@@ -7,18 +7,18 @@ import org.testng.Assert;
 
 public class VNextBORepairOrdersPageSteps {
 
-    private VNextBOROPageInteractions repairOrdersPageInteractions;
+    private VNextBOROPageInteractions roPageInteractions;
     private VNextBOChangeTechniciansDialogInteractions changeTechniciansDialogInteractions;
     private VNextBORODetailsPageInteractions roDetailsPageInteractions;
 
     public VNextBORepairOrdersPageSteps() {
-        repairOrdersPageInteractions = new VNextBOROPageInteractions();
+        roPageInteractions = new VNextBOROPageInteractions();
         changeTechniciansDialogInteractions = new VNextBOChangeTechniciansDialogInteractions();
         roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
     }
 
     public String setTechnicianAndVendorByWoNumber(String woNumber, String vendor) {
-        repairOrdersPageInteractions.clickTechniciansFieldForWO(woNumber);
+        roPageInteractions.clickTechniciansFieldForWO(woNumber);
         Assert.assertTrue(changeTechniciansDialogInteractions.isChangeTechnicianDialogDisplayed(),
                 "The Change Technician dialog hasn't been opened");
         changeTechniciansDialogInteractions.setVendor(vendor);
@@ -30,13 +30,19 @@ public class VNextBORepairOrdersPageSteps {
     }
 
     public void openRODetailsPage(String woNumber) {
-        repairOrdersPageInteractions.clickWoLink(woNumber);
+        roPageInteractions.clickWoLink(woNumber);
         Assert.assertTrue(roDetailsPageInteractions.isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 
     public void openRODetailsPage() {
-        repairOrdersPageInteractions.clickWoLink();
+        roPageInteractions.clickWoLink();
+        Assert.assertTrue(roDetailsPageInteractions.isRODetailsSectionDisplayed(),
+                "The RO Details page hasn't been opened");
+    }
+
+    public void openRONotesPage() {
+        roPageInteractions.clickWoLink();
         Assert.assertTrue(roDetailsPageInteractions.isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }

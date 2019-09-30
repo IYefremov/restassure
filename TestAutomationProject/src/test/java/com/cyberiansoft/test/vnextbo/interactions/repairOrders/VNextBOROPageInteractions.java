@@ -3,13 +3,17 @@ package com.cyberiansoft.test.vnextbo.interactions.repairOrders;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOEditNotesDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBOROPageVerifications;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.List;
 
 public class VNextBOROPageInteractions {
 
@@ -41,10 +45,6 @@ public class VNextBOROPageInteractions {
         Utils.clickElement(repairOrdersPage.getTechniciansFieldForWO(woNumber));
     }
 
-    public String getTechniciansValueForWO(String woNumber) {
-        return Utils.getText(repairOrdersPage.getTechniciansFieldForWO(woNumber));
-    }
-
     public void clickWoLink(String woNumber) {
         WaitUtilsWebDriver.waitForLoading();
         Utils.clickElement(By.xpath("//a[@class='order-no']/strong[text()='" + woNumber + "']/.."));
@@ -60,7 +60,61 @@ public class VNextBOROPageInteractions {
         return woElement;
     }
 
+    public void revealNoteForWorkOrder(String woNumber) {
+        if (!new VNextBOROPageVerifications().isNoteForWorkOrderDisplayed(woNumber)) {
+            clickNoteForWo(woNumber);
+        }
+    }
+
+    public void openNotesDialog() {
+        Utils.clickElement(repairOrdersPage.getRoNotesLink());
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(new VNextBOEditNotesDialog().getRoEditNotesModalDialog(), 5);
+    }
+
+    private void clickNoteForWo(String woNumber) {
+        Utils.clickElement(By.xpath("//strong[text()='" + woNumber
+                + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']"));
+    }
+
+    public void hideNoteForWorkOrder(String woNumber) {
+        if (new VNextBOROPageVerifications().isNoteForWorkOrderDisplayed(woNumber)) {
+            WaitUtilsWebDriver.waitForLoading();
+            clickNoteForWo(woNumber);
+        }
+    }
+
     public void clickAdvancedSearchCaret() {
         Utils.clickElement(repairOrdersPage.getAdvancedSearchCaret());
+    }
+
+    public void openAdvancedSearchDialog() {
+        clickAdvancedSearchCaret();
+        new VNextBOROPageVerifications().verifyAdvancedSearchDialogIsDisplayed();
+    }
+
+    public void setWoDepartment(String woNumber, String department) {
+        hideNoteForWorkOrder(woNumber);
+        Utils.clickElement(repairOrdersPage.getTableBody().findElement(By.xpath("//a[@class='order-no']" +
+                "/strong[text()='" + woNumber + "']/../following-sibling::div/i[@class='menu-trigger']")));
+        final WebElement departmentDropDown = repairOrdersPage.getTableBody()
+                .findElement(By.xpath("//a[@class='order-no']/strong[text()='"
+                + woNumber + "']/../..//div[@class='drop department-drop']"));
+        WaitUtilsWebDriver.waitForVisibility(departmentDropDown);
+        final List<WebElement> dropDownOptions = departmentDropDown.findElements(By.xpath(".//label"));
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(dropDownOptions);
+        dropDownOptions
+                .stream()
+                .filter(e -> e.getText().equals(department))
+                .findFirst()
+                .ifPresent(WebElement::click);
+        WaitUtilsWebDriver.waitForInvisibility(departmentDropDown);
+        WaitUtilsWebDriver.waitABit(1000);
+    }
+
+    public void clickXIconToCloseNoteForWorkOrder(String woNumber) {
+        if (new VNextBOROPageVerifications().isNoteForWorkOrderDisplayed(woNumber)) {
+            Utils.clickElement(By.xpath("//strong[text()='" + woNumber
+                    + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']//a[@class='x']"));
+        }
     }
 }

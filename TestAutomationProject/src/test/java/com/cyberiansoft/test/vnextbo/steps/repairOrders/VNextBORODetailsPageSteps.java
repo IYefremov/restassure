@@ -1,30 +1,47 @@
 package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBORODetailsPageVerifications;
 import org.testng.Assert;
 
 public class VNextBORODetailsPageSteps {
 
-    private VNextBORODetailsPageInteractions roDetailsPageInteractions;
+    private VNextBORODetailsPageInteractions detailsPageInteractions;
+    private VNextBORODetailsPageVerifications detailsPageVerifications;
 
     public VNextBORODetailsPageSteps() {
-        roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
+        detailsPageInteractions = new VNextBORODetailsPageInteractions();
+        detailsPageVerifications = new VNextBORODetailsPageVerifications();
     }
 
     public void openServicesTableForStatus(String status, String service) {
-        roDetailsPageInteractions.setStatus(status);
-        roDetailsPageInteractions.expandServicesTable(service);
+        detailsPageInteractions.setStatus(status);
+        detailsPageInteractions.expandServicesTable(service);
     }
 
     public void openServicesTableForStatus(String status) {
-        roDetailsPageInteractions.setStatus(status);
-        roDetailsPageInteractions.expandServicesTable();
+        detailsPageInteractions.setStatus(status);
+        detailsPageInteractions.expandServicesTable();
     }
 
     public void setServiceStatusForService(String phase, String status) {
-        final String serviceId = roDetailsPageInteractions.getServiceId(phase);
-        roDetailsPageInteractions.setServiceStatusForService(serviceId, status);
-        Assert.assertEquals(status, roDetailsPageInteractions.getServiceStatusValue(serviceId),
+        final String serviceId = detailsPageInteractions.getServiceId(phase);
+        detailsPageInteractions.setServiceStatusForService(serviceId, status);
+        Assert.assertEquals(status, detailsPageInteractions.getServiceStatusValue(serviceId),
                 "The status hasn't been set for service");
+    }
+
+    public void setCheckInOptionForPhase() {
+        detailsPageInteractions.openActionsDropDownForPhase();
+        Assert.assertTrue(detailsPageVerifications.isCheckInOptionDisplayedForPhase(),
+                "The 'Check in' option hasn't been displayed for phase");
+        detailsPageInteractions.clickCheckInOptionForPhase();
+    }
+
+    public void setCheckOutOptionForPhase() {
+        detailsPageInteractions.openActionsDropDownForPhase();
+        Assert.assertTrue(detailsPageVerifications.isCheckOutOptionDisplayedForPhase(),
+                "The 'Check out' option hasn't been displayed for phase");
+        detailsPageInteractions.clickCheckOutOptionForPhase();
     }
 }

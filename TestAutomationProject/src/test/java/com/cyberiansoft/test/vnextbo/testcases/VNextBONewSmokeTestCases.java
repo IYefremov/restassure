@@ -25,10 +25,13 @@ import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagem
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOEditDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORODetailsPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORONotesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBORODetailsPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBOROPageVerifications;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -62,8 +65,11 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private HomePageSteps homePageSteps;
     private VNextBOROSimpleSearchSteps simpleSearchSteps;
     private VNextBORepairOrdersPageSteps repairOrdersPageSteps;
-    private VNextBORODetailsPageSteps repairOrdersDetailsPageSteps;
-    private VNextBOPendingRegistrationsValidations pendingRegistrationsValidations;
+    private VNextBORODetailsPageSteps roDetailsPageSteps;
+    private VNextBOPendingRegistrationsValidations pendingRegistrationsVerifications;
+    private VNextBORODetailsPageVerifications roDetailsPageVerifications;
+    private VNextBORONotesPageSteps notesPageSteps;
+    private VNextBONotesPageVerifications notesPageVerifications;
 
     @BeforeClass
     public void settingUp() {
@@ -103,8 +109,11 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         homePageSteps = new HomePageSteps();
         simpleSearchSteps = new VNextBOROSimpleSearchSteps();
         repairOrdersPageSteps = new VNextBORepairOrdersPageSteps();
-        repairOrdersDetailsPageSteps = new VNextBORODetailsPageSteps();
-        pendingRegistrationsValidations = new VNextBOPendingRegistrationsValidations();
+        roDetailsPageSteps = new VNextBORODetailsPageSteps();
+        pendingRegistrationsVerifications = new VNextBOPendingRegistrationsValidations();
+        roDetailsPageVerifications = new VNextBORODetailsPageVerifications();
+        notesPageSteps = new VNextBORONotesPageSteps();
+        notesPageVerifications = new VNextBONotesPageVerifications();
     }
 
     @AfterMethod
@@ -492,10 +501,10 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         final VNextBOPendingRegistrationsInteractions pendingRegistrationsInteractions =
                 new VNextBOPendingRegistrationsInteractions();
 
-        Assert.assertTrue(pendingRegistrationsValidations.isUserDisplayedInPendingRegistrationTable(randomUser),
+        Assert.assertTrue(pendingRegistrationsVerifications.isUserDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't been displayed in the pending registration table");
         deviceManagementSteps.deletePendingRegistrationDeviceByUser(randomUser);
-        Assert.assertTrue(pendingRegistrationsValidations.isUserNotDisplayedInPendingRegistrationTable(randomUser),
+        Assert.assertTrue(pendingRegistrationsVerifications.isUserNotDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't disappeared from the pending registration table");
     }
 
@@ -543,22 +552,57 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     }
 
     //todo bug 87314 change the serviceVendorPrice test data from 5 to 1 to test the boundary values after the bug fix
+    //todo bug fixed, add advanced search options steps
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeVendorPrice(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        final VNextBOROPageVerifications roPageVerifications = new VNextBOROPageVerifications();
+
+        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        simpleSearchSteps.searchByText(data.getOrderNumber());
+
+//        roPageVerifications.verifyAdvancedSearchDialogIsDisplayed();
+//
+//        new VNextBOROAdvancedSearchDialogSteps().searchByActivePhase(
+//                data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
+        repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+//        roDetailsPageSteps.openServicesTableForStatus(data.getStatus(), data.getPhase());
+//        final String serviceId = roDetailsPageVerifications
+//                .verifyServiceIsDisplayedForExpandedPhase(data.getService());
+//
+//        Arrays.asList(data.getServiceVendorPrices())
+//                .forEach(vendorPrice -> roDetailsPageVerifications
+//                        .verifyServiceVendorPriceIsSet(serviceId, data.getService(), vendorPrice));
+    }
+
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSeeAndCreateNotes(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-        final VNextBORODetailsPageVerifications repairOrdersDetailsPageVerifications =
-                new VNextBORODetailsPageVerifications();
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        simpleSearchSteps.searchByText(data.getOrderNumber());
+        notesPageSteps.openNoteDialog(data.getOrderNumber());
+        Assert.assertTrue(notesPageVerifications.isRoEditNotesModalDialogDisplayed(),
+                "The edit notes dialog hasn't been opened");
 
+        final String note = data.getNotesMessage() + RandomStringUtils.randomAlphanumeric(5);
+        notesPageSteps.setRONoteMessageAndSave(note);
+        Assert.assertTrue(notesPageVerifications.isRoEditNotesModalDialogHidden(),
+                "The edit notes dialog hasn't been closed");
+        new VNextBOROPageVerifications().verifyNoteTextIsDisplayed(note);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCheckInRO(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         simpleSearchSteps.searchByText(data.getOrderNumber());
         repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
-        repairOrdersDetailsPageSteps.openServicesTableForStatus(data.getStatus(), data.getPhase());
-        final String serviceId = repairOrdersDetailsPageVerifications
-                .verifyServiceIsDisplayedForExpandedPhase(data.getService());
-
-        Arrays.asList(data.getServiceVendorPrices())
-                .forEach(vendorPrice -> repairOrdersDetailsPageVerifications
-                        .verifyServiceVendorPriceIsSet(serviceId, data.getService(), vendorPrice));
+        Assert.assertTrue(roDetailsPageVerifications.isPhaseActionsTriggerDisplayed(),
+                "The phase actions trigger hasn't been displayed");
+        roDetailsPageVerifications.verifyCheckInOptionIsDisplayedForPhase();
+        roDetailsPageSteps.setCheckInOptionForPhase();
+        roDetailsPageSteps.setCheckOutOptionForPhase();
     }
 }
