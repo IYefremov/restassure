@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
@@ -17,8 +18,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 @Getter
 public class VNextVisualScreen extends VNextBaseWizardScreen {
@@ -86,19 +85,21 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 	}
 	
 	public void clickCarImageSecondTime() {
-		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-		BaseUtils.waitABit(300);
-		TouchAction tch = new TouchAction(appiumdriver);
-		tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
-		BaseUtils.waitABit(300);	
-		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		if (appiumdriver.findElements(By.xpath("//div[@class='car-marker']")).size() < 2) {
-			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-			tch = new TouchAction(appiumdriver);
-			tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
-			BaseUtils.waitABit(300);
-			AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-		}
+		WaitUtils.click(By.xpath("//img[@class='car-image']"));
+		//TODO: Refactoring needed
+//		AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+//		BaseUtils.waitABit(300);
+//		TouchAction tch = new TouchAction(appiumdriver);
+//		tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
+//		BaseUtils.waitABit(300);
+//		AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+//		if (appiumdriver.findElements(By.xpath("//div[@class='car-marker']")).size() < 2) {
+//			AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
+//			tch = new TouchAction(appiumdriver);
+//			tch.tap(PointOption.point(Math.round(appiumdriver.manage().window().getSize().getWidth() / 3), Math.round(appiumdriver.manage().window().getSize().getHeight() / 3))).perform();
+//			BaseUtils.waitABit(300);
+//			AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
+//		}
 	}
 	
 	public void clickCarImageACoupleTimes(int touchTimes) {

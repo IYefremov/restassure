@@ -128,6 +128,8 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void clickStatusButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Status")));
 		appiumdriver.findElementByAccessibilityId("Status").click();
 	}
 	

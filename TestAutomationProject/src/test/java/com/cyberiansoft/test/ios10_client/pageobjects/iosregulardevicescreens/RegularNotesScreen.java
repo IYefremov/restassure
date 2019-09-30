@@ -6,6 +6,8 @@ import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -36,6 +38,9 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 
 	@iOSXCUITFindBy(accessibility = "PhotosGridView")
 	private IOSElement photosGridView;
+
+	@iOSXCUITFindBy(accessibility = "Delete")
+	private IOSElement deleteImgBtn;
 	
 	@iOSXCUITFindBy(accessibility = "Cancel")
     private IOSElement cancelbtn;
@@ -114,7 +119,7 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 		btnLibrary.click();
 	}
 
-	public void clickMommentsLibrary() {
+	public void clickMomentsLibrary() {
 		momentsLibrary.click();
 	}
 
@@ -123,7 +128,18 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 	}
 
 	public int getNumberOfAdddePhotos() {
-		return appiumdriver.findElementByAccessibilityId("ImagePreviewListView").findElements(MobileBy.className("XCUIElementTypeImage")).size();
+
+		return appiumdriver.findElementByAccessibilityId("ImagePreviewListView").findElements(MobileBy.className("XCUIElementTypeCell")).size();
+	}
+
+	public void clickOnImage() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("ImagePreviewListView")));
+		appiumdriver.findElementByAccessibilityId("ImagePreviewListView").findElement(MobileBy.className("XCUIElementTypeCell")).click();
+	}
+
+	public void clickDeleteImageButton() {
+		deleteImgBtn.click();
 	}
 
 }

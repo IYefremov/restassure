@@ -70,5 +70,114 @@
         }
       }
     }
+  ],
+  "userCANAddSingleServiceMultipleTimesCreatingWO": [
+    {
+      "rowID": "userCANAddSingleServiceMultipleTimesCreatingWO.01",
+      "description": "89529",
+      "services": [
+        {
+          "serviceName": "rozstalnoy_enable_money"
+        },
+        {
+          "serviceName": "rozstalnoy_enable_labor"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "serviceName": "rozstalnoy_enable_parts",
+          "category": "Body",
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": true
+          },
+          "partPosition": "Front"
+        }
+      ],
+      "matrixService": {
+        "matrixServiceName": "Hail Damage Repair",
+        "hailMatrixName": "Igor Matrix",
+        "vehiclePartData": {
+          "vehiclePartName": "Roof",
+          "vehiclePartSize": "DIME",
+          "vehiclePartSeverity": "HEAVY"
+        }
+      }
+    }
+  ],
+  "userCANAddSingleServiceMultipleTimesEditingWO": [
+    {
+      "rowID": "userCANAddSingleServiceMultipleTimesEditingWO.01",
+      "description": "89529",
+      "services": [
+        {
+          "serviceName": "rozstalnoy_enable_money"
+        },
+        {
+          "serviceName": "rozstalnoy_enable_labor"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "serviceName": "rozstalnoy_enable_parts",
+          "category": "Body",
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": true
+          },
+          "partPosition": "Front"
+        }
+      ],
+      "matrixService": {
+        "matrixServiceName": "Hail Damage Repair",
+        "hailMatrixName": "Igor Matrix",
+        "vehiclePartData": {
+          "vehiclePartName": "Roof",
+          "vehiclePartSize": "DIME",
+          "vehiclePartSeverity": "HEAVY"
+        }
+      }
+    }
+  ],
+  "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm": [
+    {
+      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
+      "description": "89533",
+      "damagesData": [
+        {
+          "damageGroupName": "Autre",
+          "moneyService": {
+            "serviceName": "rozstalnoy_disable_money"
+          }
+        },
+        {
+          "damageGroupName": "Autre",
+          "moneyService": {
+            "serviceName": "rozstalnoy_disable_labor"
+          }
+        },
+        {
+          "damageGroupName": "Autre",
+          "partServiceData": {
+            "serviceName": "rozstalnoy_disable_parts",
+            "category": "Body",
+            "subCategory": "Bumper",
+            "partName": {
+              "partNameList": [
+                "Bumper"
+              ],
+              "isMultiSelect": false
+            },
+            "partPosition": "Front"
+          }
+        }
+      ]
+    }
   ]
 }
