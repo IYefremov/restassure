@@ -31,7 +31,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//ul[@data-automation-id='inspectionsDetailsDamagesList']")
 	private WebElement imageLegend;
 	
-	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsPrintButton']")
+	@FindBy(xpath = "//span[@data-automation-id='inspectionsDetailsPrintButton']")
 	private WebElement printInspectionIcon;
 	
 	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsApproveButton']")
@@ -76,6 +76,27 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[contains(@class, 'intercom-launcher')]")
 	private WebElement openCloseIntercomButton;
 
+	@FindBy(xpath = "//i[@id='advSearchEstimation-caret']")
+	private WebElement searchFieldAdvancedSearchCaret;
+
+	@FindBy(xpath = "//div[@id='advSearchEstimation-savedSearchList']//i[@class='icon-gear']")
+	private WebElement searchFieldAdvancedSearchIconGear;
+
+	@FindBy(xpath = "//i[@data-automation-id='inspectionsDetailsEnlargeVisualForm']")
+	private WebElement inspectionImageZoomIcon;
+
+	@FindBy(xpath = "(//i[@class='icon-comment' and not(contains(@style, 'display: none'))])[1]")
+	private WebElement inspectionNotesIcon;
+
+	@FindBy(xpath = "//span[@data-automation-id='inspectionsDetailsPrintSupplementButton']")
+	private WebElement printSupplementIcon;
+
+	@FindBy(xpath = "//span[contains(@class, 'close-multi-archive-reasons')]//span[contains(@class, 'archive')]")
+	private WebElement archiveIcon;
+
+	@FindBy(xpath = "//span[@data-automation-id=\"inspectionsSingleUnArchiveButton\"]")
+	private WebElement unArchiveIcon;
+
 	public VNextBOInspectionsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -83,25 +104,51 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 				.until(ExpectedConditions.visibilityOf(inspectionsList));
 	}
 
+	public boolean isInspectionApproveButtonVisible() {	return Utils.isElementDisplayed(approveInspectionIcon);	}
+
 	public boolean isInspectionsListDisplayed() {
-		return isElementDisplayed(inspectionsList);
+		return Utils.isElementDisplayed(inspectionsList);
 	}
 
 	public boolean isInspectionDetailsPanelDisplayed() {
-		return isElementDisplayed(inspectionDetailsPanel);
+		return Utils.isElementDisplayed(inspectionDetailsPanel);
 	}
 
 	public boolean isSearchFieldDisplayed() {
-		return isElementDisplayed(searchFld);
+		return Utils.isElementDisplayed(searchFld);
 	}
 
 	public boolean isTermsAndConditionsLinkDisplayed() {
-		return isElementDisplayed(termsAndConditionsLink);
+		return Utils.isElementDisplayed(termsAndConditionsLink);
 	}
 
 	public boolean isPrivacyPolicyLinkDisplayed() {
-		return isElementDisplayed(privacyPolicyLink);
+		return Utils.isElementDisplayed(privacyPolicyLink);
 	}
+
+	public boolean isInspectionImageZoomIconDisplayed() {return Utils.isElementDisplayed(inspectionImageZoomIcon); }
+
+	public boolean isInspectionNotesIconDisplayed() {return Utils.isElementDisplayed(inspectionNotesIcon); }
+
+	public boolean isPrintSupplementButtonDisplayed() {return Utils.isElementDisplayed(printSupplementIcon); }
+
+	public boolean isPrintInspectionButtonDisplayed() {return Utils.isElementDisplayed(printInspectionIcon); }
+
+	public boolean isArchiveIconDisplayed() {return Utils.isElementDisplayed(archiveIcon); }
+
+	public boolean isUnArchiveIconDisplayed() {return Utils.isElementDisplayed(unArchiveIcon); }
+
+	public void clickInspectionImageZoomIcon() {Utils.clickElement(inspectionImageZoomIcon); }
+
+	public void clickInspectionNotesIcon() {Utils.clickElement(inspectionNotesIcon); }
+
+	public void clickPrintSupplementButton() {Utils.clickElement(printSupplementIcon); }
+
+	public void clickPrintInspectionButton() {Utils.clickElement(printInspectionIcon); }
+
+	public void clickArchiveIcon() {Utils.clickElement(archiveIcon); }
+
+	public void clickUnArchiveIcon() {Utils.clickElement(unArchiveIcon); }
 
 	public boolean isIntercomButtonDisplayed() {
 		driver.switchTo().frame(intercomLauncherFrame);
@@ -111,16 +158,16 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 
 	public void clickTermsAndConditionsLink() {
-		termsAndConditionsLink.click();;
+		Utils.clickElement(termsAndConditionsLink);
 	}
 
 	public void clickPrivacyPolicyLink() {
-		privacyPolicyLink.click();;
+		Utils.clickElement(privacyPolicyLink);
 	}
 
 	public void openIntercomMessenger() {
 		driver.switchTo().frame(intercomLauncherFrame);
-		openCloseIntercomButton.click();
+		Utils.clickElement(openCloseIntercomButton);
 		driver.switchTo().defaultContent();
 	}
 
@@ -133,85 +180,105 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 
 	public void closeIntercom() {
 		driver.switchTo().frame(intercomLauncherFrame);
-		openCloseIntercomButton.click();
+		Utils.clickElement(openCloseIntercomButton);
 		driver.switchTo().defaultContent();
 	}
 
-	public void selectInspectionInTheList(String inspnumber) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']"))).click();
-		//inspectionsList.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + inspnumber + "']")).click();
-		waitABit(4000);
-	}
-	
-	private WebElement getInspectionCell(String inspnumber) {
-		WebElement inspcell = null;
-		List<WebElement> inspcells = inspectionsList.findElements(By.xpath("./li[@role='option']"));
-		for (WebElement cell : inspcells)
-			if (cell.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b")).getText().trim().equals(inspnumber)) {
-				inspcell = cell;
-				break;
-			}
-		return inspcell;
-	}
-	
-	public String getInspectionStatus(String inspnumber) {
-		String inspstatus = "";
-		WebElement inspcell = getInspectionCell(inspnumber);
-		if (inspcell != null)
-			inspstatus = inspcell.findElement(By.xpath(".//div[@class='entity-list__item__status__label']")).getText().trim(); 
-		else
-			Assert.assertTrue(false, "Can't find inpection: " + inspnumber);
-		return inspstatus;
-	}
-		
-	public boolean isServicePresentForSelectedInspection(String servicename) {
-		return inspectionServicesList.findElements(By.xpath("./tbody/tr/td[text()='" + servicename + "']")).size() > 0;
-	}
-	
-	public boolean isServiceNotesIconDisplayed(String servicename) {
-		WebElement sepviserow = inspectionServicesList.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
-		return sepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).isDisplayed();
-	}
-	
-	public boolean isMatrixServiceExists(String matrixservicename) {
-		WebElement matrixsepviserow = inspectionServicesList.findElement(By.xpath(".//tr[@class='entity-details__matrix']"));
-		return matrixsepviserow.findElement(By.xpath("./td[contains(text(), '" +  matrixservicename + "')]")).isDisplayed();
+	public void openAdvancedSearchForm()
+	{
+		Utils.clickElement(searchFieldAdvancedSearchCaret);
+		Utils.clickElement(searchFieldAdvancedSearchIconGear);
 	}
 
-	public List<WebElement> getAllMatrixServicesRows(String matrixservicename) {
+	public boolean isPrintWindowOpened()
+	{
+		String parentHandle = Utils.getParentTab();
+		waitForNewTab();
+		String newWindow = Utils.getNewTab(parentHandle);
+		driver.switchTo().window(parentHandle);
+		if (parentHandle.equals(newWindow)) return false;
+		return true;
+	}
+
+	public void selectArchiveReason(String reason)
+	{
+		Utils.clickWithJS(
+				driver.findElement(By.xpath("//div[@class='archive-reasons-title' and text()='" + reason + "']")));
+	}
+
+	public void selectInspectionInTheList(String inspectionNumber) {
+		Utils.clickElement(driver.findElement(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspectionNumber + "']")));
+		waitABit(4000);
+	}
+
+	private WebElement getInspectionCell(String inspectionNumber) {
+		WebElement inspectionCell = null;
+		List<WebElement> inspectionCells = inspectionsList.findElements(By.xpath("./li[@role='option']"));
+		for (WebElement cell : inspectionCells)
+			if (cell.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b")).getText().trim().equals(inspectionNumber)) {
+				inspectionCell = cell;
+				break;
+			}
+		return inspectionCell;
+	}
+
+	public String getInspectionStatus(String inspectionNumber) {
+		String inspectionStatus = "";
+		WebElement inspectionCell = getInspectionCell(inspectionNumber);
+		if (inspectionCell != null)
+			inspectionStatus = inspectionCell.findElement(By.xpath(".//div[@class='entity-list__item__status__label']")).getText().trim();
+		else
+			Assert.assertTrue(false, "Can't find inspection: " + inspectionNumber);
+		return inspectionStatus;
+	}
+
+	public boolean isServicePresentForSelectedInspection(String serviceName) {
+		return inspectionServicesList.findElements(By.xpath("./tbody/tr/td[text()='" + serviceName + "']")).size() > 0;
+	}
+
+	public boolean isServiceNotesIconDisplayed(String serviceName) {
+		WebElement serviceRow = inspectionServicesList.findElement(By.xpath("./tbody/tr/td[text()='" + serviceName + "']/.."));
+		return serviceRow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).isDisplayed();
+	}
+
+	public boolean isMatrixServiceExists(String matrixServiceName) {
+		WebElement matrixServiceRow = inspectionServicesList.findElement(By.xpath(".//tr[@class='entity-details__matrix']"));
+		return matrixServiceRow.findElement(By.xpath("./td[contains(text(), '" +  matrixServiceName + "')]")).isDisplayed();
+	}
+
+	public List<WebElement> getAllMatrixServicesRows() {
 		return inspectionServicesList.findElements(By.xpath(".//tr[@class='entity-details__matrix']"));
 	}
 
-	
-	public boolean isImageExistsForMatrixServiceNotes(WebElement matrixsepviserow) {
+	public boolean isImageExistsForMatrixServiceNotes(WebElement matrixServiceRow) {
 		boolean exists = false;
-		matrixsepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).click();
-		WebElement notesmodaldlg = new WebDriverWait(driver, 30)
+		matrixServiceRow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).click();
+		WebElement notesModalDialog = new WebDriverWait(driver, 30)
 		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
-		exists = notesmodaldlg.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
+		exists = notesModalDialog.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
 		new WebDriverWait(driver, 30)
-				  .until(ExpectedConditions.elementToBeClickable(notesmodaldlg.findElement(By.xpath(".//button[@class='close']")))).click();
-		waitABit(500);
-		return exists;	
-	}
-	
-	public void clickServiceNotesIcon(String servicename) {
-		WebElement sepviserow = inspectionServicesList.findElement(By.xpath("./tbody/tr/td[text()='" + servicename + "']/.."));
-		sepviserow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).click();
-	}
-	
-	public boolean isImageExistsForServiceNote(String servicename) {
-		boolean exists;
-		clickServiceNotesIcon(servicename);
-		WebElement notesmodaldlg = new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
-		exists = notesmodaldlg.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
-		new WebDriverWait(driver, 30)
-				  .until(ExpectedConditions.elementToBeClickable(notesmodaldlg.findElement(By.xpath(".//button[@class='close']")))).click();
+				  .until(ExpectedConditions.elementToBeClickable(notesModalDialog.findElement(By.xpath(".//button[@class='close']")))).click();
 		waitABit(500);
 		return exists;
 	}
-	
+
+	public void clickServiceNotesIcon(String serviceName) {
+		WebElement serviceRow = inspectionServicesList.findElement(By.xpath("./tbody/tr/td[text()='" + serviceName + "']/.."));
+		serviceRow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).click();
+	}
+
+	public boolean isImageExistsForServiceNote(String serviceName) {
+		boolean exists;
+		clickServiceNotesIcon(serviceName);
+		WebElement notesModalDialog = new WebDriverWait(driver, 30)
+		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
+		exists = notesModalDialog.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
+		new WebDriverWait(driver, 30)
+				  .until(ExpectedConditions.elementToBeClickable(notesModalDialog.findElement(By.xpath(".//button[@class='close']")))).click();
+		waitABit(500);
+		return exists;
+	}
+
 	public VNextBOInspectionsWebPage clickInspectionApproveButton() {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(approveInspectionIcon)).click();
@@ -221,16 +288,12 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
         }
 		return this;
 	}
-	
-	public boolean isInspectionApproveButtonVisible() {
-		return approveInspectionIcon.isDisplayed();
-	}
-	
+
 	public void approveInspection(String approveNotes) {
 		String parent = driver.getWindowHandle();
 		clickInspectionApproveButton();
-		VNextBOConfirmationDialog confirmdialog = new VNextBOConfirmationDialog();
-		confirmdialog.clickYesButton();
+		VNextBOConfirmationDialog confirmDialog = new VNextBOConfirmationDialog();
+		confirmDialog.clickYesButton();
 		waitForNewTab();
 		String newwin = "";
 		for(String window:driver.getWindowHandles()){
@@ -266,12 +329,12 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		driver.switchTo().window(parent);
 		driver.navigate().refresh();
 	}
-	
+
 	public void declineInspection(String declineNotes) {
 		String parent = driver.getWindowHandle();
 		clickInspectionApproveButton();
-		VNextBOConfirmationDialog confirmdialog = new VNextBOConfirmationDialog();
-		confirmdialog.clickYesButton();
+		VNextBOConfirmationDialog confirmDialog = new VNextBOConfirmationDialog();
+		confirmDialog.clickYesButton();
 		waitForNewTab();
 		String newwin = "";
 		for(String window:driver.getWindowHandles()){
@@ -294,19 +357,19 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		driver.switchTo().window(parent);
 		driver.navigate().refresh();
 	}
-	
+
 	public boolean isImageLegendContainsBreakageIcon(String brackageicontype) {
 		return imageLegend.findElements(By.xpath("./li[contains(text(), '" + brackageicontype + "')]")).size() > 0;
 	}
-	
+
 	public String getSelectedInspectionCustomerName() {
-		return inspectionDetailsPanel.findElement(By.xpath(".//span[@data-bind='text:clientName']")).getText();
+		return Utils.getText(inspectionDetailsPanel.findElement(By.xpath(".//span[@data-bind='text:clientName']")));
 	}
-	
-	public String getSelectedInspectionTotalAmauntValue() {
-		return inspectionDetailsPanel.findElement(By.xpath(".//th[@data-bind='text: amount']")).getText();
+
+	public String getSelectedInspectionTotalAmountValue() {
+		return Utils.getText(inspectionDetailsPanel.findElement(By.xpath(".//th[@data-bind='text: amount']")));
 	}
-	
+
 	public VNextBOInspectionInfoWebPage clickSelectedInspectionPrintIcon() {
 		String mainWindowHandle = driver.getWindowHandle();
 		printInspectionIcon.click();
@@ -320,19 +383,11 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		return PageFactory.initElements(
 			driver, VNextBOInspectionInfoWebPage.class);
 	}
-	
-	public VNextBOAdvancedSearchInspectionDialog openAdvancedSearchPanel() {
-		clickExpandAdvancedSearchPanel();
-		if (driver.findElement(By.xpath("//div[@data-bind='click: showDefaultAdvancedSearch']")).isDisplayed())
-			driver.findElement(By.xpath("//div[@data-bind='click: showDefaultAdvancedSearch']")).click();
-		return PageFactory.initElements(
-				driver, VNextBOAdvancedSearchInspectionDialog.class);
-	}
-	
+
 	public void clickExpandAdvancedSearchPanel() {
-		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("advSearchEstimation-caret")))).click();
+		Utils.clickElement(driver.findElement(By.id("advSearchEstimation-caret")));
 	}
-	
+
 	public boolean isSavedAdvancedSearchFilterExists(String filterName) {
 		boolean exists = false;
 		if (driver.findElements(By.id("advSearchEstimation-savedSearchList")).size() > 0)
@@ -340,92 +395,110 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 			.findElements(By.xpath(".//div/span[text()='" + filterName + "']")).size() > 0;
 		return exists;
 	}
-	
+
 	public String getCustomSearchInfoTextValue() {
 		return filterInfoText.getText();
 	}
-	
-	public void deleteSavedAdvancedSearchFilter(String filterName) {		
-		VNextBOAdvancedSearchInspectionDialog advancedserchdialog = openSavedAdvancedSearchFilter(filterName);		
-		advancedserchdialog.deleteSavedSearchFilter();
+
+	public void deleteSavedAdvancedSearchFilter(String filterName) {
+		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = openSavedAdvancedSearchFilter(filterName);
+		advancedSearchDialog.deleteSavedSearchFilter();
 	}
-	
-	public VNextBOAdvancedSearchInspectionDialog openSavedAdvancedSearchFilter(String filterName) {
+
+	public VNextBOInspectionAdvancedSearchForm openSavedAdvancedSearchFilter(String filterName) {
 		waitABit(2000);
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(By.id("advSearchEstimation-savedSearchList"))
 			.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i"))).perform();
-		
+
 		driver.findElement(By.id("advSearchEstimation-savedSearchList"))
 			.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i")).click();
 		return PageFactory.initElements(
-				driver, VNextBOAdvancedSearchInspectionDialog.class);
+				driver, VNextBOInspectionAdvancedSearchForm.class);
 	}
-	
-	public void advancedSearchInspectionByCustomer(String customername) {
-		VNextBOAdvancedSearchInspectionDialog advancedserchdialog = openAdvancedSearchPanel();
-		advancedserchdialog.selectAdvancedSearchByCustomer(customername);
-		advancedserchdialog.clickSearchButton();
+
+	public void advancedSearchInspectionByCustomer(String customerName) {
+		openAdvancedSearchForm();
+		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
+		advancedSearchDialog.setAdvSearchTextField("Customer", customerName);
+		advancedSearchDialog.clickSearchButton();
 	}
-	
-	
-	public void advancedSearchInspectionByStatusAndInspectionNumber(String inspNumber, String statussearch) {
-		VNextBOAdvancedSearchInspectionDialog advancedserchdialog = openAdvancedSearchPanel();
-		advancedserchdialog.setAdvancedSearchInspectionByStatusAndInspectionNumber(inspNumber, statussearch);
-		advancedserchdialog.clickSearchButton();
+
+
+	public void advancedSearchInspectionByStatusAndInspectionNumber(String inspectionNumber, String statusSearch) {
+		openAdvancedSearchForm();
+		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
+		advancedSearchDialog.setAdvSearchTextField("Inspection#",inspectionNumber);
+		advancedSearchDialog.setAdvSearchDropDownField("Status", statusSearch);
+		advancedSearchDialog.clickSearchButton();
 	}
-	
-	public void advancedSearchInspectionByStatus(String statussearch) {
-		VNextBOAdvancedSearchInspectionDialog advancedserchdialog = openAdvancedSearchPanel();
-		advancedserchdialog.selectAdvancedSearchByStatus(statussearch);
-		advancedserchdialog.clickSearchButton();
+
+	public void advancedSearchInspectionByStatus(String statusSearch) {
+		openAdvancedSearchForm();
+		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
+		advancedSearchDialog.setAdvSearchDropDownField("Status", statusSearch);
+		advancedSearchDialog.clickSearchButton();
 	}
-	
-	public void advancedSearchInspectionByStockNumber(String stocknumber) {
-		VNextBOAdvancedSearchInspectionDialog advancedserchdialog = openAdvancedSearchPanel();
-		advancedserchdialog.setAdvancedSearchByStockNumber(stocknumber);
-		advancedserchdialog.clickSearchButton();
+
+	public void advancedSearchInspectionByStockNumber(String stockNumber) {
+		openAdvancedSearchForm();
+		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
+		advancedSearchDialog.setAdvSearchTextField("Stock#", stockNumber);
+		advancedSearchDialog.clickSearchButton();
 	}
-	
-	public void advancedSearchInspectionByPONumber(String ponumber) {
-		VNextBOAdvancedSearchInspectionDialog advancedserchdialog = openAdvancedSearchPanel();
-		advancedserchdialog.setAdvancedSearchByPONumber(ponumber);
-		advancedserchdialog.clickSearchButton();
+
+	public void advancedSearchInspectionByPONumber(String poNumber) {
+		openAdvancedSearchForm();
+		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
+		advancedSearchDialog.setAdvSearchTextField("PO#", poNumber);
+		advancedSearchDialog.clickSearchButton();
 	}
-	
-	public void advancedSearchInspectionByRONumber(String ronumber) {
-		VNextBOAdvancedSearchInspectionDialog advancedserchdialog = openAdvancedSearchPanel();
-		advancedserchdialog.setAdvancedSearchByRONumber(ronumber);
-		advancedserchdialog.clickSearchButton();
+
+	public void advancedSearchInspectionByRONumber(String roNumber) {
+		openAdvancedSearchForm();
+		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
+		advancedSearchDialog.setAdvSearchTextField("RO#", roNumber);
+		advancedSearchDialog.clickSearchButton();
 	}
-	
+
 	public void advancedSearchInspectionByVIN(String VIN) {
-		VNextBOAdvancedSearchInspectionDialog advancedserchdialog = openAdvancedSearchPanel();		
-		advancedserchdialog.setAdvencedSearchVINValue(VIN);
-		advancedserchdialog.clickSearchButton();
+		openAdvancedSearchForm();
+		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
+		advancedSearchDialog.setAdvSearchTextField("VIN", VIN);
+		advancedSearchDialog.clickSearchButton();
 	}
-	
-	public void searchInspectionByText(String searchtext) {
-		setSearchFieldValue(searchtext);
+
+	public void searchInspectionByText(String searchText) {
+		setSearchFieldValue(searchText);
 		clickSearchFilterButton();
 	}
-	
+
+	public void findInspectionByCustomTimeFrameAndNumber(String inspectionId, String fromDate, String toDate) {
+		openAdvancedSearchForm();
+		VNextBOInspectionAdvancedSearchForm vNextBOInspectionAdvancedSearchForm =
+				new VNextBOInspectionAdvancedSearchForm(driver);
+		vNextBOInspectionAdvancedSearchForm.setAdvSearchTextField("Inspection#", inspectionId);
+		vNextBOInspectionAdvancedSearchForm.setAdvSearchDropDownField("Timeframe", "Custom");
+		vNextBOInspectionAdvancedSearchForm.setAdvSearchTextField("From", fromDate);
+		vNextBOInspectionAdvancedSearchForm.setAdvSearchTextField("To", toDate);
+		vNextBOInspectionAdvancedSearchForm.clickSearchButton();
+	}
+
 	public String getSearchFieldValue() {
 		return searchFld.getAttribute("value");
 	}
-	
-	public void setSearchFieldValue(String searchtext) {
-		Utils.setData(searchFld, searchtext);
+
+	public void setSearchFieldValue(String searchText) {
+		Utils.setData(searchFld, searchText);
 	}
-	
+
 	public void clickSearchFilterButton() {
-		searchFilterBtn.click();
+		Utils.clickElement(searchFilterBtn);
 		wait.until(ExpectedConditions.visibilityOf(clearFilterBtn));
 	}
-	
+
 	public void clickClearFilterIcon() {
-		clearFilterBtn.click();
-		wait.until(ExpectedConditions.invisibilityOf(clearFilterBtn));
+		Utils.clickElement(clearFilterBtn);
 	}
 
 	public String getFirstInspectionStatus() {
@@ -436,4 +509,9 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
             return "";
         }
     }
+
+	public String getSelectedInspectionArchivingReason() {
+		return Utils.getText(
+				inspectionDetailsPanel.findElement(By.xpath(".//div[@class='text-ellipsis' and @data-bind='visible: isVisibleArchivedReasonInDetails']")));
+	}
 }

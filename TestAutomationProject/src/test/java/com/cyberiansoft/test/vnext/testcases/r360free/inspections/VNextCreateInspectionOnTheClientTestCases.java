@@ -110,7 +110,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
         inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-        Assert.assertEquals(inspectionsWebPage.getSelectedInspectionTotalAmauntValue(), inspectionData.getInspectionPrice());
+        Assert.assertEquals(inspectionsWebPage.getSelectedInspectionTotalAmountValue(), inspectionData.getInspectionPrice());
         String mainWindowHandle = webdriver.getWindowHandle();
 
         VNextBOInspectionInfoWebPage inspectionInfoWebPage = inspectionsWebPage.clickSelectedInspectionPrintIcon();

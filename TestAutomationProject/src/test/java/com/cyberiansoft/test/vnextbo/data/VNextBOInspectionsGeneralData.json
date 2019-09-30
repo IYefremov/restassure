@@ -34,5 +34,11 @@
       "rowID": "verifyIntercomMessengerCanBeOpenedClosed.01",
       "description": "Test Case 85027: User can open and close \"Intercom\""
     }
+  ],
+  "verifyAdvancedSearchFields": [
+    {
+      "rowID": "verifyAdvancedSearchFields.01",
+      "description": "Test Case 85226: User can Archive Inspections (Inspection's details)"
+    }
   ]
 }
