@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
@@ -155,10 +156,13 @@ public class UsersWebPage extends WebPageWithPagination {
 
     public WebElement getTableRowWithActiveUser(String firstName, String lastName) {
         List<WebElement> rows = getUsersTableRows();
-        wait.until(ExpectedConditions.visibilityOfAllElements(rows));
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(rows);
         return rows
                 .stream()
-                .peek(row -> row.findElement(By.xpath(".//td[3]")))
+                .peek(row -> {
+                    ExpectedConditions.not(ExpectedConditions.stalenessOf(row));
+                    row.findElement(By.xpath(".//td[3]"));
+                })
                 .collect(Collectors.toList())
                 .stream()
                 .filter(e -> {
@@ -167,34 +171,6 @@ public class UsersWebPage extends WebPageWithPagination {
                 })
                 .findAny()
                 .get();
-//        return collect;
-
-//		for (WebElement row : rows) {
-//		    waitABit(1200);
-//            final WebElement element = row.findElement(By.xpath(".//td[3]"));
-//            try {
-//                wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-//                if (wait.until(ExpectedConditions.visibilityOf(element))
-//                        .getText()
-//                        .contains(firstName + " " + lastName)) {
-//                    return row;
-//                }
-//            } catch (Exception e) {
-//		        e.printStackTrace();
-//		        waitABit(2000);
-//                try {
-//                    wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-//                } catch (Exception e1) {
-//                    e1.printStackTrace();
-//                }
-//                if (element
-//                        .getText()
-//                        .contains(firstName + " " + lastName)) {
-//                    return row;
-//                }
-//            }
-//		}
-//		return null;
     }
 
     public WebElement getTableRowWithArchivedUser(String firstname, String lastname) {

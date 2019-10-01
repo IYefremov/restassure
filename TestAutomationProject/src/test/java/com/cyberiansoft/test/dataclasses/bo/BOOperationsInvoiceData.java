@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 import org.apache.commons.lang3.RandomStringUtils;
 
+@Getter
 public class BOOperationsInvoiceData {
 
     @JsonProperty("customer")
@@ -62,83 +64,10 @@ public class BOOperationsInvoiceData {
     @JsonProperty("exportFailedStatus")
     private String exportFailedStatus;
 
-    public String getCustomer() {
-        return customer;
-    }
-
-    public String getAmountFrom() {
-        return amountFrom;
-    }
-
-    public String getAmountTo() {
-        return amountTo;
-    }
-
-    public String getPo() {
-        return po;
-    }
-
-    public String getNotes() {
-        return notes;
-    }
-
-    public String getInvoiceNumber() {
-        return invoiceNumber;
-    }
-
-    public String getPoNum() {
-        return poNum;
-    }
-
-    public String getPoNotes() {
-        return poNotes;
-    }
-
-    public String getUserMail() {
-        return userMail;
-    }
-
-    public String getMessage() {
-        return message;
-    }
+    @JsonProperty("timeFrame")
+    private String timeFrame;
 
     public String getEmail() {
         return "test" + RandomStringUtils.randomAlphanumeric(3) + "@domain.com";
-    }
-
-    public String getDateFrom() {
-        return dateFrom;
-    }
-
-    public String getDateTo() {
-        return dateTo;
-    }
-
-    public String getNewStatus() {
-        return newStatus;
-    }
-
-    public String getApprovedStatus() {
-        return approvedStatus;
-    }
-
-    public String getAllStatus() {
-        return allStatus;
-    }
-
-    public String getExportedStatus() {
-        return exportedStatus;
-    }
-
-    public String getVoidStatus() {
-        return voidStatus;
-    }
-
-    public String getDraftStatus() {
-        return draftStatus;
-    }
-
-    public String getExportFailedStatus() {
-        return exportFailedStatus;
     }
 }

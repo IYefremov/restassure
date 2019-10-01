@@ -413,6 +413,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	@FindBy(xpath = "//*[contains(@id, 'ddlTimeframe_DropDown')]")
 	private DropDown searchtimeframedd;
 
+	@FindBy(id = "Card_srLifeCycle")
+	private WebElement srLifeCycle;
+
 	@FindBy(xpath = "//div[@id='techItems-content']/div[@class='tech-item']")
 	private List<WebElement> techItemsList;
 
@@ -771,7 +774,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean saveNewServiceRequest() {
 		try {
             Utils.clickElement(saveservicerequestbutton);
-			wait.until(ExpectedConditions.elementToBeClickable(saveservicerequestbutton));
 			waitForLoading();
 			driver.switchTo().defaultContent();
 			return true;
@@ -1289,12 +1291,10 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkStatus(String status) {
 		driver.switchTo().defaultContent();
-		System.out.println(driver.findElement(By.className("serviceRequestStatus")).getText());
 		try {
-			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("serviceRequestStatus"))).getText()
-					.equals(status);
-			return true;
+            return WaitUtilsWebDriver.waitForVisibility(By.className("serviceRequestStatus")).getText().equals(status);
 		} catch (TimeoutException e) {
+		    e.printStackTrace();
 			return false;
 		}
 	}
@@ -1784,7 +1784,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkLifeCycleBTN() {
 		switchToServiceRequestInfoFrame();
-		driver.findElement(By.id("Card_srLifeCycle")).click();
+		Utils.clickElement(srLifeCycle);
 		waitABit(1000);
 		return driver.getWindowHandles().size() == 2;
 	}
@@ -1811,7 +1811,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public boolean checkLifeCycleDate() {
 		String parentFrame = driver.getWindowHandle();
 		switchToServiceRequestInfoFrame();
-		wait.until(ExpectedConditions.elementToBeClickable(By.id("Card_srLifeCycle"))).click();
+		Utils.clickElement(srLifeCycle);
 		waitABit(3000);
 		wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 		Set windows = driver.getWindowHandles();
@@ -1819,8 +1819,9 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 		driver.switchTo().window((String) windows.iterator().next());
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
 		try {
-			wait.until(ExpectedConditions.visibilityOf(lifeCycleBlock));
-			return lifeCycleBlock.getText().contains(LocalDate.now(ZoneId.of("US/Pacific")).format(formatter));
+		    return WaitUtilsWebDriver.waitForVisibility(lifeCycleBlock)
+                    .getText()
+                    .contains(LocalDate.now(ZoneId.of("US/Pacific")).format(formatter));
 		} catch (TimeoutException e) {
 			e.printStackTrace();
 			return false;
@@ -1830,7 +1831,7 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 	public void goToLifeCycle() {
 		String parentFrame = driver.getWindowHandle();
 		switchToServiceRequestInfoFrame();
-		wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.id("Card_srLifeCycle")))).click();
+		Utils.clickElement(srLifeCycle);
 		Set windows = driver.getWindowHandles();
 		driver.close();
 		windows.remove(parentFrame);
