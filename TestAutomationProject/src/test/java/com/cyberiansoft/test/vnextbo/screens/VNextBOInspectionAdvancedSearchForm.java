@@ -49,7 +49,7 @@ public class VNextBOInspectionAdvancedSearchForm extends VNextBOBaseWebPage {
 	public void deleteSavedSearchFilter() {
 		advancedSearchForm.findElement(By.xpath(".//span[contains(@data-bind, 'click: deleteSavedSearch')]")).click();
 		driver.switchTo().alert().accept();
-		wait.until(ExpectedConditions.invisibilityOf(advancedSearchForm));
+		WaitUtils.waitUntilElementInvisible(By.xpath("//form[@id='advSearchEstimation-form']"));
 	}
 	
 	public String getAdvancedSearchInspectionNumberValue() {
@@ -61,20 +61,19 @@ public class VNextBOInspectionAdvancedSearchForm extends VNextBOBaseWebPage {
 	}
 	
 	public void setAdvancedSearchFilterNameAndSave(String filterName) {
-		new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.elementToBeClickable(advancedSearchForm.findElement(By.id("advSearchEstimation-Vin")))).click();
-		setAdvancedSearchFilterName(filterName);  
+		WaitUtils.waitUntilElementIsClickable(advancedSearchForm.findElement(By.id("advSearchEstimation-Vin")));
+		Utils.clickElement(advancedSearchForm.findElement(By.id("advSearchEstimation-Vin")));
+		setAdvancedSearchFilterName(filterName);
 		saveAdvancedSearchFilter();
 	}
 	
 	public void setAdvancedSearchFilterName(String filterName) {
-		waitShort.until(ExpectedConditions.visibilityOf(advancedSearchForm.findElement(By.id("advSearchEstimation-SearchName")))).clear();
-		advancedSearchForm.findElement(By.id("advSearchEstimation-SearchName")).sendKeys(filterName);
+		Utils.clearAndType(advancedSearchForm.findElement(By.id("advSearchEstimation-SearchName")), filterName);
 	}
 	
 	public String getAdvancedSearchFilterName() {
-		return new WebDriverWait(driver, 5)
-		  .until(ExpectedConditions.visibilityOf(advancedSearchForm.findElement(By.id("advSearchEstimation-SearchName")))).getAttribute("value");
+		WaitUtils.isElementPresent(advancedSearchForm.findElement(By.id("advSearchEstimation-SearchName")));
+		return advancedSearchForm.findElement(By.id("advSearchEstimation-SearchName")).getAttribute("value");
 	}
 	
 	public void saveAdvancedSearchFilter() {
