@@ -167,34 +167,6 @@ public class UsersWebPage extends WebPageWithPagination {
                 })
                 .findAny()
                 .get();
-//        return collect;
-
-//		for (WebElement row : rows) {
-//		    waitABit(1200);
-//            final WebElement element = row.findElement(By.xpath(".//td[3]"));
-//            try {
-//                wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-//                if (wait.until(ExpectedConditions.visibilityOf(element))
-//                        .getText()
-//                        .contains(firstName + " " + lastName)) {
-//                    return row;
-//                }
-//            } catch (Exception e) {
-//		        e.printStackTrace();
-//		        waitABit(2000);
-//                try {
-//                    wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-//                } catch (Exception e1) {
-//                    e1.printStackTrace();
-//                }
-//                if (element
-//                        .getText()
-//                        .contains(firstName + " " + lastName)) {
-//                    return row;
-//                }
-//            }
-//		}
-//		return null;
     }
 
     public WebElement getTableRowWithArchivedUser(String firstname, String lastname) {

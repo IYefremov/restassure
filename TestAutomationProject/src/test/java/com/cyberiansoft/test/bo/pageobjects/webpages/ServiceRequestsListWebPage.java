@@ -1289,7 +1289,6 @@ public class ServiceRequestsListWebPage extends BaseWebPage implements Clipboard
 
 	public boolean checkStatus(String status) {
 		driver.switchTo().defaultContent();
-		System.out.println(driver.findElement(By.className("serviceRequestStatus")).getText());
 		try {
 			wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("serviceRequestStatus"))).getText()
 					.equals(status);
