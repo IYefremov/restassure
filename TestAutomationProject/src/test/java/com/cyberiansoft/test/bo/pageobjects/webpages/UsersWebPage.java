@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
@@ -155,10 +156,13 @@ public class UsersWebPage extends WebPageWithPagination {
 
     public WebElement getTableRowWithActiveUser(String firstName, String lastName) {
         List<WebElement> rows = getUsersTableRows();
-        wait.until(ExpectedConditions.visibilityOfAllElements(rows));
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(rows);
         return rows
                 .stream()
-                .peek(row -> row.findElement(By.xpath(".//td[3]")))
+                .peek(row -> {
+                    ExpectedConditions.not(ExpectedConditions.stalenessOf(row));
+                    row.findElement(By.xpath(".//td[3]"));
+                })
                 .collect(Collectors.toList())
                 .stream()
                 .filter(e -> {
