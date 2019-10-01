@@ -76,4 +76,10 @@ public class VisualScreenSteps {
         VNextInformationDialog informationDialog = new VNextInformationDialog();
         informationDialog.clickInformationDialogRemoveButton();
     }
+
+    public static void clearAllMarks() {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
+        visualScreen.clickRemoveAllBreakagesButton();
+        GeneralSteps.confirmDialog();
+    }
 }

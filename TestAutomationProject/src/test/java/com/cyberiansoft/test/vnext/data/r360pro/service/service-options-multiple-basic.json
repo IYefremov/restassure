@@ -179,5 +179,191 @@
         }
       ]
     }
+  ],
+  "userCantAddSingleServiceMultipleTimesEditingWOFromVisualForm": [
+    {
+      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
+      "description": "89533",
+      "damagesData": [
+        {
+          "damageGroupName": "Autre",
+          "moneyService": {
+            "serviceName": "rozstalnoy_disable_money"
+          }
+        },
+        {
+          "damageGroupName": "Autre",
+          "moneyService": {
+            "serviceName": "rozstalnoy_disable_labor"
+          }
+        },
+        {
+          "damageGroupName": "Autre",
+          "partServiceData": {
+            "serviceName": "rozstalnoy_disable_parts",
+            "category": "Body",
+            "subCategory": "Bumper",
+            "partName": {
+              "partNameList": [
+                "Bumper"
+              ],
+              "isMultiSelect": false
+            },
+            "partPosition": "Front"
+          }
+        }
+      ]
+    }
+  ],
+  "userCANAddSingleServiceMultipleTimesCreatingWOFromVisualForm": [
+    {
+      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
+      "description": "89533",
+      "damagesData": [
+        {
+          "damageGroupName": "Autre",
+          "moneyService": {
+            "serviceName": "rozstalnoy_enable_money"
+          }
+        },
+        {
+          "damageGroupName": "Autre",
+          "moneyService": {
+            "serviceName": "rozstalnoy_enable_labor"
+          }
+        },
+        {
+          "damageGroupName": "Autre",
+          "partServiceData": {
+            "serviceName": "rozstalnoy_enable_parts",
+            "category": "Body",
+            "subCategory": "Bumper",
+            "partName": {
+              "partNameList": [
+                "Bumper"
+              ],
+              "isMultiSelect": false
+            },
+            "partPosition": "Front"
+          }
+        }
+      ]
+    }
+  ],
+  "userCANAddSingleServiceMultipleTimesEditingWOFromVisualForm": [
+    {
+      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
+      "description": "89533",
+      "damagesData": [
+        {
+          "damageGroupName": "Autre",
+          "moneyService": {
+            "serviceName": "rozstalnoy_enable_money"
+          }
+        },
+        {
+          "damageGroupName": "Autre",
+          "moneyService": {
+            "serviceName": "rozstalnoy_enable_labor"
+          }
+        },
+        {
+          "damageGroupName": "Autre",
+          "partServiceData": {
+            "serviceName": "rozstalnoy_enable_parts",
+            "category": "Body",
+            "subCategory": "Bumper",
+            "partName": {
+              "partNameList": [
+                "Bumper"
+              ],
+              "isMultiSelect": false
+            },
+            "partPosition": "Front"
+          }
+        }
+      ]
+    }
+  ],
+  "userCanAddServicesUsingQuestionForm": [
+    {
+      "rowID": "userCanAddServicesUsingQuestionForm.01",
+      "description": "89541",
+      "services": [
+        {
+          "serviceName": "rozstalnoy_disable_money"
+        },
+        {
+          "serviceName": "rozstalnoy_disable_labor"
+        },
+        {
+          "serviceName": "rozstalnoy_enable_money"
+        },
+        {
+          "serviceName": "rozstalnoy_enable_labor"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "serviceName": "rozstalnoy_disable_parts",
+          "category": "Body",
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": true
+          },
+          "partPosition": "Front"
+        },
+        {
+          "serviceName": "rozstalnoy_enable_parts",
+          "category": "Body",
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": true
+          },
+          "partPosition": "Front"
+        }
+      ],
+      "matrixServiceDataList": [
+        {
+          "matrixServiceName": "Hail Repair",
+          "vehiclePartData": {
+            "vehiclePartName": "01Part",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "201 - 250"
+          }
+        },
+        {
+          "matrixServiceName": "Hail Damage Repair",
+          "hailMatrixName": "Igor Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Roof",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "HEAVY"
+          }
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Generate \"Money\" services?"
+          },
+          {
+            "questionName": "Generate \"Labor\" services?"
+          },
+          {
+            "questionName": "Generate \"Matrix\" services?"
+          },
+          {
+            "questionName": "Generate \"Part\" services?"
+          }
+        ]
+      }
+    }
   ]
 }
