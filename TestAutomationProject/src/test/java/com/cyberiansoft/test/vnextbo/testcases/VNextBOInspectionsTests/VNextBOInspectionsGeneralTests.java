@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.testcases;
+package com.cyberiansoft.test.vnextbo.testcases.VNextBOInspectionsTests;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -6,10 +6,14 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
 import org.testng.annotations.*;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
@@ -18,6 +22,9 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInspectionsGeneralData.json";
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
+    private List<String> expectedAdvancedSearchFields =
+            Arrays.asList("Customer", "PO#", "RO#", "Stock#", "VIN",
+                    "Status", "Inspection#", "Timeframe");
 
     @BeforeClass
     public void settingUp() {
@@ -143,5 +150,19 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
         Assert.assertTrue(inspectionsWebPage.isIntercomMessengerOpened(),
                 "Intercom messenger hasn't been opened");
         inspectionsWebPage.closeIntercom();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyAdvancedSearchFields(String rowID, String description, JSONObject testData) {
+
+        inspectionsWebPage.openAdvancedSearchForm();
+        VNextBOInspectionAdvancedSearchForm vNextBOInspectionAdvancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(webdriver);
+        Assert.assertTrue(vNextBOInspectionAdvancedSearchForm.isAdvancedSearchFormDisplayed(),
+                "Advanced search form hasn't been opened");
+        List<String> actualResult = vNextBOInspectionAdvancedSearchForm.getAllAdvancedSearchFieldsLabels();
+        Assert.assertEquals(actualResult, expectedAdvancedSearchFields);
+        Assert.assertTrue(vNextBOInspectionAdvancedSearchForm.isSearchButtonDisplayed(),
+                "Advanced Search button hasn't been displayed");
     }
 }

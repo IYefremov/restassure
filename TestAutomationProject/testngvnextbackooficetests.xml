@@ -31,7 +31,7 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOHomePageAccessRightsTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOLoginTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOForgotPasswordTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInspectionsGeneralTests"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOInspectionsTests.VNextBOInspectionsGeneralTests"/>
     </classes>
   </test>
 </suite>

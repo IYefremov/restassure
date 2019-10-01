@@ -19,22 +19,34 @@ public class VNextBOModalDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@data-automation-id='modalConfirmButton' and text()='OK']")
     private WebElement confirmOKButton;
 
+    @FindBy(xpath = "//button[@data-automation-id='modalConfirmButton' and text()='Yes']")
+    private WebElement confirmYesButton;
+
+    @FindBy(xpath = "//button[@data-automation-id='modalCancelButton' and text()='No']")
+    private WebElement cancelNoButton;
+
     @FindBy(xpath = "//div[@class='modal-content']//button[@data-automation-id='modalCloseButton']")
     private WebElement closeButton;
-
-    public boolean isDialogDisplayed()  { return  Utils.isElementDisplayed(getDialogContent()); }
-
-    public boolean isDialogClosed()  { return  Utils.isElementNotDisplayed(getDialogContent()); }
-
-    public boolean isOkButtonDisplayed()  { return confirmOKButton.isDisplayed(); }
 
     public VNextBOModalDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOf(confirmOKButton));
+                .until(ExpectedConditions.visibilityOf(closeButton));
     }
+
+    public boolean isDialogDisplayed()  { return  Utils.isElementDisplayed(getDialogContent()); }
+
+    public boolean isDialogClosed()  { return  Utils.isElementNotDisplayed(getDialogContent()); }
+
+    public boolean isOkButtonDisplayed()  { return Utils.isElementDisplayed(confirmOKButton); }
+
+    public boolean isCloseButtonDisplayed()  { return Utils.isElementDisplayed(closeButton); }
+
+    public boolean isYesButtonDisplayed()  { return Utils.isElementDisplayed(confirmYesButton); }
+
+    public boolean isNoButtonDisplayed()  { return Utils.isElementDisplayed(cancelNoButton); }
 
     private WebElement getDialogContent() {
 
@@ -51,10 +63,16 @@ public class VNextBOModalDialog extends VNextBOBaseWebPage {
     }
 
     public void clickOkButton() {
-        confirmOKButton.click();
+        Utils.clickElement(confirmOKButton);
     }
 
     public void clickCloseButton() {
-        closeButton.click();
+        Utils.clickElement(closeButton);
+    }
+
+    public void clickYesButton() { Utils.clickElement(confirmYesButton); }
+
+    public void clickNoButton() {
+        Utils.clickElement(cancelNoButton);
     }
 }

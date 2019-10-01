@@ -164,18 +164,19 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         leftMenuInteractions.selectInspectionsMenu();
 
-        inspectionsWebPage
-                .openAdvancedSearchPanel()
-                .selectAdvancedSearchByStatus(data.getStatuses()[0])
-                .clickSearchButton();
+        inspectionsWebPage.openAdvancedSearchForm();
+        VNextBOInspectionAdvancedSearchForm vNextBOInspectionAdvancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(webdriver);
+        vNextBOInspectionAdvancedSearchForm.setAdvSearchDropDownField("Status", data.getStatuses()[0]);
+        vNextBOInspectionAdvancedSearchForm.clickSearchButton();
         final String inspectionNumber = breadCrumbInteractions.getLastBreadCrumbText();
         inspectionsApprovalSteps.approveInspection(data.getNote());
 
-        inspectionsWebPage
-                .openAdvancedSearchPanel()
-                .setAdvancedSearchByInspectionNumber(inspectionNumber)
-                .selectAdvancedSearchByStatus(data.getStatuses()[1])
-                .clickSearchButton();
+        inspectionsWebPage.openAdvancedSearchForm();
+        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
+        vNextBOInspectionAdvancedSearchForm.setAdvSearchTextField("Inspection#", inspectionNumber);
+        vNextBOInspectionAdvancedSearchForm.setAdvSearchDropDownField("Status", data.getStatuses()[1]);
+        vNextBOInspectionAdvancedSearchForm.clickSearchButton();
         Assert.assertEquals(inspectionsWebPage.getFirstInspectionStatus(), data.getStatuses()[1],
                 "The status of inspection hasn't been changed from 'New' to 'Approved'");
     }
