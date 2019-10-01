@@ -215,17 +215,22 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     @FindBy(className = "breadcrumbs")
     private WebElement mainBreadCrumbsLink;
 
+    @FindBy(className = "order-notes")
+    private WebElement roNotesLink;
+
     @FindBy(xpath = "//a[@class='order-no']")
     private List<WebElement> woNumbersList;
 
     @FindBy(xpath = "//ul[@data-template='repairOrders-filterInfoList-item']/li")
     private List<WebElement> searchOptions;
 
-
     public VNextBOROWebPage() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+    }
+
+    public String getOrderNoteText() {
+        return Utils.getText(roNotesLink);
     }
 
     public VNextBOROWebPage movePointerToSearchResultsField() {
@@ -715,47 +720,6 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
         }
     }
 
-    public boolean isNoteForWorkOrderDisplayed(String woNumber) {
-        return isArrowDisplayed(woNumber, "/../../..//div[@class='dark box']");//strong[text()='O-000-152073']/../../..
-    }
-
-    public VNextBOROWebPage closeNoteForWorkOrder(String woNumber) {
-        if (isNoteForWorkOrderDisplayed(woNumber)) {
-            System.out.println("Yes, displayed");
-            waitForLoading();
-            clickNoteForWo(woNumber);
-            System.out.println("clicked");
-        } else {
-            System.out.println("not displayed");
-        }
-        return this;
-    }
-
-    public VNextBOROWebPage openNoteForWorkOrder(String woNumber) {
-        if (!isNoteForWorkOrderDisplayed(woNumber)) {
-            clickNoteForWo(woNumber);
-        }
-        return this;
-    }
-
-    public VNextBOROWebPage clickXIconToCloseNoteForWorkOrder(String woNumber) {
-        if (isNoteForWorkOrderDisplayed(woNumber)) {
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//strong[text()='" + woNumber
-                    + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']//a[@class='x']")))
-                    .click();
-        }
-        return this;
-    }
-
-    private void clickNoteForWo(String woNumber) {
-        wait
-                .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.elementToBeClickable(driver
-                        .findElement(By.xpath("//strong[text()='" + woNumber
-                                + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']"))))
-                .click();
-    }
-
     public VNextBORODetailsPage clickWoLink(String woNumber) {
         WaitUtilsWebDriver.waitForLoading();
         Utils.clickElement(By.xpath("//a[@class='order-no']/strong[text()='" + woNumber + "']/.."));
@@ -789,25 +753,6 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
         } catch (Exception e) {
             return false;
         }
-    }
-
-    public VNextBOBaseWebPage setWoDepartment(String woNumber, String department) {
-        closeNoteForWorkOrder(woNumber);
-        wait.until(ExpectedConditions.elementToBeClickable(tableBody.findElement(By.xpath("//a[@class='order-no']" +
-                "/strong[text()='" + woNumber + "']/../following-sibling::div/i[@class='menu-trigger']")))).click();
-        final WebElement departmentDropDown = tableBody.findElement(By.xpath("//a[@class='order-no']/strong[text()='"
-                + woNumber + "']/../..//div[@class='drop department-drop']"));
-        wait.until(ExpectedConditions.visibilityOf(departmentDropDown));
-        final List<WebElement> dropDownOptions = departmentDropDown.findElements(By.xpath(".//label"));
-        wait.until(ExpectedConditions.visibilityOfAllElements(dropDownOptions));
-        dropDownOptions
-                .stream()
-                .filter(e -> e.getText().equals(department))
-                .findFirst()
-                .ifPresent(WebElement::click);
-        wait.until(ExpectedConditions.invisibilityOf(departmentDropDown));
-        waitABit(1000);
-        return this;
     }
 
     public String getWoDepartment(String woNumber) {
@@ -944,7 +889,7 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     public VNextBORODetailsPage openWorkOrderDetailsPage(String orderNumber) {
         WebElement wotablerow = getTableRowWithWorkOrder(orderNumber);
         wotablerow.findElement(By.xpath(".//a/strong[text()='" + orderNumber + "']")).click();
-        return new VNextBORODetailsPage(driver);
+        return new VNextBORODetailsPage();
     }
 
     public void clickSearchTextToCloseLocationDropDown() {
@@ -964,5 +909,9 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     public WebElement getTechniciansFieldForWO(String woNumber) {
         return tableBody.findElement(By.xpath("//strong[text()=\"" + woNumber
                 + "\"]/../../../parent::tr//div[contains(@data-bind, \"changeTechnicians\")]"));
+    }
+
+    public String getTechniciansValueForWO(String woNumber) {
+        return Utils.getText(getTechniciansFieldForWO(woNumber));
     }
 }

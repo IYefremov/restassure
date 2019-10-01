@@ -140,42 +140,4 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByLastName(data.getLastName()),
                 "The work order is not displayed after search by last name after clicking the 'Enter' key");
     }
-
-    //todo uncomment after bug fix #79944!!!
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchByEmail(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBOROSimpleSearchSteps().searchByText(data.getEmail());
-
-        Assert.assertTrue(repairOrdersPage
-                        .isWorkOrderDisplayedAfterSearchByEmail(data.getFirstName() + " " + data.getLastName()),
-                "The work order is not displayed after search by email after clicking the 'Search' icon");
-        repairOrdersPage.clickCancelSearchIcon();
-        new VNextBOROSimpleSearchSteps().searchByTextWithEnter(data.getEmail());
-
-        Assert.assertTrue(repairOrdersPage
-                        .isWorkOrderDisplayedAfterSearchByEmail(data.getFirstName() + " " + data.getLastName()),
-                "The work order is not displayed after search by email after clicking the 'Enter' key");
-    }
-
-    //todo uncomment after bug fix #79944!!!
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchByCompanyName(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        new VNextBOROSimpleSearchSteps().searchByText(data.getCompany());
-
-        Assert.assertTrue(repairOrdersPage
-                        .isWorkOrderDisplayedAfterSearchByCompanyName(data.getFirstName() + " " + data.getLastName()),
-                "The work order is not displayed after search by company name after clicking the 'Search' icon");
-        repairOrdersPage.clickCancelSearchIcon();
-        new VNextBOROSimpleSearchSteps().searchByText(data.getCompany());
-
-        Assert.assertTrue(repairOrdersPage
-                        .isWorkOrderDisplayedAfterSearchByCompanyName(data.getFirstName() + " " + data.getLastName()),
-                "The work order is not displayed after search by company name after clicking the 'Enter' key");
-    }
 }

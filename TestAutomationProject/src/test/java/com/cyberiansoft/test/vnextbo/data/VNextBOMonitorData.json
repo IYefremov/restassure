@@ -581,7 +581,7 @@
       "status": "Approved",
       "orderNumber": "O-000-152073",
       "service": "zayatsPriceMatrixService",
-      "serviceNotesMessage": "Autotest"
+      "notesMessage": "Autotest"
     }
   ],
 
@@ -634,7 +634,7 @@
         "Active",
         "Completed"
       ],
-      "serviceNotesMessage": "Autotest"
+      "notesMessage": "Autotest"
     }
   ],
 

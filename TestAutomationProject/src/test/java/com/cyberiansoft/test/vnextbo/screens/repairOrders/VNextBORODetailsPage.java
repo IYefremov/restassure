@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens.repairOrders;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
 import org.apache.commons.lang3.StringUtils;
@@ -115,6 +116,18 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]")
 	private WebElement phaseActionsTrigger;
 
+	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]//div[@class='drop checkout']")
+	private WebElement phaseActionsDropDown;
+
+	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]//div[@class='drop checkout hidden']")
+	private WebElement phaseActionsDropDownHidden;
+
+	@FindBy(xpath = "//div[@class='drop checkout']/div[contains(@data-bind, 'phaseCheckIn')]")
+	private WebElement phaseActionsCheckInOption;
+
+	@FindBy(xpath = "//div[@class='drop checkout']/div[contains(@data-bind, 'phaseCheckOut')]")
+	private WebElement phaseActionsCheckOutOption;
+
 	@FindBy(xpath = "//span[contains(@class, 'location-name')]")
 	private WebElement locationElement;
 
@@ -152,8 +165,8 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	private List<WebElement> listBoxOptions;
 
 
-	public VNextBORODetailsPage(WebDriver driver) {
-		super(driver);
+	public VNextBORODetailsPage() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
@@ -741,16 +754,6 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
-		}
-	}
-
-	public boolean isPhaseActionsTriggerDisplayed() {
-		try {
-			wait.until(ExpectedConditions.visibilityOf(phaseActionsTrigger)).isDisplayed();
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
 		}
 	}
 

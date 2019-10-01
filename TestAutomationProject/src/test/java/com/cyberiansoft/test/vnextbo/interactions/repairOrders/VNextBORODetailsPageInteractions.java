@@ -9,7 +9,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.annotation.Nullable;
@@ -18,15 +17,14 @@ import java.util.Objects;
 
 public class VNextBORODetailsPageInteractions {
 
-    private VNextBORODetailsPage repairOrderDetailsPage;
+    private VNextBORODetailsPage detailsPage;
 
     public VNextBORODetailsPageInteractions() {
-        repairOrderDetailsPage = PageFactory.initElements(
-                DriverBuilder.getInstance().getDriver(), VNextBORODetailsPage.class);
+        detailsPage = new VNextBORODetailsPage();
     }
 
     public boolean isRODetailsSectionDisplayed() {
-        return Utils.isElementDisplayed(repairOrderDetailsPage.getRoDetailsSection());
+        return Utils.isElementDisplayed(detailsPage.getRoDetailsSection());
     }
 
     public void setStatus(String status) {
@@ -36,19 +34,19 @@ public class VNextBORODetailsPageInteractions {
 
     private void clickStatusBox() {
         WaitUtilsWebDriver.waitForLoading();
-        Utils.clickElement(repairOrderDetailsPage.getStatusListBox());
+        Utils.clickElement(detailsPage.getStatusListBox());
         WaitUtilsWebDriver.waitABit(1000);
     }
 
     private void selectStatus(String status) {
-        final List<WebElement> statusListBoxOptions = repairOrderDetailsPage.getStatusDropDownContainer()
+        final List<WebElement> statusListBoxOptions = detailsPage.getStatusDropDownContainer()
                 .findElements(By.xpath("//ul[@data-role='staticlist']/li"));
         Utils.selectOptionInDropDown(statusListBoxOptions.get(0), statusListBoxOptions, status);
     }
 
     public String getRoStatusValue() {
         try {
-            return WaitUtilsWebDriver.waitForVisibility(repairOrderDetailsPage.getRoStatusElement()).getText();
+            return WaitUtilsWebDriver.waitForVisibility(detailsPage.getRoStatusElement()).getText();
         } catch (Exception ignored) {
             return "";
         }
@@ -84,8 +82,8 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public void expandServicesTable() {
-        Utils.clickElement(repairOrderDetailsPage.getServicesExpandArrow());
-        WaitUtilsWebDriver.waitForInvisibility(repairOrderDetailsPage.getServicesExpandArrow());
+        Utils.clickElement(detailsPage.getServicesExpandArrow());
+        WaitUtilsWebDriver.waitForInvisibility(detailsPage.getServicesExpandArrow());
         WaitUtilsWebDriver.waitForLoading();
     }
 
@@ -127,7 +125,7 @@ public class VNextBORODetailsPageInteractions {
 
     private void clickServiceStatusBox(int order) {
         WaitUtilsWebDriver.waitForLoading();
-        final WebElement serviceStatus = repairOrderDetailsPage.getServicesStatusWidgetList().get(order);
+        final WebElement serviceStatus = detailsPage.getServicesStatusWidgetList().get(order);
         Utils.clickElement(serviceStatus);
     }
 
@@ -193,7 +191,7 @@ public class VNextBORODetailsPageInteractions {
     }
 
     private String getTextValue(String serviceId, String xpath, String replacement) {
-        final WebElement element = repairOrderDetailsPage.getElementInServicesTable(serviceId, xpath);
+        final WebElement element = detailsPage.getElementInServicesTable(serviceId, xpath);
         Utils.setAttributeWithJS(element, "style", "display: block;");
         WaitUtilsWebDriver.waitABit(1000);
         final String text = WaitUtilsWebDriver.waitForVisibility(element).getText().replace(replacement, "");
@@ -202,7 +200,7 @@ public class VNextBORODetailsPageInteractions {
     }
 
     private String getTextValue(String serviceId, String xpath) {
-        final WebElement element = repairOrderDetailsPage.getElementInServicesTable(serviceId, xpath);
+        final WebElement element = detailsPage.getElementInServicesTable(serviceId, xpath);
         Utils.setAttributeWithJS(element, "style", "display: block;");
         final String text = WaitUtilsWebDriver.waitForVisibility(element).getText();
         Utils.setAttributeWithJS(element, "style", "display: none;");
@@ -210,7 +208,7 @@ public class VNextBORODetailsPageInteractions {
     }
 
     private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
-        final WebElement element = repairOrderDetailsPage.getElementInServicesTable(serviceId, xpath);
+        final WebElement element = detailsPage.getElementInServicesTable(serviceId, xpath);
         Utils.clearAndType(element, newValue);
         clickServiceDescriptionName(serviceDescription);
         WaitUtilsWebDriver.waitABit(1000);
@@ -220,5 +218,35 @@ public class VNextBORODetailsPageInteractions {
         Objects.requireNonNull(WaitUtilsWebDriver
                 .waitForElementToBeClickable(getServiceByName(serviceDescription)))
                 .click();
+    }
+
+    public void openActionsDropDownForPhase() {
+        handleActionsButton(detailsPage.getPhaseActionsDropDown());
+    }
+
+    public void closeActionsDropDownForPhase() {
+        handleActionsButton(detailsPage.getPhaseActionsDropDownHidden());
+    }
+
+    private void handleActionsButton(WebElement phaseActionsDropDownHidden) {
+        try {
+            WaitUtilsWebDriver.waitForVisibility(phaseActionsDropDownHidden, 5);
+        } catch (Exception e) {
+            Utils.clickElement(detailsPage.getPhaseActionsTrigger());
+        }
+    }
+
+    private void setOptionForPhase(WebElement option) {
+        Utils.clickElement(option);
+        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(detailsPage.getPhaseActionsDropDown(), 5);
+    }
+
+    public void clickCheckInOptionForPhase() {
+        setOptionForPhase(detailsPage.getPhaseActionsCheckInOption());
+    }
+
+    public void clickCheckOutOptionForPhase() {
+        setOptionForPhase(detailsPage.getPhaseActionsCheckOutOption());
     }
 }
