@@ -17,6 +17,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
+import com.cyberiansoft.test.ios10_client.regularvalidations.RegularMyWorkOrdersScreenValidations;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
@@ -67,14 +68,13 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String tcname = "testValidVINCheck";
 			final int tcrow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(tcrow));
 			vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(tcrow), ExcelUtils.getModel(tcrow), ExcelUtils.getYear(tcrow));
-			RegularNavigationSteps.navigateToServicesScreen();
 			RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10451:Test Top Customers Setting", description = "Test Top Customers Setting")
@@ -107,7 +107,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			settingsScreen.setCheckDuplicatesOn();
 			settingsScreen.clickHomeButton();
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			String searchresult = vehicleScreen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
@@ -119,7 +119,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			if (DriverBuilder.getInstance().getAppiumDriver().findElementsByAccessibilityId("Close").size() > 0)
 				DriverBuilder.getInstance().getAppiumDriver().findElementByAccessibilityId("Close").click();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			homescreen.clickSettingsButton();
 			settingsScreen = new RegularSettingsScreen();
 			settingsScreen.setCheckDuplicatesOff();
@@ -139,7 +139,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			settingsScreen.setCheckDuplicatesOn();
 			settingsScreen.clickHomeButton();
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -161,7 +161,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesScreen.clickCancelButton();
 			servicesScreen.clickBackServicesButton();
 			RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 
 			homescreen.clickSettingsButton();
 			settingsScreen = new RegularSettingsScreen();
@@ -182,7 +182,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularSettingsScreen settingsScreen = homescreen.clickSettingsButton();
 			settingsScreen.setInsvoicesCustomLayoutOff();
 			settingsScreen.clickHomeButton();
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -293,22 +293,22 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
 			final String[] wos = {wo1, wo2};
+			RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 			myWorkOrdersScreen.clickCreateInvoiceIconForWOs(wos);
 			myWorkOrdersScreen.clickInvoiceIcon();
 			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-            Assert.assertTrue(invoiceinfoscreen.isWOSelected(wo1));
-			Assert.assertTrue(invoiceinfoscreen.isWOSelected(wo2));
-			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-			Assert.assertFalse(myWorkOrdersScreen.woExists(wo1));
-			Assert.assertFalse(myWorkOrdersScreen.woExists(wo2));
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+            Assert.assertTrue(invoiceInfoScreen.isWOSelected(wo1));
+			Assert.assertTrue(invoiceInfoScreen.isWOSelected(wo2));
+			String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(wo1, false);
+			RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(wo2, false);
+			RegularNavigationSteps.navigateBackScreen();
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
 			final String wosvalue = wo1 + ", " +  wo2;
-			Assert.assertEquals(wosvalue, myInvoicesScreen.getWOsForInvoice(invoicenum));
-			myInvoicesScreen.clickHomeButton();
+			Assert.assertEquals(wosvalue, myInvoicesScreen.getWOsForInvoice(invoiceNumber));
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10651:Test same Order Type required for turning multiple Work Orders into a single Invoice", description = "Test same Order Type required for turning multiple Work Orders into a single Invoice")
@@ -318,7 +318,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			final String[] vehicleparts = { "Roof" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routecanadaworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -350,8 +350,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 			final String[] vehicleparts2 = { "Hood" };
-
-			myWorkOrdersScreen.clickAddOrderButton();
+			
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 			String wo2 = vehicleScreen.getWorkOrderNumber();
@@ -375,6 +374,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
 			final String[] wos = {wo1, wo2};
+			RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 			myWorkOrdersScreen.clickCreateInvoiceIconForWOs(wos);
 			
 			myWorkOrdersScreen.clickInvoiceIcon();
@@ -384,7 +384,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					alertText,
 					"Invoice type " + DentWizardInvoiceTypes.NO_ORDER_TYPE.getInvoiceTypeName() + " doesn't support multiple Work Order types.");
 			myWorkOrdersScreen.clickCancel();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 
 		}
 		
@@ -432,7 +432,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			approveinspscreen.drawApprovalSignature();
 			myInspectionsScreen = new RegularMyInspectionsScreen();
 			Assert.assertTrue(myInspectionsScreen.isInspectionIsApproved(inspNumber));
-			myInspectionsScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10653:Test Inspections convert to Work Order", description = "Test Inspections convert to Work Order")
@@ -511,10 +511,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			RegularWizardScreensSteps.clickSaveButton();
 			myInspectionsScreen.waitMyInspectionsScreenLoaded();
-			myInspectionsScreen.clickHomeButton();
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
-			myWorkOrdersScreen.woExists(workOrderNumber);
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+			RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, true);
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10654:Test 'Vehicle' Service does not multiply price entered when selecting multiple panels", description = "Test 'Vehicle' Service does not multiply price entered when selecting multiple panels")
@@ -524,7 +524,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -549,7 +549,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 
 			RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 
 			homescreen.clickSettingsButton();
 			RegularSettingsScreen settingsScreen = new RegularSettingsScreen();
@@ -565,7 +565,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = { "Left Fender", "Left Front Door",
 					"Left Rear Door" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -590,7 +590,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 
 			RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10656:Test Carmax vehicle information requirements", description = "Test Carmax vehicle information requirements")
@@ -598,7 +598,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testCarmaxVehicleInformationRequirements";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -609,9 +609,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehicleScreen.clickChangeScreen();
 			Assert.assertTrue(vehicleScreen.clickSaveWithAlert().contains("RO# is required"));
 			vehicleScreen.setRO(ExcelUtils.getRO(testcaserow));
-			RegularNavigationSteps.navigateToServicesScreen();
 			RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10657:Test Service Drive requires Advisor", description = "Test Service Drive requires Advisor")
@@ -622,7 +621,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			homescreen.clickCustomersButton();
 			RegularCustomersScreen customersScreen = new RegularCustomersScreen();
 			customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -632,15 +631,15 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
 			RegularNavigationSteps.navigateToServicesScreen();
 			RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName= "Test Case 10658:Test Inspection requirments inforced", description = "Test Inspection requirements inforced")
 		public void testInspectionRequirementsInforced() {
 			String tcname = "testInspectionRequirementsInforced";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-
-			RegularMyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+			
+			RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 			RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.wizardprotrackerrouteinspectiondertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.clickSave();
@@ -652,7 +651,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertTrue(alertText.contains("Advisor is required"));
 			vehicleScreen.seletAdvisor(UtilConstants.TRAINING_ADVISOR);
 			RegularInspectionsSteps.saveInspection();
-			myInspectionsScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10663:Test Inspections can convert to multiple Work Orders", description = "Test Inspections can convert to multiple Work Orders")
@@ -702,12 +701,12 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			Assert.assertEquals(myInspectionsScreen.getNumberOfWorkOrdersForIspection(), 2);
 			Assert.assertTrue(myInspectionsScreen.isWorkOrderForInspectionExists(workOrderNumber2));
-			myInspectionsScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
-			Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
-			Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber2));
-			myWorkOrdersScreen.clickHomeButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+			RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, true);
+			RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber2, true);
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10665:Test Archive feature for Inspections", description = "Test Archive feature for Inspections")
@@ -719,7 +718,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			settingsScreen.setShowAllServicesOn();
 			settingsScreen.clickHomeButton();
 
-			RegularMyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+			RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 			RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routeinspectiontype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -734,6 +733,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
 			RegularInspectionsSteps.saveInspection();
+			RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 			myInspectionsScreen.clickOnInspection(inspNumber);
 			myInspectionsScreen.clickArchiveInspectionButton();
 			myInspectionsScreen.clickFilterButton();
@@ -751,7 +751,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertEquals(myInspectionsScreen.checkFilterIsApplied(), true);
 			myInspectionsScreen.clearFilter();
 			myInspectionsScreen.clickSaveFilterDialogButton();
-			myInspectionsScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 11731:Test even WO level tech split for Wholesale Hail", description = "Test even WO level tech split for Wholesale Hail")
@@ -763,7 +763,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					"Left Rear Door", "Roof" };
 
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -868,10 +868,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
-
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 11732:Test even service level tech split for Wholesale Hail", description = "Test even service level tech split for Wholesale Hail")
@@ -882,7 +881,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = { "Hood", "Right Quarter Panel",
 					"Sunroof" };
 			
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -927,10 +926,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
-
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 11733:Test Custom WO level tech split for wholesale Hail", description = "Test Custom WO level tech split for wholesale Hail")
@@ -941,7 +939,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = { "Cowl, Other", "Left Fender",
 					"Trunk Lid" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -1003,10 +1001,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
-
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 11734:Test Custom service level tech split for wholesale Hail", description = "Test Custom service level tech split for wholesale Hail")
@@ -1017,7 +1014,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = { "Left Fender", "Left Quarter Panel", "Right Rear Door",
 					"Trunk Lid" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -1097,10 +1094,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
-            myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 11735:Test Customer Discount on Wholesale Hail", description = "Test Customer Discount on Wholesale Hail")
@@ -1110,7 +1106,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			final String[] vehicleparts = { "Hood", "Roof", "Trunk Lid" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -1137,9 +1133,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10668:Test Quick Quote option for Retail Hail", description = "Test Quick Quote option for Retail Hail")
@@ -1147,7 +1143,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testQuickQuoteOptionForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.acceptForReminderNoDrilling();
@@ -1201,7 +1197,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10733:Test Customer self-pay option for Retail Hail", description = "Test Customer self-pay option for Retail Hail")
@@ -1209,7 +1205,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testCustomerSelfPayOptionForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
@@ -1250,7 +1246,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10734:Test Even WO level tech split for Retail Hail", description = "Test Even WO level tech split for Retail Hail")
@@ -1258,7 +1254,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testEvenWOLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
@@ -1354,7 +1350,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10735:Test even service level tech split for Retail Hail", description = "Test even service level tech split for Retail Hail")
@@ -1362,7 +1358,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testEvenServiceLevelTechSplitForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.acceptForReminderNoDrilling();
@@ -1432,7 +1428,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10736:Test deductible feature for Retail Hail", description = "Test deductible feature for Retail Hail")
@@ -1440,7 +1436,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testDeductibleFeatureForRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.acceptForReminderNoDrilling();
@@ -1483,9 +1479,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-            RegularInvoiceInfoScreen invoiceinfoscreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.HAIL);
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+            RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.HAIL);
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 
 		}
 		
@@ -1495,7 +1491,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			final String validzip = "83707";
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.acceptForReminderNoDrilling();
@@ -1519,7 +1515,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			questionsScreen.setRegularSetFieldValue((IOSElement) DriverBuilder.getInstance().getAppiumDriver().findElementByAccessibilityId("Owner Zip_TextView"), validzip);
 			RegularNavigationSteps.navigateToServicesScreen();
 			RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 11727:Test Custom WO level tech split for Retail Hail", description = "Test Custom WO level tech split for Retail Hail")
@@ -1528,7 +1524,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.acceptForReminderNoDrilling();
@@ -1593,8 +1589,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.setTechnicianCustomPriceValue(UtilConstants.technicianB, "35.75");
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
-			priceMatrixScreen = new RegularPriceMatrixScreen();
-            vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
+            priceMatrixScreen.selectPriceMatrix(ExcelUtils.getPriceMatrix2(retailhaildatarow));
             vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.DIME_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
 			Assert.assertEquals(vehiclePartScreen.getPrice(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			Assert.assertTrue(vehiclePartScreen.isNotesExists());
@@ -1623,7 +1618,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 11728:Test Custom service level tech split for Retail Hail", description = "Test Custom service level tech split for Retail Hail")
@@ -1632,7 +1627,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.acceptForReminderNoDrilling();
@@ -1732,7 +1727,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12626:Test Customer Discount on Retail Hail", description = "Test Customer Discount on Retail Hail")
@@ -1740,7 +1735,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testCustomerDiscountOnRetailHail";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.acceptForReminderNoDrilling();
@@ -1777,7 +1772,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12627:Test WizardPro Tracker package requirement for RO to be completed before turning into an invoice", description = "Test WizardPro Tracker package requirement for RO to be completed before turning into an invoice")
@@ -1790,7 +1785,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
 			
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -1816,7 +1811,6 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
             Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
-			servicesScreen = new RegularServicesScreen();
 			servicesScreen.clickBackServicesButton();
 			servicesScreen.selectServicePanel(UtilConstants.WHEELS_SERVICE);
 			selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
@@ -1832,9 +1826,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			servicesScreen.clickBackServicesButton();
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
-			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myWorkOrdersScreen.switchToTeamWorkOrders();
+			RegularMyWorkOrdersSteps.switchToTeamView();
+			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
 
 			teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
 			teamWorkOrdersScreen.clickiCreateInvoiceButton();
@@ -1852,7 +1846,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 					"Left Quarter Panel" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -1875,7 +1869,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesScreen.clickBackServicesButton();
 			
 			servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
-			selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
+			servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDOORHANDLE_SUBSERVICE);
 			selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
             Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -1895,9 +1889,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			servicesScreen.clickBackServicesButton();
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
-			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 
 			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = homescreen.clickTeamWorkordersButton();
 			teamWorkOrdersScreen.clickOnWO(workOrderNumber);
@@ -1926,9 +1919,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			teamWorkOrdersScreen.verifyCreateInvoiceIsActivated(workOrderNumber);
 			teamWorkOrdersScreen.clickiCreateInvoiceButton();
 			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-            RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			invoiceinfoscreen.clickSaveAsFinal();
+            RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			invoiceInfoScreen.clickSaveAsFinal();
 			teamWorkOrdersScreen.clickHomeButton();			
 		}
 
@@ -1943,7 +1936,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehiclepartspaint = { "Front Bumper"};
 			final String[] vehiclepartstoadd = { "Hood"};
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -1994,9 +1987,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesScreen.clickBackServicesButton();
 
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
-			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			
 			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = homescreen.clickTeamWorkordersButton();
 			teamWorkOrdersScreen.clickOnWO(workOrderNumber);
@@ -2049,9 +2041,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
 			teamWorkOrdersScreen.clickiCreateInvoiceButton();
 			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			invoiceinfoscreen.clickSaveAsFinal();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			invoiceInfoScreen.clickSaveAsFinal();
 			teamWorkOrdersScreen.clickHomeButton();			
 		}
 		
@@ -2060,7 +2052,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testStartServiceFeatureIsAccuratelyCapturingTimes";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2076,10 +2068,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
-			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
-			
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			
 			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = homescreen.clickTeamWorkordersButton();
 			teamWorkOrdersScreen.clickOnWO(workOrderNumber);
@@ -2107,7 +2097,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehiclepartspaint = { "Hood", "Left Roof Rail", "Right Fender" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Left Rear Wheel" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -2141,7 +2131,6 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
-			servicesScreen = new RegularServicesScreen();
 			servicesScreen.selectServicePanel(UtilConstants.WHEELS_SERVICE);
 			selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
 			selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
@@ -2158,11 +2147,11 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			invoiceinfoscreen.clickSaveAsFinal();
+			RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			invoiceInfoScreen.clickSaveAsFinal();
 
-			myWorkOrdersScreen.clickHomeButton();		
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12632:Test Delete Work Order function", description = "Test Delete Work Order function")
@@ -2172,11 +2161,11 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			final String[] vehicleparts = { "Roof" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routecanadaworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-			String wo = vehicleScreen.getWorkOrderNumber();
+			String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 			vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 
 			RegularNavigationSteps.navigateToServicesScreen();
@@ -2195,9 +2184,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesScreen.clickBackServicesButton();
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.deleteWorkOrderViaActionAndSearch(wo);
-			Assert.assertFalse(myWorkOrdersScreen.woExists(wo));
-			myWorkOrdersScreen.clickHomeButton();
+			RegularMyWorkOrdersSteps.deleteWorkOrder(workOrderNumber);
+			RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, false);
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12637:Test changing customer on Inspection", description = "Test changing customer on Inspection")
@@ -2245,25 +2234,22 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesScreen.clickBackServicesButton();
 			RegularInspectionsSteps.saveInspection();
 			RegularMyInspectionsSteps.changeCustomerForInspection(inspNumber, wholesailCustomer);
-			myInspectionsScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			
 			homescreen.clickCustomersButton();
 			RegularCustomersScreen customersScreen = new RegularCustomersScreen();
 			customersScreen.selectCustomerWithoutEditing("Abc Rental Center");
-			homescreen = new RegularHomeScreen();
 			homescreen.clickMyInspectionsButton();
 			myInspectionsScreen = new RegularMyInspectionsScreen();
 			Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
-			myInspectionsScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			
 			homescreen.clickCustomersButton();
-			customersScreen = new RegularCustomersScreen();
 			customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
-			homescreen = new RegularHomeScreen();
 			homescreen.clickMyInspectionsButton();
 			myInspectionsScreen = new RegularMyInspectionsScreen();
 			Assert.assertTrue(myInspectionsScreen.checkInspectionDoesntExists(inspNumber));
-			myInspectionsScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12638:Test Retail Hail package quantity multiplier", description = "Test Retail Hail package quantity multiplier")
@@ -2275,7 +2261,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String servicequantity2 = "4.5";
 			final String totalsumm = "$3,738.00";
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.acceptForReminderNoDrilling();
@@ -2312,10 +2298,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), totalsumm);
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-            RegularInvoiceInfoScreen invoiceinfoscreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.HAIL_NO_DISCOUNT_INVOICE);
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), totalsumm);
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+            RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.HAIL_NO_DISCOUNT_INVOICE);
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), totalsumm);
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12641:Test custom WO level split for Route package", description = "Test custom WO level split for Route package")
@@ -2326,7 +2312,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = { "Left Mirror", "Right Mirror" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2404,10 +2390,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-            RegularInvoiceInfoScreen invoiceinfoscreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+            RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12642:Test even WO level split for Route package", description = "Test even WO level split for Route package")
@@ -2417,7 +2403,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			final String[] vehicleparts = { "Left Fender", "Left Front Door", "Left Quarter Panel", "Left Rear Door", "Left Roof Rail" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2476,10 +2462,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-            RegularInvoiceInfoScreen invoiceinfoscreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+            RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12644:Test adding notes to a Work Order", description = "Test adding notes to a Work Order")
@@ -2490,7 +2476,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = {  "Hood", "Left Rear Door", "Right Fender" };
 			final String[] vehiclepartspaint = {  "Left Rear Door", "Right Fender" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routecanadaworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -2541,18 +2527,18 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.clickSaveAsFinal();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+			invoiceInfoScreen.clickSaveAsFinal();
 
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
-			Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoicenum));
-			RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoicenum);
+			Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoiceNumber));
+			RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoiceNumber);
 			notesScreen.setNotes("Declined wheel work");
 			notesScreen.clickSaveButton();
-			myInvoicesScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12645:Test changing the PO# on an invoice", description = "Test changing the PO# on an invoice")
@@ -2560,7 +2546,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testChangingThePOOnAnInvoice";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -2581,17 +2567,17 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.setTotalSale("1");
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.setPO("832145");
-			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.clickSaveAsFinal();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.setPO("832145");
+			String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+			invoiceInfoScreen.clickSaveAsFinal();
 
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
-			Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoicenum));
-			RegularMyInvoicesScreenSteps.selectInvoiceForChangePO(invoicenum);
+			Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoiceNumber));
+			RegularMyInvoicesScreenSteps.selectInvoiceForChangePO(invoiceNumber);
 			myInvoicesScreen.changePO("832710");
-			myInvoicesScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12646:Test editing an Inspection", description = "Test editing an Inspection")
@@ -2605,7 +2591,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			settingsScreen.setShowAllServicesOn();
 			homescreen = settingsScreen.clickHomeButton();
 			
-			RegularMyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+			RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 			RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routeinspectiontype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2636,7 +2622,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
 			RegularInspectionsSteps.saveInspection();
-			myInspectionsScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12647:Test editing a Work Order", description = "Test editing a Work Order")
@@ -2644,7 +2630,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testEditingWorkOrder";
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2673,10 +2659,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularWorkOrdersSteps.saveWorkOrder();
 			RegularMyWorkOrdersSteps.selectWorkOrderForEdit(wo);
 
-			vehicleScreen = new RegularVehicleScreen();
 			RegularNavigationSteps.navigateToServicesScreen();
 			servicesScreen.selectServicePanel(UtilConstants.WHEELS_SERVICE);
-			selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.WHEELCOVER2_SUBSERVICE);
+			servicesScreen.openCustomServiceDetails(UtilConstants.WHEELCOVER2_SUBSERVICE);
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
 
@@ -2688,7 +2673,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(UtilConstants.WHEELCOVER2_SUBSERVICE, "$45.00 x 1.00"));
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 19514:Test editing an Invoice in Draft", description = "Test Editing an Invoice in Draft")
@@ -2700,7 +2685,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehiclepartspaint = { "Left Mirror" };
 			final String[] vehiclepartswheel = { "Left Front Wheel", "Right Front Wheel" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2743,16 +2728,15 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.clickSaveAsDraft();
-
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+			invoiceInfoScreen.clickSaveAsDraft();
+			RegularNavigationSteps.navigateBackScreen();
 			
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
-			RegularMyInvoicesScreenSteps.selectInvoiceForEdit(invoicenum);
-			invoiceinfoscreen.clickOnWO(wonum);
+			RegularMyInvoicesScreenSteps.selectInvoiceForEdit(invoiceNumber);
+			invoiceInfoScreen.clickOnWO(wonum);
 			RegularNavigationSteps.navigateToServicesScreen();
             RegularServicesScreenSteps.switchToSelectedServices();
 			RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
@@ -2786,9 +2770,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesScreen.clickBackServicesButton();
 			
 			servicesScreen.clickSave();
-			invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
-			homescreen = myInvoicesScreen.clickHomeButton();
+			invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 19548:Test adding a PO# to an invoice", description = "Test adding a PO# to an invoice")
@@ -2799,7 +2783,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularSettingsScreen settingsScreen = homescreen.clickSettingsButton();
 			settingsScreen.setInsvoicesCustomLayoutOff();
 			settingsScreen.clickHomeButton();
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackeravisworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2821,7 +2805,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(UtilConstants.PDR6PANEL_SUBSERVICE));
 			Assert.assertEquals(servicesScreen.getSubTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			
 			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = homescreen.clickTeamWorkordersButton();
 			teamWorkOrdersScreen.clickOnWO(workOrderNumber);
@@ -2838,23 +2822,23 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
 			teamWorkOrdersScreen.verifyCreateInvoiceIsActivated(workOrderNumber);
 			teamWorkOrdersScreen.clickiCreateInvoiceButton();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 			RegularNavigationSteps.navigateToScreen("AVIS Questions");
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			
 			questionsScreen.chooseAVISCode("Rental-921");						
-			invoiceinfoscreen.clickSaveAsFinal();
+			invoiceInfoScreen.clickSaveAsFinal();
 			teamWorkOrdersScreen.clickHomeButton();
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
-			RegularMyInvoicesScreenSteps.selectInvoiceForChangePO(invoicenum);
+			RegularMyInvoicesScreenSteps.selectInvoiceForChangePO(invoiceNumber);
 			myInvoicesScreen.changePO("170116");
             myInvoicesScreen.clickBackButton();
             homescreen.clickMyInvoicesButton();
-            Assert.assertEquals(myInvoicesScreen.getInvoicePrice(invoicenum), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-            Assert.assertTrue(myInvoicesScreen.isInvoiceHasInvoiceSharedIcon(invoicenum));
-			Assert.assertTrue(myInvoicesScreen.isInvoiceHasInvoiceNumberIcon(invoicenum));
-			myInvoicesScreen.clickHomeButton();
+            Assert.assertEquals(myInvoicesScreen.getInvoicePrice(invoiceNumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+            Assert.assertTrue(myInvoicesScreen.isInvoiceHasInvoiceSharedIcon(invoiceNumber));
+			Assert.assertTrue(myInvoicesScreen.isInvoiceHasInvoiceNumberIcon(invoiceNumber));
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 19670:Test adding a PO# to an invoice containing multiple Work Orders", description = "Test adding a PO# to an invoice containing multiple Work Orders")
@@ -2869,7 +2853,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			
 			final String[] vehicleparts = { "Left Rear Door", "Right Rear Door" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackeravisworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow1));
@@ -2921,7 +2905,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			
 			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = homescreen.clickTeamWorkordersButton();
 			teamWorkOrdersScreen.clickOnWO(workOrderNumber1);
@@ -2951,15 +2935,15 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			teamWorkOrdersScreen.clickiCreateInvoiceButton();
 			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.clickSaveAsFinal();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+			invoiceInfoScreen.clickSaveAsFinal();
 			teamWorkOrdersScreen.clickHomeButton();
 			
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
-			RegularMyInvoicesScreenSteps.selectInvoiceForChangePO(invoicenum);
+			RegularMyInvoicesScreenSteps.selectInvoiceForChangePO(invoiceNumber);
 			myInvoicesScreen.changePO("957884");
-			myInvoicesScreen.clickHomeButton();	
+			RegularNavigationSteps.navigateBackScreen();	
 		}
 		
 		@Test(testName = "Test Case 19671:Test Copy Vehicle feature", description = "Test Copy Vehicle feature")
@@ -2967,7 +2951,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testCopyVehicleFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -2986,7 +2970,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			vehicleScreen.waitVehicleScreenLoaded();
 			vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 19672:Test Copy Services feature", description = "Test Copy Services feature")
@@ -2997,7 +2981,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			int testcaserow1 = ExcelUtils.getTestCaseRow(tcname1);
 			int testcaserow2 = ExcelUtils.getTestCaseRow(tcname2);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow1));
@@ -3022,7 +3006,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(UtilConstants.BLACKOUT_SUBSERVICE));
 			Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(UtilConstants.BLACKOUT_SUBSERVICE), new String(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow1)) + " x 1.00").replaceAll(" ", ""));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 24164:Test Pre-Existing Damage option", description = "Test Pre-Existing Damage option")
@@ -3035,7 +3019,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularSettingsScreen settingsScreen = homescreen.clickSettingsButton();
 			settingsScreen.setShowAllServicesOn();
 			homescreen = settingsScreen.clickHomeButton();
-			RegularMyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+			RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 			RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.servicedriveinspectiondertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3066,14 +3050,14 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			servicesScreen.clickBackServicesButton();
 			Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			RegularInspectionsSteps.saveInspection();
+			RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 			myInspectionsScreen.clickOnInspection(inspectionNumber);
 			myInspectionsScreen.clickCreateWOButton();
-			vehicleScreen = new RegularVehicleScreen();
 			String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 			RegularNavigationSteps.navigateToServicesScreen();
             Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
 			servicesScreen.selectServicePanel(UtilConstants.INTERIOR_SERVICE);
-			selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
+			servicesScreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
 			selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
             Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();	
@@ -3088,13 +3072,14 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertEquals(vehicleScreen.getWorkOrderNumber(), workOrderNumber);
 			servicesScreen.clickCancel();
 
-			myInspectionsScreen.clickHomeButton();
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularNavigationSteps.navigateBackScreen();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+			RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 			myWorkOrdersScreen.clickCreateInvoiceIconForWOViaSearch(workOrderNumber);
 			myWorkOrdersScreen.clickInvoiceIcon();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
-			homescreen = myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 19676:Test Total Sale requirement", description = "Test Total Sale requirement")
@@ -3105,7 +3090,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = { "Hood", "Left Fender" };
 			final String totalsale = "675";
 			
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackerservicedriveworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3139,7 +3124,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			orderSummaryScreen.setTotalSale(totalsale);
 			Assert.assertTrue(alertText.contains("Total Sale is required."));
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 19678:Test package pricing for read only items", description = "Test package pricing for read only items")
@@ -3149,7 +3134,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			final String[] vehicleparts = { "Left Fender", "Left Roof Rail", "Right Fender" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3183,8 +3168,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
 			vehicleScreen.clickHomeButton();
 		}
 		
@@ -3196,7 +3181,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = { "Left Front Door", "Left Rear Door", "Right Fender" };
 			final String[] vehiclepartspaint = { "Hood", "Left Fender" };
 
-			RegularMyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+			RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 			RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routeinspectiontype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3230,6 +3215,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
 			RegularInspectionsSteps.saveInspection();
+			RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 			Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 			RegularMyInspectionsSteps.selectInspectionForCreatingWO(inspectionNumber);
 			String workOrderNumber = vehicleScreen.getWorkOrderNumber();
@@ -3246,14 +3232,15 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertEquals(vehicleScreen.getWorkOrderNumber(), workOrderNumber);
 			servicesScreen.clickCancel();
 
-			myInspectionsScreen.clickHomeButton();
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularNavigationSteps.navigateBackScreen();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+			RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 			myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber);
 			myWorkOrdersScreen.clickInvoiceIcon();
 			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 10263:Send Multiple Emails", description = "Send Multiple Emails")
@@ -3262,15 +3249,12 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
 			myInvoicesScreen.clickActionButton();
 			myInvoicesScreen.selectInvoices(3);
-
-			//for (int i = 0; i< 4; i++) {
-			//	myInvoicesScreen.selectInvoiceForActionByIndex(i+1);
-			//}
+			
 			myInvoicesScreen.clickActionButton();
 			RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
 			RegularEmailScreenSteps.sendSingleEmailToAddress(UtilConstants.TEST_EMAIL);
 			myInvoicesScreen.clickDoneButton();
-			myInvoicesScreen.clickHomeButton();			
+			RegularNavigationSteps.navigateBackScreen();			
 		}
 		
 		@Test(testName = "Test Case 19683:Test Work Order Discount Override feature", description = "Test Work Order Discount Override feature")
@@ -3285,7 +3269,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			customersScreen.swtchToWholesaleMode();
 			homescreen = customersScreen.selectCustomerWithoutEditing("Bel Air Auto Auction Inc");
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3322,10 +3306,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 19685:Test completed RO only requirement for invoicing", description = "Test Completed RO only requirement for invoicing")
@@ -3336,7 +3320,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String[] vehicleparts = { "Left Quarter Panel", "Right Roof Rail", "Trunk Lid" };
 			final String[] vehiclepartswheel = { "Right Front Wheel", "Right Rear Wheel" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3363,7 +3347,6 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			servicesScreen.clickBackServicesButton();
-			servicesScreen = new RegularServicesScreen();
 			servicesScreen.selectServicePanel(UtilConstants.WHEELS_SERVICE);
 			selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
 			selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
@@ -3379,7 +3362,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			
 			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = homescreen.clickTeamWorkordersButton();
 			teamWorkOrdersScreen.clickOnWO(workOrderNumber);
@@ -3400,7 +3383,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testEnterprizeWorkOrderQuestionFormsInforced";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.enterpriseworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3418,7 +3401,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			RegularNavigationSteps.navigateToScreen(UtilConstants.ENTERPRISE_AFTER_REPAIR_SCREEN_CAPTION);
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12633:Test successful email of pictures using Notes feature", description = "Test successful email of pictures using Notes feature")
@@ -3426,19 +3409,18 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testSuccessfulEmailOfPicturesUsingNotesFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.avisworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
 			vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
 			vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
-			String wo = vehicleScreen.getWorkOrderNumber();
+			String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 			vehicleScreen.clickNotesButton();
 			RegularNotesScreen notesScreen = new RegularNotesScreen();
 			notesScreen.addNotesCapture();
 			Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
 			notesScreen.clickSaveButton();
-			vehicleScreen = new RegularVehicleScreen();
 			RegularNavigationSteps.navigateToServicesScreen();
 			RegularServicesScreen servicesScreen = new RegularServicesScreen();
 			servicesScreen.clickNotesButton();
@@ -3463,32 +3445,33 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularNavigationSteps.navigateToScreen(UtilConstants.ENTERPRISE_AFTER_REPAIR_SCREEN_CAPTION);
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.selectWorkOrderForAddingNotes(wo);
+			RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+			myWorkOrdersScreen.selectWorkOrderForAddingNotes(workOrderNumber);
 			notesScreen.addNotesCapture();
 			Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 3);
 			notesScreen.clickSaveButton();
 			
-			myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo);
+			myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber);
 			myWorkOrdersScreen.clickInvoiceIcon();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 			RegularNavigationSteps.navigateToScreen("AVIS Questions");
 			RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 			questionsScreen.chooseAVISCode("Other-920");			
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
-			RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoicenum);
+			RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoiceNumber);
 			notesScreen.addNotesCapture();
 			Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
 			notesScreen.clickSaveButton();
 			myInvoicesScreen.clickActionButton();
-			myInvoicesScreen.selectInvoice(invoicenum);
+			myInvoicesScreen.selectInvoice(invoiceNumber);
 			myInvoicesScreen.clickActionButton();
 			RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
 			RegularEmailScreenSteps.sendEmailToAddress(UtilConstants.TEST_EMAIL);
 			myInvoicesScreen.clickDoneButton();
-			myInvoicesScreen.clickHomeButton();	
+			RegularNavigationSteps.navigateBackScreen();	
 		}
 		
 		@Test(testName = "Test Case 12634:Test emailing photos in Economical Inspection", description = "Test emailing photos in Economical Inspection")
@@ -3496,7 +3479,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testEmailingPhotosInEconomicalInspection";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyInspectionsScreen myInspectionsScreen = homescreen.clickMyInspectionsButton();
+			RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 			RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.economicalinspectiondertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3552,11 +3535,11 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 2);
 			notesScreen.clickSaveButton();
 			RegularInspectionsSteps.saveInspection();
-
+			RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 			myInspectionsScreen.clickOnInspection(inspNumber);
 			RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
 			RegularEmailScreenSteps.sendEmailToAddress(UtilConstants.TEST_EMAIL);
-			myInspectionsScreen.clickHomeButton();			
+			RegularNavigationSteps.navigateBackScreen();			
 		}
 		
 		@Test(testName = "Test Case 12635:Test emailing photos in Auction package", description = "Test emailing photos in Auction package")
@@ -3568,7 +3551,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			final String firstnote = "Refused paint";
 			final String secondnote = "Just 4 panels";
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.auctionworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3608,6 +3591,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			RegularNavigationSteps.navigateToOrderSummaryScreen();
 			RegularWorkOrdersSteps.saveWorkOrder();
+			RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 			myWorkOrdersScreen.selectWorkOrderForAddingNotes(wo);
 			notesScreen.addNotesCapture();
 			Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 2);
@@ -3616,18 +3600,18 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo);
 			myWorkOrdersScreen.clickInvoiceIcon();
 			RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.AUCTION_NO_DISCOUNT_INVOICE);
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			final  String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.clickSaveAsFinal();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			final  String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
 			myInvoicesScreen.clickActionButton();
-			myInvoicesScreen.selectInvoice(invoicenum);
+			myInvoicesScreen.selectInvoice(invoiceNumber);
 			myInvoicesScreen.clickActionButton();
 			RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
 			RegularEmailScreenSteps.sendEmailToAddress(UtilConstants.TEST_EMAIL);
 			myInvoicesScreen.clickDoneButton();
-			myInvoicesScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 12636:Test emailing photos in Service Drive package", description = "Test emailing photos in Service Drive package")
@@ -3637,7 +3621,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
 			final String[] vehicleparts = { "Decklid", "Left A Pillar" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3670,14 +3654,14 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.setTotalSale("1");
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-            Assert.assertEquals(invoiceinfoscreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-			String invoicenum = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.clickSaveAsFinal();
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+            Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+			String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
+			invoiceInfoScreen.clickSaveAsFinal();
 
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 			RegularMyInvoicesScreen myInvoicesScreen = homescreen.clickMyInvoicesButton();
-			RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoicenum);
+			RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoiceNumber);
 			RegularNotesScreen notesScreen = new RegularNotesScreen();
 			notesScreen.setNotes("Refused paint");
 			notesScreen.addNotesCapture();
@@ -3685,12 +3669,12 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			notesScreen.clickSaveButton();
 			
 			myInvoicesScreen.clickActionButton();
-			myInvoicesScreen.selectInvoice(invoicenum);
+			myInvoicesScreen.selectInvoice(invoiceNumber);
 			myInvoicesScreen.clickActionButton();
 			RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SEND_EMAIL);
 			RegularEmailScreenSteps.sendEmailToAddress(UtilConstants.TEST_EMAIL);
 			myInvoicesScreen.clickDoneButton();
-			myInvoicesScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 24131:Test PO# saves with active keyboard on WO summary screen", description = "Test PO# saves with active keyboard on WO summary screen")
@@ -3698,10 +3682,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testPONumberSavesWithActiveKeyboardOnWOSummaryScreen";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			final String _po = "998601";
+			final String poNumber = "998601";
 			final String[] vehicleparts = { "Hood", "Left Quarter Panel", "Right Roof Rail" };
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3728,10 +3712,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-			invoiceinfoscreen.setPOWithoutHidingkeyboard(_po);
-			invoiceinfoscreen.clickSaveAsFinal();			
-			myWorkOrdersScreen.clickHomeButton();
+			RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
+			invoiceInfoScreen.setPOWithoutHidingkeyboard(poNumber);
+			invoiceInfoScreen.clickSaveAsFinal();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 24132:Test Total Sale saves with active keyboard on WO summary screen", description = "Test Total Sale saves with active keyboard on WO summary screen")
@@ -3740,7 +3724,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 			final String totalsale = "675";
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3759,7 +3743,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.setTotalSaleWithoutHidingkeyboard(totalsale);
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
 		
 		@Test(testName = "Test Case 19673:Test Car History feature", description = "Test Car History feature")
@@ -3768,7 +3752,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			String tcname = "testCarHistoryFeature";		
 			int testcaserow = ExcelUtils.getTestCaseRow(tcname);
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homescreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
@@ -3784,34 +3768,34 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 			RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 			orderSummaryScreen.checkApproveAndCreateInvoice();
 			orderSummaryScreen.clickSave();
-			RegularInvoiceInfoScreen invoiceinfoscreen = new RegularInvoiceInfoScreen();
-			String invoicenumber = invoiceinfoscreen.getInvoiceNumber();
-			invoiceinfoscreen.clickSaveAsFinal();	
-			RegularCarHistoryScreen carhistoryscreen = new RegularCarHistoryScreen();
-			carhistoryscreen.clickHomeButton();
-			carhistoryscreen = homescreen.clickCarHistoryButton();
-			carhistoryscreen.searchCar("887340");
+			RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
+			String invoiceNumberber = invoiceInfoScreen.getInvoiceNumber();
+			invoiceInfoScreen.clickSaveAsFinal();	
+			RegularCarHistoryScreen carHistoryScreen = new RegularCarHistoryScreen();
+			carHistoryScreen.clickHomeButton();
+			carHistoryScreen = homescreen.clickCarHistoryButton();
+			carHistoryScreen.searchCar("887340");
 			String strtocompare = ExcelUtils.getYear(testcaserow) + ", " + ExcelUtils.getMake(testcaserow) + ", " + ExcelUtils.getModel(testcaserow);
-			Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
-			Assert.assertEquals(carhistoryscreen.getFirstCarHistoryDetailsInTable(), strtocompare);
-			RegularCarHistoryWOsAndInvoicesScreen carHistoryWOsAndInvoicesScreen = carhistoryscreen.clickFirstCarHistoryInTable();
+			Assert.assertEquals(carHistoryScreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
+			Assert.assertEquals(carHistoryScreen.getFirstCarHistoryDetailsInTable(), strtocompare);
+			RegularCarHistoryWOsAndInvoicesScreen carHistoryWOsAndInvoicesScreen = carHistoryScreen.clickFirstCarHistoryInTable();
 			RegularMyInvoicesScreen myInvoicesScreen = carHistoryWOsAndInvoicesScreen.clickCarHistoryInvoices();
 			Assert.assertTrue(myInvoicesScreen.myInvoicesIsDisplayed());
 			myInvoicesScreen.clickBackButton();
 			carHistoryWOsAndInvoicesScreen = new RegularCarHistoryWOsAndInvoicesScreen();
 			carHistoryWOsAndInvoicesScreen.clickBackButton();
 			
-			carhistoryscreen.clickSwitchToWeb();
-			Assert.assertEquals(carhistoryscreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
-			Assert.assertEquals(carhistoryscreen.getFirstCarHistoryDetailsInTable(), strtocompare);
-			carHistoryWOsAndInvoicesScreen = carhistoryscreen.clickFirstCarHistoryInTable();
+			carHistoryScreen.clickSwitchToWeb();
+			Assert.assertEquals(carHistoryScreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
+			Assert.assertEquals(carHistoryScreen.getFirstCarHistoryDetailsInTable(), strtocompare);
+			carHistoryWOsAndInvoicesScreen = carHistoryScreen.clickFirstCarHistoryInTable();
 			carHistoryWOsAndInvoicesScreen.clickCarHistoryInvoices();
 
 			Assert.assertTrue(myInvoicesScreen.teamInvoicesIsDisplayed());
-			Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoicenumber));
+			Assert.assertTrue(myInvoicesScreen.myInvoiceExists(invoiceNumberber));
 			myInvoicesScreen.clickBackButton();
 			carHistoryWOsAndInvoicesScreen = new RegularCarHistoryWOsAndInvoicesScreen();
 			carHistoryWOsAndInvoicesScreen.clickBackButton();
-			carhistoryscreen.clickHomeButton();
+			carHistoryScreen.clickHomeButton();
 		}
 }

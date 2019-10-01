@@ -71,13 +71,9 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		return new RegularCustomersScreen();
 	}
 
-	public RegularMyInspectionsScreen clickMyInspectionsButton() {
+	public void clickMyInspectionsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
-		appiumdriver.findElementByAccessibilityId("Inspections").click();
-		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen();
-		myinspectionsscreen.switchToMyView();
-		return myinspectionsscreen;
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections"))).click();
 	}
 	
 	public RegularTeamInspectionsScreen clickTeamInspectionsButton() {
@@ -89,12 +85,9 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		return new RegularTeamInspectionsScreen();
 	}
 
-	public RegularMyWorkOrdersScreen clickMyWorkOrdersButton() {
+	public void clickMyWorkOrdersButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
-		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen();
-		myworkordersscreen.switchToMyView();
-		return myworkordersscreen;
 	}
 	
 	public RegularCarHistoryScreen clickCarHistoryButton() {
@@ -122,15 +115,13 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 
 	public RegularServiceRequestsScreen clickServiceRequestsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests")));
-		appiumdriver.findElementByAccessibilityId("Service Requests").click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests"))).click();
 		return new RegularServiceRequestsScreen();
 	}
 	
 	public void clickStatusButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Status")));
-		appiumdriver.findElementByAccessibilityId("Status").click();
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Status"))).click();
 	}
 	
 	public RegularTeamWorkOrdersScreen clickTeamWorkordersButton() {

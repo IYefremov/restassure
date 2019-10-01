@@ -120,7 +120,7 @@ public class NewTestCases extends BaseTestCase {
 		customersscreen.clickHomeButton();
 		
 		//Create WO1
-		RegularMyWorkOrdersScreen myworkordersscreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(VIN);
@@ -147,10 +147,11 @@ public class NewTestCases extends BaseTestCase {
 
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myworkordersscreen.selectWorkOrderForApprove(wonumber1);
-		myworkordersscreen.clickApproveButton();
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+		myWorkOrdersScreen.selectWorkOrderForApprove(wonumber1);
+		myWorkOrdersScreen.clickApproveButton();
 		
-		//myworkordersscreen.searchWO(wonumber1);
+		//myWorkOrdersScreen.searchWO(wonumber1);
 		RegularMyWorkOrdersSteps.startCopyingVehicleForWorkOrder(wonumber1, ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
 		Assert.assertEquals(vehicleScreen.getMake(), _make);
 		Assert.assertEquals(vehicleScreen.getModel(), _model);
@@ -176,7 +177,7 @@ public class NewTestCases extends BaseTestCase {
 		questionsscreen.selectAnswerForQuestion("Engine Condition", "Pretty Good");
 		RegularNavigationSteps.navigateToInvoiceInfoScreen();
 		invoiceInfoScreen.clickSaveAsDraft();
-		myworkordersscreen.clickHomeButton();
+		myWorkOrdersScreen.clickHomeButton();
 	}
 	
 	String srtowo = "";
