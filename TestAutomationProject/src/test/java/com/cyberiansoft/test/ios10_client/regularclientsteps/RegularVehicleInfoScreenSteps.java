@@ -41,6 +41,11 @@ public class RegularVehicleInfoScreenSteps {
         vehicleScreen.setRO(roNumber + "\n");
     }
 
+    public static void setPoNumber(String poNumber) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.setPO(poNumber + "\n");
+    }
+
     public static void setLicPlate(String licPlate) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setLicensePlate(licPlate + "\n");
@@ -54,6 +59,11 @@ public class RegularVehicleInfoScreenSteps {
     public static void setTrim(String trimValue) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setTrim(trimValue);
+    }
+
+    public static void setType(String typeValue) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.setType(typeValue);
     }
 
     public static void verifyMakeModelyearValues(VehicleInfoData vehicleInfoData) {
@@ -79,11 +89,17 @@ public class RegularVehicleInfoScreenSteps {
         if (vehicleInfoData.getMileage() != null) {
             setMileage(vehicleInfoData.getMileage());
         }
+        if (vehicleInfoData.getVehicleType() != null) {
+            setType(vehicleInfoData.getVehicleType());
+        }
         if (vehicleInfoData.getStockNumber() != null) {
             setStockNumber(vehicleInfoData.getStockNumber());
         }
         if (vehicleInfoData.getRoNumber() != null) {
             setRoNumber(vehicleInfoData.getRoNumber());
+        }
+        if (vehicleInfoData.getPoNumber() != null) {
+            setPoNumber(vehicleInfoData.getPoNumber());
         }
         if (vehicleInfoData.getLicPlate() != null) {
             setLicPlate(vehicleInfoData.getLicPlate());

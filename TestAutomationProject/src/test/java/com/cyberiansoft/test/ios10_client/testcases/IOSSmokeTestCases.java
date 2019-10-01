@@ -651,7 +651,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		customersScreen.clickHomeButton();
 
 		MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
-		MyInspectionsSteps.startCreatingInspection(johnRetailCustomer, InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
+		//MyInspectionsSteps.startCreatingInspection(johnRetailCustomer, InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
+		MyInspectionsSteps.startCreatingInspection(johnRetailCustomer, InspectionsTypes.VITALY_TEST_INSPTYPE);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		String inspectionNumber = vehicleScreen.getInspectionNumber();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());

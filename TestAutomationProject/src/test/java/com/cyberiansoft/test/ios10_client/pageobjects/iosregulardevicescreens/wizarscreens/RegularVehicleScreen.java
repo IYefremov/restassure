@@ -153,6 +153,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getEst() {
+		waitVehicleScreenLoaded();
 		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Est#")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
@@ -205,6 +206,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void selectLocation(String _location) {
+		waitVehicleScreenLoaded();
 		if (!vehicleinfotbl.findElement(MobileBy.AccessibilityId("Location")).isDisplayed()) {
 			swipeToElement(vehicleinfotbl.findElement(MobileBy.AccessibilityId("Location")));
 		}
@@ -212,8 +214,9 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId(_location).click();
 	}
 	
-	public void setType(String _type) {
+	public void setType(String typeValue) {
 		vehicleinfotbl.findElementByAccessibilityId("Type").click();
+		selectUIAPickerValue(typeValue);
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
@@ -224,10 +227,10 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		
 	}
 	
-	public void setTrim(String trimvalue)  {
+	public void setTrim(String trimValue)  {
 		swipeToElement(vehicleinfotbl.findElement(By.xpath("//XCUIElementTypeCell[@name='Trim']")));
 		vehicleinfotbl.findElementByAccessibilityId("Trim").click();
-		selectUIAPickerValue(trimvalue);
+		selectUIAPickerValue(trimValue);
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 

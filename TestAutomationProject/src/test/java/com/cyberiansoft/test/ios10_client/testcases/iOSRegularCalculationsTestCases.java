@@ -20,6 +20,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ba
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
+import com.cyberiansoft.test.ios10_client.regularvalidations.RegularMyWorkOrdersScreenValidations;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
@@ -68,7 +69,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(testRetailCustomer, InspectionsTypes.INSP_NOTLA_TS_INSPTYPE);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		RegularNavigationSteps.navigateToVisualScreen(WizardScreenTypes.VISUAL_INTERIOR);
@@ -91,16 +92,16 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularInspectionsSteps.saveInspection();
 
 		RegularMyInspectionsSteps.selectInspectionForApprove(inspnumber);
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspection(inspnumber);
 		approveInspectionsScreen.clickApproveButton();
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
-		myInspectionsScreen = new RegularMyInspectionsScreen();
 		Assert.assertTrue(myInspectionsScreen.isInspectionIsApproved(inspnumber));
 
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -113,7 +114,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(testRetailCustomer, InspectionsTypes.DEFAULT);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.clickSave();
@@ -153,6 +154,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularInspectionsSteps.saveInspection();
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 
@@ -174,7 +176,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularInspectionsSteps.saveInspection();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -186,8 +188,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
@@ -208,7 +210,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	private String workOrderNumber28583 = null;
@@ -224,7 +226,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_FEE_ITEM_IN_2_PACKS);
@@ -242,7 +244,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 
 	}
 
@@ -290,7 +292,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FEE_PRICE_OVERRIDE);
@@ -305,7 +307,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(servicesScreen.getTotalAmaunt(), workOrderData.getWorkOrderPrice());
 
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -319,7 +321,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
@@ -342,7 +344,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -356,7 +358,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
@@ -377,7 +379,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -391,7 +393,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
@@ -412,7 +414,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	private String workOrderNumber29398 = null;
@@ -428,9 +430,10 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
-		myWorkOrdersScreen.clickAddOrderButton();RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
+		
+		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_TEST_FEE);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		workOrderNumber29398 = vehicleScreen.getWorkOrderNumber();
 		RegularNavigationSteps.navigateToServicesScreen();
@@ -449,7 +452,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		Assert.assertEquals(servicesScreen.getTotalAmaunt(), workOrderData.getWorkOrderPrice());
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 
 	}
 
@@ -493,7 +496,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
@@ -524,7 +527,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -538,7 +541,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
@@ -568,7 +571,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			}
 		}
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -582,7 +585,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
@@ -612,7 +615,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			}
 		}
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	private String workOrderNumber31498 = null;
@@ -628,7 +631,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
@@ -653,7 +656,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 
 	}
 
@@ -699,7 +702,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_SIMPLE);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
@@ -717,6 +720,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			vehiclePartScreen.saveVehiclePart();
 		}
 		RegularInspectionsSteps.saveInspection();
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber32226);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -731,7 +735,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 
 	}
 
@@ -769,12 +773,11 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
-
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -794,7 +797,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 		servicesScreen.waitServicesScreenLoaded();
 		RegularInspectionsSteps.saveInspection();
-
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber32286);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -807,7 +810,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(testName = "Test Case 32286:Inspections: Regular - Verify that amount of approved services are shown on BO > inspectiontypes list > column ApprovedAmount",
@@ -847,7 +850,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -871,6 +874,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularInspectionsSteps.saveInspection();
 
 		RegularMyInspectionsSteps.selectInspectionForApprove(inspnumber32287);
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspection(inspnumber32287);
@@ -880,7 +884,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(testName = "Test Case 32287:Inspections: Regular - Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column ApprovedAmount",
@@ -918,9 +922,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
-		RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
 		RegularNavigationSteps.navigateToVehicleInfoScreen();
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -941,7 +944,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 		RegularInspectionsSteps.saveInspection();
-
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 
@@ -953,7 +956,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
 		approveInspectionsScreen.clickDoneButton();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -967,7 +970,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_TYPE_FOR_PRICE_MATRIX);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -1009,7 +1012,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), priceMatrixScreenData.getMatrixScreenPrice());
 		}
 		RegularInspectionsSteps.saveInspection();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1023,7 +1026,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_SMOKE_TEST);
@@ -1057,7 +1060,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServicesScreen.waitSelectedServicesScreenLoaded();
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1074,7 +1077,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		for (int i = 0; i < workOrdersToCreate; i++) {
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -1097,11 +1100,11 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			orderSummaryScreen.setTotalSale(testCaseData.getWorkOrderData().getWorkOrderTotalSale());
 			RegularWorkOrdersSteps.saveWorkOrder();
 		}
-
-
+		
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		myWorkOrdersScreen.approveWorkOrder(workOrders.get(0), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		myWorkOrdersScreen.waitMyWorkOrdersScreenLoaded();
-		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = myWorkOrdersScreen.switchToTeamWorkOrders();
+		RegularMyWorkOrdersSteps.switchToTeamView();
+		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.setFilterCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		teamWorkOrdersScreen.setFilterLocation(locationValue);
@@ -1116,7 +1119,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToInvoiceInfoScreen();
 		RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
-		String invoicenum = invoiceInfoScreen.getInvoiceNumber();
+		String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
 		teamWorkOrdersScreen.clickHomeButton();
 		homeScreen.clickMyWorkOrdersButton();
@@ -1125,10 +1128,10 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 
-		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
-		RegularMyInvoicesScreenSteps.selectInvoiceForEdit(invoicenum);
+		RegularMyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoicesButton();
+		RegularMyInvoicesScreenSteps.selectInvoiceForEdit(invoiceNumber);
 		questionsScreen.waitQuestionsScreenLoaded();
 		RegularNavigationSteps.navigateToInvoiceInfoScreen();
 		invoiceInfoScreen.addWorkOrder(workOrders.get(1));
@@ -1138,7 +1141,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.swipeScreenLeft();
 		questionsScreen.waitQuestionsScreenLoaded();
 		RegularWizardScreensSteps.cancelWizard();
-		myinvoicesscreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1152,7 +1155,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_DRAFT_MODE);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -1176,8 +1179,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.setServiceQuantityValue(inspectionData.getServiceData().getServiceQuantity2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		RegularInspectionsSteps.saveInspectionAsDraft();
-		myInspectionsScreen.waitMyInspectionsScreenLoaded();
-		myInspectionsScreen.clickHomeButton();
+		RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1260,7 +1263,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		RegularNavigationSteps.navigateToVehicleInfoScreen();
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -1296,13 +1299,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			vehiclePartScreen.saveVehiclePart();
 		}
 		RegularInspectionsSteps.saveInspection();
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
 		RegularMyInspectionsSteps.selectInspectionForApprove(inspectionNumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspection(inspectionNumber);
 		approveInspectionsScreen.approveInspectionApproveAllAndSignature();
-		myInspectionsScreen = new RegularMyInspectionsScreen();
 		RegularMyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber, WorkOrdersTypes.WO_SMOKE_MONITOR);
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
@@ -1314,7 +1317,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 					serviceData.getServicePrice()));
 		}
 		RegularInspectionsSteps.cancelCreatingInspection();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1329,7 +1332,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_WITH_PART_SERVICES);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -1339,7 +1342,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 		RegularInspectionsSteps.saveInspectionAsDraft();
-		myInspectionsScreen.waitMyInspectionsScreenLoaded();
+		RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
 		RegularNavigationSteps.navigateToServicesScreen();
@@ -1402,7 +1405,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), vehiclePartData.getVehiclePartTotalPrice());
 		Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), vehiclePartData.getVehiclePartSubTotalPrice());
 		RegularInspectionsSteps.saveInspectionAsFinal();
-		myInspectionsScreen.waitMyInspectionsScreenLoaded();
+		RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), vehiclePartData.getVehiclePartTotalPrice());
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
@@ -1423,10 +1427,11 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWizardScreensSteps.clickSaveButton();
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
-		homeScreen = myInspectionsScreen.clickHomeButton();
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularNavigationSteps.navigateBackScreen();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1441,7 +1446,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_WITH_PART_SERVICE);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -1504,8 +1509,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 		RegularWorkOrdersSteps.saveWorkOrder();
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1523,7 +1529,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -1554,7 +1560,6 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		servicesScreen = new RegularServicesScreen();
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 
@@ -1573,15 +1578,16 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(invoiceData.getQuestionScreenData().getQuestionData());
 
 		invoiceInfoScreen.clickSaveAsFinal();
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		myWorkOrdersScreen.clickFilterButton();
 		myWorkOrdersScreen.setFilterBilling(filterBillingValue);
 		myWorkOrdersScreen.clickSaveFilter();
 
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
-		homeScreen = myWorkOrdersScreen.clickHomeButton();
-		RegularMyInvoicesScreen myinvoicesscreen = homeScreen.clickMyInvoicesButton();
-		Assert.assertEquals(myinvoicesscreen.getPriceForInvoice(invoiceNumber), invoiceData.getInvoiceTotal());
-		myinvoicesscreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
+		RegularMyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoicesButton();
+		Assert.assertEquals(myInvoicesScreen.getPriceForInvoice(invoiceNumber), invoiceData.getInvoiceTotal());
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	private String invoiceNumber45224 = null;
@@ -1599,7 +1605,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -1663,7 +1669,6 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.clickSave();
 		orderSummaryScreen.clickInvoiceType("Invoice_AutoWorkListNet");
-		questionsScreen = new RegularQuestionsScreen();
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(invoiceData.getQuestionScreenData().getQuestionData());
 		RegularNavigationSteps.navigateToInvoiceInfoScreen();
@@ -1671,12 +1676,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceNumber45224 = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		myWorkOrdersScreen.clickFilterButton();
 		myWorkOrdersScreen.setFilterBilling(filterBillingValue);
 		myWorkOrdersScreen.clickSaveFilter();
 
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
-		homeScreen = myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 
@@ -1728,7 +1734,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -1792,6 +1798,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
 
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		myWorkOrdersScreen.selectWorkOrderForApprove(workOrderNumber);
 		myWorkOrdersScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -1803,7 +1810,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		invoiceInfoScreen.setPO(invoiceData.getPoNumber());
 		invoiceNumber42803 = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 
@@ -1847,7 +1854,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_WITH_0_PRICE);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -1858,9 +1865,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(inspectionData.getQuestionScreenData().getQuestionData());
 
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularInspectionsSteps.saveInspection();
-
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -1886,7 +1892,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(approveInspectionsScreen.getInspectionServicePrice(inspectionData.getServiceData().getServiceName()), PricesCalculations.getPriceRepresentation(inspectionData.getServiceData().getServicePrice2()));
 		approveInspectionsScreen.clickCancelButton();
 		approveInspectionsScreen.clickCancelButton();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1901,7 +1907,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		RegularNavigationSteps.navigateToVehicleInfoScreen();
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -1945,6 +1951,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), inspectionData.getInspectionPrice());
 		RegularInspectionsSteps.saveInspection();
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -1958,7 +1965,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen = new RegularMyInspectionsScreen();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspnumber), inspectionData.getInspectionPrice());
 		Assert.assertEquals(myInspectionsScreen.getInspectionApprovedPriceValue(inspnumber), inspectionData.getInspectionApprovedPrice());
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1973,7 +1980,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_DRAFT_MODE);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -2008,7 +2015,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		RegularInspectionsSteps.saveInspectionAsFinal();
-		myInspectionsScreen = new RegularMyInspectionsScreen();
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectInspectionForAction(inspectionNumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -2026,7 +2033,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.clickSaveFilterDialogButton();
 		Assert.assertEquals(myInspectionsScreen.getInspectionApprovedPriceValue(inspectionNumber), inspectionData.getInspectionApprovedPrice());
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2041,7 +2048,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2084,12 +2091,11 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getWorkOrderPrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
-		servicesScreen = new RegularServicesScreen();
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2105,7 +2111,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(retailCustomer, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2146,7 +2152,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServicesScreen.waitSelectedServicesScreenLoaded();
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2161,7 +2167,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2201,7 +2207,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2216,7 +2222,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_CALC);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
@@ -2249,8 +2255,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), serviceData.getServicePrice2());
 		}
 		RegularInspectionsSteps.saveInspection();
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2270,7 +2277,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			customersScreen.swtchToWholesaleMode();
 			customersScreen.selectCustomerWithoutEditing(workOrderData.getWholesailCustomer().getCompany());
 
-			RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(retailCustomer, WorkOrdersTypes.valueOf(workOrderData.getWorkOrderType()));
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2295,18 +2302,18 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
 			RegularWorkOrdersSteps.saveWorkOrder();
-			myWorkOrdersScreen.clickHomeButton();
+			RegularNavigationSteps.navigateBackScreen();
 		}
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.changeCustomerForWorkOrder(workOrders.get(workOrderIndexToEdit), retailCustomer);
-		Assert.assertFalse(myWorkOrdersScreen.woExists(workOrders.get(workOrderIndexToEdit)), "Can't find work order: " + workOrders.get(workOrderIndexToEdit));
-		myWorkOrdersScreen.clickHomeButton();
+		RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrders.get(workOrderIndexToEdit), false);
+		RegularNavigationSteps.navigateBackScreen();
 
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		customersScreen.clickHomeButton();
 
-		myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		homeScreen.clickMyWorkOrdersButton();
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrders.get(workOrderIndexToEdit));
 		RegularNavigationSteps.navigateToServicesScreen();
 
@@ -2316,7 +2323,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		servicesScreen.selectService(testCaseData.getWorkOrdersData().get(workOrderIndexToEdit).getServiceData().getServiceName());
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderNewPrice);
 		RegularWorkOrdersSteps.saveWorkOrder();
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2331,7 +2338,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
-		RegularMyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrderWithJob(WorkOrdersTypes.WO_TYPE_WITH_JOB, workOrderData.getWorkOrderJob());
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -2349,8 +2356,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), serviceData.getServicePrice());
 		}
 		RegularWorkOrdersSteps.saveWorkOrder();
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		Assert.assertEquals(myWorkOrdersScreen.getPriceValueForWO(workOrderNumber), workOrderData.getWorkOrderPrice());
-		myWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2365,7 +2373,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
-		RegularMyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		RegularNavigationSteps.navigateToVehicleInfoScreen();
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -2425,7 +2433,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			vehiclePartScreen.saveVehiclePart();
 		}
 		RegularInspectionsSteps.saveInspection();
-
+		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -2450,6 +2458,6 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(selectedServicesScreen.isServiceApproved(iOSInternalProjectConstants.SR_S1_MONEY));
 		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.TAX_DISCOUNT));
 		RegularInspectionsSteps.cancelCreatingInspection();
-		myInspectionsScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 }
