@@ -18,37 +18,37 @@ import java.util.concurrent.TimeUnit;
 
 @Getter
 public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
-	
+
 	@FindBy(xpath = "//ul[@data-automation-id='inspectionsList']")
 	private WebElement inspectionsList;
-	
+
 	@FindBy(xpath = "//div[@class='entity-details__content' and @data-bind='visible: isDetailsVisible']")
 	private WebElement inspectionDetailsPanel;
-	
+
 	@FindBy(xpath = "//table[@data-automation-id='inspectionsDetailsServicesList']")
 	private WebElement inspectionServicesList;
-	
+
 	@FindBy(xpath = "//ul[@data-automation-id='inspectionsDetailsDamagesList']")
 	private WebElement imageLegend;
-	
+
 	@FindBy(xpath = "//span[@data-automation-id='inspectionsDetailsPrintButton']")
 	private WebElement printInspectionIcon;
-	
+
 	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsApproveButton']")
 	private WebElement approveInspectionIcon;
-	
+
 	@FindBy(id = "inspectiontypes-search")
 	private WebElement searchInspectionsPanel;
-	
+
 	@FindBy(id = "advSearchEstimation-freeText")
 	private WebElement searchFld;
-	
+
 	@FindBy(xpath = "//*[@data-bind='text: filterInfoString']")
 	private WebElement filterInfoText;
-	
+
 	@FindBy(id = "advSearchEstimation-search")
 	private WebElement searchFilterBtn;
-	
+
 	@FindBy(xpath = "//i[contains(@data-bind, 'click: clear,')]")
 	private WebElement clearFilterBtn;
 
@@ -254,10 +254,10 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		boolean exists = false;
 		matrixServiceRow.findElement(By.xpath("./td[@class='notes__service-table--centered']/i[@title='Notes']")).click();
 		WebElement notesModalDialog = new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
+				.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
 		exists = notesModalDialog.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
 		new WebDriverWait(driver, 30)
-				  .until(ExpectedConditions.elementToBeClickable(notesModalDialog.findElement(By.xpath(".//button[@class='close']")))).click();
+				.until(ExpectedConditions.elementToBeClickable(notesModalDialog.findElement(By.xpath(".//button[@class='close']")))).click();
 		waitABit(500);
 		return exists;
 	}
@@ -271,90 +271,64 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		boolean exists;
 		clickServiceNotesIcon(serviceName);
 		WebElement notesModalDialog = new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
+				.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("notesViewer"))));
 		exists = notesModalDialog.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
 		new WebDriverWait(driver, 30)
-				  .until(ExpectedConditions.elementToBeClickable(notesModalDialog.findElement(By.xpath(".//button[@class='close']")))).click();
+				.until(ExpectedConditions.elementToBeClickable(notesModalDialog.findElement(By.xpath(".//button[@class='close']")))).click();
 		waitABit(500);
 		return exists;
 	}
 
-	public VNextBOInspectionsWebPage clickInspectionApproveButton() {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(approveInspectionIcon)).click();
-            waitForLoading();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-		return this;
+	public void clickInspectionApproveButton() {
+		Utils.clickElement(approveInspectionIcon);
 	}
 
+
+
 	public void approveInspection(String approveNotes) {
-		String parent = driver.getWindowHandle();
+		String parentHandle = driver.getWindowHandle();
 		clickInspectionApproveButton();
 		VNextBOConfirmationDialog confirmDialog = new VNextBOConfirmationDialog();
 		confirmDialog.clickYesButton();
 		waitForNewTab();
-		String newwin = "";
-		for(String window:driver.getWindowHandles()){
-			if(!window.equals(parent)){
-				newwin = window;
-			}
-		}
-		driver.switchTo().window(newwin);
+		String newWindow = Utils.getNewTab(parentHandle);
+		driver.switchTo().window(newWindow);
 		driver.findElement(By.xpath("//p/button[@type='submit' and @class='btn icon ok']")).click();
 		waitLong.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtAreaNotes"))));
 		driver.findElement(By.name("txtAreaNotes")).sendKeys(approveNotes);
 		driver.findElement(By.xpath("//button[@id='btnApprove']")).click();
 		waitABit(5000);
 		driver.close();
-		driver.switchTo().window(parent);
+		driver.switchTo().window(parentHandle);
 		driver.navigate().refresh();
 	}
 
-	public void approveInspection() {
-		String parent = driver.getWindowHandle();
+	public void openApproveInspectionWindow() {
+		String parentHandle = driver.getWindowHandle();
 		clickInspectionApproveButton();
 		new VNextBOConfirmationDialog().clickYesButton();
 		waitForNewTab();
-		String newWindow = "";
-		for(String window: driver.getWindowHandles()){
-			if(!window.equals(parent)){
-				newWindow = window;
-			}
-		}
+		String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
 		waitForLoading();
-		driver.close();
-		driver.switchTo().window(parent);
-		driver.navigate().refresh();
 	}
 
 	public void declineInspection(String declineNotes) {
-		String parent = driver.getWindowHandle();
+		String parentHandle = driver.getWindowHandle();
 		clickInspectionApproveButton();
 		VNextBOConfirmationDialog confirmDialog = new VNextBOConfirmationDialog();
 		confirmDialog.clickYesButton();
 		waitForNewTab();
-		String newwin = "";
-		for(String window:driver.getWindowHandles()){
-			if(!window.equals(parent)){
-				newwin = window;
-			}
-		}
-		driver.switchTo().window(newwin);
+		String newWindow = Utils.getNewTab(parentHandle);
+		driver.switchTo().window(newWindow);
 		driver.findElement(By.xpath("//p/button[@type='submit' and @class='btn icon cancel']")).click();
 		new WebDriverWait(driver, 60)
-		  .until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtDeclineNotes"))));
-		/*List<WebElement> serviceschkboxes = driver.findElements(By.name("cbService"));
-		for (WebElement serviceschkbox : serviceschkboxes)
-			serviceschkbox.click();
-		driver.findElement(By.xpath("//button[@id='btnCancel']")).click();*/
+				.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtDeclineNotes"))));
 		driver.findElement(By.name("txtDeclineNotes")).sendKeys(declineNotes);
 		driver.findElement(By.xpath("//button[@class='btn icon cancel' and @id='btnDecline']")).click();
 		waitABit(5000);
 		driver.close();
-		driver.switchTo().window(parent);
+		driver.switchTo().window(parentHandle);
 		driver.navigate().refresh();
 	}
 
@@ -381,7 +355,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 			}
 		}
 		return PageFactory.initElements(
-			driver, VNextBOInspectionInfoWebPage.class);
+				driver, VNextBOInspectionInfoWebPage.class);
 	}
 
 	public void clickExpandAdvancedSearchPanel() {
@@ -392,7 +366,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		boolean exists = false;
 		if (driver.findElements(By.id("advSearchEstimation-savedSearchList")).size() > 0)
 			exists = driver.findElement(By.id("advSearchEstimation-savedSearchList"))
-			.findElements(By.xpath(".//div/span[text()='" + filterName + "']")).size() > 0;
+					.findElements(By.xpath(".//div/span[text()='" + filterName + "']")).size() > 0;
 		return exists;
 	}
 
@@ -409,10 +383,10 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		waitABit(2000);
 		Actions act = new Actions(driver);
 		act.moveToElement(driver.findElement(By.id("advSearchEstimation-savedSearchList"))
-			.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i"))).perform();
+				.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i"))).perform();
 
 		driver.findElement(By.id("advSearchEstimation-savedSearchList"))
-			.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i")).click();
+				.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i")).click();
 		return PageFactory.initElements(
 				driver, VNextBOInspectionAdvancedSearchForm.class);
 	}
@@ -502,13 +476,13 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 
 	public String getFirstInspectionStatus() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(inspectionStatusLabels.get(0))).getText();
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
-    }
+		try {
+			return wait.until(ExpectedConditions.visibilityOf(inspectionStatusLabels.get(0))).getText();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
+	}
 
 	public String getSelectedInspectionArchivingReason() {
 		return Utils.getText(

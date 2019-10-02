@@ -1,0 +1,33 @@
+{
+  "verifyUserCanCancelApprovingWithNoButton": [
+    {
+      "rowID": "verifyUserCanCancelApprovingWithNoButton.01",
+      "description": "Test Case 90883: User can cancel approving (No)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90883",
+          "testCaseTitle": "User can cancel approving (No)"
+        }
+      ],
+      "inspectionId": "E-168-0023",
+      "fromDate": "1/1/2018",
+      "toDate": "9/26/2019"
+    }
+  ],
+
+  "verifyUserCanCancelApprovingWithCloseButton": [
+    {
+      "rowID": "verifyUserCanCancelApprovingWithCloseButton.01",
+      "description": "Test Case 90884: User can cancel approving (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90884",
+          "testCaseTitle": "User can cancel approving (X-icon)"
+        }
+      ],
+      "inspectionId": "E-168-0023",
+      "fromDate": "1/1/2018",
+      "toDate": "9/26/2019"
+    }
+  ]
+}
