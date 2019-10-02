@@ -10,7 +10,6 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
-import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
@@ -83,7 +82,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         PartServiceSteps.acceptDetailsScreen();
         inspectionId = InspectionSteps.saveInspection();
         SearchSteps.searchByText(inspectionId);
-        MonitorSteps.openItem(inspectionId);
+        InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName().getPartNameList().get(0));
@@ -95,7 +94,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName().getPartNameList().get(0));
+        SelectedServicesScreenSteps.openServiceDetails("PREF:  Parking Brake Cable Lever");
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartInfoScreenValidations.validatePartInfo(editedPartService);
         PartServiceSteps.confirmPartInfo();
@@ -122,7 +121,6 @@ public class VNextTeamPartServiceBaseCase extends BaseTestCaseTeamEditionRegistr
         GeneralValidations.errorDialogShouldBePresent(true, "Please select at least one part.");
         GeneralSteps.closeErrorDialog();
         PartServiceSteps.selectPartName(basicPartService.getPartName());
-        PartServiceSteps.selectPartPosition(basicPartService.getPartPosition());
         PartServiceSteps.confirmPartInfo();
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();

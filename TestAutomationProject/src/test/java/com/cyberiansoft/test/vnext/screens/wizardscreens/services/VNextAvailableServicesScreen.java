@@ -50,6 +50,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     }
 
     public VNextAvailableServicesScreen() {
+        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
     public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
@@ -118,19 +119,11 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     public int getServiceAmountSelectedValue(String serviceName) {
         int amaount = 0;
         WebElement servicerow = getServiceListItem(serviceName);
-        if (WaitUtils.isElementPresent(By.xpath("//*[@action='select-item']//input")))
+        try {
             amaount = Integer.valueOf(servicerow.findElement(By.xpath(".//*[@action='select-item']//input")).getAttribute("data-counter"));
-        else
+        } catch (Exception ex) {
             amaount = Integer.valueOf(servicerow.findElement(By.xpath(".//*[@action='select-item']")).getAttribute("data-counter"));
-
-
-        if (servicerow != null) {
-            if (WaitUtils.isElementPresent(By.xpath("//*[@action='select-item']//input")))
-                amaount = Integer.valueOf(servicerow.findElement(By.xpath(".//*[@action='select-item']//input")).getAttribute("data-counter"));
-            else
-                amaount = Integer.valueOf(servicerow.findElement(By.xpath(".//*[@action='select-item']")).getAttribute("data-counter"));
-        } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+        }
         return amaount;
     }
 

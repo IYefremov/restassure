@@ -48,8 +48,4 @@ public class CommonFilterScreen extends MonitorScreen {
         WaitUtils.click(searchInputField);
         searchInputField.sendKeys(searchString);
     }
-
-    public void search() {
-        searchButton.click();
-    }
 }

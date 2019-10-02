@@ -1323,7 +1323,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestCaseTeamEditionRegistrat
 	public void testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO(String rowID,
 																					  String description, JSONObject testData) {
 
-		final String NO_AVAILABLE_WO_MESSAGE = "No available work orders";
+		final String NO_AVAILABLE_WO_MESSAGE = "Please make sure that all selected work orders can be used for auto invoice creation";
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 

@@ -14,7 +14,7 @@ public class SearchSteps {
     public static void fillTextSearch(String searchString) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getClearSearchInputButton());
-        commonFilterScreen.getClearSearchInputButton().click();
+        WaitUtils.click(commonFilterScreen.getClearSearchInputButton());
         WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getSearchInputField());
         commonFilterScreen.setSearchInputField(searchString);
         BaseUtils.waitABit(1000);
@@ -29,7 +29,7 @@ public class SearchSteps {
     public static void search() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         WaitUtils.elementShouldBeVisible(commonFilterScreen.getSearchButton(), true);
-        commonFilterScreen.search();
+        WaitUtils.click(commonFilterScreen.getSearchButton());
     }
 
     public static void searchByTextAndStatus(String text, RepairOrderStatus status) {
