@@ -24,15 +24,15 @@ public class VNextBOInspectionsApprovalPageSteps {
     }
 
     public boolean isApprovePrintPageButtonDisplayed() {
-        return Utils.isElementDisplayed(inspectionsApprovalWebPage.getApproveButton());
+        return Utils.isElementDisplayed(inspectionsApprovalWebPage.getApproveServiceButton());
     }
 
     public VNextBOInspectionsApprovalWebPage clickInspectionApprovePrintPageButton() {
         if (isApprovePrintPageButtonDisplayed()) {
-            Utils.clickElement(inspectionsApprovalWebPage.getApproveButton());
-            WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getConfirmApproveButton());
+            Utils.clickElement(inspectionsApprovalWebPage.getApproveServiceButton());
+            WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getGeneralApproveButton());
         } else {
-            Utils.clickElement(inspectionsApprovalWebPage.getApproveAndCompleteButton());
+            Utils.clickElement(inspectionsApprovalWebPage.getApproveAndCompleteServiceButton());
             WaitUtilsWebDriver.waitForLoading();
         }
 
@@ -45,8 +45,8 @@ public class VNextBOInspectionsApprovalPageSteps {
     }
 
     public VNextBOInspectionsApprovalWebPage clickConfirmApprovePrintPageButtonIfDisplayed() {
-        if (Utils.isElementDisplayed(inspectionsApprovalWebPage.getConfirmApproveButton())) {
-            Utils.clickElement(inspectionsApprovalWebPage.getConfirmApproveButton());
+        if (Utils.isElementDisplayed(inspectionsApprovalWebPage.getGeneralApproveButton())) {
+            Utils.clickElement(inspectionsApprovalWebPage.getGeneralApproveButton());
             WaitUtilsWebDriver.waitForLoading();
         }
         WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getInspectionStatus());
