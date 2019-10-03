@@ -25,6 +25,7 @@ import com.cyberiansoft.test.ios10_client.types.inspectionstypes.UATInspectionTy
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.UATInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.UATServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderTypes;
+import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
@@ -219,7 +220,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularInvoiceInfoScreenValidations.verifyInvoiceTotalValue(invoiceData.getInvoiceTotal());
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(invoiceData.getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
@@ -314,7 +315,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsDraft();
+        RegularInvoicesSteps.saveInvoiceAsDraft();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
@@ -495,7 +496,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, false);
         RegularNavigationSteps.navigateBackScreen();
 
@@ -841,7 +842,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
@@ -876,7 +877,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
@@ -932,7 +933,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
@@ -969,7 +970,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
         BaseUtils.waitABit(15000);
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
@@ -1032,7 +1033,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
         RegularMyInvoicesScreenSteps.switchToTeamView();
@@ -1163,7 +1164,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
@@ -1203,6 +1204,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             RegularOrderMonitorScreenValidations.verifyServiceStatus(serviceData, OrderMonitorStatuses.COMPLETED);
 
         RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1233,7 +1235,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
@@ -1276,6 +1278,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
             RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
         }
+
         for (BundleServiceData bundleServiceData : workOrderData.getBundleServices()) {
             RegularServicesScreenSteps.selectBundleService(bundleServiceData);
         }
@@ -1292,7 +1295,122 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
-        RegularInvoiceInfoScreenSteps.saveInvoiceAsFinal();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenValidations.verifyInvoicePrice(invoiceNumber, testCaseData.getInvoiceData().getInvoiceTotal());
+        RegularMyInvoicesScreenSteps.selectSendEmailMenuForInvoice(invoiceNumber);
+        NadaEMailService nada = new NadaEMailService();
+        RegularEmailScreenSteps.sendEmailToAddress(nada.getEmailId());
+        RegularNavigationSteps.navigateBackScreen();
+
+        final String invpoicereportfilenname = invoiceNumber + ".pdf";
+
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+                .withSubjectAndAttachmentFileName(invoiceNumber, invpoicereportfilenname);
+        Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
+                " in mail box " + nada.getEmailId() + ". At time " +
+                LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+        nada.deleteMessageWithSubject(invoiceNumber);
+
+        File pdfdoc = new File(invpoicereportfilenname);
+        String pdftext = PDFReader.getPDFText(pdfdoc);
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            Assert.assertTrue(pdftext.contains(serviceData.getServiceName()));
+        }
+
+        for (BundleServiceData bundleServiceData : workOrderData.getBundleServices()) {
+            Assert.assertTrue(pdftext.contains(bundleServiceData.getBundleServiceName()));
+        }
+        Assert.assertTrue(pdftext.contains(feeServiceName));
+        Assert.assertTrue(pdftext.contains(feeServicePrice));
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifySplitWorkForTechniciansUnderWO(String rowID,
+                                                                              String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        for (BundleServiceData bundleServiceData : workOrderData.getBundleServices()) {
+            RegularServicesScreenSteps.selectBundleService(bundleServiceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+
+        RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
+        RegularVehicleInfoScreenSteps.selectAdditionalTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
+        RegularAlertValidations.acceprAlertAndVerifyAlertMessage(AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.switchToSelectedServices();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+            RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
+            RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getNewTechnician());
+            RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+        }
+        for (BundleServiceData bundleServiceData : workOrderData.getBundleServices()) {
+            RegularSelectedServicesSteps.openSelectedServiceDetails(bundleServiceData.getBundleServiceName());
+            RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
+            RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getNewTechnician());
+            RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
+            RegularServiceDetailsScreenSteps.cancelServiceDetails();
+            RegularServiceDetailsScreenSteps.cancelServiceDetails();
+        }
+
+        RegularWorkOrdersSteps.cancelCreatingWorkOrder();
+        RegularNavigationSteps.navigateBackScreen();
+
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifySaveInvoiceAsDraftAndSendEmail(String rowID,
+                                                                              String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        final String feeServiceName = "Fee Service Oksi";
+        final String feeServicePrice = "$55.00";
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_DRAFT_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+
+        for (BundleServiceData bundleServiceData : workOrderData.getBundleServices()) {
+            RegularServicesScreenSteps.selectBundleService(bundleServiceData);
+        }
+
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWizardScreenValidations.verifyScreenSubTotalPrice(workOrderData.getServicesScreen().getScreenPrice());
+        RegularWizardScreenValidations.verifyScreenTotalPrice(workOrderData.getServicesScreen().getScreenTotalPrice());
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);
+        RegularMyWorkOrdersSteps.clickCreateInvoiceIconAndSelectInvoiceType(UATInvoiceTypes.INVOICE_TEST_CUSTOM1_NEW);
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
@@ -1312,6 +1430,13 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         File pdfdoc = new File(invpoicereportfilenname);
         String pdftext = PDFReader.getPDFText(pdfdoc);
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            Assert.assertTrue(pdftext.contains(serviceData.getServiceName()));
+        }
+
+        for (BundleServiceData bundleServiceData : workOrderData.getBundleServices()) {
+            Assert.assertTrue(pdftext.contains(bundleServiceData.getBundleServiceName()));
+        }
         Assert.assertTrue(pdftext.contains(feeServiceName));
         Assert.assertTrue(pdftext.contains(feeServicePrice));
     }

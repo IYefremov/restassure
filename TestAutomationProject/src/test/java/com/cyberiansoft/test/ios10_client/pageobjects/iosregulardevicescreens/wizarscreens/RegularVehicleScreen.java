@@ -204,6 +204,12 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_tech)));
 		appiumdriver.findElementByAccessibilityId(_tech).click();
 	}
+
+	public void selectAdditionalTechnician(String additionalTechnicial) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement defEmployeeTable = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("DefaultEmployeeSelectorView")));
+		defEmployeeTable.findElement(MobileBy.AccessibilityId(additionalTechnicial)).findElement(MobileBy.AccessibilityId("unselected")).click();
+	}
 	
 	public void selectLocation(String _location) {
 		waitVehicleScreenLoaded();
@@ -237,7 +243,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	public void clickTech() {
 
 		JavascriptExecutor js1 = (JavascriptExecutor) appiumdriver;
-		HashMap<String, String> scrollObject1 = new HashMap<String, String>();
+		HashMap<String, String> scrollObject1 = new HashMap<>();
 		scrollObject1.put("direction", "up");
 		js1.executeScript("mobile: swipe", scrollObject1);
 			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeCell[@name='Tech']")));

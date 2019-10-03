@@ -14,4 +14,9 @@ public class RegularSelectedServicesSteps {
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         servicesScreen.switchToAvailableServicesTab();
     }
+
+    public static void openSelectedServiceDetails(String serviceName) {
+        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
+        selectedServicesScreen.openSelectedServiceDetails(serviceName);
+    }
 }

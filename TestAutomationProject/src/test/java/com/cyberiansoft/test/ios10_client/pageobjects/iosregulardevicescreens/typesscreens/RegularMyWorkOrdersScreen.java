@@ -44,6 +44,8 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	public void waitMyWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("MyWorkOrdersTable")));
+		wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(mywotable));
 	}
 
 	public void clickAddOrderButton() {
@@ -55,15 +57,6 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void selectFirstOrder() {
 		mywotable.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]")).click();
-	}
-
-	public void deleteWorkOrderViaActionAndSearch(String wo) {
-		clickActionButton();
-		selectWorkOrderForAction(wo);
-		clickActionButton();
-		appiumdriver.findElementByAccessibilityId("Delete").click();
-		Helpers.acceptAlert();
-		clickDoneButton();
 	}
 	
 	public void clickActionButton() {
@@ -127,7 +120,8 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
-		mywotable.findElementByAccessibilityId(workOrderId).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(mywotable.findElementByAccessibilityId(workOrderId))).click();
 	}
 	
 	public void selectWorkOrderForAddingNotes(String workOrderId)  {
@@ -177,7 +171,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		return mywotable.findElementByAccessibilityId(workOrderNumber).findElementByAccessibilityId("labelOrderAmount").getAttribute("label");
 	}
 	
-	public boolean woExists(String workOrderNumber) {
+		public boolean isWorkOrderPresent(String workOrderNumber) {
 		waitMyWorkOrdersScreenLoaded();
 		return appiumdriver.findElements(MobileBy.AccessibilityId(workOrderNumber)).size() > 0;	
 	}

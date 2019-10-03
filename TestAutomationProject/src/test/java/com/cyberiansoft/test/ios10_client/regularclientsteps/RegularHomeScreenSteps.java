@@ -11,7 +11,8 @@ public class RegularHomeScreenSteps {
 
     public static void navigateToTeamInspectionsScreen() {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        homeScreen.clickTeamInspectionsButton();
+        homeScreen.clickMyInspectionsButton();
+        RegularMyInspectionsSteps.switchToTeamView();
     }
 
     public static void navigateToMyWorkOrdersScreen() {
@@ -19,9 +20,21 @@ public class RegularHomeScreenSteps {
         homeScreen.clickMyWorkOrdersButton();
     }
 
+    public static void navigateToTeamWorkOrdersScreen() {
+        RegularHomeScreen homeScreen = new RegularHomeScreen();
+        homeScreen.clickMyWorkOrdersButton();
+        RegularMyWorkOrdersSteps.switchToTeamView();
+    }
+
     public static void navigateToMyInvoicesScreen() {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
         homeScreen.clickMyInvoicesButton();
+    }
+
+    public static void navigateToTeamInvoicesScreen() {
+        RegularHomeScreen homeScreen = new RegularHomeScreen();
+        homeScreen.clickMyInvoicesButton();
+        RegularMyInvoicesScreenSteps.switchToTeamView();
     }
 
     public static void navigateToSettingsScreen() {
@@ -42,6 +55,11 @@ public class RegularHomeScreenSteps {
     public static void navigateToStatusScreen() {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
         homeScreen.clickStatusButton();
+    }
+
+    public static void navigateTocarHistoryScreen() {
+        RegularHomeScreen homeScreen = new RegularHomeScreen();
+        homeScreen.clickCarHistoryButton();
     }
 
     public static void waitForHomeScreen() {

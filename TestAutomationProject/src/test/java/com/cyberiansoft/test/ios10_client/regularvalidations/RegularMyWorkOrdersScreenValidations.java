@@ -18,9 +18,9 @@ public class RegularMyWorkOrdersScreenValidations {
         RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
         if (isPresent)
-            Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderID));
+            Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderID));
         else
-            Assert.assertFalse(myWorkOrdersScreen.woExists(workOrderID));
+            Assert.assertFalse(myWorkOrdersScreen.isWorkOrderPresent(workOrderID));
     }
 
     public static void verifyNotesIconPresentForInspection(String workOrderID, boolean isPresent) {

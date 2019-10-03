@@ -4,6 +4,8 @@
   import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
   import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
   import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
+  import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInspectionsSteps;
+  import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInvoicesScreenSteps;
   import com.cyberiansoft.test.ios10_client.utils.Helpers;
   import com.cyberiansoft.test.vnext.utils.WaitUtils;
   import io.appium.java_client.MobileBy;
@@ -75,69 +77,39 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections"))).click();
 	}
-	
-	public RegularTeamInspectionsScreen clickTeamInspectionsButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
-		appiumdriver.findElementByAccessibilityId("Inspections").click();
-		RegularMyInspectionsScreen myinspectionsscreen = new RegularMyInspectionsScreen();
-		myinspectionsscreen.switchToTeamView();
-		return new RegularTeamInspectionsScreen();
-	}
 
 	public void clickMyWorkOrdersButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
 	}
 	
-	public RegularCarHistoryScreen clickCarHistoryButton() {
+	public void clickCarHistoryButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Car History")));
 		appiumdriver.findElementByAccessibilityId("Car History").click();
-		return new RegularCarHistoryScreen();
 	}
 
-	public RegularMyInvoicesScreen clickMyInvoicesButton() {
+	public void clickMyInvoicesButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
 		appiumdriver.findElementByAccessibilityId("Invoices").click();
-		return new RegularMyInvoicesScreen();
-	}
-	
-	public RegularTeamInvoicesScreen clickTeamInvoices() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Invoices")));
-		appiumdriver.findElementByAccessibilityId("Invoices").click();
-		RegularMyInvoicesScreen invoicesscreen = new RegularMyInvoicesScreen();
-		invoicesscreen.switchToTeamView();
-		return new RegularTeamInvoicesScreen();
 	}
 
-	public RegularServiceRequestsScreen clickServiceRequestsButton() {
+	public void clickServiceRequestsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests"))).click();
-		return new RegularServiceRequestsScreen();
 	}
 	
 	public void clickStatusButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Status"))).click();
 	}
-	
-	public RegularTeamWorkOrdersScreen clickTeamWorkordersButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Work Orders"))).click();
-		RegularMyWorkOrdersScreen myworkordersscreen = new RegularMyWorkOrdersScreen();
-		myworkordersscreen.switchToTeamView();
-		return new RegularTeamWorkOrdersScreen();
-	}
 
-	public RegularSettingsScreen clickSettingsButton() {
+	public void clickSettingsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Service Requests")));
 		swipeScreenUp();
 		appiumdriver.findElementByAccessibilityId("Settings").click();
-		return new RegularSettingsScreen();
 	}	
 	
 	public void updateDatabase() {

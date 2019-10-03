@@ -104,9 +104,9 @@
       ]
     }
   ],
-  "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1": [
+  "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity": [
     {
-      "rowID": "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1.01",
+      "rowID": "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity.01",
       "description": "Test Case 28583:WO: If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity",
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397",
@@ -266,9 +266,9 @@
       ]
     }
   ],
-  "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1": [
+  "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices": [
     {
-      "rowID": "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1.01",
+      "rowID": "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices.01",
       "description": "Test Case 29398:WO: Verify that Fee Bundle services is calculated for additional matrix services",
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
@@ -377,9 +377,9 @@
       ]
     }
   ],
-  "testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1": [
+  "testVerifyThatAmountIsCalculatedAndRoundedCorrectly": [
     {
-      "rowID": "testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1.01",
+      "rowID": "testVerifyThatAmountIsCalculatedAndRoundedCorrectly.01",
       "description": "Test Case 31498:WO: Verify that amount is calculated and rounded correctly",
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
@@ -440,9 +440,9 @@
       "workOrderPrice": "$3,153.94"
     }
   ],
-  "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1": [
+  "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined": [
     {
-      "rowID": "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1.01",
+      "rowID": "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined.01",
       "description": "Test Case 32226:Inspections: Verify that inspection is saved as declined when all services are skipped or declined",
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
@@ -468,9 +468,9 @@
       "declineReason": "Decline 1"
     }
   ],
-  "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1": [
+  "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount": [
     {
-      "rowID": "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1.01",
+      "rowID": "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount.01",
       "description": "Test Case 32286:Inspections: Verify that amount of approved services are shown on BO > inspectiontypes list > column Approved Amount",
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
@@ -507,9 +507,9 @@
       }
     }
   ],
-  "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1": [
+  "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc": [
     {
-      "rowID": "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1.01",
+      "rowID": "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc.01",
       "description": "Test Case 32287:Inspections: Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column Approved Amount",
       "vihicleInfo": {
         "vinNumber": "1D7HW48NX6S507810"
@@ -750,9 +750,9 @@
       }
     }
   ],
-  "testWOVerifyCalculationWithPriceMatrixLaborType_1": [
+  "testWOVerifyCalculationWithPriceMatrixLaborType": [
     {
-      "rowID": "testWOVerifyCalculationWithPriceMatrixLaborType_1.01",
+      "rowID": "testWOVerifyCalculationWithPriceMatrixLaborType.01",
       "description": "Test Case 45224:WO: Verify calculation with price matrix Labor type",
       "workOrderData": {
         "vihicleInfo": {
@@ -963,7 +963,8 @@
             },
             "servicePrice": "5.09",
             "questionData": {
-              "questionName": "QuestionTypeLogical_Q1"
+              "questionName": "QuestionTypeLogical_Q1",
+              "logicalQuestion" : true
             }
           },
           {
@@ -1156,7 +1157,8 @@
             },
             "servicePrice": "5.09",
             "questionData": {
-              "questionName": "QuestionTypeLogical_Q1"
+              "questionName": "QuestionTypeLogical_Q1",
+              "logicalQuestion" : true
             }
           },
           {
@@ -1315,9 +1317,9 @@
       }
     }
   ],
-  "testInvoicesVerifyRoundingMoneyAmountValues_1": [
+  "testInvoicesVerifyRoundingMoneyAmountValues": [
     {
-      "rowID": "testInvoicesVerifyRoundingMoneyAmountValues_1.01",
+      "rowID": "testInvoicesVerifyRoundingMoneyAmountValues.01",
       "description": "Test Case 42803:Invoices: Verify rounding money amount values",
       "workOrderData": {
         "vihicleInfo": {

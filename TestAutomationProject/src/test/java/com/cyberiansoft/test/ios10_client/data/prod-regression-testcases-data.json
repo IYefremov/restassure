@@ -1235,11 +1235,15 @@
   "testVerifyCalculationForServiceBundleServiceFeeBundleDiscount": [
     {
       "rowID": "testVerifyCalculationForServiceBundleServiceFeeBundleDiscount.01",
-      "description": "Test Case 28360: 43 - Verify calculation for service , bundle service, fee bundle , discount",
+      "description": "Test Case 28360: 43 - Verify calculation for service , bundle service, fee bundle , discount, Test Case 54308: 56 - Invoices: Verify save invoice as final and send email",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "83647",
           "testCaseTitle": "Test Case 28360: 43 - Verify calculation for service , bundle service, fee bundle , discount"
+        },
+        {
+          "testCaseID": "83662",
+          "testCaseTitle": "Test Case 54308: 56 - Invoices: Verify save invoice as final and send email"
         }
       ],
       "workOrderData": {
@@ -1249,6 +1253,151 @@
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
           "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "Service_PP_Service2",
+              "servicePrice": "12",
+              "vehiclePart": {
+                "vehiclePartName": "Dashboard"
+              }
+            },
+            {
+              "serviceName": "Facility Fee %"
+            },
+            {
+              "serviceName": "Discount"
+            },
+            {
+              "serviceName": "Service_PP_Panel"
+            }
+          ],
+          "screenTotalPrice": "$613.72",
+          "screenPrice": "$445.00"
+        },
+        "bundleServices": [
+          {
+            "bundleServiceName": "SR_S4_Bundle",
+            "services": [
+              {
+                "serviceName": "Test_Discount_Service",
+                "servicePrice": "350"
+              }
+            ]
+          },
+          {
+            "bundleServiceName": "Bundle for PP",
+            "services": [
+              {
+                "serviceName": "SR_S1_Money",
+                "servicePrice": "60",
+                "vehiclePart": {
+                  "vehiclePartName": "Dashboard"
+                }
+              }
+            ],
+            "bundleServiceAmount": "60"
+          }
+        ]
+      },
+      "invoiceData": {
+        "poNumber" : "123po",
+        "invoiceTotal" : "$613.72"
+      }
+    }
+  ],
+  "testVerifySplitWorkForTechniciansUnderWO": [
+    {
+      "rowID": "testVerifySplitWorkForTechniciansUnderWO.01",
+      "description": "Test Case 28361: 44 - Verify split work for technicians under WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83648",
+          "testCaseTitle": "Test Case 28361: 44 - Verify split work for technicians under WO"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "trim": "25th Anniversary",
+          "defaultTechnician": {
+            "technicianFirstName": "Test",
+            "technicianLastName": "User",
+            "isSelected" : true
+          },
+          "newTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "User",
+            "isSelected" : true
+          }
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "Service_PP_Service2",
+              "servicePrice": "12",
+              "vehiclePart": {
+                "vehiclePartName": "Dashboard"
+              }
+            },
+            {
+              "serviceName": "Service_PP_Panel"
+            }
+          ]
+        },
+        "bundleServices": [
+          {
+            "bundleServiceName": "SR_S4_Bundle",
+            "services": [
+              {
+                "serviceName": "Test_Discount_Service",
+                "servicePrice": "350"
+              }
+            ]
+          },
+          {
+            "bundleServiceName": "Bundle for PP",
+            "services": [
+              {
+                "serviceName": "SR_S1_Money",
+                "servicePrice": "60",
+                "vehiclePart": {
+                  "vehiclePartName": "Dashboard"
+                }
+              }
+            ],
+            "bundleServiceAmount": "60"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifySaveInvoiceAsDraftAndSendEmail": [
+    {
+      "rowID": "testVerifySaveInvoiceAsDraftAndSendEmail.01",
+      "description": "Test Case 54307: 55 - Invoices: Verify save invoice as draft and send email",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83661",
+          "testCaseTitle": "Test Case 54307: 55 - Invoices: Verify save invoice as draft and send email"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
         },
         "servicesScreen": {
           "moneyServices": [
