@@ -30,21 +30,14 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	public RegularCarHistoryScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.elementToBeClickable(searchbtn));
 	}
 	
-	public void searchCar(String vin)
-			throws InterruptedException {
+	public void searchCar(String vin) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
 		IOSElement searchfld = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Search' and type = 'XCUIElementTypeSearchField'"));
 		searchfld.click();
 		searchfld.sendKeys(vin + "\n");	
-	}
-	
-	public void clickCancelSearchButton() throws InterruptedException {
-		appiumdriver.findElementByAccessibilityId("Cancel").click();
 	}
 	
 	public RegularCarHistoryWOsAndInvoicesScreen clickFirstCarHistoryInTable() {
@@ -68,10 +61,6 @@ public class RegularCarHistoryScreen extends RegularBaseAppScreen {
 	
 	public String getFirstCarHistoryDetailsInTable() {		
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[2]").getAttribute("value");
-	}
-	
-	public void clickFirstCar() {		
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").click();
 	}
 	
 	public void clickSwitchToWeb() {		

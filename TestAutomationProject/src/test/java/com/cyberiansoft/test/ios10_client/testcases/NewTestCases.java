@@ -86,8 +86,9 @@ public class NewTestCases extends BaseTestCase {
 		final String mailaddress = "test@cyberiansoft.com";
 			
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
-			
-		RegularMyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoicesButton();
+
+		RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+		RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
 		myInvoicesScreen.clickActionButton();
 		myInvoicesScreen.selectInvoices(numberInvoicesToSelect);
 		myInvoicesScreen.clickActionButton();
@@ -202,11 +203,11 @@ public class NewTestCases extends BaseTestCase {
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersscreen = homeScreen.clickCustomersButton();
 		customersscreen.swtchToWholesaleMode();
-		customersscreen.clickHomeButton();
-		
-		
-		RegularServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
+		RegularNavigationSteps.navigateBackScreen();
 
+
+		RegularHomeScreenSteps.navigateToServiceRequestScreen();
+		RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
 		RegularServiceRequestSteps.startCreatingServicerequest(ZAZ_Motors, ServiceRequestTypes.SR_EST_WO_REQ_SRTYPE);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(VIN);
@@ -231,13 +232,13 @@ public class NewTestCases extends BaseTestCase {
 		String alerttext = Helpers.getAlertTextAndCancel();
 		Assert.assertEquals(alerttext, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 
-		srtowo = serviceRequestsScreen.getFirstServiceRequestNumber();
-		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(srtowo), "On Hold");
-		Assert.assertTrue(serviceRequestsScreen.getServiceRequestClient(srtowo).contains(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER));
+		srtowo = serviceRequestSscreen.getFirstServiceRequestNumber();
+		Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(srtowo), "On Hold");
+		Assert.assertTrue(serviceRequestSscreen.getServiceRequestClient(srtowo).contains(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER));
 		//Assert.assertTrue(serviceRequestsScreen.getServiceRequestEmployee(srnumber).contains(iOSInternalProjectConstants.USERSIMPLE_LOGIN));
-		Assert.assertTrue(serviceRequestsScreen.getServiceRequestDetails(srtowo).contains("WERTYU123"));
-		srtowo = serviceRequestsScreen.getFirstServiceRequestNumber();
-		serviceRequestsScreen.clickHomeButton();
+		Assert.assertTrue(serviceRequestSscreen.getServiceRequestDetails(srtowo).contains("WERTYU123"));
+		srtowo = serviceRequestSscreen.getFirstServiceRequestNumber();
+		RegularNavigationSteps.navigateBackScreen();
 		
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(backofficeurl);
@@ -311,10 +312,10 @@ public class NewTestCases extends BaseTestCase {
 		String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
 		servicerequestslistpage.acceptFirstServiceRequestFromList();
 		DriverBuilder.getInstance().getDriver().quit();
-		
-		RegularHomeScreen homeScreen = new RegularHomeScreen();
-		RegularServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-		serviceRequestsScreen.clickRefreshButton();
+
+		RegularHomeScreenSteps.navigateToServiceRequestScreen();
+		RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
+		serviceRequestSscreen.clickRefreshButton();
 		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(srnumber, InspectionsTypes.INSP_SMOKE_TEST);
 		NavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
@@ -323,7 +324,7 @@ public class NewTestCases extends BaseTestCase {
 			Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceName, PricesCalculations.getPriceRepresentation(servicePrice) +
 					" x " + BackOfficeUtils.getFullPriceRepresentation(serviceQuantity)));
 		RegularServiceRequestSteps.saveServiceRequest();
-		serviceRequestsScreen.clickHomeButton();
+		serviceRequestSscreen.clickHomeButton();
 	}
 	
 	@Test(testName = "Test Case 8430:Create work order with type is assigned to a specific client", description = "Create work order with type is assigned to a specific client ")

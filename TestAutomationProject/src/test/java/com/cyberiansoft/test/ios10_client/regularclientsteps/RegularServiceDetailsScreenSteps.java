@@ -17,7 +17,7 @@ public class RegularServiceDetailsScreenSteps {
         if (serviceData.getVehiclePart() != null)
             slectServiceVehiclePart(serviceData.getVehiclePart());
         if (serviceData.getVehicleParts() != null)
-            slectServiceVehicleParts(serviceData.getVehicleParts());
+            selectServiceVehicleParts(serviceData.getVehicleParts());
         if (serviceData.getQuestionData() != null)
             selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
         if (serviceData.getQuestionsData() != null)
@@ -42,7 +42,7 @@ public class RegularServiceDetailsScreenSteps {
         selectedServiceDetailsScreen.saveSelectedServiceDetails();
     }
 
-    public static void slectServiceVehicleParts(List<VehiclePartData> vehiclePartsData) {
+    public static void selectServiceVehicleParts(List<VehiclePartData> vehiclePartsData) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.clickVehiclePartsCell();
         for (VehiclePartData vehiclePartData : vehiclePartsData)
@@ -53,6 +53,11 @@ public class RegularServiceDetailsScreenSteps {
     public static void saveServiceDetails() {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.saveSelectedServiceDetails();
+    }
+
+    public static void cancelServiceDetails() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.cancelSelectedServiceDetails();
     }
 
     public static void clickServiceTechniciansIcon() {
@@ -68,14 +73,6 @@ public class RegularServiceDetailsScreenSteps {
     public static void unselectServiceTechnician(ServiceTechnician serviceTechnician) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.unselecTechnician(serviceTechnician.getTechnicianFullName());
-    }
-
-    public static void verifyServiceTechnicianIsSelected(ServiceTechnician serviceTechnician) {
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        if (serviceTechnician.isSelected())
-            Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceTechnician.getTechnicianFullName()));
-        else
-            Assert.assertFalse(selectedServiceDetailsScreen.isTechnicianSelected(serviceTechnician.getTechnicianFullName()));
     }
 
     public static void selectServiceAdjustment(ServiceAdjustmentData serviceAdjustmentData) {

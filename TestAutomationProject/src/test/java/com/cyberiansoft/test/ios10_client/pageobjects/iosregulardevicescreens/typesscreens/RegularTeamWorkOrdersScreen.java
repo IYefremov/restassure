@@ -90,6 +90,11 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 				+ workOrderID + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
 		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);
 	}
+
+	public void clickCreateInvoiceIconForWO(String workOrderNumber)  {
+		teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderNumber))
+				.findElement(MobileBy.className("XCUIElementTypeOther")).click();
+	}
 	
 	public void clickiCreateInvoiceButton()  {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
 import org.testng.Assert;
 
@@ -118,5 +120,12 @@ public class RegularVehicleInfoScreenSteps {
     public static String getWorkOrderNumber() {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         return vehicleScreen.getWorkOrderNumber();
+    }
+
+    public static void selectAdditionalTechnician(ServiceTechnician technician) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.clickTech();
+        vehicleScreen.selectAdditionalTechnician(technician.getTechnicianFullName());
+        RegularWizardScreensSteps.clickSaveButton();
     }
 }
