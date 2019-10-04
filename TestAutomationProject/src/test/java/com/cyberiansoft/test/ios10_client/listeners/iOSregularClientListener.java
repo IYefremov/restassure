@@ -146,20 +146,22 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
         if (testPlanRunDTO != null) {
             TestCaseData testCaseData = getTestCasesData(testResult);
             if (testCaseData != null) {
-                for (TargetProcessTestCaseData targetProcessTestCaseData : testCaseData.getTargetProcessTestCaseData())
-                    for (TestCaseRunDTO testCaseRunDTO : testPlanRunDTO.getTestCaseRuns().getItems()) {
-                        if (targetProcessTestCaseData.getTestCaseID().equals(testCaseRunDTO.getTestCase().getId().toString()))
-                            try {
-                                tpIntegrationService.setTestCaseRunStatus(testCaseRunDTO.getId().toString(), testCaseRunStatus, "");
-                                break;
-                            } catch (UnirestException e) {
-                                e.printStackTrace();
-                                break;
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                                break;
-                            }
-                    }
+                if (testCaseData.getTargetProcessTestCaseData() != null) {
+                    for (TargetProcessTestCaseData targetProcessTestCaseData : testCaseData.getTargetProcessTestCaseData())
+                        for (TestCaseRunDTO testCaseRunDTO : testPlanRunDTO.getTestCaseRuns().getItems()) {
+                            if (targetProcessTestCaseData.getTestCaseID().equals(testCaseRunDTO.getTestCase().getId().toString()))
+                                try {
+                                    tpIntegrationService.setTestCaseRunStatus(testCaseRunDTO.getId().toString(), testCaseRunStatus, "");
+                                    break;
+                                } catch (UnirestException e) {
+                                    e.printStackTrace();
+                                    break;
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                    break;
+                                }
+                        }
+                }
             }
         }
     }

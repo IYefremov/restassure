@@ -499,7 +499,6 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			String newwin = it.next();
 			driver.switchTo().window(newwin);
 			BaseUtils.waitABit(2000);
-			List<WebElement> pps = driver.findElements(By.xpath("//tr[@class='custom-total-row']/td[2]/div"));
 
 			WebElement totalrow = driver.findElements(By.xpath("//tr[@class='custom-total-row']/td[2]/div")).get(driver.findElements(By.xpath("//tr[@class='custom-total-row']/td[2]/div")).size() - 2);
 			totalapproved = totalrow.getText();

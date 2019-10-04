@@ -12,4 +12,9 @@ public class RegularOrderMonitorScreenValidations {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         Assert.assertEquals(orderMonitorScreen.getPanelStatus(serviceData), expectedStatus.getValue());
     }
+
+    public static void verifyOrderPhaseStatus(OrderMonitorStatuses expectedStatus) {
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        Assert.assertEquals(orderMonitorScreen.getOrderMonitorPhaseStatusValue(), expectedStatus.getValue());
+    }
 }
