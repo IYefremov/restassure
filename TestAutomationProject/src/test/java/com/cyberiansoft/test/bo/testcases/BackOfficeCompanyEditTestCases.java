@@ -40,18 +40,18 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 		insurancecompaniespage.createNewInsuranceCompany(data.getInsuranceCompanyName());
 		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationspage.clickNewServiceRequestList();
 
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getServiceType());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequestInsurance(data.getInsuranceCompanyName());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getServiceType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickClaimInfoEditButton();
+		serviceRequestsListInteractions.selectServiceRequestInsurance(data.getInsuranceCompanyName());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 		Assert.assertTrue(
-				servicerequestslistpage.isInsuranceCompanyPresentForFirstServiceRequestFromList(data.getInsuranceCompanyName()));
+				serviceRequestsListVerifications.isInsuranceCompanyPresentForFirstServiceRequestFromList(data.getInsuranceCompanyName()));
 
 		companyWebPage = new CompanyWebPage(webdriver);
 		backOfficeHeader.clickCompanyLink();
@@ -373,17 +373,17 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationspage.clickNewServiceRequestList();
-		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceType());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getServiceType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
 		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
-		serviceRequestsListPage.clickDoneButton();
-		serviceRequestsListPage.cancelNewServiceRequest();
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.cancelNewServiceRequest();
 
 		companyWebPage = new CompanyWebPage(webdriver);
 		backOfficeHeader.clickCompanyLink();
@@ -395,15 +395,15 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		operationspage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationspage.clickNewServiceRequestList();
-		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceType());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getServiceType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		Assert.assertEquals(serviceDialog.getAllAvailableServices(), "52");
-		serviceRequestsListPage.clickDoneButton();
-		serviceRequestsListPage.cancelNewServiceRequest();
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.cancelNewServiceRequest();
 
 		companyWebPage = new CompanyWebPage(webdriver);
 		backOfficeHeader.clickCompanyLink();

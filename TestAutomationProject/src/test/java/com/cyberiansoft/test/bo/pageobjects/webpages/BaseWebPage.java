@@ -1,10 +1,13 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.bo.config.BOConfigInfo;
+import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.google.common.base.Function;
 import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -20,6 +23,7 @@ public abstract class BaseWebPage {
 	public static WebDriverWait wait;
     public static WebDriverWait waitLong;
     public static WebDriverWait waitShort;
+    protected static BrowserType browserType;
 
     @FindBy(className = "updateProcess")
     private WebElement updateProcess;
@@ -27,14 +31,10 @@ public abstract class BaseWebPage {
 	private static final long SLEEP_TIMEOUT_IN_SEC = 15;
 
 	public BaseWebPage(WebDriver driver) {
-		this.driver = driver;
-		driver.manage().timeouts().implicitlyWait(SLEEP_TIMEOUT_IN_SEC, TimeUnit.SECONDS);
-		driver.manage().timeouts().pageLoadTimeout(SLEEP_TIMEOUT_IN_SEC*4, TimeUnit.SECONDS);
-		driver.manage().timeouts().setScriptTimeout(SLEEP_TIMEOUT_IN_SEC*2, TimeUnit.SECONDS);
-
-		wait = new WebDriverWait(driver, 15, 1);
-        waitShort = new WebDriverWait(driver, 5, 1);
-        waitLong = new WebDriverWait(driver, 30, 1);
+        this.driver = driver;
+        wait = new WebDriverWait(DriverBuilder.getInstance().getDriver(), 15, 1);
+        waitShort = new WebDriverWait(DriverBuilder.getInstance().getDriver(), 5, 1);
+        waitLong = new WebDriverWait(DriverBuilder.getInstance().getDriver(), 30, 1);
 	}
 
 	protected WebElement waitUntilElementIsClickable(final WebElement parent, final By locator) {
@@ -85,8 +85,8 @@ public abstract class BaseWebPage {
     }
 
 	public String getBrowserType() {
-		Capabilities cap = ((RemoteWebDriver) driver).getCapabilities();
-		return cap.getBrowserName().toLowerCase();
+        browserType = BaseUtils.getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser());
+        return DriverBuilder.getInstance().getBrowser();
 	}
 
 	public void closeNewTab(String mainWindowHandle) {

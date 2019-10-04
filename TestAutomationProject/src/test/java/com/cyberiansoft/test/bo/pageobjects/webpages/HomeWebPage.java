@@ -19,9 +19,9 @@ public class HomeWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
 	
-	public ServiceRequestsListWebPage clickNewServiceRequestLink() {
+	public ServiceRequestsListInteractions clickNewServiceRequestLink() {
 		click(wait.until(ExpectedConditions.elementToBeClickable(newservicerequestlink)));
 		return PageFactory.initElements(
-				driver, ServiceRequestsListWebPage.class);
+				driver, ServiceRequestsListInteractions.class);
 	}
 }

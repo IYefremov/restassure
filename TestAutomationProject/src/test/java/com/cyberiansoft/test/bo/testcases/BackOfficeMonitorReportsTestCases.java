@@ -5,7 +5,6 @@ import com.cyberiansoft.test.dataclasses.bo.BOMonitorReportsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -59,24 +58,24 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddressValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddressValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getVIN());
-		servicerequestslistpage.clickFindButton();
-		String wonumber = servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
+		serviceRequestsListInteractions.clickFindButton();
+		String wonumber = serviceRequestsListInteractions.getWOForFirstServiceRequestFromList();
 
 		MonitorWebPage monitorpage = new MonitorWebPage(webdriver);
 		backOfficeHeader.clickMonitorLink();
@@ -145,24 +144,24 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 
 		OperationsWebPage operatonspage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operatonspage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddressValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddressValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getVIN());
-		servicerequestslistpage.clickFindButton();
-		String wonumber = servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
+		serviceRequestsListInteractions.clickFindButton();
+		String wonumber = serviceRequestsListInteractions.getWOForFirstServiceRequestFromList();
 
 		MonitorWebPage monitorpage = new MonitorWebPage(webdriver);
 		backOfficeHeader.clickMonitorLink();

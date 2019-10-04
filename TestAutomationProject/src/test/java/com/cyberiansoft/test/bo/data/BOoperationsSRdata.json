@@ -354,16 +354,16 @@
     }
   ],
 
-  "checkSRappointmentSchedulerMultiTechniciansFilterOf5": [
+  "checkSRAppointmentSchedulerMultiTechniciansFilterOf5": [
     {
-      "rowID": "checkSRappointmentSchedulerMultiTechniciansFilterOf5.01",
+      "rowID": "checkSRAppointmentSchedulerMultiTechniciansFilterOf5.01",
       "description": "Test Case 56840:Operation - Service Request - Appointment - Scheduler - Multi Technicians filter of 5"
     }
   ],
 
-  "checkSRmultiTechReset": [
+  "checkSRMultiTechReset": [
     {
-      "rowID": "checkSRmultiTechReset.01",
+      "rowID": "checkSRMultiTechReset.01",
       "description": "Test Case 56841:Operation - Service Request - Appointment - Scheduler - Multi Technicians Reset",
       "clientName": "Alex SASHAZ",
       "status": "Scheduled",
@@ -394,10 +394,9 @@
     {
       "rowID": "checkSRLCEstimate.01",
       "description": "Test Case 57874:Operation - Service Request Life Cycle - Appointment - Estimate",
-      "clientName": "Alex SASHAZ",
       "status": "Scheduled",
-      "customer": "007 - Test Company",
-      "serviceRequestType": "Zak_Request_Type"
+      "customer": "Alex SASHAZ",
+      "serviceRequestType": "Stas_allPhases_Appointments"
     }
   ],
 

@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
@@ -33,8 +35,20 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	@FindBy(xpath = "//input[contains(@id, 'Card_ddlTeam_Input')]")
 	private WebElement invoicetypeteamcmb;
 
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_ddlTeam_DropDown")
+	private WebElement srTypeTeamDropDown;
+
+	@FindBy(xpath = "//div[@id='ctl00_ctl00_Content_Main_ctl01_ctl01_Card_ddlTeam_DropDown']//li")
+	private List<WebElement> srTypeTeamListBox;
+
 	@FindBy(xpath = "//input[contains(@id, 'Card_rcbServicePachages_Input')]")
-	private WebElement invoicetypepackagecmb;
+	private WebElement servicePackageInput;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rcbServicePachages_DropDown")
+	private WebElement servicePackageDropDown;
+
+	@FindBy(xpath = "//div[@id='ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rcbServicePachages_DropDown']//li")
+	private List<WebElement> servicePackageListBox;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl02_BtnOk")
 	private WebElement newservicerequesttypeOKbtn;
@@ -69,39 +83,15 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public void selectNewServiceRequestTypeTeam(String srtypeteam) {
-		waitABit(1000);
-		try {
-			wait.until(ExpectedConditions.visibilityOf(invoicetypeteamcmb));
-		} catch (Exception e) {
-			waitABit(1000);
-			e.printStackTrace();
-		}
-		wait.until(ExpectedConditions.elementToBeClickable(invoicetypeteamcmb)).click();
-		invoicetypeteamcmb.clear();
-		invoicetypeteamcmb.sendKeys(srtypeteam);
-		waitABit(300);
-		try {
-			wait
-					.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li/em[text()='" + srtypeteam + "']")))
-					.click();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		waitABit(1000);
+        Utils.clickElement(invoicetypeteamcmb);
+        Utils.selectOptionInDropDown(srTypeTeamDropDown, srTypeTeamListBox, srtypeteam, true);
+        WaitUtilsWebDriver.waitABit(1000);
 	}
 
-	public void selectNewServiceRequestTypePackage(String srtypepackage) {
-		waitABit(1000);
-		wait.until(ExpectedConditions.visibilityOf(invoicetypepackagecmb));
-		invoicetypepackagecmb.click();
-		invoicetypepackagecmb.clear();
-		invoicetypepackagecmb.sendKeys(srtypepackage);
-		waitABit(300);
-		wait.until(ExpectedConditions
-				.visibilityOfElementLocated(By.xpath("//li/em[text()='" + srtypepackage + "']")))
-				.click();
-		waitABit(1000);
-
+	public void selectNewServiceRequestTypePackage(String srTypePackage) {
+        Utils.clickElement(servicePackageInput);
+        Utils.selectOptionInDropDown(servicePackageDropDown, servicePackageListBox, srTypePackage, true);
+        WaitUtilsWebDriver.waitABit(1000);
 	}
 
 	public void clickNewServiceRequestTypeOKButton() {

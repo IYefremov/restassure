@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.verifications.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -38,9 +39,10 @@ public class BaseTestCase {
 	protected File app;
 	String bundleid = "";
 	protected static AppiumDriverLocalService service;
+    protected ServiceRequestsListVerifications serviceRequestsListVerifications;
 
 
-	public void setDriver() {
+    public void setDriver() {
         webdriver = DriverBuilder.getInstance().getDriver();
     }
 
@@ -69,6 +71,7 @@ public class BaseTestCase {
         WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURL());
         BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
         loginpage.userLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
+        serviceRequestsListVerifications = new ServiceRequestsListVerifications();
     }
 
     @AfterMethod

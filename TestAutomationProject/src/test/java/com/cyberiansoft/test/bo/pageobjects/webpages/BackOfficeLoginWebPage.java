@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.JavascriptExecutor;
@@ -31,7 +32,7 @@ public class BackOfficeLoginWebPage extends BaseWebPage {
 		executor.executeScript("window.focus();");
 		clearAndType(usernamefld, userName);
 		clearAndType(userpasswordfld, userPassword);
-		executor.executeScript("arguments[0].click();", loginbtn);
+		Utils.clickElement(loginbtn);
 	}
 
 	public WebElement getLoginButton() {

@@ -51,6 +51,19 @@ public class Utils {
         }
     }
 
+    public static void clickWithActions(By by) {
+        WebElement element = DriverBuilder.getInstance().getDriver().findElement(by);
+        try {
+            getActions()
+                    .moveToElement(element)
+                    .click()
+                    .build()
+                    .perform();
+        } catch (Exception ignored) {
+            clickWithJS(element);
+        }
+    }
+
     public static void clearAndType(WebElement element, String name) {
         scrollToElement(element);
         try {
@@ -60,6 +73,11 @@ public class Utils {
         }
         Utils.getActions().sendKeys(element, name).build().perform();
         WaitUtilsWebDriver.waitABit(500);
+    }
+
+    public static void clearAndType(By by, String name) {
+        final WebElement element = DriverBuilder.getInstance().getDriver().findElement(by);
+        clearAndType(element, name);
     }
 
     public static void clearAndTypeUsingKeyboard(WebElement element, String name) {
@@ -88,6 +106,12 @@ public class Utils {
     }
 
     public static WebElement moveToElement(WebElement element) {
+        getActions().moveToElement(element).build().perform();
+        return element;
+    }
+
+    public static WebElement moveToElement(By by) {
+        final WebElement element = DriverBuilder.getInstance().getDriver().findElement(by);
         getActions().moveToElement(element).build().perform();
         return element;
     }
@@ -188,6 +212,15 @@ public class Utils {
     public static boolean isElementDisplayed(WebElement element) {
         try {
             WaitUtilsWebDriver.waitForVisibility(element);
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public static boolean isElementDisplayed(By by) {
+        try {
+            WaitUtilsWebDriver.waitForVisibility(DriverBuilder.getInstance().getDriver().findElement(by));
             return true;
         } catch (Exception ignored) {
             return false;
@@ -389,5 +422,12 @@ public class Utils {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public static void acceptAlertIfPresent() {
+        try {
+            WaitUtilsWebDriver.getShortWait().ignoring(Exception.class).until(ExpectedConditions.alertIsPresent()).accept();
+            WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.not(ExpectedConditions.alertIsPresent()));
+        } catch (TimeoutException ignored) {}
     }
 }
