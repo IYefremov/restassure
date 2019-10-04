@@ -19,6 +19,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularInspectionsSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInspectionsSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularNavigationSteps;
@@ -100,8 +101,8 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         InspectionData inspdata = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         WholesailCustomer wholesailCustomer = new WholesailCustomer();
         wholesailCustomer.setCompanyName("R & Q Autobody");
-
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+        
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.MATRIX_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
@@ -126,11 +127,11 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             for (ServiceData service : vehiclePartData.getVehiclePartAdditionalServices())
                 vehiclePartScreen.selectDiscaunt(service.getServiceName());
             vehiclePartScreen.clickSave();
-            pricematrix = new RegularPriceMatrixScreen();
         }
         RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     /*@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -143,7 +144,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         teaminspectionsscreen.clickAddInspectionButton();
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.selectCustomer("R & Q Autobody");
-        myinspectionsscreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
+        myInspectionsScreen.selectInspectionType(ProdInspectionsTypes.MATRIX_INSPECTION);
         RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
         RegularVehicleScreen vehiclescreen = visualInteriorScreen.selectNextScreen(WizardScreenTypes.VEHICLE_INFO);
         vehiclescreen.setVIN(inspdata.getVehicleInfo().getVINNumber());
@@ -168,8 +169,8 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             pricematrix = new RegularPriceMatrixScreen();
         }
         pricematrix.saveWizard();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
+        Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }*/
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -180,7 +181,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         WholesailCustomer wholesailCustomer = new WholesailCustomer();
         wholesailCustomer.setCompanyName("Pitt Paint & Body");
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.PAINT_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
@@ -207,8 +208,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
         RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -220,7 +222,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         WholesailCustomer wholesailCustomer = new WholesailCustomer();
         wholesailCustomer.setCompanyName("Plaza Kia");
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.INTERIOR_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
@@ -240,8 +242,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
         RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -253,7 +256,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         WholesailCustomer wholesailCustomer = new WholesailCustomer();
         wholesailCustomer.setCompanyName("R & Q Autobody");
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.WHEEL_INSPECTION);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
@@ -273,8 +276,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
         RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -285,7 +289,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         WholesailCustomer wholesailCustomer = new WholesailCustomer();
         wholesailCustomer.setCompanyName("R & Q Autobody");
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.INTERIOR_DETAIL);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
@@ -305,8 +309,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
         RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -318,7 +323,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         WholesailCustomer wholesailCustomer = new WholesailCustomer();
         wholesailCustomer.setCompanyName("Torrington Detail");
 
-        RegularMyInspectionsScreen myinspectionsscreen = homescreen.clickMyInspectionsButton();
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(wholesailCustomer, ProdInspectionsTypes.EXTERIOR_DETAIL);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
         RegularVehicleScreen vehiclescreen = new RegularVehicleScreen();
@@ -338,7 +343,8 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
         RegularInspectionsSteps.saveInspection();
-        Assert.assertTrue(myinspectionsscreen.checkInspectionExists(inspNumber));
-        myinspectionsscreen.clickHomeButton();
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

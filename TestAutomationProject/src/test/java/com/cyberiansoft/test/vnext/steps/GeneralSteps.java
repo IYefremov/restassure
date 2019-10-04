@@ -17,7 +17,7 @@ public class GeneralSteps {
     public static void confirmDialog() {
         ConfirmationDialog confirmationDialog = new ConfirmationDialog();
         WaitUtils.elementShouldBeVisible(confirmationDialog.getConfirmDialogButton(), true);
-        confirmationDialog.getConfirmDialogButton().click();
+        WaitUtils.click(confirmationDialog.getConfirmDialogButton());
     }
 
     public static void declineDialog() {

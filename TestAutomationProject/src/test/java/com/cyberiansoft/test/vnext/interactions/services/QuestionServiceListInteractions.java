@@ -11,7 +11,7 @@ public class QuestionServiceListInteractions {
 
     public static void switchToSelectedView() {
         QuestionServiceListScreen questionServiceListScreen = new QuestionServiceListScreen();
-        questionServiceListScreen.getSelectedServiceScreen().click();
+        WaitUtils.click(questionServiceListScreen.getSelectedServiceScreen());
     }
 
     public static void openServiceDetails(String serviceName) {

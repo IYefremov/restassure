@@ -10,10 +10,10 @@ import org.openqa.selenium.WebElement;
 public class EditListElement implements IWebElement {
     private WebElement rootElement;
     private String statusLocator = ".//div[@class='icon-item-status-title']";
-    private String nameLocator = ".//div[contains(@class,'icon-item-content-title') or contains(@class,'icon-item-phase-title')]";
+    private String nameLocator = ".//div[contains(@class,'icon-item-entity-name') or contains(@class,'icon-item-content-title') or contains(@class,'icon-item-phase-title')]";
     private String expandElementLocator = ".//*[@action='open-phase-services']";
     private String clockIconLocator = ".//*[@class='icon-svg ']";
-    private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')][3]";
+    private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')][2]";
 
 
     public EditListElement(WebElement rootElement) {

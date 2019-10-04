@@ -1,0 +1,38 @@
+{
+  "verifyUserCanSeeInspectionImage": [
+    {
+      "rowID": "verifyUserCanSeeInspectionImage.01",
+      "description": "Test Case 85032: User can see image of Inspection",
+      "inspectionId": "E-163-00133",
+      "fromDate": "1/1/2018",
+      "toDate": "9/26/2019"
+    }
+  ],
+  "verifyUserCanSeeInspectionNotes": [
+    {
+      "rowID": "verifyUserCanSeeInspectionNotes.01",
+      "description": "Test Case 85033: User can see the Notes of the Services",
+      "inspectionId": "E-203-03581",
+      "fromDate": "1/1/2018",
+      "toDate": "9/26/2019"
+    }
+  ],
+  "verifyUserCanSeePrintSupplementDetails": [
+    {
+      "rowID": "verifyUserCanSeePrintSupplementDetails.01",
+      "description": "Test Case 85214: User can see details of the \"Print supplement\"",
+      "inspectionId": "E-168-00239",
+      "fromDate": "1/1/2018",
+      "toDate": "9/26/2019"
+    }
+  ],
+  "verifyUserCanSeePrintInspectionDetails": [
+    {
+      "rowID": "verifyUserCanSeePrintInspectionDetails.01",
+      "description": "Test Case 85233: User can see details of the \"Print inspection\"",
+      "inspectionId": "E-168-00239",
+      "fromDate": "1/1/2018",
+      "toDate": "9/26/2019"
+    }
+  ]
+}

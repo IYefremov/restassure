@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
 import org.testng.Assert;
 
@@ -41,6 +43,11 @@ public class RegularVehicleInfoScreenSteps {
         vehicleScreen.setRO(roNumber + "\n");
     }
 
+    public static void setPoNumber(String poNumber) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.setPO(poNumber + "\n");
+    }
+
     public static void setLicPlate(String licPlate) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setLicensePlate(licPlate + "\n");
@@ -54,6 +61,11 @@ public class RegularVehicleInfoScreenSteps {
     public static void setTrim(String trimValue) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setTrim(trimValue);
+    }
+
+    public static void setType(String typeValue) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.setType(typeValue);
     }
 
     public static void verifyMakeModelyearValues(VehicleInfoData vehicleInfoData) {
@@ -79,11 +91,17 @@ public class RegularVehicleInfoScreenSteps {
         if (vehicleInfoData.getMileage() != null) {
             setMileage(vehicleInfoData.getMileage());
         }
+        if (vehicleInfoData.getVehicleType() != null) {
+            setType(vehicleInfoData.getVehicleType());
+        }
         if (vehicleInfoData.getStockNumber() != null) {
             setStockNumber(vehicleInfoData.getStockNumber());
         }
         if (vehicleInfoData.getRoNumber() != null) {
             setRoNumber(vehicleInfoData.getRoNumber());
+        }
+        if (vehicleInfoData.getPoNumber() != null) {
+            setPoNumber(vehicleInfoData.getPoNumber());
         }
         if (vehicleInfoData.getLicPlate() != null) {
             setLicPlate(vehicleInfoData.getLicPlate());
@@ -102,5 +120,12 @@ public class RegularVehicleInfoScreenSteps {
     public static String getWorkOrderNumber() {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         return vehicleScreen.getWorkOrderNumber();
+    }
+
+    public static void selectAdditionalTechnician(ServiceTechnician technician) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.clickTech();
+        vehicleScreen.selectAdditionalTechnician(technician.getTechnicianFullName());
+        RegularWizardScreensSteps.clickSaveButton();
     }
 }

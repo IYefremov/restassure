@@ -8,6 +8,7 @@ public enum InspectionsTypes implements IInspectionsTypes {
     DEFAULT_INSPECTION_TYPE("Default inspection type"),
     FOR_COPY_INSP_INSPTYPE("For_Copy_Insp"),
     INSP_NOTLA_TS_INSPTYPE("Insp_NotLA_TS"),
+    INSP_LA_TS_INSPTYPE("Insp_LA_TS"),
     INSP_LA_DA_INSPTYPE("Insp_LA_DA"),
     INSP_FOR_SR_INSPTYPE("Insp_for_SR"),
     INSPTYPE_FOR_SR_INSPTYPE("Insp_type_for_Ser_Req"),

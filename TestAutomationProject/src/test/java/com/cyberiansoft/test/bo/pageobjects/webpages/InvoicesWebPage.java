@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.*;
@@ -1178,12 +1179,11 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		return true;
 	}
 
-	public void selectIvoicesFromTop(int count) {
+	public void selectInvoicesFromTop(int count) {
 		int innerCounter = 4;
 		for (int i = 0; i < count; i++) {
 			String id = String.format("%2s", innerCounter).replace(' ', '0');
-			wait.until(ExpectedConditions.presenceOfElementLocated(
-					By.id("ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl" + id + "_chkInvoice"))).click();
+            Utils.clickElement(By.id("ctl00_ctl00_Content_Main_grdInvoices_ctl00_ctl" + id + "_chkInvoice"));
 			innerCounter += 3;
 		}
 	}

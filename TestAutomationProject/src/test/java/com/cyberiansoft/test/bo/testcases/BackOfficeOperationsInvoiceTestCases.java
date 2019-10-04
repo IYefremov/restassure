@@ -2,14 +2,12 @@ package com.cyberiansoft.test.bo.testcases;
 
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.utils.WebConstants.InvoiceStatuses;
 import com.cyberiansoft.test.dataclasses.bo.BOOperationsInvoiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -322,7 +320,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 
 		String invoiceNumber = "";
 		try {
@@ -337,12 +335,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 			invoicesPage.refreshPage();
 
-			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 		}
 		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getApprovedStatus());
 		invoicesPage.refreshPage();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.selectSearchStatus(data.getApprovedStatus());
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
@@ -363,7 +361,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 
 		String invoiceNumber = "";
 		try {
@@ -378,12 +376,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 			invoicesPage.refreshPage();
 
-			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 		}
 		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getExportedStatus());
 		invoicesPage.refreshPage();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.selectSearchStatus(InvoiceStatuses.INVOICESTATUS_EXPORTED);
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
@@ -399,12 +397,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
-		backOfficeHeader.clickOperationsLink();
+        backOfficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 
-		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
-		operationspage.clickInvoicesLink();
-		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+        operationsPage.clickInvoicesLink();
+        InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 
 		String invoiceNumber = "";
 		try {
@@ -414,17 +412,18 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		if (invoiceNumber.isEmpty()) {
 			invoicesPage.selectSearchStatus(data.getAllStatus());
-			invoicesPage.clickFindButton();
+            invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
+            invoicesPage.clickFindButton();
 			invoiceNumber = invoicesPage.getFirstInvoiceName();
 			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 			invoicesPage.refreshPage();
 
-			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 		}
 		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getVoidStatus());
 		invoicesPage.refreshPage();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.selectSearchStatus(data.getVoidStatus());
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
@@ -445,7 +444,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 
 		String invoiceNumber = "";
 		try {
@@ -460,12 +459,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 			invoicesPage.refreshPage();
 
-			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 		}
 		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getDraftStatus());
 		invoicesPage.refreshPage();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.selectSearchStatus(data.getDraftStatus());
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
@@ -486,7 +485,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+		invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 
 		String invoiceNumber = "";
 		try {
@@ -501,12 +500,12 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 			invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 			invoicesPage.refreshPage();
 
-			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS, data.getNewStatus());
+			invoicesPage.findInvoice(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR, data.getNewStatus());
 		}
 		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getExportFailedStatus());
 		invoicesPage.refreshPage();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.selectSearchStatus(data.getExportFailedStatus());
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
@@ -527,13 +526,13 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.clickFindButton();
 
 		String invoiceNumber = invoicesPage.getFirstInvoiceName();
 		invoicesPage.refreshPage();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
 
@@ -544,7 +543,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.selectMarkAsPaidOption();
 		invoicesPage.handlePaymentNote();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
 		Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid(), "The invoice isn't marked as Paid");
@@ -561,13 +560,13 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.clickFindButton();
 
 		String invoiceNumber = invoicesPage.getFirstInvoiceName();
 		invoicesPage.refreshPage();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
 
@@ -578,7 +577,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.selectMarkAsPaidOption();
 		invoicesPage.handlePaymentNote();
 
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
 		Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid(), "The invoice isn't marked as Paid");
@@ -596,7 +595,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.clickFindButton();
 		String firstInvoiceNameBefore = invoicesPage.getFirstInvoiceName();
 
@@ -622,7 +621,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.clickFindButton();
 		invoicesPage.selectDownloadJsonOption();
 		invoicesPage.handleAlertForEdgeBrowser();
@@ -639,7 +638,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.clickFindButton();
 		String newTab = invoicesPage.selectTechInfoOption();
 		Assert.assertTrue(invoicesPage.isWindowOpened());
@@ -657,7 +656,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		// invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
 		invoicespage.clickFindButton();
 		invoicespage.selectRecalcTechSplitOption();
@@ -675,14 +674,14 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
 		invoicespage.selectSendEmailOption();
 		Assert.assertTrue(invoicespage.isSendEmailBoxOpened());
 		String email = data.getEmail();
 		invoicespage.setEmailAndSend(email);
 		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
 		String emailWindow = invoicespage.selectEmailActivityOption();
 		Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
@@ -699,13 +698,13 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
 		String email = data.getEmail();
 		String emailWindow = invoicespage.selectSendCustomEmailOption();
 		invoicespage.setCustomEmailAndSend(email, emailWindow);
 		invoicespage.refreshPage();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
 		emailWindow = invoicespage.selectEmailActivityOption();
 		Assert.assertTrue(invoicespage.isEmailDisplayed(emailWindow, email));
@@ -722,7 +721,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		// invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
 		invoicespage.clickFindButton();
 		String newTab = invoicespage.selectInternalTechInfoOption();
@@ -789,7 +788,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		// invoicespage.setSearchInvoiceNumber(data.getInvoiceNumber());
 		invoicespage.clickFindButton();
 
@@ -809,7 +808,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
 		invoicespage.chooseMarkAsUnpaidOptionIfPresent();
 		invoicespage.selectPayOption();
@@ -829,7 +828,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 
 		InvoicesWebPage invoicespage = new InvoicesWebPage(webdriver);
 		operationspage.clickInvoicesLink();
-		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_90_DAYS);
+		invoicespage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicespage.clickFindButton();
 		String auditLogWindow = invoicespage.selectPaymentsOption();
 		Assert.assertTrue(invoicespage.checkAuditLogWindowContent(auditLogWindow));
@@ -865,8 +864,9 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
         operationsPage.clickInvoicesLink();
         InvoicesWebPage invoicesPage = new InvoicesWebPage(webdriver);
 		invoicesPage.selectSearchStatus(data.getNewStatus());
+		invoicesPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		invoicesPage.clickFindButton();
-		invoicesPage.selectIvoicesFromTop(3);
+		invoicesPage.selectInvoicesFromTop(3);
 		String mainWindow = invoicesPage.getMainWindow();
 		invoicesPage.clickExportButton();
         invoicesPage.switchToExportInvoicesWindow(mainWindow);

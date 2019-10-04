@@ -5,13 +5,13 @@ import com.cyberiansoft.test.dataclasses.MatrixServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.vnext.screens.MatrixServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import org.springframework.util.Assert;
+import org.junit.Assert;
 
 public class MatrixServiceDetailsValidations {
     public static void validateServiceSelected(String serviceName) {
         MatrixServiceDetailsScreen matrixServiceDetailsScreen = new MatrixServiceDetailsScreen();
         WaitUtils.collectionSizeIsGreaterThan(matrixServiceDetailsScreen.getServiceListItems(), 0);
-        Assert.notNull(matrixServiceDetailsScreen.getServiceListItem(serviceName), "Service is not present in selectedSection");
+        Assert.assertNotNull(matrixServiceDetailsScreen.getServiceListItem(serviceName));
     }
 
     public static void validateMatrixServiceDetails(MatrixServiceData matrixServiceData) {

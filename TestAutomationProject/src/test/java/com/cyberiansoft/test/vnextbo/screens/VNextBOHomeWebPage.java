@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.concurrent.TimeUnit;
 
@@ -61,47 +62,48 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
     public VNextBOHomeWebPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        new WebDriverWait(driver, 30)
+                .until(ExpectedConditions.visibilityOf(logo));
     }
 
     public boolean isLogoDisplayed() {
-        return isElementDisplayed(logo);
+        return Utils.isElementDisplayed(logo);
     }
 
     public boolean isUserEmailDisplayed() {
-        return isElementDisplayed(userEmail);
+        return Utils.isElementDisplayed(userEmail);
     }
 
     public boolean isLogoutButtonDisplayed() {
-        return isElementDisplayed(logoutButton);
+        return Utils.isElementDisplayed(logoutButton);
     }
 
     public boolean isHelpButtonDisplayed() {
-        return isElementDisplayed(helpButton);
+        return Utils.isElementDisplayed(helpButton);
     }
 
     public boolean isAccessClientPortalLinkDisplayed() {
-        return isElementDisplayed(accessClientPortalLink);
+        return Utils.isElementDisplayed(accessClientPortalLink);
     }
 
     public boolean isAccessReconProBOLinkDisplayed() {
-        return isElementDisplayed(accessReconProBOLink);
+        return Utils.isElementDisplayed(accessReconProBOLink);
     }
 
     public boolean isSupportForBOButtonDisplayed() {
-        return isElementDisplayed(supportForBOButton);
+        return Utils.isElementDisplayed(supportForBOButton);
     }
 
     public boolean isSupportForMobileAppButtonDisplayed() {
-        return isElementDisplayed(supportForMobileAppButton);
+        return Utils.isElementDisplayed(supportForMobileAppButton);
     }
 
     public boolean isTermsAndConditionsLinkDisplayed() {
-        return isElementDisplayed(termsAndConditionsLink);
+        return Utils.isElementDisplayed(termsAndConditionsLink);
     }
 
     public boolean isPrivacyPolicyLinkDisplayed() {
-        return isElementDisplayed(privacyPolicyLink);
+        return Utils.isElementDisplayed(privacyPolicyLink);
     }
 
     public boolean isIntercomDisplayed() {

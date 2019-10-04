@@ -1,14 +1,12 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.dataclasses.ServiceRateData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularQuestionsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -21,7 +19,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
@@ -133,25 +130,30 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
 	}
 
-	public void answerQuestion2(QuestionsData questionsData) {
+	public void answerQuestion2(QuestionsData questionData) {
 
 		appiumdriver.findElementByAccessibilityId("Questions").click();
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
-		questionsscreen.answerQuestion(questionsData);
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
+		if (questionData.isLogicalQuestion())
+			questionsScreen.answerLogicalQuestion(questionData);
+		else if (questionData.isTextQuestion())
+			questionsScreen.answerTextQuestion(questionData);
+		else
+			questionsScreen.answerQuestion(questionData);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
 	}
 
 	public void answerQuestions(List<QuestionsData> questionsData) {
 
 		appiumdriver.findElementByAccessibilityId("Questions").click();
-		RegularQuestionsScreen questionsscreen = new RegularQuestionsScreen();
+		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 		for (QuestionsData questionData : questionsData)
 			if (questionData.isLogicalQuestion())
-				questionsscreen.answerLogicalQuestion(questionData);
+				questionsScreen.answerLogicalQuestion(questionData);
 			else if (questionData.isTextQuestion())
-				questionsscreen.answerTextQuestion(questionData);
+				questionsScreen.answerTextQuestion(questionData);
 			else
-				questionsscreen.answerQuestion(questionData);
+				questionsScreen.answerQuestion(questionData);
 		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
 	}
 	
@@ -238,7 +240,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
 	}
 
-
 	public String saveSelectedServiceDetailsWithAlert() {
 		saveSelectedServiceDetails();
 		return Helpers.getAlertTextAndAccept();
@@ -278,15 +279,10 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 
 		}
 		tech.sendKeys(_quantity + "\n");
-		//((IOSDriver) appiumdriver).getKeyboard().pressKey("\n");
 	}
 
 	public String getAdjustmentsValue() {
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name=\"Adjustments\"]/XCUIElementTypeTextField[1]").getAttribute("value");
-	}
-	
-	public String getServiceDetailsFieldValue(String fieldname) {
-		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + fieldname + "']/XCUIElementTypeTextField[1]").getAttribute("value");
 	}
 
 	public String getServiceRateValue(ServiceRateData serviceRateData) {
@@ -354,10 +350,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public void checkPreexistingDamage() {
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= \"Pre-existing damage\"]/XCUIElementTypeButton[@name= \"black unchecked\"]").click();
-	}
-	
-	public void uncheckPreexistingDamage() {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= \"Pre-existing damage\"]/XCUIElementTypeButton[@name= \"black checked\"]").click();
 	}
 	
 	public String getCustomTechnicianPercentage(String technician) {

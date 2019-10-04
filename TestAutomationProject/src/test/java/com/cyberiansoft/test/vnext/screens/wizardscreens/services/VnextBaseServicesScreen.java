@@ -30,8 +30,6 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     private WebElement selectedView;
 
 
-
-
     public VnextBaseServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
         super(appiumdriver);
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
@@ -46,7 +44,10 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     }
 
     public VNextAvailableServicesScreen switchToAvalableServicesView() {
-        tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
+            return true;
+        });
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
         wait = new WebDriverWait(appiumdriver, 5);

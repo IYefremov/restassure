@@ -85,7 +85,10 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         }
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='work orders-list']")));
-        tap(workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")).click();
+            return true;
+        });
         return new VNextWorkOrdersMenuScreen(appiumdriver);
     }
 

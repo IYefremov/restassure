@@ -69,78 +69,78 @@ public class BackOfficeCompanyEditTestCases extends BaseTestCase {
 
 		backOfficeHeader.clickCompanyLink();
 
-		UsersWebPage userspage = new UsersWebPage(webdriver);
-		companyWebPage.clickUsersLink();
+        companyWebPage.clickUsersLink();
+        UsersWebPage usersPage = new UsersWebPage(webdriver);
 
-		userspage.makeSearchPanelVisible();
+		usersPage.makeSearchPanelVisible();
 
-		userspage.setSearchUserParameter(data.getUserEmail());
-		userspage.clickFindButton();
-		if (userspage.isUserActive(data.getUserFirstNameEdited(), data.getUserLastNameEdited())) {
-			userspage.archiveUser(data.getUserFirstNameEdited(), data.getUserLastNameEdited());
+		usersPage.setSearchUserParameter(data.getUserEmail());
+		usersPage.clickFindButton();
+		if (usersPage.isUserActive(data.getUserFirstNameEdited(), data.getUserLastNameEdited())) {
+			usersPage.archiveUser(data.getUserFirstNameEdited(), data.getUserLastNameEdited());
 		}
-		if (userspage.isUserActive(data.getUserFirstName(), data.getUserLastName())) {
-			userspage.archiveUser(data.getUserFirstName(), data.getUserLastName());
+		if (usersPage.isUserActive(data.getUserFirstName(), data.getUserLastName())) {
+			usersPage.archiveUser(data.getUserFirstName(), data.getUserLastName());
 		}
 
-		userspage.clickUserAddButton();
-		userspage.createNewUser(data.getUserEmail(), data.getUserFirstName(), data.getUserLastName(), data.getUserRole());
-		userspage.clickEditActiveUser(data.getUserFirstName(), data.getUserLastName());
-		userspage.setNewUserCompany(data.getUserCompany());
-		userspage.setNewUserAddress(data.getUserAddress());
-		userspage.setNewUserCity(data.getUserCity());
-		userspage.setNewUserZip(data.getUserZip());
-		userspage.setNewUserPhone(data.getUserPhone());
-		userspage.setNewUserAccountingID(data.getUserAccId());
-		userspage.setNewUserComments(data.getUserComments());
-		userspage.clickNewUserOKButton();
+		usersPage.clickUserAddButton();
+		usersPage.createNewUser(data.getUserEmail(), data.getUserFirstName(), data.getUserLastName(), data.getUserRole());
+		usersPage.clickEditActiveUser(data.getUserFirstName(), data.getUserLastName());
+		usersPage.setNewUserCompany(data.getUserCompany());
+		usersPage.setNewUserAddress(data.getUserAddress());
+		usersPage.setNewUserCity(data.getUserCity());
+		usersPage.setNewUserZip(data.getUserZip());
+		usersPage.setNewUserPhone(data.getUserPhone());
+		usersPage.setNewUserAccountingID(data.getUserAccId());
+		usersPage.setNewUserComments(data.getUserComments());
+		usersPage.clickNewUserOKButton();
 
-		userspage.clickEditActiveUser(data.getUserFirstName(), data.getUserLastName());
-		Assert.assertEquals(userspage.getNewUserMail(), data.getUserEmail());
-		Assert.assertEquals(userspage.getNewUserFirstName(), data.getUserFirstName());
-		Assert.assertEquals(userspage.getNewUserLastName(), data.getUserLastName());
-		Assert.assertEquals(userspage.getNewUserCompany(), data.getUserCompany());
-		Assert.assertEquals(userspage.getNewUserAddress(), data.getUserAddress());
-		Assert.assertEquals(userspage.getNewUserCity(), data.getUserCity());
-		Assert.assertEquals(userspage.getNewUserZip(), data.getUserZip());
-		Assert.assertEquals(userspage.getNewUserPhone(), data.getUserPhone());
-		Assert.assertEquals(userspage.getNewUserAccountingID(), data.getUserAccId());
-		Assert.assertEquals(userspage.getNewUserComments(), data.getUserComments());
-		Assert.assertTrue(userspage.isNewUserRoleSelected(data.getUserRole()));
-		Assert.assertFalse(userspage.isNewUserRoleSelected(data.getUserRoleEdited()));
+		usersPage.clickEditActiveUser(data.getUserFirstName(), data.getUserLastName());
+		Assert.assertEquals(usersPage.getNewUserMail(), data.getUserEmail());
+		Assert.assertEquals(usersPage.getNewUserFirstName(), data.getUserFirstName());
+		Assert.assertEquals(usersPage.getNewUserLastName(), data.getUserLastName());
+		Assert.assertEquals(usersPage.getNewUserCompany(), data.getUserCompany());
+		Assert.assertEquals(usersPage.getNewUserAddress(), data.getUserAddress());
+		Assert.assertEquals(usersPage.getNewUserCity(), data.getUserCity());
+		Assert.assertEquals(usersPage.getNewUserZip(), data.getUserZip());
+		Assert.assertEquals(usersPage.getNewUserPhone(), data.getUserPhone());
+		Assert.assertEquals(usersPage.getNewUserAccountingID(), data.getUserAccId());
+		Assert.assertEquals(usersPage.getNewUserComments(), data.getUserComments());
+		Assert.assertTrue(usersPage.isNewUserRoleSelected(data.getUserRole()));
+		Assert.assertFalse(usersPage.isNewUserRoleSelected(data.getUserRoleEdited()));
 
-		userspage.setNewUserFirstName(data.getUserFirstNameEdited());
-		userspage.setNewUserLastName(data.getUserLastNameEdited());
-		userspage.setNewUserCompany(data.getUserCompanyEdited());
-		userspage.setNewUserAddress(data.getUserAddressEdited());
-		userspage.setNewUserCity(data.getUserCityEdited());
-		userspage.setNewUserZip(data.getUserZipEdited());
-		userspage.setNewUserPhone(data.getUserPhoneEdited());
-		userspage.setNewUserAccountingID(data.getUserAccIdEdited());
-		userspage.setNewUserComments(data.getUserCommentsEdited());
-		userspage.selectAllowCreatingSupportTickets();
-		userspage.selectNewUserRole(data.getUserRoleEdited());
-		userspage.clickNewUserOKButton();
+		usersPage.setNewUserFirstName(data.getUserFirstNameEdited());
+		usersPage.setNewUserLastName(data.getUserLastNameEdited());
+		usersPage.setNewUserCompany(data.getUserCompanyEdited());
+		usersPage.setNewUserAddress(data.getUserAddressEdited());
+		usersPage.setNewUserCity(data.getUserCityEdited());
+		usersPage.setNewUserZip(data.getUserZipEdited());
+		usersPage.setNewUserPhone(data.getUserPhoneEdited());
+		usersPage.setNewUserAccountingID(data.getUserAccIdEdited());
+		usersPage.setNewUserComments(data.getUserCommentsEdited());
+		usersPage.selectAllowCreatingSupportTickets();
+		usersPage.selectNewUserRole(data.getUserRoleEdited());
+		usersPage.clickNewUserOKButton();
 
-		userspage.setSearchUserParameter(data.getUserEmail());
-		userspage.clickFindButton();
-		userspage.clickEditActiveUser(data.getUserFirstNameEdited(), data.getUserLastNameEdited());
-		Assert.assertEquals(userspage.getNewUserMail(), data.getUserEmail());
-		Assert.assertEquals(userspage.getNewUserFirstName(), data.getUserFirstNameEdited());
-		Assert.assertEquals(userspage.getNewUserLastName(), data.getUserLastNameEdited());
-		Assert.assertEquals(userspage.getNewUserCompany(), data.getUserCompanyEdited());
-		Assert.assertEquals(userspage.getNewUserAddress(), data.getUserAddressEdited());
-		Assert.assertEquals(userspage.getNewUserCity(), data.getUserCityEdited());
-		Assert.assertEquals(userspage.getNewUserZip(), data.getUserZipEdited());
-		Assert.assertEquals(userspage.getNewUserPhone(), data.getUserPhoneEdited());
-		Assert.assertEquals(userspage.getNewUserAccountingID(), data.getUserAccIdEdited());
-		Assert.assertEquals(userspage.getNewUserComments(), data.getUserCommentsEdited());
-		Assert.assertTrue(userspage.isAllowCreatingSupportTicketsSelected());
-		Assert.assertTrue(userspage.isNewUserRoleSelected(data.getUserRole()));
-		Assert.assertTrue(userspage.isNewUserRoleSelected(data.getUserRoleEdited()));
-		userspage.clickNewUserCancelButton();
+		usersPage.setSearchUserParameter(data.getUserEmail());
+		usersPage.clickFindButton();
+		usersPage.clickEditActiveUser(data.getUserFirstNameEdited(), data.getUserLastNameEdited());
+		Assert.assertEquals(usersPage.getNewUserMail(), data.getUserEmail());
+		Assert.assertEquals(usersPage.getNewUserFirstName(), data.getUserFirstNameEdited());
+		Assert.assertEquals(usersPage.getNewUserLastName(), data.getUserLastNameEdited());
+		Assert.assertEquals(usersPage.getNewUserCompany(), data.getUserCompanyEdited());
+		Assert.assertEquals(usersPage.getNewUserAddress(), data.getUserAddressEdited());
+		Assert.assertEquals(usersPage.getNewUserCity(), data.getUserCityEdited());
+		Assert.assertEquals(usersPage.getNewUserZip(), data.getUserZipEdited());
+		Assert.assertEquals(usersPage.getNewUserPhone(), data.getUserPhoneEdited());
+		Assert.assertEquals(usersPage.getNewUserAccountingID(), data.getUserAccIdEdited());
+		Assert.assertEquals(usersPage.getNewUserComments(), data.getUserCommentsEdited());
+		Assert.assertTrue(usersPage.isAllowCreatingSupportTicketsSelected());
+		Assert.assertTrue(usersPage.isNewUserRoleSelected(data.getUserRole()));
+		Assert.assertTrue(usersPage.isNewUserRoleSelected(data.getUserRoleEdited()));
+		usersPage.clickNewUserCancelButton();
 
-		userspage.archiveUser(data.getUserFirstNameEdited(), data.getUserLastNameEdited());
+		usersPage.archiveUser(data.getUserFirstNameEdited(), data.getUserLastNameEdited());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

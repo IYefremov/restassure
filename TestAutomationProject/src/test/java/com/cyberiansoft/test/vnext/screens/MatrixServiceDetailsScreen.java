@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ServiceListItem;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -34,9 +35,9 @@ public class MatrixServiceDetailsScreen extends VNextBaseScreen {
 
     public ServiceListItem getServiceListItem(String itemName) {
         BaseUtils.waitABit(2000);
-        return serviceListItems.stream()
+        return WaitUtils.getGeneralFluentWait().until(driver -> serviceListItems.stream()
                 .filter(item -> item.getServiceName().equals(itemName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("service not found " + itemName));
+                .orElseThrow(() -> new RuntimeException("service not found " + itemName)));
     }
 }

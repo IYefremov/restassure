@@ -8,7 +8,9 @@ public class QuestionScreenInteractions {
     public static void clickQuestionAnswerBox(String questionName) {
         QuestionScreen questionScreen = new QuestionScreen();
         WaitUtils.waitUntilElementIsClickable(questionScreen.getGeneralQuestionByText(questionName).getRootElement());
+        String questionText = questionScreen.getGeneralQuestionByText(questionName).getAnswerElement().getText();
         WaitUtils.click(questionScreen.getGeneralQuestionByText(questionName).getAnswerElement());
+        WaitUtils.getGeneralFluentWait().until(driver -> questionScreen.getGeneralQuestionByText(questionName).getAnswerElement().getText().equals(questionText));
     }
 
     public static void clearQuestion(String questionName) {
