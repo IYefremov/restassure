@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.bo.verifications.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.core.IOSRegularDeviceInfo;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
@@ -25,7 +26,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wi
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
-import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
 import org.openqa.selenium.support.PageFactory;
@@ -250,24 +250,25 @@ public class NewTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+
+        final ServiceRequestsListVerifications serviceRequestsListVerifications = new ServiceRequestsListVerifications();
+        serviceRequestsListVerifications.verifySearchFieldsAreVisible();
 		
-		servicerequestslistpage.verifySearchFieldsAreVisible();
-		
-		servicerequestslistpage.selectSearchTeam(teamname);
-		servicerequestslistpage.selectSearchTechnician("Test User");
-		servicerequestslistpage.setSearchFreeText(srtowo);
-		servicerequestslistpage.clickFindButton();
-		servicerequestslistpage.verifySearchResultsByServiceName(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		servicerequestslistpage.selectFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getVINValueForSelectedServiceRequest(), "WERTYU123");
-		Assert.assertEquals(servicerequestslistpage.getCustomerValueForSelectedServiceRequest(), iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
-		Assert.assertEquals(servicerequestslistpage.getEmployeeValueForSelectedServiceRequest(), "Test User (Default team)");
-		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("SR_S4_Bundle $350.00 (1.00)"));
-		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("SR_Money_Vehicle $200.00 (1.00)"));
-		Assert.assertTrue(servicerequestslistpage.isServiceIsPresentForForSelectedServiceRequest("3/4\" - Penny Size $18.00 (3.00)"));
+		serviceRequestsListInteractions.selectSearchTeam(teamname);
+		serviceRequestsListInteractions.selectSearchTechnician("Test User");
+		serviceRequestsListInteractions.setSearchFreeText(srtowo);
+		serviceRequestsListInteractions.clickFindButton();
+        serviceRequestsListVerifications.verifySearchResultsByServiceName(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsListInteractions.getVINValueForSelectedServiceRequest(), "WERTYU123");
+		Assert.assertEquals(serviceRequestsListInteractions.getCustomerValueForSelectedServiceRequest(), iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
+		Assert.assertEquals(serviceRequestsListInteractions.getEmployeeValueForSelectedServiceRequest(), "Test User (Default team)");
+		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_S4_Bundle $350.00 (1.00)"));
+		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_Money_Vehicle $200.00 (1.00)"));
+		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("3/4\" - Penny Size $18.00 (3.00)"));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	
@@ -291,26 +292,26 @@ public class NewTestCases extends BaseTestCase {
 				BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backofficeheader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue("SR_Smoke_Test");
-		servicerequestslistpage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue("SR_Smoke_Test");
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 		
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer("Alex Zakaulov");
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer("Alex Zakaulov");
+		serviceRequestsListInteractions.clickDoneButton();
 		
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(VIN);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(VIN);
+		serviceRequestsListInteractions.clickDoneButton();
 		
-		servicerequestslistpage.addServicesToServiceRequest(services);
+		serviceRequestsListInteractions.addServicesToServiceRequest(services);
 		for (String serviceName : services)
-			servicerequestslistpage.setServiePriceAndQuantity(serviceName, servicePrice, serviceQuantity);
-		servicerequestslistpage.saveNewServiceRequest();
-		String srnumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
+			serviceRequestsListInteractions.setServiePriceAndQuantity(serviceName, servicePrice, serviceQuantity);
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		String srnumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 		DriverBuilder.getInstance().getDriver().quit();
 
 		RegularHomeScreenSteps.navigateToServiceRequestScreen();

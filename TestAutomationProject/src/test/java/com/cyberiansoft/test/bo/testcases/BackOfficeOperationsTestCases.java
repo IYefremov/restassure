@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.bo.verifications.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.dataclasses.bo.BOOperationsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -15,10 +16,12 @@ import org.testng.annotations.Test;
 public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json";
+	private ServiceRequestsListVerifications serviceRequestsListVerifications;
 
 	@BeforeClass
 	public void settingUp() {
 		JSONDataProvider.dataFile = DATA_FILE;
+		serviceRequestsListVerifications = new ServiceRequestsListVerifications();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -186,70 +189,70 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
 
-		ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 
-		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceType());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getServiceType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
 
-		serviceRequestsListPage.clickGeneralInfoEditButton();
-		serviceRequestsListPage.setServiceRequestGeneralInfo(data.getTeamName(), data.getServiceRequestGeneralInfo());
-		serviceRequestsListPage.clickDoneButton();
-		serviceRequestsListPage.clickCustomerEditButton();
-		serviceRequestsListPage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		serviceRequestsListPage.clickDoneButton();
-		serviceRequestsListPage.saveNewServiceRequest();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getServiceRequestGeneralInfo());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 
-		serviceRequestsListPage.makeSearchPanelVisible();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
 
-		serviceRequestsListPage.verifySearchFieldsAreVisible();
+		serviceRequestsListVerifications.verifySearchFieldsAreVisible();
 
-		serviceRequestsListPage.selectSearchTeam(data.getTeamName());
-		serviceRequestsListPage.setSearchFreeText(data.getTextSearchParameter());
-		serviceRequestsListPage.setServiceRequestType(data.getServiceType());
-		serviceRequestsListPage.clickFindButton();
-		serviceRequestsListPage.verifySearchResultsByServiceName(data.getTextSearchParameter());
+		serviceRequestsListInteractions.selectSearchTeam(data.getTeamName());
+		serviceRequestsListInteractions.setSearchFreeText(data.getTextSearchParameter());
+		serviceRequestsListInteractions.setServiceRequestType(data.getServiceType());
+		serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListVerifications.verifySearchResultsByServiceName(data.getTextSearchParameter());
 
-		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getServiceTypeVit());
-		serviceRequestsListPage.clickAddServiceRequestButton();
-		serviceRequestsListPage.clickGeneralInfoEditButton();
-		serviceRequestsListPage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPOnum(), data.getROnum());
-		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getServiceTypeVit());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPOnum(), data.getROnum());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListPage.clickCustomerEditButton();
-		serviceRequestsListPage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListPage.clickVehicleInforEditButton();
-		serviceRequestsListPage.setServiceRequestVIN(data.getVIN());
-		serviceRequestsListPage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListPage.clickClaimInfoEditButton();
-		serviceRequestsListPage.selectServiceRequestInsurance(data.getInsurance());
-		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListInteractions.clickClaimInfoEditButton();
+		serviceRequestsListInteractions.selectServiceRequestInsurance(data.getInsurance());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListPage.setServiceRequestLabel(data.getLabel());
-		serviceRequestsListPage.setServiceRequestDescription(data.getLabel());
+		serviceRequestsListInteractions.setServiceRequestLabel(data.getLabel());
+		serviceRequestsListInteractions.setServiceRequestDescription(data.getLabel());
 
-		serviceRequestsListPage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 
-		serviceRequestsListPage.makeSearchPanelVisible();
-		serviceRequestsListPage.setSearchFreeText(data.getNewServiceRequest());
-		serviceRequestsListPage.setServiceRequestType(data.getServiceTypeVit());
-		serviceRequestsListPage.clickFindButton();
-		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByServiceName(data.getNewServiceRequest()));
-		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListInteractions.setServiceRequestType(data.getServiceTypeVit());
+		serviceRequestsListInteractions.clickFindButton();
+		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByServiceName(data.getNewServiceRequest()));
+		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
 
-		serviceRequestsListPage.acceptFirstServiceRequestFromList();
-		serviceRequestsListPage.closeFirstServiceRequestFromTheList();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
 
-		serviceRequestsListPage.makeSearchPanelVisible();
-		serviceRequestsListPage.setSearchFreeText(data.getNewServiceRequest());
-		serviceRequestsListPage.clickFindButton();
-		Assert.assertTrue(serviceRequestsListPage.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
-		Assert.assertEquals(serviceRequestsListPage.getFirstServiceRequestStatus(), data.getStatus());
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickFindButton();
+		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
+		Assert.assertEquals(serviceRequestsListInteractions.getFirstServiceRequestStatus(), data.getStatus());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

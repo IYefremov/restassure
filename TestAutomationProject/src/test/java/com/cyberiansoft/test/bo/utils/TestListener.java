@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.bo.utils;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.testcases.BaseTestCase;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.apache.commons.io.FileUtils;
@@ -34,8 +32,6 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
         if (DriverBuilder.getInstance().getDriver() != null) {
             createScreenshot(DriverBuilder.getInstance().getDriver(), "report/", getTestMethodName(result));
             DriverBuilder.getInstance().getDriver().quit();
-            DriverBuilder.getInstance().setDriver(BaseUtils
-                    .getBrowserType(BOConfigInfo.getInstance().getDefaultBrowser()));
         }
         ((BaseTestCase) currentClass).setDriver();
 	}
@@ -73,8 +69,5 @@ public class TestListener extends TestListenerAdapter  implements IInvokedMethod
 	private static String getTestMethodName(ITestResult result) {
 		return result.getMethod().getConstructorOrMethod().getName();
 	}
-	
-	
-
 }
 

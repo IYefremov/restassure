@@ -26,7 +26,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		JSONDataProvider.dataFile = DATA_FILE;
 		nada = new NadaEMailService();
 		nada.setEmailId(BOConfigInfo.getInstance().getUserNadaName());
-	}
+    }
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationNewServiceRequestAppointmentWholesale(String rowID, String description, JSONObject testData) {
@@ -34,41 +34,41 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
-		backOfficeHeader.clickOperationsLink();
+        backOfficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
-		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickGeneralInfoEditButton();
+        operationsPage.clickNewServiceRequestList();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 
-		servicerequestslistpage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequestInsurance(data.getInsurance());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickClaimInfoEditButton();
+		serviceRequestsListInteractions.selectServiceRequestInsurance(data.getInsurance());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.setServiceRequestLabel(data.getLabel());
-		servicerequestslistpage.setServiceRequestDescription(data.getLabel());
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getNewServiceRequest());
-		servicerequestslistpage.clickFindButton();
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
+		serviceRequestsListInteractions.setServiceRequestLabel(data.getLabel());
+		serviceRequestsListInteractions.setServiceRequestDescription(data.getLabel());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
@@ -78,7 +78,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		appointmentpopup.clickAddAppointment();
-		servicerequestslistpage
+        serviceRequestsListVerifications
 				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 	}
 
@@ -91,38 +91,38 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 
-		servicerequestslistpage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequestInsurance(data.getInsurance());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickClaimInfoEditButton();
+		serviceRequestsListInteractions.selectServiceRequestInsurance(data.getInsurance());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.setServiceRequestLabel(data.getLabel());
-		servicerequestslistpage.setServiceRequestDescription(data.getLabel());
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getNewServiceRequest());
-		servicerequestslistpage.clickFindButton();
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
+		serviceRequestsListInteractions.setServiceRequestLabel(data.getLabel());
+		serviceRequestsListInteractions.setServiceRequestDescription(data.getLabel());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
@@ -132,7 +132,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		appointmentpopup.clickAddAppointment();
-		servicerequestslistpage
+        serviceRequestsListVerifications
 				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 	}
 
@@ -142,45 +142,45 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
-		backOfficeHeader.clickOperationsLink();
+        backOfficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
-		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickGeneralInfoEditButton();
+        operationsPage.clickNewServiceRequestList();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 
-		servicerequestslistpage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequestInsurance(data.getInsurance());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickClaimInfoEditButton();
+		serviceRequestsListInteractions.selectServiceRequestInsurance(data.getInsurance());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.setServiceRequestLabel(data.getLabel());
-		servicerequestslistpage.setServiceRequestDescription(data.getLabel());
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getNewServiceRequest());
-		servicerequestslistpage.clickFindButton();
+		serviceRequestsListInteractions.setServiceRequestLabel(data.getLabel());
+		serviceRequestsListInteractions.setServiceRequestDescription(data.getLabel());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickFindButton();
 
-		Assert.assertTrue(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 
 		appointmentpopup.setFromDateValue(CustomDateProvider.getDayAfterTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setToDateValue(CustomDateProvider.getDayAfterTomorrowLocalizedDateFormattedShort());
@@ -197,10 +197,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		appointmentpopup.setClientZipValue(data.getClientZip());
 		appointmentpopup.clickAddAppointment();
 
-		servicerequestslistpage
+		serviceRequestsListVerifications
 				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 
 		Assert.assertEquals(appointmentpopup.getClientAddressValue(), data.getClientAddress());
@@ -208,7 +208,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertTrue(appointmentpopup.getClientZipValue().equals(data.getClientZip())
 				|| appointmentpopup.getClientZipValue().equals(data.getClientZip2()));
 		appointmentpopup.clickAddAppointment();
-		servicerequestslistpage.closeFirstServiceRequestFromTheList();
+		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
 	}
 
 	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -220,43 +220,43 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 
-		servicerequestslistpage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequestInsurance(data.getInsurance());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickClaimInfoEditButton();
+		serviceRequestsListInteractions.selectServiceRequestInsurance(data.getInsurance());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.setServiceRequestLabel(data.getLabel());
-		servicerequestslistpage.setServiceRequestDescription(data.getLabel());
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getNewServiceRequest());
-		servicerequestslistpage.clickFindButton();
+		serviceRequestsListInteractions.setServiceRequestLabel(data.getLabel());
+		serviceRequestsListInteractions.setServiceRequestDescription(data.getLabel());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickFindButton();
 //todo  org.openqa.selenium.interactions.Actions moveToElement
 //INFO: When using the W3C Action commands, offsets are from the center of element
-		Assert.assertTrue(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
@@ -268,14 +268,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		appointmentpopup.selectLocationType(data.getLocationType());
 		appointmentpopup.clickAddAppointment();
-		servicerequestslistpage
+        serviceRequestsListVerifications
 				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 
 		appointmentpopup.clickAddAppointment();
-		servicerequestslistpage.closeFirstServiceRequestFromTheList();
+		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -287,43 +287,43 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 
-		servicerequestslistpage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		servicerequestslistpage.selectServiceRequestOwner(data.getNewServiceRequest());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.selectServiceRequestOwner(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequestInsurance(data.getInsurance());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickClaimInfoEditButton();
+		serviceRequestsListInteractions.selectServiceRequestInsurance(data.getInsurance());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.setServiceRequestLabel(data.getLabel());
-		servicerequestslistpage.setServiceRequestDescription(data.getLabel());
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getNewServiceRequest());
-		servicerequestslistpage.clickFindButton();
+		serviceRequestsListInteractions.setServiceRequestLabel(data.getLabel());
+		serviceRequestsListInteractions.setServiceRequestDescription(data.getLabel());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickFindButton();
 
-		Assert.assertTrue(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
@@ -334,10 +334,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 		appointmentpopup.selectLocationType(data.getLocationType());
 		appointmentpopup.clickAddAppointment();
-		servicerequestslistpage
+        serviceRequestsListVerifications
 				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 	}
 
@@ -350,42 +350,42 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 
-		servicerequestslistpage.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPoNum(), data.getRoNum());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getNewServiceRequest());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getNewServiceRequest());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickClaimInfoEditButton();
-		servicerequestslistpage.selectServiceRequestInsurance(data.getInsurance());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickClaimInfoEditButton();
+		serviceRequestsListInteractions.selectServiceRequestInsurance(data.getInsurance());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.setServiceRequestLabel(data.getLabel());
-		servicerequestslistpage.setServiceRequestDescription(data.getLabel());
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getNewServiceRequest());
-		// servicerequestslistpage.clickFindButton();
+		serviceRequestsListInteractions.setServiceRequestLabel(data.getLabel());
+		serviceRequestsListInteractions.setServiceRequestDescription(data.getLabel());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
+		// serviceRequestsListInteractions.clickFindButton();
 
-		Assert.assertTrue(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
@@ -398,14 +398,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		appointmentpopup.selectLocationType(data.getLocationType());
 		appointmentpopup.selectLocation(data.getLocation());
 		appointmentpopup.clickAddAppointment();
-		servicerequestslistpage
+        serviceRequestsListVerifications
 				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		servicerequestslistpage.clickAddAppointmentToFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 
 		appointmentpopup.clickAddAppointment();
-		servicerequestslistpage.closeFirstServiceRequestFromTheList();
+		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -419,23 +419,23 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		loginpage.userLogin(BOConfigInfo.getInstance().getAlternativeUserName(), BOConfigInfo.getInstance().getAlternativeUserPassword());
 		HomeWebPage homepage = new HomeWebPage(webdriver);
 		backOfficeHeader.clickHomeLink();
-		ServiceRequestsListWebPage servicerequestslistpage = homepage.clickNewServiceRequestLink();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
+		ServiceRequestsListInteractions serviceRequestsListInteractions = homepage.clickNewServiceRequestLink();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getVIN());
-		servicerequestslistpage.clickFindButton();
-		Assert.assertFalse(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
-		servicerequestslistpage.rejectFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
+		serviceRequestsListInteractions.clickFindButton();
+		Assert.assertFalse(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
+		serviceRequestsListInteractions.rejectFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -450,16 +450,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		HomeWebPage homepage = new HomeWebPage(webdriver);
 		backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);
-		ServiceRequestsListWebPage servicerequestslistpage = homepage.clickNewServiceRequestLink();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		ServiceRequestsListInteractions serviceRequestsListInteractions = homepage.clickNewServiceRequestLink();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 
 		backOfficeHeader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
@@ -467,14 +467,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		backOfficeHeader = PageFactory.initElements(webdriver, BackOfficeHeaderPanel.class);
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getVIN());
-		servicerequestslistpage.clickFindButton();
-		Assert.assertTrue(servicerequestslistpage.isAcceptIconPresentForFirstServiceRequestFromList());
-		servicerequestslistpage.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(servicerequestslistpage.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
+		serviceRequestsListInteractions.clickFindButton();
+		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
 
 		backOfficeHeader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
@@ -484,18 +484,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		homepage = new HomeWebPage(webdriver);
 		backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);
-		servicerequestslistpage = homepage.clickNewServiceRequestLink();
+		serviceRequestsListInteractions = homepage.clickNewServiceRequestLink();
 		Thread.sleep(2000);
-		servicerequestslistpage.makeSearchPanelVisible();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
 
-		servicerequestslistpage.setSearchFreeText(data.getVIN());
-		servicerequestslistpage.clickFindButton();
-		servicerequestslistpage.selectFirstServiceRequestFromList();
-		servicerequestslistpage.switchToServiceRequestInfoFrame();
-		Assert.assertFalse(servicerequestslistpage.getGeneralInfoEditButton().isDisplayed());
-		Assert.assertFalse(servicerequestslistpage.getCustomerEditButton().isDisplayed());
-		Assert.assertFalse(servicerequestslistpage.getVehicleInfoEditButton().isDisplayed());
-		servicerequestslistpage.clickCloseServiceRequestButton();
+		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
+		serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		serviceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
+		Assert.assertFalse(serviceRequestsListInteractions.getGeneralInfoEditButton().isDisplayed());
+		Assert.assertFalse(serviceRequestsListInteractions.getCustomerEditButton().isDisplayed());
+		Assert.assertFalse(serviceRequestsListInteractions.getVehicleInfoEditButton().isDisplayed());
+		serviceRequestsListInteractions.clickCloseServiceRequestButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -510,15 +510,15 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		HomeWebPage homepage = new HomeWebPage(webdriver);
 		backOfficeHeader.clickHomeLink();
 		Thread.sleep(1000);
-		ServiceRequestsListWebPage servicerequestslistpage = homepage.clickNewServiceRequestLink();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
+		ServiceRequestsListInteractions serviceRequestsListInteractions = homepage.clickNewServiceRequestLink();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		Assert.assertFalse(servicerequestslistpage.getServiceRequestLabelField().isDisplayed());
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		Assert.assertFalse(serviceRequestsListInteractions.getServiceRequestLabelField().isDisplayed());
 
 	}
 
@@ -530,26 +530,26 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		servicerequestslistpage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		servicerequestslistpage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(data.getCustomer());
-		servicerequestslistpage.clickDoneButton();
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(data.getVIN());
-		servicerequestslistpage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getCustomer());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.saveNewServiceRequest();
-		servicerequestslistpage.makeSearchPanelVisible();
-		servicerequestslistpage.setSearchFreeText(data.getVIN());
-		servicerequestslistpage.clickFindButton();
-		servicerequestslistpage.selectFirstServiceRequestFromList();
-		Assert.assertFalse(servicerequestslistpage.isCheckInButtonDisplayedForSelectedSR());
-		servicerequestslistpage.rejectFirstServiceRequestFromList();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
+		serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		Assert.assertFalse(serviceRequestsListVerifications.isCheckInButtonVisible());
+		serviceRequestsListInteractions.rejectFirstServiceRequestFromList();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -561,27 +561,27 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		serviceRequestsListPage.clickCustomerEditButton();
-		serviceRequestsListPage.selectServiceRequestCustomer(data.getCustomer());
-		serviceRequestsListPage.clickDoneButton();
-		serviceRequestsListPage.clickVehicleInforEditButton();
-		serviceRequestsListPage.setServiceRequestVIN(data.getVIN());
-		serviceRequestsListPage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getCustomer());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListPage.saveNewServiceRequest();
-        serviceRequestsListPage.makeSearchPanelVisible();
-        serviceRequestsListPage.setSearchFreeText(data.getVIN());
-		serviceRequestsListPage.clickFindButton();
-		serviceRequestsListPage.selectFirstServiceRequestFromList();
-		Assert.assertFalse(serviceRequestsListPage.isCheckInButtonDisplayedForSelectedSR());
-		serviceRequestsListPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListPage.isCheckInButtonVisible());
-		serviceRequestsListPage.closeFirstServiceRequestFromTheList();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+        serviceRequestsListInteractions.makeSearchPanelVisible();
+        serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
+		serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		Assert.assertFalse(serviceRequestsListVerifications.isCheckInButtonVisible());
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsListVerifications.isCheckInButtonVisible());
+		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -592,34 +592,34 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         backOfficeHeader.clickOperationsLink();
-        ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
         operationsPage.clickNewServiceRequestList();
-		serviceRequestsListPage.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getAddServiceRequestValue());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		serviceRequestsListPage.clickCustomerEditButton();
-		serviceRequestsListPage.selectServiceRequestCustomer(data.getCustomer());
-		serviceRequestsListPage.clickDoneButton();
-		serviceRequestsListPage.clickVehicleInforEditButton();
-		serviceRequestsListPage.setServiceRequestVIN(data.getVIN());
-		serviceRequestsListPage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
-		serviceRequestsListPage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getCustomer());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(data.getVIN());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListPage.saveNewServiceRequest();
-		serviceRequestsListPage.makeSearchPanelVisible();
-		serviceRequestsListPage.setSearchFreeText(data.getVIN());
-		serviceRequestsListPage.clickFindButton();
-		serviceRequestsListPage.selectFirstServiceRequestFromList();
-		Assert.assertFalse(serviceRequestsListPage.isCheckInButtonVisible());
-		serviceRequestsListPage.acceptFirstServiceRequestFromList();
-//		serviceRequestsListPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListPage.isCheckInButtonVisible());
-		Assert.assertEquals(serviceRequestsListPage.getCheckInButtonValueForSelectedSR(), data.getCheckInButton());
-		serviceRequestsListPage.clickCheckInButtonForSelectedSR();
-		Assert.assertEquals(serviceRequestsListPage.getCheckInButtonValueForSelectedSR(), data.getUndoCheckInButton());
-		serviceRequestsListPage.clickCheckInButtonForSelectedSR();
-		Assert.assertEquals(serviceRequestsListPage.getCheckInButtonValueForSelectedSR(), data.getCheckInButton());
-		serviceRequestsListPage.closeFirstServiceRequestFromTheList();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
+		serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		Assert.assertFalse(serviceRequestsListVerifications.isCheckInButtonVisible());
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+//		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsListVerifications.isCheckInButtonVisible());
+		Assert.assertEquals(serviceRequestsListInteractions.getCheckInButtonValueForSelectedSR(), data.getCheckInButton());
+		serviceRequestsListInteractions.clickCheckInButtonForSelectedSR();
+		Assert.assertEquals(serviceRequestsListInteractions.getCheckInButtonValueForSelectedSR(), data.getUndoCheckInButton());
+		serviceRequestsListInteractions.clickCheckInButtonForSelectedSR();
+		Assert.assertEquals(serviceRequestsListInteractions.getCheckInButtonValueForSelectedSR(), data.getCheckInButton());
+		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -629,13 +629,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.setServiceRequestDescription(description);
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkTimeOfLastDescription());
+		Assert.assertTrue(serviceRequestsListVerifications.checkTimeOfLastDescription());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -646,16 +646,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.addTags(data.getTags());
-		Assert.assertTrue(serviceRequestsWebPage.addTags(data.getTags()[data.getTags().length - 1]));
-		serviceRequestsWebPage.addTags(data.getSymbol());
-		Assert.assertTrue(serviceRequestsWebPage.removeFirtsTag());
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListVerifications.verifyTagsAreAdded(data.getTags());
+		Assert.assertTrue(serviceRequestsListVerifications.verifyTagsAreAdded(data.getTags()[data.getTags().length - 1]));
+		serviceRequestsListVerifications.verifyTagsAreAdded(data.getSymbol());
+		Assert.assertTrue(serviceRequestsListVerifications.isFirstTagRemoved());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkTags(data.getTags()));
+		Assert.assertTrue(serviceRequestsListVerifications.areTagsAdded(data.getTags()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -666,13 +666,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[0]);
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.addNewDescriptionAndCheckOld(data.getDescriptions()[1],
+		Assert.assertTrue(serviceRequestsListVerifications.isNewDescriptionAddedAndCheckedOld(data.getDescriptions()[1],
 				data.getDescriptions()[0]));
 	}
 
@@ -684,10 +684,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
-		Assert.assertFalse(serviceRequestsWebPage.checkIfDescriptionIconsVisible());
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
+		Assert.assertFalse(serviceRequestsListVerifications.verifyDescriptionIconsAreVisible());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -698,14 +698,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[0]);
 		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[1]);
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkServiceDescription(data.getDescriptions()[1]));
+		Assert.assertTrue(serviceRequestsListVerifications.verifyServiceDescriptionIsPresent(data.getDescriptions()[1]));
 	}
 
 
@@ -717,16 +717,16 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkServiceRequestDocumentIcon());
+		Assert.assertTrue(serviceRequestsListVerifications.isServiceRequestDocumentIconVisible());
 		serviceRequestsWebPage.clickDocumentButton();
-		Assert.assertTrue(serviceRequestsWebPage.checkElementsInDocument());
-		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
-		//serviceRequestsWebPage.addImage();
+		Assert.assertTrue(serviceRequestsListVerifications.checkElementsInDocument());
+		serviceRequestsWebPage.clickAddImageButton();
+		Assert.assertTrue(serviceRequestsListVerifications.areImageButtonsDisplayed());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -738,19 +738,23 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
         serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay()));
+		serviceRequestsWebPage.setAppointmentValues(data.getFirstDay(), data.getSecondDay());
+		serviceRequestsWebPage.clickAddAppointmentButtonFromSRList();
+        Assert.assertTrue(serviceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
+                "The Add Appointment dialog hasn't been closed");
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
+		new ServiceRequestsListInteractions().openAddAppointmentForFirstSR();
 		Assert.assertTrue(
-				serviceRequestsWebPage.checkDefaultAppointmentValuesAndAddAppointmentFomSREdit());
-		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getStatus()));
+				serviceRequestsListVerifications.checkDefaultAppointmentValuesAndAddAppointmentFomSREdit());
+		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -762,18 +766,23 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay()));
+		serviceRequestsWebPage.setAppointmentValues(data.getFirstDay(), data.getSecondDay());
+		serviceRequestsWebPage.clickAddAppointmentButtonFromSRList();
+		Assert.assertTrue(serviceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
+                "The Add Appointment dialog hasn't been closed");
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkShowHideTechs(data.getFirstDay(), data.getSecondDay()));
-		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getStatus()));
+		serviceRequestsWebPage.openAddAppointmentForFirstSR();
+		serviceRequestsWebPage.setAppointmentSREditValues(data.getFirstDay(), data.getSecondDay());
+        Assert.assertTrue(serviceRequestsListVerifications.checkShowHideTechs());
+		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -785,18 +794,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickCustomerEditButton();
-		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.saveNewServiceRequest();
-		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getStatus()));
-		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentValuesFromCalendar(
-				data.getFirstDay(), data.getSecondDay(), data.getCustomer()));
-		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getNewStatus()));
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(data.getServiceRequestType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getCustomer());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
+		serviceRequestsListInteractions.setAppointmentValues(data.getFirstDay(), data.getSecondDay());
+		Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentValuesFromCalendar(data.getCustomer()));
+		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -807,17 +816,18 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.checkSchedulerByDateWeek(data.getFirstDay(), data.isDateShifted());
-		serviceRequestsWebPage.goToSRmenu();
+		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDay());
-		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
+        serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
+        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -829,16 +839,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
         int prevRequestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(data.getFirstDay());
-		serviceRequestsWebPage.goToSRmenu();
+		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
-		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
+        serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
+        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.reloadPage();
 		int afterRequestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(data.getFirstDay());
@@ -854,12 +865,14 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
         serviceRequestsWebPage.goToMonthInScheduler();
-		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
+        serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
+        Assert.assertTrue(serviceRequestsListVerifications.checkTechniciansFromScheduler());
 		Assert.assertEquals(5, serviceRequestsWebPage.getMaximumTechniciansListSize(),
                 "The maximum technicians list size is not 5");
-		Assert.assertTrue(serviceRequestsWebPage.applyAndCheck5TechniciansFromScheduler());
+		serviceRequestsWebPage.clickArrowTechniciansLink();
+		Assert.assertTrue(serviceRequestsListVerifications.check5TechniciansFromScheduler());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -871,19 +884,21 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsWebPage.goToSRmenu();
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
+		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
-		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
+		serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
+		Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.goToMonthInScheduler();
-		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
+		serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
+		Assert.assertTrue(serviceRequestsListVerifications.checkTechniciansFromScheduler());
 		serviceRequestsWebPage.applyTechniciansFromScheduler();
 		serviceRequestsWebPage.countSR();
         System.out.println(serviceRequestsWebPage.countSR());
@@ -900,23 +915,27 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsWebPage.goToSRmenu();
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
+		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
-		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
+        serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
+        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.goToMonthInScheduler();
-		Assert.assertTrue(serviceRequestsWebPage.checkTechniciansFromScheduler());
+        serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
+        Assert.assertTrue(serviceRequestsListVerifications.checkTechniciansFromScheduler());
 		Assert.assertEquals(5, serviceRequestsWebPage.getMaximumTechniciansListSize(),
                 "The maximum technicians list size is not 5");
-		Assert.assertTrue(serviceRequestsWebPage.applyAndCheck5TechniciansFromScheduler());
-		serviceRequestsWebPage.resetAndCheckTecniciansFromScheduler();
+		serviceRequestsWebPage.clickArrowTechniciansLink();
+		Assert.assertTrue(serviceRequestsListVerifications.check5TechniciansFromScheduler());
+		serviceRequestsWebPage.resetTechniciansFromScheduler();
+		Assert.assertTrue(serviceRequestsListVerifications.checkTechniciansFromSchedulerAfterResetting());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -928,16 +947,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsWebPage.goToSRmenu();
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
+		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDay());
-		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
+        serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
+        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -948,11 +968,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.goToSRmenu();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
-		Assert.assertFalse(serviceRequestsWebPage.checkLifeCycleBTN());
+		serviceRequestsWebPage.goToSRMenu();
+		serviceRequestsWebPage.clickAddSRButton();
+		serviceRequestsWebPage.clickSRLifeCycleButton();
+		Assert.assertFalse(serviceRequestsListVerifications.areTwoWindowsOpened());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -964,21 +985,24 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsWebPage.goToSRmenu();
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
+		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
-		Assert.assertTrue(serviceRequestsWebPage.checkDefaultAppointmentDateFromSRedit(data.getFirstDay()));
+        serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
+        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
-		serviceRequestsWebPage.clickGetAppointmentButton();
-		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getStatus()));
-		Assert.assertTrue(serviceRequestsWebPage.checkLifeCycleDate());
+		serviceRequestsWebPage.setSubjectForSRAppointment("");
+		serviceRequestsWebPage.clickAddAppointmentButton();
+		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
+		serviceRequestsWebPage.goToLifeCycle();
+		Assert.assertTrue(serviceRequestsListVerifications.checkLifeCycleDate());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -989,21 +1013,21 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.goToSRmenu();
+		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
-		Assert.assertTrue(serviceRequestsWebPage.isLifeCycleContentDisplayed());
+		Assert.assertTrue(serviceRequestsListVerifications.isLifeCycleContentDisplayed());
 		serviceRequestsWebPage.goToDocumentLinkFromLC();
-		Assert.assertTrue(serviceRequestsWebPage.checkLifeCycleDocumentsContent());
-		Assert.assertTrue(serviceRequestsWebPage.checkDocumentDownloadingInLC());
-		Assert.assertTrue(serviceRequestsWebPage.clickAddImageBTN());
-		//	serviceRequestsWebPage.addImage();
+		Assert.assertTrue(serviceRequestsListVerifications.checkLifeCycleDocumentsContent());
+		Assert.assertTrue(serviceRequestsListVerifications.checkDocumentDownloadingInLC());
+        serviceRequestsWebPage.clickAddImageButton();
+        Assert.assertTrue(serviceRequestsListVerifications.areImageButtonsDisplayed());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1014,11 +1038,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.goToSRmenu();
+		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1028,7 +1052,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
-		Assert.assertTrue(serviceRequestsWebPage.goToWOfromLifeCycle());
+		serviceRequestsWebPage.goToWOFromLifeCycle();
+		Assert.assertTrue(serviceRequestsListVerifications.isSRLifeCycleDisplayed());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1039,10 +1064,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1051,10 +1076,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getNewStatus()));
+		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
-		Assert.assertTrue(serviceRequestsWebPage.checkAcceptanceOfSRinLC());
+		serviceRequestsListVerifications.checkAcceptanceOfSRInLifeCycle();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1065,10 +1090,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1077,10 +1102,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsWebPage.checkStatus(data.getNewStatus()));
+		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
-		Assert.assertTrue(serviceRequestsWebPage.checkRejectOfSRinLC());
+		serviceRequestsListVerifications.checkRejectOfSRInLifeCycle();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1091,21 +1116,21 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.makeSearchPanelVisible();
-		Assert.assertTrue(serviceRequestsWebPage.checkSRsearchCriterias());
+		serviceRequestsListVerifications.checkSRSearchCriteria();
 		// serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		// serviceRequestsWebPage.clickAddServiceRequestButton();
+		// serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		// serviceRequestsWebPage.clickCustomerEditButton();
 		// serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		// serviceRequestsWebPage.clickDoneButton();
 		// serviceRequestsWebPage.clickVehicleEditButton();
 		// serviceRequestsWebPage.setVehicleInfo(data.getStock123() , data.getStock123());
 		// serviceRequestsWebPage.clickDoneButton();
-		// serviceRequestsWebPage.saveNewServiceRequest();
+		// serviceRequestsWebPage.issaveNewServiceRequest();
 		// serviceRequestsWebPage.rejectFirstServiceRequestFromList();
-		// Assert.assertTrue(serviceRequestsWebPage.checkStatus(newStatus));
+		// Assert.assertTrue(serviceRequestsWebPage.isStatusDisplayed(newStatus));
 		// serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		// serviceRequestsWebPage.goToLifeCycle();
 		// Assert.assertTrue(serviceRequestsWebPage.checkClosedOfSRinLC());
@@ -1134,10 +1159,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1187,10 +1212,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1242,10 +1267,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1256,7 +1281,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
-		serviceRequestsWebPage.switchToServiceRequestInfoFrame();
+		serviceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
 		serviceRequestsWebPage.saveNewServiceRequest();
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
 
@@ -1288,10 +1313,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //                .withSubject(data.getEmailKeyWordWasCreated())
 //                .unreadOnlyMessages(true).maxMessagesToSearch(5);
 
-		MiscellaneousWebPage miscellaneouspage = new MiscellaneousWebPage(webdriver);
-		backOfficeHeader.clickMiscellaneousLink();
-		EventsWebPage eventsWebPage = new EventsWebPage(webdriver);
-		miscellaneouspage.clickEventsLink();
+        backOfficeHeader.clickMiscellaneousLink();
+        MiscellaneousWebPage miscellaneouspage = new MiscellaneousWebPage(webdriver);
+        miscellaneouspage.clickEventsLink();
+        EventsWebPage eventsWebPage = new EventsWebPage(webdriver);
 		eventsWebPage.clickAddEventButton();
 		eventsWebPage.selectEvent(data.getEvent());
 		eventsWebPage.setAlertNewName(data.getAlert());
@@ -1302,10 +1327,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1313,7 +1338,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setServiceRequestGeneralInfo(data.getServiceRequestGeneralInfo());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
+		serviceRequestsWebPage.addAppointmentFromSRList(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
+        Assert.assertTrue(serviceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
+                "The Add Appointment dialog hasn't been closed");
 //        Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()) || mailChecker.checkTestEmails());
 
 // todo uncomment after BO will be configured.
@@ -1358,10 +1385,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1369,7 +1396,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setServiceRequestGeneralInfo(data.getServiceRequestGeneralInfo());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		serviceRequestsWebPage.addAppointmentFromSRlist(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
+		serviceRequestsWebPage.addAppointmentFromSRList(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
+        Assert.assertTrue(serviceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
+                "The Add Appointment dialog hasn't been closed");
 // todo uncomment after BO will be configured.
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
 //                new NadaEMailService.MailSearchParametersBuilder()
@@ -1411,10 +1440,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1467,10 +1496,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1524,10 +1553,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1580,10 +1609,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1635,10 +1664,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1691,10 +1720,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1745,10 +1774,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		eventsWebPage.setEmailNotificationCheckBoxForSelected();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1759,7 +1788,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
-		serviceRequestsWebPage.switchToServiceRequestInfoFrame();
+		serviceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		// todo uncomment after BO will be configured.
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
@@ -1787,10 +1816,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
 		serviceRequestsWebPage.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
@@ -1818,10 +1847,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.switchToSecondWindow(currentWindow);
 		operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
@@ -1853,19 +1882,19 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
-		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
-		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+        backOfficeHeader.clickOperationsLink();
+        OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
+        operationsPage.clickNewServiceRequestList();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+        serviceRequestsListInteractions.selectAddServiceRequestDropDown(data.getServiceRequestType());
+        serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
-		serviceRequestsWebPage.clickServiceEditButton();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
 		Assert.assertEquals(serviceDialog.countAvailableServices(), 2);
-		serviceRequestsWebPage.scrollWindow("-300");
-		CompanyWebPage companyPage = new CompanyWebPage(webdriver);
-		backOfficeHeader.clickCompanyLink();
+		serviceRequestsListInteractions.scrollWindow("-300");
+        backOfficeHeader.clickCompanyLink();
+        CompanyWebPage companyPage = new CompanyWebPage(webdriver);
 		ServiceRequestTypesWebPage serviceRequestTypesPage = new ServiceRequestTypesWebPage(webdriver);
 		companyPage.clickServiceRequestTypesLink();
 		serviceRequestTypesPage.clickEditServiceRequestType(data.getServiceRequestType());
@@ -1876,36 +1905,36 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.selectOption(data.getRoNum());
 		serviceRequestTypesPage.unselectOption(data.getStockNum());
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
-		operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
-		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
+        operationsPage = new OperationsWebPage(webdriver);
+        operationsPage.clickNewServiceRequestList();
+        serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickCustomerEditButton();
-		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
-		serviceRequestsWebPage.setVehicleInfo(data.getStock123(), data.getStock123());
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getClientName());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setVehicleInfo(data.getStock123(), data.getStock123());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 		String randomRO = Integer.toString(new Random().nextInt());
-		serviceRequestsWebPage.setRO(randomRO);
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.saveNewServiceRequest();
+		serviceRequestsListInteractions.setRO(randomRO);
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
-		serviceRequestsWebPage.clickCustomerEditButton();
-		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
-		serviceRequestsWebPage.setVehicleInfo(data.getStock123(), data.getStock123());
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickGeneralInfoEditButton();
-		serviceRequestsWebPage.setRO(randomRO);
-		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(data.getClientName());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setVehicleInfo(data.getStock123(), data.getStock123());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.setRO(randomRO);
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1916,10 +1945,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
 		serviceRequestsWebPage.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
@@ -1938,28 +1967,28 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		String randomVIN = Integer.toString(new Random().nextInt());
 		serviceRequestsWebPage.setVehicleInfo(data.getStock123(), randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		serviceRequestsWebPage.setVehicleInfo(data.getStock123(), randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
+		serviceRequestsWebPage.saveNewServiceRequest();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1970,10 +1999,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
 		serviceRequestsWebPage.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
@@ -1992,15 +2021,15 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		serviceRequestsWebPage.setVehicleInfo(data.getStock123(), data.getStock123());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
@@ -2009,17 +2038,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		serviceRequestsWebPage.setVehicleInfo(data.getStock123(), data.getStock123());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setRO(randomRO);
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
+		serviceRequestsWebPage.saveNewServiceRequest();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2030,10 +2059,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
 		serviceRequestsWebPage.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
@@ -2052,27 +2081,27 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		String randomVIN = Integer.toString(new Random().nextInt());
 		serviceRequestsWebPage.setVehicleInfo(data.getStock123(), randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		serviceRequestsWebPage.setVehicleInfo(data.getStock123(), randomVIN);
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
+		serviceRequestsWebPage.saveNewServiceRequest();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2083,10 +2112,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
 		serviceRequestsWebPage.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
@@ -2105,28 +2134,28 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		String randonStock = Integer.toString(new Random().nextInt());
 		serviceRequestsWebPage.setVehicleInfo(randonStock, data.getStock123());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		serviceRequestsWebPage.setVehicleInfo(randonStock, data.getStock123());
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
+		serviceRequestsWebPage.saveNewServiceRequest();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2137,10 +2166,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
 		serviceRequestsWebPage.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
@@ -2159,28 +2188,28 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		String randonStock = Integer.toString(new Random().nextInt());
 		serviceRequestsWebPage.setVehicleInfo(randonStock, data.getStock123());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		serviceRequestsWebPage.setVehicleInfo(randonStock, data.getStock123());
 		serviceRequestsWebPage.clickDoneButton();
-		Assert.assertTrue(serviceRequestsWebPage.saveNewServiceRequest());
+		serviceRequestsWebPage.saveNewServiceRequest();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2198,12 +2227,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestTypesPage.clickEditServiceRequestTypeOkButton();
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.makeSearchPanelVisible();
-		Assert.assertTrue(serviceRequestsWebPage.checkSRsearchCriterias());
+		serviceRequestsListVerifications.checkSRSearchCriteria();
 		serviceRequestsWebPage.selectAddServiceRequestsComboboxValue(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestGeneralInfo(data.getServiceRequestGeneralInfo(),
 				data.getAssignedTo(), data.getPoNum(), data.getRoNum());
@@ -2211,7 +2240,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getClientName());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleInforEditButton();
+		serviceRequestsWebPage.clickVehicleInfoEditButton();
 		serviceRequestsWebPage.setServiceRequestVIN(data.getVIN());
 		serviceRequestsWebPage.decodeAndVerifyServiceRequestVIN(data.getMake(), data.getModel());
 		serviceRequestsWebPage.clickDoneButton();
@@ -2237,11 +2266,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
 		backOfficeHeader.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
-		Assert.assertTrue(serviceRequestsWebPage.checkPresenceOfServiceAdvisersByFilter(data.getTestDescription()));
+		Assert.assertTrue(serviceRequestsListVerifications.checkPresenceOfServiceAdvisersByFilter(data.getTestDescription()));
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
@@ -2260,9 +2289,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsWebPage = new ServiceRequestsListWebPage(webdriver);
+        ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsWebPage.clickAddServiceRequestButton();
+		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
 		serviceRequestsWebPage.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
@@ -2299,11 +2328,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsListPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(data.getServiceRequestType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
 		serviceDialog.checkRandomServiceOption();
 		serviceDialog.clickAddServiceOption();
@@ -2337,7 +2366,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		vehiclePartDialog.clickServiceVehiclePartCancelButton();
 		serviceDialog.verifyOneServiceContainerIsDisplayed();
 		serviceDialog.clickDoneServicesButton();
-		serviceRequestsListPage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2349,11 +2378,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsListPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(data.getServiceRequestType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
 		serviceDialog.checkRandomServiceOption();
 		serviceDialog.clickAddServiceOption();
@@ -2373,11 +2402,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(serviceDialog.getNumberOfSelectedServiceContainersDisplayed(), availableVehiclePartOptions,
 				"The number of service displayed containers differs from the number of assigned options");
 		serviceDialog.clickDoneServicesButton();
-		serviceRequestsListPage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 
 
-		serviceRequestsListPage.selectFirstServiceRequestFromList();
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickServiceEditButton();
 
 		Assert.assertEquals(serviceDialog.getNumberOfSelectedServiceContainersDisplayed(), availableVehiclePartOptions,
 				"The number of service displayed containers differs from the number of assigned options");
@@ -2393,11 +2422,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsListPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(data.getServiceRequestType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
 		serviceDialog.checkRandomServiceOption();
 		serviceDialog.clickAddServiceOption();
@@ -2425,11 +2454,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		vehiclePartDialog.clickServiceVehiclePartOkButton();
 		serviceDialog.verifyOneServiceContainerIsDisplayed();
 		serviceDialog.clickDoneServicesButton();
-		serviceRequestsListPage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 
 
-		serviceRequestsListPage.selectFirstServiceRequestFromList();
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		serviceDialog.verifyOneServiceContainerIsDisplayed();
 		serviceDialog.clickCancelServicesButton();
 	}
@@ -2443,11 +2472,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         backOfficeHeader.clickOperationsLink();
         OperationsWebPage operationsPage = new OperationsWebPage(webdriver);
         operationsPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsListPage = new ServiceRequestsListWebPage(webdriver);
-		serviceRequestsListPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
-		serviceRequestsListPage.clickAddServiceRequestButton();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(data.getServiceRequestType());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 		ServiceRequestListServiceDialog serviceDialog = new ServiceRequestListServiceDialog(webdriver);
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		serviceDialog.openServicesDropDown();
 		serviceDialog.checkRandomServiceOption();
 		serviceDialog.clickAddServiceOption();
@@ -2474,11 +2503,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		vehiclePartDialog.clickServiceVehiclePartOkButton();
 		serviceDialog.verifyOneServiceContainerIsDisplayed();
 		serviceDialog.clickDoneServicesButton();
-		serviceRequestsListPage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 
 
-		serviceRequestsListPage.selectFirstServiceRequestFromList();
-		serviceRequestsListPage.clickServiceEditButton();
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickServiceEditButton();
 		serviceDialog.verifyOneServiceContainerIsDisplayed();
 		serviceDialog.clickCancelServicesButton();
 	}
@@ -2488,9 +2517,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 //	public void testServicerequestServicesAddNotes() {
 //		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 //		OperationsWebPage operationsPage = backOfficeHeader.clickOperationsLink();
-//		ServiceRequestsListWebPage serviceRequestsWebPage = operationsPage.clickNewServiceRequestList();
+//		ServiceRequestsListInteractions serviceRequestsWebPage = operationsPage.clickNewServiceRequestList();
 //		serviceRequestsWebPage.selectAddServiceRequestsComboboxValue(data.getServiceRequestType());
-//		serviceRequestsWebPage.clickAddServiceRequestButton();
+//		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 //		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();
 //		serviceRequestsWebPage.addServicesToServiceRequest("Zak_Money_Multiple","Zak_Labor_Multiple");
 //		ServiceRequestListServiceDialog serviceDialog = serviceRequestsWebPage.clickServiceEditButton();

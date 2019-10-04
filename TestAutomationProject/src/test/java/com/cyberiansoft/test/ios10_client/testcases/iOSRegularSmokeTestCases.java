@@ -6,6 +6,7 @@ import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.bo.verifications.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -731,27 +732,28 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backOfficeHeaderPanel.clickOperationsLink();
 
-		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		serviceRequestsListWebPage.makeSearchPanelVisible();
-		serviceRequestsListWebPage.verifySearchFieldsAreVisible();
+		serviceRequestsListInteractions.makeSearchPanelVisible();
+        final ServiceRequestsListVerifications serviceRequestsListVerifications = new ServiceRequestsListVerifications();
+        serviceRequestsListVerifications.verifySearchFieldsAreVisible();
 
-		serviceRequestsListWebPage.selectSearchTeam(teamName);
-		serviceRequestsListWebPage.selectSearchTechnician("Employee Simple 20%");
-		serviceRequestsListWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		serviceRequestsListWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
-		serviceRequestsListWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
+		serviceRequestsListInteractions.selectSearchTeam(teamName);
+		serviceRequestsListInteractions.selectSearchTechnician("Employee Simple 20%");
+		serviceRequestsListInteractions.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+		serviceRequestsListInteractions.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		serviceRequestsListInteractions.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 
-		serviceRequestsListWebPage.setSearchFreeText(serviceRequestNumber);
-		serviceRequestsListWebPage.clickFindButton();
-		serviceRequestsListWebPage.verifySearchResultsByServiceName(serviceName);
-		serviceRequestsListWebPage.selectFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsListWebPage.getVINValueForSelectedServiceRequest(), serviceRequestData.getVihicleInfo().getVINNumber());
-		Assert.assertEquals(serviceRequestsListWebPage.getCustomerValueForSelectedServiceRequest(), serviceName);
-		Assert.assertEquals(serviceRequestsListWebPage.getEmployeeValueForSelectedServiceRequest(), "Employee Simple 20% (Default team)");
-		Assert.assertTrue(serviceRequestsListWebPage.isServiceIsPresentForForSelectedServiceRequest("Bundle1_Disc_Ex $150.00 (1.00)"));
-		Assert.assertTrue(serviceRequestsListWebPage.isServiceIsPresentForForSelectedServiceRequest("Quest_Req_Serv $10.00 (1.00)"));
-		Assert.assertTrue(serviceRequestsListWebPage.isServiceIsPresentForForSelectedServiceRequest("Wheel $70.00 (3.00)"));
+		serviceRequestsListInteractions.setSearchFreeText(serviceRequestNumber);
+		serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListVerifications.verifySearchResultsByServiceName(serviceName);
+		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+		Assert.assertEquals(serviceRequestsListInteractions.getVINValueForSelectedServiceRequest(), serviceRequestData.getVihicleInfo().getVINNumber());
+		Assert.assertEquals(serviceRequestsListInteractions.getCustomerValueForSelectedServiceRequest(), serviceName);
+		Assert.assertEquals(serviceRequestsListInteractions.getEmployeeValueForSelectedServiceRequest(), "Employee Simple 20% (Default team)");
+		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Bundle1_Disc_Ex $150.00 (1.00)"));
+		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Quest_Req_Serv $10.00 (1.00)"));
+		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Wheel $70.00 (3.00)"));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
@@ -2784,22 +2786,22 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backOfficeHeaderPanel.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ALL_PHASES.getServiceRequestTypeName());
-		serviceRequestsListWebPage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ALL_PHASES.getServiceRequestTypeName());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		serviceRequestsListWebPage.clickCustomerEditButton();
-		serviceRequestsListWebPage.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.clickVehicleInforEditButton();
-		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(), serviceRequestData.getVihicleInfo().getVehicleModel());
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(), serviceRequestData.getVihicleInfo().getVehicleModel());
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.saveNewServiceRequest();
-		serviceRequestsListWebPage.acceptFirstServiceRequestFromList();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
@@ -2830,23 +2832,23 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backOfficeHeaderPanel.clickOperationsLink();
-		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE.getServiceRequestTypeName());
-		serviceRequestsListWebPage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE.getServiceRequestTypeName());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		serviceRequestsListWebPage.clickCustomerEditButton();
-		serviceRequestsListWebPage.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.clickVehicleInforEditButton();
-		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(), serviceRequestData.getVihicleInfo().getVehicleModel());
-		serviceRequestsListWebPage.clickDoneButton();
-		serviceRequestsListWebPage.addServicesToServiceRequest(serviceRequestData.getPercentageServices());
-		serviceRequestsListWebPage.saveNewServiceRequest();
-		String serviceRequestNumber = serviceRequestsListWebPage.getFirstInTheListServiceRequestNumber();
-		serviceRequestsListWebPage.acceptFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(), serviceRequestData.getVihicleInfo().getVehicleModel());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.addServicesToServiceRequest(serviceRequestData.getPercentageServices());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		String serviceRequestNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 
 		DriverBuilder.getInstance().getDriver().quit();
 
@@ -2870,23 +2872,23 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
 		operationsWebPage = new OperationsWebPage(webdriver);
 		backOfficeHeaderPanel.clickOperationsLink();
-		serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		serviceRequestsListWebPage.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE.getServiceRequestTypeName());
-		serviceRequestsListWebPage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE.getServiceRequestTypeName());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		serviceRequestsListWebPage.clickCustomerEditButton();
-		serviceRequestsListWebPage.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.clickVehicleInforEditButton();
-		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(), serviceRequestData.getVihicleInfo().getVehicleModel());
-		serviceRequestsListWebPage.clickDoneButton();
-		serviceRequestsListWebPage.addServicesToServiceRequest(serviceRequestData.getMoneyServices());
-		serviceRequestsListWebPage.saveNewServiceRequest();
-		serviceRequestNumber = serviceRequestsListWebPage.getFirstInTheListServiceRequestNumber();
-		serviceRequestsListWebPage.acceptFirstServiceRequestFromList();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(), serviceRequestData.getVihicleInfo().getVehicleModel());
+		serviceRequestsListInteractions.clickDoneButton();
+		serviceRequestsListInteractions.addServicesToServiceRequest(serviceRequestData.getMoneyServices());
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		serviceRequestNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 
 		DriverBuilder.getInstance().getDriver().quit();
 
@@ -5393,22 +5395,22 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backOfficeHeaderPanel.clickOperationsLink();
 
-		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		serviceRequestsListWebPage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
-		serviceRequestsListWebPage.clickAddServiceRequestButton();
-		serviceRequestsListWebPage.clickCustomerEditButton();
-		serviceRequestsListWebPage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.clickVehicleInforEditButton();
-		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel());
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.saveNewServiceRequest();
-		final String serviceRequestNumber = serviceRequestsListWebPage.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		final String serviceRequestNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
 		DriverBuilder.getInstance().getDriver().quit();
 
 
@@ -5454,22 +5456,22 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backOfficeHeaderPanel.clickOperationsLink();
 
-		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		serviceRequestsListWebPage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
-		serviceRequestsListWebPage.clickAddServiceRequestButton();
-		serviceRequestsListWebPage.clickCustomerEditButton();
-		serviceRequestsListWebPage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.clickVehicleInforEditButton();
-		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel());
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.saveNewServiceRequest();
-		final String serviceRequestNumber = serviceRequestsListWebPage.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		final String serviceRequestNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
 		DriverBuilder.getInstance().getDriver().quit();
 
 
@@ -5512,22 +5514,22 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backOfficeHeaderPanel.clickOperationsLink();
 
-		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		serviceRequestsListWebPage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
-		serviceRequestsListWebPage.clickAddServiceRequestButton();
-		serviceRequestsListWebPage.clickCustomerEditButton();
-		serviceRequestsListWebPage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.clickVehicleInforEditButton();
-		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel());
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.saveNewServiceRequest();
-		final String serviceRequestNumber = serviceRequestsListWebPage.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		final String serviceRequestNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
 		DriverBuilder.getInstance().getDriver().quit();
 
 
@@ -5576,29 +5578,31 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
 		backOfficeHeaderPanel.clickOperationsLink();
 
-		ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationsWebPage.clickNewServiceRequestList();
-		serviceRequestsListWebPage.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
-		serviceRequestsListWebPage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.selectAddServiceRequestDropDown(ServiceRequestTypes.SR_ACCEPT_ON_MOBILE.getServiceRequestTypeName());
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		serviceRequestsListWebPage.clickGeneralInfoEditButton();
-		serviceRequestsListWebPage.setServiceRequestGeneralInfoAssignedTo(technicianValue);
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickGeneralInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestGeneralInfoAssignedTo(technicianValue);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.clickCustomerEditButton();
-		serviceRequestsListWebPage.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.clickVehicleInforEditButton();
-		serviceRequestsListWebPage.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
-		serviceRequestsListWebPage.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(serviceRequestData.getVihicleInfo().getVINNumber());
+		serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(serviceRequestData.getVihicleInfo().getVehicleMake(),
 				serviceRequestData.getVihicleInfo().getVehicleModel());
-		serviceRequestsListWebPage.clickDoneButton();
+		serviceRequestsListInteractions.clickDoneButton();
 
-		serviceRequestsListWebPage.saveNewServiceRequest();
-		final String serviceRequestNumber = serviceRequestsListWebPage.getFirstInTheListServiceRequestNumber();
-		serviceRequestsListWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListWebPage.addAppointmentFromSRlist(startDate, endDate, technicianValue));
+		serviceRequestsListInteractions.saveNewServiceRequest();
+		final String serviceRequestNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
+		serviceRequestsListInteractions.addAppointmentFromSRList(startDate, endDate, technicianValue);
+        Assert.assertTrue(new ServiceRequestsListVerifications().isAddAppointmentFromSRListClosed(),
+                "The Add Appointment dialog hasn't been closed");
 		DriverBuilder.getInstance().getDriver().quit();
 
 		RegularHomeScreenSteps.navigateToServiceRequestScreen();

@@ -66,29 +66,29 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
 		backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationspage.clickNewServiceRequestList();
-		servicerequestslistpage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(srCustomer);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(srCustomer);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(VIN);
-		//servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(VIN);
+		//serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(_make, _model);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.addServicesToServiceRequest(services);
+		serviceRequestsListInteractions.addServicesToServiceRequest(services);
 		for (int i = 0; i < services.length; i++)
-			servicerequestslistpage.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
+			serviceRequestsListInteractions.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
 		
-		servicerequestslistpage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 		
-		String srNumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
-		servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		String srNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.getWOForFirstServiceRequestFromList();
 		
-		String srWONumber = servicerequestslistpage.getWOForServiceRequestFromList(srNumber);
+		String srWONumber = serviceRequestsListInteractions.getWOForServiceRequestFromList(srNumber);
 
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
@@ -128,29 +128,29 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
 		backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationspage.clickNewServiceRequestList();
-		servicerequestslistpage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(srCustomer);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(srCustomer);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(VIN);
-		//servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(VIN);
+		//serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(_make, _model);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.addServicesToServiceRequest(services);
+		serviceRequestsListInteractions.addServicesToServiceRequest(services);
 		for (int i = 0; i < services.length; i++)
-			servicerequestslistpage.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
+			serviceRequestsListInteractions.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
 		
-		servicerequestslistpage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 		
-		String srNumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
-		servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		String srNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.getWOForFirstServiceRequestFromList();
 		
-		String srWONumber = servicerequestslistpage.getWOForServiceRequestFromList(srNumber);
+		String srWONumber = serviceRequestsListInteractions.getWOForServiceRequestFromList(srNumber);
 
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
@@ -196,29 +196,29 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
 		backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationspage.clickNewServiceRequestList();
-		servicerequestslistpage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(srCustomer);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(srCustomer);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(VIN);
-		//servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(VIN);
+		//serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(_make, _model);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.addServicesToServiceRequest(services);
+		serviceRequestsListInteractions.addServicesToServiceRequest(services);
 		for (int i = 0; i < services.length; i++)
-			servicerequestslistpage.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
+			serviceRequestsListInteractions.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
 		
-		servicerequestslistpage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 		
-		String srNumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
-		servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		String srNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.getWOForFirstServiceRequestFromList();
 		
-		String srWONumber = servicerequestslistpage.getWOForServiceRequestFromList(srNumber);
+		String srWONumber = serviceRequestsListInteractions.getWOForServiceRequestFromList(srNumber);
 
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
@@ -271,29 +271,29 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		OperationsWebPage operationspage = new OperationsWebPage(webdriver);
 		backofficeheader.clickOperationsLink();
 
-		ServiceRequestsListWebPage servicerequestslistpage = new ServiceRequestsListWebPage(webdriver);
+		ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
 		operationspage.clickNewServiceRequestList();
-		servicerequestslistpage.clickAddServiceRequestButton();
+		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
 
-		servicerequestslistpage.clickCustomerEditButton();
-		servicerequestslistpage.selectServiceRequestCustomer(srCustomer);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickCustomerEditButton();
+		serviceRequestsListInteractions.selectServiceRequestCustomer(srCustomer);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.clickVehicleInforEditButton();
-		servicerequestslistpage.setServiceRequestVIN(VIN);
-		//servicerequestslistpage.decodeAndVerifyServiceRequestVIN(_make, _model);
-		servicerequestslistpage.clickDoneButton();
+		serviceRequestsListInteractions.clickVehicleInfoEditButton();
+		serviceRequestsListInteractions.setServiceRequestVIN(VIN);
+		//serviceRequestsListInteractions.decodeAndVerifyServiceRequestVIN(_make, _model);
+		serviceRequestsListInteractions.clickDoneButton();
 
-		servicerequestslistpage.addServicesToServiceRequest(services);
+		serviceRequestsListInteractions.addServicesToServiceRequest(services);
 		for (int i = 0; i < services.length; i++)
-			servicerequestslistpage.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
+			serviceRequestsListInteractions.setServiePriceAndQuantity(services[i], servicesprices[i], servicesquantity);
 		
-		servicerequestslistpage.saveNewServiceRequest();
+		serviceRequestsListInteractions.saveNewServiceRequest();
 		
-		String srNumber = servicerequestslistpage.getFirstInTheListServiceRequestNumber();
-		servicerequestslistpage.getWOForFirstServiceRequestFromList();
+		String srNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
+		serviceRequestsListInteractions.getWOForFirstServiceRequestFromList();
 		
-		String srWONumber = servicerequestslistpage.getWOForServiceRequestFromList(srNumber);
+		String srWONumber = serviceRequestsListInteractions.getWOForServiceRequestFromList(srNumber);
 
 		webdriverGotoWebPage(MonitorLiteConfigInfo.getInstance().getBackOfficeMonitorLiteURL());
 		VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,

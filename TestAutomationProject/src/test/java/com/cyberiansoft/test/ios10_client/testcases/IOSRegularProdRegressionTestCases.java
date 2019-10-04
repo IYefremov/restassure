@@ -17,7 +17,6 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.enums.ServiceRequestAppointmentStatuses;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
@@ -28,7 +27,6 @@ import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderType
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -347,16 +345,16 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         backOfficeHeaderPanel.clickOperationsLink();
         OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
         operationsWebPage.clickNewServiceRequestList();
-        ServiceRequestsListWebPage serviceRequestsListWebPage = new ServiceRequestsListWebPage(webdriver);
-        serviceRequestsListWebPage.makeSearchPanelVisible();
+        ServiceRequestsListInteractions serviceRequestsListInteractions = new ServiceRequestsListInteractions();
+        serviceRequestsListInteractions.makeSearchPanelVisible();
 
-        serviceRequestsListWebPage.setSearchFreeText(serviceRequestNumber);
-        serviceRequestsListWebPage.clickFindButton();
-        serviceRequestsListWebPage.selectFirstServiceRequestFromList();
-        Assert.assertEquals(serviceRequestsListWebPage.getServiceRequestInspectionNumber(), inspectionNumber);
-        Assert.assertEquals(serviceRequestsListWebPage.getServiceRequestWorkOrderNumber(), workOrderNumber);
-        Assert.assertEquals(serviceRequestsListWebPage.getServiceRequestInvoiceNumber(), invoiceNumber);
-        Assert.assertEquals(serviceRequestsListWebPage.getServiceRequestAppointmentStatus(), ServiceRequestAppointmentStatuses.SCHEDULED.getAppointmentStatus());
+        serviceRequestsListInteractions.setSearchFreeText(serviceRequestNumber);
+        serviceRequestsListInteractions.clickFindButton();
+        serviceRequestsListInteractions.selectFirstServiceRequestFromList();
+        Assert.assertEquals(serviceRequestsListInteractions.getServiceRequestInspectionNumber(), inspectionNumber);
+        Assert.assertEquals(serviceRequestsListInteractions.getServiceRequestWorkOrderNumber(), workOrderNumber);
+        Assert.assertEquals(serviceRequestsListInteractions.getServiceRequestInvoiceNumber(), invoiceNumber);
+        Assert.assertEquals(serviceRequestsListInteractions.getServiceRequestAppointmentStatus(), ServiceRequestAppointmentStatuses.SCHEDULED.getAppointmentStatus());
         webdriver.quit();
     }
 

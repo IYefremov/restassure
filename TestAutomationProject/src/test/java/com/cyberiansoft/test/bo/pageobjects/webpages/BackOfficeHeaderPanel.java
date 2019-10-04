@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.JavascriptExecutor;
@@ -61,13 +63,10 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		waitABit(1000);
 		JavascriptExecutor jse = (JavascriptExecutor) driver;
 		jse.executeScript("window.scrollBy(0,-500)", "");
+		Utils.clickElement(logoutlink);
+		BackOfficeLoginWebPage loginpage = new BackOfficeLoginWebPage(driver);
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(logoutlink)).click();
-		} catch (Exception ignored) {
-		}
-		BackOfficeLoginWebPage loginpage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
-		try {
-			wait.until(ExpectedConditions.visibilityOf(loginpage.getLoginButton()));
+            WaitUtilsWebDriver.waitForVisibility(loginpage.getLoginButton(), 10);
 		} catch (TimeoutException e) {
 			DriverBuilder.getInstance().quitDriver();
 		}
@@ -76,16 +75,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 
 	public void clickOperationsLink() {
 		waitABit(5000);
-		if (getBrowserType().contains("edge")) {
-			try {
-				new Actions(driver).moveToElement(operationstab).click().build().perform();
-			} catch (Exception e) {
-				e.printStackTrace();
-				clickWithJS(operationstab);
-			}
-		} else {
-			wait.until(ExpectedConditions.elementToBeClickable(operationstab)).click();
-		}
+        Utils.clickElement(operationstab);
 	}
 
 	public void clickHomeLink() {
@@ -113,10 +103,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public void refresh() {
-		try {
-			driver.switchTo().alert().accept();
-		} catch (Exception ignored) {
-		}
+	    Utils.acceptAlertIfPresent();
 		driver.navigate().refresh();
 	}
 
