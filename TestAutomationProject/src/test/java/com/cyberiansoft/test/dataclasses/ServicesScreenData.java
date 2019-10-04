@@ -35,6 +35,9 @@ public class ServicesScreenData {
     @JsonProperty("laborService")
     LaborServiceData laborService;
 
+    @JsonProperty("matrixService")
+    com.cyberiansoft.test.dataclasses.MatrixServiceData matrixService;
+
     @JsonProperty("screenPrice")
     String screenPrice;
 

@@ -40,6 +40,8 @@
           <include name="testVerifyThatPhaseIsCompletedCorrect" />
           <include name="testVerifyRefreshPicturesActionForInvoices" />
           <include name="testVerifyCalculationForServiceBundleServiceFeeBundleDiscount" />
+          <include name="testVerifySplitWorkForTechniciansUnderWO" />
+          <include name="testVerifySaveInvoiceAsDraftAndSendEmail" />
         </methods>
       </class>
     </classes>

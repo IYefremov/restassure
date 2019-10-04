@@ -24,8 +24,6 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     public RegularVehiclePartScreen() {
         super();
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-
-        //viewMode = "PdrView";
     }
 
     public void waitVehiclePartScreenLoaded() {
@@ -73,12 +71,6 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         MobileElement elDiscount = (MobileElement) table.findElementByAccessibilityId(discaunt);
         if (!elDiscount.isDisplayed())
             swipeToElement(table.findElement(MobileBy.AccessibilityId(discaunt)));
-
-        /*else {
-            TouchAction swipe = new TouchAction(appiumdriver).press(element(table, table.getSize().width/2, table.getSize().height-30))
-                    .waitAction(WaitOptions.waitOptions(Duration.ofSeconds(2))).moveTo(element(table, table.getSize().width/2, 50)).release();
-            swipe.perform();
-        }*/
         table.findElement(MobileBy.AccessibilityId(discaunt)).click();
     }
 

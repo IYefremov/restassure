@@ -12,9 +12,20 @@ public class RegularTeamWorkOrdersSteps {
         teamWorkOrdersScreen.clickSearchSaveButton();
     }
 
-    public static void openTeamWorkOrderMonitor(String workOrderID) {
+    public static void openTeamWorkOrderMonitor(String workOrderId) {
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
-        teamWorkOrdersScreen.selectWorkOrder(workOrderID);
+        teamWorkOrdersScreen.selectWorkOrder(workOrderId);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.MONITOR);
+    }
+
+    public static void clickCreateInvoiceIconForWO(String workOrderId) {
+        RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
+        teamWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderId);
+    }
+
+    public static void clickOpenMonitorForWO(String workOrderId) {
+        RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
+        teamWorkOrdersScreen.selectWorkOrder(workOrderId);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.MONITOR);
     }
 }

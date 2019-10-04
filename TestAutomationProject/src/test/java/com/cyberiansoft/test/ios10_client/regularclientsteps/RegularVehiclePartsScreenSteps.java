@@ -14,6 +14,10 @@ public class RegularVehiclePartsScreenSteps {
 
     public static void selectVehiclePartAndSetData(VehiclePartData vehiclePartData) {
         selectVehiclePart(vehiclePartData);
+        if (vehiclePartData.getVehiclePartPrice() != null)
+            setVehiclePartPrice(vehiclePartData.getVehiclePartPrice());
+        if (vehiclePartData.getVehiclePartTime() != null)
+            setVehiclePartTime(vehiclePartData.getVehiclePartTime());
         if (vehiclePartData.getVehiclePartAdditionalServices() != null) {
             for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
                 selectVehiclepartAdditionalService(serviceData);
@@ -22,10 +26,6 @@ public class RegularVehiclePartsScreenSteps {
         if (vehiclePartData.getVehiclePartAdditionalService() != null) {
             selectVehiclepartAdditionalService(vehiclePartData.getVehiclePartAdditionalService());
         }
-        if (vehiclePartData.getVehiclePartPrice() != null)
-            setVehiclePartPrice(vehiclePartData.getVehiclePartPrice());
-        if (vehiclePartData.getVehiclePartTime() != null)
-            setVehiclePartTime(vehiclePartData.getVehiclePartTime());
     }
 
     public static void saveVehiclePart() {

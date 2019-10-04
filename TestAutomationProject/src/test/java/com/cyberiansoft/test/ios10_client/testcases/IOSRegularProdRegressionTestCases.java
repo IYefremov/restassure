@@ -1197,7 +1197,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices())
             RegularOrderMonitorScreenValidations.verifyServiceStatus(serviceData, OrderMonitorStatuses.ACTIVE);
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices())
-            RegularOrderMonitorScreenSteps.setSericeStatus(serviceData, OrderMonitorStatuses.COMPLETED);
+            RegularOrderMonitorScreenSteps.setServiceStatus(serviceData, OrderMonitorStatuses.COMPLETED);
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices())
             RegularOrderMonitorScreenValidations.verifyServiceStatus(serviceData, OrderMonitorStatuses.COMPLETED);
 

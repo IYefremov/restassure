@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
 import io.appium.java_client.MobileBy;
@@ -290,6 +291,22 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Start").click();
 	}
 
+	public void openOrderPhasesList() {
+	    waitOrderMonitorScreenLoaded();
+		monitorserviceslist.findElementByAccessibilityId("lblPhaseName").click();
+	}
+
+	public void selectOrderPhaseStatus(OrderMonitorStatuses orderPhaseStatus) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(orderPhaseStatus.getValue())));
+		appiumdriver.findElement(MobileBy.AccessibilityId(orderPhaseStatus.getValue())).click();
+	}
+
+	public String getOrderMonitorPhaseStatusValue() {
+		waitOrderMonitorScreenLoaded();
+		return monitorserviceslist.findElementByAccessibilityId("lblPhaseStatus").getAttribute("value");
+	}
+
 	public void changeStatusForWorkOrder(String newWOSTatus, String reason) {
 		MobileElement toolbar = (MobileElement) appiumdriver.findElementByAccessibilityId("Toolbar");
 		toolbar.findElementsByClassName("XCUIElementTypeButton").get(2).click();
@@ -304,7 +321,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public String getMonitorServiceAmauntValue(String serviceName) {
-		return appiumdriver.findElementByAccessibilityId("MonitorOrderServicesList")
+		return monitorserviceslist
 				.findElement(MobileBy.AccessibilityId(serviceName))
 				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label").replaceAll("\n", " ");
 	}
@@ -314,7 +331,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		if (serviceData.getVehiclePart() != null) {
 			serviceName = serviceName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
 		}
-		return appiumdriver.findElementByAccessibilityId("MonitorOrderServicesList")
+		return monitorserviceslist
 				.findElement(MobileBy.AccessibilityId(serviceName))
 				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label").replaceAll("\n", " ");
 	}

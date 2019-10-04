@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Cyberiansoft iOS Regular Calculations test cases" verbose="10" configfailurepolicy="continue">
   <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"  />
-    <parameter name="tpsuite.id" value="83604"  />
+    <parameter name="tpsuite.id" value="88991"  />
     <parameter name="tp.integration" value="false"  />
   <listeners>
       <listener class-name="com.cyberiansoft.test.ios10_client.listeners.iOSregularClientListener"/>
@@ -12,19 +12,19 @@
         <methods>
 
 
-        <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
-        <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
-        <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
-        <include name="testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1" />
-        <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1" />
-        <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1" />
-        <include name="testWOVerifyCalculationWithPriceMatrixLaborType_1" />
-        <include name="testInvoicesVerifyRoundingMoneyAmountValues_1" />
+        <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity" />
+        <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices" />
+        <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly" />
+        <include name="testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined" />
+        <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount" />
+        <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc" />
+        <include name="testWOVerifyCalculationWithPriceMatrixLaborType" />
+        <include name="testInvoicesVerifyRoundingMoneyAmountValues" />
 
         
   			<include name="testCreateInspectionOnTheDeviceWithApprovalRequired" />    
             <include name="testAddServicesToVisualInspection" />
-            <include name="testIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
+            <include name="testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart" />
             <include name="testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices" />
             <include name="testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
             <include name="testVerifyIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO" />
@@ -54,17 +54,8 @@
         	<include name="testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale" />
         	<include name="testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO" />
         	<include name="testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval" />
-        	
-        	
-        <include name="testRegularIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2" /> 
-        <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2" />   
-        <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2" /> 
-        <include name="testRegularVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2" /> 
-        <include name="testRegularVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2" /> 
-        <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2" />
-        <include name="testWOVerifyCalculationWithPriceMatrixLaborType_2" />
-        <include name="testInvoicesVerifyRoundingMoneyAmountValues_2" />
-        
+            <include name="testWOVerifyThatCalculationIsCorrectForWOWithAllTypeOfServices" />
+
         </methods>
       </class>
     </classes>

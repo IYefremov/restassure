@@ -21,7 +21,7 @@
         "vehicleModel": "1.6 EL",
         "vehicleColor": "Black"
       },
-      "visualScreensData" : [
+      "visualScreensData": [
         {
           "screenName": "Interior",
           "damagesData": [
@@ -40,10 +40,10 @@
               }
             }
           ],
-          "screenPrice" : "$175.00",
-          "screenTotalPrice" : "$225.00",
-          "screenPrice2" : "$255.00",
-          "screenTotalPrice2" : "$405.00"
+          "screenPrice": "$175.00",
+          "screenTotalPrice": "$225.00",
+          "screenPrice2": "$255.00",
+          "screenTotalPrice2": "$405.00"
         },
         {
           "screenName": "Exterior",
@@ -56,13 +56,12 @@
               }
             }
           ],
-          "screenPrice" : "$150.00",
-          "screenTotalPrice" : "$325.00",
-          "screenPrice2" : "$250.00",
-          "screenTotalPrice2" : "$505.00"
+          "screenPrice": "$150.00",
+          "screenTotalPrice": "$325.00",
+          "screenPrice2": "$250.00",
+          "screenTotalPrice2": "$505.00"
         }
       ],
-
       "inspPrice": "$325.00"
     }
   ],
@@ -70,6 +69,11 @@
     {
       "rowID": "testVerifyIfFeeBundleItemPricePolicyPanelThenItWillBeAddedOnceForManyAssociatedServiceInstancesWithSameVehiclePart.01",
       "description": "Test Case 28580:WO: If fee bundle item price policy = 'Panel' then it will be added once for many associated service instances with same vehicle part.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88829"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397",
         "vehicleMake": "Mitsubishi",
@@ -108,6 +112,11 @@
     {
       "rowID": "testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity.01",
       "description": "Test Case 28583:WO: If one fee bundle item is related to 2 or more fee bundle packages and assigned service is selected in WO then amount of the fee will be multiple to package quantity",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88828"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397",
         "vehicleMake": "Mitsubishi",
@@ -128,6 +137,11 @@
     {
       "rowID": "testVerifyThatPackagePriceOfFeeBundleItemIsOverrideThePriceOfWholesaleAndRetailPrices.01",
       "description": "Test Case 28585:WO: Verify that package price of fee bundle item is override the price of wholesale and retail prices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88827"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397",
         "vehicleMake": "Mitsubishi",
@@ -144,6 +158,11 @@
     {
       "rowID": "testVerifyIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances.01",
       "description": "Test Case 28600:WO: If fee bundle item price policy = 'Vehicle' then it will be added once for many associated service instances",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88826"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397",
         "vehicleMake": "Mitsubishi",
@@ -194,6 +213,11 @@
     {
       "rowID": "testVerifyIfFeeBundleItemPricePolicyServiceOrFlatFeeThenItWillBeAddedToWOEveryTimeWhenAssociatedServiceInstanceWillAddToWO.01",
       "description": "Test Case 28601:WO: If fee bundle item price policy = 'Service' or 'Flat Fee' then it will be added to WO every time when associated service instance will add to WO.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88825"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397",
         "vehicleMake": "Mitsubishi",
@@ -232,6 +256,11 @@
     {
       "rowID": "testVerifyThatForWholesaleAndRetailCustomersFeeIsAddedDependsOnThePriceAccordinglyToPriceOfTheFeeBundleItem.01",
       "description": "Test Case 28602:WO: Verify that for Wholesale and Retail customers fee is added depends on the price accordingly to price of the fee bundle item",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88824"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397",
         "vehicleMake": "Mitsubishi",
@@ -270,6 +299,11 @@
     {
       "rowID": "testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices.01",
       "description": "Test Case 29398:WO: Verify that Fee Bundle services is calculated for additional matrix services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88823"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -300,6 +334,11 @@
     {
       "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_095.01",
       "description": "Test Case 30672:WO: Verify that money value of some percentage service is rounds up after 0.095",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88767"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -327,6 +366,11 @@
     {
       "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_003.01",
       "description": "Test Case 30675:WO: Verify that money value of some percentage service is rounds down after 0.003",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88766"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -354,6 +398,11 @@
     {
       "rowID": "testVerifyThatMoneyValueOfSomePercentageServiceIsRoundsUpAfter0_005.01",
       "description": "Test Case 30676:WO: Verify that money value of some percentage service is rounds up after 0.005",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88765"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -381,6 +430,11 @@
     {
       "rowID": "testVerifyThatAmountIsCalculatedAndRoundedCorrectly.01",
       "description": "Test Case 31498:WO: Verify that amount is calculated and rounded correctly",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88764"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -444,6 +498,11 @@
     {
       "rowID": "testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined.01",
       "description": "Test Case 32226:Inspections: Verify that inspection is saved as declined when all services are skipped or declined",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88641"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -472,6 +531,11 @@
     {
       "rowID": "testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount.01",
       "description": "Test Case 32286:Inspections: Verify that amount of approved services are shown on BO > inspectiontypes list > column Approved Amount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88640"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -511,6 +575,11 @@
     {
       "rowID": "testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc.01",
       "description": "Test Case 32287:Inspections: Verify that amount of skipped/declined services are not calc go approved amount BO > inspectiontypes list > column Approved Amount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88639"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "1D7HW48NX6S507810"
       },
@@ -551,6 +620,11 @@
     {
       "rowID": "testInspectionVerifyServicesAreMarkedAsStrikethroughWhenExcludeFromTotal.01",
       "description": "Test Case 33664:Inspections: Verify that services are marked as strikethrough when exclude from total",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88636"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "1D7HW48NX6S507810"
       },
@@ -597,6 +671,11 @@
     {
       "rowID": "testVerifyThatValueSelectedOnPriceMatrixStepIsSavedAndShownDuringEditMode.01",
       "description": "Test Case 38748:Inspections: Verify that value selected on price matrix step is saved and shown during edit mode",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88448"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -654,6 +733,11 @@
     {
       "rowID": "testWOVerifyThatMessageIsShownTotalIsOverLimitation.01",
       "description": "Test Case 42184:WO: Verify that message is shown total is over limitation 999999999.999",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88762"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -674,6 +758,11 @@
     {
       "rowID": "testInvoicesVerifyThatMessageIsShownTotalIsOverLimitation.01",
       "description": "Test Case 42183:Invoices: Verify that message is shown total is over limitation 999,999,999.999",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88699"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -698,6 +787,11 @@
     {
       "rowID": "testInspectionVerifyThatMessageIsShownTotalIsOverLimitation.01",
       "description": "Test Case 42182:Inspection: Verify that message is shown total is over limitation 999999999.999",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88551"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -717,6 +811,11 @@
     {
       "rowID": "testVerifyApprovedAmountForInspectionCreatedFromSR.01",
       "description": "Test Case 42372:Inspections: Verify approved amount for Inspection created from SR",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88550"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "1D7HW48NX6S507810",
         "vehicleMake": "Dodge",
@@ -754,6 +853,11 @@
     {
       "rowID": "testWOVerifyCalculationWithPriceMatrixLaborType.01",
       "description": "Test Case 45224:WO: Verify calculation with price matrix Labor type",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88451"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -832,6 +936,14 @@
     {
       "rowID": "testVerifyThatOnPriceMatrixStepSubTotalValueIsShownCorrectly.01",
       "description": "Test Case 47249:Inspections: Verify that on Price matrix step sub total value is shown correctly, Test Case 47257:WO: Verify that on Price Matrix step sub total is shown correctly",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88447"
+        },
+        {
+          "testCaseID": "88452"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "JA4LS31H8YP047397"
       },
@@ -906,7 +1018,15 @@
   "testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection": [
     {
       "rowID": "testInspectionVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForInspection.01",
-      "description": "Test Case 48543:Inspections: Verify that part services with different configurations are correctly shown for inspection",
+      "description": "Test Case 48543:Inspections: Verify that part services with different configurations are correctly shown for inspection, Test Case 48562 WO: HD&Regular - Verify that part services are copied from insp to order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88658"
+        },
+        {
+          "testCaseID": "88594"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -964,7 +1084,7 @@
             "servicePrice": "5.09",
             "questionData": {
               "questionName": "QuestionTypeLogical_Q1",
-              "logicalQuestion" : true
+              "logicalQuestion": true
             }
           },
           {
@@ -1101,6 +1221,11 @@
     {
       "rowID": "testWOVerifyThatPartServicesWithDifferentConfigurationsAreCorrectlyShownForWO.01",
       "description": "Test Case 48563:WO: Verify that part services with different configurations are correctly shown for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88736"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1158,7 +1283,7 @@
             "servicePrice": "5.09",
             "questionData": {
               "questionName": "QuestionTypeLogical_Q1",
-              "logicalQuestion" : true
+              "logicalQuestion": true
             }
           },
           {
@@ -1268,6 +1393,11 @@
     {
       "rowID": "testWOVerifyRoundingInCalculationScriptWithPriceMatrix.01",
       "description": "Test Case 45100:WO: Verify rounding in calculation script with price matrix",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88450"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1321,6 +1451,11 @@
     {
       "rowID": "testInvoicesVerifyRoundingMoneyAmountValues.01",
       "description": "Test Case 42803:Invoices: Verify rounding money amount values",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88700"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1394,6 +1529,11 @@
     {
       "rowID": "testInspectionsVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenAppoveInspection.01",
       "description": "Test Case 40463:Inspections: Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when appove inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88630"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1480,6 +1620,11 @@
     {
       "rowID": "testVerifyThatAppovedAmountIsShownOnInspectionListInDarkGreenAndTotalInDarkGrayWhenDeclineInspection.01",
       "description": "Test Case 40466:Inspections: Verify that appoved amount is shown on Inspection list in dark green and total in dark gray when decline inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88631"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1530,6 +1675,11 @@
     {
       "rowID": "testInspectionsVerifyThatUpdatedValueForRequiredServiceWith0PriceIsSavedWhenPackageArouvedByPanels.01",
       "description": "Test Case 38970:Inspections: Verify that updated value for required service with 0 Price is saved when package grouped by panels",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88532"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1553,6 +1703,11 @@
     {
       "rowID": "testWOVerifyThatForBundleItemsPricePolicyIsApplied.01",
       "description": "Test Case 35030:WO: Verify that for bundle items price policy is applied",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88837"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1640,6 +1795,11 @@
     {
       "rowID": "testWOVerifyThatForSalesTaxServiceDataIsSetFromDBWhenCreateWOForCustomerWithAppropriateData.01",
       "description": "Test Case 40541:WO: Verify that for Sales Tax Service data is set from DB when create WO for customer with appropriate data",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88830"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1730,6 +1890,11 @@
     {
       "rowID": "testInvoicesVerifyThatTaxRoundingIsCorrectlyCalculated.01",
       "description": "Test Case 49680:Invoices: Verify that tax rounding is correctly calculated",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88995"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1782,6 +1947,11 @@
     {
       "rowID": "testInspectionsVerifyThatTaxIsCalcCorrectlyFromServicesWithTaxExemptYESNo.01",
       "description": "Test Case 49915:Inspections: Verify that tax is calc correctly from services with tax exempt YES/No",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88999"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1843,6 +2013,11 @@
     {
       "rowID": "testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale.01",
       "description": "Test Case 49945: Verify that package price overrides client (retail or wholesale)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89000"
+        }
+      ],
       "workOrdersData": [
         {
           "wholesailCustomer": {
@@ -1886,6 +2061,11 @@
     {
       "rowID": "testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO.01",
       "description": "Test Case 50013:WO: Verify that client and job overrides are working fine for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89001"
+        }
+      ],
       "workOrderData": {
         "workOrderJob": "Job for test",
         "vihicleInfo": {
@@ -1912,15 +2092,173 @@
       }
     }
   ],
+  "testWOVerifyThatCalculationIsCorrectForWOWithAllTypeOfServices": [
+    {
+      "rowID": "testWOVerifyThatCalculationIsCorrectForWOWithAllTypeOfServices.01",
+      "description": "Test Case 50529:Invoice: Verify that calculation is correct for WO with all type of services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89002"
+        }
+      ],
+      "workOrderData": {
+        "workOrderJob": "Job for test",
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "Money_client_override",
+            "servicePrice": "$4.79"
+          },
+          {
+            "serviceName": "Money_job_override",
+            "servicePrice": "$13.84"
+          }
+        ],
+        "servicesScreen" : {
+          "screenPrice": "$746.84",
+          "screenTotalPrice": "$730.77",
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size",
+              "servicePrice": "100"
+            },
+            {
+              "serviceName": "Oksi_Service_PP_Vehicle",
+              "servicePrice": "13",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Back Glass"
+                },
+                {
+                  "vehiclePartName": "Driver Seat"
+                }
+              ],
+              "questionData": {
+                "questionName": "QuestionTypeSelect_Question 2",
+                "questionAnswer": "A3"
+              }
+            },
+            {
+              "serviceName": "Oksi_Service_PP_Panel",
+              "servicePrice": "12",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Dashboard"
+                },
+                {
+                  "vehiclePartName": "Driver Seat"
+                }
+              ]
+            },
+            {
+              "serviceName": "Money_Discount_Exempt",
+              "servicePrice": "100",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Back Glass"
+                }
+              ]
+            },
+            {
+              "serviceName": "Money_Tax_Exempt",
+              "servicePrice": "100",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Driver Seat"
+                }
+              ]
+            },
+            {
+              "serviceName": "Money_TE_DE",
+              "servicePrice": "100",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Deck Lid"
+                }
+              ]
+            }
+          ],
+          "percentageServices": [
+            {
+              "serviceName": "Discount 5-10%"
+            },
+            {
+              "serviceName": "Tax discount"
+            }
+          ],
+          "bundleService": {
+            "bundleServiceName": "Bundle1_Disc_Ex",
+            "services": [
+              {
+                "serviceName": "Dye",
+                "servicePrice": "30"
+              }
+            ],
+            "bundleServiceAmount": "100"
+          },
+          "matrixService": {
+            "matrixServiceName": "Test service price matrix",
+            "hailMatrixName": "PM_with_%_services",
+            "vehiclePartData": {
+              "vehiclePartName": "Vehicle part new1",
+              "vehiclePartOption": "PDR",
+              "vehiclePartPrice": "100",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "SR_Disc_20_Percent"
+                },
+                {
+                  "serviceName": "SR_S6_Bl_I2_Percent"
+                },
+                {
+                  "serviceName": "Wheel",
+                  "servicePrice": "100"
+                }
+              ]
+            }
+          }
+        },
+        "workOrderPrice": "$13.84",
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        }
+      },
+      "invoiceData": {
+        "poNumber" : "123po",
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3"
+          }
+        },
+        "invoiceTotal" : "$730.77"
+      }
+    }
+  ],
   "testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval": [
     {
       "rowID": "testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval.01",
       "description": "Test Case 32190:Inspections: Verify that for Declined/Skipped services appropriate icon is shown after approval, Test Case 32191:Inspections: Verify that declined/skipped services are marked with text (Declined) or (Skipped) accordingly on Inspection Summary screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88644"
+        },
+        {
+          "testCaseID": "88643"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
         },
-        "service" : {
+        "service": {
           "serviceName": "WHEEL REPAIR"
         },
         "moneyServices": [
