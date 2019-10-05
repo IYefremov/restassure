@@ -1,77 +1,129 @@
 {
-	"testVerifyUserCanAddSupplementIfAllowSupplementsSetToON": [
+  "testVerifyUserCanAddSupplementIfAllowSupplementsSetToON": [
     {
       "rowID": "testVerifyUserCanAddSupplementIfAllowSupplementsSetToON.01",
       "description": "Test Case 71996:Verify user can add supplement if Allow Supplements=ON",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91720",
+          "testCaseTitle": "Verify user can add supplement if Allow Supplements=ON"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "TEST"
+      "vihicleInfo": {
+        "vinNumber": "TEST"
       },
       "newVinNumber": "TESTNEW"
     }
   ],
-  
-    "testVerifyUserCantCreateSupplementIfAllowSupplementsSetToOff": [
+  "testVerifyUserCantCreateSupplementIfAllowSupplementsSetToOff": [
     {
       "rowID": "testVerifyUserCantCreateSupplementIfAllowSupplementsSetToOff.01",
       "description": "Test Case 71997:Verify user can't create supplement if allow supplement=OFF",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91721",
+          "testCaseTitle": "Verify user can't create supplement if allow supplement=OFF"
+        }
+      ],
       "inspType": "O_Kramar2",
-      "vihicleInfo": {"vinNumber": "TEST"
+      "vihicleInfo": {
+        "vinNumber": "TEST"
       }
     }
   ],
-
-	"testVerifyUserCanAddSupplementAfterApproveInspection": [
+  "testVerifyUserCanAddSupplementAfterApproveInspection": [
     {
       "rowID": "testVerifyUserCanAddSupplementAfterApproveInspection.01",
       "description": "Test Case 72586:Verify user can add supplement after approve Inspection, Test Case 72803:Verify Inspectin status changed to New after ceation supplement",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91724",
+          "testCaseTitle": "Verify user can add supplement after approve Inspection."
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "TEST"
+      "vihicleInfo": {
+        "vinNumber": "TEST"
       },
-      "service": {"serviceName": "Battery Installation",
-      "servicePrice": "50",
-      "serviceStatus": "New"
+      "service": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "50",
+        "serviceStatus": "New"
       }
     }
   ],
-  
-  	"testVerifySupplementWillNOTCreatedIfUserDontChangePriceOrQuantity": [
+  "testVerifySupplementWillNOTCreatedIfUserDontChangePriceOrQuantity": [
     {
       "rowID": "testVerifySupplementWillNOTCreatedIfUserDontChangePriceOrQuantity.01",
       "description": "Test Case 72806:Verify supplement will NOT created if user don't change price or quantity",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91731",
+          "testCaseTitle": "Verify supplement will NOT created if user don't change price or quantity."
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "TEST"
+      "vihicleInfo": {
+        "vinNumber": "TEST"
       },
-      "service": {"serviceName": "Battery Installation"
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
-  
-  	"testVerifyUserCanAddSupplementWhenEditInspection": [
+  "testVerifyUserCanAddSupplementWhenEditInspection": [
     {
       "rowID": "testVerifyUserCanAddSupplementWhenEditInspection.01",
       "description": "Test Case 72585:Verify user can't add supplement when edit Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91723",
+          "testCaseTitle": "Verify user can't add supplement when edit Inspection."
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "TEST"
+      "vihicleInfo": {
+        "vinNumber": "TEST"
       },
-      "services": [{"serviceName": "Battery Installation",
-      "servicePrice": "10"
-      }, {"serviceName": "Labor",
-      "servicePrice": "20",
-      "serviceQuantity": "2"
-      }]
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "10"
+        },
+        {
+          "serviceName": "Labor",
+          "servicePrice": "20",
+          "serviceQuantity": "2"
+        }
+      ]
     }
   ],
-  
   "testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection": [
     {
       "rowID": "testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection.01",
       "description": "Test Case 72594:Verify user can add supplements only for Approved or New Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91727",
+          "testCaseTitle": "Verify user can add supplements only for Approved or New Inspection."
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "TEST"
+      "vihicleInfo": {
+        "vinNumber": "TEST"
       },
-      "service": {"serviceName": "Damage Service"
+      "service": {
+        "serviceName": "Damage Service"
       },
-      "services": [{"serviceName": "Battery Installation"}, {"serviceName": "Labor"}]
+      "services": [
+        {
+          "serviceName": "Battery Installation"
+        },
+        {
+          "serviceName": "Labor"
+        }
+      ]
     }
   ]
 }

@@ -1,135 +1,226 @@
 {
-
   "testVerifyUserCanDeleteWOIfAllowDeleteON": [
     {
       "rowID": "testVerifyUserCanDeleteWOIfAllowDeleteON.01",
       "description": "Test Case 67042:Verify user can delete WO if 'Allow Delete=ON'",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91989",
+          "testCaseTitle": "Verify user can delete WO if \"Allow Delete=ON\""
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCantDeleteWOIfAllowDeleteOFF": [
     {
       "rowID": "testVerifyUserCantDeleteWOIfAllowDeleteOFF.01",
       "description": "Test Case 67043:Verify user can't delete WO if 'Allow Delete=OFF'",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91990",
+          "testCaseTitle": "Verify user can't delete WO if \"Allow Delete=OFF\""
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "insuranceCompany" : { "insuranceCompanyName" : "Miami Beach Insurance", "claimNumber" : "4Bc",
-        "policyNumber" : "12345"
+      "insuranceCompany": {
+        "insuranceCompanyName": "Miami Beach Insurance",
+        "claimNumber": "4Bc",
+        "policyNumber": "12345"
       }
     }
   ],
-
   "testVerifyTeamWODisplaysInMyWOsListIfWOWasCreatedFromTeamInspection": [
     {
       "rowID": "testVerifyTeamWODisplaysInMyWOsListIfWOWasCreatedFromTeamInspection.01",
       "description": "Test Case 67329:Verify Team WO displays in My WO list if WO was created from Team Inspection",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91918",
+          "testCaseTitle": "Verify Team WO displays in My WO list if WO was created from Team Inspection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanCreateWOFromTeamInspection": [
     {
       "rowID": "testVerifyUserCanCreateWOFromTeamInspection.01",
       "description": "Test Case 68376:Verify user can create WO from Team Inspection",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91919",
+          "testCaseTitle": "Verify user can create WO from Team Inspection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Damage Service"
-      }]
+      "services": [
+        {
+          "serviceName": "Aluminum Panel"
+        },
+        {
+          "serviceName": "Damage Service"
+        }
+      ]
     }
   ],
-
   "testVerifyUserCanCreateWOOnlyFromApprovedTeamInspection": [
     {
       "rowID": "testVerifyUserCanCreateWOOnlyFromApprovedTeamInspection.01",
       "description": "Test Case 68377:Verify user can create WO only from Approved Team Inspection",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91920",
+          "testCaseTitle": "Verify user can create WO only from Approved Team Inspection."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyAllSelectedServicesFromInspectionDisplaysWhenUserCreateWO": [
     {
       "rowID": "testVerifyAllSelectedServicesFromInspectionDisplaysWhenUserCreateWO.01",
       "description": "Test Case 68379:Verify all selected services from Inspection displays when user create WO",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91922",
+          "testCaseTitle": "Verify all selected services from Inspection displays when user create WO."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "insuranceCompany" : { "insuranceCompanyName" : "Miami Beach Insurance"
+      "insuranceCompany": {
+        "insuranceCompanyName": "Miami Beach Insurance"
       },
-      "services": [{"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Damage Service"
-      }]
+      "services": [
+        {
+          "serviceName": "Aluminum Panel"
+        },
+        {
+          "serviceName": "Damage Service"
+        }
+      ]
     }
   ],
-
   "testVerifyUserCanDeleteWOIfThisWOWasCreatedFromTeamInspectionScreen": [
     {
       "rowID": "testVerifyUserCanDeleteWOIfThisWOWasCreatedFromTeamInspectionScreen.01",
       "description": "Test Case 68380:Verify user can delete WO if this WO was created from Team Inspection screen, Test Case 68378:Verify deleted WO doesn't displays in Team/My WO list",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91923",
+          "testCaseTitle": "Verify user can delete WO if this WO was created from Team Inspection screen."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyItIsNotPossibleToEditTeamWorkOrderWithDeviceOnFlyMode": [
     {
       "rowID": "testVerifyItIsNotPossibleToEditTeamWorkOrderWithDeviceOnFlyMode.01",
       "description": "Test Case 68486:Verify user can edit WO if we have no internet connection",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91912",
+          "testCaseTitle": "Verify user can edit WO if we have no internet connection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanEditTeamWorkOrder": [
     {
       "rowID": "testVerifyUserCanEditTeamWorkOrder.01",
       "description": "Test Case 68485:Verify user can edit Team WO",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91911",
+          "testCaseTitle": "Verify user can edit Team WO"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices": [
     {
       "rowID": "testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices.01",
       "description": "Verify user can edit team Work Order (add and remove services)",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "moneyService": {"serviceName": "Battery Installation"
+      "moneyService": {
+        "serviceName": "Battery Installation"
       },
-      "percentageService": {"serviceName": "Bundle Discount"
+      "percentageService": {
+        "serviceName": "Bundle Discount"
       }
     }
   ],
-
   "testVerifyItIsPossibleToAddServiceByOpeningServiceDetailsScreenAndSave": [
     {
       "rowID": "testVerifyItIsPossibleToAddServiceByOpeningServiceDetailsScreenAndSave.01",
       "description": "Verify it is possible to add service by opening service details screen and save",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "moneyService": {"serviceName": "Battery Installation", "servicePrice" : "9.99", "serviceQuantity" : "0.99"
+      "moneyService": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "9.99",
+        "serviceQuantity": "0.99"
       },
-      "percentageService": {"serviceName": "Aluminum Panel", "servicePrice" : "1.99"
+      "percentageService": {
+        "serviceName": "Aluminum Panel",
+        "servicePrice": "1.99"
       },
-      "workOrderPrice" : "$10.09"
+      "workOrderPrice": "$10.09"
     }
   ],
-
   "testVerifyUserCanUnselectServiceForCreatedWO": [
     {
       "rowID": "testVerifyUserCanUnselectServiceForCreatedWO.01",
       "description": "Verify user Can unselect Service for created WO",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "damagesData": [{"damageGroupName": "Dent Repair", "moneyServices" : [{"serviceName" : "Expenses Service"}]
-      }, {"damageGroupName": "Autre", "moneyServices" : [{"serviceName" : "Cirrus_Detail"}, {"serviceName" : "Cirrus_Discount"}]
-      }],
-      "workOrderPrice" : "$34.76"
+      "damagesData": [
+        {
+          "damageGroupName": "Dent Repair",
+          "moneyServices": [
+            {
+              "serviceName": "Expenses Service"
+            }
+          ]
+        },
+        {
+          "damageGroupName": "Autre",
+          "moneyServices": [
+            {
+              "serviceName": "Cirrus_Detail"
+            },
+            {
+              "serviceName": "Cirrus_Discount"
+            }
+          ]
+        }
+      ],
+      "workOrderPrice": "$34.76"
     }
   ]
-
 }

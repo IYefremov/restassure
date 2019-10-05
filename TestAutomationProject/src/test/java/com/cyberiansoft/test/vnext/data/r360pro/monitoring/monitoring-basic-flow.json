@@ -15,6 +15,12 @@
     {
       "rowID": "userCanViewOrderInfoViaEdit.01",
       "description": "TFSID: 87826",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92364",
+          "testCaseTitle": "Verify user can reach the page with the services edit icons"
+        }
+      ],
       "monitoring": {
         "orderInfoDto": {
           "vin": "777777"
@@ -26,6 +32,12 @@
     {
       "rowID": "userCanReportProblemOnServiceLevel.01",
       "description": "TFSID: 89573",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92268",
+          "testCaseTitle": "Verify user can set and resolve problem (service level)"
+        }
+      ],
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "AutomationServiceLevel"
@@ -44,6 +56,12 @@
     {
       "rowID": "userCanReportProblemOnServiceLevel.01",
       "description": "TFSID: 89573",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92268",
+          "testCaseTitle": "Verify user can set and resolve problem (service level)"
+        }
+      ],
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "AutomationServiceLevel"
@@ -61,6 +79,12 @@
     {
       "rowID": "userCanReportProblemOnPhaseLevel.01",
       "description": "TFSID: 89595",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92269",
+          "testCaseTitle": "Verify user can set and resolve problem (phase level)"
+        }
+      ],
       "service": {
         "serviceName": "Expenses_money (AM)",
         "problemReason": "SOME_PROBLEM"
@@ -77,6 +101,12 @@
     {
       "rowID": "userCanReportProblemOnPhaseLevel.01",
       "description": "TFSID: 89595",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92269",
+          "testCaseTitle": "Verify user can set and resolve problem (phase level)"
+        }
+      ],
       "service": {
         "serviceName": "Expenses_money (AM)"
       },
@@ -91,6 +121,12 @@
     {
       "rowID": "userCanStartTimeTrackingOnService.01",
       "description": "TFSID: 89595",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92262",
+          "testCaseTitle": "Verify user can start and stop service (time)"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -105,6 +141,12 @@
     {
       "rowID": "userCanStopTimeTrackingOnService.01",
       "description": "TFSID: 89595",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92262",
+          "testCaseTitle": "Verify user can start and stop service (time)"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -119,6 +161,12 @@
     {
       "rowID": "userCanStopTimeTrackingOnService.01",
       "description": "TFSID: 89595",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92261",
+          "testCaseTitle": "Verify user can start and stop phase (time)"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -133,6 +181,12 @@
     {
       "rowID": "userCanStopTimeTrackingOnService.01",
       "description": "TFSID: 89595",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92261",
+          "testCaseTitle": "Verify user can start and stop phase (time)"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -146,37 +200,93 @@
   "verifyUserSeesWarningMessageIfChosenLocationIsEmpty": [
     {
       "rowID": "verifyUserSeesWarningMessageIfChosenLocationIsEmpty.01",
-      "description": "TFSID: 85512"
+      "description": "TFSID: 85512",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92275",
+          "testCaseTitle": "Verify user sees warning message if chosen location is empty"
+        }
+      ]
     }
   ],
   "verifyUserCanUseSearchFilter": [
     {
       "rowID": "verifyUserCanUseSearchFilter.01",
-      "description": "TFSID: 85523 85526"
+      "description": "TFSID: 85523 85526",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92279",
+          "testCaseTitle": "Verify user can clear \"Search\" input field"
+        },
+        {
+          "testCaseID": "92280",
+          "testCaseTitle": "Verify user can search location (negative case)"
+        }
+      ]
     }
   ],
   "userCanUsePriorityFilter": [
     {
       "rowID": "userCanUsePriorityFilter.01",
-      "description": "TFSID: 85761,85763"
+      "description": "TFSID: 85761,85763",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92311",
+          "testCaseTitle": "Verify user can open \"Priority\""
+        },
+        {
+          "testCaseID": "92312",
+          "testCaseTitle": "Verify user can search by \"Priority\""
+        }
+      ]
     }
   ],
   "userCanSearchByDepartment": [
     {
       "rowID": "userCanSearchByDepartment.01",
-      "description": "TFSID: 85689, 85692"
+      "description": "TFSID: 85689, 85692",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92296",
+          "testCaseTitle": "Verify user can search by \"Department\""
+        },
+        {
+          "testCaseID": "92294",
+          "testCaseTitle": "Verify user can open \"Department\""
+        }
+      ]
     }
   ],
   "userCanUseOrderFlagFilter": [
     {
       "rowID": "userCanUseOrderFlagFilter.01",
-      "description": "TFSID: 85757, 85758"
+      "description": "TFSID: 85757, 85758",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92307",
+          "testCaseTitle": "Verify user can open \"Flag\""
+        },
+        {
+          "testCaseID": "92308",
+          "testCaseTitle": "Verify user can search by \"Flag\""
+        }
+      ]
     }
   ],
   "userCanSearchByPhase": [
     {
       "rowID": "userCanSearchByPhase.01",
-      "description": "TFSID: 85378, 85738, 85752",
+      "description": "TFSID: 85738, 85739",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92299",
+          "testCaseTitle": "Verify user can open \"Phase\""
+        },
+        {
+          "testCaseID": "92300",
+          "testCaseTitle": "Verify user can search by \"Phase\""
+        }
+      ],
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "AutomationPhaseLevel"
@@ -187,7 +297,13 @@
   "partServiceShouldNotAffectROCompleteness": [
     {
       "rowID": "partServiceShouldNotAffectROCompleteness.01",
-      "description": "TFSID: 85378, 85738, 85752",
+      "description": "TFSID: 90010",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92259",
+          "testCaseTitle": "Verify that Skipped, Refused and Parts services are not involved to the complete percentage calculation"
+        }
+      ],
       "service": {
         "serviceName": "Engine Auxiliary Engine Oil Filter Hose Clamp"
       },
@@ -203,7 +319,13 @@
   "skippedServicesShouldNotAffectCalculation": [
     {
       "rowID": "skippedServicesShouldNotAffectCalculation.01",
-      "description": "TFSID: 85378, 85738, 85752",
+      "description": "TFSID: 90010",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92259",
+          "testCaseTitle": "Verify that Skipped, Refused and Parts services are not involved to the complete percentage calculation"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -222,7 +344,13 @@
   "refusedServicesShouldNotAffectCalculation": [
     {
       "rowID": "skippedServicesShouldNotAffectCalculation.01",
-      "description": "TFSID: 85378, 85738, 85752",
+      "description": "TFSID: 90010",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92259",
+          "testCaseTitle": "Verify that Skipped, Refused and Parts services are not involved to the complete percentage calculation"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -242,6 +370,12 @@
     {
       "rowID": "nonLocationManagerCannotStartWO.01",
       "description": "TFSID: 91027",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92346",
+          "testCaseTitle": "Verify only location manager can start RO"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -260,6 +394,16 @@
     {
       "rowID": "anotherLocationManagerCanSeeStartOnStartedService.01",
       "description": "TFSID: 85378, 85738, 85752",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92263",
+          "testCaseTitle": "Verify \"Start\" button is visible to another employee (\"Work Status Tracking\" = \"Service And Phase Levels\")"
+        },
+        {
+          "testCaseID": "92265",
+          "testCaseTitle": "Verify \"Start\" button is visible to another employee (\"Work Status Tracking\" = \"Phase level only\")"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -277,7 +421,13 @@
   "verifyStartStopVisibleOnlyInActiveStatePhaseLevel": [
     {
       "rowID": "verifyStartStopVisibleOnlyInActiveStatePhaseLevel.01",
-      "description": "TFSID: 85378, 85738, 85752",
+      "description": "TFSID: 91036",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92266",
+          "testCaseTitle": "Verify \"Start\"&&\"Stop\" buttons are visible in active state (\"Work Status Tracking\" = \"Phase level only\")"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -295,7 +445,13 @@
   "verifyStartStopVisibleOnlyInActiveStateServiceLevel": [
     {
       "rowID": "verifyStartStopVisibleOnlyInActiveStateServiceLevel.01",
-      "description": "TFSID: 85378, 85738, 85752",
+      "description": "TFSID: 91033",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92264",
+          "testCaseTitle": "Verify \"Start\"&&\"Stop\" buttons are visible in active state (\"Work Status Tracking\" = \"Service And Phase Levels\")"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       },
@@ -314,6 +470,12 @@
     {
       "rowID": "verifySystemEnforcesUserToResolveProblemBeforeServiceCompleteServiceLevelOnly.01",
       "description": "TFSID: 91042",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92271",
+          "testCaseTitle": "Verify system enforces user to resolve problem before service complete (Service level only)"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM",
         "problemReason": "SOME_PROBLEM"
@@ -330,6 +492,12 @@
     {
       "rowID": "verifySystemEnforcesUserToResolveProblemBeforeServiceCompletePhaseLevelOnly.01",
       "description": "TFSID: 91043",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92272",
+          "testCaseTitle": "Verify system enforces user to resolve problem before phase complete (Phase level problem)"
+        }
+      ],
       "service": {
         "serviceName": "Expenses_money (AM)",
         "problemReason": "SOME_PROBLEM"
@@ -346,6 +514,12 @@
     {
       "rowID": "verifySystemEnforcesUserToResolveServiceProblemBeforeServiceOrPhaseCompletePhaseAndServiceLevel.01",
       "description": "TFSID: 91041",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92270",
+          "testCaseTitle": "Verify system enforces user to resolve service problem before service(phase) complete (Phase and service level)"
+        }
+      ],
       "service": {
         "serviceName": "Bent Wheel",
         "problemReason": "SOME_PROBLEM"

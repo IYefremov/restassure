@@ -36,6 +36,24 @@
     {
       "rowID": "userCanEditPartsInMatrixService.01",
       "description": "89701 89703 89704 89708",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91840",
+          "testCaseTitle": "User can add Part service with preselected \"Category\" and can't edit preselected part (from Price Matrix)"
+        },
+        {
+          "testCaseID": "91841",
+          "testCaseTitle": "User can add Part service with preselected \"Category + Sub Category\" and can't edit preselected parts (from Price Matrix"
+        },
+        {
+          "testCaseID": "91842",
+          "testCaseTitle": "User can add Part service with preselected \"Category + Sub Category + Part Name\" and can't edit preselected parts (from Price Matrix)"
+        },
+        {
+          "testCaseID": "91832",
+          "testCaseTitle": "User can edit Parts services and selected category > sub-category > part name > part position and part's details (price, quantity, notes, etc.) (from \"Price Matrix\")"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",

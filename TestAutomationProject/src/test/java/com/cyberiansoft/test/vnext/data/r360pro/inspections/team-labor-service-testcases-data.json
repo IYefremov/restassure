@@ -3,6 +3,12 @@
     {
       "rowID": "testVerifyUserCanSelectPanelAndPartsForLaborService.01",
       "description": "Test Case 73234:Verify user can select panel and parts for Labor service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91733",
+          "testCaseTitle": "Verify user can select panel and parts for Labor service"
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "YV4982CZ9A1538968"
@@ -22,6 +28,12 @@
     {
       "rowID": "testVerifyUserCantSelectPartWithoutPanel.01",
       "description": "Test Case 73235:Verify user can't select Part without Panel",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91734",
+          "testCaseTitle": "Verify user can't select Part without Panel"
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "YV4982CZ9A1538968"
@@ -37,6 +49,12 @@
     {
       "rowID": "testVerifyUserDoesntNeedToSelectPanelWhenAddLaborServiceInMatrix.01",
       "description": "Test Case 73237:Verify user doesn't need to select Panel when add Labor service in matrix",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91735",
+          "testCaseTitle": "Verify user doesn't need to select Panel when add Labor service in matrix"
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "YV4982CZ9A1538968"
       },
@@ -51,6 +69,12 @@
     {
       "rowID": "testVerifyUserCanSavePartServiceInMatrix.01",
       "description": "Test Case 73238:Verify user can save Part service in matrix",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91736",
+          "testCaseTitle": "Verify user can save Part service in matrix"
+        }
+      ],
       "inspType": "O_Kramar3",
       "vihicleInfo": {"vinNumber": "YV4982CZ9A1538968"
       },
@@ -70,6 +94,12 @@
     {
       "rowID": "testVerifyUserCanCancelAddPanelAndParts.01",
       "description": "Test Case 73239:Verify user can cancel add panel and parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91737",
+          "testCaseTitle": "Verify user can cancel add panel and parts"
+        }
+      ],
       "inspType": "O_Kramar",
       "vihicleInfo": {
         "vinNumber": "YV4982CZ9A1538968"

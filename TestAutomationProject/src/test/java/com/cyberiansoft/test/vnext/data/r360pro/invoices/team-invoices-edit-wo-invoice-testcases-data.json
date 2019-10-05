@@ -3,6 +3,12 @@
     {
       "rowID": "testVerifyUserCanEditWOInDraftInvoice.01",
       "description": "Test Case 75786:Verify user can edit WO in draft Invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92024",
+          "testCaseTitle": "Verify user can edit WO in draft Invoice."
+        }
+      ],
       "workOrderData": {
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
@@ -22,6 +28,12 @@
     {
       "rowID": "testVerifyWOTotalAmountChangedIfUserAddServiceToWOInDraftInvoice.01",
       "description": "Test Case 75787:Verify WO total amount changed if user add service to WO in draft Invoice, Test Case 75789:Verify WO details changed after edit WO in draft Invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92025",
+          "testCaseTitle": "Verify WO total amount changed if user add service to WO in draft Invoice."
+        }
+      ],
       "workOrderData": {
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
@@ -47,6 +59,12 @@
     {
       "rowID": "testVerifyUserCanEditWOInDraftInvoice.01",
       "description": "Test Case 75788:Verify user can add WO to draft Invoice and edit this WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92026",
+          "testCaseTitle": "Verify user can add WO to draft Invoice and edit this WO."
+        }
+      ],
       "workOrderData": {
         "workOrderType": "O_Kramar",
         "vihicleInfo": {

@@ -1,245 +1,436 @@
 {
-
   "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsON": [
     {
       "rowID": "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsON.01",
       "description": "Test Case 75376:Verify user can save draft Invoice if Draft Mode = ON",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }, "services": [{"serviceName": "Battery Installation"
-        }, {"serviceName": "Labor"
-        }]
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92005",
+          "testCaseTitle": "Verify user can save draft Invoice if Draft Mode = ON"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          },
+          {
+            "serviceName": "Labor"
+          }
+        ]
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsOFF": [
     {
       "rowID": "testVerifyUserCanSaveDraftInvoiceIfDraftModeEqualsOFF.01",
       "description": "Test Case 75377:Verify user can't save draft Invoice if Draft Mode = OFF.",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }, "services": [{"serviceName": "Battery Installation"
-        }, {"serviceName": "Labor"
-        }]
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92006",
+          "testCaseTitle": "Verify user can't save draft Invoice if Draft Mode = OFF."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          },
+          {
+            "serviceName": "Labor"
+          }
+        ]
       },
-      "invoiceData" : {"invoiceType": "O_Kramar2", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar2",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanEditDraftInvoice": [
     {
       "rowID": "testVerifyUserCanEditDraftInvoice.01",
       "description": "Test Case 75378:Verify user can edit draft Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }, "services": [{"serviceName": "Battery Installation"
-        }, {"serviceName": "Labor"
-        }]
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92007",
+          "testCaseTitle": "Verify user can edit draft Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          },
+          {
+            "serviceName": "Labor"
+          }
+        ]
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCantEditFinalInvoice": [
     {
       "rowID": "testVerifyUserCantEditFinalInvoice.01",
       "description": "Test Case 75379:Verify user can't edit final Invoice, Test Case 75380:Verify user can save Final Invoice when create Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92008",
+          "testCaseTitle": "Verify user can't edit final Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanCreateDraftInvoiceWhenEditInvoice": [
     {
       "rowID": "testVerifyUserCanCreateDraftInvoiceWhenEditInvoice.01",
       "description": "Test Case 75381:Verify user can create draft Invoice when edit Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92010",
+          "testCaseTitle": "Verify user can create draft Invoice when edit Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanSaveFinalInvoiceWhenEditInvoice": [
     {
       "rowID": "testVerifyUserCanSaveFinalInvoiceWhenEditInvoice.01",
       "description": "Test Case 75382:Verify user can save Final Invoice when Edit Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92011",
+          "testCaseTitle": "Verify user can save Final Invoice when Edit Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCantApproveDraftInvoice": [
     {
       "rowID": "testVerifyUserCantApproveDraftInvoice.01",
       "description": "Test Case 75383:Verify user can't approve draft Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92012",
+          "testCaseTitle": "Verify user can't approve draft Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanApproveFinalInvoice": [
     {
       "rowID": "testVerifyUserCanApproveFinalInvoice.01",
       "description": "Test Case 75384:Verify user can approve final Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92013",
+          "testCaseTitle": "Verify user can approve final Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanEditTeamDraftInvoice": [
     {
       "rowID": "testVerifyUserCanEditTeamDraftInvoice.01",
       "description": "Test Case 75385:Verify user can edit Team draft Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92014",
+          "testCaseTitle": "Verify user can edit Team draft Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanAddNotesWhenEditInvoice": [
     {
       "rowID": "testVerifyUserCanAddNotesWhenEditInvoice.01",
       "description": "Test Case 75386:Verify user can add Notes when edit Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92015",
+          "testCaseTitle": "Verify user can add Notes when edit Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanCancelInvoiceCreation": [
     {
       "rowID": "testVerifyUserCanCancelInvoiceCreation.01",
       "description": "Test Case 75387:Verify user can cancel Invoice creation",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "",
+          "testCaseTitle": ""
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanCancelInvoiceEditing": [
     {
       "rowID": "testVerifyUserCanCancelInvoiceEditing.01",
       "description": "Test Case 75388:Verify user can cancel Invoice editing",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }, "services": [{"serviceName": "Battery Installation"
-        }, {"serviceName": "Labor"
-        }]
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92016",
+          "testCaseTitle": "Verify user can cancel Invoice creation"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          },
+          {
+            "serviceName": "Labor"
+          }
+        ]
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanAttachWOWithSameCustomers": [
     {
       "rowID": "testVerifyUserCanAttachWOWithSameCustomers.01",
       "description": "Test Case 75389:Verify user can attach WO with same Customers",
-      "workOrdersData" : [{"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92018",
+          "testCaseTitle": "Verify user can attach WO with same Customers."
         }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      ],
+      "workOrdersData": [
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
         }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }
-      }],
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      ],
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanDeattachWOsFromInvoice": [
     {
       "rowID": "testVerifyUserCanDeattachWOsFromInvoice.01",
       "description": "Test Case 75390:Verify user can detach WOs from Invoice",
-      "workOrdersData" : [{"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92019",
+          "testCaseTitle": "No Description"
         }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      ],
+      "workOrdersData": [
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
         }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }
-      }],
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      ],
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ],
-
   "testVerifyUserCanVoidInvoiceAfterDetachAllWOs": [
     {
       "rowID": "testVerifyUserCanVoidInvoiceAfterDetachAllWOs.01",
       "description": "Test Case 75391:Verify user can void Invoice after detach all WOs",
-      "workOrdersData" : [{"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92020",
+          "testCaseTitle": "Verify user can void Invoice after detach all WOs."
         }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      ],
+      "workOrdersData": [
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
+        },
+        {
+          "workOrderType": "O_Kramar",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          }
         }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }
-      }, {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        }
-      }],
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345",
-        "newPoNumber" : "TEST!23"
+      ],
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345",
+        "newPoNumber": "TEST!23"
       }
     }
   ]
-
 }

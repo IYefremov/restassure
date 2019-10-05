@@ -1,409 +1,685 @@
 {
-
   "testVerifyUserCanCreateInvoiceInStatusNew": [
     {
       "rowID": "testVerifyUserCanCreateInvoiceInStatusNew.01",
       "description": "Test Case 64266:Verify user can create Invoice in status 'New', Test Case 64494:Verify user can approve Invoice after creating",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90318",
+          "testCaseTitle": "Verify user can create Invoice in status \"New\""
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanVoidInvoice": [
     {
       "rowID": "testVerifyUserCanVoidInvoice.01",
       "description": "Test Case 66780:Verify user can void Invoice, Test Case 66781:Verify user can Cancel Voiding Invoices, Test Case 66782:Update DB after Voiting Invoice, Test Case 66783:Verify Invoice status on BO after Voiding Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92000",
+          "testCaseTitle": "Verify user can void Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifySavedPODisplaysOnCChangePONumberPopup": [
     {
       "rowID": "testVerifySavedPODisplaysOnCChangePONumberPopup.01",
       "description": "Test Case 67279:Verify saved PO displays on 'Change PO#' pop-up, Test Case 67281:Verify PO# is not changed if user click 'don't save', Test Case 67280:Verify PO# is saved if user save changes, Test Case 67282:Verify user can't pass >50 symbols on PO field",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92101",
+          "testCaseTitle": "Verify saved PO displays on \"Change PO#\" pop-up."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyWeHidePopupAndKeyboardIfUserClickHardwareBackButton": [
     {
       "rowID": "testVerifyWeHidePopupAndKeyboardIfUserClickHardwareBackButton.01",
       "description": "Test Case 67283:Verify we hide popup and keyboard if user click hardware back button",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92104",
+          "testCaseTitle": "Verify we hide popup and keyboard if user click hardware back button."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "ABC123"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "ABC123"
       }
     }
   ],
-
   "testVerifyOnActionChangePONumberUserCantErasePONumber": [
     {
       "rowID": "testVerifyOnActionChangePONumberUserCantErasePONumber.01",
       "description": "Test Case 67284:Verify on action 'Change PO#' user can't erase PO#, Test Case 67285:Verify 'PO#' is capitalized, Test Case 67286:Verify Change PO is available only if option 'PO Visible' = YES on invoice type",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92106",
+          "testCaseTitle": "Verify on action \"Change PO#\" user can't erase PO#"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar2", "poNumber" : "ABC123"
+      "invoiceData": {
+        "invoiceType": "O_Kramar2",
+        "poNumber": "ABC123"
       }
     }
   ],
-
   "testVerifyChangePOIsNotAvailableIfOptionPOVisibleEqualsNOOnInvoiceType": [
     {
       "rowID": "testVerifyChangePOIsNotAvailableIfOptionPOVisibleEqualsNOOnInvoiceType.01",
       "description": "Test Case 67287:Verify Change PO is not available if option 'PO Visible' = NO on invoice typ",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92109",
+          "testCaseTitle": "Verify Change PO is not available if option \"PO Visible\" = NO on invoice type."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar_auto"
+      "invoiceData": {
+        "invoiceType": "O_Kramar_auto"
       }
     }
   ],
-
   "testVerifyUserCanRefreshDeletedPicturesFromMyInvoiceList": [
     {
       "rowID": "testVerifyUserCanRefreshDeletedPicturesFromMyInvoiceList.01",
       "description": "Test Case 68777:Verify user can refresh deleted pictures from My Invoice list, Test Case 68778:Verify user can refresh picture for Invoice without pictures",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92070",
+          "testCaseTitle": "Verify user can refresh deleted pictures from My Invoice list."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyDeletedPicturesDoesntDisplaysAfterUpdatingApplicationDB_MyInvoiceList": [
     {
       "rowID": "testVerifyDeletedPicturesDoesntDisplaysAfterUpdatingApplicationDB_MyInvoiceList.01",
       "description": "Test Case 68781:Verify deleted pictures doesn't displays after updating application DB (My Invoice list)",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92072",
+          "testCaseTitle": "Verify deleted pictures doesn't displays after updating application DB (My Invoice list)"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanRefreshDeletedPicturesAfterApprovingInvoice": [
     {
       "rowID": "testVerifyUserCanRefreshDeletedPicturesAfterApprovingInvoice.01",
       "description": "Test Case 68785:Verify user can refresh deleted pictures after approving Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92073",
+          "testCaseTitle": "Verify user can refresh deleted pictures after approving Invoice"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanAddNotesForTeamInvoice": [
     {
       "rowID": "testVerifyUserCanAddNotesForTeamInvoice.01",
       "description": "Test Case 68926:Verify user can add Notes for Team Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92207",
+          "testCaseTitle": "Verify user can add Notes for Team Invoice."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserDoesntSeeInvoiceWithTeamSharingEqualsNO": [
     {
       "rowID": "testVerifyUserDoesntSeeInvoiceWithTeamSharingEqualsNO.01",
       "description": "Test Case 68664:Verify user doesn't see Invoice with Team Sharing = NO",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91997",
+          "testCaseTitle": "Verify user doesn't see Invoice with Team Sharing = NO"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar2", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar2",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyEmailInvoiceForMultipleItemsWithTheSameCustomer": [
     {
       "rowID": "testVerifyEmailInvoiceForMultipleItemsWithTheSameCustomer.01",
       "description": "Test Case 72052:R360 client: Verify email Invoice for multiple items with the same customer, Test Case 72059:R360 client: Verify possibility to email My Invoice from action menu",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92092",
+          "testCaseTitle": "R360 client: Verify email My Invoice for multiple items with the same customer"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyCancelEmailInvoice": [
     {
       "rowID": "testVerifyCancelEmailInvoice.01",
       "description": "Test Case 72053:R360 client: Verify Cancel Email invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92093",
+          "testCaseTitle": "R360 client: Verify Cancel My Email invoice"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyEmailInvoiceWithDifferentCustomer": [
     {
       "rowID": "testVerifyEmailInvoiceWithDifferentCustomer.01",
       "description": "Test Case 72054:R360 client: Verify email Invoice with different customer",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92094",
+          "testCaseTitle": "R360 client: Verify email My Invoice with different customer"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyEmailMyInvoiceWithPopulatedCCAddress": [
     {
       "rowID": "testVerifyEmailMyInvoiceWithPopulatedCCAddress.01",
       "description": "Test Case 72055:R360 client: Verify Email My Invoice with populated CC address",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92095",
+          "testCaseTitle": "R360 client: Verify Email My Invoice with populated CC address"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyToFieldIsRequiredToEmailMyInvoice": [
     {
       "rowID": "testVerifyToFieldIsRequiredToEmailMyInvoice.01",
       "description": "Test Case 72057:R360 client: Verify To field is required to Email My Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92097",
+          "testCaseTitle": "R360 client: Verify To field is required to Email My Invoice"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyEmailAddressIsValidatedOnEmailMyInvoiceList": [
     {
       "rowID": "testVerifyEmailAddressIsValidatedOnEmailMyInvoiceList.01",
       "description": "Test Case 72058:R360 client: Verify Email address is validated on Email My invoice list",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92098",
+          "testCaseTitle": "R360 client: Verify Email address is validated on Email My invoice list"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyEmailTeamInvoiceForMultipleItemsWithTheSameCustomer": [
     {
       "rowID": "testVerifyEmailTeamInvoiceForMultipleItemsWithTheSameCustomer.01",
       "description": "Test Case 71740:R360 client: Verify email Team Invoice for multiple items with the same customer, Test Case 71764:R360 client: Verify possibility to email Team Invoice from action menu",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92084",
+          "testCaseTitle": "R360 client: Verify email Invoice for multiple items with the same customer"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyCancelEmailTeamInvoice": [
     {
       "rowID": "testVerifyCancelEmailTeamInvoice.01",
       "description": "Test Case 71752:R360 client: Verify Cancel Email team invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92085",
+          "testCaseTitle": "R360 client: Verify Cancel Email invoice"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyToFieldIsRequiredToEmailTeamInvoice": [
     {
       "rowID": "testVerifyToFieldIsRequiredToEmailTeamInvoice.01",
       "description": "Test Case 71762:R360 client: Verify To field is required to Email Team Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92089",
+          "testCaseTitle": "R360 client: Verify To field is required to Email Invoice"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyEmailAddressIsValidatedOnEmailTeamInvoiceList": [
     {
       "rowID": "testVerifyEmailAddressIsValidatedOnEmailTeamInvoiceList.01",
       "description": "Test Case 71763:R360 client: Verify Email address is validated on Email Team invoice list",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92090",
+          "testCaseTitle": "R360 client: Verify Email address is validated on Email invoice list"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyEmailTeamInvoiceWithDifferentCustomer": [
     {
       "rowID": "testVerifyEmailTeamInvoiceWithDifferentCustomer.01",
       "description": "Task 72850:Automate Test Case 71753:R360 client: Verify email Team Invoice with different customer",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "63466",
+          "testCaseTitle": "Automate Test Case 71753:R360 client: Verify email Invoice with different customer"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyApproveIconDoesntDisplaysAfterApproveInvoice": [
     {
       "rowID": "testVerifyApproveIconDoesntDisplaysAfterApproveInvoice.01",
       "description": "Test Case 75364:Verify 'approve' icon doesn't displays after approve Invoice",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91998",
+          "testCaseTitle": "Verify \"approve\" icon doesn't displays after approve Invoice"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         },
-        "service": {"serviceName": "Battery Installation"
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanCreateSeparateInvoicesFromOneWO": [
     {
       "rowID": "testVerifyUserCanCreateSeparateInvoicesFromOneWO.01",
       "description": "Test Case 83732:Verify user can create separate Invoices from one WO.",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90699",
+          "testCaseTitle": "Verify user can create separate Invoices from one WO."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         },
-        "service": {"serviceName": "Battery Installation"
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanCreateSeparateInvoicesFromSeveralWOs": [
     {
       "rowID": "testVerifyUserCanCreateSeparateInvoicesFromSeveralWOs.01",
       "description": "Test Case 83733:Verify user can create separate Invoices from several WOs.",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90700",
+          "testCaseTitle": "Verify user can create separate Invoices from several WOs."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         },
-        "service": {"serviceName": "Battery Installation"
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanCreateSingleInvoicesFromOneWO": [
     {
       "rowID": "testVerifyUserCanCreateSingleInvoicesFromOneWO.01",
       "description": "Test Case 83734:Verify user can create single Invoice from one WO",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90701",
+          "testCaseTitle": "Verify user can create single Invoice from one WO."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         },
-        "service": {"serviceName": "Battery Installation"
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanCreateSingleInvoicesFromSeveralWOs": [
     {
       "rowID": "testVerifyUserCanCreateSingleInvoicesFromSeveralWOs.01",
       "description": "Test Case 83735:Verify user can create single Invoice from several WO.",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90702",
+          "testCaseTitle": "Verify user can create single Invoice from several WO."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         },
-        "service": {"serviceName": "Battery Installation"
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton": [
     {
       "rowID": "testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton.01",
       "description": "Test Case 83736:Verify user can cancel Invoice creation using hardware back button",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90703",
+          "testCaseTitle": "Verify user can cancel Invoice creation using hardware back button (Android only)."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         },
-        "service": {"serviceName": "Battery Installation"
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices": [
     {
       "rowID": "testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices.01",
       "description": "Test Case 83738:Verify user can cancel Invoice creation using pop-up (Separate Invoices)",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90704",
+          "testCaseTitle": "Verify user can cancel Invoice creation using pop-up (Separate Invoices)"
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         },
-        "service": {"serviceName": "Battery Installation"
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO": [
     {
       "rowID": "testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO.01",
       "description": "Test Case 83739:Verify user can't create Separate Invoice if Invoice type is not assigned to WO",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90705",
+          "testCaseTitle": "Verify user can't create Separate Invoice if Invoice type is not assigned to WO."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         },
-        "service": {"serviceName": "Battery Installation"
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ]
-
 }

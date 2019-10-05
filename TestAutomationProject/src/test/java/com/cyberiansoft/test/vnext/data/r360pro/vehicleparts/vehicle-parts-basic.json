@@ -3,6 +3,12 @@
     {
       "rowID": "userCanCreateWoWithSingleVehiclePartForSinglePartSelect.01",
       "description": "89563",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91878",
+          "testCaseTitle": "User can't select multiple vehicle parts for service into services wizard step (with disable multiple option) creating WO"
+        }
+      ],
       "service": {
         "serviceName": "roz_dis_part_money",
         "vehiclePart": {
@@ -15,6 +21,12 @@
     {
       "rowID": "userCanSelectSinglePartForQuestionAnswerWhenCreatingWo.01",
       "description": "89566",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91882",
+          "testCaseTitle": "User can select single vehicle part for question answer service (with enable and disable multiple option) creating WO"
+        }
+      ],
       "services": [
         {
           "serviceName": "rozstalnoy_enable_money",
@@ -42,6 +54,12 @@
     {
       "rowID": "userCanSelectSinglePartViaVisualFormWhenCreatingWo.01",
       "description": "89565",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91880",
+          "testCaseTitle": "User can select single vehicle part for service into visual form (with enable and disable multiple option) creating WO"
+        }
+      ],
       "damageData": {
         "damageGroupName": "Autre",
         "moneyService": {
@@ -57,6 +75,20 @@
     {
       "rowID": "userCanSelectMultipleVehiclePartsForService.01",
       "description": "89555 89590 89560",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91874",
+          "testCaseTitle": "User can select multiple vehicle parts for service into services wizard step (with enable multiple option) creating WO___TEST_R"
+        },
+        {
+          "testCaseID": "91884",
+          "testCaseTitle": "User can assign a few vehicle parts to the current service. One of the selected vehicle part assigns to current service. Other vehicle parts will be assigned to new generated service instances that will be collapsed (for enable multiple option)"
+        },
+        {
+          "testCaseID": "91876",
+          "testCaseTitle": "User can't select multiple vehicle parts for service into services wizard step (with enable multiple option) editing WO"
+        }
+      ],
       "service": {
         "serviceName": "roz_en_part_money",
         "vehicleParts": [

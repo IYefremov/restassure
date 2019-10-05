@@ -3,6 +3,12 @@
     {
       "rowID": "userCanChangePartServiceValuesAndSaveThem.01",
       "description": "89596",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91829",
+          "testCaseTitle": "User can add Parts services and select category > sub-category > part name > part position and edit part's details (price, quantity, notes, etc.) (from \"Services\")"
+        }
+      ],
       "partServiceDataList": [
         {
           "serviceName": "Anastasia Labor parts (required + prefix)",
@@ -34,6 +40,12 @@
     {
       "rowID": "userCanEditPartService.01",
       "description": "89601",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91830",
+          "testCaseTitle": "User can edit Parts services and selected category > sub-category > part name > part position and part's details (price, quantity, notes, etc.) (from \"Services\")"
+        }
+      ],
       "partServiceDataList": [
         {
           "serviceName": "Anastasia Labor parts (required + prefix)",
@@ -65,6 +77,12 @@
     {
       "rowID": "userCantAddPartServiceWithoutSelectedPartName.01",
       "description": "89647",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91833",
+          "testCaseTitle": "User can't add Part service without selected \"Part Name\""
+        }
+      ],
       "partServiceDataList": [
         {
           "serviceName": "rozstalnoy_enable_parts",
@@ -84,6 +102,20 @@
     {
       "rowID": "userCantEditPreselectedValues.01",
       "description": "89655 89660 89662",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91835",
+          "testCaseTitle": "User can add Part service with preselected \"Category\" and can't edit preselected part (from \"Services\")"
+        },
+        {
+          "testCaseID": "91837",
+          "testCaseTitle": "User can add Part service with preselected \"Category + Sub Category\" and can't edit preselected parts (from \"Services\")"
+        },
+        {
+          "testCaseID": "91839",
+          "testCaseTitle": "User can add Part service with preselected \"Category + Sub Category + Part Name\" and can't edit preselected parts (from \"Services\")"
+        }
+      ],
       "partServiceDataList": [
         {
           "serviceName": "roz_part_with_categories",

@@ -1,73 +1,114 @@
 {
-
   "testVerifyUserCanArchiveCreatedInspection": [
     {
       "rowID": "testVerifyUserCanArchiveCreatedInspection.01",
       "description": "Test Case 75366:Verify user can archive created Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91742",
+          "testCaseTitle": "Verify user can archive created Inspection"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCantArchiveTeamInspection": [
     {
       "rowID": "testVerifyUserCantArchiveTeamInspection.01",
       "description": "Test Case 75367:Verify user can't archive Team Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91743",
+          "testCaseTitle": "Verify user can't archive Team Inspection"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanArchiveInspectionUsingSearch": [
     {
       "rowID": "testVerifyUserCanArchiveInspectionUsingSearch.01",
       "description": "Test Case 75368:Verify user can archive Inspection using search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91744",
+          "testCaseTitle": "Verify user can archive Inspection using search"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanCancelArchivingInspection": [
     {
       "rowID": "testVerifyUserCanCancelArchivingInspection.01",
       "description": "Test Case 75370:Verify user can cancel archiving Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91746",
+          "testCaseTitle": "Verify user can cancel archiving Inspection"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanArchiveSeveralInspections": [
     {
       "rowID": "testVerifyUserCanArchiveSeveralInspections.01",
       "description": "Test Case 75369:Verify user can archive several Inspections",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91745",
+          "testCaseTitle": "Verify user can archive several Inspections"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyArchivedInspectionsDoesntDispalysOnTheListAfterDBUpdate": [
     {
       "rowID": "testVerifyArchivedInspectionsDoesntDispalysOnTheListAfterDBUpdate.01",
       "description": "Test Case 75371:Verify archived Inspections doesn't dispalys on the list after DB update",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91747",
+          "testCaseTitle": "Verify archived Inspections doesn't dispalys on the list after DB update."
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyArchivedInspectionsDoesntDispalysOnTheTeamList": [
     {
       "rowID": "testVerifyArchivedInspectionsDoesntDispalysOnTheTeamList.01",
       "description": "Test Case 75372:Verify archived Inspections doesn't displays on the Team list",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91748",
+          "testCaseTitle": "Verify archived Inspections doesn't displays on the Team list."
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ]
-
 }

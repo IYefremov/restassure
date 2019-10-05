@@ -3,96 +3,154 @@
     {
       "rowID": "testVerifyUserCantChangeCustomerIfAllowClientChangingEqualsON.01",
       "description": "Test Case 75339:Verify user can change Customer if Allow Client Changing = ON",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91979",
+          "testCaseTitle": "Verify user can change Customer if Allow Client Changing = ON"
+        }
+      ],
       "workOrderType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCantChangeCustomerIfAllowClientChangingEqualsOFF": [
     {
       "rowID": "testVerifyUserCantChangeCustomerIfAllowClientChangingEqualsON.01",
       "description": "Test Case 75340:Verify user can't change Customer if Allow Client Changing = OFF",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91980",
+          "testCaseTitle": "Verify user can't change Customer if Allow Client Changing = OFF"
+        }
+      ],
       "workOrderType": "O_Kramar2",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyIfChangedCustomerIsSavedAfterEditWO": [
     {
       "rowID": "testVerifyIfChangedCustomerIsSavedAfterEditWO.01",
       "description": "Test Case 75356:Verify if changed Customer is saved after edit WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91981",
+          "testCaseTitle": "Verify if changed Customer is saved after edit WO."
+        }
+      ],
       "workOrderType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "service": {"serviceName": "Battery Installation"
+      "service": {
+        "serviceName": "Battery Installation"
       },
       "workOrderPrice": "$9.00"
     }
   ],
-
   "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen": [
     {
       "rowID": "testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen.01",
       "description": "Test Case 75358:Verify user can't create new Customer on Change customer screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91983",
+          "testCaseTitle": "Verify user can't create new Customer on Change customer screen."
+        }
+      ],
       "workOrderType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanChangeRetailCustomerToWholesaleForWO": [
     {
       "rowID": "testVerifyUserCanChangeRetailCustomerToWholesaleForWO.01",
       "description": "Test Case 75357:Verify user can change Retail customer to Wholesale for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91982",
+          "testCaseTitle": "Verify user can change Retail customer to Wholesale for WO."
+        }
+      ],
       "workOrderType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanSelectCustomerUsingSearch": [
     {
       "rowID": "testVerifyUserCanSelectCustomerUsingSearch.01",
       "description": "Test Case 75359:Verify user can select Customer using search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91984",
+          "testCaseTitle": "Verify user can select Customer using search."
+        }
+      ],
       "workOrderType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyInvoiceCreatedWithChangedCustomer": [
     {
       "rowID": "testVerifyInvoiceCreatedWithChangedCustomer.01",
       "description": "Test Case 75360:Verify Invoice created with changed customer",
-      "workOrderData" : {"workOrderType": "O_Kramar",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91985",
+          "testCaseTitle": "Verify Invoice created with changed customer."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"invoiceType": "O_Kramar", "poNumber" : "12345"
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyUserCanChangeCustomerForTeamWO": [
     {
       "rowID": "testVerifyUserCanChangeCustomerForTeamWO.01",
       "description": "Test Case 75362:Verify user can change customer for Team WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91986",
+          "testCaseTitle": "Verify user can change customer for Team WO."
+        }
+      ],
       "workOrderType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanCreateCustomerAfterChangingCustomerForWO": [
     {
       "rowID": "testVerifyUserCanCreateCustomerAfterChangingCustomerForWO.01",
       "description": "Test Case 75374:Verify user can create customer after Changing Customer for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91987",
+          "testCaseTitle": "Verify user can create customer after Canging Customer for WO."
+        }
+      ],
       "workOrderType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ]
-
 }

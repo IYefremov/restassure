@@ -3,6 +3,16 @@
     {
       "rowID": "userCanAssignMultipleTechniciansToOrder.01",
       "description": "TFSID:87874 87875",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91952",
+          "testCaseTitle": "User can assign full amount of WO for 1 Technician evenly (Team)"
+        },
+        {
+          "testCaseID": "91953",
+          "testCaseTitle": "User can separate amount of WO for 3 Technicians evenly (Team)"
+        }
+      ],
       "technicianList": [
         {
           "employeeFirstName": "Test",
@@ -19,6 +29,16 @@
     {
       "rowID": "userCanChangeTechAmountViaEdit.01",
       "description": "TFSID:87886 87929",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91954",
+          "testCaseTitle": "User can increase qty of Technicians of WO editing WO (Team)"
+        },
+        {
+          "testCaseID": "91955",
+          "testCaseTitle": "User can decrease qty of Technicians of WO editing WO (Team)"
+        }
+      ],
       "technicianList": [
         {
           "employeeFirstName": "Test",
@@ -35,6 +55,12 @@
     {
       "rowID": "userCanSeparateAmountOfWOForTechniciansManually.01",
       "description": "87990",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91958",
+          "testCaseTitle": "User can separate amount of WO for 2 Technicians manually (Team)"
+        }
+      ],
       "technicianList": [
         {
           "employeeFirstName": "Test",
@@ -51,6 +77,12 @@
     {
       "rowID": "userCanSeparateAmountOfWOForTechniciansManuallyEditingWO.01",
       "description": "87991",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91959",
+          "testCaseTitle": "User can separate amount of WO for 2 Technicians manually editing WO (Team)"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "40",
         "Employee Employee": "60"
@@ -61,6 +93,16 @@
     {
       "rowID": "userCanSeparateAmountOfWOForTechniciansManuallyEditingWOAndCancelIt.01",
       "description": "87992 87993",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91960",
+          "testCaseTitle": "User can cancel separate amount of WO for 2 Technicians manually editing WO (Team)"
+        },
+        {
+          "testCaseID": "91961",
+          "testCaseTitle": "User can separate amount of WO for 2 Technicians manually editing WO and cancel it (Team)"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "40",
         "Employee Employee": "60"
@@ -71,6 +113,12 @@
     {
       "rowID": "userCantSpecifyValueNotEqualTo100PercentOnSplit.01",
       "description": "87994",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91962",
+          "testCaseTitle": "User can't separate amount of WO for 2 Technicians manually if value is not 100% (Team)"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "40",
         "Employee Employee": "40"
@@ -79,6 +127,12 @@
     {
       "rowID": "userCantSpecifyValueNotEqualTo100PercentOnSplit.02",
       "description": "87995",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91963",
+          "testCaseTitle": "User can't separate amount of WO for 2 Technicians manually if value is not 100% editing WO (Team)"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "60",
         "Employee Employee": "60"
@@ -89,6 +143,12 @@
     {
       "rowID": "userCanSelectEvenlyAfterCustomPercentageSplit.01",
       "description": "88087",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91972",
+          "testCaseTitle": "User can recalculate amount of the service manually between technicians when user change qty of technicians different then qty of WO technicians"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "50",
         "Employee Employee": "50"

@@ -3,6 +3,12 @@
     {
       "rowID": "verifyUserCanAnswerQuestionsSeparatley.01",
       "description": "TFSID:90014",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91821",
+          "testCaseTitle": "Verify that steps are separated for every question section. User can change or clear answers for its (for \"Traffic-light\" and \"Logical\" question types)"
+        }
+      ],
       "questionScreenData": {
         "questionsData": [
           {
@@ -41,6 +47,12 @@
     {
       "rowID": "verifyUserCanAnswerQuestionsSeparatley.01",
       "description": "TFSID:90021",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91823",
+          "testCaseTitle": "Verify validation for required questions going forward/back from question section (for \"Traffic-light\" and \"Logical\" question types)"
+        }
+      ],
       "questionScreenData": {
         "questionsData": [
           {
@@ -117,6 +129,12 @@
     {
       "rowID": " verifyQuestionsHasDefaultAnswers.01",
       "description": "TFSID: 87011",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91816",
+          "testCaseTitle": "R360 Inspection - Verify that services are added when answer to specific question"
+        }
+      ],
       "service": {
         "serviceName": "Test service zayats"
       },
@@ -141,6 +159,12 @@
     {
       "rowID": " verifyQFShownForServiceAndEntityLevels.01",
       "description": "TFSID: 87014",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91819",
+          "testCaseTitle": "R360 Inspection - Verify that QF can be shown for Service and Entity levels"
+        }
+      ],
       "service": {
         "serviceName": "Test service zayats"
       },
@@ -161,6 +185,12 @@
     {
       "rowID": " verifyPartServiceIsAddedWithLaborAfterQuestionIsAnswered.01",
       "description": "TFSID: 87012",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91817",
+          "testCaseTitle": "R360 Inspection - Verify that when part service is added with labor as answer services , labor is linked to part after configuration part"
+        }
+      ],
       "questionScreenData": {
         "questionsData": [
           {
@@ -191,6 +221,12 @@
     {
       "rowID": " verifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered.01",
       "description": "TFSID: 87013",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91818",
+          "testCaseTitle": "R360 Inspection - Verify that when part services are added with labor as answer services , labor is not linked to part after configuration part"
+        }
+      ],
       "questionScreenData": {
         "questionsData": [
           {

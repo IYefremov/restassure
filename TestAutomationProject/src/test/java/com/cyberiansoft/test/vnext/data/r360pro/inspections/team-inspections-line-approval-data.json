@@ -1,305 +1,673 @@
 {
-  
-  	"testVerifyUserCanApproveServiceForInspectionIfLineApprovalEqualsON": [
+  "testVerifyUserCanApproveServiceForInspectionIfLineApprovalEqualsON": [
     {
       "rowID": "testVerifyUserCanApproveServiceForInspectionIfLineApprovalEqualsON.01",
       "description": "Test Case 71742:Verify user can approve service for Inspection if Line Approval = ON",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91701",
+          "testCaseTitle": "Verify user can approve service for Inspection if Line Approval = ON"
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
-      }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
-      }, {"serviceName": "Anastasia Labor Avarage Data", "serviceStatus" : "Skipped"
-      }]
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Aluminum Panel",
+          "serviceStatus": "Declined"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceStatus": "Skipped"
+        }
+      ]
     }
   ],
-
   "testVerifyUserCanApproveDeclineAndSkipDifferentServicesInOneInspection": [
     {
       "rowID": "testVerifyUserCanApproveDeclineAndSkipDifferentServicesInOneInspection.01",
       "description": "Test Case 71743:Verify user can approve, decline and skip different services in one Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91702",
+          "testCaseTitle": "Verify user can approve, decline and skip different services in one Inspection."
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
-      }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
-      }, {"serviceName": "Anastasia Labor Avarage Data", "serviceStatus" : "Skipped"
-      }],
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Aluminum Panel",
+          "serviceStatus": "Declined"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceStatus": "Skipped"
+        }
+      ],
       "inspPrice": "$14.86",
       "inspApprovedPrice": "$9.00"
     }
   ],
-
   "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON": [
     {
       "rowID": "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON.01",
       "description": "Test Case 71744:Verify user can decline all service if Line Approval = ON, Test Case 71747:Verify user need to select reason for decline/skip all services in Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91703",
+          "testCaseTitle": "Verify user can decline all service if Line Approval = ON"
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Anastasia Labor Avarage Data"
-      }],
+      "services": [
+        {
+          "serviceName": "Battery Installation"
+        },
+        {
+          "serviceName": "Aluminum Panel"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data"
+        }
+      ],
       "declineReason": "No repair needed"
     }
   ],
-
   "testVerifyUserCantApproveOrDeclineServicesIfLineApprovalEqualsOFF": [
     {
       "rowID": "testVerifyUserCantApproveOrDeclineServicesIfLineApprovalEqualsOFF.01",
       "description": "Test Case 71745:Verify user can't approve or decline services if Line Approval = OFF",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91704",
+          "testCaseTitle": "Verify user can't approve or decline services if Line Approval = OFF"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "service": {"serviceName": "Battery Installation"
+      "service": {
+        "serviceName": "Battery Installation"
       },
       "inspApprovedPrice": "$9.00"
     }
   ],
-
   "testVerifyStateChangedToNewIfUserEditInspection": [
     {
       "rowID": "testVerifyStateChangedToNewIfUserEditInspection.01",
       "description": "Test Case 71746:Verify state changed to New if user edit Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91705",
+          "testCaseTitle": "Verify state changed to New if user edit Inspection."
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Anastasia Labor Avarage Data"
-      }]
+      "services": [
+        {
+          "serviceName": "Battery Installation"
+        },
+        {
+          "serviceName": "Aluminum Panel"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data"
+        }
+      ]
     }
   ],
-
   "testVerifyInspectionHaveStateApproveIfUserSelectOnlyOneServiceAsApproved": [
     {
       "rowID": "testVerifyInspectionHaveStateApproveIfUserSelectOnlyOneServiceAsApproved.01",
       "description": "Test Case 71748:Verify Inspection have state 'Approve' if user select only one service as 'approved'",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91707",
+          "testCaseTitle": "Verify Inspection have state \"Approve\" if user select only one service as \"approved\""
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Anastasia Labor Avarage Data"
-      }]
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Aluminum Panel"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data"
+        }
+      ]
     }
   ],
-
   "testVerifyUserCanGoBackFromApproveScreenUsingHardwareBackButton": [
     {
       "rowID": "testVerifyUserCanGoBackFromApproveScreenUsingHardwareBackButton.01",
       "description": "Test Case 71749:Verify user can go back from approve screen using hardware back button",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91708",
+          "testCaseTitle": "Verify user can go back from approve screen using hardware back button"
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Anastasia Labor Avarage Data"
-      }]
+      "services": [
+        {
+          "serviceName": "Battery Installation"
+        },
+        {
+          "serviceName": "Aluminum Panel"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data"
+        }
+      ]
     }
   ],
-
   "testVerifyTotalAmountIncludeOnlyApprovedServices": [
     {
       "rowID": "testVerifyTotalAmountIncludeOnlyApprovedServices.01",
       "description": "Test Case 71751:Verify total amount include only Approved services, Test Case 73110:Verify user can select several Inspection with line approve for approve.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91710",
+          "testCaseTitle": "Verify total amount include only Approved services."
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
-      }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
-      }, {"serviceName": "Anastasia Labor Avarage Data", "serviceStatus" : "Skipped"
-      }],
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Aluminum Panel",
+          "serviceStatus": "Declined"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceStatus": "Skipped"
+        }
+      ],
       "inspPrice": "$14.86",
       "inspApprovedPrice": "$9.00"
     }
   ],
-
   "testVerifyUserSeeOnlyTotalAmountForSelectedMatrixWhenApproveInspectionWithLineApprovalEqualsON": [
     {
       "rowID": "testVerifyUserSeeOnlyTotalAmountForSelectedMatrixWhenApproveInspectionWithLineApprovalEqualsON.01",
       "description": "Test Case 71750:Verify user see only total amount for selected matrix when approve Inspection with Line Approval = ON",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91709",
+          "testCaseTitle": "Verify user see only total amount for selected matrix when approve Inspection with Line Approval = ON"
+        }
+      ],
       "inspType": "O_Kramar3",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
       "matrixService": {
         "matrixServiceName": "Anastasia Labor matrix",
-        "vehiclePartsData" : [{"vehiclePartName": "Anastasia Part", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "VERY LIGHT", "vehiclePartAdditionalServices" : [{ "serviceName" : "Anastasia Labor Avarage Data" }, { "serviceName" : "Battery Installation", "servicePrice" : "30", "serviceQuantity" : "2.50" }, { "serviceName" : "Anastasia % Vehicle Part" }]
-        }, {"vehiclePartName": "Hood", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)", "vehiclePartAdditionalServices" : [{ "serviceName" : "A new demo service" }, { "serviceName" : "PREFIX Hood" }, { "serviceName" : "Aluminum Panel" }]
-        }]},
+        "vehiclePartsData": [
+          {
+            "vehiclePartName": "Anastasia Part",
+            "vehiclePartSize": "Nickel",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Anastasia Labor Avarage Data"
+              },
+              {
+                "serviceName": "Battery Installation",
+                "servicePrice": "30",
+                "serviceQuantity": "2.50"
+              },
+              {
+                "serviceName": "Anastasia % Vehicle Part"
+              }
+            ]
+          },
+          {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "Quarter",
+            "vehiclePartSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "A new demo service"
+              },
+              {
+                "serviceName": "PREFIX Hood"
+              },
+              {
+                "serviceName": "Aluminum Panel"
+              }
+            ]
+          }
+        ]
+      },
       "inspPrice": "$302.89"
     }
   ],
-
   "testVerifyUserCanApproveSeveralInspectionsWithOneCustomersWithLineApproveAndWithoutLineApprove": [
     {
       "rowID": "testVerifyUserCanApproveSeveralInspectionsWithOneCustomersWithLineApproveAndWithoutLineApprove.01",
       "description": "Test Case 73111:Verify user can approve several inspections with one customers with line approve and without line approve",
-      "inspectionsData" : [{"inspType": "O_KRAMAR",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91712",
+          "testCaseTitle": "Verify user can approve several inspections with one customers with line approve and without line approve."
+        }
+      ],
+      "inspectionsData": [
+        {
+          "inspType": "O_KRAMAR",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            },
+            {
+              "serviceName": "Labor"
+            },
+            {
+              "serviceName": "Aluminum Panel"
+            }
+          ]
         },
-        "services": [{"serviceName": "Battery Installation"
-        }, {"serviceName": "Labor"
-        }, {"serviceName": "Aluminum Panel"
-        }]
-      }, {"inspType": "O_KRAMAR3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        },
-        "services": [{"serviceName": "Battery Installation"
-        }, {"serviceName": "Labor"
-        }, {"serviceName": "Aluminum Panel"
-        }]
-      }]
+        {
+          "inspType": "O_KRAMAR3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            },
+            {
+              "serviceName": "Labor"
+            },
+            {
+              "serviceName": "Aluminum Panel"
+            }
+          ]
+        }
+      ]
     }
   ],
-
   "testVerifyUserCanSelectServiceForApproveOnMultiLineApproveScreenIfLineApprovalEqualsONForThisInspection": [
     {
       "rowID": "testVerifyUserCanSelectServiceForApproveOnMultiLineApproveScreenIfLineApprovalEqualsONForThisInspection.01",
       "description": "Test Case 73113:Verify user can select service for approve on multi line approve screen if line approval = ON for this Inspection",
-      "inspectionsData" : [{"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91713",
+          "testCaseTitle": "Verify user can select service for approve on multi line approve screen if line approval = ON for this Inspection."
+        }
+      ],
+      "inspectionsData": [
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "servicePrice": "1"
+            },
+            {
+              "serviceName": "Labor",
+              "servicePrice": "5"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "servicePrice": "10"
+            }
+          ]
         },
-        "services": [{"serviceName": "Battery Installation", "servicePrice": "1"
-        }, {"serviceName": "Labor", "servicePrice": "5"
-        }, {"serviceName": "Aluminum Panel", "servicePrice": "10"
-        }]
-      }, {"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        },
-        "services": [{"serviceName": "Battery Installation", "servicePrice": "15"
-        }, {"serviceName": "Labor", "servicePrice": "20"
-        }, {"serviceName": "Aluminum Panel", "servicePrice": "50"
-        }]
-      }]
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "servicePrice": "15"
+            },
+            {
+              "serviceName": "Labor",
+              "servicePrice": "20"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "servicePrice": "50"
+            }
+          ]
+        }
+      ]
     }
   ],
-
   "testVerifyUserCanDeleteInspectionFromLineApproveList": [
     {
       "rowID": "testVerifyUserCanDeleteInspectionFromLineApproveList.01",
       "description": "Test Case 73116:Verify user can delete Inspection from line approve list",
-      "inspectionsData" : [{"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91714",
+          "testCaseTitle": "Verify user can delete Inspection from line approve list"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "servicePrice": "1"
+            },
+            {
+              "serviceName": "Labor",
+              "servicePrice": "5"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "servicePrice": "10"
+            }
+          ]
         },
-        "services": [{"serviceName": "Battery Installation", "servicePrice": "1"
-        }, {"serviceName": "Labor", "servicePrice": "5"
-        }, {"serviceName": "Aluminum Panel", "servicePrice": "10"
-        }]
-      }, {"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        },
-        "services": [{"serviceName": "Battery Installation", "servicePrice": "15"
-        }, {"serviceName": "Labor", "servicePrice": "20"
-        }, {"serviceName": "Aluminum Panel", "servicePrice": "50"
-        }]
-      }]
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "servicePrice": "15"
+            },
+            {
+              "serviceName": "Labor",
+              "servicePrice": "20"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "servicePrice": "50"
+            }
+          ]
+        }
+      ]
     }
   ],
-
   "testVerifyTotalApprovalAmountIncludeOnlySUMOfApprovedService": [
     {
       "rowID": "testVerifyTotalApprovalAmountIncludeOnlySUMOfApprovedService.01",
       "description": "Test Case 73117:Verify Total approval amount include only SUM of approved service",
-      "inspectionsData" : [{"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91715",
+          "testCaseTitle": "Verify Total approval amount include only SUM of approved service."
+        }
+      ],
+      "inspectionsData": [
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "serviceStatus": "Approved"
+            },
+            {
+              "serviceName": "Labor",
+              "serviceStatus": "Approved"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "serviceStatus": "Declined"
+            }
+          ],
+          "inspApprovedPrice": "$52.29"
         },
-        "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
-        }, {"serviceName": "Labor", "serviceStatus" : "Approved"
-        }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
-        }],
-        "inspApprovedPrice": "$52.29"
-      }, {"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        },
-        "services": [{"serviceName": "Battery Installation", "servicePrice": "15", "serviceStatus" : "Declined"
-        }, {"serviceName": "Labor", "servicePrice": "20", "serviceStatus" : "Declined"
-        }, {"serviceName": "Aluminum Panel", "servicePrice": "50", "serviceStatus" : "Approved"
-        }],
-        "inspApprovedPrice": "$0.00"
-      }]
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "servicePrice": "15",
+              "serviceStatus": "Declined"
+            },
+            {
+              "serviceName": "Labor",
+              "servicePrice": "20",
+              "serviceStatus": "Declined"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "servicePrice": "50",
+              "serviceStatus": "Approved"
+            }
+          ],
+          "inspApprovedPrice": "$0.00"
+        }
+      ]
     }
   ],
-
   "testVerifyUserNeedToSelectReasonForAllDeclinedInspection": [
     {
       "rowID": "testVerifyUserNeedToSelectReasonForAllDeclinedInspection.01",
       "description": "Test Case 73118:Verify user need to select reason for all declined Inspection",
-      "inspectionsData" : [{"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91716",
+          "testCaseTitle": "Verify user need to select reason for all declined Inspection."
+        }
+      ],
+      "inspectionsData": [
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            },
+            {
+              "serviceName": "Labor"
+            },
+            {
+              "serviceName": "Aluminum Panel"
+            }
+          ],
+          "inspectionStatus": "Declined",
+          "declineReason": "No repair needed"
         },
-        "services": [{"serviceName": "Battery Installation"
-        }, {"serviceName": "Labor"
-        }, {"serviceName": "Aluminum Panel"
-        }],
-        "inspectionStatus": "Declined",
-        "declineReason": "No repair needed"
-      }, {"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        },
-        "services": [{"serviceName": "Battery Installation", "servicePrice": "15"
-        }, {"serviceName": "Labor", "servicePrice": "20"
-        }, {"serviceName": "Aluminum Panel", "servicePrice": "50"
-        }],
-        "inspectionStatus": "Declined",
-        "declineReason": "No repair needed"
-      }]
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "servicePrice": "15"
+            },
+            {
+              "serviceName": "Labor",
+              "servicePrice": "20"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "servicePrice": "50"
+            }
+          ],
+          "inspectionStatus": "Declined",
+          "declineReason": "No repair needed"
+        }
+      ]
     }
   ],
-
   "testVerifyInspectionStatusUpdatedAfterApproveDecline": [
     {
       "rowID": "testVerifyInspectionStatusUpdatedAfterApproveDecline.01",
       "description": "Test Case 74190:Verify Inspection Status updated after approve/decline",
-      "inspectionsData" : [{"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91717",
+          "testCaseTitle": "Verify Inspection Status updated after approve/decline"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "serviceStatus": "Approved"
+            },
+            {
+              "serviceName": "Labor",
+              "serviceStatus": "Approved"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "serviceStatus": "Declined"
+            }
+          ],
+          "inspApprovedPrice": "$52.29",
+          "inspectionStatus": "Approved"
         },
-        "services": [{"serviceName": "Battery Installation", "serviceStatus" : "Approved"
-        }, {"serviceName": "Labor", "serviceStatus" : "Approved"
-        }, {"serviceName": "Aluminum Panel", "serviceStatus" : "Declined"
-        }],
-        "inspApprovedPrice": "$52.29",
-        "inspectionStatus": "Approved"
-      }, {"inspType": "O_Kramar3",
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        },
-        "services": [{"serviceName": "Battery Installation", "servicePrice": "15", "serviceStatus" : "Declined"
-        }, {"serviceName": "Labor", "servicePrice": "20", "serviceStatus" : "Declined"
-        }, {"serviceName": "Aluminum Panel", "servicePrice": "50", "serviceStatus" : "Declined"
-        }],
-        "inspApprovedPrice": "$0.00",
-        "inspectionStatus": "Declined",
-        "declineReason": "No repair needed"
-      }]
+        {
+          "inspType": "O_Kramar3",
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation",
+              "servicePrice": "15",
+              "serviceStatus": "Declined"
+            },
+            {
+              "serviceName": "Labor",
+              "servicePrice": "20",
+              "serviceStatus": "Declined"
+            },
+            {
+              "serviceName": "Aluminum Panel",
+              "servicePrice": "50",
+              "serviceStatus": "Declined"
+            }
+          ],
+          "inspApprovedPrice": "$0.00",
+          "inspectionStatus": "Declined",
+          "declineReason": "No repair needed"
+        }
+      ]
     }
   ],
-
   "testVerifyUserCantApproveInspectionsWithDifferentCustomers": [
     {
       "rowID": "testVerifyUserCantApproveInspectionsWithDifferentCustomers.01",
       "description": "Test Case 74191:Verify user can't aprrove Inspections with different customers",
-      "inspectionsData" : [{"inspType": "O_Kramar3",
-        "retailCustomer": {
-          "firstName": "000Automation",
-          "lastName": "Retail"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91718",
+          "testCaseTitle": "Verify user can't aprrove Inspections with different customers."
+        }
+      ],
+      "inspectionsData": [
+        {
+          "inspType": "O_Kramar3",
+          "retailCustomer": {
+            "firstName": "000Automation",
+            "lastName": "Retail"
+          },
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
         },
-        "vihicleInfo": {"vinNumber": "7777777777777"
+        {
+          "inspType": "O_Kramar3",
+          "retailCustomer": {
+            "firstName": "RetailCustomer2",
+            "lastName": "RetailLast2"
+          },
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Labor"
+            }
+          ]
         },
-        "services": [{"serviceName": "Battery Installation"}]
-      }, {"inspType": "O_Kramar3",
-        "retailCustomer": {"firstName": "RetailCustomer2", "lastName" : "RetailLast2"
-        },
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        },
-        "services": [{"serviceName": "Labor"}]
-      },{"inspType": "O_Kramar3",
-        "retailCustomer": {"firstName": "RetailCustomer2", "lastName" : "RetailLast2"
-        },
-        "vihicleInfo": {"vinNumber": "7777777777777"
-        },
-        "services": [{"serviceName": "Battery Installation"}]
-      }]
+        {
+          "inspType": "O_Kramar3",
+          "retailCustomer": {
+            "firstName": "RetailCustomer2",
+            "lastName": "RetailLast2"
+          },
+          "vihicleInfo": {
+            "vinNumber": "7777777777777"
+          },
+          "services": [
+            {
+              "serviceName": "Battery Installation"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -2,6 +2,12 @@
   "userCanSeeTimeReportOnServiceLevel": [
     {
       "rowID": "userCanSeeTimeReportOnServiceLevel.01",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92257",
+          "testCaseTitle": "Verify user can see the \"Time Report\" (service level)"
+        }
+      ],
       "description": "91017",
       "service": {
         "serviceName": "Labor AM"
@@ -12,6 +18,12 @@
     {
       "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
       "description": "91020",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92256",
+          "testCaseTitle": "Verify user can see \"Time Report\" report (phase level)"
+        }
+      ],
       "monitoring": {
         "orderPhaseDto": {
           "phaseName": "AutomationPhaseLevel"
@@ -23,6 +35,12 @@
     {
       "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
       "description": "91006",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92348",
+          "testCaseTitle": "Verify user can reset start date(service level)"
+        }
+      ],
       "service": {
         "serviceName": "Labor AM"
       }
@@ -32,6 +50,12 @@
     {
       "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
       "description": "91007",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92349",
+          "testCaseTitle": "Verify user can reset start date(phase level)"
+        }
+      ],
       "service": {
         "serviceName": "Expenses_money (AM)"
       },

@@ -1,23 +1,33 @@
 {
-
   "testVerifyLettersIOQAreTrimmedWhileManualEntry": [
     {
       "rowID": "testVerifyLettersIOQAreTrimmedWhileManualEntry.01",
       "description": "Test Case 72794:R360 client - Verify letters I,O,Q are trimmed while manual entry, Test Case 72801:R360 client - Verify letters less than 17-digit VIN is treated as valid while manual entry",
-      "vihicleInfo": {"vinNumber": "AI0YQ56ONJ"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90336",
+          "testCaseTitle": "R360 client - Verify letters I,O,Q are trimmed while manual entry"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "AI0YQ56ONJ"
       },
       "newVinNumber": "A0Y56NJ"
     }
   ],
-
   "testVerifyVINWithMoreThan17ValidDigitsIsTrimmedToFirst17CharactersWhileManualEntry": [
     {
       "rowID": "testVerifyVINWithMoreThan17ValidDigitsIsTrimmedToFirst17CharactersWhileManualEntry.01",
       "description": "Test Case 72805:R360 client - Verify VIN with more than 17 valid digits is trimmed to first 17 characters while manual entry",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90338",
+          "testCaseTitle": "R360 client - Verify VIN with more than 17 valid digits is trimmed to first 17 characters while manual entry"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "WDBFA67E1SFA946591"
       }
     }
   ]
-
 }

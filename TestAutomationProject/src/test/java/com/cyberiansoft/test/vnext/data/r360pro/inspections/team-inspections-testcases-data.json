@@ -1,205 +1,333 @@
 {
-
   "testVerifyUserCanCloseMyInspectionActionScreenInAndroid": [
     {
       "rowID": "testVerifyUserCanCloseMyInspectionActionScreenInAndroid.01",
       "description": "Test Case 72780:Verify user can close My inspection action screen in Android",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91896",
+          "testCaseTitle": "Verify user can close My inspection action screen in Android"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanNavigateInMyInspectionWizardUsingActionScreenWwizardMenuInAndroid": [
     {
       "rowID": "testVerifyUserCanNavigateInMyInspectionWizardUsingActionScreenWwizardMenuInAndroid.01",
       "description": "Test Case 72781:Verify user can navigate in My Inspection Wizard using action screen wizard menu ( Android )",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90339",
+          "testCaseTitle": "Verify user can navigate in My Inspection Wizard using action screen \\wizard menu ( Android )"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "service": {"serviceName": "Battery Installation"
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
-
   "testVerifyMyInspectionActionScreenWorksCorrectly": [
     {
       "rowID": "testVerifyMyInspectionActionScreenWorksCorrectly.01",
       "description": "Test Case 72785:Verify My Inspection action screen works correctly.",
-      "vihicleInfo": {"vinNumber": "7777777777777", "vehicleYear" : "2005", "vehicleColor" : "Blue"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90340",
+          "testCaseTitle": "Verify My Inspection action screen works correctly."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777",
+        "vehicleYear": "2005",
+        "vehicleColor": "Blue"
       },
-      "service": {"serviceName": "Battery Installation"
+      "service": {
+        "serviceName": "Battery Installation"
       },
-      "damagesData": [{"damageGroupName": "Miscellanious"
-      }, {"damageGroupName": "Price Adjustment"
-      }]
+      "damagesData": [
+        {
+          "damageGroupName": "Miscellanious"
+        },
+        {
+          "damageGroupName": "Price Adjustment"
+        }
+      ]
     }
   ],
-
   "testVerifyUserCanCreateInvoiceFromInspections": [
     {
       "rowID": "testVerifyUserCanCreateInvoiceFromInspections.01",
       "description": "Test Case 64494:Verify user can approve Invoice after creating, Test Case 64497:Verify user can create Invoice from Inspection, Test Case 64266:Verify user can create Invoice in status 'New'",
-      "inspectionData" : {
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90319",
+          "testCaseTitle": "Verify user can approve Invoice after creating."
+        }
+      ],
+      "inspectionData": {
         "inspType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
         }
       },
-      "invoiceData" : {"poNumber" : "12345"
+      "invoiceData": {
+        "poNumber": "12345"
       }
     }
   ],
-
   "testVerifyTeamInspectionDisplaysOnTheScreen": [
     {
       "rowID": "testVerifyTeamInspectionDisplaysOnTheScreen.01",
       "description": "Test Case 66276:Verify Team Inspection displays on the screen",
-      "vihicleInfo" : {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90658",
+          "testCaseTitle": "Verify Team Inspection displays on the screen."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyWhenUserGoBackFromInspectionsScreenToHomeWeSaveLastSelectedMode": [
     {
       "rowID": "testVerifyWhenUserGoBackFromInspectionsScreenToHomeWeSaveLastSelectedMode.01",
       "description": "Test Case 66286:Verify when user go back from inspectiontypes screen to Home we save last selected mode",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90662",
+          "testCaseTitle": "Verify when user go back from inspections screen to Home we save last selected mode."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanCreateInspectionWithoutTeamSharing": [
     {
       "rowID": "testVerifyUserCanCreateInspectionWithoutTeamSharing.01",
       "description": "Test Case 66295:Verify user can create Inspection without Team Sharing",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90664",
+          "testCaseTitle": "Verify user can create Inspection without Team Sharing"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "insuranceCompany" : { "insuranceCompanyName" : "Oranta", "claimNumber" : "123", "policyNumber" : "099"
+      "insuranceCompany": {
+        "insuranceCompanyName": "Oranta",
+        "claimNumber": "123",
+        "policyNumber": "099"
       }
     }
   ],
-
   "testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList": [
     {
       "rowID": "testVerifyOnlyWhenUserTapSearchButtonWePerformSearchAndRefreshTeamInspectionsList.01",
       "description": "Test Case 66284:Verify only when user tap 'search' button we perform search and refresh team inspectiontypes list",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90660",
+          "testCaseTitle": "Verify only when user tap 'search' button we perform search and refresh team inspections list."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanViewTeamInspection": [
     {
       "rowID": "testVerifyUserCanViewTeamInspection.01",
       "description": "Test Case 66858:Verify user can view Team Inspection",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91898",
+          "testCaseTitle": "Verify user can view Team Inspection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanCreateTeamInspection": [
     {
       "rowID": "testVerifyUserCanCreateTeamInspection.01",
       "description": "Test Case 67290:Verify user can create Team Inspection, Test Case 67291:Verify Team Inspection save into mobile device and BO immediately if internet connection is available",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91683",
+          "testCaseTitle": "Verify user can create Team Inspection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyTeamInspectionSavedIntoMobileDeviceAndBOLaterViaOutgoingMessageIfThereIsNoConnection": [
     {
       "rowID": "testVerifyTeamInspectionSavedIntoMobileDeviceAndBOLaterViaOutgoingMessageIfThereIsNoConnection.01",
       "description": "Test Case 67292:Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection, Test Case 67299:Verify Inspection displays on the list after DB update and after reconnect Internet, Test Case 67320:Verify user can't send sms if internet connection is lost",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91685",
+          "testCaseTitle": "Verify Team Inspection saved into mobile deviceand BO later via outgoing message if there is no connection."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifySavingTeamInspectionOnlineDoesntAffectedToSettingsManualSendOption": [
     {
       "rowID": "testVerifySavingTeamInspectionOnlineDoesntAffectedToSettingsManualSendOption.01",
       "description": "Test Case 67293:Verify saving team inspection online doesn't affected to Settings > Manual send option, Test Case 67295:Verify Inspection displays in the list after DB updating",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91687",
+          "testCaseTitle": "Verify saving team inspection online doesn't affected to Settings > Manual send option."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanEditInspectionIfWeHaveNoInternetConnection": [
     {
       "rowID": "testVerifyUserCanEditInspectionIfWeHaveNoInternetConnection.01",
       "description": "Test Case 67330:Verify user can edit Inspection if we have no internet connection",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91694",
+          "testCaseTitle": "Verify user can edit Inspection if we have no internet connection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanEditMyInspectionsIfWeHaveNoInternetConnection": [
     {
       "rowID": "testVerifyUserCanEditMyInspectionsIfWeHaveNoInternetConnection.01",
       "description": "Test Case 67331:Verify user can edit 'My inspectiontypes' if we have no internet connection",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91695",
+          "testCaseTitle": "Verify user can edit \"My inspections\" if we have no internet connection."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanEditTeamInspection": [
     {
       "rowID": "testVerifyUserCanEditTeamInspection.01",
       "description": "Test Case 67326:Verify user can edit Team Inspection, Test Case 67332:Verify immediately saving on BO if user edit Team Inspection",
-      "vihicleInfo": {"vinNumber": "7777777777777", "vehicleMake" : "Ford", "vehicleModel" : "Escape", "vehicleYear" : "2011",
-        "stockNumber" : "123ABC", "roNumber" : "123ASD", "mileage" : "100000", "licPlate" : "123"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91691",
+          "testCaseTitle": "Verify user can edit Team Inspection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777",
+        "vehicleMake": "Ford",
+        "vehicleModel": "Escape",
+        "vehicleYear": "2011",
+        "stockNumber": "123ABC",
+        "roNumber": "123ASD",
+        "mileage": "100000",
+        "licPlate": "123"
       },
-      "insuranceCompany" : { "insuranceCompanyName" : "Miami Beach Insurance"
+      "insuranceCompany": {
+        "insuranceCompanyName": "Miami Beach Insurance"
       }
     }
   ],
-
   "testVerifyMessageYourEmailMessageHasBeenAddedtoTheQueueDisplaysAfterSending": [
     {
       "rowID": "testVerifyMessageYourEmailMessageHasBeenAddedtoTheQueueDisplaysAfterSending.01",
       "description": "Test Case 67756:Verify message 'Your email message has been added to the queue.' displays after sending",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91699",
+          "testCaseTitle": "Verify message \"Your email message has been added to the queue.\" displays after sending."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyItIsNotPossibleToEditTeamInspectionWithDeviceOnFlyMode": [
     {
       "rowID": "testVerifyItIsNotPossibleToEditTeamInspectionWithDeviceOnFlyMode.01",
       "description": "Verify it is not possible to edit Team Inspection with device on Fly-mode",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       }
     }
   ],
-
   "testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices": [
     {
       "rowID": "testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices.01",
       "description": "Verify user can edit team Work Order (add and remove services)",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
       "moneyService": {
         "serviceName": "Battery Installation"
       },
-      "percentageService" : {
+      "percentageService": {
         "serviceName": "Bundle Discount"
       }
     }
   ],
-
   "testVerifySendingMoreThen100MessagesAfterReconnectInternet": [
     {
       "rowID": "testVerifySendingMoreThen100MessagesAfterReconnectInternet.01",
       "description": "Test Case 68042:Verify sending >100 messages after reconnect Internet",
-      "vihicleInfo": {"vinNumber": "7777777777777"
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91698",
+          "testCaseTitle": "Verify sending >100 messages after reconnect Internet."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
       },
-      "insuranceCompany" : { "insuranceCompanyName" : "Test Insurance Company"
+      "insuranceCompany": {
+        "insuranceCompanyName": "Test Insurance Company"
       },
-      "services": [{"serviceName": "Battery Installation"
-      }, {"serviceName": "Aluminum Panel"
-      }, {"serviceName": "Damage Service"
-      }]
+      "services": [
+        {
+          "serviceName": "Battery Installation"
+        },
+        {
+          "serviceName": "Aluminum Panel"
+        },
+        {
+          "serviceName": "Damage Service"
+        }
+      ]
     }
   ]
-
 }

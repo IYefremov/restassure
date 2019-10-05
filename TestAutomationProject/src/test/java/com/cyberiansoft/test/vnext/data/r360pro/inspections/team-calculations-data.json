@@ -1,202 +1,422 @@
 {
-  
-  	"testVerifyCorrectTotalIsShownAfterEditingPercentageServiceInMyInspection": [
+  "testVerifyCorrectTotalIsShownAfterEditingPercentageServiceInMyInspection": [
     {
       "rowID": "testVerifyCorrectTotalIsShownAfterEditingPercentageServiceInMyInspection.01",
       "description": "Test Case 73393:R360 client: Verify correct Total is shown after editing Percentage service in My Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91802",
+          "testCaseTitle": "R360 client: Verify correct Total is shown after editing Percentage service in My Inspection"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "percentageServices": [{"serviceName": "Aluminum Panel", "servicePrice": "50"
-      }, {"serviceName": "Aluminum Panel", "servicePrice": "-25"
-      }],
-      "service": {"serviceName": "Battery Installation", "servicePrice": "9"
+      "percentageServices": [
+        {
+          "serviceName": "Aluminum Panel",
+          "servicePrice": "50"
+        },
+        {
+          "serviceName": "Aluminum Panel",
+          "servicePrice": "-25"
+        }
+      ],
+      "service": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "9"
       },
       "inspPrice": "$11.25"
     }
   ],
-
   "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceInMyInspection": [
     {
       "rowID": "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceInMyInspection.01",
       "description": "Test Case 73395:R360 client: Verify correct Total is shown after editing Money service in My Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91803",
+          "testCaseTitle": "R360 client: Verify correct Total is shown after editing Money service in My Inspection"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "moneyServices": [{"serviceName": "Battery Installation", "servicePrice": "0.50"
-      }, {"serviceName": "Battery Installation", "servicePrice": "100"
-      }, {"serviceName": "Battery Installation", "servicePrice": "0"
-      }],
-      "service": {"serviceName": "Aluminum Panel", "servicePrice": "25"
+      "moneyServices": [
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "0.50"
+        },
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "100"
+        },
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "0"
+        }
+      ],
+      "service": {
+        "serviceName": "Aluminum Panel",
+        "servicePrice": "25"
       },
       "inspPrice": "$11.25"
     }
   ],
-
   "testVerifyMyInspectionTotalAmountCantBeLessThan0": [
     {
       "rowID": "testVerifyMyInspectionTotalAmountCantBeLessThan0.01",
       "description": "Test Case 73396:R360 client: Verify My Inspection total amount can't be less than 0",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91804",
+          "testCaseTitle": "R360 client: Verify My Inspection total amount can't be less than 0"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "moneyService": {"serviceName": "Battery Installation", "servicePrice": "-9"
+      "moneyService": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "-9"
       },
-      "percentageService": {"serviceName": "Aluminum Panel", "servicePrice": "25"
+      "percentageService": {
+        "serviceName": "Aluminum Panel",
+        "servicePrice": "25"
       },
       "inspPrice": "$(11.25)"
     }
   ],
-
   "testVerifyMyInspectionTotalAmountCantBeMoreThanOneMillion": [
     {
       "rowID": "testVerifyMyInspectionTotalAmountCantBeMoreThanOneMillion.01",
       "description": "Test Case 73397:R360 client: Verify My Inspection total amount can't be more than 999999999.99",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91805",
+          "testCaseTitle": "R360 client: Verify My Inspection total amount can't be more than 999999999.99"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "moneyService": {"serviceName": "Battery Installation", "servicePrice": "999999.00", "serviceQuantity": "19999.00"
+      "moneyService": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "999999.00",
+        "serviceQuantity": "19999.00"
       },
-      "percentageService": {"serviceName": "Aluminum Panel", "servicePrice": "25"
+      "percentageService": {
+        "serviceName": "Aluminum Panel",
+        "servicePrice": "25"
       },
       "inspPrice": "$24,998,725,001.25"
     }
   ],
-
   "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceQTYInMyInspection": [
     {
       "rowID": "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceQTYInMyInspection.01",
       "description": "Test Case 73398:R360 client: Verify correct Total is shown after editing Money service QTY in My Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91806",
+          "testCaseTitle": "R360 client: Verify correct Total is shown after editing Money service QTY in My Inspection"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "moneyServices": [{"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "0.50"
-      }, {"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "100"
-      }, {"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "0"
-      }],
-      "service": {"serviceName": "Aluminum Panel", "servicePrice": "25"
+      "moneyServices": [
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "9",
+          "serviceQuantity": "0.50"
+        },
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "9",
+          "serviceQuantity": "100"
+        },
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "9",
+          "serviceQuantity": "0"
+        }
+      ],
+      "service": {
+        "serviceName": "Aluminum Panel",
+        "servicePrice": "25"
       },
       "inspPrice": "$11.25"
     }
   ],
-
   "testVerifyCorrectTotalIsShownMyInspectionWithNegativeAndPositivePercentageServices": [
     {
       "rowID": "testVerifyCorrectTotalIsShownMyInspectionWithNegativeAndPositivePercentageServices.01",
       "description": "Test Case 73399:R360 client: Verify correct Total is shown My Inspection with negative and positive percentage services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91807",
+          "testCaseTitle": "R360 client: Verify correct Total is shown My Inspection with negative and positive percentage services"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "percentageServices": [{"serviceName": "Aluminum Panel", "servicePrice": "25"
-      }, {"serviceName": "Bundle Discount", "servicePrice": "-25"
-      }],
-      "service": {"serviceName": "Battery Installation", "servicePrice": "9"
+      "percentageServices": [
+        {
+          "serviceName": "Aluminum Panel",
+          "servicePrice": "25"
+        },
+        {
+          "serviceName": "Bundle Discount",
+          "servicePrice": "-25"
+        }
+      ],
+      "service": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "9"
       },
       "inspPrice": "$8.44"
     }
   ],
-
   "testVerifyCorrectTotalIsShownForMyInspectionWithFewMoneyServices": [
     {
       "rowID": "testVerifyCorrectTotalIsShownForMyInspectionWithFewMoneyServices.01",
       "description": "Test Case 73400:R360 client: Verify correct Total is shown for My Inspection with few Money services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91808",
+          "testCaseTitle": "R360 client: Verify correct Total is shown for My Inspection with few Money services"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "moneyServices": [{"serviceName": "Battery Installation", "servicePrice": "9", "serviceQuantity": "1"
-      }, {"serviceName": "Damage Service", "servicePrice": "-1"
-      }, {"serviceName": "Labor", "servicePrice": "13.99", "serviceQuantity": "1"
-      }],
+      "moneyServices": [
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "9",
+          "serviceQuantity": "1"
+        },
+        {
+          "serviceName": "Damage Service",
+          "servicePrice": "-1"
+        },
+        {
+          "serviceName": "Labor",
+          "servicePrice": "13.99",
+          "serviceQuantity": "1"
+        }
+      ],
       "inspPrice": "$21.99"
     }
   ],
-
   "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsStateFarmMatrix": [
     {
       "rowID": "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsStateFarmMatrix.01",
       "description": "Test Case 73401:R360 client: R360 client: Verify correct Total is shown for My Inspection with panels State Farm matrix",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91809",
+          "testCaseTitle": "R360 client: R360 client: Verify correct Total is shown for My Inspection with panels State Farm matrix"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "State Farm-Tech",
-        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "DIME", "vehiclePartSeverity": "Light 6 to 15", "vehiclePartAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
-        }, {"vehiclePartName": "Roof", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "Very Light 1 to 5"
-        }, {"vehiclePartName": "Deck Lid", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Limit 151 to 200"
-        }, {"vehiclePartName": "Cowl, Other", "vehiclePartSize": "Half", "vehiclePartSeverity": "Ceiling 201 to 250"
-        }]},
+      "matrixService": {
+        "matrixServiceName": "Hail Damage Repair",
+        "hailMatrixName": "State Farm-Tech",
+        "vehiclePartsData": [
+          {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "Light 6 to 15",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Aluminum Panel"
+              }
+            ]
+          },
+          {
+            "vehiclePartName": "Roof",
+            "vehiclePartSize": "Nickel",
+            "vehiclePartSeverity": "Very Light 1 to 5"
+          },
+          {
+            "vehiclePartName": "Deck Lid",
+            "vehiclePartSize": "Quarter",
+            "vehiclePartSeverity": "Limit 151 to 200"
+          },
+          {
+            "vehiclePartName": "Cowl, Other",
+            "vehiclePartSize": "Half",
+            "vehiclePartSeverity": "Ceiling 201 to 250"
+          }
+        ]
+      },
       "inspPrice": "$281.25"
     }
   ],
-
   "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsNationwideInsuranceMatrix": [
     {
       "rowID": "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsNationwideInsuranceMatrix.01",
       "description": "Test Case 73402:R360 client: R360 client: Verify correct Total is shown for My Inspection with panels Nationwide Insurance matrix",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91810",
+          "testCaseTitle": "R360 client: R360 client: Verify correct Total is shown for My Inspection with panels Nationwide Insurance matrix"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "Nationwide Insurance-Tech",
-        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "QTR", "vehiclePartSeverity": "1-5", "vehiclePartAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
-        }, {"vehiclePartName": "Roof", "vehiclePartSize": "NKL", "vehiclePartSeverity": "Roof (251 - 300)"
-        }, {"vehiclePartName": "Left Other", "vehiclePartSize": "HLF", "vehiclePartSeverity": "6-15"
-        }]},
+      "matrixService": {
+        "matrixServiceName": "Hail Damage Repair",
+        "hailMatrixName": "Nationwide Insurance-Tech",
+        "vehiclePartsData": [
+          {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "QTR",
+            "vehiclePartSeverity": "1-5",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Aluminum Panel"
+              }
+            ]
+          },
+          {
+            "vehiclePartName": "Roof",
+            "vehiclePartSize": "NKL",
+            "vehiclePartSeverity": "Roof (251 - 300)"
+          },
+          {
+            "vehiclePartName": "Left Other",
+            "vehiclePartSize": "HLF",
+            "vehiclePartSeverity": "6-15"
+          }
+        ]
+      },
       "inspPrice": "$1,531.25"
     }
   ],
-
   "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsProgressiveMatrix": [
     {
       "rowID": "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsProgressiveMatrix.01",
       "description": "Test Case 73403:R360 client: R360 client: Verify correct Total is shown for My Inspection with panels Progressive matrix",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91811",
+          "testCaseTitle": "R360 client: R360 client: Verify correct Total is shown for My Inspection with panels Progressive matrix"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "matrixService": {"matrixServiceName" : "Hail Damage Repair", "hailMatrixName" : "Progressive-Tech",
-        "vehiclePartsData" : [{"vehiclePartName": "Hood", "vehiclePartSize": "Half", "vehiclePartSeverity": "Moderate 31 to 50", "vehiclePartAdditionalServices" : [{ "serviceName" : "Aluminum Panel" }]
-        }, {"vehiclePartName": "Roof", "vehiclePartSize": "Quarter", "vehiclePartSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)"
-        }, {"vehiclePartName": "Cowl, Other", "vehiclePartSize": "Nickel", "vehiclePartSeverity": "Light 6 to 15"
-        }]},
+      "matrixService": {
+        "matrixServiceName": "Hail Damage Repair",
+        "hailMatrixName": "Progressive-Tech",
+        "vehiclePartsData": [
+          {
+            "vehiclePartName": "Hood",
+            "vehiclePartSize": "Half",
+            "vehiclePartSeverity": "Moderate 31 to 50",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Aluminum Panel"
+              }
+            ]
+          },
+          {
+            "vehiclePartName": "Roof",
+            "vehiclePartSize": "Quarter",
+            "vehiclePartSeverity": "Roof Limit 201 to 300 (201 TO 300 DENTS)"
+          },
+          {
+            "vehiclePartName": "Cowl, Other",
+            "vehiclePartSize": "Nickel",
+            "vehiclePartSeverity": "Light 6 to 15"
+          }
+        ]
+      },
       "inspPrice": "$2,287.50"
     }
   ],
-
   "testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen": [
     {
       "rowID": "testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen.01",
       "description": "Test Case 48947:vNext - Verify Total is correct when adding several money services on Visuals screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90464",
+          "testCaseTitle": "vNext - Verify Total is correct when adding several money services on Visuals screen"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "moneyServices": [{"serviceName": "Dent Repair", "servicePrice": "20.00", "serviceQuantity": "10.58"
-      }, {"serviceName": "Dent Repair", "servicePrice": "647.99", "serviceQuantity": "6"
-      }],
+      "moneyServices": [
+        {
+          "serviceName": "Dent Repair",
+          "servicePrice": "20.00",
+          "serviceQuantity": "10.58"
+        },
+        {
+          "serviceName": "Dent Repair",
+          "servicePrice": "647.99",
+          "serviceQuantity": "6"
+        }
+      ],
       "inspPrice": "$4,099.54"
     }
   ],
-
   "testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen": [
     {
       "rowID": "testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen.01",
       "description": "Test Case 48955:vNext - Verify Total is correct when adding money and percentage services on Visuals screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90467",
+          "testCaseTitle": "vNext - Verify Total is correct when adding money and percentage services on Visuals screen"
+        }
+      ],
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "moneyService": {"serviceName": "Miscellanious", "servicePrice": "506.35", "serviceQuantity": "5.00"
+      "moneyService": {
+        "serviceName": "Miscellanious",
+        "servicePrice": "506.35",
+        "serviceQuantity": "5.00"
       },
-      "percentageService": {"serviceName": "APercent_QualityControl"
+      "percentageService": {
+        "serviceName": "APercent_QualityControl"
       },
       "inspPrice": "$2,798.98"
     }
   ],
-
   "testCreateInspectionWithNegativePrice": [
     {
       "rowID": "testCreateInspectionWithNegativePrice.01",
       "description": "Test Case:vNext Create inspection with negative price",
       "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "19UUA66278A050105"
+      "vihicleInfo": {
+        "vinNumber": "19UUA66278A050105"
       },
-      "moneyService": {"serviceName": "Detail", "servicePrice": "-9"
+      "moneyService": {
+        "serviceName": "Detail",
+        "servicePrice": "-9"
       },
       "inspPrice": "$8.44"
     }

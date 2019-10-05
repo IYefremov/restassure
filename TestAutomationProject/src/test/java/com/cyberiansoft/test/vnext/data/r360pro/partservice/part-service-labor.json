@@ -3,6 +3,12 @@
     {
       "rowID": "userCanAddPartServiceAndAssignThatToLaborService.01",
       "description": "TFS_ID: 89723",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91843",
+          "testCaseTitle": "User can add Part service and assign that to a labor service"
+        }
+      ],
       "partServiceDataList": [
         {
           "serviceName": "roz_part_full_cat",
@@ -23,6 +29,12 @@
     {
       "rowID": "userCanAddLaborServiceAndAssignToPartService.01",
       "description": "TFS_ID: 89728",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91844",
+          "testCaseTitle": "User can add Labor service and assign that to a Part service"
+        }
+      ],
       "laborService": {
         "serviceName": "rozstalnoy_enable_labor",
         "partServiceDataList": [
@@ -49,6 +61,12 @@
     {
       "rowID": "userCanAddLaborServiceAndAssignToPartService.01",
       "description": "TFS_ID: 89730",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91845",
+          "testCaseTitle": "User can remove or left Part service removing Labor service (for assigned Part and Labor services)"
+        }
+      ],
       "laborServicesList": [
         {
           "serviceName": "rozstalnoy_enable_labor",
@@ -82,6 +100,12 @@
     {
       "rowID": "userCanAddLaborServiceAndAssignToPartService.01",
       "description": "TFS_ID: 89751",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91846",
+          "testCaseTitle": "User can remove or left Labor service removing Part service (for assigned Part and Labor services)"
+        }
+      ],
       "partServiceDataList": [
         {
           "serviceName": "roz_part_full_cat",

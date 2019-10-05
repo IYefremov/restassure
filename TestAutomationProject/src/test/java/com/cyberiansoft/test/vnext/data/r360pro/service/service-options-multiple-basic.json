@@ -3,6 +3,12 @@
     {
       "rowID": "userCantAddSingleServiceMultipleTimesCreatingWO.01",
       "description": "89495",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91855",
+          "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part, price matrix) manually on services creating Inspection"
+        }
+      ],
       "services": [
         {
           "serviceName": "rozstalnoy_disable_money"
@@ -39,6 +45,12 @@
     {
       "rowID": "userCantAddSingleServiceMultipleTimesEditingWO.01",
       "description": "89527",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91857",
+          "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part, price matrix) manually on services editing Inspection"
+        }
+      ],
       "services": [
         {
           "serviceName": "rozstalnoy_disable_money"
@@ -75,6 +87,12 @@
     {
       "rowID": "userCANAddSingleServiceMultipleTimesCreatingWO.01",
       "description": "89529",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91859",
+          "testCaseTitle": "User can add services with enabled option Multiple twice or more into Inspection (money, labor, part, price matrix) manually on services creating Inspection"
+        }
+      ],
       "services": [
         {
           "serviceName": "rozstalnoy_enable_money"
@@ -112,6 +130,12 @@
     {
       "rowID": "userCANAddSingleServiceMultipleTimesEditingWO.01",
       "description": "89529",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91859",
+          "testCaseTitle": "User can add services with enabled option Multiple twice or more into Inspection (money, labor, part, price matrix) manually on services creating Inspection"
+        }
+      ],
       "services": [
         {
           "serviceName": "rozstalnoy_enable_money"
@@ -149,6 +173,12 @@
     {
       "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
       "description": "89533",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91863",
+          "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part) manually on visual form creating Inspection"
+        }
+      ],
       "damagesData": [
         {
           "damageGroupName": "Autre",
@@ -184,6 +214,12 @@
     {
       "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
       "description": "89533",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91863",
+          "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part) manually on visual form creating Inspection"
+        }
+      ],
       "damagesData": [
         {
           "damageGroupName": "Autre",
@@ -219,6 +255,12 @@
     {
       "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
       "description": "89533",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91863",
+          "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part) manually on visual form creating Inspection"
+        }
+      ],
       "damagesData": [
         {
           "damageGroupName": "Autre",
@@ -254,6 +296,12 @@
     {
       "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
       "description": "89533",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91863",
+          "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part) manually on visual form creating Inspection"
+        }
+      ],
       "damagesData": [
         {
           "damageGroupName": "Autre",
@@ -289,6 +337,12 @@
     {
       "rowID": "userCanAddServicesUsingQuestionForm.01",
       "description": "89541",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91871",
+          "testCaseTitle": "Non multiple services are not added and multiple services are added by the question answers if they was added previously"
+        }
+      ],
       "services": [
         {
           "serviceName": "rozstalnoy_disable_money"
