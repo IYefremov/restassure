@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsApprovalWebPage;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsApprovalWebPage;
 import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -91,7 +91,7 @@ public class VNextBOInspectionsApprovalPageSteps {
 
     public void approveInspection(String ...note) {
         String parent = Utils.getParentTab();
-        new VNextBOInspectionsSteps().clickTheApproveInspectionButton();
+        new VNextBOInspectionsPageSteps(driver).clickTheApproveInspectionButton();
         confirmationDialog.clickYesButton();
         Utils.getNewTab(parent);
 

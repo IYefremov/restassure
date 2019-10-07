@@ -287,7 +287,7 @@ public class VNextBOBaseWebPage {
         return selectedValue.getText();
     }
 
-    boolean isElementDisplayed(WebElement element) {
+    protected boolean isElementDisplayed(WebElement element) {
         try {
             wait.until(ExpectedConditions.visibilityOf(element));
             return true;

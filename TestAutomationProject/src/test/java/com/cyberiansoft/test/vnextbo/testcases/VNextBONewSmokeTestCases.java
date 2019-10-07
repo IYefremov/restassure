@@ -16,6 +16,7 @@ import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDe
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsListViewSteps;
@@ -23,6 +24,7 @@ import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOAddNewDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOEditDeviceSteps;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORONotesPageSteps;
@@ -70,6 +72,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBORODetailsPageVerifications roDetailsPageVerifications;
     private VNextBORONotesPageSteps notesPageSteps;
     private VNextBONotesPageVerifications notesPageVerifications;
+    private VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps;
 
     @BeforeClass
     public void settingUp() {
@@ -165,18 +168,17 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         leftMenuInteractions.selectInspectionsMenu();
 
         inspectionsWebPage.openAdvancedSearchForm();
-        VNextBOInspectionAdvancedSearchForm vNextBOInspectionAdvancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(webdriver);
-        vNextBOInspectionAdvancedSearchForm.setAdvSearchDropDownField("Status", data.getStatuses()[0]);
-        vNextBOInspectionAdvancedSearchForm.clickSearchButton();
+        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
+        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[0]);
+        vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
         final String inspectionNumber = breadCrumbInteractions.getLastBreadCrumbText();
         inspectionsApprovalSteps.approveInspection(data.getNote());
 
         inspectionsWebPage.openAdvancedSearchForm();
-        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
-        vNextBOInspectionAdvancedSearchForm.setAdvSearchTextField("Inspection#", inspectionNumber);
-        vNextBOInspectionAdvancedSearchForm.setAdvSearchDropDownField("Status", data.getStatuses()[1]);
-        vNextBOInspectionAdvancedSearchForm.clickSearchButton();
+        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
+        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionNumber);
+        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[1]);
+        vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
         Assert.assertEquals(inspectionsWebPage.getFirstInspectionStatus(), data.getStatuses()[1],
                 "The status of inspection hasn't been changed from 'New' to 'Approved'");
     }

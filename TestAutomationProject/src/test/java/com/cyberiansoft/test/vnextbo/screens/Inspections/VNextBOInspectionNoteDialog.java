@@ -1,7 +1,8 @@
-package com.cyberiansoft.test.vnextbo.screens;
+package com.cyberiansoft.test.vnextbo.screens.Inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

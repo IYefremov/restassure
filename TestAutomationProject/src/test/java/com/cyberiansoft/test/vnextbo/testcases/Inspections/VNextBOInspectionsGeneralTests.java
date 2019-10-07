@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.testcases.VNextBOInspectionsTests;
+package com.cyberiansoft.test.vnextbo.testcases.Inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -6,7 +6,10 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsAdvancedSearchVerifications;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -19,9 +22,11 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInspectionsGeneralData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsGeneralData.json";
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
+    private VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps;
+    private VNextBOInspectionsAdvancedSearchVerifications vNextBOInspectionsAdvancedSearchVerifications;
     private List<String> expectedAdvancedSearchFields =
             Arrays.asList("Customer", "PO#", "RO#", "Stock#", "VIN",
                     "Status", "Inspection#", "Timeframe");
@@ -156,13 +161,11 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyAdvancedSearchFields(String rowID, String description, JSONObject testData) {
 
         inspectionsWebPage.openAdvancedSearchForm();
-        VNextBOInspectionAdvancedSearchForm vNextBOInspectionAdvancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(webdriver);
-        Assert.assertTrue(vNextBOInspectionAdvancedSearchForm.isAdvancedSearchFormDisplayed(),
-                "Advanced search form hasn't been opened");
-        List<String> actualResult = vNextBOInspectionAdvancedSearchForm.getAllAdvancedSearchFieldsLabels();
+        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
+        vNextBOInspectionsAdvancedSearchVerifications = new VNextBOInspectionsAdvancedSearchVerifications(webdriver);
+        vNextBOInspectionsAdvancedSearchVerifications.isAdvancedSearchFormDisplayed();
+        List<String> actualResult = vNextBOInspectionsAdvancedSearchSteps.getAllAdvancedSearchFieldsLabels();
         Assert.assertEquals(actualResult, expectedAdvancedSearchFields);
-        Assert.assertTrue(vNextBOInspectionAdvancedSearchForm.isSearchButtonDisplayed(),
-                "Advanced Search button hasn't been displayed");
+        vNextBOInspectionsAdvancedSearchVerifications.isSearchButtonDisplayed();
     }
 }

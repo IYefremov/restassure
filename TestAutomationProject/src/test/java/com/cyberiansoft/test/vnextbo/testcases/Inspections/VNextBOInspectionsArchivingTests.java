@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.testcases.VNextBOInspectionsTests;
+package com.cyberiansoft.test.vnextbo.testcases.Inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInspectionsDetailsData;
@@ -8,6 +8,8 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -20,9 +22,9 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOInspectionsArchivingTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInspectionsArchivingData.json";
-    private VNextBOInspectionsWebPage inspectionsWebPage;
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsArchivingData.json";
     private VNextBOLoginScreenWebPage loginPage;
+    private VNextBOInspectionsWebPage inspectionsWebPage;
 
     @BeforeClass
     public void settingUp() {
@@ -65,7 +67,7 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
     public void verifyUserCanCancelArchivingWithNoButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        inspectionsWebPage.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        new VNextBOInspectionsPageSteps(webdriver).findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isArchiveIconDisplayed(), "Archive icon hasn't been displayed.");
         inspectionsWebPage.clickArchiveIcon();
         inspectionsWebPage.selectArchiveReason("Reason: Test");

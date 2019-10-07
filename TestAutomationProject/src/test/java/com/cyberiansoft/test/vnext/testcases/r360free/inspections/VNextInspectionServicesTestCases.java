@@ -29,7 +29,7 @@ import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegi
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;

@@ -1,7 +1,10 @@
-package com.cyberiansoft.test.vnextbo.screens;
+package com.cyberiansoft.test.vnextbo.screens.Inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -40,17 +43,17 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	@FindBy(id = "inspectiontypes-search")
 	private WebElement searchInspectionsPanel;
 
-	@FindBy(id = "advSearchEstimation-freeText")
-	private WebElement searchFld;
+	@FindBy(xpath = "//input[@id='advSearchEstimation-freeText']")
+	public WebElement searchFld;
 
-	@FindBy(xpath = "//*[@data-bind='text: filterInfoString']")
-	private WebElement filterInfoText;
+	@FindBy(xpath = "//section[@class='view']//*[@data-bind='text: filterInfoString']")
+	public WebElement filterInfoText;
 
-	@FindBy(id = "advSearchEstimation-search")
+	@FindBy(xpath = "//i[@id='advSearchEstimation-search']")
 	private WebElement searchFilterBtn;
 
-	@FindBy(xpath = "//i[contains(@data-bind, 'click: clear,')]")
-	private WebElement clearFilterBtn;
+	@FindBy(xpath = "//section[@class='view']//i[contains(@data-bind, 'click: clear,')]")
+	public WebElement clearFilterBtn;
 
 	@FindBy(xpath = "//button[contains(text(), 'Approve and Complete')]")
 	private WebElement approveAndCompleteButton;
@@ -77,10 +80,10 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	private WebElement openCloseIntercomButton;
 
 	@FindBy(xpath = "//i[@id='advSearchEstimation-caret']")
-	private WebElement searchFieldAdvancedSearchCaret;
+	public WebElement searchFieldAdvancedSearchCaret;
 
 	@FindBy(xpath = "//div[@id='advSearchEstimation-savedSearchList']//i[@class='icon-gear']")
-	private WebElement searchFieldAdvancedSearchIconGear;
+	public WebElement searchFieldAdvancedSearchIconGear;
 
 	@FindBy(xpath = "//i[@data-automation-id='inspectionsDetailsEnlargeVisualForm']")
 	private WebElement inspectionImageZoomIcon;
@@ -94,8 +97,36 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//span[contains(@class, 'close-multi-archive-reasons')]//span[contains(@class, 'archive')]")
 	private WebElement archiveIcon;
 
-	@FindBy(xpath = "//span[@data-automation-id=\"inspectionsSingleUnArchiveButton\"]")
+	@FindBy(xpath = "//span[@data-automation-id='inspectionsSingleUnArchiveButton']")
 	private WebElement unArchiveIcon;
+
+	@FindBy(xpath = "//i[@id='advSearchEstimation-editIcon']")
+	public WebElement editAdvancedSearchIcon;
+
+	@FindBy(xpath = "//span[@class='entity-list__item__title']")
+	public List<WebElement> inspectionsNamesElementsList;
+
+	@FindBy(id = "advSearchEstimation-savedSearchList")
+	public WebElement savedSearchListForm;
+
+	@FindBy(xpath = "//div[@id='advSearchEstimation-savedSearchList']//div/span")
+	public List<WebElement> savedSearchesList;
+
+	@FindBy(xpath = "//a[@class='link--underlined']")
+	public WebElement howToCreateInspectionLink;
+
+	@FindBy(xpath = ".//span[@data-bind='text:clientName']")
+	public WebElement selectedInspectionCustomerName;
+
+	@FindBy(xpath = "//div[@class='entity-list__item__status__label']")
+	public List<WebElement> inspectionStatusesList;
+
+	@FindBy(xpath = "//div[@class='entity-list__item__description']//b")
+	public List<WebElement> inspectionNumbersList;
+
+	public WebElement selectedInspectionFieldValueByName(String fieldLabel) {
+		return driver.findElement(By.xpath("//div[@class='text-ellipsis' and contains(text(), '" + fieldLabel + "')]/span"));
+	}
 
 	public VNextBOInspectionsWebPage(WebDriver driver) {
 		super(driver);
@@ -283,8 +314,6 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		Utils.clickElement(approveInspectionIcon);
 	}
 
-
-
 	public void approveInspection(String approveNotes) {
 		String parentHandle = driver.getWindowHandle();
 		clickInspectionApproveButton();
@@ -336,10 +365,6 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		return imageLegend.findElements(By.xpath("./li[contains(text(), '" + brackageicontype + "')]")).size() > 0;
 	}
 
-	public String getSelectedInspectionCustomerName() {
-		return Utils.getText(inspectionDetailsPanel.findElement(By.xpath(".//span[@data-bind='text:clientName']")));
-	}
-
 	public String getSelectedInspectionTotalAmountValue() {
 		return Utils.getText(inspectionDetailsPanel.findElement(By.xpath(".//th[@data-bind='text: amount']")));
 	}
@@ -358,126 +383,28 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 				driver, VNextBOInspectionInfoWebPage.class);
 	}
 
-	public void clickExpandAdvancedSearchPanel() {
-		Utils.clickElement(driver.findElement(By.id("advSearchEstimation-caret")));
-	}
-
-	public boolean isSavedAdvancedSearchFilterExists(String filterName) {
-		boolean exists = false;
-		if (driver.findElements(By.id("advSearchEstimation-savedSearchList")).size() > 0)
-			exists = driver.findElement(By.id("advSearchEstimation-savedSearchList"))
-					.findElements(By.xpath(".//div/span[text()='" + filterName + "']")).size() > 0;
-		return exists;
-	}
-
-	public String getCustomSearchInfoTextValue() {
-		return filterInfoText.getText();
-	}
-
-	public void deleteSavedAdvancedSearchFilter(String filterName) {
-		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = openSavedAdvancedSearchFilter(filterName);
-		advancedSearchDialog.deleteSavedSearchFilter();
-	}
-
 	public VNextBOInspectionAdvancedSearchForm openSavedAdvancedSearchFilter(String filterName) {
 		waitABit(2000);
 		Actions act = new Actions(driver);
-		act.moveToElement(driver.findElement(By.id("advSearchEstimation-savedSearchList"))
-				.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i"))).perform();
+		act.moveToElement(savedSearchListForm.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i"))).perform();
 
-		driver.findElement(By.id("advSearchEstimation-savedSearchList"))
-				.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i")).click();
+		savedSearchListForm.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i")).click();
 		return PageFactory.initElements(
 				driver, VNextBOInspectionAdvancedSearchForm.class);
 	}
 
-	public void advancedSearchInspectionByCustomer(String customerName) {
-		openAdvancedSearchForm();
-		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
-		advancedSearchDialog.setAdvSearchAutocompleteField("Customer", customerName);
-		advancedSearchDialog.clickSearchButton();
-	}
-
-
-	public void advancedSearchInspectionByStatusAndInspectionNumber(String inspectionNumber, String statusSearch) {
-		openAdvancedSearchForm();
-		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
-		advancedSearchDialog.setAdvSearchTextField("Inspection#",inspectionNumber);
-		advancedSearchDialog.setAdvSearchDropDownField("Status", statusSearch);
-		advancedSearchDialog.clickSearchButton();
-	}
-
-	public void advancedSearchInspectionByStatus(String statusSearch) {
-		openAdvancedSearchForm();
-		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
-		advancedSearchDialog.setAdvSearchDropDownField("Status", statusSearch);
-		advancedSearchDialog.clickSearchButton();
-	}
-
-	public void advancedSearchInspectionByStockNumber(String stockNumber) {
-		openAdvancedSearchForm();
-		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
-		advancedSearchDialog.setAdvSearchTextField("Stock#", stockNumber);
-		advancedSearchDialog.clickSearchButton();
-	}
-
-	public void advancedSearchInspectionByPONumber(String poNumber) {
-		openAdvancedSearchForm();
-		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
-		advancedSearchDialog.setAdvSearchTextField("PO#", poNumber);
-		advancedSearchDialog.clickSearchButton();
-	}
-
-	public void advancedSearchInspectionByRONumber(String roNumber) {
-		openAdvancedSearchForm();
-		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
-		advancedSearchDialog.setAdvSearchTextField("RO#", roNumber);
-		advancedSearchDialog.clickSearchButton();
-	}
-
-	public void advancedSearchInspectionByVIN(String VIN) {
-		openAdvancedSearchForm();
-		VNextBOInspectionAdvancedSearchForm advancedSearchDialog = new VNextBOInspectionAdvancedSearchForm(driver);
-		advancedSearchDialog.setAdvSearchTextField("VIN", VIN);
-		advancedSearchDialog.clickSearchButton();
-	}
-
-	public void searchInspectionByText(String searchText) {
-		setSearchFieldValue(searchText);
-		clickSearchFilterButton();
-	}
-
-	public void findInspectionByCustomTimeFrameAndNumber(String inspectionId, String fromDate, String toDate) {
-		openAdvancedSearchForm();
-		VNextBOInspectionAdvancedSearchForm vNextBOInspectionAdvancedSearchForm =
-				new VNextBOInspectionAdvancedSearchForm(driver);
-		vNextBOInspectionAdvancedSearchForm.setAdvSearchTextField("Inspection#", inspectionId);
-		vNextBOInspectionAdvancedSearchForm.setAdvSearchDropDownField("Timeframe", "Custom");
-		vNextBOInspectionAdvancedSearchForm.setAdvSearchTextField("From", fromDate);
-		vNextBOInspectionAdvancedSearchForm.setAdvSearchTextField("To", toDate);
-		vNextBOInspectionAdvancedSearchForm.clickSearchButton();
-	}
-
-	public String getSearchFieldValue() {
-		return searchFld.getAttribute("value");
-	}
-
 	public void setSearchFieldValue(String searchText) {
-		Utils.setData(searchFld, searchText);
+		Utils.clearAndType(searchFld, searchText);
 	}
 
 	public void clickSearchFilterButton() {
 		Utils.clickElement(searchFilterBtn);
-		wait.until(ExpectedConditions.visibilityOf(clearFilterBtn));
-	}
-
-	public void clickClearFilterIcon() {
-		Utils.clickElement(clearFilterBtn);
+		WaitUtils.isElementPresent(clearFilterBtn);
 	}
 
 	public String getFirstInspectionStatus() {
 		try {
-			return wait.until(ExpectedConditions.visibilityOf(inspectionStatusLabels.get(0))).getText();
+			return Utils.getText(inspectionStatusLabels.get(0));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
