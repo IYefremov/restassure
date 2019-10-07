@@ -2,10 +2,10 @@
   "verifyUserCanUseAdvancedSearchForInspectionsSearch": [
     {
       "rowID": "verifyUserCanUseAdvancedSearchForInspectionsSearch.01",
-      "description": "Test Case 84589: User can use Advanced Search for the search of Inspections",
+      "description": "Test Case 90904: User can use Advanced Search for the search of Inspections",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84589",
+          "testCaseID": "90904",
           "testCaseTitle": "User can use Advanced Search for the search of Inspections"
         }
       ]
@@ -15,10 +15,10 @@
   "verifyUserCanSearchInspectionsUsingSearch": [
     {
       "rowID": "verifyUserCanSearchInspectionsUsingSearch.01",
-      "description": "Test Case 84586: User can search Inspections using \"Search\"",
+      "description": "Test Case 90902: User can search Inspections using \"Search\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84586",
+          "testCaseID": "90902",
           "testCaseTitle": "User can search Inspections using \"Search\""
         }
       ]
@@ -28,10 +28,10 @@
   "verifyUserCanDeleteSearchOptions": [
     {
       "rowID": "verifyUserCanDeleteSearchOptions.01",
-      "description": "Test Case 84587: User can delete search options",
+      "description": "Test Case 90903: User can delete search options",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84587",
+          "testCaseID": "90903",
           "testCaseTitle": "User can delete search options"
         }
       ]
@@ -41,10 +41,10 @@
   "verifyUserCanFillAllAdvancedSearchFields": [
     {
       "rowID": "verifyUserCanFillAllAdvancedSearchFields.01",
-      "description": "Test Case 84903: User can fill all fields of \"Advanced Search\"",
+      "description": "Test Case 90925: User can fill all fields of \"Advanced Search\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84903",
+          "testCaseID": "90925",
           "testCaseTitle": "User can fill all fields of \"Advanced Search\""
         }
       ]
@@ -54,10 +54,10 @@
   "verifyUserCanClearSearchOptions": [
     {
       "rowID": "verifyUserCanClearSearchOptions.01",
-      "description": "Test Case 84904: User can clear \"Search options\"",
+      "description": "Test Case 90926: User can clear \"Search options\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84904",
+          "testCaseID": "90926",
           "testCaseTitle": "User can clear \"Search options\""
         }
       ]
@@ -67,10 +67,10 @@
   "verifyUserCanSaveSearchOptions": [
     {
       "rowID": "verifyUserCanSaveSearchOptions.01",
-      "description": "Test Case 84905: User can save \"Search options\"",
+      "description": "Test Case 90927: User can save \"Search options\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84905",
+          "testCaseID": "90927",
           "testCaseTitle": "User can save \"Search options\""
         }
       ]
@@ -80,10 +80,10 @@
   "verifyUserCanCloseAdvancedSearchWindow": [
     {
       "rowID": "verifyUserCanCloseAdvancedSearchWindow.01",
-      "description": "Test Case 84906: User can close \"Advanced Search\" window",
+      "description": "Test Case 90928: User can close \"Advanced Search\" window",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84906",
+          "testCaseID": "90928",
           "testCaseTitle": "User can close \"Advanced Search\" window"
         }
       ]
@@ -93,10 +93,10 @@
   "verifyUserCanOpenAdvancedSearchWindowWithEditPencilIcon": [
     {
       "rowID": "verifyUserCanOpenAdvancedSearchWindowWithEditPencilIcon.01",
-      "description": "Test Case 84916: User can open \"Advanced Search\" window (click on the icon of pencil is to the right of  \"X-icon\" )",
+      "description": "Test Case 90935: User can open \"Advanced Search\" window (click on the icon of pencil is to the right of  \"X-icon\" )",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84916",
+          "testCaseID": "90935",
           "testCaseTitle": "User can open \"Advanced Search\" window (click on the icon of pencil is to the right of  \"X-icon\" )"
         }
       ]
@@ -106,10 +106,10 @@
   "verifyUserCanEditSavedAdvancedSearch": [
     {
       "rowID": "verifyUserCanEditSavedAdvancedSearch.01",
-      "description": "Test Case 84909: User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field)",
+      "description": "Test Case 90931: User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84909",
+          "testCaseID": "90931",
           "testCaseTitle": "User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field)"
         }
       ]
@@ -119,10 +119,10 @@
   "verifyUserCanSaveEditedAdvancedSearch": [
     {
       "rowID": "verifyUserCanSaveEditedAdvancedSearch.01",
-      "description": "Test Case 84910: User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field) and save it",
+      "description": "Test Case 90932: User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field) and save it",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84910",
+          "testCaseID": "90932",
           "testCaseTitle": "User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field) and save it"
         }
       ]
@@ -132,10 +132,10 @@
   "verifyUserCanNotSaveEditedAdvancedSearch": [
     {
       "rowID": "verifyUserCanNotSaveEditedAdvancedSearch.01",
-      "description": "Test Case 84911: User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field) and not save it",
+      "description": "Test Case 90933: User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field) and not save it",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84911",
+          "testCaseID": "90933",
           "testCaseTitle": "User can edit saved \"Advanced Search\" form (clicking on the pencil icon in the \"SearchName\" field) and not save it"
         }
       ]
@@ -145,10 +145,10 @@
   "verifyUserCanCancelSavedAdvancedSearchDeleting": [
     {
       "rowID": "verifyUserCanCancelSavedAdvancedSearchDeleting.01",
-      "description": "Test Case 84908: User can cancel deleting of the saved \"Advanced Search\" form",
+      "description": "Test Case 90930: User can cancel deleting of the saved \"Advanced Search\" form",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84908",
+          "testCaseID": "90930",
           "testCaseTitle": "User can cancel deleting of the saved \"Advanced Search\" form"
         }
       ]
@@ -158,10 +158,10 @@
   "verifyUserCanDeleteSavedAdvancedSearch": [
     {
       "rowID": "verifyUserCanDeleteSavedAdvancedSearch.01",
-      "description": "Test Case 84907: User can delete saved \"Advanced Search\" form",
+      "description": "Test Case 90929: User can delete saved \"Advanced Search\" form",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84907",
+          "testCaseID": "90929",
           "testCaseTitle": "User can delete saved \"Advanced Search\" form"
         }
       ]
@@ -171,10 +171,10 @@
   "verifyUserCanSearchInspectionByCustomer": [
     {
       "rowID": "verifyUserCanSearchInspectionByCustomer.01",
-      "description": "Test Case 84590: User can search Inspection by \"Customer\" using Advanced Search",
+      "description": "Test Case 90905: User can search Inspection by \"Customer\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84590",
+          "testCaseID": "90905",
           "testCaseTitle": "User can search Inspection by \"Customer\" using Advanced Search"
         }
       ]
@@ -184,10 +184,10 @@
   "verifyUserCanSearchInspectionByPONumber": [
     {
       "rowID": "verifyUserCanSearchInspectionByPONumber.01",
-      "description": "Test Case 84592: User can search Inspections by \"PO#\" using Advanced Search",
+      "description": "Test Case 90906: User can search Inspections by \"PO#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84592",
+          "testCaseID": "90906",
           "testCaseTitle": "User can search Inspections by \"PO#\" using Advanced Search"
         }
       ]
@@ -197,10 +197,10 @@
   "verifyUserCanSearchInspectionByRONumber": [
     {
       "rowID": "verifyUserCanSearchInspectionByPONumber.01",
-      "description": "Test Case 84593: User can search Inspections by \"RO#\" using Advanced Search",
+      "description": "Test Case 90907: User can search Inspections by \"RO#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84593",
+          "testCaseID": "90907",
           "testCaseTitle": "User can search Inspections by \"RO#\" using Advanced Search"
         }
       ]
@@ -210,10 +210,10 @@
   "verifyUserCanSearchInspectionByStockNumber": [
     {
       "rowID": "verifyUserCanSearchInspectionByStockNumber.01",
-      "description": "Test Case 84595: User can search Inspections by \"Stock#\" using Advanced Search",
+      "description": "Test Case 90908: User can search Inspections by \"Stock#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84595",
+          "testCaseID": "90908",
           "testCaseTitle": "User can search Inspections by \"Stock#\" using Advanced Search"
         }
       ]
@@ -223,10 +223,10 @@
   "verifyUserCanSearchInspectionByVinNumber": [
     {
       "rowID": "verifyUserCanSearchInspectionByVinNumber.01",
-      "description": "Test Case 84596: User can search RO by \"VIN\" using Advanced Search",
+      "description": "Test Case 90909: User can search RO by \"VIN\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84596",
+          "testCaseID": "90909",
           "testCaseTitle": "User can search RO by \"VIN\" using Advanced Search"
         }
       ]
@@ -236,10 +236,10 @@
   "verifyUserCanSearchInspectionByInspectionNumber": [
     {
       "rowID": "verifyUserCanSearchInspectionByVinNumber.01",
-      "description": "Test Case 84602: User can search Inspections by \"Inspection#\" using Advanced Search",
+      "description": "Test Case 90915: User can search Inspections by \"Inspection#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84602",
+          "testCaseID": "90915",
           "testCaseTitle": "User can search Inspections by \"Inspection#\" using Advanced Search"
         }
       ]
@@ -249,10 +249,10 @@
   "verifyUserCanSearchInspectionByStatus": [
     {
       "rowID": "verifyUserCanSearchInspectionByStatus.01",
-      "description": "Test Case 84597: User can search Inspections by \"Status → All Active\" using Advanced Search",
+      "description": "Test Case 90910: User can search Inspections by \"Status → All Active\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84597",
+          "testCaseID": "90910",
           "testCaseTitle": "User can search Inspections by \"Status → All Active\" using Advanced Search"
         }
       ],
@@ -260,10 +260,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByStatus.02",
-      "description": "Test Case 84598: User can search Inspections by \"Status → New\" using Advanced Search",
+      "description": "Test Case 90911: User can search Inspections by \"Status → New\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84598",
+          "testCaseID": "90911",
           "testCaseTitle": "User can search Inspections by \"Status → New\" using Advanced Search"
         }
       ],
@@ -271,10 +271,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByStatus.03",
-      "description": "Test Case 84599: User can search Inspections by \"Status → Approved\" using Advanced Search",
+      "description": "Test Case 90912: User can search Inspections by \"Status → Approved\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84599",
+          "testCaseID": "90912",
           "testCaseTitle": "User can search Inspections by \"Status → Approved\" using Advanced Search"
         }
       ],
@@ -282,10 +282,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByStatus.04",
-      "description": "Test Case 84600: User can search Inspections by \"Status → Archived\" using Advanced Search",
+      "description": "Test Case 90913: User can search Inspections by \"Status → Archived\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84600",
+          "testCaseID": "90913",
           "testCaseTitle": "User can search Inspections by \"Status → Archived\" using Advanced Search"
         }
       ],
@@ -293,10 +293,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByStatus.05",
-      "description": "Test Case 84601: User can search Inspections by \"Status → Declined\" using Advanced Search",
+      "description": "Test Case 90914: User can search Inspections by \"Status → Declined\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84601",
+          "testCaseID": "90914",
           "testCaseTitle": "User can search Inspections by \"Status → Declined\" using Advanced Search"
         }
       ],
@@ -307,10 +307,10 @@
   "verifyUserCanSearchInspectionByTimeFrame": [
     {
       "rowID": "verifyUserCanSearchInspectionByTimeFrame.01",
-      "description": "Test Case 84891: User can search Inspections by \"Timeframe → Week to Date\" using Advanced Search",
+      "description": "Test Case 90916: User can search Inspections by \"Timeframe → Week to Date\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84891",
+          "testCaseID": "90916",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Week to Date\" using Advanced Search"
         }
       ],
@@ -318,10 +318,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByTimeFrame.02",
-      "description": "Test Case 84892: User can search Inspections by \"Timeframe → Last Week\" using Advanced Search",
+      "description": "Test Case 90917: User can search Inspections by \"Timeframe → Last Week\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84892",
+          "testCaseID": "90917",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Last Week\" using Advanced Search"
         }
       ],
@@ -329,10 +329,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByTimeFrame.03",
-      "description": "Test Case 84893: User can search Inspections by \"Timeframe → Month to Date\" using Advanced Search",
+      "description": "Test Case 90918: User can search Inspections by \"Timeframe → Month to Date\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84893",
+          "testCaseID": "90918",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Month to Date\" using Advanced Search"
         }
       ],
@@ -340,10 +340,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByTimeFrame.04",
-      "description": "Test Case 84894: User can search Inspections by \"Timeframe → Last Month\" using Advanced Search",
+      "description": "Test Case 90919: User can search Inspections by \"Timeframe → Last Month\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84894",
+          "testCaseID": "90919",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Last Month\" using Advanced Search"
         }
       ],
@@ -351,10 +351,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByTimeFrame.05",
-      "description": "Test Case 84895: User can search Inspections by \"Timeframe → Last 30 Days\" using Advanced Search",
+      "description": "Test Case 90920: User can search Inspections by \"Timeframe → Last 30 Days\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84895",
+          "testCaseID": "90920",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Last 30 Days\" using Advanced Search"
         }
       ],
@@ -362,10 +362,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByTimeFrame.06",
-      "description": "Test Case 84896: User can search Inspections by \"Timeframe → Last 90 Days\" using Advanced Search",
+      "description": "Test Case 90921: User can search Inspections by \"Timeframe → Last 90 Days\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84896",
+          "testCaseID": "90921",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Last 90 Days\" using Advanced Search"
         }
       ],
@@ -373,10 +373,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByTimeFrame.07",
-      "description": "Test Case 84897: User can search Inspections by \"Timeframe → Year to Date\" using Advanced Search",
+      "description": "Test Case 90922: User can search Inspections by \"Timeframe → Year to Date\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84897",
+          "testCaseID": "90922",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Year to Date\" using Advanced Search"
         }
       ],
@@ -384,10 +384,10 @@
     },
     {
       "rowID": "verifyUserCanSearchInspectionByTimeFrame.08",
-      "description": "Test Case 84898: User can search Inspections by \"Timeframe → Last Year\" using Advanced Search",
+      "description": "Test Case 90923: User can search Inspections by \"Timeframe → Last Year\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84898",
+          "testCaseID": "90923",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Last Year\" using Advanced Search"
         }
       ],
@@ -398,10 +398,10 @@
   "verifyUserCanSearchInspectionByCustomTimeFrame": [
     {
       "rowID": "verifyUserCanSearchInspectionByCustomTimeFrame.01",
-      "description": "Test Case 84902: User can search Inspections by \"Timeframe → Custom\" using Advanced Search",
+      "description": "Test Case 90924: User can search Inspections by \"Timeframe → Custom\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "84902",
+          "testCaseID": "90924",
           "testCaseTitle": "User can search Inspections by \"Timeframe → Custom\" using Advanced Search"
         }
       ]
