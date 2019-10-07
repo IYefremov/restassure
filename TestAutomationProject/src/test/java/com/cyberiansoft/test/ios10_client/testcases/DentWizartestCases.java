@@ -2,11 +2,16 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.dataclasses.InspectionData;
+import com.cyberiansoft.test.dataclasses.TestCaseData;
+import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.InvoiceTypesSteps;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.MyInspectionsSteps;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.MyWorkOrdersSteps;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
+import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.*;
+import com.cyberiansoft.test.ios10_client.hdvalidations.AvailableServicesScreenValidations;
+import com.cyberiansoft.test.ios10_client.hdvalidations.VehicleInfoValidations;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CarHistoryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
@@ -19,10 +24,12 @@ import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceT
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
+import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
@@ -32,10 +39,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 	
 	@BeforeClass
 	public void setUpSuite() throws Exception {
+		JSONDataProvider.dataFile = IOSReconProTestCasesDataPaths.getInstance().getDentWizardSuiteTestCasesDataPath();
 		mobilePlatform = MobilePlatform.IOS_HD;
 		initTestUser(UtilConstants.USER_LOGIN, UtilConstants.USER_PASSWORD);
-
-
 
 		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,
                 ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(),
@@ -51,10 +57,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		ExcelUtils.setDentWizardExcelFile();
 	}
 
-	@Test(testName = "Test Case 10264:Test Valid VIN Check", description = "Test Valid VIN Check")
-	public void testValidVINCheck() {
-		final String tcname = "testValidVINCheck";
-		final int tcrow = ExcelUtils.getTestCaseRow(tcname);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testCreateInspectionOnTheDeviceWithApprovalRequired(String rowID,
+																	String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
 		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
@@ -62,17 +70,18 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
-		VehicleScreen vehicleScreen = new VehicleScreen();
-		vehicleScreen.setVIN(ExcelUtils.getVIN(tcrow));
-		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(tcrow), ExcelUtils.getModel(tcrow), ExcelUtils.getYear(tcrow));
+		VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+		VehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
 		servicesScreen.cancelWizard();
 		myWorkOrdersScreen.clickHomeButton();
 	}
-	
-	@Test(testName = "Test Case 10451:Test Top Customers Setting", description = "Test Top Customers Setting")
-	public void testTopCustomersSetting() {
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testTopCustomersSetting(String rowID,
+																	String description, JSONObject testData) {
+
 		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
 		settingsscreen.setShowTopCustomersOn();
@@ -88,11 +97,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		settingsscreen.clickHomeButton();
 	}
 
-	@Test(testName = "Test Case 10452:Test VIN Duplicate check", description = "Test VIN Duplicate check")
-	public void testVINDuplicateCheck() {
-		
-		final String tcname = "testVINDuplicateCheck";
-		final int tcrow = ExcelUtils.getTestCaseRow(tcname);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testVINDuplicateCheck(String rowID,
+																	String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
 		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
@@ -105,9 +115,9 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleScreen vehicleScreen = new VehicleScreen();
-		vehicleScreen.setVINAndAndSearch(ExcelUtils.getVIN(tcrow).substring(
+		vehicleScreen.setVINAndAndSearch(workOrderData.getVehicleInfoData().getVINNumber().substring(
 				0, 11));
-		vehicleScreen.setVIN(ExcelUtils.getVIN(tcrow).substring(11, 17));
+		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber().substring(11, 17));
 		vehicleScreen.verifyExistingWorkOrdersDialogAppears();		
 		vehicleScreen.saveWizard();
 		myWorkOrdersScreen.clickHomeButton();
@@ -116,10 +126,17 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		settingsscreen.clickHomeButton();
 	}
 
-	@Test(testName = "Test Case 10453:Test Vehicle Part requirement", description = "Test Vehicle Part requirement")
-	public void testVehiclePartRequirement() {
-		final String tcname = "testVehiclePartRequirement";
-		final int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testVehiclePartRequirement(String rowID,
+																	String description, JSONObject testData) {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+		List<String> sericesToValidate = new ArrayList<>();
+		sericesToValidate.add("PDR Panel (Non-Customary)");
+		sericesToValidate.add("PDR Vehicle");
+		sericesToValidate.add("PDR - Panel (Hail)");
 
 		HomeScreen homeScreen = new HomeScreen();
 		SettingsScreen settingsscreen = homeScreen.clickSettingsButton();
@@ -131,30 +148,14 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
-		VehicleScreen vehicleScreen = new VehicleScreen();
-		vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-		//Assert.assertEquals(searchresult, "Search Complete No vehicle invoice history found");
-		vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
+		VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+		VehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
 
 		NavigationSteps.navigateToServicesScreen();
-		ServicesScreen servicesScreen = new ServicesScreen();
-		servicesScreen.selectGroupServiceItem(UtilConstants.PDR_SERVICE);
-		Assert.assertTrue(servicesScreen
-				.isServiceTypeExists(UtilConstants.PDRPANEL_NONCUSTOMARY_SUBSERVICE));
-		Assert.assertTrue(servicesScreen
-				.isServiceTypeExists(UtilConstants.PDRPANEL_SUBSERVICE));
-		Assert.assertTrue(servicesScreen
-				.isServiceTypeExists(UtilConstants.PDRVEHICLE_SUBSERVICE));
-		Assert.assertTrue(servicesScreen
-				.isServiceTypeExists(UtilConstants.PDRPANEL_HAIL_SUBSERVICE));
-		servicesScreen.selectService(UtilConstants.PDRPANEL_SUBSERVICE);
-		SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
-		selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
-		servicesScreen.cancelWizard();
+		for (String serviceName : sericesToValidate)
+			AvailableServicesScreenValidations.verifyServiceExixts(serviceName, true);
+		ServicesScreenSteps.selectPanelServiceData(workOrderData.getDamageData());
+		WorkOrdersSteps.cancelCreatingWorkOrder();
 		myWorkOrdersScreen.clickHomeButton();
 
 		settingsscreen = homeScreen.clickSettingsButton();

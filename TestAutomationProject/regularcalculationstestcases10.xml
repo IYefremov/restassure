@@ -55,6 +55,12 @@
         	<include name="testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO" />
         	<include name="testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval" />
             <include name="testWOVerifyThatCalculationIsCorrectForWOWithAllTypeOfServices" />
+            <include name="testWOIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
+            <include name="testWOVerifyThatDiscountsAreCalculatedCorrectlyOnAllLevels" />
+            <include name="testWOVerifyThatUpchargesAreCalculatedCorrectlyOnAllLevels" />
+            <include name="testInvoicesVerifyThatOnPrintOutOfAllProTemplateAllCalculationDataIsCorrectProductionData" />
+            <include name="testInvoicesVerifyThatOnPrintOutOfAutoWorkListNetTemplateAllCalculationDataIsCorrect_ProdData" />
+            <include name="testInvoicesVerifyThatOnPrintOutOfDentWizardHailTemplateAllCalculationDataIsCorrect_ProductionData" />
 
         </methods>
       </class>

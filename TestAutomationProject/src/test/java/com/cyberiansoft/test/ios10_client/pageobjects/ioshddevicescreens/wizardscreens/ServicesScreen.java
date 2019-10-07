@@ -143,7 +143,7 @@ public class ServicesScreen extends BaseWizardScreen {
 		return appiumdriver.findElementByName("SubtotalAmount").getAttribute("value");
 	}
 
-	public boolean isServiceTypeExists(String servicetype) {
+	public boolean isServiceExists(String servicetype) {
 		IOSElement availableservices = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
 		return availableservices.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(servicetype).size() > 0;
 	}

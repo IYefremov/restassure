@@ -1,0 +1,56 @@
+{
+  "testValidVINCheck": [
+    {
+      "rowID": "testValidVINCheck.01",
+      "description": "Test Case 10264:Test Valid VIN Check",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1J4GX48SX3C123499",
+          "vehicleMake": "Jeep",
+          "vehicleModel": "Grand Cherokee",
+          "vehicleYear": "2003"
+        }
+      }
+    }
+  ],
+  "testTopCustomersSetting": [
+    {
+      "rowID": "testTopCustomersSetting.01",
+      "description": "Test Case 10451:Test Top Customers Setting"
+    }
+  ],
+  "testVINDuplicateCheck": [
+    {
+      "rowID": "testVINDuplicateCheck.01",
+      "description": "Test Case 10452:Test VIN Duplicate check",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1J4GX48SX3C123499"
+        }
+      }
+    }
+  ],
+  "testVehiclePartRequirement": [
+    {
+      "rowID": "testVehiclePartRequirement.01",
+      "description": "Test Case 10453:Test Vehicle Part requirement",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1J4GX48SX3C123499",
+          "vehicleMake": "Jeep",
+          "vehicleModel": "Grand Cherokee",
+          "vehicleYear": "2003"
+        },
+        "damageData":
+          {
+            "damageGroupName": "PDR",
+            "moneyService":
+              {
+                "serviceName": "PDR Panel",
+                "servicePrice" : "200"
+              }
+          }
+      }
+    }
+  ]
+}

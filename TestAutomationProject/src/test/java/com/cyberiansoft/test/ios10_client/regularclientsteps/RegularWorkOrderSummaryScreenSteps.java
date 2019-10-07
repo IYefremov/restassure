@@ -8,4 +8,9 @@ public class RegularWorkOrderSummaryScreenSteps {
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
         orderSummaryScreen.waitWorkOrderSummaryScreenLoad();
     }
+
+    public static void setTotalSale(String totalSale) {
+        RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
+        orderSummaryScreen.setTotalSale(totalSale);
+    }
 }

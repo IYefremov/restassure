@@ -538,7 +538,20 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	public String getPrintPreviewTestMartrixLaborServiceNetValue(String servicename) {
 		WebElement parentrow = driver.findElement(
 				By.xpath("//table/tbody/tr/td/div/table/tbody/tr/td[text()='" + servicename + "']/../../../../../.."));
-		return parentrow.findElement(By.xpath("./td[3]/div/table/tbody/tr/td")).getText();
+		return parentrow.findElement(By.xpath("./td[3]/div")).getText();
+	}
+
+	public String getPrintPreviewTotalListValue() {
+		WebElement parentrow = driver.findElement(
+				By.xpath("//table/tbody/tr/td/div/table/tbody/tr/td[text()='TOTAL:']/../../../../../.."));
+		BaseUtils.waitABit(500);
+		return parentrow.findElement(By.xpath("./td[2]/div")).getText();
+	}
+
+	public String getPrintPreviewTotalNetValue() {
+		WebElement parentrow = driver.findElement(
+				By.xpath("//table/tbody/tr/td/div/table/tbody/tr/td[text()='TOTAL:']/../../../../../.."));
+		return parentrow.findElement(By.xpath("./td[3]/div")).getText();
 	}
 
 	public void clickInvoiceInternalTechInfo(String invoicenumber) {

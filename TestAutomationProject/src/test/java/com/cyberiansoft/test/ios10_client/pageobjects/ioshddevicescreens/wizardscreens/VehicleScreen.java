@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechniciansPopup;
@@ -18,8 +17,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-
-import java.util.List;
 
 import static io.appium.java_client.touch.TapOptions.tapOptions;
 import static io.appium.java_client.touch.offset.ElementOption.element;
@@ -220,6 +217,31 @@ public class VehicleScreen extends BaseWizardScreen {
 		IOSElement makefld = (IOSElement) appiumdriver.findElementByAccessibilityId("Trim");
 		return makefld.findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
 	}
+
+	public String getColor() {
+		IOSElement makefld = (IOSElement) appiumdriver.findElementByAccessibilityId("Color");
+		return makefld.findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
+	}
+
+	public String getMileage() {
+		IOSElement makefld = (IOSElement) appiumdriver.findElementByAccessibilityId("Mileage");
+		return makefld.findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
+	}
+
+	public String getStock() {
+		IOSElement makefld = (IOSElement) appiumdriver.findElementByAccessibilityId("Stock");
+		return makefld.findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
+	}
+
+	public String getRO() {
+		IOSElement makefld = (IOSElement) appiumdriver.findElementByAccessibilityId("RO#");
+		return makefld.findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
+	}
+
+	public String getLicensePlate() {
+		IOSElement makefld = (IOSElement) appiumdriver.findElementByAccessibilityId("License Plate");
+		return makefld.findElementByClassName("XCUIElementTypeTextField").getAttribute("value");
+	}
 	
 	public void verifyMakeModelyearValues(String exp_make, String exp_model, String exp_year) {
 		Assert.assertEquals(getMake(), exp_make);
@@ -332,12 +354,7 @@ public class VehicleScreen extends BaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId("PO#").sendKeys(po + "\n");
 	}
 	
-	public String getWorkOrderCustomer() {
-		waitVehicleScreenLoaded();
-		return appiumdriver.findElementByAccessibilityId("viewPrompt").getAttribute("value");
-	}
-	
-	public String getInspectionCustomer() {
+	public String getCustomerValue() {
 		waitVehicleScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId("viewPrompt").getAttribute("value");
 	}

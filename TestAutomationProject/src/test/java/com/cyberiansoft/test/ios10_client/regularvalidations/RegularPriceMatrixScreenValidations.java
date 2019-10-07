@@ -11,4 +11,10 @@ public class RegularPriceMatrixScreenValidations {
         Assert.assertEquals(priceMatrixScreen.getPriceMatrixVehiclePartSubTotalPrice(), expectedPrice);
     }
 
+    public static void verifyVehiclePartPriceValue(String vehiclePart, String expectedPrice) {
+        RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
+        priceMatrixScreen.waitPriceMatrixScreenLoad();
+        Assert.assertEquals(priceMatrixScreen.getVehiclePartPriceValue(vehiclePart), expectedPrice);
+    }
+
 }

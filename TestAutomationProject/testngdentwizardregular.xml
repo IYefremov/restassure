@@ -11,8 +11,8 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.DentWizardRegularVersionTestCases">
         <methods>
 
-          <!--<include name="testValidVINCheck" />
-          <include name="testVehiclePartRequirement" />-->
+
+          <include name="testValidVINCheck" />
           <include name="testTurningMultipleWorkOrdersIntoASingleInvoice" />
           <include name="testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice" />
           <include name="testApprovalNeededBeforeInspectionsCanBeConvertedToWorkOrderForWizardProTracker" />
@@ -74,6 +74,7 @@
           <include name="testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testCarHistoryFeature" />
           <include name="testTopCustomersSetting" />
+          <include name="testVehiclePartRequirement" />
           <include name="testVINDuplicateCheck" />
         </methods>
       </class>

@@ -91,7 +91,7 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		return subtotalAmaunt;
 	}
 
-	public boolean isServiceTypeExists(String servicetype) {
+	public boolean isServiceExists(String servicetype) {
 		return appiumdriver.findElements(MobileBy.AccessibilityId(servicetype)).size() > 0;
 	}
 
@@ -160,11 +160,9 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	}
 
 	public RegularServicesScreen clickBackServicesButton() {
-		BaseUtils.waitABit(500);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Service Types")));
 		appiumdriver.findElement(MobileBy.name("Service Types")).click();
-		BaseUtils.waitABit(500);
 		return this;
 	}
 
