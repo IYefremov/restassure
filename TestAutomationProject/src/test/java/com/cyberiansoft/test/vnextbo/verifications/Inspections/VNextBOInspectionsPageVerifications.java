@@ -11,10 +11,8 @@ import org.testng.Assert;
 public class VNextBOInspectionsPageVerifications {
 
     private VNextBOInspectionsWebPage inspectionsPage;
-    private WebDriver webDriver;
 
     public VNextBOInspectionsPageVerifications(WebDriver driver) {
-        webDriver = driver;
         inspectionsPage = new VNextBOInspectionsWebPage(driver);
     }
 
@@ -49,12 +47,12 @@ public class VNextBOInspectionsPageVerifications {
 
     public void verifySearchFieldContainsText(String value) {
         WaitUtilsWebDriver.waitForInputFieldValueIgnoringException(inspectionsPage.searchFld, value);
-        Assert.assertEquals(new VNextBOInspectionsPageSteps(webDriver).getSearchFieldValue(), value,
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), value,
                 "Search field hasn't contained " + value);
     }
 
     public void isCustomerNameCorrect(String expectedCustomerName) {
-        Assert.assertEquals(new VNextBOInspectionsPageSteps(webDriver).getSelectedInspectionCustomerName(),
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(),
                 expectedCustomerName, "Customer name hasn't been correct");
     }
 

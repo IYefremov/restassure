@@ -25,7 +25,6 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsGeneralData.json";
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
-    private VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps;
     private VNextBOInspectionsAdvancedSearchVerifications vNextBOInspectionsAdvancedSearchVerifications;
     private List<String> expectedAdvancedSearchFields =
             Arrays.asList("Customer", "PO#", "RO#", "Stock#", "VIN",
@@ -161,11 +160,10 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyAdvancedSearchFields(String rowID, String description, JSONObject testData) {
 
         inspectionsWebPage.openAdvancedSearchForm();
-        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
         vNextBOInspectionsAdvancedSearchVerifications = new VNextBOInspectionsAdvancedSearchVerifications(webdriver);
         vNextBOInspectionsAdvancedSearchVerifications.isAdvancedSearchFormDisplayed();
-        List<String> actualResult = vNextBOInspectionsAdvancedSearchSteps.getAllAdvancedSearchFieldsLabels();
-        Assert.assertEquals(actualResult, expectedAdvancedSearchFields);
+        Assert.assertEquals(new VNextBOInspectionsAdvancedSearchSteps(webdriver).getAllAdvancedSearchFieldsLabels(),
+                expectedAdvancedSearchFields);
         vNextBOInspectionsAdvancedSearchVerifications.isSearchButtonDisplayed();
     }
 }

@@ -72,7 +72,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBORODetailsPageVerifications roDetailsPageVerifications;
     private VNextBORONotesPageSteps notesPageSteps;
     private VNextBONotesPageVerifications notesPageVerifications;
-    private VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps;
 
     @BeforeClass
     public void settingUp() {
@@ -168,14 +167,14 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         leftMenuInteractions.selectInspectionsMenu();
 
         inspectionsWebPage.openAdvancedSearchForm();
-        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
+        VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps =
+                new VNextBOInspectionsAdvancedSearchSteps(webdriver);
         vNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[0]);
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
         final String inspectionNumber = breadCrumbInteractions.getLastBreadCrumbText();
         inspectionsApprovalSteps.approveInspection(data.getNote());
 
         inspectionsWebPage.openAdvancedSearchForm();
-        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
         vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionNumber);
         vNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[1]);
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();

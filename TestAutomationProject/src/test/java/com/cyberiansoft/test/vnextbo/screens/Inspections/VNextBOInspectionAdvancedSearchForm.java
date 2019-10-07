@@ -34,9 +34,6 @@ public class VNextBOInspectionAdvancedSearchForm extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[not(@style='display: none;')]/label[contains(@for, 'advSearchEstimation')]")
 	public List<WebElement> searchFieldsTitlesList;
 
-	@FindBy(xpath = "//div[@class='text-red']/i")
-	public WebElement errorMessage;
-
 	public WebElement textFieldByName(String fieldLabel) {
 		return advancedSearchFormContent.findElement(By.xpath("//form[@id='advSearchEstimation-form']//label[text()='" +
 				fieldLabel + "']/following-sibling::div//input"));

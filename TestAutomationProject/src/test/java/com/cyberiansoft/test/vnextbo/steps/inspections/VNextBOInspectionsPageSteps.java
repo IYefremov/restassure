@@ -7,16 +7,15 @@ import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.Optional;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class VNextBOInspectionsPageSteps {
 
-    private VNextBOInspectionsWebPage inspectionsPage;
-    private VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps;
-    private WebDriver webDriver;
+    private static VNextBOInspectionsWebPage inspectionsPage;
+    private static VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps;
+    private static WebDriver webDriver;
 
     public VNextBOInspectionsPageSteps(WebDriver driver) {
 
@@ -29,34 +28,34 @@ public class VNextBOInspectionsPageSteps {
         return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
-    public void clickClearFilterIcon() {
+    public static void clickClearFilterIcon() {
         Utils.clickElement(inspectionsPage.clearFilterBtn);
     }
 
-    public void clickEditAdvancedSearchIcon() { Utils.clickElement(inspectionsPage.editAdvancedSearchIcon); }
+    public static void clickEditAdvancedSearchIcon() { Utils.clickElement(inspectionsPage.editAdvancedSearchIcon); }
 
-    public void clickExpandAdvancedSearchPanel() { Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchCaret); }
+    public static void clickExpandAdvancedSearchPanel() { Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchCaret); }
 
-    public String getCustomSearchInfoTextValue() {
+    public static String getCustomSearchInfoTextValue() {
         return Utils.getText(inspectionsPage.filterInfoText);
     }
 
-    public String getSearchFieldValue() {
+    public static String getSearchFieldValue() {
         return inspectionsPage.searchFld.getAttribute("value");
     }
 
-    public void openAdvancedSearchForm()
+    public static void openAdvancedSearchForm()
     {
         Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchCaret);
         Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchIconGear);
     }
 
-    public void searchInspectionByText(String searchText) {
+    public static void searchInspectionByText(String searchText) {
         inspectionsPage.setSearchFieldValue(searchText);
         inspectionsPage.clickSearchFilterButton();
     }
 
-    public List<String> getNamesOfAllInspectionsInTheList()
+    public static List<String> getNamesOfAllInspectionsInTheList()
     {
         List<String> inspectionsNamesList = new ArrayList<>();
         for (WebElement inspectionRow: inspectionsPage.inspectionsNamesElementsList
@@ -66,7 +65,7 @@ public class VNextBOInspectionsPageSteps {
         return inspectionsNamesList;
     }
 
-    public List<String> getStatusesOfAllInspectionsInTheList()
+    public static List<String> getStatusesOfAllInspectionsInTheList()
     {
         List<String> inspectionsStatusesList = new ArrayList<>();
         for (WebElement inspectionRow: inspectionsPage.inspectionStatusesList
@@ -76,7 +75,7 @@ public class VNextBOInspectionsPageSteps {
         return inspectionsStatusesList;
     }
 
-    public List<String> getNumbersOfAllInspectionsInTheList()
+    public static List<String> getNumbersOfAllInspectionsInTheList()
     {
         List<String> inspectionsNumbersList = new ArrayList<>();
         for (WebElement inspectionRow: inspectionsPage.inspectionNumbersList
@@ -86,7 +85,7 @@ public class VNextBOInspectionsPageSteps {
         return inspectionsNumbersList;
     }
 
-    public void advancedSearchInspectionByCustomer(String customerName) {
+    public static void advancedSearchInspectionByCustomer(String customerName) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.clickClearButton();
@@ -94,7 +93,7 @@ public class VNextBOInspectionsPageSteps {
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void advancedSearchInspectionByStatusAndInspectionNumber(String inspectionNumber, String statusSearch) {
+    public static void advancedSearchInspectionByStatusAndInspectionNumber(String inspectionNumber, String statusSearch) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#",inspectionNumber);
@@ -102,7 +101,7 @@ public class VNextBOInspectionsPageSteps {
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void advancedSearchInspectionByInspectionNumber(String inspectionNumber) {
+    public static void advancedSearchInspectionByInspectionNumber(String inspectionNumber) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.clickClearButton();
@@ -110,14 +109,14 @@ public class VNextBOInspectionsPageSteps {
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void advancedSearchInspectionByStatus(String statusSearch) {
+    public static void advancedSearchInspectionByStatus(String statusSearch) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", statusSearch);
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void advancedSearchInspectionByStockNumber(String stockNumber) {
+    public static void advancedSearchInspectionByStockNumber(String stockNumber) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.clickClearButton();
@@ -125,7 +124,7 @@ public class VNextBOInspectionsPageSteps {
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void advancedSearchInspectionByPONumber(String poNumber) {
+    public static void advancedSearchInspectionByPONumber(String poNumber) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.clickClearButton();
@@ -133,7 +132,7 @@ public class VNextBOInspectionsPageSteps {
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void advancedSearchInspectionByRONumber(String roNumber) {
+    public static void advancedSearchInspectionByRONumber(String roNumber) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.clickClearButton();
@@ -141,7 +140,7 @@ public class VNextBOInspectionsPageSteps {
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void advancedSearchInspectionByVIN(String VIN) {
+    public static void advancedSearchInspectionByVIN(String VIN) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.clickClearButton();
@@ -149,14 +148,14 @@ public class VNextBOInspectionsPageSteps {
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void findInspectionByCustomTimeFrame(String timeFrame) {
+    public static void findInspectionByCustomTimeFrame(String timeFrame) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Timeframe", timeFrame);
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void findInspectionByCustomTimeFrameAndNumber(String inspectionId, String fromDate, String toDate) {
+    public static void findInspectionByCustomTimeFrameAndNumber(String inspectionId, String fromDate, String toDate) {
         openAdvancedSearchForm();
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionId);
@@ -166,22 +165,22 @@ public class VNextBOInspectionsPageSteps {
         vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public void deleteSavedAdvancedSearchFilter(String filterName) {
+    public static void deleteSavedAdvancedSearchFilter(String filterName) {
         inspectionsPage.openSavedAdvancedSearchFilter(filterName);
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
         vNextBOInspectionsAdvancedSearchSteps.deleteSavedSearchFilter();
     }
 
-    public String getNotFoundInspectionMessage()
+    public static String getNotFoundInspectionMessage()
     {
         return  Utils.getText(inspectionsPage.howToCreateInspectionLink);
     }
 
-    public String getSelectedInspectionCustomerName() {
+    public static String getSelectedInspectionCustomerName() {
         return Utils.getText(inspectionsPage.selectedInspectionCustomerName);
     }
 
-    public String getSelectedInspectionParameterValueByName(String parameterName) {
+    public static String getSelectedInspectionParameterValueByName(String parameterName) {
         return Utils.getText(inspectionsPage.selectedInspectionFieldValueByName(parameterName));
     }
 }

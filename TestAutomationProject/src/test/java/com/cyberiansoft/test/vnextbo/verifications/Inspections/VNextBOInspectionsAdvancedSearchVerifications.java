@@ -6,18 +6,16 @@ import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvance
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
-import java.util.List;
+import java.util.Map;
 
 public class VNextBOInspectionsAdvancedSearchVerifications {
 
-    private WebDriver webDriver;
     private VNextBOInspectionAdvancedSearchForm advancedSearchForm;
     private VNextBOInspectionsAdvancedSearchSteps advancedSearchFormSteps;
 
     public VNextBOInspectionsAdvancedSearchVerifications(WebDriver driver) {
-        webDriver = driver;
-        advancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webDriver);
-        advancedSearchFormSteps = new VNextBOInspectionsAdvancedSearchSteps(webDriver);
+        advancedSearchForm = new VNextBOInspectionAdvancedSearchForm(driver);
+        advancedSearchFormSteps = new VNextBOInspectionsAdvancedSearchSteps(driver);
     }
 
     public void isAdvancedSearchFormDisplayed() {
@@ -35,30 +33,23 @@ public class VNextBOInspectionsAdvancedSearchVerifications {
                 "Advanced Search button hasn't been displayed");
     }
 
-    public void verifyErrorMessageText(String expectedErrorMessage) {
-        Assert.assertEquals(advancedSearchFormSteps.getErrorMessage(), expectedErrorMessage,
-                "Error message hasn't been correct");
-    }
-
-    public void verifyAllAdvancedSearchFormFields(List<String> listWithValuesForFields)
+    public void verifyAllAdvancedSearchFormFields(Map<String, String> listWithValuesForFields)
     {
-        VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps =
-                new VNextBOInspectionsAdvancedSearchSteps(webDriver);
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("Customer"),
-                listWithValuesForFields.get(0),  "Entered value to the \"Customer\" field hasn't been displayed");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("PO#"),
-                listWithValuesForFields.get(1),  "Entered value to the \"PO#\" field hasn't been displayed");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("RO#"),
-                listWithValuesForFields.get(2), "Entered value to the \"RO#\" field hasn't been displayed");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("Stock#"),
-                listWithValuesForFields.get(3), "Entered value to the \"Stock#\" field hasn't been displayed");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("VIN"),
-                listWithValuesForFields.get(4), "Entered value to the \"VIN\" field hasn't been displayed");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromDropdownField("Status"),
-                listWithValuesForFields.get(5), "\"Status\" Dropdown field hasn't been correct");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("Inspection#"),
-                listWithValuesForFields.get(6), "Entered value to the \"Inspection#\" field hasn't been displayed");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromDropdownField("Timeframe"),
-                listWithValuesForFields.get(7), "\"Timeframe\" Dropdown field hasn't been correct");
+        Assert.assertEquals(advancedSearchFormSteps.getValueFromTextInputField("Customer"),
+                listWithValuesForFields.get("Customer"),  "Entered value to the \"Customer\" field hasn't been displayed");
+        Assert.assertEquals(advancedSearchFormSteps.getValueFromTextInputField("PO#"),
+                listWithValuesForFields.get("PO#"),  "Entered value to the \"PO#\" field hasn't been displayed");
+        Assert.assertEquals(advancedSearchFormSteps.getValueFromTextInputField("RO#"),
+                listWithValuesForFields.get("RO#"), "Entered value to the \"RO#\" field hasn't been displayed");
+        Assert.assertEquals(advancedSearchFormSteps.getValueFromTextInputField("Stock#"),
+                listWithValuesForFields.get("Stock#"), "Entered value to the \"Stock#\" field hasn't been displayed");
+        Assert.assertEquals(advancedSearchFormSteps.getValueFromTextInputField("VIN"),
+                listWithValuesForFields.get("VIN"), "Entered value to the \"VIN\" field hasn't been displayed");
+        Assert.assertEquals(advancedSearchFormSteps.getValueFromDropdownField("Status"),
+                listWithValuesForFields.get("Status"), "\"Status\" Dropdown field hasn't been correct");
+        Assert.assertEquals(advancedSearchFormSteps.getValueFromTextInputField("Inspection#"),
+                listWithValuesForFields.get("Inspection#"), "Entered value to the \"Inspection#\" field hasn't been displayed");
+        Assert.assertEquals(advancedSearchFormSteps.getValueFromDropdownField("Timeframe"),
+                listWithValuesForFields.get("Timeframe"), "\"Timeframe\" Dropdown field hasn't been correct");
     }
 }

@@ -6,7 +6,6 @@ import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInspectionSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
@@ -25,7 +24,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
@@ -42,6 +43,29 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     private List<String> expectedTimeFrameDropDownOptions =
             Arrays.asList("Week to Date", "Last Week", "Month to Date", "Last Month", "Last 30 Days",
                     "Last 90 Days", "Year to Date", "Last Year", "Custom");
+    Map<String, String> valuesForSearch = new HashMap<String, String>() {{
+        put("Customer", "Albert Einstein");
+        put("PO#", "123");
+        put("RO#", "123");
+        put("Stock#", "123");
+        put("VIN", "123");
+        put("Status", "New");
+        put("Inspection#", "123");
+        put("Timeframe", "Week to Date");
+        put("Search Name", "AutomationSearchTest");
+    }};
+
+    Map<String, String> editedValuesForSearch = new HashMap<String, String>() {{
+        put("Customer", "Albert Einstein");
+        put("PO#", "456");
+        put("RO#", "456");
+        put("Stock#", "456");
+        put("VIN", "456");
+        put("Status", "New");
+        put("Inspection#", "456");
+        put("Timeframe", "Week to Date");
+        put("Search Name", "AutomationSearchTest2");
+    }};
 
     @BeforeClass
     public void settingUp() {
@@ -136,8 +160,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
                 expectedStatusDropDownOptions,"Status dropdown options set hasn't been correct");
         Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getAllOptionsFromDropdownByName("Timeframe"),
                 expectedTimeFrameDropDownOptions, "Timeframe dropdown options set hasn't been correct");
-        List<String> valuesForSearch =
-                Arrays.asList("Albert Einstein", "123", "123", "123", "123", "New", "123", "Week to Date", "AutomationSearchTest");
         vNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(valuesForSearch);
         vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(valuesForSearch);
     }
@@ -146,16 +168,23 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     public void verifyUserCanClearSearchOptions(String rowID, String description, JSONObject testData) {
 
         vNextBOInspectionsAdvancedSearchSteps.clickClearButton();
-        List<String> valuesForSearch = Arrays.asList("", "", "", "", "", "All Active", "", "Last 90 Days");
-        vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(valuesForSearch);
+        Map<String, String> emptyValuesForSearch = new HashMap<String, String>() {{
+            put("Customer", "");
+            put("PO#", "");
+            put("RO#", "");
+            put("Stock#", "");
+            put("VIN", "");
+            put("Status", "All Active");
+            put("Inspection#", "");
+            put("Timeframe", "Last 90 Days");
+        }};
+        vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(emptyValuesForSearch);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
     public void verifyUserCanSaveSearchOptions(String rowID, String description, JSONObject testData) {
 
         vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
-        List<String> valuesForSearch =
-                Arrays.asList("Albert Einstein", "123", "123", "123", "123", "New", "123", "Week to Date", "AutomationSearchTest");
         vNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(valuesForSearch);
         vNextBOInspectionsAdvancedSearchSteps.clickSaveButton();
         vNextBOInspectionsPageVerifications.isEditAdvancedSearchIconDisplayed();
@@ -174,10 +203,8 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
     public void verifyUserCanEditSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
 
-        List<String> valuesForSearch =
-                Arrays.asList("Albert Einstein", "456", "456", "456", "456", "New", "456", "Last Week", "AutomationSearchTest2");
-        vNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(valuesForSearch);
-        vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(valuesForSearch);
+        vNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(editedValuesForSearch);
+        vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(editedValuesForSearch);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
@@ -190,24 +217,29 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         vNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
         vNextBOInspectionsAdvancedSearchVerifications.isAdvancedSearchFormDisplayed();
         WaitUtilsWebDriver.waitForLoading();
-        List<String> valuesForSearch =
-                Arrays.asList("Albert Einstein", "456", "456", "456", "456", "New", "456", "Last Week");
-        vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(valuesForSearch);
+        vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(editedValuesForSearch);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanNotSaveEditedAdvancedSearch(String rowID, String description, JSONObject testData) {
 
-        List<String> valuesForSearch =
-                Arrays.asList("Albert Einstein", "789", "789", "789", "789", "Declined", "789", "Last Month", "AutomationSearchTest3");
-        vNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(valuesForSearch);
+        Map<String, String> notSavedValuesForSearch = new HashMap<String, String>() {{
+            put("Customer", "Albert Einstein");
+            put("PO#", "789");
+            put("RO#", "789");
+            put("Stock#", "789");
+            put("VIN", "789");
+            put("Status", "Declined");
+            put("Inspection#", "789");
+            put("Timeframe", "Last Month");
+            put("Search Name", "AutomationSearchTest3");
+        }};
+        vNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(notSavedValuesForSearch);
         vNextBOInspectionsAdvancedSearchSteps.clickCloseButton();
         vNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
         vNextBOInspectionsAdvancedSearchVerifications.isAdvancedSearchFormDisplayed();
         WaitUtilsWebDriver.waitForLoading();
-        valuesForSearch =
-                Arrays.asList("Albert Einstein", "456", "456", "456", "456", "New", "456", "Last Week");
-        vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(valuesForSearch);
+        vNextBOInspectionsAdvancedSearchVerifications.verifyAllAdvancedSearchFormFields(editedValuesForSearch);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
