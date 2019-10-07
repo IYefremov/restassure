@@ -79,6 +79,7 @@ public class ServiceRequestsListVerifications {
     }
 
     public boolean isServiceIsPresentForForSelectedServiceRequest(String servicename) {
+        DriverBuilder.getInstance().getDriver().switchTo().frame(srListPage.getEditServiceRequestPanelFrame());
         return isDisplayed(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[contains(text(), '" + servicename + "')]")));
     }
 

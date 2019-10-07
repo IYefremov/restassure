@@ -689,11 +689,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
 			if (serviceData.getServiceQuantity() != null) {
-				RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-				selectedServiceDetailsScreen.setServiceQuantityValue(serviceData.getServiceQuantity());
-				selectedServiceDetailsScreen.saveSelectedServiceDetails();
+				RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
 			} else
-				servicesScreen.selectService(serviceData.getServiceName());
+				RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		}
 		servicesScreen.waitServicesScreenLoaded();
 		RegularNavigationSteps.navigateToClaimScreen();
@@ -722,7 +720,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestSscreen.clickHomeButton();
 		Helpers.waitABit(10 * 1000);
 
-
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 		BackOfficeLoginWebPage loginWebPage = new BackOfficeLoginWebPage(webdriver);
@@ -749,11 +746,11 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsListVerifications.verifySearchResultsByServiceName(serviceName);
 		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
 		Assert.assertEquals(serviceRequestsListInteractions.getVINValueForSelectedServiceRequest(), serviceRequestData.getVihicleInfo().getVINNumber());
-		Assert.assertEquals(serviceRequestsListInteractions.getCustomerValueForSelectedServiceRequest(), serviceName);
-		Assert.assertEquals(serviceRequestsListInteractions.getEmployeeValueForSelectedServiceRequest(), "Employee Simple 20% (Default team)");
 		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Bundle1_Disc_Ex $150.00 (1.00)"));
 		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Quest_Req_Serv $10.00 (1.00)"));
 		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Wheel $70.00 (3.00)"));
+		Assert.assertEquals(serviceRequestsListInteractions.getCustomerValueForSelectedServiceRequest(), serviceName);
+		Assert.assertEquals(serviceRequestsListInteractions.getEmployeeValueForSelectedServiceRequest(), "Employee Simple 20% (Default team)");
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 
@@ -5225,7 +5222,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		for (DamageData damageData : inspectionData.getDamagesData()) {
 			servicesScreen.selectServicePanel(damageData.getDamageGroupName());
 			for (ServiceData serviceData : damageData.getMoneyServices())
-				Assert.assertTrue(servicesScreen.isServiceTypeExists(serviceData.getServiceName()));
+				RegularAvailableServicesScreenValidations.verifyServiceExixts(serviceData.getServiceName(), true);
 			servicesScreen.clickBackServicesButton();
 			servicesScreen = new RegularServicesScreen();
 		}

@@ -2086,7 +2086,8 @@
           "screenName": "Zayats Section1",
           "questionData": {
             "questionName": "Question 2",
-            "questionAnswer": "A3"
+            "questionAnswer": "A3",
+            "screenIndex": 1
           }
         }
       }
@@ -2116,7 +2117,7 @@
             "servicePrice": "$13.84"
           }
         ],
-        "servicesScreen" : {
+        "servicesScreen": {
           "screenPrice": "$746.84",
           "screenTotalPrice": "$730.77",
           "moneyServices": [
@@ -2225,20 +2226,22 @@
           "screenName": "Zayats Section1",
           "questionData": {
             "questionName": "Question 2",
-            "questionAnswer": "A3"
+            "questionAnswer": "A3",
+            "screenIndex": 1
           }
         }
       },
       "invoiceData": {
-        "poNumber" : "123po",
+        "poNumber": "123po",
         "questionScreenData": {
           "screenName": "Zayats Section1",
           "questionData": {
             "questionName": "Question 2",
-            "questionAnswer": "A3"
+            "questionAnswer": "A3",
+            "screenIndex": 1
           }
         },
-        "invoiceTotal" : "$730.77"
+        "invoiceTotal": "$730.77"
       }
     }
   ],
@@ -2346,7 +2349,8 @@
           "screenName": "Zayats Section1",
           "questionData": {
             "questionName": "Question 2",
-            "questionAnswer": "A3"
+            "questionAnswer": "A3",
+            "screenIndex": 1
           }
         },
         "servicesToApprove": [
@@ -2375,6 +2379,563 @@
         ],
         "inspApprovedPrice": "$2,650.00",
         "inspPrice": "$2,688.00"
+      }
+    }
+  ],
+  "testWOIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances": [
+    {
+      "rowID": "testWOIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances.01",
+      "description": "Test Case 84795:WO: If fee bundle item price policy = ''Vehicle' then it will be added once for many associated service instances.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89006"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "screenPrice": "$13.00",
+          "screenTotalPrice": "$34.00",
+          "moneyServices": [
+            {
+              "serviceName": "Oksi_Service_PP_Vehicle",
+              "servicePrice": "13",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Back Glass"
+                },
+                {
+                  "vehiclePartName": "Deck Lid"
+                },
+                {
+                  "vehiclePartName": "Driver Seat"
+                },
+                {
+                  "vehiclePartName": "Hood"
+                }
+              ],
+              "questionData": {
+                "questionName": "QuestionTypeSelect_Question 2",
+                "questionAnswer": "A3"
+              }
+            }
+          ]
+        },
+        "workOrderPrice": "$34.00"
+      }
+    }
+  ],
+  "testWOVerifyThatDiscountsAreCalculatedCorrectlyOnAllLevels": [
+    {
+      "rowID": "testWOVerifyThatDiscountsAreCalculatedCorrectlyOnAllLevels.01",
+      "description": "Test Case 49357:WO: Verify that discounts are calculated correctly on all levels",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88992"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "screenPrice": "$259.00",
+          "screenTotalPrice": "$157.85",
+          "percentageServices": [
+            {
+              "serviceName": "Calc_Discount",
+              "servicePrice": "-10"
+            },
+            {
+              "serviceName": "Calc_Discount",
+              "servicePrice": "-25"
+            }
+          ],
+          "bundleService": {
+            "bundleServiceName": "Calc_Bundle",
+            "services": [
+              {
+                "serviceName": "Oksi_Service_PP_Vehicle",
+                "servicePrice": "10",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Back Glass"
+                  }
+                ]
+              },
+              {
+                "serviceName": "Oksi_Service_PP_Service",
+                "servicePrice": "90",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Hood"
+                  }
+                ]
+              },
+              {
+                "serviceName": "SR_S5_Mt_Discount_10",
+                "servicePrice": "-10"
+              },
+              {
+                "serviceName": "SR_Up_20_Percent",
+                "servicePrice": "-20"
+              }
+            ],
+            "bundleServiceAmount": "70"
+          },
+          "laborService": {
+            "serviceName": "Calc_Labor",
+            "laborServiceRate": "100",
+            "laborServiceTime": "1"
+          },
+          "matrixService": {
+            "matrixServiceName": "Calc_Price_Matrix",
+            "vehiclePartData": {
+              "vehiclePartTotalPrice": "$89.00",
+              "vehiclePartName": "VP_for_calc",
+              "vehiclePartOption": "PDR",
+              "vehiclePartPrice": "100",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Calc_Discount",
+                  "servicePrice": "-10"
+                },
+                {
+                  "serviceName": "Customer Discount",
+                  "servicePrice": "-1"
+                }
+              ]
+            }
+          }
+        },
+        "workOrderPrice": "$157.85",
+        "workOrderTotalSale": "3",
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatUpchargesAreCalculatedCorrectlyOnAllLevels": [
+    {
+      "rowID": "testWOVerifyThatUpchargesAreCalculatedCorrectlyOnAllLevels.01",
+      "description": "Test Case 49358:WO: Verify that upcharges are calculated correctly on all levels",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88993"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "screenPrice": "$341.00",
+          "screenTotalPrice": "$449.85",
+          "percentageServices": [
+            {
+              "serviceName": "Calc_Discount",
+              "servicePrice": "10"
+            },
+            {
+              "serviceName": "Calc_Discount",
+              "servicePrice": "25"
+            }
+          ],
+          "bundleService": {
+            "bundleServiceName": "Calc_Bundle",
+            "services": [
+              {
+                "serviceName": "Oksi_Service_PP_Vehicle",
+                "servicePrice": "10",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Back Glass"
+                  }
+                ]
+              },
+              {
+                "serviceName": "Oksi_Service_PP_Service",
+                "servicePrice": "90",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Hood"
+                  }
+                ]
+              },
+              {
+                "serviceName": "SR_S5_Mt_Discount_10",
+                "servicePrice": "10"
+              },
+              {
+                "serviceName": "SR_Up_20_Percent",
+                "servicePrice": "20"
+              }
+            ],
+            "bundleServiceAmount": "130"
+          },
+          "laborService": {
+            "serviceName": "Calc_Labor",
+            "laborServiceRate": "100",
+            "laborServiceTime": "1"
+          },
+          "matrixService": {
+            "matrixServiceName": "Calc_Price_Matrix",
+            "vehiclePartData": {
+              "vehiclePartTotalPrice": "$111.00",
+              "vehiclePartName": "VP_for_calc",
+              "vehiclePartOption": "PDR",
+              "vehiclePartPrice": "100",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Calc_Discount",
+                  "servicePrice": "10"
+                },
+                {
+                  "serviceName": "Customer Discount",
+                  "servicePrice": "1"
+                }
+              ]
+            }
+          }
+        },
+        "workOrderPrice": "$449.85",
+        "workOrderTotalSale": "3",
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testInvoicesVerifyThatOnPrintOutOfAllProTemplateAllCalculationDataIsCorrectProductionData": [
+    {
+      "rowID": "testInvoicesVerifyThatOnPrintOutOfAllProTemplateAllCalculationDataIsCorrectProductionData.01",
+      "description": "Test Case 51262:Invoices: Verify that on Print out of AllPro template all calculation data is correct_production data",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89003"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "servicesScreen": {
+          "screenPrice": "$592.50",
+          "screenTotalPrice": "$599.13",
+          "moneyServices": [
+            {
+              "serviceName": "Money_Tax_Exempt",
+              "servicePrice": "75",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Decklid"
+                }
+              ]
+            },
+            {
+              "serviceName": "Money_Tax_Exempt",
+              "servicePrice": "190",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Driver Seat"
+                }
+              ]
+            },
+            {
+              "serviceName": "Money_TE_DE",
+              "servicePrice": "140",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Deck Lid"
+                }
+              ]
+            },
+            {
+              "serviceName": "Money_TE_DE",
+              "servicePrice": "55",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Front LH Door Glass"
+                }
+              ]
+            },
+            {
+              "serviceName": "Money_Pack_Price",
+              "servicePrice": "132.50"
+            },
+            {
+              "serviceName": "Tax discount"
+            }
+          ]
+        },
+        "workOrderTotalSale": "3",
+        "workOrderPrice": "$599.13"
+      },
+      "invoiceData": {
+        "poNumber": "123po",
+        "invoiceTotal": "$599.13"
+      }
+    }
+  ],
+  "testInvoicesVerifyThatOnPrintOutOfAutoWorkListNetTemplateAllCalculationDataIsCorrect_ProdData": [
+    {
+      "rowID": "testInvoicesVerifyThatOnPrintOutOfAutoWorkListNetTemplateAllCalculationDataIsCorrect_ProdData.01",
+      "description": "Test Case 51263:Invoices: Verify that on Print out of AutoWorkListNet template all calculation data is correct_Prod_data",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89004"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "services": [
+          {
+            "serviceName": "Money_client_override",
+            "servicePrice": "$4.79"
+          },
+          {
+            "serviceName": "Money_job_override",
+            "servicePrice": "$13.84"
+          }
+        ],
+        "servicesScreen": {
+          "screenPrice": "$2,365.00",
+          "screenTotalPrice": "$1,682.50",
+          "percentageServices": [
+            {
+              "serviceName": "SR_Disc_20_Percent",
+              "servicePrice": "-30"
+            }
+          ],
+          "matrixService": {
+            "matrixServiceName": "Test service price matrix",
+            "hailMatrixName": "PM_with_%_services",
+            "vehiclePartsData": [
+              {
+                "vehiclePartName": "123",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "175",
+                "vehiclePartTotalPrice" : "$255.00",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "SR_S1_Money_Panel",
+                    "servicePrice": "80"
+                  }
+                ]
+              },
+              {
+                "vehiclePartName": "Back Glass",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "325",
+                "vehiclePartTotalPrice" : "$405.00",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "Oksi_Part_SubCategory",
+                    "servicePrice": "80"
+                  }
+                ]
+              },
+              {
+                "vehiclePartName": "Decklid",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "175",
+                "vehiclePartTotalPrice" : "$175.00"
+              },
+              {
+                "vehiclePartName": "Vehicle part new1",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "150",
+                "vehiclePartTotalPrice" : "$187.50",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "Discount 5-10%",
+                    "servicePrice": "25"
+                  }
+                ]
+              },
+              {
+                "vehiclePartName": "VP1 zayats",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "225",
+                "vehiclePartTotalPrice" : "$225.00"
+              },
+              {
+                "vehiclePartName": "VP2 zayats",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "150",
+                "vehiclePartTotalPrice" : "$187.50",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "Discount 5-10%",
+                    "servicePrice": "25"
+                  }
+                ]
+              },
+              {
+                "vehiclePartName": "Sunroof",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "125",
+                "vehiclePartTotalPrice" : "$125.00"
+              },
+              {
+                "vehiclePartName": "Roof",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "150",
+                "vehiclePartTotalPrice" : "$150.00"
+              },
+              {
+                "vehiclePartName": "Left Headlight",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "300",
+                "vehiclePartTotalPrice" : "$300.00"
+              },
+              {
+                "vehiclePartName": "Deck Lid",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "100",
+                "vehiclePartTotalPrice" : "$125.00",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "SR_Disc_20_Percent",
+                    "servicePrice": "25"
+                  }
+                ]
+              },
+              {
+                "vehiclePartName": "Cowl, Other",
+                "vehiclePartOption": "PDR",
+                "vehiclePartPrice": "150",
+                "vehiclePartTotalPrice" : "$230.00",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "Dye",
+                    "servicePrice": "80"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "workOrderPrice": "$1,682.50",
+        "workOrderTotalSale": "3",
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po",
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "invoiceTotal": "1682.50"
+      }
+    }
+  ],
+  "testInvoicesVerifyThatOnPrintOutOfDentWizardHailTemplateAllCalculationDataIsCorrect_ProductionData": [
+    {
+      "rowID": "testInvoicesVerifyThatOnPrintOutOfDentWizardHailTemplateAllCalculationDataIsCorrect_ProductionData.01",
+      "description": "Test Case 51265:Invoices: Verify that on Print out of DentWizard Hail template all calculation data is correct_production data",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89005"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Miscellaneous",
+            "moneyServices": [
+              {
+                "serviceName": "3/4\" - Penny Size",
+                "servicePrice": "100"
+              },
+              {
+                "serviceName": "Disc_Ex_Service1",
+                "servicePrice": "100"
+              },
+              {
+                "serviceName": "Dye",
+                "servicePrice": "10"
+              },
+              {
+                "serviceName": "Discount 10%",
+                "servicePrice": "-10"
+              }
+            ]
+          },
+          {
+            "damageGroupName": "PDR",
+            "moneyServices": [
+              {
+                "serviceName": "Oksi_Part_several",
+                "servicePrice": "32.10"
+              },
+              {
+                "serviceName": "Discount_PDR",
+                "servicePrice": "-10"
+              }
+            ],
+            "matrixService": {
+              "matrixServiceName": "SR_S5_Matrix",
+              "vehiclePartData": {
+                "vehiclePartName": "Roof",
+                "vehiclePartSize": "2 \"",
+                "vehiclePartSeverity": "VERY LIGHT",
+                "vehiclePartPrice": "350"
+              }
+            }
+          }
+        ],
+        "workOrderPrice": "$493.68",
+        "workOrderTotalSale": "5"
+      },
+      "invoiceData": {
+        "poNumber": "123po",
+        "invoiceTotal": "493.68"
       }
     }
   ]

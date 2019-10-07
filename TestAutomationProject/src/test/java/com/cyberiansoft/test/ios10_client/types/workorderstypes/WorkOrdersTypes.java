@@ -31,6 +31,8 @@ public enum WorkOrdersTypes implements  IWorkOrdersTypes {
     WO_MONITOR_REQUIRED_START("WO_MOnitor_Required_Start"),
     WO_BUNDLE_REQ_DEF_TECH("WO_bundle_req_def_tech"),
     WO_ALL_SERVICES("WO_All_Services"),
+    CALC_ORDER("Calc_Order"),
+    WO_DW_INVOICE_HAIL("WO_DW_Invoice_Hail"),
     WO_MONITOR_REQUIRED_SERVICES_ALL("WO_Monitor_required_services_All");
 
     private final String woType;

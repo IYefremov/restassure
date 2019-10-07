@@ -19,10 +19,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularInspectionsSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInspectionsSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularNavigationSteps;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.ProdInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import org.json.simple.JSONObject;
@@ -199,13 +196,8 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         claimscreen.setAccidentDate();
 
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularServicesScreenSteps.selectServiceWithServiceData(moneyService);
         }
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
@@ -235,11 +227,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularServicesScreenSteps.selectServiceWithServiceData(moneyService);
         }
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
@@ -269,11 +257,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularServicesScreenSteps.selectServiceWithServiceData(moneyService);
         }
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
@@ -302,11 +286,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularServicesScreenSteps.selectServiceWithServiceData(moneyService);
         }
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
@@ -336,11 +316,7 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         for (ServiceData moneyService : inspdata.getMoneyServicesList()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(moneyService.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(moneyService.getServicePrice());
-            if (moneyService.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularServicesScreenSteps.selectServiceWithServiceData(moneyService);
         }
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();

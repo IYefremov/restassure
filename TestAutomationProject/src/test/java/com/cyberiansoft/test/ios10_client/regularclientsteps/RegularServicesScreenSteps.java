@@ -34,6 +34,7 @@ public class RegularServicesScreenSteps {
         if (matrixServiceData.getVehiclePartsData() != null) {
             for (VehiclePartData vehiclePartData : matrixServiceData.getVehiclePartsData()) {
                 RegularVehiclePartsScreenSteps.selectVehiclePartAndSetData(vehiclePartData);
+                RegularVehiclePartsScreenSteps.saveVehiclePart();
             }
         }
         if (matrixServiceData.getVehiclePartData() != null) {
@@ -65,6 +66,9 @@ public class RegularServicesScreenSteps {
                     if (serviceData.getVehiclePart() != null) {
                         RegularServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
                     }
+                    if (serviceData.getVehicleParts() != null) {
+                        RegularServiceDetailsScreenSteps.selectServiceVehicleParts(serviceData.getVehicleParts());
+                    }
                     RegularServiceDetailsScreenSteps.saveServiceDetails();
                 } else
                     selectedservicebundlescreen.selectBundle(serviceData.getServiceName());
@@ -84,8 +88,7 @@ public class RegularServicesScreenSteps {
     }
 
     public static void selectPanelServiceData(DamageData damageData) {
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(damageData.getDamageGroupName());
+        selectServicePanel(damageData);
         if (damageData.getMoneyServices() != null) {
             for (ServiceData serviceData : damageData.getMoneyServices())
                 selectServiceWithServiceData(serviceData);
@@ -98,6 +101,11 @@ public class RegularServicesScreenSteps {
             RegularPriceMatrixScreenSteps.savePriceMatrix();
         }
 
+    }
+
+    public static void selectServicePanel(DamageData damageData) {
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.selectServicePanel(damageData.getDamageGroupName());
     }
 
     public static void selectLaborServiceAndSetData(LaborServiceData laborServiceData) {
@@ -115,6 +123,11 @@ public class RegularServicesScreenSteps {
     public static void waitServicesScreenLoad() {
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         servicesScreen.waitServicesScreenLoaded();
+    }
+
+    public static void clickServiceTypesButton() {
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.clickBackServicesButton();
     }
 
 }

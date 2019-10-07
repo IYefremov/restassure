@@ -57,10 +57,15 @@ public class RegularMyWorkOrdersSteps {
     }
 
     public static void clickCreateInvoiceIconAndSelectInvoiceType(IInvoicesTypes invoiceType) {
-        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-        myWorkOrdersScreen.clickInvoiceIcon();
+        clickInvoiceIcon();
         RegularInvoiceTypesSteps.selectInvoiceType(invoiceType);
     }
+
+    public static void clickInvoiceIcon() {
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.clickInvoiceIcon();
+    }
+
 
     public static void selectWorkOrderForApprove(String workOrderId) {
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();

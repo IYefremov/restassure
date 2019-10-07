@@ -309,14 +309,17 @@ public class ServiceRequestsListInteractions {
 	}
 
 	public String getVINValueForSelectedServiceRequest() {
+		WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@data-for='Card_vehicleVin']")));
 	    return getTextValue(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@data-for='Card_vehicleVin']")));
 	}
 
 	public String getCustomerValueForSelectedServiceRequest() {
+		DriverBuilder.getInstance().getDriver().switchTo().frame(srListPage.getEditServiceRequestPanelFrame());
 	    return getTextValue(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@data-for='Card_hdnFullClientName']")));
 	}
 
 	public String getEmployeeValueForSelectedServiceRequest() {
+		DriverBuilder.getInstance().getDriver().switchTo().frame(srListPage.getEditServiceRequestPanelFrame());
 	    return getTextValue(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@data-for='Card_hdnEmployeeFullName']")));
 	}
 

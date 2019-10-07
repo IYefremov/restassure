@@ -43,7 +43,6 @@ public class TPIntegrationService {
     }
 
     public TestPlanRunDTO createTestPlanRun(String testplan_Id) throws UnirestException, IOException {
-        System.out.println("+====" + getCreateTestPlanRunBodyRequest(testplan_Id));
         String msgs = Unirest.post(TARGET_PROCESS_CREATE_TESTPLAN_RUN_PARAM)
                 .routeParam(ACCESS_TOKEN_ROUTE_PARAM, "Mzc6bzRIZXc0VW1acktsNlVNeDYwUVNDUnVod2hsY250b1ljVXBZTTZOUUdsTT0=")
                 .header("accept", POST_REQUEST_CONTENT_TYPE)
@@ -63,7 +62,6 @@ public class TPIntegrationService {
     }
 
     private String getSetTestRunStatusBodyRequest(TestCaseRunStatus runStatus, String runComment) {
-        System.out.println("+====" + runStatus.getRunStatus());
         JtwigTemplate template = JtwigTemplate.fileTemplate(new File("src/test/java/com/cyberiansoft/test/targetprocessintegration/templates/set-test-run-status.json"));
         JtwigModel model = JtwigModel.newModel()
                 .with("runStatus", runStatus.getRunStatus())
