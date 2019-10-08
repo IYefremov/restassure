@@ -177,7 +177,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
         inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-        Assert.assertEquals(new VNextBOInspectionsPageSteps(webdriver).getSelectedInspectionCustomerName(), testcustomer);
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(), testcustomer);
         Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection(inspectionData.getMoneyServiceData().getServiceName()));
         Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection(matrixServiceData.getMatrixServiceName()));
         Assert.assertTrue(inspectionsWebPage.isImageLegendContainsBreakageIcon(damageName));
@@ -237,7 +237,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
         inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-        Assert.assertEquals(new VNextBOInspectionsPageSteps(webdriver).getSelectedInspectionCustomerName(), inspectionData.getInspectionRetailCustomer().getFirstName());
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(), inspectionData.getInspectionRetailCustomer().getFirstName());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

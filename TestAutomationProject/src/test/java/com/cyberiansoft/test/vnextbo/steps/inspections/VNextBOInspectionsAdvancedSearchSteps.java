@@ -2,9 +2,8 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionAdvancedSearchForm;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
@@ -13,52 +12,82 @@ import java.util.Map;
 
 public class VNextBOInspectionsAdvancedSearchSteps {
 
-    private VNextBOInspectionAdvancedSearchForm advancedSearchForm;
-    private WebDriver webDriver;
-
-    public VNextBOInspectionsAdvancedSearchSteps(WebDriver driver) {
-        webDriver = driver;
-        advancedSearchForm = new VNextBOInspectionAdvancedSearchForm(driver);
+    public static void clickSearchButton()
+    {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(advancedSearchForm.searchButton);
     }
 
-    public void clickSearchButton() {Utils.clickElement(advancedSearchForm.searchButton); }
+    public static void clickCloseButton()
+    {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(advancedSearchForm.closeButton);
+    }
 
-    public void clickCloseButton() { Utils.clickElement(advancedSearchForm.closeButton); }
+    public static void clickSaveButton()
+    {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(advancedSearchForm.saveButton);
+    }
 
-    public void clickSaveButton() { Utils.clickElement(advancedSearchForm.saveButton); }
+    public static void clickClearButton()
+    {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(advancedSearchForm.clearButton);
+    }
 
-    public void clickClearButton() { Utils.clickElement(advancedSearchForm.clearButton); }
+    public static void clickDeleteButton()
+    {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(advancedSearchForm.deleteSavedSearchButton);
+    }
 
-    public void clickDeleteButton() { Utils.clickElement(advancedSearchForm.deleteSavedSearchButton); }
-
-    public void deleteSavedSearchFilter() {
+    public static void deleteSavedSearchFilter()
+    {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         advancedSearchForm.deleteSavedSearchButton.click();
-        webDriver.switchTo().alert().accept();
+        DriverBuilder.getInstance().getDriver().switchTo().alert().accept();
         WaitUtilsWebDriver.waitForInvisibility(advancedSearchForm.advancedSearchFormContent);
     }
 
-    public String getValueFromTextInputField(String fieldLabel)
+    public static String getValueFromTextInputField(String fieldLabel)
     {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         return advancedSearchForm.textFieldByName(fieldLabel).getAttribute("value");
     }
 
-    public String getValueFromDropdownField(String fieldLabel)
+    public static String getValueFromDropdownField(String fieldLabel)
     {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         return advancedSearchForm.dropDownFieldByName(fieldLabel).getText();
     }
 
-    public void setAdvancedSearchFilterNameAndSave(String filterName) {
+    public static void setAdvancedSearchFilterNameAndSave(String filterName)
+    {
         setAdvSearchTextField("Search Name", filterName);
         saveAdvancedSearchFilter();
     }
 
-    public void saveAdvancedSearchFilter() {
+    public static void saveAdvancedSearchFilter()
+    {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         clickSaveButton();
         WaitUtilsWebDriver.waitForInvisibility(advancedSearchForm.advancedSearchFormContent);
     }
 
-    public List<String> getAllAdvancedSearchFieldsLabels()
+    public static List<String> getAllAdvancedSearchFieldsLabels()
     {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         List<String> fieldsLabels = new ArrayList<>();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(advancedSearchForm.searchFieldsTitlesList);
         for (WebElement label: advancedSearchForm.searchFieldsTitlesList)
@@ -68,8 +97,10 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         return fieldsLabels;
     }
 
-    public List<String> getAllOptionsFromDropdownByName(String dropdownFieldLabel)
+    public static List<String> getAllOptionsFromDropdownByName(String dropdownFieldLabel)
     {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(advancedSearchForm.dropDownFieldByName(dropdownFieldLabel));
         List<String> statusOptionsNames = new ArrayList<>();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(advancedSearchForm.dropDownFieldOptionsList(dropdownFieldLabel.toLowerCase()));
@@ -80,28 +111,34 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         return statusOptionsNames;
     }
 
-    public void setAdvSearchTextField(String fldName, String value)
+    public static void setAdvSearchTextField(String fldName, String value)
     {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         Utils.clearAndType(advancedSearchForm.textFieldByName(fldName), value);
     }
 
-    public void setAdvSearchDropDownField(String fieldLabel, String value)
+    public static void setAdvSearchDropDownField(String fieldLabel, String value)
     {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         WebElement fieldWithDropdown = advancedSearchForm.dropDownFieldByName(fieldLabel);
         Utils.clickElement(fieldWithDropdown);
         WebElement dropDownOption = advancedSearchForm.dropDownFieldOption(value);
         Utils.clickWithJS(dropDownOption);
     }
 
-    public void setAdvSearchAutocompleteField(String fieldLabel, String value)
+    public static void setAdvSearchAutocompleteField(String fieldLabel, String value)
     {
+        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
+                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         WebElement fieldWithAutocomplete = advancedSearchForm.autoPopulatedFieldByName(fieldLabel);
         Utils.clearAndType(fieldWithAutocomplete, value);
         WaitUtilsWebDriver.waitForLoading();
         Utils.clickWithJS(advancedSearchForm.dropDownFieldOption(value));
     }
 
-    public void setAllAdvancedSearchFields(Map<String, String> listWithValuesForFields)
+    public static void setAllAdvancedSearchFields(Map<String, String> listWithValuesForFields)
     {
         setAdvSearchAutocompleteField("Customer", listWithValuesForFields.get("Customer"));
         setAdvSearchTextField("PO#", listWithValuesForFields.get("PO#"));

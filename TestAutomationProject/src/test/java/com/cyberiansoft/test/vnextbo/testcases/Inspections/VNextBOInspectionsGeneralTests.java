@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases.Inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
@@ -9,7 +10,7 @@ import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsAdvancedSearchVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsAdvancedSearchValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -25,7 +26,6 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsGeneralData.json";
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
-    private VNextBOInspectionsAdvancedSearchVerifications vNextBOInspectionsAdvancedSearchVerifications;
     private List<String> expectedAdvancedSearchFields =
             Arrays.asList("Customer", "PO#", "RO#", "Stock#", "VIN",
                     "Status", "Inspection#", "Timeframe");
@@ -151,6 +151,7 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyIntercomMessengerCanBeOpenedClosed(String rowID, String description, JSONObject testData) {
 
         inspectionsWebPage.openIntercomMessenger();
+        WaitUtilsWebDriver.waitForLoading();
         Assert.assertTrue(inspectionsWebPage.isIntercomMessengerOpened(),
                 "Intercom messenger hasn't been opened");
         inspectionsWebPage.closeIntercom();
@@ -160,10 +161,9 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyAdvancedSearchFields(String rowID, String description, JSONObject testData) {
 
         inspectionsWebPage.openAdvancedSearchForm();
-        vNextBOInspectionsAdvancedSearchVerifications = new VNextBOInspectionsAdvancedSearchVerifications(webdriver);
-        vNextBOInspectionsAdvancedSearchVerifications.isAdvancedSearchFormDisplayed();
-        Assert.assertEquals(new VNextBOInspectionsAdvancedSearchSteps(webdriver).getAllAdvancedSearchFieldsLabels(),
+        VNextBOInspectionsAdvancedSearchValidations.isAdvancedSearchFormDisplayed();
+        Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getAllAdvancedSearchFieldsLabels(),
                 expectedAdvancedSearchFields);
-        vNextBOInspectionsAdvancedSearchVerifications.isSearchButtonDisplayed();
+        VNextBOInspectionsAdvancedSearchValidations.isSearchButtonDisplayed();
     }
 }

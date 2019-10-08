@@ -67,7 +67,7 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
     public void verifyUserCanCancelApprovingWithNoButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        new VNextBOInspectionsPageSteps(webdriver).findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         inspectionsWebPage.clickInspectionApproveButton();
         VNextBOModalDialog confirmApprovingDialog = new VNextBOModalDialog(webdriver);
         Assert.assertTrue(confirmApprovingDialog.isYesButtonDisplayed(), "Confirmation dialog hasn't had \"Yes\" button.");

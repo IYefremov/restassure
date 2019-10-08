@@ -25,7 +25,6 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsDetailsData.json";
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
-    private VNextBOInspectionsPageSteps vNextBOInspectionsPageSteps;
 
     @BeforeClass
     public void settingUp() {
@@ -48,7 +47,6 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
         leftMenuInteractions.selectInspectionsMenu();
         inspectionsWebPage = new VNextBOInspectionsWebPage(webdriver);
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
     }
 
     @AfterClass
@@ -69,7 +67,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeeInspectionImage(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        vNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isInspectionImageZoomIconDisplayed(),
                 "Inspection's image hasn't had Zoom icon");
         inspectionsWebPage.clickInspectionImageZoomIcon();
@@ -86,7 +84,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeeInspectionNotes(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        vNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isInspectionNotesIconDisplayed(),
                 "Notes icon hasn't been displayed");
         inspectionsWebPage.clickInspectionNotesIcon();
@@ -102,7 +100,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeePrintSupplementDetails(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        vNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isPrintSupplementButtonDisplayed(),
                 "Print supplement button hasn't been displayed");
         inspectionsWebPage.clickPrintSupplementButton();
@@ -114,7 +112,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeePrintInspectionDetails(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        vNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isPrintInspectionButtonDisplayed(),
                 "Print inspection button hasn't been displayed");
         inspectionsWebPage.clickPrintInspectionButton();

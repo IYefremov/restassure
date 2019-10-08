@@ -30,7 +30,7 @@ import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPa
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
-import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsPageValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -45,8 +45,6 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     private final String stock = "123";
     private final String po = "987";
     private final String defaultTimeFrameValue = "Timeframe: Last 90 Days";
-    VNextBOInspectionsPageSteps vNextBOInspectionsPageSteps;
-    private VNextBOInspectionsAdvancedSearchSteps vNextBOInspectionsAdvancedSearchSteps;
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWithPopulatedVehicleInfoForCurrentDay(String rowID,
@@ -102,8 +100,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
-        vNextBOInspectionsPageSteps.advancedSearchInspectionByCustomer(testcustomer.getFullName());
+        VNextBOInspectionsPageSteps.advancedSearchInspectionByCustomer(testcustomer.getFullName());
 
         insppage.selectInspectionInTheList(inspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspectionData.getInspectionPrice());
@@ -173,8 +170,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
-        vNextBOInspectionsPageSteps.advancedSearchInspectionByStatusAndInspectionNumber(archivedinspnumber, "All");
+        VNextBOInspectionsPageSteps.advancedSearchInspectionByStatusAndInspectionNumber(archivedinspnumber, "All");
 
         insppage.selectInspectionInTheList(archivedinspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
@@ -197,8 +193,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
-        vNextBOInspectionsPageSteps.advancedSearchInspectionByStatus("Archived");
+        VNextBOInspectionsPageSteps.advancedSearchInspectionByStatus("Archived");
 
         insppage.selectInspectionInTheList(archivedinspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
@@ -221,8 +216,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
-        vNextBOInspectionsPageSteps.advancedSearchInspectionByStatus("Approved");
+        VNextBOInspectionsPageSteps.advancedSearchInspectionByStatus("Approved");
 
         insppage.selectInspectionInTheList(inspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
@@ -245,8 +239,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
-        vNextBOInspectionsPageSteps.advancedSearchInspectionByStockNumber(stock);
+        VNextBOInspectionsPageSteps.advancedSearchInspectionByStockNumber(stock);
 
         insppage.selectInspectionInTheList(inspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
@@ -269,8 +262,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
-        vNextBOInspectionsPageSteps.advancedSearchInspectionByPONumber(po);
+        VNextBOInspectionsPageSteps.advancedSearchInspectionByPONumber(po);
 
         insppage.selectInspectionInTheList(inspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
@@ -293,8 +285,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
-        vNextBOInspectionsPageSteps.advancedSearchInspectionByVIN(VIN);
+        VNextBOInspectionsPageSteps.advancedSearchInspectionByVIN(VIN);
 
         insppage.selectInspectionInTheList(inspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
@@ -318,18 +309,16 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
 
-        vNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
-        if (new VNextBOInspectionsPageVerifications(webdriver).isSavedAdvancedSearchFilterExists(filterName))
-            vNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterName);
+        VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
+        if (VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterName))
+            VNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterName);
 
 
         insppage.openAdvancedSearchForm();
         VNextBOInspectionAdvancedSearchForm advancedserchdialog = new VNextBOInspectionAdvancedSearchForm(webdriver);
-        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspnumber);
-        vNextBOInspectionsAdvancedSearchSteps.setAdvancedSearchFilterNameAndSave(filterName);
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspnumber);
+        VNextBOInspectionsAdvancedSearchSteps.setAdvancedSearchFilterNameAndSave(filterName);
         insppage.selectInspectionInTheList(inspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
@@ -353,19 +342,16 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
 
-        vNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        if (new VNextBOInspectionsPageVerifications(webdriver).isSavedAdvancedSearchFilterExists(filterNameEdited))
-            vNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterNameEdited);
+        VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
+        if (VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterNameEdited))
+            VNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterNameEdited);
 
-        vNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        VNextBOInspectionAdvancedSearchForm advancedserchdialog = insppage.openSavedAdvancedSearchFilter(filterName);
-        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
-        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#","");
-        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
-        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Search Name", filterNameEdited);
-        vNextBOInspectionsAdvancedSearchSteps.saveAdvancedSearchFilter();
+        VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#","");
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Search Name", filterNameEdited);
+        VNextBOInspectionsAdvancedSearchSteps.saveAdvancedSearchFilter();
 
         insppage.selectInspectionInTheList(inspnumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
@@ -388,18 +374,15 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
 
-        vNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        VNextBOInspectionAdvancedSearchForm advancedserchdialog = insppage.openSavedAdvancedSearchFilter(filterNameEdited);
-        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
-        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#","2");
-        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
-        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Search Name", filterNameEdited + "Clear");
-        vNextBOInspectionsAdvancedSearchSteps.clickClearButton();
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("Inspection#"), "");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("VIN"), "");
-        Assert.assertEquals(vNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("Search Name"), filterNameEdited);
+        VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#","2");
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Search Name", filterNameEdited + "Clear");
+        VNextBOInspectionsAdvancedSearchSteps.clickClearButton();
+        Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("Inspection#"), "");
+        Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("VIN"), "");
+        Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("Search Name"), filterNameEdited);
 
         webdriver.quit();
     }
@@ -420,16 +403,14 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
                 VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
-        VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
-        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
+        leftmenu.selectInspectionsMenu();
 
-        vNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        vNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterNameEdited);
-        Assert.assertEquals(vNextBOInspectionsPageSteps.getSearchFieldValue(), "");
-        Assert.assertEquals(vNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
-        vNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        Assert.assertFalse(new VNextBOInspectionsPageVerifications(webdriver).isSavedAdvancedSearchFilterExists(filterNameEdited));
+        VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
+        VNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterNameEdited);
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
+        VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
+        Assert.assertFalse(VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterNameEdited));
         webdriver.quit();
     }
 
@@ -447,23 +428,20 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
-        vNextBOInspectionsPageSteps = new VNextBOInspectionsPageSteps(webdriver);
 
-        vNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
+        VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         insppage.openAdvancedSearchForm();
-        vNextBOInspectionsAdvancedSearchSteps = new VNextBOInspectionsAdvancedSearchSteps(webdriver);
-        vNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
-        vNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
+        VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
         insppage.selectInspectionInTheList(inspnumber);
-        vNextBOInspectionsPageSteps.clickClearFilterIcon();
-        Assert.assertEquals(vNextBOInspectionsPageSteps.getSearchFieldValue(), "");
-        Assert.assertEquals(vNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
-        vNextBOInspectionsPageSteps.searchInspectionByText(inspnumber);
+        VNextBOInspectionsPageSteps.clickClearFilterIcon();
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
+        VNextBOInspectionsPageSteps.searchInspectionByText(inspnumber);
         insppage.selectInspectionInTheList(inspnumber);
-        vNextBOInspectionsPageSteps.clickClearFilterIcon();
-        Assert.assertEquals(vNextBOInspectionsPageSteps.getSearchFieldValue(), "");
-        Assert.assertEquals(vNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
-
+        VNextBOInspectionsPageSteps.clickClearFilterIcon();
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
 
         webdriver.quit();
     }

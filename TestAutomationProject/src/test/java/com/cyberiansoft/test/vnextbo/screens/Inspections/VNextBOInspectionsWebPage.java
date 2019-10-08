@@ -132,7 +132,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		new WebDriverWait(driver, 30)
-				.until(ExpectedConditions.visibilityOf(inspectionsList));
+				.until(ExpectedConditions.visibilityOf(searchFld));
 	}
 
 	public boolean isInspectionApproveButtonVisible() {	return Utils.isElementDisplayed(approveInspectionIcon);	}
