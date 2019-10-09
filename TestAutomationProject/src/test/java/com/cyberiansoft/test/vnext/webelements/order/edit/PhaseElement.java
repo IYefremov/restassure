@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.webelements;
+package com.cyberiansoft.test.vnext.webelements.order.edit;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
@@ -7,7 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 @Getter
-public class EditListElement implements IWebElement {
+public class PhaseElement implements IWebElement {
     private WebElement rootElement;
     private String statusLocator = ".//div[@class='icon-item-status-title']";
     private String nameLocator = ".//div[contains(@class,'icon-item-entity-name') or contains(@class,'icon-item-content-title') or contains(@class,'icon-item-phase-title')]";
@@ -16,7 +16,7 @@ public class EditListElement implements IWebElement {
     private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')][2]";
 
 
-    public EditListElement(WebElement rootElement) {
+    public PhaseElement(WebElement rootElement) {
         this.rootElement = rootElement;
     }
 

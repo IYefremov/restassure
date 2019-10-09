@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting;
+package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.workqueue.problemreporting;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -19,6 +19,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.ProblemReportingSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -58,7 +59,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
         phaseDto.setStatus(PhaseName.PROBLEM);
-        EditOrderSteps.verifyElementStatus(phaseDto);
+        PhaseScreenValidations.validatePhaseStatus(phaseDto);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "userCanReportProblemOnPhaseLevel")
@@ -71,7 +72,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
         ProblemReportingSteps.resolveProblem();
         phaseDto.setStatus(PhaseName.ACTIVE);
-        EditOrderSteps.verifyElementStatus(phaseDto);
+        PhaseScreenValidations.validatePhaseStatus(phaseDto);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -90,7 +91,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(serviceDto.getProblemReason());
         serviceDto.setServiceStatus(ServiceStatus.PROBLEM);
-        EditOrderSteps.verifyElementStatus(serviceDto);
+        PhaseScreenValidations.validateServiceStatus(serviceDto);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
@@ -104,7 +105,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
         ProblemReportingSteps.resolveProblem();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
-        EditOrderSteps.verifyElementStatus(serviceDto);
+        PhaseScreenValidations.validateServiceStatus(serviceDto);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }

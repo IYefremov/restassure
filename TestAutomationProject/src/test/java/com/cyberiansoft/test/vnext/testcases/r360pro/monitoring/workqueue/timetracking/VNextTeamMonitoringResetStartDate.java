@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking;
+package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.workqueue.timetracking;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -17,7 +17,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
-import com.cyberiansoft.test.vnext.validations.EditOrderScreenValidations;
+import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -50,17 +50,17 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestCaseTeamEditionRe
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), false);//add open
+        PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), true);
-        EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.STARTED);
+        PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, true);
+        PhaseScreenValidations.validateServiceStatus(serviceDto);
         EditOrderSteps.openElementMenu(serviceDto.getServiceName());
         MenuSteps.selectMenuItem(MenuItems.RESET_START_DATE);
         GeneralSteps.confirmDialog();
-        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), false);
-        EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.ACTIVE);
+        PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
+        PhaseScreenValidations.validateServiceStatus(serviceDto, ServiceStatus.ACTIVE);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -73,17 +73,17 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestCaseTeamEditionRe
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), false);
+        PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
         EditOrderSteps.openElementMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), true);
-        EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.STARTED);
+        PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, true);
+        PhaseScreenValidations.validateServiceStatus(serviceDto, ServiceStatus.STARTED);
         EditOrderSteps.openElementMenu(phaseDto.getPhaseName());
         MenuSteps.selectMenuItem(MenuItems.RESET_START_DATE);
         GeneralSteps.confirmDialog();
-        EditOrderScreenValidations.elementShouldHaveStartDate(serviceDto.getServiceName(), false);
-        EditOrderScreenValidations.validateElementState(serviceDto.getServiceName(), ServiceStatus.ACTIVE);
+        PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
+        PhaseScreenValidations.validateServiceStatus(serviceDto, ServiceStatus.ACTIVE);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }

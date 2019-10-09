@@ -45,6 +45,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='work-queue']")
     private WebElement workQueue;
 
+    @FindBy(xpath = "//*[@action='navigate-to-monitor']")
+    private WebElement monitor;
+
     @FindBy(xpath = "//a[@class='tile-link tile-item more-tile']")
     private WebElement morelist;
 

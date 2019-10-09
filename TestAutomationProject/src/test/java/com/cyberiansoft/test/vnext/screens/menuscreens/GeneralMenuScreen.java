@@ -21,7 +21,8 @@ public class GeneralMenuScreen extends VNextBaseScreen {
         WaitUtils.click(menuItems.stream()
                 .filter(WebElement::isDisplayed)
                 .filter((element) ->
-                        element.getText().trim().equals(menuItem.getMenuItemDataName()))
+                        element.getText()
+                                .trim().equals(menuItem.getMenuItemDataName()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Menu element not found " + menuItem.getMenuItemDataName()))
         );

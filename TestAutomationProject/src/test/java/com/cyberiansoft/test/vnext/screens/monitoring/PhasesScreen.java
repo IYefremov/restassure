@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.vnext.webelements.EditListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
+import com.cyberiansoft.test.vnext.webelements.order.edit.PhaseElement;
+import com.cyberiansoft.test.vnext.webelements.order.edit.ServiceElement;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,8 +12,12 @@ import java.util.List;
 
 @Getter
 public class PhasesScreen extends MonitorScreen {
-    @FindBy(xpath = "//*[@data-autotests-id='phases-list']/div/div")
-    private List<EditListElement> phaseListElements;
+
+    @FindBy(xpath = "//div[contains(@class,'phase-item')]/div[contains(@class,'icon-item phase')]")
+    private List<PhaseElement> phaseListElements;
+
+    @FindBy(xpath = "//div[@class='phase-services-item']")
+    private List<ServiceElement> serviceElementsList;
 
     @FindBy(xpath = "//*[@action='info']")
     private WebElement infoScreenButton;
@@ -26,13 +30,5 @@ public class PhasesScreen extends MonitorScreen {
 
     public PhasesScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
-    }
-
-    public EditListElement getPhaseElement(String phaseName) {
-        BaseUtils.waitABit(2000);
-        return phaseListElements.stream()
-                .filter((phaseElement) -> phaseElement.getName().equals(phaseName))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Phase element not found " + phaseName));
     }
 }

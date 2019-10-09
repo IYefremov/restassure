@@ -170,4 +170,8 @@ public class VNextProTestCasesDataPaths {
     public String getServiceMultipleOptionDataPath() {
         return props.getProperty("service.multiple.option");
     }
+
+    public String getMonitoringRoActionMenu() {
+        return props.getProperty("monitoring.action.menu");
+    }
 }

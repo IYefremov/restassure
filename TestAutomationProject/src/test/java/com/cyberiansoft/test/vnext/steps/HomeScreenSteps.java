@@ -41,4 +41,9 @@ public class HomeScreenSteps {
         VNextBaseScreen vNextBaseScreen = new VNextBaseScreen();
         WaitUtils.click(vNextBaseScreen.getLogoutButton());
     }
+
+    public static void openMonitor() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        WaitUtils.click(homeScreen.getMonitor());
+    }
 }

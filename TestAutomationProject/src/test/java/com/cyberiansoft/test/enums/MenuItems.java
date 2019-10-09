@@ -13,8 +13,8 @@ public enum MenuItems {
     CHANGE_DEPARTMENT(""),
     REPORT_PROBLEM("Report Problem"),
     RESOLVE_PROBLEM("Resolve Problem"),
-    FOCUS_MODE_ON("OFF\nFocus mode"),
-    FOCUS_MODE_OFF("ON\nFocus mode"),
+    FOCUS_MODE_ON("TURN OFF\nFocus mode"),
+    FOCUS_MODE_OFF("TURN ON\nFocus mode"),
     TIME_REPORT("Time Report"),
     RESET_START_DATE("Reset Start Date");
 

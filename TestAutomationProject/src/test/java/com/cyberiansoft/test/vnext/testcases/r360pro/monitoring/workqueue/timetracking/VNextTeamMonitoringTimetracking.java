@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking;
+package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.workqueue.timetracking;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -17,6 +17,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -53,8 +54,8 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
-        EditOrderSteps.verifyElementStatus(serviceDto);
-        EditOrderSteps.verifyTimeTrackingShouldBeStarted(serviceDto.getServiceName(), true);
+        PhaseScreenValidations.validateServiceStatus(serviceDto);
+        PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnSerivce(serviceDto, true);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
@@ -68,8 +69,8 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
-        EditOrderSteps.verifyElementStatus(serviceDto);
-        EditOrderSteps.verifyTimeTrackingShouldBeStarted(serviceDto.getServiceName(), false);
+        PhaseScreenValidations.validateServiceStatus(serviceDto);
+        PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnSerivce(serviceDto, false);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,dependsOnMethods = "userCanStopTimeTrackingOnService")
@@ -81,7 +82,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         EditOrderSteps.openElementMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.verifyTimeTrackingShouldBeStarted(phaseDto.getPhaseName(), true);
+        PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnPhase(phaseDto, true);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
@@ -94,7 +95,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         EditOrderSteps.openElementMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.verifyTimeTrackingShouldBeStarted(phaseDto.getPhaseName(), false);
+        PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnPhase(phaseDto, false);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }

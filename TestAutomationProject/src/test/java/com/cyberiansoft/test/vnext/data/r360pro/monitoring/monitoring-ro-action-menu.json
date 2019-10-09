@@ -1,0 +1,79 @@
+{
+  "verifyUserCanStartServiceFromRoActionMenuForPhaseAndServiceLevel": [
+    {
+      "rowID": "01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "79320",
+          "testCaseTitle": "Verify user can Start Services from RO action screen."
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Carpet Cleaning",
+          "serviceStatus": "STARTED"
+        },
+        {
+          "serviceName": "A new demo service",
+          "serviceStatus": "STARTED"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCompleteServiceFromRoActionMenuForPhaseAndServiceLevel": [
+    {
+      "rowID": "01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "79324",
+          "testCaseTitle": "Verify user can complete Services from the RO action screen."
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Carpet Cleaning",
+          "serviceStatus": "COMPLETED"
+        },
+        {
+          "serviceName": "A new demo service",
+          "serviceStatus": "COMPLETED"
+        }
+      ]
+    }
+  ],
+  "verifyPhaseIsCompletedWhenAllServicesCompleted": [
+    {
+      "rowID": "01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "79326",
+          "testCaseTitle": "Verify the Phase is completed if user complete the last service."
+        },
+        {
+          "testCaseID": "79335",
+          "testCaseTitle": "Verify user see only not started services on Start service list."
+        },
+        {
+          "testCaseID": "79336",
+          "testCaseTitle": "Verify user can't start/complete Phase on RO action screen if \"Do Not Track Individual Service Statuses\" = OFF"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Carpet Cleaning"
+        },
+        {
+          "serviceName": "A new demo service"
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationServiceAndPhasesLevel"
+        }
+      }
+    }
+  ]
+}

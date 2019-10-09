@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
+package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.workqueue;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
