@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
@@ -15,8 +15,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
-
-import java.util.concurrent.TimeUnit;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 @Getter

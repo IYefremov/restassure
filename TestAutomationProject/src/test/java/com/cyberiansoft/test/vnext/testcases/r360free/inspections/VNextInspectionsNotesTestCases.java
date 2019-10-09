@@ -25,7 +25,7 @@ import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;

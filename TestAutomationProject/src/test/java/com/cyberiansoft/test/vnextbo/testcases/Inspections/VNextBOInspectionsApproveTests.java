@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.testcases.VNextBOInspectionsTests;
+package com.cyberiansoft.test.vnextbo.testcases.Inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInspectionsDetailsData;
@@ -8,6 +8,8 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -20,7 +22,7 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOInspectionsApproveTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInspectionsApproveData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsApproveData.json";
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
 
@@ -65,7 +67,7 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
     public void verifyUserCanCancelApprovingWithNoButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        inspectionsWebPage.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         inspectionsWebPage.clickInspectionApproveButton();
         VNextBOModalDialog confirmApprovingDialog = new VNextBOModalDialog(webdriver);
         Assert.assertTrue(confirmApprovingDialog.isYesButtonDisplayed(), "Confirmation dialog hasn't had \"Yes\" button.");

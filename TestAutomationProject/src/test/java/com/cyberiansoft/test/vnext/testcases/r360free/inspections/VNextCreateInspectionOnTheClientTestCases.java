@@ -27,9 +27,10 @@ import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionInfoWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionInfoWebPage;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -176,7 +177,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
         inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-        Assert.assertEquals(inspectionsWebPage.getSelectedInspectionCustomerName(), testcustomer);
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(), testcustomer);
         Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection(inspectionData.getMoneyServiceData().getServiceName()));
         Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection(matrixServiceData.getMatrixServiceName()));
         Assert.assertTrue(inspectionsWebPage.isImageLegendContainsBreakageIcon(damageName));
@@ -236,7 +237,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
         inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-        Assert.assertEquals(inspectionsWebPage.getSelectedInspectionCustomerName(), inspectionData.getInspectionRetailCustomer().getFirstName());
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(), inspectionData.getInspectionRetailCustomer().getFirstName());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

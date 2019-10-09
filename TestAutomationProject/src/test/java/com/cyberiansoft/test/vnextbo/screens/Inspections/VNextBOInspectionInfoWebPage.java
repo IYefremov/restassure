@@ -1,7 +1,8 @@
-package com.cyberiansoft.test.vnextbo.screens;
+package com.cyberiansoft.test.vnextbo.screens.Inspections;
 
 import java.util.concurrent.TimeUnit;
 
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

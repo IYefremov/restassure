@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.testcases.VNextBOInspectionsTests;
+package com.cyberiansoft.test.vnextbo.testcases.Inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInspectionsDetailsData;
@@ -8,6 +8,10 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionMaximizedImageDialog;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionNoteDialog;
+import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -18,7 +22,7 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOInspectionsDetailsData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsDetailsData.json";
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
 
@@ -63,7 +67,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeeInspectionImage(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        inspectionsWebPage.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isInspectionImageZoomIconDisplayed(),
                 "Inspection's image hasn't had Zoom icon");
         inspectionsWebPage.clickInspectionImageZoomIcon();
@@ -80,7 +84,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeeInspectionNotes(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        inspectionsWebPage.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isInspectionNotesIconDisplayed(),
                 "Notes icon hasn't been displayed");
         inspectionsWebPage.clickInspectionNotesIcon();
@@ -96,7 +100,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeePrintSupplementDetails(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        inspectionsWebPage.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isPrintSupplementButtonDisplayed(),
                 "Print supplement button hasn't been displayed");
         inspectionsWebPage.clickPrintSupplementButton();
@@ -108,7 +112,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeePrintInspectionDetails(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        inspectionsWebPage.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         Assert.assertTrue(inspectionsWebPage.isPrintInspectionButtonDisplayed(),
                 "Print inspection button hasn't been displayed");
         inspectionsWebPage.clickPrintInspectionButton();
