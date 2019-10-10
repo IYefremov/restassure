@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.hdclientsteps;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyWorkOrdersScreen;
+import com.cyberiansoft.test.ios10_client.types.invoicestypes.InvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 
 public class MyWorkOrdersSteps {
@@ -74,5 +75,26 @@ public class MyWorkOrdersSteps {
         selectWorkOrderForCopyVehicle(workOrderID);
         CustomersScreenSteps.selectCustomer(appCustomer);
         WorkOrderTypesSteps.selectWorkOrderType(workOrdersType);
+    }
+
+    public static void selectWorkOrderForApprove(String workOrderID) {
+        MyWorkOrdersScreen myWorkOrdersScreen = new MyWorkOrdersScreen();
+        myWorkOrdersScreen.selectWorkOrderForApprove(workOrderID);
+    }
+
+    public static void clickCreateInvoiceIconForWO(String workOrderID) {
+        MyWorkOrdersScreen myWorkOrdersScreen = new MyWorkOrdersScreen();
+        myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderID);
+    }
+
+    public static void clickInvoiceIcon() {
+        MyWorkOrdersScreen myWorkOrdersScreen = new MyWorkOrdersScreen();
+        myWorkOrdersScreen.clickInvoiceIcon();
+    }
+
+    public static void clickCreateInvoiceIconAndSelectInvoiceType(InvoicesTypes invoiceType) {
+        MyWorkOrdersScreen myWorkOrdersScreen = new MyWorkOrdersScreen();
+        clickInvoiceIcon();
+        InvoiceTypesSteps.selectInvoiceType(invoiceType);
     }
 }

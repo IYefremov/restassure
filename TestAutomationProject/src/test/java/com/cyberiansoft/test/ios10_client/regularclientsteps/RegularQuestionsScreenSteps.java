@@ -12,6 +12,12 @@ import java.util.List;
 
 public class RegularQuestionsScreenSteps {
 
+    public static void waitQuestionsScreenLoaded() {
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
+        questionsScreen.waitQuestionsScreenLoaded();
+    }
+
+
     public static void goToQuestionsScreenAndAnswerQuestions(QuestionScreenData questionScreenData) {
         RegularNavigationSteps.navigateToScreen(questionScreenData.getScreenName());
         if (questionScreenData.getQuestionsData() != null)
@@ -34,10 +40,18 @@ public class RegularQuestionsScreenSteps {
         }
         if (questionData.getQuestionSetionName() != null)
             questionsScreen.waitForQuestionSectionLoad(questionData.getQuestionSetionName());
-        if (questionData.getQuestionAnswer() != null)
+        if (questionData.isLogicalQuestion())
+            questionsScreen.answerLogicalQuestion(questionData);
+        else if (questionData.isTextQuestion())
+            questionsScreen.answerTextQuestion(questionData);
+        else if (questionData.isListQuestion())
+            questionsScreen.selectListQuestion(questionData);
+        else if (questionData.getQuestionAnswer() != null)
             questionsScreen.answerQuestion(questionData);
-        if (questionData.isSignatureQuestion())
+        else if (questionData.isSignatureQuestion())
             questionsScreen.drawRegularSignature();
+        else
+            questionsScreen.answerQuestion(questionData);
 
     }
 }

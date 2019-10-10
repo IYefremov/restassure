@@ -104,6 +104,10 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 
 	public void setPrice(String price) {
 		MobileElement priceCell = (MobileElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice");
+		if (!priceCell.isDisplayed()) {
+			MobileElement table = getMaqtrixPanel();
+			scrollToElement(table.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice"));
+		}
 		priceCell.click();
 		priceCell.findElementByClassName("XCUIElementTypeTextField").clear();
 		priceCell.findElementByClassName("XCUIElementTypeTextField").setValue(price + "\n");
@@ -209,7 +213,7 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 	
 	public String getPriceMatrixVehiclePartSubTotalPrice() {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeToolbar[1]/XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return appiumdriver.findElementByAccessibilityId("Toolbar").findElement(MobileBy.className("XCUIElementTypeStaticText[2]")).getAttribute("value");
 	}
 	
 	public String getPriceMatrixVehiclePartTotalPrice() {

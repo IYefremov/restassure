@@ -108,7 +108,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElementByAccessibilityId("Save").click();
 	}
 
-	public void seletAdvisor(String advisor) {
+	public void selectAdvisor(String advisor) {
 		swipeToElement(vehicleinfotbl.findElement(By.xpath("//XCUIElementTypeCell[@name='Advisor']")));
 		vehicleinfotbl.findElementByAccessibilityId("Advisor").click();
 		appiumdriver.findElementByAccessibilityId(advisor).click();

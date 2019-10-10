@@ -291,7 +291,7 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		return appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + workOrderNumber + "']/XCUIElementTypeStaticText[@name='labelOrderAmount']").getAttribute("value");
 	}
 
-	public boolean woExists(String workOrderNumber) {
+	public boolean isWorkOrderPresent(String workOrderNumber) {
 		waitWorkOrdersScreenLoaded();
 		return elementExists(workOrderNumber);
 	}

@@ -16,6 +16,21 @@ public class PricesCalculations {
   	  }
   	  return formedprice;
     }
+
+	public static String getPercentageRepresentation(String percentage) {
+		String formedPercentage = "";
+		final String percentageSymbol = "%";
+		final String floatingpart = ".00";
+		if (percentage.contains(".")) {
+			if (isDouble(percentage))
+				formedPercentage = percentageSymbol + percentage;
+		} else if (isInteger(percentage)) {
+			formedPercentage = percentageSymbol + percentage + floatingpart;
+		} else if (percentage.contains("%")) {
+			formedPercentage = percentage;
+		}
+		return formedPercentage;
+	}
     
     public static boolean isInteger(String value) {
 	    try { 

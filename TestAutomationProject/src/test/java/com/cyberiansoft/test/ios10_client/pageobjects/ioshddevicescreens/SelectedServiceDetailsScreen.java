@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.ServiceRateData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -405,6 +406,28 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		new WebDriverWait(appiumdriver, 10)
 				.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Technicians"))).click();
 		return new TechniciansPopup();
+	}
+
+	public void clickOperationCell() {
+		appiumdriver.findElementByAccessibilityId("ClarificationBox_PanelPartSelector").click();
+	}
+
+	public void selectLaborServicePanel(String panelName) {
+		if (!appiumdriver.
+				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + panelName + "']")).isDisplayed()) {
+			SwipeUtils.swipeToElement(appiumdriver.
+					findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + panelName + "']/..")));
+		}
+		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(panelName)).click();
+	}
+
+	public void selectLaborServicePart(String partName) {
+		appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(partName+"\n");
+		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(partName)).click();
+	}
+
+	public void clickSelectedServiceDetailsDoneButton() {
+		appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
 	}
 
 }

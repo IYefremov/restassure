@@ -935,7 +935,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.clickHomeButton();
 
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
-		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 
 	}
@@ -1854,7 +1854,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		myWorkOrdersScreen = new MyWorkOrdersScreen();
-		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 
 		myWorkOrdersScreen.clickHomeButton();
 	}
@@ -1893,7 +1893,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.clickSave();
 		orderSummaryScreen.waitForCustomWarningMessage("Duplicate services", "Cancel");
 		myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
-		Assert.assertFalse(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertFalse(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
@@ -2215,7 +2215,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		VehicleInfoScreenSteps.verifyMakeModelyearValues(workOrderData.getVehicleInfoData());
 		NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
-		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
 		ServicesScreen servicesScreen = new ServicesScreen();
 		Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getMatrixServiceData().getMatrixServiceName()));
 		QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
@@ -2354,7 +2354,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
-		myWorkOrdersScreen.woExists(workOrderNumber);
+		myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber);
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 	}
 
@@ -2388,7 +2388,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
-		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 		myWorkOrdersScreen.clickHomeButton();
 
 		HomeScreenSteps.navigateToTeamWorkOrdersScreen();
@@ -2447,7 +2447,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
-		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 		myWorkOrdersScreen.clickHomeButton();
 
 		HomeScreenSteps.navigateToTeamWorkOrdersScreen();
@@ -2510,7 +2510,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
-		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 		myWorkOrdersScreen.clickHomeButton();
 
 		TeamWorkOrdersScreen teamWorkordersScreen = homeScreen.clickTeamWorkordersButton();
@@ -2582,7 +2582,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
 		selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		orderSummaryScreen.saveWizard();
-		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 
 		homeScreen = myWorkOrdersScreen.clickHomeButton();
 
@@ -3997,7 +3997,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicedetailsscreen.changeAmountOfBundleService(inspectionData.getBundleService().getBundleServiceAmount());
 		servicedetailsscreen.saveSelectedServiceDetails();
 
-		ServicesScreenSteps.selectMatrixServiceData(inspectionData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(inspectionData.getMatrixServiceData());
 
 		servicesScreen.clickSaveAsFinal();
 		myInspectionsScreen = new MyInspectionsScreen();
@@ -4596,7 +4596,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
-		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
 
 		servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
@@ -4679,7 +4679,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
-		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
 		servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
@@ -4762,7 +4762,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
-		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
 
 		servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
@@ -5335,7 +5335,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
-		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
 		//PriceMatrixScreenSteps.savePriceMatrixData();
 		servicesScreen.waitServicesScreenLoaded();
 		NavigationSteps.navigateToOrderSummaryScreen();
@@ -5493,7 +5493,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.saveWizard();
-		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 
 		myWorkOrdersScreen.clickHomeButton();
 	}
@@ -6666,7 +6666,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
-		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
 		servicesScreen.waitServicesScreenLoaded();
 		NavigationSteps.navigateToOrderSummaryScreen();
 		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
@@ -7320,7 +7320,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen.clickFinalPopup();
 		servicesScreen.clickSave();
 		myWorkOrdersScreen = new MyWorkOrdersScreen();
-		Assert.assertTrue(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 
 		myWorkOrdersScreen.clickHomeButton();
 		homeScreen.clickLogoutButton();
@@ -7445,7 +7445,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen.waitServicesScreenLoaded();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
-		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
 		servicesScreen.waitServicesScreenLoaded();
 		NavigationSteps.navigateToOrderSummaryScreen();
 		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
@@ -7514,7 +7514,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServicesScreen servicesScreen = new ServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ServicesScreenSteps.selectService(serviceData.getServiceName());
-		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+		ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
 		servicesScreen.waitServicesScreenLoaded();
 		NavigationSteps.navigateToOrderSummaryScreen();
 		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();

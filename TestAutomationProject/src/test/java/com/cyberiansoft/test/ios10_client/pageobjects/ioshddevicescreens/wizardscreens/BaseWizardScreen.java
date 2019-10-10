@@ -56,6 +56,12 @@ public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScre
         clickSave();
     }
 
+    public void clickSaveAsDraft() {
+        clickSave();
+        clickDraftPopup();
+        clickSave();
+    }
+
     public void saveWizard() {
         clickSave();
     }

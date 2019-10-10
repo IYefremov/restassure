@@ -56,7 +56,7 @@ public class RegularVehiclePartsScreenSteps {
         RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         if ((serviceData.getServiceQuantity() != null) || (serviceData.getServicePrice() != null)) {
             vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
-            RegularServiceDetailsScreenSteps.setServiceDetailsData(serviceData);
+            RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
         } else
             vehiclePartScreen.selectDiscaunt(serviceData.getServiceName());
     }

@@ -31,4 +31,6 @@ public class QuestionsData {
     private boolean logicalQuestionValue;
     @JsonProperty("textQuestion")
     private boolean textQuestion;
+    @JsonProperty("listQuestion")
+    private boolean listQuestion;
 }

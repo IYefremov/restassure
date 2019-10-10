@@ -11,4 +11,10 @@ public class HomeScreenSteps {
         TeamWorkOrdersScreen teamWorkOrdersScreen = new TeamWorkOrdersScreen();
         teamWorkOrdersScreen.waitTeamWorkOrdersScreenLoaded();
     }
+
+    public static void navigateToMyWorkOrdersScreen() {
+        HomeScreen homeScreen = new HomeScreen();
+        homeScreen.clickMyWorkOrdersButton();
+        MyWorkOrdersSteps.waitMyWorkOrdersLoaded();
+    }
 }
