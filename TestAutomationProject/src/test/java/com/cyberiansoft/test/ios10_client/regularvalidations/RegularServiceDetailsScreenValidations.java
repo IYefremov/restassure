@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.regularvalidations;
 import com.cyberiansoft.test.dataclasses.ServicePartData;
 import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import org.testng.Assert;
 
 public class RegularServiceDetailsScreenValidations {
@@ -15,7 +16,25 @@ public class RegularServiceDetailsScreenValidations {
             Assert.assertFalse(selectedServiceDetailsScreen.isTechnicianSelected(serviceTechnician.getTechnicianFullName()));
     }
 
-    public static void verifyServiceParValue(ServicePartData servicePartData) {
+    public static void verifyServiceTechnicianPriceValue(ServiceTechnician serviceTechnician, String expactedPrice) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(serviceTechnician.getTechnicianFullName()),
+                PricesCalculations.getPriceRepresentation(expactedPrice));
+    }
+
+    public static void verifyServiceTechnicianPercentageValue(ServiceTechnician serviceTechnician, String expactedPercentageValue) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPercentage(serviceTechnician.getTechnicianFullName()),
+                PricesCalculations.getPercentageRepresentation(expactedPercentageValue));
+    }
+
+    public static void verifyServiceTechnicianCustomPercentageValue(ServiceTechnician serviceTechnician, String expactedPercentageValue) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getCustomTechnicianPercentage(serviceTechnician.getTechnicianFullName()),
+                PricesCalculations.getPercentageRepresentation(expactedPercentageValue));
+    }
+
+    public static void verifyServicePartValue(ServicePartData servicePartData) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         Assert.assertEquals(selectedServiceDetailsScreen.getServicePartValue(), servicePartData.getServicePartValue());
     }

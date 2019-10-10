@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
@@ -46,7 +47,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     }
 
     public boolean isTechniciansExists() {
-        return appiumdriver.findElementByAccessibilityId("Technicians").isDisplayed();
+        return appiumdriver.findElementsByAccessibilityId("Technicians").size() > 0;
     }
 
     public String getTechniciansValue() {

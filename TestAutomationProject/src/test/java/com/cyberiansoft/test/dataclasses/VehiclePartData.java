@@ -55,6 +55,14 @@ public class VehiclePartData {
     @JsonProperty("serviceNewTechnician")
     ServiceTechnician serviceNewTechnician;
 
+    @Getter
+    @JsonProperty("serviceDefaultTechnicians")
+    List<ServiceTechnician> serviceDefaultTechnicians;
+
+    @Getter
+    @JsonProperty("serviceNewTechnicians")
+    List<ServiceTechnician> serviceNewTechnicians;
+
     public String getVehiclePartName() {
         return vehiclePartName;
     }

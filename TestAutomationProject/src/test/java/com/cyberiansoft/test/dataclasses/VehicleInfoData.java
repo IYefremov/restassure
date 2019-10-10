@@ -52,19 +52,18 @@ public class VehicleInfoData {
 	@JsonProperty("location")
 	String location;
 
-	@Getter
 	@JsonProperty("trim")
 	String trim;
 
-	@Getter
+	@JsonProperty("vehicleAdvisor")
+	String vehicleAdvisor;
+
 	@JsonProperty("defaultTechnician")
 	ServiceTechnician defaultTechnician;
 
-	@Getter
 	@JsonProperty("newTechnician")
 	ServiceTechnician newTechnician;
 
-	@Getter
 	@JsonProperty("newTechnicians")
 	List<ServiceTechnician> newTechnicians;
 

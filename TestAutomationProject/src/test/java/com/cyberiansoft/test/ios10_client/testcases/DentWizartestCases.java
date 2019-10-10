@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -299,8 +298,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		final String invoicenumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsFinal();
         myWorkOrdersScreen = new MyWorkOrdersScreen();
-		Assert.assertFalse(myWorkOrdersScreen.woExists(wo1));
-		Assert.assertFalse(myWorkOrdersScreen.woExists(wo2));
+		Assert.assertFalse(myWorkOrdersScreen.isWorkOrderPresent(wo1));
+		Assert.assertFalse(myWorkOrdersScreen.isWorkOrderPresent(wo2));
 		myWorkOrdersScreen.clickHomeButton();
 		MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
 		final String wosubstring = wo1 + ", " + wo2;
@@ -497,7 +496,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 
 		myInspectionsScreen.clickHomeButton();
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
-		myWorkOrdersScreen.woExists(wonumber);
+		myWorkOrdersScreen.isWorkOrderPresent(wonumber);
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
@@ -722,8 +721,8 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		myInspectionsScreen.clickHomeButton();
 
 		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
-		myWorkOrdersScreen.woExists(wonumber);
-		myWorkOrdersScreen.woExists(wonumber2);
+		myWorkOrdersScreen.isWorkOrderPresent(wonumber);
+		myWorkOrdersScreen.isWorkOrderPresent(wonumber2);
 		myWorkOrdersScreen.clickHomeButton();
 	}
 
@@ -2305,7 +2304,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.saveWizard();
 		myWorkOrdersScreen.deleteWorkOrderViaAction(workOrderNumber);
-		Assert.assertFalse(myWorkOrdersScreen.woExists(workOrderNumber));
+		Assert.assertFalse(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 		myWorkOrdersScreen.clickDoneButton();
 		myWorkOrdersScreen.clickHomeButton();
 	}

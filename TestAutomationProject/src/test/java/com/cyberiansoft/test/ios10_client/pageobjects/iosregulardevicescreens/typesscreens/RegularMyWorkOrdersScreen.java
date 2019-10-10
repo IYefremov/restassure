@@ -20,6 +20,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
@@ -159,7 +160,13 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		mywotable.findElement(MobileBy.AccessibilityId(workOrderNumber))
 				.findElement(MobileBy.className("XCUIElementTypeOther")).click();
 	}
-	
+
+	public void clickCreateInvoiceIconForWOs(List<String> workOrders) {
+		for (String workOrderID : workOrders) {
+			clickCreateInvoiceIconForWO(workOrderID);
+		}
+	}
+
 	public void clickCreateInvoiceIconForWOs(String[] wos) {
 		for (int i = 0; i < wos.length; i++) {
 			clickCreateInvoiceIconForWO(wos[i]);
@@ -168,6 +175,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public String getPriceValueForWO(String workOrderNumber) {
+		waitMyWorkOrdersScreenLoaded();
 		return mywotable.findElementByAccessibilityId(workOrderNumber).findElementByAccessibilityId("labelOrderAmount").getAttribute("label");
 	}
 	

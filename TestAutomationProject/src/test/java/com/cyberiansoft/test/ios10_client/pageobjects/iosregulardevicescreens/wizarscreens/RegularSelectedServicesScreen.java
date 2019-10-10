@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.w
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
@@ -71,6 +72,11 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
         selectedservicestable.findElement(MobileBy.AccessibilityId(servicename)).click();
 
         return new RegularSelectedServiceDetailsScreen();
+    }
+
+    public void openCustomServiceDetails(String serviceName, VehiclePartData vehiclePartData) {
+        selectedservicestable.findElementByXPath("//XCUIElementTypeCell[@name='" + serviceName +
+                "']/XCUIElementTypeStaticText[@name='" + vehiclePartData.getVehiclePartName() +"']").click();
     }
 
     public void openServiceDetailsByIndex(String servicename, int servicedetailindex) {

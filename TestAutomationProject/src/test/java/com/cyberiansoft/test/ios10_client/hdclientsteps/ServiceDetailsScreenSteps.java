@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.hdclientsteps;
 
+import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceAdjustmentData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
@@ -74,5 +75,23 @@ public class ServiceDetailsScreenSteps {
         selectedServiceDetailsScreen.clickAdjustments();
         selectedServiceDetailsScreen.selectAdjustment(serviceAdjustmentData.getAdjustmentData().getAdjustmentName());
         saveServiceDetails();
+    }
+
+    public static void setLaborServiceData(LaborServiceData laborServiceData) {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        if (laborServiceData.getLaborServiceRate() != null) {
+            selectedServiceDetailsScreen.setServiceRateValue(laborServiceData.getLaborServiceRate());
+        }
+
+        if (laborServiceData.getLaborServicePanel() != null) {
+            selectedServiceDetailsScreen.clickOperationCell();
+            selectedServiceDetailsScreen.selectLaborServicePanel(laborServiceData.getLaborServicePanel());
+            selectedServiceDetailsScreen.selectLaborServicePart(laborServiceData.getLaborServicePart());
+            selectedServiceDetailsScreen.clickSelectedServiceDetailsDoneButton();
+        }
+        if (laborServiceData.getLaborServiceTime() != null) {
+            selectedServiceDetailsScreen.setServiceTimeValue(laborServiceData.getLaborServiceTime());
+        }
+
     }
 }

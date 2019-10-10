@@ -56,7 +56,8 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	public void clickApproveButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Approve")));
-		approvebtn.click();
+		wait = new WebDriverWait(appiumdriver, 20);
+		wait.until(ExpectedConditions.elementToBeClickable(approvebtn)).click();
 	}
 	
 	public void clickApproveAllServicesButton() {

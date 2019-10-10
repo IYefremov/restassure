@@ -1233,7 +1233,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
-		RegularServiceDetailsScreenValidations.verifyServiceParValue(inspectionData.getMoneyServiceData().getServicePartData());
+		RegularServiceDetailsScreenValidations.verifyServicePartValue(inspectionData.getMoneyServiceData().getServicePartData());
 		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getMoneyServiceData().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
@@ -1341,7 +1341,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
-		RegularServiceDetailsScreenValidations.verifyServiceParValue(workOrderData.getMoneyServiceData().getServicePartData());
+		RegularServiceDetailsScreenValidations.verifyServicePartValue(workOrderData.getMoneyServiceData().getServicePartData());
 		selectedServiceDetailsScreen.setServicePriceValue(workOrderData.getMoneyServiceData().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
@@ -2523,7 +2523,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		String mainWindowHandle = webdriver.getWindowHandle();
 		invoicesWebPage.clickInvoicePrintPreview(invoiceNumber);
 		Assert.assertEquals(invoicesWebPage.getPrintPreviewTestMartrixLaborServiceListValue(totalColumnText), testCaseData.getInvoiceData().getInvoiceTotal());
-		Assert.assertEquals(invoicesWebPage.getPrintPreviewServiceListValue(taxColumnText), taxServicesTotal);
+		Assert.assertEquals(invoicesWebPage.getPrintPreviewListValue(taxColumnText), taxServicesTotal);
 		invoicesWebPage.closeNewTab(mainWindowHandle);
 		DriverBuilder.getInstance().getDriver().quit();
 	}
@@ -2573,8 +2573,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyWorkOrdersScreenValidations.verifyWorkOrderTotalPrice(workOrderNumber, workOrderData.getWorkOrderPrice());
 
 		RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
-		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
-		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+		myWorkOrdersScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularSummaryApproveScreenSteps.approveWorkOrder();
 
 		RegularMyWorkOrdersSteps.clickCreateInvoiceIconForWO(workOrderNumber);

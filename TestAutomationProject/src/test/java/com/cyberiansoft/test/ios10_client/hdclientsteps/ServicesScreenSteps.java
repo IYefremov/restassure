@@ -9,9 +9,14 @@ import java.util.List;
 
 public class ServicesScreenSteps {
 
-    public static void verifyServicesAreSelected(List<ServiceData> servicesData) {
+    public static void waitServicesScreenLoad() {
         ServicesScreen servicesScreen = new ServicesScreen();
         servicesScreen.waitServicesScreenLoaded();
+    }
+
+    public static void verifyServicesAreSelected(List<ServiceData> servicesData) {
+        waitServicesScreenLoad();
+        ServicesScreen servicesScreen = new ServicesScreen();
         for (ServiceData serviceData : servicesData) {
             if (serviceData.isSelected())
                 Assert.assertTrue(servicesScreen.checkServiceIsSelected(serviceData.getServiceName()));
@@ -40,10 +45,19 @@ public class ServicesScreenSteps {
                     ServiceDetailsScreenSteps.setServiceQuantityValue(serviceData.getServiceQuantity());
                 if (serviceData.getServicePrice() != null)
                     ServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
+                if (serviceData.getVehiclePart() != null) {
+                    ServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
+                }
+                if (serviceData.getVehicleParts() != null) {
+                    for (VehiclePartData vehiclePartData : serviceData.getVehicleParts())
+                        ServiceDetailsScreenSteps.slectServiceVehiclePart(vehiclePartData);
+                }
                 ServiceDetailsScreenSteps.saveServiceDetails();
             } else
                 selectedservicebundlescreen.selectBundle(serviceData.getServiceName());
         }
+        if (bundleServiceData.getBundleServiceAmount() != null)
+            selectedservicebundlescreen.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());
         ServiceDetailsScreenSteps.saveServiceDetails();
     }
 
@@ -52,8 +66,13 @@ public class ServicesScreenSteps {
         servicesScreen.selectService(sericeName);
     }
 
-    public static void selectMatrixServiceData(MatrixServiceData matrixServiceData) {
+    public static void selectMatrixServiceDataAndSave(MatrixServiceData matrixServiceData) {
         selectMatrixService(matrixServiceData);
+        selectMatrixServiceData(matrixServiceData);
+        PriceMatrixScreenSteps.savePriceMatrixData();
+    }
+
+    public static void selectMatrixServiceData(MatrixServiceData matrixServiceData) {
         if (matrixServiceData.getVehiclePartsData() != null) {
             for (VehiclePartData vehiclePartData : matrixServiceData.getVehiclePartsData()) {
                 PriceMatrixScreenSteps.selectVehiclePartAndSetData(vehiclePartData);
@@ -62,7 +81,6 @@ public class ServicesScreenSteps {
         if (matrixServiceData.getVehiclePartData() != null) {
             PriceMatrixScreenSteps.selectVehiclePartAndSetData(matrixServiceData.getVehiclePartData());
         }
-        PriceMatrixScreenSteps.savePriceMatrixData();
     }
 
     public static void selectMatrixService(MatrixServiceData matrixServiceData) {
@@ -84,8 +102,13 @@ public class ServicesScreenSteps {
             selectBundleService(damageData.getBundleService());
         }
         if (damageData.getMatrixService() != null) {
-            selectMatrixServiceData(damageData.getMatrixService());
+            selectMatrixServiceDataAndSave(damageData.getMatrixService());
         }
 
+    }
+
+    public static void selectLaborServiceAndSetData(LaborServiceData laborServiceData) {
+        openCustomServiceDetails(laborServiceData.getServiceName());
+        ServiceDetailsScreenSteps.setLaborServiceData(laborServiceData);
     }
 }

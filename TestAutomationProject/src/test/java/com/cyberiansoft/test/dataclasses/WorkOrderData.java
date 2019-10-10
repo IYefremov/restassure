@@ -98,6 +98,10 @@ public class WorkOrderData {
     QuestionScreenData questionScreenData;
 
     @Getter
+    @JsonProperty("questionScreensData")
+    List<QuestionScreenData> questionScreensData;
+
+    @Getter
     @JsonProperty("wholesailCustomer")
     WholesailCustomer wholesailCustomer;
 

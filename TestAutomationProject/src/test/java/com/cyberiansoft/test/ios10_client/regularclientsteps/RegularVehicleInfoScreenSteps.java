@@ -43,6 +43,11 @@ public class RegularVehicleInfoScreenSteps {
         vehicleScreen.setRO(roNumber + "\n");
     }
 
+    public static void selectAdvisor(String advisor) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.selectAdvisor(advisor);
+    }
+
     public static void setPoNumber(String poNumber) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setPO(poNumber + "\n");
@@ -109,6 +114,9 @@ public class RegularVehicleInfoScreenSteps {
         if (vehicleInfoData.getTrim() != null) {
             setTrim(vehicleInfoData.getTrim());
         }
+        if (vehicleInfoData.getVehicleAdvisor() != null) {
+            selectAdvisor(vehicleInfoData.getVehicleAdvisor());
+        }
     }
 
     public static String getInspectionNumber() {
@@ -124,8 +132,13 @@ public class RegularVehicleInfoScreenSteps {
 
     public static void selectAdditionalTechnician(ServiceTechnician technician) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.clickTech();
+        clickTech();
         vehicleScreen.selectAdditionalTechnician(technician.getTechnicianFullName());
         RegularWizardScreensSteps.clickSaveButton();
+    }
+
+    public static void clickTech() {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.clickTech();
     }
 }

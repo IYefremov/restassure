@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularPriceMatricesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceBundleScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSubServicesScreen;
 
@@ -11,7 +10,7 @@ public class RegularServicesScreenSteps {
 
     public static void selectServiceWithServiceData(ServiceData serviceData) {
         openCustomServiceDetails(serviceData.getServiceName());
-        RegularServiceDetailsScreenSteps.setServiceDetailsData(serviceData);
+        RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
     }
 
     public static void selectService(String serviceName) {
@@ -89,6 +88,9 @@ public class RegularServicesScreenSteps {
 
     public static void selectPanelServiceData(DamageData damageData) {
         selectServicePanel(damageData);
+        if (damageData.getMoneyService() != null) {
+            selectServiceWithServiceData(damageData.getMoneyService());
+        }
         if (damageData.getMoneyServices() != null) {
             for (ServiceData serviceData : damageData.getMoneyServices())
                 selectServiceWithServiceData(serviceData);

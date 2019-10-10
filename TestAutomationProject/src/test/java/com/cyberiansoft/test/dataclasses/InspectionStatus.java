@@ -1,10 +1,9 @@
 package com.cyberiansoft.test.dataclasses;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public enum InspectionStatus {
 
     APPROVED("Approved"),
+    ARCHIVED("Archived"),
     NEW("New"),
     DECLINED("Declined"),
     SKIPPED("Skipped");;

@@ -8,6 +8,11 @@ import java.util.List;
 
 public class RegularServiceDetailsScreenSteps {
 
+    public static void setServiceDetailsDataAndSave(ServiceData serviceData) {
+        setServiceDetailsData(serviceData);
+        saveServiceDetails();
+    }
+
     public static void setServiceDetailsData(ServiceData serviceData) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         if (serviceData.getServicePrice() != null)
@@ -22,7 +27,6 @@ public class RegularServiceDetailsScreenSteps {
             selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
         if (serviceData.getQuestionsData() != null)
             selectedServiceDetailsScreen.answerQuestions(serviceData.getQuestionsData());
-        saveServiceDetails();
     }
 
     public static void setServicePriceValue(String servicePrice) {
@@ -65,6 +69,11 @@ public class RegularServiceDetailsScreenSteps {
         selectedServiceDetailsScreen.clickTechniciansIcon();
     }
 
+    public static void selectTechniciansCustomView() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.selectTechniciansCustomView();
+    }
+
     public static void selectServiceTechnician(ServiceTechnician serviceTechnician) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.selecTechnician(serviceTechnician.getTechnicianFullName());
@@ -97,6 +106,18 @@ public class RegularServiceDetailsScreenSteps {
             selectedServiceDetailsScreen.setServiceTimeValue(laborServiceData.getLaborServiceTime());
         }
 
+    }
+
+    public static void setTechnicianCustomPriceValue(ServiceTechnician serviceTechnician) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.setTechnicianCustomPriceValue(serviceTechnician.getTechnicianFullName(),
+                serviceTechnician.getTechnicianPriceValue());
+    }
+
+    public static void setTechnicianCustomPercentageValue(ServiceTechnician serviceTechnician) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.setTechnicianCustomPriceValue(serviceTechnician.getTechnicianFullName(),
+                serviceTechnician.getTechnicianPercentageValue());
     }
 
 }

@@ -9,14 +9,14 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSHDCalculationsTestCases">
         <methods>
 
-            <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_1" />
-        <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_1" />   
-        <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_1" /> 
-        <include name="testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_1" />
-        <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_1" />
-        <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_1" />
-        <include name="testWOVerifyCalculationWithPriceMatrixLaborType_1" />
-        <include name="testInvoicesVerifyRoundingMoneyAmountValues_1" />
+        <include name="testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity" />
+        <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices" />
+        <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly" />
+        <include name="testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined" />
+        <include name="testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount" />
+        <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc" />
+        <include name="testWOVerifyCalculationWithPriceMatrixLaborType" />
+        <include name="testInvoicesVerifyRoundingMoneyAmountValues" />
         
           
             <include name="testCreateInspectionOnTheDeviceWithApprovalRequired" />
@@ -49,15 +49,14 @@
         	<include name="testWOVerifyThatPackagePriceOverridesClient_RretailOrWholesale" />
         	<include name="testWOVerifyThatClientAndJobOverridesAreWorkingFineForWO" />
         	<include name="testInspectionsVerifyThatForDeclinedSkippedaServicesAppropriateIconIsShownAfterApproval" />
+            <include name="testWOVerifyThatCalculationIsCorrectForWOWithAllTypeOfServices" />
+            <include name="testWOIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances" />
+            <include name="testWOVerifyThatDiscountsAreCalculatedCorrectlyOnAllLevels" />
+            <include name="testWOVerifyThatUpchargesAreCalculatedCorrectlyOnAllLevels" />
+            <include name="testInvoicesVerifyThatOnPrintOutOfAllProTemplateAllCalculationDataIsCorrectProductionData" />
+            <include name="testInvoicesVerifyThatOnPrintOutOfAutoWorkListNetTemplateAllCalculationDataIsCorrect_ProdData" />
+            <include name="testInvoicesVerifyThatOnPrintOutOfDentWizardHailTemplateAllCalculationDataIsCorrect_ProductionData" />
 
-        <include name="testHDIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity_2" /> 
-        <include name="testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices_2" />   
-        <include name="testVerifyThatAmountIsCalculatedAndRoundedCorrectly_2" /> 
-        <include name="testHDVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined_2" /> 
-        <include name="testHDVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount_2" /> 
-        <include name="testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc_2" />
-        <include name="testWOVerifyCalculationWithPriceMatrixLaborType_2" />
-        <include name="testInvoicesVerifyRoundingMoneyAmountValues_2" />
         </methods>
       </class>
     </classes>

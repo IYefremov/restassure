@@ -541,6 +541,13 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		return parentrow.findElement(By.xpath("./td[3]/div")).getText();
 	}
 
+	public String getPrintPreviewListValue(String servicename) {
+		WebElement parentrow = driver.findElement(
+				By.xpath("//table/tbody/tr/td/table/tbody/tr/td/div[text()='" + servicename + "']/../.."));
+		BaseUtils.waitABit(500);
+		return parentrow.findElement(By.xpath("./td[2]/div")).getText();
+	}
+
 	public String getPrintPreviewTotalListValue() {
 		WebElement parentrow = driver.findElement(
 				By.xpath("//table/tbody/tr/td/div/table/tbody/tr/td[text()='TOTAL:']/../../../../../.."));

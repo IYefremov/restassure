@@ -12,7 +12,6 @@ public class RegularWorkOrdersSteps {
 
     public static void saveWorkOrder() {
         RegularWizardScreensSteps.clickSaveButton();
-        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
 
     public static void cancelCreatingWorkOrder() {

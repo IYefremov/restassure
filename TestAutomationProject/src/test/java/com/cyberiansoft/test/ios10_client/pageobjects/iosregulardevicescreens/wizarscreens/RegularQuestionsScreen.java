@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
@@ -14,6 +16,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.List;
 
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
@@ -112,6 +116,20 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Choose One AVIS Code")));
 		appiumdriver.findElementByName(aviscode).click();
 	}
+
+	public void selectListQuestion(QuestionsData questionsData) {
+		for (int i = 0; i < 10; i++)
+			if (appiumdriver.findElementsByName(questionsData.getQuestionAnswer()).size() <= 0) {
+				scrollScreenUp();
+				BaseUtils.waitABit(2000);
+			} else {
+				i=11;
+			}
+		if (!appiumdriver.findElementByName(questionsData.getQuestionAnswer()).isDisplayed())
+			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + questionsData.getQuestionAnswer() + "']/..")));
+		appiumdriver.findElementByName(questionsData.getQuestionAnswer()).click();
+
+	}
 	
 	public void chooseConsignor(String consignor) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
@@ -204,7 +222,8 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 
 	public void answerTextQuestion(QuestionsData questionsData) {
 		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).click();
-		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).sendKeys(questionsData.getQuestionAnswer());
+		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).sendKeys(questionsData.getQuestionAnswer()+ "\n");
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 
 
