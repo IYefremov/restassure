@@ -42,7 +42,7 @@ public class VNextTeamProblemEnforcement extends BaseTestCaseTeamEditionRegistra
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
-        AvailableServicesScreenSteps.selectService("Bent Wheel");
+        AvailableServicesScreenSteps.selectService("A new demo service");
         workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -54,13 +54,13 @@ public class VNextTeamProblemEnforcement extends BaseTestCaseTeamEditionRegistra
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(serviceDto.getProblemReason());
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
         ProblemReportingSteps.resolveProblem();
@@ -78,13 +78,13 @@ public class VNextTeamProblemEnforcement extends BaseTestCaseTeamEditionRegistra
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
         ProblemReportingSteps.resolveProblem();
@@ -103,13 +103,13 @@ public class VNextTeamProblemEnforcement extends BaseTestCaseTeamEditionRegistra
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(serviceDto.getProblemReason());
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
         PhaseDetailsSteps.selectProblem(serviceDto.getServiceName());

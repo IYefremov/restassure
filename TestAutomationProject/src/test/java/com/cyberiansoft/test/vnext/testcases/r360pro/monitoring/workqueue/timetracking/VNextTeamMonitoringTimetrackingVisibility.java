@@ -56,7 +56,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         HomeScreenSteps.logOut();
         GeneralSteps.logIn(nonLocationManagerEmployee);
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, true);
         MenuSteps.closeMenu();
         ScreenNavigationSteps.pressBackButton();
@@ -76,10 +76,10 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         locationManagerEmployee.setEmployeeLastName("Test");
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         ScreenNavigationSteps.pressBackButton();
@@ -87,10 +87,10 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         HomeScreenSteps.logOut();
         GeneralSteps.logIn(locationManagerEmployee);
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, true);
         MenuSteps.closeMenu();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, true);
         MenuSteps.closeMenu();
         ScreenNavigationSteps.pressBackButton();
@@ -98,10 +98,10 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         HomeScreenSteps.logOut();
         GeneralSteps.logIn(employee);
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
     }
@@ -113,18 +113,18 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         ServiceData serviceDto = workOrderData.getServiceData();
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
         ProblemReportingSteps.resolveProblem();
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.closeMenu();
@@ -138,19 +138,19 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestCaseTeamE
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
         ProblemReportingSteps.resolveProblem();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.closeMenu();

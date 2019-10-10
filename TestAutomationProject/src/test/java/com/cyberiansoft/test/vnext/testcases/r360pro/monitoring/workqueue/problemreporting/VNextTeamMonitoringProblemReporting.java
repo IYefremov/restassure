@@ -52,10 +52,10 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
         phaseDto.setStatus(PhaseName.PROBLEM);
@@ -68,7 +68,8 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        EditOrderSteps.openElementMenu(phaseDto);
+        MonitorSteps.editOrder(workOrderId);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
         ProblemReportingSteps.resolveProblem();
         phaseDto.setStatus(PhaseName.ACTIVE);
@@ -84,10 +85,10 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(serviceDto.getProblemReason());
         serviceDto.setServiceStatus(ServiceStatus.PROBLEM);
@@ -101,7 +102,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestCaseTeamEdition
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceDto = workOrderData.getServiceData();
 
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
         ProblemReportingSteps.resolveProblem();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);

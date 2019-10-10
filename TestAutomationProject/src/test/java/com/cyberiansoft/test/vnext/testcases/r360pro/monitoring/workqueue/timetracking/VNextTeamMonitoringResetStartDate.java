@@ -51,12 +51,12 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestCaseTeamEditionRe
 
         MonitorSteps.editOrder(workOrderId);
         PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, true);
         PhaseScreenValidations.validateServiceStatus(serviceDto);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.RESET_START_DATE);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
@@ -74,12 +74,12 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestCaseTeamEditionRe
 
         MonitorSteps.editOrder(workOrderId);
         PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, true);
         PhaseScreenValidations.validateServiceStatus(serviceDto, ServiceStatus.STARTED);
-        EditOrderSteps.openElementMenu(phaseDto.getPhaseName());
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.RESET_START_DATE);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);

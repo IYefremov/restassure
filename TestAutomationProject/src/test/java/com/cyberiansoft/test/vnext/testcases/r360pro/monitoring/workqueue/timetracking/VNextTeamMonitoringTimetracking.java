@@ -50,7 +50,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
@@ -65,7 +65,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceDto = workOrderData.getServiceData();
 
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
@@ -79,7 +79,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnPhase(phaseDto, true);
@@ -92,7 +92,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnPhase(phaseDto, false);

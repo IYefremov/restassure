@@ -50,19 +50,19 @@ public class VNextTeamMonitoringTimeReport extends BaseTestCaseTeamEditionRegist
         ServiceData serviceDto = workOrderData.getServiceData();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, false);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(false);
         ScreenNavigationSteps.pressBackButton();
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(serviceDto.getServiceName());
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(true);
@@ -78,19 +78,19 @@ public class VNextTeamMonitoringTimeReport extends BaseTestCaseTeamEditionRegist
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
         MonitorSteps.editOrder(workOrderId);
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, false);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(false);
         ScreenNavigationSteps.pressBackButton();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
-        EditOrderSteps.openElementMenu(phaseDto);
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(true);

@@ -24,21 +24,11 @@ public class PhaseElement implements IWebElement {
         return WaitUtils.getGeneralFluentWait().until(
                 driver -> rootElement.findElement(By.xpath(nameLocator)).getText()
         );
-
     }
 
     public String getStatus() {
         WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(statusLocator)), true);
         return rootElement.findElement(By.xpath(statusLocator)).getText();
-    }
-
-    public void openMenu() {
-        WaitUtils.click(rootElement);
-    }
-
-    public void expandElement() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(expandElementLocator)), true);
-        rootElement.findElement(By.xpath(expandElementLocator)).click();
     }
 
     public Boolean isClockIconPresent() {

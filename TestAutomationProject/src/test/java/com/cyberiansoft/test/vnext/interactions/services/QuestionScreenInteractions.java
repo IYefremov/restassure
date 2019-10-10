@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.interactions.services;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.questions.QuestionScreen;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -8,9 +9,9 @@ public class QuestionScreenInteractions {
     public static void clickQuestionAnswerBox(String questionName) {
         QuestionScreen questionScreen = new QuestionScreen();
         WaitUtils.waitUntilElementIsClickable(questionScreen.getGeneralQuestionByText(questionName).getRootElement());
-        String questionText = questionScreen.getGeneralQuestionByText(questionName).getAnswerElement().getText();
+        questionScreen.getGeneralQuestionByText(questionName).getAnswerElement().getText();
         WaitUtils.click(questionScreen.getGeneralQuestionByText(questionName).getAnswerElement());
-        WaitUtils.getGeneralFluentWait().until(driver -> questionScreen.getGeneralQuestionByText(questionName).getAnswerElement().getText().equals(questionText));
+        BaseUtils.waitABit(1000);
     }
 
     public static void clearQuestion(String questionName) {

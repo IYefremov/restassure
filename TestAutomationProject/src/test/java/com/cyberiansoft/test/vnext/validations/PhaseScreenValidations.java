@@ -12,7 +12,7 @@ public class PhaseScreenValidations {
     }
 
     public static void validateServiceStatus(ServiceData serviceData, ServiceStatus serviceStatus) {
-        Assert.assertEquals(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()).getStatus(), serviceStatus);
+        Assert.assertEquals(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()).getStatus(), serviceStatus.getStatus());
     }
 
     public static void validatePhaseStatus(OrderPhaseDto phaseDto) {

@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
@@ -29,17 +29,14 @@ public class EditOrderSteps {
         Assert.assertNotNull(actualOrderInfo.getStartDate());
     }
 
-    public static void openElementMenu(OrderPhaseDto phaseDto) {
-        PhasesScreen phasesScreen = new PhasesScreen();
-        BaseUtils.waitABit(1000);
-        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getPhaseListElements(), 0);
-        PhaseScreenInteractions.getPhaseElement(phaseDto.getPhaseName()).openMenu();
+    public static void openPhaseMenu(OrderPhaseDto phaseDto) {
+        PhaseScreenInteractions.openPhaseElementMenu(
+                PhaseScreenInteractions.getPhaseElement(phaseDto.getPhaseName()));
     }
 
-    public static void openElementMenu(String phaseName) {
-        OrderPhaseDto orderPhaseDto = new OrderPhaseDto();
-        orderPhaseDto.setPhaseName(phaseName);
-        openElementMenu(orderPhaseDto);
+    public static void openServiceMenu(ServiceData serviceData) {
+        PhaseScreenInteractions.openServiceElementMenu(
+                PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
     }
 
     public static void setOrderPriority(OrderPriority orderPriority) {
