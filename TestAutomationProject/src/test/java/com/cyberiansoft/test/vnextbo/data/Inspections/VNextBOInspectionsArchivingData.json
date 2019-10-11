@@ -20,7 +20,13 @@
   "verifyUserCanArchiveInspection": [
     {
       "rowID": "verifyUserCanArchiveInspection.01",
-      "description": "Test Case 85226: User can Archive Inspections (Inspection's details)",
+      "description": "Test Case 90873: User can Archive Inspections (Inspection's details)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90873",
+          "testCaseTitle": "User can Archive Inspections (Inspection's details)"
+        }
+      ],
       "inspectionId": "E-444-00188",
       "fromDate": "1/1/2018",
       "toDate": "9/26/2019"
@@ -47,7 +53,13 @@
   "verifyUserCanUnArchiveInspection": [
     {
       "rowID": "verifyUserCanUnArchiveInspection.01",
-      "description": "Test Case 85229: User can Unarchive Inspection (Inspection details)",
+      "description": "Test Case 90876: User can Unarchive Inspection (Inspection details)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90876",
+          "testCaseTitle": "User can Unarchive Inspection (Inspection details)"
+        }
+      ],
       "inspectionId": "E-444-00188",
       "fromDate": "1/1/2018",
       "toDate": "9/26/2019"

@@ -10,12 +10,15 @@ import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionMaximizedImageDialog;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionNoteDialog;
-import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionMaximizedImageDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionNoteDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionMaximizedImageDialogValidations;
+import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionNoteDialogValidations;
+import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsPageValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
@@ -23,7 +26,6 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsDetailsData.json";
-    private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
 
     @BeforeClass
@@ -46,7 +48,6 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         loginPage.userLogin(userName, userPassword);
         VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
         leftMenuInteractions.selectInspectionsMenu();
-        inspectionsWebPage = new VNextBOInspectionsWebPage(webdriver);
     }
 
     @AfterClass
@@ -68,16 +69,13 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        Assert.assertTrue(inspectionsWebPage.isInspectionImageZoomIconDisplayed(),
-                "Inspection's image hasn't had Zoom icon");
-        inspectionsWebPage.clickInspectionImageZoomIcon();
+        VNextBOInspectionsPageValidations.isInspectionImageZoomIconDisplayed();
+        VNextBOInspectionsPageSteps.clickInspectionImageZoomIcon();
         VNextBOInspectionMaximizedImageDialog vNextBOInspectionMaximizedImageDialog =
                 new VNextBOInspectionMaximizedImageDialog(webdriver);
-        Assert.assertTrue(vNextBOInspectionMaximizedImageDialog.isInspectionZoomedImageDisplayed(),
-                "Inspection's image hasn't been maximized");
-        vNextBOInspectionMaximizedImageDialog.closeInspectionMaximizedImageDialog();
-        Assert.assertTrue(vNextBOInspectionMaximizedImageDialog.isInspectionZoomedImageClosed(),
-                "Inspection's image hasn't been minimized");
+        VNextBOInspectionMaximizedImageDialogValidations.isInspectionZoomedImageDisplayed();
+        VNextBOInspectionMaximizedImageDialogSteps.closeInspectionMaximizedImageDialog();
+        VNextBOInspectionMaximizedImageDialogValidations.isInspectionZoomedImageClosed(vNextBOInspectionMaximizedImageDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -85,15 +83,12 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        Assert.assertTrue(inspectionsWebPage.isInspectionNotesIconDisplayed(),
-                "Notes icon hasn't been displayed");
-        inspectionsWebPage.clickInspectionNotesIcon();
+        VNextBOInspectionsPageValidations.isInspectionNotesIconDisplayed();
+        VNextBOInspectionsPageSteps.clickInspectionNotesIcon();
         VNextBOInspectionNoteDialog vNextBOInspectionNoteDialog = new  VNextBOInspectionNoteDialog(webdriver);
-        Assert.assertTrue(vNextBOInspectionNoteDialog.isInspectionNoteTextDisplayed(),
-                "Notes dialog  hasn't been opened");
-        vNextBOInspectionNoteDialog.closeInspectionNote();
-        Assert.assertTrue(vNextBOInspectionNoteDialog.isNoteDialogClosed(),
-                "Notes dialog  hasn't been closed");
+        VNextBOInspectionNoteDialogValidations.isInspectionNoteTextDisplayed();
+        VNextBOInspectionNoteDialogSteps.closeInspectionNote();
+        VNextBOInspectionNoteDialogValidations.isNoteDialogClosed(vNextBOInspectionNoteDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -101,11 +96,9 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        Assert.assertTrue(inspectionsWebPage.isPrintSupplementButtonDisplayed(),
-                "Print supplement button hasn't been displayed");
-        inspectionsWebPage.clickPrintSupplementButton();
-        Assert.assertTrue(inspectionsWebPage.isPrintWindowOpened(),
-                "Print supplement window hasn't been opened");
+        VNextBOInspectionsPageValidations.isPrintSupplementButtonDisplayed();
+        VNextBOInspectionsPageSteps.clickPrintSupplementButton();
+        VNextBOInspectionsPageValidations.isPrintWindowOpened();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -113,10 +106,8 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        Assert.assertTrue(inspectionsWebPage.isPrintInspectionButtonDisplayed(),
-                "Print inspection button hasn't been displayed");
-        inspectionsWebPage.clickPrintInspectionButton();
-        Assert.assertTrue(inspectionsWebPage.isPrintWindowOpened(),
-                "Print inspection details window hasn't been opened");
+        VNextBOInspectionsPageValidations.isPrintInspectionButtonDisplayed();
+        VNextBOInspectionsPageSteps.clickPrintInspectionButton();
+        VNextBOInspectionsPageValidations.isPrintWindowOpened();
     }
 }

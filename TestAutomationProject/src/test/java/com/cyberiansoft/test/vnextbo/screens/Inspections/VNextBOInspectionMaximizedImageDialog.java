@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.screens.Inspections;
 
-import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
@@ -15,24 +14,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class VNextBOInspectionMaximizedImageDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[contains(@data-bind, 'modalDialogHeight')]")
-    private WebElement maximizedImageDialogContainer;
+    public WebElement dialogContainer;
 
     @FindBy(xpath = "//div[@class='image-notes__preview--modal' and contains(@style, 'url')]")
-    private WebElement maximizedImage;
+    public WebElement maximizedImage;
 
     @FindBy(xpath = "//div[contains(@class, 'notes__images')]//button[@class='close']")
-    private WebElement closeMaximizedImageDialogButton;
+    public WebElement closeDialogButton;
 
     public VNextBOInspectionMaximizedImageDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOf(closeMaximizedImageDialogButton));
+                .until(ExpectedConditions.visibilityOf(closeDialogButton));
     }
-
-    public boolean isInspectionZoomedImageDisplayed() {return Utils.isElementDisplayed(maximizedImage); }
-
-    public boolean isInspectionZoomedImageClosed() {return Utils.isElementDisplayed(maximizedImageDialogContainer); }
-
-    public void closeInspectionMaximizedImageDialog() {Utils.clickElement(closeMaximizedImageDialogButton); }
 }

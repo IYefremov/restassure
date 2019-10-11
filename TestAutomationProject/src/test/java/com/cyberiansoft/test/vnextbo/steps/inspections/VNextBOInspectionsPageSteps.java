@@ -4,6 +4,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsApprovalWebPage;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.baseutils.Utils;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 
@@ -37,6 +38,60 @@ public class VNextBOInspectionsPageSteps {
         Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchCaret);
     }
 
+    public static void clickInspectionApproveButton()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.approveInspectionIcon);
+    }
+
+    public static void clickArchiveIcon()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.archiveIcon);
+    }
+
+    public static void clickUnArchiveIcon()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.unArchiveIcon);
+    }
+
+    public static void clickInspectionImageZoomIcon()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.inspectionImageZoomIcon);
+    }
+
+    public static void clickInspectionNotesIcon()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.inspectionNotesIcon);
+    }
+
+    public static void clickPrintSupplementButton()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.printSupplementIcon);
+    }
+
+    public static void clickPrintInspectionButton()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.printInspectionIcon);
+    }
+
+    public static void clickTermsAndConditionsLink()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.termsAndConditionsLink);
+    }
+
+    public static void clickPrivacyPolicyLink()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickElement(inspectionsPage.privacyPolicyLink);
+    }
+
     public static String getCustomSearchInfoTextValue()
     {
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
@@ -47,6 +102,24 @@ public class VNextBOInspectionsPageSteps {
     {
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
         return inspectionsPage.searchFld.getAttribute("value");
+    }
+
+    public static String getInspectionStatus(String inspectionNumber)
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        return Utils.getText(inspectionsPage.inspectionStatusByInspectionNumber(inspectionNumber));
+    }
+
+    public static String getSelectedInspectionArchivingReason()
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        return Utils.getText(inspectionsPage.selectedInspectionArchivedReason);
+    }
+
+    public static void selectArchiveReason(String reason)
+    {
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Utils.clickWithJS(inspectionsPage.archivingReasonByName(reason));
     }
 
     public static void openAdvancedSearchForm()
@@ -199,5 +272,23 @@ public class VNextBOInspectionsPageSteps {
     {
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
         return Utils.getText(inspectionsPage.selectedInspectionFieldValueByName(parameterName));
+    }
+
+    public static void openIntercomMessenger()
+    {
+        WebDriver driver = DriverBuilder.getInstance().getDriver();
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(driver);
+        driver.switchTo().frame(inspectionsPage.intercomLauncherFrame);
+        Utils.clickElement(inspectionsPage.openCloseIntercomButton);
+        driver.switchTo().defaultContent();
+    }
+
+    public static void closeIntercom()
+    {
+        WebDriver driver = DriverBuilder.getInstance().getDriver();
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(driver);
+        driver.switchTo().frame(inspectionsPage.intercomLauncherFrame);
+        Utils.clickElement(inspectionsPage.openCloseIntercomButton);
+        driver.switchTo().defaultContent();
     }
 }

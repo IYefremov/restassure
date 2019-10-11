@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.screens.Inspections;
 
-import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
@@ -15,24 +14,18 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class VNextBOInspectionNoteDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[contains(@data-bind, 'modalDialogHeight')]")
-    private WebElement noteDialogContainer;
+    public WebElement dialogContainer;
 
     @FindBy(xpath = "//pre[@class='notes__text']")
-    private WebElement noteDialogText;
+    public WebElement noteText;
 
     @FindBy(xpath = "//div[contains(@data-bind, 'modalDialogHeight')]//button[@class='close']")
-    private WebElement closeNoteDialogButtonButton;
+    public WebElement closeDialogButton;
 
     public VNextBOInspectionNoteDialog(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOf(closeNoteDialogButtonButton));
+                .until(ExpectedConditions.visibilityOf(closeDialogButton));
     }
-
-    public boolean isNoteDialogClosed() {return Utils.isElementNotDisplayed(noteDialogContainer); }
-
-    public boolean isInspectionNoteTextDisplayed() {return Utils.isElementDisplayed(noteDialogText); }
-
-    public void closeInspectionNote() {Utils.clickElement(closeNoteDialogButtonButton); }
 }

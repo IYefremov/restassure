@@ -5,6 +5,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -23,10 +24,10 @@ import java.util.concurrent.TimeUnit;
 public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//ul[@data-automation-id='inspectionsList']")
-	private WebElement inspectionsList;
+	public WebElement inspectionsList;
 
 	@FindBy(xpath = "//div[@class='entity-details__content' and @data-bind='visible: isDetailsVisible']")
-	private WebElement inspectionDetailsPanel;
+	public WebElement inspectionDetailsPanel;
 
 	@FindBy(xpath = "//table[@data-automation-id='inspectionsDetailsServicesList']")
 	private WebElement inspectionServicesList;
@@ -35,10 +36,10 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	private WebElement imageLegend;
 
 	@FindBy(xpath = "//span[@data-automation-id='inspectionsDetailsPrintButton']")
-	private WebElement printInspectionIcon;
+	public WebElement printInspectionIcon;
 
 	@FindBy(xpath = "//button[@data-automation-id='inspectionsDetailsApproveButton']")
-	private WebElement approveInspectionIcon;
+	public WebElement approveInspectionIcon;
 
 	@FindBy(id = "inspectiontypes-search")
 	private WebElement searchInspectionsPanel;
@@ -62,22 +63,22 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	private List<WebElement> inspectionStatusLabels;
 
 	@FindBy(xpath = "//a[@data-bind='click: showTermsAndConditions']")
-	private WebElement termsAndConditionsLink;
+	public WebElement termsAndConditionsLink;
 
 	@FindBy(xpath = "//a[@data-bind='click: showPrivacyPolicy']")
-	private WebElement privacyPolicyLink;
+	public WebElement privacyPolicyLink;
 
 	@FindBy(xpath = "//iframe[@name='intercom-messenger-frame']")
-	private WebElement intercomMessengerFrame;
+	public WebElement intercomMessengerFrame;
 
 	@FindBy(xpath = "//div[contains(@class,'intercom-messenger-new-conversation')]")
-	private WebElement intercomNewConversionSpace;
+	public WebElement intercomNewConversionSpace;
 
 	@FindBy(xpath = "//iframe[@name='intercom-launcher-frame']")
-	private WebElement intercomLauncherFrame;
+	public WebElement intercomLauncherFrame;
 
 	@FindBy(xpath = "//div[contains(@class, 'intercom-launcher')]")
-	private WebElement openCloseIntercomButton;
+	public WebElement openCloseIntercomButton;
 
 	@FindBy(xpath = "//i[@id='advSearchEstimation-caret']")
 	public WebElement searchFieldAdvancedSearchCaret;
@@ -86,19 +87,19 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public WebElement searchFieldAdvancedSearchIconGear;
 
 	@FindBy(xpath = "//i[@data-automation-id='inspectionsDetailsEnlargeVisualForm']")
-	private WebElement inspectionImageZoomIcon;
+	public WebElement inspectionImageZoomIcon;
 
 	@FindBy(xpath = "(//i[@class='icon-comment' and not(contains(@style, 'display: none'))])[1]")
-	private WebElement inspectionNotesIcon;
+	public WebElement inspectionNotesIcon;
 
 	@FindBy(xpath = "//span[@data-automation-id='inspectionsDetailsPrintSupplementButton']")
-	private WebElement printSupplementIcon;
+	public WebElement printSupplementIcon;
 
 	@FindBy(xpath = "//span[contains(@class, 'close-multi-archive-reasons')]//span[contains(@class, 'archive')]")
-	private WebElement archiveIcon;
+	public WebElement archiveIcon;
 
 	@FindBy(xpath = "//span[@data-automation-id='inspectionsSingleUnArchiveButton']")
-	private WebElement unArchiveIcon;
+	public WebElement unArchiveIcon;
 
 	@FindBy(xpath = "//i[@id='advSearchEstimation-editIcon']")
 	public WebElement editAdvancedSearchIcon;
@@ -124,8 +125,20 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@class='entity-list__item__description']//b")
 	public List<WebElement> inspectionNumbersList;
 
+	@FindBy(xpath = "//div[@class='text-ellipsis' and @data-bind='visible: isVisibleArchivedReasonInDetails']")
+	public WebElement selectedInspectionArchivedReason;
+
 	public WebElement selectedInspectionFieldValueByName(String fieldLabel) {
 		return driver.findElement(By.xpath("//div[@class='text-ellipsis' and contains(text(), '" + fieldLabel + "')]/span"));
+	}
+
+	public WebElement archivingReasonByName(String reason) {
+		return driver.findElement(By.xpath("//div[@class='archive-reasons-title' and text()='" + reason + "']"));
+	}
+
+	public WebElement inspectionStatusByInspectionNumber(String inspectionNumber) {
+		return driver.findElement(By.xpath("//b[text()='" +inspectionNumber + "']/ancestor::" +
+				"div[@class='entity-list__item entity-list__item--active']//div[@class='entity-list__item__status__label']"));
 	}
 
 	public VNextBOInspectionsWebPage(WebDriver driver) {
@@ -136,106 +149,6 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 
 	public boolean isInspectionApproveButtonVisible() {	return Utils.isElementDisplayed(approveInspectionIcon);	}
-
-	public boolean isInspectionsListDisplayed() {
-		return Utils.isElementDisplayed(inspectionsList);
-	}
-
-	public boolean isInspectionDetailsPanelDisplayed() {
-		return Utils.isElementDisplayed(inspectionDetailsPanel);
-	}
-
-	public boolean isSearchFieldDisplayed() {
-		return Utils.isElementDisplayed(searchFld);
-	}
-
-	public boolean isTermsAndConditionsLinkDisplayed() {
-		return Utils.isElementDisplayed(termsAndConditionsLink);
-	}
-
-	public boolean isPrivacyPolicyLinkDisplayed() {
-		return Utils.isElementDisplayed(privacyPolicyLink);
-	}
-
-	public boolean isInspectionImageZoomIconDisplayed() {return Utils.isElementDisplayed(inspectionImageZoomIcon); }
-
-	public boolean isInspectionNotesIconDisplayed() {return Utils.isElementDisplayed(inspectionNotesIcon); }
-
-	public boolean isPrintSupplementButtonDisplayed() {return Utils.isElementDisplayed(printSupplementIcon); }
-
-	public boolean isPrintInspectionButtonDisplayed() {return Utils.isElementDisplayed(printInspectionIcon); }
-
-	public boolean isArchiveIconDisplayed() {return Utils.isElementDisplayed(archiveIcon); }
-
-	public boolean isUnArchiveIconDisplayed() {return Utils.isElementDisplayed(unArchiveIcon); }
-
-	public void clickInspectionImageZoomIcon() {Utils.clickElement(inspectionImageZoomIcon); }
-
-	public void clickInspectionNotesIcon() {Utils.clickElement(inspectionNotesIcon); }
-
-	public void clickPrintSupplementButton() {Utils.clickElement(printSupplementIcon); }
-
-	public void clickPrintInspectionButton() {Utils.clickElement(printInspectionIcon); }
-
-	public void clickArchiveIcon() {Utils.clickElement(archiveIcon); }
-
-	public void clickUnArchiveIcon() {Utils.clickElement(unArchiveIcon); }
-
-	public boolean isIntercomButtonDisplayed() {
-		driver.switchTo().frame(intercomLauncherFrame);
-		boolean isIntercomButtonDisplayed = isElementDisplayed(openCloseIntercomButton);
-		driver.switchTo().defaultContent();
-		return isIntercomButtonDisplayed;
-	}
-
-	public void clickTermsAndConditionsLink() {
-		Utils.clickElement(termsAndConditionsLink);
-	}
-
-	public void clickPrivacyPolicyLink() {
-		Utils.clickElement(privacyPolicyLink);
-	}
-
-	public void openIntercomMessenger() {
-		driver.switchTo().frame(intercomLauncherFrame);
-		Utils.clickElement(openCloseIntercomButton);
-		driver.switchTo().defaultContent();
-	}
-
-	public boolean isIntercomMessengerOpened() {
-		driver.switchTo().frame(intercomMessengerFrame);
-		boolean isMessengerOpened =  isElementDisplayed(intercomNewConversionSpace);
-		driver.switchTo().defaultContent();
-		return isMessengerOpened;
-	}
-
-	public void closeIntercom() {
-		driver.switchTo().frame(intercomLauncherFrame);
-		Utils.clickElement(openCloseIntercomButton);
-		driver.switchTo().defaultContent();
-	}
-
-	public void openAdvancedSearchForm()
-	{
-		Utils.clickElement(searchFieldAdvancedSearchCaret);
-		Utils.clickElement(searchFieldAdvancedSearchIconGear);
-	}
-
-	public boolean isPrintWindowOpened()
-	{
-		String parentHandle = Utils.getParentTab();
-		waitForNewTab();
-		String newWindow = Utils.getNewTab(parentHandle);
-		driver.switchTo().window(parentHandle);
-		if (parentHandle.equals(newWindow)) return false;
-		return true;
-	}
-
-	public void selectArchiveReason(String reason)
-	{
-		Utils.clickWithJS(
-				driver.findElement(By.xpath("//div[@class='archive-reasons-title' and text()='" + reason + "']")));
-	}
 
 	public void selectInspectionInTheList(String inspectionNumber) {
 		Utils.clickElement(driver.findElement(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspectionNumber + "']")));
@@ -310,13 +223,9 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		return exists;
 	}
 
-	public void clickInspectionApproveButton() {
-		Utils.clickElement(approveInspectionIcon);
-	}
-
 	public void approveInspection(String approveNotes) {
 		String parentHandle = driver.getWindowHandle();
-		clickInspectionApproveButton();
+		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
 		VNextBOConfirmationDialog confirmDialog = new VNextBOConfirmationDialog();
 		confirmDialog.clickYesButton();
 		waitForNewTab();
@@ -334,7 +243,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 
 	public void openApproveInspectionWindow() {
 		String parentHandle = driver.getWindowHandle();
-		clickInspectionApproveButton();
+		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
 		new VNextBOConfirmationDialog().clickYesButton();
 		waitForNewTab();
 		String newWindow = Utils.getNewTab(parentHandle);
@@ -344,7 +253,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 
 	public void declineInspection(String declineNotes) {
 		String parentHandle = driver.getWindowHandle();
-		clickInspectionApproveButton();
+		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
 		VNextBOConfirmationDialog confirmDialog = new VNextBOConfirmationDialog();
 		confirmDialog.clickYesButton();
 		waitForNewTab();
@@ -409,10 +318,5 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 			e.printStackTrace();
 			return "";
 		}
-	}
-
-	public String getSelectedInspectionArchivingReason() {
-		return Utils.getText(
-				inspectionDetailsPanel.findElement(By.xpath(".//div[@class='text-ellipsis' and @data-bind='visible: isVisibleArchivedReasonInDetails']")));
 	}
 }

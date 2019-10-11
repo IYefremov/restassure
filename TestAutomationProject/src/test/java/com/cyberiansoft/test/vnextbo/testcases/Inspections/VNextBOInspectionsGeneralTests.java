@@ -7,10 +7,13 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
-import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsAdvancedSearchValidations;
+import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsPageValidations;
+import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -24,7 +27,6 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsGeneralData.json";
-    private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOLoginScreenWebPage loginPage;
     private List<String> expectedAdvancedSearchFields =
             Arrays.asList("Customer", "PO#", "RO#", "Stock#", "VIN",
@@ -50,7 +52,6 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
         loginPage.userLogin(userName, userPassword);
         VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
         leftMenuInteractions.selectInspectionsMenu();
-        inspectionsWebPage = new VNextBOInspectionsWebPage(webdriver);
     }
 
     @AfterClass
@@ -70,97 +71,84 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyInspectionPageCanBeOpened(String rowID, String description, JSONObject testData) {
 
-        Assert.assertTrue(inspectionsWebPage.isTermsAndConditionsLinkDisplayed(), "Terms and Conditions link hasn't been displayed");
-        Assert.assertTrue(inspectionsWebPage.isPrivacyPolicyLinkDisplayed(), "Privacy Policy link hasn't been displayed");
-        Assert.assertTrue(inspectionsWebPage.isInspectionsListDisplayed(), "Inspection list hasn't been displayed");
-        Assert.assertTrue(inspectionsWebPage.isSearchFieldDisplayed(), "Search field hasn't been displayed");
-        Assert.assertTrue(inspectionsWebPage.isInspectionDetailsPanelDisplayed(), "Inspection details panel hasn't been displayed");
-        Assert.assertTrue(inspectionsWebPage.isIntercomButtonDisplayed(), "Intercom button hasn't been displayed");
+        VNextBOInspectionsPageValidations.isTermsAndConditionsLinkDisplayed();
+        VNextBOInspectionsPageValidations.isPrivacyPolicyLinkDisplayed();
+        VNextBOInspectionsPageValidations.isInspectionsListDisplayed();
+        VNextBOInspectionsPageValidations.isSearchFieldDisplayed();
+        VNextBOInspectionsPageValidations.isInspectionDetailsPanelDisplayed();
+        VNextBOInspectionsPageValidations.isIntercomButtonDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn(String rowID, String description, JSONObject testData) {
 
-        inspectionsWebPage.clickTermsAndConditionsLink();
+        VNextBOInspectionsPageSteps.clickTermsAndConditionsLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogDisplayed(),
-                "Terms and Conditions dialog hasn't been displayed");
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isOkButtonDisplayed(),
-                "OK button hasn't been displayed");
-        Assert.assertEquals(vNextBOTermsAndConditionsDialog.getDialogHeader(),
+        VNextBOModalDialogValidations.isDialogDisplayed();
+        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "AMT Service Agreement Terms and Conditions",
                 "Dialog header hasn't been correct");
-        vNextBOTermsAndConditionsDialog.clickOkButton();
-        Assert.assertTrue(inspectionsWebPage.isSearchFieldDisplayed(), "Search field hasn't been displayed");
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogClosed(),
-                "Terms and Conditions dialog hasn't been closed");
+        VNextBOModalDialogSteps.clickOkButton();
+        VNextBOInspectionsPageValidations.isSearchFieldDisplayed();
+        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn(String rowID, String description, JSONObject testData) {
 
-        inspectionsWebPage.clickTermsAndConditionsLink();
+        VNextBOInspectionsPageSteps.clickTermsAndConditionsLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogDisplayed(),
-                "Terms and Conditions dialog hasn't been displayed");
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isOkButtonDisplayed(),
-                "OK button hasn't been displayed");
-        Assert.assertEquals(vNextBOTermsAndConditionsDialog.getDialogHeader(),
+        VNextBOModalDialogValidations.isDialogDisplayed();
+        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "AMT Service Agreement Terms and Conditions",
                 "Dialog header hasn't been correct");
-        vNextBOTermsAndConditionsDialog.clickCloseButton();
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogClosed(),
-                "Terms and Conditions dialog hasn't been closed");
+        VNextBOModalDialogSteps.clickCloseButton();
+        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyPrivacyPolicyCanBeOpenedAndClosedOkBtn(String rowID, String description, JSONObject testData) {
 
-        inspectionsWebPage.clickPrivacyPolicyLink();
+        VNextBOInspectionsPageSteps.clickPrivacyPolicyLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogDisplayed(),
-                "Privacy Policy dialog hasn't been displayed");
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isOkButtonDisplayed(),
-                "OK button hasn't been displayed");
-        Assert.assertEquals(vNextBOTermsAndConditionsDialog.getDialogHeader(),
+        VNextBOModalDialogValidations.isDialogDisplayed();
+        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "Privacy Policy",
                 "Dialog header hasn't been correct");
-        vNextBOTermsAndConditionsDialog.clickOkButton();
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogClosed(),
-                "Privacy Policy dialog hasn't been closed");
+        VNextBOModalDialogSteps.clickOkButton();
+        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyPrivacyPolicyCanBeOpenedAndClosedCloseBtn(String rowID, String description, JSONObject testData) {
 
-        inspectionsWebPage.clickPrivacyPolicyLink();
+        VNextBOInspectionsPageSteps.clickPrivacyPolicyLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogDisplayed(),
-                "Privacy Policy dialog hasn't been displayed");
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isOkButtonDisplayed(),
-                "OK button hasn't been displayed");
-        Assert.assertEquals(vNextBOTermsAndConditionsDialog.getDialogHeader(),
+        VNextBOModalDialogValidations.isDialogDisplayed();
+        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "Privacy Policy",
                 "Dialog header hasn't been correct");
-        vNextBOTermsAndConditionsDialog.clickCloseButton();
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogClosed(),
-                "Privacy Policy dialog hasn't been closed");
+        VNextBOModalDialogSteps.clickCloseButton();
+        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyIntercomMessengerCanBeOpenedClosed(String rowID, String description, JSONObject testData) {
 
-        inspectionsWebPage.openIntercomMessenger();
+        VNextBOInspectionsPageSteps.openIntercomMessenger();
         WaitUtilsWebDriver.waitForLoading();
-        Assert.assertTrue(inspectionsWebPage.isIntercomMessengerOpened(),
-                "Intercom messenger hasn't been opened");
-        inspectionsWebPage.closeIntercom();
+        VNextBOInspectionsPageValidations.isIntercomMessengerOpened();
+        VNextBOInspectionsPageSteps.closeIntercom();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyAdvancedSearchFields(String rowID, String description, JSONObject testData) {
 
-        inspectionsWebPage.openAdvancedSearchForm();
+        VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchValidations.isAdvancedSearchFormDisplayed();
         Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getAllAdvancedSearchFieldsLabels(),
                 expectedAdvancedSearchFields);

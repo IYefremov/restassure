@@ -7,6 +7,8 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -64,15 +66,12 @@ public class VNextBOLoginTests extends BaseTestCase {
     public void verifyUserCanReadTermsAndConditions(String rowID, String description, JSONObject testData) {
 
         loginPage.clickTermsAndConditionsLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isDialogDisplayed(),
-                "Terms and Conditions dialog hasn't been displayed");
-        Assert.assertTrue(vNextBOTermsAndConditionsDialog.isOkButtonDisplayed(),
-                "OK button hasn't been displayed");
-        Assert.assertEquals(vNextBOTermsAndConditionsDialog.getDialogHeader(),
+        VNextBOModalDialogValidations.isDialogDisplayed();
+        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "AMT Service Agreement Terms and Conditions",
                 "Dialog header hasn't been correct");
-        vNextBOTermsAndConditionsDialog.clickOkButton();
+        VNextBOModalDialogSteps.clickOkButton();
         Assert.assertTrue(loginPage.isLoginFormDisplayed(),
                 "Terms and Conditions dialog hasn't been closed");
     }
