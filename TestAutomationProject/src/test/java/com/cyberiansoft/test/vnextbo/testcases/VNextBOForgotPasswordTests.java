@@ -9,6 +9,8 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -101,13 +103,11 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage.setConfirmationMailFieldValue(NOT_REGISTERED_USER_EMAIL);
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialog vNextBOWarningModalDialog = new VNextBOModalDialog(webdriver);
-
-        Assert.assertTrue(vNextBOWarningModalDialog.isDialogDisplayed(), "Warning dialog hasn't been displayed");
-        Assert.assertTrue(vNextBOWarningModalDialog.isOkButtonDisplayed(), "OK button hasn't been displayed");
-        Assert.assertEquals(vNextBOWarningModalDialog.getDialogHeader(), "Warning",
+        VNextBOModalDialogValidations.isDialogDisplayed();
+        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(), "Warning",
                 "Dialog header hasn't been correct");
-        Assert.assertEquals(vNextBOWarningModalDialog.getDialogInformationMessage(),
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogInformationMessage(),
                 "This email is not found", "Dialog message hasn't been correct");
     }
 
@@ -121,16 +121,14 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialog vNextBOInformationModalDialog = new VNextBOModalDialog(webdriver);
-
-        Assert.assertTrue(vNextBOInformationModalDialog.isDialogDisplayed(), "Information dialog hasn't been displayed");
-        Assert.assertTrue(vNextBOInformationModalDialog.isOkButtonDisplayed(), "OK button hasn't been displayed");
-        Assert.assertEquals(vNextBOInformationModalDialog.getDialogHeader(), "Information",
+        VNextBOModalDialogValidations.isDialogDisplayed();
+        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(), "Information",
                 "Dialog header hasn't been correct");
-        Assert.assertEquals(vNextBOInformationModalDialog.getDialogInformationMessage(),
+        Assert.assertEquals(VNextBOModalDialogSteps.getDialogInformationMessage(),
                 "Please check your mailbox. You will receive an email with a link for resetting password within a few minutes.",
                 "Dialog message hasn't been correct");
-        vNextBOInformationModalDialog.clickOkButton();
+        VNextBOModalDialogSteps.clickOkButton();
         loginPage = new VNextBOLoginScreenWebPage(webdriver);
 
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
@@ -162,8 +160,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialog vNextBOInformationModalDialog = new VNextBOModalDialog(webdriver);
-        vNextBOInformationModalDialog.clickOkButton();
+        VNextBOModalDialogSteps.clickOkButton();
         loginPage = new VNextBOLoginScreenWebPage(webdriver);
         loginPage.userLogin(userName, userPassword);
 
@@ -192,9 +189,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage.setConfirmationMailFieldValue(data.getEmail());
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialog vNextBOInformationModalDialog = new VNextBOModalDialog(webdriver);
-
-        vNextBOInformationModalDialog.clickOkButton();
+        VNextBOModalDialogSteps.clickOkButton();
 
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()

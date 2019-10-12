@@ -31,6 +31,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -105,7 +106,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 				VNexBOLeftMenuPanel.class);
 		VNextBOInspectionsWebPage inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspNumber);
-		inspectionsWebPage.clickInspectionApproveButton();
+		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
 		VNextBOConfirmationDialog confirmationDialog = new VNextBOConfirmationDialog();
 
 		confirmationDialog.clickNoButton();
@@ -177,7 +178,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 				VNexBOLeftMenuPanel.class);
 		VNextBOInspectionsWebPage inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspNumber);
-		inspectionsWebPage.clickInspectionApproveButton();
+		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
 		VNextBOConfirmationDialog confirmationDialog = new VNextBOConfirmationDialog();
 		confirmationDialog.clickNoButton();
 		BaseUtils.waitABit(1000);

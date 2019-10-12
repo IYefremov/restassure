@@ -2,43 +2,85 @@
   "verifyInspectionPageCanBeOpened": [
     {
       "rowID": "verifyInspectionPageCanBeOpened.01",
-      "description": "Test Case 84584: Verify user can open \"Operations → Inspections\" with full set of elements (Automated)"
+      "description": "Test Case 90868: Verify user can open \"Operations → Inspections\" with full set of elements",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90868",
+          "testCaseTitle": "Verify user can open \"Operations → Inspections\" with full set of elements"
+        }
+      ]
     }
   ],
   "verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn": [
     {
       "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn.01",
-      "description": "Test Case 85028: Verify user can open and close \"Terms&Conditions\" (OK)"
+      "description": "Test Case 90937: Verify user can open and close \"Terms&Conditions\" (OK)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90937",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (OK)"
+        }
+      ]
     }
   ],
   "verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn": [
     {
       "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn.01",
-      "description": "Test Case 85029: Verify user can open and close \"Terms&Conditions\" (X-icon)"
+      "description": "Test Case 90938: Verify user can open and close \"Terms&Conditions\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90938",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (X-icon)"
+        }
+      ]
     }
   ],
   "verifyPrivacyPolicyCanBeOpenedAndClosedOkBtn": [
     {
-      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn.01",
-      "description": "Test Case 85030: Verify user can open and close \"Privacy Policy\" (OK)"
+      "rowID": "verifyPrivacyPolicyCanBeOpenedAndClosedOkBtn.01",
+      "description": "Test Case 90939: Verify user can open and close \"Privacy Policy\" (OK)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90939",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (OK)"
+        }
+      ]
     }
   ],
   "verifyPrivacyPolicyCanBeOpenedAndClosedCloseBtn": [
     {
-      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn.01",
-      "description": "Test Case 85031: Verify user can open and close \"Privacy Policy\" (X-icon)"
+      "rowID": "verifyPrivacyPolicyCanBeOpenedAndClosedCloseBtn.01",
+      "description": "Test Case 90940: Verify user can open and close \"Privacy Policy\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90940",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (X-icon)"
+        }
+      ]
     }
   ],
   "verifyIntercomMessengerCanBeOpenedClosed": [
     {
       "rowID": "verifyIntercomMessengerCanBeOpenedClosed.01",
-      "description": "Test Case 85027: User can open and close \"Intercom\""
+      "description": "Test Case 90942: User can open and close \"Intercom\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90942",
+          "testCaseTitle": "User can open and close \"Intercom\""
+        }
+      ]
     }
   ],
   "verifyAdvancedSearchFields": [
     {
       "rowID": "verifyAdvancedSearchFields.01",
-      "description": "Test Case 85226: User can Archive Inspections (Inspection's details)"
+      "description": "Test Case 90925: User can fill all fields of \"Advanced Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90925",
+          "testCaseTitle": "User can fill all fields of \"Advanced Search\""
+        }
+      ]
     }
   ]
 }

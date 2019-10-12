@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -80,5 +81,126 @@ public class VNextBOInspectionsPageValidations {
         VNextBOInspectionsWebPage inspectionsPage =
                 new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
         return Utils.isElementDisplayed(inspectionsPage.howToCreateInspectionLink);
+    }
+
+    public static void isInspectionStatusCorrect(String inspectionNumber, String expectedStatus)
+    {
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getInspectionStatus(inspectionNumber),
+                expectedStatus, "Inspection status hasn't been changed to " + expectedStatus);
+    }
+
+    public static void isArchiveIconDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.archiveIcon), "Archive icon hasn't been displayed.");
+    }
+
+    public static void isUnArchiveIconDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.unArchiveIcon), "Unarchive icon hasn't been displayed.");
+    }
+
+    public static void isInspectionImageZoomIconDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.inspectionImageZoomIcon),
+                "Inspection's image hasn't had Zoom icon");
+    }
+
+    public static void isInspectionNotesIconDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.inspectionNotesIcon),
+                "Notes icon hasn't been displayed");
+    }
+
+    public static void isPrintSupplementButtonDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.printSupplementIcon),
+                "Print supplement button hasn't been displayed");
+    }
+
+    public static void isPrintInspectionButtonDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.printInspectionIcon),
+                "Print inspection button hasn't been displayed");
+    }
+
+    public static void isPrintWindowOpened()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        String parentHandle = Utils.getParentTab();
+        inspectionsPage.waitForNewTab();
+        String newWindow = Utils.getNewTab(parentHandle);
+        DriverBuilder.getInstance().getDriver().switchTo().window(parentHandle);
+        boolean isPrintWindowOpened = false;
+        if (!parentHandle.equals(newWindow)) isPrintWindowOpened = true;
+        Assert.assertTrue(isPrintWindowOpened, "Print supplement window hasn't been opened");
+    }
+
+    public static void isTermsAndConditionsLinkDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.termsAndConditionsLink), "Terms and Conditions link hasn't been displayed");
+    }
+
+    public static void isPrivacyPolicyLinkDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.privacyPolicyLink), "Privacy Policy link hasn't been displayed");
+    }
+
+    public static void isInspectionsListDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.inspectionsList), "Inspection list hasn't been displayed");
+    }
+
+    public static void isSearchFieldDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.searchFld), "Search field hasn't been displayed");
+    }
+
+    public static void isInspectionDetailsPanelDisplayed()
+    {
+        VNextBOInspectionsWebPage inspectionsPage =
+                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.inspectionDetailsPanel),
+                "Inspection details panel hasn't been displayed");
+    }
+
+    public static void isIntercomButtonDisplayed()
+    {
+        WebDriver driver = DriverBuilder.getInstance().getDriver();
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(driver);
+        driver.switchTo().frame(inspectionsPage.intercomLauncherFrame);
+        boolean isIntercomButtonDisplayed = Utils.isElementDisplayed(inspectionsPage.openCloseIntercomButton);
+        driver.switchTo().defaultContent();
+        Assert.assertTrue(isIntercomButtonDisplayed, "Intercom button hasn't been displayed");
+    }
+
+    public static void isIntercomMessengerOpened()
+    {
+        WebDriver driver = DriverBuilder.getInstance().getDriver();
+        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(driver);
+        driver.switchTo().frame(inspectionsPage.intercomMessengerFrame);
+        boolean isMessengerOpened =  Utils.isElementDisplayed(inspectionsPage.intercomNewConversionSpace);
+        driver.switchTo().defaultContent();
+        Assert.assertTrue(isMessengerOpened, "Intercom messenger hasn't been opened");
     }
 }

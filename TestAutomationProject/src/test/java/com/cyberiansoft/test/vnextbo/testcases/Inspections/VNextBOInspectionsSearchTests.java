@@ -11,12 +11,13 @@ import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsAdvancedSearchValidations;
 import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsPageValidations;
+import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -241,12 +242,11 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
         VNextBOInspectionsAdvancedSearchSteps.clickDeleteButton();
-        VNextBOModalDialog vNextBOConfirmationDialog = new VNextBOModalDialog(webdriver);
-        Assert.assertTrue(vNextBOConfirmationDialog.isDialogDisplayed(), "Confirmation dialog hasn't been opened");
-        Assert.assertTrue(vNextBOConfirmationDialog.isNoButtonDisplayed(), "Confirmation dialog hasn't had \"No\" button");
-        Assert.assertTrue(vNextBOConfirmationDialog.isYesButtonDisplayed(), "Confirmation dialog hasn't had \"Yes\" button\"");
-        Assert.assertTrue(vNextBOConfirmationDialog.isCloseButtonDisplayed(), "Confirmation dialog hasn't had \"Close\" x-icon");
-        vNextBOConfirmationDialog.clickNoButton();
+        VNextBOModalDialogValidations.isDialogDisplayed();
+        VNextBOModalDialogValidations.isNoButtonDisplayed();
+        VNextBOModalDialogValidations.isYesButtonDisplayed();
+        VNextBOModalDialogValidations.isCloseButtonDisplayed();
+        VNextBOModalDialogSteps.clickNoButton();
         WaitUtilsWebDriver.waitForLoading();
         VNextBOInspectionsAdvancedSearchValidations.isAdvancedSearchFormNotDisplayed(vNextBOInspectionAdvancedSearchForm);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
@@ -260,8 +260,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
         vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
         VNextBOInspectionsAdvancedSearchSteps.clickDeleteButton();
-        VNextBOModalDialog vNextBOConfirmationDialog = new VNextBOModalDialog(webdriver);
-        vNextBOConfirmationDialog.clickYesButton();
+        VNextBOModalDialogSteps.clickYesButton();
         WaitUtilsWebDriver.waitForLoading();
         VNextBOInspectionsAdvancedSearchValidations.isAdvancedSearchFormNotDisplayed(vNextBOInspectionAdvancedSearchForm);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();

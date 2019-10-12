@@ -315,7 +315,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
             VNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterName);
 
 
-        insppage.openAdvancedSearchForm();
+        VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionAdvancedSearchForm advancedserchdialog = new VNextBOInspectionAdvancedSearchForm(webdriver);
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspnumber);
         VNextBOInspectionsAdvancedSearchSteps.setAdvancedSearchFilterNameAndSave(filterName);
@@ -430,7 +430,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        insppage.openAdvancedSearchForm();
+        VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
         insppage.selectInspectionInTheList(inspnumber);
