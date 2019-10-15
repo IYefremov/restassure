@@ -65,7 +65,7 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 	}
 
 
-	public void clearZip() {
+	public void clearTextQuestion() {
 		appiumdriver.findElementByAccessibilityId("Clear").click();	
 	}
 	
@@ -221,7 +221,7 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 	}
 
 	public void answerTextQuestion(QuestionsData questionsData) {
-		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).click();
+		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).clear();
 		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).sendKeys(questionsData.getQuestionAnswer()+ "\n");
 		appiumdriver.findElementByAccessibilityId("Done").click();
 	}

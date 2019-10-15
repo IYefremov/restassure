@@ -5179,7 +5179,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularVehiclePartsScreenSteps.selectVehiclePart(workOrderData.getMatrixServiceData().getVehiclePartData());
 		RegularVehiclePartsScreenSteps.setVehiclePartPrice(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartPrice());
 		RegularVehiclePartsScreenSteps.verifyVehiclePartTechnicianValue(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceDefaultTechnician());
-		RegularVehiclePartsScreenSteps.selectVehiclepartAdditionalService(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartAdditionalService());
+		RegularVehiclePartsScreenSteps.selectVehiclePartAdditionalServiceAndSave(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartAdditionalService());
 		RegularVehiclePartsScreenSteps.saveVehiclePart();
 		vehicleScreen.clickSave();
 

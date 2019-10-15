@@ -20,11 +20,11 @@ public class RegularVehiclePartsScreenSteps {
             setVehiclePartTime(vehiclePartData.getVehiclePartTime());
         if (vehiclePartData.getVehiclePartAdditionalServices() != null) {
             for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
-                selectVehiclepartAdditionalService(serviceData);
+                selectVehiclePartAdditionalServiceAndSave(serviceData);
             }
         }
         if (vehiclePartData.getVehiclePartAdditionalService() != null) {
-            selectVehiclepartAdditionalService(vehiclePartData.getVehiclePartAdditionalService());
+            selectVehiclePartAdditionalServiceAndSave(vehiclePartData.getVehiclePartAdditionalService());
         }
     }
 
@@ -52,13 +52,18 @@ public class RegularVehiclePartsScreenSteps {
             vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
     }
 
-    public static void selectVehiclepartAdditionalService(ServiceData serviceData) {
+    public static void selectVehiclePartAdditionalServiceAndSave(ServiceData serviceData) {
         RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         if ((serviceData.getServiceQuantity() != null) || (serviceData.getServicePrice() != null)) {
-            vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
+            openVehiclePartAdditionalServiceDetails(serviceData);
             RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
         } else
             vehiclePartScreen.selectDiscaunt(serviceData.getServiceName());
+    }
+
+    public static void openVehiclePartAdditionalServiceDetails(ServiceData serviceData) {
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
+        vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
     }
 
     public static void verifyIfVehiclePartPriceValue(VehiclePartData vehiclePartData) {

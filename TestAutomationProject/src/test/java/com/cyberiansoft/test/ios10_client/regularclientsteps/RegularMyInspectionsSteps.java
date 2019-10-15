@@ -121,4 +121,9 @@ public class RegularMyInspectionsSteps {
         selectInspection(inspectionID);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.DETAILS);
     }
+
+    public static void clickActionButton() {
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        myInspectionsScreen.clickActionButton();
+    }
 }

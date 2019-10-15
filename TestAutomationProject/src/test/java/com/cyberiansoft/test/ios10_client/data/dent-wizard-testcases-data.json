@@ -921,5 +921,1984 @@
         "workOrderPrice": "475.00"
       }
     }
+  ],
+  "testCustomerSelfPayOptionForRetailHail": [
+    {
+      "rowID": "testCustomerSelfPayOptionForRetailHail.01",
+      "description": "Test Case 10733:Test Customer self-pay option for Retail Hail",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "3D73Y3CL1BG554648",
+          "vehicleMake": "Ram",
+          "vehicleModel": "Ram Pickup 3500",
+          "vehicleYear": "2011"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Walter Sobchak",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "17 West Adams",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Chicago",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Illinois",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "60652",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "Customer self-pay",
+          "claimNumber": "none"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Hail PDR Non Customary",
+            "servicePrice": "290",
+            "questionData": {
+              "questionName": "QuestionTypeSelect_Choose One Hail Project Code",
+              "questionAnswer": "DEALER"
+            }
+          },
+          {
+            "serviceName": "R & I - Hail",
+            "servicePrice": "180"
+          }
+        ],
+        "workOrderPrice": "470.00"
+      }
+    }
+  ],
+  "testEvenWOLevelTechSplitForRetailHail": [
+    {
+      "rowID": "testEvenWOLevelTechSplitForRetailHail.01",
+      "description": "Test Case 10734:Test Even WO level tech split for Retail Hail",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1GCJC33G22E688420",
+          "vehicleMake": "Chevrolet",
+          "vehicleModel": "Silverado 3500",
+          "vehicleYear": "2002",
+          "defaultTechnician": {
+            "technicianFirstName": "Troy",
+            "technicianLastName": "Banks",
+            "technicianPercentageValue": "33.34",
+            "isSelected": true
+          },
+          "newTechnicians": [
+            {
+              "technicianFirstName": "Willie",
+              "technicianLastName": "Aycox",
+              "technicianPercentageValue": "33.33",
+              "isSelected": false
+            },
+            {
+              "technicianFirstName": "Michael",
+              "technicianLastName": "Giordano",
+              "technicianPercentageValue": "33.33",
+              "isSelected": false
+            }
+          ]
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Maude Lebowski",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "2054 Jefferson Avenue",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Miami",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Florida",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "33018",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "Allstate",
+          "claimNumber": "H7846"
+        },
+        "matrixService": {
+          "matrixServiceName": "PDR - Hail (US)",
+          "hailMatrixName": "Hail Estimating",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "Hood",
+              "vehiclePartSize": "QTR",
+              "vehiclePartSeverity": "Heavy (51-75 Dents)",
+              "vehiclePartSubTotalPrice": "$400.00",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Michael",
+                  "technicianLastName": "Giordano",
+                  "isSelected": true
+                }
+              ],
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Paint - Panel",
+                  "servicePrice": "65",
+                  "serviceDefaultTechnicians": [
+                    {
+                      "technicianFirstName": "Troy",
+                      "technicianLastName": "Banks",
+                      "isSelected": true
+                    },
+                    {
+                      "technicianFirstName": "Willie",
+                      "technicianLastName": "Aycox",
+                      "isSelected": false
+                    },
+                    {
+                      "technicianFirstName": "Michael",
+                      "technicianLastName": "Giordano",
+                      "isSelected": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "Right Fender",
+              "vehiclePartSize": "NKL",
+              "vehiclePartSeverity": "Severe (76-100 Dents)",
+              "vehiclePartSubTotalPrice": "$0.00",
+              "vehiclePartPrice": "245",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Michael",
+                  "technicianLastName": "Giordano",
+                  "isSelected": true
+                }
+              ],
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "WS&B - Panel",
+                  "servicePrice": "95",
+                  "serviceDefaultTechnicians": [
+                    {
+                      "technicianFirstName": "Troy",
+                      "technicianLastName": "Banks",
+                      "isSelected": false
+                    },
+                    {
+                      "technicianFirstName": "Willie",
+                      "technicianLastName": "Aycox",
+                      "isSelected": false
+                    },
+                    {
+                      "technicianFirstName": "Michael",
+                      "technicianLastName": "Giordano",
+                      "isSelected": false
+                    }
+                  ],
+                  "serviceNewTechnicians": [
+                    {
+                      "technicianFirstName": "Paul",
+                      "technicianLastName": "Hargett",
+                      "isSelected": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "workOrderPrice": "805.00"
+      }
+    }
+  ],
+  "testEvenServiceLevelTechSplitForRetailHail": [
+    {
+      "rowID": "testEvenServiceLevelTechSplitForRetailHail.01",
+      "description": "Test Case 10735:Test even service level tech split for Retail Hail",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FTNF20P74E094302",
+          "vehicleMake": "Ford",
+          "vehicleModel": "F-250 Super Duty",
+          "vehicleYear": "2004"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Donny Kerabatsos",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "3 Oak Lane",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Dallas",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Texas",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "75218",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "Safeco",
+          "claimNumber": "5240VC"
+        },
+        "matrixService": {
+          "matrixServiceName": "PDR - Hail (US)",
+          "hailMatrixName": "Hail Estimating",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "Roof",
+              "vehiclePartSize": "DIME",
+              "vehiclePartSeverity": "Medium (31-50 Dents)",
+              "vehiclePartSubTotalPrice": "$350.00",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                }
+              ],
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Scratch",
+                  "serviceDefaultTechnicians": [
+                    {
+                      "technicianFirstName": "Troy",
+                      "technicianLastName": "Banks",
+                      "isSelected": false
+                    }
+                  ],
+                  "serviceNewTechnicians": [
+                    {
+                      "technicianFirstName": "Willie",
+                      "technicianLastName": "Aycox",
+                      "technicianPriceValue": "60.00",
+                      "isSelected": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "Left Quarter Panel",
+              "vehiclePartSize": "HLF",
+              "vehiclePartSeverity": "Light (6-15 Dents)",
+              "vehiclePartSubTotalPrice": "$175.00",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                }
+              ],
+              "serviceNewTechnicians": [
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "isSelected": false
+                }
+              ],
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Hen Egg Sized Dent Upcharge"
+                },
+                {
+                  "serviceName": "WS&B- Car",
+                  "servicePrice": "105"
+                }
+              ]
+            }
+          ]
+        },
+        "workOrderPrice": "770.00"
+      }
+    }
+  ],
+  "testDeductibleFeatureForRetailHail": [
+    {
+      "rowID": "testDeductibleFeatureForRetailHail.01",
+      "description": "Test Case 10736:Test deductible feature for Retail Hail",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FTZR14V02T836186",
+          "vehicleMake": "Ford",
+          "vehicleModel": "Ranger",
+          "vehicleYear": "2002"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Uli Kunkel",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "403 Birch Street",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Boston",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Massachusetts",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "02120",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "Allied",
+          "claimNumber": "8C4F5"
+        },
+        "matrixService": {
+          "matrixServiceName": "PDR - Hail (US)",
+          "hailMatrixName": "Hail Estimating",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "Right Front Door",
+              "vehiclePartSize": "QTR",
+              "vehiclePartSeverity": "Moderate (16-30 Dents)",
+              "vehiclePartSubTotalPrice": "$225.00",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                }
+              ]
+            }
+          ]
+        },
+        "workOrderPrice": "225.00"
+      }
+    }
+  ],
+  "testZipCodeValidatorForRetailHail": [
+    {
+      "rowID": "testZipCodeValidatorForRetailHail.01",
+      "description": "Test Case 10737:Test Zip Code validator for Retail Hail",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FTNF20P74E094302",
+          "vehicleMake": "Ford",
+          "vehicleModel": "F-250 Super Duty",
+          "vehicleYear": "2004"
+        },
+        "questionScreenData": {
+          "questionData": {
+            "questionName": "Owner Zip_TextView",
+            "questionAnswer": "83707",
+            "textQuestion": true,
+            "screenIndex": 0,
+            "screenHDIndex": 0
+          }
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Karl Hungus",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "83108 Evergreen Terrace",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Boise",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Idaho",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "A4B6C2",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "testCustomWOLevelTechSplitForRetailHail": [
+    {
+      "rowID": "testCustomWOLevelTechSplitForRetailHail.01",
+      "description": "Test Case 11727:Test Custom WO level tech split for Retail Hail",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "5TETX62NX7Z659671",
+          "vehicleMake": "Toyota",
+          "vehicleModel": "Tacoma",
+          "vehicleYear": "2007",
+          "defaultTechnician": {
+            "technicianFirstName": "Troy",
+            "technicianLastName": "Banks",
+            "technicianPercentageValue": "70.00",
+            "isSelected": true
+          },
+          "newTechnician": {
+            "technicianFirstName": "Willie",
+            "technicianLastName": "Aycox",
+            "technicianPercentageValue": "30.00",
+            "isSelected": false
+          }
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Jesus Quintana",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "20 Clark Boulevard",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Portland",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Oregon",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "97221",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "Esurance",
+          "claimNumber": "HG52LM"
+        },
+        "matrixService": {
+          "matrixServiceName": "PDR - Hail (US)",
+          "hailMatrixName": "Hail Estimating",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "Metal Sunroof",
+              "vehiclePartSize": "DIME",
+              "vehiclePartSeverity": "Very Light (1-5 Dents)",
+              "vehiclePartSubTotalPrice": "$65.00",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "isSelected": true
+                }
+              ],
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Aluminum Panel Upcharge",
+                  "servicePrice2": "%25.000",
+                  "serviceDefaultTechnician": {
+                    "technicianFirstName": "Willie",
+                    "technicianLastName": "Aycox",
+                    "technicianPriceValue": "35.75",
+                    "isSelected": true
+                  }
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "Right Quarter Panel",
+              "vehiclePartSize": "DIME",
+              "vehiclePartSeverity": "Moderate (16-30 Dents)",
+              "vehiclePartSubTotalPrice": "$150.00",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "isSelected": true
+                }
+              ],
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "R & I - Tail Light/liner",
+                  "servicePrice": "43",
+                  "serviceDefaultTechnicians": [
+                    {
+                      "technicianFirstName": "Troy",
+                      "technicianLastName": "Banks",
+                      "isSelected": true
+                    },
+                    {
+                      "technicianFirstName": "Willie",
+                      "technicianLastName": "Aycox",
+                      "isSelected": true
+                    }
+                  ],
+                  "serviceNewTechnician": {
+                    "technicianFirstName": "Michael",
+                    "technicianLastName": "Giordano",
+                    "isSelected": false
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "workOrderPrice": "274.25"
+      }
+    }
+  ],
+  "testCustomServiceLevelTechSplitForRetailHail": [
+    {
+      "rowID": "testCustomServiceLevelTechSplitForRetailHail.01",
+      "description": "Test Case 11728:Test Custom service level tech split for Retail Hail",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2GCEK19Z271761313",
+          "vehicleMake": "Chevrolet",
+          "vehicleModel": "Silverado 1500 Classic",
+          "vehicleYear": "2007"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Fawn Knutsen",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "286 Copeland Road",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Omaha",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Nebraska",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "68104",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "Farmers Insurance",
+          "claimNumber": "84-105"
+        },
+        "matrixService": {
+          "matrixServiceName": "PDR - Hail (US)",
+          "hailMatrixName": "Hail Estimating",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "Roof",
+              "vehiclePartSize": "QTR",
+              "vehiclePartSeverity": "Moderate (16-30 Dents)",
+              "vehiclePartSubTotalPrice": "325.00",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Troy",
+                "technicianLastName": "Banks",
+                "technicianPriceValue": "285",
+                "isSelected": true
+              },
+              "serviceNewTechnician": {
+                "technicianFirstName": "Willie",
+                "technicianLastName": "Aycox",
+                "technicianPriceValue": "40",
+                "isSelected": false
+              },
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Double Panel Upcharge",
+                  "servicePrice2": "%25.000",
+                  "serviceDefaultTechnician": {
+                    "technicianFirstName": "Willie",
+                    "technicianLastName": "Aycox",
+                    "technicianPriceValue": "121.25",
+                    "isSelected": true
+                  }
+                }
+              ]
+            },
+            {
+              "vehiclePartName": "Right Front Door",
+              "vehiclePartSize": "DIME",
+              "vehiclePartSeverity": "Medium (31-50 Dents)",
+              "vehiclePartSubTotalPrice": "200.00",
+              "vehiclePartPrice": "245",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Troy",
+                "technicianLastName": "Banks",
+                "technicianPriceValue": "125",
+                "isSelected": true
+              },
+              "serviceNewTechnician": {
+                "technicianFirstName": "Willie",
+                "technicianLastName": "Aycox",
+                "technicianPriceValue": "75",
+                "isSelected": false
+              },
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Paint - Panel",
+                  "servicePrice": "145",
+                  "serviceDefaultTechnician": {
+                    "technicianFirstName": "Troy",
+                    "technicianLastName": "Banks",
+                    "isSelected": true
+                  },
+                  "serviceNewTechnicians": [
+                    {
+                      "technicianFirstName": "Willie",
+                      "technicianLastName": "Aycox",
+                      "technicianPriceValue": "100",
+                      "isSelected": true
+                    },
+                    {
+                      "technicianFirstName": "Michael",
+                      "technicianLastName": "Giordano",
+                      "technicianPriceValue": "45",
+                      "isSelected": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "workOrderPrice": "751.25"
+      }
+    }
+  ],
+  "testCustomerDiscountOnRetailHail": [
+    {
+      "rowID": "testCustomerDiscountOnRetailHail.01",
+      "description": "Test Case 12626:Test Customer Discount on Retail Hail",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FAFP55S51G832767",
+          "vehicleMake": "Ford",
+          "vehicleModel": "Taurus",
+          "vehicleYear": "2001"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Knox Harrington",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "12 Redwood Place",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Reno",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Nevada",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "89507",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "USAA",
+          "claimNumber": "2S3W4"
+        },
+        "percentageService": {
+          "serviceName": "Customer Discount",
+          "servicePrice": "-10"
+        },
+        "moneyService": {
+          "serviceName": "Fix Price",
+          "servicePrice": "350"
+        },
+        "workOrderPrice": "315.00"
+      }
+    }
+  ],
+  "testWizardProTrackerPackageRequirementForROToBeCompletedBeforeTurningIntoOnInvoice": [
+    {
+      "rowID": "testWizardProTrackerPackageRequirementForROToBeCompletedBeforeTurningIntoOnInvoice.01",
+      "description": "Test Case 12627:Test WizardPro Tracker package requirement for RO to be completed before turning into an invoice",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "5S3ET23H582748019",
+          "vehicleMake": "Saab",
+          "vehicleModel": "9-7X",
+          "vehicleYear": "2008"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Panel",
+              "servicePrice": "93",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Roof Rail"
+                },
+                {
+                  "vehiclePartName": "Right Roof Rail"
+                },
+                {
+                  "vehiclePartName": "Roof"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Rocker Panels",
+              "servicePrice": "132"
+            }
+          },
+          {
+            "damageGroupName": "Wheels",
+            "moneyService": {
+              "serviceName": "Wheel",
+              "servicePrice": "84",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Wheel"
+                },
+                {
+                  "vehiclePartName": "Left Rear Wheel"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testPhaseEnforcementForWizardProTracker": [
+    {
+      "rowID": "testPhaseEnforcementForWizardProTracker.01",
+      "description": "Test Case 12628:Test Phase Enforcement for WizardPro Tracker",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JHMED6350KS267262",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Civic",
+          "vehicleYear": "1989"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Panel",
+              "servicePrice": "78",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Fender"
+                },
+                {
+                  "vehiclePartName": "Left Front Door"
+                },
+                {
+                  "vehiclePartName": "Left Quarter Panel"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Door Handle",
+              "servicePrice": "105"
+            }
+          },
+          {
+            "damageGroupName": "Wheels",
+            "moneyService": {
+              "serviceName": "Wheel",
+              "servicePrice": "92",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Wheel"
+                },
+                {
+                  "vehiclePartName": "Left Rear Wheel"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "526.00"
+      }
+    }
+  ],
+  "testAddingServicesToOnOrderBeingMonitored": [
+    {
+      "rowID": "testAddingServicesToOnOrderBeingMonitored.01",
+      "description": "Test Case 12630:Test adding services to an order being monitored",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FMZU63K25Z314031",
+          "vehicleMake": "Ford",
+          "vehicleModel": "Explorer",
+          "vehicleYear": "2005"
+        },
+        "damageData": {
+          "damageGroupName": "PDR",
+          "moneyService": {
+            "serviceName": "PDR Panel",
+            "servicePrice": "115",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Hood"
+              }
+            ]
+          }
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Full Bumper",
+              "servicePrice": "235",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Front Bumper"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Wheels",
+            "moneyService": {
+              "serviceName": "Wheel Straightening",
+              "servicePrice": "110",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Wheel"
+                },
+                {
+                  "vehiclePartName": "Right Rear Wheel"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Panel (Non-Customary)",
+              "servicePrice": "86",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Rear Door"
+                },
+                {
+                  "vehiclePartName": "Right Front Door"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "745.00"
+      }
+    }
+  ],
+  "testStartServiceFeatureIsAccuratelyCapturingTimes": [
+    {
+      "rowID": "testStartServiceFeatureIsAccuratelyCapturingTimes.01",
+      "description": "Test Case 12629:Test Start Service feature is accurately capturing times",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "3VWTM71K79M821565",
+          "vehicleMake": "Volkswagen",
+          "vehicleModel": "Jetta",
+          "vehicleYear": "2009"
+        },
+        "damageData": {
+          "damageGroupName": "Detail",
+          "moneyService": {
+            "serviceName": "Front Line Ready",
+            "servicePrice": "436"
+          }
+        }
+      }
+    }
+  ],
+  "testQuantityDoesNotMulitplyPriceInRoutePackage": [
+    {
+      "rowID": "testQuantityDoesNotMulitplyPriceInRoutePackage.01",
+      "description": "Test Case 12631:Test Quantity does not mulitply price in Route package",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1C4GP54R3YB729447",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country",
+          "vehicleYear": "2000"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Panel",
+              "servicePrice": "100",
+              "serviceQuantity": "4",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Roof Rail"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Panel",
+              "servicePrice": "75",
+              "serviceQuantity": "5",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                },
+                {
+                  "vehiclePartName": "Left Roof Rail"
+                },
+                {
+                  "vehiclePartName": "Right Fender"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Wheels",
+            "moneyService": {
+              "serviceName": "Wheel",
+              "servicePrice": "125",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Wheel"
+                },
+                {
+                  "vehiclePartName": "Left Rear Wheel"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "578.00"
+      }
+    }
+  ],
+  "testDeleteWorkOrderFunction": [
+    {
+      "rowID": "testDeleteWorkOrderFunction.01",
+      "description": "Test Case 12632:Test Delete Work Order function",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "4S4BRCGC2B1254589",
+          "vehicleMake": "Subaru",
+          "vehicleModel": "Outback",
+          "vehicleYear": "2011"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Vehicle",
+              "servicePrice": "715",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "578.00"
+      }
+    }
+  ],
+  "testChangingCustomerOnInspection": [
+    {
+      "rowID": "testChangingCustomerOnInspection.01",
+      "description": "Test Case 12637:Test changing customer on Inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "WVWMA21G8MW523050",
+          "vehicleMake": "Volkswagen",
+          "vehicleModel": "Jetta",
+          "vehicleYear": "1991"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Detail",
+            "moneyService": {
+              "serviceName": "Wash-N-Vac",
+              "servicePrice": "15"
+            }
+          },
+          {
+            "damageGroupName": "Wheels",
+            "moneyService": {
+              "serviceName": "Chrome Wheel Repair",
+              "servicePrice": "113",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Wheel"
+                },
+                {
+                  "vehiclePartName": "Left Rear Wheel"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testRetailHailPackageQuantityMultiplier": [
+    {
+      "rowID": "testRetailHailPackageQuantityMultiplier.01",
+      "description": "Test Case 12638:Test Retail Hail package quantity multiplier",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1B3ES27C9TD298803",
+          "vehicleMake": "Dodge",
+          "vehicleModel": "Neon",
+          "vehicleYear": "1996"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Message",
+            "questionData": {
+              "questionSetionName": "REMINDER NO DRILLING AND USE E-COAT",
+              "questionAnswer": "Accept",
+              "screenIndex": 0,
+              "screenHDIndex": 0
+            }
+          },
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Outside",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Larry Sellers",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "15 West Elm",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Atlanta",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Georgia",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "United States",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "30322",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ],
+        "insuranceCompany": {
+          "insuranceCompanyName": "Jevco",
+          "claimNumber": "42 HJe"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Fix Price",
+            "servicePrice": "367",
+            "serviceQuantity": "3"
+          },
+          {
+            "serviceName": "R & I - Hail",
+            "servicePrice": "586",
+            "serviceQuantity": "4.5"
+          }
+        ],
+        "workOrderPrice": "3738.00"
+      }
+    }
+  ],
+  "testCustomWOLevelSplitForRoutePackage": [
+    {
+      "rowID": "testCustomWOLevelSplitForRoutePackage.01",
+      "description": "Test Case 12641:Test custom WO level split for Route package",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "SHSRD77823U042930",
+          "vehicleMake": "Honda",
+          "vehicleModel": "CR-V",
+          "vehicleYear": "2003",
+          "defaultTechnician": {
+            "technicianFirstName": "Troy",
+            "technicianLastName": "Banks",
+            "technicianPercentageValue": "70.00",
+            "isSelected": true
+          },
+          "newTechnician": {
+            "technicianFirstName": "Willie",
+            "technicianLastName": "Aycox",
+            "technicianPercentageValue": "30.00",
+            "isSelected": false
+          }
+        },
+        "damageData": {
+          "damageGroupName": "Interior",
+          "moneyService": {
+            "serviceName": "Dye Leather",
+            "servicePrice": "64"
+          }
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Mirror",
+              "servicePrice": "42",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Mirror"
+                },
+                {
+                  "vehiclePartName": "Right Mirror"
+                }
+              ],
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": false,
+                  "technicianPriceValue": "29.40"
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "technicianPriceValue": "12.60",
+                  "isSelected": true
+                }
+              ],
+              "serviceNewTechnicians": [
+                {
+                  "technicianFirstName": "Michael",
+                  "technicianLastName": "Giordano",
+                  "technicianPriceValue": "31.50",
+                  "technicianPercentageValue": "75.00",
+                  "isSelected": false
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "technicianPriceValue": "10.50",
+                  "technicianPercentageValue": "25.00",
+                  "isSelected": true
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Wheels",
+            "moneyService": {
+              "serviceName": "Wheel",
+              "servicePrice": "100",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true,
+                  "technicianPriceValue": "70.00"
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "technicianPriceValue": "30.00",
+                  "isSelected": true
+                }
+              ],
+              "serviceNewTechnicians": [
+                {
+                  "technicianFirstName": "Michael",
+                  "technicianLastName": "Giordano",
+                  "technicianPriceValue": "28",
+                  "technicianPercentageValue": "28.00",
+                  "isSelected": false
+                },
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true,
+                  "technicianPriceValue": "67",
+                  "technicianPercentageValue": "67.00",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "technicianPriceValue": "5",
+                  "technicianPercentageValue": "5.00",
+                  "isSelected": true
+                }
+              ],
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Wheel"
+                },
+                {
+                  "vehiclePartName": "Right Front Wheel"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "351.00"
+      }
+    }
+  ],
+  "testEvenWOLevelSplitForRoutePackage": [
+    {
+      "rowID": "testEvenWOLevelSplitForRoutePackage.01",
+      "description": "Test Case 12642:Test even WO level split for Route package",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JT2AE93E2J3269689",
+          "vehicleMake": "Toyota",
+          "vehicleModel": "Corolla",
+          "vehicleYear": "1988",
+          "defaultTechnician": {
+            "technicianFirstName": "Troy",
+            "technicianLastName": "Banks",
+            "technicianPercentageValue": "50.00",
+            "isSelected": true
+          },
+          "newTechnician": {
+            "technicianFirstName": "Willie",
+            "technicianLastName": "Aycox",
+            "technicianPercentageValue": "50.00",
+            "isSelected": false
+          }
+        },
+        "damageData": {
+          "damageGroupName": "Detail",
+          "moneyService": {
+            "serviceName": "Front Line Ready",
+            "servicePrice": "23"
+          }
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Other",
+            "moneyService": {
+              "serviceName": "Window Tint",
+              "servicePrice": "216",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "isSelected": false
+                }
+              ],
+              "serviceNewTechnician":
+                {
+                  "technicianFirstName": "Michael",
+                  "technicianLastName": "Giordano",
+                  "technicianPriceValue": "108.00",
+                  "technicianPercentageValue": "50.00",
+                  "isSelected": false
+                }
+            }
+          },
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Vehicle",
+              "servicePrice": "240",
+              "serviceDefaultTechnicians": [
+                {
+                  "technicianFirstName": "Troy",
+                  "technicianLastName": "Banks",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Willie",
+                  "technicianLastName": "Aycox",
+                  "isSelected": true
+                }
+              ],
+              "serviceNewTechnician":
+                {
+                  "technicianFirstName": "Michael",
+                  "technicianLastName": "Giordano",
+                  "technicianPriceValue": "80.00",
+                  "technicianPercentageValue": "33.33",
+                  "isSelected": false
+                },
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Fender"
+                },
+                {
+                  "vehiclePartName": "Left Front Door"
+                },
+                {
+                  "vehiclePartName": "Left Quarter Panel"
+                },
+                {
+                  "vehiclePartName": "Left Rear Door"
+                },
+                {
+                  "vehiclePartName": "Left Roof Rail"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "479.00"
+      }
+    }
+  ],
+  "testAddingNotesToWorkOrder": [
+    {
+      "rowID": "testAddingNotesToWorkOrder.01",
+      "description": "Test Case 12644:Test adding notes to a Work Order",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JAABL14S8H0898027",
+          "vehicleMake": "Isuzu",
+          "vehicleModel": "Pickup",
+          "vehicleYear": "1987"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Panel",
+              "servicePrice": "82",
+              "serviceNotes" : "Declined right door",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                },
+                {
+                  "vehiclePartName": "Left Rear Door"
+                },
+                {
+                  "vehiclePartName": "Right Fender"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Panel",
+              "servicePrice": "114",
+              "serviceNotes" : "Declined hood",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Rear Door"
+                },
+                {
+                  "vehiclePartName": "Right Fender"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "477.00"
+      }
+    }
+  ],
+  "testChangingThePOOnAnInvoice": [
+    {
+      "rowID": "testChangingThePOOnAnInvoice.01",
+      "description": "Test Case 12645:Test changing the PO# on an invoice",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "WBAAD2315ME832710",
+          "vehicleMake": "BMW",
+          "vehicleModel": "3 Series",
+          "vehicleYear": "1991",
+          "vehicleAdvisor": "Training"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Hood",
+              "servicePrice": "163"
+            }
+          }
+        ],
+        "workOrderTotalSale": "1"
+      },
+      "invoiceData": {
+        "poNumber": "832145"
+      }
+    }
+  ],
+  "testEditingAnInspection": [
+    {
+      "rowID": "testEditingAnInspection.01",
+      "description": "Test Case 12646:Test editing an Inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1GTCR14Z8HJ957466",
+          "vehicleMake": "GMC",
+          "vehicleModel": "R/V 1500 Series",
+          "vehicleYear": "1987"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Vehicle",
+              "servicePrice": "320",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Door"
+                },
+                {
+                  "vehiclePartName": "Left Rear Door"
+                },
+                {
+                  "vehiclePartName": "Right Front Door"
+                },
+                {
+                  "vehiclePartName": "Right Rear Door"
+                }
+              ]
+            }
+          }
+        ],
+        "damageData":
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Door Handle",
+              "servicePrice": "97"
+            }
+          }
+      }
+    }
+  ],
+  "testEditingWorkOrder": [
+    {
+      "rowID": "testEditingWorkOrder.01",
+      "description": "Test Case 12647:Test editing a Work Order",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FTPX17L11N765106",
+          "vehicleMake": "Ford",
+          "vehicleModel": "F-150",
+          "vehicleYear": "2001",
+          "vehicleStock": "765106",
+          "roNumber": "FTP"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Interior-Fabric",
+            "moneyService": {
+              "serviceName": "H/B 1-3 Brns 1 Sect Fbrc",
+              "servicePrice2": "$36.97 x 1.00"
+            }
+          },
+          {
+            "damageGroupName": "Interior-Vinyl",
+            "moneyService": {
+              "serviceName": "C/R/T 3 Rpr Vnyl",
+              "servicePrice2": "$89.67 x 1.00"
+            }
+          }
+        ],
+        "damageData":
+        {
+          "damageGroupName": "Wheels",
+          "moneyService": {
+            "serviceName": "Wheel Cover 2",
+            "servicePrice2": "$45.00 x 1.00"
+          }
+        }
+      }
+    }
+  ],
+  "testEditingAnInvoiceInDraft": [
+    {
+      "rowID": "testEditingAnInvoiceInDraft.01",
+      "description": "Test Case 19514:Test editing an Invoice in Draft",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48K56S011416",
+          "vehicleMake": "Dodge",
+          "vehicleModel": "Dakota",
+          "vehicleYear": "2006"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Interior",
+            "moneyService": {
+              "serviceName": "Carpet Repair",
+              "servicePrice": "112"
+            }
+          },
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Panel",
+              "servicePrice": "65",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Fender"
+                },
+                {
+                  "vehiclePartName": "Left Roof Rail"
+                },
+                {
+                  "vehiclePartName": "Right Quarter Panel"
+                },
+                {
+                  "vehiclePartName": "Trunk Lid"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Mirror",
+              "servicePrice": "85",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Mirror"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "460.00"
+      },
+      "invoiceData": {
+        "damagesData": [
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Mirror",
+              "servicePrice": "85",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Right Mirror"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Wheels",
+            "moneyService": {
+              "serviceName": "Chrome Wheel Repair",
+              "servicePrice": "50",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Wheel"
+                },
+                {
+                  "vehiclePartName": "Right Front Wheel"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
   ]
 }

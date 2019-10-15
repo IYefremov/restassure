@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -91,16 +92,6 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Override").click();
 	}
 
-	public List<String> getListOfBundleServices() {
-		List<String> servicesList = new ArrayList<>();
-		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));
-		List<MobileElement> servicesCells = bundleview.findElementsByClassName("XCUIElementTypeCell");
-		for (MobileElement cell : servicesCells)
-			servicesList.add(cell.getAttribute("name"));
-		return servicesList;
-
-	}
-
 	public void waitUntilBundlePopupOpened() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
@@ -129,6 +120,25 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 			pricefld.findElement(MobileBy.AccessibilityId("Clear text")).click();
 		pricefld.sendKeys(_price + "\n");
 		BaseUtils.waitABit(1000);
+	}
+
+	public void openBundleMoneyServiceDetailsFromServicesScrollElement(ServiceData serviceData) {
+		WebElement scrollElement = appiumdriver.findElementByClassName("XCUIElementTypeScrollView");
+		swipeScrollViewElement(scrollElement.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())));
+		scrollElement.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())).click();
+	}
+
+	public void selectBundlePercentageServiceFromServicesScrollElement(ServiceData serviceData) {
+		WebElement scrollElement = appiumdriver.findElementByClassName("XCUIElementTypeScrollView");
+		swipeScrollViewElement(scrollElement.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())));
+		WebElement cell = scrollElement.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[@name='" +
+				serviceData.getServiceName() + "']/.."));
+		cell.findElement(MobileBy.iOSNsPredicateString("name CONTAINS '%'")).click();
+
+		cell.findElement(MobileBy.className("XCUIElementTypeTextField")).clear();
+		cell.findElement(MobileBy.className("XCUIElementTypeTextField")).sendKeys(serviceData.getServicePrice()+"\n");
+
+		scrollElement.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())).click();
 	}
 
 }

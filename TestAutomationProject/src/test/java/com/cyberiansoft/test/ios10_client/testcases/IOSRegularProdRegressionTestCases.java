@@ -26,6 +26,7 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.UATServiceR
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderTypes;
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -1437,5 +1438,97 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         }
         Assert.assertTrue(pdftext.contains(feeServiceName));
         Assert.assertTrue(pdftext.contains(feeServicePrice));
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testInspectionsMultipleInspectionsApproval(String rowID,
+                                                         String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
+        List<String> inspectionsIDs = new ArrayList<>();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        for (InspectionData inspectionData : inspectionsData) {
+            RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(),
+                    UATInspectionTypes.valueOf(inspectionData.getInspectionType()));
+            RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+            inspectionsIDs.add(RegularVehicleInfoScreenSteps.getInspectionNumber());
+            if (inspectionData.getInsuranceCompanyData() != null) {
+                RegularNavigationSteps.navigateToClaimScreen();
+                RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+            }
+
+            RegularNavigationSteps.navigateToServicesScreen();
+            if (inspectionData.getServicesScreen().getMoneyServices() != null) {
+                for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+                    RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+                }
+                RegularServicesScreenSteps.waitServicesScreenLoad();
+            }
+            if (inspectionData.getServicesScreen().getPercentageServices() != null) {
+                RegularServicesScreenSteps.switchToSelectedServices();
+                for (ServiceData serviceData : inspectionData.getServicesScreen().getPercentageServices()) {
+                    RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+                    RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
+                }
+                RegularSelectedServicesSteps.waitSelectedServicesScreenLoaded();
+            }
+
+
+            if (inspectionData.getInspectionType().equals(UATInspectionTypes.AUTOCREATEWO.toString()))
+                RegularWizardScreensSteps.clickSaveButton();
+            else
+                RegularInspectionsSteps.saveInspectionAsFinal();
+        }
+
+        RegularMyInspectionsSteps.clickActionButton();
+        for (String inspectionNumber : inspectionsIDs)
+            RegularMyInspectionsSteps.selectInspection(inspectionNumber);
+        RegularMyInspectionsSteps.clickActionButton();
+
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.APPROVE);
+        RegularCustomersScreenSteps.clickOnCustomer(inspectionsData.get(0).getWholesailCustomer());
+        //RegularApproveInspectionScreenActions.
+
+        //RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionID);
+       //RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
+        RegularApproveInspectionScreenActions.saveApprovedServices();
+        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection(String rowID,
+                                             String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionID = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+
+        RegularServicesScreenSteps.switchToSelectedServices();
+
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularSelectedServicesScreenValidations.verifyServiceIsSelected(serviceData.getServiceName(), true);
+        }
+        RegularSelectedServicesSteps.deleteSelectedService(inspectionData.getServicesScreen().getMoneyServices().get(0).getServiceName());
+
+        RegularWizardScreenValidations.verifyScreenTotalPrice(PricesCalculations.getPriceRepresentation(inspectionData.getInspectionTotalPrice()));
+
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

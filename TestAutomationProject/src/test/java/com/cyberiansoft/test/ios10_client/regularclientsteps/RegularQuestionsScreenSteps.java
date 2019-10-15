@@ -43,7 +43,7 @@ public class RegularQuestionsScreenSteps {
         if (questionData.isLogicalQuestion())
             questionsScreen.answerLogicalQuestion(questionData);
         else if (questionData.isTextQuestion())
-            questionsScreen.answerTextQuestion(questionData);
+            answerTextQuestion(questionData);
         else if (questionData.isListQuestion())
             questionsScreen.selectListQuestion(questionData);
         else if (questionData.getQuestionAnswer() != null)
@@ -52,6 +52,15 @@ public class RegularQuestionsScreenSteps {
             questionsScreen.drawRegularSignature();
         else
             questionsScreen.answerQuestion(questionData);
+    }
 
+    public static void clearTextQuestion() {
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
+        questionsScreen.clearTextQuestion();
+    }
+
+    public static void answerTextQuestion(QuestionsData questionData) {
+        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
+        questionsScreen.answerTextQuestion(questionData);
     }
 }

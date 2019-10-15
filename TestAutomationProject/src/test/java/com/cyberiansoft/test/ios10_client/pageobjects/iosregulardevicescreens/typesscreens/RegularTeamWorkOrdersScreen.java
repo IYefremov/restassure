@@ -72,8 +72,8 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	public void clickOnWO(String workOrderID) {
 		waitTeamWorkOrdersScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(workOrderID)));
-		appiumdriver.findElementByAccessibilityId(workOrderID).click();
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(workOrderID))).click();
+		//appiumdriver.findElementByAccessibilityId(workOrderID).click();
 	}
 	
 	public RegularOrderMonitorScreen selectWOMonitor() {

@@ -1305,8 +1305,8 @@
         ]
       },
       "invoiceData": {
-        "poNumber" : "123po",
-        "invoiceTotal" : "$613.72"
+        "poNumber": "123po",
+        "invoiceTotal": "$613.72"
       }
     }
   ],
@@ -1330,12 +1330,12 @@
           "defaultTechnician": {
             "technicianFirstName": "Test",
             "technicianLastName": "User",
-            "isSelected" : true
+            "isSelected": true
           },
           "newTechnician": {
             "technicianFirstName": "Oksana",
             "technicianLastName": "User",
-            "isSelected" : true
+            "isSelected": true
           }
         },
         "servicesScreen": {
@@ -1450,8 +1450,172 @@
         ]
       },
       "invoiceData": {
-        "poNumber" : "123po",
-        "invoiceTotal" : "$613.72"
+        "poNumber": "123po",
+        "invoiceTotal": "$613.72"
+      }
+    }
+  ],
+  "testInspectionsMultipleInspectionsApproval": [
+    {
+      "rowID": "testInspectionsMultipleInspectionsApproval.01",
+      "description": "Test Case 54311: 59 - Inspections: Multiple Inspections Approval",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83666",
+          "testCaseTitle": "Test Case 54311: 59 - Inspections: Multiple Inspections Approval"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "wholesailCustomer": {
+            "companyName": "Amazimg Nissan"
+          },
+          "inspType": "INSP_APPROVE_MULTISELECT",
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810",
+            "vehicleMake": "Honda",
+            "vehicleModel": "Accord",
+            "vehicleColor": "Black",
+            "vehicleYear": "2011",
+            "mileage": "77777",
+            "licPlate": "12345",
+            "stockNumber": "Stock1",
+            "roNumber": "123",
+            "trim": "25th Anniversary"
+          },
+          "servicesScreen": {
+            "moneyServices": [
+              {
+                "serviceName": "Dye_Panel",
+                "servicePrice": "20"
+              },
+              {
+                "serviceName": "Special Discount",
+                "servicePrice": "-10"
+              }
+            ]
+          },
+          "insuranceCompany": {
+            "insuranceCompanyName": "USG",
+            "claimNumber": "QWERTY",
+            "policyNumber": "pl-123",
+            "deductible": "34"
+          }
+        },
+        {
+          "wholesailCustomer": {
+            "companyName": "Test"
+          },
+          "inspType": "INSP_APPROVE_MULTISELECT",
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810",
+            "vehicleMake": "Honda",
+            "vehicleModel": "Accord",
+            "vehicleColor": "Black",
+            "vehicleYear": "2011",
+            "mileage": "77777",
+            "licPlate": "12345",
+            "stockNumber": "Stock1",
+            "roNumber": "123",
+            "trim": "25th Anniversary"
+          },
+          "servicesScreen": {
+            "moneyServices": [
+              {
+                "serviceName": "Dye_Panel",
+                "servicePrice": "20"
+              },
+              {
+                "serviceName": "Special Discount",
+                "servicePrice": "-10"
+              }
+            ]
+          },
+          "insuranceCompany": {
+            "insuranceCompanyName": "USG",
+            "claimNumber": "QWERTY",
+            "policyNumber": "pl-123",
+            "deductible": "34"
+          }
+        },
+        {
+          "wholesailCustomer": {
+            "companyName": "BoBo"
+          },
+          "inspType": "AUTOCREATEWO",
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "servicesScreen": {
+            "percentageServices": [
+              {
+                "serviceName": "SR_Money_Panel",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Vehicle"
+                  }
+                ]
+              },
+              {
+                "serviceName": "SR_Money_Vehicle",
+                "servicePrice": "120",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Vehicle"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection": [
+    {
+      "rowID": "testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection.01",
+      "description": "Test Case 65 - Verify work with services under Available/Selected tabs when create Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83698",
+          "testCaseTitle": "Test Case 65 - Verify work with services under Available/Selected tabs when create Inspection"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor": "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size",
+              "servicePrice" : "18"
+            },
+            {
+              "serviceName": "Dye_Panel",
+              "servicePrice" : "20"
+            }
+          ]
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        },
+        "inspectionTotalPrice": "20"
       }
     }
   ]

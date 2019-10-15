@@ -104,6 +104,7 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	}
 	
 	public void clickOnWO(String workOrderId) {
+		waitInvoiceInfoScreenLoaded();
 		appiumdriver.findElementByAccessibilityId(workOrderId).click();
 	}
 	

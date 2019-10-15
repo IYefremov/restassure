@@ -2659,4 +2659,71 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularInvoicesSteps.saveInvoiceAsFinal();
 		RegularNavigationSteps.navigateBackScreen();
 	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testWOVerifyThatUpChargesAndDiscountsAreCalculatedCorrectlyOnAllLevels(String rowID,
+																		   String description, JSONObject testData) throws Exception {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+		final String subTotal = "$203.90";
+		final String subTotal2 = "$303.90";
+
+		RegularHomeScreen homeScreen = new RegularHomeScreen();
+		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
+		customersScreen.swtchToWholesaleMode();
+		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
+
+		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.CALC_ORDER);
+		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
+		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
+
+		RegularNavigationSteps.navigateToServicesScreen();
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getServicesScreen().getBundleService().getBundleServiceName());
+
+		RegularSelectedServiceBundleScreen selectedServiceBundleScreen = new RegularSelectedServiceBundleScreen();
+
+		for (ServiceData serviceData : workOrderData.getServicesScreen().getBundleService().getMoneyServices()) {
+			selectedServiceBundleScreen.clickServicesIcon();
+			selectedServiceBundleScreen.openBundleMoneyServiceDetailsFromServicesScrollElement(serviceData);
+			RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
+
+		}
+
+		for (ServiceData serviceData : workOrderData.getServicesScreen().getBundleService().getPercentageServices()) {
+			selectedServiceBundleScreen.clickServicesIcon();
+			selectedServiceBundleScreen.selectBundlePercentageServiceFromServicesScrollElement(serviceData);
+
+		}
+		selectedServiceBundleScreen.changeAmountOfBundleService(workOrderData.getServicesScreen().getBundleService().getBundleServiceAmount());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
+
+		RegularServicesScreenSteps.selectMatrixServiceData(workOrderData.getServicesScreen().getMatrixService());
+		RegularPriceMatrixScreenValidations.verifyPriceMatrixScreenSubTotalValue(workOrderData.getServicesScreen().getMatrixService().getVehiclePartData().getVehiclePartTotalPrice());
+		RegularPriceMatrixScreenSteps.savePriceMatrix();
+		RegularWizardScreenValidations.verifyScreenSubTotalPrice(subTotal);
+		RegularServicesScreenSteps.selectLaborServiceAndSetData(workOrderData.getServicesScreen().getLaborService());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
+		RegularWizardScreenValidations.verifyScreenSubTotalPrice(subTotal2);
+
+		for (ServiceData serviceData : workOrderData.getServicesScreen().getPercentageServices())
+			RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+
+		RegularServicesScreenSteps.waitServicesScreenLoad();
+		RegularWizardScreenValidations.verifyScreenTotalPrice(workOrderData.getServicesScreen().getScreenTotalPrice());
+		RegularWizardScreenValidations.verifyScreenSubTotalPrice(workOrderData.getServicesScreen().getScreenPrice());
+		RegularNavigationSteps.navigateToOrderSummaryScreen();
+		RegularWorkOrderSummaryScreenSteps.setTotalSale(workOrderData.getWorkOrderTotalSale());
+
+		RegularWorkOrdersSteps.saveWorkOrder();
+
+		RegularMyWorkOrdersScreenValidations.verifyWorkOrderTotalPrice(workOrderNumber, workOrderData.getWorkOrderPrice());
+
+		RegularNavigationSteps.navigateBackScreen();
+
+	}
 }

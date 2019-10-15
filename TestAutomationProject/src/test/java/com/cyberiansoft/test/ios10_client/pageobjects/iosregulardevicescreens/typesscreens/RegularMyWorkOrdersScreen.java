@@ -44,9 +44,9 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void waitMyWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("MyWorkOrdersTable")));
-		wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(mywotable));
+		WebElement myWOTable = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MyWorkOrdersTable")));
+		//wait = new WebDriverWait(appiumdriver, 60);
+		//wait.until(ExpectedConditions.visibilityOf(myWOTable));
 	}
 
 	public void clickAddOrderButton() {

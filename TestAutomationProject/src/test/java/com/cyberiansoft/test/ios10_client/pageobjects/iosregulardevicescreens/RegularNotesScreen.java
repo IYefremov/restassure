@@ -54,6 +54,8 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 	}
 	
 	public void setNotes(String _notes) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("txtNotes")));
 		appiumdriver.findElementByAccessibilityId("txtNotes").click();
 		appiumdriver.findElementByAccessibilityId("txtNotes").sendKeys(_notes);
 		appiumdriver.findElementByAccessibilityId("Done").click();

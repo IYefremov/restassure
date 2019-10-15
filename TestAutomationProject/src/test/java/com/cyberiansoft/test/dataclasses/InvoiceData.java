@@ -3,6 +3,8 @@ package com.cyberiansoft.test.dataclasses;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import java.util.List;
+
 @Getter
 public class InvoiceData {
 
@@ -14,6 +16,9 @@ public class InvoiceData {
 
     @JsonProperty("invoiceTotal")
     String invoiceTotal;
+
+    @JsonProperty("damagesData")
+    List<DamageData> damagesData;
 
     @JsonProperty("questionScreenData")
     QuestionScreenData questionScreenData;

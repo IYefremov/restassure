@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.*;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import org.testng.Assert;
 
@@ -19,6 +20,8 @@ public class RegularServiceDetailsScreenSteps {
             setServicePriceValue(serviceData.getServicePrice());
         if (serviceData.getServiceQuantity() != null)
             setServiceQuantityValue(serviceData.getServiceQuantity());
+        if (serviceData.getServiceNotes() != null)
+            setServiceNotes(serviceData.getServiceNotes());
         if (serviceData.getVehiclePart() != null)
             slectServiceVehiclePart(serviceData.getVehiclePart());
         if (serviceData.getVehicleParts() != null)
@@ -27,6 +30,13 @@ public class RegularServiceDetailsScreenSteps {
             selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
         if (serviceData.getQuestionsData() != null)
             selectedServiceDetailsScreen.answerQuestions(serviceData.getQuestionsData());
+    }
+
+    public static void setServiceNotes(String notes) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickNotesCell();
+        RegularNotesScreenSteps.setTextNotes(notes);
+        RegularNotesScreenSteps.saveNotes();
     }
 
     public static void setServicePriceValue(String servicePrice) {

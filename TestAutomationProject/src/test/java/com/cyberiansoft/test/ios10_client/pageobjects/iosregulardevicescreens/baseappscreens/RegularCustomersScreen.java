@@ -117,6 +117,10 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 		appiumdriver.findElementByAccessibilityId(appCustomer.getFullName()).click();
 		WaitUtils.waitUntilElementInvisible(MobileBy.AccessibilityId("Customer changing..."));
 	}
+
+	public void clickOnCustomer(AppCustomer appCustomer) {
+		appiumdriver.findElementByAccessibilityId(appCustomer.getFullName()).click();
+	}
 	
 	public void selectOnlineCustomer(String customer) {
 		appiumdriver.findElementByAccessibilityId("Online").click();
