@@ -58,17 +58,7 @@ public class RegularServicesScreenSteps {
             for (ServiceData serviceData : bundleServiceData.getServices()) {
                 if ((serviceData.getServiceQuantity() != null) || (serviceData.getServicePrice() != null) || (serviceData.getVehiclePart() != null)) {
                     selectedservicebundlescreen.openBundleInfo(serviceData.getServiceName());
-                    if (serviceData.getServiceQuantity() != null)
-                        RegularServiceDetailsScreenSteps.setServiceQuantityValue(serviceData.getServiceQuantity());
-                    if (serviceData.getServicePrice() != null)
-                        RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
-                    if (serviceData.getVehiclePart() != null) {
-                        RegularServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
-                    }
-                    if (serviceData.getVehicleParts() != null) {
-                        RegularServiceDetailsScreenSteps.selectServiceVehicleParts(serviceData.getVehicleParts());
-                    }
-                    RegularServiceDetailsScreenSteps.saveServiceDetails();
+                    RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
                 } else
                     selectedservicebundlescreen.selectBundle(serviceData.getServiceName());
             }
@@ -120,6 +110,13 @@ public class RegularServicesScreenSteps {
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         servicesScreen.switchToSelectedServicesTab();
         RegularSelectedServicesSteps.waitSelectedServicesScreenLoaded();
+    }
+
+    public static void switchToAvailableServices() {
+        waitServicesScreenLoad();
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.switchToAvailableServicesTab();
+        waitServicesScreenLoad();
     }
 
     public static void waitServicesScreenLoad() {

@@ -13,6 +13,11 @@ public class RegularCustomersScreenSteps {
         customersScreen.selectCustomer(appCustomer);
     }
 
+    public static void clickOnCustomer(AppCustomer appCustomer) {
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
+        customersScreen.clickOnCustomer(appCustomer);
+    }
+
     public static void switchToRetailMode() {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.swtchToRetailMode();

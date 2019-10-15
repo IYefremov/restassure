@@ -73,6 +73,7 @@ public class ServicesScreenSteps {
     }
 
     public static void selectMatrixServiceData(MatrixServiceData matrixServiceData) {
+        selectMatrixService(matrixServiceData);
         if (matrixServiceData.getVehiclePartsData() != null) {
             for (VehiclePartData vehiclePartData : matrixServiceData.getVehiclePartsData()) {
                 PriceMatrixScreenSteps.selectVehiclePartAndSetData(vehiclePartData);

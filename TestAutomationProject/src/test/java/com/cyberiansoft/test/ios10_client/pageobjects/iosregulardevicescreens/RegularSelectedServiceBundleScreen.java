@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -96,6 +97,25 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("technician")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("technician"))).click();
+	}
+
+	public void openBundleMoneyServiceDetailsFromServicesScrollElement(ServiceData serviceData) {
+		WebElement scrollElement = appiumdriver.findElementByClassName("XCUIElementTypeScrollView");
+		swipeScrollViewElement(scrollElement.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())));
+		scrollElement.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())).click();
+	}
+
+	public void selectBundlePercentageServiceFromServicesScrollElement(ServiceData serviceData) {
+		WebElement scrollElement = appiumdriver.findElementByClassName("XCUIElementTypeScrollView");
+		swipeScrollViewElement(scrollElement.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())));
+		WebElement cell = scrollElement.findElement(MobileBy.xpath("//XCUIElementTypeOther/XCUIElementTypeStaticText[@name='" +
+				serviceData.getServiceName() + "']/.."));
+		cell.findElement(MobileBy.iOSNsPredicateString("name CONTAINS '%'")).click();
+
+		cell.findElement(MobileBy.className("XCUIElementTypeTextField")).clear();
+		cell.findElement(MobileBy.className("XCUIElementTypeTextField")).sendKeys(serviceData.getServicePrice()+"\n");
+
+		scrollElement.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())).click();
 	}
 
 }

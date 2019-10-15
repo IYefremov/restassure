@@ -143,6 +143,8 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public void clickOnSelectedService(String service) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(service)));
         List<MobileElement> selectedservices = selectedservicestable.findElementsByAccessibilityId(service);
         if (selectedservices.size() > 1) {
             ((WebElement) selectedservicestable.findElementsByAccessibilityId(service).get(1)).click();

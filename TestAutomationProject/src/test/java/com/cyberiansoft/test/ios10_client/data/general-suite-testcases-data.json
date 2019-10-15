@@ -2,19 +2,34 @@
   "testUpdateDatabase": [
     {
       "rowID": "testUpdateDatabase.01",
-      "description": "Test Case 8438:Update database on the device"
+      "description": "Test Case 8438:Update database on the device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89032"
+        }
+      ]
     }
   ],
   "testUpdateVIN": [
     {
       "rowID": "testUpdateVIN.01",
-      "description": "Test Case 8437:Updating VIN decoder"
+      "description": "Test Case 8437:Updating VIN decoder",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89031"
+        }
+      ]
     }
   ],
   "testEditRetailInspectionNotes": [
     {
       "rowID": "testEditRetailInspectionNotes.01",
       "description": "Test Case 8432:Edit the retail Inspection Notes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89026"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "TESTVINNO",
         "vehicleMake": "Acura",
@@ -27,6 +42,11 @@
     {
       "rowID": "testApproveInspectionOnDevice.01",
       "description": "Test Case 8431:Approve inspection on device (Not Line Approval)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89025"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "TESTVINNO",
         "vehicleMake": "Acura",
@@ -39,6 +59,11 @@
     {
       "rowID": "testArchiveAndUnArchiveTheInspection.01",
       "description": "Test Case 8586:Archive and Un-Archive the Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88654"
+        }
+      ],
       "vihicleInfo": {
         "vinNumber": "TESTVINNO",
         "vehicleMake": "Acura",
@@ -52,6 +77,14 @@
     {
       "rowID": "testCreateWorkOrderWithTeamSharingOption.01",
       "description": "Test Case 8429:Creating complex calculation WO, Test Case 8428:Copy services of WO (regular version)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89022"
+        },
+        {
+          "testCaseID": "89023"
+        }
+      ],
       "workOrdersData": [
         {
           "vihicleInfo": {
@@ -186,6 +219,11 @@
     {
       "rowID": "testApproveInspectionsOnDeviceViaAction.01",
       "description": "Approve Inspections On Device via Action",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89025"
+        }
+      ],
       "inspectionsData": [
         {
           "vihicleInfo": {
@@ -210,6 +248,11 @@
     {
       "rowID": "testArchiveInspectionsOnDeviceViaAction.01",
       "description": "Archive Inspections On Device via Action",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88654"
+        }
+      ],
       "inspectionsData": [
         {
           "vihicleInfo": {
@@ -235,6 +278,11 @@
     {
       "rowID": "testApproveInspectionOnBackOfficeFullInspectionApproval.01",
       "description": "Test Case 8467:Approve inspection on back office (full inspection approval)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88649"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "TESTVINNO",
@@ -249,6 +297,11 @@
     {
       "rowID": "testApproveInspectionOnBackOfficeLinebylineApproval.01",
       "description": "Test Case 8463:Approve inspection on back office (line-by-line approval)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88650"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "TESTVINNO",
@@ -273,6 +326,11 @@
     {
       "rowID": "testCreatingServiceRequestWithInspectionWOAndAppointmentRequiredOnDevice.01",
       "description": "Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89011"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "WERTYU123",
@@ -314,6 +372,11 @@
     {
       "rowID": "testCreateInspectionFromServiceRequest.01",
       "description": "Test Case 21582:Create Inspection from Service request",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89010"
+        }
+      ],
       "inspectionData": {
         "moneyServices": [
           {
@@ -350,6 +413,11 @@
     {
       "rowID": "testCreateWOFromServiceRequest.01",
       "description": "Test Case 21585:Create WO from Service Request",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89009"
+        }
+      ],
       "workOrderData": {
         "moneyService" : {
           "serviceName": "Wheel",
@@ -366,6 +434,11 @@
     {
       "rowID": "testCreateInspectionFromInvoiceWithTwoWOs.01",
       "description": "Test Case 16640:Create Inspection from Invoice with two WOs",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89020"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397",
@@ -395,6 +468,11 @@
     {
       "rowID": "testCreateInvoiceFromWOInMyWOsList.01",
       "description": "Test Case 16664:Create Invoice from WO in 'My WOs' list",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89019"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -463,6 +541,11 @@
     {
       "rowID": "testDontAlowToSelectBilleAandNotBilledOrdersTogetherInMultiSelectionMode.01",
       "description": "Test Case 18426:Don't allow to select billed and not billed orders together in multi selection mode",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89018"
+        }
+      ],
       "workOrdersData": [
         {
           "vihicleInfo": {
@@ -506,6 +589,11 @@
     {
       "rowID": "testDontAlowToChangeBilledOrders.01",
       "description": "Test Case 18436:Don't allow to change billed orders",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89017"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -531,6 +619,11 @@
     {
       "rowID": "testChangeCustomerForInvoice.01",
       "description": "Test Case 18439:Change customer for invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89016"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -556,6 +649,11 @@
     {
       "rowID": "testBugWithCrashOnCopyVehicle.01",
       "description": "Test Case 10498:Regression test: test bug with crash on 'Copy Vehicle",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89014"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "TESTVINNO",
@@ -570,6 +668,11 @@
     {
       "rowID": "testCopyInspections.01",
       "description": "Test Case 16239:Copy Inspections",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88509"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397",
@@ -762,6 +865,11 @@
     {
       "rowID": "testCreateInspectionFromWO.01",
       "description": "Test Case 16507:Create inspection from WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89013"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397",
@@ -777,6 +885,11 @@
     {
       "rowID": "testCreateInvoiceWithTwoWOsAndCopyVehicle.01",
       "description": "Test Case 26266:Create Invoice with two WOs and copy vehicle",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89041"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397",
@@ -806,6 +919,11 @@
     {
       "rowID": "testChangeCustomerOptionForInspection.01",
       "description": "Test Case 23401:Test 'Change customer' option for inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88623"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -828,6 +946,11 @@
     {
       "rowID": "testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa.01",
       "description": "Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88622"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -850,6 +973,11 @@
     {
       "rowID": "testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies.01",
       "description": "Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88621"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -864,6 +992,11 @@
     {
       "rowID": "testChangeCustomerOptionForWorkOrder.01",
       "description": "Test Case 23422:Test 'Change customer' option for Work Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88798"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -887,6 +1020,11 @@
     {
       "rowID": "testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies.01",
       "description": "Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88797"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -910,6 +1048,11 @@
     {
       "rowID": "testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa.01",
       "description": "Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88796"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -933,6 +1076,11 @@
     {
       "rowID": "testBlockForTheSameVINIsONVerifyDuplicateVINMessageWhenCreate2WOWithOneVIN.01",
       "description": "Test Case 23428:'Block for the same VIN' is ON. Verify 'Duplicate VIN ' message when create 2 WO with one VIN",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88836"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -952,7 +1100,12 @@
   "testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService": [
     {
       "rowID": "testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService.01",
-      "description": "Test Case 23459:'Block for the same Services' is ON. Verify 'Duplicate services message' when create 2 WO with one service",
+      "description": "Test Case 23459:WO: Verify that 'Duplicate message' is shown for WO with the same VIN number",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88778"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -981,6 +1134,11 @@
     {
       "rowID": "testEditOptionOfDuplicateServicesMessageForWO.01",
       "description": "Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88785"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1007,6 +1165,11 @@
     {
       "rowID": "testOverrideOptionOfDuplicateServicesMessageForWO.01",
       "description": "Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88784"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1035,6 +1198,11 @@
     {
       "rowID": "testCancelOptionOfDuplicateServicesMessageForWO.01",
       "description": "Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88783"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1063,6 +1231,14 @@
     {
       "rowID": "testSavingInspectionsWithThreeMatrix.01",
       "description": "Test Case 23966:Inspections: Test saving inspectiontypes with three matrix, Test Case 24022:Inspections: Test saving inspection copied from one with 3 matrix price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88673"
+        },
+        {
+          "testCaseID": "88672"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397",
@@ -1208,6 +1384,11 @@
     {
       "rowID": "testThatSelectedServicesOnSRAreCopiedToInspectionBasedOnSR.01",
       "description": "Test Case 24075:SR: Test that selected services on SR are copied to Inspection based on SR",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88859"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -1245,6 +1426,17 @@
     {
       "rowID": "testThatAutoSavedWOIsCreatedCorrectly.01",
       "description": "Test Case 24657:WO: Test that auto-saved WO is created correctly, Test Case 23435:WO: Test 'Continue' option of 'Auto-saved' WO, Test Case 23436:WO: Test 'Discard' option of 'Auto-saved' WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88776"
+        },
+        {
+          "testCaseID": "88782"
+        },
+        {
+          "testCaseID": "88781"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1FMFU18L53LC13897",
@@ -1267,6 +1459,11 @@
     {
       "rowID": "testSRAddAppointmentToServiceRequest.01",
       "description": "Test Case 21578:SR: Add appointment to Service Request",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89008"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1285,6 +1482,11 @@
     {
       "rowID": "testSRVerifySummaryActionForAppointmentOnSRsCalendar.01",
       "description": "Test Case 24677:SR: Verify 'Summary' action for appointment on SR's calendar",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88899"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1303,6 +1505,11 @@
     {
       "rowID": "testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices.01",
       "description": "Test Case 25403:WO: Verify that only assigned services on Matrix Panel is available as additional services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88833"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "WDZPE7CD9E5889222",
@@ -1350,6 +1557,11 @@
     {
       "rowID": "testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices.01",
       "description": "Test Case 25011:Inspections: verify that only assigned services on Matrix Panel is available as additional services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88671"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "WDZPE7CD9E5889222",
@@ -1396,6 +1608,14 @@
     {
       "rowID": "testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService.01",
       "description": "Test Case 26054:WO Monitor: Regular - Create WO for monitor, Test Case 26091:WO Monitor: Regular - Verify that it is not possible to change Service Status before Start Service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88942"
+        },
+        {
+          "testCaseID": "88929"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -1442,6 +1662,11 @@
     {
       "rowID": "testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase.01",
       "description": "Test Case 26092:WO Monitor: Regular - Verify that it is not possible to change Phase Status before Start phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88930"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -1491,6 +1716,11 @@
     {
       "rowID": "testWOMonitorVerifyThatStartDateIsSetWhenStartService.01",
       "description": "Test Case 26094:WO Monitor: Regular - Verify that Start date is set when Start Service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88928"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -1534,6 +1764,11 @@
     {
       "rowID": "testVerifyThatRedAIconIsPresentForInvoiceWithCustomerApprovalONAndNoSignature.01",
       "description": "Test Case 28473:Invoices: Verify that red 'A' icon is present for invoice with customer approval ON and no signature",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88510"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1557,6 +1792,11 @@
     {
       "rowID": "testVerifyThatGreyAIconIsPresentForInvoiceWithCustomerApprovalOFFAndNoSignature.01",
       "description": "Test Case 28476:Invoices: Verify that grey 'A' icon is present for invoice with customer approval OFF and no signature",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88511"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1580,6 +1820,11 @@
     {
       "rowID": "testVerifyThatAIconIsNotPresentForInvoiceWhenSignatureExists.01",
       "description": "Test Case 28478:Invoices: Regular - Verify that 'A' icon is not present for invoice when signature exists",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88512"
+        }
+      ],
       "workOrdersData": [
         {
           "vihicleInfo": {
@@ -1624,6 +1869,11 @@
     {
       "rowID": "testVerifyThatRejectActionIsDisplayedForSRInStatusScheduledInspOrWOAndAssignForTech.01",
       "description": "Test Case 29022:SR: Verify that Reject action is displayed for SR in Status Scheduled (Insp or WO) and assign for Tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88908"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1646,6 +1896,11 @@
     {
       "rowID": "testVerifyThatRejectActionIsDisplayedForSRInStatusOnHoldInspOrWOAndAssignForTech.01",
       "description": "Test Case 29029:SR: Verify that Reject action is displayed for SR in Status OnHold (Insp or WO) and assign for Tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88907"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -1668,6 +1923,11 @@
     {
       "rowID": "testVerifyThatRejectActionIsNotDisplayedForSRInStatusOnHoldInspOrWOAndNotAssignForTech.01",
       "description": "Test Case 29082:SR: Verify that Reject action is not displayed for SR in Status OnHold (Insp or WO) and not assign for Tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88906"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008",
@@ -1681,6 +1941,11 @@
     {
       "rowID": "testVerifyThatRejectActionIsNotDisplayedForSRInStatusScheduledInspOrWOAndNotAssignForTech.01",
       "description": "Test Case 29083:SR: Verify that Reject action is not displayed for SR in Status Scheduled (Insp or WO) and not assign for Tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88905"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008",
@@ -1710,6 +1975,11 @@
     {
       "rowID": "testNotMultipleServiceWithRequiredPanelsIsAddedOneTimeToWOAfterSelecting.01",
       "description": "Test Case 33165:WO: Not multiple Service with required Panels is added one time to WO after selecting",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88819"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1745,6 +2015,11 @@
     {
       "rowID": "testRegularWOVerifyThatBundleItemsAreShownWhenCreateWOFromInspection.01",
       "description": "Test Case 34562:WO: Verify that Bundle Items are shown when create WO from inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88817"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "JA4LS31H8YP047397"
@@ -1778,6 +2053,11 @@
     {
       "rowID": "testVerifyThatWhenOptionAllowToCloseSRIsSetToONActionCloseIsShownForSelectedSROnStatusScheduledOrOnHold.01",
       "description": "Test Case 31743:SR: Verify that when option 'Allow to close SR' is set to ON action 'Close' is shown for selected SR on status 'Scheduled' or 'On-Hold'",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88883"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -1800,6 +2080,11 @@
     {
       "rowID": "testVerifyThatWhenOptionAllowToCloseSRIsSetToOFFActionCloseIsNotShownForSelectedSROnStatusScheduledOrOnHold.01",
       "description": "Test Case 31748:SR: Verify that when option 'Allow to close SR' is set to OFF action 'Close' is not shown for selected SR on status 'Scheduled' or 'On-Hold'",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88882"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -1822,6 +2107,11 @@
     {
       "rowID": "testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressNoAlertMessageIsClose.01",
       "description": "Test Case 31749:SR: Verify that alert message is shown when select 'Close' action for SR - press No alert message is close",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88881"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -1844,6 +2134,11 @@
     {
       "rowID": "testVerifyThatAlertMessageIsShownWhenSelectCloseActionForSRPressYesListOfStatusReasonsIsShown.01",
       "description": "Test Case 31750:SR: Verify that alert message is shown when select 'Close' action for SR - press Yes list of status reasons is shown",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88880"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -1866,6 +2161,11 @@
     {
       "rowID": "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO.01",
       "description": "Test Case 31752:SR: Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88851"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -1888,6 +2188,11 @@
     {
       "rowID": "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO.01",
       "description": "Test Case 31753:SR: Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88850"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -1910,6 +2215,11 @@
     {
       "rowID": "testVerifyThatWhenCreateWOFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices.01",
       "description": "Test Case 30083:SR: Verify that when create WO from SR message that vehicle parts are required is shown for appropriate services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88894"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008",
@@ -1952,6 +2262,11 @@
     {
       "rowID": "testVerifyThatWhenCreateInspectionFromSRMessageThatVehiclePartsAreRequiredIsShownForAppropriateServices.01",
       "description": "Test Case 30084:SR: Verify that when create Inspection from SR message that vehicle parts are required is shown for appropriate services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88858"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008",
@@ -1994,6 +2309,11 @@
     {
       "rowID": "testVerifyThatOnInspectionApprovalScreenSelectedPriceMatrixValueIsShown.01",
       "description": "Test Case 38749:Inspections: Verify that on inspection approval screen selected price matrix value is shown",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88633"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "WDZPE7CD9E5889222",
@@ -2050,6 +2370,11 @@
     {
       "rowID": "testVerifyThatQuestionSectionIsShownPerServiceForFirstSelectedPanelWhenQFIsNotRequired.01",
       "description": "Test Case 31451:Inspection - Verify that question section is shown per service for first selected panel when QF is not required",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88541"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -2078,6 +2403,11 @@
     {
       "rowID": "testVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen.01",
       "description": "Test Case 31963:Inspections: Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88557"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -2089,6 +2419,11 @@
     {
       "rowID": "testVerifyThatWhenEditInspectionSelectedVehiclePartsForServicesArePresent.01",
       "description": "Test Case 42376:Inspections: Verify that when edit inspection selected vehicle parts for services are present",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88659"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -2122,6 +2457,11 @@
     {
       "rowID": "testVerifyThatItIsPossibleToSaveAsFinalInspectionLinkedToSR.01",
       "description": "Test Case 42388:Inspections: Verify that it is possible to save as Final inspection linked to SR",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88585"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2155,6 +2495,11 @@
     {
       "rowID": "testVerifyThatWhenFinalInspectionIsCopiedServisesAreCopiedWithoutStatuses_Approved_Declined_Skipped.01",
       "description": "Test Case 33117:Inspections: Verify that when final inspection is copied servises are copied without statuses (approved, declined, skipped)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88583"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -2228,6 +2573,11 @@
     {
       "rowID": "testVerifyThatTextNotesAreCopiedToNewInspectionsWhenUseCopyAction.01",
       "description": "Test Case 33116:Inspections: Verify that text notes are copied to new inspectiontypes when use copy action",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88615"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2239,6 +2589,11 @@
     {
       "rowID": "testVerifyThatItIsPossibleToApproveTeamInspectionsUseMultiSelect.01",
       "description": "Test Case 33154:Inspections: Verify that it is possible to approve Team Inspections use multi select",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88638"
+        }
+      ],
       "inspectionsData": [
         {
           "vihicleInfo": {
@@ -2274,6 +2629,11 @@
     {
       "rowID": "testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard.01",
       "description": "Test Case 33869:Inspections: Verify that Services on Service Package are grouped by type selected on Insp type->Wizard",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88536"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2330,6 +2690,11 @@
     {
       "rowID": "testVerifyThatAllInstancesOfOneServiceAreCopiedFromInspectionToWO.01",
       "description": "Test Case 44407:Inspections: Regular - Verify that all instances of one service are copied from inspection to WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88595"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2378,6 +2743,11 @@
     {
       "rowID": "testVerifyThatAssignButtonIsPresentWhenSelectSomeTechInCaseDirectAssignOptionIsSetForInspectionType.01",
       "description": "Test Case 33918:Inspections: Verify that Assign button is present when select some Tech in case Direct Assign option is set for inspection type",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88578"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2397,6 +2767,11 @@
     {
       "rowID": "testVerifyThatDuringLineApprovalSelectAllButtonsAreWorkingCorrectly.01",
       "description": "Test Case 34285:Inspections: Verify that during Line approval ''Select All'' buttons are working correctly",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88634"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2430,6 +2805,11 @@
     {
       "rowID": "testVerifyThatApproveOptionIsNotPresentForApprovedInspectionInMultiselectMode.01",
       "description": "Test Case 30012:Inspections: Verify that Approve option is not present for approved inspection in multi-select mode",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88645"
+        }
+      ],
       "inspectionsData": [
         {
           "vihicleInfo": {
@@ -2477,6 +2857,11 @@
     {
       "rowID": "testVerifyThatApproveOptionIsPresentInMultiselectModeOnlyOneOrMoreNotApprovedInspectionsAreSelected.01",
       "description": "Test Case 30013:Inspections: Verify that Approve option is present in multi-select mode only one or more not approved inspectiontypes are selected",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88514"
+        }
+      ],
       "inspectionsData": [
         {
           "vihicleInfo": {
@@ -2524,6 +2909,14 @@
     {
       "rowID": "testVerifyThatWhenOptionDraftModeIsSetToONWhenSaveInspectionProvidePromptToAUserToSelectEitherDraftOrFinal.01",
       "description": "Test Case 30853:Inspections: Verify that when option ''Draft Mode'' is set to ON - when save inspection provide prompt to a user to select either Draft or Final, Test Case 30855:Inspections: Regular - Verify that for Draft inspection following options are not available (Approve, Create WO, Create SR, Copy inspection)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88590"
+        },
+        {
+          "testCaseID": "88584"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2549,6 +2942,11 @@
     {
       "rowID": "testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO.01",
       "description": "Test Case 51336:WO: Verify that approve WO is working correct under Team WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88801"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2564,6 +2962,11 @@
     {
       "rowID": "testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice.01",
       "description": "Test Case 27717:Invoices: Verify that it is posible to add payment from device for draft invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88499"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2606,6 +3009,11 @@
     {
       "rowID": "testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice.01",
       "description": "Test Case 27739:Invoices: Verify that payment is send to BO when PO# is changed under My invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88500"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2649,6 +3057,11 @@
     {
       "rowID": "testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice.01",
       "description": "Test Case 27741:Invoices: Verify that payment is send to BO when PO# is changed under Team invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88501"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2692,6 +3105,11 @@
     {
       "rowID": "testSRVerifyMultipleInspectionsAndMultipleWorkOrdersToBeTiedToAServiceRequest.01",
       "description": "Test Case 45251:SR: Verify multiple inspectiontypes and multiple work orders to be tied to a Service Request",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88505"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2731,6 +3149,11 @@
     {
       "rowID": "testInspectionsVerifyThatServiceLevelNotesAreCopiedFromInspectionToWOWhenItIsAutoCreatedAfterApproval.01",
       "description": "Test Case 45128:Inspections: Verify that service level notes are copied from Inspection to WO when it is auto created after approval",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88604"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2784,6 +3207,11 @@
     {
       "rowID": "testInspectionsVerifyThatQuestionSectionIsShownPerServiceWithMustPanelsWhenQuestionsAreRequired.01",
       "description": "Test Case 32989:Inspections: Verify that question section is shown per service with must panels when questions are required",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88543"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2825,6 +3253,14 @@
     {
       "rowID": "testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamAndMyInvoices.01",
       "description": "Test Case 30509:Invoices: Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices, Test Case 30510:Invoices: Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88691"
+        },
+        {
+          "testCaseID": "88690"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -2854,6 +3290,11 @@
     {
       "rowID": "testWOVerifyThatTechSplitsIsSavedInPriceMatrices.01",
       "description": "Test Case 33115:WO: Verify that Tech splits is saved in price matrices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88470"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -2895,6 +3336,11 @@
     {
       "rowID": "testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit.01",
       "description": "Test Case 34551:WO: Verify that it is not possible to change default tech via service type split",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88472"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -2929,6 +3375,11 @@
     {
       "rowID": "testWOVerifyThatWhenUseCopyServicesActionForWOAllServiceInstancesShouldBeCopied.01",
       "description": "Test Case 45097:WO: Verify that when use Copy Services action for WO all service instances should be copied",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88813"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -2974,6 +3425,11 @@
     {
       "rowID": "testWOVerifyThatWONumberIsNotDuplicated.01",
       "description": "Test Case 50250:WO: Verify that WO number is not duplicated",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88809"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -2997,6 +3453,11 @@
     {
       "rowID": "testWOVerifyThatInCaseValidVINIsDecodedReplaceExistingMakeAndModelWithNewOne.01",
       "description": "Test Case 39573:WO: Verify that in case valid VIN is decoded, replace existing make and model with new one",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88838"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3008,6 +3469,11 @@
     {
       "rowID": "testWOVerifyThatWhenServiceDoNotHaveQuestionsAndSelectSeveralPanelsDoNotUnderlineAnyone.01",
       "description": "Test Case 34626:WO: Verify that when service do not have questions and select several panels do not underline anyone",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88816"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3030,6 +3496,11 @@
     {
       "rowID": "testWOVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen.01",
       "description": "Test Case 31964:WO: Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88821"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "2A8GP54L87R279721"
@@ -3041,6 +3512,11 @@
     {
       "rowID": "testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO.01",
       "description": "Test Case 53824:WO: Verify that message is shown for Money and Labor service when price is changed to 0$ under WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88761"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3091,6 +3567,11 @@
     {
       "rowID": "testWOVerifyThatValidationIsPresentForVehicleTrimField.01",
       "description": "Test Case 45252:WO: Verify that validation is present for vehicle trim field",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88812"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3110,6 +3591,11 @@
     {
       "rowID": "testWOVerifyThatTotalSaleIsNotShownWhenCheckmarkTotalSaleRequiredIsNotSetToOFF.01",
       "description": "Test Case 35375:WO: Verify that Total sale is not shown when checkmark 'Total sale required' is not set to OFF",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88815"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3132,6 +3618,11 @@
     {
       "rowID": "testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians.01",
       "description": "Test Case 40821:WO: Verify that it is possible to assign tech to order by action Technicians",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88473"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3218,6 +3709,11 @@
     {
       "rowID": "testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown.01",
       "description": "Test Case 58663:Inspections: Verify that when Panel grouping is used for package for selected Panel only linked services are shown",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88473"
+        }
+      ],
       "inspectionData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3267,6 +3763,11 @@
     {
       "rowID": "testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit.01",
       "description": "Test Case 57101:WO: Verify that WO is saved correct with selected sub service (no message with incorrect tech split)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88747"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3298,6 +3799,11 @@
     {
       "rowID": "testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet.01",
       "description": "Test Case 54542:WO: Verify that answer services are correctly added for WO when Panel group is set",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88760"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3321,6 +3827,11 @@
     {
       "rowID": "testWOVerifyThatSearchBarIsPresentForServicePackScreen.01",
       "description": "Test Case 43408:WO: Verify that search bar is present for service pack screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88832"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3343,6 +3854,11 @@
     {
       "rowID": "testWOVerifyThatCancelMessageIsShownForNewOrExistingWO.01",
       "description": "Test Case 42178:WO: Verify that Cancel message is shown for New/Existing WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88814"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3354,6 +3870,11 @@
     {
       "rowID": "testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected.01",
       "description": "Test Case 35953:SR: Verify that when SR is declined status reason should be selected",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88849"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008",
@@ -3367,6 +3888,11 @@
     {
       "rowID": "testVerifyThatAcceptDeclineActionsArePresentForTechWhenTechnicianAcceptanceRequiredOptionIsONAndStatusIsProposed.01",
       "description": "Test Case 35951:SR: Verify that Accept/Decline actions are present for tech when 'Technician Acceptance Required' option is ON and status is Proposed",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88903"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008",
@@ -3380,6 +3906,11 @@
     {
       "rowID": "testVerifyThatSRIsNotAcceptedWhenEmployeeReviewOrUpdateIt.01",
       "description": "Test Case 35954:SR: Verify that SR is not accepted when employee review or update it",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88901"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008",
@@ -3405,6 +3936,11 @@
     {
       "rowID": "testSRVerifyThatItIsPossibleToAcceptDeclineAppointmentWhenOptionAppointmentAcceptanceRequiredEqualsON.01",
       "description": "Test Case 36004:SR: Verify that it is possible to accept/decline Appointment when option 'Appointment Acceptance Required' = ON",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88893"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008",
@@ -3418,6 +3954,11 @@
     {
       "rowID": "testWOVerifyAssignTechToServiceTypeInsteadOfIndividualServices.01",
       "description": "Test Case 34427:WO: Verify Assign tech to service type, instead of individual services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88471"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3556,6 +4097,11 @@
     {
       "rowID": "testWOVerifyThatDefaultTechIsNotChangedWhenResetOrderSplit.01",
       "description": "Test Case 50029:WO: Verify that default tech is not changed when reset order split",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88474"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -3599,7 +4145,15 @@
   "testWOVerifyThatItIsPossibleToAssignTechWhenWOIsNotStarted": [
     {
       "rowID": "testWOVerifyThatItIsPossibleToAssignTechWhenWOIsNotStarted.01",
-      "description": "Test Case 53502:WO Monitor: Verify that it is possible to assign tech when WO is not started, Test Case 53503:WO Monitor: Regular - Verify that it is possible to assign tech when Service is not completed and vice versa",
+      "description": "Test Case 53502:WO Monitor: Verify that it is possible to assign tech when WO is not started, Test Case 53503:WO Monitor: Verify that it is possible to assign tech when Service is not completed and vice versa",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88476"
+        },
+        {
+          "testCaseID": "88477"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3672,6 +4226,11 @@
     {
       "rowID": "testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold.01",
       "description": "Test Case 53505:WO Monitor: Verify that it is not possible to assign tech when WO is On Hold",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88478"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3723,6 +4282,11 @@
     {
       "rowID": "testWOVerifyThatTechSplitAssignedFormVehicleScreenIsSetToServicesUnderList.01",
       "description": "Test Case 66362:WO: Verify that Tech split assigned form Vehicle screen is set to services under list",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88475"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -3758,6 +4322,11 @@
     {
       "rowID": "testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount.01",
       "description": "Test Case 68296:WO: Verify price matrix item doesn't have additional services - its main service's tech split amount is equal to main service's amount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88480"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -3784,6 +4353,11 @@
     {
       "rowID": "testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount.01",
       "description": "Test Case 68297:WO: Verify price matrix item has money additional service - its main service's tech split amount is equal to main service's amount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88481"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3822,6 +4396,11 @@
     {
       "rowID": "testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage.01",
       "description": "Test Case 68298:WO: price matrix item has percentage additional service - its main service's tech split amount is equal to main service's amount + additional percentage service's amount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88482"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3861,6 +4440,11 @@
     {
       "rowID": "testWOVerifyIfServiceHasDefaultTechnicianAndItsAmountIs0ThenDefaultTechnicianShouldBeAssignedToTheService_NotTechnicianSplitAtWorkOrderLevel.01",
       "description": "Test Case 81676:WO: if service has default technician and its amount is 0 then default technician should be assigned to the service (not technician split at work order level)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88484"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -3888,6 +4472,11 @@
     {
       "rowID": "testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0.01",
       "description": "Test Case 81677:WO: Verify that correct tech split amount is shown for matrix service when change price to 0",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88485"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3915,6 +4504,11 @@
     {
       "rowID": "testWOVerifyThatTechSplitAmountIsShownCorrectUnderMonitorForServiceWithAdjustments.01",
       "description": "Test Case 81699:WO: Monitor - Verify that tech split amount is shown correct under monitor for service with Adjustments",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88486"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810"
@@ -3946,6 +4540,11 @@
     {
       "rowID": "testVerifyThatRequiredServicesHasCorrectTech.01",
       "description": "Test Case 82189:WO: Verify that required services has correct tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88487"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -4006,6 +4605,11 @@
     {
       "rowID": "testVerifyThatRequiredBundleItemsHasCorrectDefTech.01",
       "description": "Test Case 82190:WO: Verify that required bundle items has correct def tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88488"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -4074,6 +4678,11 @@
     {
       "rowID": "testVerifyThatRequiredBundleItemsAndServiceWithExpensesAnd0PriceHasCorrectDefTechAfterEditWO.01",
       "description": "Test Case 82196:WO: Verify that required bundle items and service with expenses and 0 price has correct def tech after edit WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88489"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -4147,6 +4756,11 @@
     {
       "rowID": "testVerifyThatSelectedServicesHaveCorrectTechSplitWhenChangeIsDuringCreatingWO.01",
       "description": "Test Case 82197:WO - Verify that selected services has correct tech split when change is during creating WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88490"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -4201,6 +4815,11 @@
     {
       "rowID": "testVerifyIfServicePriceIs0AndHasDefTechAssignToServiceDefTech.01",
       "description": "Test Case 82200:WO - If service price is 0 and has def tech assign to service def tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88493"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -4233,6 +4852,11 @@
     {
       "rowID": "testVerifyIfServicePriceIs0AssignWOSplitToServiceInCaseNoDefTech.01",
       "description": "Test Case 82201:WO - If service price is 0 assign WO split to service in case no def tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88494"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D7HW48NX6S507810",
@@ -4257,6 +4881,11 @@
     {
       "rowID": "testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired.01",
       "description": "Test Case 26115:WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88944"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -4304,6 +4933,11 @@
     {
       "rowID": "testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase.01",
       "description": "Test Case 29181:WO Monitor: Verify that when option 'Phase enforcement' is OFF and 'Start service required' it possible to start service from inactive phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88931"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -4358,6 +4992,11 @@
     {
       "rowID": "testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder.01",
       "description": "Test Case 30546:WO Monitor:  Verify that Tech who is not assigned to order service cannot start order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88935"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -4424,6 +5063,14 @@
     {
       "rowID": "testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted.01",
       "description": "Test Case 30547:WO Monitor: Verify that is it impossible to change status for service/phase when order is not started, Test Case 30548:WO Monitor: Verify that when order is not started Start date can be changed but not for future",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88938"
+        },
+        {
+          "testCaseID": "88932"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -4490,6 +5137,11 @@
     {
       "rowID": "testSRVerifyThatSRIsCreatedCorrectlyWhenSelectOwnerOnVehicleInfo.01",
       "description": "Test Case 26214:SR: Verify that SR is created correctly when select owner on Vehicle info",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88875"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -4502,6 +5154,11 @@
     {
       "rowID": "testSRVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON.01",
       "description": "Test Case 26215:SR: Verify that Check In action is present for SR when appropriate SR type has option Check in ON",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88914"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -4514,6 +5171,11 @@
     {
       "rowID": "testSRVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa.01",
       "description": "Test Case 26216:SR: Verify that Check In action is changed to Undo Check In after pressing on it and vice versa",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88913"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -4526,6 +5188,11 @@
     {
       "rowID": "testSRVerifyThatFilterNotCheckedInIsWorkingCorrectly.01",
       "description": "Test Case 26217:SR: Verify that filter 'Not Checked In' is working correctly",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88912"
+        }
+      ],
       "serviceRequestData": {
         "vihicleInfo": {
           "vinNumber": "2A4RR4DE2AR286008"
@@ -4538,6 +5205,11 @@
     {
       "rowID": "testVerifyThatWhenCustomerApprovalRequiredIsSetToONAutoEmailIsNotSentWhenApprovalDoesNotExist.01",
       "description": "Test Case 26662:Invoices: Verify that when ‘Customer approval required’ is set to ON - auto email is not sent when approval does not exist",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88707"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -4562,6 +5234,11 @@
     {
       "rowID": "testVerifyThatWhenCustomerApprovalRequiredIsSetToOffAutoEmailIsSentWhenInvoiceAsAutoApproved.01",
       "description": "Test Case 26663:Invoices: verify that when ‘Customer approval required’ is set to OFF - auto email is sent when invoice is auto approved",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88706"
+        }
+      ],
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1D3HV13T19S825733",
@@ -4585,13 +5262,23 @@
   "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices": [
     {
       "rowID": "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices.01",
-      "description": "Test Case 26690:Invoices: Verify that print icon is shown next to invoice when it was printed (My Invoices)"
+      "description": "Test Case 26690:Invoices: Verify that print icon is shown next to invoice when it was printed (My Invoices)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88506"
+        }
+      ]
     }
   ],
   "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices": [
     {
       "rowID": "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices.01",
-      "description": "Test Case 26691:Invoices: Verify that print icon is shown next to invoice when it was printed (Team Invoices)"
+      "description": "Test Case 26691:Invoices: Verify that print icon is shown next to invoice when it was printed (Team Invoices)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88507"
+        }
+      ]
     }
   ]
 }

@@ -172,6 +172,7 @@ public class RegularMyWorkOrdersSteps {
 
     public static void switchToTeamView() {
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        waitMyWorkOrdersLoaded();
         myWorkOrdersScreen.switchToTeamView();
     }
 }

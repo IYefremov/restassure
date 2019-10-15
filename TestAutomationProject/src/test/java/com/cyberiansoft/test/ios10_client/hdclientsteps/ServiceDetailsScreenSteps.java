@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceAdjustmentData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 
 import java.util.List;
@@ -16,6 +17,9 @@ public class ServiceDetailsScreenSteps {
             setServicePriceValue(serviceData.getServicePrice());
         if (serviceData.getServiceQuantity() != null)
             setServiceQuantityValue(serviceData.getServiceQuantity());
+        if (serviceData.getServiceNotes() != null) {
+            setServiceNotes(serviceData.getServiceNotes());
+        }
         if (serviceData.getVehiclePart() != null)
             slectServiceVehiclePart(serviceData.getVehiclePart());
         if (serviceData.getVehicleParts() != null)
@@ -33,6 +37,13 @@ public class ServiceDetailsScreenSteps {
     public static void setServiceQuantityValue(String serviceQuantity) {
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.setServiceQuantityValue(serviceQuantity);
+    }
+
+    public static void setServiceNotes(String notes) {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        NotesScreen notesScreen = selectedServiceDetailsScreen.clickNotesCell();
+        notesScreen.setNotes(notes);
+        notesScreen.clickSaveButton();
     }
 
     public static void slectServiceVehiclePart(VehiclePartData vehiclePartData) {

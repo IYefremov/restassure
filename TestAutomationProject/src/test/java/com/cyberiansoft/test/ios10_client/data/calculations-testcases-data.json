@@ -2938,5 +2938,115 @@
         "invoiceTotal": "493.68"
       }
     }
+  ],
+  "testWOVerifyThatUpChargesAndDiscountsAreCalculatedCorrectlyOnAllLevels": [
+    {
+      "rowID": "testWOVerifyThatUpChargesAndDiscountsAreCalculatedCorrectlyOnAllLevels.01",
+      "description": "Test Case 49359:WO: Verify that up charges+discounts are calculated correctly on all levels",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88994"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "screenPrice": "$303.90",
+          "screenTotalPrice": "$449.85",
+          "percentageServices": [
+            {
+              "serviceName": "Calc_Discount",
+              "servicePrice": "10"
+            },
+            {
+              "serviceName": "Calc_Discount",
+              "servicePrice": "-25"
+            },
+            {
+              "serviceName": "Calc_Discount",
+              "servicePrice": "-10"
+            }
+          ],
+          "bundleService": {
+            "bundleServiceName": "Calc_Bundle",
+            "moneyServices": [
+              {
+                "serviceName": "Oksi_Service_PP_Vehicle",
+                "servicePrice": "10",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Back Glass"
+                  }
+                ]
+              },
+              {
+                "serviceName": "Oksi_Service_PP_Service",
+                "servicePrice": "90",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Hood"
+                  }
+                ]
+              }
+            ],
+            "percentageServices": [
+              {
+                "serviceName": "SR_S5_Mt_Discount_10",
+                "servicePrice": "10"
+              },
+              {
+                "serviceName": "SR_Up_20_Percent",
+                "servicePrice": "20"
+              },
+              {
+                "serviceName": "SR_Up_20_Percent",
+                "servicePrice": "-20"
+              }
+            ],
+            "bundleServiceAmount": "104"
+          },
+          "laborService": {
+            "serviceName": "Calc_Labor",
+            "laborServiceRate": "100",
+            "laborServiceTime": "1"
+          },
+          "matrixService": {
+            "matrixServiceName": "Calc_Price_Matrix",
+            "vehiclePartData": {
+              "vehiclePartTotalPrice": "$99.90",
+              "vehiclePartName": "VP_for_calc",
+              "vehiclePartOption": "PDR",
+              "vehiclePartPrice": "100",
+              "vehiclePartAdditionalServices": [
+                {
+                  "serviceName": "Calc_Discount",
+                  "servicePrice": "10"
+                },
+                {
+                  "serviceName": "Customer Discount",
+                  "servicePrice": "1"
+                },
+                {
+                  "serviceName": "Discount 5-10%",
+                  "servicePrice": "-10"
+                }
+              ]
+            }
+          }
+        },
+        "workOrderPrice": "$207.93",
+        "workOrderTotalSale": "3",
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
   ]
 }

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -10,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 	
@@ -136,6 +138,24 @@ public abstract class iOSHDBaseScreen extends iOSBaseScreen {
 		HashMap<String, Object> scrollObject = new HashMap<>();
 		scrollObject.put("predicateString", "name == '" + elementValue + "'");
 		js.executeScript("mobile: scroll", scrollObject);
+	}
+
+	public void swipeScrollViewElement(WebElement elementtoswipe) {
+		boolean swipe = true;
+
+		while (swipe) {
+			if (elementtoswipe.isDisplayed()) {
+				swipe = false;
+				break;
+			} else {
+				Map<String, Object> args = new HashMap<>();
+				MobileElement list = (MobileElement) appiumdriver.findElement(By.className("XCUIElementTypeScrollView"));
+				args.put("direction", "down");
+				args.put("name", null);
+				args.put("element", list.getId());
+				appiumdriver.executeScript("mobile: scroll", args);
+			}
+		}
 	}
 	
 }

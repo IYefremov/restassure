@@ -23,6 +23,12 @@ public class BundleServiceData {
     @JsonProperty("services")
     List<ServiceData> services;
 
+    @JsonProperty("moneyServices")
+    List<ServiceData> moneyServices;
+
+    @JsonProperty("percentageServices")
+    List<ServiceData> percentageServices;
+
     @JsonProperty("partService")
     List<PartServiceData> partService;
 

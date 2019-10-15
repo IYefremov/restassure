@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
@@ -125,6 +126,14 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		}
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
+		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		return monitorserviceslist.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
+	}
+
+	public String getPanelStatus(ServiceData serviceData, VehiclePartData vehiclePartData) {
+
+		String panelName = serviceData.getServiceName() + " (" + vehiclePartData.getVehiclePartName() + ")";
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
 		return monitorserviceslist.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}

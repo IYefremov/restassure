@@ -21,6 +21,8 @@ public class ServiceData {
     private String serviceQuantity2;
     @JsonProperty("serviceStatus")
     private String serviceStatus;
+    @JsonProperty("serviceNotes")
+    private String serviceNotes;
     @JsonProperty("serviceAdjustment")
     private ServiceAdjustmentData serviceAdjustment;
     @JsonProperty("vehiclePart")
@@ -41,6 +43,8 @@ public class ServiceData {
     private String problemReason;
     @JsonProperty("serviceDefaultTechnician")
     ServiceTechnician serviceDefaultTechnician;
+    @JsonProperty("serviceDefaultTechnicians")
+    List<ServiceTechnician> serviceDefaultTechnicians;
     @JsonProperty("serviceNewTechnician")
     ServiceTechnician serviceNewTechnician;
     @JsonProperty("serviceNewTechnicians")
