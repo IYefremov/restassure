@@ -43,6 +43,10 @@ public class VNextBORODetailsPageVerifications {
         return Utils.isElementDisplayed(detailsPage.getPhaseActionsTrigger());
     }
 
+    public boolean isPhaseActionsTriggerDisplayed(String phase) {
+        return Utils.isElementDisplayed(detailsPage.getPhaseActionsTrigger(phase));
+    }
+
     public boolean isCheckInOptionDisplayedForPhase() {
         return Utils.isElementDisplayed(detailsPage.getPhaseActionsCheckInOption());
     }
@@ -58,5 +62,9 @@ public class VNextBORODetailsPageVerifications {
         } else {
             detailsPageInteractions.clickCheckOutOptionForPhase();
         }
+    }
+
+    public boolean isReportProblemDisplayedForPhase(String phase) {
+        return Utils.isElementDisplayed(detailsPage.getPhaseActionsReportProblemOption(phase));
     }
 }

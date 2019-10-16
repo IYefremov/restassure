@@ -29,8 +29,8 @@ import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprova
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORONotesPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBORODetailsPageVerifications;
@@ -603,5 +603,20 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         roDetailsPageVerifications.verifyCheckInOptionIsDisplayedForPhase();
         roDetailsPageSteps.setCheckInOptionForPhase();
         roDetailsPageSteps.setCheckOutOptionForPhase();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanReportProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        simpleSearchSteps.searchByText(data.getOrderNumber());
+        repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        Assert.assertTrue(roDetailsPageVerifications.isPhaseActionsTriggerDisplayed(data.getPhase()),
+                "The phase actions trigger hasn't been displayed");
+
+        if (roDetailsPageVerifications.isReportProblemDisplayedForPhase(data.getPhase())) {
+
+        }
     }
 }

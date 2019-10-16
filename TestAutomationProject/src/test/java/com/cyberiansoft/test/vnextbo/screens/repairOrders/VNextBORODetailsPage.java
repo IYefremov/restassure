@@ -847,4 +847,19 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 				.map(WebElement::getText)
 				.collect(Collectors.toList());
 	}
+
+	public WebElement getPhaseActionsTrigger(String phase) {
+	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase
+                + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]"));
+    }
+
+	public WebElement getPhaseActionsReportProblemOption(String phase) {
+	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase
+                + "']//label[text()='Report Problem']"));
+    }
+
+	public WebElement getPhaseActionsResolveProblemOption(String phase) {
+	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase
+                + "']//label[text()='Resolve Problem']"));
+    }
 }

@@ -4,6 +4,8 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROReportProblemDialog;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROResolveProblemDialog;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -18,6 +20,8 @@ import java.util.Objects;
 public class VNextBORODetailsPageInteractions {
 
     private VNextBORODetailsPage detailsPage;
+    private VNextBOROReportProblemDialog reportProblemDialog;
+    private VNextBOROResolveProblemDialog resolveProblemDialog;
 
     public VNextBORODetailsPageInteractions() {
         detailsPage = new VNextBORODetailsPage();
@@ -133,7 +137,7 @@ public class VNextBORODetailsPageInteractions {
         WaitUtilsWebDriver.waitForLoading();
         final WebElement service = DriverBuilder.getInstance().getDriver()
                 .findElement(By.xpath("//div[@data-order-service-id='" + serviceId
-                + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
+                        + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
         Utils.getActions().moveToElement(service).build().perform();
         Utils.clickElement(service);
     }
@@ -224,13 +228,18 @@ public class VNextBORODetailsPageInteractions {
         handleActionsButton(detailsPage.getPhaseActionsDropDown());
     }
 
+    public void openActionsDropDownForPhase(String phase) {
+        handleActionsButton(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase
+                + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]//div[@class='drop checkout']")));
+    }
+
     public void closeActionsDropDownForPhase() {
         handleActionsButton(detailsPage.getPhaseActionsDropDownHidden());
     }
 
-    private void handleActionsButton(WebElement phaseActionsDropDownHidden) {
+    private void handleActionsButton(WebElement phaseActionsDropDown) {
         try {
-            WaitUtilsWebDriver.waitForVisibility(phaseActionsDropDownHidden, 5);
+            WaitUtilsWebDriver.waitForVisibility(phaseActionsDropDown, 5);
         } catch (Exception e) {
             Utils.clickElement(detailsPage.getPhaseActionsTrigger());
         }
@@ -240,6 +249,16 @@ public class VNextBORODetailsPageInteractions {
         Utils.clickElement(option);
         WaitUtilsWebDriver.waitForLoading();
         WaitUtilsWebDriver.waitForInvisibilityIgnoringException(detailsPage.getPhaseActionsDropDown(), 5);
+    }
+
+    public void clickReportProblemForPhase(String phase) {
+        setOptionForPhase(detailsPage.getPhaseActionsReportProblemOption(phase));
+        WaitUtilsWebDriver.waitForVisibility(reportProblemDialog.getReportProblemDialog());
+    }
+
+    public void clickResolveProblemForPhase(String phase) {
+        setOptionForPhase(detailsPage.getPhaseActionsResolveProblemOption(phase));
+        WaitUtilsWebDriver.waitForVisibility(resolveProblemDialog.getResolveProblemDialog());
     }
 
     public void clickCheckInOptionForPhase() {

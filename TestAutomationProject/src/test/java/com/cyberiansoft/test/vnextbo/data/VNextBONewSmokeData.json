@@ -248,5 +248,15 @@
       "location": "New_zayats_location",
       "orderNumber": "O-000-152460"
     }
+  ],
+
+  "verifyUserCanReportProblemOnPhaseLevel": [
+    {
+      "rowID": "verifyUserCanReportProblemOnPhaseLevel.01",
+      "description": "Test Case 88119: Verify user can report problem on the phase level (select reason from the list)",
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station"
+    }
   ]
 }
