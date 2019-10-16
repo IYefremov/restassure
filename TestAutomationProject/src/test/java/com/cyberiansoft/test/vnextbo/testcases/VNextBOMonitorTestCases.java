@@ -228,6 +228,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	//Test fails due to orders are displayed only for last 30 days, it should be updated with advanced search by custom timeframe
 	public void verifyUserCanUsePaging(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
