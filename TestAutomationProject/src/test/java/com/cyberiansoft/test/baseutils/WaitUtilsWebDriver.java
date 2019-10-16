@@ -239,11 +239,16 @@ public class WaitUtilsWebDriver {
         getWebDriverWait(timeOut).until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 
-    public static void waitForElementNotToBeStale(WebElement element) {
+    public static WebElement waitForElementNotToBeStale(WebElement element) {
         try {
             getWait().until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
         } catch (Exception ignored) {
             waitABit(1500);
         }
+        return element;
+    }
+
+    public static WebElement waitForElementNotToBeStale(By by) {
+        return waitForElementNotToBeStale(DriverBuilder.getInstance().getDriver().findElement(by));
     }
 }

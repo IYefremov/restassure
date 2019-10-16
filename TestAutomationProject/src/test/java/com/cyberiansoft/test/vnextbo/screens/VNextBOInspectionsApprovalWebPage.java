@@ -48,8 +48,6 @@ public class VNextBOInspectionsApprovalWebPage extends VNextBOBaseWebPage {
     public VNextBOInspectionsApprovalWebPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOf(generalApproveButton));
     }
 
     public boolean isApproveServiceButtonDisplayed() {
