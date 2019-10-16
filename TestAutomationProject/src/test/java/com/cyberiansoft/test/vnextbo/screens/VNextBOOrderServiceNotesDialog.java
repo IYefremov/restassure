@@ -10,8 +10,8 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class VNextBOOrderServiceNotesDialog extends VNextBONotesDialog {
 
-    @FindBy(id = "editOrderServiceNotesModal")
-    private WebElement editOrderServiceNotesModalDialog;
+    @FindBy(xpath = "//div[@class='modal-content']//div[@class='repair-notes__list__notes-category-item__content__notes']")
+    private WebElement repairNotesList;
 
     public VNextBOOrderServiceNotesDialog() {
         super();

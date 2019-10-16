@@ -146,12 +146,8 @@ public class VNextBORODetailsPageInteractions {
 
     public String getServiceStatusValue(String serviceId) {
         final WebElement serviceStatusValue = DriverBuilder.getInstance().getDriver().findElement(By.xpath(
-                "//div[@data-order-service-id='" + serviceId + "']//div[contains(@data-bind, 'orderServiceStatusName')]"));
-        Utils.setAttributeWithJS(serviceStatusValue, "style", "display: block;");
-        WaitUtilsWebDriver.waitForElementNotToBeStale(serviceStatusValue);
-        final String value = serviceStatusValue.getText();
-        Utils.setAttributeWithJS(serviceStatusValue, "style", "display: none;");
-        return value;
+                "//div[@data-order-service-id='" + serviceId + "']//span[contains(@class, 'service-status-dropdown')]//span[@class='k-input']"));
+        return Utils.getText(serviceStatusValue);
     }
 
     public String getServiceDescription(String serviceId) {

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -227,6 +228,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	//Test fails due to orders are displayed only for last 30 days, it should be updated with advanced search by custom timeframe
 	public void verifyUserCanUsePaging(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -519,7 +521,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		detailsPage.setStatus(data.getStatus());
-		Assert.assertEquals(detailsPage.getRoStatusElement(), data.getStatus(), "The status hasn't been set");
+		WaitUtilsWebDriver.waitForLoading();
+		Assert.assertEquals(detailsPage.getRoStatus(), data.getStatus(), "The status hasn't been set");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -536,7 +539,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		detailsPage.setStatus(data.getStatus());
-		Assert.assertEquals(detailsPage.getRoStatusElement(), data.getStatus(), "The status hasn't been set");
+		WaitUtilsWebDriver.waitForLoading();
+		Assert.assertEquals(detailsPage.getRoStatus(), data.getStatus(), "The status hasn't been set");
 		Assert.assertTrue(detailsPage.isImageOnHoldStatusDisplayed(),
 				"The On Hold image notification hasn't been displayed");
 	}
@@ -555,7 +559,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		detailsPage.setStatus(data.getStatus());
-		Assert.assertEquals(detailsPage.getRoStatusElement(), data.getStatus(), "The status hasn't been set");
+		Assert.assertEquals(detailsPage.getRoStatus(), data.getStatus(), "The status hasn't been set");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -572,7 +576,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		detailsPage.setStatus(data.getStatus());
-		Assert.assertNotEquals(detailsPage.getRoStatusElement(), data.getStatus(), "The status has been changed to 'Draft'");
+		Assert.assertNotEquals(detailsPage.getRoStatus(), data.getStatus(), "The status has been changed to 'Draft'");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1122,6 +1126,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = detailsPage.getServiceId(data.getService());
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
@@ -1144,7 +1149,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The audit logs tabs are not displayed");
 
 		auditLogDialog.clickAuditLogsPhasesAndDepartmentsTab();
-		final String departmentsLastRecord = auditLogDialog.getDepartmentsLastRecord();
+		final String departmentsLastRecord = auditLogDialog.getDepartmentsAndPhasesLastRecord();
 		final String actualLocalDateTime = auditLogDialog.getActualLocalDateTime();
 		final String actualLocalDateTimePlusMinute = auditLogDialog.getActualLocalDateTimePlusMinute();
 		final String actualLocalDateTimePlusTwoMinutes = auditLogDialog.getActualLocalDateTimePlusTwoMinutes();
@@ -1458,6 +1463,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
 		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
@@ -1499,6 +1505,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
 		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
@@ -1540,6 +1547,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
 		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
@@ -1581,6 +1589,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
 		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
@@ -1616,6 +1625,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
 		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
@@ -1654,9 +1664,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = detailsPage.getServiceId(data.getService());
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
 
 		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
 		final VNextBOAuditLogDialog auditLogDialog = new VNextBOAuditLogDialog(webdriver);
@@ -1676,7 +1688,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The audit logs tabs are not displayed");
 
 		auditLogDialog.clickAuditLogsPhasesAndDepartmentsTab();
-		final String phasesLastRecord = auditLogDialog.getPhasesLastRecord();
+		final String phasesLastRecord = auditLogDialog.getDepartmentsAndPhasesLastRecord();
 		Assert.assertTrue(!phasesLastRecord.isEmpty(), "The last phase record hasn't been displayed");
 	}
 

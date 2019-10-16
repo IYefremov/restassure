@@ -69,7 +69,7 @@
     {
       "rowID": "verifyUserCanUsePaging.01",
       "description": "Test Case 81902:Verify user can use paging",
-      "location": "1111 Automation"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -761,9 +761,9 @@
         "Completed"
       ],
       "auditLogTabs": [
-        "Phases",
-        "Departments",
-        "Services Activity",
+        "ALL",
+        "Phases and Departments",
+        "Services",
         "Parts"
       ]
     }

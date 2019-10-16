@@ -13,7 +13,7 @@ public class VNextBONotesPageVerifications {
     }
 
     public boolean isEditOrderServiceNotesBlockDisplayed() {
-        return Utils.isElementDisplayed(orderServiceNotesDialog.getEditOrderServiceNotesModalDialog());
+        return Utils.isElementDisplayed(orderServiceNotesDialog.getRepairNotesList());
     }
 
     public boolean isRoEditNotesModalDialogDisplayed() {
