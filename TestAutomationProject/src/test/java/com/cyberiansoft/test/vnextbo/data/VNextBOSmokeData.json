@@ -3,6 +3,11 @@
     {
       "rowID": "testCheckValidationErrorsOnTheCreateNewUserDialog.01",
       "description": "Test Case 43376:vNext: check validation errors on the Create new user dialog",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90565"
+        }
+      ],
       "firstName": "TestTech",
       "lastName": "QA",
       "userMailPrefix": "test.cyberiansoft+",
@@ -14,6 +19,11 @@
     {
       "rowID": "testCreateUserWithExistingEmailAddress.01",
       "description": "Test Case 43373:vNext: create user with existing Email address",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90564"
+        }
+      ],
       "firstName": "TestTech",
       "lastName": "QA",
       "userMailPrefix": "test.cyberiansoft+",
@@ -26,6 +36,11 @@
     {
       "rowID": "testCheckPossibilityToResendRegistrationEmail.01",
       "description": "Test Case 43372:vNext: check posibility to resend registration email",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90563"
+        }
+      ],
       "firstName": "TestTech",
       "lastName": "QA",
       "userMailPrefix": "test.cyberiansoft+",
@@ -38,6 +53,11 @@
     {
       "rowID": "testCheckValidationErrorsOnTheSetPasswordPage.01",
       "description": "Test Case 43377:vNext: check validation errors on the set password page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90566"
+        }
+      ],
       "firstName": "TestTech",
       "lastName": "QA",
       "userMailPrefix": "test.cyberiansoft+",
@@ -51,6 +71,11 @@
     {
       "rowID": "testCreateUserWithoutWebAccess.01",
       "description": "Test Case 43038:vNext: create user without Web access",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90558"
+        }
+      ],
       "firstName": "TestTech",
       "lastName": "QA",
       "userMailPrefix": "test.cyberiansoft+",
@@ -63,6 +88,11 @@
     {
       "rowID": "testCreateUserWithWebAccess.01",
       "description": "Test Case 43046:vNext: create user with Web access",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90559"
+        }
+      ],
       "firstName": "TestTech",
       "lastName": "QA",
       "userMailPrefix": "test.cyberiansoft+",
@@ -75,6 +105,11 @@
     {
       "rowID": "testEditNotConfirmedUserWithWebAccess.01",
       "description": "Test Case 43165:vNext: Edit not confirmed user with Web access",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90560"
+        }
+      ],
       "firstName": "TestTech",
       "lastName": "QA",
       "userMailPrefix": "test.cyberiansoft+",
@@ -89,6 +124,11 @@
     {
       "rowID": "testEditUserWithoutWebAccess.01",
       "description": "Test Case 43371:vNext: Edit user without Web access",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90562"
+        }
+      ],
       "firstName": "TestTech",
       "lastName": "QA",
       "userMailPrefix": "test.cyberiansoft+",

@@ -2,7 +2,12 @@
   "verifyUserCanMaximizeMinimizeMenu": [
     {
       "rowID": "verifyUserCanMaximizeMinimizeMenu.01",
-      "description": "Test Case 84374:User can maximize/minimize the menu"
+      "description": "Test Case 84374:User can maximize/minimize the menu",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91061"
+        }
+      ]
     }
   ],
 
@@ -10,6 +15,17 @@
     {
       "rowID": "verifyUserCanApproveInspection.01",
       "description": "Test Case 84584:Verify user can open \"Operations → Inspections\" with full set of elements, Test Case 84999:User can see \"Approve's\" details. Test Case 85018:User can approve Inspection (Approve and complete).",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90868"
+        },
+        {
+          "testCaseID": "90881"
+        },
+        {
+          "testCaseID": "90885"
+        }
+      ],
       "statuses": [
         "New",
         "Approved"
@@ -22,6 +38,11 @@
     {
       "rowID": "verifyUserCanAddNewParts.01",
       "description": "Test Case 83857:User can Add new parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91187"
+        }
+      ],
       "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "service": "_ multiple presets (required, no prefix)",
@@ -39,6 +60,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfThePartToOrdered.01",
       "description": "Test Case 83968:User can change Status of the Part to \"Ordered\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91165"
+        }
+      ],
       "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "status": "Ordered"
@@ -49,6 +75,11 @@
     {
       "rowID": "verifyUserCanDuplicateThePart.01",
       "description": "Test Case 84003:User can Duplicate the Part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91179"
+        }
+      ],
       "location": "Best Location Automation",
       "woNum": "O-000-152414"
     }
@@ -58,6 +89,11 @@
     {
       "rowID": "verifyUserCanDeleteThePart.01",
       "description": "Test Case 84007:User can Delete the Part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91183"
+        }
+      ],
       "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "partItems": [
@@ -71,6 +107,14 @@
     {
       "rowID": "verifyUserCanAddAndDeleteLabor.01",
       "description": "Test Case 83937:User can Add labour. Test Case 83938:User can delete labour.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91139"
+        },
+        {
+          "testCaseID": "91140"
+        }
+      ],
       "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "labor": "Labor AM"
@@ -81,6 +125,20 @@
     {
       "rowID": "verifyUserCanChangeCompanyInfoAndSaveIt.01",
       "description": "Test Case 84558: Verify user can open \"Settings → Company Info\" with full set of elements. Test Case 84561: User can change \"Company Info\" and save it. Test Case 84563: User can type \"Country\" and select it from the list. Test Case 84582: User can type and select \"Phone\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90944"
+        },
+        {
+          "testCaseID": "90945"
+        },
+        {
+          "testCaseID": "90946"
+        },
+        {
+          "testCaseID": "90947"
+        }
+      ],
       "company": [
         "SpainCo",
         "AMT"
@@ -128,6 +186,17 @@
     {
       "rowID": "verifyUserCanAddDeleteAndEditQuickNotes.01",
       "description": "Test Case 79070:Verify user can add new \"Quick Notes\". Test Case 79073:Verify user can delete \"Quick Notes\". Test Case 79074:Verify user can edit \"Quick Notes\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91526"
+        },
+        {
+          "testCaseID": "91529"
+        },
+        {
+          "testCaseID": "91530"
+        }
+      ],
       "quickNotesDescription": "Test Description",
       "quickNotesDescriptionEdited": "Description test for update"
     }
@@ -137,6 +206,29 @@
     {
       "rowID": "verifyUserCanEditAddressFields.01",
       "description": "Test Case 84405: Verify user can open \"Settings → Clients\" with full set of elements. Test Case 84504:User can edit \"Address\" fields. Test Case 84535: User can edit detailes of \"Retail\" client. Test Case 84498: User can edit \"Client info\" of client. Test Case 84499: User can edit \"Account info\" fields. Test Case 84505: User can edit \"Email Options\" fields. Test Case 84506: User can edit \"Preferences\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90980"
+        },
+        {
+          "testCaseID": "91019"
+        },
+        {
+          "testCaseID": "91025"
+        },
+        {
+          "testCaseID": "91017"
+        },
+        {
+          "testCaseID": "91018"
+        },
+        {
+          "testCaseID": "91020"
+        },
+        {
+          "testCaseID": "91021"
+        }
+      ],
       "search": "bentley",
       "employee": {
         "clientType": "Retail",
@@ -185,6 +277,17 @@
     {
       "rowID": "verifyUserCanDeleteDeviceFromPendingRegistrationsList.01",
       "description": "Test Case 85465: Verify user can open \"Settings → Device Management\" with full set of elements. Test Case 85467: User can add New Device. Test Case 85720: User can delete Device from the \"Pending Registrations\" list.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90767"
+        },
+        {
+          "testCaseID": "90769"
+        },
+        {
+          "testCaseID": "90805"
+        }
+      ],
       "minutes": "22",
       "hours": "1",
       "nickname": "Autotest",
@@ -198,6 +301,11 @@
     {
       "rowID": "verifyUserCanUncoverHideNewRegistrationCode.01",
       "description": "Test Case 85694: User can uncover/hide new Registration Code.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90791"
+        }
+      ],
       "deviceName": "jj automation do not change"
     }
   ],
@@ -206,6 +314,11 @@
     {
       "rowID": "verifyUserCanEditDeviceSettings.01",
       "description": "Test Case 85699: User can edit \"Device Settings\".",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90793"
+        }
+      ],
       "deviceName": "Automation_test",
       "nickname": "Automation_test 222",
       "team": "ALM Recon Facility Team",
@@ -217,6 +330,17 @@
     {
       "rowID": "verifyUserCanChangeVendorPrice.01",
       "description": "Test Case 82657: User can select location. Test Case 82955: User can see Services of RO. Test Case 82967: User can change Vendor Price of RO.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91381"
+        },
+        {
+          "testCaseID": "91282"
+        },
+        {
+          "testCaseID": "91283"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-168-00242",
       "status": "Approved",
@@ -235,6 +359,14 @@
     {
       "rowID": "verifyUserCanSeeAndCreateNotes.01",
       "description": "Test Case 82659: User can search WO using search filter. Test Case 82951: User can see and create notes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91382"
+        },
+        {
+          "testCaseID": "91302"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "notesMessage": "Autotest"
@@ -245,6 +377,14 @@
     {
       "rowID": "verifyUserCanCheckInRO.01",
       "description": "Test Case 83643: User can see Parts of RO. Test Case 83743: User can Chek - In RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91261"
+        },
+        {
+          "testCaseID": "91258"
+        }
+      ],
       "location": "New_zayats_location",
       "orderNumber": "O-000-152460"
     }

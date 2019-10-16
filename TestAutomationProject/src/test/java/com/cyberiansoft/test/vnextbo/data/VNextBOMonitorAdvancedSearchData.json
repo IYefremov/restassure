@@ -3,6 +3,11 @@
     {
       "rowID": "verifyUserCanSelectCustomer.01",
       "description": "Test Case 82212:User can select \"Customer\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91422"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1"
     }
@@ -12,6 +17,11 @@
     {
       "rowID": "verifyUserCanSearchByEmployee.01",
       "description": "Test Case 82213:User can search by \"Employee\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91423"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "AAA1",
       "employee": "Yurii Tolkunov",
@@ -23,6 +33,11 @@
     {
       "rowID": "verifyUserCanSearchByPhase.01",
       "description": "Test Case 82214:User can search by \"Phase\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91424"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
       "timeFrame": "Year To Date",
@@ -34,6 +49,11 @@
     {
       "rowID": "verifyUserCanSearchByDepartment.01",
       "description": "Test Case 82215:User can search by \"Department\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91425"
+        }
+      ],
       "location": "1111 Automation",
       "customer": "Mike's Techs",
       "timeFrame": "Year To Date",
@@ -45,6 +65,11 @@
     {
       "rowID": "verifyUserCanSearchByWoType.01",
       "description": "Test Case 82216:User can search by \"WO Type\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91426"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
       "woType": "Best",
@@ -56,6 +81,11 @@
     {
       "rowID": "verifyUserCanSearchByWoNumber.01",
       "description": "Test Case 82217:User can search by \"WO#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91427"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
       "woNum": "O-361-00004",
@@ -67,6 +97,11 @@
     {
       "rowID": "verifyUserCanSearchByRoNumber.01",
       "description": "Test Case 82218:User can search by \"RO#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91428"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
       "woNum": "O-361-00004",
@@ -79,6 +114,11 @@
     {
       "rowID": "verifyUserCanSearchByStockNumber.01",
       "description": "Test Case 82219:User can search by \"Stock#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91429"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
       "stockNum": "S00054",
@@ -90,6 +130,11 @@
     {
       "rowID": "verifyUserCanSearchByVinNumber.01",
       "description": "Test Case 82220:User can search by \"VIN\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91430"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
       "vinNum": "1ESFCVGDE34ES2589",
@@ -101,6 +146,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseLess.01",
       "description": "Test Case 82224:User can search by 'Days in Phase' ('<')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91433"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInPhase": "<",
       "daysNum": "25"
@@ -111,6 +161,11 @@
     {
       "rowID": "verifyUserCanSearchByWhiteFlag.01",
       "description": "Test Case 82225:User can search by \"Flag\" (white)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91434"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "White"
     }
@@ -120,6 +175,11 @@
     {
       "rowID": "verifyUserCanSearchByCustomer.01",
       "description": "Test Case 82279:Verify user can search by \"Customer\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91440"
+        }
+      ],
       "location": "Rozstalnoy_location",
       "customer": "Bratan",
       "timeFrame": "Year To Date"
@@ -130,6 +190,11 @@
     {
       "rowID": "verifyUserCanSearchByRedFlag.01",
       "description": "Test Case 83948:User can search by \"Flag\" (red)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91463"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "Red"
     }
@@ -139,6 +204,11 @@
     {
       "rowID": "verifyUserCanSearchByOrangeFlag.01",
       "description": "Test Case 83952:User can search by \"Flag\" (orange)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91464"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "Orange"
     }
@@ -148,6 +218,11 @@
     {
       "rowID": "verifyUserCanSearchByYellowFlag.01",
       "description": "Test Case 83953:User can search by \"Flag\" (yellow)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91465"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "Yellow"
     }
@@ -157,6 +232,11 @@
     {
       "rowID": "verifyUserCanSearchByGreenFlag.01",
       "description": "Test Case 83955:User can search by \"Flag\" (green)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91466"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "Green"
     }
@@ -166,6 +246,11 @@
     {
       "rowID": "verifyUserCanSearchByBlueFlag.01",
       "description": "Test Case 83956:User can search by \"Flag\" (blue)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91467"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "Blue"
     }
@@ -175,6 +260,11 @@
     {
       "rowID": "verifyUserCanSearchByPurpleFlag.01",
       "description": "Test Case 83958:User can search by \"Flag\" (purple)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91468"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "Purple"
     }
@@ -184,6 +274,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseLessOrEqual.01",
       "description": "Test Case 82766:User can search by 'Days in Phase' ('<=')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91458"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInPhase": "<=",
       "daysNum": "25"
@@ -194,6 +289,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseEqual.01",
       "description": "Test Case 82767:User can search by 'Days in Phase' ('=')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91459"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInPhase": "=",
       "daysNum": "25"
@@ -204,6 +304,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseMoreOrEqual.01",
       "description": "Test Case 82768:User can search by 'Days in Phase' ('>=')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91460"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInPhase": ">=",
       "daysNum": "25"
@@ -214,6 +319,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseMore.01",
       "description": "Test Case 82769:User can search by 'Days in Phase' ('>')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91461"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInPhase": ">",
       "daysNum": "25"
@@ -224,6 +334,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInPhaseBetween.01",
       "description": "Test Case 82770:User can search by 'Days in Phase' ('Between')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91520"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInPhase": "Between",
       "daysNumStart": "10",
@@ -235,6 +350,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessLess.01",
       "description": "Test Case 82747:User can search by 'Days in Process' ('<')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91452"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInProcess": "<",
       "daysNum": "25"
@@ -245,6 +365,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessLessOrEqual.01",
       "description": "Test Case 82749:User can search by 'Days in Process' ('<=')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91453"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInProcess": "<=",
       "daysNum": "25"
@@ -255,6 +380,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessEqual.01",
       "description": "Test Case 82754:User can search by 'Days in Process' ('=')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91454"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInProcess": "=",
       "daysNum": "25"
@@ -265,6 +395,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessMoreOrEqual.01",
       "description": "Test Case 82755:User can search by \"Days in Process\" ('>=')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91455"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInProcess": ">=",
       "daysNum": "25"
@@ -275,6 +410,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessMore.01",
       "description": "Test Case 82756:User can search by \"Days in Process\" ('>')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91456"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInProcess": ">",
       "daysNum": "25"
@@ -285,6 +425,11 @@
     {
       "rowID": "verifyUserCanSearchByDaysInProcessBetween.01",
       "description": "Test Case 82760:User can search by \"Days in Process\" ('Between')",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91457"
+        }
+      ],
       "location": "Best Location Automation",
       "daysInProcess": "Between",
       "daysNumStart": "10",
@@ -296,6 +441,11 @@
     {
       "rowID": "verifyUserCanSearchByCustomTimeFrame.01",
       "description": "Test Case 82660:User can search by \"Timeframe\" (Custom)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91441"
+        }
+      ],
       "location": "Best Location Automation",
       "timeFrame": "Custom"
     }
@@ -305,6 +455,11 @@
     {
       "rowID": "verifyUserCanSearchByLast3WeeksTimeFrame.01",
       "description": "Test Case 82221:User can search by \"Timeframe\" (Last 3 weeks)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91431"
+        }
+      ],
       "location": "Best Location Automation",
       "timeFrame": "Last 3 weeks"
     }
@@ -314,6 +469,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressRework.01",
       "description": "Test Case 82666:User can search by \"Repair Status\"(In Progress - Rework)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91444"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "In Progress - Rework",
       "orderNumber": "O-000-152073"
@@ -324,6 +484,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressActive.01",
       "description": "Test Case 82664:User can search by \"Repair Status\"(In Progress - Active)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91442"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "In Progress - Active"
     }
@@ -333,6 +498,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressQueued.01",
       "description": "Test Case 82665:User can search by \"Repair Status\"(In Progress - Queued)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91443"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "In Progress - Queued"
     }
@@ -342,6 +512,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressOnHold.01",
       "description": "Test Case 82667:User can search by \"Repair Status\"(In Progress - On Hold)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91445"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "In Progress - On Hold"
     }
@@ -351,6 +526,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressNotOnHold.01",
       "description": "Test Case 82668:User can search by \"Repair Status\"(In Progress - Not On Hold)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91446"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "In Progress - Not On Hold"
     }
@@ -360,6 +540,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressQAReady.01",
       "description": "Test Case 82669:User can search by \"Repair Status\"(In Progress - QA Ready)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91447"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "In Progress - QA Ready"
     }
@@ -369,6 +554,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusCompletedQAReady.01",
       "description": "Test Case 82670:User can search by \"Repair Status\"(Completed - QA Ready)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91448"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "Completed - QA Ready"
     }
@@ -378,6 +568,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusCompletedNotBilled.01",
       "description": "Test Case 82671:User can search by \"Repair Status\"(Completed - Not Billed)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91449"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "Completed - Not Billed"
     }
@@ -387,6 +582,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusCompletedOnSite.01",
       "description": "Test Case 82672:User can search by \"Repair Status\"(Completed - On Site)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91450"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "Completed - On Site"
     }
@@ -396,6 +596,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusCompletedAll.01",
       "description": "Test Case 82673:User can search by \"Repair Status\"(Completed - All)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91451"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "Completed - All"
     }
@@ -405,6 +610,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatusInProgressAll.01",
       "description": "Test Case 82222:User can search by \"Repair Status\"(In Progress - All)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91432"
+        }
+      ],
       "location": "Best Location Automation",
       "repairStatus": "In Progress - All"
     }
@@ -414,6 +624,11 @@
     {
       "rowID": "verifyUserCanUseStoredAdvancedSearch.01",
       "description": "Test Case 82227:Verify user can use stored \"Advanced Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91435"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "White",
       "searchName": "MySavedSearch"
@@ -424,6 +639,11 @@
     {
       "rowID": "verifyUserCanFillInAdvancedSearchWindow.01",
       "description": "Test Case 82228:Verify user can fill in all fields in the \"Advanced Search\" window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91436"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
@@ -447,6 +667,11 @@
     {
       "rowID": "verifyUserCanSaveAdvancedSearch.01",
       "description": "Test Case 82229:Verify user can save \"Advanced search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91437"
+        }
+      ],
       "location": "Best Location Automation",
       "flag": "White",
       "searchName": "MySavedSearch"
@@ -457,6 +682,11 @@
     {
       "rowID": "verifyUserCanEditSavedAdvancedSearch.01",
       "description": "Test Case 82230:Verify user can edit saved \"Advanced\" search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91438"
+        }
+      ],
       "locations": [
         "Best Location Automation",
         "1111 Automation"
@@ -473,6 +703,11 @@
     {
       "rowID": "verifyUserCanCloseAdvancedSearchWindow.01",
       "description": "Test Case 82232:Verify user can close \"Advanced\" search window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91439"
+        }
+      ],
       "location": "Best Location Automation"
     }
   ],
@@ -481,6 +716,11 @@
     {
       "rowID": "verifyUserCanClearAllFieldsInAdvancedSearchWindow.01",
       "description": "Test Case 84876:Verify user can clear all fields in the \"Advanced Search\" window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91469"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",
@@ -512,6 +752,11 @@
     {
       "rowID": "verifyUserSeesSearchMaskWithAllEnteredInfo.01",
       "description": "Test Case 84878:Verify user sees \"Search\" mask with all entered info",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91470"
+        }
+      ],
       "location": "Best Location Automation",
       "customer": "Alex1 Zakaulov1",
       "employee": "Criss Lai",

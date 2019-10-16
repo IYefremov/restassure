@@ -3,6 +3,11 @@
     {
       "rowID": "verifyUserCanOpenMonitorWithFullSetOfElements.01",
       "description": "Test Case 81749:Verify user can open \"Monitor\" with full set of elements",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91218"
+        }
+      ],
       "location": "Best Location Automation",
       "titles": [
         "Order / Type / Department",
@@ -27,6 +32,11 @@
     {
       "rowID": "verifyUserCanOpenAndCloseTermsAndConditions.01",
       "description": "Test Case 81751:Verify user can open and close \"Terms&Conditions\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91492"
+        }
+      ],
       "location": "Best Location Automation"
     }
   ],
@@ -35,6 +45,11 @@
     {
       "rowID": "verifyUserCanOpenAndClosePrivacyPolicy.01",
       "description": "Test Case 81752:Verify user can open and close \"Privacy Policy\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91493"
+        }
+      ],
       "location": "Best Location Automation"
     }
   ],
@@ -43,6 +58,11 @@
     {
       "rowID": "verifyUserCanOpenAndCloseIntercom.01",
       "description": "Test Case 81753:Verify user can open and close \"Intercom\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91495"
+        }
+      ],
       "location": "Best Location Automation"
     }
   ],
@@ -51,6 +71,11 @@
     {
       "rowID": "verifyUserCanChangeLocation.01",
       "description": "Test Case 81899:Verify user can change \"location\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91419"
+        }
+      ],
       "searchLocation": "1111 Automation",
       "location": "Best Location Automation"
     }
@@ -60,6 +85,11 @@
     {
       "rowID": "verifyUserCanChangeLocationUsingSearch.01",
       "description": "Test Case 81901:Verify user can change location by using \"search\" field",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91420"
+        }
+      ],
       "searchLocation": "Anastasia",
       "location": "Anastasia_Location"
     }
@@ -69,6 +99,11 @@
     {
       "rowID": "verifyUserCanUsePaging.01",
       "description": "Test Case 81902:Verify user can use paging",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91490"
+        }
+      ],
       "location": "1111 Automation"
     }
   ],
@@ -77,6 +112,11 @@
     {
       "rowID": "verifyUserCanFilterRObyDepartments.01",
       "description": "Test Case 82624:User can filter RO by Departments",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91414"
+        }
+      ],
       "location": "1111 Automation",
       "departments": [
         "All",
@@ -90,6 +130,11 @@
     {
       "rowID": "verifyUserCanFilterRObyPhases.01",
       "description": "Test Case 82625:User can filter RO by Phases",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91415"
+        }
+      ],
       "location": "1111 Automation",
       "phases": [
         "All",
@@ -103,6 +148,11 @@
     {
       "rowID": "verifyUserCanSelectLocation.01",
       "description": "Test Case 82657:User can select location",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91381"
+        }
+      ],
       "location": "1111 Automation"
     }
   ],
@@ -111,6 +161,11 @@
     {
       "rowID": "verifyUserCanSearchWoUsingSearchFilter.01",
       "description": "Test Case 82659:User can search WO using search filter",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91382"
+        }
+      ],
       "location": "1111 Automation",
       "vinNum": "O-000-152073"
     }
@@ -120,6 +175,11 @@
     {
       "rowID": "verifyUserCanSeeAndChangeRoDetails.01",
       "description": "Test Case 82627:User can see and change RO details",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91383"
+        }
+      ],
       "location": "1111 Automation",
       "vinNum": "O-000-152073",
       "title": "Order / Type / Department",
@@ -134,6 +194,11 @@
     {
       "rowID": "verifyUserCanSearchByRepairStatus.01",
       "description": "Test Case 82222:User can search by \"Repair Status\"(In Progress - All)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91432"
+        }
+      ],
       "location": "1111 Automation",
       "vinNum": "O-000-152073",
       "title": "Order / Type / Department",
@@ -149,6 +214,11 @@
     {
       "rowID": "verifyUserCannotChangePoForInvoicedOrders.01",
       "description": "Test Case 84986:Verify user can't change \"PO#\" for invoiced orders",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91387"
+        }
+      ],
       "location": "Best Location Automation",
       "orderNumber": "O-062-00197"
     }
@@ -158,6 +228,11 @@
     {
       "rowID": "verifyUserCanSeeInvoiceOfRo.01",
       "description": "Test Case 83641:User can see Invoice of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91386"
+        }
+      ],
       "location": "New_zayats_location",
       "orderNumber": "O-000-152441",
       "invoiceNumber": "I-000-00997"
@@ -168,6 +243,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoToCheckInCheckOut.01",
       "description": "Test Case 82691:User can change status of RO to Check In/ Check Out",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91391"
+        }
+      ],
       "location": "Best Location Automation",
       "orderNumber": "O-000-147159"
     }
@@ -177,6 +257,11 @@
     {
       "rowID": "verifyUserCanShowOrCloseNotesToTheLeftOfRo.01",
       "description": "Test Case 83258:User can show or close Notes to the left of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91409"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073"
     }
@@ -186,6 +271,11 @@
     {
       "rowID": "verifyUserCanTypeAndNotSaveNotesWithXIcon.01",
       "description": "Test Case 83261:User can type and not save notes (X-icon) (Left of RO)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91411"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073"
     }
@@ -195,6 +285,11 @@
     {
       "rowID": "verifyUserCanTypeAndNotSaveNotesWithClose.01",
       "description": "Test Case 83262:User can type and not save notes (Close) (Left of RO)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91412"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073"
     }
@@ -204,6 +299,11 @@
     {
       "rowID": "verifyUserCanOpenRoDetails.01",
       "description": "Test Case 82726:Repair Order details",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91234"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073"
     }
@@ -213,6 +313,11 @@
     {
       "rowID": "verifyUserCanChangeStockOfRo.01",
       "description": "Test Case 82882:User can change \"Stock#\" of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91337"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "stockNumbers": [
@@ -226,6 +331,11 @@
     {
       "rowID": "verifyUserCanChangeRoNumOfRo.01",
       "description": "Test Case 82885:User can change \"RO#\" of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91334"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "roNumbers": [
@@ -239,6 +349,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoToNew.01",
       "description": "Test Case 82858:User can change Status of RO to \"New\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91340"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "New"
@@ -249,6 +364,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoToOnHold.01",
       "description": "Test Case 82861:User can change Status of RO to \"On Hold\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91342"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "On Hold"
@@ -259,6 +379,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoToApproved.01",
       "description": "Test Case 82863:User can change Status of RO to \"Approved\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91344"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved"
@@ -269,6 +394,11 @@
     {
       "rowID": "verifyUserCannotChangeStatusOfRoToDraft.01",
       "description": "Test Case 82865:User can change Status of RO to \"Draft\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91346"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Draft"
@@ -279,6 +409,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoToClosedWithNoneReason.01",
       "description": "Test Case 85902:User can change Status of RO to \"Closed\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91347"
+        }
+      ],
       "location": "Best Location Automation",
       "timeFrame": "Last Year",
       "status": "Closed",
@@ -292,6 +427,11 @@
     {
       "rowID": "verifyUserCanChangePriorityOfRoToLow.01",
       "description": "Test Case 82771:User can change Priority of RO to \"Low\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91358"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priority": "Low"
@@ -302,6 +442,11 @@
     {
       "rowID": "verifyUserCanChangePriorityOfRoToNormal.01",
       "description": "Test Case 82775:User can change Priority of RO to \"Normal\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91360"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priority": "Normal"
@@ -312,6 +457,11 @@
     {
       "rowID": "verifyUserCanChangePriorityOfRoToHigh.01",
       "description": "Test Case 82777:User can change Priority of RO to \"High\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91362"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priority": "High"
@@ -322,6 +472,11 @@
     {
       "rowID": "verifyUserCanAddNewService.01",
       "description": "Test Case 82732:User can add new service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91365"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priceType": "All",
@@ -337,6 +492,11 @@
     {
       "rowID": "verifyUserCanAddNewMoneyService.01",
       "description": "Test Case 86118:User can add new service (Money)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91366"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priceType": "Money",
@@ -352,6 +512,11 @@
     {
       "rowID": "verifyUserCanAddNewLaborService.01",
       "description": "Test Case 86121:User can add new service (Labour)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91367"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priceType": "Labor",
@@ -367,6 +532,11 @@
     {
       "rowID": "verifyUserCanAddNewPartService.01",
       "description": "Test Case 86122:User can add new service (Part)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91368"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priceType": "Part",
@@ -384,6 +554,11 @@
     {
       "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon.01",
       "description": "Test Case 82744:User can select details of \"Add new Service\" and not add it (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91370"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priceType": "All",
@@ -398,6 +573,11 @@
     {
       "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton.01",
       "description": "Test Case 82759:User can select details of \"Add new Service\" and not add it (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91372"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "priceType": "All",
@@ -412,6 +592,11 @@
     {
       "rowID": "verifyUserCanChangeFlagOfRoToWhite.01",
       "description": "Test Case 82908:User can change a Flag of RO to white",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91313"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "flag": "White"
@@ -422,6 +607,11 @@
     {
       "rowID": "verifyUserCanChangeFlagOfRoToRed.01",
       "description": "Test Case 82910:User can change a Flag of RO to red",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91315"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "flag": "Important"
@@ -432,6 +622,11 @@
     {
       "rowID": "verifyUserCanChangeFlagOfRoToOrange.01",
       "description": "Test Case 82912:User can change a Flag of RO to orange",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91317"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "flag": "Low priority"
@@ -442,6 +637,11 @@
     {
       "rowID": "verifyUserCanChangeFlagOfRoToYellow.01",
       "description": "Test Case 82914:User can change a Flag of RO to yellow",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91319"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "flag": "Yellow"
@@ -452,6 +652,11 @@
     {
       "rowID": "verifyUserCanChangeFlagOfRoToGreen.01",
       "description": "Test Case 82916:User can change a Flag of RO to green",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91321"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "flag": "Green"
@@ -462,6 +667,11 @@
     {
       "rowID": "verifyUserCanChangeFlagOfRoToBlue.01",
       "description": "Test Case 82918:User can change a Flag of RO to blue",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91323"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "flag": "Blue"
@@ -472,6 +682,11 @@
     {
       "rowID": "verifyUserCanChangeFlagOfRoToPurple.01",
       "description": "Test Case 82920:User can change a Flag of RO to purple",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91325"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "flag": "Test"
@@ -526,6 +741,11 @@
     {
       "rowID": "verifyUserCanSeeServicesOfRo.01",
       "description": "Test Case 82955:User can see Services of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91282"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "servicesTableFields": [
@@ -545,6 +765,11 @@
     {
       "rowID": "verifyUserCanChangeVendorPriceOfRo.01",
       "description": "Test Case 82967:User can change Vendor Price of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91283"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -560,6 +785,11 @@
     {
       "rowID": "verifyUserCanChangeVendorTechnicianOfRo.01",
       "description": "Test Case 82968:User can change Vendor/Technician of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91284"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -577,6 +807,11 @@
     {
       "rowID": "verifyUserCanCreateNoteOfServiceOfRo.01",
       "description": "Test Case 82970:User can create Note of the Service of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91285"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -589,6 +824,11 @@
     {
       "rowID": "verifyUserCanChangeTargetDateOfRo.01",
       "description": "Test Case 82926:User can change Target Date of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91310"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -606,6 +846,11 @@
     {
       "rowID": "verifyUserCanSeeMoreInformationOfRo.01",
       "description": "Test Case 82949:User can see More Information of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91307"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -624,6 +869,11 @@
     {
       "rowID": "verifyUserCanTypeAndNotSaveNoteOfRoService.01",
       "description": "Test Case 82973:User can type and not save Note of the Service of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91286"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -642,6 +892,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoServiceToActive.01",
       "description": "Test Case 82971:User can change Status of RO to \"Active\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91287"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -661,6 +916,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoServiceToCompleted.01",
       "description": "Test Case 82969:User can change Status of RO to \"Complete\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91288"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -679,6 +939,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoServiceToAudited.01",
       "description": "Test Case 83619:User can change Status of RO to \"Audited\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91289"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -697,6 +962,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoServiceToRework.01",
       "description": "Test Case 83636:User can change Status of RO to \"Rework\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91291"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -715,6 +985,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoServiceToRefused.01",
       "description": "Test Case 83635:User can change Status of RO to \"Refused\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91290"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -733,6 +1008,11 @@
     {
       "rowID": "verifyUserCanChangeStatusOfRoServiceToSkipped.01",
       "description": "Test Case 83637:User can change Status of RO to \"Skipped\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91292"
+        }
+      ],
       "location": "1111 Automation",
       "status": "Approved",
       "orderNumber": "O-000-152073",
@@ -751,6 +1031,11 @@
     {
       "rowID": "verifyUserCanSeeChangesOfPhasesInLogInfo.01",
       "description": "Test Case 82897:User can see changes of Phases in Log Info",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91327"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -773,6 +1058,11 @@
     {
       "rowID": "verifyUserCanChangeQuantityForService.01",
       "description": "Test Case 84990:Verify user can change quantity for service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91293"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-168-00242",
       "status": "Approved",
@@ -786,6 +1076,11 @@
     {
       "rowID": "verifyUserCanEnterNegativeNumberForServiceQuantity.01",
       "description": "Test Case 84992:Verify user can't enter a negative number for service quantity",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91294"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-168-00242",
       "status": "Approved",
@@ -798,6 +1093,11 @@
     {
       "rowID": "verifyUserCannotEnterTextForServiceQuantity.01",
       "description": "Test Case 84993:Verify user can't enter text for service quantity",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91295"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-168-00242",
       "status": "Approved",
@@ -811,6 +1111,11 @@
     {
       "rowID": "verifyUserCanChangePriceForService.01",
       "description": "Test Case 84994:Verify user can change price for service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91296"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -824,6 +1129,11 @@
     {
       "rowID": "verifyUserCanEnterNegativeNumberForServicePrice.01",
       "description": "Test Case 84995:Verify user can enter a negative number for service price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91297"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152449",
       "status": "Approved",
@@ -836,6 +1146,11 @@
     {
       "rowID": "verifyUserCannotEnterTextForServicePrice.01",
       "description": "Test Case 84996:Verify user can't enter a text for service price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91298"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -849,6 +1164,11 @@
     {
       "rowID": "verifyUserCanSeePhaseOfRo.01",
       "description": "Test Case 82960:User can see Phase of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91273"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -866,6 +1186,11 @@
     {
       "rowID": "verifyUserCanSeeStartedPrice.01",
       "description": "Test Case 82974:User can see \"Started\" → Price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91274"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -883,6 +1208,11 @@
     {
       "rowID": "verifyUserCanSeeStartedVendorPrice.01",
       "description": "Test Case 82975:User can see \"Started\" → Vendor Price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91275"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -900,6 +1230,11 @@
     {
       "rowID": "verifyUserCanSeeBreadCrumb.01",
       "description": "Test Case 87414:User can see breadcrumb",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91220"
+        }
+      ],
       "location": "1111 Automation"
     }
   ],
@@ -908,6 +1243,11 @@
     {
       "rowID": "verifyUserCanSeeWoInBreadCrumb.01",
       "description": "Test Case 87415:User can see WO in the breadcrumb",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91221"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073"
     }
@@ -917,6 +1257,11 @@
     {
       "rowID": "verifyUserCanChangeLocationOnDetailsPage.01",
       "description": "Test Case 87416:User can change location being on detail's page of WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91222"
+        }
+      ],
       "location": "1111 Automation",
       "locationChanged": "Rozstalnoy_location",
       "orderNumber": "O-000-152073"
@@ -927,6 +1272,11 @@
     {
       "rowID": "verifyUserCanReturnToMainPageOfWo.01",
       "description": "Test Case 87417:User can return to the main page of WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91223"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073"
     }
@@ -936,6 +1286,11 @@
     {
       "rowID": "verifyUserCanChangeTechnicianOfRo.01",
       "description": "Test Case 82976:User can change Technician of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91276"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -952,6 +1307,11 @@
     {
       "rowID": "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo.01",
       "description": "Test Case 83089:User can change and not save Technician of RO (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91277"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -966,6 +1326,11 @@
     {
       "rowID": "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo.01",
       "description": "Test Case 83090:User can change and not save Technician of RO (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91278"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073",
       "status": "Approved",
@@ -980,6 +1345,11 @@
     {
       "rowID": "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase.01",
       "description": "Test Case 91010:User can see and change Technicians of the current phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91376"
+        }
+      ],
       "location": "Rozstalnoy_location",
       "orderNumber": "O-000-152649",
       "status": "Approved",
