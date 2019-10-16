@@ -21,7 +21,7 @@ import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//ul[@id='mainMenu']")
-    private WebElement mainmenu;
+    private WebElement mainMenu;
 
     @FindBy(id = "menuBtn")
     private WebElement menuButton;
@@ -160,11 +160,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     private void clickMainMenuItem(String mainMenu) {
         try {
             wait.until(ExpectedConditions
-                    .elementToBeClickable(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
+                    .elementToBeClickable(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
                     .click();
         } catch (Exception e) {
-            scrollToElement(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
-            clickWithJS(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            scrollToElement(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            clickWithJS(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
         }
         waitABit(1000);
     }

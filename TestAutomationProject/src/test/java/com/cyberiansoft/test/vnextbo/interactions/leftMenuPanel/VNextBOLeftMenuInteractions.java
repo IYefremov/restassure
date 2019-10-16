@@ -90,7 +90,7 @@ public class VNextBOLeftMenuInteractions {
 
     private void clickMainMenuItem(String mainMenu) {
         final WebElement menuElement = leftMenuPanel
-                .getMainmenu()
+                .getMainMenu()
                 .findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"));
         WaitUtilsWebDriver.waitForElementNotToBeStale(menuElement);
         Utils.clickElement(menuElement);

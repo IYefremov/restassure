@@ -17,16 +17,35 @@ import java.util.concurrent.TimeUnit;
 public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='users-form-popup-view']/button")
-    private WebElement adduserbtn;
+    public WebElement addNewUserBtn;
 
     @FindBy(xpath = "//div[@id='users-list']/table")
-    private WebTable userstable;
+    public WebTable usersTable;
 
     @FindBy(xpath = "//tfoot//button[contains(@data-bind, 'nextPage')]")
-    private WebElement nextpagebtn;
+    public WebElement nextPageBtn;
 
     @FindBy(xpath = "//tfoot//button[contains(@data-bind, 'previousPage')]")
-    private WebElement previouspagebtn;
+    public WebElement previousPageBtn;
+
+    @FindBy(xpath = "(//button[@class='pager__item' and contains(@data-bind, 'click: pager.firstPage')])[1]")
+    public WebElement firstPageBtn;
+
+    @FindBy(xpath = "(//button[@class='pager__item' and contains(@data-bind, 'click: pager.lastPage')])[1]")
+    public WebElement lastPageBtn;
+
+    @FindBy(xpath = "(//span[@class='k-input'])[1]")
+    public WebElement itemsPerPageField;
+
+    public WebElement specificPageButton(int pageNumber) {
+        return driver.findElement(By.xpath("(//button[@class='pager__item active' and @data-page-index='" +
+                (pageNumber - 1) + "'])[1]"));
+    }
+
+    public WebElement itemsPerPageOption(int itemsPerPage) {
+        return driver.findElement(By.xpath("(//ul[@class='k-list k-reset']/li[text()='" +
+                itemsPerPage + " items per page'])[1]"));
+    }
 
     @FindBy(id = "advSearchUsers-freeText")
     private WebElement searchField;
@@ -36,11 +55,11 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOf(userstable.getWrappedElement()));
+                .until(ExpectedConditions.visibilityOf(usersTable.getWrappedElement()));
     }
 
     public VNexBOAddNewUserDialog clickAddUserButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(adduserbtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(addNewUserBtn)).click();
         return PageFactory.initElements(
                 driver, VNexBOAddNewUserDialog.class);
     }
@@ -48,8 +67,8 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
     public List<WebElement> getUsersTableRows() {
         waitLong
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.visibilityOf(userstable.getWrappedElement()));
-        return userstable.getTableRows();
+                .until(ExpectedConditions.visibilityOf(usersTable.getWrappedElement()));
+        return usersTable.getTableRows();
     }
 
     public int getUsersTableRowCount() {
@@ -65,7 +84,7 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
                     wait
                             .ignoring(StaleElementReferenceException.class)
                             .until(ExpectedConditions.visibilityOf(row.findElement(By.xpath("./td[" +
-                                    userstable.getTableColumnIndex("Email") + "]"))))
+                                    usersTable.getTableColumnIndex("Email") + "]"))))
                             .getText()
                             .equals(usermail)) {
                 userrow = row;
@@ -87,12 +106,12 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
         boolean found = false;
         boolean nextpage = true;
         while (nextpage) {
-            if (nextpagebtn.getAttribute("disabled") != null) {
+            if (nextPageBtn.getAttribute("disabled") != null) {
                 found = isUserPresentOnCurrentPageByUserEmail(usermail);
                 nextpage = false;
             } else if (!isUserPresentOnCurrentPageByUserEmail(usermail)) {
-                wait.until(ExpectedConditions.elementToBeClickable(nextpagebtn));
-                clickWithJS(nextpagebtn);
+                wait.until(ExpectedConditions.elementToBeClickable(nextPageBtn));
+                clickWithJS(nextPageBtn);
                 waitABit(2500);
             } else {
                 found = true;
@@ -158,7 +177,7 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
         String username = "";
         WebElement row = getTableRowWithUserMail(usermail);
         if (row != null) {
-            username = row.findElement(By.xpath("./td[" + userstable.getTableColumnIndex("Name") + "]")).getText();
+            username = row.findElement(By.xpath("./td[" + usersTable.getTableColumnIndex("Name") + "]")).getText();
         } else
             Assert.assertFalse(false, "Can't find user with the following email: " + usermail);
         return username;
@@ -168,7 +187,7 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
         String userphone = "";
         WebElement row = getTableRowWithUserMail(usermail);
         if (row != null) {
-            userphone = row.findElement(By.xpath("./td[" + userstable.getTableColumnIndex("Phone") + "]")).getText();
+            userphone = row.findElement(By.xpath("./td[" + usersTable.getTableColumnIndex("Phone") + "]")).getText();
         } else
             Assert.assertFalse(false, "Can't find user with the following email: " + usermail);
         return userphone;
