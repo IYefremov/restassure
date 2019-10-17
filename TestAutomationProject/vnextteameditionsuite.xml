@@ -53,6 +53,8 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceLaborCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.questionforms.BasicQuestionFormTests"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.services.option.multiple.SingleSelectionServiceTests"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhase"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhaseAndService"/>
         </classes>
     </test>
 </suite>
