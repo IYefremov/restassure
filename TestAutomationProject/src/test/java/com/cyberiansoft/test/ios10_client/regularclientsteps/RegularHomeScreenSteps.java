@@ -66,4 +66,9 @@ public class RegularHomeScreenSteps {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
         homeScreen.waitHomeScreenLoaded();
     }
+
+    public static void updateMainDataBase() {
+        RegularHomeScreen homeScreen = new RegularHomeScreen();
+        homeScreen.updateDatabase();
+    }
 }

@@ -348,8 +348,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 						+ technician + "\")]/XCUIElementTypeTextField[1]").getAttribute("value");
 	}
 	
-	public void checkPreexistingDamage() {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= \"Pre-existing damage\"]/XCUIElementTypeButton[@name= \"black unchecked\"]").click();
+	public void checkPreexistingDamage(String damageName) {
+		appiumdriver.findElementByAccessibilityId(damageName).findElement(MobileBy.AccessibilityId("black unchecked")).click();
+		//appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= \"Pre-existing damage\"]/XCUIElementTypeButton[@name= \"black unchecked\"]").click();
 	}
 	
 	public String getCustomTechnicianPercentage(String technician) {

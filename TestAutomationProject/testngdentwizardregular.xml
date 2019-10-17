@@ -11,7 +11,6 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.DentWizardRegularVersionTestCases">
         <methods>
 
-
           <include name="testValidVINCheck" />
           <include name="testTurningMultipleWorkOrdersIntoASingleInvoice" />
           <include name="testSameOrderTypeRequiredForTurningMultipleWorkOrdersIntoASingleInvoice" />
@@ -65,11 +64,11 @@
           <include name="testSendMultipleEmails" />  
           <include name="testWorkOrderDiscountOverrideFeature" />
           <include name="testCompletedROOnlyRequirementForInvoicing" />
+          <include name="testEmailingPhotosInAuctionPackage" />
+          <include name="testEmailingPhotosInServiceDrivePackage" />
           <!--<include name="testEnterprizeWorkOrderQuestionFormsInforced" />
           <include name="testSuccessfulEmailOfPicturesUsingNotesFeature" />
-          <include name="testEmailingPhotosInEconomicalInspection" />
-          <include name="testEmailingPhotosInAuctionPackage" />
-          <include name="testEmailingPhotosInServiceDrivePackage" />-->
+          <include name="testEmailingPhotosInEconomicalInspection" />-->
           <include name="testPONumberSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen" />
           <include name="testCarHistoryFeature" />

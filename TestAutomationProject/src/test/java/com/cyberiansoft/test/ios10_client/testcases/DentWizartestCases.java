@@ -3235,7 +3235,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails("Scratch (Exterior)");
 		selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
         Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-		selectedServiceDetailsScreen.checkPreexistingDamage();
+		selectedServiceDetailsScreen.checkPreexistingDamage("Pre-existing damage");
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();	
 		servicesScreen.cancelSearchAvailableService();
 		Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));

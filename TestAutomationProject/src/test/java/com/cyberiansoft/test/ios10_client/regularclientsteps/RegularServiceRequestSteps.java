@@ -93,9 +93,15 @@ public class RegularServiceRequestSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHECK_IN);
         waitServiceRequestScreenLoaded();
     }
+
     public static void clickServiceRequestUndoCheckInAction(String serviceRequestNumber) {
         selectServiceRequest(serviceRequestNumber);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.UNDO_CHECK_IN);
         waitServiceRequestScreenLoaded();
+    }
+
+    public static void clickServiceRequestAppointmentsAction(String serviceRequestNumber) {
+        selectServiceRequest(serviceRequestNumber);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.APPOINTMENTS);
     }
 }

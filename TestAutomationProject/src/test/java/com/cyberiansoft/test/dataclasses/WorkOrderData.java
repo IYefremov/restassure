@@ -3,11 +3,17 @@ package com.cyberiansoft.test.dataclasses;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 import java.util.Map;
 
 public class WorkOrderData {
+
+    @Getter
+    @Setter
+    @JsonProperty("workOrderID")
+    String workOrderID;
 
     @JsonProperty("workOrderType")
     String workOrderType;

@@ -2589,14 +2589,13 @@
                   "isSelected": false
                 }
               ],
-              "serviceNewTechnician":
-                {
-                  "technicianFirstName": "Michael",
-                  "technicianLastName": "Giordano",
-                  "technicianPriceValue": "108.00",
-                  "technicianPercentageValue": "50.00",
-                  "isSelected": false
-                }
+              "serviceNewTechnician": {
+                "technicianFirstName": "Michael",
+                "technicianLastName": "Giordano",
+                "technicianPriceValue": "108.00",
+                "technicianPercentageValue": "50.00",
+                "isSelected": false
+              }
             }
           },
           {
@@ -2616,14 +2615,13 @@
                   "isSelected": true
                 }
               ],
-              "serviceNewTechnician":
-                {
-                  "technicianFirstName": "Michael",
-                  "technicianLastName": "Giordano",
-                  "technicianPriceValue": "80.00",
-                  "technicianPercentageValue": "33.33",
-                  "isSelected": false
-                },
+              "serviceNewTechnician": {
+                "technicianFirstName": "Michael",
+                "technicianLastName": "Giordano",
+                "technicianPriceValue": "80.00",
+                "technicianPercentageValue": "33.33",
+                "isSelected": false
+              },
               "vehicleParts": [
                 {
                   "vehiclePartName": "Left Fender"
@@ -2665,7 +2663,7 @@
             "moneyService": {
               "serviceName": "PDR Panel",
               "servicePrice": "82",
-              "serviceNotes" : "Declined right door",
+              "serviceNotes": "Declined right door",
               "vehicleParts": [
                 {
                   "vehiclePartName": "Hood"
@@ -2684,7 +2682,7 @@
             "moneyService": {
               "serviceName": "Paint - Panel",
               "servicePrice": "114",
-              "serviceNotes" : "Declined hood",
+              "serviceNotes": "Declined hood",
               "vehicleParts": [
                 {
                   "vehiclePartName": "Left Rear Door"
@@ -2762,14 +2760,13 @@
             }
           }
         ],
-        "damageData":
-          {
-            "damageGroupName": "Paint",
-            "moneyService": {
-              "serviceName": "Paint - Door Handle",
-              "servicePrice": "97"
-            }
+        "damageData": {
+          "damageGroupName": "Paint",
+          "moneyService": {
+            "serviceName": "Paint - Door Handle",
+            "servicePrice": "97"
           }
+        }
       }
     }
   ],
@@ -2802,8 +2799,7 @@
             }
           }
         ],
-        "damageData":
-        {
+        "damageData": {
           "damageGroupName": "Wheels",
           "moneyService": {
             "serviceName": "Wheel Cover 2",
@@ -2895,6 +2891,769 @@
                   "vehiclePartName": "Right Front Wheel"
                 }
               ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testAddingAPOToAnInvoice": [
+    {
+      "rowID": "testAddingAPOToAnInvoice.01",
+      "description": "Test Case 19548:Test adding a PO# to an invoice",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1GCGG39N8SF170116",
+          "vehicleMake": "Chevrolet",
+          "vehicleModel": "Chevy Van",
+          "vehicleYear": "1995",
+          "vehicleStock": "700043"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR 6 Panel"
+            }
+          },
+          {
+            "damageGroupName": "Interior-Fabric",
+            "moneyService": {
+              "serviceName": "Tear/Burn >2\" (Fabric)"
+            }
+          }
+        ],
+        "workOrderPrice": "153.00"
+      },
+      "invoiceData": {
+        "poNumber": "170116",
+        "questionScreenData": {
+          "screenName": "AVIS Questions",
+          "questionData": {
+            "questionAnswer": "Rental-921",
+            "listQuestion": true,
+            "screenIndex": 0,
+            "screenHDIndex": 0
+          }
+        }
+      }
+    }
+  ],
+  "testAddingPOToAnInvoiceContainingMultipleWorkOrders": [
+    {
+      "rowID": "testAddingPOToAnInvoiceContainingMultipleWorkOrders.01",
+      "description": "Test Case 19670:Test adding a PO# to an invoice containing multiple Work Orders",
+      "workOrdersData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "JTHBL5EF1B5898395",
+            "vehicleMake": "Lexus",
+            "vehicleModel": "LS 460",
+            "vehicleYear": "2011"
+          },
+          "damagesData": [
+            {
+              "damageGroupName": "PDR",
+              "orderPanelName": "PDR",
+              "moneyService": {
+                "serviceName": "PDR Vehicle",
+                "servicePrice": "312",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Left Rear Door"
+                  },
+                  {
+                    "vehiclePartName": "Right Rear Door"
+                  }
+                ]
+              }
+            }
+          ],
+          "workOrderPrice": "312.00"
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "YS3EH45G083809478",
+            "vehicleMake": "Saab",
+            "vehicleModel": "9-5",
+            "vehicleYear": "2008"
+          },
+          "damagesData": [
+            {
+              "damageGroupName": "Interior",
+              "orderPanelName": "Interior Repair",
+              "moneyService": {
+                "serviceName": "Leather Repair",
+                "servicePrice": "78"
+              }
+            }
+          ],
+          "workOrderPrice": "78.00"
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "1HGCP26358A531384",
+            "vehicleMake": "Honda",
+            "vehicleModel": "Accord",
+            "vehicleYear": "2008"
+          },
+          "damagesData": [
+            {
+              "damageGroupName": "Paint",
+              "orderPanelName": "Paint",
+              "moneyService": {
+                "serviceName": "Black Out",
+                "servicePrice": "83"
+              }
+            }
+          ],
+          "workOrderPrice": "83.00"
+        }
+      ],
+      "invoiceData": {
+        "poNumber": "957884"
+      }
+    }
+  ],
+  "testCopyVehicleFeature": [
+    {
+      "rowID": "testCopyVehicleFeature.01",
+      "description": "Test Case 19671:Test Copy Vehicle feature",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FMJU1J59BE847719",
+          "vehicleMake": "Ford",
+          "vehicleModel": "Expedition",
+          "vehicleYear": "2011"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Other",
+            "moneyService": {
+              "serviceName": "Window Tint",
+              "servicePrice": "245"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testCopyServicesFeature": [
+    {
+      "rowID": "testCopyServicesFeature.01",
+      "description": "Test Case 19672:Test Copy Services feature",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1GTEC19V24E688786",
+          "vehicleMake": "GMC",
+          "vehicleModel": "Sierra 1500",
+          "vehicleYear": "2004"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Black Out",
+              "servicePrice": "304"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testPreExistingDamageOption": [
+    {
+      "rowID": "testPreExistingDamageOption.01",
+      "description": "Test Case 24164:Test Pre-Existing Damage option",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1G6CD1153K4442903",
+          "vehicleMake": "Cadillac",
+          "vehicleModel": "DeVille",
+          "vehicleYear": "1989"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "Paintless Dent Removal",
+              "servicePrice": "90",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left A Pillar"
+                },
+                {
+                  "vehiclePartName": "Left Front Door"
+                },
+                {
+                  "vehiclePartName": "Metal Sunroof"
+                },
+                {
+                  "vehiclePartName": "Right Roof Rail"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Scratch (Exterior)",
+              "servicePrice": "45",
+              "preExistingDamage": "Pre-existing damage"
+            }
+          }
+        ],
+        "inspPrice": "405.00"
+      },
+      "workOrderData": {
+        "damagesData": [
+          {
+            "damageGroupName": "Interior",
+            "moneyService": {
+              "serviceName": "Odor Removal",
+              "servicePrice": "36"
+            }
+          }
+        ],
+        "workOrderPrice": "360.00",
+        "workOrderTotalSale": "1"
+      }
+    }
+  ],
+  "testTotalSaleRequirement": [
+    {
+      "rowID": "testTotalSaleRequirement.01",
+      "description": "Test Case 19676:Test Total Sale requirement",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FAFP56SX3G732276",
+          "vehicleMake": "Ford",
+          "vehicleModel": "Taurus",
+          "vehicleYear": "2003"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "Paintless Dent Removal",
+              "servicePrice": "235",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                },
+                {
+                  "vehiclePartName": "Left Fender"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Interior",
+            "moneyService": {
+              "serviceName": "Odor Removal",
+              "servicePrice": "18"
+            }
+          }
+        ],
+        "workOrderTotalSale": "675"
+      }
+    }
+  ],
+  "testPackagePricingForReadOnlyItems": [
+    {
+      "rowID": "testPackagePricingForReadOnlyItems.01",
+      "description": "Test Case 19678:Test package pricing for read only items",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JH4DB85901S347401",
+          "vehicleMake": "Acura",
+          "vehicleModel": "Integra",
+          "vehicleYear": "2001",
+          "vehicleStock": "347401",
+          "roNumber": "85901"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Interior-Leather",
+            "moneyService": {
+              "serviceName": "C/R/T 2 Rpr Lthr",
+              "servicePercentage": "3.00",
+              "servicePrice2": "82.02",
+              "serviceAdjustment": {
+                "adjustmentTotalAmaunt": "-$14.48"
+              }
+            }
+          },
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "Cust 2 Pnl",
+              "servicePrice2": "140.97",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Fender"
+                },
+                {
+                  "vehiclePartName": "Left Roof Rail"
+                },
+                {
+                  "vehiclePartName": "Right Fender"
+                }
+              ],
+              "serviceAdjustment": {
+                "adjustmentTotalAmaunt": "-$6.55"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation": [
+    {
+      "rowID": "testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation.01",
+      "description": "Test Case 19681:Test price policy for service items from Inspection through Invoice creation",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "3G2JB11H3NS929015",
+          "vehicleMake": "Pontiac",
+          "vehicleModel": "Sunbird",
+          "vehicleYear": "1992"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Vehicle",
+              "servicePrice": "340",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Front Door"
+                },
+                {
+                  "vehiclePartName": "Left Rear Door"
+                },
+                {
+                  "vehiclePartName": "Right Fender"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Panel",
+              "servicePrice": "83",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                },
+                {
+                  "vehiclePartName": "Left Fender"
+                }
+              ]
+            }
+          }
+        ],
+        "inspPrice": "506"
+      }
+    }
+  ],
+  "testSendMultipleEmails": [
+    {
+      "rowID": "testSendMultipleEmails.01",
+      "description": "Test Case 10263:Send Multiple Emails"
+    }
+  ],
+  "testWorkOrderDiscountOverrideFeature": [
+    {
+      "rowID": "testWorkOrderDiscountOverrideFeature.01",
+      "description": "Test Case 19683:Test Work Order Discount Override feature",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2HKRL18904H899264",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Odyssey",
+          "vehicleYear": "2004"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Panel",
+              "servicePrice": "95",
+              "servicePrice2": "133",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Fender"
+                },
+                {
+                  "vehiclePartName": "Right Fender"
+                }
+              ],
+              "serviceAdjustment": {
+                "adjustmentTotalAmaunt": "-$28.50"
+              }
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "WS&B - Panel",
+              "servicePrice": "90",
+              "servicePrice2": "214",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "invoiceData": {
+        "invoiceTotal": "214"
+      }
+    }
+  ],
+  "testCompletedROOnlyRequirementForInvoicing": [
+    {
+      "rowID": "testCompletedROOnlyRequirementForInvoicing.01",
+      "description": "Test Case 19685:Test completed RO only requirement for invoicing",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1P4GP44G0WB625435",
+          "vehicleMake": "Plymouth",
+          "vehicleModel": "Grand Voyager",
+          "vehicleYear": "1998"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Panel",
+              "servicePrice": "87",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Left Quarter Panel"
+                },
+                {
+                  "vehiclePartName": "Right Roof Rail"
+                },
+                {
+                  "vehiclePartName": "Trunk Lid"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Tow Hook Cover",
+              "servicePrice": "63"
+            }
+          },
+          {
+            "damageGroupName": "Wheels",
+            "moneyService": {
+              "serviceName": "Wheel",
+              "servicePrice": "71",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Right Front Wheel"
+                },
+                {
+                  "vehiclePartName": "Right Rear Wheel"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "testEnterprizeWorkOrderQuestionFormsInforced": [
+    {
+      "rowID": "testEnterprizeWorkOrderQuestionFormsInforced.01",
+      "description": "Test Case 10659:Test Enterprise Work Order question forms inforced",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FTRX02W35K097028",
+          "vehicleMake": "Ford",
+          "vehicleModel": "F-150",
+          "vehicleYear": "2005"
+        }
+      }
+    }
+  ],
+  "testSuccessfulEmailOfPicturesUsingNotesFeature": [
+    {
+      "rowID": "testSuccessfulEmailOfPicturesUsingNotesFeature.01",
+      "description": "Test Case 12633:Test successful email of pictures using Notes feature",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FTWF30P66E459436",
+          "vehicleMake": "Ford",
+          "vehicleModel": "F-350 Super Duty",
+          "vehicleYear": "2006",
+          "vehicleStock": "JDkd"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR 2 Panel",
+              "servicePrice": "53"
+            }
+          }
+        ]
+      },
+      "invoiceData": {
+        "questionScreenData": {
+          "screenName": "AVIS Questions",
+          "questionData": {
+            "questionAnswer": "Other-920",
+            "listQuestion": true,
+            "screenIndex": 0,
+            "screenHDIndex": 0
+          }
+        }
+      }
+    }
+  ],
+  "testEmailingPhotosInEconomicalInspection": [
+    {
+      "rowID": "testEmailingPhotosInEconomicalInspection.01",
+      "description": "Test Case 12634:Test emailing photos in Economical Inspection",
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "WAUBC044XMN771407",
+          "vehicleMake": "Audi",
+          "vehicleModel": "100",
+          "vehicleYear": "1991"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Hail Info",
+            "questionsData": [
+              {
+                "questionSetionName": "Estimate Conditions",
+                "questionAnswer": "Proper",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Name_TextView",
+                "questionAnswer": "Arthur Digby",
+                "textQuestion": true,
+                "screenIndex": 2,
+                "screenHDIndex": 1
+              },
+              {
+                "questionName": "Owner Address_TextView",
+                "questionAnswer": "2 Cedarcrest Boulevard",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner City_TextView",
+                "questionAnswer": "Toronto",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Ontario",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Canada",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "Owner Zip_TextView",
+                "questionAnswer": "14121",
+                "textQuestion": true,
+                "screenIndex": 3,
+                "screenHDIndex": 2
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "testEmailingPhotosInAuctionPackage": [
+    {
+      "rowID": "testEmailingPhotosInAuctionPackage.01",
+      "description": "Test Case 12635:Test emailing photos in Auction package",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FMZU84P8YU595050",
+          "vehicleMake": "Ford",
+          "vehicleModel": "Explorer",
+          "vehicleYear": "2000"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Vehicle",
+              "servicePrice": "635",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                },
+                {
+                  "vehiclePartName": "Left Fender"
+                },
+                {
+                  "vehiclePartName": "Right Fender"
+                },
+                {
+                  "vehiclePartName": "Roof"
+                }
+              ]
+            }
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Consignors",
+          "questionData": {
+            "questionAnswer": "Arizona FCU-390",
+            "listQuestion": true,
+            "screenIndex": 0,
+            "screenHDIndex": 0
+          }
+        }
+      }
+    }
+  ],
+  "testEmailingPhotosInServiceDrivePackage": [
+    {
+      "rowID": "testEmailingPhotosInServiceDrivePackage.01",
+      "description": "Test Case 12636:Test emailing photos in Service Drive package",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1GC1KVEG4BF191486",
+          "vehicleMake": "Chevrolet",
+          "vehicleModel": "Silverado 2500HD",
+          "vehicleYear": "2011"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "Paintless Dent Removal",
+              "servicePrice": "187",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Decklid"
+                },
+                {
+                  "vehiclePartName": "Left A Pillar"
+                }
+              ]
+            }
+          },
+          {
+            "damageGroupName": "Interior",
+            "moneyService": {
+              "serviceName": "Stain",
+              "servicePrice": "53"
+            }
+          }
+        ],
+        "workOrderTotalSale": "1",
+        "workOrderPrice": "427.00"
+      }
+    }
+  ],
+  "testPONumberSavesWithActiveKeyboardOnWOSummaryScreen": [
+    {
+      "rowID": "testPONumberSavesWithActiveKeyboardOnWOSummaryScreen.01",
+      "description": "Test Case 24131:Test PO# saves with active keyboard on WO summary screen",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "WDBTK56G17T154474",
+          "vehicleMake": "Mercedes-Benz",
+          "vehicleModel": "CLK",
+          "vehicleYear": "2007"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Vehicle",
+              "servicePrice": "260",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                },
+                {
+                  "vehiclePartName": "Left Quarter Panel"
+                },
+                {
+                  "vehiclePartName": "Right Roof Rail"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "260.00"
+      },
+      "invoiceData": {
+        "poNumber": "998601"
+      }
+    }
+  ],
+  "testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen": [
+    {
+      "rowID": "testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen.01",
+      "description": "Test Case 24132:Test Total Sale saves with active keyboard on WO summary screen",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1GCJC39U42F706004",
+          "vehicleMake": "Chevrolet",
+          "vehicleModel": "Silverado 3500",
+          "vehicleYear": "2002"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Paint",
+            "moneyService": {
+              "serviceName": "Paint - Hood",
+              "servicePrice": "135"
+            }
+          }
+        ],
+        "workOrderTotalSale": "675"
+      }
+    }
+  ],
+  "testCarHistoryFeature": [
+    {
+      "rowID": "testCarHistoryFeature.01",
+      "description": "Test Case 19673:Test Car History feature",
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JT2JA82L3S0887340",
+          "vehicleMake": "Toyota",
+          "vehicleModel": "Supra",
+          "vehicleYear": "1995",
+          "vehicleStock": "10534920",
+          "roNumber": "7340"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Interior-Plastic",
+            "moneyService": {
+              "serviceName": "Scrtch 1 Sect Plstc"
             }
           }
         ]

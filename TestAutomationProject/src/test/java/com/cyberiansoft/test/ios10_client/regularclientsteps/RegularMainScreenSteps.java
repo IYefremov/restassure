@@ -10,4 +10,9 @@ public class RegularMainScreenSteps {
         mainScreen.enterEmployeePassword(password);
         RegularHomeScreenSteps.waitForHomeScreen();
     }
+
+    public static void updateMainDataBase()  {
+        RegularMainScreen mainScreen = new RegularMainScreen();
+        mainScreen.updateDatabase();
+    }
 }

@@ -2121,12 +2121,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.setCityAppointmet(appointmentCity);
 		serviceRequestsScreen.saveAppointment();
 		serviceRequestsScreen.selectCloseAction();
-		serviceRequestsScreen = new ServiceRequestsScreen();
 		String newserviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(newserviceRequestNumber), ServiceRequestStatus.SCHEDULED.getValue());
 		serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
 		serviceRequestsScreen.selectRejectAction();
-		serviceRequestsScreen = new ServiceRequestsScreen();
 		serviceRequestsScreen.clickHomeButton();
 	}
 
@@ -2182,7 +2180,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsScreen.setCityAppointmet(appointmentCity);
 		serviceRequestsScreen.saveAppointment();
 		serviceRequestsScreen.selectCloseAction();
-		serviceRequestsScreen = new ServiceRequestsScreen();
 		Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.SCHEDULED.getValue());
 		serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
 		ServiceRequestdetailsScreen serviceRequestdetailsScreen = serviceRequestsScreen.selectDetailsRequestAction();

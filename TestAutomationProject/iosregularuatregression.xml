@@ -11,6 +11,11 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
 
+          <include name="testVerifyUpdateApplicationFromLastDBVersionForNewOne" />
+          <include name="testSRVerifyActionsOnCalendarForSRAppointments" />
+          <include name="testInspectionsMultipleInspectionsApproval" />
+
+
           <include name="testCreateInspectionVerifyOnBO" />
           <include name="testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO" />
           <include name="testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO" />
