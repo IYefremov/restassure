@@ -3,6 +3,11 @@
     {
       "rowID": "verifyUserCanAddLaborPriceService.01",
       "description": "Test Case 79095:Verify user can add \"Labor\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91560"
+        }
+      ],
       "serviceName": "New labor type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor",
@@ -16,6 +21,11 @@
     {
       "rowID": "verifyUserCanAddLaborPriceServiceWithUseLaborTimes.01",
       "description": "Test Case 79096:Verify user can add \"Labor\" price service with \"Use labor times\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91561"
+        }
+      ],
       "serviceName": "New labor type test name w/times",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor",
@@ -29,6 +39,11 @@
     {
       "rowID": "verifyUserCannotAddLaborServiceWithClickedRejectIcon.01",
       "description": "Test Case 79097:Verify user can't add new \"labor\" service when click reject",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91562"
+        }
+      ],
       "serviceName": "New labor type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor",
@@ -42,6 +57,11 @@
     {
       "rowID": "verifyUserCanAddPartPriceService.01",
       "description": "Test Case 79124:Verify user can add \"Part\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91574"
+        }
+      ],
       "serviceName": "New part type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Part"
@@ -52,6 +72,11 @@
     {
       "rowID": "verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName.01",
       "description": "Test Case 79125:Verify user can add \"Part\" price service with \"Category\", \"Subcategory\" and \"Part Name\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91564"
+        }
+      ],
       "serviceName": "New part type test name2",
       "serviceDescription": "Test description",
       "servicePriceType": "Part",
@@ -65,6 +90,11 @@
     {
       "rowID": "verifyUserCanDeleteLaborPriceService.01",
       "description": "Test Case 79129:Verify user can delete \"Labor\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91566"
+        }
+      ],
       "serviceName": "New labor type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor",
@@ -78,6 +108,11 @@
     {
       "rowID": "verifyUserCanRestoreDeletedLaborPriceService.01",
       "description": "Test Case 79130:Verify user can restore deleted \"Labor\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91566"
+        }
+      ],
       "serviceName": "New labor type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor",
@@ -92,6 +127,11 @@
     {
       "rowID": "verifyUserCanDeletePartPriceService.01",
       "description": "Test Case 79131:Verify user can delete \"Part\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91568"
+        }
+      ],
       "serviceName": "New part type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Part"
@@ -102,6 +142,11 @@
     {
       "rowID": "verifyUserCanRestoreDeletedPartPriceService.01",
       "description": "Test Case 79132:Verify user can restore deleted \"Part\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91568"
+        }
+      ],
       "serviceName": "New part type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Part",
@@ -113,6 +158,11 @@
     {
       "rowID": "verifyUserCanEditPartPriceService.01",
       "description": "Test Case 79133:Verify user can edit \"Part\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91569"
+        }
+      ],
       "serviceName": "New part type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Part",
@@ -124,6 +174,11 @@
     {
       "rowID": "verifyUserCanEditLaborPriceService.01",
       "description": "Test Case 79143:Verify user can edit \"Labor\" price service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91570"
+        }
+      ],
       "serviceName": "New part type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor"
@@ -134,6 +189,11 @@
     {
       "rowID": "verifyUserCanChangeSequenceNumberForMoneyServiceOrder.01",
       "description": "Test Case 79180:Verify user can change sequence number for \"Money\" service order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91571"
+        }
+      ],
       "serviceName": "New part type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor"
@@ -144,6 +204,11 @@
     {
       "rowID": "verifyUserCanChangeSequenceNumberForPercentageServiceOrder.01",
       "description": "Test Case 79181:Verify user can change sequence number for \"Percentage\" service order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91572"
+        }
+      ],
       "serviceName": "New labor type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor",
@@ -157,6 +222,11 @@
     {
       "rowID": "verifyUserCanChangeSequenceNumberForLaborServiceOrder.01",
       "description": "Test Case 79182:Verify user can change sequence number for \"Labor\" service order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91573"
+        }
+      ],
       "serviceName": "New labor type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor",
@@ -170,6 +240,11 @@
     {
       "rowID": "verifyUserCanChangeSequenceNumberForPartServiceOrder.01",
       "description": "Test Case 79185:Verify user can change sequence number for \"Part\" service order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91574"
+        }
+      ],
       "serviceName": "New labor type test name",
       "serviceDescription": "Test description",
       "servicePriceType": "Labor",

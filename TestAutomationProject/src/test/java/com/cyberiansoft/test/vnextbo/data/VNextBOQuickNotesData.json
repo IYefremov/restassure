@@ -3,6 +3,11 @@
     {
       "rowID": "verifyUserCanAddQuickNotes.01",
       "description": "Test Case 79070:Verify user can add new \"Quick Notes\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91526"
+        }
+      ],
       "quickNotesDescription": "Test Description"
     }
   ],
@@ -11,6 +16,11 @@
     {
       "rowID": "verifyQuickNoteIsNotAddedAfterReject.01",
       "description": "Test Case 79071:Verify user can't add new \"Quick Notes\" when click reject icon",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91527"
+        }
+      ],
       "quickNotesDescription": "Test Description"
     }
   ],
@@ -19,6 +29,11 @@
     {
       "rowID": "verifyUserCannotAddEmptyQuickNotes.01",
       "description": "Test Case 79072:Verify user can't add empty \"Quick Notes\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91528"
+        }
+      ],
       "quickNotesDescription": ""
     }
   ],
@@ -27,6 +42,11 @@
     {
       "rowID": "verifyUserCanDeleteQuickNotes.01",
       "description": "Test Case 79073:Verify user can delete \"Quick Notes\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91529"
+        }
+      ],
       "quickNotesDescription": "Test Description"
     }
   ],
@@ -35,6 +55,11 @@
     {
       "rowID": "verifyUserCanEditQuickNotes.01",
       "description": "Test Case 79074:Verify user can edit \"Quick Notes\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91530"
+        }
+      ],
       "quickNotesDescription": "Test Description",
       "quickNotesDescriptionEdited": "Description test for update"
     }
@@ -44,6 +69,11 @@
     {
       "rowID": "verifyUserCannotSaveUpdating.01",
       "description": "Test Case 79075:Verify user can't save updating when click \"Reject\" icon",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91531"
+        }
+      ],
       "quickNotesDescription": "Test Description",
       "quickNotesDescriptionEdited": "Test Description for updating"
     }
@@ -53,6 +83,11 @@
     {
       "rowID": "verifyUserCannotSaveEmptyUpdatedQuickNote.01",
       "description": "Test Case 79079:Verify user can't save empty updated \"Quick Notes\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91532"
+        }
+      ],
       "quickNotesDescription": "Test Description",
       "quickNotesDescriptionEdited": ""
     }
@@ -62,6 +97,11 @@
     {
       "rowID": "verifyUserCanMoveNotation.01",
       "description": "Test Case 79081:Verify user can move notation",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91533"
+        }
+      ],
       "quickNotesDescriptionList": [
         "Test Description",
         "Test Description for drag and drop"

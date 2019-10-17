@@ -3,6 +3,11 @@
     {
       "rowID": "verifyUserCanSearchByVIN.01",
       "description": "Test Case 81905:User can search by VIN",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91480"
+        }
+      ],
       "location": "1111 Automation",
       "vinNum": "32434234234234"
     }
@@ -12,6 +17,11 @@
     {
       "rowID": "verifyUserCanSearchByOrderNum.01",
       "description": "Test Case 81906:User can search by OrderNum",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91481"
+        }
+      ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152292"
     }
@@ -21,6 +31,11 @@
     {
       "rowID": "verifyUserCanSearchByRoNum.01",
       "description": "Test Case 81908:User can search by RONo",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91482"
+        }
+      ],
       "location": "1111 Automation",
       "roNumber": "O-000-152292"
     }
@@ -30,6 +45,11 @@
     {
       "rowID": "verifyUserCanSearchByFirstName.01",
       "description": "Test Case 81909:User can search by FirstName",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91483"
+        }
+      ],
       "location": "Best Location Automation",
       "firstName": "Alex1"
     }
@@ -39,6 +59,11 @@
     {
       "rowID": "verifyUserCanSearchByLastName.01",
       "description": "Test Case 81910:User can search by LastName",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91484"
+        }
+      ],
       "location": "Best Location Automation",
       "lastName": "Zakaulov1"
     }
@@ -48,6 +73,11 @@
     {
       "rowID": "verifyUserCanSearchByEmail.01",
       "description": "Test Case 82104:User can search by Email",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91485"
+        }
+      ],
       "location": "Best Location Automation",
       "email": "cyberiansoft.test@nada.ltd",
       "firstName": "Alex1",
@@ -59,6 +89,11 @@
     {
       "rowID": "verifyUserCanSearchByCompanyName.01",
       "description": "Test Case 82105:User can search by CompanyName",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91486"
+        }
+      ],
       "location": "Best Location Automation",
       "company": "TestAutomationCompany",
       "firstName": "Alex1",

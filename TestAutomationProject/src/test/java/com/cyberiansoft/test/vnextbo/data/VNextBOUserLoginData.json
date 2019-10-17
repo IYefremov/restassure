@@ -3,30 +3,55 @@
     {
       "rowID": "verifySettingsTabIsShown.01",
       "description": "88650 - \"Settings\" tab is shown for \"SuperUser\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91078"
+        }
+      ],
       "login": "cyberiansoft.test@nada.ltd",
       "password": "ZZzz11!!"
     },
     {
       "rowID": "verifySettingsTabIsShown.02",
       "description": "88646 - \"Settings\" tab is shown for \"Administrator\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91074"
+        }
+      ],
       "login": "yrozstalnoy+1@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsShown.03",
       "description": "88647 - \"Settings\" tab is shown for \"Area Administrator\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91075"
+        }
+      ],
       "login": "yrozstalnoy+34@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsShown.04",
       "description": "88649 - \"Settings\" tab is shown for \"Setup Engineer\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91077"
+        }
+      ],
       "login": "yrozstalnoy+30@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsShown.05",
       "description": "88651 - \"Settings\" tab is shown for \"Team Administrator\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91079"
+        }
+      ],
       "login": "yrozstalnoy+33@cyberiansoft.com",
       "password": "Barcelona_1990"
     }
@@ -36,66 +61,121 @@
     {
       "rowID": "verifySettingsTabIsNotShown.01",
       "description": "88645 - \"Settings\" tab is not shown for \"Accountant\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91073"
+        }
+      ],
       "login": "yrozstalnoy+6@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.02",
       "description": "88648 - \"Settings\" tab is not shown for \"Area Work Manager\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91076"
+        }
+      ],
       "login": "yrozstalnoy+3@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.03",
       "description": "88652 - \"Settings\" tab is not shown for \"Team Work Manager\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91080"
+        }
+      ],
       "login": "yrozstalnoy+4@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.04",
       "description": "88653 - \"Settings\" tab is not shown for \"Technician\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91081"
+        }
+      ],
       "login": "yrozstalnoy+2@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.05",
       "description": "88654 - \"Settings\" tab is not shown for \"Work Manager (Read Only)\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91082"
+        }
+      ],
       "login": "yrozstalnoy+32@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.06",
       "description": "88655 - \"Settings\" tab is not shown for \"Work Manager\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91083"
+        }
+      ],
       "login": "yrozstalnoy+31@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.07",
       "description": "88656 - \"Settings\" tab is not shown for \"Client\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91084"
+        }
+      ],
       "login": "yrozstalnoy+40@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.08",
       "description": "88657 - \"Settings\" tab is not shown for \"Client Inspector\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91085"
+        }
+      ],
       "login": "yrozstalnoy+15@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.09",
       "description": "88658 - \"Settings\" tab is not shown for \"Client Accountant\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91086"
+        }
+      ],
       "login": "yrozstalnoy+17@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.10",
       "description": "88659 - \"Settings\" tab is not shown for \"Client Monitor Manager (Read Only)\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91087"
+        }
+      ],
       "login": "yrozstalnoy+19@cyberiansoft.com",
       "password": "Barcelona_1990"
     },
     {
       "rowID": "verifySettingsTabIsNotShown.11",
       "description": "88661 - \"Settings\" tab is not shown for \"Client Monitor Manager\" user",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91088"
+        }
+      ],
       "login": "yrozstalnoy+14@cyberiansoft.com",
       "password": "Barcelona_1990"
     }

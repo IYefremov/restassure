@@ -3,6 +3,11 @@
     {
       "rowID": "verifyUserCanVoidInvoice.01",
       "description": "Test Case 79457:Verify user can void invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90970"
+        }
+      ],
       "timeFrame": "Custom",
       "status": "All Active",
       "fromDate": "02/01/2017"
@@ -13,6 +18,11 @@
     {
       "rowID": "verifyUserCannotVoidInvoiceAfterClickingNo.01",
       "description": "Test Case 79459:Verify user can't void invoice if click \"No\" button",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90971"
+        }
+      ],
       "timeFrame": "Custom",
       "status": "All Active",
       "fromDate": "02/01/2017"
@@ -23,6 +33,11 @@
     {
       "rowID": "verifyUserCannotVoidInvoiceAfterClickingReject.01",
       "description": "Test Case 79460:Verify user can't void invoice if click reject icon",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90972"
+        }
+      ],
       "timeFrame": "Custom",
       "status": "All Active",
       "fromDate": "02/01/2017"
@@ -33,6 +48,11 @@
     {
       "rowID": "verifyUserCanVoidInvoicesUsingCheckboxes.01",
       "description": "Test Case 79461:Verify user can void invoices using check-boxes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "#90973"
+        }
+      ],
       "timeFrame": "Custom",
       "status": "All Active",
       "fromDate": "02/01/2017"
@@ -43,6 +63,11 @@
     {
       "rowID": "verifyUserCanUnvoidInvoice.01",
       "description": "Test Case 79462:Verify user can unvoid invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90974"
+        }
+      ],
       "status": "Void",
       "timeFrame": "Custom",
       "fromDate": "02/01/2017"
@@ -53,6 +78,11 @@
     {
       "rowID": "verifyUserCanUnvoidInvoicesUsingCheckboxes.01",
       "description": "Test Case 79463:Verify user can unvoid invoices using check-boxes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90975"
+        }
+      ],
       "status": "Void",
       "status2": "New",
       "timeFrame": "Custom",
