@@ -1618,5 +1618,45 @@
         "inspectionTotalPrice": "20"
       }
     }
+  ],
+  "testSRVerifyActionsOnCalendarForSRAppointments": [
+    {
+      "rowID": "testSRVerifyActionsOnCalendarForSRAppointments.01",
+      "description": "Test Case 27862: 16 - Verify actions on calendar for SR appointments",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83620",
+          "testCaseTitle": "Test Case 27862: 16 - Verify actions on calendar for SR appointments"
+        }
+      ],
+      "serviceRequestData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor": "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123"
+        }
+      }
+    }
+  ],
+  "testVerifyUpdateApplicationFromLastDBVersionForNewOne": [
+    {
+      "rowID": "testVerifyUpdateApplicationFromLastDBVersionForNewOne.01",
+      "description": "Test Case: 61 - Verify update Application from last DB version for new one",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83670",
+          "testCaseTitle": "Test Case: 61 - Verify update Application from last DB version for new one"
+        }
+      ]
+    }
   ]
 }

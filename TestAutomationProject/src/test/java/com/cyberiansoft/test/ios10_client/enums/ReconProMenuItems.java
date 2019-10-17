@@ -25,6 +25,7 @@ public enum ReconProMenuItems {
     REFRESH_PICTURES("Refresh\nPictures"),
     SHOW_PICTURES("Show\nPictures"),
     APPROVE("Approve"),
+    APPOINTMENTS("Appointments"),
     CHANGE_CUSTOMER("Change\nCustomer"),
     SHOW_WOS("Show\nWOs"),
     ASSIGN("Assign"),

@@ -259,10 +259,8 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		return new TechniciansPopup();
 	}
 
-	public void checkPreexistingDamage() {
-		WebElement preexistingdamagebtn =  appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='Pre-existing damage']/XCUIElementTypeButton[@name='black unchecked']");
-		if (preexistingdamagebtn.getAttribute("label").equals("black unchecked"))
-			preexistingdamagebtn.click();
+	public void checkPreexistingDamage(String damageName) {
+		appiumdriver.findElementByAccessibilityId(damageName).findElement(MobileBy.AccessibilityId("black unchecked")).click();
 	}
 	
 	public void uncheckPreexistingDamage() {

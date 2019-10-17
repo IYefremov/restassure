@@ -2005,7 +2005,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularQuestionsScreenSteps.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
 		servicesScreen.clickSave();
 		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-		serviceRequestSscreen = new RegularServiceRequestsScreen();
 		final String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestSscreen.selectAppointmentRequestAction();
@@ -5146,6 +5145,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		Assert.assertFalse(orderSummaryScreen.isTotalSaleFieldPresent());
 		RegularWizardScreensSteps.clickSaveButton();
+		RegularTeamWorkOrdersSteps.waitTeamWorkOrdersScreenLoaded();
 		teamWorkOrdersScreen.clickHomeButton();
 	}
 

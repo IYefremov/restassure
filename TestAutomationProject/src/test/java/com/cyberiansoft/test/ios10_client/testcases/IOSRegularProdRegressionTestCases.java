@@ -1451,7 +1451,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 
         for (InspectionData inspectionData : inspectionsData) {
-            RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(),
+             RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(),
                     UATInspectionTypes.valueOf(inspectionData.getInspectionType()));
             RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
             inspectionsIDs.add(RegularVehicleInfoScreenSteps.getInspectionNumber());
@@ -1530,5 +1530,39 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInspectionsSteps.saveInspectionAsFinal();
         RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testSRVerifyActionsOnCalendarForSRAppointments(String rowID,
+                                                                                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
+
+        RegularHomeScreenSteps.navigateToServiceRequestScreen();
+        RegularServiceRequestSteps.startCreatingServicerequest(serviceRequestData.getWholesailCustomer(), UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(serviceRequestData.getVihicleInfo());
+        RegularServiceRequestSteps.saveServiceRequestWithAppointment();
+        RegularServiceRequestAppointmentScreenSteps.setDefaultServiceRequestAppointment();
+        final String serviceRequestNumber = RegularServiceRequestSteps.getFirstServiceRequestNumber();
+        RegularServiceRequestSteps.clickServiceRequestAppointmentsAction(serviceRequestNumber);
+        RegularServiceRequestAppointmentScreenValidations.verifyAppointmentExistsForServiceRequest(true);
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUpdateApplicationFromLastDBVersionForNewOne(String rowID,
+                                   String description, JSONObject testData) {
+        DriverBuilder.getInstance().getAppiumDriver().closeApp();
+        DriverBuilder.getInstance().getAppiumDriver().launchApp();
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin("Test User", "1111");
+
+        RegularHomeScreenSteps.navigateToStatusScreen();
+        RegularHomeScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin("Test User", "1111");
+
     }
 }

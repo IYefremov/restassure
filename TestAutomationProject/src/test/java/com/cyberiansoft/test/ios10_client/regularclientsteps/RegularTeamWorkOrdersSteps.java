@@ -5,6 +5,11 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.ty
 
 public class RegularTeamWorkOrdersSteps {
 
+    public static void waitTeamWorkOrdersScreenLoaded() {
+        RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
+        teamWorkOrdersScreen.waitTeamWorkOrdersScreenLoaded();
+    }
+
     public static void selectSearchLocation(String location) {
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
         teamWorkOrdersScreen.clickSearchButton();
