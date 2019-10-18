@@ -10,6 +10,8 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.steps.Users.VNextBOAddNewUserDialogSteps;
+import com.cyberiansoft.test.vnextbo.verifications.Users.VNextBOUsersPageValidations;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -71,14 +73,13 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 
 		VNextBOInvoiceDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInvoiceDetailsData.class);
 
-		VNexBOUsersWebPage usersWebPage = PageFactory.initElements(webdriver, VNexBOUsersWebPage.class);
 		VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
 		leftMenuInteractions.selectUsersMenu();
 		final String usermail = data.getUserMailPrefix() + RandomUtils.nextInt(100000, 1000000) + data.getUserMailPostbox();
 		System.out.println(usermail);
-		VNexBOAddNewUserDialog adduserdialog = usersWebPage.clickAddUserButton();
-		adduserdialog.createNewUser(data.getTechFirstName(), data.getTechLastName(), usermail, data.getTechUserPhone(), false);
-		Assert.assertTrue(usersWebPage.findUserInTableByUserEmail(usermail));
+		VNextBOAddNewUserDialogSteps.createNewUser(data.getTechFirstName(), data.getTechLastName(),
+				usermail, data.getTechUserPhone(), false);
+		Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentInTableByText(usermail));
 		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
 				VNextBOHeaderPanel.class);
 		headerpanel.userLogout();

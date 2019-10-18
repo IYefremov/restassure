@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.Users.VNexBOUsersWebPage;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
@@ -21,7 +22,7 @@ import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//ul[@id='mainMenu']")
-    private WebElement mainmenu;
+    private WebElement mainMenu;
 
     @FindBy(id = "menuBtn")
     private WebElement menuButton;
@@ -160,11 +161,11 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     private void clickMainMenuItem(String mainMenu) {
         try {
             wait.until(ExpectedConditions
-                    .elementToBeClickable(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
+                    .elementToBeClickable(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
                     .click();
         } catch (Exception e) {
-            scrollToElement(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
-            clickWithJS(mainmenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            scrollToElement(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            clickWithJS(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
         }
         waitABit(1000);
     }
