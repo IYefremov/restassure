@@ -9,6 +9,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -61,10 +62,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
 
     @AfterMethod
     public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerPanel = PageFactory.initElements(webdriver, VNextBOHeaderPanel.class);
-        if (headerPanel.logOutLinkExists()) {
-            headerPanel.userLogout();
-        }
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();

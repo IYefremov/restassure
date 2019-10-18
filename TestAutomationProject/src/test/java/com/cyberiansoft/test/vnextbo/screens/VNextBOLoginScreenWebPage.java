@@ -2,13 +2,10 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
-import org.openqa.selenium.WebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import java.util.concurrent.TimeUnit;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
 
@@ -38,11 +35,9 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//span[@data-bind='text: password.errorText']")
 	private WebElement passwordErrorText;
 	
-	public VNextBOLoginScreenWebPage(WebDriver driver) {
-		super(driver);
+	public VNextBOLoginScreenWebPage() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		waitLong.until(ExpectedConditions.visibilityOf(loginForm));
 	}
 	
 	public void userLogin(String username, String userPsw) {

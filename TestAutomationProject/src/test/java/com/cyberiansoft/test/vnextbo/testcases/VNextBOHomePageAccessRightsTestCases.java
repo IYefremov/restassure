@@ -8,6 +8,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -39,18 +40,13 @@ public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
 		}
 		webdriver = DriverBuilder.getInstance().getDriver();
 		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-		loginPage = new VNextBOLoginScreenWebPage(webdriver);
+		loginPage = new VNextBOLoginScreenWebPage();
 	}
 
 	@AfterMethod
 	public void BackOfficeLogout() {
-		try {
-			VNextBOHeaderPanel vNextBOHeaderPanel = new VNextBOHeaderPanel(webdriver);
-			if (vNextBOHeaderPanel.logOutLinkExists()) {
-				vNextBOHeaderPanel.userLogout();
-			}
-		} catch (RuntimeException ignored) {
-		}
+        new VNextBOHeaderPanelSteps().logout();
+
 		if (DriverBuilder.getInstance().getDriver() != null) {
 			DriverBuilder.getInstance().quitDriver();
 		}

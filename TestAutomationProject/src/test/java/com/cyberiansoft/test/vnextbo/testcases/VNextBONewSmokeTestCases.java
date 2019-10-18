@@ -18,6 +18,7 @@ import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsListViewSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsSearchSteps;
@@ -33,8 +34,8 @@ import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSte
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBORODetailsPageVerifications;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBOROPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBORODetailsPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageVerifications;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -119,10 +120,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
     @AfterMethod
     public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerPanel = PageFactory.initElements(webdriver, VNextBOHeaderPanel.class);
-        if (headerPanel.logOutLinkExists()) {
-            headerPanel.userLogout();
-        }
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();
@@ -615,8 +613,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         Assert.assertTrue(roDetailsPageVerifications.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 
-        if (roDetailsPageVerifications.isReportProblemDisplayedForPhase(data.getPhase())) {
-
-        }
+        roDetailsPageSteps.setReportProblemForPhase(data.getPhase(), data.getReason(), data.getProblemDescription());
+        roDetailsPageSteps.setResolveProblemForPhase(data.getPhase());
     }
 }

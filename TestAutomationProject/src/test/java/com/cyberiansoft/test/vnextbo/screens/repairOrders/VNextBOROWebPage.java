@@ -7,6 +7,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.google.common.base.CharMatcher;
 import lombok.Getter;
+import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,7 +18,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Getter
@@ -229,6 +229,12 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 
+    public WebElement getRandomOrderNumber() {
+        final List<WebElement> orders =
+                WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(woNumbersList);
+        return orders != null ? orders.get(RandomUtils.nextInt(0, orders.size())) : null;
+    }
+
     public String getOrderNoteText() {
         return Utils.getText(roNotesLink);
     }
@@ -293,12 +299,6 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
             e.printStackTrace();
         }
         waitForLoading();
-    }
-
-    public VNextBOROWebPage setSavedSearchOption(String option) {
-        clickSavedSearchArrow();
-        selectSavedSearchDropDownOption(option);
-        return this;
     }
 
     public VNextBOROAdvancedSearchDialog clickEditIconForSavedSearch() {

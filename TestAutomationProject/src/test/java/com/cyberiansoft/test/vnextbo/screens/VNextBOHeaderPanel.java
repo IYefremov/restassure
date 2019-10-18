@@ -1,59 +1,26 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.concurrent.TimeUnit;
-
+@Getter
 public class VNextBOHeaderPanel extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//a[@data-bind='click: logout']")
-	private WebElement logoutlink;
+	private WebElement logoutLink;
 	
 	@FindBy(xpath = "//div[@class='user']/span")
-	private WebElement userprofilelink;
+	private WebElement userProfileLink;
 	
 	@FindBy(id = "upgrade-banner")
-	private WebElement upgradenowbtn;
+	private WebElement upgradeNowButton;
 	
-	public VNextBOHeaderPanel(WebDriver driver) {
-		super(driver);
+	public VNextBOHeaderPanel() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	}
-	
-	public void clickLogout() {
-		try {
-		    waitShort
-                    .until(ExpectedConditions.elementToBeClickable(logoutlink))
-                    .click();
-		} catch (WebDriverException ignored) {}
-	}
-	
-	public boolean logOutLinkExists() {
-	    try {
-            return driver.findElements(By.xpath("//div[@class='login']/a")).size() > 0;
-        } catch (Exception ignored) {
-	        return false;
-        }
-	}
-	
-	public VNextBOLoginScreenWebPage userLogout() {
-		clickLogout();
-		waitABit(1000);
-		return PageFactory.initElements(
-				driver, VNextBOLoginScreenWebPage.class);
-	}
-	
-	public VNextUpgradeInfoWebPage clickUpgradeNowBanner() {
-		waitShort.until(ExpectedConditions.elementToBeClickable(upgradenowbtn)).click();
-		return PageFactory.initElements(
-				driver, VNextUpgradeInfoWebPage.class);
 	}
 }

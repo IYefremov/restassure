@@ -14,6 +14,12 @@ public class VNextBOROResolveProblemDialog extends VNextBOBaseWebPage {
     @FindBy(id = "resolve-problem-popup")
     private WebElement resolveProblemDialog;
 
+    @FindBy(xpath = "//button[contains(@data-bind, 'resolveProblemAction')]")
+    private WebElement resolveProblemButton;
+
+    @FindBy(xpath = "//div[@id='resolve-problem-popup']//button[@class='close']")
+    private WebElement resolveProblemCloseButton;
+
     public VNextBOROResolveProblemDialog() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

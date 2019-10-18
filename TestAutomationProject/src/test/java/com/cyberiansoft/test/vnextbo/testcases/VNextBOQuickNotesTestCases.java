@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -46,18 +47,16 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
         loginPage.userLogin(userName, userPassword);
-        VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
+        VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel();
         headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
         leftMenu = new VNexBOLeftMenuPanel(webdriver);
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
-        if (headerPanel.logOutLinkExists())
-            headerPanel.userLogout();
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();

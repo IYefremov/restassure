@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -61,13 +62,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
 
     @AfterMethod
     public void BackOfficeLogout() {
-        try {
-            VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver, VNextBOHeaderPanel.class);
-            if (headerpanel.logOutLinkExists()) {
-                headerpanel.userLogout();
-            }
-        } catch (RuntimeException ignored) {
-        }
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();

@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORONotesPag
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
 import org.apache.commons.lang3.RandomUtils;
@@ -71,10 +72,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
 
     @AfterMethod
     public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-                VNextBOHeaderPanel.class);
-        if (headerpanel.logOutLinkExists())
-            headerpanel.userLogout();
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();

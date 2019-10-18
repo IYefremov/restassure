@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.verifications;
+package com.cyberiansoft.test.vnextbo.verifications.repairOrders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
@@ -28,8 +28,18 @@ public class VNextBOROPageVerifications {
         Assert.assertTrue(isAdvancedSearchDialogDisplayed(), "The advanced search dialog is not opened");
     }
 
-    public boolean isAdvancedSearchDialogDisplayed() {
-        return Utils.isElementDisplayed(advancedSearchDialog.getAdvancedSearchDialog());
+    public void verifyAdvancedSearchDialogIsClosed() {
+        Assert.assertTrue(isAdvancedSearchDialogClosed(), "The advanced search dialog is not closed");
+    }
+
+    private boolean isAdvancedSearchDialogDisplayed() {
+        return Utils.isElementWithAttributeContainingValueDisplayed(
+                advancedSearchDialog.getAdvancedSearchDialogContainer(), "style", "display: block", 5);
+    }
+
+    private boolean isAdvancedSearchDialogClosed() {
+        return Utils.isElementWithAttributeContainingValueDisplayed(
+                advancedSearchDialog.getAdvancedSearchDialogContainer(), "style", "display: none", 5);
     }
 
     private boolean isArrowDisplayed(String wo, String arrow) {
@@ -52,5 +62,9 @@ public class VNextBOROPageVerifications {
     public void verifyNoteTextIsDisplayed(String noteMessage) {
         Assert.assertEquals(repairOrdersPage.getOrderNoteText(), noteMessage,
                 "The order note text hasn't been displayed");
+    }
+
+    public boolean isSavedSearchEditIconDisplayed() {
+        return Utils.isElementDisplayed(repairOrdersPage.getSavedSearchEditIcon(), 5);
     }
 }

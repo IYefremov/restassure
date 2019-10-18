@@ -87,8 +87,8 @@ public class WaitUtilsWebDriver {
         getWait().until(ExpectedConditions.invisibilityOf(element));
     }
 
-    public static void waitForInvisibility(WebElement element, int timeout) {
-        new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeout).until(ExpectedConditions.invisibilityOf(element));
+    public static void waitForInvisibility(WebElement element, int timeoutInSeconds) {
+        new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutInSeconds).until(ExpectedConditions.invisibilityOf(element));
     }
 
     public static void waitForInvisibilityIgnoringException(WebElement element) {

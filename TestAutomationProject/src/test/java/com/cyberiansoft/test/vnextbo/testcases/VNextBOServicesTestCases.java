@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.utils.VNextPriceCalculations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -54,10 +55,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 
     @AfterMethod
     public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-                VNextBOHeaderPanel.class);
-        if (headerpanel.logOutLinkExists())
-            headerpanel.userLogout();
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();

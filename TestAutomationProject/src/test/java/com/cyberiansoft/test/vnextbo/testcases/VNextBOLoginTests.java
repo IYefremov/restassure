@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
@@ -45,17 +46,12 @@ public class VNextBOLoginTests extends BaseTestCase {
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
-        try {
-            VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
-            if (headerPanel.logOutLinkExists()) {
-                headerPanel.userLogout();
-            }
-        } catch (RuntimeException ignored) {}
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();

@@ -11,6 +11,8 @@ import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -65,10 +67,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
     @AfterMethod
     public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-                VNextBOHeaderPanel.class);
-        if (headerpanel.logOutLinkExists())
-            headerpanel.userLogout();
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();
@@ -1023,8 +1022,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         breadCrumbInteractions.setLocation(data.getLocations()[1]);
         breadCrumbInteractions.setLocation(data.getLocations()[0]);
+        new VNextBORepairOrdersPageSteps().setSavedSearchOption(searchName);
         repairOrdersPage
-                .setSavedSearchOption(searchName)
                 .clickEditIconForSavedSearch()
                 .setFlag(data.getFlags()[1])
                 .clickSaveButton();
@@ -1061,8 +1060,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
+        new VNextBORepairOrdersPageSteps().setSavedSearchOption(searchName);
         repairOrdersPage
-                .setSavedSearchOption(searchName)
                 .clickAdvancedSearchCaret()
                 .setFlag(data.getFlag())
                 .setSearchName(searchName)

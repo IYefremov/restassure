@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOChangeTechniciansDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageVerifications;
 import org.testng.Assert;
 
 public class VNextBORepairOrdersPageSteps {
@@ -41,9 +42,13 @@ public class VNextBORepairOrdersPageSteps {
                 "The RO Details page hasn't been opened");
     }
 
-    public void openRONotesPage() {
-        roPageInteractions.clickWoLink();
-        Assert.assertTrue(roDetailsPageInteractions.isRODetailsSectionDisplayed(),
-                "The RO Details page hasn't been opened");
+    public void setSavedSearchOption(String option) {
+        roPageInteractions.clickSavedSearchArrow();
+        roPageInteractions.selectSavedSearchDropDownOption(option);
+    }
+
+    public void openAdvancedSearchDialog() {
+        roPageInteractions.clickAdvancedSearchCaret();
+        new VNextBOROPageVerifications().verifyAdvancedSearchDialogIsDisplayed();
     }
 }

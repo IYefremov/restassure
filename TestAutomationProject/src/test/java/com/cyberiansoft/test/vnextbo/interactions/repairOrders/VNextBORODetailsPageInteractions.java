@@ -16,12 +16,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class VNextBORODetailsPageInteractions {
 
     private VNextBORODetailsPage detailsPage;
-    private VNextBOROReportProblemDialog reportProblemDialog;
-    private VNextBOROResolveProblemDialog resolveProblemDialog;
 
     public VNextBORODetailsPageInteractions() {
         detailsPage = new VNextBORODetailsPage();
@@ -229,8 +228,14 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public void openActionsDropDownForPhase(String phase) {
-        handleActionsButton(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase
-                + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]//div[@class='drop checkout']")));
+        final WebElement actionsTrigger = DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase
+                + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]"));
+        try {
+            WaitUtilsWebDriver.waitForVisibility(actionsTrigger.findElement(By.xpath("./div[contains(@class, 'drop checkout')]")), 3);
+        } catch (Exception ignored) {
+            Utils.clickElement(actionsTrigger.findElement(By.xpath("./i[contains(@class, 'checkout-arrow')]")));
+            WaitUtilsWebDriver.waitForVisibility(actionsTrigger.findElement(By.xpath("./div[contains(@class, 'drop checkout')]")));
+        }
     }
 
     public void closeActionsDropDownForPhase() {
@@ -253,12 +258,10 @@ public class VNextBORODetailsPageInteractions {
 
     public void clickReportProblemForPhase(String phase) {
         setOptionForPhase(detailsPage.getPhaseActionsReportProblemOption(phase));
-        WaitUtilsWebDriver.waitForVisibility(reportProblemDialog.getReportProblemDialog());
     }
 
     public void clickResolveProblemForPhase(String phase) {
         setOptionForPhase(detailsPage.getPhaseActionsResolveProblemOption(phase));
-        WaitUtilsWebDriver.waitForVisibility(resolveProblemDialog.getResolveProblemDialog());
     }
 
     public void clickCheckInOptionForPhase() {
@@ -267,5 +270,16 @@ public class VNextBORODetailsPageInteractions {
 
     public void clickCheckOutOptionForPhase() {
         setOptionForPhase(detailsPage.getPhaseActionsCheckOutOption());
+    }
+
+    public List<String> getPhaseStatusValues() {
+        try {
+            return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(detailsPage.getPhaseStatus())
+                    .stream()
+                    .map(WebElement::getText)
+                    .collect(Collectors.toList());
+        } catch (Exception ignored) {
+            return null;
+        }
     }
 }

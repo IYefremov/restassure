@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.verifications;
+package com.cyberiansoft.test.vnextbo.verifications.repairOrders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
@@ -64,7 +64,25 @@ public class VNextBORODetailsPageVerifications {
         }
     }
 
-    public boolean isReportProblemDisplayedForPhase(String phase) {
+    public boolean isReportProblemOptionDisplayedForPhase(String phase) {
         return Utils.isElementDisplayed(detailsPage.getPhaseActionsReportProblemOption(phase));
+    }
+
+    public boolean isResolveProblemOptionDisplayedForPhase(String phase) {
+        return Utils.isElementDisplayed(detailsPage.getPhaseActionsResolveProblemOption(phase));
+    }
+
+    public boolean isProblemIconDisplayedForPhase(String phase) {
+        return Utils.isElementDisplayed(detailsPage.getPhaseProblemIcon(phase));
+    }
+
+    public void verifyPhaseStatuses(String[] phaseStatuses) {
+        final boolean notMatching = detailsPageInteractions.getPhaseStatusValues()
+                .stream()
+                .allMatch(status -> status.equals(phaseStatuses[0])
+                        || status.equals(phaseStatuses[1])
+                        || status.equals(phaseStatuses[2])
+                        || status.equals(phaseStatuses[3]));
+        Assert.assertFalse(notMatching, "The phases contain the restricted statuses");
     }
 }

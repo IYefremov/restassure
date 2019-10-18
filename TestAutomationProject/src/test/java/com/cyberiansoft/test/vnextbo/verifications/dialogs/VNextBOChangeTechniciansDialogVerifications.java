@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.verifications;
+package com.cyberiansoft.test.vnextbo.verifications.dialogs;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOChangeTechniciansDialogInteractions;
 import org.testng.Assert;

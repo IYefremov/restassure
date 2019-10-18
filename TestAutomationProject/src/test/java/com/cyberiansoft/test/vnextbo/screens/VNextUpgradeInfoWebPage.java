@@ -21,7 +21,6 @@ public class VNextUpgradeInfoWebPage extends VNextBOBaseWebPage {
 	public VNextUpgradeInfoWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	public VNextPaymentInfoWebPage clickUnlockRepair360EditionButton() {

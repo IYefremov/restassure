@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOROAdvancedSearchValues;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -12,13 +13,16 @@ import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsP
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORONotesPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.*;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBORODetailsPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROAdvancedSearchDialogVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBORODetailsPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBOROPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageVerifications;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
@@ -63,6 +67,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	private VNextBOROPageInteractions roPageInteractions;
 	private VNextBORONotesPageSteps notesPageSteps;
     private VNextBOROPageVerifications roPageVerifications;
+    private VNextBOROAdvancedSearchDialogVerifications advancedSearchDialogVerifications;
+    private VNextBOROAdvancedSearchDialogSteps advancedSearchDialogSteps;
 
     @BeforeMethod
 	public void BackOfficeLogin() {
@@ -78,9 +84,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
 		userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-		loginPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOLoginScreenWebPage.class);
+		loginPage = new VNextBOLoginScreenWebPage();
 		loginPage.userLogin(userName, userPassword);
-		repairOrdersPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOROWebPage.class);
+		repairOrdersPage = new VNextBOROWebPage();
 		leftMenuInteractions = new VNextBOLeftMenuInteractions();
 		breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
 		roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
@@ -96,17 +102,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         roPageInteractions = new VNextBOROPageInteractions();
         notesPageSteps = new VNextBORONotesPageSteps();
         roPageVerifications = new VNextBOROPageVerifications();
+        advancedSearchDialogVerifications = new VNextBOROAdvancedSearchDialogVerifications();
+        advancedSearchDialogSteps = new VNextBOROAdvancedSearchDialogSteps();
     }
 
 	@AfterMethod
 	public void BackOfficeLogout() {
-		try {
-			VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver, VNextBOHeaderPanel.class);
-			if (headerpanel.logOutLinkExists()) {
-				headerpanel.userLogout();
-			}
-		} catch (RuntimeException ignored) {
-		}
+        new VNextBOHeaderPanelSteps().logout();
 
 		if (DriverBuilder.getInstance().getDriver() != null) {
 			DriverBuilder.getInstance().quitDriver();
@@ -580,9 +582,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        roPageInteractions.openAdvancedSearchDialog();
+        repairOrdersPageSteps.openAdvancedSearchDialog();
 
-        new VNextBOROAdvancedSearchDialogSteps()
+        advancedSearchDialogSteps
                 .searchByActivePhase(data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
 
         repairOrdersPageSteps.openRODetailsPage();
@@ -2135,4 +2137,74 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		ordersDetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
 		detailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
 	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanSearchBySavedSearchForm(String rowID, String description, JSONObject testData) {
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        final VNextBOROAdvancedSearchDialog advSearchDialog = new VNextBOROAdvancedSearchDialog();
+
+        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        repairOrdersPageSteps.openAdvancedSearchDialog();
+        final VNextBOROAdvancedSearchValues searchValues = data.getSearchValues();
+
+        Assert.assertEquals(advSearchDialog.getCustomerInputFieldValue(), searchValues.getCustomer());
+        Assert.assertEquals(advSearchDialog.getEmployeeInputFieldValue(), searchValues.getEmployee());
+        Assert.assertEquals(advSearchDialog.getPhaseInputFieldValue(), searchValues.getPhase());
+        Assert.assertEquals(advSearchDialog.getPhaseStatusInputFieldValue(), searchValues.getPhaseStatus());
+        Assert.assertEquals(advSearchDialog.getDepartmentInputFieldValue(), searchValues.getDepartment());
+        Assert.assertEquals(advSearchDialog.getWoTypeInputFieldValue(), searchValues.getWoType());
+        Assert.assertEquals(advSearchDialog.getWoNumInputFieldValue(), searchValues.getWoNum());
+        Assert.assertEquals(advSearchDialog.getRoNumInputFieldValue(), searchValues.getRoNum());
+        Assert.assertEquals(advSearchDialog.getStockInputFieldValue(), searchValues.getStockNum());
+        Assert.assertEquals(advSearchDialog.getVinInputFieldValue(), searchValues.getVinNum());
+        Assert.assertEquals(advSearchDialog.getTimeFrameInputFieldValue(), searchValues.getTimeFrame());
+        Assert.assertEquals(advSearchDialog.getRepairStatusInputFieldValue(), searchValues.getRepairStatus());
+        Assert.assertEquals(advSearchDialog.getDaysInProcessInputFieldValue(), searchValues.getDaysInProcess());
+        Assert.assertEquals(advSearchDialog.getDaysInPhaseInputFieldValue(), searchValues.getDaysInPhase());
+        Assert.assertEquals(advSearchDialog.getFlagInputFieldValue(), searchValues.getFlag());
+        Assert.assertEquals(advSearchDialog.getSortByInputFieldValue(), searchValues.getSortBy());
+        Assert.assertEquals(advSearchDialog.getSearchNameInputFieldValue(), searchValues.getSearchName());
+    }
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCannotEditSavedSearch(String rowID, String description, JSONObject testData) {
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+
+        repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
+        Assert.assertTrue(roPageVerifications.isSavedSearchEditIconDisplayed(),
+                "The saved search edit icon hasn't been displayed");
+        repairOrdersPageSteps.openAdvancedSearchDialog();
+        Assert.assertTrue(advancedSearchDialogVerifications.isSavedSearchNameClickable(),
+                "The saved search input field isn't clickable");
+        Assert.assertTrue(advancedSearchDialogVerifications.isSaveButtonClickable(),
+                "The save button isn't clickable");
+        advancedSearchDialogSteps.closeAdvancedSearchDialog();
+
+        repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
+        repairOrdersPageSteps.openAdvancedSearchDialog();
+        Assert.assertFalse(roPageVerifications.isSavedSearchEditIconDisplayed(),
+                "The saved search edit icon hasn't been displayed");
+        Assert.assertFalse(advancedSearchDialogVerifications.isSavedSearchNameClickable(),
+                "The saved search input field is clickable");
+        Assert.assertFalse(advancedSearchDialogVerifications.isSaveButtonClickable(),
+                "The save button is clickable");
+        advancedSearchDialogSteps.closeAdvancedSearchDialog();
+    }
+
+//	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+//    TODO the TC blocker - the locations are nor loaded for the given technician
+	public void verifyTechnicianUserCanFindOrdersUsingSavedSearchMyCompletedWork(String rowID, String description, JSONObject testData) {
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        new VNextBOHeaderPanelSteps().logout();
+        loginPage.userLogin(data.getUserName(), data.getUserPassword());
+
+        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        repairOrdersPageSteps.openRODetailsPage();
+        roDetailsPageVerifications.verifyPhaseStatuses(data.getServiceStatuses());
+    }
 }

@@ -47,21 +47,14 @@ public class Utils {
                     .build()
                     .perform();
         } catch (Exception ignored) {
-            clickWithJS(element);
+            scrollToElement(element);
+            clickElement(element);
         }
     }
 
     public static void clickWithActions(By by) {
         WebElement element = DriverBuilder.getInstance().getDriver().findElement(by);
-        try {
-            getActions()
-                    .moveToElement(element)
-                    .click()
-                    .build()
-                    .perform();
-        } catch (Exception ignored) {
-            clickWithJS(element);
-        }
+        clickWithActions(element);
     }
 
     public static void clearAndType(WebElement element, String name) {

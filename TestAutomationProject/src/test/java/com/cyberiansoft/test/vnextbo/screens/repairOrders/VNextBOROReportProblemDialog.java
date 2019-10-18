@@ -14,6 +14,15 @@ public class VNextBOROReportProblemDialog extends VNextBOBaseWebPage {
     @FindBy(id = "report-problem-popup")
     private WebElement reportProblemDialog;
 
+    @FindBy(xpath = "//select[@data-text-field='reason']")
+    private WebElement problemReason;
+
+    @FindBy(id = "servicePopup-problemDescription")
+    private WebElement problemReasonDescription;
+
+    @FindBy(xpath = "//button[contains(@data-bind, 'reportProblemAction')]")
+    private WebElement problemReasonAddButton;
+
     public VNextBOROReportProblemDialog() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

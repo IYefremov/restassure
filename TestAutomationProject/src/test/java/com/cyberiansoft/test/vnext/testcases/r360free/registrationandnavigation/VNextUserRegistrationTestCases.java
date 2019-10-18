@@ -30,6 +30,7 @@ import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -1059,9 +1060,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         leftMenuPanel.expandMainMenu();
-        VNextBOHeaderPanel vnextboheaderpanel = PageFactory.initElements(webdriver,
-                VNextBOHeaderPanel.class);
-        VNextUpgradeInfoWebPage upgradeinfopage = vnextboheaderpanel.clickUpgradeNowBanner();
+        new VNextBOHeaderPanelSteps().clickUpgradeNowBanner();
+        VNextUpgradeInfoWebPage upgradeinfopage = new VNextUpgradeInfoWebPage(webdriver);
+
         VNextPaymentInfoWebPage paymentinfopage = upgradeinfopage.clickUnlockRepair360EditionButton();
 
         paymentinfopage.setUserPaymentsInfo(edition, userfullname, cardnumber,

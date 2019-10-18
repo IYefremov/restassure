@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROAdvancedSearchDialogInteractions;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageVerifications;
 
 public class VNextBOROAdvancedSearchDialogSteps {
 
@@ -15,5 +16,10 @@ public class VNextBOROAdvancedSearchDialogSteps {
         advancedSearchDialogInteractions.setPhaseStatus(phaseStatus);
         advancedSearchDialogInteractions.setTimeFrame(timeFrame);
         advancedSearchDialogInteractions.clickSearchButton();
+    }
+
+    public void closeAdvancedSearchDialog() {
+        advancedSearchDialogInteractions.closeAdvancedSearchDialog();
+        new VNextBOROPageVerifications().verifyAdvancedSearchDialogIsClosed();
     }
 }

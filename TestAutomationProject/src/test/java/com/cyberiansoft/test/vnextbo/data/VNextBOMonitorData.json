@@ -997,5 +997,81 @@
         "roz_dis_part_money"
       ]
     }
+  ],
+
+  "verifyUserCanSearchBySavedSearchForm": [
+    {
+      "rowID": "verifyUserCanSearchBySavedSearchForm.01",
+      "description": "Test Case 87743:User can search by the saved search form \"My Location - Active Work\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91225"
+        }
+      ],
+      "location": "zayats location",
+      "searchValues": {
+        "customer": "",
+        "employee": "",
+        "phase": "All",
+        "phaseStatus": "Current",
+        "department": "All",
+        "woType": "All",
+        "woNum": "",
+        "roNum": "",
+        "stockNum": "",
+        "vinNum": "",
+        "timeFrame": "Last 30 days",
+        "repairStatus": "In Progress - All",
+        "daysInProcess": "All",
+        "daysInPhase": "All",
+        "flag": "All",
+        "sortBy": "Priority, Newest to Oldest",
+        "searchName": "My Location - Active Work"
+      }
+    }
+  ],
+
+  "verifyUserCannotEditSavedSearch": [
+    {
+      "rowID": "verifyUserCannotEditSavedSearch.01",
+      "description": "Test Case 87744:User can't edit \"Saved\" → \"My Location - Active Work\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91226"
+        }
+      ],
+      "location": "zayats location",
+      "searchValues": {
+        "searchNames": [
+          "111",
+          "My Location - Active Work"
+        ]
+      }
+    }
+  ],
+
+  "verifyTechnicianUserCanFindOrdersUsingSavedSearchMyCompletedWork": [
+    {
+      "rowID": "verifyTechnicianUserCanFindOrdersUsingSavedSearchMyCompletedWork.01",
+      "description": "Test Case 91012:Technician user can find orders using \"saved search\" \"My Completed Work\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91227"
+        }
+      ],
+      "userName": "yrozstalnoy+7@cyberiansoft.com",
+      "userPassword": "Barcelona_1990",
+      "location": "Rozstalnoy_location",
+      "searchValues": {
+        "searchName": "My Completed Work"
+      },
+      "technician": "Yevhenii Rozstalnoy",
+      "serviceStatuses": [
+        "Completed",
+        "Audited",
+        "Refused",
+        "Skipped"
+      ]
+    }
   ]
 }

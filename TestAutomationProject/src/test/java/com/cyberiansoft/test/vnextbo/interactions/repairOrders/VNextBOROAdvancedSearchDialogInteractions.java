@@ -12,10 +12,6 @@ public class VNextBOROAdvancedSearchDialogInteractions {
         advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
     }
 
-    public boolean isAdvancedSearchDialogDisplayed() {
-        return Utils.isElementDisplayed(advancedSearchDialog.getAdvancedSearchDialog());
-    }
-
     public void setTimeFrame(String timeFrame) {
         Utils.clickElement(advancedSearchDialog.getTimeFrameListBox());
         Utils.selectOptionInDropDown(advancedSearchDialog.getTimeFrameDropDown(),
@@ -37,5 +33,9 @@ public class VNextBOROAdvancedSearchDialogInteractions {
     public void clickSearchButton() {
         Utils.clickElement(advancedSearchDialog.getSearchButton());
         WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public void closeAdvancedSearchDialog() {
+        Utils.clickElement(advancedSearchDialog.getAdvancedSearchCloseButton());
     }
 }

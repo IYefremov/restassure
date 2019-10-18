@@ -10,6 +10,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -56,10 +57,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 
 	@AfterMethod
 	public void BackOfficeLogout() {
-		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-				VNextBOHeaderPanel.class);
-		if (headerpanel.logOutLinkExists())
-			headerpanel.userLogout();
+        new VNextBOHeaderPanelSteps().logout();
 
 		if (DriverBuilder.getInstance().getDriver() != null)
 			DriverBuilder.getInstance().quitDriver();
@@ -79,9 +77,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 		VNexBOAddNewUserDialog adduserdialog = usersWebPage.clickAddUserButton();
 		adduserdialog.createNewUser(data.getTechFirstName(), data.getTechLastName(), usermail, data.getTechUserPhone(), false);
 		Assert.assertTrue(usersWebPage.findUserInTableByUserEmail(usermail));
-		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-				VNextBOHeaderPanel.class);
-		headerpanel.userLogout();
+        new VNextBOHeaderPanelSteps().logout();
 
 		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
 		BackOfficeLoginWebPage oldloginpage = PageFactory.initElements(webdriver,

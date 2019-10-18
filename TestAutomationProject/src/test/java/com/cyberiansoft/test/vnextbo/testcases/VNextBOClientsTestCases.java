@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.AfterMethod;
@@ -49,10 +50,7 @@ public class VNextBOClientsTestCases extends BaseTestCase {
 
     @AfterMethod
     public void BackOfficeLogout() {
-        VNextBOHeaderPanel headerPanel = PageFactory.initElements(webdriver, VNextBOHeaderPanel.class);
-        if (headerPanel.logOutLinkExists()) {
-            headerPanel.userLogout();
-        }
+        new VNextBOHeaderPanelSteps().logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();
