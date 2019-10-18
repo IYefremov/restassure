@@ -1,0 +1,158 @@
+{
+  "verifyNewUserCantBeAddedWithoutRequiredFields": [
+    {
+      "rowID": "verifyNewUserCantBeAddedWithoutRequiredFields.01",
+      "description": "Test Case 90824: Verify the user can't add new user without the required fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90824",
+          "testCaseTitle": "Verify the user can't add new user without the required fields"
+        }
+      ]
+    }
+  ],
+  "verifyNewUserCantBeAddedWithRegisteredEmail": [
+    {
+      "rowID": "verifyNewUserCantBeAddedWithRegisteredEmail.01",
+      "description": "Test Case 90825: Verify the user can't add new user with the registered email",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90825",
+          "testCaseTitle": "Verify the user can't add new user with the registered email"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseAddNewUserDialog": [
+    {
+      "rowID": "verifyUserCanCloseAddNewUserDialog.01",
+      "description": "Test Case 90826: Verify user can close the \"Add New User\" pop-up window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90826",
+          "testCaseTitle": "Verify user can close the \"Add New User\" pop-up window"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanAddNewUser": [
+    {
+      "rowID": "verifyUserCanAddNewUser.01",
+      "description": "Test Case 90823: Verify the user can add new \"user\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90823",
+          "testCaseTitle": "Verify the user can add new \"user\""
+        }
+      ]
+    }
+  ],
+  "verifyRegistrationMailCanBeResend": [
+    {
+      "rowID": "verifyRegistrationMailCanBeResend.01",
+      "description": "Test Case 90821: Verify user get the registration letter after clicking the \"Re-send\" button",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90821",
+          "testCaseTitle": "Verify user get the registration letter after clicking the \"Re-send\" button"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseAdvancedSearchForm": [
+    {
+      "rowID": "verifyUserCanCloseAdvancedSearchForm.01",
+      "description": "Test Case 90846: Verify user can close the \"Advanced Searh\" pop-up window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90846",
+          "testCaseTitle": "Verify user can close the \"Advanced Searh\" pop-up window"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByEmail": [
+    {
+      "rowID": "verifyNewUserCantBeAddedWithoutRequiredFields.01",
+      "description": "Test Case 90843: Verify user can search by \"Email\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90843",
+          "testCaseTitle": "Verify user can search by \"Email\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByPhone": [
+    {
+      "rowID": "verifyNewUserCantBeAddedWithoutRequiredFields.01",
+      "description": "Test Case 90844: Verify user can search by \"Phone\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90844",
+          "testCaseTitle": "Verify user can search by \"Phone\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearAdvancedSearchFilter": [
+    {
+      "rowID": "verifyUserCanClearAdvancedSearchFilter.01",
+      "description": "Test Case 90845: Verify user can clear advanced search mask",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90845",
+          "testCaseTitle": "Verify user can clear advanced search mask"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByName": [
+    {
+      "rowID": "verifyUserCanClearAdvancedSearchFilter.01",
+      "description": "Test Case 90848: Verify user can search by name",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90848",
+          "testCaseTitle": "Verify user can search by name"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearSearchByNameFilter": [
+    {
+      "rowID": "verifyUserCanClearSearchByNameFilter.01",
+      "description": "Test Case 90849: Verify user can clear the search mask",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90849",
+          "testCaseTitle": "Verify user can clear the search mask"
+        }
+      ]
+    }
+  ],
+  "verifyUserSeesMessageWhenSearchResultIsNegative": [
+    {
+      "rowID": "verifyUserSeesMessageWhenSearchResultIsNegative.01",
+      "description": "Test Case 90850: Verify user sees the message when the search result is negative",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90850",
+          "testCaseTitle": "Verify user sees the message when the search result is negative"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanEditCreatedUserData": [
+    {
+      "rowID": "verifyUserCanEditCreatedUserData.01",
+      "description": "Test Case 90828: Verify user can edit the created user parameters (except \"Email\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90828",
+          "testCaseTitle": "Verify user can edit the created user parameters (except \"Email\")"
+        }
+      ]
+    }
+  ]
+}

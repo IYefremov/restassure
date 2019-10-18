@@ -160,4 +160,56 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOUsersPageSteps.openHelpPage();
         VNextBOUsersPageValidations.isHelpPageOpened();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanNavigateBetweenPages(String rowID, String description, JSONObject testData) {
+
+        VNextBOUsersPageSteps.clickNextPageButton();
+        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("2");
+        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+        VNextBOUsersPageSteps.clickPreviousPageButton();
+        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("1");
+        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+        VNextBOUsersPageSteps.clickLastPageButton();
+        Assert.assertFalse(VNextBOUsersPageValidations.isLastPageButtonClickable(), "Last page button has been clickable.");
+        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+        VNextBOUsersPageSteps.clickFirstPageButton();
+        Assert.assertFalse(VNextBOUsersPageValidations.isFirstPageButtonClickable(), "First page button has been clickable.");
+        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("1");
+        VNextBOUsersPageSteps.openPageByNumber(3);
+        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("3");
+        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySystemSavesCurrentPageNumber(String rowID, String description, JSONObject testData) {
+
+        VNextBOUsersPageSteps.openPageByNumber(4);
+        VNextBOUsersPageSteps.clickLogo();
+        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("4");
+        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeItemsPerPage(String rowID, String description, JSONObject testData) {
+
+        VNextBOUsersPageSteps.changeItemsPerPage("20");
+        VNextBOUsersPageValidations.isItemsPerPageNumberCorrect("20");
+        VNextBOUsersPageValidations.verifyTopAndBottomPagingPagingBoxesHaveSameItemsPerPageNumber();
+        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("1");
+        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySystemSavesCurrentValueItemsPerPage(String rowID, String description, JSONObject testData) {
+
+        VNextBOUsersPageSteps.changeItemsPerPage("50");
+        VNextBOUsersPageSteps.openPageByNumber(2);
+        VNextBOUsersPageSteps.clickLogo();
+        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("2");
+        VNextBOUsersPageValidations.isItemsPerPageNumberCorrect("50");
+    }
 }
