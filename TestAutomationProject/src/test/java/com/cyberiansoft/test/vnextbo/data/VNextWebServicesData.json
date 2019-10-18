@@ -2,7 +2,12 @@
   "testSetupConfigurationToRunInvoiceListSuite": [
     {
       "rowID": "testCheckPossibilityToResendRegistrationEmail.01",
-      "description": "Test Case 45496:vNext: setup configuration to run Invoice list suite"
+      "description": "Test Case 45496:vNext: setup configuration to run Invoice list suite",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90590"
+        }
+      ]
     }
   ]
 }

@@ -3,6 +3,11 @@
     {
       "rowID": "testSetupConfigurationToRunInvoiceListSuite.01",
       "description": "Test Case 45496:vNext: setup configuration to run Invoice list suite",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90590"
+        }
+      ],
       "companyName": "AMT",
       "firstName": "Retail",
       "lastName": "Automation",

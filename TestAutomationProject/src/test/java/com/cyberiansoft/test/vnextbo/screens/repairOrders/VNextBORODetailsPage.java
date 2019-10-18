@@ -615,11 +615,8 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 
 	public String getServiceStatusValue(String serviceId) {
 		final WebElement serviceStatusValue = driver.findElement(By.xpath(
-				"//div[@data-order-service-id='" + serviceId + "']//div[contains(@data-bind, 'orderServiceStatusName')]"));
-		setAttributeWithJS(serviceStatusValue, "style", "display: block;");
-		final String value = serviceStatusValue.getText();
-		setAttributeWithJS(serviceStatusValue, "style", "display: none;");
-		return value;
+				"//div[@data-order-service-id='" + serviceId + "']//span[contains(@class, 'service-status-dropdown')]//span[@class='k-input']"));
+		return Utils.getText(serviceStatusValue);
 	}
 
 	public void clickLogInfoButton() {

@@ -75,5 +75,50 @@
         }
       }
     }
+  ],
+  "verifyUserCanStartPhaseFromRoActionMenuForPhase": [
+    {
+      "rowID": "01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "79328",
+          "testCaseTitle": "Verify user can Start the Phase on RO action screen."
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Labor AM"
+        },
+        {
+          "serviceName": "Expenses_money (AM)",
+          "serviceStatus": "STARTED"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCompletePhaseOnRoActionScreen": [
+    {
+      "rowID": "01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93746",
+          "testCaseTitle": "Verify user can Start the Phase on RO action screen."
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Expenses_money (AM)",
+          "serviceStatus": "COMPLETED"
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel",
+          "status": "COMPLETED"
+        }
+      }
+    }
   ]
 }

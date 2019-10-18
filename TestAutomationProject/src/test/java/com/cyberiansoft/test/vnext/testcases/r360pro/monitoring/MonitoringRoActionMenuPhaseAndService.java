@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MonitoringRoActionMenu extends BaseTestCaseTeamEditionRegistration {
+public class MonitoringRoActionMenuPhaseAndService extends BaseTestCaseTeamEditionRegistration {
     String workOrderId;
     String inspectionId;
 
@@ -133,4 +133,5 @@ public class MonitoringRoActionMenu extends BaseTestCaseTeamEditionRegistration 
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }
+
 }

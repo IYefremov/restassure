@@ -1,0 +1,163 @@
+{
+  "verifyUserCanOpenUsersPage": [
+    {
+      "rowID": "verifyUserCanOpenUsersPage.01",
+      "description": "Test Case 90817: Verify user can open \"User\" page.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90817",
+          "testCaseTitle": "Verify user can open \"User\" page."
+        }
+      ]
+    }
+  ],
+  "verifyIntercomMessengerCanBeOpenedClosed": [
+    {
+      "rowID": "verifyIntercomMessengerCanBeOpenedClosed.01",
+      "description": "Test Case 90818: Verify user can open and close \"Intercom\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90818",
+          "testCaseTitle": "Verify user can open and close \"Intercom\""
+        }
+      ]
+    }
+  ],
+  "verifyTermsAndConditionsCanBeOpenedAndClosed": [
+    {
+      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosed.01",
+      "description": "Test Case 90840: Verify user can open \"Terms and Conditions\" link",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90840",
+          "testCaseTitle": "Verify user can open \"Terms and Conditions\" link"
+        }
+      ]
+    }
+  ],
+  "verifyPrivacyPolicyCanBeOpenedAndClosed": [
+    {
+      "rowID": "verifyPrivacyPolicyCanBeOpenedAndClosed.01",
+      "description": "Test Case 90841: Verify user can open \"Privacy Policy\" link",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90841",
+          "testCaseTitle": "Verify user can open \"Privacy Policy\" link"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanOpenAndCloseMainMenu": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseMainMenu.01",
+      "description": "Test Case 90835: Verify user can open \"Main\" menu",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90835",
+          "testCaseTitle": "Verify user can open \"Main\" menu"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanReturnToHomePageByClickingLogo": [
+    {
+      "rowID": "verifyUserCanReturnToHomePageByClickingLogo.01",
+      "description": "Test Case 90836: Verify user can return to \"Home\" page by clicking \"Logo\" field",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90836",
+          "testCaseTitle": "Verify user can return to \"Home\" page by clicking \"Logo\" field"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanOpenUserProfile": [
+    {
+      "rowID": "verifyUserCanOpenUserProfiles.01",
+      "description": "Test Case 90837: Verify user can open \"Profile\" pop-up window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90837",
+          "testCaseTitle": "Verify user can open \"Profile\" pop-up window"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanLogout": [
+    {
+      "rowID": "verifyUserCanLogout.01",
+      "description": "Test Case 90838: Verify user can logout",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90838",
+          "testCaseTitle": "Verify user can logout"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanUseHelp": [
+    {
+      "rowID": "verifyUserCanUseHelp.01",
+      "description": "Test Case 90839: Verify user can use \"Help\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90839",
+          "testCaseTitle": "Verify user can use \"Help\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanNavigateBetweenPages": [
+    {
+      "rowID": "verifyUserCanNavigateBetweenPages.01",
+      "description": "Test Case 90830: Verify user can navigate between pages. Verify top and bottom paging are synchronized.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90830",
+          "testCaseTitle": "Verify user can navigate between pages. Verify top and bottom paging are synchronized."
+        }
+      ]
+    }
+  ],
+
+  "verifySystemSavesCurrentPageNumber": [
+    {
+      "rowID": "verifySystemSavesCurrentPageNumber.01",
+      "description": "Test Case 90831: Verify system saves current page number",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90831",
+          "testCaseTitle": "Verify system saves current page number"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeItemsPerPage": [
+    {
+      "rowID": "verifyUserCanChangeItemsPerPage.01",
+      "description": "Test Case 90832: Verify user can change items per page.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90832",
+          "testCaseTitle": "Verify user can change items per page."
+        }
+      ]
+    }
+  ],
+
+  "verifySystemSavesCurrentValueItemsPerPage": [
+    {
+      "rowID": "verifySystemSavesCurrentValueItemsPerPage.01",
+      "description": "Test Case 90833: Verify system saves current value of \"N items per page\" ",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90833",
+          "testCaseTitle": "Verify system saves current value of \"N items per page\" "
+        }
+      ]
+    }
+  ]
+}

@@ -14,6 +14,9 @@ public class DamageData {
     @JsonProperty("damageGroupName")
     String damageGroupName;
 
+    @JsonProperty("orderPanelName")
+    String orderPanelName;
+
     @JsonProperty("moneyService")
     ServiceData moneyService;
 

@@ -3,6 +3,11 @@
     {
       "rowID": "verifyUserCanCancelArchivingWithNoButton.01",
       "description": "Test Case 85227: User can cancel Archiving of Inspection (No) (Inspection's details)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90874"
+        }
+      ],
       "inspectionId": "E-444-00188",
       "fromDate": "1/1/2018",
       "toDate": "9/26/2019"
@@ -12,6 +17,11 @@
     {
       "rowID": "verifyUserCanCancelArchivingWithCloseButton.01",
       "description": "Test Case 85228: User can cancel Archiving of Inspection (X-icon) (Inspection's details)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90875"
+        }
+      ],
       "inspectionId": "E-444-00188",
       "fromDate": "1/1/2018",
       "toDate": "9/26/2019"
@@ -36,6 +46,11 @@
     {
       "rowID": "verifyUserCanCancelUnArchivingWithNoButton.01",
       "description": "Test Case 85231: User can cancel Unarchiving of Inspection (No) (Inspection's details)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90877"
+        }
+      ],
       "inspectionId": "E-444-00188",
       "fromDate": "1/1/2018",
       "toDate": "9/26/2019"
@@ -45,6 +60,11 @@
     {
       "rowID": "verifyUserCanCancelUnArchivingWithCloseButton.01",
       "description": "Test Case 85232: User can cancel Unarchiving of Inspection (X-icon) (Inspection's details)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90878"
+        }
+      ],
       "inspectionId": "E-444-00188",
       "fromDate": "1/1/2018",
       "toDate": "9/26/2019"

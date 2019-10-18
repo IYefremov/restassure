@@ -17,9 +17,10 @@ public class ServiceDetailsScreenSteps {
             setServicePriceValue(serviceData.getServicePrice());
         if (serviceData.getServiceQuantity() != null)
             setServiceQuantityValue(serviceData.getServiceQuantity());
-        if (serviceData.getServiceNotes() != null) {
+        if (serviceData.getServiceNotes() != null)
             setServiceNotes(serviceData.getServiceNotes());
-        }
+        if (serviceData.getPreExistingDamage() != null)
+        selectPreExistingDamage(serviceData.getPreExistingDamage());
         if (serviceData.getVehiclePart() != null)
             slectServiceVehiclePart(serviceData.getVehiclePart());
         if (serviceData.getVehicleParts() != null)
@@ -32,6 +33,11 @@ public class ServiceDetailsScreenSteps {
     public static void setServicePriceValue(String servicePrice) {
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.setServicePriceValue(servicePrice);
+    }
+
+    public static void selectPreExistingDamage(String damageName) {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.checkPreexistingDamage(damageName);
     }
 
     public static void setServiceQuantityValue(String serviceQuantity) {

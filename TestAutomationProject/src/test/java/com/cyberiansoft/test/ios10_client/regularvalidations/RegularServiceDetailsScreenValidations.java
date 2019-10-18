@@ -38,4 +38,14 @@ public class RegularServiceDetailsScreenValidations {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         Assert.assertEquals(selectedServiceDetailsScreen.getServicePartValue(), servicePartData.getServicePartValue());
     }
+
+    public static void verifyServiceDetailsAdjustmentValue(String expectedValue) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getAdjustmentsValue(), expectedValue);
+    }
+
+    public static void verifyServicePriceValue(String expectedPrice) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
+    }
 }

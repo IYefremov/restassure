@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.iOSRegularBaseScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
@@ -49,6 +50,7 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
         if (!btns.get(1).getAttribute("label").equals("Save"))
             btns.get(1).click();*/
 
+        BaseUtils.waitABit(1000);
         if (!elementExists("Save"))
             clickChangeScreen();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

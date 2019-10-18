@@ -10,6 +10,11 @@ public class RegularServiceRequestAppointmentScreenSteps {
         serviceRequestAppointmentScreen.clickDatePickerDoneButton();
         serviceRequestAppointmentScreen.clickAppointmentToField();
         serviceRequestAppointmentScreen.clickDatePickerDoneButton();
+        saveAppointment();
+    }
+
+    public static void saveAppointment() {
+        RegularServiceRequestAppointmentScreen serviceRequestAppointmentScreen = new RegularServiceRequestAppointmentScreen();
         serviceRequestAppointmentScreen.clickAppointmentSaveButton();
     }
 }

@@ -28,11 +28,8 @@ public class VNextBOAuditLogDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='repair-order-audit-log-modal' and @style]//ul[@id='logsTabs']/li")
     private WebElement auditLogsTabs;
 
-    @FindBy(xpath = "//div[@id='repairOrder_departmentsLog' and contains(@class, 'active')]//tbody[contains(@data-bind, 'departments')]/tr[last()]/td[1]/div[2]")
-    private WebElement departmentsLastRecord;
-
-    @FindBy(xpath = "//div[@id='repairOrder_phasesLog' and contains(@class, 'active')]//tbody[contains(@data-bind, 'phases')]/tr[last()]/td[1]/div[2]")
-    private WebElement phasesLastRecord;
+    @FindBy(xpath = "//div[@id='repairOrder_phasesDepartmentsLog' and contains(@class, 'active')]//tbody[@data-template='phases-activity-log-template']/tr[last()]//span[@data-bind='text: timeFinished']")
+    private WebElement departmentsAndPhasesLastRecord;
 
     @FindBy(xpath = "//div[@id='repairOrder_servicesLog' and contains(@class, 'active')]//tbody[contains(@data-bind, 'services')]//td[last()-1]")
     private WebElement servicesActivityTimeFirstRecord;
@@ -97,12 +94,8 @@ public class VNextBOAuditLogDialog extends VNextBOBaseWebPage {
         return this;
     }
 
-    public String getDepartmentsLastRecord() {
-        return wait.until(ExpectedConditions.visibilityOf(departmentsLastRecord)).getText();
-    }
-
-    public String getPhasesLastRecord() {
-        return wait.until(ExpectedConditions.visibilityOf(phasesLastRecord)).getText();
+    public String getDepartmentsAndPhasesLastRecord() {
+        return wait.until(ExpectedConditions.visibilityOf(departmentsAndPhasesLastRecord)).getText();
     }
 
     public String getServicesActivityTimeFirstRecord() {

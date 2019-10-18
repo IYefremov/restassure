@@ -62,24 +62,6 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[contains(@class, 'status__label')]")
 	private List<WebElement> inspectionStatusLabels;
 
-	@FindBy(xpath = "//a[@data-bind='click: showTermsAndConditions']")
-	public WebElement termsAndConditionsLink;
-
-	@FindBy(xpath = "//a[@data-bind='click: showPrivacyPolicy']")
-	public WebElement privacyPolicyLink;
-
-	@FindBy(xpath = "//iframe[@name='intercom-messenger-frame']")
-	public WebElement intercomMessengerFrame;
-
-	@FindBy(xpath = "//div[contains(@class,'intercom-messenger-new-conversation')]")
-	public WebElement intercomNewConversionSpace;
-
-	@FindBy(xpath = "//iframe[@name='intercom-launcher-frame']")
-	public WebElement intercomLauncherFrame;
-
-	@FindBy(xpath = "//div[contains(@class, 'intercom-launcher')]")
-	public WebElement openCloseIntercomButton;
-
 	@FindBy(xpath = "//i[@id='advSearchEstimation-caret']")
 	public WebElement searchFieldAdvancedSearchCaret;
 

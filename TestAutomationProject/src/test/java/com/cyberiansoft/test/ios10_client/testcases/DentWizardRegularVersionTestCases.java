@@ -28,7 +28,6 @@ import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceT
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
-import io.appium.java_client.ios.IOSElement;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -2075,10 +2074,14 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19548:Test adding a PO# to an invoice", description = "Test adding a PO# to an invoice")
-    public void testAddingAPOToAnInvoice() {
-        String tcname = "testAddingAPOToAnInvoice";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testAddingAPOToAnInvoice(String rowID,
+                                            String description, JSONObject testData) {
+
+        final String secondOrderMonitorPanel = "Interior Repair";
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToSettingsScreen();
         RegularSettingsScreen settingsScreen = new RegularSettingsScreen();
@@ -2087,25 +2090,22 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackeravisworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoScreenSteps.setStockNumber(workOrderData.getVehicleInfoData().getStockNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
 
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.INTERIOR_FABRIC_SERVICE);
-        servicesScreen.selectService("Tear/Burn >2\" (Fabric)");
-        servicesScreen.clickBackServicesButton();
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
+        }
 
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDR6PANEL_SUBSERVICE);
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
         RegularServicesScreenSteps.switchToSelectedServices();
-        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-        Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(UtilConstants.PDR6PANEL_SUBSERVICE));
-        Assert.assertEquals(servicesScreen.getSubTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularSelectedServicesScreenValidations.verifyServiceIsSelected(damageData.getMoneyService().getServiceName(), true);
+        }
+        RegularWizardScreenValidations.verifyScreenSubTotalPrice(PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
 
@@ -2113,130 +2113,89 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
         teamWorkOrdersScreen.clickOnWO(workOrderNumber);
         RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
-        orderMonitorScreen.selectPanelToChangeStatus(UtilConstants.PDR_SERVICE);
+        orderMonitorScreen.selectPanelToChangeStatus(workOrderData.getDamagesData().get(0).getDamageGroupName());
         orderMonitorScreen.setCompletedPhaseStatus();
-        orderMonitorScreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
-        Assert.assertEquals(orderMonitorScreen.getPanelStatus("Tear/Burn >2\" (Fabric)"), "Active");
-        orderMonitorScreen.selectPanelToChangeStatus("Interior Repair");
+
+        RegularOrderMonitorScreenValidations.verifyServiceStatus(workOrderData.getDamagesData().get(0).getMoneyService(),
+                OrderMonitorStatuses.COMPLETED);
+        RegularOrderMonitorScreenValidations.verifyServiceStatus(workOrderData.getDamagesData().get(1).getMoneyService(),
+                OrderMonitorStatuses.ACTIVE);
+        orderMonitorScreen.selectPanelToChangeStatus(secondOrderMonitorPanel);
         orderMonitorScreen.setCompletedPhaseStatus();
-        orderMonitorScreen.verifyPanelsStatuses(UtilConstants.PDR6PANEL_SUBSERVICE, "Completed");
-        Assert.assertEquals(orderMonitorScreen.getPanelStatus("Tear/Burn >2\" (Fabric)"), "Completed");
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(),
+                    OrderMonitorStatuses.COMPLETED);
+        }
+
         teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.verifyCreateInvoiceIsActivated(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
         String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        RegularNavigationSteps.navigateToScreen("AVIS Questions");
-        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
-
-        questionsScreen.chooseAVISCode("Rental-921");
+        final InvoiceData invoiceData = testCaseData.getInvoiceData();
+        RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(invoiceData.getQuestionScreenData());
         invoiceInfoScreen.clickSaveAsFinal();
         teamWorkOrdersScreen.clickHomeButton();
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
         RegularMyInvoicesScreenSteps.selectInvoiceForChangePO(invoiceNumber);
-        myInvoicesScreen.changePO("170116");
+        myInvoicesScreen.changePO(invoiceData.getPoNumber());
         myInvoicesScreen.clickBackButton();
         homescreen.clickMyInvoicesButton();
-        Assert.assertEquals(myInvoicesScreen.getInvoicePrice(invoiceNumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+        Assert.assertEquals(myInvoicesScreen.getInvoicePrice(invoiceNumber), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
         Assert.assertTrue(myInvoicesScreen.isInvoiceHasInvoiceSharedIcon(invoiceNumber));
         Assert.assertTrue(myInvoicesScreen.isInvoiceHasInvoiceNumberIcon(invoiceNumber));
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19670:Test adding a PO# to an invoice containing multiple Work Orders", description = "Test adding a PO# to an invoice containing multiple Work Orders")
-    public void testAddingPOToAnInvoiceContainingMultipleWorkOrders() {
-        String tcname1 = "testAddingPOToAnInvoiceContainingMultipleWorkOrders1";
-        String tcname2 = "testAddingPOToAnInvoiceContainingMultipleWorkOrders2";
-        String tcname3 = "testAddingPOToAnInvoiceContainingMultipleWorkOrders3";
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testAddingPOToAnInvoiceContainingMultipleWorkOrders(String rowID,
+                                         String description, JSONObject testData) {
 
-        int testcaserow1 = ExcelUtils.getTestCaseRow(tcname1);
-        int testcaserow2 = ExcelUtils.getTestCaseRow(tcname2);
-        int testcaserow3 = ExcelUtils.getTestCaseRow(tcname3);
-
-        final String[] vehicleparts = {"Left Rear Door", "Right Rear Door"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        List<WorkOrderData> workOrdersData = testCaseData.getWorkOrdersData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
-        RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackeravisworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow1));
-        String workOrderNumber1 = vehicleScreen.getWorkOrderNumber();
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow1), ExcelUtils.getModel(testcaserow1), ExcelUtils.getYear(testcaserow1));
 
-        RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow1));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow1)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+        for (WorkOrderData workOrderData : workOrdersData ) {
+            RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
+            RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+            RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+            workOrderData.setWorkOrderID(RegularVehicleInfoScreenSteps.getWorkOrderNumber());
+            RegularNavigationSteps.navigateToServicesScreen();
+            for (DamageData damageData : workOrderData.getDamagesData()) {
+                RegularServicesScreenSteps.selectPanelServiceData(damageData);
+                RegularServicesScreenSteps.clickServiceTypesButton();
+            }
+            RegularWorkOrdersSteps.saveWorkOrder();
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        RegularWorkOrdersSteps.saveWorkOrder();
-
-        //Create second WO
-        RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackeravisworkordertype);
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow2));
-        String workOrderNumber2 = vehicleScreen.getWorkOrderNumber();
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
-
-        RegularNavigationSteps.navigateToServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.INTERIOR_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.LEATHERREPAIR_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow2));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow2)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        RegularWorkOrdersSteps.saveWorkOrder();
-
-        //Create third WO
-        RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackeravisworkordertype);
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow3));
-        String workOrderNumber3 = vehicleScreen.getWorkOrderNumber();
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow3), ExcelUtils.getModel(testcaserow3), ExcelUtils.getYear(testcaserow3));
-
-        RegularNavigationSteps.navigateToServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow3));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow3)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
-        teamWorkOrdersScreen.clickOnWO(workOrderNumber1);
-        RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
-        orderMonitorScreen.selectPanelToChangeStatus(UtilConstants.PDR_SERVICE);
-        orderMonitorScreen.setCompletedPhaseStatus();
-        for (int i = 0; i < vehicleparts.length; i++)
-            Assert.assertEquals(orderMonitorScreen.getPanelStatus(UtilConstants.PDRVEHICLE_SUBSERVICE + " (" + vehicleparts[i] + ")"), "Completed");
+        for (WorkOrderData workOrderData : workOrdersData ) {
+            teamWorkOrdersScreen.clickOnWO(workOrderData.getWorkOrderID());
+            RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+            for (DamageData damageData : workOrderData.getDamagesData()) {
+                orderMonitorScreen.selectPanelToChangeStatus(damageData.getOrderPanelName());
+                orderMonitorScreen.setCompletedPhaseStatus();
+                if (damageData.getMoneyService().getVehicleParts() !=null) {
+                    for (VehiclePartData vehiclePartData : damageData.getMoneyService().getVehicleParts()) {
+                        RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(), vehiclePartData,
+                                OrderMonitorStatuses.COMPLETED);
+                    }
+                } else {
+                    RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(),
+                            OrderMonitorStatuses.COMPLETED);
+                }
+            }
+            RegularNavigationSteps.navigateBackScreen();
+        }
 
-        teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
-        teamWorkOrdersScreen.clickOnWO(workOrderNumber2);
-        teamWorkOrdersScreen.selectWOMonitor();
-        orderMonitorScreen.selectPanelToChangeStatus("Interior Repair");
-        orderMonitorScreen.setCompletedPhaseStatus();
-        orderMonitorScreen.verifyPanelsStatuses(UtilConstants.LEATHERREPAIR_SUBSERVICE, "Completed");
-        teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
-        teamWorkOrdersScreen.clickOnWO(workOrderNumber3);
-        teamWorkOrdersScreen.selectWOMonitor();
-        orderMonitorScreen.selectPanelToChangeStatus(UtilConstants.PAINT_SERVICE);
-        orderMonitorScreen.setCompletedPhaseStatus();
-        orderMonitorScreen.verifyPanelsStatuses(UtilConstants.BLACKOUT_SUBSERVICE, "Completed");
-        teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
-
-        teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber1);
-        teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber2);
-        teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber3);
+        for (WorkOrderData workOrderData : workOrdersData ) {
+            teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderData.getWorkOrderID());
+        }
 
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
         RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
@@ -2248,79 +2207,75 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
         RegularMyInvoicesScreenSteps.selectInvoiceForChangePO(invoiceNumber);
-        myInvoicesScreen.changePO("957884");
+        myInvoicesScreen.changePO(testCaseData.getInvoiceData().getPoNumber());
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19671:Test Copy Vehicle feature", description = "Test Copy Vehicle feature")
-    public void testCopyVehicleFeature() {
-        String tcname = "testCopyVehicleFeature";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCopyVehicleFeature(String rowID,
+                                                                    String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.OTHER_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.WINDOWTINT_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
+        }
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularMyWorkOrdersSteps.startCopyingVehicleForWorkOrder(workOrderNumber, DentWizardWorkOrdersTypes.carmaxworkordertype);
-        vehicleScreen.waitVehicleScreenLoaded();
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        RegularWorkOrdersSteps.saveWorkOrder();
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        RegularWorkOrdersSteps.cancelCreatingWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19672:Test Copy Services feature", description = "Test Copy Services feature")
-    public void testCopyServicesFeature() {
-        String tcname1 = "testCopyServicesFeature1";
-        String tcname2 = "testCopyServicesFeature2";
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCopyServicesFeature(String rowID,
+                                       String description, JSONObject testData) {
 
-        int testcaserow1 = ExcelUtils.getTestCaseRow(tcname1);
-        int testcaserow2 = ExcelUtils.getTestCaseRow(tcname2);
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        final String newVIN = "1G8AZ52F23Z186658";
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow1));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow1), ExcelUtils.getModel(testcaserow1), ExcelUtils.getYear(testcaserow1));
-        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.BLACKOUT_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow1));
-
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
+        }
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularMyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, DentWizardWorkOrdersTypes.routeusworkordertype);
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow2));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow2), ExcelUtils.getModel(testcaserow2), ExcelUtils.getYear(testcaserow2));
+        RegularVehicleInfoScreenSteps.setVIN(newVIN);
         RegularNavigationSteps.navigateToServicesScreen();
-        //servicesScreen.selectService(UtilConstants.PAINT_SERVICE);
+
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-        Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(UtilConstants.BLACKOUT_SUBSERVICE));
-        Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(UtilConstants.BLACKOUT_SUBSERVICE), new String(PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow1)) + " x 1.00").replaceAll(" ", ""));
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(damageData.getMoneyService().getServiceName()));
+            Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(damageData.getMoneyService().getServiceName()),
+                    (PricesCalculations.getPriceRepresentation(damageData.getMoneyService().getServicePrice()) + " x 1.00").replaceAll(" ", ""));
+        }
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 24164:Test Pre-Existing Damage option", description = "Test Pre-Existing Damage option")
-    public void testPreExistingDamageOption() {
-        String tcname = "testPreExistingDamageOption";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testPreExistingDamageOption(String rowID,
+                                        String description, JSONObject testData) {
 
-        final String[] vehicleparts = {"Left A Pillar", "Left Front Door", "Metal Sunroof", "Right Roof Rail"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
 
         RegularHomeScreenSteps.navigateToSettingsScreen();
         RegularSettingsScreen settingsScreen = new RegularSettingsScreen();
@@ -2329,55 +2284,36 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.servicedriveinspectiondertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        vehicleScreen.selectAdvisor(UtilConstants.TRAINING_ADVISOR);
-        final String inspectionNumber = vehicleScreen.getInspectionNumber();
+        RegularVehicleInfoScreenSteps.setVIN(inspectionData.getVehicleInfo().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
+        RegularVehicleInfoScreenSteps.selectAdvisor(UtilConstants.TRAINING_ADVISOR);
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+        for (DamageData damageData : inspectionData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-
-        servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails("Scratch (Exterior)");
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-        selectedServiceDetailsScreen.checkPreexistingDamage();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+        RegularWizardScreenValidations.verifyScreenTotalPrice(PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         myInspectionsScreen.clickOnInspection(inspectionNumber);
         myInspectionsScreen.clickCreateWOButton();
-        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
+        final WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
         RegularNavigationSteps.navigateToServicesScreen();
-        Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
-        servicesScreen.selectServicePanel(UtilConstants.INTERIOR_SERVICE);
-        servicesScreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
+        RegularWizardScreenValidations.verifyScreenTotalPrice(PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
+        }
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
-        orderSummaryScreen.setTotalSale("1");
+        orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
         RegularWorkOrdersSteps.saveWorkOrder();
-        //Assert.assertEquals(myInspectionsScreen.getFirstInspectionNumberValue(), inspectionNumber);
         RegularMyInspectionsSteps.selectShowWOsMenuForInspection(inspectionNumber);
-        Assert.assertEquals(vehicleScreen.getWorkOrderNumber(), workOrderNumber);
-        servicesScreen.clickCancel();
+        Assert.assertEquals(RegularVehicleInfoScreenSteps.getWorkOrderNumber(), workOrderNumber);
+        RegularWizardScreensSteps.cancelWizard();
 
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
@@ -2389,155 +2325,105 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19676:Test Total Sale requirement", description = "Test Total Sale requirement")
-    public void testTotalSaleRequirement() {
-        String tcname = "testTotalSaleRequirement";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testTotalSaleRequirement(String rowID,
+                                        String description, JSONObject testData) {
 
-        final String[] vehicleparts = {"Hood", "Left Fender"};
-        final String totalsale = "675";
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizardprotrackerservicedriveworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        vehicleScreen.selectAdvisor(UtilConstants.TRAINING_ADVISOR);
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        RegularVehicleInfoScreenSteps.selectAdvisor(UtilConstants.TRAINING_ADVISOR);
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.INTERIOR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.ODORREMOVAL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
         orderSummaryScreen.clickSave();
         String alertText = Helpers.getAlertTextAndAccept();
-        orderSummaryScreen.setTotalSale(totalsale);
         Assert.assertTrue(alertText.contains("Total Sale is required."));
+        orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19678:Test package pricing for read only items", description = "Test package pricing for read only items")
-    public void testPackagePricingForReadOnlyItems() {
-        String tcname = "testPackagePricingForReadOnlyItems";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testPackagePricingForReadOnlyItems(String rowID,
+                                         String description, JSONObject testData) {
 
-        final String[] vehicleparts = {"Left Fender", "Left Roof Rail", "Right Fender"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
-        vehicleScreen.setRO(ExcelUtils.getRO(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoScreenSteps.setStockNumber(workOrderData.getVehicleInfoData().getStockNumber());
+        RegularVehicleInfoScreenSteps.setRoNumber(workOrderData.getVehicleInfoData().getRoNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.INTERIOR_LEATHER_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.CRT_2_RPR_LTHR_SUBSERVICE);
-        Assert.assertEquals(selectedServiceDetailsScreen.getAdjustmentsValue(), "-$14.48");
-        selectedServiceDetailsScreen.setServiceQuantityValue("3.00");
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
 
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.CUST2PNL_SUBSERVICE);
-        Assert.assertEquals(selectedServiceDetailsScreen.getAdjustmentsValue(), "-$6.55");
-        selectedServiceDetailsScreen.clickVehiclePartsCell();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectServicePanel(damageData);
+            RegularServicesScreenSteps.openCustomServiceDetails(damageData.getMoneyService().getServiceName());
+            RegularServiceDetailsScreenSteps.setServiceDetailsData(damageData.getMoneyService());
+            RegularServiceDetailsScreenValidations.verifyServiceDetailsAdjustmentValue(damageData.getMoneyService().getServiceAdjustment().getAdjustmentTotalAmaunt());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+            RegularServicesScreenSteps.clickServiceTypesButton();
+            RegularWizardScreenValidations.verifyScreenTotalPrice(PricesCalculations.getPriceRepresentation(damageData.getMoneyService().getServicePrice2()));
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-        servicesScreen.clickBackServicesButton();
-        Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
         orderSummaryScreen.checkApproveAndCreateInvoice();
         orderSummaryScreen.clickSave();
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
         invoiceInfoScreen.clickSaveAsFinal();
-        vehicleScreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19681:Test price policy for service items from Inspection through Invoice creation", description = "Test price policy for service items from Inspection through Invoice creation")
-    public void testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation() {
-        String tcname = "testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testPricePolicyForServiceItemsFromInspectionThroughInvoiceCreation(String rowID,
+                                                   String description, JSONObject testData) {
 
-        final String[] vehicleparts = {"Left Front Door", "Left Rear Door", "Right Fender"};
-        final String[] vehiclepartspaint = {"Hood", "Left Fender"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
 
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.routeinspectiontype);
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(inspectionData.getVehicleInfo().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
         String inspectionNumber = vehicleScreen.getInspectionNumber();
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
-        }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
 
-        servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTPANEL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehiclepartspaint.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehiclepartspaint[i]);
+        for (DamageData damageData : inspectionData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
+
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
-        Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+        Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
         RegularMyInspectionsSteps.selectInspectionForCreatingWO(inspectionNumber);
         String workOrderNumber = vehicleScreen.getWorkOrderNumber();
         RegularNavigationSteps.navigateToServicesScreen();
 
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-        Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(UtilConstants.PDRVEHICLE_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)) + " x 1.00"));
+        for (DamageData damageData : inspectionData.getDamagesData())
+            Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(damageData.getMoneyService().getServiceName(),
+                    PricesCalculations.getPriceRepresentation(damageData.getMoneyService().getServicePrice()) + " x 1.00"));
 
-        Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(UtilConstants.PAINTPANEL_SUBSERVICE, PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)) + " x 1.00"));
         RegularInspectionsSteps.saveInspection();
-        Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+        Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
         RegularMyInspectionsSteps.selectShowWOsMenuForInspection(inspectionNumber);
         Assert.assertEquals(vehicleScreen.getWorkOrderNumber(), workOrderNumber);
-        servicesScreen.clickCancel();
+        RegularWizardScreensSteps.cancelWizard();
 
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
@@ -2550,8 +2436,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 10263:Send Multiple Emails", description = "Send Multiple Emails")
-    public void testSendMultipleEmails() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testSendMultipleEmails(String rowID,
+                                       String description, JSONObject testData) {
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
@@ -2565,107 +2452,65 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19683:Test Work Order Discount Override feature", description = "Test Work Order Discount Override feature")
-    public void testWorkOrderDiscountOverrideFeature() {
-        String tcname = "testWorkOrderDiscountOverrideFeature";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testWorkOrderDiscountOverrideFeature(String rowID,
+                                                   String description, JSONObject testData) {
 
-        final String[] vehicleparts = {"Left Fender", "Right Fender"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
+        WholesailCustomer wholesailCustomer = new WholesailCustomer();
+        wholesailCustomer.setCompanyName("Bel Air Auto Auction Inc");
 
         RegularCustomersScreen customersScreen = homescreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
-        homescreen = customersScreen.selectCustomerWithoutEditing("Bel Air Auto Auction Inc");
+        homescreen = customersScreen.selectCustomerWithoutEditing(wholesailCustomer.getCompany());
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
 
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServiceAdjustmentsValue(), "-$28.50");
-        selectedServiceDetailsScreen.clickVehiclePartsCell();
-
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectServicePanel(damageData);
+            RegularServicesScreenSteps.openCustomServiceDetails(damageData.getMoneyService().getServiceName());
+            RegularServiceDetailsScreenSteps.setServiceDetailsData(damageData.getMoneyService());
+            if (damageData.getMoneyService().getServiceAdjustment() != null)
+                RegularServiceDetailsScreenValidations.verifyServiceDetailsAdjustmentValue(damageData.getMoneyService().getServiceAdjustment().getAdjustmentTotalAmaunt());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+            RegularServicesScreenSteps.clickServiceTypesButton();
+            RegularWizardScreenValidations.verifyScreenTotalPrice(PricesCalculations.getPriceRepresentation(damageData.getMoneyService().getServicePrice2()));
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-        servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.WSANDBPANEL_SERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        selectedServiceDetailsScreen.selectVehiclePart("Hood");
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
         orderSummaryScreen.checkApproveAndCreateInvoice();
         orderSummaryScreen.clickSave();
         RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm2(testcaserow)));
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(testCaseData.getInvoiceData().getInvoiceTotal()));
         invoiceInfoScreen.clickSaveAsFinal();
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19685:Test completed RO only requirement for invoicing", description = "Test Completed RO only requirement for invoicing")
-    public void testCompletedROOnlyRequirementForInvoicing() {
-        String tcname = "testCompletedROOnlyRequirementForInvoicing";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCompletedROOnlyRequirementForInvoicing(String rowID,
+                                                     String description, JSONObject testData) {
 
-        final String[] vehicleparts = {"Left Quarter Panel", "Right Roof Rail", "Trunk Lid"};
-        final String[] vehiclepartswheel = {"Right Front Wheel", "Right Rear Wheel"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wizprotrackerrouteworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRPANEL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
-        }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
 
-        servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTTOWHOOKCOVER_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        servicesScreen.selectServicePanel(UtilConstants.WHEELS_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.WHEEL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice3(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice3(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        for (int i = 0; i < vehiclepartswheel.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehiclepartswheel[i]);
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
 
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
@@ -2676,8 +2521,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
         teamWorkOrdersScreen.clickOnWO(workOrderNumber);
         teamWorkOrdersScreen.selectEditWO();
-        vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.selectNextScreen(WizardScreenTypes.ORDER_SUMMARY);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        RegularNavigationSteps.navigateToOrderSummaryScreen();
         Assert.assertFalse(orderSummaryScreen.checkApproveAndCreateInvoiceExists());
         RegularWorkOrdersSteps.saveWorkOrder();
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
@@ -2687,16 +2532,17 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         teamWorkOrdersScreen.clickHomeButton();
     }
 
-    @Test(testName = "Test Case 10659:Test Enterprise Work Order question forms inforced", description = "Test Enterprize Work Order question forms inforced")
-    public void testEnterprizeWorkOrderQuestionFormsInforced() {
-        String tcname = "testEnterprizeWorkOrderQuestionFormsInforced";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEnterprizeWorkOrderQuestionFormsInforced(String rowID,
+                                                           String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.enterpriseworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
         RegularNavigationSteps.navigateToScreen(WizardScreenTypes.ENTERPRISE_BEFORE_DAMAGE.getDefaultScreenTypeName());
         RegularEnterpriseBeforeDamageScreen enterprisebeforedamagescreen = new RegularEnterpriseBeforeDamageScreen();
         enterprisebeforedamagescreen.clickSave();
@@ -2713,39 +2559,41 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 12633:Test successful email of pictures using Notes feature", description = "Test successful email of pictures using Notes feature")
-    public void testSuccessfulEmailOfPicturesUsingNotesFeature() {
-        String tcname = "testSuccessfulEmailOfPicturesUsingNotesFeature";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testSuccessfulEmailOfPicturesUsingNotesFeature(String rowID,
+                                                             String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.avisworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
-        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        vehicleScreen.clickNotesButton();
-        RegularNotesScreen notesScreen = new RegularNotesScreen();
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
-        notesScreen.clickSaveButton();
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoScreenSteps.setStockNumber(workOrderData.getVehicleInfoData().getStockNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularWizardScreensSteps.clickNotesButton();
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(1);
+        RegularNotesScreenSteps.saveNotes();
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.clickNotesButton();
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 2);
-        notesScreen.clickSaveButton();
+        RegularWizardScreensSteps.clickNotesButton();
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(2);
+        RegularNotesScreenSteps.saveNotes();
 
-        servicesScreen.selectService(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDR2PANEL_SUBSERVICE);
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
-        selectedServiceDetailsScreen.clickNotesCell();
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
-        notesScreen.clickSaveButton();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectServicePanel(damageData);
+            RegularServicesScreenSteps.openCustomServiceDetails(damageData.getMoneyService().getServiceName());
+            RegularServiceDetailsScreenValidations.verifyServicePriceValue(damageData.getMoneyService().getServicePrice());
+            RegularServiceDetailsScreenSteps.clickNotes();
+            RegularNotesScreenSteps.addImageNote();
+            RegularNotesScreenValidations.verifyNumberOfImagesNotes(1);
+            RegularNotesScreenSteps.saveNotes();
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+            RegularServicesScreenSteps.clickServiceTypesButton();
+        }
+
         RegularNavigationSteps.navigateToScreen(WizardScreenTypes.ENTERPRISE_BEFORE_DAMAGE.getDefaultScreenTypeName());
         RegularEnterpriseBeforeDamageScreen enterprisebeforedamagescreen = new RegularEnterpriseBeforeDamageScreen();
         enterprisebeforedamagescreen.setVINCapture();
@@ -2756,25 +2604,24 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
         myWorkOrdersScreen.selectWorkOrderForAddingNotes(workOrderNumber);
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 3);
-        notesScreen.clickSaveButton();
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(3);
+        RegularNotesScreenSteps.saveNotes();
 
         myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber);
         myWorkOrdersScreen.clickInvoiceIcon();
-        RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
-        String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        RegularNavigationSteps.navigateToScreen("AVIS Questions");
-        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
-        questionsScreen.chooseAVISCode("Other-920");
-        invoiceInfoScreen.clickSaveAsFinal();
+        String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        final InvoiceData invoiceData = testCaseData.getInvoiceData();
+        RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(invoiceData.getQuestionScreenData());
+
+        RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
         RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoiceNumber);
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
-        notesScreen.clickSaveButton();
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(1);
+        RegularNotesScreenSteps.saveNotes();
         myInvoicesScreen.clickActionButton();
         myInvoicesScreen.selectInvoice(invoiceNumber);
         myInvoicesScreen.clickActionButton();
@@ -2784,26 +2631,26 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 12634:Test emailing photos in Economical Inspection", description = "Test emailing photos in Economical Inspection")
-    public void testEmailingPhotosInEconomicalInspection() {
-        String tcname = "testEmailingPhotosInEconomicalInspection";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEmailingPhotosInEconomicalInspection(String rowID,
+                                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
 
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(DentWizardInspectionsTypes.economicalinspectiondertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(inspectionData.getVehicleInfo().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(inspectionData.getVehicleInfo());
 
-        final String inspNumber = vehicleScreen.getInspectionNumber();
-        vehicleScreen.clickNotesButton();
+        final String inspNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularWizardScreensSteps.clickNotesButton();
         RegularNotesScreen notesScreen = new RegularNotesScreen();
         notesScreen.addNotesCapture();
         Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
         notesScreen.clickSaveButton();
 
         RegularNavigationSteps.navigateToClaimScreen();
-        RegularClaimScreen claimScreen = new RegularClaimScreen();
         RegularNavigationSteps.navigateToScreen(UtilConstants.HAIL_PHOTOS_SCREEN_CAPTION);
         RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
         questionsScreen.makeCaptureForQuestionRegular("VIN");
@@ -2819,17 +2666,12 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         questionsScreen.makeCaptureForQuestionRegular("Right Rear of Vehicle");
         questionsScreen.swipeScreenUp();
         questionsScreen.makeCaptureForQuestionRegular("Left Rear of Vehicle");
-        RegularNavigationSteps.navigateToScreen(UtilConstants.HAIL_INFO_SCREEN_CAPTION);
-        questionsScreen.selectProperQuestions();
-
-        int retailhaildatarow = ExcelUtils.getRetailHailDataRow(tcname);
-        questionsScreen.setOwnerInfo(ExcelUtils.getOwnerName(retailhaildatarow), ExcelUtils.getOwnerAddress(retailhaildatarow), ExcelUtils.getownerCity(retailhaildatarow),
-                ExcelUtils.getownerState(retailhaildatarow), UtilConstants.CANADA, ExcelUtils.getOwnerZip(retailhaildatarow));
+        RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails("E-Coat");
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
+        selectedServiceDetailsScreen.setServicePriceValue("20");
         selectedServiceDetailsScreen.clickNotesCell();
         notesScreen.addNotesCapture();
         notesScreen.clickSaveButton();
@@ -2837,7 +2679,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularNavigationSteps.navigateToScreen(UtilConstants.PRICE_MATRIX_SCREEN_CAPTION);
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(ExcelUtils.getPriceMatrix(retailhaildatarow));
+        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix("Roof");
         vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
         vehiclePartScreen.saveVehiclePart();
         priceMatrixScreen.clickNotesButton();
@@ -2852,62 +2694,51 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 12635:Test emailing photos in Auction package", description = "Test emailing photos in Auction package")
-    public void testEmailingPhotosInAuctionPackage() {
-        String tcname = "testEmailingPhotosInAuctionPackage";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEmailingPhotosInAuctionPackage(String rowID,
+                                                               String description, JSONObject testData) {
 
-        final String[] vehicleparts = {"Hood", "Left Fender", "Right Fender", "Roof"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         final String firstnote = "Refused paint";
         final String secondnote = "Just 4 panels";
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.auctionworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-
-        String wo = vehicleScreen.getWorkOrderNumber();
-        vehicleScreen.clickNotesButton();
-        RegularNotesScreen notesScreen = new RegularNotesScreen();
-        notesScreen.setNotes(firstnote);
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
-        notesScreen.clickSaveButton();
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularWizardScreensSteps.clickNotesButton();
+        RegularNotesScreenSteps.setTextNotes(firstnote);
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(1);
+        RegularNotesScreenSteps.saveNotes();
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectService(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        selectedServiceDetailsScreen.clickVehiclePartsCell();
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectServicePanel(damageData);
+            RegularServicesScreenSteps.openCustomServiceDetails(damageData.getMoneyService().getServiceName());
+            RegularServiceDetailsScreenSteps.setServiceDetailsData(damageData.getMoneyService());
+            RegularServiceDetailsScreenSteps.clickNotes();
+            RegularNotesScreenSteps.setTextNotes(secondnote);
+            RegularNotesScreenSteps.addImageNote();
+            RegularNotesScreenValidations.verifyNumberOfImagesNotes(1);
+            RegularNotesScreenSteps.saveNotes();
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+            RegularServicesScreenSteps.clickServiceTypesButton();
         }
 
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.clickNotesCell();
-        notesScreen.setNotes(secondnote);
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
-        notesScreen.clickSaveButton();
-        selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-
-        RegularNavigationSteps.navigateToScreen(WizardScreenTypes.QUESTIONS.getDefaultScreenTypeName());
-        RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
-        questionsScreen.chooseConsignor("Unknown Consignor/One Off-718");
+        RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
 
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
-        myWorkOrdersScreen.selectWorkOrderForAddingNotes(wo);
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 2);
-        notesScreen.clickSaveButton();
+        myWorkOrdersScreen.selectWorkOrderForAddingNotes(workOrderNumber);
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(2);
+        RegularNotesScreenSteps.saveNotes();
 
-        myWorkOrdersScreen.clickCreateInvoiceIconForWO(wo);
+        myWorkOrdersScreen.clickCreateInvoiceIconForWO(workOrderNumber);
         myWorkOrdersScreen.clickInvoiceIcon();
         RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.AUCTION_NO_DISCOUNT_INVOICE);
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
@@ -2925,48 +2756,33 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 12636:Test emailing photos in Service Drive package", description = "Test emailing photos in Service Drive package")
-    public void testEmailingPhotosInServiceDrivePackage() {
-        String tcname = "testEmailingPhotosInServiceDrivePackage";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testEmailingPhotosInServiceDrivePackage(String rowID,
+                                                   String description, JSONObject testData) {
 
-        final String[] vehicleparts = {"Decklid", "Left A Pillar"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        final String notesTxt = "Refused paint";
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         vehicleScreen.selectAdvisor(UtilConstants.TRAINING_ADVISOR);
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
 
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectService(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTDENTREMOVEAL_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-        selectedServiceDetailsScreen.clickVehiclePartsCell();
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-
-
-        servicesScreen.selectService(UtilConstants.INTERIOR_SERVICE);
-        selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.STAIN_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice2(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice2(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
         orderSummaryScreen.checkApproveAndCreateInvoice();
-        orderSummaryScreen.setTotalSale("1");
+        orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
         orderSummaryScreen.clickSave();
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
-        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getTotalSumm(testcaserow)));
+        Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
         String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
         invoiceInfoScreen.clickSaveAsFinal();
 
@@ -2974,11 +2790,11 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
         RegularMyInvoicesScreenSteps.selectInvoiceNotesMenu(invoiceNumber);
-        RegularNotesScreen notesScreen = new RegularNotesScreen();
-        notesScreen.setNotes("Refused paint");
-        notesScreen.addNotesCapture();
-        Assert.assertEquals(notesScreen.getNumberOfAddedPhotos(), 1);
-        notesScreen.clickSaveButton();
+
+        RegularNotesScreenSteps.setTextNotes(notesTxt);
+        RegularNotesScreenSteps.addImageNote();
+        RegularNotesScreenValidations.verifyNumberOfImagesNotes(1);
+        RegularNotesScreenSteps.saveNotes();
 
         myInvoicesScreen.clickActionButton();
         myInvoicesScreen.selectInvoice(invoiceNumber);
@@ -2989,93 +2805,81 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 24131:Test PO# saves with active keyboard on WO summary screen", description = "Test PO# saves with active keyboard on WO summary screen")
-    public void testPONumberSavesWithActiveKeyboardOnWOSummaryScreen() {
-        String tcname = "testPONumberSavesWithActiveKeyboardOnWOSummaryScreen";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testPONumberSavesWithActiveKeyboardOnWOSummaryScreen(String rowID,
+                                                        String description, JSONObject testData) {
 
-        final String poNumber = "998601";
-        final String[] vehicleparts = {"Hood", "Left Quarter Panel", "Right Roof Rail"};
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
 
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PDR_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PDRVEHICLE_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
-        Assert.assertTrue(selectedServiceDetailsScreen.vehiclePartsIsDisplayed());
-        for (int i = 0; i < vehicleparts.length; i++) {
-            selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
         }
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
-        Assert.assertEquals(servicesScreen.getTotalAmaunt(), (PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow))));
+        RegularWizardScreenValidations.verifyScreenTotalPrice(PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
 
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
-        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
+        Assert.assertEquals(orderSummaryScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
         orderSummaryScreen.checkApproveAndCreateInvoice();
         orderSummaryScreen.clickSave();
         RegularInvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
-        invoiceInfoScreen.setPOWithoutHidingkeyboard(poNumber);
+        invoiceInfoScreen.setPOWithoutHidingkeyboard(testCaseData.getInvoiceData().getPoNumber());
         invoiceInfoScreen.clickSaveAsFinal();
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 24132:Test Total Sale saves with active keyboard on WO summary screen", description = "Test Total Sale saves with active keyboard on WO summary screen")
-    public void testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen() {
-        String tcname = "testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
-        final String totalsale = "675";
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testTotalSaleSavesWithActiveKeyboardOnWOSummaryScreen(String rowID,
+                                                                     String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.servicedriveworkordertype);
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         vehicleScreen.selectAdvisor(UtilConstants.TRAINING_ADVISOR);
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
 
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.PAINT_SERVICE);
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(UtilConstants.PAINTHOOD_SUBSERVICE);
-        selectedServiceDetailsScreen.setServicePriceValue(ExcelUtils.getServicePrice(testcaserow));
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(ExcelUtils.getServicePrice(testcaserow)));
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickBackServicesButton();
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
+        }
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
-        orderSummaryScreen.setTotalSaleWithoutHidingkeyboard(totalsale);
+        orderSummaryScreen.setTotalSaleWithoutHidingkeyboard(workOrderData.getWorkOrderTotalSale());
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(testName = "Test Case 19673:Test Car History feature", description = "Test Car History feature")
-    public void testCarHistoryFeature()
-            throws Exception {
-        String tcname = "testCarHistoryFeature";
-        int testcaserow = ExcelUtils.getTestCaseRow(tcname);
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCarHistoryFeature(String rowID,
+                                                                      String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.carmaxworkordertype);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(ExcelUtils.getVIN(testcaserow));
-        vehicleScreen.verifyMakeModelyearValues(ExcelUtils.getMake(testcaserow), ExcelUtils.getModel(testcaserow), ExcelUtils.getYear(testcaserow));
-        vehicleScreen.setStock(ExcelUtils.getStock(testcaserow));
-        vehicleScreen.setRO(ExcelUtils.getRO(testcaserow));
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        RegularVehicleInfoScreenSteps.setStockNumber(workOrderData.getVehicleInfoData().getStockNumber());
+        RegularVehicleInfoScreenSteps.setRoNumber(workOrderData.getVehicleInfoData().getRoNumber());
+        RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        servicesScreen.selectServicePanel(UtilConstants.INTERIORPLASTIC_SERVICE);
-        servicesScreen.selectService(UtilConstants.SCRTCH_1_SECTPLSTC_SERVICE);
-        servicesScreen.clickBackServicesButton();
+
+        for (DamageData damageData : workOrderData.getDamagesData()) {
+            RegularServicesScreenSteps.selectPanelServiceData(damageData);
+            RegularServicesScreenSteps.clickServiceTypesButton();
+        }
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
         orderSummaryScreen.checkApproveAndCreateInvoice();
@@ -3087,8 +2891,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         carHistoryScreen.clickHomeButton();
         RegularHomeScreenSteps.navigateTocarHistoryScreen();
         carHistoryScreen.searchCar("887340");
-        String strtocompare = ExcelUtils.getYear(testcaserow) + ", " + ExcelUtils.getMake(testcaserow) + ", " + ExcelUtils.getModel(testcaserow);
-        Assert.assertEquals(carHistoryScreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
+        String strtocompare = workOrderData.getVehicleInfoData().getVehicleYear() + ", " +
+                workOrderData.getVehicleInfoData().getVehicleMake() + ", " + workOrderData.getVehicleInfoData().getVehicleModel();
+        Assert.assertEquals(carHistoryScreen.getFirstCarHistoryValueInTable(), workOrderData.getVehicleInfoData().getVINNumber());
         Assert.assertEquals(carHistoryScreen.getFirstCarHistoryDetailsInTable(), strtocompare);
         RegularCarHistoryWOsAndInvoicesScreen carHistoryWOsAndInvoicesScreen = carHistoryScreen.clickFirstCarHistoryInTable();
         RegularMyInvoicesScreen myInvoicesScreen = carHistoryWOsAndInvoicesScreen.clickCarHistoryInvoices();
@@ -3098,7 +2903,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         carHistoryWOsAndInvoicesScreen.clickBackButton();
 
         carHistoryScreen.clickSwitchToWeb();
-        Assert.assertEquals(carHistoryScreen.getFirstCarHistoryValueInTable(), ExcelUtils.getVIN(testcaserow));
+        Assert.assertEquals(carHistoryScreen.getFirstCarHistoryValueInTable(), workOrderData.getVehicleInfoData().getVINNumber());
         Assert.assertEquals(carHistoryScreen.getFirstCarHistoryDetailsInTable(), strtocompare);
         carHistoryWOsAndInvoicesScreen = carHistoryScreen.clickFirstCarHistoryInTable();
         carHistoryWOsAndInvoicesScreen.clickCarHistoryInvoices();

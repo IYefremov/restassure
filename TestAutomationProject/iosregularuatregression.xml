@@ -11,6 +11,10 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
 
+
+          <include name="testInspectionsMultipleInspectionsApproval" />
+
+
           <include name="testCreateInspectionVerifyOnBO" />
           <include name="testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO" />
           <include name="testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO" />
@@ -44,6 +48,8 @@
           <include name="testVerifySaveInvoiceAsDraftAndSendEmail" />
           <include name="testInspectionsMultipleInspectionsApproval" />
           <include name="testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection" />
+          <include name="testVerifyUpdateApplicationFromLastDBVersionForNewOne" />
+          <include name="testSRVerifyActionsOnCalendarForSRAppointments" />
         </methods>
       </class>
     </classes>

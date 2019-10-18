@@ -4,6 +4,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsApprovalWebPage;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -11,7 +12,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VNextBOInspectionsPageSteps {
+public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
 
     public static VNextBOInspectionsApprovalWebPage clickTheApproveInspectionButton()
     {
@@ -78,18 +79,6 @@ public class VNextBOInspectionsPageSteps {
     {
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(inspectionsPage.printInspectionIcon);
-    }
-
-    public static void clickTermsAndConditionsLink()
-    {
-        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(inspectionsPage.termsAndConditionsLink);
-    }
-
-    public static void clickPrivacyPolicyLink()
-    {
-        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(inspectionsPage.privacyPolicyLink);
     }
 
     public static String getCustomSearchInfoTextValue()
@@ -272,23 +261,5 @@ public class VNextBOInspectionsPageSteps {
     {
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
         return Utils.getText(inspectionsPage.selectedInspectionFieldValueByName(parameterName));
-    }
-
-    public static void openIntercomMessenger()
-    {
-        WebDriver driver = DriverBuilder.getInstance().getDriver();
-        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(driver);
-        driver.switchTo().frame(inspectionsPage.intercomLauncherFrame);
-        Utils.clickElement(inspectionsPage.openCloseIntercomButton);
-        driver.switchTo().defaultContent();
-    }
-
-    public static void closeIntercom()
-    {
-        WebDriver driver = DriverBuilder.getInstance().getDriver();
-        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(driver);
-        driver.switchTo().frame(inspectionsPage.intercomLauncherFrame);
-        Utils.clickElement(inspectionsPage.openCloseIntercomButton);
-        driver.switchTo().defaultContent();
     }
 }

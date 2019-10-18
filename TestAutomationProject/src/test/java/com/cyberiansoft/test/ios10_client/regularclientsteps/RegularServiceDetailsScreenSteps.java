@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.*;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import org.testng.Assert;
 
@@ -26,17 +25,28 @@ public class RegularServiceDetailsScreenSteps {
             slectServiceVehiclePart(serviceData.getVehiclePart());
         if (serviceData.getVehicleParts() != null)
             selectServiceVehicleParts(serviceData.getVehicleParts());
+        if (serviceData.getPreExistingDamage() != null)
+            selectPreExistingDamage(serviceData.getPreExistingDamage());
         if (serviceData.getQuestionData() != null)
             selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
         if (serviceData.getQuestionsData() != null)
             selectedServiceDetailsScreen.answerQuestions(serviceData.getQuestionsData());
     }
 
-    public static void setServiceNotes(String notes) {
+    public static void selectPreExistingDamage(String damageName) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.clickNotesCell();
+        selectedServiceDetailsScreen.checkPreexistingDamage(damageName);
+    }
+
+    public static void setServiceNotes(String notes) {
+        clickNotes();
         RegularNotesScreenSteps.setTextNotes(notes);
         RegularNotesScreenSteps.saveNotes();
+    }
+
+    public static void clickNotes() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickNotesCell();
     }
 
     public static void setServicePriceValue(String servicePrice) {

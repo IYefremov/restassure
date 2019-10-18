@@ -2,28 +2,48 @@
   "verifyUserCanReadTermsAndConditions": [
     {
       "rowID": "verifyUserCanReadTermsAndConditions.01",
-      "description": "Test Case 84360: Verify user has possibility to click \"Logo\" and reads \"Terms and Conditions\", \"Privacy Policy\""
+      "description": "Test Case 84360: Verify user has possibility to click \"Logo\" and reads \"Terms and Conditions\", \"Privacy Policy\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91509"
+        }
+      ]
     }
   ],
 
   "verifyUserCanNotLoginWithoutPassword": [
     {
       "rowID": "verifyUserCanNotLoginWithoutPassword.01",
-      "description": "Test Case 84364: Repair360 BO - Verify user can't login without \"Password\""
+      "description": "Test Case 84364: Repair360 BO - Verify user can't login without \"Password\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91513"
+        }
+      ]
     }
   ],
 
   "verifyUserCanNotLoginWithoutEmailAndPassword": [
     {
       "rowID": "verifyUserCanNotLoginWithoutEmailAndPassword.01",
-      "description": "Test Case 84362: Repair360 BO - Verify user can't login without \"Email\" and \"Password\""
+      "description": "Test Case 84362: Repair360 BO - Verify user can't login without \"Email\" and \"Password\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91511"
+        }
+      ]
     }
   ],
 
   "verifyUserCanNotLoginWithoutEmail": [
     {
       "rowID": "verifyUserCanNotLoginWithoutEmail.01",
-      "description": "Test Case 84363: Repair360 BO - Verify user can't login without \"Email\""
+      "description": "Test Case 84363: Repair360 BO - Verify user can't login without \"Email\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91512"
+        }
+      ]
     }
   ],
 
@@ -31,6 +51,11 @@
     {
       "rowID": "verifyUserCanNotLoginWithInvalidUserData.01",
       "description": "Test Case 84365: Repair360 BO - Verify user can't login with correct \"Email\" and incorrect \"Passsword\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91514"
+        }
+      ],
       "login": "cyberiansoft.test@nada.ltd",
       "password": "1111111"
     },
@@ -38,6 +63,11 @@
     {
       "rowID": "verifyUserCanNotLoginWithInvalidUserData.02",
       "description": "Test Case 84366: Repair360 BO - Verify user can't login with correct \"Password\" and incorrect \"Email\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91515"
+        }
+      ],
       "login": "a@d.com",
       "password": "ZZzz11!!"
     },
@@ -45,6 +75,11 @@
     {
       "rowID": "verifyUserCanNotLoginWithInvalidUserData.03",
       "description": "Test Case 84371: Repair360 BO - Verify user can't login with incorrect \"Email\" and incorrect \"Password\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91516"
+        }
+      ],
       "login": "a@d.com",
       "password": "1111111"
     },
@@ -52,6 +87,11 @@
     {
       "rowID": "verifyUserCanNotLoginWithInvalidUserData.04",
       "description": "Test Case 84399: Repair360 BO - Verify user can't login with correct \"Password\" and correct \"Email\". \"Password\" contains chars in different register",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91521"
+        }
+      ],
       "login": "cyberiansoft.test@nada.ltd",
       "password": "zzZZ11!!"
     }
@@ -60,7 +100,12 @@
   "verifyUserCanNotLoginWithPasswordInsteadOfEmail": [
     {
       "rowID": "verifyUserCanNotLoginWithPasswordInsteadOfEmail.01",
-      "description": "Test Case 84372: Repair360 BO - Verify user can't login when \"Password\" == \"Email\" and \"Email\" == \"Password\""
+      "description": "Test Case 84372: Repair360 BO - Verify user can't login when \"Password\" == \"Email\" and \"Email\" == \"Password\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91517"
+        }
+      ]
     }
   ],
 
@@ -68,6 +113,11 @@
     {
       "rowID": "verifyUserCanLoginWithCorrectUserData.01",
       "description": "Test Case 84361: Repair360 BO - Verify user can login (positive case)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91510"
+        }
+      ],
       "login": "cyberiansoft.test@nada.ltd",
       "password": "ZZzz11!!"
     },
@@ -75,6 +125,11 @@
     {
       "rowID": "verifyUserCanLoginWithCorrectUserData.01",
       "description": "Test Case 84396: Repair360 BO - Verify user can login with correct \"Password\" and correct \"Email\". \"Email\" starts with a space.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91518"
+        }
+      ],
       "login": " cyberiansoft.test@nada.ltd",
       "password": "ZZzz11!!"
     },
@@ -82,6 +137,11 @@
     {
       "rowID": "verifyUserCanLoginWithCorrectUserData.02",
       "description": "Test Case 84397: Repair360 BO - Verify user can login with correct \"Password\" and correct \"Email\". \"Email\" ends with a space.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91519"
+        }
+      ],
       "login": "cyberiansoft.test@nada.ltd ",
       "password": "ZZzz11!!"
     },
@@ -89,6 +149,11 @@
     {
       "rowID": "verifyUserCanLoginWithCorrectUserData.03",
       "description": "Test Case 84400: Repair360 BO - Verify user can login with correct \"Password\" and correct \"Email\". \"Email\" contains chars in different register",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91522"
+        }
+      ],
       "login": "cyBERiansoft.test@nada.ltd",
       "password": "ZZzz11!!"
     }
@@ -97,7 +162,12 @@
   "verifyUserCanLoginWhenClickBackBtnAndReturn": [
     {
       "rowID": "verifyUserCanLoginWhenClickBackBtnAndReturn.01",
-      "description": "Test Case 84398: Repair360 BO - Verify user can login when click \"back\" icon and return (positive case)"
+      "description": "Test Case 84398: Repair360 BO - Verify user can login when click \"back\" icon and return (positive case)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91520"
+        }
+      ]
     }
   ]
 }
