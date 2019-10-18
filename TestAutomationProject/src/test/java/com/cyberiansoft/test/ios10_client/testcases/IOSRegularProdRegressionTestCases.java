@@ -718,7 +718,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 
-        for (int i =0; i < inspectionsToCreate; i++) {
+        for (int i = 0; i < inspectionsToCreate; i++) {
             RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
             RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
             inspectionsIDs.add(RegularVehicleInfoScreenSteps.getInspectionNumber());
