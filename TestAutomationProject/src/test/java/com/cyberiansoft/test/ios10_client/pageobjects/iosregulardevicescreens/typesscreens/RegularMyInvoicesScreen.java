@@ -73,6 +73,8 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 
 	public String getInvoicePONumber(String invoiceID) {
 		final String poSubstring = "PO#: ";
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement changePOPopup = wait.until(ExpectedConditions.elementToBeClickable(invoicesTable));
 		String invoiceInfoLabel = invoicesTable.findElementByAccessibilityId(invoiceID).findElementByAccessibilityId("labelInfo2").getAttribute("value");
 		return invoiceInfoLabel.substring(invoiceInfoLabel.indexOf(poSubstring) + poSubstring.length(), invoiceInfoLabel.length());
 	}

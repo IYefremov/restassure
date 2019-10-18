@@ -43,10 +43,10 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	@iOSXCUITFindBy(accessibility = "Location")
     private IOSElement locationfld;
-	
+
 	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement searccsavebtn;
-	
+
 	@iOSXCUITFindBy(accessibility = "Approve")
     private IOSElement approvebtn;
 
@@ -205,11 +205,11 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public boolean isWorkOrderHasActionIcon(String workOrderID) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_79')]")).size() > 0;
+		return teamOrdersTable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_79')]")).size() > 0;
 	}
 	
 	public String getFirstWorkOrderNumberValue() {		
-		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelOrderNumber']")).getAttribute("label");
+		return teamOrdersTable.findElement(By.xpath("//XCUIElementTypeCell[1]/XCUIElementTypeStaticText[@name='labelOrderNumber']")).getAttribute("label");
 	}
 	
 	public void selectWorkOrderForEidt(String workOrderID) {
@@ -218,8 +218,8 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectWorkOrder(String workOrderID) {
-		new WebDriverWait(appiumdriver, 10)
-				  .until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId(workOrderID))).click();
+		waitTeamWorkOrdersScreenLoaded();
+		teamOrdersTable.findElementByAccessibilityId(workOrderID).click();
 
 	}
 

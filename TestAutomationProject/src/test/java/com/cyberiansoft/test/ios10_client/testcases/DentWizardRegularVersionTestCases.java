@@ -28,7 +28,6 @@ import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceT
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
-import io.appium.java_client.ios.IOSElement;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
