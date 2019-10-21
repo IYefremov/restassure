@@ -9,28 +9,20 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOPendingRegistrationsValidations {
 
-    private VNextBOPendingRegistrationWebPage pendingRegistrationWebPage;
-    private VNextBODeviceManagementInteractions deviceManagementInteractions;
-
-    public VNextBOPendingRegistrationsValidations() {
-        pendingRegistrationWebPage = PageFactory.initElements(
-                DriverBuilder.getInstance().getDriver(), VNextBOPendingRegistrationWebPage.class);
-        deviceManagementInteractions = new VNextBODeviceManagementInteractions();
-    }
-
-    public void verifyPendingRegistrationTabIsOpened() {
+    public static void verifyPendingRegistrationTabIsOpened() {
+        final VNextBODeviceManagementInteractions deviceManagementInteractions = new VNextBODeviceManagementInteractions();
         if (!deviceManagementInteractions.isPendingRegistrationTabOpened()) {
             deviceManagementInteractions.clickPendingRegistrationsTab();
         }
     }
 
-    public boolean isUserDisplayedInPendingRegistrationTable(String user) {
-        return Utils.isElementDisplayed(pendingRegistrationWebPage.getDeleteDeviceButton(user));
+    public static boolean isUserDisplayedInPendingRegistrationTable(String user) {
+        return Utils.isElementDisplayed(new VNextBOPendingRegistrationWebPage().getDeleteDeviceButton(user));
     }
 
-    public boolean isUserNotDisplayedInPendingRegistrationTable(String user) {
+    public static boolean isUserNotDisplayedInPendingRegistrationTable(String user) {
         try {
-            WaitUtilsWebDriver.waitForInvisibility(pendingRegistrationWebPage.getDeleteDeviceButton(user), 10);
+            WaitUtilsWebDriver.waitForInvisibility(new VNextBOPendingRegistrationWebPage().getDeleteDeviceButton(user), 10);
             return true;
         } catch (NullPointerException ignored) {
             return true;

@@ -14,8 +14,8 @@ public class VNextBOChangeTechniciansDialogSteps {
     public void setOptionsForTechniciansDialog(String vendor, String technician) {
         final VNextBOChangeTechniciansDialogVerifications techniciansDialogVerifications =
                 new VNextBOChangeTechniciansDialogVerifications();
-        techniciansDialogVerifications.verifyVendorIsSet(vendor);
-        techniciansDialogVerifications.verifyTechnicianIsSet(technician);
+        VNextBOChangeTechniciansDialogVerifications.verifyVendorIsSet(vendor);
+        VNextBOChangeTechniciansDialogVerifications.verifyTechnicianIsSet(technician);
     }
 
     public void setOptionsAndClickOkButtonForTechniciansDialog(String vendor, String technician) {

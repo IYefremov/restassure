@@ -20,6 +20,6 @@ public class VNextBOROAdvancedSearchDialogSteps {
 
     public void closeAdvancedSearchDialog() {
         advancedSearchDialogInteractions.closeAdvancedSearchDialog();
-        new VNextBOROPageVerifications().verifyAdvancedSearchDialogIsClosed();
+        VNextBOROPageVerifications.verifyAdvancedSearchDialogIsClosed();
     }
 }

@@ -13,7 +13,7 @@ public class VNextBOHeaderPanelSteps {
 
     public void logout() {
         try {
-            if (new VNextBOHeaderPanelVerifications().logOutLinkExists()) {
+            if (VNextBOHeaderPanelVerifications.logOutLinkExists()) {
                 headerPanelInteractions.userLogout();
             }
         } catch (RuntimeException ignored) {}

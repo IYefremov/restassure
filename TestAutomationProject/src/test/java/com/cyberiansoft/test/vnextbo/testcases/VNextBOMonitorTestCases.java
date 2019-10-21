@@ -435,7 +435,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         roPageInteractions.hideNoteForWorkOrder(data.getOrderNumber());
         roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
         roPageInteractions.clickXIconToCloseNoteForWorkOrder(data.getOrderNumber());
-		Assert.assertFalse(roPageVerifications.isNoteForWorkOrderDisplayed(data.getOrderNumber()),
+		Assert.assertFalse(VNextBOROPageVerifications.isNoteForWorkOrderDisplayed(data.getOrderNumber()),
 				"The note for work order has not been closed after clicking the 'X' icon");
 	}
 
@@ -1293,13 +1293,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
 		final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog();
 		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 		final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
 
 		notesPageSteps.setRONoteMessage(data.getNotesMessage());
 		notesPageInteractions.clickRONoteSaveButton();
 
-		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 		Assert.assertEquals(notesNumber + 1, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number is not updated");
 	}
@@ -1378,9 +1378,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = detailsPage.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog();
 		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes block hasn't been displayed");
+		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes block hasn't been displayed");
 		final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
 
         notesPageSteps.setRONoteMessage(data.getNotesMessage());
@@ -1390,7 +1389,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         notesPageInteractions.closeRONoteDialog();
 
         detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 		Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number has been updated, although the 'X' button was clicked");
 
@@ -1398,7 +1397,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         notesPageInteractions.closeRONoteDialog();
 
 		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(roNotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 		Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number has been updated, although the 'X' button was clicked");
 	}
@@ -1918,7 +1917,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		System.out.println("Phase vendor price: " + detailsPage.getPhaseVendorPriceValue());
 		System.out.println("Phase vendor technician: " + detailsPage.getPhaseVendorTechnicianValue());
 		System.out.println("Phase status: " + detailsPage.getPhaseStatusValue());
-		System.out.println("Phase actions trigger: " + roDetailsPageVerifications.isPhaseActionsTriggerDisplayed());
+		System.out.println("Phase actions trigger: " + VNextBORODetailsPageVerifications.isPhaseActionsTriggerDisplayed());
 
 		Assert.assertEquals(detailsPage.getPhaseNameValue(), data.getServicePhaseHeaders()[0],
 				"The phase name value hasn't been displayed properly");
@@ -1928,7 +1927,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The phase vendor technician value hasn't been displayed properly");
 		Assert.assertEquals(detailsPage.getPhaseStatusValue(), data.getServicePhaseHeaders()[2],
 				"The phase status hasn't been displayed properly");
-		Assert.assertTrue(roDetailsPageVerifications.isPhaseActionsTriggerDisplayed(),
+		Assert.assertTrue(VNextBORODetailsPageVerifications.isPhaseActionsTriggerDisplayed(),
 				"The phase actions trigger hasn't been displayed");
 	}
 
@@ -2138,15 +2137,15 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				data.getOrderNumber(), data.getVendor());
 		repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
 
-		ordersDetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
+        VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
 		detailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[0]);
-		ordersDetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[1], data.getServiceTabs()[1]);
-		ordersDetailsPageVerifications.verifyVendorTechnicianNameIsSet(selectedRandomTechnician);
+        VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[1], data.getServiceTabs()[1]);
+        VNextBORODetailsPageVerifications.verifyVendorTechnicianNameIsSet(selectedRandomTechnician);
 
 		breadCrumbInteractions.clickFirstBreadCrumbLink();
-		roPageVerifications.verifyTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
+        VNextBOROPageVerifications.verifyTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
 		repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
-		ordersDetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
+        VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
 		detailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
 	}
 
@@ -2186,22 +2185,22 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
-        Assert.assertTrue(roPageVerifications.isSavedSearchEditIconDisplayed(),
+        Assert.assertTrue(VNextBOROPageVerifications.isSavedSearchEditIconDisplayed(),
                 "The saved search edit icon hasn't been displayed");
         repairOrdersPageSteps.openAdvancedSearchDialog();
-        Assert.assertTrue(advancedSearchDialogVerifications.isSavedSearchNameClickable(),
+        Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSavedSearchNameClickable(),
                 "The saved search input field isn't clickable");
-        Assert.assertTrue(advancedSearchDialogVerifications.isSaveButtonClickable(),
+        Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSaveButtonClickable(),
                 "The save button isn't clickable");
         advancedSearchDialogSteps.closeAdvancedSearchDialog();
 
         repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
         repairOrdersPageSteps.openAdvancedSearchDialog();
-        Assert.assertFalse(roPageVerifications.isSavedSearchEditIconDisplayed(),
+        Assert.assertFalse(VNextBOROPageVerifications.isSavedSearchEditIconDisplayed(),
                 "The saved search edit icon hasn't been displayed");
-        Assert.assertFalse(advancedSearchDialogVerifications.isSavedSearchNameClickable(),
+        Assert.assertFalse(VNextBOROAdvancedSearchDialogVerifications.isSavedSearchNameClickable(),
                 "The saved search input field is clickable");
-        Assert.assertFalse(advancedSearchDialogVerifications.isSaveButtonClickable(),
+        Assert.assertFalse(VNextBOROAdvancedSearchDialogVerifications.isSaveButtonClickable(),
                 "The save button is clickable");
         advancedSearchDialogSteps.closeAdvancedSearchDialog();
     }
@@ -2217,6 +2216,6 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
         repairOrdersPageSteps.openRODetailsPage();
-        roDetailsPageVerifications.verifyPhaseStatuses(data.getServiceStatuses());
+        VNextBORODetailsPageVerifications.verifyPhaseStatuses(data.getServiceStatuses());
     }
 }

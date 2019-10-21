@@ -38,32 +38,32 @@ public class VNextBORODetailsPageSteps {
 
     public void setCheckInOptionForPhase() {
         detailsPageInteractions.openActionsDropDownForPhase();
-        Assert.assertTrue(detailsPageVerifications.isCheckInOptionDisplayedForPhase(),
+        Assert.assertTrue(VNextBORODetailsPageVerifications.isCheckInOptionDisplayedForPhase(),
                 "The 'Check in' option hasn't been displayed for phase");
         detailsPageInteractions.clickCheckInOptionForPhase();
     }
 
     public void setCheckOutOptionForPhase() {
         detailsPageInteractions.openActionsDropDownForPhase();
-        Assert.assertTrue(detailsPageVerifications.isCheckOutOptionDisplayedForPhase(),
+        Assert.assertTrue(VNextBORODetailsPageVerifications.isCheckOutOptionDisplayedForPhase(),
                 "The 'Check out' option hasn't been displayed for phase");
         detailsPageInteractions.clickCheckOutOptionForPhase();
     }
 
     public void setReportProblemForPhase(String phase, String problem, String description) {
-        if (detailsPageVerifications.isProblemIconDisplayedForPhase(phase)) {
+        if (VNextBORODetailsPageVerifications.isProblemIconDisplayedForPhase(phase)) {
             setResolveProblemForPhase(phase);
         }
         detailsPageInteractions.openActionsDropDownForPhase(phase);
         detailsPageInteractions.clickReportProblemForPhase(phase);
         handleReportProblemDialog(problem, description);
-        Assert.assertTrue(detailsPageVerifications.isProblemIconDisplayedForPhase(phase),
+        Assert.assertTrue(VNextBORODetailsPageVerifications.isProblemIconDisplayedForPhase(phase),
                 "The Problem icon hasn't been displayed");
     }
 
     public void setResolveProblemForPhase(String phase) {
         detailsPageInteractions.openActionsDropDownForPhase(phase);
-        if (detailsPageVerifications.isResolveProblemOptionDisplayedForPhase(phase)) {
+        if (VNextBORODetailsPageVerifications.isResolveProblemOptionDisplayedForPhase(phase)) {
             detailsPageInteractions.clickResolveProblemForPhase(phase);
             problemsInteractions.clickResolveButton();
         }

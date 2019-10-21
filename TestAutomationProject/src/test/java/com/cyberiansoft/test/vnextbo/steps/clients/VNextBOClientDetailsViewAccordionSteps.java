@@ -28,7 +28,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     public void setClientInfoData(Employee employee) {
-        addressFieldsVerifications.verifyClientInfoBlockIsExpanded();
+        VNextBOClientAddressFieldsVerifications.verifyClientInfoBlockIsExpanded();
         if (employee.getClientType().toLowerCase().equals("retail")) {
             clientInfoBlockInteractions.setRetailCompanyType();
         } else if (employee.getClientType().toLowerCase().equals("wholesale")) {
@@ -42,7 +42,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     public void setAccountInfoData(AccountInfoData accountInfoData) {
-        addressFieldsVerifications.verifyAccountInfoBlockIsExpanded();
+        VNextBOClientAddressFieldsVerifications.verifyAccountInfoBlockIsExpanded();
 
         accountInfoInteractions.setAccountingId(accountInfoData.getAccountingId());
         accountInfoInteractions.setAccountingId2(accountInfoData.getAccountingId2());
@@ -53,27 +53,27 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     public void setAddressData(AddressData addressData) {
-        addressFieldsVerifications.verifyAddressBlockIsExpanded();
+        VNextBOClientAddressFieldsVerifications.verifyAddressBlockIsExpanded();
         setAddressShipToData(addressData);
         addressBlockInteractions.checkSameAsShipToCheckBox();
         setAddressBillToData(addressData);
     }
 
     public void setEmailOptionsData(EmailOptionsData emailOptionsData) {
-        addressFieldsVerifications.verifyEmailOptionsBlockIsExpanded();
+        VNextBOClientAddressFieldsVerifications.verifyEmailOptionsBlockIsExpanded();
         emailOptionsBlockInteractions.setDefaultRecipient(emailOptionsData.getDefaultRecipient());
         emailOptionsBlockInteractions.setCc(emailOptionsData.getCc());
         emailOptionsBlockInteractions.setBcc(emailOptionsData.getBcc());
     }
 
     public void setPreferencesData(String defaultArea) {
-        addressFieldsVerifications.verifyPreferencesBlockIsExpanded();
+        VNextBOClientAddressFieldsVerifications.verifyPreferencesBlockIsExpanded();
         preferencesBlockInteractions.clickUseSingleWoTypeCheckbox();
         preferencesBlockInteractions.setDefaultArea(defaultArea);
     }
 
     public void setMiscellaneousData(String notes) {
-        addressFieldsVerifications.verifyMiscellaneousBlockIsExpanded();
+        VNextBOClientAddressFieldsVerifications.verifyMiscellaneousBlockIsExpanded();
         miscellaneousBlockInteractions.setNotes(notes);
     }
 

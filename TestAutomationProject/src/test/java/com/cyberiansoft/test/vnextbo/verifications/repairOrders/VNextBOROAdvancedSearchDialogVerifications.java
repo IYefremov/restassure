@@ -5,17 +5,11 @@ import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROAdvancedSearc
 
 public class VNextBOROAdvancedSearchDialogVerifications {
 
-    private VNextBOROAdvancedSearchDialog advancedSearchDialog;
-
-    public VNextBOROAdvancedSearchDialogVerifications() {
-        advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+    public static boolean isSaveButtonClickable() {
+        return Utils.isElementClickable(new VNextBOROAdvancedSearchDialog().getSaveButton(), 3);
     }
 
-    public boolean isSaveButtonClickable() {
-        return Utils.isElementClickable(advancedSearchDialog.getSaveButton(), 3);
-    }
-
-    public boolean isSavedSearchNameClickable() {
-        return Utils.isElementClickable(advancedSearchDialog.getSearchNameInputField(), 3);
+    public static boolean isSavedSearchNameClickable() {
+        return Utils.isElementClickable(new VNextBOROAdvancedSearchDialog().getSearchNameInputField(), 3);
     }
 }

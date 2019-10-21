@@ -13,26 +13,8 @@ import java.util.List;
 
 public class VNextBOClientAddressFieldsVerifications {
 
-    private VNextBOClientInfoBlock clientInfoBlock;
-    private VNextBOEmailOptionsBlock emailOptionsBlock;
-    private VNextBOPreferencesBlock preferencesBlock;
-    private VNextBOAccountInfoBlock accountInfoBlock;
-    private VNextBOAddressBlock addressBlock;
-
-    public VNextBOClientAddressFieldsVerifications() {
-        clientInfoBlock = PageFactory.initElements(DriverBuilder.getInstance().getDriver(),
-                VNextBOClientInfoBlock.class);
-        emailOptionsBlock = PageFactory.initElements(DriverBuilder.getInstance().getDriver(),
-                VNextBOEmailOptionsBlock.class);
-        preferencesBlock = PageFactory.initElements(DriverBuilder.getInstance().getDriver(),
-                VNextBOPreferencesBlock.class);
-        accountInfoBlock = PageFactory.initElements(DriverBuilder.getInstance().getDriver(),
-                VNextBOAccountInfoBlock.class);
-        addressBlock = PageFactory.initElements(DriverBuilder.getInstance().getDriver(),
-                VNextBOAddressBlock.class);
-    }
-
-    public void verifyClientInfoBlockIsExpanded() {
+    public static void verifyClientInfoBlockIsExpanded() {
+        final VNextBOClientInfoBlock clientInfoBlock = new VNextBOClientInfoBlock();
         final List<WebElement> infoBlockElements = Arrays.asList(
                 clientInfoBlock.getRetailRadioButton(),
                 clientInfoBlock.getWholesaleRadioButton(),
@@ -51,7 +33,8 @@ public class VNextBOClientAddressFieldsVerifications {
         }
     }
 
-    public void verifyEmailOptionsBlockIsExpanded() {
+    public static void verifyEmailOptionsBlockIsExpanded() {
+        final VNextBOEmailOptionsBlock emailOptionsBlock = new VNextBOEmailOptionsBlock();
         final List<WebElement> emailOptionBlockElements = Arrays.asList(
                 emailOptionsBlock.getDefaultRecipientInputField(),
                 emailOptionsBlock.getCcInputField(),
@@ -69,7 +52,8 @@ public class VNextBOClientAddressFieldsVerifications {
         }
     }
 
-    public void verifyPreferencesBlockIsExpanded() {
+    public static void verifyPreferencesBlockIsExpanded() {
+        final VNextBOPreferencesBlock preferencesBlock = new VNextBOPreferencesBlock();
         final List<WebElement> preferencesBlockElements = Arrays.asList(
                 preferencesBlock.getUseSingleWoTypeCheckbox(),
                 preferencesBlock.getDefaultAreaArrow());
@@ -83,7 +67,7 @@ public class VNextBOClientAddressFieldsVerifications {
         }
     }
 
-    public void verifyMiscellaneousBlockIsExpanded() {
+    public static void verifyMiscellaneousBlockIsExpanded() {
         try {
             WaitUtilsWebDriver.waitForVisibility(new VNextBOMiscellaneousBlock().getNotesField(), 4);
         } catch (Exception ignored) {
@@ -91,7 +75,8 @@ public class VNextBOClientAddressFieldsVerifications {
         }
     }
 
-    public void verifyAccountInfoBlockIsExpanded() {
+    public static void verifyAccountInfoBlockIsExpanded() {
+        final VNextBOAccountInfoBlock accountInfoBlock = new VNextBOAccountInfoBlock();
         final List<WebElement> infoBlockElements = Arrays.asList(
                 accountInfoBlock.getAccountingId(),
                 accountInfoBlock.getAccountingId2(),
@@ -108,7 +93,8 @@ public class VNextBOClientAddressFieldsVerifications {
         }
     }
 
-    public void verifyAddressBlockIsExpanded() {
+    public static void verifyAddressBlockIsExpanded() {
+        final VNextBOAddressBlock addressBlock = new VNextBOAddressBlock();
         final List<WebElement> addressBlockElements = Arrays.asList(
                 addressBlock.getAddress1ShipToInputField(),
                 addressBlock.getAddress2ShipToInputField(),

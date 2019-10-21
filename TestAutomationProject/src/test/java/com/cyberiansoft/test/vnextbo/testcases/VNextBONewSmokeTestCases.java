@@ -498,10 +498,10 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         final VNextBOPendingRegistrationsInteractions pendingRegistrationsInteractions =
                 new VNextBOPendingRegistrationsInteractions();
 
-        Assert.assertTrue(pendingRegistrationsVerifications.isUserDisplayedInPendingRegistrationTable(randomUser),
+        Assert.assertTrue(VNextBOPendingRegistrationsValidations.isUserDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't been displayed in the pending registration table");
         deviceManagementSteps.deletePendingRegistrationDeviceByUser(randomUser);
-        Assert.assertTrue(pendingRegistrationsVerifications.isUserNotDisplayedInPendingRegistrationTable(randomUser),
+        Assert.assertTrue(VNextBOPendingRegistrationsValidations.isUserNotDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't disappeared from the pending registration table");
     }
 
@@ -579,14 +579,14 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         simpleSearchSteps.searchByText(data.getOrderNumber());
         notesPageSteps.openNoteDialog(data.getOrderNumber());
-        Assert.assertTrue(notesPageVerifications.isRoEditNotesModalDialogDisplayed(),
+        Assert.assertTrue(VNextBONotesPageVerifications.isRoEditNotesModalDialogDisplayed(),
                 "The edit notes dialog hasn't been opened");
 
         final String note = data.getNotesMessage() + RandomStringUtils.randomAlphanumeric(5);
         notesPageSteps.setRONoteMessageAndSave(note);
-        Assert.assertTrue(notesPageVerifications.isRoEditNotesModalDialogHidden(),
+        Assert.assertTrue(VNextBONotesPageVerifications.isRoEditNotesModalDialogHidden(),
                 "The edit notes dialog hasn't been closed");
-        new VNextBOROPageVerifications().verifyNoteTextIsDisplayed(note);
+        VNextBOROPageVerifications.verifyNoteTextIsDisplayed(note);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -596,9 +596,9 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         simpleSearchSteps.searchByText(data.getOrderNumber());
         repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
-        Assert.assertTrue(roDetailsPageVerifications.isPhaseActionsTriggerDisplayed(),
+        Assert.assertTrue(VNextBORODetailsPageVerifications.isPhaseActionsTriggerDisplayed(),
                 "The phase actions trigger hasn't been displayed");
-        roDetailsPageVerifications.verifyCheckInOptionIsDisplayedForPhase();
+        VNextBORODetailsPageVerifications.verifyCheckInOptionIsDisplayedForPhase();
         roDetailsPageSteps.setCheckInOptionForPhase();
         roDetailsPageSteps.setCheckOutOptionForPhase();
     }
@@ -610,7 +610,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         simpleSearchSteps.searchByText(data.getOrderNumber());
         repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
-        Assert.assertTrue(roDetailsPageVerifications.isPhaseActionsTriggerDisplayed(data.getPhase()),
+        Assert.assertTrue(VNextBORODetailsPageVerifications.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 
         roDetailsPageSteps.setReportProblemForPhase(data.getPhase(), data.getReason(), data.getProblemDescription());

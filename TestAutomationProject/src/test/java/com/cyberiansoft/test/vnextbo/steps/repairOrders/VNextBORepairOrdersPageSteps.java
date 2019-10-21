@@ -49,6 +49,6 @@ public class VNextBORepairOrdersPageSteps {
 
     public void openAdvancedSearchDialog() {
         roPageInteractions.clickAdvancedSearchCaret();
-        new VNextBOROPageVerifications().verifyAdvancedSearchDialogIsDisplayed();
+        VNextBOROPageVerifications.verifyAdvancedSearchDialogIsDisplayed();
     }
 }

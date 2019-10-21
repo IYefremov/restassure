@@ -6,25 +6,19 @@ import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOEditNotesDialog
 
 public class VNextBONotesPageVerifications {
 
-    private VNextBOOrderServiceNotesDialog orderServiceNotesDialog;
-
-    public VNextBONotesPageVerifications() {
-        orderServiceNotesDialog = new VNextBOOrderServiceNotesDialog();
+    public static boolean isEditOrderServiceNotesBlockDisplayed() {
+        return Utils.isElementDisplayed(new VNextBOOrderServiceNotesDialog().getRepairNotesList());
     }
 
-    public boolean isEditOrderServiceNotesBlockDisplayed() {
-        return Utils.isElementDisplayed(orderServiceNotesDialog.getRepairNotesList());
-    }
-
-    public boolean isRoEditNotesModalDialogDisplayed() {
+    public static boolean isRoEditNotesModalDialogDisplayed() {
         return Utils.isElementDisplayed(new VNextBOEditNotesDialog().getRoEditNotesModalDialog());
     }
 
-    public boolean isRoEditNotesModalDialogHidden() {
+    public static boolean isRoEditNotesModalDialogHidden() {
         return Utils.isElementNotDisplayed(new VNextBOEditNotesDialog().getRoEditNotesModalDialog());
     }
 
-    public boolean isRONoteTextAreaDisplayed() {
-        return Utils.isElementDisplayed(orderServiceNotesDialog.getRoNoteTextArea(), 5);
+    public static boolean isRONoteTextAreaDisplayed() {
+        return Utils.isElementDisplayed(new VNextBOOrderServiceNotesDialog().getRoNoteTextArea(), 5);
     }
 }

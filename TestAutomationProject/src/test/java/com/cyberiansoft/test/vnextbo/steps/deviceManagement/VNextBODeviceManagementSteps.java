@@ -29,7 +29,7 @@ public class VNextBODeviceManagementSteps {
     }
 
     public void deletePendingRegistrationDeviceByUser(String user) {
-        new VNextBOPendingRegistrationsValidations().verifyPendingRegistrationTabIsOpened();
+        VNextBOPendingRegistrationsValidations.verifyPendingRegistrationTabIsOpened();
         pendingRegistrationsInteractions.clickDeleteDeviceButtonForUser(user);
         confirmationDialog.clickYesButton();
     }
