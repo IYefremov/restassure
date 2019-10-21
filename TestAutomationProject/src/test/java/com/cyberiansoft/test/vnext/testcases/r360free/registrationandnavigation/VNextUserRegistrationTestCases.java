@@ -1060,7 +1060,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         leftMenuPanel.expandMainMenu();
-        new VNextBOHeaderPanelSteps().clickUpgradeNowBanner();
+        VNextBOHeaderPanelSteps.clickUpgradeNowBanner();
         VNextUpgradeInfoWebPage upgradeinfopage = new VNextUpgradeInfoWebPage(webdriver);
 
         VNextPaymentInfoWebPage paymentinfopage = upgradeinfopage.clickUnlockRepair360EditionButton();

@@ -65,14 +65,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions;
     private VNextBODeviceManagementSteps deviceManagementSteps;
     private VNextBOQuickNotesWebPage quickNotesPage;
-    private HomePageSteps homePageSteps;
-    private VNextBOROSimpleSearchSteps simpleSearchSteps;
-    private VNextBORepairOrdersPageSteps repairOrdersPageSteps;
-    private VNextBORODetailsPageSteps roDetailsPageSteps;
-    private VNextBOPendingRegistrationsValidations pendingRegistrationsVerifications;
-    private VNextBORODetailsPageVerifications roDetailsPageVerifications;
-    private VNextBORONotesPageSteps notesPageSteps;
-    private VNextBONotesPageVerifications notesPageVerifications;
 
     @BeforeClass
     public void settingUp() {
@@ -108,19 +100,11 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         listViewInteractions = new VNextBOClientsListViewInteractions();
         emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
         deviceManagementSteps = new VNextBODeviceManagementSteps();
-        homePageSteps = new HomePageSteps();
-        simpleSearchSteps = new VNextBOROSimpleSearchSteps();
-        repairOrdersPageSteps = new VNextBORepairOrdersPageSteps();
-        roDetailsPageSteps = new VNextBORODetailsPageSteps();
-        pendingRegistrationsVerifications = new VNextBOPendingRegistrationsValidations();
-        roDetailsPageVerifications = new VNextBORODetailsPageVerifications();
-        notesPageSteps = new VNextBORONotesPageSteps();
-        notesPageVerifications = new VNextBONotesPageVerifications();
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();
@@ -464,17 +448,16 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
 
         leftMenuInteractions.selectClientsMenu();
-        new VNextBOClientsSearchSteps().searchWithSimpleSearch(data.getSearch());
+        VNextBOClientsSearchSteps.searchWithSimpleSearch(data.getSearch());
         Assert.assertTrue(listViewInteractions.isClientsTableDisplayed(), "The clients table hasn't been displayed");
 
-        new VNextBOClientsListViewSteps().openClientsDetailsPage(data.getTypes()[0]);
-        final VNextBOClientDetailsViewAccordionSteps accordionSteps = new VNextBOClientDetailsViewAccordionSteps();
-        accordionSteps.setClientInfoData(data.getEmployee());
+        VNextBOClientsListViewSteps.openClientsDetailsPage(data.getTypes()[0]);
+        VNextBOClientDetailsViewAccordionSteps.setClientInfoData(data.getEmployee());
 
-        accordionSteps.setAccountInfoData(data.getAccountInfoData());
+        VNextBOClientDetailsViewAccordionSteps.setAccountInfoData(data.getAccountInfoData());
         Assert.assertFalse(new VNextBOAccountInfoBlockInteractions().isPoNumberUpfrontRequiredCheckboxClickable());
-        accordionSteps.setAddressData(data.getAddressData());
-        accordionSteps.setEmailOptionsData(data.getEmailOptionsData());
+        VNextBOClientDetailsViewAccordionSteps.setAddressData(data.getAddressData());
+        VNextBOClientDetailsViewAccordionSteps.setEmailOptionsData(data.getEmailOptionsData());
 
         Assert.assertFalse(emailOptionsBlockInteractions.isInvoicesCheckboxClickable(),
                 "The invoices checkbox is clickable");
@@ -482,8 +465,8 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
                 "The inspections checkbox is clickable");
         Assert.assertFalse(emailOptionsBlockInteractions.isIncludeInspectionCheckboxClickable(),
                 "The include inspections checkbox is clickable");
-        accordionSteps.setPreferencesData(data.getDefaultArea());
-        accordionSteps.setMiscellaneousData(data.getNotes());
+        VNextBOClientDetailsViewAccordionSteps.setPreferencesData(data.getDefaultArea());
+        VNextBOClientDetailsViewAccordionSteps.setMiscellaneousData(data.getNotes());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -494,7 +477,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         new VNextBODeviceManagementInteractions().clickAddNewDeviceButton();
         final String randomUser = data.getNickname() + " " + RandomStringUtils.randomAlphanumeric(5);
 
-        new VNextBOAddNewDeviceSteps().setNewDeviceValuesAndSubmit(data, randomUser);
+        VNextBOAddNewDeviceSteps.setNewDeviceValuesAndSubmit(data, randomUser);
         final VNextBOPendingRegistrationsInteractions pendingRegistrationsInteractions =
                 new VNextBOPendingRegistrationsInteractions();
 
@@ -511,11 +494,11 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         leftMenuInteractions.selectDeviceManagementMenu();
         new VNextBODeviceManagementInteractions().clickActiveDevicesTab();
-        deviceManagementSteps.searchByText(data.getDeviceName());
+        VNextBODeviceManagementSteps.searchByText(data.getDeviceName());
         Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getDeviceName()),
                 "The device hasn't been displayed");
-        deviceManagementSteps.verifyUserCanUncoverRegistrationCode(data.getDeviceName());
-        deviceManagementSteps.verifyUserCanHideRegistrationCode(data.getDeviceName());
+        VNextBODeviceManagementSteps.verifyUserCanUncoverRegistrationCode(data.getDeviceName());
+        VNextBODeviceManagementSteps.verifyUserCanHideRegistrationCode(data.getDeviceName());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -526,13 +509,13 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         leftMenuInteractions.selectDeviceManagementMenu();
 
-        deviceManagementSteps.openEditDeviceDialog(data.getDeviceName());
-        editDeviceSteps.setAllValuesAndSubmit(data, data.getNickname());
-        deviceManagementSteps.searchByText(data.getNickname());
+        VNextBODeviceManagementSteps.openEditDeviceDialog(data.getDeviceName());
+        VNextBOEditDeviceSteps.setAllValuesAndSubmit(data, data.getNickname());
+        VNextBODeviceManagementSteps.searchByText(data.getNickname());
         Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getNickname()),
                 "The device hasn't been displayed");
 
-        deviceManagementSteps.openEditDeviceDialog(data.getNickname());
+        VNextBODeviceManagementSteps.openEditDeviceDialog(data.getNickname());
 
         System.out.println(editDeviceDialogInteractions.getNickNameValue());
         System.out.println(editDeviceDialogInteractions.getTeamValue());
@@ -545,7 +528,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         Assert.assertEquals(editDeviceDialogInteractions.getTimeZoneValue(), data.getTimeZone(),
                 "The time zone hasn't been changed");
 
-        editDeviceSteps.setNickNameValueAndSubmit(data.getNickname());
+        VNextBOEditDeviceSteps.setNickNameValueAndSubmit(data.getNickname());
     }
 
     //todo bug 87314 change the serviceVendorPrice test data from 5 to 1 to test the boundary values after the bug fix
@@ -555,14 +538,14 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         final VNextBOROPageVerifications roPageVerifications = new VNextBOROPageVerifications();
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        simpleSearchSteps.searchByText(data.getOrderNumber());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
 //        roPageVerifications.verifyAdvancedSearchDialogIsDisplayed();
 //
 //        new VNextBOROAdvancedSearchDialogSteps().searchByActivePhase(
 //                data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
-        repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
 //        roDetailsPageSteps.openServicesTableForStatus(data.getStatus(), data.getPhase());
 //        final String serviceId = roDetailsPageVerifications
 //                .verifyServiceIsDisplayedForExpandedPhase(data.getService());
@@ -576,14 +559,14 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanSeeAndCreateNotes(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        simpleSearchSteps.searchByText(data.getOrderNumber());
-        notesPageSteps.openNoteDialog(data.getOrderNumber());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
+        VNextBORONotesPageSteps.openNoteDialog(data.getOrderNumber());
         Assert.assertTrue(VNextBONotesPageVerifications.isRoEditNotesModalDialogDisplayed(),
                 "The edit notes dialog hasn't been opened");
 
         final String note = data.getNotesMessage() + RandomStringUtils.randomAlphanumeric(5);
-        notesPageSteps.setRONoteMessageAndSave(note);
+        VNextBORONotesPageSteps.setRONoteMessageAndSave(note);
         Assert.assertTrue(VNextBONotesPageVerifications.isRoEditNotesModalDialogHidden(),
                 "The edit notes dialog hasn't been closed");
         VNextBOROPageVerifications.verifyNoteTextIsDisplayed(note);
@@ -593,27 +576,27 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanCheckInRO(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        simpleSearchSteps.searchByText(data.getOrderNumber());
-        repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
+        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageVerifications.isPhaseActionsTriggerDisplayed(),
                 "The phase actions trigger hasn't been displayed");
         VNextBORODetailsPageVerifications.verifyCheckInOptionIsDisplayedForPhase();
-        roDetailsPageSteps.setCheckInOptionForPhase();
-        roDetailsPageSteps.setCheckOutOptionForPhase();
+        VNextBORODetailsPageSteps.setCheckInOptionForPhase();
+        VNextBORODetailsPageSteps.setCheckOutOptionForPhase();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanReportProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        simpleSearchSteps.searchByText(data.getOrderNumber());
-        repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
+        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageVerifications.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 
-        roDetailsPageSteps.setReportProblemForPhase(data.getPhase(), data.getReason(), data.getProblemDescription());
-        roDetailsPageSteps.setResolveProblemForPhase(data.getPhase());
+        VNextBORODetailsPageSteps.setReportProblemForPhase(data.getPhase(), data.getReason(), data.getProblemDescription());
+        VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
     }
 }

@@ -72,7 +72,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
 
     @AfterMethod
     public void BackOfficeLogout() {
-        new VNextBOHeaderPanelSteps().logout();
+       VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();
@@ -319,7 +319,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final String firstWONum = optionsWONums.get(0);
 
         leftMenuInteractions.selectRepairOrdersMenu();
-        new VNextBOROSimpleSearchSteps().searchByText(firstWONum);
+        VNextBOROSimpleSearchSteps.searchByText(firstWONum);
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
@@ -561,7 +561,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final String firstWONum = optionsWONums.get(0);
 
         leftMenuInteractions.selectRepairOrdersMenu();
-        new VNextBOROSimpleSearchSteps().searchByText(firstWONum);
+        VNextBOROSimpleSearchSteps.searchByText(firstWONum);
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         Assert.assertTrue(repairOrdersPage.isWoTypeDisplayed(firstWONum),
@@ -618,7 +618,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final String firstWONum = optionsWONums.get(0);
 
         leftMenuInteractions.selectRepairOrdersMenu();
-        new VNextBOROSimpleSearchSteps().searchByText(firstWONum);
+        VNextBOROSimpleSearchSteps.searchByText(firstWONum);
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(firstWONum),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");

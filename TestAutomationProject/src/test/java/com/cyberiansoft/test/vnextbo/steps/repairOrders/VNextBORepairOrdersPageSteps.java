@@ -8,18 +8,9 @@ import org.testng.Assert;
 
 public class VNextBORepairOrdersPageSteps {
 
-    private VNextBOROPageInteractions roPageInteractions;
-    private VNextBOChangeTechniciansDialogInteractions changeTechniciansDialogInteractions;
-    private VNextBORODetailsPageInteractions roDetailsPageInteractions;
-
-    public VNextBORepairOrdersPageSteps() {
-        roPageInteractions = new VNextBOROPageInteractions();
-        changeTechniciansDialogInteractions = new VNextBOChangeTechniciansDialogInteractions();
-        roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-    }
-
-    public String setTechnicianAndVendorByWoNumber(String woNumber, String vendor) {
-        roPageInteractions.clickTechniciansFieldForWO(woNumber);
+    public static String setTechnicianAndVendorByWoNumber(String woNumber, String vendor) {
+        new VNextBOROPageInteractions().clickTechniciansFieldForWO(woNumber);
+        final VNextBOChangeTechniciansDialogInteractions changeTechniciansDialogInteractions = new VNextBOChangeTechniciansDialogInteractions();
         Assert.assertTrue(changeTechniciansDialogInteractions.isChangeTechnicianDialogDisplayed(),
                 "The Change Technician dialog hasn't been opened");
         changeTechniciansDialogInteractions.setVendor(vendor);
@@ -30,25 +21,26 @@ public class VNextBORepairOrdersPageSteps {
         return technician;
     }
 
-    public void openRODetailsPage(String woNumber) {
-        roPageInteractions.clickWoLink(woNumber);
-        Assert.assertTrue(roDetailsPageInteractions.isRODetailsSectionDisplayed(),
+    public static void openRODetailsPage(String woNumber) {
+        new VNextBOROPageInteractions().clickWoLink(woNumber);
+        Assert.assertTrue(new VNextBORODetailsPageInteractions().isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 
-    public void openRODetailsPage() {
-        roPageInteractions.clickWoLink();
-        Assert.assertTrue(roDetailsPageInteractions.isRODetailsSectionDisplayed(),
+    public static void openRODetailsPage() {
+        new VNextBOROPageInteractions().clickWoLink();
+        Assert.assertTrue(new VNextBORODetailsPageInteractions().isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 
-    public void setSavedSearchOption(String option) {
+    public static void setSavedSearchOption(String option) {
+        final VNextBOROPageInteractions roPageInteractions = new VNextBOROPageInteractions();
         roPageInteractions.clickSavedSearchArrow();
         roPageInteractions.selectSavedSearchDropDownOption(option);
     }
 
-    public void openAdvancedSearchDialog() {
-        roPageInteractions.clickAdvancedSearchCaret();
+    public static void openAdvancedSearchDialog() {
+        new VNextBOROPageInteractions().clickAdvancedSearchCaret();
         VNextBOROPageVerifications.verifyAdvancedSearchDialogIsDisplayed();
     }
 }

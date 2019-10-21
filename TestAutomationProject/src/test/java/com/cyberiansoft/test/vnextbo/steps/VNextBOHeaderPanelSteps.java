@@ -5,21 +5,15 @@ import com.cyberiansoft.test.vnextbo.verifications.VNextBOHeaderPanelVerificatio
 
 public class VNextBOHeaderPanelSteps {
 
-    private VNextBOHeaderPanelInteractions headerPanelInteractions;
-
-    public VNextBOHeaderPanelSteps() {
-        headerPanelInteractions = new VNextBOHeaderPanelInteractions();
-    }
-
-    public void logout() {
+    public static void logout() {
         try {
             if (VNextBOHeaderPanelVerifications.logOutLinkExists()) {
-                headerPanelInteractions.userLogout();
+                new VNextBOHeaderPanelInteractions().userLogout();
             }
         } catch (RuntimeException ignored) {}
     }
 
-    public void clickUpgradeNowBanner() {
-        headerPanelInteractions.clickUpgradeNowBanner();
+    public static void clickUpgradeNowBanner() {
+        new VNextBOHeaderPanelInteractions().clickUpgradeNowBanner();
     }
 }

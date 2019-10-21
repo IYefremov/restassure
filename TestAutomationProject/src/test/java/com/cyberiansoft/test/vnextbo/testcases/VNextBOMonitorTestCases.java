@@ -56,19 +56,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	private VNextBOBreadCrumbInteractions breadCrumbInteractions;
 	private VNextBORODetailsPageInteractions roDetailsPageInteractions;
 	private VNextBOROWebPage repairOrdersPage;
-	private HomePageSteps homePageSteps;
-	private VNextBOROSimpleSearchSteps simpleSearchSteps;
-	private VNextBORepairOrdersPageSteps repairOrdersPageSteps;
-	private VNextBOChangeTechniciansDialogSteps changeTechniciansDialogSteps;
-	private VNextBORODetailsPageSteps detailsPageSteps;
-	private VNextBOCloseRODialogSteps closeRODialogSteps;
-	private VNextBORODetailsPageVerifications roDetailsPageVerifications;
-	private VNextBONotesPageVerifications roNotesPageVerifications;
 	private VNextBORONotesPageInteractions notesPageInteractions;
 	private VNextBOROPageInteractions roPageInteractions;
-	private VNextBORONotesPageSteps notesPageSteps;
-    private VNextBOROPageVerifications roPageVerifications;
-    private VNextBOROAdvancedSearchDialogVerifications advancedSearchDialogVerifications;
     private VNextBOROAdvancedSearchDialogSteps advancedSearchDialogSteps;
 
     @BeforeMethod
@@ -91,25 +80,14 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		leftMenuInteractions = new VNextBOLeftMenuInteractions();
 		breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
 		roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-		homePageSteps = new HomePageSteps();
-		simpleSearchSteps = new VNextBOROSimpleSearchSteps();
-		repairOrdersPageSteps = new VNextBORepairOrdersPageSteps();
-		changeTechniciansDialogSteps = new VNextBOChangeTechniciansDialogSteps();
-		detailsPageSteps = new VNextBORODetailsPageSteps();
-		closeRODialogSteps = new VNextBOCloseRODialogSteps();
-        roDetailsPageVerifications = new VNextBORODetailsPageVerifications();
-        roNotesPageVerifications = new VNextBONotesPageVerifications();
         notesPageInteractions = new VNextBORONotesPageInteractions();
         roPageInteractions = new VNextBOROPageInteractions();
-        notesPageSteps = new VNextBORONotesPageSteps();
-        roPageVerifications = new VNextBOROPageVerifications();
-        advancedSearchDialogVerifications = new VNextBOROAdvancedSearchDialogVerifications();
         advancedSearchDialogSteps = new VNextBOROAdvancedSearchDialogSteps();
     }
 
 	@AfterMethod
 	public void BackOfficeLogout() {
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
 
 		if (DriverBuilder.getInstance().getDriver() != null) {
 			DriverBuilder.getInstance().quitDriver();
@@ -120,7 +98,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanOpenMonitorWithFullSetOfElements(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		Assert.assertTrue(repairOrdersPage.isSavedSearchContainerDisplayed(),
 				"The search container isn't displayed");
@@ -164,7 +142,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanOpenAndCloseTermsAndConditions(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		repairOrdersPage
 				.clickTermsAndConditionsLink()
@@ -178,7 +156,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanOpenAndClosePrivacyPolicy(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		repairOrdersPage
 				.clickPrivacyPolicyLink()
@@ -192,7 +170,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		repairOrdersPage
 				.openIntercom()
@@ -203,7 +181,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeLocation(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getSearchLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getSearchLocation());
 		Assert.assertTrue(breadCrumbInteractions.isLocationSearched(data.getSearchLocation()),
 				"The location is not searched");
 		repairOrdersPage.clickLocationInDropDown(data.getSearchLocation());
@@ -234,7 +212,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanUsePaging(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		Assert.assertTrue(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not disabled");
 		repairOrdersPage.clickNextButton();
 		Assert.assertFalse(repairOrdersPage.isPrevButtonDisabled(), "The previous page button is not enabled");
@@ -246,7 +224,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanFilterRObyDepartments(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		repairOrdersPage.setDepartmentsTabActive();
 
 		Assert.assertTrue(repairOrdersPage.isDepartmentsTabDisplayed());
@@ -292,7 +270,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanFilterRObyPhases(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		repairOrdersPage.setPhasesTabActive();
 
 		Assert.assertTrue(repairOrdersPage.isPhasesTabDisplayed());
@@ -339,7 +317,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSelectLocation(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		Assert.assertTrue(breadCrumbInteractions.isLocationSet(data.getLocation()), "The location hasn't been set");
 	}
 
@@ -347,9 +325,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSearchWoUsingSearchFilter(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		Assert.assertTrue(breadCrumbInteractions.isLocationSet(data.getLocation()), "The location hasn't been set");
-		simpleSearchSteps.searchByText(data.getVinNum());
+		VNextBOROSimpleSearchSteps.searchByText(data.getVinNum());
 
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getVinNum()),
 				"The work order is not displayed after search by VIN after clicking the 'Search' icon");
@@ -359,11 +337,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeAndChangeRoDetails(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		Assert.assertTrue(breadCrumbInteractions.isLocationSet(data.getLocation()), "The location hasn't been set");
 
 		final String vinNum = data.getVinNum();
-		simpleSearchSteps.searchByText(vinNum);
+		VNextBOROSimpleSearchSteps.searchByText(vinNum);
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(vinNum),
 				"The work order is not displayed after search by VIN after clicking the 'Search' icon");
 
@@ -390,9 +368,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCannotChangePoForInvoicedOrders(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation(), true);
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation(), true);
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -403,10 +381,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeInvoiceOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		Assert.assertTrue(breadCrumbInteractions.isLocationSet(data.getLocation()), "The location hasn't been set");
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		final VNextBOInvoicesDescriptionWindow invoicesDescription = repairOrdersPage
 				.clickInvoiceNumberInTable(data.getOrderNumber(), data.getInvoiceNumber());
 		Assert.assertEquals(webdriver.getWindowHandles().size(), 2);
@@ -417,9 +395,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToCheckInCheckOut(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		repairOrdersPage.openOtherDropDownMenu(data.getOrderNumber());
 		//todo finish after TC update
 	}
@@ -428,9 +406,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanShowOrCloseNotesToTheLeftOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
         roPageInteractions.hideNoteForWorkOrder(data.getOrderNumber());
         roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
@@ -443,9 +421,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanTypeAndNotSaveNotesWithXIcon(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
         //todo bug fix #78127
 	}
@@ -454,9 +432,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanTypeAndNotSaveNotesWithClose(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         roPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
 		//todo bug fix #78127
 	}
@@ -465,9 +443,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanOpenRoDetails(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -479,9 +457,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStockOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -496,9 +474,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeRoNumOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -513,9 +491,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToNew(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -531,9 +509,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToOnHold(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -551,9 +529,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToApproved(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -568,9 +546,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCannotChangeStatusOfRoToDraft(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -585,15 +563,15 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToClosedWithNoneReason(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        repairOrdersPageSteps.openAdvancedSearchDialog();
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
 
         advancedSearchDialogSteps
                 .searchByActivePhase(data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
 
-        repairOrdersPageSteps.openRODetailsPage();
+        VNextBORepairOrdersPageSteps.openRODetailsPage();
         roDetailsPageInteractions.setStatus(data.getStatus());
-        closeRODialogSteps.closeROWithReason(data.getReason());
+        VNextBOCloseRODialogSteps.closeROWithReason(data.getReason());
         Assert.assertEquals(roDetailsPageInteractions.getRoStatusValue(), data.getStatus(),
                 "The status hasn't been changed to 'Closed'");
 	}
@@ -602,9 +580,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangePriorityOfRoToLow(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -625,9 +603,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangePriorityOfRoToNormal(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -650,9 +628,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanAddNewService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -700,9 +678,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangePriorityOfRoToHigh(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -723,9 +701,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanAddNewMoneyService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -771,9 +749,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanAddNewLaborService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -818,9 +796,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanAddNewPartService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -865,9 +843,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -898,9 +876,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -931,9 +909,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeFlagOfRoToWhite(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -949,9 +927,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeFlagOfRoToRed(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -967,9 +945,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeFlagOfRoToOrange(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -985,9 +963,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeFlagOfRoToYellow(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1003,9 +981,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeFlagOfRoToGreen(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1021,9 +999,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeFlagOfRoToBlue(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1039,9 +1017,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeFlagOfRoToPurple(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1057,9 +1035,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeChangesOfServicesActivityInLogInfo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1113,9 +1091,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeChangesOfDepartmentsInLogInfo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1187,9 +1165,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeServicesOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1214,9 +1192,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeVendorPriceOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1248,9 +1226,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeVendorTechnicianOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1274,9 +1252,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanCreateNoteOfServiceOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1296,7 +1274,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 		final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
 
-		notesPageSteps.setRONoteMessage(data.getNotesMessage());
+        VNextBORONotesPageSteps.setRONoteMessage(data.getNotesMessage());
 		notesPageInteractions.clickRONoteSaveButton();
 
 		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
@@ -1308,9 +1286,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeTargetDateOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1334,9 +1312,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeMoreInformationOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1361,9 +1339,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanTypeAndNotSaveNoteOfRoService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1382,7 +1360,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes block hasn't been displayed");
 		final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
 
-        notesPageSteps.setRONoteMessage(data.getNotesMessage());
+        VNextBORONotesPageSteps.setRONoteMessage(data.getNotesMessage());
         notesPageInteractions.clickRepairNotesXButton();
 
 		Assert.assertEquals(notesPageInteractions.getRONoteTextAreaValue(), "");
@@ -1393,7 +1371,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number has been updated, although the 'X' button was clicked");
 
-        notesPageSteps.setRONoteMessage(data.getNotesMessage());
+        VNextBORONotesPageSteps.setRONoteMessage(data.getNotesMessage());
         notesPageInteractions.closeRONoteDialog();
 
 		detailsPage.openNotesDialog(serviceId);
@@ -1406,9 +1384,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoServiceToActive(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1446,9 +1424,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoServiceToCompleted(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1488,9 +1466,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoServiceToAudited(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1530,9 +1508,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoServiceToRefused(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1572,9 +1550,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoServiceToRework(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1608,9 +1586,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoServiceToSkipped(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1650,9 +1628,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeChangesOfPhasesInLogInfo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1697,9 +1675,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeQuantityForService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1731,9 +1709,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanEnterNegativeNumberForServiceQuantity(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1773,9 +1751,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCannotEnterTextForServiceQuantity(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1804,9 +1782,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangePriceForService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1838,9 +1816,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanEnterNegativeNumberForServicePrice(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1873,9 +1851,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCannotEnterTextForServicePrice(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1903,9 +1881,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeePhaseOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1935,9 +1913,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeStartedPrice(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -1975,9 +1953,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanSeeStartedVendorPrice(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -2015,9 +1993,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeTechnicianOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -2031,7 +2009,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
-		changeTechniciansDialogSteps.setOptionsAndClickOkButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
+        VNextBOChangeTechniciansDialogSteps.setOptionsAndClickOkButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
 
 		final VNextBORODetailsPage repairOrderDetailsPage = PageFactory.initElements(
 				DriverBuilder.getInstance().getDriver(), VNextBORODetailsPage.class);
@@ -2051,16 +2029,16 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
-		changeTechniciansDialogSteps.setOptionsAndClickOkButtonForTechniciansDialog(data.getVendor1(), data.getTechnician1());
+        VNextBOChangeTechniciansDialogSteps.setOptionsAndClickOkButtonForTechniciansDialog(data.getVendor1(), data.getTechnician1());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -2080,7 +2058,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
-		changeTechniciansDialogSteps.setOptionsAndClickXButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
+        VNextBOChangeTechniciansDialogSteps.setOptionsAndClickXButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
 
 		Assert.assertEquals(numberOfVendorOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
 				"The vendor options number has been changed for repair orders with the 'Active' status");
@@ -2093,9 +2071,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
@@ -2115,7 +2093,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
-		changeTechniciansDialogSteps.setOptionsAndClickXButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
+        VNextBOChangeTechniciansDialogSteps.setOptionsAndClickXButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
 
 		Assert.assertEquals(numberOfVendorOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
 				"The vendor options number has been changed for repair orders with the 'Active' status");
@@ -2130,23 +2108,23 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final VNextBORODetailsPageVerifications ordersDetailsPageVerifications =
 				new VNextBORODetailsPageVerifications();
 
-		homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-		simpleSearchSteps.searchByText(data.getOrderNumber());
+		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
-		final String selectedRandomTechnician = repairOrdersPageSteps.setTechnicianAndVendorByWoNumber(
+		final String selectedRandomTechnician = VNextBORepairOrdersPageSteps.setTechnicianAndVendorByWoNumber(
 				data.getOrderNumber(), data.getVendor());
-		repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
 
         VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
-		detailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[0]);
+        VNextBORODetailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[0]);
         VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[1], data.getServiceTabs()[1]);
         VNextBORODetailsPageVerifications.verifyVendorTechnicianNameIsSet(selectedRandomTechnician);
 
 		breadCrumbInteractions.clickFirstBreadCrumbLink();
         VNextBOROPageVerifications.verifyTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
-		repairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
         VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
-		detailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
+        VNextBORODetailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2154,9 +2132,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         final VNextBOROAdvancedSearchDialog advSearchDialog = new VNextBOROAdvancedSearchDialog();
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
-        repairOrdersPageSteps.openAdvancedSearchDialog();
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
         final VNextBOROAdvancedSearchValues searchValues = data.getSearchValues();
 
         Assert.assertEquals(advSearchDialog.getCustomerInputFieldValue(), searchValues.getCustomer());
@@ -2182,20 +2160,20 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyUserCannotEditSavedSearch(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-        repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
+        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
         Assert.assertTrue(VNextBOROPageVerifications.isSavedSearchEditIconDisplayed(),
                 "The saved search edit icon hasn't been displayed");
-        repairOrdersPageSteps.openAdvancedSearchDialog();
+        VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
         Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSavedSearchNameClickable(),
                 "The saved search input field isn't clickable");
         Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSaveButtonClickable(),
                 "The save button isn't clickable");
         advancedSearchDialogSteps.closeAdvancedSearchDialog();
 
-        repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
-        repairOrdersPageSteps.openAdvancedSearchDialog();
+        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
+        VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
         Assert.assertFalse(VNextBOROPageVerifications.isSavedSearchEditIconDisplayed(),
                 "The saved search edit icon hasn't been displayed");
         Assert.assertFalse(VNextBOROAdvancedSearchDialogVerifications.isSavedSearchNameClickable(),
@@ -2210,12 +2188,12 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void verifyTechnicianUserCanFindOrdersUsingSavedSearchMyCompletedWork(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
         loginPage.userLogin(data.getUserName(), data.getUserPassword());
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        repairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
-        repairOrdersPageSteps.openRODetailsPage();
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        VNextBORepairOrdersPageSteps.openRODetailsPage();
         VNextBORODetailsPageVerifications.verifyPhaseStatuses(data.getServiceStatuses());
     }
 }

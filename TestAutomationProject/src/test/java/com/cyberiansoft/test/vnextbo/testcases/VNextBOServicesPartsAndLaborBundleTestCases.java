@@ -56,7 +56,7 @@ public class VNextBOServicesPartsAndLaborBundleTestCases extends BaseTestCase {
 	
 	@AfterMethod
 	public void BackOfficeLogout() {
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();

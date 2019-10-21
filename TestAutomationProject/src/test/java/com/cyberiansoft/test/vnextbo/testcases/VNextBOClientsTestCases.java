@@ -17,9 +17,6 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 public class VNextBOClientsTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOClientsData.json";
-    private VNexBOLeftMenuPanel leftMenu;
-    private VNextBOBreadCrumbPanel breadCrumbPanel;
-    private VNextBOHomeWebPage homePage;
 
     @BeforeClass
     public void settingUp() {
@@ -42,15 +39,11 @@ public class VNextBOClientsTestCases extends BaseTestCase {
 
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(userName, userPassword);
-
-        leftMenu = PageFactory.initElements(webdriver, VNexBOLeftMenuPanel.class);
-        breadCrumbPanel = PageFactory.initElements(webdriver, VNextBOBreadCrumbPanel.class);
-        homePage = PageFactory.initElements(webdriver, VNextBOHomeWebPage.class);
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();

@@ -6,23 +6,17 @@ import org.testng.Assert;
 
 public class VNextBOROSimpleSearchSteps {
 
-    private VNextBOROSimpleSearchInteractions repairOrdersSimpleSearchInteractions;
-    private VNextBOROPageInteractions repairOrdersPageInteractions;
-
-    public VNextBOROSimpleSearchSteps() {
-        repairOrdersSimpleSearchInteractions = new VNextBOROSimpleSearchInteractions();
-        repairOrdersPageInteractions = new VNextBOROPageInteractions();
-    }
-
-    public void searchByText(String searchText) {
-        repairOrdersSimpleSearchInteractions.setRepairOrdersSearchText(searchText);
-        repairOrdersSimpleSearchInteractions.clickSearchIcon();
-        Assert.assertTrue(repairOrdersPageInteractions.isWorkOrderDisplayedByName(searchText),
+    public static void searchByText(String searchText) {
+        final VNextBOROSimpleSearchInteractions simpleSearchInteractions = new VNextBOROSimpleSearchInteractions();
+        simpleSearchInteractions.setRepairOrdersSearchText(searchText);
+        simpleSearchInteractions.clickSearchIcon();
+        Assert.assertTrue(new VNextBOROPageInteractions().isWorkOrderDisplayedByName(searchText),
                 "The work order is not displayed after search by clicking the 'Search' icon");
     }
 
-    public void searchByTextWithEnter(String searchText) {
-        repairOrdersSimpleSearchInteractions.setRepairOrdersSearchText(searchText);
-        repairOrdersSimpleSearchInteractions.clickEnterToSearch();
+    public static void searchByTextWithEnter(String searchText) {
+        final VNextBOROSimpleSearchInteractions simpleSearchInteractions = new VNextBOROSimpleSearchInteractions();
+        simpleSearchInteractions.setRepairOrdersSearchText(searchText);
+        simpleSearchInteractions.clickEnterToSearch();
     }
 }

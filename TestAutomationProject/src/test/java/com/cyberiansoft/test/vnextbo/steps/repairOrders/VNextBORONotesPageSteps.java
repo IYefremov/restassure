@@ -5,26 +5,21 @@ import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInte
 
 public class VNextBORONotesPageSteps {
 
-    private VNextBORONotesPageInteractions roNotesPageInteractions;
-    private VNextBOROPageInteractions roPageInteractions;
-
-    public VNextBORONotesPageSteps() {
-        roNotesPageInteractions = new VNextBORONotesPageInteractions();
-        roPageInteractions = new VNextBOROPageInteractions();
-    }
-
-    public void openNoteDialog(String woNumber) {
+    public static void openNoteDialog(String woNumber) {
+        final VNextBOROPageInteractions roPageInteractions = new VNextBOROPageInteractions();
         roPageInteractions.revealNoteForWorkOrder(woNumber);
         roPageInteractions.openNotesDialog();
     }
 
-    public void setRONoteMessage(String message) {
+    public static void setRONoteMessage(String message) {
+        final VNextBORONotesPageInteractions roNotesPageInteractions = new VNextBORONotesPageInteractions();
         roNotesPageInteractions.openRONoteTextArea();
         roNotesPageInteractions.typeRONotesMessage(message);
     }
 
-    public void setRONoteMessageAndSave(String message) {
+    public static void setRONoteMessageAndSave(String message) {
         setRONoteMessage(message);
+        final VNextBORONotesPageInteractions roNotesPageInteractions = new VNextBORONotesPageInteractions();
         roNotesPageInteractions.clickRONoteSaveButton();
         roNotesPageInteractions.closeRONoteDialog();
     }

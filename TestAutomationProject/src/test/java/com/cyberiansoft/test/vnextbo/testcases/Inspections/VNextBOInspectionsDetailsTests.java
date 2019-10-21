@@ -53,7 +53,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
     @AfterClass
     public void BackOfficeLogout() {
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();

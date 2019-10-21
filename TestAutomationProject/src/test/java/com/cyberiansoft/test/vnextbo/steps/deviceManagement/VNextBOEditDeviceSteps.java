@@ -6,29 +6,25 @@ import org.testng.Assert;
 
 public class VNextBOEditDeviceSteps {
 
-    private VNextBOEditDeviceDialogInteractions editDeviceDialogInteractions;
-
-    public VNextBOEditDeviceSteps() {
-        editDeviceDialogInteractions = new VNextBOEditDeviceDialogInteractions();
-    }
-
-    public void setEditDeviceFields(VNextBODeviceManagementData deviceManagementData, String nickName) {
+    private static void setEditDeviceFields(VNextBODeviceManagementData deviceManagementData, String nickName) {
+        VNextBOEditDeviceDialogInteractions editDeviceDialogInteractions = new VNextBOEditDeviceDialogInteractions();
         editDeviceDialogInteractions.setTeam(deviceManagementData.getTeam());
         editDeviceDialogInteractions.setNickName(nickName);
         editDeviceDialogInteractions.setTimeZone(deviceManagementData.getTimeZone());
     }
 
-    public void setAllValuesAndSubmit(VNextBODeviceManagementData deviceManagementData, String nickName) {
+    public static void setAllValuesAndSubmit(VNextBODeviceManagementData deviceManagementData, String nickName) {
         setEditDeviceFields(deviceManagementData, nickName);
         submitChanges();
     }
 
-    public void setNickNameValueAndSubmit(String nickName) {
-        editDeviceDialogInteractions.setNickName(nickName);
+    public static void setNickNameValueAndSubmit(String nickName) {
+        new VNextBOEditDeviceDialogInteractions().setNickName(nickName);
         submitChanges();
     }
 
-    private void submitChanges() {
+    private static void submitChanges() {
+        final VNextBOEditDeviceDialogInteractions editDeviceDialogInteractions = new VNextBOEditDeviceDialogInteractions();
         editDeviceDialogInteractions.clickSubmitButton();
         Assert.assertTrue(editDeviceDialogInteractions.isEditDeviceDialogClosed(),
                 "The 'Edit device' dialog hasn't been closed");

@@ -59,7 +59,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
     @AfterClass
     public void backOfficeLogout() {
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();

@@ -59,7 +59,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 
 	@AfterMethod
 	public void BackOfficeLogout() {
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
 
 		if (DriverBuilder.getInstance().getDriver() != null)
 			DriverBuilder.getInstance().quitDriver();
@@ -78,7 +78,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 		VNextBOAddNewUserDialogSteps.createNewUser(data.getTechFirstName(), data.getTechLastName(),
 				usermail, data.getTechUserPhone(), false);
 		Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentInTableByText(usermail));
-        new VNextBOHeaderPanelSteps().logout();
+        VNextBOHeaderPanelSteps.logout();
 
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
 		BackOfficeLoginWebPage oldloginpage = PageFactory.initElements(webdriver,

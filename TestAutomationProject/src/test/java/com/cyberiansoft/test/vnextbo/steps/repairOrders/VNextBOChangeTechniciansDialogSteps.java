@@ -5,31 +5,23 @@ import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOChangeTechnici
 
 public class VNextBOChangeTechniciansDialogSteps {
 
-    private VNextBOChangeTechniciansDialogInteractions techniciansDialogInteractions;
-
-    public VNextBOChangeTechniciansDialogSteps() {
-        techniciansDialogInteractions = new VNextBOChangeTechniciansDialogInteractions();
-    }
-
-    public void setOptionsForTechniciansDialog(String vendor, String technician) {
-        final VNextBOChangeTechniciansDialogVerifications techniciansDialogVerifications =
-                new VNextBOChangeTechniciansDialogVerifications();
+    public static void setOptionsForTechniciansDialog(String vendor, String technician) {
         VNextBOChangeTechniciansDialogVerifications.verifyVendorIsSet(vendor);
         VNextBOChangeTechniciansDialogVerifications.verifyTechnicianIsSet(technician);
     }
 
-    public void setOptionsAndClickOkButtonForTechniciansDialog(String vendor, String technician) {
+    public static void setOptionsAndClickOkButtonForTechniciansDialog(String vendor, String technician) {
         setOptionsForTechniciansDialog(vendor, technician);
-        techniciansDialogInteractions.clickOrderServiceOkButton();
+        new VNextBOChangeTechniciansDialogInteractions().clickOrderServiceOkButton();
     }
 
-    public void setOptionsAndClickCancelButtonForTechniciansDialog(String vendor, String technician) {
+    public static void setOptionsAndClickCancelButtonForTechniciansDialog(String vendor, String technician) {
         setOptionsForTechniciansDialog(vendor, technician);
-        techniciansDialogInteractions.clickOrderServiceCancelButton();
+        new VNextBOChangeTechniciansDialogInteractions().clickOrderServiceCancelButton();
     }
 
-    public void setOptionsAndClickXButtonForTechniciansDialog(String vendor, String technician) {
+    public static void setOptionsAndClickXButtonForTechniciansDialog(String vendor, String technician) {
         setOptionsForTechniciansDialog(vendor, technician);
-        techniciansDialogInteractions.clickOrderServiceXButton();
+        new VNextBOChangeTechniciansDialogInteractions().clickOrderServiceXButton();
     }
 }

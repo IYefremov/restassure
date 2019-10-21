@@ -8,70 +8,68 @@ import org.testng.Assert;
 
 public class VNextBORODetailsPageSteps {
 
-    private VNextBORODetailsPageInteractions detailsPageInteractions;
-    private VNextBORODetailsPageVerifications detailsPageVerifications;
-    private VNextBOROProblemsInteractions problemsInteractions;
-
-    public VNextBORODetailsPageSteps() {
-        detailsPageInteractions = new VNextBORODetailsPageInteractions();
-        detailsPageVerifications = new VNextBORODetailsPageVerifications();
-        problemsInteractions = new VNextBOROProblemsInteractions();
+    public static void openServicesTableForStatus(String status, String service) {
+        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
+        roDetailsPageInteractions.setStatus(status);
+        roDetailsPageInteractions.expandServicesTable(service);
     }
 
-    public void openServicesTableForStatus(String status, String service) {
-        detailsPageInteractions.setStatus(status);
-        detailsPageInteractions.expandServicesTable(service);
+    public static void openServicesTableForStatus(String status) {
+        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
+        roDetailsPageInteractions.setStatus(status);
+        roDetailsPageInteractions.expandServicesTable();
     }
 
-    public void openServicesTableForStatus(String status) {
-        detailsPageInteractions.setStatus(status);
-        detailsPageInteractions.expandServicesTable();
-    }
-
-    public void setServiceStatusForService(String phase, String status) {
-        final String serviceId = detailsPageInteractions.getServiceId(phase);
-        detailsPageInteractions.setServiceStatusForService(serviceId, status);
+    public static void setServiceStatusForService(String phase, String status) {
+        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
+        final String serviceId = roDetailsPageInteractions.getServiceId(phase);
+        roDetailsPageInteractions.setServiceStatusForService(serviceId, status);
         WaitUtilsWebDriver.waitForLoading();
-        Assert.assertEquals(detailsPageInteractions.getServiceStatusValue(serviceId), status,
+        Assert.assertEquals(roDetailsPageInteractions.getServiceStatusValue(serviceId), status,
                 "The status hasn't been set for service");
     }
 
-    public void setCheckInOptionForPhase() {
-        detailsPageInteractions.openActionsDropDownForPhase();
+    public static void setCheckInOptionForPhase() {
+        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
+        roDetailsPageInteractions.openActionsDropDownForPhase();
         Assert.assertTrue(VNextBORODetailsPageVerifications.isCheckInOptionDisplayedForPhase(),
                 "The 'Check in' option hasn't been displayed for phase");
-        detailsPageInteractions.clickCheckInOptionForPhase();
+        roDetailsPageInteractions.clickCheckInOptionForPhase();
     }
 
-    public void setCheckOutOptionForPhase() {
-        detailsPageInteractions.openActionsDropDownForPhase();
+    public static void setCheckOutOptionForPhase() {
+        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
+        roDetailsPageInteractions.openActionsDropDownForPhase();
         Assert.assertTrue(VNextBORODetailsPageVerifications.isCheckOutOptionDisplayedForPhase(),
                 "The 'Check out' option hasn't been displayed for phase");
-        detailsPageInteractions.clickCheckOutOptionForPhase();
+        roDetailsPageInteractions.clickCheckOutOptionForPhase();
     }
 
-    public void setReportProblemForPhase(String phase, String problem, String description) {
+    public static void setReportProblemForPhase(String phase, String problem, String description) {
         if (VNextBORODetailsPageVerifications.isProblemIconDisplayedForPhase(phase)) {
             setResolveProblemForPhase(phase);
         }
-        detailsPageInteractions.openActionsDropDownForPhase(phase);
-        detailsPageInteractions.clickReportProblemForPhase(phase);
+        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
+        roDetailsPageInteractions.openActionsDropDownForPhase(phase);
+        roDetailsPageInteractions.clickReportProblemForPhase(phase);
         handleReportProblemDialog(problem, description);
         Assert.assertTrue(VNextBORODetailsPageVerifications.isProblemIconDisplayedForPhase(phase),
                 "The Problem icon hasn't been displayed");
     }
 
-    public void setResolveProblemForPhase(String phase) {
-        detailsPageInteractions.openActionsDropDownForPhase(phase);
+    public static void setResolveProblemForPhase(String phase) {
+        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
+        roDetailsPageInteractions.openActionsDropDownForPhase(phase);
         if (VNextBORODetailsPageVerifications.isResolveProblemOptionDisplayedForPhase(phase)) {
-            detailsPageInteractions.clickResolveProblemForPhase(phase);
-            problemsInteractions.clickResolveButton();
+            roDetailsPageInteractions.clickResolveProblemForPhase(phase);
+            new VNextBOROProblemsInteractions().clickResolveButton();
         }
     }
 
-    public void handleReportProblemDialog(String problem, String description) {
-        problemsInteractions.setReportProblem(problem);
-        problemsInteractions.setProblemDescription(description);
-        problemsInteractions.clickAddProblemButton();
+    public static void handleReportProblemDialog(String problem, String description) {
+        final VNextBOROProblemsInteractions roProblemsInteractions = new VNextBOROProblemsInteractions();
+        roProblemsInteractions.setReportProblem(problem);
+        roProblemsInteractions.setProblemDescription(description);
+        roProblemsInteractions.clickAddProblemButton();
     }
 }

@@ -7,15 +7,10 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOClientsListViewSteps {
 
-    private VNextBOClientsListViewInteractions listViewInteractions;
-
-    public VNextBOClientsListViewSteps() {
-        listViewInteractions = new VNextBOClientsListViewInteractions();
-    }
-
-    public VNextBOClientsDetailsViewAccordion openClientsDetailsPage(String client) {
-        listViewInteractions.clickActionsIcon(client);
-        listViewInteractions.clickEditDropMenuButton();
+    public static VNextBOClientsDetailsViewAccordion openClientsDetailsPage(String client) {
+        final VNextBOClientsListViewInteractions clientsListViewInteractions = new VNextBOClientsListViewInteractions();
+        clientsListViewInteractions.clickActionsIcon(client);
+        clientsListViewInteractions.clickEditDropMenuButton();
         return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOClientsDetailsViewAccordion.class);
     }
 }
