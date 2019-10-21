@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -33,7 +34,6 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     }
 
     private VNextBOBreadCrumbInteractions breadCrumbInteractions;
-    private HomePageSteps homePageSteps;
     private VNextBOROWebPage repairOrdersPage;
 
     @BeforeMethod
@@ -56,18 +56,11 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
 
         repairOrdersPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOROWebPage.class);
         breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
-        homePageSteps = new HomePageSteps();
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
-        try {
-            VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver, VNextBOHeaderPanel.class);
-            if (headerpanel.logOutLinkExists()) {
-                headerpanel.userLogout();
-            }
-        } catch (RuntimeException ignored) {
-        }
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();
@@ -78,7 +71,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanSeeBreadCrumb(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
     }
 
@@ -86,9 +79,9 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanSeeWoInBreadCrumb(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        new VNextBOROSimpleSearchSteps().searchByText(data.getOrderNumber());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
@@ -109,9 +102,9 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanChangeLocationOnDetailsPage(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        new VNextBOROSimpleSearchSteps().searchByText(data.getOrderNumber());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
@@ -136,9 +129,9 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanReturnToMainPageOfWo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        homePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(breadCrumbInteractions.isBreadCrumbClickable(), "The breadCrumb is not clickable");
-        new VNextBOROSimpleSearchSteps().searchByText(data.getOrderNumber());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
         Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");

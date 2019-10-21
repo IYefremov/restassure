@@ -4,6 +4,8 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROReportProblemDialog;
+import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROResolveProblemDialog;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -14,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class VNextBORODetailsPageInteractions {
 
@@ -133,7 +136,7 @@ public class VNextBORODetailsPageInteractions {
         WaitUtilsWebDriver.waitForLoading();
         final WebElement service = DriverBuilder.getInstance().getDriver()
                 .findElement(By.xpath("//div[@data-order-service-id='" + serviceId
-                + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
+                        + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
         Utils.getActions().moveToElement(service).build().perform();
         Utils.clickElement(service);
     }
@@ -220,13 +223,24 @@ public class VNextBORODetailsPageInteractions {
         handleActionsButton(detailsPage.getPhaseActionsDropDown());
     }
 
+    public void openActionsDropDownForPhase(String phase) {
+        final WebElement actionsTrigger = DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase
+                + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]"));
+        try {
+            WaitUtilsWebDriver.waitForVisibility(actionsTrigger.findElement(By.xpath("./div[contains(@class, 'drop checkout')]")), 3);
+        } catch (Exception ignored) {
+            Utils.clickElement(actionsTrigger.findElement(By.xpath("./i[contains(@class, 'checkout-arrow')]")));
+            WaitUtilsWebDriver.waitForVisibility(actionsTrigger.findElement(By.xpath("./div[contains(@class, 'drop checkout')]")));
+        }
+    }
+
     public void closeActionsDropDownForPhase() {
         handleActionsButton(detailsPage.getPhaseActionsDropDownHidden());
     }
 
-    private void handleActionsButton(WebElement phaseActionsDropDownHidden) {
+    private void handleActionsButton(WebElement phaseActionsDropDown) {
         try {
-            WaitUtilsWebDriver.waitForVisibility(phaseActionsDropDownHidden, 5);
+            WaitUtilsWebDriver.waitForVisibility(phaseActionsDropDown, 5);
         } catch (Exception e) {
             Utils.clickElement(detailsPage.getPhaseActionsTrigger());
         }
@@ -238,11 +252,30 @@ public class VNextBORODetailsPageInteractions {
         WaitUtilsWebDriver.waitForInvisibilityIgnoringException(detailsPage.getPhaseActionsDropDown(), 5);
     }
 
+    public void clickReportProblemForPhase(String phase) {
+        setOptionForPhase(detailsPage.getPhaseActionsReportProblemOption(phase));
+    }
+
+    public void clickResolveProblemForPhase(String phase) {
+        setOptionForPhase(detailsPage.getPhaseActionsResolveProblemOption(phase));
+    }
+
     public void clickCheckInOptionForPhase() {
         setOptionForPhase(detailsPage.getPhaseActionsCheckInOption());
     }
 
     public void clickCheckOutOptionForPhase() {
         setOptionForPhase(detailsPage.getPhaseActionsCheckOutOption());
+    }
+
+    public List<String> getPhaseStatusValues() {
+        try {
+            return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(detailsPage.getPhaseStatus())
+                    .stream()
+                    .map(WebElement::getText)
+                    .collect(Collectors.toList());
+        } catch (Exception ignored) {
+            return null;
+        }
     }
 }

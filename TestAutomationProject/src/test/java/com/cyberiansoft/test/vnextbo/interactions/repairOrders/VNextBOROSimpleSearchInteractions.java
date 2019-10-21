@@ -2,18 +2,15 @@ package com.cyberiansoft.test.vnextbo.interactions.repairOrders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOROSimpleSearchInteractions {
 
-    public VNextBOROWebPage repairOrdersPage;
+    private VNextBOROWebPage repairOrdersPage;
 
     public VNextBOROSimpleSearchInteractions() {
-        repairOrdersPage = PageFactory.initElements(
-                DriverBuilder.getInstance().getDriver(), VNextBOROWebPage.class);
+        repairOrdersPage = new VNextBOROWebPage();
     }
 
     public void setRepairOrdersSearchText(String repairOrderText) {

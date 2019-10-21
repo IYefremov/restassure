@@ -19,7 +19,7 @@ public class VNextBOInspectionsApprovalPageSteps {
         return Utils.isElementDisplayed(inspectionsApprovalWebPage.getApproveServiceButton());
     }
 
-    public static VNextBOInspectionsApprovalWebPage clickInspectionApprovePrintPageButton()
+    public static void clickInspectionApprovePrintPageButton()
     {
         VNextBOInspectionsApprovalWebPage inspectionsApprovalWebPage =
                 new VNextBOInspectionsApprovalWebPage(DriverBuilder.getInstance().getDriver());
@@ -30,8 +30,6 @@ public class VNextBOInspectionsApprovalPageSteps {
             Utils.clickElement(inspectionsApprovalWebPage.getApproveAndCompleteServiceButton());
             WaitUtilsWebDriver.waitForLoading();
         }
-
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
     private static VNextBOInspectionsApprovalWebPage setPrintPageNotes(String notes)

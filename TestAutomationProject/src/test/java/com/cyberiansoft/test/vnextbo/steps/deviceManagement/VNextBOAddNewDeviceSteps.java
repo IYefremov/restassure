@@ -5,13 +5,8 @@ import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOAddNew
 
 public class VNextBOAddNewDeviceSteps {
 
-    private VNextBOAddNewDeviceDialogInteractions addNewDeviceDialogInteractions;
-
-    public VNextBOAddNewDeviceSteps() {
-        addNewDeviceDialogInteractions = new VNextBOAddNewDeviceDialogInteractions();
-    }
-
-    public void setAddNewDeviceFields(VNextBODeviceManagementData deviceManagementData, String nickName) {
+    private static void setAddNewDeviceFields(VNextBODeviceManagementData deviceManagementData, String nickName) {
+        final VNextBOAddNewDeviceDialogInteractions addNewDeviceDialogInteractions = new VNextBOAddNewDeviceDialogInteractions();
         addNewDeviceDialogInteractions.setExpiresInHours(deviceManagementData.getHours());
         addNewDeviceDialogInteractions.setExpiresInMinutes(deviceManagementData.getMinutes());
         addNewDeviceDialogInteractions.setTeam(deviceManagementData.getTeam());
@@ -22,13 +17,13 @@ public class VNextBOAddNewDeviceSteps {
         addNewDeviceDialogInteractions.setRandomPhoneNumber();
     }
 
-    public void setNewDeviceValuesAndSubmit(VNextBODeviceManagementData deviceManagementData, String nickName) {
+    public static void setNewDeviceValuesAndSubmit(VNextBODeviceManagementData deviceManagementData, String nickName) {
         setAddNewDeviceFields(deviceManagementData, nickName);
-        addNewDeviceDialogInteractions.clickSubmitButton();
+        new VNextBOAddNewDeviceDialogInteractions().clickSubmitButton();
     }
 
-    public void setNewDeviceValuesAndCancel(VNextBODeviceManagementData deviceManagementData, String nickName) {
+    public static void setNewDeviceValuesAndCancel(VNextBODeviceManagementData deviceManagementData, String nickName) {
         setAddNewDeviceFields(deviceManagementData, nickName);
-        addNewDeviceDialogInteractions.clickCancelButton();
+        new VNextBOAddNewDeviceDialogInteractions().clickCancelButton();
     }
 }

@@ -2,6 +2,7 @@ package com.cyberiansoft.test.dataclasses.vNextBO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -55,6 +56,9 @@ public class VNextBOMonitorData  {
 
     @JsonProperty("phase")
     private String phase;
+
+    @JsonProperty("reason")
+    private String reason;
 
     @JsonProperty("phaseStatus")
     private String phaseStatus;
@@ -221,8 +225,14 @@ public class VNextBOMonitorData  {
     @JsonProperty("servicePhase")
     private String servicePhase;
 
-    @JsonProperty("reason")
-    private String reason;
+    @JsonProperty("savedSearch")
+    private String savedSearch;
+
+    @JsonProperty("userName")
+    private String userName;
+
+    @JsonProperty("userPassword")
+    private String userPassword;
 
     @JsonProperty("services")
     private String[] services;
@@ -235,12 +245,6 @@ public class VNextBOMonitorData  {
 
     @JsonProperty("serviceParts")
     private String[] serviceParts;
-
-    @JsonProperty("titles")
-    private String[] titles;
-
-    @JsonProperty("titlesRepeater")
-    private String[] titlesRepeater;
 
     @JsonProperty("flags")
     private String[] flags;
@@ -272,13 +276,8 @@ public class VNextBOMonitorData  {
     @JsonProperty("servicePhaseHeaders")
     private String[] servicePhaseHeaders;
 
-    public List<String> getTitles() {
-        return Arrays.asList(titles);
-    }
-
-    public List<String> getTitlesRepeater() {
-        return Arrays.asList(titlesRepeater);
-    }
+    @JsonProperty("searchValues")
+    private VNextBOROAdvancedSearchValues searchValues;
 
     public List<String> getFullAdvancedSearchElementsList() {
         return Stream.of(departmentText, phaseText, customerText, stockNumText, vinNumText, roNumText, woNumText,
@@ -300,5 +299,9 @@ public class VNextBOMonitorData  {
     public String getServiceCompletedDate() {
         LocalDate date = LocalDate.now(ZoneId.of("US/Pacific"));
         return date.format(DateTimeFormatter.ofPattern("MM/dd/uuuu"));
+    }
+
+    public String getProblemDescription() {
+        return "autotest-" + RandomStringUtils.randomAlphanumeric(5);
     }
 }

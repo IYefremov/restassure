@@ -28,7 +28,7 @@ public class VNextBOClientsData {
     @JsonProperty("accountInfoData")
     private AccountInfoData accountInfoData;
 
-    @JsonProperty("accountInfoData")
+    @JsonProperty("addressData")
     private AddressData addressData;
 
     @JsonProperty("emailOptionsData")
