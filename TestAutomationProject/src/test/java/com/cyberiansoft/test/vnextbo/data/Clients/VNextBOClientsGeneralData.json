@@ -1,0 +1,122 @@
+{
+  "verifyUserCanOpenClientsPageWithFullSetOfElements": [
+    {
+      "rowID": "verifyUserCanOpenClientsPageWithFullSetOfElements.01",
+      "description": "Test Case 90980: Verify user can open \"Settings -> Clients\" with full set of elements",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90980",
+          "testCaseTitle": "Verify user can open \"Settings -> Clients\" with full set of elements"
+        }
+      ]
+    }
+  ],
+  "verifyIntercomMessengerCanBeOpenedClosed": [
+    {
+      "rowID": "verifyIntercomMessengerCanBeOpenedClosed.01",
+      "description": "Test Case 91058: User can open and close \"Intercom\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91058",
+          "testCaseTitle": "User can open and close \"Intercom\""
+        }
+      ]
+    }
+  ],
+  "verifyTermsAndConditionsCanBeOpenedAndClosedOkButton": [
+    {
+      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedOkButton.01",
+      "description": "Test Case 91053: Verify user can open and close \"Terms&Conditions\" (OK)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91053",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (OK)"
+        }
+      ]
+    }
+  ],
+  "verifyTermsAndConditionsCanBeOpenedAndClosedXIcon": [
+    {
+      "rowID": "verifyTermsAndConditionsCanBeOpenedAndClosedXIcon.01",
+      "description": "Test Case 91054: Verify user can open and close \"Terms&Conditions\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91054",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyPrivacyPolicyCanBeOpenedAndClosedOkButton": [
+    {
+      "rowID": "verifyPrivacyPolicyCanBeOpenedAndClosedOkButton.01",
+      "description": "Test Case 91055: Verify user can open and close \"Privacy Policy\" (OK)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91055",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (OK)"
+        }
+      ]
+    }
+  ],
+  "verifyPrivacyPolicyCanBeOpenedAndClosedXIcon": [
+    {
+      "rowID": "verifyPrivacyPolicyCanBeOpenedAndClosedXIcon.01",
+      "description": "Test Case 91056: Verify user can open and close \"Privacy Policy\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91056",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSwitchBetweenPagesActiveTab": [
+    {
+      "rowID": "verifyUserCanSwitchBetweenPagesActiveTab.01",
+      "description": "Test Case 91048: User can switch beetween pages (Active)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91048",
+          "testCaseTitle": "User can switch beetween pages (Active)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSwitchBetweenPagesArchivedTab": [
+    {
+      "rowID": "verifyUserCanSwitchBetweenPagesArchivedTab.01",
+      "description": "Test Case 91049: User can switch beetween pages (Archived)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91049",
+          "testCaseTitle": "User can switch beetween pages (Archived)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanUsePageFilterActiveTab": [
+    {
+      "rowID": "verifyUserCanUsePageFilter.01",
+      "description": "Test Case 91050: User can use page filter (Active)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91050",
+          "testCaseTitle": "User can use page filter (Active)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanUsePageFilterArchivedTab": [
+    {
+      "rowID": "verifyUserCanUsePageFilter.01",
+      "description": "Test Case 91051: User can use page filter (Archived)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91051",
+          "testCaseTitle": "User can use page filter (Archived)"
+        }
+      ]
+    }
+  ]
+}
