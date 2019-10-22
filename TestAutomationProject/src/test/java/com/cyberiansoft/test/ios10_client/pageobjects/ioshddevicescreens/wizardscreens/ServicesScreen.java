@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceBundleScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -9,6 +10,7 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,6 +49,9 @@ public class ServicesScreen extends BaseWizardScreen {
 	
 	@iOSXCUITFindBy(accessibility = "Draft")
     private IOSElement draftalertbtn;*/
+
+	@iOSXCUITFindBy(accessibility  = "SelectedServicesView")
+	private IOSElement selectedServicesView;
 	
 	public ServicesScreen() {
 		super();
@@ -296,6 +301,11 @@ public class ServicesScreen extends BaseWizardScreen {
 		if (selectedservices.size() > dervicedetailindex) {
 			selectedservices.get(dervicedetailindex).click();
 		}
+	}
+
+	public void openServiceDetails(String serviceName, VehiclePartData vehiclePartData) {
+		selectedServicesView.findElementByXPath("//XCUIElementTypeCell[@name='" + serviceName +
+				"']/XCUIElementTypeStaticText[@name='" + vehiclePartData.getVehiclePartName() +"']").click();
 	}
 
 	public boolean priceMatricesPopupIsDisplayed() {

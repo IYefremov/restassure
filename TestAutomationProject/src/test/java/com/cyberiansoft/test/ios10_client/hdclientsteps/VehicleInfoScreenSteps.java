@@ -116,5 +116,14 @@ public class VehicleInfoScreenSteps {
         return vehicleScreen.getInspectionNumber();
     }
 
+    public static void selectAdvisor(String advisor) {
+        VehicleScreen vehicleScreen = new VehicleScreen();
+        vehicleScreen.selectAdvisor(advisor);
+    }
+
+    public static void clickTech() {
+        VehicleScreen vehicleScreen = new VehicleScreen();
+        vehicleScreen.clickTech();
+    }
 
 }

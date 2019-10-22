@@ -15,6 +15,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 
 	private By autosavedworkorder = By.name("EntityInfoButtonUnchecked, AutoSaved");
@@ -284,6 +286,12 @@ public class MyWorkOrdersScreen extends BaseTypeScreenWithTabs {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(workOrderId)));
 		appiumdriver.findElementByAccessibilityId(workOrderId).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
+	}
+
+	public void clickCreateInvoiceIconForWOs(List<String> workOrders) {
+		for (String workOrderID : workOrders) {
+			clickCreateInvoiceIconForWO(workOrderID);
+		}
 	}
 	
 	public String getPriceValueForWO(String workOrderNumber) {

@@ -6,9 +6,7 @@ import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.InspectionToolBar;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.TechniciansPopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
-import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import org.testng.Assert;
 
 import java.util.List;
@@ -75,7 +73,7 @@ public class PriceMatrixScreenSteps {
         PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
         if ((serviceData.getServiceQuantity() != null) || (serviceData.getServicePrice() != null)) {
             priceMatrixScreen.clickDiscaunt(serviceData.getServiceName());
-            ServiceDetailsScreenSteps.setServiceDetailsData(serviceData);
+            ServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
         } else
             priceMatrixScreen.selectDiscaunt(serviceData.getServiceName());
     }
