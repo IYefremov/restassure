@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOPageSwitcherSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.verifications.commonObjects.VNextBOPageSwitcherValidations;
@@ -45,7 +46,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
 
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
         loginPage.userLogin(userName, userPassword);
         VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
         leftMenuInteractions.selectUsersMenu();
@@ -53,12 +54,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
     @AfterClass
     public void backOfficeLogout() {
-        try {
-            VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
-            if (headerPanel.logOutLinkExists()) {
-                headerPanel.userLogout();
-            }
-        } catch (RuntimeException ignored) {}
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();
@@ -152,7 +148,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyUserCanLogout(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.logOut();
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
         Assert.assertTrue(loginPage.isLoginFormDisplayed(), "Login page hasn't been closed");
         loginPage.userLogin(userName, userPassword);
         new VNextBOLeftMenuInteractions().selectUsersMenu();

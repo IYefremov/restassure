@@ -9,26 +9,9 @@ import com.cyberiansoft.test.vnextbo.verifications.VNextBOClientAddressFieldsVer
 
 public class VNextBOClientDetailsViewAccordionSteps {
 
-    private VNextBOAccountInfoBlockInteractions accountInfoInteractions;
-    private VNextBOAddressBlockInteractions addressBlockInteractions;
-    private VNextBOClientInfoBlockInteractions clientInfoBlockInteractions;
-    private VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions;
-    private VNextBOPreferencesBlockInteractions preferencesBlockInteractions;
-    private VNextBOMiscellaneousBlockInteractions miscellaneousBlockInteractions;
-    private final VNextBOClientAddressFieldsVerifications addressFieldsVerifications;
-
-    public VNextBOClientDetailsViewAccordionSteps() {
-        accountInfoInteractions = new VNextBOAccountInfoBlockInteractions();
-        addressBlockInteractions = new VNextBOAddressBlockInteractions();
-        clientInfoBlockInteractions = new VNextBOClientInfoBlockInteractions();
-        emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
-        preferencesBlockInteractions = new VNextBOPreferencesBlockInteractions();
-        miscellaneousBlockInteractions = new VNextBOMiscellaneousBlockInteractions();
-        addressFieldsVerifications = new VNextBOClientAddressFieldsVerifications();
-    }
-
-    public void setClientInfoData(Employee employee) {
-        addressFieldsVerifications.verifyClientInfoBlockIsExpanded();
+    public static void setClientInfoData(Employee employee) {
+        VNextBOClientAddressFieldsVerifications.verifyClientInfoBlockIsExpanded();
+        final VNextBOClientInfoBlockInteractions clientInfoBlockInteractions = new VNextBOClientInfoBlockInteractions();
         if (employee.getClientType().toLowerCase().equals("retail")) {
             clientInfoBlockInteractions.setRetailCompanyType();
         } else if (employee.getClientType().toLowerCase().equals("wholesale")) {
@@ -41,43 +24,47 @@ public class VNextBOClientDetailsViewAccordionSteps {
         clientInfoBlockInteractions.setPhone(employee.getPhoneNumber());
     }
 
-    public void setAccountInfoData(AccountInfoData accountInfoData) {
-        addressFieldsVerifications.verifyAccountInfoBlockIsExpanded();
+    public static void setAccountInfoData(AccountInfoData accountInfoData) {
+        VNextBOClientAddressFieldsVerifications.verifyAccountInfoBlockIsExpanded();
 
-        accountInfoInteractions.setAccountingId(accountInfoData.getAccountingId());
-        accountInfoInteractions.setAccountingId2(accountInfoData.getAccountingId2());
-        accountInfoInteractions.setExportAs(accountInfoData.getExportAs());
-        accountInfoInteractions.setClass(accountInfoData.getClassOption());
-        accountInfoInteractions.setQbAccount(accountInfoData.getQbAccount());
-        accountInfoInteractions.clickPoNumberRequiredCheckbox();
+        final VNextBOAccountInfoBlockInteractions accountInfoBlockInteractions = new VNextBOAccountInfoBlockInteractions();
+        accountInfoBlockInteractions.setAccountingId(accountInfoData.getAccountingId());
+        accountInfoBlockInteractions.setAccountingId2(accountInfoData.getAccountingId2());
+        accountInfoBlockInteractions.setExportAs(accountInfoData.getExportAs());
+        accountInfoBlockInteractions.setClass(accountInfoData.getClassOption());
+        accountInfoBlockInteractions.setQbAccount(accountInfoData.getQbAccount());
+        accountInfoBlockInteractions.clickPoNumberRequiredCheckbox();
     }
 
-    public void setAddressData(AddressData addressData) {
-        addressFieldsVerifications.verifyAddressBlockIsExpanded();
+    public static void setAddressData(AddressData addressData) {
+        VNextBOClientAddressFieldsVerifications.verifyAddressBlockIsExpanded();
         setAddressShipToData(addressData);
-        addressBlockInteractions.checkSameAsShipToCheckBox();
+        new VNextBOAddressBlockInteractions().checkSameAsShipToCheckBox();
         setAddressBillToData(addressData);
     }
 
-    public void setEmailOptionsData(EmailOptionsData emailOptionsData) {
-        addressFieldsVerifications.verifyEmailOptionsBlockIsExpanded();
+    public static void setEmailOptionsData(EmailOptionsData emailOptionsData) {
+        VNextBOClientAddressFieldsVerifications.verifyEmailOptionsBlockIsExpanded();
+        final VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
         emailOptionsBlockInteractions.setDefaultRecipient(emailOptionsData.getDefaultRecipient());
         emailOptionsBlockInteractions.setCc(emailOptionsData.getCc());
         emailOptionsBlockInteractions.setBcc(emailOptionsData.getBcc());
     }
 
-    public void setPreferencesData(String defaultArea) {
-        addressFieldsVerifications.verifyPreferencesBlockIsExpanded();
+    public static void setPreferencesData(String defaultArea) {
+        VNextBOClientAddressFieldsVerifications.verifyPreferencesBlockIsExpanded();
+        final VNextBOPreferencesBlockInteractions preferencesBlockInteractions = new VNextBOPreferencesBlockInteractions();
         preferencesBlockInteractions.clickUseSingleWoTypeCheckbox();
         preferencesBlockInteractions.setDefaultArea(defaultArea);
     }
 
-    public void setMiscellaneousData(String notes) {
-        addressFieldsVerifications.verifyMiscellaneousBlockIsExpanded();
-        miscellaneousBlockInteractions.setNotes(notes);
+    public static void setMiscellaneousData(String notes) {
+        VNextBOClientAddressFieldsVerifications.verifyMiscellaneousBlockIsExpanded();
+        new VNextBOMiscellaneousBlockInteractions().setNotes(notes);
     }
 
-    private void setAddressShipToData(AddressData addressData) {
+    private static void setAddressShipToData(AddressData addressData) {
+        final VNextBOAddressBlockInteractions addressBlockInteractions = new VNextBOAddressBlockInteractions();
         addressBlockInteractions.setAddress1ShipTo(addressData.getAddress1());
         addressBlockInteractions.setAddress2ShipTo(addressData.getAddress2());
         addressBlockInteractions.setCityShipTo(addressData.getCity());
@@ -86,7 +73,8 @@ public class VNextBOClientDetailsViewAccordionSteps {
         addressBlockInteractions.setZipShipTo(addressData.getZip());
     }
 
-    private void setAddressBillToData(AddressData addressData) {
+    private static void setAddressBillToData(AddressData addressData) {
+        final VNextBOAddressBlockInteractions addressBlockInteractions = new VNextBOAddressBlockInteractions();
         addressBlockInteractions.setAddress1BillTo(addressData.getAddress11());
         addressBlockInteractions.setAddress2BillTo(addressData.getAddress22());
         addressBlockInteractions.setCityBillTo(addressData.getCity2());

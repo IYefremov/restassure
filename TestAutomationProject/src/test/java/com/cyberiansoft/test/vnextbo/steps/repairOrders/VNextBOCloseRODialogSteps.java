@@ -5,13 +5,8 @@ import org.testng.Assert;
 
 public class VNextBOCloseRODialogSteps {
 
-    private VNextBOCloseRODialogInteractions closeRODialogInteractions;
-
-    public VNextBOCloseRODialogSteps() {
-        closeRODialogInteractions = new VNextBOCloseRODialogInteractions();
-    }
-
-    public void closeROWithReason(String reason) {
+    public static void closeROWithReason(String reason) {
+        final VNextBOCloseRODialogInteractions closeRODialogInteractions = new VNextBOCloseRODialogInteractions();
         Assert.assertTrue(closeRODialogInteractions.isCloseRODialogDisplayed(),
                 "The close RO dialog hasn't been displayed");
         closeRODialogInteractions.setReason(reason);

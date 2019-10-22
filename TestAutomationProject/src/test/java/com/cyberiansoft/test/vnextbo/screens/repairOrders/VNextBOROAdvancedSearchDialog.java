@@ -23,6 +23,9 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(className = "advSearch")
     private WebElement advancedSearchDialog;
 
+    @FindBy(xpath = "//div[@id='customSearchContainer']//div[@id='customPopup']")
+    private WebElement advancedSearchDialogContainer;
+
     @FindBy(id = "teamclientsAutocomplete")
     private WebElement customerInputField;
 
@@ -191,6 +194,12 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='orderPhaseDropdown_listbox']//span[@class='k-input']")
     private WebElement phaseSelection;
 
+    @FindBy(xpath = "//span[@aria-owns='orderPhaseStatusDropdown_listbox']//span[@class='k-input']")
+    private WebElement phaseStatusSelection;
+
+    @FindBy(xpath = "//span[@aria-owns='orderTypeDropdownlist_listbox']//span[@class='k-input']")
+    private WebElement woTypeSelection;
+
     @FindBy(xpath = "//span[@aria-owns='orderTimeframeDropdown_listbox']//span[@class='k-input']")
     private WebElement timeFrameSelection;
 
@@ -209,6 +218,9 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']//span[@class='k-input']")
     private WebElement flagSelection;
 
+    @FindBy(xpath = "//span[@aria-owns='orderSortOptionsDropdown_listbox']//span[@class='k-input']")
+    private WebElement sortBySelection;
+
     public VNextBOROAdvancedSearchDialog() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -226,11 +238,80 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
     public List<String> getAdvancedSearchDialogElements() {
         final String text = customerSelection.getText();
         try {
-            waitShort.until((ExpectedCondition<Boolean>) driver -> !text.equals(customerSelection.getText()));
+            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver
+                    -> !text.equals(customerSelection.getText()));
         } catch (Exception ignored) {}
         return Arrays.asList(customerSelection.getText(), employeeSelection.getText(), phaseSelection.getText(),
                 timeFrameSelection.getText(), departmentSelection.getText(), repairStatusSelection.getText(),
                 daysInProcessSelection.getText(), daysInPhaseSelection.getText(), flagSelection.getText());
+    }
+
+    public String getCustomerInputFieldValue() {
+        return customerInputField.getText();
+    }
+
+    public String getEmployeeInputFieldValue() {
+        return employeeInputField.getText();
+    }
+
+    public String getPhaseInputFieldValue() {
+        return phaseSelection.getText();
+    }
+
+    public String getPhaseStatusInputFieldValue() {
+        return phaseStatusSelection.getText();
+    }
+
+    public String getDepartmentInputFieldValue() {
+        return departmentSelection.getText();
+    }
+
+    public String getWoTypeInputFieldValue() {
+        return woTypeSelection.getText();
+    }
+
+    public String getWoNumInputFieldValue() {
+        return woInputField.getText();
+    }
+
+    public String getRoNumInputFieldValue() {
+        return roInputField.getText();
+    }
+
+    public String getStockInputFieldValue() {
+        return stockInputField.getText();
+    }
+
+    public String getVinInputFieldValue() {
+        return vinInputField.getText();
+    }
+
+    public String getTimeFrameInputFieldValue() {
+        return timeFrameSelection.getText();
+    }
+
+    public String getRepairStatusInputFieldValue() {
+        return repairStatusSelection.getText();
+    }
+
+    public String getDaysInProcessInputFieldValue() {
+        return daysInProcessSelection.getText();
+    }
+
+    public String getDaysInPhaseInputFieldValue() {
+        return daysInPhaseSelection.getText();
+    }
+
+    public String getFlagInputFieldValue() {
+        return flagSelection.getText();
+    }
+
+    public String getSortByInputFieldValue() {
+        return sortBySelection.getText();
+    }
+
+    public String getSearchNameInputFieldValue() {
+        return searchNameInputField.getAttribute("value");
     }
 
     public boolean isAdvancedSearchDialogNotDisplayed() {

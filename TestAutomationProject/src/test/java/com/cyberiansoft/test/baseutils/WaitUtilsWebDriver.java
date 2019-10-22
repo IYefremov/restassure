@@ -87,8 +87,8 @@ public class WaitUtilsWebDriver {
         getWait().until(ExpectedConditions.invisibilityOf(element));
     }
 
-    public static void waitForInvisibility(WebElement element, int timeout) {
-        new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeout).until(ExpectedConditions.invisibilityOf(element));
+    public static void waitForInvisibility(WebElement element, int timeoutInSeconds) {
+        new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutInSeconds).until(ExpectedConditions.invisibilityOf(element));
     }
 
     public static void waitForInvisibilityIgnoringException(WebElement element) {
@@ -239,11 +239,16 @@ public class WaitUtilsWebDriver {
         getWebDriverWait(timeOut).until(ExpectedConditions.textToBePresentInElement(element, text));
     }
 
-    public static void waitForElementNotToBeStale(WebElement element) {
+    public static WebElement waitForElementNotToBeStale(WebElement element) {
         try {
             getWait().until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
         } catch (Exception ignored) {
             waitABit(1500);
         }
+        return element;
+    }
+
+    public static WebElement waitForElementNotToBeStale(By by) {
+        return waitForElementNotToBeStale(DriverBuilder.getInstance().getDriver().findElement(by));
     }
 }

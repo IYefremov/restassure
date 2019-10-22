@@ -4,14 +4,9 @@ import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOClientsSearchPa
 
 public class VNextBOClientsSearchSteps {
 
-    private VNextBOClientsSearchPanelInteractions searchPanelInteractions;
-
-    public VNextBOClientsSearchSteps() {
-        searchPanelInteractions = new VNextBOClientsSearchPanelInteractions();
-    }
-
-    public void searchWithSimpleSearch(String searchParam) {
-        searchPanelInteractions.setClientsSearchText(searchParam);
-        searchPanelInteractions.clickSearchLoupeIcon();
+    public static void searchWithSimpleSearch(String searchParam) {
+        final VNextBOClientsSearchPanelInteractions clientsSearchPanelInteractions = new VNextBOClientsSearchPanelInteractions();
+        clientsSearchPanelInteractions.setClientsSearchText(searchParam);
+        clientsSearchPanelInteractions.clickSearchLoupeIcon();
     }
 }

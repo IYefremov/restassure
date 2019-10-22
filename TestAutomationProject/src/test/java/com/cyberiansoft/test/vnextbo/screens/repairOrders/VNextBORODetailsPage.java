@@ -111,7 +111,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	private WebElement phaseVendorTechnician;
 
 	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_5']//div[contains(@data-bind, 'statusText')]")
-	private WebElement phaseStatus;
+	private List<WebElement> phaseStatus;
 
 	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]")
 	private WebElement phaseActionsTrigger;
@@ -747,7 +747,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 
 	public String getPhaseStatusValue() {
 		try {
-			return wait.until(ExpectedConditions.visibilityOf(phaseStatus)).getText();
+			return wait.until(ExpectedConditions.visibilityOf(phaseStatus.get(0))).getText();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "";
@@ -844,4 +844,24 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 				.map(WebElement::getText)
 				.collect(Collectors.toList());
 	}
+
+	public WebElement getPhaseActionsTrigger(String phase) {
+	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase
+                + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]"));
+    }
+
+	public WebElement getPhaseActionsReportProblemOption(String phase) {
+	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase
+                + "']//label[text()='Report Problem']"));
+    }
+
+	public WebElement getPhaseActionsResolveProblemOption(String phase) {
+	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase
+                + "']//label[text()='Resolve Problem']"));
+    }
+
+	public WebElement getPhaseProblemIcon(String phase) {
+	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase
+                + "']//i[@class='icon-problem-indicator']"));
+    }
 }

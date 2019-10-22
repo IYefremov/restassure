@@ -13,11 +13,10 @@ import java.util.List;
 
 public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
 
-    public static VNextBOInspectionsApprovalWebPage clickTheApproveInspectionButton()
+    public static void clickTheApproveInspectionButton()
     {
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(inspectionsPage.getApproveInspectionIcon());
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
     public static void clickClearFilterIcon()

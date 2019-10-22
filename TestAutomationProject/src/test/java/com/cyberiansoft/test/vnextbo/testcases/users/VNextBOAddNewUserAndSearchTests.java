@@ -14,6 +14,7 @@ import com.cyberiansoft.test.vnextbo.steps.users.VNextBOAddNewUserDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.verifications.commonObjects.VNextBOSearchPanelValidations;
 import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOAddNewUserDialogValidations;
@@ -52,7 +53,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
 
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
         loginPage.userLogin(userName, userPassword);
         VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
         leftMenuInteractions.selectUsersMenu();
@@ -60,12 +61,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
     @AfterClass
     public void backOfficeLogout() {
-        try {
-            VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
-            if (headerPanel.logOutLinkExists()) {
-                headerPanel.userLogout();
-            }
-        } catch (RuntimeException ignored) {}
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();

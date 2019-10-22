@@ -9,6 +9,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
@@ -48,19 +49,14 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaTestMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
         loginPage.clickForgotPasswordLink();
         forgotPasswordPage = new VNextBOForgotPasswordWebPage(webdriver);
     }
 
     @AfterMethod
     public void BackOfficeLogout() {
-        try {
-            VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel(webdriver);
-            if (headerPanel.logOutLinkExists()) {
-                headerPanel.userLogout();
-            }
-        } catch (RuntimeException ignored) {}
+        VNextBOHeaderPanelSteps.logout();
 
         if (DriverBuilder.getInstance().getDriver() != null) {
             DriverBuilder.getInstance().quitDriver();
@@ -79,7 +75,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     public void verifyUserIsReturnedToLoginPage(String rowID, String description, JSONObject testData) {
 
         forgotPasswordPage.clickLoginLink();
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
 
         Assert.assertTrue(loginPage.isLoginFormDisplayed(), "Login form hasn't been displayed");
         Assert.assertTrue(loginPage.isEmailFieldDisplayed(), "Email field hasn't been displayed");
@@ -129,7 +125,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
                 "Please check your mailbox. You will receive an email with a link for resetting password within a few minutes.",
                 "Dialog message hasn't been correct");
         VNextBOModalDialogSteps.clickOkButton();
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
 
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
@@ -145,7 +141,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
                 "User's email hasn't been correct");
 
         vNextBOResetPasswordPage.setNewPassword(userPassword);
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
         Assert.assertEquals(loginPage.getValueFromEmailField(), userName,
                 "Email field hasn't been correct");
     }
@@ -161,7 +157,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage.clickSubmitButton();
 
         VNextBOModalDialogSteps.clickOkButton();
-        loginPage = new VNextBOLoginScreenWebPage(webdriver);
+        loginPage = new VNextBOLoginScreenWebPage();
         loginPage.userLogin(userName, userPassword);
 
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =

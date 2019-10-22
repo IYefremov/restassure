@@ -8,11 +8,11 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOAddNewUserDialogSteps;
-import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOUsersPageValidations;
-import org.apache.commons.lang3.RandomUtils;
+import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOUsersPageValidations;import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -58,10 +58,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 
 	@AfterMethod
 	public void BackOfficeLogout() {
-		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-				VNextBOHeaderPanel.class);
-		if (headerpanel.logOutLinkExists())
-			headerpanel.userLogout();
+        VNextBOHeaderPanelSteps.logout();
 
 		if (DriverBuilder.getInstance().getDriver() != null)
 			DriverBuilder.getInstance().quitDriver();
@@ -80,11 +77,8 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 		VNextBOAddNewUserDialogSteps.createNewUser(data.getTechFirstName(), data.getTechLastName(),
 				usermail, data.getTechUserPhone(), false);
 		Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentInTableByText(usermail));
-		VNextBOHeaderPanel headerpanel = PageFactory.initElements(webdriver,
-				VNextBOHeaderPanel.class);
-		headerpanel.userLogout();
-
-		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
+        VNextBOHeaderPanelSteps.logout();
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());
 		BackOfficeLoginWebPage oldloginpage = PageFactory.initElements(webdriver,
 				BackOfficeLoginWebPage.class);
 		oldloginpage.userLogin(VNextBOConfigInfo.getInstance().getVNextBOMail(),

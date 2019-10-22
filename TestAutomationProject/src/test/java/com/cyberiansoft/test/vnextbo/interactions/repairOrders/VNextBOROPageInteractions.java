@@ -5,13 +5,13 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOEditNotesDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBOROPageVerifications;
-import org.apache.commons.lang3.RandomUtils;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageVerifications;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -53,10 +53,13 @@ public class VNextBOROPageInteractions {
 
     public WebElement clickWoLink() {
         WaitUtilsWebDriver.waitForLoading();
-        final WebElement woElement = repairOrdersPage.getWoNumbersList().get(
-                        RandomUtils.nextInt(0, repairOrdersPage.getWoNumbersList().size()));
-        Utils.clickElement(woElement);
-        WaitUtilsWebDriver.waitForLoading();
+        final WebElement woElement = repairOrdersPage.getRandomOrderNumber();
+        if (woElement != null) {
+            Utils.clickElement(woElement);
+            WaitUtilsWebDriver.waitForLoading();
+        } else {
+            Assert.fail("The work orders list is empty");
+        }
         return woElement;
     }
 
@@ -87,11 +90,6 @@ public class VNextBOROPageInteractions {
         Utils.clickElement(repairOrdersPage.getAdvancedSearchCaret());
     }
 
-    public void openAdvancedSearchDialog() {
-        clickAdvancedSearchCaret();
-        new VNextBOROPageVerifications().verifyAdvancedSearchDialogIsDisplayed();
-    }
-
     public void setWoDepartment(String woNumber, String department) {
         hideNoteForWorkOrder(woNumber);
         Utils.clickElement(repairOrdersPage.getTableBody().findElement(By.xpath("//a[@class='order-no']" +
@@ -116,5 +114,20 @@ public class VNextBOROPageInteractions {
             Utils.clickElement(By.xpath("//strong[text()='" + woNumber
                     + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']//a[@class='x']"));
         }
+    }
+
+    public void clickSavedSearchArrow() {
+        Utils.clickElement(repairOrdersPage.getSavedSearchArrow());
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(repairOrdersPage.getSavedSearchDropDown());
+    }
+
+    public void selectSavedSearchDropDownOption(String option) {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(repairOrdersPage.getSavedSearchDropDownOptions());
+        repairOrdersPage.getSavedSearchDropDownOptions()
+                .stream()
+                .filter(o -> o.getText().equals(option))
+                .findFirst()
+                .ifPresent(Utils::clickWithActions);
+        WaitUtilsWebDriver.waitForLoading();
     }
 }
