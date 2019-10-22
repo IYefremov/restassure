@@ -11,7 +11,7 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
 
-
+          <include name="testVerifySearchForSR" />
           <include name="testInspectionsMultipleInspectionsApproval" />
 
 

@@ -104,4 +104,39 @@ public class RegularServiceRequestSteps {
         selectServiceRequest(serviceRequestNumber);
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.APPOINTMENTS);
     }
+
+    public static void searchServiceRequestByNumber(String serviceRequestNamber) {
+        RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
+        clickSearchButton();
+        serviceRequestsScreen.setSearchText(serviceRequestNamber);
+        saveSearchParamaters();
+    }
+
+    public static void searchServiceRequestByParameter(String serviceRequestSearchParameter) {
+        RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
+        clickSearchButton();
+        selectSearchParamaters(serviceRequestSearchParameter);
+        saveSearchParamaters();
+    }
+
+    public static void saveSearchParamaters() {
+        RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
+        serviceRequestsScreen.saveSearchParamaters();
+        waitServiceRequestScreenLoaded();
+    }
+
+    public static void clickSearchButton() {
+        RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
+        serviceRequestsScreen.clickSearchButton();
+    }
+
+    public static void selectSearchParamaters(String serviceRequestSearchParameter) {
+        RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
+        serviceRequestsScreen.selectSearchParamaters(serviceRequestSearchParameter);
+    }
+
+    public static void clearSerchText() {
+        RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
+        serviceRequestsScreen.clearSearchText();
+    }
 }

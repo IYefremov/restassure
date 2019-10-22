@@ -27,4 +27,5 @@ public class WizardScreensSteps {
         Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
         alert.accept();
     }
+
 }

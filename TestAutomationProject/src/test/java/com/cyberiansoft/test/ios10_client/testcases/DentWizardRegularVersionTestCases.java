@@ -351,7 +351,6 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         approveinspscreen.clickApproveButton();
         approveinspscreen.clickSignButton();
         approveinspscreen.drawApprovalSignature();
-        myInspectionsScreen = new RegularMyInspectionsScreen();
         Assert.assertTrue(myInspectionsScreen.isInspectionIsApproved(inspNumber));
         RegularNavigationSteps.navigateBackScreen();
     }
@@ -418,10 +417,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
         RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-
         RegularVehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
 
-        RegularNavigationSteps.navigateToServicesScreen();
         RegularNavigationSteps.navigateToServicesScreen();
         for (DamageData damageData : workOrderData.getDamagesData()) {
             RegularServicesScreenSteps.selectPanelServiceData(damageData);

@@ -24,4 +24,13 @@ public class RegularServiceRequestsScreenValidations {
         else
             Assert.assertFalse(serviceRequestsScreen.isWorkOrderIconPresentForServiceRequest(serviceRequestNumber));
     }
+
+    public static void verifyServiceRequestPresent(String serviceRequestNumber, boolean isPresent) {
+        RegularServiceRequestSteps.waitServiceRequestScreenLoaded();
+        RegularServiceRequestsScreen serviceRequestsScreen = new RegularServiceRequestsScreen();
+        if (isPresent)
+            Assert.assertTrue(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
+        else
+            Assert.assertFalse(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
+    }
 }

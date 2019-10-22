@@ -27,7 +27,7 @@ public class ServicesScreenSteps {
 
     public static void selectServiceWithServiceData(ServiceData serviceData) {
         openCustomServiceDetails(serviceData.getServiceName());
-        ServiceDetailsScreenSteps.setServiceDetailsData(serviceData);
+        ServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
     }
 
     public static void openCustomServiceDetails(String serviceName) {
@@ -93,8 +93,10 @@ public class ServicesScreenSteps {
     }
 
     public static void selectPanelServiceData(DamageData damageData) {
-        ServicesScreen servicesScreen = new ServicesScreen();
-        servicesScreen.selectGroupServiceItem(damageData.getDamageGroupName());
+        selectGroupServiceItem(damageData);
+        if (damageData.getMoneyService() != null) {
+            selectServiceWithServiceData(damageData.getMoneyService());
+        }
         if (damageData.getMoneyServices() != null) {
             for (ServiceData serviceData : damageData.getMoneyServices())
                 selectServiceWithServiceData(serviceData);
@@ -108,8 +110,19 @@ public class ServicesScreenSteps {
 
     }
 
+    public static void selectGroupServiceItem(DamageData damageData) {
+        ServicesScreen servicesScreen = new ServicesScreen();
+        servicesScreen.selectGroupServiceItem(damageData.getDamageGroupName());
+
+    }
+
     public static void selectLaborServiceAndSetData(LaborServiceData laborServiceData) {
         openCustomServiceDetails(laborServiceData.getServiceName());
         ServiceDetailsScreenSteps.setLaborServiceData(laborServiceData);
+    }
+
+    public static void clickServiceTypesButton() {
+        ServicesScreen servicesScreen = new ServicesScreen();
+        servicesScreen.clickServiceTypesButton();
     }
 }
