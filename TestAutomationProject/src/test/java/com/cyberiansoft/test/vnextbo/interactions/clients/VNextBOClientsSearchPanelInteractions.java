@@ -2,17 +2,17 @@ package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsSearchPanel;
+import com.cyberiansoft.test.vnextbo.screens.commonObjects.VNextBOSearchPanel;
 import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOClientsSearchPanelInteractions {
 
-    private VNextBOClientsSearchPanel clientsSearchPanel;
+    private VNextBOSearchPanel clientsSearchPanel;
 
     public VNextBOClientsSearchPanelInteractions() {
         clientsSearchPanel = PageFactory.initElements(DriverBuilder.getInstance().getDriver(),
-                VNextBOClientsSearchPanel.class);
+                VNextBOSearchPanel.class);
     }
 
     public void setClientsSearchText(String value) {

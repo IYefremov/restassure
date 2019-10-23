@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnextbo.verifications;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;

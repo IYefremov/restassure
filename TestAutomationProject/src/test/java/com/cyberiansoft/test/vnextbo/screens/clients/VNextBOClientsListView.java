@@ -1,11 +1,9 @@
 package com.cyberiansoft.test.vnextbo.screens.clients;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.baseutils.Utils;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,7 +13,7 @@ import java.util.List;
 @Getter
 public class VNextBOClientsListView extends VNextBOClientsWebPage {
 
-    @FindBy(id = "clients-list-view")
+    @FindBy(xpath = "//div[@id='clients-list-view']//table")
     private WebElement clientsTable;
 
     @FindBy(id = "app-progress-spinner")
