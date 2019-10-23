@@ -9,77 +9,66 @@ public class VNextBOPageSwitcherSteps extends VNextBOBaseWebPageSteps {
 
     public static void clickHeaderNextPageButton()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.getHeaderNextPageBtn());
+        Utils.clickElement(new VNextBOPageSwitcherElements().getHeaderNextPageBtn());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickFooterNextPageButton()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.getFooterNextPageBtn());
+        Utils.clickElement(new VNextBOPageSwitcherElements().getFooterNextPageBtn());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickHeaderPreviousPageButton()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.getHeaderPreviousPageBtn());
+        Utils.clickElement(new VNextBOPageSwitcherElements().getHeaderPreviousPageBtn());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickFooterPreviousPageButton()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.getFooterPreviousPageBtn());
+        Utils.clickElement(new VNextBOPageSwitcherElements().getFooterPreviousPageBtn());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickHeaderLastPageButton()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.getHeaderLastPageBtn());
+        Utils.clickElement(new VNextBOPageSwitcherElements().getHeaderLastPageBtn());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickFooterLastPageButton()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.getFooterLastPageBtn());
+        Utils.clickElement(new VNextBOPageSwitcherElements().getFooterLastPageBtn());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickHeaderFirstPageButton()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.getHeaderFirstPageBtn());
+        Utils.clickElement(new VNextBOPageSwitcherElements().getHeaderFirstPageBtn());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickFooterFirstPageButton()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.getFooterFirstPageBtn());
+        Utils.clickElement(new VNextBOPageSwitcherElements().getFooterFirstPageBtn());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openPageByNumber(int pageNumber)
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        Utils.clickElement(switcherElements.specificPageButton(pageNumber));
+        Utils.clickElement(new VNextBOPageSwitcherElements().specificPageButton(pageNumber));
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static String getActivePageNumberFromHeaderPager()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        return Utils.getText(switcherElements.getActivePageTopPagingElement());
+        return Utils.getText(new VNextBOPageSwitcherElements().getActivePageTopPagingElement());
     }
 
     public static String getActivePageNumberFromFooterPager()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        return Utils.getText(switcherElements.getActivePageBottomPagingElement());
+        return Utils.getText(new VNextBOPageSwitcherElements().getActivePageBottomPagingElement());
     }
 
     public static void changeItemsPerPage(String itemsPerPage)
@@ -92,13 +81,11 @@ public class VNextBOPageSwitcherSteps extends VNextBOBaseWebPageSteps {
 
     public static String getItemsPerPageNumberFromTopElement()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        return Utils.getText(switcherElements.getHeaderItemsPerPageField());
+        return Utils.getText(new VNextBOPageSwitcherElements().getHeaderItemsPerPageField());
     }
 
     public static String getItemsPerPageNumberFromBottomElement()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        return Utils.getText(switcherElements.getFooterItemsPerPageField());
+        return Utils.getText(new VNextBOPageSwitcherElements().getFooterItemsPerPageField());
     }
 }

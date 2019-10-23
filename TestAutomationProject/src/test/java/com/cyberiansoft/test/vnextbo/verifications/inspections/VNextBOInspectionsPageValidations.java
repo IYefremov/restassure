@@ -13,39 +13,31 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
 
     public static void isClearFilterIconDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.clearFilterBtn),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().clearFilterBtn),
                 "Clear filter button hasn't been displayed");
     }
 
     public static void isClearFilterIconNotDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementNotDisplayed(inspectionsPage.clearFilterBtn),
+        Assert.assertTrue(Utils.isElementNotDisplayed(new VNextBOInspectionsWebPage().clearFilterBtn),
                 "Clear filter button has been displayed");
     }
 
     public static boolean isSearchOptionTextNotDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        return Utils.isElementNotDisplayed(inspectionsPage.filterInfoText);
+        return Utils.isElementNotDisplayed(new VNextBOInspectionsWebPage().filterInfoText);
     }
 
     public static void isEditAdvancedSearchIconDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.editAdvancedSearchIcon),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().editAdvancedSearchIcon),
                 "Edit advanced search pencil icon hasn't been displayed");
     }
 
     public static boolean isSavedAdvancedSearchFilterExists(String filterName)
     {
         VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+                new VNextBOInspectionsWebPage();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(inspectionsPage.savedSearchesList);
         for (WebElement searchName: inspectionsPage.savedSearchesList
         ) {
@@ -58,7 +50,7 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
     public static void verifySearchFieldContainsText(String value)
     {
         VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
+                new VNextBOInspectionsWebPage();
         WaitUtilsWebDriver.waitForInputFieldValueIgnoringException(inspectionsPage.searchFld, value);
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), value,
                 "Search field hasn't contained " + value);
@@ -78,9 +70,7 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
 
     public static boolean isHowToCreateInspectionLinkDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        return Utils.isElementDisplayed(inspectionsPage.howToCreateInspectionLink);
+        return Utils.isElementDisplayed(new VNextBOInspectionsWebPage().howToCreateInspectionLink);
     }
 
     public static void isInspectionStatusCorrect(String inspectionNumber, String expectedStatus)
@@ -91,56 +81,44 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
 
     public static void isArchiveIconDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.archiveIcon), "Archive icon hasn't been displayed.");
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().archiveIcon),
+                "Archive icon hasn't been displayed.");
     }
 
     public static void isUnArchiveIconDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.unArchiveIcon), "Unarchive icon hasn't been displayed.");
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().unArchiveIcon),
+                "Unarchive icon hasn't been displayed.");
     }
 
     public static void isInspectionImageZoomIconDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.inspectionImageZoomIcon),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().inspectionImageZoomIcon),
                 "Inspection's image hasn't had Zoom icon");
     }
 
     public static void isInspectionNotesIconDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.inspectionNotesIcon),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().inspectionNotesIcon),
                 "Notes icon hasn't been displayed");
     }
 
     public static void isPrintSupplementButtonDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.printSupplementIcon),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().printSupplementIcon),
                 "Print supplement button hasn't been displayed");
     }
 
     public static void isPrintInspectionButtonDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.printInspectionIcon),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().printInspectionIcon),
                 "Print inspection button hasn't been displayed");
     }
 
     public static void isPrintWindowOpened()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
         String parentHandle = Utils.getParentTab();
-        inspectionsPage.waitForNewTab();
+        new VNextBOInspectionsWebPage().waitForNewTab();
         String newWindow = Utils.getNewTab(parentHandle);
         DriverBuilder.getInstance().getDriver().switchTo().window(parentHandle);
         boolean isPrintWindowOpened = false;
@@ -150,23 +128,19 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
 
     public static void isInspectionsListDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.inspectionsList), "Inspection list hasn't been displayed");
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().inspectionsList),
+                "Inspection list hasn't been displayed");
     }
 
     public static void isSearchFieldDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.searchFld), "Search field hasn't been displayed");
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().searchFld),
+                "Search field hasn't been displayed");
     }
 
     public static void isInspectionDetailsPanelDisplayed()
     {
-        VNextBOInspectionsWebPage inspectionsPage =
-                new VNextBOInspectionsWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(inspectionsPage.inspectionDetailsPanel),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().inspectionDetailsPanel),
                 "Inspection details panel hasn't been displayed");
     }
 }

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.verifications.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import org.testng.Assert;
@@ -12,21 +11,19 @@ public class VNextBOInspectionsAdvancedSearchValidations {
 
     public static void isAdvancedSearchFormDisplayed()
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(advancedSearchForm.advancedSearchFormContent),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionAdvancedSearchForm().advancedSearchFormContent),
                 "Advanced search form hasn't been displayed\"");
     }
 
-    public static void isAdvancedSearchFormNotDisplayed(VNextBOInspectionAdvancedSearchForm advancedSearchForm) {
+    public static void isAdvancedSearchFormNotDisplayed(VNextBOInspectionAdvancedSearchForm advancedSearchForm)
+    {
         Assert.assertTrue(Utils.isElementNotDisplayed(advancedSearchForm.advancedSearchFormContent),
                 "Advanced search form hasn't been closed");
     }
 
-    public static void isSearchButtonDisplayed() {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(advancedSearchForm.searchButton),
+    public static void isSearchButtonDisplayed()
+    {
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionAdvancedSearchForm().searchButton),
                 "Advanced Search button hasn't been displayed");
     }
 

@@ -39,6 +39,7 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.users.VNextBOUsersGeneralTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.users.VNextBOAddNewUserAndSearchTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsGeneralTests"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsSearchTests"/>
     </classes>
   </test>
 </suite>

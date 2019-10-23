@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnextbo.steps.users;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOAddNewUserDialog;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import org.openqa.selenium.WebElement;
@@ -14,46 +13,39 @@ public class VNextBOAddNewUserDialogSteps extends VNextBOBaseWebPageSteps {
 
     public static void clickSaveButton()
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(vNexBOAddNewUserDialog.saveBtn);
+        Utils.clickElement(new VNexBOAddNewUserDialog().saveBtn);
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void closeDialog()
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(vNexBOAddNewUserDialog.closeDialogBtn);
+        Utils.clickElement(new VNexBOAddNewUserDialog().closeDialogBtn);
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void setUserFirstName(String firstName)
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clearAndType(vNexBOAddNewUserDialog.firstNameFld, firstName);
+        Utils.clearAndType(new VNexBOAddNewUserDialog().firstNameFld, firstName);
     }
 
     public static void setUserLastName(String lastName)
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clearAndType(vNexBOAddNewUserDialog.lastNameFld, lastName);
+        Utils.clearAndType(new VNexBOAddNewUserDialog().lastNameFld, lastName);
     }
 
     public static void setUserEmail(String userMail)
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clearAndType(vNexBOAddNewUserDialog.userMailFld, userMail);
+        Utils.clearAndType(new VNexBOAddNewUserDialog().userMailFld, userMail);
     }
 
     public static void setUserPhone(String userPhone)
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clearAndType(vNexBOAddNewUserDialog.userPhoneFld, userPhone);
+        Utils.clearAndType(new VNexBOAddNewUserDialog().userPhoneFld, userPhone);
     }
 
     public static void clickWebAccessCheckbox()
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(vNexBOAddNewUserDialog.webAccessCheckbox);
+        Utils.clickElement(new VNexBOAddNewUserDialog().webAccessCheckbox);
     }
 
     public static void createNewUser(String firstName, String lastName, String userMail, String phoneNumber, boolean webAccess)
@@ -69,18 +61,17 @@ public class VNextBOAddNewUserDialogSteps extends VNextBOBaseWebPageSteps {
 
     public static void editUserData(String firstName, String lastName, String phoneNumber, boolean webAccess)
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
         setUserFirstName(firstName);
         setUserLastName(lastName);
         setUserPhone(phoneNumber);
-        if (!webAccess & (vNexBOAddNewUserDialog.webAccessCheckbox.getAttribute("checked") != null))
+        if (!webAccess & (new VNexBOAddNewUserDialog().webAccessCheckbox.getAttribute("checked") != null))
             clickWebAccessCheckbox();
         clickSaveButton();
     }
 
     public static List<String> getErrorMessages()
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        return  vNexBOAddNewUserDialog.errorMessagesList.stream().map(WebElement::getText).collect(Collectors.toList());
+        return  new VNexBOAddNewUserDialog().errorMessagesList.stream().
+                map(WebElement::getText).collect(Collectors.toList());
     }
 }

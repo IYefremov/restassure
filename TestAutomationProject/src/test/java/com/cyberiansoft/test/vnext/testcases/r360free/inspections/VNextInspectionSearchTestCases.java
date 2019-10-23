@@ -316,7 +316,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 
 
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
-        VNextBOInspectionAdvancedSearchForm advancedserchdialog = new VNextBOInspectionAdvancedSearchForm(webdriver);
+        VNextBOInspectionAdvancedSearchForm advancedserchdialog = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspnumber);
         VNextBOInspectionsAdvancedSearchSteps.setAdvancedSearchFilterNameAndSave(filterName);
         insppage.selectInspectionInTheList(inspnumber);

@@ -43,26 +43,22 @@ public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidation
 
     public static boolean isHeaderLastPageButtonClickable()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        return Utils.isElementClickable(switcherElements.getHeaderLastPageBtn());
+        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderLastPageBtn());
     }
 
     public static boolean isFooterLastPageButtonClickable()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        return Utils.isElementClickable(switcherElements.getFooterLastPageBtn());
+        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterLastPageBtn());
     }
 
     public static boolean isHeaderFirstPageButtonClickable()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        return Utils.isElementClickable(switcherElements.getHeaderFirstPageBtn());
+        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderFirstPageBtn());
     }
 
     public static boolean isFooterFirstPageButtonClickable()
     {
-        VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
-        return Utils.isElementClickable(switcherElements.getFooterFirstPageBtn());
+        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterFirstPageBtn());
     }
 
     public static void isItemsPerPageNumberCorrect(String expectedItemsNumber)

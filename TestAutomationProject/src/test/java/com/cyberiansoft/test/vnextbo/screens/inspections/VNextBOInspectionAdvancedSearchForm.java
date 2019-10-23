@@ -2,9 +2,9 @@ package com.cyberiansoft.test.vnextbo.screens.inspections;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -58,8 +58,8 @@ public class VNextBOInspectionAdvancedSearchForm extends VNextBOBaseWebPage {
 		return advancedSearchFormContent.findElement(By.xpath("//li[text()='" + optionName + "']"));
 	}
 
-	public VNextBOInspectionAdvancedSearchForm(WebDriver driver) {
-		super(driver);
+	public VNextBOInspectionAdvancedSearchForm() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 		WaitUtilsWebDriver.waitForVisibility(advancedSearchFormContent);
 	}

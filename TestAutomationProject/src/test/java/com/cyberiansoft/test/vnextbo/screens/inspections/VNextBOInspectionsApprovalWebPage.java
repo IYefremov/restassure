@@ -2,14 +2,12 @@ package com.cyberiansoft.test.vnextbo.screens.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 @Getter
 public class VNextBOInspectionsApprovalWebPage extends VNextBOBaseWebPage {
@@ -45,8 +43,8 @@ public class VNextBOInspectionsApprovalWebPage extends VNextBOBaseWebPage {
     private WebElement inspectionStatus;
 
 
-    public VNextBOInspectionsApprovalWebPage(WebDriver driver) {
-        super(driver);
+    public VNextBOInspectionsApprovalWebPage() {
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 

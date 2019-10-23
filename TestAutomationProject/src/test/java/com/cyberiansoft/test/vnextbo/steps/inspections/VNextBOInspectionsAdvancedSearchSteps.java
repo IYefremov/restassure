@@ -14,43 +14,33 @@ public class VNextBOInspectionsAdvancedSearchSteps {
 
     public static void clickSearchButton()
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(advancedSearchForm.searchButton);
+        Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().searchButton);
     }
 
     public static void clickCloseButton()
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(advancedSearchForm.closeButton);
+        Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().closeButton);
     }
 
     public static void clickSaveButton()
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(advancedSearchForm.saveButton);
+        Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().saveButton);
     }
 
     public static void clickClearButton()
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(advancedSearchForm.clearButton);
+        Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().clearButton);
     }
 
     public static void clickDeleteButton()
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(advancedSearchForm.deleteSavedSearchButton);
+        Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().deleteSavedSearchButton);
     }
 
     public static void deleteSavedSearchFilter()
     {
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOInspectionAdvancedSearchForm();
         advancedSearchForm.deleteSavedSearchButton.click();
         DriverBuilder.getInstance().getDriver().switchTo().alert().accept();
         WaitUtilsWebDriver.waitForInvisibility(advancedSearchForm.advancedSearchFormContent);
@@ -58,16 +48,12 @@ public class VNextBOInspectionsAdvancedSearchSteps {
 
     public static String getValueFromTextInputField(String fieldLabel)
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        return advancedSearchForm.textFieldByName(fieldLabel).getAttribute("value");
+        return new VNextBOInspectionAdvancedSearchForm().textFieldByName(fieldLabel).getAttribute("value");
     }
 
     public static String getValueFromDropdownField(String fieldLabel)
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
-        return advancedSearchForm.dropDownFieldByName(fieldLabel).getText();
+        return new VNextBOInspectionAdvancedSearchForm().dropDownFieldByName(fieldLabel).getText();
     }
 
     public static void setAdvancedSearchFilterNameAndSave(String filterName)
@@ -78,16 +64,14 @@ public class VNextBOInspectionsAdvancedSearchSteps {
 
     public static void saveAdvancedSearchFilter()
     {
-        VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
         clickSaveButton();
-        WaitUtilsWebDriver.waitForInvisibility(advancedSearchForm.advancedSearchFormContent);
+        WaitUtilsWebDriver.waitForInvisibility(new VNextBOInspectionAdvancedSearchForm().advancedSearchFormContent);
     }
 
     public static List<String> getAllAdvancedSearchFieldsLabels()
     {
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOInspectionAdvancedSearchForm();
         List<String> fieldsLabels = new ArrayList<>();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(advancedSearchForm.searchFieldsTitlesList);
         for (WebElement label: advancedSearchForm.searchFieldsTitlesList)
@@ -100,7 +84,7 @@ public class VNextBOInspectionsAdvancedSearchSteps {
     public static List<String> getAllOptionsFromDropdownByName(String dropdownFieldLabel)
     {
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOInspectionAdvancedSearchForm();
         Utils.clickElement(advancedSearchForm.dropDownFieldByName(dropdownFieldLabel));
         List<String> statusOptionsNames = new ArrayList<>();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(advancedSearchForm.dropDownFieldOptionsList(dropdownFieldLabel.toLowerCase()));
@@ -114,14 +98,14 @@ public class VNextBOInspectionsAdvancedSearchSteps {
     public static void setAdvSearchTextField(String fldName, String value)
     {
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOInspectionAdvancedSearchForm();
         Utils.clearAndType(advancedSearchForm.textFieldByName(fldName), value);
     }
 
     public static void setAdvSearchDropDownField(String fieldLabel, String value)
     {
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOInspectionAdvancedSearchForm();
         WebElement fieldWithDropdown = advancedSearchForm.dropDownFieldByName(fieldLabel);
         Utils.clickElement(fieldWithDropdown);
         WebElement dropDownOption = advancedSearchForm.dropDownFieldOption(value);
@@ -131,7 +115,7 @@ public class VNextBOInspectionsAdvancedSearchSteps {
     public static void setAdvSearchAutocompleteField(String fieldLabel, String value)
     {
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
-                new VNextBOInspectionAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOInspectionAdvancedSearchForm();
         WebElement fieldWithAutocomplete = advancedSearchForm.autoPopulatedFieldByName(fieldLabel);
         Utils.clearAndType(fieldWithAutocomplete, value);
         WaitUtilsWebDriver.waitForLoading();

@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnextbo.steps.users;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOUsersWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
@@ -15,23 +14,20 @@ public class VNextBOUsersPageSteps extends VNextBOBaseWebPageSteps {
 
     public static void clickAddNewUserButton()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(vNexBOUsersWebPage.addNewUserBtn);
+        Utils.clickElement(new VNexBOUsersWebPage().addNewUserBtn);
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void resendConfirmationEmail()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(vNexBOUsersWebPage.reSendButton);
+        Utils.clickElement(new VNexBOUsersWebPage().reSendButton);
         VNextBOModalDialogSteps.clickYesButton();
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openUserDataForEdit()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(vNexBOUsersWebPage.editUserButton);
+        Utils.clickElement(new VNexBOUsersWebPage().editUserButton);
         WaitUtilsWebDriver.waitForLoading();
     }
 
@@ -53,8 +49,7 @@ public class VNextBOUsersPageSteps extends VNextBOBaseWebPageSteps {
 
     public static List<WebElement> getUsersTableRows()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        return vNexBOUsersWebPage.usersTable.getTableRows();
+        return new VNexBOUsersWebPage().usersTable.getTableRows();
     }
 
     public static int getUsersTableRowsCount()
@@ -64,13 +59,11 @@ public class VNextBOUsersPageSteps extends VNextBOBaseWebPageSteps {
 
     public static WebElement getTableRowWithText(String userMail)
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        return vNexBOUsersWebPage.tableRowByText(userMail);
+        return new VNexBOUsersWebPage().tableRowByText(userMail);
     }
 
     public static String getUsersNotFoundMessage()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        return Utils.getText(vNexBOUsersWebPage.noItemsFoundMessage);
+        return Utils.getText(new VNexBOUsersWebPage().noItemsFoundMessage);
     }
 }

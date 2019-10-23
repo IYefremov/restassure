@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.verifications.users;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOAddNewUserDialog;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOAddNewUserDialogSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOBaseWebPageValidations;
@@ -23,8 +22,7 @@ public class VNextBOAddNewUserDialogValidations extends VNextBOBaseWebPageValida
 
     public static void isEmailFieldDisabled()
     {
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(DriverBuilder.getInstance().getDriver());
-        Assert.assertFalse(Utils.isElementClickable(vNexBOAddNewUserDialog.userMailFld),
+        Assert.assertFalse(Utils.isElementClickable(new VNexBOAddNewUserDialog().userMailFld),
                 "Email field hasn't been disabled");
     }
 }

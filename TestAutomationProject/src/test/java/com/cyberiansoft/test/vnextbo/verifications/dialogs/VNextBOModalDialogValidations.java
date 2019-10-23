@@ -9,36 +9,31 @@ public class VNextBOModalDialogValidations {
 
     public static void isDialogDisplayed()
     {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(confirmationDialog.dialogContent),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog(DriverBuilder.getInstance().getDriver()).dialogContent),
                 "Modal dialog hasn't been opened");
     }
 
     public static void isNoButtonDisplayed()
     {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(confirmationDialog.cancelNoButton),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog(DriverBuilder.getInstance().getDriver()).cancelNoButton),
                 "Modal dialog hasn't had \"No\" button");
     }
 
     public static void isYesButtonDisplayed()
     {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(confirmationDialog.confirmYesButton),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog(DriverBuilder.getInstance().getDriver()).confirmYesButton),
                 "Modal dialog hasn't had \"Yes\" button");
     }
 
     public static void isCloseButtonDisplayed()
     {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(confirmationDialog.closeButton),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog(DriverBuilder.getInstance().getDriver()).closeButton),
                 "Modal dialog hasn't had \"Close\" x-icon");
     }
 
     public static void isOkButtonDisplayed()
     {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(confirmationDialog.confirmOKButton),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog(DriverBuilder.getInstance().getDriver()).confirmOKButton),
                 "Modal dialog hasn't had \"Ok\" button");
     }
 
