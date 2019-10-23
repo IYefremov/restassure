@@ -86,10 +86,16 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
     private IOSElement srsummaryinspectionsbtn;
 	
 	@iOSXCUITFindBy(accessibility = "Work Orders")
-    private IOSElement srsummaryordrersbtn;
+    private IOSElement srsummaryordrersbtn;*/
 	
 	@iOSXCUITFindBy(accessibility = "Save")
-    private IOSElement savebtn;*/
+    private IOSElement saveBtn;
+
+	@iOSXCUITFindBy(accessibility = "Search")
+	private IOSElement searchBtn;
+
+	@iOSXCUITFindBy(className = "XCUIElementTypeSearchField")
+	private IOSElement searchFld;
 
 	@iOSXCUITFindBy(accessibility = "ServiceRequestsTable")
 	private IOSElement serviceRequestsTable;
@@ -302,5 +308,26 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	public void clickBackButton() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
+	}
+
+	public void clickSearchButton() {
+		searchBtn.click();
+	}
+
+	public void setSearchText(String searchText) {
+		clearSearchText();
+		searchFld.setValue(searchText);
+	}
+
+	public void clearSearchText() {
+		searchFld.clear();
+	}
+
+	public void saveSearchParamaters() {
+		saveBtn.click();
+	}
+
+	public void selectSearchParamaters(String serviceRequestSearchParameters) {
+		appiumdriver.findElementByAccessibilityId(serviceRequestSearchParameters).click();
 	}
 }

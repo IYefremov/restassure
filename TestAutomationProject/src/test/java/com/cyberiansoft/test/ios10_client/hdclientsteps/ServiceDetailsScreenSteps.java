@@ -11,6 +11,11 @@ import java.util.List;
 
 public class ServiceDetailsScreenSteps {
 
+    public static void setServiceDetailsDataAndSave(ServiceData serviceData) {
+        setServiceDetailsData(serviceData);
+        saveServiceDetails();
+    }
+
     public static void setServiceDetailsData(ServiceData serviceData) {
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
         if (serviceData.getServicePrice() != null)
@@ -20,14 +25,13 @@ public class ServiceDetailsScreenSteps {
         if (serviceData.getServiceNotes() != null)
             setServiceNotes(serviceData.getServiceNotes());
         if (serviceData.getPreExistingDamage() != null)
-        selectPreExistingDamage(serviceData.getPreExistingDamage());
+            selectPreExistingDamage(serviceData.getPreExistingDamage());
         if (serviceData.getVehiclePart() != null)
             slectServiceVehiclePart(serviceData.getVehiclePart());
         if (serviceData.getVehicleParts() != null)
             slectServiceVehicleParts(serviceData.getVehicleParts());
         if (serviceData.getQuestionData() != null)
             selectedServiceDetailsScreen.answerQuestion(serviceData.getQuestionData());
-        saveServiceDetails();
     }
 
     public static void setServicePriceValue(String servicePrice) {

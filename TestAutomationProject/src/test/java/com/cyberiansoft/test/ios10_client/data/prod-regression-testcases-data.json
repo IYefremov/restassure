@@ -1658,5 +1658,29 @@
         }
       ]
     }
+  ],
+  "testVerifySearchForSR": [
+    {
+      "rowID": "testVerifySearchForSR.01",
+      "description": "Test Case 28106: 39 - Verify search for SR, Test Case 28151:  38 - Verify SR number",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83642",
+          "testCaseTitle": "Test Case 28106: 39 - Verify search for SR"
+        },
+        {
+          "testCaseID": "83643",
+          "testCaseTitle": "Test Case 28151:  38 - Verify SR number"
+        }
+      ],
+      "serviceRequestData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
   ]
 }

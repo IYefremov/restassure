@@ -2771,7 +2771,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : workOrderData.getServicesScreen().getBundleService().getMoneyServices()) {
 			selectedServiceBundleScreen.clickServicesIcon();
 			selectedServiceBundleScreen.openBundleMoneyServiceDetailsFromServicesScrollElement(serviceData);
-			ServiceDetailsScreenSteps.setServiceDetailsData(serviceData);
+			ServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
 
 		}
 

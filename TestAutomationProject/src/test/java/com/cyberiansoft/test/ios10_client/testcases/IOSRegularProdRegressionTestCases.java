@@ -25,6 +25,7 @@ import com.cyberiansoft.test.ios10_client.types.invoicestypes.UATInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.UATServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderTypes;
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import org.json.simple.JSONObject;
@@ -1564,5 +1565,32 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularHomeScreenSteps.updateMainDataBase();
         RegularMainScreenSteps.userLogin("Test User", "1111");
 
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifySearchForSR(String rowID,
+                                                                                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
+        final String serviceRequestSearchParameter = "Not Checked In Team";
+
+        RegularHomeScreenSteps.navigateToServiceRequestScreen();
+        RegularServiceRequestSteps.startCreatingServicerequest(serviceRequestData.getWholesailCustomer(), UATServiceRequestTypes.SR_TYPE_ALL_PHASES);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(serviceRequestData.getVihicleInfo());
+        RegularServiceRequestSteps.saveServiceRequestWithAppointment();
+        RegularServiceRequestAppointmentScreenSteps.setDefaultServiceRequestAppointment();
+        final String serviceRequestNumber = RegularServiceRequestSteps.getFirstServiceRequestNumber();
+
+        RegularServiceRequestSteps.searchServiceRequestByNumber(serviceRequestNumber);
+        RegularServiceRequestsScreenValidations.verifyServiceRequestPresent(serviceRequestNumber, true);
+        RegularServiceRequestSteps.clickSearchButton();
+        RegularServiceRequestSteps.clearSerchText();
+        RegularServiceRequestSteps.selectSearchParamaters(serviceRequestSearchParameter);
+        RegularServiceRequestSteps.saveSearchParamaters();
+        RegularServiceRequestsScreenValidations.verifyServiceRequestPresent(serviceRequestNumber, true);
+        RegularServiceRequestSteps.clickServiceRequestCheckInAction(serviceRequestNumber);
+        RegularServiceRequestsScreenValidations.verifyServiceRequestPresent(serviceRequestNumber, false);
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

@@ -179,7 +179,7 @@ public class VehicleScreen extends BaseWizardScreen {
 		appiumdriver.findElementByName(model).click();
 	}
 
-	public void seletAdvisor(String advisor) {
+	public void selectAdvisor(String advisor) {
 		appiumdriver.findElementByAccessibilityId("Advisor").click();
 		appiumdriver.findElementByAccessibilityId(advisor).click();
 	}
