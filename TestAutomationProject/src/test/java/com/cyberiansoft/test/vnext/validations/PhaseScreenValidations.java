@@ -39,4 +39,8 @@ public class PhaseScreenValidations {
     public static void phaseShouldHaveStartDate(OrderPhaseDto phaseDto, Boolean shouldHaveStartDate) {
         Assert.assertEquals(PhaseScreenInteractions.getPhaseElement(phaseDto.getPhaseName()).isStartDatePresent(), shouldHaveStartDate);
     }
+
+    public static void validateServiceTechnician(ServiceData serviceData) {
+        Assert.assertEquals(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()).getTechnician(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
+    }
 }

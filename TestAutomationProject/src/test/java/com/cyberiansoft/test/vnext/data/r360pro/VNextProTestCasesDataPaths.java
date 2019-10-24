@@ -174,4 +174,8 @@ public class VNextProTestCasesDataPaths {
     public String getMonitoringRoActionMenu() {
         return props.getProperty("monitoring.action.menu");
     }
+
+    public String getAutoAssignTech() {
+        return props.getProperty("monitoring.autoassign.tech");
+    }
 }
