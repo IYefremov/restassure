@@ -14,7 +14,7 @@ public class ServiceElement implements IWebElement {
     private String expandElementLocator = ".//*[@action='open-phase-services']";
     private String clockIconLocator = ".//*[@class='icon-svg ']";
     private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')][2]";
-
+    private String technicianLocator = ".//div[@data-phase-tech]";
 
     public ServiceElement(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -24,7 +24,12 @@ public class ServiceElement implements IWebElement {
         return WaitUtils.getGeneralFluentWait().until(
                 driver -> rootElement.findElement(By.xpath(nameLocator)).getText()
         );
+    }
 
+    public String getTechnician() {
+        return WaitUtils.getGeneralFluentWait().until(
+                driver -> rootElement.findElement(By.xpath(technicianLocator)).getText()
+        );
     }
 
     public String getStatus() {

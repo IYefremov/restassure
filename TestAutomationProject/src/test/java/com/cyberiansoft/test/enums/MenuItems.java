@@ -4,7 +4,7 @@ import lombok.Getter;
 
 public enum MenuItems {
     EDIT("Edit"),
-    ASSIGN_TECH(""),
+    ASSIGN_TECH("Assign Tech"),
     START("Start"),
     STOP("Stop"),
     COMPLETE("Complete"),

@@ -1,0 +1,30 @@
+{
+  "autoAssignTechToMoneyService": [
+    {
+      "rowID": "01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94252",
+          "testCaseTitle": "Auto-assign tech to a Money service"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Labor AM",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "1111",
+            "technicianLastName": "2222"
+          }
+        },
+        {
+          "serviceName": "Labor AM",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Employee"
+          }
+        }
+      ]
+    }
+  ]
+}
