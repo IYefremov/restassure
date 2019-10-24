@@ -1682,5 +1682,73 @@
         }
       }
     }
+  ],
+  "testVerifyCalculationForServiceWithPricePolicyVehiclePricePolicyPanelOnPrintOut": [
+    {
+      "rowID": "testVerifyCalculationForServiceWithPricePolicyVehiclePricePolicyPanelOnPrintOut.01",
+      "description": "Test Case 40 - Verify calculation for service with Price policy Vehicle/Price policy Panel (on print out)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83644",
+          "testCaseTitle": "Test Case 40 - Verify calculation for service with Price policy Vehicle/Price policy Panel (on print out)"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor": "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123",
+          "trim": "25th Anniversary"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "SR_Money_Vehicle",
+              "servicePrice" : "200",
+              "servicePrice2" : "$200.00 x 3.00",
+              "serviceQuantity" : "3",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Dashboard"
+                },
+                {
+                  "vehiclePartName": "Driver Seat"
+                }
+              ]
+            },
+            {
+              "serviceName": "SR_Money_Panel",
+              "servicePrice" : "100",
+              "servicePrice2" : "$100.00 x 2.00",
+              "serviceQuantity" : "2",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Back Glass"
+                },
+                {
+                  "vehiclePartName": "Cowl, Other"
+                }
+              ]
+            }
+          ]
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        },
+        "inspectionTotalPrice": "400"
+      }
+    }
   ]
 }

@@ -1447,7 +1447,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
-        List<String> inspectionsIDs = new ArrayList<>();
+        final String companyInspToDecline = "BoBo";
 
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 
@@ -1455,7 +1455,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
              RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(),
                     UATInspectionTypes.valueOf(inspectionData.getInspectionType()));
             RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
-            inspectionsIDs.add(RegularVehicleInfoScreenSteps.getInspectionNumber());
+            inspectionData.setInspectionNumber(RegularVehicleInfoScreenSteps.getInspectionNumber());
             if (inspectionData.getInsuranceCompanyData() != null) {
                 RegularNavigationSteps.navigateToClaimScreen();
                 RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
@@ -1485,18 +1485,25 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         }
 
         RegularMyInspectionsSteps.clickActionButton();
-        for (String inspectionNumber : inspectionsIDs)
-            RegularMyInspectionsSteps.selectInspection(inspectionNumber);
+        for (InspectionData inspectionData : inspectionsData)
+            RegularMyInspectionsSteps.selectInspection(inspectionData.getInspectionNumber());
         RegularMyInspectionsSteps.clickActionButton();
 
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.APPROVE);
-        RegularCustomersScreenSteps.clickOnCustomer(inspectionsData.get(0).getWholesailCustomer());
-        //RegularApproveInspectionScreenActions.
 
-        //RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionID);
-       //RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
-        RegularApproveInspectionScreenActions.saveApprovedServices();
-        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+        for (InspectionData inspectionData : inspectionsData) {
+            RegularCustomersScreenSteps.clickOnCustomer(inspectionData.getWholesailCustomer());
+            RegularApproveInspectionScreenActions.selectInspectionForApprove(inspectionData.getInspectionNumber());
+            if (!inspectionData.getWholesailCustomer().getCompany().equals(companyInspToDecline)) {
+                RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
+                RegularApproveInspectionScreenActions.saveApprovedServices();
+            } else
+                RegularApproveInspectionScreenActions.clickDeclinePopupButton();
+
+            RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+        }
+
+        RegularNavigationSteps.navigateBackScreen();
 
     }
 
@@ -1526,6 +1533,8 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             RegularSelectedServicesScreenValidations.verifyServiceIsSelected(serviceData.getServiceName(), true);
         }
         RegularSelectedServicesSteps.deleteSelectedService(inspectionData.getServicesScreen().getMoneyServices().get(0).getServiceName());
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getMoneyServices().get(0).getServiceName(), false);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getServicesScreen().getMoneyServices().get(1).getServiceName(), true);
 
         RegularWizardScreenValidations.verifyScreenTotalPrice(PricesCalculations.getPriceRepresentation(inspectionData.getInspectionTotalPrice()));
 
@@ -1592,5 +1601,60 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularServiceRequestSteps.clickServiceRequestCheckInAction(serviceRequestNumber);
         RegularServiceRequestsScreenValidations.verifyServiceRequestPresent(serviceRequestNumber, false);
         RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyCalculationForServiceWithPricePolicyVehiclePricePolicyPanelOnPrintOut(String rowID,
+                                                                                         String description, JSONObject testData) throws Exception {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        final String zeroPrice = "$0.00";
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionID = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+
+        RegularServicesScreenSteps.switchToSelectedServices();
+
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            RegularSelectedServicesScreenValidations.verifyServiceIsSelectedWithServicePrice(serviceData, serviceData.getServicePrice2());
+        }
+        RegularWizardScreenValidations.verifyScreenTotalPrice(PricesCalculations.getPriceRepresentation(inspectionData.getInspectionTotalPrice()));
+
+        RegularInspectionsSteps.saveInspectionAsFinal();
+
+
+
+        RegularMyInspectionsSteps.selectSendEmailMenuForInspection(inspectionID);
+        NadaEMailService nada = new NadaEMailService();
+        RegularEmailScreenSteps.sendEmailToAddress(nada.getEmailId());
+        RegularNavigationSteps.navigateBackScreen();
+
+        final String inspectionreportfilenname = inspectionID + ".pdf";
+
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+                .withSubjectAndAttachmentFileName(inspectionID, inspectionreportfilenname);
+        Assert.assertTrue(nada.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + inspectionID +
+                " in mail box " + nada.getEmailId() + ". At time " +
+                LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+        nada.deleteMessageWithSubject(inspectionID);
+
+        File pdfdoc = new File(inspectionreportfilenname);
+        String pdftext = PDFReader.getPDFText(pdfdoc);
+        for (ServiceData serviceData : inspectionData.getServicesScreen().getMoneyServices()) {
+            Assert.assertTrue(pdftext.contains(PricesCalculations.getPriceRepresentation(serviceData.getServicePrice())));
+        }
+        Assert.assertTrue(pdftext.contains(zeroPrice));
+
     }
 }

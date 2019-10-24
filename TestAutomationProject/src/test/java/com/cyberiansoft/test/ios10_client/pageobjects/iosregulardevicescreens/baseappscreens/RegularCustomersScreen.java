@@ -119,6 +119,8 @@ public class RegularCustomersScreen extends RegularBaseAppScreen {
 	}
 
 	public void clickOnCustomer(AppCustomer appCustomer) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Customers")));
 		appiumdriver.findElementByAccessibilityId(appCustomer.getFullName()).click();
 	}
 	
