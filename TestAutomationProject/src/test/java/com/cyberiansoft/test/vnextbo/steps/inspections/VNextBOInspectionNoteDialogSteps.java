@@ -5,8 +5,8 @@ import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionNoteDi
 
 public class VNextBOInspectionNoteDialogSteps {
 
-    public static void closeInspectionNote()
-    {
+    public static void closeInspectionNote() {
+
         Utils.clickElement(new VNextBOInspectionNoteDialog().closeDialogButton);
     }
 }

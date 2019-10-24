@@ -6,25 +6,25 @@ import com.cyberiansoft.test.vnextbo.screens.users.VNextBOUsersAdvancedSearchFor
 
 public class VNextBOUsersAdvancedSearchSteps {
 
-    public static void clickSearchButton()
-    {
+    public static void clickSearchButton() {
+
         Utils.clickElement(new VNextBOUsersAdvancedSearchForm().searchButton);
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void clickCloseButton()
-    {
+    public static void clickCloseButton() {
+
         Utils.clickElement(new VNextBOUsersAdvancedSearchForm().closeButton);
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void setEmailField(String email)
-    {
+    public static void setEmailField(String email) {
+
         Utils.clearAndType(new VNextBOUsersAdvancedSearchForm().emailField, email);
     }
 
-    public static void setPhoneField(String phone)
-    {
+    public static void setPhoneField(String phone) {
+
         Utils.clearAndType(new VNextBOUsersAdvancedSearchForm().phoneField, phone);
     }
 }

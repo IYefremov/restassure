@@ -7,24 +7,24 @@ import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 
 public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
 
-    public static String getSearchFilterText()
-    {
+    public static String getSearchFilterText() {
+
         return Utils.getText(new VNextBOSearchPanel().getFilterInfoText());
     }
 
-    public static void clearSearchFilter()
-    {
+    public static void clearSearchFilter() {
+
         Utils.clickElement(new VNextBOSearchPanel().getSearchXIcon());
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void openAdvancedSearchForm()
-    {
+    public static void openAdvancedSearchForm() {
+
         Utils.clickElement(new VNextBOSearchPanel().getAdvancedSearchCaret());
     }
 
-    public static void searchByText(String userName)
-    {
+    public static void searchByText(String userName) {
+
         VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
         Utils.clearAndType(searchPanel.getSearchInputField(), userName);
         Utils.clickElement(searchPanel.getSearchLoupeIcon());

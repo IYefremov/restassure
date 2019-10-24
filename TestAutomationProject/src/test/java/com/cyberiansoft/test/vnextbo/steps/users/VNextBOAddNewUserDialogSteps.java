@@ -11,45 +11,45 @@ import java.util.stream.Collectors;
 
 public class VNextBOAddNewUserDialogSteps extends VNextBOBaseWebPageSteps {
 
-    public static void clickSaveButton()
-    {
+    public static void clickSaveButton() {
+
         Utils.clickElement(new VNexBOAddNewUserDialog().saveBtn);
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void closeDialog()
-    {
+    public static void closeDialog() {
+
         Utils.clickElement(new VNexBOAddNewUserDialog().closeDialogBtn);
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void setUserFirstName(String firstName)
-    {
+    public static void setUserFirstName(String firstName) {
+
         Utils.clearAndType(new VNexBOAddNewUserDialog().firstNameFld, firstName);
     }
 
-    public static void setUserLastName(String lastName)
-    {
+    public static void setUserLastName(String lastName) {
+
         Utils.clearAndType(new VNexBOAddNewUserDialog().lastNameFld, lastName);
     }
 
-    public static void setUserEmail(String userMail)
-    {
+    public static void setUserEmail(String userMail) {
+
         Utils.clearAndType(new VNexBOAddNewUserDialog().userMailFld, userMail);
     }
 
-    public static void setUserPhone(String userPhone)
-    {
+    public static void setUserPhone(String userPhone) {
+
         Utils.clearAndType(new VNexBOAddNewUserDialog().userPhoneFld, userPhone);
     }
 
-    public static void clickWebAccessCheckbox()
-    {
+    public static void clickWebAccessCheckbox() {
+
         Utils.clickElement(new VNexBOAddNewUserDialog().webAccessCheckbox);
     }
 
-    public static void createNewUser(String firstName, String lastName, String userMail, String phoneNumber, boolean webAccess)
-    {
+    public static void createNewUser(String firstName, String lastName, String userMail, String phoneNumber, boolean webAccess) {
+
         setUserFirstName(firstName);
         setUserLastName(lastName);
         setUserEmail(userMail);
@@ -59,8 +59,8 @@ public class VNextBOAddNewUserDialogSteps extends VNextBOBaseWebPageSteps {
         clickSaveButton();
     }
 
-    public static void editUserData(String firstName, String lastName, String phoneNumber, boolean webAccess)
-    {
+    public static void editUserData(String firstName, String lastName, String phoneNumber, boolean webAccess) {
+
         setUserFirstName(firstName);
         setUserLastName(lastName);
         setUserPhone(phoneNumber);
@@ -69,8 +69,8 @@ public class VNextBOAddNewUserDialogSteps extends VNextBOBaseWebPageSteps {
         clickSaveButton();
     }
 
-    public static List<String> getErrorMessages()
-    {
+    public static List<String> getErrorMessages() {
+
         return  new VNexBOAddNewUserDialog().errorMessagesList.stream().
                 map(WebElement::getText).collect(Collectors.toList());
     }

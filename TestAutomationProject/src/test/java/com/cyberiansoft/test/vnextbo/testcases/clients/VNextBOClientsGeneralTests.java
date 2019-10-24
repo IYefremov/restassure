@@ -89,7 +89,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedOkButton(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickTermsAndConditionsLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isOkButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
@@ -103,7 +103,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickTermsAndConditionsLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isCloseButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
@@ -117,7 +117,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosedOkButton(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickPrivacyPolicyLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isOkButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
@@ -131,7 +131,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosedXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickPrivacyPolicyLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isCloseButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),

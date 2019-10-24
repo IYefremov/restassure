@@ -9,26 +9,26 @@ import java.util.Map;
 
 public class VNextBOInspectionsAdvancedSearchValidations {
 
-    public static void isAdvancedSearchFormDisplayed()
-    {
+    public static void isAdvancedSearchFormDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionAdvancedSearchForm().advancedSearchFormContent),
                 "Advanced search form hasn't been displayed\"");
     }
 
-    public static void isAdvancedSearchFormNotDisplayed(VNextBOInspectionAdvancedSearchForm advancedSearchForm)
-    {
+    public static void isAdvancedSearchFormNotDisplayed(VNextBOInspectionAdvancedSearchForm advancedSearchForm) {
+
         Assert.assertTrue(Utils.isElementNotDisplayed(advancedSearchForm.advancedSearchFormContent),
                 "Advanced search form hasn't been closed");
     }
 
-    public static void isSearchButtonDisplayed()
-    {
+    public static void isSearchButtonDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionAdvancedSearchForm().searchButton),
                 "Advanced Search button hasn't been displayed");
     }
 
-    public static void verifyAllAdvancedSearchFormFields(Map<String, String> listWithValuesForFields)
-    {
+    public static void verifyAllAdvancedSearchFormFields(Map<String, String> listWithValuesForFields) {
+
         Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("Customer"),
                 listWithValuesForFields.get("Customer"),  "Entered value to the \"Customer\" field hasn't been displayed");
         Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getValueFromTextInputField("PO#"),

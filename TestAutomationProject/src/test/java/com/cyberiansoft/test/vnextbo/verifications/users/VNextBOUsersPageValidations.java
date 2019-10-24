@@ -11,46 +11,47 @@ import org.testng.Assert;
 
 public class VNextBOUsersPageValidations extends VNextBOBaseWebPageValidations {
 
-    public static void isAddNewUserBtnDisplayed()
-    {
+    public static void isAddNewUserBtnDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNexBOUsersWebPage().addNewUserBtn),
                 "\"Add New User\" button hasn't been displayed.");
     }
 
-    public static void isUsersTableDisplayed()
-    {
+    public static void isUsersTableDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNexBOUsersWebPage().usersTable.getWrappedElement()),
                 "\"Add New User\" button hasn't been displayed.");
     }
 
-    public static void isUsersNotFoundMessageDisplayed()
-    {
+    public static void isUsersNotFoundMessageDisplayed() {
+
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersNotFoundMessage(), "No items to show",
                 "\"No items to show\" message hasn't been displayed.");
     }
 
-    public static boolean isRedTriangleWarningIconDisplayed()
-    {
+    public static boolean isRedTriangleWarningIconDisplayed() {
+
         return Utils.isElementDisplayed(new VNexBOUsersWebPage().redTriangleWarningIcon);
     }
 
-    public static boolean isRedTriangleWarningIconNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage)
-    {
+    public static boolean isRedTriangleWarningIconNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage) {
+
         return Utils.isElementNotDisplayed(vNexBOUsersWebPage.redTriangleWarningIcon);
     }
 
-    public static void isReSendButtonDisplayed()
-    {
+    public static void isReSendButtonDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNexBOUsersWebPage().reSendButton),
                 "Re-send button hasn't been displayed.");
     }
 
-    public static boolean isReSendButtonNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage)
-    {
+    public static boolean isReSendButtonNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage) {
+
         return Utils.isElementNotDisplayed(vNexBOUsersWebPage.reSendButton);
     }
 
     public static boolean isUserPresentOnCurrentPageByText(String userMail) {
+
         try {
             VNextBOUsersPageSteps.getTableRowWithText(userMail);
         } catch (NullPointerException ignored) {}
@@ -59,6 +60,7 @@ public class VNextBOUsersPageValidations extends VNextBOBaseWebPageValidations {
     }
 
     public static boolean isUserPresentInTableByText(String userMail) {
+
         boolean found = false;
         boolean nextPage = true;
         VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();

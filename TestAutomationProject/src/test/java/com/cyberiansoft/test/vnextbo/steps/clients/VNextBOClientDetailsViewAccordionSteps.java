@@ -10,6 +10,7 @@ import com.cyberiansoft.test.vnextbo.verifications.VNextBOClientAddressFieldsVer
 public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setClientInfoData(Employee employee) {
+
         VNextBOClientAddressFieldsVerifications.verifyClientInfoBlockIsExpanded();
         final VNextBOClientInfoBlockInteractions clientInfoBlockInteractions = new VNextBOClientInfoBlockInteractions();
         if (employee.getClientType().toLowerCase().equals("retail")) {
@@ -25,6 +26,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     public static void setAccountInfoData(AccountInfoData accountInfoData) {
+
         VNextBOClientAddressFieldsVerifications.verifyAccountInfoBlockIsExpanded();
 
         final VNextBOAccountInfoBlockInteractions accountInfoBlockInteractions = new VNextBOAccountInfoBlockInteractions();
@@ -37,6 +39,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     public static void setAddressData(AddressData addressData) {
+
         VNextBOClientAddressFieldsVerifications.verifyAddressBlockIsExpanded();
         setAddressShipToData(addressData);
         new VNextBOAddressBlockInteractions().checkSameAsShipToCheckBox();
@@ -44,6 +47,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     public static void setEmailOptionsData(EmailOptionsData emailOptionsData) {
+
         VNextBOClientAddressFieldsVerifications.verifyEmailOptionsBlockIsExpanded();
         final VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
         emailOptionsBlockInteractions.setDefaultRecipient(emailOptionsData.getDefaultRecipient());
@@ -52,6 +56,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     public static void setPreferencesData(String defaultArea) {
+
         VNextBOClientAddressFieldsVerifications.verifyPreferencesBlockIsExpanded();
         final VNextBOPreferencesBlockInteractions preferencesBlockInteractions = new VNextBOPreferencesBlockInteractions();
         preferencesBlockInteractions.clickUseSingleWoTypeCheckbox();
@@ -59,11 +64,13 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     public static void setMiscellaneousData(String notes) {
+
         VNextBOClientAddressFieldsVerifications.verifyMiscellaneousBlockIsExpanded();
         new VNextBOMiscellaneousBlockInteractions().setNotes(notes);
     }
 
     private static void setAddressShipToData(AddressData addressData) {
+
         final VNextBOAddressBlockInteractions addressBlockInteractions = new VNextBOAddressBlockInteractions();
         addressBlockInteractions.setAddress1ShipTo(addressData.getAddress1());
         addressBlockInteractions.setAddress2ShipTo(addressData.getAddress2());
@@ -74,6 +81,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
     }
 
     private static void setAddressBillToData(AddressData addressData) {
+
         final VNextBOAddressBlockInteractions addressBlockInteractions = new VNextBOAddressBlockInteractions();
         addressBlockInteractions.setAddress1BillTo(addressData.getAddress11());
         addressBlockInteractions.setAddress2BillTo(addressData.getAddress22());

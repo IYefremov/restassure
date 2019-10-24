@@ -1,39 +1,42 @@
 package com.cyberiansoft.test.vnextbo.steps.dialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 
 public class VNextBOModalDialogSteps {
 
     public static String getDialogHeader() {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        return Utils.getText(confirmationDialog.dialogHeader());
+
+        return Utils.getText(new VNextBOModalDialog().dialogHeader());
     }
 
     public static String getDialogInformationMessage() {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        return Utils.getText(confirmationDialog.dialogInformationMessage());
+        return Utils.getText(new VNextBOModalDialog().dialogInformationMessage());
     }
 
     public static void clickOkButton() {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(confirmationDialog.confirmOKButton);
+
+        Utils.clickElement(new VNextBOModalDialog().getConfirmOKButton());
     }
 
     public static void clickCloseButton() {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(confirmationDialog.closeButton);
+
+        Utils.clickElement(new VNextBOModalDialog().getCloseButton());
     }
 
     public static void clickYesButton() {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(confirmationDialog.confirmYesButton);
+
+        Utils.clickElement(new VNextBOModalDialog().getYesButton());
     }
 
     public static void clickNoButton() {
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(confirmationDialog.cancelNoButton);
+
+        Utils.clickElement(new VNextBOModalDialog().getNoButton());
+    }
+
+    public static void clickCancelButton() {
+
+        Utils.clickElement(new VNextBOModalDialog().getCancelButton());
     }
 }

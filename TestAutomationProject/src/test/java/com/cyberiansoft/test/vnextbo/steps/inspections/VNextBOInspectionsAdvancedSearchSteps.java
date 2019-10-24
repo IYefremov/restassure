@@ -12,33 +12,33 @@ import java.util.Map;
 
 public class VNextBOInspectionsAdvancedSearchSteps {
 
-    public static void clickSearchButton()
-    {
+    public static void clickSearchButton() {
+
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().searchButton);
     }
 
-    public static void clickCloseButton()
-    {
+    public static void clickCloseButton() {
+
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().closeButton);
     }
 
-    public static void clickSaveButton()
-    {
+    public static void clickSaveButton() {
+
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().saveButton);
     }
 
-    public static void clickClearButton()
-    {
+    public static void clickClearButton() {
+
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().clearButton);
     }
 
-    public static void clickDeleteButton()
-    {
+    public static void clickDeleteButton() {
+
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().deleteSavedSearchButton);
     }
 
-    public static void deleteSavedSearchFilter()
-    {
+    public static void deleteSavedSearchFilter() {
+
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
                 new VNextBOInspectionAdvancedSearchForm();
         advancedSearchForm.deleteSavedSearchButton.click();
@@ -46,30 +46,30 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         WaitUtilsWebDriver.waitForInvisibility(advancedSearchForm.advancedSearchFormContent);
     }
 
-    public static String getValueFromTextInputField(String fieldLabel)
-    {
+    public static String getValueFromTextInputField(String fieldLabel) {
+
         return new VNextBOInspectionAdvancedSearchForm().textFieldByName(fieldLabel).getAttribute("value");
     }
 
-    public static String getValueFromDropdownField(String fieldLabel)
-    {
+    public static String getValueFromDropdownField(String fieldLabel) {
+
         return new VNextBOInspectionAdvancedSearchForm().dropDownFieldByName(fieldLabel).getText();
     }
 
-    public static void setAdvancedSearchFilterNameAndSave(String filterName)
-    {
+    public static void setAdvancedSearchFilterNameAndSave(String filterName) {
+
         setAdvSearchTextField("Search Name", filterName);
         saveAdvancedSearchFilter();
     }
 
-    public static void saveAdvancedSearchFilter()
-    {
+    public static void saveAdvancedSearchFilter() {
+
         clickSaveButton();
         WaitUtilsWebDriver.waitForInvisibility(new VNextBOInspectionAdvancedSearchForm().advancedSearchFormContent);
     }
 
-    public static List<String> getAllAdvancedSearchFieldsLabels()
-    {
+    public static List<String> getAllAdvancedSearchFieldsLabels() {
+
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
                 new VNextBOInspectionAdvancedSearchForm();
         List<String> fieldsLabels = new ArrayList<>();
@@ -81,8 +81,8 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         return fieldsLabels;
     }
 
-    public static List<String> getAllOptionsFromDropdownByName(String dropdownFieldLabel)
-    {
+    public static List<String> getAllOptionsFromDropdownByName(String dropdownFieldLabel) {
+
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
                 new VNextBOInspectionAdvancedSearchForm();
         Utils.clickElement(advancedSearchForm.dropDownFieldByName(dropdownFieldLabel));
@@ -95,15 +95,15 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         return statusOptionsNames;
     }
 
-    public static void setAdvSearchTextField(String fldName, String value)
-    {
+    public static void setAdvSearchTextField(String fldName, String value) {
+
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
                 new VNextBOInspectionAdvancedSearchForm();
         Utils.clearAndType(advancedSearchForm.textFieldByName(fldName), value);
     }
 
-    public static void setAdvSearchDropDownField(String fieldLabel, String value)
-    {
+    public static void setAdvSearchDropDownField(String fieldLabel, String value) {
+
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
                 new VNextBOInspectionAdvancedSearchForm();
         WebElement fieldWithDropdown = advancedSearchForm.dropDownFieldByName(fieldLabel);
@@ -112,8 +112,8 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         Utils.clickWithJS(dropDownOption);
     }
 
-    public static void setAdvSearchAutocompleteField(String fieldLabel, String value)
-    {
+    public static void setAdvSearchAutocompleteField(String fieldLabel, String value) {
+
         VNextBOInspectionAdvancedSearchForm advancedSearchForm =
                 new VNextBOInspectionAdvancedSearchForm();
         WebElement fieldWithAutocomplete = advancedSearchForm.autoPopulatedFieldByName(fieldLabel);
@@ -122,8 +122,8 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         Utils.clickWithJS(advancedSearchForm.dropDownFieldOption(value));
     }
 
-    public static void setAllAdvancedSearchFields(Map<String, String> listWithValuesForFields)
-    {
+    public static void setAllAdvancedSearchFields(Map<String, String> listWithValuesForFields) {
+
         setAdvSearchAutocompleteField("Customer", listWithValuesForFields.get("Customer"));
         setAdvSearchTextField("PO#", listWithValuesForFields.get("PO#"));
         setAdvSearchTextField("RO#", listWithValuesForFields.get("RO#"));

@@ -63,7 +63,7 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isYesButtonDisplayed();
         VNextBOModalDialogValidations.isNoButtonDisplayed();
         VNextBOModalDialogValidations.isCloseButtonDisplayed();
@@ -75,7 +75,7 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
     public void verifyUserCanCancelApprovingWithCloseButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCloseButton();
         VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
     }

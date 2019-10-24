@@ -5,8 +5,8 @@ import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionMaximi
 
 public class VNextBOInspectionMaximizedImageDialogSteps {
 
-    public static void closeInspectionMaximizedImageDialog()
-    {
+    public static void closeInspectionMaximizedImageDialog() {
+
         Utils.clickElement(new VNextBOInspectionMaximizedImageDialog().closeDialogButton);
     }
 }
