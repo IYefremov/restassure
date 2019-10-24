@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnextbo.verifications.users;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.commonObjects.VNextBOPageSwitcherElements;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOUsersWebPage;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
@@ -14,29 +13,25 @@ public class VNextBOUsersPageValidations extends VNextBOBaseWebPageValidations {
 
     public static void isAddNewUserBtnDisplayed()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(vNexBOUsersWebPage.addNewUserBtn),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNexBOUsersWebPage().addNewUserBtn),
                 "\"Add New User\" button hasn't been displayed.");
     }
 
     public static void isUsersTableDisplayed()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(vNexBOUsersWebPage.usersTable.getWrappedElement()),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNexBOUsersWebPage().usersTable.getWrappedElement()),
                 "\"Add New User\" button hasn't been displayed.");
     }
 
     public static void isUsersNotFoundMessageDisplayed()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersNotFoundMessage(), "No items to show",
                 "\"No items to show\" message hasn't been displayed.");
     }
 
     public static boolean isRedTriangleWarningIconDisplayed()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        return Utils.isElementDisplayed(vNexBOUsersWebPage.redTriangleWarningIcon);
+        return Utils.isElementDisplayed(new VNexBOUsersWebPage().redTriangleWarningIcon);
     }
 
     public static boolean isRedTriangleWarningIconNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage)
@@ -46,8 +41,7 @@ public class VNextBOUsersPageValidations extends VNextBOBaseWebPageValidations {
 
     public static void isReSendButtonDisplayed()
     {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
-        Assert.assertTrue(Utils.isElementDisplayed(vNexBOUsersWebPage.reSendButton),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNexBOUsersWebPage().reSendButton),
                 "Re-send button hasn't been displayed.");
     }
 

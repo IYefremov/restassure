@@ -10,36 +10,64 @@ public class VNextBOClientsPageValidations extends VNextBOBaseWebPageValidations
 
     public static void isAddNewClientBtnDisplayed()
     {
-        VNextBOClientsWebPage vNextBOClientsWebPage = new VNextBOClientsWebPage();
-        Assert.assertTrue(Utils.isElementDisplayed(vNextBOClientsWebPage.getAddNewClientButton()),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getAddNewClientButton()),
                 "\"Add New Client\" button hasn't been displayed.");
     }
 
     public static void isActiveTabDisplayed()
     {
-        VNextBOClientsWebPage vNextBOClientsWebPage = new VNextBOClientsWebPage();
-        Assert.assertTrue(Utils.isElementDisplayed(vNextBOClientsWebPage.getActiveTab()),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getActiveTab()),
                 "\"Active\" tab hasn't been displayed.");
     }
 
     public static void isArchivedTabDisplayed()
     {
-        VNextBOClientsWebPage vNextBOClientsWebPage = new VNextBOClientsWebPage();
-        Assert.assertTrue(Utils.isElementDisplayed(vNextBOClientsWebPage.getArchivedTab()),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getArchivedTab()),
                 "\"Archived\" tab hasn't been displayed.");
     }
 
     public static void isClientsTableDisplayed()
     {
-        VNextBOClientsWebPage vNextBOClientsWebPage = new VNextBOClientsWebPage();
-        Assert.assertTrue(Utils.isElementDisplayed(vNextBOClientsWebPage.getClientsTable()),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getClientsTable()),
                 "clients table hasn't been displayed.");
     }
 
     public static void isCorrectRecordsAmountDisplayed(int expectedRecordsAmount)
     {
-        VNextBOClientsWebPage vNextBOClientsWebPage = new VNextBOClientsWebPage();
         Assert.assertEquals(VNextBOClientsPageSteps.getClientsAmount(), expectedRecordsAmount,
                 "Clients table has contained incorrect clients amount.");
+    }
+
+    public static void isSearchResultCorrectForColumnWithText(String columnTitle, String expectedValue)
+    {
+        for (String cellValue : VNextBOClientsPageSteps.getColumnValuesByTitleFromColumnWithText(columnTitle)
+             ) {
+            Assert.assertTrue(cellValue.toLowerCase().contains(expectedValue.toLowerCase()), "Search result hasn't been correct" );
+        }
+    }
+
+    public static void isSearchResultCorrectForColumnWithCheckboxes(String columnTitle, boolean shouldBeChecked)
+    {
+        if (shouldBeChecked)
+        {
+            for (String cellValue : VNextBOClientsPageSteps.getColumnValuesFromColumnWithCheckBoxes(columnTitle)
+            ) {
+                Assert.assertEquals(cellValue, "true", "Search result hasn't been correct" );
+            }
+        }
+        else
+        {
+            for (String cellValue : VNextBOClientsPageSteps.getColumnValuesFromColumnWithCheckBoxes(columnTitle)
+            ) {
+                Assert.assertEquals(cellValue, null, "Search result hasn't been correct" );
+            }
+        }
+
+    }
+
+    public static void isClientsNotFoundMessageDisplayed()
+    {
+        Assert.assertEquals(VNextBOClientsPageSteps.getClientsNotFoundMessage(), "There are no clients to show.",
+                "\"There are no clients to show.\" message hasn't been displayed.");
     }
 }

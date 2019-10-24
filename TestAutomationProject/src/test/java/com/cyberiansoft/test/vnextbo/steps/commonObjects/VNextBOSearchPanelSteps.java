@@ -9,21 +9,18 @@ public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
 
     public static String getSearchFilterText()
     {
-        VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
-        return Utils.getText(searchPanel.getFilterInfoText());
+        return Utils.getText(new VNextBOSearchPanel().getFilterInfoText());
     }
 
     public static void clearSearchFilter()
     {
-        VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
-        Utils.clickElement(searchPanel.getSearchXIcon());
+        Utils.clickElement(new VNextBOSearchPanel().getSearchXIcon());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openAdvancedSearchForm()
     {
-        VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
-        Utils.clickElement(searchPanel.getAdvancedSearchCaret());
+        Utils.clickElement(new VNextBOSearchPanel().getAdvancedSearchCaret());
     }
 
     public static void searchByText(String userName)

@@ -68,7 +68,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOInspectionsPageValidations.isInspectionImageZoomIconDisplayed();
         VNextBOInspectionsPageSteps.clickInspectionImageZoomIcon();
         VNextBOInspectionMaximizedImageDialog vNextBOInspectionMaximizedImageDialog =
-                new VNextBOInspectionMaximizedImageDialog(webdriver);
+                new VNextBOInspectionMaximizedImageDialog();
         VNextBOInspectionMaximizedImageDialogValidations.isInspectionZoomedImageDisplayed();
         VNextBOInspectionMaximizedImageDialogSteps.closeInspectionMaximizedImageDialog();
         VNextBOInspectionMaximizedImageDialogValidations.isInspectionZoomedImageClosed(vNextBOInspectionMaximizedImageDialog);
@@ -81,7 +81,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageValidations.isInspectionNotesIconDisplayed();
         VNextBOInspectionsPageSteps.clickInspectionNotesIcon();
-        VNextBOInspectionNoteDialog vNextBOInspectionNoteDialog = new  VNextBOInspectionNoteDialog(webdriver);
+        VNextBOInspectionNoteDialog vNextBOInspectionNoteDialog = new  VNextBOInspectionNoteDialog();
         VNextBOInspectionNoteDialogValidations.isInspectionNoteTextDisplayed();
         VNextBOInspectionNoteDialogSteps.closeInspectionNote();
         VNextBOInspectionNoteDialogValidations.isNoteDialogClosed(vNextBOInspectionNoteDialog);

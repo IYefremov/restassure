@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens.commonObjects;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -8,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Getter
-public class VNextBOSearchPanel extends VNextBOClientsWebPage {
+public class VNextBOSearchPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//section[@class='view']//div[contains(@id, 'search-form')]")
     private WebElement searchPanel;
@@ -29,7 +31,7 @@ public class VNextBOSearchPanel extends VNextBOClientsWebPage {
     private WebElement filterInfoText;
 
     public VNextBOSearchPanel() {
-        super();
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 }

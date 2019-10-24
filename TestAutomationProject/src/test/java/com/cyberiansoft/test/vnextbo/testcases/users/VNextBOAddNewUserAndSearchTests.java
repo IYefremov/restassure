@@ -85,7 +85,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(newUserEmail);
         VNextBOUsersPageSteps.clickAddNewUserButton();
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(webdriver);
+        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         VNextBOAddNewUserDialogSteps.createNewUser(newUserFirstName, newUserLastName,
                 newUserEmail,"111111116", true);
         VNextBOAddNewUserDialogValidations.isDialogClosed(vNexBOAddNewUserDialog);
@@ -138,7 +138,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     public void verifyUserCanCloseAddNewUserDialog(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
-        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog(webdriver);
+        VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         VNextBOAddNewUserDialogSteps.closeDialog();
         VNextBOAddNewUserDialogValidations.isDialogClosed(vNexBOAddNewUserDialog);
     }
@@ -147,7 +147,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     public void verifyUserCanCloseAdvancedSearchForm(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOUsersAdvancedSearchForm vNextBOUsersAdvancedSearchForm = new VNextBOUsersAdvancedSearchForm(webdriver);
+        VNextBOUsersAdvancedSearchForm vNextBOUsersAdvancedSearchForm = new VNextBOUsersAdvancedSearchForm();
         VNextBOUsersAdvancedSearchSteps.clickCloseButton();
         VNextBOUsersAdvancedSearchValidations.isAdvancedSearchFormNotDisplayed(vNextBOUsersAdvancedSearchForm);
         VNextBOSearchPanelValidations.isSearchFilterTextCorrect("");
@@ -157,7 +157,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByEmail(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOUsersAdvancedSearchForm vNextBOUsersAdvancedSearchForm = new VNextBOUsersAdvancedSearchForm(webdriver);
+        VNextBOUsersAdvancedSearchForm vNextBOUsersAdvancedSearchForm = new VNextBOUsersAdvancedSearchForm();
         VNextBOUsersAdvancedSearchValidations.isAdvancedSearchFormDisplayed();
         VNextBOUsersAdvancedSearchValidations.isEmailFieldDisplayed();
         VNextBOUsersAdvancedSearchValidations.isPhoneFieldDisplayed();
@@ -224,7 +224,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     public void verifyUserCanEditCreatedUserData(String rowID, String description, JSONObject testData) throws Exception {
 
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage(DriverBuilder.getInstance().getDriver());
+        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         VNextBOUsersPageSteps.openUserDataForEdit();
         VNextBOAddNewUserDialogValidations.isEmailFieldDisabled();
         VNextBOAddNewUserDialogSteps.editUserData("autoUserEditedFirstName",
