@@ -64,11 +64,15 @@ public class QuestionsScreen extends BaseWizardScreen {
 		appiumdriver.findElementByName("Proper").click();
 	}
 
+	public void answerTextQuestion(QuestionsData questionsData) {
+		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).clear();
+		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).sendKeys(questionsData.getQuestionAnswer()+ "\n");
+		appiumdriver.hideKeyboard();
+	}
+
 	public void setOwnerName(String ownername) {
 		appiumdriver.findElementByAccessibilityId("Owner Name_TextView_Cell").click();
 		appiumdriver.findElementByAccessibilityId("Owner Name_TextView_Cell").sendKeys(ownername + "\n");
-		//((IOSDriver) appiumdriver).getKeyboard().sendKeys(ownername);
-		//((IOSDriver) appiumdriver).getKeyboard().sendKeys("\n");
 		appiumdriver.hideKeyboard();
 		
 	}
@@ -93,9 +97,8 @@ public class QuestionsScreen extends BaseWizardScreen {
 		appiumdriver.hideKeyboard();
 	}
 
-	public void clearZip() {
+	public void clearTextQuestion() {
 		((IOSElement) appiumdriver.findElementsByAccessibilityId("Clear").get(1)).click();
-		//appiumdriver.findElementByXPath("//XCUIElementTypeCell[@name=\"Owner Zip\"]/XCUIElementTypeButton[@name=\"Clear\"]").click();	
 	}
 
 	public void setOwnerZip(String ownerzip)  {
@@ -124,18 +127,18 @@ public class QuestionsScreen extends BaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Owner State")));
 		if (!appiumdriver.findElementByName(ownerstate).isDisplayed()) {
-			//dragTable((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']/../.."));
 			scrollTable((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']/../.."),
 					ownerstate);
-					//scrollToElementUp((MobileElement) appiumdriver.findElementByName(ownerstate));
-			//scrollToElement(ownerstate);
-			//swipeToElementUp((MobileElement) appiumdriver.findElementByName(ownerstate));
-			//scrollToElement((MobileElement) appiumdriver.findElementByName(ownerstate));
-			//scrollToElement(ownerstate);
-			//swipeTableUp((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']"),
-			//		appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + ownerstate + "']/../.."));
 		}
 		appiumdriver.findElementByName(ownerstate).click();
+	}
+
+	public void selectListQuestion(QuestionsData questionsData) {
+		if (!appiumdriver.findElementByName(questionsData.getQuestionAnswer()).isDisplayed()) {
+			scrollTable((MobileElement) appiumdriver.findElementByXPath("//XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + questionsData.getQuestionAnswer() + "']/../.."),
+					questionsData.getQuestionAnswer());
+		}
+		appiumdriver.findElementByName(questionsData.getQuestionAnswer()).click();
 	}
 
 	public void setOwnerCountry(String ownercountry) {

@@ -201,9 +201,10 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		WebElement approvetable = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveInspectionsView")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber))).click();
-		//approvetable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
-		//wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.AccessibilityId(inspnumber)))).click();
+	}
+
+	public void clickDeclinePopupButton() {
+		appiumdriver.findElement(MobileBy.AccessibilityId("Decline")).click();
 	}
 	
 	public int getNumberOfActiveApproveButtons() {

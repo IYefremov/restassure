@@ -998,14 +998,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "60652",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -1115,14 +1115,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "60652",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -1236,14 +1236,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "33018",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -1429,14 +1429,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "75218",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -1584,21 +1584,22 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "02120",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
         ],
         "insuranceCompany": {
           "insuranceCompanyName": "Allied",
-          "claimNumber": "8C4F5"
+          "claimNumber": "8C4F5",
+          "deductible": "50.00"
         },
         "matrixService": {
           "matrixServiceName": "PDR - Hail (US)",
@@ -1699,14 +1700,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "A4B6C2",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -1793,14 +1794,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "97221",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -1957,14 +1958,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "68104",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -2124,14 +2125,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "89507",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -2597,14 +2598,14 @@
                 "questionAnswer": "United States",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "30322",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }
@@ -3821,14 +3822,14 @@
                 "questionAnswer": "Canada",
                 "listQuestion": true,
                 "screenIndex": 1,
-                "screenHDIndex": 0
+                "screenHDIndex": 1
               },
               {
                 "questionName": "Owner Zip_TextView",
                 "questionAnswer": "14121",
                 "textQuestion": true,
                 "screenIndex": 3,
-                "screenHDIndex": 2
+                "screenHDIndex": 1
               }
             ]
           }

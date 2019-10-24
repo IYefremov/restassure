@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
 import io.appium.java_client.MobileBy;
@@ -109,6 +110,19 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 
 	public String getPanelStatus(ServiceData serviceData) {
 		return monitorservicestable.findElementByAccessibilityId (serviceData.getServiceName()).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
+	}
+
+	public String getPanelStatus(ServiceData serviceData, VehiclePartData vehiclePartData) {
+
+		String panelName = serviceData.getServiceName() + " (" + vehiclePartData.getVehiclePartName() + ")";
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		return monitorservicestable.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
+	}
+
+	public String getOrderMonitorPhaseStatusValue() {
+		waitOrderMonitorScreenLoaded();
+		return monitorservicestable.findElementByAccessibilityId("lblPhaseStatus").getAttribute("value");
 	}
 
 	public String getPanelStatusInPopup() {

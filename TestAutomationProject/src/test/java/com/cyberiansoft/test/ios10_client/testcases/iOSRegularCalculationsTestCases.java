@@ -430,6 +430,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateBackScreen();
 
 
+		BaseUtils.waitABit(45*1000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
@@ -672,6 +673,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		myInspectionsScreen.waitMyInspectionsScreenLoaded();
 		RegularNavigationSteps.navigateBackScreen();
 
+		BaseUtils.waitABit(45*1000);
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
