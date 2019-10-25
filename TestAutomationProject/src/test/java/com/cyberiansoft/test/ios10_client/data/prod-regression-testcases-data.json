@@ -1750,5 +1750,93 @@
         "inspectionTotalPrice": "400"
       }
     }
+  ],
+  "testVerifyWorkWithIndividualServicesUnderMonitor": [
+    {
+      "rowID": "testVerifyWorkWithIndividualServicesUnderMonitor.01",
+      "description": "Test Case: 72- Verify work with individual services under Monitor, 73 - Verify work with Phases under Monitor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83706",
+          "testCaseTitle": "Test Case: 72- Verify work with individual services under Monitor"
+        },
+        {
+          "testCaseID": "83707",
+          "testCaseTitle": "Test Case: 73 - Verify work with Phases under Monitor"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "Labor_Vehicle_data_all_Motor"
+            },
+            {
+              "serviceName": "Labor_Vehilce_data_R&R"
+            },
+            {
+              "serviceName": "Oksi_Part_Service_Category"
+            },
+            {
+              "serviceName": "Oksi_Part_Service_Name"
+            }
+          ]
+        },
+        "orderMonitorsData" : [
+          {
+            "phaseName" : "Start phase",
+            "monitorServicesData" : [
+              {
+                "monitorService": {
+                  "serviceName": "3/4\" - Penny Size"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Dye_Panel"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor_Vehicle_data_all_Motor"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor_Vehilce_data_R&R"
+                }
+              }
+            ]
+          },
+          {
+            "phaseName" : "Repair phase",
+            "monitorServicesData" : [
+              {
+                "monitorService": {
+                  "serviceName": "Oksi_Part_Service_Category"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Oksi_Part_Service_Name"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
   ]
 }

@@ -11,6 +11,7 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
 
+          <include name="testVerifyWorkWithIndividualServicesUnderMonitor" />
           <include name="testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection" />
           <include name="testInspectionsMultipleInspectionsApproval" />
           <include name="testVerifyCalculationForServiceWithPricePolicyVehiclePricePolicyPanelOnPrintOut" />

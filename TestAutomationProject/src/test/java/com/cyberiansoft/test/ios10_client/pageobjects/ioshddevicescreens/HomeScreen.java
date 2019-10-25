@@ -59,8 +59,6 @@ public class HomeScreen extends iOSHDBaseScreen {
 	public HomeScreen() {
 		super();
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Home")));
 	}
 
 	public CustomersScreen clickCustomersButton() {

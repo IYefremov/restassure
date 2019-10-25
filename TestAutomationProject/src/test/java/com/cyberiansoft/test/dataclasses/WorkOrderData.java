@@ -147,6 +147,10 @@ public class WorkOrderData {
     @JsonProperty("partServiceDataList")
     private List<PartServiceData> partServiceDataList;
 
+    @Getter
+    @JsonProperty("orderMonitorsData")
+    List<OrderMonitorData> orderMonitorsData;
+
     public String getWorkOrderType() {
         return workOrderType;
     }
