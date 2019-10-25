@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROProblemsInteractions;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBORODetailsPageVerifications;
 import org.testng.Assert;
 
@@ -71,5 +72,11 @@ public class VNextBORODetailsPageSteps {
         roProblemsInteractions.setReportProblem(problem);
         roProblemsInteractions.setProblemDescription(description);
         roProblemsInteractions.clickAddProblemButton();
+    }
+
+    public static void openEditNotesDialog(String serviceId) {
+        new VNextBORODetailsPageInteractions().openNotesDialog(serviceId);
+        Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(),
+                "The notes block hasn't been displayed");
     }
 }

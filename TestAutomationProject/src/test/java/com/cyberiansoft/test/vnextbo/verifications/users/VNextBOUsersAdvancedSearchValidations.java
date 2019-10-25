@@ -7,38 +7,42 @@ import org.testng.Assert;
 public class VNextBOUsersAdvancedSearchValidations {
 
     public static void isAdvancedSearchFormDisplayed() {
-
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOUsersAdvancedSearchForm().advancedSearchFormContent),
+        VNextBOUsersAdvancedSearchForm advancedSearchForm =
+                new VNextBOUsersAdvancedSearchForm();
+        Assert.assertTrue(Utils.isElementDisplayed(advancedSearchForm.advancedSearchFormContent),
                 "Advanced search form hasn't been displayed\"");
     }
 
     public static void isAdvancedSearchFormNotDisplayed(VNextBOUsersAdvancedSearchForm advancedSearchForm) {
-
         Assert.assertTrue(Utils.isElementNotDisplayed(advancedSearchForm.advancedSearchFormContent),
                 "Advanced search form hasn't been closed");
     }
 
     public static void isSearchButtonDisplayed() {
-
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOUsersAdvancedSearchForm().searchButton),
+        VNextBOUsersAdvancedSearchForm advancedSearchForm =
+                new VNextBOUsersAdvancedSearchForm();
+        Assert.assertTrue(Utils.isElementDisplayed(advancedSearchForm.searchButton),
                 "Advanced Search button hasn't been displayed");
     }
 
     public static void isEmailFieldDisplayed() {
-
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOUsersAdvancedSearchForm().emailField),
+        VNextBOUsersAdvancedSearchForm advancedSearchForm =
+                new VNextBOUsersAdvancedSearchForm();
+        Assert.assertTrue(Utils.isElementDisplayed(advancedSearchForm.emailField),
                 "Email field hasn't been displayed");
     }
 
     public static void isPhoneFieldDisplayed() {
-
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOUsersAdvancedSearchForm().phoneField),
+        VNextBOUsersAdvancedSearchForm advancedSearchForm =
+                new VNextBOUsersAdvancedSearchForm();
+        Assert.assertTrue(Utils.isElementDisplayed(advancedSearchForm.phoneField),
                 "Phone field hasn't been displayed");
     }
 
     public static void isCloseButtonDisplayed() {
-
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOUsersAdvancedSearchForm().closeButton),
+        VNextBOUsersAdvancedSearchForm advancedSearchForm =
+                new VNextBOUsersAdvancedSearchForm();
+        Assert.assertTrue(Utils.isElementDisplayed(advancedSearchForm.closeButton),
                 "Close x-icon button hasn't been displayed");
     }
 }

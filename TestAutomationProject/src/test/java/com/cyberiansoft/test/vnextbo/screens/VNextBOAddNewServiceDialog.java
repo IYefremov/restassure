@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.*;
@@ -30,6 +31,15 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//span[@aria-owns='popup-services-type_listbox']/span/span/span")
     private WebElement servicetypecmb;
+
+    @FindBy(xpath = "//span[@aria-owns='popup-services-type_listbox']")
+    private WebElement serviceTypeField;
+
+    @FindBy(id = "//span[@aria-owns='popup-services-type_listbox']")
+    private WebElement serviceTypeDropdown;
+
+    @FindBy(xpath = "//ul[@id='popup-services-type_listbox']/li/span")
+    private List<WebElement> serviceTypeListBox;
 
     @FindBy(xpath = "//textarea[@data-automation-id='servicePopup-description']")
     private WebElement servicedescfld;
@@ -182,14 +192,9 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         return servicetypecmb.getText();
     }
 
-    public VNextBOAddNewServiceDialog selectServiceType(String servicetype) {
-        wait.until(ExpectedConditions.elementToBeClickable(servicetypecmb)).click();
-        waitABit(300);
-        waitLong.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.xpath("//ul[@id='popup-services-type_listbox']/li/span[text()='" + servicetype + "']"))))
-                .click();
-        waitABit(500);
-        return this;
+    public void selectServiceType(String serviceType) {
+        Utils.clickElement(serviceTypeField);
+        Utils.selectOptionInDropDown(serviceTypeDropdown, serviceTypeListBox, serviceType, true);
     }
 
     public VNextBOAddNewServiceDialog setServiceDescription(String servicedesc) {
@@ -204,11 +209,8 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         return this;
     }
 
-    //    public String getServiceDescription() {
-//        return servicedescfld.getValue();
-//    }
     public String getServiceDescription() {
-        return servicedescfld.getText();
+        return WaitUtilsWebDriver.waitForVisibility(servicedescfld).getAttribute("value");
     }
 
     public VNextBOAddNewServiceDialog selectServicePriceType(String servicepricetype) {
@@ -337,9 +339,13 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
         return pricepercentagefld;
     }
 
+    public String getServicePricePercentageValueTxtFieldValue() {
+        return getServicePricePercentageValueTxtField().getAttribute("value");
+    }
+
     public VNextBOServicesWebPage saveNewService() {
         clickServiceAddButton();
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(serviceaddbtnby));
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(saveNewServiceButton, 3);
         waitForLoading();
         return PageFactory.initElements(
                 driver, VNextBOServicesWebPage.class);

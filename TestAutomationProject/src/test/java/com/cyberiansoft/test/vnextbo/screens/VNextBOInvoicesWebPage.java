@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.*;
@@ -72,11 +73,6 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	public VNextBOInvoicesWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        try {
-            wait.until(ExpectedConditions.visibilityOf(invoices));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 	public boolean areHeaderIconsDisplayed() {
@@ -87,7 +83,7 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBOConfirmationDialog clickHeaderIconVoidButton() {
-	    wait.until(ExpectedConditions.elementToBeClickable(headerIconVoidButton)).click();
+	    Utils.clickElement(headerIconVoidButton);
 	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
     }
 
@@ -107,8 +103,8 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
     public VNextBOInvoicesWebPage clickCheckbox(String ...invoiceNames) {
         for (String invoiceName : invoiceNames) {
-            getInvoiceByName(invoiceName).findElement(By.xpath(".//../../..//input")).click();
-            waitABit(1000);
+            Utils.clickElement(getInvoiceByName(invoiceName).findElement(By.xpath(".//../../..//input")));
+            WaitUtilsWebDriver.waitABit(1000);
         }
         return this;
     }
@@ -130,7 +126,7 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
     }
 
     public String[] getFirstInvoiceNames(int number) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers));
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(invoiceNumbers);
         String[] invoices = new String[number];
         for (int i = 0; i < number; i++) {
             invoices[i] = invoiceNumbers.get(i).getText();

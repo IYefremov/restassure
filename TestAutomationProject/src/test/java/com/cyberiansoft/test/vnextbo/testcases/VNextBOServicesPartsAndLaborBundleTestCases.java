@@ -10,7 +10,6 @@ import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -269,8 +268,12 @@ public class VNextBOServicesPartsAndLaborBundleTestCases extends BaseTestCase {
 
         servicesPage.performAdvancedSearchService(data.getServiceName(), data.getServiceType(), true);
         Assert.assertTrue(servicesPage.isServicePresentOnCurrentPageByServiceName(data.getServiceName()));
+        final int servicesNumber = servicesPage.getNumOfServicesOnCurrentPageByServiceName(data.getServiceName());
+        System.out.println("numOfServicesOnPage: "+ numOfServicesOnPage);
+        System.out.println("servicesNumber: "+servicesNumber);
         servicesPage.unarchiveServiceByServiceName(data.getServiceName());
-        Assert.assertFalse(servicesPage.isServicePresentOnCurrentPageByServiceName(data.getServiceName()));
+        Assert.assertEquals(servicesNumber - 1, servicesPage.getNumOfServicesOnCurrentPageByServiceName(data.getServiceName()),
+                "The service hasn't been unarchived");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
