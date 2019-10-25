@@ -8,6 +8,9 @@ import java.util.List;
 @Getter
 public class OrderMonitorData {
 
+    @JsonProperty("phaseName")
+    String phaseName;
+
     @JsonProperty("monitorServiceData")
     MonitorServiceData monitorServiceData;
 

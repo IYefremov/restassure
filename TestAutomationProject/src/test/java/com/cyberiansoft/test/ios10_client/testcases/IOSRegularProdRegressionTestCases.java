@@ -11,12 +11,15 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
+import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.enums.WorkOrderStatuses;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.enums.ServiceRequestAppointmentStatuses;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSelectedServicesScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
@@ -1197,11 +1200,11 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularTeamWorkOrdersSteps.selectSearchLocation(location);
         RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(serviceData, OrderMonitorStatuses.ACTIVE);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(serviceData, OrderMonitorServiceStatuses.ACTIVE);
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices())
-            RegularOrderMonitorScreenSteps.setServiceStatus(serviceData, OrderMonitorStatuses.COMPLETED);
+            RegularOrderMonitorScreenSteps.setServiceStatus(serviceData, OrderMonitorServiceStatuses.COMPLETED);
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(serviceData, OrderMonitorStatuses.COMPLETED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(serviceData, OrderMonitorServiceStatuses.COMPLETED);
 
         RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
@@ -1655,6 +1658,61 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             Assert.assertTrue(pdftext.contains(PricesCalculations.getPriceRepresentation(serviceData.getServicePrice())));
         }
         Assert.assertTrue(pdftext.contains(zeroPrice));
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyWorkWithIndividualServicesUnderMonitor(String rowID,
+                                                      String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        final String location = "All locations";
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_MONITOR);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.switchToTeamView();
+        RegularTeamWorkOrdersSteps.selectSearchLocation(location);
+        RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+
+        for (OrderMonitorData orderMonitorData : workOrderData.getOrderMonitorsData())
+            RegularOrderMonitorScreenValidations.verifyOrderPhasePresent(orderMonitorData,true);
+
+        RegularOrderMonitorScreenSteps.selectServicePanel(workOrderData.getServicesScreen().getMoneyServices().get(0));
+        RegularOrderMonitorScreenSteps.clickServiceStatusCell();
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+        RegularOrderMonitorScreenSteps.clickServiceDetailsCancelButton();
+
+        RegularOrderMonitorScreenSteps.changePhaseStatus(workOrderData.getOrderMonitorsData().get(0), OrderMonitorStatuses.COMPLETED);
+        for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorsData().get(0).getMonitorServicesData()) {
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.COMPLETED);
+        }
+
+        RegularOrderMonitorScreenSteps.selectOrderPhase(workOrderData.getOrderMonitorsData().get(1));
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.YOU_CANT_CHANGE_STATUS_OF_THE_PHASE);
+
+        for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorsData().get(1).getMonitorServicesData()) {
+            RegularOrderMonitorScreenSteps.selectServicePanel(monitorServiceData.getMonitorService());
+            RegularOrderMonitorScreenSteps.clickStartService();
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.ORDERED);
+            RegularOrderMonitorScreenSteps.setServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.RECEIVED);
+            RegularOrderMonitorScreenSteps.selectServicePanel(monitorServiceData.getMonitorService());
+            RegularOrderMonitorScreenValidations.verifyServiceCompletedDatePresent(true);
+            RegularOrderMonitorScreenValidations.verifyServiceDurationPresent(true);
+            RegularOrderMonitorScreenSteps.clickServiceDetailsCancelButton();
+        }
+        for (OrderMonitorData orderMonitorData : workOrderData.getOrderMonitorsData())
+            RegularOrderMonitorScreenValidations.verifyOrderPhaseStatus(orderMonitorData,OrderMonitorStatuses.COMPLETED);
+        NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
 
     }
 }

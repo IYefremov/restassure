@@ -17,6 +17,7 @@ public class OrderMonitorScreenValidations {
 
     public static void verifyServicesStatus(ServiceData serviceData, OrderMonitorStatuses expectedStatus) {
         OrderMonitorScreen orderMonitorScreen = new OrderMonitorScreen();
+        orderMonitorScreen.waitOrderMonitorScreenLoaded();
         List<String> statuses = orderMonitorScreen.getPanelsStatuses(serviceData.getServiceName());
         for (String status : statuses)
             Assert.assertEquals(status, expectedStatus.getValue());

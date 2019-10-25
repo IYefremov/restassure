@@ -76,6 +76,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public void selectMainPanel(String panelname) {
+		waitOrderMonitorScreenLoaded();
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(panelname))).click();
 	}
