@@ -34,7 +34,7 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsSearchData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/inspections/VNextBOInspectionsSearchData.json";
     private VNextBOLoginScreenWebPage loginPage;
     private VNextBOInspectionAdvancedSearchForm vNextBOInspectionAdvancedSearchForm;
     private List<String> expectedStatusDropDownOptions =
@@ -112,7 +112,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     public void verifyUserCanCloseAdvancedSearchWindow(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
-        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
+        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickCloseButton();
         VNextBOInspectionsAdvancedSearchValidations.isAdvancedSearchFormNotDisplayed(vNextBOInspectionAdvancedSearchForm);
     }
@@ -199,7 +199,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanSaveEditedAdvancedSearch(String rowID, String description, JSONObject testData) {
 
-        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
+        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickSaveButton();
         VNextBOInspectionsPageValidations.isEditAdvancedSearchIconDisplayed();
         WaitUtilsWebDriver.waitForLoading();
@@ -235,7 +235,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserCanCancelSavedAdvancedSearchDeleting(String rowID, String description, JSONObject testData) {
 
-        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
+        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickDeleteButton();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isNoButtonDisplayed();
@@ -253,7 +253,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     public void verifyUserCanDeleteSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
-        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
+        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickDeleteButton();
         VNextBOModalDialogSteps.clickYesButton();
         WaitUtilsWebDriver.waitForLoading();
@@ -433,7 +433,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         }
         else {
             Assert.assertTrue(VNextBOInspectionsPageSteps.getStatusesOfAllInspectionsInTheList().size() > 0,
-                    "Inspections have not been found");
+                    "inspections have not been found");
         }
     }
 
@@ -441,7 +441,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchInspectionByCustomTimeFrame(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
-        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm(webdriver);
+        vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", "All Active");
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Timeframe", "Custom");
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("From", "1/1/2018");
@@ -451,6 +451,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().equals("From: 01/01/2018, To: 10/01/2019"),
                 "Search option under Search field hasn't been correct");
         Assert.assertTrue(VNextBOInspectionsPageSteps.getStatusesOfAllInspectionsInTheList().size() > 0,
-                "Inspections have not been found");
+                "inspections have not been found");
     }
 }

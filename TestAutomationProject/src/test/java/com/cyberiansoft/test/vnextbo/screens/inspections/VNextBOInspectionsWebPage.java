@@ -2,13 +2,13 @@ package com.cyberiansoft.test.vnextbo.screens.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -123,8 +123,8 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 				"div[@class='entity-list__item entity-list__item--active']//div[@class='entity-list__item__status__label']"));
 	}
 
-	public VNextBOInspectionsWebPage(WebDriver driver) {
-		super(driver);
+	public VNextBOInspectionsWebPage() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 

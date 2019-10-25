@@ -1,0 +1,75 @@
+{
+  "verifyUserCanCancelArchiveXIcon": [
+    {
+      "rowID": "verifyUserCanCancelArchiveXIcon.01",
+      "description": "Test Case 91011: User can cancel \"Archive\" clients (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91011",
+          "testCaseTitle": "User can cancel \"Archive\" clients (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelArchiveCancelButton": [
+    {
+      "rowID": "verifyUserCanCancelArchiveCancelButton.01",
+      "description": "Test Case 91012: User can cancel \"Archive\" clients (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91012",
+          "testCaseTitle": "User can cancel \"Archive\" clients (Cancel)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanArchiveClient": [
+    {
+      "rowID": "verifyUserCanArchiveClient.01",
+      "description": "Test Case 91010: User can \"Archive\" clients",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91010",
+          "testCaseTitle": "User can \"Archive\" clients"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelRestoreXIcon": [
+    {
+      "rowID": "verifyUserCanCancelRestoreXIcon.01",
+      "description": "Test Case 91014: User can cancel \"Restore\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91014",
+          "testCaseTitle": "User can cancel \"Restore\" (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelRestoreCancelButton": [
+    {
+      "rowID": "verifyUserCanCancelRestoreCancelButton.01",
+      "description": "Test Case 91015: User can cancel \"Restore\" (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91015",
+          "testCaseTitle": "User can cancel \"Restore\" (Cancel)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanRestoreClient": [
+    {
+      "rowID": "verifyUserCanRestoreClient.01",
+      "description": "Test Case 91013: User can \"Restore\" clients",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91013",
+          "testCaseTitle": "User can \"Restore\" clients"
+        }
+      ]
+    }
+  ]
+
+}

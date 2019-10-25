@@ -37,21 +37,21 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
         WaitUtils.elementShouldBeVisible(selectedservicestable, true);
     }
 
-    public boolean checkServiceIsSelected(String servicename) {
+    public boolean checkServiceIsSelected(String serviceName) {
 
-        return selectedservicestable.findElementsByAccessibilityId(servicename).size() > 0;
+        return selectedservicestable.findElementsByAccessibilityId(serviceName).size() > 0;
     }
 
-    public void removeSelectedService(String servicename) {
-        searchServiceByName(servicename);
-        selectedservicestable.findElementByAccessibilityId(servicename).findElementByClassName("XCUIElementTypeButton").click();
-        selectedservicestable.findElementByAccessibilityId(servicename).findElementByAccessibilityId("Delete").click();
+    public void removeSelectedService(String serviceName) {
+        searchServiceByName(serviceName);
+        selectedservicestable.findElementByAccessibilityId(serviceName).findElementByClassName("XCUIElementTypeButton").click();
+        selectedservicestable.findElementByAccessibilityId(serviceName).findElementByAccessibilityId("Delete").click();
     }
 
-    public void searchServiceByName(String servicename) {
+    public void searchServiceByName(String serviceName) {
         clearSearchServiceParameters();
         appiumdriver.findElementByClassName("XCUIElementTypeSearchField").click();
-        appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(servicename + "\n");
+        appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(serviceName + "\n");
 
     }
 
@@ -59,17 +59,17 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
         appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
     }
 
-    public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
+    public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String serviceName) {
         WebElement searchFild = appiumdriver.findElementByClassName("XCUIElementTypeSearchField");
         if (!(searchFild.getAttribute("value") == null))
             searchFild.clear();
 
         IOSElement servicecell = (IOSElement) selectedservicestable.
-                findElement(MobileBy.AccessibilityId(servicename));
+                findElement(MobileBy.AccessibilityId(serviceName));
         if (!servicecell.isDisplayed()) {
-            searchFild.sendKeys(servicename + "\n");
+            searchFild.sendKeys(serviceName + "\n");
         }
-        selectedservicestable.findElement(MobileBy.AccessibilityId(servicename)).click();
+        selectedservicestable.findElement(MobileBy.AccessibilityId(serviceName)).click();
 
         return new RegularSelectedServiceDetailsScreen();
     }
@@ -79,27 +79,41 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
                 "']/XCUIElementTypeStaticText[@name='" + vehiclePartData.getVehiclePartName() +"']").click();
     }
 
-    public void openServiceDetailsByIndex(String servicename, int servicedetailindex) {
-        MobileElement serviceCell = ((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(servicedetailindex));
+    public void openServiceDetailsByIndex(String servicename, int serviceDetailIndex) {
+        MobileElement serviceCell = ((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex));
         if (serviceCell.isDisplayed())
             serviceCell.click();
         else {
-            swipeToElement((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(servicedetailindex));
-            ((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(servicedetailindex)).click();
+            swipeToElement((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex));
+            ((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex)).click();
         }
     }
 
+    public String getSelectedServicePriceValue(String serviceName) {
+        return selectedservicestable.findElement(MobileBy.AccessibilityId(serviceName + "_SelectedServiceIconSelected"))
+                .findElements(MobileBy.className("XCUIElementTypeStaticText")).get(2).getAttribute("value")
+                .replaceAll("[^a-zA-Z0-9$.%]", " ");
+    }
 
-    public boolean isServiceIsSelectedWithServiceValues(String servicename, String pricevalue) {
+    public String getSelectedServicePriceValue(String serviceName, String vehiclePart) {
+        String serviceNameFull = serviceName + "_SelectedServiceIconSelected";
+        WebElement serviceCell = selectedservicestable.
+                findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='" + serviceNameFull + "']/XCUIElementTypeStaticText[@name='" + vehiclePart + "']/.."));
+        return serviceCell.findElements(MobileBy.xpath("XCUIElementTypeStaticText")).get(2).getAttribute("value")
+                .replaceAll("[^a-zA-Z0-9$.%]", " ");
+    }
+
+
+    public boolean isServiceIsSelectedWithServiceValues(String serviceName, String priceValue) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(servicename)));
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)));
         boolean selected = false;
         List<MobileElement> services = selectedservicestable.findElements(MobileBy.className("XCUIElementTypeCell"));
         for (MobileElement srvc : services)
-            if (srvc.getAttribute("name").contains(servicename))
+            if (srvc.getAttribute("name").contains(serviceName))
                 if ((srvc.
                         findElements(MobileBy.className("XCUIElementTypeStaticText")).get(2).getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
-                        pricevalue.replaceAll(" ", "")))) {
+                        priceValue.replaceAll(" ", "")))) {
                     selected = true;
                     break;
                 }
@@ -124,46 +138,38 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
         return selected;
     }
 
-    public String getSelectedServicePriceValue(String servicename) {
-        List<MobileElement> services = selectedservicestable.findElements(MobileBy.className("XCUIElementTypeCell"));
-        for (MobileElement srvc : services)
-            if (srvc.getAttribute("name").contains(servicename))
-                return srvc.findElementByXPath("//XCUIElementTypeStaticText[3]").getAttribute("value").replaceAll("[^a-zA-Z0-9$.%]", "");
-        return null;
-    }
-
-    public int getNumberOfServiceSelectedItems(String servicename) {
+    public int getNumberOfServiceSelectedItems(String serviceName) {
         return selectedservicestable.findElements(MobileBy.iOSNsPredicateString("name = '" +
-                servicename + "' and type = 'XCUIElementTypeCell'")).size();
+                serviceName + "' and type = 'XCUIElementTypeCell'")).size();
     }
 
-    public RegularSelectedServiceDetailsScreen openSelectedServiceDetails(String service) {
-        clickOnSelectedService(service);
+    public RegularSelectedServiceDetailsScreen openSelectedServiceDetails(String serviceName) {
+        clickOnSelectedService(serviceName);
         return new RegularSelectedServiceDetailsScreen();
     }
 
-    public void clickOnSelectedService(String service) {
+    public void clickOnSelectedService(String serviceName) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(service)));
-        List<MobileElement> selectedservices = selectedservicestable.findElementsByAccessibilityId(service);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)));
+        List<MobileElement> selectedservices = selectedservicestable.findElementsByAccessibilityId(serviceName);
         if (selectedservices.size() > 1) {
-            ((WebElement) selectedservicestable.findElementsByAccessibilityId(service).get(1)).click();
+            ((WebElement) selectedservicestable.findElementsByAccessibilityId(serviceName).get(1)).click();
         } else {
             selectedservices.get(0).click();
         }
     }
 
-    public RegularSelectedServiceBundleScreen openSelectBundleServiceDetails(String service) {
-        selectedservicestable.findElementByAccessibilityId(service).click();
+    public RegularSelectedServiceBundleScreen openSelectBundleServiceDetails(String serviceName) {
+        selectedservicestable.findElementByAccessibilityId(serviceName).click();
 
         return new RegularSelectedServiceBundleScreen();
     }
 
-    public boolean isNotesIconPresentForSelectedService(String servicename) {
+    public boolean isNotesIconPresentForSelectedService(String serviceName) {
         List<MobileElement> services = selectedservicestable.findElements(MobileBy.className("XCUIElementTypeCell"));
         boolean present = false;
         for (MobileElement srvc : services)
-            if (srvc.getAttribute("name").contains(servicename))
+            if (srvc.getAttribute("name").contains(serviceName))
                 if (srvc.
                         findElements(MobileBy.AccessibilityId("ESTIMATION_NOTES")).size() > 0) {
                     present = true;
@@ -173,26 +179,26 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
         return present;
     }
 
-    public boolean isNotesIconPresentForSelectedWorkOrderService(String servicename) {
-        return selectedservicestable.findElementByAccessibilityId(servicename).findElementsByAccessibilityId("ORDER_NOTES").size() > 0;
+    public boolean isNotesIconPresentForSelectedWorkOrderService(String serviceName) {
+        return selectedservicestable.findElementByAccessibilityId(serviceName).findElementsByAccessibilityId("ORDER_NOTES").size() > 0;
     }
 
     public int getNumberOfSelectedServices() {
         return selectedservicestable.findElementsByClassName("XCUIElementTypeTable").size();
     }
 
-    public boolean isServiceWithSubSrviceSelected(String servicename, String servicesubsrvicename) {
-        return selectedservicestable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[@name='" + servicesubsrvicename + "']")).size() > 0;
+    public boolean isServiceWithSubSrviceSelected(String serviceName, String serviceSubsrviceName) {
+        return selectedservicestable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + serviceName + "']/XCUIElementTypeStaticText[@name='" + serviceSubsrviceName + "']")).size() > 0;
     }
 
-    public boolean isServiceApproved(String srvname) {
+    public boolean isServiceApproved(String serviceName) {
         return selectedservicestable.findElement(MobileBy.iOSNsPredicateString("name CONTAINS '" +
-                srvname + "' and type = 'XCUIElementTypeCell'")).findElements(MobileBy.AccessibilityId("SelectedServiceIcon_Selected")).size() > 0;
+                serviceName + "' and type = 'XCUIElementTypeCell'")).findElements(MobileBy.AccessibilityId("SelectedServiceIcon_Selected")).size() > 0;
     }
 
-    public boolean isServiceDeclinedSkipped(String srvname) {
+    public boolean isServiceDeclinedSkipped(String serviceName) {
         return selectedservicestable.findElement(MobileBy.iOSNsPredicateString("name CONTAINS '" +
-                srvname + "' and type = 'XCUIElementTypeCell'")).findElements(MobileBy.AccessibilityId("SelectedServiceIcon_Declined")).size() > 0;
+                serviceName + "' and type = 'XCUIElementTypeCell'")).findElements(MobileBy.AccessibilityId("SelectedServiceIcon_Declined")).size() > 0;
     }
 
     public boolean isDefaultServiceIsSelected() {

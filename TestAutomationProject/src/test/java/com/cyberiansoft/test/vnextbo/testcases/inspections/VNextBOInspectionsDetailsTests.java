@@ -26,7 +26,7 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsDetailsData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/inspections/VNextBOInspectionsDetailsData.json";
     private VNextBOLoginScreenWebPage loginPage;
 
     @BeforeClass
@@ -68,7 +68,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOInspectionsPageValidations.isInspectionImageZoomIconDisplayed();
         VNextBOInspectionsPageSteps.clickInspectionImageZoomIcon();
         VNextBOInspectionMaximizedImageDialog vNextBOInspectionMaximizedImageDialog =
-                new VNextBOInspectionMaximizedImageDialog(webdriver);
+                new VNextBOInspectionMaximizedImageDialog();
         VNextBOInspectionMaximizedImageDialogValidations.isInspectionZoomedImageDisplayed();
         VNextBOInspectionMaximizedImageDialogSteps.closeInspectionMaximizedImageDialog();
         VNextBOInspectionMaximizedImageDialogValidations.isInspectionZoomedImageClosed(vNextBOInspectionMaximizedImageDialog);
@@ -81,7 +81,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageValidations.isInspectionNotesIconDisplayed();
         VNextBOInspectionsPageSteps.clickInspectionNotesIcon();
-        VNextBOInspectionNoteDialog vNextBOInspectionNoteDialog = new  VNextBOInspectionNoteDialog(webdriver);
+        VNextBOInspectionNoteDialog vNextBOInspectionNoteDialog = new  VNextBOInspectionNoteDialog();
         VNextBOInspectionNoteDialogValidations.isInspectionNoteTextDisplayed();
         VNextBOInspectionNoteDialogSteps.closeInspectionNote();
         VNextBOInspectionNoteDialogValidations.isNoteDialogClosed(vNextBOInspectionNoteDialog);

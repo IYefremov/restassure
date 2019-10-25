@@ -27,7 +27,7 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Inspections/VNextBOInspectionsGeneralData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/inspections/VNextBOInspectionsGeneralData.json";
     private VNextBOLoginScreenWebPage loginPage;
     private List<String> expectedAdvancedSearchFields =
             Arrays.asList("Customer", "PO#", "RO#", "Stock#", "VIN",
@@ -79,7 +79,7 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickTermsAndConditionsLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isOkButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
@@ -94,7 +94,7 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickTermsAndConditionsLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isOkButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
@@ -108,7 +108,7 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosedOkBtn(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickPrivacyPolicyLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isOkButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
@@ -122,7 +122,7 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosedCloseBtn(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickPrivacyPolicyLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isOkButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),

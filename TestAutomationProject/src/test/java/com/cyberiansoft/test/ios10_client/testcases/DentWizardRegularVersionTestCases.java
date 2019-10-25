@@ -1139,6 +1139,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         }
         RegularNavigationSteps.navigateToClaimScreen();
         RegularClaimScreenSteps.setClaimData(workOrderData.getInsuranceCompanyData());
+        RegularClaimScreen claimScreen = new RegularClaimScreen();
+        Assert.assertEquals(claimScreen.getDeductibleValue(), workOrderData.getInsuranceCompanyData().getDeductible());
 
         RegularNavigationSteps.navigateToServicesScreen();
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();

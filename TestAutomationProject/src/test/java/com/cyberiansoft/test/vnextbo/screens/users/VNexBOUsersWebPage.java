@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.screens.users;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.WebTable;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -84,8 +85,8 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
         return driver.findElement(By.xpath("//td[contains(text(), '" + searchText + "')]/ancestor::tr"));
     }
 
-    public VNexBOUsersWebPage(WebDriver driver) {
-        super(driver);
+    public VNexBOUsersWebPage() {
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
         new WebDriverWait(driver, 30)

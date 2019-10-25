@@ -1,0 +1,170 @@
+{
+  "verifyUserCanSearchClients": [
+    {
+      "rowID": "verifyUserCanSearchClients.01",
+      "description": "Test Case 91008: User can search clients",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91008",
+          "testCaseTitle": "User can search clients"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClickSearchWithEmptyAdvancedSearchFields": [
+    {
+      "rowID": "verifyUserCanClickSearchWithEmptyAdvancedSearchFields.01",
+      "description": "Test Case 90983: Verify user can click \"Search\" icon when all the fields are empty",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90983",
+          "testCaseTitle": "Verify user can click \"Search\" icon when all the fields are empty"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseAdvancedSearchPopUp": [
+    {
+      "rowID": "verifyUserCanCloseAdvancedSearchPopUp.01",
+      "description": "Test Case 90984: Verify user can close \"Advanced Search\" pop-up window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90984",
+          "testCaseTitle": "Verify user can close \"Advanced Search\" pop-up window"
+        }
+      ]
+    }
+  ],
+  "verifyAdvancedSearchWindowSavesSearchParameters": [
+    {
+      "rowID": "verifyAdvancedSearchWindowSavesSearchParameters.01",
+      "description": "Test Case 90987: Verify \"Advaced Search\" window saves search parameters after searching",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90987",
+          "testCaseTitle": "Verify \"Advaced Search\" window saves search parameters after searching"
+        }
+      ]
+    }
+  ],
+  "verifyAdvancedSearchWindowFromActiveAndArchivedTabs": [
+    {
+      "rowID": "verifyAdvancedSearchWindowFromActiveAndArchivedTabs.01",
+      "description": "Test Case 90982: Verify user can open \"Advanced Search\" pop-up window with set of fields(\"Active\" && \"Archive\" tab)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90982",
+          "testCaseTitle": "Verify user can open \"Advanced Search\" pop-up window with set of fields(\"Active\" && \"Archive\" tab)"
+        }
+      ]
+    }
+  ],
+  "verifyAdvancedSearchWindowSavesEnteredValuesWithoutSearching": [
+    {
+      "rowID": "verifyAdvancedSearchWindowFromActiveAndArchivedTabs.01",
+      "description": "Test Case 90989: Verify user can close \"Advanced Search\" window without searching start and system saves entered values",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90989",
+          "testCaseTitle": "Verify user can close \"Advanced Search\" window without searching start and system saves entered values"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByNameNegative": [
+    {
+      "rowID": "verifyUserCanSearchByNameNegative.01",
+      "description": "Test Case 90985: Verify user can search by \"Name\" -negative",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90985",
+          "testCaseTitle": "Verify user can search by \"Name\" -negative"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByNamePositive": [
+    {
+      "rowID": "verifyUserCanSearchByNamePositive.01",
+      "description": "Test Case 90986: Verify user can search by \"Name\" -positive",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90986",
+          "testCaseTitle": "Verify user can search by \"Name\" -positive"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByEmail": [
+    {
+      "rowID": "verifyUserCanSearchByEmail.01",
+      "description": "Test Case 90993: Verify user can search by \"Email\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90993",
+          "testCaseTitle": "Verify user can search by \"Email\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByPhone": [
+    {
+      "rowID": "verifyUserCanSearchByPhone.01",
+      "description": "Test Case 90994: Verify user can search by \"Phone\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90994",
+          "testCaseTitle": "Verify user can search by \"Phone\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByAddress": [
+    {
+      "rowID": "verifyUserCanSearchByAddress.01",
+      "description": "Test Case 90992: Verify user can search by \"Address\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90992",
+          "testCaseTitle": "Verify user can search by \"Address\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanFillInAllAdvancedSearchFields": [
+    {
+      "rowID": "verifyUserCanFillInAllAdvancedSearchFields.01",
+      "description": "Test Case 90988: Verify user can fill in all the fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90988",
+          "testCaseTitle": "Verify user can fill in all the fields"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByTypeRetail": [
+    {
+      "rowID": "verifyUserCanSearchByTypeRetail.01",
+      "description": "Test Case 90990: Verify user can search by \"Type\"(Retail)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90990",
+          "testCaseTitle": "Verify user can search by \"Type\"(Retail)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchByTypeWholesale": [
+    {
+      "rowID": "verifyUserCanSearchByTypeWholesale.01",
+      "description": "Test Case 90991: Verify user can search by \"Type\"(Wholesale)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90991",
+          "testCaseTitle": "Verify user can search by \"Type\"(Wholesale)"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+<suite name="Cyberiansoft R360 ReconPro tests" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
+    </listeners>
+
+  <test name="VNext BO Smoke Test Cases" preserve-order="true">
+    <classes>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBONewSmokeTestCases"/>
+    </classes>
+  </test>
+</suite>

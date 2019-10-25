@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSelectedServicesScreen;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import org.testng.Assert;
 
 import java.util.List;
@@ -22,5 +24,19 @@ public class RegularSelectedServicesScreenValidations {
                 verifyServiceIsSelected(serviceData.getServiceName(), true);
             else
                 verifyServiceIsSelected(serviceData.getServiceName(), false);
+    }
+
+    public static void verifyServiceIsSelectedWithServicePrice(ServiceData servicesData, String expectedPriceValue) {
+        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
+        if (servicesData.getVehicleParts() != null) {
+            for (VehiclePartData vehiclePartData : servicesData.getVehicleParts())
+                Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(servicesData.getServiceName(),
+                        vehiclePartData.getVehiclePartName()), expectedPriceValue);
+        } else if (servicesData.getVehiclePart() != null) {
+            Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(servicesData.getServiceName(),
+                    servicesData.getVehiclePart().getVehiclePartName()), expectedPriceValue);
+        } else
+            Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(servicesData.getServiceName()), expectedPriceValue);
+
     }
 }

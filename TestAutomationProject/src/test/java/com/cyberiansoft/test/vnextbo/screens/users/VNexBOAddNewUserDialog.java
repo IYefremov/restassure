@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens.users;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -40,10 +41,8 @@ public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 	public List<WebElement> errorMessagesList;
 
 	
-	public VNexBOAddNewUserDialog(WebDriver driver) {
-		super(driver);
+	public VNexBOAddNewUserDialog() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(firstNameFld));
 	}
 }

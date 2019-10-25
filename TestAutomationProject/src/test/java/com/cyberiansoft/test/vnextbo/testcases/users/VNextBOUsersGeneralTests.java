@@ -6,13 +6,19 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.*;
-import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOUserProfileDialog;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOUsersPageValidations;
+import com.cyberiansoft.test.vnextbo.verifications.commonObjects.VNextBOPageSwitcherValidations;
+import com.cyberiansoft.test.vnextbo.verifications.commonObjects.VNextBOSearchPanelValidations;
 import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOUsersPageValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -24,7 +30,7 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOUsersGeneralTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/Users/VNextBOUsersGeneralData.json";
+    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/users/VNextBOUsersGeneralData.json";
     private VNextBOLoginScreenWebPage loginPage;
     String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
     String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
@@ -68,7 +74,8 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOUsersPageValidations.isIntercomButtonDisplayed();
         VNextBOUsersPageValidations.isLogoDisplayed();
         VNextBOUsersPageValidations.isTimeBoxDisplayed();
-        VNextBOUsersPageValidations.isPageNavigationButtonsDisplayed();
+        VNextBOSearchPanelValidations.isSearchPanelDisplayed();
+        VNextBOPageSwitcherValidations.arePageNavigationElementsDisplayed();
         VNextBOUsersPageValidations.isUserInfoBlockDisplayed();
         VNextBOUsersPageValidations.isLogoutButtonDisplayed();
         VNextBOUsersPageValidations.isHelpButtonDisplayed();
@@ -88,7 +95,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosed(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickTermsAndConditionsLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isOkButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
@@ -102,7 +109,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosed(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickPrivacyPolicyLink();
-        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog(webdriver);
+        VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.isDialogDisplayed();
         VNextBOModalDialogValidations.isOkButtonDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
@@ -160,52 +167,49 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanNavigateBetweenPages(String rowID, String description, JSONObject testData) {
 
-        VNextBOUsersPageSteps.clickNextPageButton();
-        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("2");
-        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
-        VNextBOUsersPageSteps.clickPreviousPageButton();
-        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("1");
-        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
-        VNextBOUsersPageSteps.clickLastPageButton();
-        Assert.assertFalse(VNextBOUsersPageValidations.isLastPageButtonClickable(), "Last page button has been clickable.");
-        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
-        VNextBOUsersPageSteps.clickFirstPageButton();
-        Assert.assertFalse(VNextBOUsersPageValidations.isFirstPageButtonClickable(), "First page button has been clickable.");
-        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
-        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("1");
-        VNextBOUsersPageSteps.openPageByNumber(3);
-        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("3");
-        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+        VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
+        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("2");
+        VNextBOPageSwitcherSteps.clickFooterPreviousPageButton();
+        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
+        VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
+                "Bottom Last page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
+                "Top Last page button has been clickable.");
+        VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+        VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
+        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
+        VNextBOPageSwitcherSteps.openPageByNumber(3);
+        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("3");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifySystemSavesCurrentPageNumber(String rowID, String description, JSONObject testData) {
 
-        VNextBOUsersPageSteps.openPageByNumber(4);
+        VNextBOPageSwitcherSteps.openPageByNumber(4);
         VNextBOUsersPageSteps.clickLogo();
         new VNextBOLeftMenuInteractions().selectUsersMenu();
-        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("4");
-        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("4");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeItemsPerPage(String rowID, String description, JSONObject testData) {
 
-        VNextBOUsersPageSteps.changeItemsPerPage("20");
-        VNextBOUsersPageValidations.isItemsPerPageNumberCorrect("20");
-        VNextBOUsersPageValidations.verifyTopAndBottomPagingPagingBoxesHaveSameItemsPerPageNumber();
-        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("1");
-        VNextBOUsersPageValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
+        VNextBOPageSwitcherSteps.changeItemsPerPage("20");
+        VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("20");
+        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifySystemSavesCurrentValueItemsPerPage(String rowID, String description, JSONObject testData) {
 
-        VNextBOUsersPageSteps.changeItemsPerPage("50");
-        VNextBOUsersPageSteps.openPageByNumber(2);
+        VNextBOPageSwitcherSteps.changeItemsPerPage("50");
+        VNextBOPageSwitcherSteps.openPageByNumber(2);
         VNextBOUsersPageSteps.clickLogo();
         new VNextBOLeftMenuInteractions().selectUsersMenu();
-        VNextBOUsersPageValidations.isOpenedPageNumberCorrect("2");
-        VNextBOUsersPageValidations.isItemsPerPageNumberCorrect("50");
+        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("2");
+        VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("50");
     }
 }

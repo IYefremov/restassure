@@ -7,33 +7,29 @@ import com.cyberiansoft.test.vnextbo.screens.users.VNextBOUsersAdvancedSearchFor
 
 public class VNextBOUsersAdvancedSearchSteps {
 
-    public static void clickSearchButton()
-    {
+    public static void clickSearchButton() {
         VNextBOUsersAdvancedSearchForm advancedSearchForm =
-                new VNextBOUsersAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOUsersAdvancedSearchForm();
         Utils.clickElement(advancedSearchForm.searchButton);
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void clickCloseButton()
-    {
+    public static void clickCloseButton() {
         VNextBOUsersAdvancedSearchForm advancedSearchForm =
-                new VNextBOUsersAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOUsersAdvancedSearchForm();
         Utils.clickElement(advancedSearchForm.closeButton);
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void setEmailField(String email)
-    {
+    public static void setEmailField(String email) {
         VNextBOUsersAdvancedSearchForm advancedSearchForm =
-                new VNextBOUsersAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOUsersAdvancedSearchForm();
         Utils.clearAndType(advancedSearchForm.emailField, email);
     }
 
-    public static void setPhoneField(String phone)
-    {
+    public static void setPhoneField(String phone) {
         VNextBOUsersAdvancedSearchForm advancedSearchForm =
-                new VNextBOUsersAdvancedSearchForm(DriverBuilder.getInstance().getDriver());
+                new VNextBOUsersAdvancedSearchForm();
         Utils.clearAndType(advancedSearchForm.phoneField, phone);
     }
 }

@@ -9,6 +9,11 @@ public class RegularApproveInspectionScreenActions {
         approveInspectionsScreen.clickApproveAllServicesButton();
     }
 
+    public static void clickDeclineAllServicesButton() {
+        RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
+        approveInspectionsScreen.clickDeclineAllServicesButton();
+    }
+
     public static void saveApprovedServices() {
         RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
         approveInspectionsScreen.clickSaveButton();
@@ -18,6 +23,15 @@ public class RegularApproveInspectionScreenActions {
         RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
         approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
         approveInspectionsScreen.clickDoneButton();
-        RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
+    }
+
+    public static void selectInspectionForApprove(String inspectionID) {
+        RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
+        approveInspectionsScreen.selectInspection(inspectionID);
+    }
+
+    public static void clickDeclinePopupButton() {
+        RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
+        approveInspectionsScreen.clickDeclinePopupButton();
     }
 }

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.verifications.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionNoteDialog;
 import org.testng.Assert;
 
@@ -9,7 +8,7 @@ public class VNextBOInspectionNoteDialogValidations {
 
     public static void isInspectionNoteTextDisplayed()
     {
-        VNextBOInspectionNoteDialog noteDialog = new VNextBOInspectionNoteDialog(DriverBuilder.getInstance().getDriver());
+        VNextBOInspectionNoteDialog noteDialog = new VNextBOInspectionNoteDialog();
         Assert.assertTrue(Utils.isElementDisplayed(noteDialog.noteText),
                 "Notes dialog  hasn't been opened");
     }
