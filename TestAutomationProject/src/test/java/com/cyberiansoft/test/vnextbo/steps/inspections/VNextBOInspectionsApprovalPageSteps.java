@@ -2,9 +2,9 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsApprovalWebPage;
+import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsApprovalWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
-import com.cyberiansoft.test.vnextbo.verifications.Inspections.VNextBOInspectionsApprovalPageValidations;
+import com.cyberiansoft.test.vnextbo.verifications.inspections.VNextBOInspectionsApprovalPageValidations;
 import org.testng.Assert;
 
 import java.util.Arrays;

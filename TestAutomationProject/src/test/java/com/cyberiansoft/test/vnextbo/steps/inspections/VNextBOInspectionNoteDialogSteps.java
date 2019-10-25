@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionNoteDialog;
+import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionNoteDialog;
 
 public class VNextBOInspectionNoteDialogSteps {
 

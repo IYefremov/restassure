@@ -2,8 +2,8 @@ package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.Users.VNexBOUsersWebPage;
+import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.users.VNexBOUsersWebPage;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
