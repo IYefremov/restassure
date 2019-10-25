@@ -12,58 +12,58 @@ import java.util.List;
 
 public class VNextBOUsersPageSteps extends VNextBOBaseWebPageSteps {
 
-    public static void clickAddNewUserButton()
-    {
+    public static void clickAddNewUserButton() {
+
         Utils.clickElement(new VNexBOUsersWebPage().addNewUserBtn);
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void resendConfirmationEmail()
-    {
+    public static void resendConfirmationEmail() {
+
         Utils.clickElement(new VNexBOUsersWebPage().reSendButton);
         VNextBOModalDialogSteps.clickYesButton();
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void openUserDataForEdit()
-    {
+    public static void openUserDataForEdit() {
+
         Utils.clickElement(new VNexBOUsersWebPage().editUserButton);
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void searchUserByEmail(String email)
-    {
+    public static void searchUserByEmail(String email) {
+
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOUsersAdvancedSearchSteps.setEmailField(email);
         VNextBOUsersAdvancedSearchSteps.clickSearchButton();
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void searchUserByPhone(String phone)
-    {
+    public static void searchUserByPhone(String phone) {
+
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOUsersAdvancedSearchSteps.setPhoneField(phone);
         VNextBOUsersAdvancedSearchSteps.clickSearchButton();
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static List<WebElement> getUsersTableRows()
-    {
+    public static List<WebElement> getUsersTableRows() {
+
         return new VNexBOUsersWebPage().usersTable.getTableRows();
     }
 
-    public static int getUsersTableRowsCount()
-    {
+    public static int getUsersTableRowsCount() {
+
         return getUsersTableRows().size();
     }
 
-    public static WebElement getTableRowWithText(String userMail)
-    {
+    public static WebElement getTableRowWithText(String userMail) {
+
         return new VNexBOUsersWebPage().tableRowByText(userMail);
     }
 
-    public static String getUsersNotFoundMessage()
-    {
+    public static String getUsersNotFoundMessage() {
+
         return Utils.getText(new VNexBOUsersWebPage().noItemsFoundMessage);
     }
 }

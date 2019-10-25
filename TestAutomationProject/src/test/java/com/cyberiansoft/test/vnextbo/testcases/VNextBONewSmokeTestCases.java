@@ -8,7 +8,6 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOAccountInfoBlockInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOClientsListViewInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOEmailOptionsBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOActiveDevicesInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
@@ -20,8 +19,8 @@ import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPa
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
-import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsListViewSteps;
-import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsSearchSteps;
+import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOAddNewDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOEditDeviceSteps;
@@ -34,6 +33,7 @@ import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSte
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
+import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientsPageValidations;
 import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBORODetailsPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageVerifications;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -61,7 +61,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBOCompanyInfoWebPage companyInfoWebPage;
     private VNextBOHomeWebPage homePage;
     private VNextBOInspectionsWebPage inspectionsWebPage;
-    private VNextBOClientsListViewInteractions listViewInteractions;
     private VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions;
     private VNextBODeviceManagementSteps deviceManagementSteps;
     private VNextBOQuickNotesWebPage quickNotesPage;
@@ -97,7 +96,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         quickNotesPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOQuickNotesWebPage.class);
         breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
         leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        listViewInteractions = new VNextBOClientsListViewInteractions();
         emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
         deviceManagementSteps = new VNextBODeviceManagementSteps();
     }
@@ -448,10 +446,10 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
 
         leftMenuInteractions.selectClientsMenu();
-        VNextBOClientsSearchSteps.searchWithSimpleSearch(data.getSearch());
-        Assert.assertTrue(listViewInteractions.isClientsTableDisplayed(), "The clients table hasn't been displayed");
+        VNextBOSearchPanelSteps.searchByText(data.getSearch());
+        VNextBOClientsPageValidations.isClientsTableDisplayed();
 
-        VNextBOClientsListViewSteps.openClientsDetailsPage(data.getTypes()[0]);
+        VNextBOClientsPageSteps.openClientsDetailsPage(data.getTypes()[0]);
         VNextBOClientDetailsViewAccordionSteps.setClientInfoData(data.getEmployee());
 
         VNextBOClientDetailsViewAccordionSteps.setAccountInfoData(data.getAccountInfoData());

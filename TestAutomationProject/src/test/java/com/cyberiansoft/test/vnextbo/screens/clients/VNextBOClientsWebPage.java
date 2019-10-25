@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens.clients;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
@@ -33,6 +34,18 @@ public class VNextBOClientsWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@data-template='clients-view-row-template']/tr")
     private List<WebElement> clientRecords;
 
+    @FindBy(xpath = "//tbody[@data-template='clients-view-row-template']//div[@class='actions-menu__icon']")
+    private List<WebElement> actionsIconsList;
+
+    @FindBy(xpath = "//div[contains(@class, 'menu-drop')]/div[contains(@data-bind, 'onEditClicked')]")
+    private WebElement editDropMenuButton;
+
+    @FindBy(xpath = "//div[contains(@class, 'menu-drop')]/div[contains(@data-bind, 'onArchiveClicked')]")
+    private WebElement archiveDropMenuButton;
+
+    @FindBy(xpath = "//div[contains(@class, 'menu-drop')]/div[contains(@data-bind, 'onRestoreClicked')]")
+    private WebElement restoreDropMenuButton;
+
     public List<WebElement> columnTextCellsByTitle(String columnTitle)
     {
         int searchColumnIndex = driver.findElements(By.xpath("//div[@id='clientsListTable-wrapper']/table[@class='grid']//th")).
@@ -46,6 +59,11 @@ public class VNextBOClientsWebPage extends VNextBOBaseWebPage {
                 stream().map(WebElement::getText).collect(Collectors.toList()).indexOf(columnTitle) + 1;
         return driver.findElements(By.xpath("//div[@id='clientsListTable-wrapper']/table[@class='grid']//tr[@role='option']/td[" +
                 searchColumnIndex + "]/input"));
+    }
+
+    public WebElement getActionsIconForClient(String client) {
+        return Utils.getElement(driver.findElement(By.xpath("//td[text()='" + client
+                + "']/following-sibling::*//div[@class='actions-menu__icon']")));
     }
 
     public VNextBOClientsWebPage() {

@@ -8,46 +8,46 @@ import org.testng.Assert;
 
 public class VNextBOClientsPageValidations extends VNextBOBaseWebPageValidations {
 
-    public static void isAddNewClientBtnDisplayed()
-    {
+    public static void isAddNewClientBtnDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getAddNewClientButton()),
                 "\"Add New Client\" button hasn't been displayed.");
     }
 
-    public static void isActiveTabDisplayed()
-    {
+    public static void isActiveTabDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getActiveTab()),
                 "\"Active\" tab hasn't been displayed.");
     }
 
-    public static void isArchivedTabDisplayed()
-    {
+    public static void isArchivedTabDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getArchivedTab()),
                 "\"Archived\" tab hasn't been displayed.");
     }
 
-    public static void isClientsTableDisplayed()
-    {
+    public static void isClientsTableDisplayed() {
+
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getClientsTable()),
                 "clients table hasn't been displayed.");
     }
 
-    public static void isCorrectRecordsAmountDisplayed(int expectedRecordsAmount)
-    {
+    public static void isCorrectRecordsAmountDisplayed(int expectedRecordsAmount) {
+
         Assert.assertEquals(VNextBOClientsPageSteps.getClientsAmount(), expectedRecordsAmount,
                 "Clients table has contained incorrect clients amount.");
     }
 
-    public static void isSearchResultCorrectForColumnWithText(String columnTitle, String expectedValue)
-    {
+    public static void isSearchResultCorrectForColumnWithText(String columnTitle, String expectedValue) {
+
         for (String cellValue : VNextBOClientsPageSteps.getColumnValuesByTitleFromColumnWithText(columnTitle)
              ) {
             Assert.assertTrue(cellValue.toLowerCase().contains(expectedValue.toLowerCase()), "Search result hasn't been correct" );
         }
     }
 
-    public static void isSearchResultCorrectForColumnWithCheckboxes(String columnTitle, boolean shouldBeChecked)
-    {
+    public static void isSearchResultCorrectForColumnWithCheckboxes(String columnTitle, boolean shouldBeChecked) {
+
         if (shouldBeChecked)
         {
             for (String cellValue : VNextBOClientsPageSteps.getColumnValuesFromColumnWithCheckBoxes(columnTitle)
@@ -65,8 +65,8 @@ public class VNextBOClientsPageValidations extends VNextBOBaseWebPageValidations
 
     }
 
-    public static void isClientsNotFoundMessageDisplayed()
-    {
+    public static void isClientsNotFoundMessageDisplayed() {
+
         Assert.assertEquals(VNextBOClientsPageSteps.getClientsNotFoundMessage(), "There are no clients to show.",
                 "\"There are no clients to show.\" message hasn't been displayed.");
     }

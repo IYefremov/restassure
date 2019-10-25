@@ -8,8 +8,8 @@ import org.testng.Assert;
 
 public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations {
 
-    public static void isSearchPanelDisplayed()
-    {
+    public static void isSearchPanelDisplayed() {
+
         VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
         Assert.assertTrue(Utils.isElementDisplayed(searchPanel.getSearchPanel()),
                 "Search panel hasn't been displayed.");
@@ -21,8 +21,8 @@ public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations
                 "Advanced search drop down caret hasn't been displayed.");
     }
 
-    public static void isSearchFilterTextCorrect(String text)
-    {
+    public static void isSearchFilterTextCorrect(String text) {
+
         Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().contains(text),
                 "Search option under Search field hasn't been correct");
     }

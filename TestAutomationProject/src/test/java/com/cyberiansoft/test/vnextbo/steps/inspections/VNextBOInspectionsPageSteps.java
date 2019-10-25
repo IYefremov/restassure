@@ -10,102 +10,102 @@ import java.util.List;
 
 public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
 
-    public static void clickTheApproveInspectionButton()
-    {
+    public static void clickTheApproveInspectionButton() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().getApproveInspectionIcon());
     }
 
-    public static void clickClearFilterIcon()
-    {
+    public static void clickClearFilterIcon() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().clearFilterBtn);
     }
 
-    public static void clickEditAdvancedSearchIcon()
-    {
+    public static void clickEditAdvancedSearchIcon() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().editAdvancedSearchIcon);
     }
 
-    public static void clickExpandAdvancedSearchPanel()
-    {
+    public static void clickExpandAdvancedSearchPanel() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().searchFieldAdvancedSearchCaret);
     }
 
-    public static void clickInspectionApproveButton()
-    {
+    public static void clickInspectionApproveButton() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().approveInspectionIcon);
     }
 
-    public static void clickArchiveIcon()
-    {
+    public static void clickArchiveIcon() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().archiveIcon);
     }
 
-    public static void clickUnArchiveIcon()
-    {
+    public static void clickUnArchiveIcon() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().unArchiveIcon);
     }
 
-    public static void clickInspectionImageZoomIcon()
-    {
+    public static void clickInspectionImageZoomIcon() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().inspectionImageZoomIcon);
     }
 
-    public static void clickInspectionNotesIcon()
-    {
+    public static void clickInspectionNotesIcon() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().inspectionNotesIcon);
     }
 
-    public static void clickPrintSupplementButton()
-    {
+    public static void clickPrintSupplementButton() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().printSupplementIcon);
     }
 
-    public static void clickPrintInspectionButton()
-    {
+    public static void clickPrintInspectionButton() {
+
         Utils.clickElement(new VNextBOInspectionsWebPage().printInspectionIcon);
     }
 
-    public static String getCustomSearchInfoTextValue()
-    {
+    public static String getCustomSearchInfoTextValue() {
+
         return Utils.getText(new VNextBOInspectionsWebPage().filterInfoText);
     }
 
-    public static String getSearchFieldValue()
-    {
+    public static String getSearchFieldValue() {
+
         return new VNextBOInspectionsWebPage().searchFld.getAttribute("value");
     }
 
-    public static String getInspectionStatus(String inspectionNumber)
-    {
+    public static String getInspectionStatus(String inspectionNumber) {
+
         return Utils.getText(new VNextBOInspectionsWebPage().inspectionStatusByInspectionNumber(inspectionNumber));
     }
 
-    public static String getSelectedInspectionArchivingReason()
-    {
+    public static String getSelectedInspectionArchivingReason() {
+
         return Utils.getText(new VNextBOInspectionsWebPage().selectedInspectionArchivedReason);
     }
 
-    public static void selectArchiveReason(String reason)
-    {
+    public static void selectArchiveReason(String reason) {
+
         Utils.clickWithJS(new VNextBOInspectionsWebPage().archivingReasonByName(reason));
     }
 
-    public static void openAdvancedSearchForm()
-    {
+    public static void openAdvancedSearchForm() {
+
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage();
         Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchCaret);
         Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchIconGear);
     }
 
-    public static void searchInspectionByText(String searchText)
-    {
+    public static void searchInspectionByText(String searchText) {
+
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage();
         inspectionsPage.setSearchFieldValue(searchText);
         inspectionsPage.clickSearchFilterButton();
     }
 
-    public static List<String> getNamesOfAllInspectionsInTheList()
-    {
+    public static List<String> getNamesOfAllInspectionsInTheList() {
+
         List<String> inspectionsNamesList = new ArrayList<>();
         for (WebElement inspectionRow: new VNextBOInspectionsWebPage().inspectionsNamesElementsList
         ) {
@@ -114,8 +114,8 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         return inspectionsNamesList;
     }
 
-    public static List<String> getStatusesOfAllInspectionsInTheList()
-    {
+    public static List<String> getStatusesOfAllInspectionsInTheList() {
+
         List<String> inspectionsStatusesList = new ArrayList<>();
         for (WebElement inspectionRow: new VNextBOInspectionsWebPage().inspectionStatusesList
         ) {
@@ -124,8 +124,8 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         return inspectionsStatusesList;
     }
 
-    public static List<String> getNumbersOfAllInspectionsInTheList()
-    {
+    public static List<String> getNumbersOfAllInspectionsInTheList() {
+
         List<String> inspectionsNumbersList = new ArrayList<>();
         for (WebElement inspectionRow: new VNextBOInspectionsWebPage().inspectionNumbersList
         ) {
@@ -134,78 +134,78 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         return inspectionsNumbersList;
     }
 
-    public static void advancedSearchInspectionByCustomer(String customerName)
-    {
+    public static void advancedSearchInspectionByCustomer(String customerName) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickClearButton();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchAutocompleteField("Customer", customerName);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void advancedSearchInspectionByStatusAndInspectionNumber(String inspectionNumber, String statusSearch)
-    {
+    public static void advancedSearchInspectionByStatusAndInspectionNumber(String inspectionNumber, String statusSearch) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#",inspectionNumber);
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", statusSearch);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void advancedSearchInspectionByInspectionNumber(String inspectionNumber)
-    {
+    public static void advancedSearchInspectionByInspectionNumber(String inspectionNumber) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickClearButton();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#",inspectionNumber);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void advancedSearchInspectionByStatus(String statusSearch)
-    {
+    public static void advancedSearchInspectionByStatus(String statusSearch) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", statusSearch);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void advancedSearchInspectionByStockNumber(String stockNumber)
-    {
+    public static void advancedSearchInspectionByStockNumber(String stockNumber) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickClearButton();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Stock#", stockNumber);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void advancedSearchInspectionByPONumber(String poNumber)
-    {
+    public static void advancedSearchInspectionByPONumber(String poNumber) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickClearButton();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("PO#", poNumber);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void advancedSearchInspectionByRONumber(String roNumber)
-    {
+    public static void advancedSearchInspectionByRONumber(String roNumber) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickClearButton();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("RO#", roNumber);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void advancedSearchInspectionByVIN(String VIN)
-    {
+    public static void advancedSearchInspectionByVIN(String VIN) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickClearButton();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void findInspectionByCustomTimeFrame(String timeFrame)
-    {
+    public static void findInspectionByCustomTimeFrame(String timeFrame) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Timeframe", timeFrame);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void findInspectionByCustomTimeFrameAndNumber(String inspectionId, String fromDate, String toDate)
-    {
+    public static void findInspectionByCustomTimeFrameAndNumber(String inspectionId, String fromDate, String toDate) {
+
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionId);
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Timeframe", "Custom");
@@ -214,24 +214,24 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void deleteSavedAdvancedSearchFilter(String filterName)
-    {
+    public static void deleteSavedAdvancedSearchFilter(String filterName) {
+
         new VNextBOInspectionsWebPage().openSavedAdvancedSearchFilter(filterName);
         VNextBOInspectionsAdvancedSearchSteps.deleteSavedSearchFilter();
     }
 
-    public static String getNotFoundInspectionMessage()
-    {
+    public static String getNotFoundInspectionMessage() {
+
         return  Utils.getText(new VNextBOInspectionsWebPage().howToCreateInspectionLink);
     }
 
-    public static String getSelectedInspectionCustomerName()
-    {
+    public static String getSelectedInspectionCustomerName() {
+
         return Utils.getText(new VNextBOInspectionsWebPage().selectedInspectionCustomerName);
     }
 
-    public static String getSelectedInspectionParameterValueByName(String parameterName)
-    {
+    public static String getSelectedInspectionParameterValueByName(String parameterName) {
+
         return Utils.getText(new VNextBOInspectionsWebPage().selectedInspectionFieldValueByName(parameterName));
     }
 }

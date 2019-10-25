@@ -12,13 +12,13 @@ import java.util.Arrays;
 
 public class VNextBOInspectionsApprovalPageSteps {
 
-    public static boolean isApprovePrintPageButtonDisplayed()
-    {
+    public static boolean isApprovePrintPageButtonDisplayed() {
+
         return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getApproveServiceButton());
     }
 
-    public static void clickInspectionApprovePrintPageButton()
-    {
+    public static void clickInspectionApprovePrintPageButton() {
+
         VNextBOInspectionsApprovalWebPage inspectionsApprovalWebPage =
                 new VNextBOInspectionsApprovalWebPage();
         if (isApprovePrintPageButtonDisplayed()) {
@@ -30,14 +30,14 @@ public class VNextBOInspectionsApprovalPageSteps {
         }
     }
 
-    private static VNextBOInspectionsApprovalWebPage setPrintPageNotes(String notes)
-    {
+    private static VNextBOInspectionsApprovalWebPage setPrintPageNotes(String notes) {
+
         Utils.clearAndType(new VNextBOInspectionsApprovalWebPage().getNotesTextArea(), notes);
         return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
-    public static VNextBOInspectionsApprovalWebPage clickConfirmApprovePrintPageButtonIfDisplayed()
-    {
+    public static VNextBOInspectionsApprovalWebPage clickConfirmApprovePrintPageButtonIfDisplayed() {
+
         VNextBOInspectionsApprovalWebPage inspectionsApprovalWebPage =
                 new VNextBOInspectionsApprovalWebPage();
         if (Utils.isElementDisplayed(inspectionsApprovalWebPage.getGeneralApproveButton())) {
@@ -48,8 +48,8 @@ public class VNextBOInspectionsApprovalPageSteps {
         return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
-    public static String getPrintPageInspectionStatus()
-    {
+    public static String getPrintPageInspectionStatus() {
+
         VNextBOInspectionsApprovalWebPage inspectionsApprovalWebPage =
                 new VNextBOInspectionsApprovalWebPage();
         try {
@@ -63,12 +63,13 @@ public class VNextBOInspectionsApprovalPageSteps {
         }
     }
 
-    public static boolean isNotesTextAreaDisplayed()
-    {
+    public static boolean isNotesTextAreaDisplayed() {
+
         return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getNotesTextArea());
     }
 
     public static void setNotesIfDisplayed(String ...notes) {
+
         if (isNotesTextAreaDisplayed()) {
             if (notes.length > 0) {
                 Arrays.asList(notes).forEach(VNextBOInspectionsApprovalPageSteps::setPrintPageNotes);
@@ -78,20 +79,20 @@ public class VNextBOInspectionsApprovalPageSteps {
         }
     }
 
-    public static boolean isPrintPageInspectionStatusDisplayed()
-    {
+    public static boolean isPrintPageInspectionStatusDisplayed() {
+
         return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getInspectionStatus());
     }
 
-    public static void completeApprovingPrintPageInspection(String ...notes)
-    {
+    public static void completeApprovingPrintPageInspection(String ...notes) {
+
         clickInspectionApprovePrintPageButton();
         setNotesIfDisplayed(notes);
         clickConfirmApprovePrintPageButtonIfDisplayed();
     }
 
-    public static void approveInspection(String ...note)
-    {
+    public static void approveInspection(String ...note) {
+
         String parent = Utils.getParentTab();
         VNextBOInspectionsPageSteps.clickTheApproveInspectionButton();
         new VNextBOConfirmationDialog().clickYesButton();
