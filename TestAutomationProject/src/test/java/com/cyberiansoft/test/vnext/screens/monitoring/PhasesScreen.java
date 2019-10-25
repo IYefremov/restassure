@@ -13,6 +13,9 @@ import java.util.List;
 @Getter
 public class PhasesScreen extends MonitorScreen {
 
+    @FindBy(xpath = "//div[@data-autotests-id='phases-list']")
+    private WebElement rootElement;
+
     @FindBy(xpath = "//div[contains(@class,'phase-item')]/div[contains(@class,'icon-item phase')]")
     private List<PhaseElement> phaseListElements;
 

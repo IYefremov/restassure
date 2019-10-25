@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
-import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
@@ -15,6 +14,7 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.BundleServiceSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import org.json.simple.JSONObject;
@@ -39,14 +39,23 @@ public class AutoAssignTechCases extends BaseTestCaseTeamEditionRegistration {
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
+        AvailableServicesScreenSteps.selectService("rozstalnoy_enable_bundle");
+        BundleServiceSteps.setBundlePrice("1450");
+        BundleServiceSteps.openServiceDetails("rozstalnoy_disable_labor");
+        WizardScreenSteps.saveAction();
+        BundleServiceSteps.openServiceDetails("rozstalnoy_disable_money");
+        WizardScreenSteps.saveAction();
+        WizardScreenSteps.saveAction();
+        AvailableServicesScreenSteps.openServiceDetails("Paint");
+        WizardScreenSteps.saveAction();
+        AvailableServicesScreenSteps.selectService("Labor AM");
         workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void autoAssignTechToMoneyService(String rowID,
-                                             String description, JSONObject testData) {
+    public void autoAssignTechToService(String rowID,
+                                        String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         List<ServiceData> serviceDataList = workOrderData.getServicesList();
         ServiceData serviceWithNonDefaultTechnician = serviceDataList.get(0);

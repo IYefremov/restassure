@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.validations;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
@@ -41,6 +42,7 @@ public class PhaseScreenValidations {
     }
 
     public static void validateServiceTechnician(ServiceData serviceData) {
+        BaseUtils.waitABit(2000);
         Assert.assertEquals(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()).getTechnician(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
     }
 }

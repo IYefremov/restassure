@@ -12,8 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextCustomKeyboard extends VNextBaseScreen {
-	
-	@FindBy(xpath="//*[@data-autotests-id='keypad']")
+
+    @FindBy(xpath = "//*[@data-autotests-id='keypad'][3]")
 	private WebElement keyboard;
 	
 	public VNextCustomKeyboard(AppiumDriver<MobileElement> appiumdriver) {
@@ -33,7 +33,7 @@ public class VNextCustomKeyboard extends VNextBaseScreen {
 	
 	public void clickKeyboardDoneButton() {
 		tap(keyboard.findElement(By.xpath(".//*[@class='link close-picker']")));
-		WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='keypad']"));
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='keypad'][3]"));
 	}
 	
 	public void clickKeyboardMinusButton() {
