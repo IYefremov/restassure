@@ -114,7 +114,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 .clickEditServiceByServiceName(data.getPriceServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPriceServiceName());
 //        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
-//        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getServiceDescription()); //todo verify getServiceDescription.getText() works
+        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getServiceDescription());
         Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
                 VNextPriceCalculations.getPriceRepresentation(data.getServicePrice()));
         Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
@@ -123,7 +123,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         addnewservicedialog.selectServiceType(data.getServiceTypeEdited());
         addnewservicedialog.setServiceDescription(data.getServiceDescription() + data.getServiceEdited());
         addnewservicedialog.setServicePriceValue(data.getServicePriceEdited());
-        servicespage = addnewservicedialog.saveNewService();
+        addnewservicedialog.saveNewService();
         servicespage.searchServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName() +
                 data.getServiceEdited()));
@@ -156,8 +156,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         VNextBOAddNewServiceDialog addNewServiceDialog = servicespage
                 .clickEditServiceByServiceName(data.getPriceServiceName());
         Assert.assertEquals(addNewServiceDialog.getServiceName(), data.getPriceServiceName());
-        Assert.assertEquals(addNewServiceDialog.getServiceType(), data.getServiceType());
-//        Assert.assertEquals(addNewServiceDialog.getServiceDescription(), data.getServiceDescription());
+//        Assert.assertEquals(addNewServiceDialog.getServiceType(), data.getServiceType());
+        Assert.assertEquals(addNewServiceDialog.getServiceDescription(), data.getServiceDescription());
         Assert.assertEquals(addNewServiceDialog.getServicePricePercentageValueTxtField().getAttribute("value"),
                 VNextPriceCalculations.getPriceRepresentation(data.getServicePrice()));
         Assert.assertTrue(addNewServiceDialog.isServicePriceTypeVisible());
@@ -211,8 +211,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         addnewservicedialog = servicespage
                 .clickEditServiceByServiceName(data.getPercentageServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
-        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
-//        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
+//        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
+        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
         Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
                 VNextPriceCalculations.getPercentageRepresentation(data.getServicePrice()).replace("%", ""));
         Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
@@ -235,6 +235,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 + data.getServiceEdited()), data.getPercentageServiceDescription() + data.getServiceEdited());
     }
 
+    //TODO BUG #94337
+    //TODO https://cyb.tpondemand.com/RestUI/Board.aspx#page=bug/94337&appConfig=eyJhY2lkIjoiNkZENTE5RjAzRTRCN0NCNTU0NzNFMEQ3NjE5QTgxOTIifQ==
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testRemovePercentageService(String rowID, String description, JSONObject testData) {
 
@@ -255,8 +257,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         addnewservicedialog = servicespage
                 .clickEditServiceByServiceName(data.getPercentageServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
-        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
-//        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
+//        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
+        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
         Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
                 VNextPriceCalculations.getPercentageRepresentation(data.getServicePrice()).replace("%", ""));
         Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
@@ -287,6 +289,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 + data.getServiceEdited()));
         }
 
+    //TODO BUG #94337
+    //TODO https://cyb.tpondemand.com/RestUI/Board.aspx#page=bug/94337&appConfig=eyJhY2lkIjoiNkZENTE5RjAzRTRCN0NCNTU0NzNFMEQ3NjE5QTgxOTIifQ==
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testResumeRemovedMoneyService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
@@ -307,8 +311,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         VNextBOAddNewServiceDialog addNewServiceDialog = servicespage
                 .clickEditServiceByServiceName(data.getPriceServiceName());
         Assert.assertEquals(addNewServiceDialog.getServiceName(), data.getPriceServiceName());
-        Assert.assertEquals(addNewServiceDialog.getServiceType(), data.getServiceType());
-//        Assert.assertEquals(addNewServiceDialog.getServiceDescription(), data.getServiceDescription());
+//        Assert.assertEquals(addNewServiceDialog.getServiceType(), data.getServiceType());
+        Assert.assertEquals(addNewServiceDialog.getServiceDescription(), data.getServiceDescription());
         Assert.assertEquals(addNewServiceDialog.getServicePricePercentageValueTxtField().getAttribute("value"),
                 VNextPriceCalculations.getPriceRepresentation(data.getServicePrice()));
         Assert.assertTrue(addNewServiceDialog.isServicePriceTypeVisible());
@@ -355,6 +359,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage.deleteServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
     }
 
+    //TODO BUG #94337
+    //TODO https://cyb.tpondemand.com/RestUI/Board.aspx#page=bug/94337&appConfig=eyJhY2lkIjoiNkZENTE5RjAzRTRCN0NCNTU0NzNFMEQ3NjE5QTgxOTIifQ==
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testResumeRemovedPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
@@ -373,9 +379,9 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 
         addnewservicedialog = servicespage.clickEditServiceByServiceName(data.getPercentageServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
-        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
-//        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
-        Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtField().getAttribute("value"),
+//        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
+        Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
+        Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtFieldValue(),
                 VNextPriceCalculations.getPercentageRepresentation(data.getServicePrice()).replace("%", ""));
         Assert.assertTrue(addnewservicedialog.isServicePriceTypeVisible());
 
@@ -422,6 +428,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage.deleteServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
     }
 
+    //TODO BUG 93334
+    //TODO https://cyb.tpondemand.com/RestUI/Board.aspx#page=bug/94334&appConfig=eyJhY2lkIjoiNkZENTE5RjAzRTRCN0NCNTU0NzNFMEQ3NjE5QTgxOTIifQ==
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyErrorMessagesOnCreateEditServiceDialog(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);

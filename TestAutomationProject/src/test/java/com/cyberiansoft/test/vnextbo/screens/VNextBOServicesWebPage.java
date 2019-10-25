@@ -50,7 +50,16 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
     private WebElement advancedSearchNameField;
 
     @FindBy(xpath = "//span[@aria-owns='advSearchServices-type_listbox']/span")
-    private WebElement advancedsearchtypefld;
+    private WebElement advancedSearchTypeField;
+
+    @FindBy(id = "advSearchServices-type-list")
+    private WebElement advancedSearchTypeDropDown;
+
+    @FindBy(xpath = "//ul[@id='advSearchServices-type_listbox']/li")
+    private List<WebElement> advancedSearchTypeListBox;
+
+    @FindBy(id = "advSearchServices-type_listbox")
+    private WebElement advancedSearchServicesTypeListBox;
 
     @FindBy(xpath = "//form[@id='advSearchServices-form']//button[@class='btn btn-black btn-wide']")
     private WebElement advancedSearchButton;
@@ -85,11 +94,8 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
     public VNextBOServicesWebPage searchServiceByServiceName(String searchtext) {
         setSearchFreeTextValue(searchtext);
         waitABit(1500);
-        wait
-                .ignoring(WebDriverException.class)
-                .until(ExpectedConditions.elementToBeClickable(searchservicespanel.findElement(By
-                        .xpath(".//div[@class='custom-search__input']/i[@data-bind='click: freeTextSearch']"))))
-                .click();
+        Utils.clickElement(searchservicespanel.findElement(By
+                .xpath(".//div[@class='custom-search__input']/i[@data-bind='click: freeTextSearch']")));
         waitForLoading();
         return this;
     }
@@ -133,22 +139,13 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
         return this;
     }
 
-    private void selectAdvancedServiceType(String servicetype) {
-        wait.until(ExpectedConditions.elementToBeClickable(driver
-                .findElement(By.xpath("//span[@aria-owns='advSearchServices-type_listbox']/span/span[2]"))))
-                .click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("advSearchServices-type_listbox"))));
-        WebElement advserchcmb = driver.findElement(By.id("advSearchServices-type_listbox"));
-        waitABit(500);
-        wait
-                .until(ExpectedConditions.elementToBeClickable(advserchcmb.
-                        findElement(By.xpath(".//li/span[text()='" + servicetype + "']"))))
-                .click();
-        waitABit(1500);
+    private void selectAdvancedServiceType(String serviceType) {
+        Utils.clickElement(advancedSearchTypeField);
+        Utils.selectOptionInDropDown(advancedSearchTypeDropDown, advancedSearchTypeListBox, serviceType, true);
     }
 
     private void clickSearchButtonForAdvancedSearch() {
-        wait.until(ExpectedConditions.elementToBeClickable(advancedSearchButton)).click();
+        Utils.clickElement(advancedSearchButton);
         waitForLoading();
     }
 
@@ -172,9 +169,7 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
                     return true;
                 }
             }
-        } catch (Exception ignored) {
-            ignored.printStackTrace();
-        }
+        } catch (Exception ignored) {}
         return false;
     }
 
@@ -348,7 +343,6 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
         waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
         wait.until(ExpectedConditions.elementToBeClickable(addservicebtn));
     }
-
 
     public void unarchiveServiceByServiceName(String servicename) {
         VNextBOConfirmationDialog confirmdialog = clickUnarchiveButtonForService(servicename);

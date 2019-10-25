@@ -11,8 +11,8 @@ import org.testng.Assert;
 
 public class VNextBOROPageVerifications {
 
-    public static void verifyTechnicianIsDisplayed(String woNumber, String technician) {
-        Assert.assertEquals(new VNextBOROWebPage().getTechniciansValueForWO(woNumber), technician,
+    public static void verifyAnotherTechnicianIsDisplayed(String woNumber, String prevTechnician) {
+        Assert.assertNotEquals(new VNextBOROWebPage().getTechniciansValueForWO(woNumber), prevTechnician,
                 "The technician hasn't been changed");
     }
 

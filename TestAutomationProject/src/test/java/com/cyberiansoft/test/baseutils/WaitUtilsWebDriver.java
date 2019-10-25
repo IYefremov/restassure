@@ -174,7 +174,7 @@ public class WaitUtilsWebDriver {
 
     public static void waitForDropDownToBeOpened(WebElement dropDown) {
         try {
-            getWait().until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "false"));
+            WaitUtilsWebDriver.waitForAttributeToBe(dropDown, "aria-hidden", "false");
         } catch (Exception ignored) {}
     }
 

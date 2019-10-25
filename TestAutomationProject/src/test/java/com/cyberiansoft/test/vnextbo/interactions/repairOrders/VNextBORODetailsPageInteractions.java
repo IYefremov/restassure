@@ -4,13 +4,12 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROReportProblemDialog;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROResolveProblemDialog;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.annotation.Nullable;
@@ -53,6 +52,15 @@ public class VNextBORODetailsPageInteractions {
         } catch (Exception ignored) {
             return "";
         }
+    }
+
+    public void updateRoStatusValue(String previousStatus) {
+        try {
+            WaitUtilsWebDriver
+                    .getShortWait()
+                    .until((ExpectedCondition<Boolean>) driver ->
+                            !getRoStatusValue().equals(previousStatus));
+        } catch (Exception ignored) {}
     }
 
     @Nullable
@@ -266,6 +274,21 @@ public class VNextBORODetailsPageInteractions {
 
     public void clickCheckOutOptionForPhase() {
         setOptionForPhase(detailsPage.getPhaseActionsCheckOutOption());
+    }
+
+    private WebElement clickActionsIcon(String serviceId) {
+        final WebElement actionsIcon = detailsPage.getActionIconForServiceId(serviceId);
+        Utils.clickWithActions(actionsIcon);
+        WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
+        return actionsIcon;
+    }
+
+    public void openNotesDialog(String serviceId) {
+        clickActionsIcon(serviceId);
+        Utils.clickElement(By
+                .xpath("//div[@class='serviceRow' and @data-order-service-id='" + serviceId
+                        + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]//label[text()='Notes']"));
+        WaitUtilsWebDriver.waitForLoading();
     }
 
     public List<String> getPhaseStatusValues() {

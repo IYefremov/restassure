@@ -15,8 +15,8 @@ import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODevice
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.Inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
@@ -63,7 +63,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOClientsListViewInteractions listViewInteractions;
     private VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions;
-    private VNextBODeviceManagementSteps deviceManagementSteps;
     private VNextBOQuickNotesWebPage quickNotesPage;
 
     @BeforeClass
@@ -99,7 +98,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         leftMenuInteractions = new VNextBOLeftMenuInteractions();
         listViewInteractions = new VNextBOClientsListViewInteractions();
         emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
-        deviceManagementSteps = new VNextBODeviceManagementSteps();
     }
 
     @AfterMethod
@@ -483,7 +481,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         Assert.assertTrue(VNextBOPendingRegistrationsValidations.isUserDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't been displayed in the pending registration table");
-        deviceManagementSteps.deletePendingRegistrationDeviceByUser(randomUser);
+        VNextBODeviceManagementSteps.deletePendingRegistrationDeviceByUser(randomUser);
         Assert.assertTrue(VNextBOPendingRegistrationsValidations.isUserNotDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't disappeared from the pending registration table");
     }
