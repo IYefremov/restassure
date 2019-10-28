@@ -249,7 +249,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.saveWizard();
 
 		myInspectionsScreen.selectInspectionForEdit(inspNumber);
-		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		WizardScreensSteps.clickNotesButton();
+		NotesScreen notesScreen = new NotesScreen();
 		notesScreen.setNotes(_notes1);
 		notesScreen.addQuickNotes(quickNote);
 
@@ -4050,7 +4051,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = myInspectionsScreen.selectDefaultInspectionType();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
-		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		WizardScreensSteps.clickNotesButton();
+		NotesScreen notesScreen = new NotesScreen();
 		notesScreen.setNotes(notesText);
 		notesScreen.clickSaveButton();
 		vehicleScreen.saveWizard();
@@ -5119,7 +5121,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_SPORT_CAR);
 		NavigationSteps.navigateToVehicleInfoScreen();
-		NotesScreen notesScreen = vehicleScreen.clickNotesButton();
+		WizardScreensSteps.clickNotesButton();
+		NotesScreen notesScreen = new NotesScreen();
 		notesScreen.setNotes(inspectionNotes);
 		notesScreen.clickSaveButton();
 
@@ -5170,7 +5173,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		final String workOrderNumber = teamWorkOrdersScreen.getFirstWorkOrderNumberValue();
 		teamWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen.waitVehicleScreenLoaded();
-		notesScreen = vehicleScreen.clickNotesButton();
+		WizardScreensSteps.clickNotesButton();
 		Assert.assertEquals(notesScreen.getNotesValue(), inspectionNotes);
 		notesScreen.clickSaveButton();
 		Assert.assertEquals(vehicleScreen.getEst(), inspectionNumber);
@@ -5184,7 +5187,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 			Assert.assertTrue(servicesScreen.isNotesIconPresentForSelectedWorkOrderService(serviceData.getServiceName()));
 		}
 		servicesScreen.cancelWizard();
-		teamWorkOrdersScreen.clickHomeButton();
+		NavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

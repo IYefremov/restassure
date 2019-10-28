@@ -67,10 +67,8 @@ public class HomeScreen extends iOSHDBaseScreen {
 	}
 
 	public MyInspectionsScreen clickMyInspectionsButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Inspections")));
-		//TouchAction action = new TouchAction(appiumdriver);
-		//action.press(myinspectionsbtn).waitAction(300).release().perform();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Home")));
 		appiumdriver.findElementByAccessibilityId("Inspections").click();
 		MyInspectionsScreen myInspectionsScreen = new MyInspectionsScreen();
 		myInspectionsScreen.switchToMyView();
@@ -156,7 +154,7 @@ public class HomeScreen extends iOSHDBaseScreen {
 
 	public SettingsScreen clickSettingsButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Settings")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Home")));
 		appiumdriver.findElementByAccessibilityId("Settings").click();
 		return new SettingsScreen();
 	}	

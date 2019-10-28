@@ -112,6 +112,9 @@ public class ServicesScreen extends BaseWizardScreen {
 		List<MobileElement> serviceCells = selectedservices.findElementByClassName("XCUIElementTypeTable").
 				findElementsByXPath("//XCUIElementTypeStaticText[@name='" + serviceName + "']/..");
 		for (MobileElement serviceCell : serviceCells) {
+			System.out.println("++" + serviceCell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", ""));
+			System.out.println("++" + servicepriceandquantity.replaceAll(" ", ""));
+
 			if (serviceCell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
 			servicepriceandquantity.replaceAll(" ", ""))) {
 				selected = true;
