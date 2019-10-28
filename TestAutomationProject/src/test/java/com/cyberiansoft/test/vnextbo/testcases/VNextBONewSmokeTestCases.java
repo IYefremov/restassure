@@ -455,7 +455,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.setAccountInfoData(data.getAccountInfoData());
         Assert.assertFalse(new VNextBOAccountInfoBlockInteractions().isPoNumberUpfrontRequiredCheckboxClickable());
         VNextBOClientDetailsViewAccordionSteps.setAddressData(data.getAddressData());
-        VNextBOClientDetailsViewAccordionSteps.setEmailOptionsData(data.getEmailOptionsData());
+        VNextBOClientDetailsViewAccordionSteps.setEmailOptionsData(data.getEmailOptionsData(), false);
 
         Assert.assertFalse(emailOptionsBlockInteractions.isInvoicesCheckboxClickable(),
                 "The invoices checkbox is clickable");

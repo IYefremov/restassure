@@ -18,6 +18,10 @@ public class VNextBOPreferencesBlockInteractions {
         Utils.clickElement(preferencesBlock.getUseSingleWoTypeCheckbox());
     }
 
+    public void clickVehicleHistoryEnforcedCheckbox() {
+        Utils.clickElement(preferencesBlock.getVehicleHistoryEnforcedCheckbox());
+    }
+
     public void setDefaultArea(String option) {
         Utils.clickElement(preferencesBlock.getDefaultAreaArrow());
         Utils.selectOptionInDropDown(preferencesBlock.getDefaultAreaDropDown(),

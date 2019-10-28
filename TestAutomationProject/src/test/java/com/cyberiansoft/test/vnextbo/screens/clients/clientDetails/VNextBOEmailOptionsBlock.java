@@ -9,6 +9,9 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class VNextBOEmailOptionsBlock extends VNextBOClientsDetailsViewAccordion {
 
+    @FindBy(xpath = "//div[@id='collapseEmailOptions']/div[@class='panel-body']/div")
+    private WebElement emailOptionsPanel;
+
     @FindBy(id = "clientEditForm-email-default-recepient")
     private WebElement defaultRecipientInputField;
 

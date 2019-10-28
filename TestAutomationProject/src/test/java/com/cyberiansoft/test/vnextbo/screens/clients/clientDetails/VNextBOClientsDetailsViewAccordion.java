@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,8 +34,16 @@ public class VNextBOClientsDetailsViewAccordion extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='client-details-view-headingMisc']//div[contains(text(), 'Miscellaneous')]")
     private WebElement miscellaneous;
 
-    @FindBy(xpath = "//div[@id='client-details-view-headingMisc']//div[contains(text(), 'Services')]")
-    private WebElement services;
+    @FindBy(xpath = "//button[@data-bind='click: onCancelClick']")
+    private WebElement cancelButton;
+
+    @FindBy(xpath = "//button[@data-bind='click: onSaveClientClick']")
+    private WebElement okButton;
+
+    public WebElement dropDownFieldOption(String optionName) {
+
+        return driver.findElement(By.xpath("//ul[contains(@id, 'clientEditForm')]//li[text()='" + optionName +"']"));
+    }
 
     public VNextBOClientsDetailsViewAccordion() {
         super(DriverBuilder.getInstance().getDriver());

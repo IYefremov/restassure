@@ -5,7 +5,6 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOAccountInfoBlock;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 public class VNextBOAccountInfoBlockInteractions {
 
@@ -30,25 +29,25 @@ public class VNextBOAccountInfoBlockInteractions {
 
     public void setExportAs(String exportAs) {
         Utils.clearAndType(accountInfoBlock.getExportAsInputField(), exportAs);
-        Utils.selectOptionInDropDown(accountInfoBlock.getExportAsDropDown(),
-                accountInfoBlock.getExportAsListBoxOptions(), exportAs, true);
+        WaitUtilsWebDriver.waitABit(2000);
+        Utils.selectOptionInDropDownWithJs(accountInfoBlock.getExportAsDropDown(),
+                accountInfoBlock.getExportAsListBoxOptionByText(exportAs));
     }
 
     public void setClass(String classOption) {
-        Utils.clickElement(accountInfoBlock.getClassArrow());
-        if (classOption.equals("")) {
-            try {
-                WaitUtilsWebDriver.waitForVisibility(accountInfoBlock.getClassDropDownNoDataFound(), 3);
-            } catch (Exception ignored) {
-                Assert.fail("\"No data found message\" hasn't been displayed");
-            }
+
+        if (!classOption.equals("")) {
             Utils.clickElement(accountInfoBlock.getClassArrow());
-            WaitUtilsWebDriver.waitForInvisibility(accountInfoBlock.getClassDropDown());
-        } else {
             Utils.selectOptionInDropDown(accountInfoBlock.getClassDropDown(),
                     accountInfoBlock.getClassListBoxOptions(), classOption, true);
         }
     }
+
+    /*public void setQbAccount(String qbAccount) {
+        Utils.clickElement(accountInfoBlock.getQbAccountArrow());
+        Utils.selectOptionInDropDownWithJs(accountInfoBlock.getQbAccountDropDown(),
+                accountInfoBlock.getQbAccountListBoxOptionByText(qbAccount));
+    }*/
 
     public void setQbAccount(String qbAccount) {
         Utils.clickElement(accountInfoBlock.getQbAccountArrow());

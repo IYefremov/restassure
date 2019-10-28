@@ -139,6 +139,13 @@ public class Utils {
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
     }
 
+    public static void selectOptionInDropDownWithJs(WebElement dropDown, WebElement option) {
+        waitForDropDownToBeOpened(dropDown);
+        WaitUtilsWebDriver.waitForVisibility(option);
+        Utils.clickWithJS(option);
+        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
+    }
+
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
         if (draggable) {
             waitForDropDownToBeOpened(dropDown);

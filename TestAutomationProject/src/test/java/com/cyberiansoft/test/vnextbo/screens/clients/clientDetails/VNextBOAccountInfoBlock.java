@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.screens.clients.clientDetails;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,6 +11,9 @@ import java.util.List;
 
 @Getter
 public class VNextBOAccountInfoBlock extends VNextBOClientsDetailsViewAccordion {
+
+    @FindBy(xpath = "//div[@id='collapseAccountInfo']/div[@class='panel-body']/div")
+    private WebElement accountInfoPanel;
 
     @FindBy(id = "clientEditForm-client-accounting-id")
     private WebElement accountingId;
@@ -29,6 +33,9 @@ public class VNextBOAccountInfoBlock extends VNextBOClientsDetailsViewAccordion 
     @FindBy(xpath = "//ul[@id='clientEditForm-client-export-as_listbox']/li")
     private List<WebElement> exportAsListBoxOptions;
 
+    @FindBy(xpath = "//span[@aria-owns='clientEditForm-client-class_listbox']//span[contains(@class, 'k-input')]")
+    private WebElement classField;
+
     @FindBy(xpath = "//span[@aria-owns='clientEditForm-client-class_listbox']//span[contains(@class, 'k-icon')]")
     private WebElement classArrow;
 
@@ -40,6 +47,9 @@ public class VNextBOAccountInfoBlock extends VNextBOClientsDetailsViewAccordion 
 
     @FindBy(xpath = "//ul[@id='clientEditForm-client-class_listbox']/li")
     private List<WebElement> classListBoxOptions;
+
+    @FindBy(xpath = "//span[@aria-owns='clientEditForm-client-qb-account_listbox']//span[contains(@class, 'k-input')]")
+    private WebElement qbAccountField;
 
     @FindBy(xpath = "//span[@aria-owns='clientEditForm-client-qb-account_listbox']//span[contains(@class, 'k-icon')]")
     private WebElement qbAccountArrow;
@@ -55,6 +65,17 @@ public class VNextBOAccountInfoBlock extends VNextBOClientsDetailsViewAccordion 
 
     @FindBy(id = "poUpfrontRequired")
     private WebElement poNumberUpfrontRequiredCheckbox;
+
+
+    public WebElement getExportAsListBoxOptionByText(String option) {
+
+        return driver.findElement(By.xpath("//ul[@id='clientEditForm-client-export-as_listbox']/li[text()='" + option + "']"));
+    }
+
+    public WebElement getQbAccountListBoxOptionByText(String option) {
+
+        return driver.findElement(By.xpath("//ul[@id='clientEditForm-client-qb-account_listbox']/li[text()='" + option + "']"));
+    }
 
     public VNextBOAccountInfoBlock() {
         super();

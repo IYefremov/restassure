@@ -12,22 +12,22 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class VNextBOSearchPanel extends VNextBOBaseWebPage {
 
-    @FindBy(xpath = "//section[@class='view']//div[contains(@id, 'search-form')]")
+    @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]")
     private WebElement searchPanel;
 
-    @FindBy(xpath = "//section[@class='view']//input[contains(@id, 'search-freeText')]")
+    @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//input[contains(@id, 'freeText')]")
     private WebElement searchInputField;
 
-    @FindBy(xpath = "//section[@class='view']//i[contains(@id, 'search-search')]")
+    @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//i[@class='icon-search']")
     private WebElement searchLoupeIcon;
 
-    @FindBy(xpath = "//section[@class='view']//i[contains(@id, 'search-caret')]")
+    @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//i[contains(@class, 'caret')]")
     private WebElement advancedSearchCaret;
 
-    @FindBy(xpath = "//section[@class='view']//i[@class='icon-cancel-circle']")
+    @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//i[contains(@class, 'cancel')]")
     private WebElement searchXIcon;
 
-    @FindBy(xpath = "//section[@class='view']//div[@data-bind='text: filterInfoString']")
+    @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//div[contains(@class, 'info-text')]")
     private WebElement filterInfoText;
 
     public VNextBOSearchPanel() {

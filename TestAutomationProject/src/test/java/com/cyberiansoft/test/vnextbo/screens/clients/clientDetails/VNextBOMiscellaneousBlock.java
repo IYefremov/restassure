@@ -9,8 +9,17 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class VNextBOMiscellaneousBlock extends VNextBOClientsDetailsViewAccordion {
 
+    @FindBy(xpath = "//div[@id='collapseMisc']/div[@class='panel-body']/div")
+    private WebElement miscellaneousPanel;
+
     @FindBy(id = "clientEditForm-client-notes")
     private WebElement notesField;
+
+    @FindBy(xpath = "//button[text()='Upload']")
+    private WebElement uploadButton;
+
+    @FindBy(xpath = "//button[text()='Clear']")
+    private WebElement clearButton;
 
     public VNextBOMiscellaneousBlock() {
         super();
