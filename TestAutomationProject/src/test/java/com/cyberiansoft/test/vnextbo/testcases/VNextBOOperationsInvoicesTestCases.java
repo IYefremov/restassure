@@ -255,4 +255,64 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                                 .isInvoiceDisplayed(inv),
                         "The invoice " + inv + " is not displayed after being unvoided"));
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanApproveInvoice(String rowID, String description, JSONObject testData) {
+        VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
+
+        leftMenuInteractions.selectInvoicesMenu();
+
+        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
+                "The advanced search dialog is not opened");
+
+        advancedSearchInvoiceForm
+                .setTimeFrame(data.getTimeFrame())
+                .setFromDate(data.getFromDate())
+                .setToDate(data.getToDate())
+                .setStatus(data.getStatus2())
+                .clickSearchButton();
+
+        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+
+        final String[] invoices = {
+                invoicesPage.getInvoiceName(0),
+                invoicesPage.getInvoiceName(1),
+                invoicesPage.getInvoiceName(2)
+        };
+
+        Arrays.stream(invoices)
+                .forEach((inv) -> invoicesPage
+                        .clickFirstInvoice()
+                        .clickVoidButton()
+                        .clickInvoiceYesButton());
+
+        Arrays.stream(invoices)
+                .forEach((inv) -> Assert.assertFalse(invoicesPage
+                                .isInvoiceDisplayed(inv),
+                        "The invoice " + inv + " is displayed after being voided"));
+
+        invoicesPage
+                .clickAdvancedSearchCaret()
+                .setStatus(data.getStatus())
+                .clickSearchButton();
+
+        invoicesPage
+                .clickCheckbox(invoices)
+                .clickHeaderIconUnvoidButton()
+                .clickInvoiceYesButton();
+
+        invoicesPage
+                .clickAdvancedSearchCaret()
+                .setStatus(data.getStatus2())
+                .clickSearchButton();
+//                .scrollInvoices(); todo uncomment here, if the test becomes not stable
+
+        Arrays.stream(invoices)
+                .forEach((inv) -> Assert.assertTrue(invoicesPage
+                                .isInvoiceDisplayed(inv),
+                        "The invoice " + inv + " is not displayed after being unvoided"));
+    }
 }

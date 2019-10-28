@@ -1443,5 +1443,30 @@
         "Skipped"
       ]
     }
+  ],
+
+  "verifyTechnicianUserCanFindOrdersUsingSavedSearchMyWorkQueue": [
+    {
+      "rowID": "verifyTechnicianUserCanFindOrdersUsingSavedSearchMyWorkQueue.01",
+      "description": "Test Case 91013:Technician user can find orders using \"saved search\" \"My Work Queue\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91228"
+        }
+      ],
+      "userName": "yrozstalnoy+7@cyberiansoft.com",
+      "userPassword": "Barcelona_1990",
+      "location": "Rozstalnoy_location",
+      "searchValues": {
+        "searchName": "My Work Queue"
+      },
+      "technician": "Yevhenii Rozstalnoy",
+      "serviceStatuses": [
+        "Completed",
+        "Audited",
+        "Refused",
+        "Skipped"
+      ]
+    }
   ]
 }

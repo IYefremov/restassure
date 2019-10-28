@@ -89,5 +89,22 @@
       "fromDate": "01/01/2018",
       "toDate": "03/01/2018"
     }
+  ],
+
+  "verifyUserCanApproveInvoice": [
+    {
+      "rowID": "verifyUserCanApproveInvoice.01",
+      "description": "Test Case 91045:User can approve invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90976"
+        }
+      ],
+      "status": "Void",
+      "status2": "New",
+      "timeFrame": "Custom",
+      "fromDate": "01/01/2018",
+      "toDate": "03/01/2018"
+    }
   ]
 }

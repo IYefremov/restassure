@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.testcases;
+package com.cyberiansoft.test.vnextbo.testcases.repairOrders;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
