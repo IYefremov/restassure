@@ -44,7 +44,5 @@ public class VNexBOAddNewUserDialog extends VNextBOBaseWebPage {
 	public VNexBOAddNewUserDialog() {
 		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(firstNameFld));
 	}
 }

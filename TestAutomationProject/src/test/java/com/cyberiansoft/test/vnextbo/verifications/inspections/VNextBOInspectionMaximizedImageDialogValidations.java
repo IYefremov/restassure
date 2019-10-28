@@ -7,13 +7,13 @@ import org.testng.Assert;
 public class VNextBOInspectionMaximizedImageDialogValidations {
 
     public static void isInspectionZoomedImageDisplayed() {
-
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionMaximizedImageDialog().maximizedImage),
+        VNextBOInspectionMaximizedImageDialog maximizedImageDialog =
+                new VNextBOInspectionMaximizedImageDialog();
+        Assert.assertTrue(Utils.isElementDisplayed(maximizedImageDialog.maximizedImage),
                 "Inspection's image hasn't been maximized");
     }
 
     public static void isInspectionZoomedImageClosed(VNextBOInspectionMaximizedImageDialog maximizedImageDialog) {
-
         Assert.assertTrue(Utils.isElementDisplayed(maximizedImageDialog.dialogContainer),
                 "Inspection's image hasn't been minimized");
     }

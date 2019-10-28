@@ -62,7 +62,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     private VNextBOHomeWebPage homePage;
     private VNextBOInspectionsWebPage inspectionsWebPage;
     private VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions;
-    private VNextBODeviceManagementSteps deviceManagementSteps;
     private VNextBOQuickNotesWebPage quickNotesPage;
 
     @BeforeClass
@@ -97,7 +96,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
         leftMenuInteractions = new VNextBOLeftMenuInteractions();
         emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
-        deviceManagementSteps = new VNextBODeviceManagementSteps();
     }
 
     @AfterMethod
@@ -481,7 +479,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         Assert.assertTrue(VNextBOPendingRegistrationsValidations.isUserDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't been displayed in the pending registration table");
-        deviceManagementSteps.deletePendingRegistrationDeviceByUser(randomUser);
+        VNextBODeviceManagementSteps.deletePendingRegistrationDeviceByUser(randomUser);
         Assert.assertTrue(VNextBOPendingRegistrationsValidations.isUserNotDisplayedInPendingRegistrationTable(randomUser),
                 "The user hasn't disappeared from the pending registration table");
     }

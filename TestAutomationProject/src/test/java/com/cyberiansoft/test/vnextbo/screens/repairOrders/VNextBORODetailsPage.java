@@ -549,30 +549,22 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@Nullable
 	private WebElement getServiceByName(String service) {
 		try {
-			return wait.until(ExpectedConditions
-					.visibilityOf(driver.findElement(By.xpath("//div[text()='" + service + "']"))));
+		    return WaitUtilsWebDriver.waitForVisibility(By.xpath("//div[text()='" + service + "']"));
 		} catch (NoSuchElementException ignored) {
 			try {
 				final WebElement element = driver.findElement(By.xpath("//div[contains(text(), '" + service + "')]"));
-				wait.until(ExpectedConditions.visibilityOf(element));
+                WaitUtilsWebDriver.waitForVisibilityIgnoringException(element);
 				return element.getText().trim().equals(service) ? element : null;
 			} catch (NoSuchElementException ignore) {
-			}
-			return null;
+                return null;
+            }
 		}
 	}
 
 	public void clickAddNewServiceButton() {
-		wait.until(ExpectedConditions.elementToBeClickable(addNewServiceButton)).click();
-		waitForLoading();
+	    Utils.clickElement(addNewServiceButton);
+	    WaitUtilsWebDriver.waitForLoading();
 	}
-
-//    public VNextBOAddNewServiceMonitorDialog selectServiceStatusForFirstService() {
-//        wait.until(ExpectedConditions.visibilityOfAllElements(servicesStatusWidgetList));
-//        final WebElement serviceStatus = servicesStatusWidgetList.get(0);
-//        wait.until(ExpectedConditions.elementToBeClickable(serviceStatus)).click();
-//        wait.until(ExpectedConditions.attributeContains(serviceStatus, "aria-expanded", "true"));
-//    }
 
 	public void setServiceStatusForService(String serviceId, String status) {
 		clickServiceStatusBox(serviceId);
@@ -634,12 +626,19 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 		return actionsIcon;
 	}
 
-	public void openNotesDialog(String serviceId) {
+    public WebElement getActionIconForServiceId(String serviceId) {
+        return driver.findElement(By
+                .xpath("//div[@class='serviceRow' and @data-order-service-id='" +
+                        serviceId + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]"));
+    }
+
+    public void openNotesDialog(String serviceId) {
 		clickActionsIcon(serviceId);
 		Utils.clickElement(By
 				.xpath("//div[@class='serviceRow' and @data-order-service-id='" + serviceId
 						+ "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]//label[text()='Notes']"));
-		waitForLoading();
+		WaitUtilsWebDriver.waitForLoading();
+		WaitUtilsWebDriver.waitABit(1000);
 	}
 
 	public void openMoreInformation() {

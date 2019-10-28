@@ -19,6 +19,7 @@ public class PhaseScreenInteractions {
     public static ServiceElement getServiceElements(String phaseName) {
         PhasesScreen phasesScreen = new PhasesScreen();
         WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
+        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
         return WaitUtils.getGeneralFluentWait().until(driver -> phasesScreen.getServiceElementsList().stream()
                 .filter((serviceElement) ->
                         serviceElement.getName().equals(phaseName))

@@ -37,15 +37,6 @@ public class ServiceElement implements IWebElement {
         return rootElement.findElement(By.xpath(statusLocator)).getText();
     }
 
-    public void openMenu() {
-        WaitUtils.click(rootElement);
-    }
-
-    public void expandElement() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(expandElementLocator)), true);
-        rootElement.findElement(By.xpath(expandElementLocator)).click();
-    }
-
     public Boolean isClockIconPresent() {
         return rootElement.findElements(By.xpath(clockIconLocator)).size() > 0;
     }

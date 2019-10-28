@@ -11,7 +11,10 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
 
-          <include name="testVerifySearchForSR" />
+          <include name="testVerifyWorkWithIndividualServicesUnderMonitor" />
+          <include name="testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection" />
+          <include name="testInspectionsMultipleInspectionsApproval" />
+          <include name="testVerifyCalculationForServiceWithPricePolicyVehiclePricePolicyPanelOnPrintOut" />
           <include name="testInspectionsMultipleInspectionsApproval" />
 
 
@@ -50,6 +53,7 @@
           <include name="testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection" />
           <include name="testVerifyUpdateApplicationFromLastDBVersionForNewOne" />
           <include name="testSRVerifyActionsOnCalendarForSRAppointments" />
+          <include name="testVerifySearchForSR" />
         </methods>
       </class>
     </classes>

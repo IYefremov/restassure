@@ -1,5 +1,5 @@
 {
-  "autoAssignTechToMoneyService": [
+  "autoAssignTechToService": [
     {
       "rowID": "01",
       "description": "",
@@ -19,6 +19,84 @@
         },
         {
           "serviceName": "Labor AM",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Employee"
+          }
+        }
+      ]
+    },
+    {
+      "rowID": "02",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94253",
+          "testCaseTitle": "Auto-assign tech to a Labor service"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Paint",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "1111",
+            "technicianLastName": "2222"
+          }
+        },
+        {
+          "serviceName": "Paint",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Employee"
+          }
+        }
+      ]
+    },
+    {
+      "rowID": "03",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94255",
+          "testCaseTitle": "Auto-assign tech to Bundle services"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "rozstalnoy_disable_labor",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "1111",
+            "technicianLastName": "2222"
+          }
+        },
+        {
+          "serviceName": "rozstalnoy_disable_labor",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Employee"
+          }
+        }
+      ]
+    },
+    {
+      "rowID": "04",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "94255",
+          "testCaseTitle": "Auto-assign tech to Bundle services"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "rozstalnoy_disable_money",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "1111",
+            "technicianLastName": "2222"
+          }
+        },
+        {
+          "serviceName": "rozstalnoy_disable_money",
           "serviceDefaultTechnician": {
             "technicianFirstName": "Employee",
             "technicianLastName": "Employee"

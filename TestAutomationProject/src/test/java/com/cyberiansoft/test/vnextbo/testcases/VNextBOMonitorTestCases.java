@@ -58,7 +58,6 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	private VNextBOROWebPage repairOrdersPage;
 	private VNextBORONotesPageInteractions notesPageInteractions;
 	private VNextBOROPageInteractions roPageInteractions;
-    private VNextBOROAdvancedSearchDialogSteps advancedSearchDialogSteps;
 
     @BeforeMethod
 	public void BackOfficeLogin() {
@@ -82,7 +81,6 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
         notesPageInteractions = new VNextBORONotesPageInteractions();
         roPageInteractions = new VNextBOROPageInteractions();
-        advancedSearchDialogSteps = new VNextBOROAdvancedSearchDialogSteps();
     }
 
 	@AfterMethod
@@ -566,7 +564,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
 
-        advancedSearchDialogSteps
+        VNextBOROAdvancedSearchDialogSteps
                 .searchByActivePhase(data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
 
         VNextBORepairOrdersPageSteps.openRODetailsPage();
@@ -1032,136 +1030,6 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanSeeChangesOfServicesActivityInLogInfo(String rowID, String description, JSONObject testData) {
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-
-		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-				"The work order is not displayed after search by order number after clicking the 'Search' icon");
-
-		final VNextBORODetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
-
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
-
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
-
-		final VNextBOAuditLogDialog auditLogDialog = new VNextBOAuditLogDialog(webdriver);
-		detailsPage.clickLogInfoButton();
-		Assert.assertTrue(auditLogDialog.isAuditLogDialogDisplayed(), "The audit log modal dialog hasn't been opened");
-
-		auditLogDialog.getAuditLogsTabsNames().forEach(System.out::println);
-		System.out.println("*****************************************");
-		System.out.println();
-
-		final List<String> tabs = Arrays.asList(data.getAuditLogTabs());
-		tabs.forEach(System.out::println);
-		System.out.println("*****************************************");
-		System.out.println();
-
-		Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
-				"The audit logs tabs are not displayed");
-
-		auditLogDialog.clickAuditLogsServicesTab();
-		final String servicesActivityTimeFirstRecord = auditLogDialog.getServicesActivityTimeFirstRecord();
-		final String actualLocalDateTime = auditLogDialog.getActualLocalDateTime();
-		final String actualLocalDateTimeMinusMinute = auditLogDialog.getActualLocalDateTimeMinusMinute();
-		final String actualLocalDateTimeMinusTwoMinutes = auditLogDialog.getActualLocalDateTimeMinusTwoMinutes();
-		if (servicesActivityTimeFirstRecord.equals(actualLocalDateTime)) {
-			Assert.assertEquals(servicesActivityTimeFirstRecord, actualLocalDateTime);
-		}
-		if (servicesActivityTimeFirstRecord.equals(actualLocalDateTimeMinusMinute)) {
-			Assert.assertEquals(servicesActivityTimeFirstRecord, actualLocalDateTimeMinusMinute);
-		}
-		if (servicesActivityTimeFirstRecord.equals(actualLocalDateTimeMinusTwoMinutes)) {
-			Assert.assertEquals(servicesActivityTimeFirstRecord, actualLocalDateTimeMinusTwoMinutes);
-		}
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanSeeChangesOfDepartmentsInLogInfo(String rowID, String description, JSONObject testData) {
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-
-		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-				"The work order is not displayed after search by order number after clicking the 'Search' icon");
-
-		final VNextBORODetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
-
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
-		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
-
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
-
-		final VNextBOAuditLogDialog auditLogDialog = new VNextBOAuditLogDialog(webdriver);
-		detailsPage.clickLogInfoButton();
-		Assert.assertTrue(auditLogDialog.isAuditLogDialogDisplayed(), "The audit log modal dialog hasn't been opened");
-
-		auditLogDialog.getAuditLogsTabsNames().forEach(System.out::println);
-		System.out.println("*****************************************");
-		System.out.println();
-
-		final List<String> tabs = Arrays.asList(data.getAuditLogTabs());
-		tabs.forEach(System.out::println);
-		System.out.println("*****************************************");
-		System.out.println();
-
-		Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
-				"The audit logs tabs are not displayed");
-
-		auditLogDialog.clickAuditLogsPhasesAndDepartmentsTab();
-		final String departmentsLastRecord = auditLogDialog.getDepartmentsAndPhasesLastRecord();
-		final String actualLocalDateTime = auditLogDialog.getActualLocalDateTime();
-		final String actualLocalDateTimePlusMinute = auditLogDialog.getActualLocalDateTimePlusMinute();
-		final String actualLocalDateTimePlusTwoMinutes = auditLogDialog.getActualLocalDateTimePlusTwoMinutes();
-		final String actualLocalDateTimeMinusMinute = auditLogDialog.getActualLocalDateTimeMinusMinute();
-		final String actualLocalDateTimeMinusTwoMinutes = auditLogDialog.getActualLocalDateTimeMinusTwoMinutes();
-		if (departmentsLastRecord.equals(actualLocalDateTime)) {
-			Assert.assertEquals(departmentsLastRecord, actualLocalDateTime);
-			System.out.println(1);
-		}
-		if (departmentsLastRecord.equals(actualLocalDateTime)) {
-			Assert.assertEquals(departmentsLastRecord, actualLocalDateTime);
-			System.out.println(2);
-		}
-		if (departmentsLastRecord.equals(actualLocalDateTimeMinusMinute)) {
-			Assert.assertEquals(departmentsLastRecord, actualLocalDateTimeMinusMinute);
-			System.out.println(3);
-		}
-		if (departmentsLastRecord.equals(actualLocalDateTimeMinusTwoMinutes)) {
-			Assert.assertEquals(departmentsLastRecord, actualLocalDateTimeMinusTwoMinutes);
-			System.out.println(4);
-		}
-		if (departmentsLastRecord.equals(actualLocalDateTimePlusMinute)) {
-			Assert.assertEquals(departmentsLastRecord, actualLocalDateTimePlusMinute);
-			System.out.println(5);
-		}
-		if (departmentsLastRecord.equals(actualLocalDateTimePlusTwoMinutes)) {
-			Assert.assertEquals(departmentsLastRecord, actualLocalDateTimePlusTwoMinutes);
-			System.out.println(6);
-		}
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanSeeServicesOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1269,10 +1137,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = detailsPage.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog();
-		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
-		final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
+        VNextBORODetailsPageSteps.openEditNotesDialog(serviceId);
+        final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
 
         VNextBORONotesPageSteps.setRONoteMessage(data.getNotesMessage());
 		notesPageInteractions.clickRONoteSaveButton();
@@ -1356,9 +1222,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = detailsPage.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes block hasn't been displayed");
-		final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
+        VNextBORODetailsPageSteps.openEditNotesDialog(serviceId);
+        final int notesNumber = notesPageInteractions.getRepairNotesListNumber();
 
         VNextBORONotesPageSteps.setRONoteMessage(data.getNotesMessage());
         notesPageInteractions.clickRepairNotesXButton();
@@ -1366,17 +1231,15 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertEquals(notesPageInteractions.getRONoteTextAreaValue(), "");
         notesPageInteractions.closeRONoteDialog();
 
-        detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
-		Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
+        VNextBORODetailsPageSteps.openEditNotesDialog(serviceId);
+        Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number has been updated, although the 'X' button was clicked");
 
         VNextBORONotesPageSteps.setRONoteMessage(data.getNotesMessage());
         notesPageInteractions.closeRONoteDialog();
 
-		detailsPage.openNotesDialog(serviceId);
-		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
-		Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
+        VNextBORODetailsPageSteps.openEditNotesDialog(serviceId);
+        Assert.assertEquals(notesNumber, notesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number has been updated, although the 'X' button was clicked");
 	}
 
@@ -1624,18 +1487,16 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The helper info dialog isn't displayed");
 	}
 
+	//todo blocker, needs clarification
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanSeeChangesOfPhasesInLogInfo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-		Assert.assertTrue(repairOrdersPage.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-				"The work order is not displayed after search by order number after clicking the 'Search' icon");
+		VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
 
-		final VNextBORODetailsPage detailsPage = repairOrdersPage.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
 
 		detailsPage
 				.setStatus(data.getStatus())
@@ -2111,8 +1972,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
-		final String selectedRandomTechnician = VNextBORepairOrdersPageSteps.setTechnicianAndVendorByWoNumber(
-				data.getOrderNumber(), data.getVendor());
+        final String priorTechniciansValue = repairOrdersPage.getTechniciansValueForWO(data.getOrderNumber());
+        String selectedRandomTechnician = VNextBORepairOrdersPageSteps.setTechnicianAndVendorByWoNumber(
+                data.getOrderNumber(), data.getVendor());
+        if (priorTechniciansValue.equals(selectedRandomTechnician)) {
+            selectedRandomTechnician = VNextBORepairOrdersPageSteps.setTechnicianAndVendorByWoNumber(
+                    data.getOrderNumber(), data.getVendor());
+        }
         VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
 
         VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
@@ -2121,7 +1987,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBORODetailsPageVerifications.verifyVendorTechnicianNameIsSet(selectedRandomTechnician);
 
 		breadCrumbInteractions.clickFirstBreadCrumbLink();
-        VNextBOROPageVerifications.verifyTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
+        VNextBOROPageVerifications.verifyAnotherTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
         VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
         VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
         VNextBORODetailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
@@ -2170,7 +2036,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 "The saved search input field isn't clickable");
         Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSaveButtonClickable(),
                 "The save button isn't clickable");
-        advancedSearchDialogSteps.closeAdvancedSearchDialog();
+        VNextBOROAdvancedSearchDialogSteps.closeAdvancedSearchDialog();
 
         VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
         VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
@@ -2180,11 +2046,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 "The saved search input field is clickable");
         Assert.assertFalse(VNextBOROAdvancedSearchDialogVerifications.isSaveButtonClickable(),
                 "The save button is clickable");
-        advancedSearchDialogSteps.closeAdvancedSearchDialog();
+        VNextBOROAdvancedSearchDialogSteps.closeAdvancedSearchDialog();
     }
 
 //	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-//    TODO the TC blocker - the locations are nor loaded for the given technician
+//    TODO the TC blocker - the locations are not loaded for the given technician
 	public void verifyTechnicianUserCanFindOrdersUsingSavedSearchMyCompletedWork(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 

@@ -10,6 +10,11 @@ import java.util.List;
 
 public class QuestionsScreenSteps {
 
+    public static void waitQuestionsScreenLoaded() {
+        QuestionsScreen questionsScreen = new QuestionsScreen();
+        questionsScreen.waitQuestionsScreenLoaded();
+    }
+
     public static void goToQuestionsScreenAndAnswerQuestions(QuestionScreenData questionScreenData) {
       NavigationSteps.navigateToScreen(questionScreenData.getScreenName());
         if (questionScreenData.getQuestionsData() != null)
@@ -30,12 +35,29 @@ public class QuestionsScreenSteps {
             for (int i = 0; i < questionData.getScreenHDIndex(); i++)
                 questionsScreen.swipeScreenRight();
         }
-        if (questionData.getQuestionSetionName() != null)
+        if (questionData.getQuestionSetionName() != null) {
             questionsScreen.waitQuestionsScreenLoaded();
-        if (questionData.getQuestionAnswer() != null)
+        }
+        if (questionData.isListQuestion())
+            questionsScreen.selectListQuestion(questionData);
+        else if (questionData.isTextQuestion())
+            answerTextQuestion(questionData);
+        else if (questionData.getQuestionAnswer() != null)
             questionsScreen.selectAnswerForQuestion(questionData);
-        if (questionData.isSignatureQuestion())
+        else if (questionData.isSignatureQuestion())
             questionsScreen.drawSignature();
+        else
+            questionsScreen.selectAnswerForQuestion(questionData);
 
+    }
+
+    public static void answerTextQuestion(QuestionsData questionData) {
+        QuestionsScreen questionsScreen = new QuestionsScreen();
+        questionsScreen.answerTextQuestion(questionData);
+    }
+
+    public static void clearTextQuestion() {
+        QuestionsScreen questionsScreen = new QuestionsScreen();
+        questionsScreen.clearTextQuestion();
     }
 }

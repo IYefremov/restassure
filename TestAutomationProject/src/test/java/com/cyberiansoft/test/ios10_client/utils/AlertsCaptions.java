@@ -56,6 +56,8 @@ public class AlertsCaptions {
 			"Continue?";
 	public static final String YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE = "Order Monitor\n" +
 			"You cannot change the status of services for this phase. You can only change the status of the whole phase.";
+	public static final String YOU_CANT_CHANGE_STATUS_OF_THE_PHASE = "Order Monitor\n" +
+			"You cannot change the status of the phase. You can only change the status of services for this phase.";
 	public static final String YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES = "Order Monitor\n" +
 			"You can not start repair order because you are not assigned to order services.";
 	public static final String YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES = "Order Monitor\n" +

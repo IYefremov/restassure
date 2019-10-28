@@ -18,7 +18,7 @@ public class ListPicker implements IWebElement {
     }
 
     public void selectOption(String elementName) {
-        rootElement.click();
+        WaitUtils.click(rootElement);
         WaitUtils.getGeneralFluentWait().until((webdriver) -> webdriver.findElements(By.xpath(elementsLocator)).size() > 0);
         DriverBuilder.getInstance().getAppiumDriver().findElements(By.xpath(elementsLocator))
                 .stream()

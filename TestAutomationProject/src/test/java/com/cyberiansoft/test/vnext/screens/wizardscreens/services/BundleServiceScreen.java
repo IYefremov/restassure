@@ -20,6 +20,9 @@ public class BundleServiceScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='selected']")
     private WebElement selectedServiceScreen;
 
+    @FindBy(id = "bundlePrice")
+    private WebElement bundlePriceInput;
+
     @FindBy(xpath = "//*[@data-entity-service-id]")
     private List<ServiceListItem> serviceList;
 

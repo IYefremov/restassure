@@ -14,7 +14,7 @@ public class StatusSelectScreen extends VNextBaseScreen {
 
     public WebElement getStatusItemByText(String statusText){
         return statusList.stream()
-                .filter(element -> element.getText().contains(statusText))
+                .filter(element -> element.getText().toLowerCase().contains(statusText.toLowerCase()))
                 .findFirst()
                 .orElseThrow(()-> new RuntimeException("status item not found " + statusText));
     }

@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
@@ -1139,6 +1140,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         }
         RegularNavigationSteps.navigateToClaimScreen();
         RegularClaimScreenSteps.setClaimData(workOrderData.getInsuranceCompanyData());
+        RegularClaimScreen claimScreen = new RegularClaimScreen();
+        Assert.assertEquals(claimScreen.getDeductibleValue(), workOrderData.getInsuranceCompanyData().getDeductible());
 
         RegularNavigationSteps.navigateToServicesScreen();
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
@@ -1463,9 +1466,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
             orderMonitorScreen.setCompletedPhaseStatus();
             if (damageData.getMoneyService().getVehicleParts() != null) {
                 for (VehiclePartData vehiclePartData : damageData.getMoneyService().getVehicleParts())
-                    RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(), vehiclePartData, OrderMonitorStatuses.COMPLETED);
+                    RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.COMPLETED);
             } else {
-                RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(), OrderMonitorStatuses.COMPLETED);
+                RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(), OrderMonitorServiceStatuses.COMPLETED);
             }
         }
         teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
@@ -1509,10 +1512,10 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         orderMonitorScreen.selectPanelToChangeStatus(pdrDamage.getDamageGroupName());
         orderMonitorScreen.setCompletedPhaseStatus();
         for (VehiclePartData vehiclePartData : pdrDamage.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(pdrDamage.getMoneyService(), vehiclePartData, OrderMonitorStatuses.COMPLETED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(pdrDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.COMPLETED);
         final DamageData paintDamage = workOrderData.getDamagesData().get(0);
         for (VehiclePartData vehiclePartData : paintDamage.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(paintDamage.getMoneyService(), vehiclePartData, OrderMonitorStatuses.ACTIVE);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(paintDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.ACTIVE);
 
         orderMonitorScreen.clickServicesButton();
         RegularServicesScreenSteps.switchToAvailableServices();
@@ -1521,32 +1524,29 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularWizardScreensSteps.clickSaveButton();
 
         for (VehiclePartData vehiclePartData : paintDamage.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(paintDamage.getMoneyService(), vehiclePartData, OrderMonitorStatuses.QUEUED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(paintDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.QUEUED);
         final DamageData pdrDamageNew = workOrderData.getDamageData();
         orderMonitorScreen.selectPanelToChangeStatus(pdrDamageNew.getDamageGroupName());
         orderMonitorScreen.setCompletedPhaseStatus();
         for (VehiclePartData vehiclePartData : pdrDamageNew.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(pdrDamageNew.getMoneyService(), vehiclePartData, OrderMonitorStatuses.COMPLETED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(pdrDamageNew.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.COMPLETED);
 
         for (VehiclePartData vehiclePartData : paintDamage.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(paintDamage.getMoneyService(), vehiclePartData, OrderMonitorStatuses.ACTIVE);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(paintDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.ACTIVE);
 
         orderMonitorScreen.selectPanelToChangeStatus(paintDamage.getDamageGroupName());
         orderMonitorScreen.setCompletedPhaseStatus();
         for (VehiclePartData vehiclePartData : paintDamage.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(paintDamage.getMoneyService(), vehiclePartData, OrderMonitorStatuses.COMPLETED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(paintDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.COMPLETED);
 
         final DamageData wheelsDamage = workOrderData.getDamagesData().get(workOrderData.getDamagesData().size() - 2);
         for (VehiclePartData vehiclePartData : wheelsDamage.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(wheelsDamage.getMoneyService(), vehiclePartData, OrderMonitorStatuses.ACTIVE);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(wheelsDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.ACTIVE);
 
         orderMonitorScreen.selectPanelToChangeStatus(wheelsDamage.getDamageGroupName());
         orderMonitorScreen.setCompletedPhaseStatus();
         for (VehiclePartData vehiclePartData : wheelsDamage.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(wheelsDamage.getMoneyService(), vehiclePartData, OrderMonitorStatuses.COMPLETED);
-
-        for (VehiclePartData vehiclePartData : wheelsDamage.getMoneyService().getVehicleParts())
-            RegularOrderMonitorScreenValidations.verifyServiceStatus(wheelsDamage.getMoneyService(), vehiclePartData, OrderMonitorStatuses.COMPLETED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(wheelsDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.COMPLETED);
 
         teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
@@ -1582,7 +1582,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         teamWorkOrdersScreen.clickOnWO(workOrderNumber);
         teamWorkOrdersScreen.selectWOMonitor();
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
-        RegularOrderMonitorScreenValidations.verifyServiceStatus(workOrderData.getDamageData().getMoneyService(), OrderMonitorStatuses.ACTIVE);
+        RegularOrderMonitorScreenValidations.verifyServiceStatus(workOrderData.getDamageData().getMoneyService(), OrderMonitorServiceStatuses.ACTIVE);
 
         orderMonitorScreen.selectPanel(workOrderData.getDamageData().getMoneyService().getServiceName());
         orderMonitorScreen.clickStartService();
@@ -2114,14 +2114,14 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         orderMonitorScreen.setCompletedPhaseStatus();
 
         RegularOrderMonitorScreenValidations.verifyServiceStatus(workOrderData.getDamagesData().get(0).getMoneyService(),
-                OrderMonitorStatuses.COMPLETED);
+                OrderMonitorServiceStatuses.COMPLETED);
         RegularOrderMonitorScreenValidations.verifyServiceStatus(workOrderData.getDamagesData().get(1).getMoneyService(),
-                OrderMonitorStatuses.ACTIVE);
+                OrderMonitorServiceStatuses.ACTIVE);
         orderMonitorScreen.selectPanelToChangeStatus(secondOrderMonitorPanel);
         orderMonitorScreen.setCompletedPhaseStatus();
         for (DamageData damageData : workOrderData.getDamagesData()) {
             RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(),
-                    OrderMonitorStatuses.COMPLETED);
+                    OrderMonitorServiceStatuses.COMPLETED);
         }
 
         teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
@@ -2180,11 +2180,11 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
                 if (damageData.getMoneyService().getVehicleParts() !=null) {
                     for (VehiclePartData vehiclePartData : damageData.getMoneyService().getVehicleParts()) {
                         RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(), vehiclePartData,
-                                OrderMonitorStatuses.COMPLETED);
+                                OrderMonitorServiceStatuses.COMPLETED);
                     }
                 } else {
                     RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(),
-                            OrderMonitorStatuses.COMPLETED);
+                            OrderMonitorServiceStatuses.COMPLETED);
                 }
             }
             RegularNavigationSteps.navigateBackScreen();

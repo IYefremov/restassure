@@ -72,10 +72,15 @@ public class PriceMatrixScreenSteps {
     public static void selectVehiclepartAdditionalService(ServiceData serviceData) {
         PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
         if ((serviceData.getServiceQuantity() != null) || (serviceData.getServicePrice() != null)) {
-            priceMatrixScreen.clickDiscaunt(serviceData.getServiceName());
+            openVehiclePartAdditionalServiceDetails(serviceData);
             ServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
         } else
             priceMatrixScreen.selectDiscaunt(serviceData.getServiceName());
+    }
+
+    public static void openVehiclePartAdditionalServiceDetails(ServiceData serviceData) {
+        PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
+        priceMatrixScreen.clickDiscaunt(serviceData.getServiceName());
     }
 
     public static void verifyIfVehiclePartContainsPriceValue(VehiclePartData vehiclePartData) {

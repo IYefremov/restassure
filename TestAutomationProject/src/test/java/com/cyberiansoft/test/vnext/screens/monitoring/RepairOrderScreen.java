@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 public class RepairOrderScreen extends MonitorScreen {
 
-    @FindBy(xpath = "//div[@data-page=\"list\"]")
+    @FindBy(xpath = "//div[@data-page='repair-orders-work-queue-list' or @data-page='repair-orders-list']")
     private WebElement rootElement;
 
     @FindBy(xpath = "//*[@action=\"show-locations\"]")

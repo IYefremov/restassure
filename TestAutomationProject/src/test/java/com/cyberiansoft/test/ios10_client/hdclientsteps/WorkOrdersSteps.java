@@ -8,7 +8,6 @@ public class WorkOrdersSteps {
 
     public static void saveWorkOrder() {
         WizardScreensSteps.clickSaveButton();
-        MyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
 
     public static void cancelCreatingWorkOrder() {

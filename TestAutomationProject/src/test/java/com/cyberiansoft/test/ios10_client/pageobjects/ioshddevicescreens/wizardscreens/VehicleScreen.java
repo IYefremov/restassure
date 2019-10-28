@@ -358,12 +358,6 @@ public class VehicleScreen extends BaseWizardScreen {
 		waitVehicleScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId("viewPrompt").getAttribute("value");
 	}
-
-	public NotesScreen clickNotesButton() {
-		waitVehicleScreenLoaded();
-		appiumdriver.findElementByAccessibilityId("Compose").click();
-		return new NotesScreen();
-	}
 	
 	public void saveWorkOrder() {
 		appiumdriver.findElementByAccessibilityId("Save").click();

@@ -40,7 +40,7 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
                 new VNextBOInspectionsWebPage();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(inspectionsPage.savedSearchesList);
         for (WebElement searchName: inspectionsPage.savedSearchesList
-        ) {
+                ) {
             if (Utils.getText(searchName).equals(filterName))
                 return true;
         }

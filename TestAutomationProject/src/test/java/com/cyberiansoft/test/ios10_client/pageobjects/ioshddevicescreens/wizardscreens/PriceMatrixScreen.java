@@ -173,11 +173,11 @@ public class PriceMatrixScreen extends BaseWizardScreen {
 	}
 
 	public boolean isNotesExists() {
-		return notescell.isDisplayed();
+		return getMaqtrixPanel().findElementsByAccessibilityId("Notes").size() > 0;
 	}
 
 	public boolean isTechniciansExists() {
-		return technicianscell.isDisplayed();
+		return getMaqtrixPanel().findElementsByAccessibilityId("Technicians").size() > 0;
 	}
 
 	public String getTechniciansValue() {
