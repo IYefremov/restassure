@@ -55,5 +55,20 @@ public class RegularOrderMonitorScreenValidations {
             Assert.assertFalse(orderMonitorScreen.isServiceDurationExists());
     }
 
+    public static void verifytartFinishDateLabelPresentForService(ServiceData serviceData, boolean isPresent) {
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        if (isPresent)
+            Assert.assertTrue(orderMonitorScreen.isStartFinishDateLabelPresentForService(serviceData));
+        else
+            Assert.assertFalse(orderMonitorScreen.isStartFinishDateLabelPresentForService(serviceData));
+    }
+
+    public static void verifyDurationLabelPresentForService(ServiceData serviceData, boolean isPresent) {
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        if (isPresent)
+            Assert.assertTrue(orderMonitorScreen.isDurationLabelPresentForService(serviceData));
+        else
+            Assert.assertFalse(orderMonitorScreen.isDurationLabelPresentForService(serviceData));
+    }
 
 }

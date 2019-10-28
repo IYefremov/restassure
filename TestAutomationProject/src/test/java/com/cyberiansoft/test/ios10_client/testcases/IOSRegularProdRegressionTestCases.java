@@ -1715,4 +1715,52 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         NavigationSteps.navigateBackScreen();
 
     }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyMonitorOfPartServices(String rowID,
+                                                                 String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        final String location = "All locations";
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_MONITOR);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.switchToTeamView();
+        RegularTeamWorkOrdersSteps.selectSearchLocation(location);
+        RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+
+        for (OrderMonitorData orderMonitorData : workOrderData.getOrderMonitorsData())
+            RegularOrderMonitorScreenValidations.verifyOrderPhasePresent(orderMonitorData,true);
+
+        for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorsData().get(1).getMonitorServicesData()) {
+            RegularOrderMonitorScreenSteps.selectServicePanel(monitorServiceData.getMonitorService());
+            RegularOrderMonitorScreenSteps.clickStartService();
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.ORDERED);
+            RegularOrderMonitorScreenSteps.setServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.RECEIVED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.RECEIVED);
+            RegularOrderMonitorScreenValidations.verifytartFinishDateLabelPresentForService(monitorServiceData.getMonitorService(), true);
+            RegularOrderMonitorScreenValidations.verifyDurationLabelPresentForService(monitorServiceData.getMonitorService(), true);
+
+
+            RegularOrderMonitorScreenSteps.setServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.REORDERED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.REORDERED);
+
+            RegularOrderMonitorScreenSteps.setServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.RECEIVED);
+            RegularOrderMonitorScreenValidations.verifyServiceStatus(monitorServiceData.getMonitorService(), OrderMonitorServiceStatuses.RECEIVED);
+            RegularOrderMonitorScreenValidations.verifytartFinishDateLabelPresentForService(monitorServiceData.getMonitorService(), true);
+            RegularOrderMonitorScreenValidations.verifyDurationLabelPresentForService(monitorServiceData.getMonitorService(), true);
+        }
+        NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
+    }
 }

@@ -21,11 +21,22 @@ public class WizardScreensSteps {
         baseWizardScreen.clickDraftPopup();
     }
 
-    public static void cancelWizard() {
+    public static void clickCancelButton() {
         BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
         baseWizardScreen.clickCancelButton();
+    }
+
+    public static void cancelWizard() {
+        clickCancelButton();
         Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
         alert.accept();
     }
+
+    public static void clickNotesButton() {
+        BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
+        baseWizardScreen.clickNotesButton();
+    }
+
+
 
 }
