@@ -10,15 +10,7 @@ public class VNextBOCloseRODialogInteractions {
     private VNextBOCloseRODialog closeRODialog;
 
     public VNextBOCloseRODialogInteractions() {
-        closeRODialog = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOCloseRODialog.class);
-    }
-
-    public boolean isCloseRODialogDisplayed() {
-        return Utils.isElementDisplayed(closeRODialog.getCloseROModal());
-    }
-
-    public boolean isCloseRODialogClosed() {
-        return Utils.isElementNotDisplayed(closeRODialog.getCloseROModal(), 5);
+        closeRODialog = new VNextBOCloseRODialog();
     }
 
     public void setReason(String reason) {

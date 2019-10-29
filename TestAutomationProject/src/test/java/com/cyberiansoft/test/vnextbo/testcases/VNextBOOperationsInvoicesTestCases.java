@@ -6,12 +6,16 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.invoices.VNextBOAdvancedSearchInvoiceFormSteps;
+import com.cyberiansoft.test.vnextbo.steps.invoices.VNextBOInvoicesPageSteps;
+import com.cyberiansoft.test.vnextbo.verifications.invoices.VNextBOInvoicesPageValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -31,7 +35,8 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     }
 
     private VNextBOLeftMenuInteractions leftMenuInteractions;
-    private VNextBOInvoicesWebPage invoicesPage;
+    private VNextBOInvoicesPageInteractions invoicesPageInteractions;
+    private VNextBOConfirmationDialogInteractions confirmationDialogInteractions;
 
     @BeforeMethod
     public void BackOfficeLogin() {
@@ -47,12 +52,11 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-        VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
-        loginPage
-                .userLogin(userName, userPassword);
-//                .executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
-        invoicesPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInvoicesWebPage.class);
+        VNextBOLoginScreenWebPage loginPage = new VNextBOLoginScreenWebPage();
+        loginPage.userLogin(userName, userPassword);
         leftMenuInteractions = new VNextBOLeftMenuInteractions();
+        invoicesPageInteractions = new VNextBOInvoicesPageInteractions();
+        confirmationDialogInteractions = new VNextBOConfirmationDialogInteractions();
     }
 
     @AfterMethod
@@ -68,13 +72,10 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         leftMenuInteractions.selectInvoicesMenu();
-        final String firstInvoiceNumber = invoicesPage.getFirstInvoiceName();
-        invoicesPage
-                .clickFirstInvoice()
-                .clickVoidButton()
-                .clickInvoiceYesButton();
+        final String firstInvoiceNumber = invoicesPageInteractions.getFirstInvoiceName();
 
-        Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNumber),
+        VNextBOInvoicesPageSteps.confirmVoidingFirstInvoice();
+        Assert.assertFalse(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNumber),
                 "The invoice is displayed after being voided");
     }
 
@@ -83,27 +84,13 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         leftMenuInteractions.selectInvoicesMenu();
-        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(
+                data.getFromDate(), data.getStatus());
 
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
-                "The advanced search dialog is not opened");
+        final String firstInvoiceNumber = invoicesPageInteractions.getFirstInvoiceName();
+        VNextBOInvoicesPageSteps.cancelVoidingFirstInvoice();
 
-        advancedSearchInvoiceForm
-                .setTimeFrame(data.getTimeFrame())
-                .setFromDate(data.getFromDate())
-                .setStatus(data.getStatus())
-                .clickSearchButton();
-
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
-
-        final String firstInvoiceNumber = invoicesPage.getFirstInvoiceName();
-        invoicesPage
-                .clickFirstInvoice()
-                .clickVoidButton()
-                .clickInvoiceNoButton();
-
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(firstInvoiceNumber),
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNumber),
                 "The invoice is not displayed after clicking 'No' button");
     }
 
@@ -113,27 +100,12 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
         leftMenuInteractions.selectInvoicesMenu();
 
-        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(
+                data.getFromDate(), data.getStatus());
+        final String firstInvoiceNumber = invoicesPageInteractions.getFirstInvoiceName();
 
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
-                "The advanced search dialog is not opened");
-
-        advancedSearchInvoiceForm
-                .setTimeFrame(data.getTimeFrame())
-                .setFromDate(data.getFromDate())
-                .setStatus(data.getStatus())
-                .clickSearchButton();
-
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
-
-        final String firstInvoiceNumber = invoicesPage.getFirstInvoiceName();
-        invoicesPage
-                .clickFirstInvoice()
-                .clickVoidButton()
-                .clickInvoiceRejectButton();
-
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(firstInvoiceNumber),
+        VNextBOInvoicesPageSteps.rejectVoidingFirstInvoice();
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNumber),
                 "The invoice is not displayed after clicking the 'No' button");
     }
 
@@ -142,38 +114,25 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         leftMenuInteractions.selectInvoicesMenu();
-
-        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
-
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
-                "The advanced search dialog is not opened");
-
-        advancedSearchInvoiceForm
-                .setTimeFrame(data.getTimeFrame())
-                .setFromDate(data.getFromDate())
-                .setStatus(data.getStatus())
-                .clickSearchButton();
-
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(
+                data.getFromDate(), data.getStatus());
 
         final int selected = 3;
-        final String[] firstInvoiceNames = invoicesPage.getFirstInvoiceNames(selected);
+        final String[] firstInvoiceNames = invoicesPageInteractions.getFirstInvoiceNames(selected);
 
-        invoicesPage.clickCheckbox(firstInvoiceNames);
-        final String checkedItemsNote = invoicesPage.getCheckedItemsNote();
+        invoicesPageInteractions.clickCheckbox(firstInvoiceNames);
+        final String checkedItemsNote = invoicesPageInteractions.getCheckedItemsNote();
         Assert.assertEquals(checkedItemsNote, selected + " invoices have been selected");
-        Assert.assertTrue(invoicesPage.areHeaderIconsDisplayed(), "The header icons haven't been displayed");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.areHeaderIconsDisplayed(), "The header icons haven't been displayed");
 
-        invoicesPage
-                .clickHeaderIconVoidButton()
-                .clickInvoiceYesButton();
+        invoicesPageInteractions.clickHeaderIconVoidButton();
+        confirmationDialogInteractions.clickInvoiceYesButton();
 
-        Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[0]),
+        Assert.assertFalse(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNames[0]),
                 "The invoice " + firstInvoiceNames[0] + " is displayed after clicking the 'Yes' button");
-        Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[1]),
+        Assert.assertFalse(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNames[1]),
                 "The invoice " + firstInvoiceNames[1] + " is displayed after clicking the 'Yes' button");
-        Assert.assertFalse(invoicesPage.isInvoiceDisplayed(firstInvoiceNames[2]),
+        Assert.assertFalse(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNames[2]),
                 "The invoice " + firstInvoiceNames[2] + " is displayed after clicking the 'Yes' button");
     }
 
@@ -182,136 +141,63 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         leftMenuInteractions.selectInvoicesMenu();
-        final String invoiceNumber = invoicesPage.getFirstInvoiceName();
-        invoicesPage
-                .clickFirstInvoice()
-                .clickVoidButton()
-                .clickInvoiceYesButton()
-                .clickAdvancedSearchCaret()
-                .setInvoiceNumber(invoiceNumber)
-                .setStatus(data.getStatus())
-                .clickSearchButton();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(data.getFromDate(), data.getStatus());
+        final String invoiceNumber = invoicesPageInteractions.getFirstInvoiceName();
+        VNextBOInvoicesPageSteps.confirmUnvoidingFirstInvoice();
 
-        Assert.assertTrue(invoicesPage.isInvoiceDisplayed(invoiceNumber),
-                "The invoice is not displayed after being voided");
+        invoicesPageInteractions.clickClearSearchIconIfDisplayed();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoiceNumber, data.getStatus2());
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoiceNumber),
+                "The invoice is not displayed after being unvoided");
     }
 
+    /**
+     * commented several steps because
+     * a) these steps are already tested in the other TCs
+     * b) the necessary invoices cannot be found in a large scope of created invoices
+     */
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanUnvoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         leftMenuInteractions.selectInvoicesMenu();
 
-        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
+//        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
+//                data.getFromDate(), data.getToDate(), data.getStatus2());
+//
+//        final String[] invoices = {
+//                invoicesPageInteractions.getInvoiceName(0),
+//                invoicesPageInteractions.getInvoiceName(1),
+//                invoicesPageInteractions.getInvoiceName(2)
+//        };
+//
+//        Arrays.stream(invoices)
+//                .forEach((invoice) ->
+//                        VNextBOInvoicesPageSteps.confirmVoidingFirstInvoice());
+//
+//        Arrays.stream(invoices)
+//                .forEach((invoice) -> Assert.assertFalse(VNextBOInvoicesPageValidations
+//                                .isInvoiceDisplayed(invoice),
+//                        "The invoice " + invoice + " is displayed after being voided"));
 
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
-                "The advanced search dialog is not opened");
-
-        advancedSearchInvoiceForm
-                .setTimeFrame(data.getTimeFrame())
-                .setFromDate(data.getFromDate())
-                .setToDate(data.getToDate())
-                .setStatus(data.getStatus2())
-                .clickSearchButton();
-
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
-
-        final String[] invoices = {
-                invoicesPage.getInvoiceName(0),
-                invoicesPage.getInvoiceName(1),
-                invoicesPage.getInvoiceName(2)
-        };
-
-        Arrays.stream(invoices)
-                .forEach((inv) -> invoicesPage
-                        .clickFirstInvoice()
-                        .clickVoidButton()
-                        .clickInvoiceYesButton());
-
-        Arrays.stream(invoices)
-                .forEach((inv) -> Assert.assertFalse(invoicesPage
-                                .isInvoiceDisplayed(inv),
-                        "The invoice " + inv + " is displayed after being voided"));
-
-        invoicesPage
-                .clickAdvancedSearchCaret()
-                .setStatus(data.getStatus())
-                .clickSearchButton();
-
-        invoicesPage
-                .clickCheckbox(invoices)
-                .clickHeaderIconUnvoidButton()
-                .clickInvoiceYesButton();
-
-        invoicesPage
-                .clickAdvancedSearchCaret()
-                .setStatus(data.getStatus2())
-                .clickSearchButton();
-//                .scrollInvoices(); todo uncomment here, if the test becomes not stable
-
-        Arrays.stream(invoices)
-                .forEach((inv) -> Assert.assertTrue(invoicesPage
-                                .isInvoiceDisplayed(inv),
-                        "The invoice " + inv + " is not displayed after being unvoided"));
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanApproveInvoice(String rowID, String description, JSONObject testData) {
-        VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
-
-        leftMenuInteractions.selectInvoicesMenu();
-
-        final VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm = invoicesPage.clickAdvancedSearchCaret();
-
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogDisplayed(),
-                "The advanced search dialog is not opened");
-
-        advancedSearchInvoiceForm
-                .setTimeFrame(data.getTimeFrame())
-                .setFromDate(data.getFromDate())
-                .setToDate(data.getToDate())
-                .setStatus(data.getStatus2())
-                .clickSearchButton();
-
-        Assert.assertTrue(advancedSearchInvoiceForm.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
+                data.getFromDate(), data.getToDate(), data.getStatus());
 
         final String[] invoices = {
-                invoicesPage.getInvoiceName(0),
-                invoicesPage.getInvoiceName(1),
-                invoicesPage.getInvoiceName(2)
+                invoicesPageInteractions.getInvoiceName(0),
+                invoicesPageInteractions.getInvoiceName(1),
+                invoicesPageInteractions.getInvoiceName(2)
         };
+        System.out.println(Arrays.toString(invoices));
+        VNextBOInvoicesPageSteps.unvoidSelectedInvoices(invoices);
+
+        invoicesPageInteractions.clickClearSearchIconIfDisplayed();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
+                data.getFromDate(), data.getToDate(), data.getStatus2());
+//        invoicesPageInteractions.scrollInvoices();  todo uncomment here, if the test becomes not stable
 
         Arrays.stream(invoices)
-                .forEach((inv) -> invoicesPage
-                        .clickFirstInvoice()
-                        .clickVoidButton()
-                        .clickInvoiceYesButton());
-
-        Arrays.stream(invoices)
-                .forEach((inv) -> Assert.assertFalse(invoicesPage
-                                .isInvoiceDisplayed(inv),
-                        "The invoice " + inv + " is displayed after being voided"));
-
-        invoicesPage
-                .clickAdvancedSearchCaret()
-                .setStatus(data.getStatus())
-                .clickSearchButton();
-
-        invoicesPage
-                .clickCheckbox(invoices)
-                .clickHeaderIconUnvoidButton()
-                .clickInvoiceYesButton();
-
-        invoicesPage
-                .clickAdvancedSearchCaret()
-                .setStatus(data.getStatus2())
-                .clickSearchButton();
-//                .scrollInvoices(); todo uncomment here, if the test becomes not stable
-
-        Arrays.stream(invoices)
-                .forEach((inv) -> Assert.assertTrue(invoicesPage
+                .forEach((inv) -> Assert.assertTrue(VNextBOInvoicesPageValidations
                                 .isInvoiceDisplayed(inv),
                         "The invoice " + inv + " is not displayed after being unvoided"));
     }

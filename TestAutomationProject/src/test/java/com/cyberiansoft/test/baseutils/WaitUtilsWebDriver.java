@@ -91,6 +91,15 @@ public class WaitUtilsWebDriver {
         new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutInSeconds).until(ExpectedConditions.invisibilityOf(element));
     }
 
+    public static void waitForInvisibility(By by) {
+        getWait().until(ExpectedConditions.invisibilityOf(DriverBuilder.getInstance().getDriver().findElement(by)));
+    }
+
+    public static void waitForInvisibility(By by, int timeoutInSeconds) {
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        new WebDriverWait(driver, timeoutInSeconds).until(ExpectedConditions.invisibilityOf(driver.findElement(by)));
+    }
+
     public static void waitForInvisibilityIgnoringException(WebElement element) {
         try {
             getWait().until(ExpectedConditions.invisibilityOf(element));
@@ -212,7 +221,7 @@ public class WaitUtilsWebDriver {
         return getWait().until(ExpectedConditions.attributeContains(element, attribute, value));
     }
 
-    public static boolean waitForElementToContainAttributeIgnoringException(WebElement element, String attribute, String value) {
+    public static boolean waitForAttributeToContainIgnoringException(WebElement element, String attribute, String value) {
         try {
             return waitForAttributeToContain(element, attribute, value);
         } catch (Exception ignored) {

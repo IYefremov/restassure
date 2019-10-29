@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.deviceManagement;
 
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOActiveDevicesInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
@@ -14,7 +15,7 @@ public class VNextBODeviceManagementSteps {
     public static void deletePendingRegistrationDeviceByUser(String user) {
         VNextBOPendingRegistrationsValidations.verifyPendingRegistrationTabIsOpened();
         new VNextBOPendingRegistrationsInteractions().clickDeleteDeviceButtonForUser(user);
-        new VNextBOConfirmationDialog().clickYesButton();
+        new VNextBOConfirmationDialogInteractions().clickYesButton();
     }
 
     public static void verifyUserCanUncoverRegistrationCode(String deviceName) {

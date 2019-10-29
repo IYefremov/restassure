@@ -27,6 +27,7 @@ import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
+import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -140,9 +141,8 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         loginPage.userLogin(deviceuser, devicepsw);
         VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
-        VNextBOInvoicesWebPage invoicesWebPage = leftMenu.selectInvoicesMenu();
-        invoicesWebPage.selectInvoiceInTheList(invoiceNumber);
-        Assert.assertEquals(invoicesWebPage.getSelectedInvoiceNote(), noteText);
+        new VNextBOInvoicesPageInteractions().selectInvoiceInTheList(invoiceNumber);
+        Assert.assertEquals(new VNextBOInvoicesPageInteractions().getSelectedInvoiceNote(), noteText);
         webdriver.quit();
     }
 
@@ -206,9 +206,8 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         loginPage.userLogin(deviceuser, devicepsw);
         VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
-        VNextBOInvoicesWebPage invoicesWebPage = leftMenu.selectInvoicesMenu();
-        invoicesWebPage.selectInvoiceInTheList(invoiceNumber);
-        Assert.assertEquals(invoicesWebPage.getSelectedInvoiceCustomerName(), testcustomer.getFullName());
+        new VNextBOInvoicesPageInteractions().selectInvoiceInTheList(invoiceNumber);
+        Assert.assertEquals(new VNextBOInvoicesPageInteractions().getSelectedInvoiceCustomerName(), testcustomer.getFullName());
 
     }
 

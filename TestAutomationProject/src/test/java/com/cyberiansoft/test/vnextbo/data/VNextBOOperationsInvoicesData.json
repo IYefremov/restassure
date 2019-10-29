@@ -69,6 +69,7 @@
         }
       ],
       "status": "Void",
+      "status2": "New",
       "timeFrame": "Custom",
       "fromDate": "02/01/2017"
     }

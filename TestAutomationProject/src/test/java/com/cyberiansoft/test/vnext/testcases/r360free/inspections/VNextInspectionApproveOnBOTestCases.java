@@ -27,6 +27,7 @@ import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
@@ -107,9 +108,8 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextBOInspectionsWebPage inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspNumber);
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-		VNextBOConfirmationDialog confirmationDialog = new VNextBOConfirmationDialog();
 
-		confirmationDialog.clickNoButton();
+        new VNextBOConfirmationDialogInteractions().clickNoButton();
 		BaseUtils.waitABit(500);
 		inspectionsWebPage.approveInspection(approveNotes);
 
@@ -179,8 +179,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextBOInspectionsWebPage inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspNumber);
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-		VNextBOConfirmationDialog confirmationDialog = new VNextBOConfirmationDialog();
-		confirmationDialog.clickNoButton();
+        new VNextBOConfirmationDialogInteractions().clickNoButton();
 		BaseUtils.waitABit(1000);
 		inspectionsWebPage.declineInspection(approveNotes);
 		
@@ -189,5 +188,4 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspNumber), inspectionData.getInspectionStatus().getStatus());
 		webdriver.quit();
 	}
-
 }

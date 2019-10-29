@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.baseutils.Utils;
-import org.openqa.selenium.*;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import lombok.Getter;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,6 +12,7 @@ import org.testng.Assert;
 
 import java.util.List;
 
+@Getter
 public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//ul[@data-automation-id='invoiceList']")
@@ -69,173 +71,16 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
     private WebElement locationExpanded;
+
+    @FindBy(xpath = "//div[@id='invoices-search']//i[contains(@data-bind, 'click: clear')]")
+    private WebElement clearSearchIcon;
 	
-	public VNextBOInvoicesWebPage(WebDriver driver) {
-		super(driver);
+	public VNextBOInvoicesWebPage() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 
-	public boolean areHeaderIconsDisplayed() {
-	    wait.until(ExpectedConditions.visibilityOf(headerIcons));
-	    return headerIconVoidButton.isDisplayed() &&
-                headerIconApproveButton.isDisplayed() &&
-                headerIconArchiveButton.isDisplayed();
-    }
-
-    public VNextBOConfirmationDialog clickHeaderIconVoidButton() {
-	    Utils.clickElement(headerIconVoidButton);
-	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
-    }
-
-    public VNextBOConfirmationDialog clickHeaderIconUnvoidButton() {
-	    Utils.clickElement(headerIconUnvoidButton);
-	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
-    }
-
-	public void selectInvoiceInTheList(String invoice) {
-		getInvoiceByName(invoice).click();
-		waitForLoading();
-	}
-
     public WebElement getInvoiceByName(String invoice) {
         return invoices.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + invoice + "']"));
-    }
-
-    public VNextBOInvoicesWebPage clickCheckbox(String ...invoiceNames) {
-        for (String invoiceName : invoiceNames) {
-            Utils.clickElement(getInvoiceByName(invoiceName).findElement(By.xpath(".//../../..//input")));
-            WaitUtilsWebDriver.waitABit(1000);
-        }
-        return this;
-    }
-
-    public String getSelectedInvoiceCustomerName() {
-		return invoiceDetailsPanel.findElement(By.xpath(".//h5[@data-bind='text: customer.clientName']")).getText();
-	}
-	
-	public String getSelectedInvoiceNote() {
-		return invoiceDetailsPanel.findElement(By.xpath(".//p[@data-bind='text: note']")).getText();
-	}
-
-    public String getFirstInvoiceName() {
-	    return getInvoiceName(0);
-    }
-
-    public String getInvoiceName(int index) {
-	    return wait.until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers)).get(index).getText();
-    }
-
-    public String[] getFirstInvoiceNames(int number) {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(invoiceNumbers);
-        String[] invoices = new String[number];
-        for (int i = 0; i < number; i++) {
-            invoices[i] = invoiceNumbers.get(i).getText();
-        }
-        return invoices;
-    }
-
-    public VNextBOInvoicesWebPage clickFirstInvoice() {
-	    wait.until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers)).get(0).click();
-	    waitForLoading();
-	    return this;
-    }
-
-    public VNextBOConfirmationDialog clickVoidButton() {
-	    wait.until(ExpectedConditions.elementToBeClickable(voidButton)).click();
-        waitForLoading();
-	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
-    }
-
-    public VNextBOConfirmationDialog clickUnvoidButton() {
-        Utils.clickElement(unvoidButton);
-	    waitForLoading();
-	    return PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
-    }
-
-    public void scrollInvoices() {
-        while (true) {
-            scrollDownToLastInvoice();
-            waitABit(1000);
-            try {
-                waitShort.until(ExpectedConditions.visibilityOf(progressMessage));
-                break;
-            } catch (Exception ignored) {}
-        }
-    }
-
-    public boolean isInvoiceDisplayed(String invoice) {
-        wait
-                .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.visibilityOfAllElements(invoiceNumbers));
-        return invoiceNumbers.stream().anyMatch(n -> n.getText().equals(invoice));
-    }
-
-    private void scrollDownToLastInvoice() {
-        final WebElement invoice = waitShort
-                .until(ExpectedConditions.visibilityOf(invoicesList.get(invoicesList.size() - 1)));
-        scrollToElement(invoice);
-    }
-
-    public String getCheckedItemsNote() {
-	    return wait.until(ExpectedConditions.visibilityOf(checkedItemsNote)).getText();
-	}
-
-	public VNextBOAdvancedSearchInvoiceForm clickAdvancedSearchCaret() {
-	    wait.until(ExpectedConditions.elementToBeClickable(advancedSearchCaret)).click();
-        return PageFactory.initElements(driver, VNextBOAdvancedSearchInvoiceForm.class);
-    }
-
-    public VNextBOInvoicesWebPage setLocation(String location) {
-        if (isLocationExpanded()) {
-            selectLocation(location);
-        } else {
-            try {
-                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
-            } catch (Exception ignored) {
-                waitABit(2000);
-                wait.until(ExpectedConditions.elementToBeClickable(locationElement)).click();
-            }
-            selectLocation(location);
-        }
-        return this;
-    }
-
-    private void selectLocation(String location) {
-        wait.until(ExpectedConditions
-                .elementToBeClickable(locationExpanded.findElement(By.xpath(".//label[text()='" + location + "']"))))
-                .click();
-        waitForLoading();
-        Assert.assertTrue(isLocationSelected(location), "The location hasn't been selected");
-        closeLocationDropDown();
-    }
-
-    public boolean isLocationExpanded() {
-        try {
-            return waitShort.until(ExpectedConditions.visibilityOf(locationExpanded)).isDisplayed();
-        } catch (Exception ignored) {
-            return false;
-        }
-    }
-
-    public void closeLocationDropDown() {
-        try {
-            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
-        } catch (Exception e) {
-            locationElement.click();
-            wait.until(ExpectedConditions.invisibilityOf(locationExpanded));
-        }
-    }
-
-    public boolean isLocationSelected(String location) {
-        try {
-            wait
-                    .ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions
-                            .presenceOfElementLocated(By
-                                    .xpath("//div[@class='add-notes-item menu-item active']//label[text()='" + location + "']")));
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
     }
 }

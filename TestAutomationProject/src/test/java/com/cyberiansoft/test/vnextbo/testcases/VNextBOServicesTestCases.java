@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.utils.VNextPriceCalculations;
@@ -347,9 +348,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 
         leftMenu.selectServicesMenu();
         servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), false);
-        VNextBOConfirmationDialog confirmdialog = servicespage
-                .clickUnarchiveButtonForService(data.getPriceServiceName() + data.getServiceEdited());
-        Assert.assertEquals(confirmdialog.clickNoAndGetConfirmationDialogMessage(),
+        servicespage.clickUnarchiveButtonForService(data.getPriceServiceName() + data.getServiceEdited());
+        Assert.assertEquals(new VNextBOConfirmationDialogInteractions().clickNoAndGetConfirmationDialogMessage(),
                 "Are you sure you want to restore \"" + data.getPriceServiceName() + data.getServiceEdited()
                         + "\" service?");
         servicespage.unarchiveServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
@@ -415,9 +415,8 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage = leftMenu.selectServicesMenu();
         servicespage.advancedSearchService(data.getPercentageServiceName()
                 + data.getServiceEdited(), false);
-        VNextBOConfirmationDialog confirmdialog = servicespage
-                .clickUnarchiveButtonForService(data.getPercentageServiceName() + data.getServiceEdited());
-        Assert.assertEquals(confirmdialog.clickNoAndGetConfirmationDialogMessage(),
+        servicespage.clickUnarchiveButtonForService(data.getPercentageServiceName() + data.getServiceEdited());
+        Assert.assertEquals(new VNextBOConfirmationDialogInteractions().clickNoAndGetConfirmationDialogMessage(),
                 "Are you sure you want to restore \"" + data.getPercentageServiceName()
                         + data.getServiceEdited() + "\" service?");
         servicespage.unarchiveServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());

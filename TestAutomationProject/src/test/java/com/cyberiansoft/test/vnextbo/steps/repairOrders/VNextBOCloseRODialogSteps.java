@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOCloseRODialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOCloseRODialogValidations;
 import org.testng.Assert;
 
 public class VNextBOCloseRODialogSteps {
@@ -11,11 +12,11 @@ public class VNextBOCloseRODialogSteps {
         final String previousStatus = detailsPageInteractions.getRoStatusValue();
         System.out.println(previousStatus);
         final VNextBOCloseRODialogInteractions closeRODialogInteractions = new VNextBOCloseRODialogInteractions();
-        Assert.assertTrue(closeRODialogInteractions.isCloseRODialogDisplayed(),
+        Assert.assertTrue(VNextBOCloseRODialogValidations.isCloseRODialogDisplayed(),
                 "The close RO dialog hasn't been displayed");
         closeRODialogInteractions.setReason(reason);
         closeRODialogInteractions.clickCloseROButton();
-        Assert.assertTrue(closeRODialogInteractions.isCloseRODialogClosed(),
+        Assert.assertTrue(VNextBOCloseRODialogValidations.isCloseRODialogClosed(),
                 "The close RO dialog hasn't been closed");
         detailsPageInteractions.updateRoStatusValue(previousStatus);
     }
