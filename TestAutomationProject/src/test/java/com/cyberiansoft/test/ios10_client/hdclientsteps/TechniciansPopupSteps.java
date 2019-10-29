@@ -10,6 +10,11 @@ public class TechniciansPopupSteps {
         techniciansPopup.selectTechniciansCustomView();
     }
 
+    public static void selectTechniciansEvenlyView() {
+        TechniciansPopup techniciansPopup = new TechniciansPopup();
+        techniciansPopup.selectTechniciansEvenlyView();
+    }
+
     public static void selectServiceTechnician(ServiceTechnician serviceTechnician) {
         TechniciansPopup techniciansPopup = new TechniciansPopup();
         techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());

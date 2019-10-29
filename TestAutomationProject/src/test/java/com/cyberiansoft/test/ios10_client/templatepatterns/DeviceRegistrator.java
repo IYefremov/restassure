@@ -50,12 +50,11 @@ public class DeviceRegistrator {
         WebDriver webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(backofficeurl);
 
-        BackOfficeLoginWebPage loginpage = PageFactory.initElements(webdriver,
-                BackOfficeLoginWebPage.class);
-        loginpage.userLogin(userName, userPassword);
-        BackOfficeHeaderPanel backofficeheader = PageFactory.initElements(webdriver,
-                BackOfficeHeaderPanel.class);
-        backofficeheader.clickCompanyLink();
+        BackOfficeLoginWebPage loginWebPage = new BackOfficeLoginWebPage(webdriver);
+        loginWebPage.userLogin(userName, userPassword);
+        BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
+        backOfficeHeaderPanel.clickCompanyLink();
+        backOfficeHeaderPanel.clickCompanyLink();
         CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
         companyWebPage.clickManageDevicesLink();
         ActiveDevicesWebPage devicespage = new ActiveDevicesWebPage(webdriver);

@@ -31,6 +31,10 @@ public class RegularServiceDetailsScreenSteps {
             selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
         if (serviceData.getQuestionsData() != null)
             selectedServiceDetailsScreen.answerQuestions(serviceData.getQuestionsData());
+        if (serviceData.getServicePartData() != null) {
+            selectedServiceDetailsScreen.clickServicePartCell();
+            RegularServicePartSteps.selectServicePartData(serviceData.getServicePartData());
+        }
     }
 
     public static void selectPreExistingDamage(String damageName) {
@@ -138,6 +142,11 @@ public class RegularServiceDetailsScreenSteps {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.setTechnicianCustomPriceValue(serviceTechnician.getTechnicianFullName(),
                 serviceTechnician.getTechnicianPercentageValue());
+    }
+
+    public static void clickRemoveServiceButton() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickRemoveServiceButton();
     }
 
 }

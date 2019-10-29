@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.hdvalidations;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
 import org.testng.Assert;
@@ -41,6 +42,11 @@ public class VehicleInfoValidations {
     public static void verifyVehicleInfoScreenCustomerValue(AppCustomer expectedCustomer) {
         VehicleScreen vehicleScreen = new VehicleScreen();
         Assert.assertEquals(vehicleScreen.getCustomerValue(), expectedCustomer.getFullName().trim());
+    }
+
+    public static void verifyVehicleInfoScreenTechValue(ServiceTechnician serviceTechnician) {
+        VehicleScreen vehicleScreen = new VehicleScreen();
+        Assert.assertEquals(vehicleScreen.getTechnician(), serviceTechnician.getTechnicianFullName().trim());
     }
 
 }
