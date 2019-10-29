@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import org.openqa.selenium.WebElement;
 
@@ -90,7 +90,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void searchUserByEmail(String email) {
+    public static void searchClientByEmail(String email) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setEmailField(email);
@@ -98,7 +98,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void searchUserByPhone(String phone) {
+    public static void searchClientByPhone(String phone) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setPhoneField(phone);
@@ -106,7 +106,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void searchUserByName(String name) {
+    public static void searchClientByName(String name) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setNameField(name);
@@ -114,7 +114,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void searchUserByAddress(String address) {
+    public static void searchClientByAddress(String address) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setAddressField(address);
@@ -122,7 +122,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void searchUserByType(String clientType) {
+    public static void searchClientByType(String clientType) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setTypeDropDownField(clientType);

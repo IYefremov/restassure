@@ -1,8 +1,8 @@
-package com.cyberiansoft.test.vnextbo.verifications.commonObjects;
+package com.cyberiansoft.test.vnextbo.verifications.commonobjects;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.vnextbo.screens.commonObjects.VNextBOSearchPanel;
-import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOSearchPanel;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOBaseWebPageValidations;
 import org.testng.Assert;
 

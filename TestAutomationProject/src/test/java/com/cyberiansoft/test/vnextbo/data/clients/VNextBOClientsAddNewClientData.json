@@ -1,0 +1,350 @@
+{
+  "verifyUserCanFillClientInfoFields": [
+    {
+      "rowID": "verifyUserCanFillClientInfoFields.01",
+      "description": "Test Case 90996: User can fill \"Client info\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90996",
+          "testCaseTitle": "User can fill \"Client info\" fields"
+        }
+      ],
+      "employee": {
+        "clientType": "Retail",
+        "companyName": "Tekila",
+        "employeeFirstName": "El",
+        "employeeLastName": "Jimador",
+        "employeeEmail": "jimador@gmail.com",
+        "phoneNumber": "+38077777777"
+      }
+    }
+  ],
+  "verifyUserCanFillAccountInfoFields": [
+    {
+      "rowID": "verifyUserCanFillAccountInfoFields.01",
+      "description": "Test Case 90997: User can fill \"Account info\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90997",
+          "testCaseTitle": "User can fill \"Account info\" fields"
+        }
+      ],
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "Aarom Mcbeen",
+        "classOption": "",
+        "qbAccount": "Sales"
+      }
+    }
+  ],
+  "verifyUserCanFillAddressFields": [
+    {
+      "rowID": "verifyUserCanFillAddressFields.01",
+      "description": "Test Case 90998: User can fill \"Address\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90998",
+          "testCaseTitle": "User can fill \"Address\" fields"
+        }
+      ],
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      }
+    }
+  ],
+  "verifyUserCanFillEmailOptionsFields": [
+    {
+      "rowID": "verifyUserCanFillEmailOptionsFields.01",
+      "description": "Test Case 90999: User can fill \"Email Options\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90999",
+          "testCaseTitle": "User can fill \"Email Options\" fields"
+        }
+      ],
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      }
+    }
+  ],
+  "verifyUserCanFillPreferencesFields": [
+    {
+      "rowID": "verifyUserCanFillPreferencesFields.01",
+      "description": "Test Case 91000: User can fill \"Preferences\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91000",
+          "testCaseTitle": "User can fill \"Preferences\" fields"
+        }
+      ],
+      "defaultArea": "Arizona"
+    }
+  ],
+  "verifyUserCanFillMiscellaneousFields": [
+    {
+      "rowID": "verifyUserCanFillMiscellaneousFields.01",
+      "description": "Test Case 91001: User can fill \"Miscellaneous\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91001",
+          "testCaseTitle": "User can fill \"Miscellaneous\" fields"
+        }
+      ],
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanAddNewWholesaleClient": [
+    {
+      "rowID": "verifyUserCanAddNewWholesaleClient.01",
+      "description": "Test Case 91002: User can Add new \"Wholesale \"client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91002",
+          "testCaseTitle": "User can Add new \"Wholesale \"client"
+        }
+      ],
+      "employee": {
+        "clientType": "Wholesale",
+        "companyName": "Test Wholesale Company",
+        "employeeFirstName": "testWholesaleFirstName",
+        "employeeLastName": "testWholesaleLastName",
+        "employeeEmail": "test_wholesale_client@gmail.com",
+        "phoneNumber": "+38077777777"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "Andrew Bartolomeo",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanAddNewRetailClient": [
+    {
+      "rowID": "verifyUserCanAddNewRetailClient.01",
+      "description": "Test Case 91005: User can Add new \"Retail \"client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91005",
+          "testCaseTitle": "User can Add new \"Retail \"client"
+        }
+      ],
+      "employee": {
+        "clientType": "Retail",
+        "companyName": "Test Retail Company",
+        "employeeFirstName": "testRetailFirstName",
+        "employeeLastName": "testRetailLastName",
+        "employeeEmail": "test_retail_client@gmail.com",
+        "phoneNumber": "+38088888888"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "David Taylor",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanCancelAddingWholesaleClient": [
+    {
+      "rowID": "verifyUserCanCancelAddingWholesaleClient.01",
+      "description": "Test Case 91003: User can cancel adding of \"Wholesale\" client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91003",
+          "testCaseTitle": "User can cancel adding of \"Wholesale\" client"
+        }
+      ],
+      "employee": {
+        "clientType": "Wholesale",
+        "companyName": "Tekila",
+        "employeeFirstName": "El",
+        "employeeLastName": "Jimador",
+        "employeeEmail": "jimador@gmail.com",
+        "phoneNumber": "+38077777777"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "Max Kitson",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanFillAllFieldsForRetailClient": [
+    {
+      "rowID": "verifyUserCanFillAllFieldsForRetailClient.01",
+      "description": "Test Case 91004: User can fill the fields for new \"Retail\" client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91004",
+          "testCaseTitle": "User can fill the fields for new \"Retail\" client"
+        }
+      ],
+      "employee": {
+        "clientType": "Retail",
+        "companyName": "Tekila",
+        "employeeFirstName": "El",
+        "employeeLastName": "Jimador",
+        "employeeEmail": "jimador@gmail.com",
+        "phoneNumber": "+38077777777"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "Aarom Mcbeen",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanCancelAddingRetailClient": [
+    {
+      "rowID": "verifyUserCanCancelAddingRetailClient.01",
+      "description": "Test Case 91006: User can cancel adding of \"Retail\" client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91006",
+          "testCaseTitle": "User can cancel adding of \"Retail\" client"
+        }
+      ],
+      "employee": {
+        "clientType": "Retail",
+        "companyName": "Tekila",
+        "employeeFirstName": "El",
+        "employeeLastName": "Jimador",
+        "employeeEmail": "jimador@gmail.com",
+        "phoneNumber": "+38077777777"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "ROMAINE TWAR",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ]
+}

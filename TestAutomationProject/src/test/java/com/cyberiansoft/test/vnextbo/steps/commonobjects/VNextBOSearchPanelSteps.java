@@ -1,8 +1,8 @@
-package com.cyberiansoft.test.vnextbo.steps.commonObjects;
+package com.cyberiansoft.test.vnextbo.steps.commonobjects;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.commonObjects.VNextBOSearchPanel;
+import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOSearchPanel;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 
 public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {

@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOAddressBlock;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOAddressBlock;
 import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOAddressBlockInteractions {
@@ -29,14 +29,14 @@ public class VNextBOAddressBlockInteractions {
 
     public void setCountryShipTo(String country) {
         Utils.clearAndType(addressBlock.getCountryShipToInputField(), country);
-        Utils.selectOptionInDropDown(addressBlock.getCountryShipToDropDown(),
-                addressBlock.getCountryShipToListBoxOptions(), country);
+        Utils.selectOptionInDropDownWithJs(addressBlock.getCountryShipToDropDown(),
+                addressBlock.getCountryShipToListBoxOptionByText(country));
     }
 
     public void setStateProvinceShipTo(String stateProvince) {
         Utils.clearAndType(addressBlock.getStateProvinceShipToInputField(), stateProvince);
-        Utils.selectOptionInDropDown(addressBlock.getStateProvinceShipToDropDown(),
-                addressBlock.getCountryShipToListBoxOptions(), stateProvince);
+        Utils.selectOptionInDropDownWithJs(addressBlock.getStateProvinceShipToDropDown(),
+                addressBlock.getStateProvinceShipToListBoxOptionByText(stateProvince));
     }
 
     public void setZipShipTo(String zipShipTo) {
@@ -63,14 +63,14 @@ public class VNextBOAddressBlockInteractions {
 
     public void setCountryBillTo(String country) {
         Utils.clearAndType(addressBlock.getCountryBillToInputField(), country);
-        Utils.selectOptionInDropDown(addressBlock.getCountryBillToDropDown(),
-                addressBlock.getCountryBillToListBoxOptions(), country);
+        Utils.selectOptionInDropDownWithJs(addressBlock.getCountryBillToDropDown(),
+                addressBlock.getCountryBillToListBoxOptionByText(country));
     }
 
     public void setStateProvinceBillTo(String stateProvince) {
         Utils.clearAndType(addressBlock.getStateProvinceBillToInputField(), stateProvince);
-        Utils.selectOptionInDropDown(addressBlock.getStateProvinceBillToDropDown(),
-                addressBlock.getCountryBillToListBoxOptions(), stateProvince);
+        Utils.selectOptionInDropDownWithJs(addressBlock.getStateProvinceBillToDropDown(),
+                addressBlock.getStateProvinceBillToListBoxOptionByText(stateProvince));
     }
 
     public void setZipBillTo(String zipBillTo) {
