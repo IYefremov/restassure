@@ -1,0 +1,350 @@
+{
+  "verifyUserCanEditClientInfoFields": [
+    {
+      "rowID": "verifyUserCanEditClientInfoFields.01",
+      "description": "Test Case 91017: User can edit \"Client info\" of client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91017",
+          "testCaseTitle": "User can edit \"Client info\" of client"
+        }
+      ],
+      "employee": {
+        "clientType": "Wholesale",
+        "companyName": "Tekila edited",
+        "employeeFirstName": "El edited",
+        "employeeLastName": "Jimador edited",
+        "employeeEmail": "jimador_edited@gmail.com",
+        "phoneNumber": "+38077777779"
+      }
+    }
+  ],
+  "verifyUserCanEditAccountInfoFields": [
+    {
+      "rowID": "verifyUserCanEditAccountInfoFields.01",
+      "description": "Test Case 91018: User can edit \"Account info\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91018",
+          "testCaseTitle": "User can edit \"Account info\" fields"
+        }
+      ],
+      "accountInfoData": {
+        "accountingId": "233534",
+        "accountingId2": "3453453433",
+        "exportAs": "Andrew Bartolomeo",
+        "classOption": "",
+        "qbAccount": "Made in Ukraine"
+      }
+    }
+  ],
+  "verifyUserCanEditAddressFields": [
+    {
+      "rowID": "verifyUserCanEditAddressFields.01",
+      "description": "Test Case 91019: User can edit \"Address\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91019",
+          "testCaseTitle": "User can edit \"Address\" fields"
+        }
+      ],
+      "addressData": {
+        "address1": "street22",
+        "address2": "street12353",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      }
+    }
+  ],
+  "verifyUserCanEditEmailOptionsFields": [
+    {
+      "rowID": "verifyUserCanEditEmailOptionsFields.01",
+      "description": "Test Case 91020: User can edit \"Email Options\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91020",
+          "testCaseTitle": "User can edit \"Email Options\" fields"
+        }
+      ],
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      }
+    }
+  ],
+  "verifyUserCanEditPreferencesFields": [
+    {
+      "rowID": "verifyUserCanEditPreferencesFields.01",
+      "description": "Test Case 91021: User can edit \"Preferences\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91021",
+          "testCaseTitle": "User can edit \"Preferences\" fields"
+        }
+      ],
+      "defaultArea": "Arizona"
+    }
+  ],
+  "verifyUserCanEditMiscellaneousFields": [
+    {
+      "rowID": "verifyUserCanEditMiscellaneousFields.01",
+      "description": "Test Case 91022: User can edit \"Miscellaneous\" fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91022",
+          "testCaseTitle": "User can edit \"Miscellaneous\" fields"
+        }
+      ],
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanCancelEditingRetailClient": [
+    {
+      "rowID": "verifyUserCanCancelEditingRetailClient.01",
+      "description": "Test Case 91027: User can cancel editing of \"Retail\" client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91027",
+          "testCaseTitle": "User can cancel editing of \"Retail\" client"
+        }
+      ],
+      "employee": {
+        "clientType": "Retail",
+        "companyName": "Tekila",
+        "employeeFirstName": "El",
+        "employeeLastName": "Jimador",
+        "employeeEmail": "jimador@gmail.com",
+        "phoneNumber": "+38077777777"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "ROMAINE TWAR",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanCancelEditingWholesaleClient": [
+    {
+      "rowID": "verifyUserCanCancelEditingWholesaleClient.01",
+      "description": "Test Case 91024: User can cancel editing of \"Wholesale\" client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91024",
+          "testCaseTitle": "User can cancel editing of \"Wholesale\" client"
+        }
+      ],
+      "employee": {
+        "clientType": "Wholesale",
+        "companyName": "Tekila",
+        "employeeFirstName": "El",
+        "employeeLastName": "Jimador",
+        "employeeEmail": "jimador@gmail.com",
+        "phoneNumber": "+38077777777"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "Max Kitson",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanEditDetailsOfRetailClient": [
+    {
+      "rowID": "verifyUserCanEditDetailsOfRetailClient.01",
+      "description": "Test Case 91025: User can edit detailes of \"Retail\" client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91025",
+          "testCaseTitle": "User can edit detailes of \"Retail\" client"
+        }
+      ],
+      "employee": {
+        "clientType": "Retail",
+        "companyName": "Tekila",
+        "employeeFirstName": "El",
+        "employeeLastName": "Jimador",
+        "employeeEmail": "jimador@gmail.com",
+        "phoneNumber": "+38077777777"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "Aarom Mcbeen",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanSaveEditedDetailsForWholesaleClient": [
+    {
+      "rowID": "verifyUserCanSaveEditedDetailsForWholesaleClient.01",
+      "description": "Test Case 91023: User can save edited detailes for \"Wholesale\" client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91002",
+          "testCaseTitle": "User can save edited detailes for \"Wholesale\" client"
+        }
+      ],
+      "employee": {
+        "clientType": "Wholesale",
+        "companyName": "Test Wholesale Company",
+        "employeeFirstName": "testWholesaleFirstName",
+        "employeeLastName": "testWholesaleLastName",
+        "employeeEmail": "test_wholesale_client@gmail.com",
+        "phoneNumber": "+38077777777"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "Andrew Bartolomeo",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ],
+  "verifyUserCanSaveEditedDetailsForRetailClient": [
+    {
+      "rowID": "verifyUserCanSaveEditedDetailsForRetailClient.01",
+      "description": "Test Case 91026: User can save edited detailes for \"Retail\" client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91026",
+          "testCaseTitle": "User can save edited detailes for \"Retail\" client"
+        }
+      ],
+      "employee": {
+        "clientType": "Retail",
+        "companyName": "Test Retail Company",
+        "employeeFirstName": "testRetailFirstName",
+        "employeeLastName": "testRetailLastName",
+        "employeeEmail": "test_retail_client@gmail.com",
+        "phoneNumber": "+38088888888"
+      },
+      "accountInfoData": {
+        "accountingId": "2335",
+        "accountingId2": "34534534",
+        "exportAs": "David Taylor",
+        "classOption": "",
+        "qbAccount": "Sales"
+      },
+      "addressData": {
+        "address1": "street11",
+        "address2": "street12343",
+        "city": "London",
+        "country": "Canada",
+        "stateProvince": "Alberta",
+        "zip": "34645",
+        "address11": "addr",
+        "address22": "addr35",
+        "city2": "New York",
+        "country2": "United States",
+        "stateProvince2": "Colorado",
+        "zip2": "235"
+      },
+      "emailOptionsData": {
+        "defaultRecipient": "loremmm",
+        "cc": "ipsummm",
+        "bcc": "bcccc"
+      },
+      "defaultArea": "Arizona",
+      "notes": "Lorem trulala"
+    }
+  ]
+}

@@ -2,10 +2,12 @@ package com.cyberiansoft.test.vnextbo.verifications.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.Employee;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.*;
+import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import org.testng.Assert;
 import org.testng.asserts.Assertion;
 
@@ -160,5 +162,21 @@ public class VNextBOClientDetailsValidations {
             Assert.assertTrue(Utils.isElementDisplayed(miscellaneousBlock.getClearButton()),
                     "\"Clear\" button hasn't been displayed");
         }
+    }
+
+    public static void verifyAllClientDetailsBlocksData(VNextBOClientsData clientsData, boolean wholesale) {
+
+        if (!VNextBOClientDetailsValidations.isClientInfoPanelExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
+        VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(clientsData.getEmployee());
+        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
+        VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(clientsData.getAccountInfoData());
+        VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
+        VNextBOClientDetailsValidations.verifyAddressFieldsContainCorrectData(clientsData.getAddressData());
+        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
+        VNextBOClientDetailsValidations.verifyEmailOptionsFieldsContainCorrectData(clientsData.getEmailOptionsData(), true);
+        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
+        VNextBOClientDetailsValidations.verifyPreferencesFieldsContainCorrectData(clientsData.getDefaultArea());
+        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
+        VNextBOClientDetailsValidations.verifyMiscellaneousFieldsContainCorrectData(clientsData.getNotes(), true);
     }
 }
