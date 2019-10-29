@@ -109,7 +109,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		inspectionsWebPage.selectInspectionInTheList(inspNumber);
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
 
-        new VNextBOConfirmationDialogInteractions().clickNoButton();
+        VNextBOConfirmationDialogInteractions.clickNoButton();
 		BaseUtils.waitABit(500);
 		inspectionsWebPage.approveInspection(approveNotes);
 
@@ -179,7 +179,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextBOInspectionsWebPage inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspNumber);
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-        new VNextBOConfirmationDialogInteractions().clickNoButton();
+        VNextBOConfirmationDialogInteractions.clickNoButton();
 		BaseUtils.waitABit(1000);
 		inspectionsWebPage.declineInspection(approveNotes);
 		

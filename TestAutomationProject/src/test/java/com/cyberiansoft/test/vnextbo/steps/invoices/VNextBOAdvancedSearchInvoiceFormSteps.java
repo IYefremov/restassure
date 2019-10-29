@@ -8,53 +8,49 @@ import com.cyberiansoft.test.vnextbo.verifications.invoices.VNextBOAdvancedSearc
 public class VNextBOAdvancedSearchInvoiceFormSteps {
 
     public static void searchByCustomTimeFrameWithFromDateAndStatus(String fromDate, String status) {
-        final VNextBOAdvancedSearchInvoiceFormInteractions searchInvoiceFormInteractions = new VNextBOAdvancedSearchInvoiceFormInteractions();
-        new VNextBOInvoicesPageInteractions().clickAdvancedSearchCaret();
+        VNextBOInvoicesPageInteractions.clickAdvancedSearchCaret();
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
 
-        searchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
-        searchInvoiceFormInteractions.setFromDate(fromDate);
-        searchInvoiceFormInteractions.setStatus(status);
-        searchInvoiceFormInteractions.clickSearchButton();
+        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
+        VNextBOAdvancedSearchInvoiceFormInteractions.setFromDate(fromDate);
+        VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
+        VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
     }
 
     public static void searchByCustomTimeFrameAndStatus(String fromDate, String toDate, String status) {
-        final VNextBOAdvancedSearchInvoiceFormInteractions searchInvoiceFormInteractions = new VNextBOAdvancedSearchInvoiceFormInteractions();
-        new VNextBOInvoicesPageInteractions().clickAdvancedSearchCaret();
+        VNextBOInvoicesPageInteractions.clickAdvancedSearchCaret();
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
 
-        searchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
-        searchInvoiceFormInteractions.setFromDate(fromDate);
-        searchInvoiceFormInteractions.setToDate(toDate);
-        searchInvoiceFormInteractions.setStatus(status);
-        searchInvoiceFormInteractions.clickSearchButton();
+        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
+        VNextBOAdvancedSearchInvoiceFormInteractions.setFromDate(fromDate);
+        VNextBOAdvancedSearchInvoiceFormInteractions.setToDate(toDate);
+        VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
+        VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
     }
 
     public static void searchByStatus(String status) {
-        final VNextBOAdvancedSearchInvoiceFormInteractions searchInvoiceFormInteractions = new VNextBOAdvancedSearchInvoiceFormInteractions();
-        new VNextBOInvoicesPageInteractions().clickAdvancedSearchCaret();
+        VNextBOInvoicesPageInteractions.clickAdvancedSearchCaret();
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
-        searchInvoiceFormInteractions.setStatus(status);
-        searchInvoiceFormInteractions.clickSearchButton();
+        VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
+        VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
     }
 
     public static void searchByInvoiceAndStatus(String invoice, String status) {
-        final VNextBOAdvancedSearchInvoiceFormInteractions searchInvoiceFormInteractions = new VNextBOAdvancedSearchInvoiceFormInteractions();
-        new VNextBOInvoicesPageInteractions().clickAdvancedSearchCaret();
+        VNextBOInvoicesPageInteractions.clickAdvancedSearchCaret();
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
-        searchInvoiceFormInteractions.setInvoiceNumber(invoice);
-        searchInvoiceFormInteractions.setStatus(status);
-        searchInvoiceFormInteractions.clickSearchButton();
+        VNextBOAdvancedSearchInvoiceFormInteractions.setInvoiceNumber(invoice);
+        VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
+        VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
     }

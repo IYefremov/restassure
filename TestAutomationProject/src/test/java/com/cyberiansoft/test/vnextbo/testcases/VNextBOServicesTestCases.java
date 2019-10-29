@@ -349,7 +349,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         leftMenu.selectServicesMenu();
         servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), false);
         servicespage.clickUnarchiveButtonForService(data.getPriceServiceName() + data.getServiceEdited());
-        Assert.assertEquals(new VNextBOConfirmationDialogInteractions().clickNoAndGetConfirmationDialogMessage(),
+        Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickNoAndGetConfirmationDialogMessage(),
                 "Are you sure you want to restore \"" + data.getPriceServiceName() + data.getServiceEdited()
                         + "\" service?");
         servicespage.unarchiveServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
@@ -416,7 +416,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage.advancedSearchService(data.getPercentageServiceName()
                 + data.getServiceEdited(), false);
         servicespage.clickUnarchiveButtonForService(data.getPercentageServiceName() + data.getServiceEdited());
-        Assert.assertEquals(new VNextBOConfirmationDialogInteractions().clickNoAndGetConfirmationDialogMessage(),
+        Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickNoAndGetConfirmationDialogMessage(),
                 "Are you sure you want to restore \"" + data.getPercentageServiceName()
                         + data.getServiceEdited() + "\" service?");
         servicespage.unarchiveServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());

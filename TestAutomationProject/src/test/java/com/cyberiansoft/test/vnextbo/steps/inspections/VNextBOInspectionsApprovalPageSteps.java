@@ -95,7 +95,7 @@ public class VNextBOInspectionsApprovalPageSteps {
 
         String parent = Utils.getParentTab();
         VNextBOInspectionsPageSteps.clickTheApproveInspectionButton();
-        new VNextBOConfirmationDialogInteractions().clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
         Utils.getNewTab(parent);
 
         completeApprovingPrintPageInspection(note);

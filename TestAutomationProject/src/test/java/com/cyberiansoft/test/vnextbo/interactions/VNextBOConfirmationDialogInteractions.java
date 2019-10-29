@@ -12,42 +12,36 @@ import java.util.Objects;
 
 public class VNextBOConfirmationDialogInteractions {
 
-    private VNextBOConfirmationDialog confirmationDialog;
-
-    public VNextBOConfirmationDialogInteractions() {
-        confirmationDialog = new VNextBOConfirmationDialog();
-    }
-
-    public void clickNoButton() {
-        clickModalDialogButton(confirmationDialog.getConfirmDialog()
+    public static void clickNoButton() {
+        clickModalDialogButton(new VNextBOConfirmationDialog().getConfirmDialog()
                 .findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")));
     }
 
-    public void clickInvoiceNoButton() {
-        clickModalDialogButton(confirmationDialog.getInvoiceNoButton());
+    public static void clickInvoiceNoButton() {
+        clickModalDialogButton(new VNextBOConfirmationDialog().getInvoiceNoButton());
     }
 
-    public void clickYesButton() {
-        clickModalDialogButton(confirmationDialog.getConfirmDialog()
+    public static void clickYesButton() {
+        clickModalDialogButton(new VNextBOConfirmationDialog().getConfirmDialog()
                 .findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")));
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public void clickInvoiceYesButton() {
+    public static void clickInvoiceYesButton() {
         clickConfirmButton();
     }
 
-    public void clickConfirmButton() {
-        clickModalDialogButton(confirmationDialog.getConfirmButton());
+    public static void clickConfirmButton() {
+        clickModalDialogButton(new VNextBOConfirmationDialog().getConfirmButton());
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public void clickInvoiceRejectButton() {
-        clickModalDialogButton(confirmationDialog.getRejectButton());
+    public static void clickInvoiceRejectButton() {
+        clickModalDialogButton(new VNextBOConfirmationDialog().getRejectButton());
         WaitUtilsWebDriver.waitABit(2000);
     }
 
-    private void clickModalDialogButton(WebElement button) {
+    private static void clickModalDialogButton(WebElement button) {
         Utils.clickElement(button);
         try {
             WaitUtilsWebDriver.waitForInvisibility(By.id("dialogModal"));
@@ -56,8 +50,8 @@ public class VNextBOConfirmationDialogInteractions {
         }
     }
 
-    private String getConfirmationDialogMessage() {
-        final List<WebElement> dialogMessagesList = confirmationDialog.getDialogMessagesList();
+    private static String getConfirmationDialogMessage() {
+        final List<WebElement> dialogMessagesList = new VNextBOConfirmationDialog().getDialogMessagesList();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(dialogMessagesList, 7);
         for (WebElement message : dialogMessagesList)
             if (!message.getText().equals("")) {
@@ -66,13 +60,13 @@ public class VNextBOConfirmationDialogInteractions {
         return null;
     }
 
-    public String clickYesAndGetConfirmationDialogMessage() {
+    public static String clickYesAndGetConfirmationDialogMessage() {
         final String msg = Objects.requireNonNull(getConfirmationDialogMessage());
         clickYesButton();
         return msg;
     }
 
-    public String clickNoAndGetConfirmationDialogMessage() {
+    public static String clickNoAndGetConfirmationDialogMessage() {
         final String msg = Objects.requireNonNull(getConfirmationDialogMessage());
         clickNoButton();
         return msg;

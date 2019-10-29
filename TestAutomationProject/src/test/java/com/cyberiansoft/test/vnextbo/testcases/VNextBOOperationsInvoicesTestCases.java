@@ -34,10 +34,6 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-    private VNextBOLeftMenuInteractions leftMenuInteractions;
-    private VNextBOInvoicesPageInteractions invoicesPageInteractions;
-    private VNextBOConfirmationDialogInteractions confirmationDialogInteractions;
-
     @BeforeMethod
     public void BackOfficeLogin() {
         browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
@@ -54,9 +50,6 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
         VNextBOLoginScreenWebPage loginPage = new VNextBOLoginScreenWebPage();
         loginPage.userLogin(userName, userPassword);
-        leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        invoicesPageInteractions = new VNextBOInvoicesPageInteractions();
-        confirmationDialogInteractions = new VNextBOConfirmationDialogInteractions();
     }
 
     @AfterMethod
@@ -71,8 +64,8 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCanVoidInvoice(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        leftMenuInteractions.selectInvoicesMenu();
-        final String firstInvoiceNumber = invoicesPageInteractions.getFirstInvoiceName();
+        VNextBOLeftMenuInteractions.selectInvoicesMenu();
+        final String firstInvoiceNumber = VNextBOInvoicesPageInteractions.getFirstInvoiceName();
 
         VNextBOInvoicesPageSteps.confirmVoidingFirstInvoice();
         Assert.assertFalse(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNumber),
@@ -83,11 +76,11 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCannotVoidInvoiceAfterClickingNo(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        leftMenuInteractions.selectInvoicesMenu();
+        VNextBOLeftMenuInteractions.selectInvoicesMenu();
         VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(
                 data.getFromDate(), data.getStatus());
 
-        final String firstInvoiceNumber = invoicesPageInteractions.getFirstInvoiceName();
+        final String firstInvoiceNumber = VNextBOInvoicesPageInteractions.getFirstInvoiceName();
         VNextBOInvoicesPageSteps.cancelVoidingFirstInvoice();
 
         Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNumber),
@@ -98,11 +91,11 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCannotVoidInvoiceAfterClickingReject(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        leftMenuInteractions.selectInvoicesMenu();
+        VNextBOLeftMenuInteractions.selectInvoicesMenu();
 
         VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(
                 data.getFromDate(), data.getStatus());
-        final String firstInvoiceNumber = invoicesPageInteractions.getFirstInvoiceName();
+        final String firstInvoiceNumber = VNextBOInvoicesPageInteractions.getFirstInvoiceName();
 
         VNextBOInvoicesPageSteps.rejectVoidingFirstInvoice();
         Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNumber),
@@ -113,20 +106,20 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCanVoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        leftMenuInteractions.selectInvoicesMenu();
+        VNextBOLeftMenuInteractions.selectInvoicesMenu();
         VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(
                 data.getFromDate(), data.getStatus());
 
         final int selected = 3;
-        final String[] firstInvoiceNames = invoicesPageInteractions.getFirstInvoiceNames(selected);
+        final String[] firstInvoiceNames = VNextBOInvoicesPageInteractions.getFirstInvoiceNames(selected);
 
-        invoicesPageInteractions.clickCheckbox(firstInvoiceNames);
-        final String checkedItemsNote = invoicesPageInteractions.getCheckedItemsNote();
+        VNextBOInvoicesPageInteractions.clickCheckbox(firstInvoiceNames);
+        final String checkedItemsNote = VNextBOInvoicesPageInteractions.getCheckedItemsNote();
         Assert.assertEquals(checkedItemsNote, selected + " invoices have been selected");
         Assert.assertTrue(VNextBOInvoicesPageValidations.areHeaderIconsDisplayed(), "The header icons haven't been displayed");
 
-        invoicesPageInteractions.clickHeaderIconVoidButton();
-        confirmationDialogInteractions.clickInvoiceYesButton();
+        VNextBOInvoicesPageInteractions.clickHeaderIconVoidButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
 
         Assert.assertFalse(VNextBOInvoicesPageValidations.isInvoiceDisplayed(firstInvoiceNames[0]),
                 "The invoice " + firstInvoiceNames[0] + " is displayed after clicking the 'Yes' button");
@@ -140,12 +133,12 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCanUnvoidInvoice(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        leftMenuInteractions.selectInvoicesMenu();
+        VNextBOLeftMenuInteractions.selectInvoicesMenu();
         VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(data.getFromDate(), data.getStatus());
-        final String invoiceNumber = invoicesPageInteractions.getFirstInvoiceName();
+        final String invoiceNumber = VNextBOInvoicesPageInteractions.getFirstInvoiceName();
         VNextBOInvoicesPageSteps.confirmUnvoidingFirstInvoice();
 
-        invoicesPageInteractions.clickClearSearchIconIfDisplayed();
+        VNextBOInvoicesPageInteractions.clickClearSearchIconIfDisplayed();
         VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoiceNumber, data.getStatus2());
         Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoiceNumber),
                 "The invoice is not displayed after being unvoided");
@@ -160,15 +153,15 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     public void verifyUserCanUnvoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
-        leftMenuInteractions.selectInvoicesMenu();
+        VNextBOLeftMenuInteractions.selectInvoicesMenu();
 
 //        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
 //                data.getFromDate(), data.getToDate(), data.getStatus2());
 //
 //        final String[] invoices = {
-//                invoicesPageInteractions.getInvoiceName(0),
-//                invoicesPageInteractions.getInvoiceName(1),
-//                invoicesPageInteractions.getInvoiceName(2)
+//                VNextBOInvoicesPageInteractions.getInvoiceName(0),
+//                VNextBOInvoicesPageInteractions.getInvoiceName(1),
+//                VNextBOInvoicesPageInteractions.getInvoiceName(2)
 //        };
 //
 //        Arrays.stream(invoices)
@@ -184,21 +177,29 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 data.getFromDate(), data.getToDate(), data.getStatus());
 
         final String[] invoices = {
-                invoicesPageInteractions.getInvoiceName(0),
-                invoicesPageInteractions.getInvoiceName(1),
-                invoicesPageInteractions.getInvoiceName(2)
+                VNextBOInvoicesPageInteractions.getInvoiceName(0),
+                VNextBOInvoicesPageInteractions.getInvoiceName(1),
+                VNextBOInvoicesPageInteractions.getInvoiceName(2)
         };
         System.out.println(Arrays.toString(invoices));
         VNextBOInvoicesPageSteps.unvoidSelectedInvoices(invoices);
 
-        invoicesPageInteractions.clickClearSearchIconIfDisplayed();
+        VNextBOInvoicesPageInteractions.clickClearSearchIconIfDisplayed();
         VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
                 data.getFromDate(), data.getToDate(), data.getStatus2());
-//        invoicesPageInteractions.scrollInvoices();  todo uncomment here, if the test becomes not stable
+//        VNextBOInvoicesPageInteractions.scrollInvoices();  todo uncomment here, if the test becomes not stable
 
         Arrays.stream(invoices)
                 .forEach((inv) -> Assert.assertTrue(VNextBOInvoicesPageValidations
                                 .isInvoiceDisplayed(inv),
                         "The invoice " + inv + " is not displayed after being unvoided"));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanApproveInvoice(String rowID, String description, JSONObject testData) {
+        VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
+
+        VNextBOLeftMenuInteractions.selectInvoicesMenu();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(data.getFromDate(), data.getStatus());
     }
 }

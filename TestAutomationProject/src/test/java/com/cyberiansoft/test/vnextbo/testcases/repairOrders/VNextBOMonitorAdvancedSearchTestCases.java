@@ -1035,7 +1035,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         Assert.assertEquals(advancedSearchDialog.getFlagSelected(), data.getFlags()[1],
                 "The flag hasn't been selected");
         advancedSearchDialog.clickDeleteButton();
-        new VNextBOConfirmationDialogInteractions().clickConfirmButton();
+        VNextBOConfirmationDialogInteractions.clickConfirmButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

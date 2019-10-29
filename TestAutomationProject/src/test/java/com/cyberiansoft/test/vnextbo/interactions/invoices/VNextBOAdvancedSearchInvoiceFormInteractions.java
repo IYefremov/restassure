@@ -7,42 +7,36 @@ import org.openqa.selenium.WebElement;
 
 public class VNextBOAdvancedSearchInvoiceFormInteractions {
 
-    private VNextBOAdvancedSearchInvoiceForm advancedSearchInvoiceForm;
-
-    public VNextBOAdvancedSearchInvoiceFormInteractions() {
-        advancedSearchInvoiceForm = new VNextBOAdvancedSearchInvoiceForm();
+    public static void setInvoiceNumber(String invoice) {
+        Utils.clearAndType(new VNextBOAdvancedSearchInvoiceForm().getInvoiceInputField(), invoice);
     }
 
-    public void setInvoiceNumber(String invoice) {
-        Utils.clearAndType(advancedSearchInvoiceForm.getInvoiceInputField(), invoice);
+    public static void setStatus(String status) {
+        Utils.clickElement(new VNextBOAdvancedSearchInvoiceForm().getStatusCombobox());
+        Utils.selectOptionInDropDown(new VNextBOAdvancedSearchInvoiceForm().getStatusDropDown(),
+                new VNextBOAdvancedSearchInvoiceForm().getStatusListBoxOptions(), status);
     }
 
-    public void setStatus(String status) {
-        Utils.clickElement(advancedSearchInvoiceForm.getStatusCombobox());
-        Utils.selectOptionInDropDown(advancedSearchInvoiceForm.getStatusDropDown(),
-                advancedSearchInvoiceForm.getStatusListBoxOptions(), status);
-    }
-
-    public void clickSearchButton() {
-        Utils.clickElement(advancedSearchInvoiceForm.getSubmitButton());
+    public static void clickSearchButton() {
+        Utils.clickElement(new VNextBOAdvancedSearchInvoiceForm().getSubmitButton());
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
-    public void setTimeFrame(String timeFrame) {
-        Utils.clickElement(advancedSearchInvoiceForm.getTimeFrameListBox());
-        Utils.selectOptionInDropDown(advancedSearchInvoiceForm.getTimeFrameDropDown(),
-                advancedSearchInvoiceForm.getTimeFrameListBoxOptions(), timeFrame, true);
+    public static void setTimeFrame(String timeFrame) {
+        Utils.clickElement(new VNextBOAdvancedSearchInvoiceForm().getTimeFrameListBox());
+        Utils.selectOptionInDropDown(new VNextBOAdvancedSearchInvoiceForm().getTimeFrameDropDown(),
+                new VNextBOAdvancedSearchInvoiceForm().getTimeFrameListBoxOptions(), timeFrame, true);
     }
 
-    public void setFromDate(String date) {
-        setDate(advancedSearchInvoiceForm.getFromDateField(), date);
+    public static void setFromDate(String date) {
+        setDate(new VNextBOAdvancedSearchInvoiceForm().getFromDateField(), date);
     }
 
-    public void setToDate(String date) {
-        setDate(advancedSearchInvoiceForm.getToDateField(), date);
+    public static void setToDate(String date) {
+        setDate(new VNextBOAdvancedSearchInvoiceForm().getToDateField(), date);
     }
 
-    private void setDate(WebElement dateField, String date) {
+    private static void setDate(WebElement dateField, String date) {
         Utils.clickElement(dateField);
         Utils.clearAndType(dateField, date);
     }

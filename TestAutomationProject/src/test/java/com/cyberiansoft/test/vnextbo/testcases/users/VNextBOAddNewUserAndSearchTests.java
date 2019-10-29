@@ -55,8 +55,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
         loginPage = new VNextBOLoginScreenWebPage();
         loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.selectUsersMenu();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @AfterClass

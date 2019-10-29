@@ -139,10 +139,8 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
                 VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(deviceuser, devicepsw);
-        VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
-                VNexBOLeftMenuPanel.class);
-        new VNextBOInvoicesPageInteractions().selectInvoiceInTheList(invoiceNumber);
-        Assert.assertEquals(new VNextBOInvoicesPageInteractions().getSelectedInvoiceNote(), noteText);
+        VNextBOInvoicesPageInteractions.selectInvoiceInTheList(invoiceNumber);
+        Assert.assertEquals(VNextBOInvoicesPageInteractions.getSelectedInvoiceNote(), noteText);
         webdriver.quit();
     }
 
@@ -204,10 +202,8 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
                 VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(deviceuser, devicepsw);
-        VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
-                VNexBOLeftMenuPanel.class);
-        new VNextBOInvoicesPageInteractions().selectInvoiceInTheList(invoiceNumber);
-        Assert.assertEquals(new VNextBOInvoicesPageInteractions().getSelectedInvoiceCustomerName(), testcustomer.getFullName());
+        VNextBOInvoicesPageInteractions.selectInvoiceInTheList(invoiceNumber);
+        Assert.assertEquals(VNextBOInvoicesPageInteractions.getSelectedInvoiceCustomerName(), testcustomer.getFullName());
 
     }
 

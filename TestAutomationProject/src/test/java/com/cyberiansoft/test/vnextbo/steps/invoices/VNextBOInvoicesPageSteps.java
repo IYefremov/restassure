@@ -6,39 +6,38 @@ import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageIn
 public class VNextBOInvoicesPageSteps {
 
     public static void voidFirstInvoice() {
-        new VNextBOInvoicesPageInteractions().clickFirstInvoice();
-        new VNextBOInvoicesPageInteractions().clickVoidButton();
+        VNextBOInvoicesPageInteractions.clickFirstInvoice();
+        VNextBOInvoicesPageInteractions.clickVoidButton();
     }
 
     public static void confirmVoidingFirstInvoice() {
         voidFirstInvoice();
-        new VNextBOConfirmationDialogInteractions().clickInvoiceYesButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
     }
 
     public static void cancelVoidingFirstInvoice() {
         voidFirstInvoice();
-        new VNextBOConfirmationDialogInteractions().clickInvoiceNoButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceNoButton();
     }
 
     public static void rejectVoidingFirstInvoice() {
         voidFirstInvoice();
-        new VNextBOConfirmationDialogInteractions().clickInvoiceRejectButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceRejectButton();
     }
 
     public static void unvoidFirstInvoice() {
-        new VNextBOInvoicesPageInteractions().clickFirstInvoice();
-        new VNextBOInvoicesPageInteractions().clickUnvoidButton();
+        VNextBOInvoicesPageInteractions.clickFirstInvoice();
+        VNextBOInvoicesPageInteractions.clickUnvoidButton();
     }
 
     public static void confirmUnvoidingFirstInvoice() {
         unvoidFirstInvoice();
-        new VNextBOConfirmationDialogInteractions().clickInvoiceYesButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
     }
 
     public static void unvoidSelectedInvoices(String ...invoices) {
-        final VNextBOInvoicesPageInteractions invoicesPageInteractions = new VNextBOInvoicesPageInteractions();
-        invoicesPageInteractions.clickCheckbox(invoices);
-        invoicesPageInteractions.clickHeaderIconUnvoidButton();
-        new VNextBOConfirmationDialogInteractions().clickInvoiceYesButton();
+        VNextBOInvoicesPageInteractions.clickCheckbox(invoices);
+        VNextBOInvoicesPageInteractions.clickHeaderIconUnvoidButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
     }
 }

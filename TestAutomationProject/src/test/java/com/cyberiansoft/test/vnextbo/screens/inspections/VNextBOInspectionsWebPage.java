@@ -207,7 +207,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void approveInspection(String approveNotes) {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-        new VNextBOConfirmationDialogInteractions().clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
 		waitForNewTab();
 		String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
@@ -224,7 +224,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void openApproveInspectionWindow() {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-        new VNextBOConfirmationDialogInteractions().clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
 		waitForNewTab();
 		String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
@@ -234,7 +234,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void declineInspection(String declineNotes) {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-        new VNextBOConfirmationDialogInteractions().clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
 		waitForNewTab();
 		String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);

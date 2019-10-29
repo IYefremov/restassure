@@ -11,11 +11,10 @@ public class VNextBOCloseRODialogSteps {
         final VNextBORODetailsPageInteractions detailsPageInteractions = new VNextBORODetailsPageInteractions();
         final String previousStatus = detailsPageInteractions.getRoStatusValue();
         System.out.println(previousStatus);
-        final VNextBOCloseRODialogInteractions closeRODialogInteractions = new VNextBOCloseRODialogInteractions();
         Assert.assertTrue(VNextBOCloseRODialogValidations.isCloseRODialogDisplayed(),
                 "The close RO dialog hasn't been displayed");
-        closeRODialogInteractions.setReason(reason);
-        closeRODialogInteractions.clickCloseROButton();
+        VNextBOCloseRODialogInteractions.setReason(reason);
+        VNextBOCloseRODialogInteractions.clickCloseROButton();
         Assert.assertTrue(VNextBOCloseRODialogValidations.isCloseRODialogClosed(),
                 "The close RO dialog hasn't been closed");
         detailsPageInteractions.updateRoStatusValue(previousStatus);

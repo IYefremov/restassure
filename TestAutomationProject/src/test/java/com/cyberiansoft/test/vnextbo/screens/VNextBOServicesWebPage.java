@@ -313,7 +313,7 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
     public VNextBOServicesWebPage deleteServiceByServiceName(String servicename) {
         WebElement tablerow = getTableRowWithServiceByServiceName(servicename);
         clickDeleteServiceButton(tablerow);
-        Assert.assertEquals(new VNextBOConfirmationDialogInteractions().clickYesAndGetConfirmationDialogMessage(),
+        Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickYesAndGetConfirmationDialogMessage(),
                 "Are you sure you want to delete \"" + servicename + "\" service?");
         return this;
     }
@@ -337,15 +337,13 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
 
     public void clickDeleteServiceButtonAndAcceptAlert(WebElement tablerow) {
         clickDeleteServiceButton(tablerow);
-        VNextBOConfirmationDialog confirmdialog = PageFactory.initElements(
-                driver, VNextBOConfirmationDialog.class);
-        new VNextBOConfirmationDialogInteractions().clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
         waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
         wait.until(ExpectedConditions.elementToBeClickable(addservicebtn));
     }
 
     public void unarchiveServiceByServiceName(String servicename) {
-        Assert.assertEquals(new VNextBOConfirmationDialogInteractions().clickYesAndGetConfirmationDialogMessage(),
+        Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickYesAndGetConfirmationDialogMessage(),
                 "Are you sure you want to restore \"" + servicename + "\" service?");
         waitForLoading();
         waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
