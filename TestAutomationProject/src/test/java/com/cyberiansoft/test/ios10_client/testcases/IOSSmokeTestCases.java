@@ -6347,7 +6347,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		}
 
 		NavigationSteps.navigateToVehicleInfoScreen();
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		techniciansPopup.selecTechnician(workOrderData.getVehicleInfoData().getNewTechnician().getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechViewDetails();
@@ -6628,7 +6629,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
 		vehicleScreen = new VehicleScreen();
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		for (ServiceTechnician technician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			techniciansPopup.selecTechnician(technician.getTechnicianFullName());
 		techniciansPopup.saveTechViewDetails();
@@ -6675,8 +6677,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
 
 		myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-		vehicleScreen = new VehicleScreen();
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName()));
 		Assert.assertEquals(techniciansPopup.getTechnicianPercentage(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName()),
 				workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianPercentageValue());
@@ -6844,7 +6846,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		ServiceDetailsScreenSteps.saveServiceDetails();
 
 		NavigationSteps.navigateToVehicleInfoScreen();
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		techniciansPopup.selecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechnociansViewWithAlert();
 		NavigationSteps.navigateToServicesScreen();
@@ -6997,7 +7000,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		}
 		serviceBundleScreen.clickCancelBundlePopupButton();
 		NavigationSteps.navigateToVehicleInfoScreen();
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
@@ -7081,7 +7085,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceBundleScreen.clickCancelBundlePopupButton();
 
 		NavigationSteps.navigateToVehicleInfoScreen();
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
@@ -7169,7 +7174,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		serviceBundleScreen.clickCancelBundlePopupButton();
 
 		NavigationSteps.navigateToVehicleInfoScreen();
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
@@ -7265,7 +7271,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getInspectionNumber();
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
@@ -7347,7 +7354,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_ALL_SERVICES);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(VIN);
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		techniciansPopup.selecTechnician(tech1);
 		techniciansPopup.unselecTechnician(defaulttech);
 		techniciansPopup.saveTechnociansViewWithAlert();
@@ -7367,8 +7375,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(techniciansPopup.getTechnicianPrice(techDefSelected), "$0.00");
 		techniciansPopup.cancelTechViewDetails();
 		selectedServiceDetailsScreen.cancelSelectedServiceDetails();
-
-		servicesScreen = new ServicesScreen();
 		servicesScreen.cancelWizard();
 
 		myWorkOrdersScreen.clickHomeButton();
@@ -7391,7 +7397,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_TYPE_FOR_CALC);
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-		TechniciansPopup techniciansPopup = vehicleScreen.clickTech();
+		VehicleInfoScreenSteps.clickTech();
+		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		techniciansPopup.selecTechnician(workOrderData.getVehicleInfoData().getNewTechnician().getTechnicianFullName());
 		techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		techniciansPopup.saveTechnociansViewWithAlert();

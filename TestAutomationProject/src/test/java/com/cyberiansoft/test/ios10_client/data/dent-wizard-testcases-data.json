@@ -4038,5 +4038,49 @@
         ]
       }
     }
+  ],
+  "testPONumberSavesWithActiveKeyboardOnWOSummaryScreen": [
+    {
+      "rowID": "testPONumberSavesWithActiveKeyboardOnWOSummaryScreen.01",
+      "description": "Test Case 24131:Test PO# saves with active keyboard on WO summary screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89100",
+          "testCaseTitle": "Test Case 24131:Test PO# saves with active keyboard on WO summary screen"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "WDBTK56G17T154474",
+          "vehicleMake": "Mercedes-Benz",
+          "vehicleModel": "CLK",
+          "vehicleYear": "2007"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "PDR",
+            "moneyService": {
+              "serviceName": "PDR Vehicle",
+              "servicePrice": "260",
+              "vehicleParts": [
+                {
+                  "vehiclePartName": "Hood"
+                },
+                {
+                  "vehiclePartName": "Left Quarter Panel"
+                },
+                {
+                  "vehiclePartName": "Right Roof Rail"
+                }
+              ]
+            }
+          }
+        ],
+        "workOrderPrice": "260.00"
+      },
+      "invoiceData": {
+        "poNumber": "998601"
+      }
+    }
   ]
 }

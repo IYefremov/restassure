@@ -8,9 +8,7 @@ public class AlertsCaptions {
 	public static final String ALERT_VIN_REQUIRED = "Warning!\nVIN# is required";
 	public static final String ALERT_MAKE_REQUIRED = "Warning!\nMake is required";
 	public static final String ALERT_TRIM_REQUIRED = "Warning!\nTrim is required";
-	public static final String ALERT_COLOR_REQUIRED = "Warning!\nColor is required";
 	public static final String THE_VIN_IS_INCORRECT = "The VIN# is incorrect.";
-	public static final String THE_VIN_IS_INVALID = "Warning!\nThe VIN is invalid.";
 	public static final String THE_VIN_IS_INVALID_AND_SAVE_WORKORDER = "Warning!\n" +
 			"The VIN is invalid.\n" +
 			"\n" +
@@ -84,4 +82,7 @@ public class AlertsCaptions {
 	public static final String NO_SELECTED_SERVICES = "Services\n" +
 			"No selected services.";
 	public static final String WOULD_YOU_LIKE_TO_START_REPAIR_ORDER = "Would you like to start repair order";
+	public static final String WOULD_YOU_LIKE_TO_REMOVE_SERVICE = "Would you like to remove service '%1$s'?";
+	public static final String SELECTED_TECHNICIANS_WILL_BE_ASSIGNED_TO_ALL_WO_SERVICES = "Assign Technicians\n"+
+			"Selected technician(s) will be assigned to all work order services.";
 }

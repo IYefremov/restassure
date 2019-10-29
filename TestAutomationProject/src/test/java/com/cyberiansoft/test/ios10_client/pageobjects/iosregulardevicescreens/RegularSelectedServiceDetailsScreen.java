@@ -260,9 +260,13 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	public boolean isEvenlyTabSelected() {
 		return appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Evenly")).getAttribute("value") != null;
 	}
+
+	public void clickRemoveServiceButton() {
+		appiumdriver.findElementByAccessibilityId("Remove").click();
+	}
 	
 	public void removeService() {
-		appiumdriver.findElementByAccessibilityId("Remove").click();
+		clickRemoveServiceButton();
 		Helpers.acceptAlertIfExists();
 	}
 

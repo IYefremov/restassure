@@ -327,13 +327,12 @@ public class VehicleScreen extends BaseWizardScreen {
 			appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 
-	public TechniciansPopup clickTech() {
+	public void clickTech() {
 		waitVehicleScreenLoaded();
 		MobileElement vehicleTable = (MobileElement) appiumdriver.findElementByAccessibilityId("VehicleTable");
 		if (!vehicleTable.findElementByAccessibilityId("Tech").isDisplayed())
 			scrollToElement(vehicleTable.findElementByAccessibilityId("Tech"));
 		vehicleTable.findElementByAccessibilityId("Tech").click();
-		return new TechniciansPopup();
 	}
 
 	public void setStock(String stock) {

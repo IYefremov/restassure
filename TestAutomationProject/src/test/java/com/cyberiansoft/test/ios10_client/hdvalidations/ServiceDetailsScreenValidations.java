@@ -9,4 +9,9 @@ public class ServiceDetailsScreenValidations {
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
         Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), expectedPrice);
     }
+
+    public static void verifyServiceDetailsAdjustmentValue(String expectedValue) {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getAdjustmentsValue(), expectedValue);
+    }
 }
