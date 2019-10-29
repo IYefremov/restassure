@@ -10,12 +10,12 @@ import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsAdvancedSearc
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientsAdvancedSearchValidations;
 import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientsPageValidations;
-import com.cyberiansoft.test.vnextbo.verifications.commonObjects.VNextBOPageSwitcherValidations;
-import com.cyberiansoft.test.vnextbo.verifications.commonObjects.VNextBOSearchPanelValidations;
+import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOPageSwitcherValidations;
+import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOSearchPanelValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.annotations.AfterClass;

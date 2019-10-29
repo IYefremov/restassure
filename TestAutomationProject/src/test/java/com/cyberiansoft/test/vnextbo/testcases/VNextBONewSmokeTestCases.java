@@ -20,7 +20,7 @@ import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOAddNewDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOEditDeviceSteps;

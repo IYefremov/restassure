@@ -5,9 +5,8 @@ import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
-import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.*;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.*;
 import org.testng.Assert;
-import org.testng.asserts.Assertion;
 
 public class VNextBOClientDetailsValidations {
 
