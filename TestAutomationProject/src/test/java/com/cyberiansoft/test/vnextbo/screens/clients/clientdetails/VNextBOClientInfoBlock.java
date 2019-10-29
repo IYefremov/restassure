@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.screens.clients.clientDetails;
+package com.cyberiansoft.test.vnextbo.screens.clients.clientdetails;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import lombok.Getter;
@@ -8,6 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public class VNextBOClientInfoBlock extends VNextBOClientsDetailsViewAccordion {
+
+    @FindBy(xpath = "//div[@id='collapseClientInfo']/div[@class='panel-body']/div")
+    private WebElement clientInfoPanel;
 
     @FindBy(id = "clientEditForm-client-type-retail")
     private WebElement retailRadioButton;

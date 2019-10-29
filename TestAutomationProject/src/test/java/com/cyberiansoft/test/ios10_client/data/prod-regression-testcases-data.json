@@ -1838,5 +1838,65 @@
         ]
       }
     }
+  ],
+  "testVerifyMonitorOfPartServices": [
+    {
+      "rowID": "testVerifyMonitorOfPartServices.01",
+      "description": "Test Case: 71 - Verify Monitor of Part services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83705",
+          "testCaseTitle": "Test Case: 71 - Verify Monitor of Part services"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            {
+              "serviceName": "Oksi_Part_Service_Name"
+            },
+            {
+              "serviceName": "Oksi_Part_Service_None"
+            }
+          ]
+        },
+        "orderMonitorsData" : [
+          {
+            "phaseName" : "Start phase",
+            "monitorServicesData" : [
+              {
+                "monitorService": {
+                  "serviceName": "3/4\" - Penny Size"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Oksi_Part_Service_None"
+                }
+              }
+            ]
+          },
+          {
+            "phaseName" : "Repair phase",
+            "monitorServicesData" : [
+              {
+                "monitorService": {
+                  "serviceName": "Oksi_Part_Service_Name"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
   ]
 }

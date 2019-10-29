@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOPreferencesBlock;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOPreferencesBlock;
 import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOPreferencesBlockInteractions {
@@ -16,6 +16,10 @@ public class VNextBOPreferencesBlockInteractions {
 
     public void clickUseSingleWoTypeCheckbox() {
         Utils.clickElement(preferencesBlock.getUseSingleWoTypeCheckbox());
+    }
+
+    public void clickVehicleHistoryEnforcedCheckbox() {
+        Utils.clickElement(preferencesBlock.getVehicleHistoryEnforcedCheckbox());
     }
 
     public void setDefaultArea(String option) {

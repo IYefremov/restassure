@@ -394,6 +394,13 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		return ((MobileElement) appiumdriver.findElementsByClassName("XCUIElementTypePickerWheel").get(2)).getAttribute("value");
 	}
 
+	public boolean isDurationLabelPresentForService(ServiceData serviceData) {
+		return monitorserviceslist.findElementByAccessibilityId(serviceData.getServiceName()).findElementsByAccessibilityId("lblDuration").size() > 0;
+	}
+
+	public boolean isStartFinishDateLabelPresentForService(ServiceData serviceData) {
+		return monitorserviceslist.findElementByAccessibilityId(serviceData.getServiceName()).findElementsByAccessibilityId("lblStartFinishDate").size() > 0;
+	}
 
 	public void closeSelectorderDatePicker() {
 		appiumdriver.findElementByAccessibilityId("Done").click();

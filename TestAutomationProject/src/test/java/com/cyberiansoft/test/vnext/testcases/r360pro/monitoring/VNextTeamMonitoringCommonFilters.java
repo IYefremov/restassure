@@ -1,9 +1,10 @@
-package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.workqueue;
+package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
@@ -14,10 +15,10 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSearchSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.validations.GeneralValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -47,7 +48,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
 
     @BeforeMethod
     public void beforeMethod() {
-        HomeScreenSteps.openWorkQueue();
+        HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.clearAllFilters();
     }
@@ -67,7 +68,9 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         SearchSteps.openSearchFilters();
         SearchSteps.fillTextSearch("NON_EXISTING_REPAIR_ORDER");
         SearchSteps.search();
-        MonitorSearchSteps.verifySearchResultsAreEmpty();
+        GeneralValidations.errorDialogShouldBePresent(true, "Sorry, there are no repair orders by the current criteria.");
+        GeneralSteps.closeErrorDialog();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -89,6 +92,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
                                          String description, JSONObject testData) {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();
         EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
         ScreenNavigationSteps.pressBackButton();

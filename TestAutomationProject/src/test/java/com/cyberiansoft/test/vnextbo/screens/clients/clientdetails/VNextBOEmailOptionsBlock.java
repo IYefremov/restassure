@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.screens.clients.clientDetails;
+package com.cyberiansoft.test.vnextbo.screens.clients.clientdetails;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import lombok.Getter;
@@ -8,6 +8,9 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public class VNextBOEmailOptionsBlock extends VNextBOClientsDetailsViewAccordion {
+
+    @FindBy(xpath = "//div[@id='collapseEmailOptions']/div[@class='panel-body']/div")
+    private WebElement emailOptionsPanel;
 
     @FindBy(id = "clientEditForm-email-default-recepient")
     private WebElement defaultRecipientInputField;

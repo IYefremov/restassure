@@ -7,6 +7,7 @@ public enum  OrderMonitorServiceStatuses {
     COMPLETED("Completed"),
     ACTIVE("Active"),
     RECEIVED("Received"),
+    REORDERED("Re-Ordered"),
     ORDERED("Ordered"),
     SKIPPED("Skipped"),
     PROBLEM("Problem"),

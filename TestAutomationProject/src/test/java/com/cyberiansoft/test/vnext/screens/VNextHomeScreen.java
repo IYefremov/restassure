@@ -24,7 +24,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Getter
 public class VNextHomeScreen extends VNextBaseScreen {
 
-    @FindBy(xpath = "//div[@data-page='null']")
+    @FindBy(xpath = "//div[@data-page='home']")
     private WebElement rootElement;
 
     @FindBy(xpath = "//*[@action='navigate-to-customers']")

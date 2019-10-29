@@ -77,5 +77,9 @@ public class BaseWizardScreen extends iOSHDBaseScreen implements IBaseWizardScre
         appiumdriver.findElementByAccessibilityId(buttonToClick).click();
     }
 
+    public void clickNotesButton() {
+        appiumdriver.findElement(MobileBy.AccessibilityId("Compose")).click();
+    }
+
 }
 

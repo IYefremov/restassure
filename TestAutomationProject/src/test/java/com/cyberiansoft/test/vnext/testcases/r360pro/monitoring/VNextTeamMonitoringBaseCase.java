@@ -1,9 +1,10 @@
-package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.workqueue;
+package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
@@ -50,10 +51,11 @@ public class VNextTeamMonitoringBaseCase extends BaseTestCaseTeamEditionRegistra
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderInfoDto expectedOrderInfo = workOrderData.getMonitoring().getOrderInfoDto();
 
-        HomeScreenSteps.openWorkQueue();
+        HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();
         expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         EditOrderSteps.verifyOrderInfo(expectedOrderInfo);
