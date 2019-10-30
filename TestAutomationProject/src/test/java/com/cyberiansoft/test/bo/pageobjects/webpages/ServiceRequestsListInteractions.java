@@ -685,9 +685,9 @@ public class ServiceRequestsListInteractions {
     }
 
 	private void waitForSRLoading() {
-	    WaitUtilsWebDriver.waitForElementToContainAttributeIgnoringException(srListPage.getLoading(), "style", "display: block;");
+	    WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(srListPage.getLoading(), "style", "display: block;");
 	    WaitUtilsWebDriver.waitABit(2000);
-        WaitUtilsWebDriver.waitForElementToContainAttributeIgnoringException(srListPage.getLoading(), "style", "display: none;");
+        WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(srListPage.getLoading(), "style", "display: none;");
 	}
 
 	public void setServiceRequestGeneralInfo(String _assignedto) {

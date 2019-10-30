@@ -31,6 +31,7 @@ import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORODetailsPageStep
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORONotesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBOLeftMenuValidations;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
 import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientsPageValidations;
@@ -53,7 +54,6 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 public class VNextBONewSmokeTestCases extends BaseTestCase {
 
     private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBONewSmokeData.json";
-    private VNextBOLeftMenuInteractions leftMenuInteractions;
     private VNextBOBreadCrumbInteractions breadCrumbInteractions;
     private VNextBOPartsManagementSearchPanel partsManagementSearch;
     private VNextBOPartsOrdersListPanel partsOrdersListPanel;
@@ -94,7 +94,6 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         inspectionsWebPage = PageFactory.initElements(webdriver, VNextBOInspectionsWebPage.class);
         quickNotesPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOQuickNotesWebPage.class);
         breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
-        leftMenuInteractions = new VNextBOLeftMenuInteractions();
         emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
     }
 
@@ -111,7 +110,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanMaximizeMinimizeMenu(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
-        Assert.assertTrue(leftMenuInteractions.isMenuButtonDisplayed(), "The Menu button hasn't been displayed");
+        Assert.assertTrue(VNextBOLeftMenuValidations.isMenuButtonDisplayed(), "The Menu button hasn't been displayed");
         Assert.assertTrue(homePage.isLogoDisplayed(), "The logo hasn't been displayed");
         Assert.assertTrue(homePage.isUserEmailDisplayed(), "The email hasn't been displayed");
         Assert.assertTrue(homePage.isLogoutButtonDisplayed(), "The logout button hasn't been displayed");
@@ -131,17 +130,17 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         Assert.assertTrue(homePage.isIntercomDisplayed(),
                 "The Intercom Link hasn't been displayed");
 
-        leftMenuInteractions.expandMainMenu();
-        Assert.assertTrue(leftMenuInteractions.isMainMenuExpanded(), "The main menu hasn't been expanded");
-        leftMenuInteractions.collapseMainMenu();
-        Assert.assertFalse(leftMenuInteractions.isMainMenuExpanded(), "The main menu hasn't been collapsed");
+        VNextBOLeftMenuInteractions.expandMainMenu();
+        Assert.assertTrue(VNextBOLeftMenuInteractions.isMainMenuExpanded(), "The main menu hasn't been expanded");
+        VNextBOLeftMenuInteractions.collapseMainMenu();
+        Assert.assertFalse(VNextBOLeftMenuInteractions.isMainMenuExpanded(), "The main menu hasn't been collapsed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanApproveInspection(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
-        leftMenuInteractions.selectInspectionsMenu();
+        VNextBOLeftMenuInteractions.selectInspectionsMenu();
 
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[0]);
@@ -161,7 +160,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanAddNewParts(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
@@ -200,7 +199,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanChangeStatusOfThePartToOrdered(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
@@ -219,7 +218,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanDuplicateThePart(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
@@ -253,7 +252,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanDeleteThePart(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
@@ -290,7 +289,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanAddAndDeleteLabor(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         partsManagementSearch
@@ -353,7 +352,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanChangeCompanyInfoAndSaveIt(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
-        leftMenuInteractions.selectCompanyInfoMenu();
+        VNextBOLeftMenuInteractions.selectCompanyInfoMenu();
         companyInfoWebPage
                 .setCompanyName(data.getCompany()[0])
                 .setAddressLine1(data.getAddressLine1()[0])
@@ -413,7 +412,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanAddDeleteAndEditQuickNotes(String rowID, String description, JSONObject testData) {
         VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
 
-        leftMenuInteractions.selectQuickNotesMenu();
+        VNextBOLeftMenuInteractions.selectQuickNotesMenu();
         final int numberOfQuickNotes = quickNotesPage.getNumberOfQuickNotesDisplayed(data.getQuickNotesDescription());
         quickNotesPage
                 .clickAddNotesButton()
@@ -443,7 +442,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanEditAddressFields(String rowID, String description, JSONObject testData) {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
 
-        leftMenuInteractions.selectClientsMenu();
+        VNextBOLeftMenuInteractions.selectClientsMenu();
         VNextBOSearchPanelSteps.searchByText(data.getSearch());
         VNextBOClientsPageValidations.isClientsTableDisplayed();
 
@@ -469,7 +468,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanDeleteDeviceFromPendingRegistrationsList(String rowID, String description, JSONObject testData) {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
 
-        leftMenuInteractions.selectDeviceManagementMenu();
+        VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         new VNextBODeviceManagementInteractions().clickAddNewDeviceButton();
         final String randomUser = data.getNickname() + " " + RandomStringUtils.randomAlphanumeric(5);
 
@@ -488,7 +487,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     public void verifyUserCanUncoverHideNewRegistrationCode(String rowID, String description, JSONObject testData) {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
 
-        leftMenuInteractions.selectDeviceManagementMenu();
+        VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         new VNextBODeviceManagementInteractions().clickActiveDevicesTab();
         VNextBODeviceManagementSteps.searchByText(data.getDeviceName());
         Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getDeviceName()),
@@ -503,7 +502,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         final VNextBOEditDeviceSteps editDeviceSteps = new VNextBOEditDeviceSteps();
         final VNextBOEditDeviceDialogInteractions editDeviceDialogInteractions = new VNextBOEditDeviceDialogInteractions();
 
-        leftMenuInteractions.selectDeviceManagementMenu();
+        VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
 
         VNextBODeviceManagementSteps.openEditDeviceDialog(data.getDeviceName());
         VNextBOEditDeviceSteps.setAllValuesAndSubmit(data, data.getNickname());

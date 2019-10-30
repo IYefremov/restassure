@@ -7,34 +7,21 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOCloseRODialogInteractions {
 
-    private VNextBOCloseRODialog closeRODialog;
-
-    public VNextBOCloseRODialogInteractions() {
-        closeRODialog = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOCloseRODialog.class);
-    }
-
-    public boolean isCloseRODialogDisplayed() {
-        return Utils.isElementDisplayed(closeRODialog.getCloseROModal());
-    }
-
-    public boolean isCloseRODialogClosed() {
-        return Utils.isElementNotDisplayed(closeRODialog.getCloseROModal(), 5);
-    }
-
-    public void setReason(String reason) {
+    public static void setReason(String reason) {
         clickReasonBox();
         selectReason(reason);
     }
 
-    private void clickReasonBox() {
-        Utils.clickElement(closeRODialog.getReasonBox());
+    private static void clickReasonBox() {
+        Utils.clickElement(new VNextBOCloseRODialog().getReasonBox());
     }
 
-    private void selectReason(String reason) {
+    private static void selectReason(String reason) {
+        final VNextBOCloseRODialog closeRODialog = new VNextBOCloseRODialog();
         Utils.selectOptionInDropDown(closeRODialog.getListBoxDropDown(), closeRODialog.getListBoxOptions(), reason);
     }
 
-    public void clickCloseROButton() {
-        Utils.clickElement(closeRODialog.getCloseROButton());
+    public static void clickCloseROButton() {
+        Utils.clickElement(new VNextBOCloseRODialog().getCloseROButton());
     }
 }

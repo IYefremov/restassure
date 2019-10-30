@@ -12,84 +12,78 @@ import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOLeftMenuInteractions {
 
-    private VNexBOLeftMenuPanel leftMenuPanel;
-
-    public VNextBOLeftMenuInteractions() {
-        leftMenuPanel = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNexBOLeftMenuPanel.class);
+    public static void selectInspectionsMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getInspectionsMenu(), MainMenuItems.OPERATIONS.getMenu());
     }
 
-    public void selectInspectionsMenu() {
-        selectMenuItem(leftMenuPanel.getInspectionsMenu(), MainMenuItems.OPERATIONS.getMenu());
+    public static void selectInvoicesMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getInvoicesMenu(), MainMenuItems.OPERATIONS.getMenu());
     }
 
-    public void selectInvoicesMenu() {
-        selectMenuItem(leftMenuPanel.getInvoicesMenu(), MainMenuItems.OPERATIONS.getMenu());
+    public static void selectPartsManagementMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getPartsManagementMenu(), MainMenuItems.OPERATIONS.getMenu());
     }
 
-    public void selectPartsManagementMenu() {
-        selectMenuItem(leftMenuPanel.getPartsManagementMenu(), MainMenuItems.OPERATIONS.getMenu());
+    public static void selectUsersMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getUsersMenu(), MainMenuItems.SETTINGS.getMenu());
     }
 
-    public void selectUsersMenu() {
-        selectMenuItem(leftMenuPanel.getUsersMenu(), MainMenuItems.SETTINGS.getMenu());
+    public static void selectRepairOrdersMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getRepairOrdersMenu(), MainMenuItems.MONITOR.getMenu());
     }
 
-    public void selectRepairOrdersMenu() {
-        selectMenuItem(leftMenuPanel.getRepairOrdersMenu(), MainMenuItems.MONITOR.getMenu());
+    public static void selectServicesMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getServicesMenu(), MainMenuItems.SETTINGS.getMenu());
     }
 
-    public void selectServicesMenu() {
-        selectMenuItem(leftMenuPanel.getServicesMenu(), MainMenuItems.SETTINGS.getMenu());
+    public static void selectQuickNotesMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getQuickNotesMenu(), MainMenuItems.SETTINGS.getMenu());
     }
 
-    public void selectQuickNotesMenu() {
-        selectMenuItem(leftMenuPanel.getQuickNotesMenu(), MainMenuItems.SETTINGS.getMenu());
+    public static void selectCompanyInfoMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getCompanyInfoMenu(), MainMenuItems.SETTINGS.getMenu());
     }
 
-    public void selectCompanyInfoMenu() {
-        selectMenuItem(leftMenuPanel.getCompanyInfoMenu(), MainMenuItems.SETTINGS.getMenu());
+    public static void selectClientsMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getClientsMenu(), MainMenuItems.SETTINGS.getMenu());
     }
 
-    public void selectClientsMenu() {
-        selectMenuItem(leftMenuPanel.getClientsMenu(), MainMenuItems.SETTINGS.getMenu());
-    }
-
-    public void selectDeviceManagementMenu() {
-        selectMenuItem(leftMenuPanel.getDeviceManagementMenu(), MainMenuItems.SETTINGS.getMenu());
+    public static void selectDeviceManagementMenu() {
+        selectMenuItem(new VNexBOLeftMenuPanel().getDeviceManagementMenu(), MainMenuItems.SETTINGS.getMenu());
         final VNextBODeviceManagementWebPage deviceManagementWebPage =
                 PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBODeviceManagementWebPage.class);
         WaitUtilsWebDriver.waitForVisibilityIgnoringException(deviceManagementWebPage.getDeviceManagementBreadCrumb(), 5);
     }
 
-    public boolean isUsersMenuItemExists() {
+    public static boolean isUsersMenuItemExists() {
         if (!isMainMenuExpanded()) {
             expandMainMenu();
         }
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//*[@data-automation-id='users']")).isDisplayed();
     }
 
-    public boolean isMainMenuExpanded() {
+    public static boolean isMainMenuExpanded() {
         DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
-        WaitUtilsWebDriver.waitForVisibility(leftMenuPanel.getBody());
-        return Utils.isElementWithAttributeContainingValueDisplayed(leftMenuPanel.getBody(), "class", "left-menu--open", 10);
+        WaitUtilsWebDriver.waitForVisibility(new VNexBOLeftMenuPanel().getBody());
+        return Utils.isElementWithAttributeContainingValueDisplayed(new VNexBOLeftMenuPanel().getBody(), "class", "left-menu--open", 10);
     }
 
-    public void expandMainMenu() {
+    public static void expandMainMenu() {
         if (!isMainMenuExpanded()) {
-            Utils.clickElement(leftMenuPanel.getMenuButton());
-            WaitUtilsWebDriver.waitForAttributeToContain(leftMenuPanel.getBody(), "class", "left-menu--open");
+            Utils.clickElement(new VNexBOLeftMenuPanel().getMenuButton());
+            WaitUtilsWebDriver.waitForAttributeToContain(new VNexBOLeftMenuPanel().getBody(), "class", "left-menu--open");
         }
     }
 
-    public void collapseMainMenu() {
+    public static void collapseMainMenu() {
         if (isMainMenuExpanded()) {
-            Utils.clickElement(leftMenuPanel.getMenuButton());
-            WaitUtilsWebDriver.waitForAttributeToBe(leftMenuPanel.getBody(), "class", "body-mobile--scroll-hidden");
+            Utils.clickElement(new VNexBOLeftMenuPanel().getMenuButton());
+            WaitUtilsWebDriver.waitForAttributeToBe(new VNexBOLeftMenuPanel().getBody(), "class", "body-mobile--scroll-hidden");
         }
     }
 
-    private void clickMainMenuItem(String mainMenu) {
-        final WebElement menuElement = leftMenuPanel
+    private static void clickMainMenuItem(String mainMenu) {
+        final WebElement menuElement = new VNexBOLeftMenuPanel()
                 .getMainMenu()
                 .findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"));
         WaitUtilsWebDriver.waitForElementNotToBeStale(menuElement);
@@ -97,11 +91,11 @@ public class VNextBOLeftMenuInteractions {
         WaitUtilsWebDriver.waitABit(1000);
     }
 
-    private void selectMenuItem(WebElement menuitem, String mainMenuItem) {
+    private static void selectMenuItem(WebElement menuitem, String mainMenuItem) {
         try {
-            DriverBuilder.getInstance().getDriver().switchTo().frame(leftMenuPanel.getTutorialFrame());
+            DriverBuilder.getInstance().getDriver().switchTo().frame(new VNexBOLeftMenuPanel().getTutorialFrame());
             WaitUtilsWebDriver.waitABit(1000);
-            Utils.clickElement(leftMenuPanel.getTutorialSkipButton());
+            Utils.clickElement(new VNexBOLeftMenuPanel().getTutorialSkipButton());
         } catch (Exception ignored) {}
 
         DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
@@ -109,17 +103,5 @@ public class VNextBOLeftMenuInteractions {
         clickMainMenuItem(mainMenuItem);
         Utils.clickElement(menuitem);
         WaitUtilsWebDriver.waitForLoading();
-    }
-
-    public boolean isMenuButtonDisplayed() {
-        return Utils.isElementDisplayed(leftMenuPanel.getMenuButton(), 10);
-    }
-
-    public boolean isSettingsMenuTabDisplayed() {
-        return Utils.isElementDisplayed(leftMenuPanel.getSettingsMenuTab(), 10);
-    }
-
-    public boolean isSettingsMenuTabAbsent() {
-        return Utils.isElementNotDisplayed(leftMenuPanel.getSettingsMenuTab(), 5);
     }
 }

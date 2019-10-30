@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.testcases;
+package com.cyberiansoft.test.vnextbo.testcases.repairOrders;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.*;
+import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROAdvancedSearchDialogVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBORODetailsPageVerifications;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
@@ -2052,6 +2053,20 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 //	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 //    TODO the TC blocker - the locations are not loaded for the given technician
 	public void verifyTechnicianUserCanFindOrdersUsingSavedSearchMyCompletedWork(String rowID, String description, JSONObject testData) {
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        VNextBOHeaderPanelSteps.logout();
+        loginPage.userLogin(data.getUserName(), data.getUserPassword());
+
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        VNextBORepairOrdersPageSteps.openRODetailsPage();
+        VNextBORODetailsPageVerifications.verifyPhaseStatuses(data.getServiceStatuses());
+    }
+
+    //todo continue after the blocker is resolved
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyTechnicianUserCanFindOrdersUsingSavedSearchMyWorkQueue(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBOHeaderPanelSteps.logout();

@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.testcases;
+package com.cyberiansoft.test.vnextbo.testcases.repairOrders;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROAdvancedSearchDialog;
@@ -13,6 +14,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
+import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -1032,9 +1034,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         repairOrdersPage.clickEditIconForSavedSearch();
         Assert.assertEquals(advancedSearchDialog.getFlagSelected(), data.getFlags()[1],
                 "The flag hasn't been selected");
-        advancedSearchDialog
-                .clickDeleteButton()
-                .clickConfirmButton();
+        advancedSearchDialog.clickDeleteButton();
+        VNextBOConfirmationDialogInteractions.clickConfirmButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

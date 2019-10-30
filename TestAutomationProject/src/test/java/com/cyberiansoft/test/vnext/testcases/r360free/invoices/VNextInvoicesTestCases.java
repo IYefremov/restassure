@@ -27,6 +27,7 @@ import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
+import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
@@ -138,11 +139,8 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
                 VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(deviceuser, devicepsw);
-        VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
-                VNexBOLeftMenuPanel.class);
-        VNextBOInvoicesWebPage invoicesWebPage = leftMenu.selectInvoicesMenu();
-        invoicesWebPage.selectInvoiceInTheList(invoiceNumber);
-        Assert.assertEquals(invoicesWebPage.getSelectedInvoiceNote(), noteText);
+        VNextBOInvoicesPageInteractions.selectInvoiceInTheList(invoiceNumber);
+        Assert.assertEquals(VNextBOInvoicesPageInteractions.getSelectedInvoiceNote(), noteText);
         webdriver.quit();
     }
 
@@ -204,11 +202,8 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
                 VNextBOLoginScreenWebPage.class);
         loginPage.userLogin(deviceuser, devicepsw);
-        VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
-                VNexBOLeftMenuPanel.class);
-        VNextBOInvoicesWebPage invoicesWebPage = leftMenu.selectInvoicesMenu();
-        invoicesWebPage.selectInvoiceInTheList(invoiceNumber);
-        Assert.assertEquals(invoicesWebPage.getSelectedInvoiceCustomerName(), testcustomer.getFullName());
+        VNextBOInvoicesPageInteractions.selectInvoiceInTheList(invoiceNumber);
+        Assert.assertEquals(VNextBOInvoicesPageInteractions.getSelectedInvoiceCustomerName(), testcustomer.getFullName());
 
     }
 

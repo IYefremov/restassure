@@ -21,9 +21,9 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOQuickNotesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOServicesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOOperationsInvoicesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorAdvancedSearchTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOMonitorSimpleSearchTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorAdvancedSearchTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorSimpleSearchTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOHomePage"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementSearchTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.VNextBOPartsManagementOrderDetailsTestCases"/>

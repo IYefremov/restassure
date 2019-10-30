@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.bo.webelements.WebTable;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -312,8 +313,7 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
     public VNextBOServicesWebPage deleteServiceByServiceName(String servicename) {
         WebElement tablerow = getTableRowWithServiceByServiceName(servicename);
         clickDeleteServiceButton(tablerow);
-        VNextBOConfirmationDialog confirmdialog = PageFactory.initElements(driver, VNextBOConfirmationDialog.class);
-        Assert.assertEquals(confirmdialog.clickYesAndGetConfirmationDialogMessage(),
+        Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickYesAndGetConfirmationDialogMessage(),
                 "Are you sure you want to delete \"" + servicename + "\" service?");
         return this;
     }
@@ -337,16 +337,13 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
 
     public void clickDeleteServiceButtonAndAcceptAlert(WebElement tablerow) {
         clickDeleteServiceButton(tablerow);
-        VNextBOConfirmationDialog confirmdialog = PageFactory.initElements(
-                driver, VNextBOConfirmationDialog.class);
-        confirmdialog.clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
         waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
         wait.until(ExpectedConditions.elementToBeClickable(addservicebtn));
     }
 
     public void unarchiveServiceByServiceName(String servicename) {
-        VNextBOConfirmationDialog confirmdialog = clickUnarchiveButtonForService(servicename);
-        Assert.assertEquals(confirmdialog.clickYesAndGetConfirmationDialogMessage(),
+        Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickYesAndGetConfirmationDialogMessage(),
                 "Are you sure you want to restore \"" + servicename + "\" service?");
         waitForLoading();
         waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
