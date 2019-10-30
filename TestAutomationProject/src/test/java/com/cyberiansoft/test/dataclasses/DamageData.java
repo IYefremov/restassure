@@ -40,4 +40,7 @@ public class DamageData {
 
     @JsonProperty("serviceNewTechnician")
     ServiceTechnician serviceNewTechnician;
+
+    @JsonProperty("laborService")
+    LaborServiceData laborService;
 }

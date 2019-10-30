@@ -92,8 +92,32 @@ public class RegularServicesScreenSteps {
             selectMatrixServiceData(damageData.getMatrixService());
             RegularPriceMatrixScreenSteps.savePriceMatrix();
         }
-
+        if (damageData.getLaborService() != null) {
+            selectLaborServiceAndSetData(damageData.getLaborService());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+        }
     }
+
+    public static void selectServicePanelGroupData(ServicePanelGroup servicePanelGroup) {
+        selectServicePanelGroup(servicePanelGroup);
+        if (servicePanelGroup.getMoneyService() != null) {
+            selectServiceWithServiceData(servicePanelGroup.getMoneyService());
+        }
+        if (servicePanelGroup.getMoneyServices() != null) {
+            for (ServiceData serviceData : servicePanelGroup.getMoneyServices())
+                selectServiceWithServiceData(serviceData);
+        }
+        if (servicePanelGroup.getLaborService() != null) {
+            selectLaborServiceAndSetData(servicePanelGroup.getLaborService());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+        }
+    }
+
+    public static void selectServicePanelGroup(ServicePanelGroup servicePanelGroup) {
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.selectServicePanel(servicePanelGroup.getPanelGroupName());
+    }
+
 
     public static void selectServicePanel(DamageData damageData) {
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
@@ -129,4 +153,8 @@ public class RegularServicesScreenSteps {
         servicesScreen.clickBackServicesButton();
     }
 
+    public static void clickVehiclePartsButton() {
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.clickVehiclePartsButton();
+    }
 }
