@@ -1601,11 +1601,11 @@
           "moneyServices": [
             {
               "serviceName": "3/4\" - Penny Size",
-              "servicePrice" : "18"
+              "servicePrice": "18"
             },
             {
               "serviceName": "Dye_Panel",
-              "servicePrice" : "20"
+              "servicePrice": "20"
             }
           ]
         },
@@ -1713,9 +1713,9 @@
           "moneyServices": [
             {
               "serviceName": "SR_Money_Vehicle",
-              "servicePrice" : "200",
-              "servicePrice2" : "$200.00 x 3.00",
-              "serviceQuantity" : "3",
+              "servicePrice": "200",
+              "servicePrice2": "$200.00 x 3.00",
+              "serviceQuantity": "3",
               "vehicleParts": [
                 {
                   "vehiclePartName": "Dashboard"
@@ -1727,9 +1727,9 @@
             },
             {
               "serviceName": "SR_Money_Panel",
-              "servicePrice" : "100",
-              "servicePrice2" : "$100.00 x 2.00",
-              "serviceQuantity" : "2",
+              "servicePrice": "100",
+              "servicePrice2": "$100.00 x 2.00",
+              "serviceQuantity": "2",
               "vehicleParts": [
                 {
                   "vehiclePartName": "Back Glass"
@@ -1794,10 +1794,10 @@
             }
           ]
         },
-        "orderMonitorsData" : [
+        "orderMonitorsData": [
           {
-            "phaseName" : "Start phase",
-            "monitorServicesData" : [
+            "phaseName": "Start phase",
+            "monitorServicesData": [
               {
                 "monitorService": {
                   "serviceName": "3/4\" - Penny Size"
@@ -1821,8 +1821,8 @@
             ]
           },
           {
-            "phaseName" : "Repair phase",
-            "monitorServicesData" : [
+            "phaseName": "Repair phase",
+            "monitorServicesData": [
               {
                 "monitorService": {
                   "serviceName": "Oksi_Part_Service_Category"
@@ -1869,10 +1869,10 @@
             }
           ]
         },
-        "orderMonitorsData" : [
+        "orderMonitorsData": [
           {
-            "phaseName" : "Start phase",
-            "monitorServicesData" : [
+            "phaseName": "Start phase",
+            "monitorServicesData": [
               {
                 "monitorService": {
                   "serviceName": "3/4\" - Penny Size"
@@ -1886,8 +1886,8 @@
             ]
           },
           {
-            "phaseName" : "Repair phase",
-            "monitorServicesData" : [
+            "phaseName": "Repair phase",
+            "monitorServicesData": [
               {
                 "monitorService": {
                   "serviceName": "Oksi_Part_Service_Name"
@@ -1896,6 +1896,69 @@
             ]
           }
         ]
+      }
+    }
+  ],
+  "testVerifyLinkPartsAndLaborServices": [
+    {
+      "rowID": "testVerifyLinkPartsAndLaborServices.01",
+      "description": "Test Case: 77 - Verify link Parts and Labor services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83711",
+          "testCaseTitle": "Test Case: 77 - Verify link Parts and Labor services"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Accord",
+          "vehicleColor": "Black",
+          "vehicleYear": "2011",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123",
+          "trim": "25th Anniversary"
+        },
+        "moneyService": {
+          "serviceName": "Oksi_Part_Service_Several",
+          "servicePrice": "20",
+          "servicePartData": {
+            "serviceCategory": {
+              "partName": "Body",
+              "isPredefined": false
+            },
+            "serviceSubCategory": {
+              "partName": "Bumper",
+              "isPredefined": false
+            },
+            "serviceSubCategoryPart": {
+              "partName": "Bumper",
+              "isPredefined": false
+            },
+            "serviceSubCategoryPosition": {
+              "partName": "Left",
+              "isPredefined": false
+            }
+          }
+        },
+        "laborService": {
+          "serviceName": "labor test",
+          "laborServiceRate": "2.57",
+          "laborServiceTime": "2"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        },
+        "inspectionTotalPrice": "$1,013.53"
       }
     }
   ]

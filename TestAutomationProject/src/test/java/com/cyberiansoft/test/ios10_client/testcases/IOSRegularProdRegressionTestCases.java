@@ -18,6 +18,7 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.enums.ServiceRequestAppointmentStatuses;
+import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSelectedServicesScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
@@ -1761,6 +1762,52 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             RegularOrderMonitorScreenValidations.verifyDurationLabelPresentForService(monitorServiceData.getMonitorService(), true);
         }
         NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyLinkPartsAndLaborServices(String rowID,
+                                                                 String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+
+        RegularServicesScreenSteps.selectServiceWithServiceData(inspectionData.getMoneyServiceData());
+        RegularServicesScreenSteps.selectLaborServiceAndSetData(inspectionData.getLaborServiceData());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+
+        RegularServicesScreenSteps.switchToSelectedServices();
+        RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
+        RegularServiceDetailsScreenSteps.clickRemoveServiceButton();
+        AlertsValidations.cancelAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE, inspectionData.getMoneyServiceData().getServiceName()));
+        RegularServiceDetailsScreenSteps.cancelServiceDetails();
+
+        RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getLaborServiceData().getServiceName());
+        RegularServiceDetailsScreenSteps.clickRemoveServiceButton();
+        AlertsValidations.cancelAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE, inspectionData.getLaborServiceData().getServiceName()));
+        RegularServiceDetailsScreenSteps.cancelServiceDetails();
+
+        RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
+        RegularServiceDetailsScreenSteps.clickRemoveServiceButton();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE, inspectionData.getMoneyServiceData().getServiceName()));
+
+        RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getLaborServiceData().getServiceName());
+        RegularServiceDetailsScreenSteps.clickRemoveServiceButton();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE, inspectionData.getLaborServiceData().getServiceName()));
+
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getMoneyServiceData().getServiceName(), false);
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getLaborServiceData().getServiceName(), false);
+        RegularInspectionsSteps.cancelCreatingInspection();
         NavigationSteps.navigateBackScreen();
     }
 }

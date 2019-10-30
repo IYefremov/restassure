@@ -2,14 +2,9 @@ package com.cyberiansoft.test.vnextbo.steps.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.Employee;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
-import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
-import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
-import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
-import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import org.openqa.selenium.WebElement;
 

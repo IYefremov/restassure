@@ -1,9 +1,12 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class RegularVehicleInfoValidations {
 
@@ -41,5 +44,15 @@ public class RegularVehicleInfoValidations {
     public static void verifyVehicleInfoScreenCustomerValue(AppCustomer expectedCustomer) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         Assert.assertEquals(vehicleScreen.getCustomerValue(), expectedCustomer.getFullName().trim());
+    }
+
+    public static void verifyVehicleInfoScreenTechValue(ServiceTechnician serviceTechnician) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        Assert.assertTrue(vehicleScreen.getTechnician().contains(serviceTechnician.getTechnicianFullName().trim()));
+    }
+
+    public static void verifyVehicleInfoScreenTechValue(List<ServiceTechnician> serviceTechnicians) {
+        for (ServiceTechnician serviceTechnician : serviceTechnicians)
+            verifyVehicleInfoScreenTechValue(serviceTechnician);
     }
 }

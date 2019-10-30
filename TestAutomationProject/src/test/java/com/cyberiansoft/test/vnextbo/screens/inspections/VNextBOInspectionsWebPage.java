@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
@@ -206,8 +207,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void approveInspection(String approveNotes) {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-		VNextBOConfirmationDialog confirmDialog = new VNextBOConfirmationDialog();
-		confirmDialog.clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
 		waitForNewTab();
 		String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
@@ -224,7 +224,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void openApproveInspectionWindow() {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-		new VNextBOConfirmationDialog().clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
 		waitForNewTab();
 		String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
@@ -234,8 +234,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public void declineInspection(String declineNotes) {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-		VNextBOConfirmationDialog confirmDialog = new VNextBOConfirmationDialog();
-		confirmDialog.clickYesButton();
+        VNextBOConfirmationDialogInteractions.clickYesButton();
 		waitForNewTab();
 		String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);

@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBOLeftMenuValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -28,7 +29,6 @@ public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
 	}
 
 	private VNextBOLoginScreenWebPage loginPage;
-	private VNextBOLeftMenuInteractions leftMenuInteractions;
 
 	@BeforeMethod
 	public void BackOfficeLogin() {
@@ -56,15 +56,13 @@ public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
 	public void verifySettingsTabIsShown(String rowID, String description, JSONObject testData) {
 		VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
 		loginPage.userLogin(data.getLogin(), data.getPassword());
-		leftMenuInteractions = new VNextBOLeftMenuInteractions();
-		Assert.assertTrue(leftMenuInteractions.isSettingsMenuTabDisplayed(), "Settings tab is not displayed");
+		Assert.assertTrue(VNextBOLeftMenuValidations.isSettingsMenuTabDisplayed(), "Settings tab is not displayed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifySettingsTabIsNotShown(String rowID, String description, JSONObject testData) {
 		VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
 		loginPage.userLogin(data.getLogin(), data.getPassword());
-		leftMenuInteractions = new VNextBOLeftMenuInteractions();
-		Assert.assertTrue(leftMenuInteractions.isSettingsMenuTabAbsent(), "Settings tab is displayed");
+		Assert.assertTrue(VNextBOLeftMenuValidations.isSettingsMenuTabAbsent(), "Settings tab is displayed");
 	}
 }

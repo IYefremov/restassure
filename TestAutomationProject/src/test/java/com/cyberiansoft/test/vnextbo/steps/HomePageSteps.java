@@ -8,13 +8,15 @@ public class HomePageSteps {
 
     public static void openRepairOrdersMenuWithLocation(String location) {
         new VNextBOLeftMenuInteractions().selectRepairOrdersMenu();
-        new VNextBOBreadCrumbInteractions().setLocation(location);
-        Assert.assertTrue(new VNextBOBreadCrumbInteractions().isLocationSet(location), "The location hasn't been set");
+        final VNextBOBreadCrumbInteractions breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
+        breadCrumbInteractions.setLocation(location);
+        Assert.assertTrue(breadCrumbInteractions.isLocationSet(location), "The location hasn't been set");
     }
 
     public static void openRepairOrdersMenuWithLocation(String location, boolean isSetWithEnter) {
         new VNextBOLeftMenuInteractions().selectRepairOrdersMenu();
-        new VNextBOBreadCrumbInteractions().setLocation(location, isSetWithEnter);
-        Assert.assertTrue(new VNextBOBreadCrumbInteractions().isLocationSet(location), "The location hasn't been set");
+        final VNextBOBreadCrumbInteractions breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
+        breadCrumbInteractions.setLocation(location, isSetWithEnter);
+        Assert.assertTrue(breadCrumbInteractions.isLocationSet(location), "The location hasn't been set");
     }
 }

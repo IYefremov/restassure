@@ -137,6 +137,7 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public void clickCreateInvoiceIconForWO(String wonumber) {
+		waitTeamWorkOrdersScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(wonumber)));
 		appiumdriver.findElementByAccessibilityId(wonumber).findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
