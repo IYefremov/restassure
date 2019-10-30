@@ -1,0 +1,38 @@
+{
+  "employee": {
+    "clientType": "Retail",
+    "companyName": "Test Retail Company",
+    "employeeFirstName": "testRetailFirstName",
+    "employeeLastName": "testRetailLastName",
+    "employeeEmail": "test_retail_client@gmail.com",
+    "phoneNumber": "+38088888888"
+  },
+  "accountInfoData": {
+    "accountingId": "2335",
+    "accountingId2": "34534534",
+    "exportAs": "David Taylor",
+    "classOption": "",
+    "qbAccount": "Sales"
+  },
+  "addressData": {
+    "address1": "street11",
+    "address2": "street12343",
+    "city": "London",
+    "country": "Canada",
+    "stateProvince": "Alberta",
+    "zip": "34645",
+    "address11": "addr",
+    "address22": "addr35",
+    "city2": "New York",
+    "country2": "United States",
+    "stateProvince2": "Colorado",
+    "zip2": "235"
+  },
+  "emailOptionsData": {
+    "defaultRecipient": "loremmm",
+    "cc": "ipsummm",
+    "bcc": "bcccc"
+  },
+  "defaultArea": "Arizona",
+  "notes": "Lorem trulala"
+}

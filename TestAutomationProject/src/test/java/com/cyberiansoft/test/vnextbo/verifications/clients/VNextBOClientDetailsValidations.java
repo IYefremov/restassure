@@ -2,10 +2,12 @@ package com.cyberiansoft.test.vnextbo.verifications.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.Employee;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.*;
+import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import org.testng.Assert;
 
 public class VNextBOClientDetailsValidations {
@@ -68,7 +70,7 @@ public class VNextBOClientDetailsValidations {
 
     }
 
-    public static void verifyAccountInfoFieldsContainCorrectData(AccountInfoData accountInfoData) {
+    public static void verifyAccountInfoFieldsContainCorrectData(AccountInfoData accountInfoData, boolean poNumberRequiredCheckbox) {
 
         VNextBOAccountInfoBlock accountInfoBlock = new VNextBOAccountInfoBlock();
         Assert.assertEquals(Utils.getInputFieldValue(accountInfoBlock.getAccountingId()), accountInfoData.getAccountingId(),
@@ -81,8 +83,13 @@ public class VNextBOClientDetailsValidations {
                 "\"Class\" field has contained incorrect value");
         Assert.assertEquals(Utils.getText(accountInfoBlock.getQbAccountField()), accountInfoData.getQbAccount(),
                 "\"QB Account\" field has contained incorrect value");
-        Assert.assertEquals(accountInfoBlock.getPoNumberRequiredCheckbox().getAttribute("checked"), "true",
-                "\"PO# required\" checkbox hasn't been checked");
+        if (poNumberRequiredCheckbox) {
+            Assert.assertEquals(accountInfoBlock.getPoNumberRequiredCheckbox().getAttribute("checked"), "true",
+                    "\"PO# required\" checkbox hasn't been checked");
+        } else {
+            Assert.assertEquals(accountInfoBlock.getPoNumberRequiredCheckbox().getAttribute("checked"), null,
+                    "\"PO# required\" checkbox hasn't been checked");
+        }
         Assert.assertEquals(accountInfoBlock.getPoNumberUpfrontRequiredCheckbox().getAttribute("checked"), null,
                 "\"PO# Upfront required\" checkbox hasn't been checked");
     }
@@ -118,7 +125,7 @@ public class VNextBOClientDetailsValidations {
                 "\"Bill To Zip/Postal Code\" field has contained incorrect value");
     }
 
-    public static void verifyEmailOptionsFieldsContainCorrectData(EmailOptionsData emailOptionsData, boolean wholesale) {
+    public static void verifyEmailOptionsFieldsContainCorrectData(EmailOptionsData emailOptionsData, boolean wholesale, boolean selectedCheckboxes) {
 
         VNextBOEmailOptionsBlock emailOptionsBlock = new VNextBOEmailOptionsBlock();
         Assert.assertEquals(Utils.getInputFieldValue(emailOptionsBlock.getDefaultRecipientInputField()), emailOptionsData.getDefaultRecipient(),
@@ -127,25 +134,41 @@ public class VNextBOClientDetailsValidations {
                 "\"CC\" textarea has contained incorrect value");
         Assert.assertEquals(Utils.getInputFieldValue(emailOptionsBlock.getBccInputField()), emailOptionsData.getBcc(),
                 "\"BCC\" textarea has contained incorrect value");
-        if (wholesale) {
+        if (wholesale & selectedCheckboxes) {
             Assert.assertEquals(emailOptionsBlock.getInvoicesCheckbox().getAttribute("checked"), "true",
                     "\"Invoices\" checkbox hasn't been checked");
             Assert.assertEquals(emailOptionsBlock.getInspectionsCheckbox().getAttribute("checked"), "true",
                     "\"Inspections\" checkbox hasn't been checked");
             Assert.assertEquals(emailOptionsBlock.getIncludeInspectionCheckbox().getAttribute("checked"), "true",
                     "\"Include Inspection\" checkbox hasn't been checked");
+        } else {
+            Assert.assertEquals(emailOptionsBlock.getInvoicesCheckbox().getAttribute("checked"), null,
+                    "\"Invoices\" checkbox has been checked");
+            Assert.assertEquals(emailOptionsBlock.getInspectionsCheckbox().getAttribute("checked"), null,
+                    "\"Inspections\" checkbox has been checked");
+            Assert.assertEquals(emailOptionsBlock.getIncludeInspectionCheckbox().getAttribute("checked"), null,
+                    "\"Include Inspection\" checkbox has been checked");
         }
     }
 
-    public static void verifyPreferencesFieldsContainCorrectData(String defaultArea) {
+    public static void verifyPreferencesFieldsContainCorrectData(String defaultArea, boolean selectedCheckboxes) {
 
         VNextBOPreferencesBlock preferencesBlock = new VNextBOPreferencesBlock();
         Assert.assertEquals(Utils.getText(preferencesBlock.getDefaultAreaField()), defaultArea,
                 "\"Default Area\" field has contained incorrect value");
-        Assert.assertEquals(preferencesBlock.getUseSingleWoTypeCheckbox().getAttribute("checked"), "true",
-                "\"Use Single WO type\" checkbox hasn't been checked");
-        Assert.assertEquals(preferencesBlock.getVehicleHistoryEnforcedCheckbox().getAttribute("checked"), "true",
-                "\"Vehicle History Enforced\" checkbox hasn't been checked");
+        if (selectedCheckboxes)
+        {
+            Assert.assertEquals(preferencesBlock.getUseSingleWoTypeCheckbox().getAttribute("checked"), "true",
+                    "\"Use Single WO type\" checkbox hasn't been checked");
+            Assert.assertEquals(preferencesBlock.getVehicleHistoryEnforcedCheckbox().getAttribute("checked"), "true",
+                    "\"Vehicle History Enforced\" checkbox hasn't been checked");
+        } else {
+            Assert.assertEquals(preferencesBlock.getUseSingleWoTypeCheckbox().getAttribute("checked"), null,
+                    "\"Use Single WO type\" checkbox has been checked");
+            Assert.assertEquals(preferencesBlock.getVehicleHistoryEnforcedCheckbox().getAttribute("checked"), null,
+                    "\"Vehicle History Enforced\" checkbox has been checked");
+        }
+
     }
 
     public static void verifyMiscellaneousFieldsContainCorrectData(String notes, boolean wholesale) {
@@ -159,5 +182,21 @@ public class VNextBOClientDetailsValidations {
             Assert.assertTrue(Utils.isElementDisplayed(miscellaneousBlock.getClearButton()),
                     "\"Clear\" button hasn't been displayed");
         }
+    }
+
+    public static void verifyAllClientDetailsBlocksData(VNextBOClientsData clientsData, boolean wholesale, boolean selectedCheckboxes) {
+
+        if (!VNextBOClientDetailsValidations.isClientInfoPanelExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
+        VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(clientsData.getEmployee());
+        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
+        VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(clientsData.getAccountInfoData(), selectedCheckboxes);
+        VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
+        VNextBOClientDetailsValidations.verifyAddressFieldsContainCorrectData(clientsData.getAddressData());
+        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
+        VNextBOClientDetailsValidations.verifyEmailOptionsFieldsContainCorrectData(clientsData.getEmailOptionsData(), wholesale, selectedCheckboxes);
+        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
+        VNextBOClientDetailsValidations.verifyPreferencesFieldsContainCorrectData(clientsData.getDefaultArea(), selectedCheckboxes);
+        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
+        VNextBOClientDetailsValidations.verifyMiscellaneousFieldsContainCorrectData(clientsData.getNotes(), wholesale);
     }
 }

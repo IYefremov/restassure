@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.clients;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.Employee;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
@@ -124,15 +125,14 @@ public class VNextBOClientDetailsViewAccordionSteps {
         new VNextBOMiscellaneousBlockInteractions().setNotes(notes);
     }
 
-    public static void setAllClientsData(Employee employee, AccountInfoData accountInfoData, AddressData addressData,
-                                               EmailOptionsData emailOptionsData, String defaultArea, String notes, boolean wholesale){
+    public static void setAllClientsData(VNextBOClientsData clientsData, boolean wholesale){
 
-        VNextBOClientDetailsViewAccordionSteps.setClientInfoData(employee);
-        VNextBOClientDetailsViewAccordionSteps.setAccountInfoData(accountInfoData);
-        VNextBOClientDetailsViewAccordionSteps.setAddressData(addressData);
-        VNextBOClientDetailsViewAccordionSteps.setEmailOptionsData(emailOptionsData, wholesale);
-        VNextBOClientDetailsViewAccordionSteps.setPreferencesData(defaultArea);
-        VNextBOClientDetailsViewAccordionSteps.setMiscellaneousData(notes);
+        VNextBOClientDetailsViewAccordionSteps.setClientInfoData(clientsData.getEmployee());
+        VNextBOClientDetailsViewAccordionSteps.setAccountInfoData(clientsData.getAccountInfoData());
+        VNextBOClientDetailsViewAccordionSteps.setAddressData(clientsData.getAddressData());
+        VNextBOClientDetailsViewAccordionSteps.setEmailOptionsData(clientsData.getEmailOptionsData(), wholesale);
+        VNextBOClientDetailsViewAccordionSteps.setPreferencesData(clientsData.getDefaultArea());
+        VNextBOClientDetailsViewAccordionSteps.setMiscellaneousData(clientsData.getNotes());
     }
 
     private static void setAddressShipToData(AddressData addressData) {

@@ -23,10 +23,10 @@ public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(new VNextBOSearchPanel().getAdvancedSearchCaret());
     }
 
-    public static void searchByText(String userName) {
+    public static void searchByText(String searchText) {
 
         VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
-        Utils.clearAndType(searchPanel.getSearchInputField(), userName);
+        Utils.clearAndType(searchPanel.getSearchInputField(), searchText);
         Utils.clickElement(searchPanel.getSearchLoupeIcon());
         WaitUtilsWebDriver.waitForLoading();
     }

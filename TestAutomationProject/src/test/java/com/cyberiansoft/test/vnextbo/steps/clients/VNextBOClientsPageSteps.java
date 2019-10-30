@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.steps.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
@@ -144,5 +144,13 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         clickActionsButtonForClient(clientName);
         clickRestoreDropMenuButton();
         VNextBOModalDialogSteps.clickOkButton();
+    }
+
+    public static void createNewClient(VNextBOClientsData clientsData, boolean wholesale){
+
+        VNextBOClientsPageSteps.clickAddNewClientButton();
+        VNextBOClientDetailsViewAccordionSteps.setAllClientsData(clientsData, wholesale);
+        VNextBOClientDetailsViewAccordionSteps.clickOkButton();
+        Utils.refreshPage();
     }
 }
