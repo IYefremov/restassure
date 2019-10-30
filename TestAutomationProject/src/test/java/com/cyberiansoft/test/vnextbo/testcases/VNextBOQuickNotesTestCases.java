@@ -51,7 +51,7 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
         loginPage.userLogin(userName, userPassword);
         VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel();
         headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
-        leftMenu = new VNexBOLeftMenuPanel(webdriver);
+        leftMenu = new VNexBOLeftMenuPanel();
     }
 
     @AfterMethod
