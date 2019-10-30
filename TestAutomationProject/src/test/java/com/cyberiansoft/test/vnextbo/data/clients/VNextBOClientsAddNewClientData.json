@@ -119,7 +119,7 @@
       ],
       "employee": {
         "clientType": "Wholesale",
-        "companyName": "Test Wholesale Company",
+        "companyName": "Wholesale",
         "employeeFirstName": "testWholesaleFirstName",
         "employeeLastName": "testWholesaleLastName",
         "employeeEmail": "test_wholesale_client@gmail.com",
@@ -168,7 +168,7 @@
       "employee": {
         "clientType": "Retail",
         "companyName": "Test Retail Company",
-        "employeeFirstName": "testRetailFirstName",
+        "employeeFirstName": "FirstName",
         "employeeLastName": "testRetailLastName",
         "employeeEmail": "test_retail_client@gmail.com",
         "phoneNumber": "+38088888888"
@@ -215,7 +215,7 @@
       ],
       "employee": {
         "clientType": "Wholesale",
-        "companyName": "Tekila",
+        "companyName": "Wholesale",
         "employeeFirstName": "El",
         "employeeLastName": "Jimador",
         "employeeEmail": "jimador@gmail.com",
@@ -312,7 +312,7 @@
       "employee": {
         "clientType": "Retail",
         "companyName": "Tekila",
-        "employeeFirstName": "El",
+        "employeeFirstName": "FirstName",
         "employeeLastName": "Jimador",
         "employeeEmail": "jimador@gmail.com",
         "phoneNumber": "+38077777777"

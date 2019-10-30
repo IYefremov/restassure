@@ -62,8 +62,8 @@ public class VNextBOClientsWebPage extends VNextBOBaseWebPage {
     }
 
     public WebElement getActionsIconForClient(String client) {
-        return Utils.getElement(driver.findElement(By.xpath("//td[text()='" + client
-                + "']/following-sibling::*//div[@class='actions-menu__icon']")));
+        return Utils.getElement(driver.findElement(By.xpath("//td[contains(text(),'" + client
+                + "')]/following-sibling::*//div[@class='actions-menu__icon']")));
     }
 
     public VNextBOClientsWebPage() {

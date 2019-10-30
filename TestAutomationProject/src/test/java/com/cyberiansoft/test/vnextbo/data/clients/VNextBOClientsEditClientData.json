@@ -120,7 +120,7 @@
       "employee": {
         "clientType": "Retail",
         "companyName": "Tekila",
-        "employeeFirstName": "El",
+        "employeeFirstName": "FirstName",
         "employeeLastName": "Jimador",
         "employeeEmail": "jimador@gmail.com",
         "phoneNumber": "+38077777777"
@@ -167,7 +167,7 @@
       ],
       "employee": {
         "clientType": "Wholesale",
-        "companyName": "Tekila",
+        "companyName": "Wholesale",
         "employeeFirstName": "El",
         "employeeLastName": "Jimador",
         "employeeEmail": "jimador@gmail.com",
@@ -263,40 +263,40 @@
       ],
       "employee": {
         "clientType": "Wholesale",
-        "companyName": "Test Wholesale Company",
-        "employeeFirstName": "testWholesaleFirstName",
-        "employeeLastName": "testWholesaleLastName",
-        "employeeEmail": "test_wholesale_client@gmail.com",
-        "phoneNumber": "+38077777777"
+        "companyName": "Wholesale",
+        "employeeFirstName": "testWholesaleFirstedited",
+        "employeeLastName": "testWholesaleLastedited",
+        "employeeEmail": "test_wholesale_edited@gmail.com",
+        "phoneNumber": "+38077777776"
       },
       "accountInfoData": {
-        "accountingId": "2335",
-        "accountingId2": "34534534",
-        "exportAs": "Andrew Bartolomeo",
+        "accountingId": "233512",
+        "accountingId2": "34534556",
+        "exportAs": "David Taylor",
         "classOption": "",
-        "qbAccount": "Sales"
+        "qbAccount": "Made in Ukraine"
       },
       "addressData": {
-        "address1": "street11",
-        "address2": "street12343",
-        "city": "London",
-        "country": "Canada",
-        "stateProvince": "Alberta",
-        "zip": "34645",
-        "address11": "addr",
-        "address22": "addr35",
-        "city2": "New York",
-        "country2": "United States",
-        "stateProvince2": "Colorado",
-        "zip2": "235"
+        "address1": "street22",
+        "address2": "street55",
+        "city": "Dnipro",
+        "country": "United States",
+        "stateProvince": "Alaska",
+        "zip": "34699",
+        "address11": "addr33",
+        "address22": "addr66",
+        "city2": "Toronto",
+        "country2": "Canada",
+        "stateProvince2": "Manitoba",
+        "zip2": "23577"
       },
       "emailOptionsData": {
-        "defaultRecipient": "loremmm",
-        "cc": "ipsummm",
-        "bcc": "bcccc"
+        "defaultRecipient": "defaultRecipient",
+        "cc": "RecipientCc",
+        "bcc": "RecipientBcc"
       },
-      "defaultArea": "Arizona",
-      "notes": "Lorem trulala"
+      "defaultArea": "Firefly",
+      "notes": "Notes 12312"
     }
   ],
   "verifyUserCanSaveEditedDetailsForRetailClient": [
@@ -312,39 +312,39 @@
       "employee": {
         "clientType": "Retail",
         "companyName": "Test Retail Company",
-        "employeeFirstName": "testRetailFirstName",
+        "employeeFirstName": "FirstName",
         "employeeLastName": "testRetailLastName",
         "employeeEmail": "test_retail_client@gmail.com",
         "phoneNumber": "+38088888888"
       },
       "accountInfoData": {
-        "accountingId": "2335",
-        "accountingId2": "34534534",
+        "accountingId": "233512",
+        "accountingId2": "34534556",
         "exportAs": "David Taylor",
         "classOption": "",
-        "qbAccount": "Sales"
+        "qbAccount": "Made in Ukraine"
       },
       "addressData": {
-        "address1": "street11",
-        "address2": "street12343",
-        "city": "London",
-        "country": "Canada",
-        "stateProvince": "Alberta",
-        "zip": "34645",
-        "address11": "addr",
-        "address22": "addr35",
-        "city2": "New York",
-        "country2": "United States",
-        "stateProvince2": "Colorado",
-        "zip2": "235"
+        "address1": "street22",
+        "address2": "street55",
+        "city": "Dnipro",
+        "country": "United States",
+        "stateProvince": "Alaska",
+        "zip": "34699",
+        "address11": "addr33",
+        "address22": "addr66",
+        "city2": "Toronto",
+        "country2": "Canada",
+        "stateProvince2": "Manitoba",
+        "zip2": "23577"
       },
       "emailOptionsData": {
-        "defaultRecipient": "loremmm",
-        "cc": "ipsummm",
-        "bcc": "bcccc"
+        "defaultRecipient": "defaultRecipient",
+        "cc": "RecipientCc",
+        "bcc": "RecipientBcc"
       },
-      "defaultArea": "Arizona",
-      "notes": "Lorem trulala"
+      "defaultArea": "Firefly",
+      "notes": "Notes 12312"
     }
   ]
 }
