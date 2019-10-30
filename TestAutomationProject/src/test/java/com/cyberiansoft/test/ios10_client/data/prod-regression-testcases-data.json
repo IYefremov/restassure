@@ -1961,5 +1961,103 @@
         "inspectionTotalPrice": "$1,013.53"
       }
     }
+  ],
+  "testVerifyCreatingInspectionAndWOWithServiceGroupingNoGroupServicesParts": [
+    {
+      "rowID": "testVerifyCreatingInspectionAndWOWithServiceGroupingNoGroupServicesParts.01",
+      "description": "Test Case: 78 - Verify creating Inspection and WO with Service grouping (No group, Services, Parts)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83712",
+          "testCaseTitle": "Test Case: 78 - Verify creating Inspection and WO with Service grouping (No group, Services, Parts)"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "wholesailCustomer": {
+            "companyName": "Amazimg Nissan"
+          },
+          "inspType": "INSPECTION_PART_GROUP",
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "servicePanelGroups": [
+            {
+              "panelGroupName": "Decklid",
+              "moneyService": {
+                "serviceName": "Dye_Panel",
+                "servicePrice": "20"
+              }
+            },
+            {
+              "panelGroupName": "Front Bumper",
+              "moneyService": {
+                "serviceName": "PPV_service",
+                "servicePrice": "20"
+              }
+            },
+            {
+              "panelGroupName": "Other",
+              "laborService": {
+                "serviceName": "labor test",
+                "laborServiceRate": "12",
+                "laborServiceTime": "1"
+              }
+            }
+          ],
+          "inspectionTotalPrice": "$52.00"
+        },
+        {
+          "wholesailCustomer": {
+            "companyName": "Amazimg Nissan"
+          },
+          "inspType": "INSPECTION_SERVICE_GROUP",
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "damagesData": [
+            {
+              "damageGroupName": "Paint",
+              "moneyService": {
+                "serviceName": "SR_S1_Money",
+                "servicePrice": "1000",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Dashboard"
+                  }
+                ]
+              }
+            },
+            {
+              "damageGroupName": "Dent",
+              "moneyService": {
+                "serviceName": "Service_PP_Vehicle",
+                "servicePrice": "21",
+                "vehicleParts": [
+                  {
+                    "vehiclePartName": "Front Bumper"
+                  }
+                ]
+              }
+            }
+          ],
+          "inspectionTotalPrice": "$1,021.00"
+        },
+        {
+          "wholesailCustomer": {
+            "companyName": "Amazimg Nissan"
+          },
+          "inspType": "INSPECTION_NO_GROUP",
+          "vihicleInfo": {
+            "vinNumber": "1D7HW48NX6S507810"
+          },
+          "moneyService": {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "18"
+          },
+          "inspectionTotalPrice": "$18.00"
+        }
+      ]
+    }
   ]
 }

@@ -19,8 +19,6 @@ import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.enums.ServiceRequestAppointmentStatuses;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSelectedServicesScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
@@ -1712,8 +1710,8 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         }
         for (OrderMonitorData orderMonitorData : workOrderData.getOrderMonitorsData())
             RegularOrderMonitorScreenValidations.verifyOrderPhaseStatus(orderMonitorData,OrderMonitorStatuses.COMPLETED);
-        NavigationSteps.navigateBackScreen();
-        NavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
 
     }
 
@@ -1761,8 +1759,8 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             RegularOrderMonitorScreenValidations.verifytartFinishDateLabelPresentForService(monitorServiceData.getMonitorService(), true);
             RegularOrderMonitorScreenValidations.verifyDurationLabelPresentForService(monitorServiceData.getMonitorService(), true);
         }
-        NavigationSteps.navigateBackScreen();
-        NavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1776,7 +1774,6 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
-        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
         RegularNavigationSteps.navigateToClaimScreen();
         RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
 
@@ -1808,6 +1805,43 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getMoneyServiceData().getServiceName(), false);
         RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getLaborServiceData().getServiceName(), false);
         RegularInspectionsSteps.cancelCreatingInspection();
-        NavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    public void testVerifyCreatingInspectionAndWOWithServiceGroupingNoGroupServicesParts(String rowID,
+                                                    String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        for (InspectionData inspectionData : inspectionsData) {
+            RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.valueOf(inspectionData.getInspectionType()));
+            RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+
+            RegularNavigationSteps.navigateToServicesScreen();
+            if (inspectionData.getDamagesData() != null) {
+                for (DamageData damageData : inspectionData.getDamagesData()) {
+                    RegularServicesScreenSteps.selectPanelServiceData(damageData);
+                    RegularServicesScreenSteps.clickServiceTypesButton();
+                }
+            }
+            else if (inspectionData.getServicePanelGroups() != null) {
+                for (ServicePanelGroup servicePanelGroup : inspectionData.getServicePanelGroups()) {
+                    RegularServicesScreenSteps.selectServicePanelGroupData(servicePanelGroup);
+                    RegularServicesScreenSteps.clickVehiclePartsButton();
+                }
+            } else {
+                RegularServicesScreenSteps.selectServiceWithServiceData(inspectionData.getMoneyServiceData());
+            }
+            RegularWizardScreenValidations.verifyScreenTotalPrice(inspectionData.getInspectionTotalPrice());
+            RegularInspectionsSteps.saveInspection();
+        }
+        RegularNavigationSteps.navigateBackScreen();
+
+
+
     }
 }

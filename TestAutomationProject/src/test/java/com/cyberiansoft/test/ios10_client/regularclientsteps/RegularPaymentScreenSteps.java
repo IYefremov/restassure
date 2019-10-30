@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.InvoiceCashCheckPaymentData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.paymentsscreens.RegularPaymentScreen;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 
 public class RegularPaymentScreenSteps {
 

@@ -5,6 +5,9 @@ import lombok.Getter;
 public enum UATInspectionTypes implements IInspectionsTypes {
 
     INSP_APPROVE_MULTISELECT("Insp_approve_multiselect_AQA"),
+    INSPECTION_PART_GROUP("Inspection_Part_Group_AQA"),
+    INSPECTION_SERVICE_GROUP("Inspection_Service_Group_AQA"),
+    INSPECTION_NO_GROUP("Inspection_No_Group"),
     AUTOCREATEWO("AutoCreateWO");
 
     @Getter

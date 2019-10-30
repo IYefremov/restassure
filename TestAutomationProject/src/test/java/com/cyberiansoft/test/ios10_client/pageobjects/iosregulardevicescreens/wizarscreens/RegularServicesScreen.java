@@ -97,9 +97,11 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 
 	public void selectServicePanel(String servicePanel) {
 		MobileElement panelTable = (MobileElement) appiumdriver.findElementByAccessibilityId("AvailableGroupItemList");
-		if (!panelTable.findElement(MobileBy.AccessibilityId(servicePanel)).isDisplayed())
-			swipeToElement(panelTable.
-					findElement(By.xpath("//XCUIElementTypeCell[@name='" + servicePanel + "']/XCUIElementTypeStaticText[@name='" + servicePanel + "']/..")));
+		if (!panelTable.findElement(MobileBy.AccessibilityId(servicePanel)).isDisplayed()) {
+			swipeToElement(panelTable.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + servicePanel + "']/..")));
+			if (!panelTable.findElement(MobileBy.AccessibilityId(servicePanel)).isDisplayed())
+				swipeScreenUp();
+		}
 		panelTable.findElement(MobileBy.AccessibilityId(servicePanel)).click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId("ServiceGroupServicePartsTable"), 1));
@@ -157,6 +159,10 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	public RegularPriceMatrixScreen selectPriceMatrices(String pricematrice) {
 		appiumdriver.findElementByAccessibilityId(pricematrice).click();
 		return new RegularPriceMatrixScreen();
+	}
+
+	public void clickVehiclePartsButton() {
+		appiumdriver.findElement(MobileBy.name("Vehicle Parts")).click();
 	}
 
 	public RegularServicesScreen clickBackServicesButton() {

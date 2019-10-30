@@ -84,6 +84,10 @@ public class InspectionData {
     @JsonProperty("damagesData")
     List<DamageData> damagesData;
 
+    @Getter
+    @JsonProperty("servicePanelGroups")
+    List<ServicePanelGroup> servicePanelGroups;
+
     @JsonProperty("priceMatrixScreenData")
     PriceMatrixScreenData priceMatrixScreenData;
 
