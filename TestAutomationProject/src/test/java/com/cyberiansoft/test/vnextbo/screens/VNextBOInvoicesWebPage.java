@@ -7,8 +7,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -72,6 +70,21 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
     private WebElement locationExpanded;
 
+    @FindBy(xpath = "//button[contains(@data-bind, 'approveItem')]")
+    private WebElement approveInvoiceButton;
+
+    @FindBy(xpath = "//div[@id='invoice-details']//span[@title='Approve invoice']")
+    private WebElement approveInvoiceIcon;
+
+    @FindBy(xpath = "//button[contains(@data-bind, 'rollbackApprovalItem')]")
+    private WebElement rollbackApprovalButton;
+
+    @FindBy(xpath = "//div[@id='invoice-details']//span[contains(@data-bind, 'rollbackApprovalItem')]")
+    private WebElement rollbackApprovalIcon;
+
+    @FindBy(id = "advSearchInvoice-freeText")
+    private WebElement searchInputField;
+
     @FindBy(xpath = "//div[@id='invoices-search']//i[contains(@data-bind, 'click: clear')]")
     private WebElement clearSearchIcon;
 	
@@ -82,5 +95,9 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
     public WebElement getInvoiceByName(String invoice) {
         return invoices.findElement(By.xpath(".//div[@class='entity-list__item__description']/div/b[text()='" + invoice + "']"));
+    }
+
+    public WebElement getInvoiceStatusByName(String invoice) {
+        return invoices.findElement(By.xpath("//ul[@data-automation-id='invoiceList']//b[text()='" + invoice + "']/../../div[2]"));
     }
 }

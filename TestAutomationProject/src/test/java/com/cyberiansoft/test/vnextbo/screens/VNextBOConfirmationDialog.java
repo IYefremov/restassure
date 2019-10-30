@@ -31,7 +31,7 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	private WebElement confirmButton;
 
 	@FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalCloseButton']")
-	private WebElement rejectButton;
+	private WebElement closeButton;
 
 	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div")
 	private List<WebElement> dialogMessagesList;
