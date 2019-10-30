@@ -22,7 +22,7 @@ public class VNextBOInvoicesPageSteps {
 
     public static void rejectVoidingFirstInvoice() {
         voidFirstInvoice();
-        VNextBOConfirmationDialogInteractions.clickInvoiceRejectButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceCloseButton();
     }
 
     public static void unvoidFirstInvoice() {
@@ -38,6 +38,28 @@ public class VNextBOInvoicesPageSteps {
     public static void unvoidSelectedInvoices(String ...invoices) {
         VNextBOInvoicesPageInteractions.clickCheckbox(invoices);
         VNextBOInvoicesPageInteractions.clickHeaderIconUnvoidButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
+    }
+
+    public static void cancelApprovingFirstInvoiceWithButton() {
+        VNextBOInvoicesPageInteractions.clickFirstInvoice();
+        VNextBOInvoicesPageInteractions.clickApproveInvoiceButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceNoButton();
+    }
+
+    public static void approveInvoiceWithIcon() {
+        VNextBOInvoicesPageInteractions.clickApproveInvoiceIcon();
+        VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
+    }
+
+    public static void cancelFirstInvoiceRollbackApprovalWithIcon() {
+        VNextBOInvoicesPageInteractions.clickFirstInvoice();
+        VNextBOInvoicesPageInteractions.clickRollbackApprovalButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceNoButton();
+    }
+
+    public static void approveInvoiceRollbackApprovalWithIcon() {
+        VNextBOInvoicesPageInteractions.clickRollbackApprovalIcon();
         VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
     }
 }

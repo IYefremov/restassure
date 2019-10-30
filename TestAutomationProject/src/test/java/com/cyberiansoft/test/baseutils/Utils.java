@@ -58,14 +58,24 @@ public class Utils {
     }
 
     public static void clearAndType(WebElement element, String name) {
+        clear(element);
+        Utils.getActions().sendKeys(element, name).build().perform();
+        WaitUtilsWebDriver.waitABit(500);
+    }
+
+    public static void sendKeysWithEnter(WebElement element, String name) {
+        clear(element);
+        Utils.getActions().sendKeys(element, name).sendKeys(Keys.ENTER).build().perform();
+        WaitUtilsWebDriver.waitABit(500);
+    }
+
+    public static void clear(WebElement element) {
         scrollToElement(element);
         try {
             waitForElementToBeClickable(element).clear();
         } catch (Exception e) {
             Assert.fail("The text field has not been displayed", e);
         }
-        Utils.getActions().sendKeys(element, name).build().perform();
-        WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void clearAndType(By by, String name) {

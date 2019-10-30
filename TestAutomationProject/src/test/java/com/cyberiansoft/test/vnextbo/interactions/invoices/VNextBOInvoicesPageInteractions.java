@@ -129,4 +129,28 @@ public class VNextBOInvoicesPageInteractions {
             WaitUtilsWebDriver.waitForLoading();
         }
     }
+
+    public static void searchByText(String text) {
+        Utils.sendKeysWithEnter(new VNextBOInvoicesWebPage().getSearchInputField(), text);
+    }
+
+    public static void clickApproveInvoiceButton() {
+        Utils.clickElement(new VNextBOInvoicesWebPage().getApproveInvoiceButton());
+    }
+
+    public static void clickApproveInvoiceIcon() {
+        Utils.clickElement(new VNextBOInvoicesWebPage().getApproveInvoiceIcon());
+    }
+
+    public static void clickRollbackApprovalButton() {
+        Utils.clickElement(new VNextBOInvoicesWebPage().getRollbackApprovalButton());
+    }
+
+    public static void clickRollbackApprovalIcon() {
+        Utils.clickElement(new VNextBOInvoicesWebPage().getRollbackApprovalIcon());
+    }
+
+    public static String getInvoiceStatusByName(String invoice) {
+        return WaitUtilsWebDriver.waitForVisibility(new VNextBOInvoicesWebPage().getInvoiceStatusByName(invoice)).getText().trim();
+    }
 }

@@ -95,17 +95,19 @@
   "verifyUserCanApproveInvoice": [
     {
       "rowID": "verifyUserCanApproveInvoice.01",
-      "description": "Test Case 91045:User can approve invoice",
+      "description": "Test Case 91045:User can approve invoice. Test Case 91046:User can rollback approval",
       "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90975"
+        },
         {
           "testCaseID": "90976"
         }
       ],
-      "status": "Void",
-      "status2": "New",
+      "status": "New",
+      "status2": "Approved",
       "timeFrame": "Custom",
-      "fromDate": "01/01/2018",
-      "toDate": "03/01/2018"
+      "fromDate": "01/01/2018"
     }
   ]
 }

@@ -39,4 +39,20 @@ public class VNextBOInvoicesPageValidations {
     public static boolean isClearSearchIconDisplayed() {
         return Utils.isElementDisplayed(new VNextBOInvoicesWebPage().getClearSearchIcon(), 3);
     }
+
+    public static boolean isRollbackApprovalButtonDisplayed() {
+        return Utils.isElementDisplayed(new VNextBOInvoicesWebPage().getRollbackApprovalButton(), 10);
+    }
+
+    public static boolean isRollbackApprovalIconDisplayed() {
+        return Utils.isElementDisplayed(new VNextBOInvoicesWebPage().getRollbackApprovalIcon(), 10);
+    }
+
+    public static boolean isApproveButtonDisplayed() {
+        return Utils.isElementDisplayed(new VNextBOInvoicesWebPage().getApproveInvoiceButton(), 10);
+    }
+
+    public static boolean isApproveIconDisplayed() {
+        return Utils.isElementDisplayed(new VNextBOInvoicesWebPage().getApproveInvoiceIcon(), 10);
+    }
 }

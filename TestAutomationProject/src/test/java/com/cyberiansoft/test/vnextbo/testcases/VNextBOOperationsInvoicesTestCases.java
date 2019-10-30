@@ -14,6 +14,7 @@ import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.invoices.VNextBOAdvancedSearchInvoiceFormSteps;
 import com.cyberiansoft.test.vnextbo.steps.invoices.VNextBOInvoicesPageSteps;
 import com.cyberiansoft.test.vnextbo.verifications.invoices.VNextBOInvoicesPageValidations;
+import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
@@ -201,5 +202,35 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectInvoicesMenu();
         VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(data.getFromDate(), data.getStatus());
+
+        final String invoice =
+                VNextBOInvoicesPageInteractions.getInvoiceName(RandomUtils.nextInt(0, 8));
+        VNextBOInvoicesPageInteractions.searchByText(invoice);
+        VNextBOInvoicesPageSteps.cancelApprovingFirstInvoiceWithButton();
+        VNextBOInvoicesPageSteps.approveInvoiceWithIcon();
+
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoice, data.getStatus2());
+
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoice),
+                "The invoice hasn't been found");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isRollbackApprovalButtonDisplayed(),
+                "The rollback approval button hasn't been shown");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isRollbackApprovalIconDisplayed(),
+                "The rollback approval icon hasn't been shown");
+        Assert.assertTrue(VNextBOInvoicesPageInteractions.getInvoiceStatusByName(invoice).contains(data.getStatus2()),
+                "The status hasn't been changed to 'Approved'");
+
+        VNextBOInvoicesPageSteps.cancelFirstInvoiceRollbackApprovalWithIcon();
+        VNextBOInvoicesPageSteps.approveInvoiceRollbackApprovalWithIcon();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoice, data.getStatus());
+
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoice),
+                "The invoice hasn't been found");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isApproveButtonDisplayed(),
+                "The 'Approve invoice' button hasn't been shown");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isApproveIconDisplayed(),
+                "The 'Approve invoice' icon hasn't been shown");
+        Assert.assertTrue(VNextBOInvoicesPageInteractions.getInvoiceStatusByName(invoice).contains(data.getStatus()),
+                "The status hasn't been changed to 'New'");
     }
 }

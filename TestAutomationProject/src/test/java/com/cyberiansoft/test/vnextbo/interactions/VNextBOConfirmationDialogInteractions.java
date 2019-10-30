@@ -36,8 +36,8 @@ public class VNextBOConfirmationDialogInteractions {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void clickInvoiceRejectButton() {
-        clickModalDialogButton(new VNextBOConfirmationDialog().getRejectButton());
+    public static void clickInvoiceCloseButton() {
+        clickModalDialogButton(new VNextBOConfirmationDialog().getCloseButton());
         WaitUtilsWebDriver.waitABit(2000);
     }
 
