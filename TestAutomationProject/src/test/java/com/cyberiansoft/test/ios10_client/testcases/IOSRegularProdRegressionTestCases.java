@@ -66,8 +66,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         if (inspectionData.getWholesailCustomer() != null) {
             appCustomer = inspectionData.getWholesailCustomer();
             RegularCustomersScreenSteps.switchToWholesaleMode();
-        }
-        else {
+        } else {
             appCustomer = inspectionData.getInspectionRetailCustomer();
             RegularCustomersScreenSteps.switchToRetailMode();
         }
@@ -109,9 +108,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         return inspectionID;
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionVerifyOnBO(String rowID,
-                                              String description, JSONObject testData) {
+                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -143,9 +142,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO(String rowID,
-                                               String description, JSONObject testData) {
+                                                                          String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -169,9 +168,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO(String rowID,
-                                               String description, JSONObject testData) {
+                                                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -200,7 +199,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInvoiceBasedOn3CreatedWOs_VerifyPresenceOfInvoiceOnBO(String rowID,
                                                                                 String description, JSONObject testData) {
 
@@ -243,7 +242,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
         backOfficeHeaderPanel.clickOperationsLink();
         OperationsWebPage operationsWebPage = new OperationsWebPage(webdriver);
-         operationsWebPage.clickInvoicesLink();
+        operationsWebPage.clickInvoicesLink();
         InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();
@@ -280,9 +279,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         webdriver.quit();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateSRAddAppointmentCreateInspectionAndWOAndInvoiceAndVerifyDataOnBOISCorrectlyDisplayed(String rowID,
-                                                                                String description, JSONObject testData) {
+                                                                                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
@@ -294,7 +293,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularServiceRequestAppointmentScreenSteps.setDefaultServiceRequestAppointment();
         final String serviceRequestNumber = RegularServiceRequestSteps.getFirstServiceRequestNumber();
 
-        RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber , UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, UATInspectionTypes.INSP_APPROVE_MULTISELECT);
         RegularVehicleInfoValidations.validateVehicleInfoData(serviceRequestData.getVihicleInfo());
         RegularVehicleInfoScreenSteps.setVehicleInfoData(testCaseData.getInspectionData().getVehicleInfo());
         final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
@@ -362,9 +361,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         webdriver.quit();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateRetailCustomer(String rowID,
-                                               String description, JSONObject testData) {
+                                         String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -411,9 +410,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         DriverBuilder.getInstance().getDriver().quit();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWOInvoiceForCreatedRetailCustomer(String rowID,
-                                               String description, JSONObject testData) throws Exception {
+                                                                      String description, JSONObject testData) throws Exception {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -423,8 +422,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         if (inspectionData.getWholesailCustomer() != null) {
             appCustomer = inspectionData.getWholesailCustomer();
             RegularCustomersScreenSteps.switchToWholesaleMode();
-        }
-        else {
+        } else {
             appCustomer = inspectionData.getInspectionRetailCustomer();
             RegularCustomersScreenSteps.switchToRetailMode();
         }
@@ -523,7 +521,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCheckInUndoCheckInForSR(String rowID,
                                                   String description, JSONObject testData) {
 
@@ -546,9 +544,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCreatingSRFromInspectionTeamInspection(String rowID,
-                                                                      String description, JSONObject testData) {
+                                                                 String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -582,9 +580,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyAddNotesToInspection(String rowID,
-                                                                 String description, JSONObject testData) {
+                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -621,7 +619,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyAddNotesForWorkOrder(String rowID,
                                                String description, JSONObject testData) {
 
@@ -657,9 +655,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyDeleteWOFunctionality(String rowID,
-                                               String description, JSONObject testData) {
+                                                String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -680,9 +678,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyArchiveFunctionalityForInspection(String rowID,
-                                               String description, JSONObject testData) {
+                                                            String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -709,9 +707,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyApprovingInspectionUnderMyInspectionTeamInspection(String rowID,
-                                                            String description, JSONObject testData) {
+                                                                             String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -754,9 +752,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCreatingInspectionFromWO(String rowID,
-                                               String description, JSONObject testData) {
+                                                   String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -788,9 +786,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyChangeStatusForWO(String rowID,
-                                                   String description, JSONObject testData) {
+                                            String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -819,9 +817,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyDeleteInvoiceFunctionality(String rowID,
-                                                String description, JSONObject testData) {
+                                                     String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -854,9 +852,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCreatingInspectionsFromInvoiceTeamInvoice(String rowID,
-                                                     String description, JSONObject testData) {
+                                                                    String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -907,9 +905,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyChangePOActionForInvoicesTeamInvoice(String rowID,
-                                                                    String description, JSONObject testData) {
+                                                               String description, JSONObject testData) {
 
         final String myInvoicePO = "myPO12345";
         final String teamInvoicePO = "teamPO12345";
@@ -947,9 +945,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyApprovingInvoiceFromTeamInvoice(String rowID,
-                                                               String description, JSONObject testData) {
+                                                          String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -982,9 +980,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionFromCopy(String rowID,
-                                               String description, JSONObject testData) {
+                                             String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -1010,9 +1008,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifySearchFunctionalityUnderTeamInvoices(String rowID,
-                                                          String description, JSONObject testData) {
+                                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1051,9 +1049,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyChangeCustomerForWO(String rowID,
-                                                               String description, JSONObject testData) {
+                                              String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1082,9 +1080,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyChangeCustomerForInspection(String rowID,
-                                                            String description, JSONObject testData) {
+                                                      String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -1108,7 +1106,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularInspectionsSteps.saveInspectionAsFinal();
 
         RegularMyInspectionsSteps.changeCustomerForInspection(inspectionNumber, wholesailCustomer);
-        BaseUtils.waitABit(15*1000);
+        BaseUtils.waitABit(15 * 1000);
         RegularMyInspectionsSteps.openInspectionDetails(inspectionNumber);
 
         RegularVehicleInfoValidations.verifyVehicleInfoScreenCustomerValue(wholesailCustomer);
@@ -1117,9 +1115,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyDecodingOfVINNumber(String rowID,
-                                                      String description, JSONObject testData) {
+                                              String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         VehicleInfoData vehicleInfoData = new VehicleInfoData();
@@ -1141,9 +1139,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyThatDisclaimerIsShownWhenApproveInvoice(String rowID,
-                                                          String description, JSONObject testData) {
+                                                                  String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1176,9 +1174,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
     }
 
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyThatPhaseIsCompletedCorrect(String rowID,
-                                              String description, JSONObject testData) {
+                                                      String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1209,9 +1207,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyRefreshPicturesActionForInvoices(String rowID,
-                                                     String description, JSONObject testData) {
+                                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1262,9 +1260,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCalculationForServiceBundleServiceFeeBundleDiscount(String rowID,
-                                                           String description, JSONObject testData) throws Exception {
+                                                                              String description, JSONObject testData) throws Exception {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1329,9 +1327,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(pdftext.contains(feeServicePrice));
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifySplitWorkForTechniciansUnderWO(String rowID,
-                                                                              String description, JSONObject testData) throws Exception {
+                                                         String description, JSONObject testData) throws Exception {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1380,9 +1378,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifySaveInvoiceAsDraftAndSendEmail(String rowID,
-                                                                              String description, JSONObject testData) throws Exception {
+                                                         String description, JSONObject testData) throws Exception {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1443,9 +1441,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(pdftext.contains(feeServicePrice));
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInspectionsMultipleInspectionsApproval(String rowID,
-                                                         String description, JSONObject testData) throws Exception {
+                                                           String description, JSONObject testData) throws Exception {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
@@ -1454,7 +1452,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 
         for (InspectionData inspectionData : inspectionsData) {
-             RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(),
+            RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(),
                     UATInspectionTypes.valueOf(inspectionData.getInspectionType()));
             RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
             inspectionData.setInspectionNumber(RegularVehicleInfoScreenSteps.getInspectionNumber());
@@ -1509,9 +1507,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection(String rowID,
-                                             String description, JSONObject testData) {
+                                                                                         String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -1544,9 +1542,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testSRVerifyActionsOnCalendarForSRAppointments(String rowID,
-                                                                                                               String description, JSONObject testData) {
+                                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
@@ -1566,7 +1564,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUpdateApplicationFromLastDBVersionForNewOne(String rowID,
-                                   String description, JSONObject testData) {
+                                                                      String description, JSONObject testData) {
         DriverBuilder.getInstance().getAppiumDriver().closeApp();
         DriverBuilder.getInstance().getAppiumDriver().launchApp();
         RegularMainScreenSteps.updateMainDataBase();
@@ -1578,9 +1576,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifySearchForSR(String rowID,
-                                                                                                               String description, JSONObject testData) {
+                                      String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         ServiceRequestData serviceRequestData = testCaseData.getServiceRequestData();
@@ -1605,9 +1603,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCalculationForServiceWithPricePolicyVehiclePricePolicyPanelOnPrintOut(String rowID,
-                                                                                         String description, JSONObject testData) throws Exception {
+                                                                                                String description, JSONObject testData) throws Exception {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -1636,7 +1634,6 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularInspectionsSteps.saveInspectionAsFinal();
 
 
-
         RegularMyInspectionsSteps.selectSendEmailMenuForInspection(inspectionID);
         NadaEMailService nada = new NadaEMailService();
         RegularEmailScreenSteps.sendEmailToAddress(nada.getEmailId());
@@ -1659,9 +1656,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(pdftext.contains(zeroPrice));
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyWorkWithIndividualServicesUnderMonitor(String rowID,
-                                                      String description, JSONObject testData) {
+                                                                 String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1683,7 +1680,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
 
         for (OrderMonitorData orderMonitorData : workOrderData.getOrderMonitorsData())
-            RegularOrderMonitorScreenValidations.verifyOrderPhasePresent(orderMonitorData,true);
+            RegularOrderMonitorScreenValidations.verifyOrderPhasePresent(orderMonitorData, true);
 
         RegularOrderMonitorScreenSteps.selectServicePanel(workOrderData.getServicesScreen().getMoneyServices().get(0));
         RegularOrderMonitorScreenSteps.clickServiceStatusCell();
@@ -1709,15 +1706,15 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             RegularOrderMonitorScreenSteps.clickServiceDetailsCancelButton();
         }
         for (OrderMonitorData orderMonitorData : workOrderData.getOrderMonitorsData())
-            RegularOrderMonitorScreenValidations.verifyOrderPhaseStatus(orderMonitorData,OrderMonitorStatuses.COMPLETED);
+            RegularOrderMonitorScreenValidations.verifyOrderPhaseStatus(orderMonitorData, OrderMonitorStatuses.COMPLETED);
         RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyMonitorOfPartServices(String rowID,
-                                                                 String description, JSONObject testData) {
+                                                String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1739,7 +1736,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
 
         for (OrderMonitorData orderMonitorData : workOrderData.getOrderMonitorsData())
-            RegularOrderMonitorScreenValidations.verifyOrderPhasePresent(orderMonitorData,true);
+            RegularOrderMonitorScreenValidations.verifyOrderPhasePresent(orderMonitorData, true);
 
         for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorsData().get(1).getMonitorServicesData()) {
             RegularOrderMonitorScreenSteps.selectServicePanel(monitorServiceData.getMonitorService());
@@ -1763,9 +1760,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyLinkPartsAndLaborServices(String rowID,
-                                                                 String description, JSONObject testData) {
+                                                    String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -1808,9 +1805,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCreatingInspectionAndWOWithServiceGroupingNoGroupServicesParts(String rowID,
-                                                    String description, JSONObject testData) {
+                                                                                         String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
@@ -1827,8 +1824,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
                     RegularServicesScreenSteps.selectPanelServiceData(damageData);
                     RegularServicesScreenSteps.clickServiceTypesButton();
                 }
-            }
-            else if (inspectionData.getServicePanelGroups() != null) {
+            } else if (inspectionData.getServicePanelGroups() != null) {
                 for (ServicePanelGroup servicePanelGroup : inspectionData.getServicePanelGroups()) {
                     RegularServicesScreenSteps.selectServicePanelGroupData(servicePanelGroup);
                     RegularServicesScreenSteps.clickVehiclePartsButton();
@@ -1840,8 +1836,51 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             RegularInspectionsSteps.saveInspection();
         }
         RegularNavigationSteps.navigateBackScreen();
+    }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyLaborTimesGettingFromDB(String rowID,
+                                                  String description, JSONObject testData) {
 
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
 
+        final String defRate = "$0.00";
+        final String defTimeRate = "11.00";
+        final String defZeroTimeRate = "0.00";
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_APPROVE_MULTISELECT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        RegularNavigationSteps.navigateToClaimScreen();
+        RegularClaimScreenSteps.setClaimData(inspectionData.getInsuranceCompanyData());
+
+        RegularNavigationSteps.navigateToServicesScreen();
+
+        for (LaborServiceData laborServiceData : inspectionData.getLaborServices()) {
+            RegularServicesScreenSteps.openCustomServiceDetails(laborServiceData.getServiceName());
+            RegularServiceDetailsScreenValidations.verifyLaborServiceRateValue(defRate);
+            RegularServiceDetailsScreenValidations.verifyLaborServiceTimeValue(defTimeRate);
+            RegularServiceDetailsScreenSteps.selectLaborServicePanels(laborServiceData);
+            RegularServiceDetailsScreenSteps.setLaborServiceRate(laborServiceData.getLaborServiceRate());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
+
+        }
+
+        RegularServicesScreenSteps.openCustomServiceDetails(inspectionData.getLaborServiceData().getServiceName());
+        RegularServiceDetailsScreenValidations.verifyLaborServiceRateValue(defRate);
+        RegularServiceDetailsScreenValidations.verifyLaborServiceTimeValue(defZeroTimeRate);
+        inspectionData.getLaborServiceData().getPartServiceDataList();
+        inspectionData.getLaborServiceData().getPartServiceDataList().forEach((service) -> {
+            RegularServiceDetailsScreenSteps.selectLaborPartServiceData(service);
+            RegularServiceDetailsScreenSteps.clickSelectedServiceDetailsDoneButton();
+        });
+        RegularServiceDetailsScreenSteps.setLaborServiceTime(inspectionData.getLaborServiceData().getLaborServiceTime());
+        RegularServiceDetailsScreenSteps.setLaborServiceRate(inspectionData.getLaborServiceData().getLaborServiceRate());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+
+        RegularInspectionsSteps.cancelCreatingInspection();
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

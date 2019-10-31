@@ -15,7 +15,7 @@ public class BaseAppScreen extends iOSHDBaseScreen {
     public HomeScreen clickHomeButton() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
-        wait = new WebDriverWait(appiumdriver, 15);
+        wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Back"))).click();
         return new HomeScreen();
     }

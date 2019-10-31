@@ -89,7 +89,7 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 	}
 
 	public OrderMonitorServiceDetailsPopup selectPanel(ServiceData serviceData) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 20);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name(serviceData.getServiceName()))).click();
 		return new OrderMonitorServiceDetailsPopup();
 	}
@@ -133,6 +133,10 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 
 	public void clickDoneIcon() {
 		appiumdriver.findElementByAccessibilityId("Done icon").click();
+	}
+
+	public void clickCancelServiceDetails() {
+		appiumdriver.findElementByAccessibilityId("NavigationBarItemClose").click();
 	}
 
 
