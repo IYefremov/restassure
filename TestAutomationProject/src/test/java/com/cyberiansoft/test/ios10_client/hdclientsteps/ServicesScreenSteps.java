@@ -67,7 +67,7 @@ public class ServicesScreenSteps {
     }
 
     public static void selectMatrixServiceDataAndSave(MatrixServiceData matrixServiceData) {
-        selectMatrixService(matrixServiceData);
+        //selectMatrixService(matrixServiceData);
         selectMatrixServiceData(matrixServiceData);
         PriceMatrixScreenSteps.savePriceMatrixData();
     }

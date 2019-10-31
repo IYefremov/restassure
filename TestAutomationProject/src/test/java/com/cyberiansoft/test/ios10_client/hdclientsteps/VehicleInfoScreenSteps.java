@@ -74,6 +74,11 @@ public class VehicleInfoScreenSteps {
         Assert.assertEquals(vehicleScreen.getYear(), vehicleInfoData.getVehicleYear());
     }
 
+    public static void selectLocation(String vehicleLocation) {
+        VehicleScreen vehicleScreen = new VehicleScreen();
+        vehicleScreen.selectLocation(vehicleLocation);
+    }
+
     public static void setVehicleInfoData(VehicleInfoData vehicleInfoData) {
         if (vehicleInfoData.getVINNumber() != null) {
             setVIN(vehicleInfoData.getVINNumber());

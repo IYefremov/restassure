@@ -48,4 +48,14 @@ public class RegularServiceDetailsScreenValidations {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
     }
+
+    public static void verifyLaborServiceTimeValue(String expectedTime) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getTimeValue(), expectedTime);
+    }
+
+    public static void verifyLaborServiceRateValue(String expectedRate) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getRateValue(), expectedRate);
+    }
 }

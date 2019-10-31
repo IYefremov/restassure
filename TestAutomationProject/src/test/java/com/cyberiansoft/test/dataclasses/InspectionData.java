@@ -50,6 +50,10 @@ public class InspectionData {
     @JsonProperty("laborService")
     LaborServiceData laborService;
 
+    @Getter
+    @JsonProperty("laborServices")
+    List<LaborServiceData> laborServices;
+
     @JsonProperty("insuranceCompany")
     InsuranceCompanyData insuranceCompany;
 
