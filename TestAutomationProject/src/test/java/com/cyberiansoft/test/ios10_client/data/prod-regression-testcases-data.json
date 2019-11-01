@@ -2059,5 +2059,76 @@
         }
       ]
     }
+  ],
+  "testVerifyLaborTimesGettingFromDB": [
+    {
+      "rowID": "testVerifyLaborTimesGettingFromDB.01",
+      "description": "Test Case: 79 - Verify Labor times getting from DB",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83713",
+          "testCaseTitle": "Test Case: 79 - Verify Labor times getting from DB"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Honda",
+          "vehicleModel": "Civic",
+          "vehicleYear": "2010",
+          "mileage": "77777",
+          "licPlate": "12345",
+          "stockNumber": "Stock1",
+          "roNumber": "123",
+          "trim": "25th Anniversary"
+        },
+        "laborServices": [
+          {
+            "serviceName": "Labor_Vehilce_data_R&R",
+            "laborServiceRate": "12",
+            "laborServiceTime": "0.3",
+            "laborServicePanel": "Wheel",
+            "laborServicePart": "Remove/Replace Alloy Wheel"
+          },
+          {
+            "serviceName": "Labor_Vehilce_data_R&R",
+            "laborServiceRate": "2",
+            "laborServiceTime": "0.1",
+            "laborServicePanel": "Front Door",
+            "laborServicePart": "Remove/Replace Left Front Door Armrest"
+          }
+        ],
+        "laborService":
+          {
+            "serviceName": "Labor_Vehicle_data_all_Motor",
+            "laborServiceRate": "1",
+            "laborServiceTime": "1",
+            "partServiceDataList": [
+              {
+                "serviceName": "roz_part_with_categories",
+                "category": "Brake",
+                "subCategory": "Disc Pads and Brake Shoes",
+                "partName": {
+                  "partNameList": [
+                    "Disc Brake Pad"
+                  ],
+                  "isMultiSelect": false
+                },
+                "partPosition": "N/A"
+              }
+            ]
+          },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG",
+          "claimNumber": "QWERTY",
+          "policyNumber": "pl-123",
+          "deductible": "34"
+        },
+        "inspectionTotalPrice": "$1,013.53"
+      }
+    }
   ]
 }
