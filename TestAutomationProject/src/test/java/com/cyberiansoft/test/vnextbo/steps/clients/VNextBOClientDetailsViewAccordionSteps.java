@@ -49,6 +49,12 @@ public class VNextBOClientDetailsViewAccordionSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
+    public static void clickServicesTab() {
+
+        Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getServices());
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
     public static void clickCancelButton() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getCancelButton());

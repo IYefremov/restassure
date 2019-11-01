@@ -33,6 +33,9 @@ public class VNextBOClientsDetailsViewAccordion extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='client-details-view-headingMisc']//div[contains(text(), 'Miscellaneous')]")
     private WebElement miscellaneous;
 
+    @FindBy(xpath = "//div[@data-bind='click: onServicesClick']")
+    private WebElement services;
+
     @FindBy(xpath = "//button[@data-bind='click: onCancelClick']")
     private WebElement cancelButton;
 

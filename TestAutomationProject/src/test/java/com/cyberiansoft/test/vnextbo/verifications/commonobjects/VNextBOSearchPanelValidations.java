@@ -21,6 +21,15 @@ public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations
                 "Advanced search drop down caret hasn't been displayed.");
     }
 
+    public static void isSearchFieldDisplayed() {
+
+        VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
+        Assert.assertTrue(Utils.isElementDisplayed(searchPanel.getSearchInputField()),
+                "Search input field hasn't been displayed.");
+        Assert.assertTrue(Utils.isElementDisplayed(searchPanel.getSearchLoupeIcon()),
+                "Search loupe icon hasn't been displayed.");
+    }
+
     public static void isSearchFilterTextCorrect(String text) {
 
         Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().contains(text),
