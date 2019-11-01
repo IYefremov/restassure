@@ -32,8 +32,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static int getClientsAmount()
-    {
+    public static int getClientsAmount() {
 
         return new VNextBOClientsWebPage().getClientRecords().size();
     }
@@ -62,7 +61,6 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
     public static void clickActionsButtonForClient(String client) {
 
         Utils.clickElement(new VNextBOClientsWebPage().getActionsIconForClient(client));
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickEditDropMenuButton() {

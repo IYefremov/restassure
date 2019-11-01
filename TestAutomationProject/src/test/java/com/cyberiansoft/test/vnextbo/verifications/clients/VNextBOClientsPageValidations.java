@@ -29,7 +29,7 @@ public class VNextBOClientsPageValidations extends VNextBOBaseWebPageValidations
     public static void isClientsTableDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsWebPage().getClientsTable()),
-                "clients table hasn't been displayed.");
+                "Clients table hasn't been displayed.");
     }
 
     public static void isCorrectRecordsAmountDisplayed(int expectedRecordsAmount) {
