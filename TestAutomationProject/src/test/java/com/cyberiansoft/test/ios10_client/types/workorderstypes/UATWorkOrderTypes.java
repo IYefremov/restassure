@@ -4,7 +4,8 @@ public enum UATWorkOrderTypes implements IWorkOrdersTypes {
 
     WO_FINAL_INVOICE("WO_Final_Invoice_AQA"),
     WO_DRAFT_INVOICE("WO_Draft_Invoice"),
-    WO_MONITOR("WO_Monitor_AQA");
+    WO_MONITOR("WO_Monitor_AQA"),
+    WO_MONITOR_DELAY_RO_START("WO_Monitor_delay_RO_start");
 
     private final String woType;
 

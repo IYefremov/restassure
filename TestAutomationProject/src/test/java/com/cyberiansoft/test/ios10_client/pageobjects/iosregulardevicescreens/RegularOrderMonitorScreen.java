@@ -334,6 +334,11 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		return monitorserviceslist.findElementByAccessibilityId("lblPhaseStatus").getAttribute("value");
 	}
 
+	public String getOrderMonitorPhaseStatusValue(String phaseName) {
+		waitOrderMonitorScreenLoaded();
+		return monitorserviceslist.findElementByAccessibilityId(phaseName).findElementByAccessibilityId("lblPhaseStatus").getAttribute("value");
+	}
+
 	public void changeStatusForWorkOrder(String newWOSTatus, String reason) {
 		MobileElement toolbar = (MobileElement) appiumdriver.findElementByAccessibilityId("Toolbar");
 		toolbar.findElementsByClassName("XCUIElementTypeButton").get(2).click();
