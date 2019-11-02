@@ -2130,5 +2130,90 @@
         "inspectionTotalPrice": "$1,013.53"
       }
     }
+  ],
+  "testVerifyPhaseEnforcementUnderMonitor": [
+    {
+      "rowID": "testVerifyPhaseEnforcementUnderMonitor.01",
+      "description": "Test Case: 74 - Verify Phase enforcement under Monitor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83705",
+          "testCaseTitle": "Test Case: 74 - Verify Phase enforcement under Monitor"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            {
+              "serviceName": "Labor_Vehicle_data_all_Motor"
+            },
+            {
+              "serviceName": "Labor_Vehilce_data_R&R"
+            },
+            {
+              "serviceName": "Oksi_Part_Service_Category"
+            },
+            {
+              "serviceName": "Oksi_Part_Service_Name"
+            },
+            {
+              "serviceName": "Labor service - MOTOR source"
+            }
+          ]
+        },
+        "orderMonitorsData": [
+          {
+            "phaseName": "Start phase",
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "3/4\" - Penny Size"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor_Vehicle_data_all_Motor"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor_Vehilce_data_R&R"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor service - MOTOR source"
+                }
+              }
+            ]
+          },
+          {
+            "phaseName": "Repair phase",
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "Oksi_Part_Service_Name"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Oksi_Part_Service_Category"
+                }
+              }
+            ]
+          }
+        ],
+        "workOrderTotalSale": "5"
+      }
+    }
   ]
 }
