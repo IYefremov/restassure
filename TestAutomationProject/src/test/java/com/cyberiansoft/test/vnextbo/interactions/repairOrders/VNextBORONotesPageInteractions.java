@@ -13,82 +13,76 @@ import java.util.stream.Collectors;
 
 public class VNextBORONotesPageInteractions {
 
-    private VNextBOOrderServiceNotesDialog orderServiceNotesDialog;
-    private VNextBOEditNotesDialog editNotesDialog;
-
-    public VNextBORONotesPageInteractions() {
-        orderServiceNotesDialog = new VNextBOOrderServiceNotesDialog();
-        editNotesDialog = new VNextBOEditNotesDialog();
-    }
-
-    public void openRONoteTextArea() {
-        if (!new VNextBONotesPageVerifications().isRONoteTextAreaDisplayed()) {
+    public static void openRONoteTextArea() {
+        if (!VNextBONotesPageVerifications.isRONoteTextAreaDisplayed()) {
             clickAddNewNoteButton();
         }
     }
 
-    public void clickAddNewNoteButton() {
-        Utils.clickElement(orderServiceNotesDialog.getAddNewNoteButton());
+    public static void clickAddNewNoteButton() {
+        Utils.clickElement(new VNextBOOrderServiceNotesDialog().getAddNewNoteButton());
     }
 
-    public void typeRONotesMessage(String message) {
-        Utils.clearAndType(orderServiceNotesDialog.getRoNoteTextArea(), message);
+    public static void typeRONotesMessage(String message) {
+        Utils.clearAndType(new VNextBOOrderServiceNotesDialog().getRoNoteTextArea(), message);
         clickRoNoteServiceTitle();
         WaitUtilsWebDriver.waitABit(1000);
     }
 
-    public void clickRoNoteServiceTitle() {
-        Utils.clickElement(orderServiceNotesDialog.getRoNoteTextTitle());
+    public static void clickRoNoteServiceTitle() {
+        Utils.clickElement(new VNextBOOrderServiceNotesDialog().getRoNoteTextTitle());
     }
 
-    public void clickRONoteSaveButton() {
-        Utils.clickElement(orderServiceNotesDialog.getRoNoteSaveButton());
-        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(orderServiceNotesDialog.getRoNoteSaveButton(), 5);
+    public static void clickRONoteSaveButton() {
+        final VNextBOOrderServiceNotesDialog notesDialog = new VNextBOOrderServiceNotesDialog();
+        Utils.clickElement(notesDialog.getRoNoteSaveButton());
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(notesDialog.getRoNoteSaveButton(), 5);
     }
 
-    public void clickRepairNotesXButton() {
-        Utils.clickElement(orderServiceNotesDialog.getRoNotesXbutton());
+    public static void clickRepairNotesXButton() {
+        Utils.clickElement(new VNextBOOrderServiceNotesDialog().getRoNotesXbutton());
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public void closeRONoteDialog() {
-        Utils.clickElement(editNotesDialog.getRoNoteDialogCloseButton());
-        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(new VNextBOEditNotesDialog().getRoEditNotesModalDialog(), 5);
+    public static void closeRONoteDialog() {
+        final VNextBOEditNotesDialog notesDialog = new VNextBOEditNotesDialog();
+        Utils.clickElement(notesDialog.getRoNoteDialogCloseButton());
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(notesDialog.getRoEditNotesModalDialog(), 5);
     }
 
-    public String getRONoteTextAreaValue() {
+    public static String getRONoteTextAreaValue() {
         try {
-            return WaitUtilsWebDriver.waitForVisibility(orderServiceNotesDialog.getRoNoteTextArea(), 4).getText();
+            return WaitUtilsWebDriver.waitForVisibility(new VNextBOOrderServiceNotesDialog().getRoNoteTextArea(), 4).getText();
         } catch (Exception ignored) {
             return "";
         }
     }
 
-    public void waitUntilRONoteTextContainsValue(String value) {
+    public static void waitUntilRONoteTextContainsValue(String value) {
         try {
             WaitUtilsWebDriver
                     .getShortWait()
-                    .until(driver -> orderServiceNotesDialog.getRoNoteTextArea().getText().equals(value));
+                    .until(driver -> new VNextBOOrderServiceNotesDialog().getRoNoteTextArea().getText().equals(value));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public int getRepairNotesListNumber() {
+    public static int getRepairNotesListNumber() {
         try {
             return Objects
                     .requireNonNull(WaitUtilsWebDriver
-                            .waitForVisibilityOfAllOptionsIgnoringException(orderServiceNotesDialog.getRoNotesList(), 10))
+                            .waitForVisibilityOfAllOptionsIgnoringException(new VNextBOOrderServiceNotesDialog().getRoNotesList(), 10))
                     .size();
         } catch (Exception ignored) {
             return 0;
         }
     }
 
-    public List<String> getRepairNotesListValues() {
+    public static List<String> getRepairNotesListValues() {
         try {
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(orderServiceNotesDialog.getRoNotesList()).size();
-            return orderServiceNotesDialog.getRoNotesList().stream().map(WebElement::getText).collect(Collectors.toList());
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOOrderServiceNotesDialog().getRoNotesList()).size();
+            return new VNextBOOrderServiceNotesDialog().getRoNotesList().stream().map(WebElement::getText).collect(Collectors.toList());
         } catch (Exception ignored) {
             return null;
         }

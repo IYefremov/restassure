@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROSimpleSearchInteractions;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageValidations;
 import org.testng.Assert;
 
 public class VNextBOROSimpleSearchSteps {
@@ -10,7 +10,7 @@ public class VNextBOROSimpleSearchSteps {
         final VNextBOROSimpleSearchInteractions simpleSearchInteractions = new VNextBOROSimpleSearchInteractions();
         simpleSearchInteractions.setRepairOrdersSearchText(searchText);
         simpleSearchInteractions.clickSearchIcon();
-        Assert.assertTrue(new VNextBOROPageInteractions().isWorkOrderDisplayedByName(searchText),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(searchText),
                 "The work order is not displayed after search by clicking the 'Search' icon");
     }
 
