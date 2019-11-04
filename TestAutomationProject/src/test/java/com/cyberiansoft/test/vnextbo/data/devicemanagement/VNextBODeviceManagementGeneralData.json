@@ -1,0 +1,98 @@
+{
+  "verifyUserCanOpenDeviceManagementPageWithFullSetOfElements": [
+    {
+      "rowID": "verifyUserCanOpenDeviceManagementPageWithFullSetOfElements.01",
+      "description": "Test Case 90767: Verify user can open \"Settings → Device Management\" with full set of elements (Automated)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90767",
+          "testCaseTitle": "Verify user can open \"Settings → Device Management\" with full set of elements (Automated)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSelectXItemsPerPage": [
+    {
+      "rowID": "verifyUserCanSelectXItemsPerPage.01",
+      "description": "Test Case 90801: User can select \"X\" items per page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90801",
+          "testCaseTitle": "User can select \"X\" items per page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanNavigateBetweenPagesOfActiveDevicesTab": [
+    {
+      "rowID": "verifyUserCanNavigateBetweenPagesOfActiveDevicesTab.01",
+      "description": "Test Case 90802: User can navigate between pages of the \"Active Devices\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90802",
+          "testCaseTitle": "User can navigate between pages of the \"Active Devices\" page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanOpenAndCloseTermsAndConditionsOkButton": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsOkButton.01",
+      "description": "Test Case 85724: Verify user can open and close \"Terms&Conditions\" (OK)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "85724",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (OK)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanOpenAndCloseTermsAndConditionsXIcon": [
+    {
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsOkButton.01",
+      "description": "Test Case 85725: Verify user can open and close \"Terms&Conditions\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "85725",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanOpenAndClosePrivacyPolicyOkButton": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyOkButton.01",
+      "description": "Test Case 85726: Verify user can open and close \"Privacy Policy\" (OK)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "85726",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (OK)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanOpenAndClosePrivacyPolicyXIcon": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyXIcon.01",
+      "description": "Test Case 85727: Verify user can open and close \"Privacy Policy\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "85727",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanOpenAndCloseIntercom": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyXIcon.01",
+      "description": "Test Case 85730: User can open and close \"Intercom\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "85730",
+          "testCaseTitle": "User can open and close \"Intercom\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,17 +1,37 @@
 package com.cyberiansoft.test.vnextbo.screens.deviceManagement;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
+@Getter
 public class VNextBOActiveDevicesWebPage extends VNextBODeviceManagementWebPage {
 
     public VNextBOActiveDevicesWebPage() {
         super();
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
+
+    @FindBy(xpath = "//li[@data-item-id='active-devices-tab']")
+    private WebElement activeDevicesTab;
+
+    @FindBy(xpath = "//li[@data-item-id='pre-registred-devices-tab']")
+    private WebElement pendingRegistrationTab;
+
+    @FindBy(xpath = "//div[@id='devicesListTable-wrapper']//table")
+    private WebElement devicesTable;
+
+    @FindBy(xpath = "//tbody[@data-template='devices-view-row-template']/tr")
+    private List<WebElement> deviceRecords;
+
+    @FindBy(xpath = "//li[@data-item-id='active-devices-tab']")
+    private WebElement addNewDeviceButton;
 
     public WebElement getDeviceByName(String deviceName) {
         try {
