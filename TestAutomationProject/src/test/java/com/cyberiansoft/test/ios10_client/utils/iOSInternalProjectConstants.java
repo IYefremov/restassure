@@ -26,10 +26,8 @@ public class iOSInternalProjectConstants {
     public static final String HAIL_MATRIX_SERVICE = "Hail Matrix";
     public static final String DISCOUNT_5_10_SERVICE = "Discount 5-10%";
     public static final String VPS1_SERVICE = "VPS1";
-    public static final String SR_S1_MONEY_VEHICLE = "SR_S1_Money_Vehicle";
     public static final String SR_S1_MONEY_PANEL = "SR_S1_Money_Panel";
     public static final String SR_S1_MONEY = "SR_S1_Money";
-    public static final String TEST_SERVICE_ZAYATS = "Test service zayats";
     public static final String OKSI_SERVICE_PP_VEHICLE = "Oksi_Service_PP_Vehicle";
     public static final String TEST_SERVICE_PRICE_MATRIX = "Test service price matrix";
     public static final String TAX_DISCOUNT = "Tax discount";

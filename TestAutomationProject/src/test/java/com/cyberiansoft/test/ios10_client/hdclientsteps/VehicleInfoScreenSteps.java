@@ -57,6 +57,11 @@ public class VehicleInfoScreenSteps {
         vehicleScreen.setYear(year);
     }
 
+    public static void setFuelTankLevel(String fuelTankLevel) {
+        VehicleScreen vehicleScreen = new VehicleScreen();
+        vehicleScreen.setFuelTankLevel(fuelTankLevel);
+    }
+
     public static void setTrim(String trimValue) {
         VehicleScreen vehicleScreen = new VehicleScreen();
         vehicleScreen.setTrim(trimValue);
@@ -74,6 +79,11 @@ public class VehicleInfoScreenSteps {
         Assert.assertEquals(vehicleScreen.getYear(), vehicleInfoData.getVehicleYear());
     }
 
+    public static void selectLocation(String vehicleLocation) {
+        VehicleScreen vehicleScreen = new VehicleScreen();
+        vehicleScreen.selectLocation(vehicleLocation);
+    }
+
     public static void setVehicleInfoData(VehicleInfoData vehicleInfoData) {
         if (vehicleInfoData.getVINNumber() != null) {
             setVIN(vehicleInfoData.getVINNumber());
@@ -89,6 +99,9 @@ public class VehicleInfoScreenSteps {
         }
         if (vehicleInfoData.getMileage() != null) {
             setMileage(vehicleInfoData.getMileage());
+        }
+        if (vehicleInfoData.getFuelTankLevel() != null) {
+            setFuelTankLevel(vehicleInfoData.getFuelTankLevel());
         }
         if (vehicleInfoData.getVehicleType() != null) {
             setType(vehicleInfoData.getVehicleType());

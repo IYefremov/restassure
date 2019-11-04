@@ -180,20 +180,30 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public void setServiceTimeValue(String _timevalue) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Time")));	
-        WebElement par = getTableParentCell("Time");
-		
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).click();
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_timevalue + "\n");
+        WebElement time = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name='Time'"))));
+
+		time.findElement(By.className("XCUIElementTypeTextField")).click();
+		time.findElement(By.className("XCUIElementTypeTextField")).clear();
+		time.findElement(By.className("XCUIElementTypeTextField")).sendKeys(_timevalue + "\n");
+	}
+
+	public String getTimeValue() {
+		return appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name='Time'")).
+				findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 	
 	public void setServiceRateValue(String _ratevalue) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Rate")));	
-        WebElement par = getTableParentCell("Rate");
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).clear();
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(_ratevalue + "\n");
+		WebElement time = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name='Rate'"))));
+
+		time.findElement(By.className("XCUIElementTypeTextField")).click();
+		time.findElement(By.className("XCUIElementTypeTextField")).clear();
+		time.findElement(By.className("XCUIElementTypeTextField")).sendKeys(_ratevalue + "\n");
+	}
+
+	public String getRateValue() {
+		return appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name='Rate'")).
+				findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 
 	public String getAdjustmentValue(String adjustment) {
@@ -484,7 +494,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategorypartname)));
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
-		appiumdriver.findElementByAccessibilityId("Done").click();
+		//appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {

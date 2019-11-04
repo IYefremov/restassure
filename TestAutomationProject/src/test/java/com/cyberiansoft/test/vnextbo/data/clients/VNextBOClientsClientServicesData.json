@@ -1,0 +1,140 @@
+{
+  "verifyUserCanSeeServicesDetailsAndSelectServicePackage": [
+    {
+      "rowID": "verifyUserCanSeeServicesDetailsAndSelectServicePackage.01",
+      "description": "Test Case 91029: User can see \"Services\" detailes and select \"Service Packages\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91029",
+          "testCaseTitle": "User can see \"Services\" detailes and select \"Service Packages\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanGoToPreviousPage": [
+    {
+      "rowID": "verifyUserCanGoToPreviousPage.01",
+      "description": "Test Case 91034: User can go back to previous page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91034",
+          "testCaseTitle": "User can go back to previous page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchServices": [
+    {
+      "rowID": "verifyUserCanSearchServices.01",
+      "description": "Test Case 91036: User can Search \"Services\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91036",
+          "testCaseTitle": "User can Search \"Services\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSwitchBetweenPages": [
+    {
+      "rowID": "verifyUserCanSwitchBetweenPages.01",
+      "description": "Test Case 91045: User can switch beetween pages",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91045",
+          "testCaseTitle": "User can switch beetween pages"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanUsePageFilter": [
+    {
+      "rowID": "verifyUserCanUsePageFilter.01",
+      "description": "Test Case 91046: User can use page filter",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91046",
+          "testCaseTitle": "User can use page filter"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeRequiredOfClientServices": [
+    {
+      "rowID": "verifyUserCanChangeRequiredOfClientServices.01",
+      "description": "Test Case 91030: User can change \"Required\" of Client Services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91030",
+          "testCaseTitle": "User can change \"Required\" of Client Services"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeRequiredToYes": [
+    {
+      "rowID": "verifyUserCanChangeRequiredToYes.01",
+      "description": "Test Case 91039: User can change \"Required\" to \"Yes\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91039",
+          "testCaseTitle": "User can change \"Required\" to \"Yes\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeRequiredToNo": [
+    {
+      "rowID": "verifyUserCanChangeRequiredToNo.01",
+      "description": "Test Case 91040: User can change \"Required\" to \"No\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91040",
+          "testCaseTitle": "User can change \"Required\" to \"No\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeRequiredToUseDefault": [
+    {
+      "rowID": "verifyUserCanChangeRequiredToUseDefault.01",
+      "description": "Test Case 91041: User can change \"Required\" to \"(use default)\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91041",
+          "testCaseTitle": "User can change \"Required\" to \"(use default)\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeRequiredOfClientServicesAndSaveIt": [
+    {
+      "rowID": "verifyUserCanChangeRequiredOfClientServicesAndSaveIt.01",
+      "description": "Test Case 91031: User can change \"Required\" of Client Services and save it",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91031",
+          "testCaseTitle": "User can change \"Required\" of Client Services and save it"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeTechnicianEffectiveDateEffectivePriceOfClientServices": [
+    {
+      "rowID": "verifyUserCanChangeTechnicianEffectiveDateEffectivePriceOfClientServices.01",
+      "description": "Test Case 91032: User can change \"Technician\", \"Effective Date\" and \"Effective Price\" of \"Client Services\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91032",
+          "testCaseTitle": "User can change \"Technician\", \"Effective Date\" and \"Effective Price\" of \"Client Services\""
+        }
+      ]
+    }
+  ]
+}

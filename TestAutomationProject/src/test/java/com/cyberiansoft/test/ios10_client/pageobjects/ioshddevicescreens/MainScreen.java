@@ -46,6 +46,8 @@ public class MainScreen extends iOSHDBaseScreen {
 
 	public HomeScreen userLogin(String user, String password) {
 		Helpers.waitABit(1000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(licenses));
 		if (!appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").isDisplayed()) {
 			swipeTableUp(appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + user + "']/.."),
 					appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + user + "']/../.."));
@@ -53,7 +55,7 @@ public class MainScreen extends iOSHDBaseScreen {
 		} else 
 			appiumdriver.findElementByXPath("//XCUIElementTypeStaticText[@name='" + user + "']").click();
 
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeSecureTextField")));
 		((IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeSecureTextField")).setValue(password);
 		loginbtn.click();

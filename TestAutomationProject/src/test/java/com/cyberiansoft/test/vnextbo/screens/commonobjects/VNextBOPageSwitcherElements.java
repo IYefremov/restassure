@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens.commonobjects;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
@@ -8,6 +9,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 @Getter
 public class VNextBOPageSwitcherElements extends VNextBOBaseWebPage {
@@ -60,8 +63,9 @@ public class VNextBOPageSwitcherElements extends VNextBOBaseWebPage {
     }
 
     public WebElement itemsPerPageOption(String itemsPerPage) {
-        return driver.findElement(By.xpath("(//ul[@class='k-list k-reset']/li[text()='" +
-                itemsPerPage + " items per page'])[1]"));
+
+        return driver.findElement(By.xpath("//ul[@class='k-list k-reset' and @aria-hidden='false']/li[text()='" +
+                itemsPerPage + " items per page']"));
     }
 
     public VNextBOPageSwitcherElements() {

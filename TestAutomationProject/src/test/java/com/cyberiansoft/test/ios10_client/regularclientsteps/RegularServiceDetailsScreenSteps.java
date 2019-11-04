@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.*;
+import com.cyberiansoft.test.dataclasses.partservice.PartName;
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import org.testng.Assert;
 
@@ -115,21 +117,57 @@ public class RegularServiceDetailsScreenSteps {
     }
 
     public static void setLaborServiceData(LaborServiceData laborServiceData) {
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         if (laborServiceData.getLaborServiceRate() != null) {
-            selectedServiceDetailsScreen.setServiceRateValue(laborServiceData.getLaborServiceRate());
+            setLaborServiceRate(laborServiceData.getLaborServiceRate());
         }
 
         if (laborServiceData.getLaborServicePanel() != null) {
-            selectedServiceDetailsScreen.clickOperationCell();
-            selectedServiceDetailsScreen.selectLaborServicePanel(laborServiceData.getLaborServicePanel());
-            selectedServiceDetailsScreen.selectLaborServicePart(laborServiceData.getLaborServicePart());
-            selectedServiceDetailsScreen.clickSelectedServiceDetailsDoneButton();
+            selectLaborServicePanels(laborServiceData);
         }
         if (laborServiceData.getLaborServiceTime() != null) {
-            selectedServiceDetailsScreen.setServiceTimeValue(laborServiceData.getLaborServiceTime());
+            setLaborServiceTime(laborServiceData.getLaborServiceTime());
         }
+    }
 
+    public static void setLaborServiceRate(String rateValue) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.setServiceRateValue(rateValue);
+    }
+
+    public static void setLaborServiceTime(String timeValue) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.setServiceTimeValue(timeValue);
+    }
+
+    public static void selectLaborServicePanels(LaborServiceData laborServiceData) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickOperationCell();
+        selectedServiceDetailsScreen.selectLaborServicePanel(laborServiceData.getLaborServicePanel());
+        selectedServiceDetailsScreen.selectLaborServicePart(laborServiceData.getLaborServicePart());
+        selectedServiceDetailsScreen.clickSelectedServiceDetailsDoneButton();
+    }
+
+    public static void selectLaborPartServiceData(PartServiceData partServiceData) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickOperationCell();
+
+        if (partServiceData.getCategory() != null)
+            selectedServiceDetailsScreen.selectServicePartCategory(partServiceData.getCategory());
+        if (partServiceData.getSubCategory() != null)
+            selectedServiceDetailsScreen.selectServicePartSubcategory(partServiceData.getSubCategory());
+        if (partServiceData.getPartName() != null) {
+            for (String partName : partServiceData.getPartName().getPartNameList())
+                selectedServiceDetailsScreen.selectServicePartSubcategoryPart(partName);
+        }
+        if (partServiceData.getPartPosition() != null)
+            selectedServiceDetailsScreen.selectServicePartSubcategoryPosition(partServiceData.getPartPosition());
+
+
+    }
+
+    public static void clickSelectedServiceDetailsDoneButton() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickSelectedServiceDetailsDoneButton();
     }
 
     public static void setTechnicianCustomPriceValue(ServiceTechnician serviceTechnician) {
