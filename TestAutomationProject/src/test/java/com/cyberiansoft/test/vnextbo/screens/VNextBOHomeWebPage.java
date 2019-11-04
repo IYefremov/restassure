@@ -169,18 +169,6 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
         return getNewTab(mainWindow);
     }
 
-    public VNextBOTermsAndConditionsDialog clickTermsAndConditionsLink() {
-        Utils.clickElement(termsAndConditionsLink);
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBOTermsAndConditionsDialog.class);
-    }
-
-    public VNextBOPrivacyPolicyDialog clickPrivacyPolicyLink() {
-        Utils.clickElement(termsAndConditionsLink);
-        waitForLoading();
-        return PageFactory.initElements(driver, VNextBOPrivacyPolicyDialog.class);
-    }
-
     public void clickButton(WebElement link) {
         wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(link)));
         wait.until(ExpectedConditions.elementToBeClickable(link)).click();

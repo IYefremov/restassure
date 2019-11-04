@@ -36,7 +36,7 @@ import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
 import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientsPageValidations;
 import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBORODetailsPageVerifications;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageValidations;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
@@ -531,7 +531,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeVendorPrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-        final VNextBOROPageVerifications roPageVerifications = new VNextBOROPageVerifications();
+        final VNextBOROPageValidations roPageVerifications = new VNextBOROPageValidations();
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
@@ -564,7 +564,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
         VNextBORONotesPageSteps.setRONoteMessageAndSave(note);
         Assert.assertTrue(VNextBONotesPageVerifications.isRoEditNotesModalDialogHidden(),
                 "The edit notes dialog hasn't been closed");
-        VNextBOROPageVerifications.verifyNoteTextIsDisplayed(note);
+        VNextBOROPageValidations.verifyNoteTextIsDisplayed(note);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

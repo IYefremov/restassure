@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbIn
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.verifications.VNextBOFooterPanelValidations;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -34,12 +35,10 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = DATA_FILE;
     }
 
-    private VNextBOLeftMenuInteractions leftMenuInteractions;
     private VNextBOBreadCrumbInteractions breadCrumbInteractions;
     private VNextBODashboardPanel dashboardPanel;
     private VNextBOPartsManagementSearchPanel partsManagementSearch;
     private VNextBOPartsOrdersListPanel partsOrdersListPanel;
-    private VNextBOFooterPanel footerPanel;
     private VNextBOPartsDetailsPanel partsDetailsPanel;
 
     @BeforeMethod
@@ -63,10 +62,8 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
         partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
         partsOrdersListPanel = PageFactory.initElements(webdriver, VNextBOPartsOrdersListPanel.class);
-        footerPanel = PageFactory.initElements(webdriver, VNextBOFooterPanel.class);
         partsDetailsPanel = PageFactory.initElements(webdriver, VNextBOPartsDetailsPanel.class);
         breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
-        leftMenuInteractions = new VNextBOLeftMenuInteractions();
     }
 
     @AfterMethod
@@ -81,7 +78,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
     public void verifyUserCanOpenOperationsPartsManagementWithFullSetOfElements(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         Assert.assertTrue(dashboardPanel
@@ -92,13 +89,13 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
                 "The Parts Management search panel hasn't been displayed");
         Assert.assertTrue(partsOrdersListPanel.isPartsOrdersListDisplayed(),
                 "The Parts Management RO list panel hasn't been displayed");
-        Assert.assertTrue(footerPanel.isFooterPanelDisplayed(),
+        Assert.assertTrue(VNextBOFooterPanelValidations.isFooterDisplayed(),
                 "The Parts Management footer panel hasn't been displayed");
-        Assert.assertTrue(footerPanel.isTermsAndConditionsLinkDisplayed(),
+        Assert.assertTrue(VNextBOFooterPanelValidations.isTermsAndConditionsLinkDisplayed(),
                 "The Parts Management Terms and Conditions link hasn't been displayed");
-        Assert.assertTrue(footerPanel.isPrivacyPolicyLinkDisplayed(),
+        Assert.assertTrue(VNextBOFooterPanelValidations.isPrivacyPolicyLinkDisplayed(),
                 "The Parts Management Privacy Policy link hasn't been displayed");
-        Assert.assertTrue(footerPanel.isIntercomDisplayed(),
+        Assert.assertTrue(VNextBOFooterPanelValidations.isIntercomDisplayed(),
                 "The Intercom link hasn't been displayed on the Parts Management page");
     }
 
@@ -106,7 +103,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
     public void verifyUserCanSeePartsDetailsOfDifferentROs(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         final int partsOrderListSize = partsOrdersListPanel.getPartsOrderListSize();
@@ -127,7 +124,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
     public void verifyUserCanSelectOrdersWithPastDuePartsOption(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         dashboardPanel.clickPastDuePartsLink();
@@ -180,7 +177,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
     public void verifyUserCanSelectOrdersWithInProgressOption(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         dashboardPanel.clickInProgressItemLink();
@@ -241,7 +238,7 @@ public class VNextBOPartsManagementTestCases extends BaseTestCase {
     public void verifyUserCanSelectOrdersWithCompletedOption(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        leftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         breadCrumbInteractions.setLocation(data.getLocation());
 
         dashboardPanel.clickCompletedItemLink();
