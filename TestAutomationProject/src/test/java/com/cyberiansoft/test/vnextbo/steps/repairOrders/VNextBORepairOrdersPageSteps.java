@@ -3,13 +3,13 @@ package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOChangeTechniciansDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageVerifications;
+import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageValidations;
 import org.testng.Assert;
 
 public class VNextBORepairOrdersPageSteps {
 
     public static String setTechnicianAndVendorByWoNumber(String woNumber, String vendor) {
-        new VNextBOROPageInteractions().clickTechniciansFieldForWO(woNumber);
+        VNextBOROPageInteractions.clickTechniciansFieldForWO(woNumber);
         final VNextBOChangeTechniciansDialogInteractions changeTechniciansDialogInteractions = new VNextBOChangeTechniciansDialogInteractions();
         Assert.assertTrue(changeTechniciansDialogInteractions.isChangeTechnicianDialogDisplayed(),
                 "The Change Technician dialog hasn't been opened");
@@ -22,25 +22,24 @@ public class VNextBORepairOrdersPageSteps {
     }
 
     public static void openRODetailsPage(String woNumber) {
-        new VNextBOROPageInteractions().clickWoLink(woNumber);
+        VNextBOROPageInteractions.clickWoLink(woNumber);
         Assert.assertTrue(new VNextBORODetailsPageInteractions().isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 
     public static void openRODetailsPage() {
-        new VNextBOROPageInteractions().clickWoLink();
+        VNextBOROPageInteractions.clickWoLink();
         Assert.assertTrue(new VNextBORODetailsPageInteractions().isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 
     public static void setSavedSearchOption(String option) {
-        final VNextBOROPageInteractions roPageInteractions = new VNextBOROPageInteractions();
-        roPageInteractions.clickSavedSearchArrow();
-        roPageInteractions.selectSavedSearchDropDownOption(option);
+        VNextBOROPageInteractions.clickSavedSearchArrow();
+        VNextBOROPageInteractions.selectSavedSearchDropDownOption(option);
     }
 
     public static void openAdvancedSearchDialog() {
-        new VNextBOROPageInteractions().clickAdvancedSearchCaret();
-        VNextBOROPageVerifications.verifyAdvancedSearchDialogIsDisplayed();
+        VNextBOROPageInteractions.clickAdvancedSearchCaret();
+        VNextBOROPageValidations.verifyAdvancedSearchDialogIsDisplayed();
     }
 }

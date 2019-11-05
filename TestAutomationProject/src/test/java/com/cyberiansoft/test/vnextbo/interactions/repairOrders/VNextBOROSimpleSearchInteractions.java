@@ -14,8 +14,8 @@ public class VNextBOROSimpleSearchInteractions {
     }
 
     public void setRepairOrdersSearchText(String repairOrderText) {
-        WaitUtilsWebDriver.waitForVisibility(repairOrdersPage.getRepairOdersSearchTextField());
-        Utils.clearAndType(repairOrdersPage.getRepairOdersSearchTextField(), repairOrderText);
+        WaitUtilsWebDriver.waitForVisibility(repairOrdersPage.getRepairOrdersSearchTextField());
+        Utils.clearAndType(repairOrdersPage.getRepairOrdersSearchTextField(), repairOrderText);
         WaitUtilsWebDriver.waitABit(500);
     }
 

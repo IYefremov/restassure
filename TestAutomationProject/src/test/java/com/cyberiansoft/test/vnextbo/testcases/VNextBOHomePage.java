@@ -8,6 +8,8 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOPrivacyPolicyDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOTermsAndConditionsDialogSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
@@ -317,38 +319,16 @@ public class VNextBOHomePage extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanOpenAndCloseTermsAndConditionsWithOkButtonOnHomePage(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanOpenAndCloseTermsAndConditionsOnHomePage(String rowID, String description, JSONObject testData) {
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
-
-        homePage
-                .clickTermsAndConditionsLink()
-                .acceptTermsAndConditions();
+        VNextBOTermsAndConditionsDialogSteps.openAndRejectTermsAndConditions();
+        VNextBOTermsAndConditionsDialogSteps.openAndAcceptTermsAndConditions();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanOpenAndCloseTermsAndConditionsWithXButtonOnHomePage(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanOpenAndClosePrivacyPolicyOnHomePage(String rowID, String description, JSONObject testData) {
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
-
-        homePage
-                .clickTermsAndConditionsLink()
-                .rejectTermsAndConditions();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanOpenAndClosePrivacyPolicyWithOkButtonOnHomePage(String rowID, String description, JSONObject testData) {
-        VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
-
-        homePage
-                .clickPrivacyPolicyLink()
-                .acceptPrivacyPolicy();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanOpenAndClosePrivacyPolicyWithXButtonOnHomePage(String rowID, String description, JSONObject testData) {
-        VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
-
-        homePage
-                .clickPrivacyPolicyLink()
-                .rejectPrivacyPolicy();
+        VNextBOPrivacyPolicyDialogSteps.openAndRejectPrivacyPolicy();
+        VNextBOPrivacyPolicyDialogSteps.openAndAcceptPrivacyPolicy();
     }
 }

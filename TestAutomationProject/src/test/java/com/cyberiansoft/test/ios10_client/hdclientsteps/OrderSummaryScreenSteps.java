@@ -8,4 +8,9 @@ public class OrderSummaryScreenSteps {
         OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
         orderSummaryScreen.waitOrderSummaryScreenLoaded();
     }
+
+    public static void setTotalSale(String totalSale) {
+        OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
+        orderSummaryScreen.setTotalSale(totalSale);
+    }
 }

@@ -62,6 +62,8 @@ public class HomeScreen extends iOSHDBaseScreen {
 	}
 
 	public CustomersScreen clickCustomersButton() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Home")));
 		appiumdriver.findElementByAccessibilityId("Customers").click();
 		return new CustomersScreen();
 	}
@@ -135,9 +137,11 @@ public class HomeScreen extends iOSHDBaseScreen {
 	}
 
 	public ServiceRequestsScreen clickServiceRequestsButton() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests")));
-		appiumdriver.findElementByAccessibilityId("Service Requests").click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Home")));
+		wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(appiumdriver.findElementByAccessibilityId("Service Requests"))).click();
+		//appiumdriver.findElementByAccessibilityId("Service Requests").click();
 		/*if (appiumdriver.findElementsByAccessibilityId("Loading service requests").size() > 0) {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Loading service requests")));

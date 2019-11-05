@@ -1,13 +1,10 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -18,10 +15,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class RegularServicesScreen extends RegularBaseServicesScreen {
 
@@ -109,8 +103,7 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	
 	public void selectService(String servicename) {
 		WebElement searchFild = appiumdriver.findElementByClassName("XCUIElementTypeSearchField");
-		if (!(searchFild.getAttribute("value") == null))
-			searchFild.clear();
+		searchFild.clear();
 
 		IOSElement servicecell = (IOSElement) availableservicestbl.
 				findElement(MobileBy.AccessibilityId(servicename));
@@ -118,6 +111,15 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 			searchFild.sendKeys(servicename + "\n");
 		}
 		availableservicestbl.findElement(MobileBy.AccessibilityId(servicename)).click();
+	}
+
+	public void selectServices(List<ServiceData> servicesData) {
+		WebElement searchFild = appiumdriver.findElement(MobileBy.className("XCUIElementTypeSearchField"));
+		for (ServiceData serviceData : servicesData) {
+			searchFild.clear();
+			searchFild.sendKeys(serviceData.getServiceName() + "\n");
+			availableservicestbl.findElement(MobileBy.AccessibilityId(serviceData.getServiceName())).click();
+		}
 	}
 	
 	public void selectServiceSubSrvice(String servicesubsrvicename) {

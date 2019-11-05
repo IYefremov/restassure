@@ -6,6 +6,8 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.Re
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSubServicesScreen;
 
+import java.util.List;
+
 public class RegularServicesScreenSteps {
 
     public static void selectServiceWithServiceData(ServiceData serviceData) {
@@ -16,6 +18,11 @@ public class RegularServicesScreenSteps {
     public static void selectService(String serviceName) {
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         servicesScreen.selectService(serviceName);
+    }
+
+    public static void selectServices(List<ServiceData> servicesData) {
+        RegularServicesScreen servicesScreen = new RegularServicesScreen();
+        servicesScreen.selectServices(servicesData);
     }
 
     public static void selectSubService(String subServiceName) {
