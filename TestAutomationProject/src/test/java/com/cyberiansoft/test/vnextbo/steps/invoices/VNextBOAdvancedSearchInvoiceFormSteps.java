@@ -54,4 +54,29 @@ public class VNextBOAdvancedSearchInvoiceFormSteps {
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
     }
+
+    public static void searchByInvoice(String invoice) {
+        VNextBOInvoicesPageInteractions.clickAdvancedSearchCaret();
+
+        VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
+        VNextBOAdvancedSearchInvoiceFormInteractions.setInvoiceNumber(invoice);
+        VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
+
+        VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
+    }
+
+    public static void searchByCustomTimeFrameInvoiceAndStatus(String fromDate, String toDate, String invoice, String status) {
+        VNextBOInvoicesPageInteractions.clickAdvancedSearchCaret();
+
+        VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
+
+        VNextBOAdvancedSearchInvoiceFormInteractions.setInvoiceNumber(invoice);
+        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
+        VNextBOAdvancedSearchInvoiceFormInteractions.setFromDate(fromDate);
+        VNextBOAdvancedSearchInvoiceFormInteractions.setToDate(toDate);
+        VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
+        VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
+
+        VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
+    }
 }

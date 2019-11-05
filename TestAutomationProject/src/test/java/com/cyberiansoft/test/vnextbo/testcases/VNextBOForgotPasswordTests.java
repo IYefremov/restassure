@@ -167,9 +167,8 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         String resetPasswordUrl = nada.getUrlsFromMessage(mailMessage, "reset your password").get(0);
 
         webdriverGotoWebPage(resetPasswordUrl);
-        Utils.refreshPage();
 
-        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage(webdriver);
+        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
         Assert.assertTrue(vNextBOHomeWebPage.isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
     }
 

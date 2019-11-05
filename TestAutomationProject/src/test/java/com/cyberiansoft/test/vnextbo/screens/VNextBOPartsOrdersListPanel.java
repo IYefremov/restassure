@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.WebDriver;
@@ -161,8 +162,8 @@ public class VNextBOPartsOrdersListPanel extends VNextBOBaseWebPage {
     }
 
     private List<String> getPartsManagementValues(List<WebElement> options) {
-        wait.until(ExpectedConditions.visibilityOfAllElements(options));
-        return options
+        WaitUtilsWebDriver.waitABit(1000);
+        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(options)
                 .stream()
                 .map(e -> e.getAttribute("value"))
                 .collect(Collectors.toList());

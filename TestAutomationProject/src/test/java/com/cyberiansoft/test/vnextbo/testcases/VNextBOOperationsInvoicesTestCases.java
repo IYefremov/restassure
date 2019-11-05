@@ -150,6 +150,8 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
      * a) these steps are already tested in the other TCs
      * b) the necessary invoices cannot be found in a large scope of created invoices
      */
+    // todo bug 94937
+    // https://cyb.tpondemand.com/RestUI/Board.aspx#page=board/4692469321793274828&appConfig=eyJhY2lkIjoiMTA1MTA5MDU0OEY2QTUyQjlFM0JCODkwRjYwQUVGMEIifQ==&boardPopup=bug/94937
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanUnvoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);

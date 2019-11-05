@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -71,7 +72,7 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
         return isElementDisplayed(forgotPasswordLink);
     }
 
-    public String getValueFromEmailField() { return emailField.getValue(); }
+    public String getValueFromEmailField() { return WaitUtilsWebDriver.waitForVisibility(emailField.getWrappedElement()).getAttribute("value"); }
 
 	public String getValueFromPasswordField() { return passwordField.getValue(); }
 
