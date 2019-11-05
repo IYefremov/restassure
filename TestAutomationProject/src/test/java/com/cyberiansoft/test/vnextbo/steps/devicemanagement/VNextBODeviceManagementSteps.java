@@ -1,23 +1,28 @@
-package com.cyberiansoft.test.vnextbo.steps.deviceManagement;
+package com.cyberiansoft.test.vnextbo.steps.devicemanagement;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOActiveDevicesInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOActiveDevicesWebPage;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
 import org.testng.Assert;
 
-public class VNextBODeviceManagementSteps {
+public class VNextBODeviceManagementSteps extends VNextBOBaseWebPageSteps {
 
     public static void deletePendingRegistrationDeviceByUser(String user) {
+
         VNextBOPendingRegistrationsValidations.verifyPendingRegistrationTabIsOpened();
         new VNextBOPendingRegistrationsInteractions().clickDeleteDeviceButtonForUser(user);
         VNextBOConfirmationDialogInteractions.clickYesButton();
     }
 
     public static void verifyUserCanUncoverRegistrationCode(String deviceName) {
+
         final VNextBOActiveDevicesInteractions activeDevicesInteractions = new VNextBOActiveDevicesInteractions();
         activeDevicesInteractions.verifyReplaceButtonIsDisplayedForDevice(deviceName);
         activeDevicesInteractions.clickReplaceButtonByDeviceName(deviceName);
@@ -26,6 +31,7 @@ public class VNextBODeviceManagementSteps {
     }
 
     public static void verifyUserCanHideRegistrationCode(String deviceName) {
+
         final VNextBOActiveDevicesInteractions activeDevicesInteractions = new VNextBOActiveDevicesInteractions();
         activeDevicesInteractions.verifyActiveDevicesTabIsOpened();
         activeDevicesInteractions.clickRegistrationNumberClearButtonForDevice(deviceName);
@@ -34,6 +40,7 @@ public class VNextBODeviceManagementSteps {
     }
 
     public static void openEditDeviceDialog(String deviceName) {
+
         final VNextBODeviceManagementInteractions deviceManagementInteractions = new VNextBODeviceManagementInteractions();
         deviceManagementInteractions.clickActiveDevicesTab();
 
@@ -53,7 +60,25 @@ public class VNextBODeviceManagementSteps {
     }
 
     public static void searchByText(String searchText) {
+
         new VNextBODeviceManagementInteractions().setDeviceManagementSearchText(searchText);
         new VNextBODeviceManagementInteractions().clickDeviceManagementSearchLoupeIcon();
+    }
+
+    public static int getDevicesAmount() {
+
+        return new VNextBOActiveDevicesWebPage().getDeviceRecords().size();
+    }
+
+    public static void openActiveDevicesTab() {
+
+        Utils.clickElement(new VNextBOActiveDevicesWebPage().getActiveDevicesTab());
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void openPendingRegistrationDevicesTab() {
+
+        Utils.clickElement(new VNextBOActiveDevicesWebPage().getPendingRegistrationTab());
+        WaitUtilsWebDriver.waitForLoading();
     }
 }

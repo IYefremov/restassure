@@ -63,12 +63,12 @@ public class VNextBOPageSwitcherSteps extends VNextBOBaseWebPageSteps {
 
     public static String getActivePageNumberFromHeaderPager() {
 
-        return Utils.getText(new VNextBOPageSwitcherElements().getActivePageTopPagingElement());
+        return Utils.getText(new VNextBOPageSwitcherElements().getHeaderActivePageNumber());
     }
 
     public static String getActivePageNumberFromFooterPager() {
 
-        return Utils.getText(new VNextBOPageSwitcherElements().getActivePageBottomPagingElement());
+        return Utils.getText(new VNextBOPageSwitcherElements().getFooterActivePageNumber());
     }
 
     public static void changeItemsPerPage(String itemsPerPage) {

@@ -51,15 +51,9 @@ public class VNextBOPageSwitcherElements extends VNextBOBaseWebPage {
     @FindBy(xpath = "//section[@class='view']//tfoot//button[@class='pager__item active']")
     private WebElement footerActivePageNumber;
 
-    @FindBy(xpath = "(//section[@class='view']//button[@class='pager__item active'])[1]")
-    private WebElement activePageTopPagingElement;
-
-    @FindBy(xpath = "(//section[@class='view']//button[@class='pager__item active'])[2]")
-    private WebElement activePageBottomPagingElement;
-
     public WebElement specificPageButton(int pageNumber) {
-        return driver.findElement(By.xpath("(//button[@class='pager__item' and @data-page-index='" +
-                (pageNumber - 1) + "'])[1]"));
+        return driver.findElement(By.xpath("//thead//button[@class='pager__item' and @data-page-index='" +
+                (pageNumber - 1) + "']"));
     }
 
     public WebElement itemsPerPageOption(String itemsPerPage) {

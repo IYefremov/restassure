@@ -43,6 +43,7 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsAddNewClientTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsEditClientTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsClientServicesTests"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementGeneralTests"/>
     </classes>
   </test>
 </suite>
