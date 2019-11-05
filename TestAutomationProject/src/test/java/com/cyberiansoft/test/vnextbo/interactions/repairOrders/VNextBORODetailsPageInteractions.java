@@ -193,10 +193,6 @@ public class VNextBORODetailsPageInteractions {
         setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
     }
 
-    public void setServiceVendor(String serviceId, String serviceDescription, String newValue) {
-        setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
-    }
-
     private String getTextValue(String serviceId, String xpath, String replacement) {
         final WebElement element = detailsPage.getElementInServicesTable(serviceId, xpath);
         Utils.setAttributeWithJS(element, "style", "display: block;");

@@ -336,13 +336,6 @@ public class Utils {
         }
     }
 
-    //todo change to clearAndType?
-    public static void setData(WebElement inputField, String data) {
-        clickElement(inputField);
-        inputField.clear();
-        inputField.sendKeys(data);
-    }
-
     public static void selectDataFromBoxList(List<WebElement> listBox, WebElement list, String data) {
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
         for (WebElement selected : listBox) {

@@ -1074,17 +1074,16 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				.setStatus(data.getStatus())
 				.expandServicesTable();
 
-		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceIdContainingName(service);
+		final String serviceId = detailsPage.getServiceId(data.getService());
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
 		System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
-		detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[0]);
+		detailsPage.setServiceVendorPrice(serviceId, data.getServiceVendorPrices()[0]);
         Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[0],
 				"The Vendor Price hasn't been changed");
 
 		System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
-		detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[1]);
+		detailsPage.setServiceVendorPrice(serviceId, data.getServiceVendorPrices()[1]);
 		Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[1],
 				"The Vendor Price hasn't been changed");
 
@@ -1560,7 +1559,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 			serviceQuantity = RandomStringUtils.randomNumeric(2);
 			System.out.println("Random serviceQuantity 2: " + serviceQuantity);
 		}
-		detailsPage.setServiceQuantity(serviceId, data.getService(), serviceQuantity);
+		detailsPage.setServiceQuantity(serviceId, serviceQuantity);
 		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
 		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
 		Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
@@ -1586,7 +1585,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = detailsPage.getServiceId(data.getService());
 		String negativeServiceQuantity = String.valueOf(-(RandomUtils.nextInt(10, 100)));
 		String serviceQuantity = String.valueOf(RandomUtils.nextInt(1, 100));
-        detailsPage.setServiceQuantity(serviceId, data.getService(), serviceQuantity);
+        detailsPage.setServiceQuantity(serviceId, serviceQuantity);
         detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
 
         final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
@@ -1599,7 +1598,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 			negativeServiceQuantity = String.valueOf(-(RandomUtils.nextInt(10, 100)));
 			System.out.println("Random serviceQuantity 2: " + negativeServiceQuantity);
 		}
-		detailsPage.setServiceQuantity(serviceId, data.getService(), negativeServiceQuantity);
+		detailsPage.setServiceQuantity(serviceId, negativeServiceQuantity);
 		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
 		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
         //todo the total price sometimes is not recalculated, but can hardly be reproduced manually
@@ -1632,7 +1631,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		System.out.println("ServiceQuantity: " + data.getServiceQuantity());
 		System.out.println("ServiceQuantity: " + detailsPage.getServiceQuantity(serviceId));
 
-		detailsPage.setServiceQuantity(serviceId, data.getService(), data.getServiceQuantity());
+		detailsPage.setServiceQuantity(serviceId, data.getServiceQuantity());
 		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
 		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
 		Assert.assertEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
@@ -1667,7 +1666,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 			servicePrice = String.valueOf(RandomUtils.nextInt(10, 100));
 			System.out.println("Random servicePrice 2: " + servicePrice);
 		}
-		detailsPage.setServicePrice(serviceId, data.getService(), servicePrice);
+		detailsPage.setServicePrice(serviceId, servicePrice);
 		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
 		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
 		Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
@@ -1701,7 +1700,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 			servicePrice = String.valueOf(-(RandomUtils.nextInt(10, 100)));
 			System.out.println("Random servicePrice 2: " + servicePrice);
 		}
-		detailsPage.setServicePrice(serviceId, data.getService(), servicePrice);
+		detailsPage.setServicePrice(serviceId, servicePrice);
 		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
 		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
 		Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
@@ -1731,7 +1730,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		System.out.println("ServicePrice: " + data.getServicePrice());
 		System.out.println("ServicePrice: " + detailsPage.getServicePrice(serviceId));
 
-		detailsPage.setServicePrice(serviceId, data.getService(), data.getServicePrice());
+		detailsPage.setServicePrice(serviceId, data.getServicePrice());
 		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
 		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
 		Assert.assertEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
