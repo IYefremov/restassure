@@ -1075,12 +1075,12 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = detailsPage.getServiceIdContainingName(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
 		System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
 		detailsPage.setServiceVendorPrice(serviceId, service, data.getServiceVendorPrices()[0]);
-		Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[0],
+        Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[0],
 				"The Vendor Price hasn't been changed");
 
 		System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));

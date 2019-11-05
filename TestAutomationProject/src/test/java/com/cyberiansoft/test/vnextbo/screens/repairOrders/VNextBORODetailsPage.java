@@ -517,7 +517,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 
 	private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
 		final WebElement element = getElementInServicesTable(serviceId, xpath);
-		Utils.clearAndType(element, newValue);
+		Utils.sendKeysWithJS(element, newValue);
 		clickServiceDescriptionName(serviceDescription);
 		WaitUtilsWebDriver.waitABit(500);
 	}
@@ -533,9 +533,9 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 				+ serviceId + "']" + xpath));
 	}
 
-	public String getServiceId(String description) {
-		final WebElement serviceElement = getServiceByName(description);
-		if (serviceElement != null) {
+    private String getService(WebElement serviceElement) {
+        System.out.println(serviceElement);
+        if (serviceElement != null) {
 			final String id = wait
 					.ignoring(StaleElementReferenceException.class)
 					.until(ExpectedConditions.visibilityOf(serviceElement))
@@ -543,8 +543,16 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 			System.out.println(id);
 			return id;
 		}
-		return "";
+        return "";
+    }
+
+    public String getServiceIdContainingName(String description) {
+        return getService(getServiceContainingName(description));
 	}
+
+    public String getServiceId(String description) {
+        return getService(getServiceByName(description));
+    }
 
 	@Nullable
 	private WebElement getServiceByName(String service) {
@@ -560,6 +568,15 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
             }
 		}
 	}
+
+    @Nullable
+    private WebElement getServiceContainingName(String service) {
+        try {
+            return WaitUtilsWebDriver.waitForVisibility(By.xpath("//div[contains(text(), '" + service + "')]"));
+        } catch (NoSuchElementException ignore) {
+            return null;
+        }
+    }
 
 	public void clickAddNewServiceButton() {
 	    Utils.clickElement(addNewServiceButton);
