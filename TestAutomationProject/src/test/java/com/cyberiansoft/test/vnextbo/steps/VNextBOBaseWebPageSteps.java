@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.WebDriver;
@@ -35,12 +36,14 @@ public class VNextBOBaseWebPageSteps {
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.termsAndConditionsLink);
+        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickPrivacyPolicyLink()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.privacyPolicyLink);
+        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openIntercomMessenger()

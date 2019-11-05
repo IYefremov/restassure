@@ -161,23 +161,14 @@
     }
   ],
 
-  "verifyUserCanOpenAndCloseTermsAndConditionsWithOkButtonOnHomePage": [
+  "verifyUserCanOpenAndCloseTermsAndConditionsOnHomePage": [
     {
-      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsWithOkButtonOnHomePage.01",
-      "description": "Test Case 84390:Verify user can open and close \"Terms&Conditions\" (OK)",
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsOnHomePage.01",
+      "description": "Test Case 84390:Verify user can open and close \"Terms&Conditions\" (OK). Test Case 84391:Verify user can open and close \"Terms&Conditions\" (X-icon)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91090"
-        }
-      ]
-    }
-  ],
-
-  "verifyUserCanOpenAndCloseTermsAndConditionsWithXButtonOnHomePage": [
-    {
-      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsWithXButtonOnHomePage.01",
-      "description": "Test Case 84391:Verify user can open and close \"Terms&Conditions\" (X-icon)",
-      "targetProcessTestCaseData": [
+        },
         {
           "testCaseID": "91091"
         }
@@ -185,23 +176,14 @@
     }
   ],
 
-  "verifyUserCanOpenAndClosePrivacyPolicyWithOkButtonOnHomePage": [
+  "verifyUserCanOpenAndClosePrivacyPolicyOnHomePage": [
     {
-      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyWithOkButtonOnHomePage.01",
-      "description": "Test Case 84392:Verify user can open and close \"Privacy Policy\" (OK)",
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyOnHomePage.01",
+      "description": "Test Case 84392:Verify user can open and close \"Privacy Policy\" (OK). Test Case 84393:Verify user can open and close \"Privacy Policy\" (X-icon)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91092"
-        }
-      ]
-    }
-  ],
-
-  "verifyUserCanOpenAndClosePrivacyPolicyWithXButtonOnHomePage": [
-    {
-      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyWithXButtonOnHomePage.01",
-      "description": "Test Case 84393:Verify user can open and close \"Privacy Policy\" (X-icon)",
-      "targetProcessTestCaseData": [
+        },
         {
           "testCaseID": "91093"
         }
