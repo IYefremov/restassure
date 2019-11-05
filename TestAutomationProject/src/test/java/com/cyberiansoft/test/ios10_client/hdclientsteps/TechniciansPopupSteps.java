@@ -33,12 +33,17 @@ public class TechniciansPopupSteps {
 
     public static void setTechnicianCustomPercentageValue(ServiceTechnician serviceTechnician) {
         TechniciansPopup techniciansPopup = new TechniciansPopup();
-        techniciansPopup.setTechnicianCustomPriceValue(serviceTechnician.getTechnicianFullName(),
+        techniciansPopup.setTechnicianCustomPercentageValue(serviceTechnician.getTechnicianFullName(),
                 serviceTechnician.getTechnicianPercentageValue());
     }
 
     public static void saveTechViewDetails() {
         TechniciansPopup techniciansPopup = new TechniciansPopup();
         techniciansPopup.saveTechViewDetails();
+    }
+
+    public static void cancelTechViewDetails() {
+        TechniciansPopup techniciansPopup = new TechniciansPopup();
+        techniciansPopup.cancelTechViewDetails();
     }
 }

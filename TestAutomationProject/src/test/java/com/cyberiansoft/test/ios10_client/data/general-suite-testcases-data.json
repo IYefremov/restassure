@@ -4332,7 +4332,7 @@
           "defaultTechnician": {
             "technicianFirstName": "Employee",
             "technicianLastName": "Simple 20%",
-            "technicianPercentageValue": "%100.00"
+            "technicianPercentageValue": "100.00"
           }
         },
         "matrixService": {
@@ -4460,7 +4460,8 @@
           },
           "serviceDefaultTechnician": {
             "technicianFirstName": "Employee",
-            "technicianLastName": "Simple 20%"
+            "technicianLastName": "Simple 20%",
+            "isSelected" :  true
           }
         },
         "workOrderTotalSale": "5"
@@ -4554,11 +4555,13 @@
           "newTechnicians": [
             {
               "technicianFirstName": "Inspector",
-              "technicianLastName": "1"
+              "technicianLastName": "1",
+              "isSelected" : true
             },
             {
               "technicianFirstName": "Man-Insp",
-              "technicianLastName": "1"
+              "technicianLastName": "1",
+              "isSelected" : true
             }
           ]
         },
@@ -4692,11 +4695,13 @@
           "newTechnicians": [
             {
               "technicianFirstName": "Inspector",
-              "technicianLastName": "1"
+              "technicianLastName": "1",
+              "isSelected" : true
             },
             {
               "technicianFirstName": "Man-Insp",
-              "technicianLastName": "1"
+              "technicianLastName": "1",
+              "isSelected" : true
             }
           ]
         },
@@ -4713,11 +4718,13 @@
               "serviceNewTechnicians": [
                 {
                   "technicianFirstName": "Inspector",
-                  "technicianLastName": "1"
+                  "technicianLastName": "1",
+                  "isSelected" : true
                 },
                 {
                   "technicianFirstName": "Man-Insp",
-                  "technicianLastName": "1"
+                  "technicianLastName": "1",
+                  "isSelected" : true
                 }
               ],
               "vehiclePart": {
@@ -4770,11 +4777,13 @@
           "newTechnicians": [
             {
               "technicianFirstName": "Vladimir",
-              "technicianLastName": "Avsievich"
+              "technicianLastName": "Avsievich",
+              "isSelected" : true
             },
             {
               "technicianFirstName": "Nikolay",
-              "technicianLastName": "Lomeko"
+              "technicianLastName": "Lomeko",
+              "isSelected" : true
             }
           ]
         },
@@ -4837,7 +4846,8 @@
           "serviceDefaultTechnician": {
             "technicianFirstName": "Employee",
             "technicianLastName": "Simple 20%",
-            "technicianPriceValue": "$0.00"
+            "technicianPriceValue": "0.00",
+            "isSelected" : true
           },
           "vehiclePart": {
             "vehiclePartName": "Grill"
@@ -4864,12 +4874,13 @@
           },
           "newTechnician": {
             "technicianFirstName": "Vladimir",
-            "technicianLastName": "Avsievich"
+            "technicianLastName": "Avsievich",
+            "isSelected" : true
           }
         },
         "service": {
           "serviceName": "3/4\" - Penny Size",
-          "servicePrice": "$0.00"
+          "servicePrice": "0.00"
         }
       }
     }

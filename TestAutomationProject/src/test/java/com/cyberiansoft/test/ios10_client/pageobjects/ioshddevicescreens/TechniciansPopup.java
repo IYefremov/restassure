@@ -22,12 +22,6 @@ public class TechniciansPopup extends iOSHDBaseScreen {
         PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
     }
 
-    public String saveTechnociansViewWithAlert() {
-        appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Technicians' and type = 'XCUIElementTypeNavigationBar'"))
-                .findElement(MobileBy.AccessibilityId("Save")).click();
-        return Helpers.getAlertTextAndAccept();
-    }
-
     public void selectTechniciansCustomView() {
         appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Custom")).click();
     }
