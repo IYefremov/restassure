@@ -146,6 +146,9 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[contains(@data-bind, 'cachedServices')]")
 	private WebElement toBeAddedLaterServiceNotification;
 
+	@FindBy(xpath = "//div[text()='Vendor Price']")
+	private WebElement vendorPriceTitle;
+
 	@FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/span")
 	private List<WebElement> vendorPricesList;
 
@@ -455,48 +458,16 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 				.replace("$", "");
 	}
 
-	public void setServiceVendorPrice(String serviceId, String serviceDescription, String newValue) {
-		setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
+	public void setServiceVendorPrice(String serviceId, String newValue) {
+		setTextValue(serviceId, "/div[@class='clmn_3_1']/input", newValue);
 	}
 
-	public void setServiceVendor(String serviceId, String serviceDescription, String newValue) { //todo!!!
-		setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
+	public void setServiceQuantity(String serviceId, String newValue) {
+			setTextValue(serviceId, "//div[@class='clmn_2_1 grid__number']/input", newValue);
 	}
 
-	public void setServiceQuantity(String serviceId, String serviceDescription, String newValue) {
-//		try { toto delete?
-			setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
-//		} catch (TimeoutException e) {
-//			((JavascriptExecutor) driver).executeScript("window.open('about:blank','_blank');");
-//
-//			List<String> tabs = new ArrayList<>(driver.getWindowHandles());
-//			driver.switchTo().window(tabs.get(1));
-//
-//			WebDriverUtils.webdriverGotoWebPage(BOConfigInfo.getInstance().getBackOfficeURLMain());
-//			BackOfficeLoginWebPage loginPage = PageFactory.initElements(driver, BackOfficeLoginWebPage.class);
-//			BackOfficeHeaderPanel backOfficeHeader = PageFactory.initElements(driver, BackOfficeHeaderPanel.class);
-//			loginPage.userLogin(BOConfigInfo.getInstance().getUserNadaName(), BOConfigInfo.getInstance().getUserNadaPassword());
-//
-//			ServicesWebPage servicesPage = new ServicesWebPage(this.driver);
-//			backOfficeHeader.clickCompanyLink();
-//			CompanyWebPage companyWebPage = new CompanyWebPage(this.driver);
-//			companyWebPage.clickServicesLink();
-//
-//			servicesPage.setServiceSearchCriteria(serviceDescription);
-//			servicesPage.clickFindButton();
-//			servicesPage.clickEditService(serviceDescription);
-//			NewServiceDialogWebPage newServiceDialogWebPage = new NewServiceDialogWebPage(this.driver);
-//			newServiceDialogWebPage.clickMultipleCheckbox();
-//			newServiceDialogWebPage.clickOKButton();
-//			newServiceDialogWebPage.closeNewTab(tabs.get(0));
-//			refreshPage();
-//			expandServicesTable();
-//			setTextValue(serviceId, serviceDescription, "//div[@class='clmn_2_1 grid__number']/input", newValue);
-//		}
-	}
-
-	public void setServicePrice(String serviceId, String serviceDescription, String newValue) {
-		setTextValue(serviceId, serviceDescription, "//div[@class='clmn_3 grid__number']/input", newValue);
+	public void setServicePrice(String serviceId, String newValue) {
+		setTextValue(serviceId, "//div[@class='clmn_3 grid__number']/input", newValue);
 	}
 
 	private String getTextValue(String serviceId, String xpath, String replacement) {
@@ -515,10 +486,11 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 		return text;
 	}
 
-	private void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
+	private void setTextValue(String serviceId, String xpath, String newValue) {
 		final WebElement element = getElementInServicesTable(serviceId, xpath);
-		Utils.clearAndType(element, newValue);
-		clickServiceDescriptionName(serviceDescription);
+		Utils.clearAndTypeUsingKeyboard(element, newValue);
+		Utils.clickElement(vendorPriceTitle);
+//		clickServiceDescriptionName(serviceDescription);
 		WaitUtilsWebDriver.waitABit(500);
 	}
 
@@ -533,9 +505,9 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 				+ serviceId + "']" + xpath));
 	}
 
-	public String getServiceId(String description) {
-		final WebElement serviceElement = getServiceByName(description);
-		if (serviceElement != null) {
+    private String getService(WebElement serviceElement) {
+        System.out.println(serviceElement);
+        if (serviceElement != null) {
 			final String id = wait
 					.ignoring(StaleElementReferenceException.class)
 					.until(ExpectedConditions.visibilityOf(serviceElement))
@@ -543,8 +515,16 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 			System.out.println(id);
 			return id;
 		}
-		return "";
+        return "";
+    }
+
+    public String getServiceIdContainingName(String description) {
+        return getService(getServiceContainingName(description));
 	}
+
+    public String getServiceId(String description) {
+        return getService(getServiceByName(description));
+    }
 
 	@Nullable
 	private WebElement getServiceByName(String service) {
@@ -560,6 +540,15 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
             }
 		}
 	}
+
+    @Nullable
+    private WebElement getServiceContainingName(String service) {
+        try {
+            return WaitUtilsWebDriver.waitForVisibility(By.xpath("//div[contains(text(), '" + service + "')]"));
+        } catch (NoSuchElementException ignore) {
+            return null;
+        }
+    }
 
 	public void clickAddNewServiceButton() {
 	    Utils.clickElement(addNewServiceButton);

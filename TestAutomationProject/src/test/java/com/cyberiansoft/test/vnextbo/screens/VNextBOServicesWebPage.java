@@ -101,16 +101,17 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
         return this;
     }
 
-    public void advancedSearchService(String searchtext, boolean archived) {
-        setSearchFreeTextValue(searchtext);
+    public void advancedSearchService(String searchText, boolean archived) {
+        setSearchFreeTextValue(searchText);
         openAdvancedSearchPanel();
-        wait.until(ExpectedConditions.elementToBeClickable(searchServicesArchiveCheckbox));
-        if (archived)
+        Utils.clickElement(searchServicesArchiveCheckbox);
+        if (archived) {
             checkboxSelect(searchServicesArchiveCheckbox);
-        else
+        } else {
             checkboxUnselect(searchServicesArchiveCheckbox);
-        waitABit(2000);
-        searchServicesArchiveCheckbox.click();
+        }
+        WaitUtilsWebDriver.waitABit(2000);
+        Utils.clickElement(searchServicesArchiveCheckbox);
         clickSearchButtonForAdvancedSearch();
     }
 
@@ -342,9 +343,10 @@ public class VNextBOServicesWebPage extends VNextBOBaseWebPage {
         wait.until(ExpectedConditions.elementToBeClickable(addservicebtn));
     }
 
-    public void unarchiveServiceByServiceName(String servicename) {
+    public void unarchiveServiceByServiceName(String serviceName) {
+        clickUnarchiveButtonForService(serviceName);
         Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickYesAndGetConfirmationDialogMessage(),
-                "Are you sure you want to restore \"" + servicename + "\" service?");
+                "Are you sure you want to restore \"" + serviceName + "\" service?");
         waitForLoading();
         waitShort.until(ExpectedConditions.invisibilityOfElementLocated(By.id("dialogModal")));
     }

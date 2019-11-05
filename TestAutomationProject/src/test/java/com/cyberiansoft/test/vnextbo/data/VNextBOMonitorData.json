@@ -770,10 +770,10 @@
           "testCaseID": "91283"
         }
       ],
-      "location": "1111 Automation",
+      "location": "Rozstalnoy_location",
       "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
+      "orderNumber": "O-000-152510",
+      "service": "  Test Bundle Service",
       "serviceVendorPrices": [
         "0",
         "100"

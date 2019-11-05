@@ -51,8 +51,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         loginPage = new VNextBOLoginScreenWebPage();
         loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.selectUsersMenu();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @AfterClass
@@ -122,19 +121,18 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndCloseMainMenu(String rowID, String description, JSONObject testData) {
 
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.expandMainMenu();
-        Assert.assertTrue(leftMenuInteractions.isMainMenuExpanded(), "Main menu hasn't been opened");
-        leftMenuInteractions.collapseMainMenu();
-        Assert.assertFalse(leftMenuInteractions.isMainMenuExpanded(), "Main menu hasn't been closed");
+        VNextBOLeftMenuInteractions.expandMainMenu();
+        Assert.assertTrue(VNextBOLeftMenuInteractions.isMainMenuExpanded(), "Main menu hasn't been opened");
+        VNextBOLeftMenuInteractions.collapseMainMenu();
+        Assert.assertFalse(VNextBOLeftMenuInteractions.isMainMenuExpanded(), "Main menu hasn't been closed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanReturnToHomePageByClickingLogo(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickLogo();
-        Assert.assertTrue(new VNextBOHomeWebPage(webdriver).isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
-        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        Assert.assertTrue(new VNextBOHomeWebPage().isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -154,7 +152,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         loginPage = new VNextBOLoginScreenWebPage();
         Assert.assertTrue(loginPage.isLoginFormDisplayed(), "Login page hasn't been closed");
         loginPage.userLogin(userName, userPassword);
-        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -190,7 +188,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOPageSwitcherSteps.openPageByNumber(4);
         VNextBOUsersPageSteps.clickLogo();
-        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
         VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("4");
     }
 
@@ -208,7 +206,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.changeItemsPerPage("50");
         VNextBOPageSwitcherSteps.openPageByNumber(2);
         VNextBOUsersPageSteps.clickLogo();
-        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
         VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("2");
         VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("50");
     }

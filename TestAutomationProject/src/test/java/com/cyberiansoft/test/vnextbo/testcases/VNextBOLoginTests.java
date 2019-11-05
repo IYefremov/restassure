@@ -121,7 +121,7 @@ public class VNextBOLoginTests extends BaseTestCase {
 
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
         loginPage.userLogin(data.getLogin(), data.getPassword());
-        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage(webdriver);
+        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
         Assert.assertTrue(vNextBOHomeWebPage.isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
     }
 
@@ -137,7 +137,7 @@ public class VNextBOLoginTests extends BaseTestCase {
         Assert.assertEquals(loginPage.getValueFromPasswordField(), "",
                 "Password field hasn't been empty");
         loginPage.userLogin(userName, userPassword);
-        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage(webdriver);
+        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
         Assert.assertTrue(vNextBOHomeWebPage.isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
     }
 }
