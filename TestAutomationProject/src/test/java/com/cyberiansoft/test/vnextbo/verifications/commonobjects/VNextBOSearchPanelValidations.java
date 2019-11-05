@@ -35,4 +35,10 @@ public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations
         Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().contains(text),
                 "Search option under Search field hasn't been correct");
     }
+
+    public static void isSearchFieldEmpty() {
+
+        Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().equals(""),
+                "Search field hasn't been cleared");
+    }
 }

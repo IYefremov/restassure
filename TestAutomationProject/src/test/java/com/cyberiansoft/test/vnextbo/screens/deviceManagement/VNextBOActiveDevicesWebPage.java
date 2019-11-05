@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 public class VNextBOActiveDevicesWebPage extends VNextBODeviceManagementWebPage {
@@ -80,5 +81,12 @@ public class VNextBOActiveDevicesWebPage extends VNextBODeviceManagementWebPage 
         } catch (NullPointerException ignored) {
             return null;
         }
+    }
+
+    public List<WebElement> columnTextCellsByTitle(String columnTitle)
+    {
+        int searchColumnIndex = driver.findElements(By.xpath("//div[@id='devicesListTable-wrapper']/table[@class='grid']//th")).
+                stream().map(WebElement::getText).collect(Collectors.toList()).indexOf(columnTitle) + 1;
+        return driver.findElements(By.xpath("//div[@id='devicesListTable-wrapper']/table[@class='grid']//tr[@role='option']/td[" + searchColumnIndex + "]"));
     }
 }

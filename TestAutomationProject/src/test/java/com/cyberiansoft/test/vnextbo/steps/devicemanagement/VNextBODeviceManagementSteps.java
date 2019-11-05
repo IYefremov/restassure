@@ -7,10 +7,16 @@ import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOActive
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
+import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOActiveDevicesWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class VNextBODeviceManagementSteps extends VNextBOBaseWebPageSteps {
 
@@ -79,6 +85,44 @@ public class VNextBODeviceManagementSteps extends VNextBOBaseWebPageSteps {
     public static void openPendingRegistrationDevicesTab() {
 
         Utils.clickElement(new VNextBOActiveDevicesWebPage().getPendingRegistrationTab());
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static List<String> getColumnValuesByTitleFromColumnWithText(String columnTitle) {
+
+        return new VNextBOActiveDevicesWebPage().columnTextCellsByTitle(columnTitle).stream().
+                map(WebElement::getText).collect(Collectors.toList());
+    }
+
+    public static void searchDevicesByTeam(String teamName) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBODevicesAdvancedSearchSteps.setTeamDropdownField(teamName);
+        VNextBODevicesAdvancedSearchSteps.clickSearchButton();
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void searchDevicesByLicense(String license) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBODevicesAdvancedSearchSteps.setLicenseField(license);
+        VNextBODevicesAdvancedSearchSteps.clickSearchButton();
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void searchDevicesByName(String name) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBODevicesAdvancedSearchSteps.setNameField(name);
+        VNextBODevicesAdvancedSearchSteps.clickSearchButton();
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void searchDevicesByVersion(String version) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBODevicesAdvancedSearchSteps.setVersionField(version);
+        VNextBODevicesAdvancedSearchSteps.clickSearchButton();
         WaitUtilsWebDriver.waitForLoading();
     }
 }
