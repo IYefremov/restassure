@@ -46,7 +46,7 @@ public class VehicleInfoValidations {
 
     public static void verifyVehicleInfoScreenTechValue(ServiceTechnician serviceTechnician) {
         VehicleScreen vehicleScreen = new VehicleScreen();
-        Assert.assertEquals(vehicleScreen.getTechnician(), serviceTechnician.getTechnicianFullName().trim());
+        Assert.assertTrue(vehicleScreen.getTechnician().contains(serviceTechnician.getTechnicianFullName().trim()));
     }
 
 }

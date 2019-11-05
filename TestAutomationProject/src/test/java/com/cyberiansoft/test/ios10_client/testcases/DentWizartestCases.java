@@ -8,6 +8,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
+import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.*;
 import com.cyberiansoft.test.ios10_client.hdvalidations.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
@@ -647,21 +648,18 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
-		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 		VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		VehicleInfoScreenSteps.setStockNumber(workOrderData.getVehicleInfoData().getStockNumber());
 		VehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+		VehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		VehicleInfoScreenSteps.clickTech();
-		TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
+		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
-		TechniciansPopup techniciansPopup = new TechniciansPopup();
-		techniciansPopup.selectTechniciansEvenlyView();
-		String alerttext = techniciansPopup
-				.saveTechnociansViewWithAlert();
-		Assert.assertEquals(
-				alerttext,
-				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+		TechniciansPopupSteps.selectTechniciansEvenlyView();
+		TechniciansPopupSteps.saveTechViewDetails();
+		AssignTechniciansSteps.assignTechniciansToWorkOrder();
 
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreen servicesScreen = new ServicesScreen();
@@ -762,7 +760,6 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		final String fullPercentageValue = "100.00";
 		final String defTechPrice = "93.50";
 		final String newTechPrice = "16.50";
 
@@ -770,34 +767,26 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 
-		MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+		homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.wholesailhailworkordertype);
 		VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		VehicleInfoScreenSteps.setStockNumber(workOrderData.getVehicleInfoData().getStockNumber());
 		VehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+		VehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		VehicleInfoScreenSteps.clickTech();
-		TechniciansPopup techniciansPopup = new TechniciansPopup();
-		TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
-
 		TechniciansPopupSteps.selectTechniciansCustomView();
-		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
-		TechniciansPopupValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
-				fullPercentageValue);
-
+		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		TechniciansPopupSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		TechniciansPopupValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
 				workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianPercentageValue());
-
-		String alerttext = techniciansPopup
-				.saveTechnociansViewWithAlert();
-		Assert.assertTrue(alerttext.contains("Total amount is not equal 100%"));
+		TechniciansPopupSteps.saveTechViewDetails();
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TOTAL_AMAUNT_NOT_EQUAL100);
+		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
 		TechniciansPopupSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician());
 		TechniciansPopupValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician(),
 				workOrderData.getVehicleInfoData().getNewTechnician().getTechnicianPercentageValue());
-		alerttext = techniciansPopup.saveTechnociansViewWithAlert();
-		Assert.assertEquals(
-				alerttext,
-				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+		TechniciansPopupSteps.saveTechViewDetails();
+		AssignTechniciansSteps.assignTechniciansToWorkOrder();
 
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
@@ -1002,8 +991,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		
 		homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsScreen = new QuestionsScreen();
-		questionsScreen.acceptForReminderNoDrilling();
+		QuestionsScreenSteps.waitQuestionsScreenLoaded();
 
 		NavigationSteps.navigateToVehicleInfoScreen();
 		VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
@@ -1011,20 +999,22 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		VehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		VehicleInfoScreenSteps.clickTech();
 
-		TechniciansPopup techniciansPopup = new TechniciansPopup();
+		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			TechniciansPopupSteps.selectServiceTechnician(serviceTechnician);
-		techniciansPopup.selectTechniciansEvenlyView();
+		TechniciansPopupSteps.selectTechniciansEvenlyView();
 		TechniciansPopupValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
 				workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianPercentageValue());
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			TechniciansPopupValidations.verifyServiceTechnicianPercentageValue(serviceTechnician,
 					serviceTechnician.getTechnicianPercentageValue());
-		String alerttext = techniciansPopup
-				.saveTechnociansViewWithAlert();
-		Assert.assertEquals(
-				alerttext,
-				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+		TechniciansPopupSteps.saveTechViewDetails();
+		AssignTechniciansSteps.assignTechniciansToWorkOrder();
+
+		VehicleInfoScreenSteps.waitVehicleScreenLoaded();
+		VehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
+		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
+			VehicleInfoValidations.verifyVehicleInfoScreenTechValue(serviceTechnician);
 
 		for (QuestionScreenData questionScreenData : workOrderData.getQuestionScreensData()) {
 			QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(questionScreenData);
@@ -1232,38 +1222,29 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		final String fullPercentage = "100.00";
-
 		HomeScreen homeScreen = new HomeScreen();
 		CustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.selectCustomerWithoutEditing(UtilConstants.TEST_CUSTOMER_FOR_TRAINING);
 		
 		homeScreen.clickMyWorkOrdersButton();
 		MyWorkOrdersSteps.startCreatingWorkOrderWithJob(DentWizardWorkOrdersTypes.retailhailworkordertype, UtilConstants.WO_TYPE_JOB);
-		QuestionsScreen questionsScreen = new QuestionsScreen();
-		questionsScreen.acceptForReminderNoDrilling();
+		QuestionsScreenSteps.waitQuestionsScreenLoaded();
 
 		NavigationSteps.navigateToVehicleInfoScreen();
 		VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		VehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+		VehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		VehicleInfoScreenSteps.clickTech();
-		TechniciansPopup techniciansPopup =  new TechniciansPopup();
-		TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
-		techniciansPopup.selectTechniciansCustomView();
-		TechniciansPopupValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
-				fullPercentage);
-
+		TechniciansPopupSteps.selectTechniciansCustomView();
+		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
 		TechniciansPopupSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
-		String alerttext = techniciansPopup
-				.saveTechnociansViewWithAlert();
-		Assert.assertTrue(alerttext.contains("Total amount is not equal 100%"));
+		TechniciansPopupSteps.saveTechViewDetails();
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TOTAL_AMAUNT_NOT_EQUAL100);
 
 		TechniciansPopupSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician());
-		alerttext = techniciansPopup.saveTechnociansViewWithAlert();
-		Assert.assertEquals(
-				alerttext,
-				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+		TechniciansPopupSteps.saveTechViewDetails();
+		AssignTechniciansSteps.assignTechniciansToWorkOrder();
 
 		VehicleInfoScreenSteps.waitVehicleScreenLoaded();
 		for (QuestionScreenData questionScreenData : workOrderData.getQuestionScreensData()) {
@@ -1786,19 +1767,15 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		VehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+		VehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		VehicleInfoScreenSteps.clickTech();
-		TechniciansPopup techniciansPopup = new TechniciansPopup();
 		TechniciansPopupSteps.selectTechniciansCustomView();
-		TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
+		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
 		TechniciansPopupSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		TechniciansPopupSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician());
-		
-		String alerttext = techniciansPopup
-				.saveTechnociansViewWithAlert();
-		Assert.assertEquals(
-				alerttext,
-				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+		TechniciansPopupSteps.saveTechViewDetails();
+		AssignTechniciansSteps.assignTechniciansToWorkOrder();
 
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreenSteps.selectPanelServiceData(workOrderData.getDamageData());
@@ -1835,7 +1812,6 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		NavigationSteps.navigateToOrderSummaryScreen();
 		OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
 		orderSummaryScreen.checkApproveAndSaveWorkOrder();
-		//orderSummaryScreen.clickSaveButton();
 		InvoiceInfoScreen invoiceInfoScreen = orderSummaryScreen.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
         Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
 		invoiceInfoScreen.clickSaveAsFinal();
@@ -1856,18 +1832,15 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		MyWorkOrdersSteps.startCreatingWorkOrder(DentWizardWorkOrdersTypes.routeusworkordertype);
 		VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		VehicleInfoValidations.validateVehicleInfoData(workOrderData.getVehicleInfoData());
+		VehicleInfoValidations.verifyVehicleInfoScreenTechValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		VehicleInfoScreenSteps.clickTech();
-		TechniciansPopup techniciansPopup = new TechniciansPopup();
-		TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician());
+		TechniciansPopupSteps.selectTechniciansCustomView();
+		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
 		TechniciansPopupSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		TechniciansPopupSteps.setTechnicianCustomPercentageValue(workOrderData.getVehicleInfoData().getNewTechnician());
-
-		String alerttext = techniciansPopup
-				.saveTechnociansViewWithAlert();
-		Assert.assertEquals(
-				alerttext,
-				AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+		TechniciansPopupSteps.saveTechViewDetails();
+		AssignTechniciansSteps.assignTechniciansToWorkOrder();
 
 		NavigationSteps.navigateToServicesScreen();
 		ServicesScreenSteps.selectPanelServiceData(workOrderData.getDamageData());

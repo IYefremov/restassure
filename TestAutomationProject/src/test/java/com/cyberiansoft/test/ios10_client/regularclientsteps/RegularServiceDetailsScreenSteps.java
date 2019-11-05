@@ -100,6 +100,11 @@ public class RegularServiceDetailsScreenSteps {
         selectedServiceDetailsScreen.selectTechniciansCustomView();
     }
 
+    public static void selectTechniciansEvenlyView() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.selectTechniciansEvenlyView();
+    }
+
     public static void selectServiceTechnician(ServiceTechnician serviceTechnician) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.selecTechnician(serviceTechnician.getTechnicianFullName());
