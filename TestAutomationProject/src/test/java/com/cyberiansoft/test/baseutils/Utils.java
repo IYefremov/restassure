@@ -440,4 +440,12 @@ public class Utils {
             WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.not(ExpectedConditions.alertIsPresent()));
         } catch (TimeoutException ignored) {}
     }
+
+    public static void switchToFrame(WebElement frame) {
+        DriverBuilder.getInstance().getDriver().switchTo().frame(frame);
+    }
+
+    public static boolean elementContainsText(WebElement element, String text) {
+        return WaitUtilsWebDriver.waitForVisibility(element).getText().contains(text);
+    }
 }

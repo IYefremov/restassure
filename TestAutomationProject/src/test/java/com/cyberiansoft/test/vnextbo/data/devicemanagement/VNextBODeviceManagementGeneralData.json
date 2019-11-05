@@ -38,10 +38,10 @@
   "verifyUserCanOpenAndCloseTermsAndConditionsOkButton": [
     {
       "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsOkButton.01",
-      "description": "Test Case 85724: Verify user can open and close \"Terms&Conditions\" (OK)",
+      "description": "Test Case 90810: Verify user can open and close \"Terms&Conditions\" (OK)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "85724",
+          "testCaseID": "90810",
           "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (OK)"
         }
       ]
@@ -50,10 +50,10 @@
   "verifyUserCanOpenAndCloseTermsAndConditionsXIcon": [
     {
       "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsOkButton.01",
-      "description": "Test Case 85725: Verify user can open and close \"Terms&Conditions\" (X-icon)",
+      "description": "Test Case 90811: Verify user can open and close \"Terms&Conditions\" (X-icon)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "85725",
+          "testCaseID": "90811",
           "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (X-icon)"
         }
       ]
@@ -62,10 +62,10 @@
   "verifyUserCanOpenAndClosePrivacyPolicyOkButton": [
     {
       "rowID": "verifyUserCanOpenAndClosePrivacyPolicyOkButton.01",
-      "description": "Test Case 85726: Verify user can open and close \"Privacy Policy\" (OK)",
+      "description": "Test Case 90812: Verify user can open and close \"Privacy Policy\" (OK)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "85726",
+          "testCaseID": "90812",
           "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (OK)"
         }
       ]
@@ -74,10 +74,10 @@
   "verifyUserCanOpenAndClosePrivacyPolicyXIcon": [
     {
       "rowID": "verifyUserCanOpenAndClosePrivacyPolicyXIcon.01",
-      "description": "Test Case 85727: Verify user can open and close \"Privacy Policy\" (X-icon)",
+      "description": "Test Case 90813: Verify user can open and close \"Privacy Policy\" (X-icon)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "85727",
+          "testCaseID": "90813",
           "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (X-icon)"
         }
       ]
@@ -86,10 +86,10 @@
   "verifyUserCanOpenAndCloseIntercom": [
     {
       "rowID": "verifyUserCanOpenAndClosePrivacyPolicyXIcon.01",
-      "description": "Test Case 85730: User can open and close \"Intercom\"",
+      "description": "Test Case 90815: User can open and close \"Intercom\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "85730",
+          "testCaseID": "90815",
           "testCaseTitle": "User can open and close \"Intercom\""
         }
       ]

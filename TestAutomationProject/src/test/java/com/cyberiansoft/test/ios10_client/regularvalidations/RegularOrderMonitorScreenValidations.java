@@ -28,7 +28,7 @@ public class RegularOrderMonitorScreenValidations {
 
     public static void verifyOrderPhaseStatus(OrderMonitorData orderMonitorData, OrderMonitorStatuses expectedStatus) {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
-        Assert.assertEquals(orderMonitorScreen.getOrderMonitorPhaseStatusValue(), expectedStatus.getValue());
+        Assert.assertEquals(orderMonitorScreen.getOrderMonitorPhaseStatusValue(orderMonitorData.getPhaseName()), expectedStatus.getValue());
     }
 
     public static void verifyOrderPhasePresent(OrderMonitorData orderMonitorData, boolean isPresent) {
@@ -69,6 +69,14 @@ public class RegularOrderMonitorScreenValidations {
             Assert.assertTrue(orderMonitorScreen.isDurationLabelPresentForService(serviceData));
         else
             Assert.assertFalse(orderMonitorScreen.isDurationLabelPresentForService(serviceData));
+    }
+
+    public static void verifyStartOrderButtonPresent(boolean isPresent) {
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        if (isPresent)
+            Assert.assertTrue(orderMonitorScreen.isStartOrderButtonExists());
+        else
+            Assert.assertFalse(orderMonitorScreen.isStartOrderButtonExists());
     }
 
 }
