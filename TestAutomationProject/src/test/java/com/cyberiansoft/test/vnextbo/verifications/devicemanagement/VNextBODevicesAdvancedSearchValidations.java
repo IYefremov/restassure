@@ -6,16 +6,10 @@ import org.testng.Assert;
 
 public class VNextBODevicesAdvancedSearchValidations {
 
-    public static void isAdvancedSearchFormDisplayed() {
+    public static void verifyAdvancedSearchFormIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBODevicesAdvancedSearchForm().getAdvancedSearchFormContent()),
                 "Advanced search form hasn't been displayed\"");
-    }
-
-    public static void isAdvancedSearchFormNotDisplayed(VNextBODevicesAdvancedSearchForm advancedSearchForm) {
-
-        Assert.assertTrue(Utils.isElementNotDisplayed(advancedSearchForm.getAdvancedSearchFormContent()),
-                "Advanced search form hasn't been closed");
     }
 
     public static void verifyAllElementsAreDisplayed() {

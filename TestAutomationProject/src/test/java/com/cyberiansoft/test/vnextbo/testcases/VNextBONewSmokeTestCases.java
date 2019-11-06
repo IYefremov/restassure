@@ -444,7 +444,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectClientsMenu();
         VNextBOSearchPanelSteps.searchByText(data.getSearch());
-        VNextBOClientsPageValidations.isClientsTableDisplayed();
+        VNextBOClientsPageValidations.verifyClientsTableIsDisplayed();
 
         VNextBOClientsPageSteps.openClientsDetailsPage(data.getTypes()[0]);
         VNextBOClientDetailsViewAccordionSteps.setClientInfoData(data.getEmployee());

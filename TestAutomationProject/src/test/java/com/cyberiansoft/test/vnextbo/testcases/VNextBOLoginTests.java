@@ -62,8 +62,8 @@ public class VNextBOLoginTests extends BaseTestCase {
     public void verifyUserCanReadTermsAndConditions(String rowID, String description, JSONObject testData) {
 
         loginPage.clickTermsAndConditionsLink();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "AMT Service Agreement Terms and Conditions",
                 "Dialog header hasn't been correct");

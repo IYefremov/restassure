@@ -69,7 +69,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setClientInfoData(Employee employee) {
 
-        if (!VNextBOClientDetailsValidations.isClientInfoPanelExpanded()) clickClientsInfoTab();
+        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) clickClientsInfoTab();
         final VNextBOClientInfoBlockInteractions clientInfoBlockInteractions = new VNextBOClientInfoBlockInteractions();
         if (employee.getClientType().toLowerCase().equals("retail")) {
             clientInfoBlockInteractions.setRetailCompanyType();
@@ -85,7 +85,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setAccountInfoData(AccountInfoData accountInfoData) {
 
-        if (!VNextBOClientDetailsValidations.isAccountInfoPanelExpanded()) clickAccountInfoTab();
+        if (!VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded()) clickAccountInfoTab();
         final VNextBOAccountInfoBlockInteractions accountInfoBlockInteractions = new VNextBOAccountInfoBlockInteractions();
         accountInfoBlockInteractions.setAccountingId(accountInfoData.getAccountingId());
         accountInfoBlockInteractions.setAccountingId2(accountInfoData.getAccountingId2());
@@ -97,14 +97,14 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setAddressData(AddressData addressData) {
 
-        if (!VNextBOClientDetailsValidations.isAddressPanelExpanded()) clickAddressTab();
+        if (!VNextBOClientDetailsValidations.verifyAddressPanelIsExpanded()) clickAddressTab();
         setAddressShipToData(addressData);
         setAddressBillToData(addressData);
     }
 
     public static void setEmailOptionsData(EmailOptionsData emailOptionsData, boolean wholesale) {
 
-        if (!VNextBOClientDetailsValidations.isEmailOptionsBlockExpanded()) clickEmailOptionsTab();
+        if (!VNextBOClientDetailsValidations.verifyEmailOptionsBlockIsExpanded()) clickEmailOptionsTab();
         final VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
         emailOptionsBlockInteractions.setDefaultRecipient(emailOptionsData.getDefaultRecipient());
         emailOptionsBlockInteractions.setCc(emailOptionsData.getCc());
@@ -118,7 +118,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setPreferencesData(String defaultArea) {
 
-        if (!VNextBOClientDetailsValidations.isPreferencesBlockExpanded()) clickPreferencesTab();
+        if (!VNextBOClientDetailsValidations.verifyPreferencesBlockIsExpanded()) clickPreferencesTab();
         final VNextBOPreferencesBlockInteractions preferencesBlockInteractions = new VNextBOPreferencesBlockInteractions();
         preferencesBlockInteractions.clickUseSingleWoTypeCheckbox();
         preferencesBlockInteractions.clickVehicleHistoryEnforcedCheckbox();
@@ -127,7 +127,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setMiscellaneousData(String notes) {
 
-        if (!VNextBOClientDetailsValidations.isMiscellaneousBlockExpanded()) clickMiscellaneousTab();
+        if (!VNextBOClientDetailsValidations.verifyMiscellaneousBlockIsExpanded()) clickMiscellaneousTab();
         new VNextBOMiscellaneousBlockInteractions().setNotes(notes);
     }
 

@@ -65,15 +65,15 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        VNextBOInspectionsPageValidations.isArchiveIconDisplayed();
+        VNextBOInspectionsPageValidations.verifyArchiveIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickArchiveIcon();
         VNextBOInspectionsPageSteps.selectArchiveReason("Reason: Test");
         VNextBOModalDialog confirmArchivingDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isYesButtonDisplayed();
-        VNextBOModalDialogValidations.isNoButtonDisplayed();
-        VNextBOModalDialogValidations.isCloseButtonDisplayed();
+        VNextBOModalDialogValidations.verifyYesButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyNoButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
         VNextBOModalDialogSteps.clickNoButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmArchivingDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmArchivingDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
@@ -83,7 +83,7 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.selectArchiveReason("Reason: Test");
         VNextBOModalDialog confirmArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmArchivingDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmArchivingDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
@@ -94,9 +94,9 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.selectArchiveReason("Reason: Test");
         VNextBOModalDialog confirmArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickYesButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmArchivingDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmArchivingDialog);
         WaitUtilsWebDriver.waitForLoading();
-        VNextBOInspectionsPageValidations.isInspectionStatusCorrect(data.getInspectionId(), "Archived");
+        VNextBOInspectionsPageValidations.verifyInspectionStatusIsCorrect(data.getInspectionId(), "Archived");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionArchivingReason(),
                 "Inspection archived with reason: Test",
                 "Archiving reason hasn't been correct");
@@ -105,14 +105,14 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyUserCanCancelUnArchivingWithNoButton(String rowID, String description, JSONObject testData) {
 
-        VNextBOInspectionsPageValidations.isUnArchiveIconDisplayed();
+        VNextBOInspectionsPageValidations.verifyUnArchiveIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickUnArchiveIcon();
         VNextBOModalDialog confirmUnArchivingDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isYesButtonDisplayed();
-        VNextBOModalDialogValidations.isNoButtonDisplayed();
-        VNextBOModalDialogValidations.isCloseButtonDisplayed();
+        VNextBOModalDialogValidations.verifyYesButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyNoButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
         VNextBOModalDialogSteps.clickNoButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmUnArchivingDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmUnArchivingDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
@@ -121,7 +121,7 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.clickUnArchiveIcon();
         VNextBOModalDialog confirmUnArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmUnArchivingDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmUnArchivingDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
@@ -131,8 +131,8 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.clickUnArchiveIcon();
         VNextBOModalDialog confirmArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickYesButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmArchivingDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmArchivingDialog);
         WaitUtilsWebDriver.waitForLoading();
-        VNextBOInspectionsPageValidations.isInspectionStatusCorrect(data.getInspectionId(), "New");
+        VNextBOInspectionsPageValidations.verifyInspectionStatusIsCorrect(data.getInspectionId(), "New");
     }
 }

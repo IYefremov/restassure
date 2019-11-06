@@ -65,13 +65,13 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        VNextBOInspectionsPageValidations.isInspectionImageZoomIconDisplayed();
+        VNextBOInspectionsPageValidations.verifyInspectionImageZoomIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickInspectionImageZoomIcon();
         VNextBOInspectionMaximizedImageDialog vNextBOInspectionMaximizedImageDialog =
                 new VNextBOInspectionMaximizedImageDialog();
-        VNextBOInspectionMaximizedImageDialogValidations.isInspectionZoomedImageDisplayed();
+        VNextBOInspectionMaximizedImageDialogValidations.verifyInspectionZoomedImageIsDisplayed();
         VNextBOInspectionMaximizedImageDialogSteps.closeInspectionMaximizedImageDialog();
-        VNextBOInspectionMaximizedImageDialogValidations.isInspectionZoomedImageClosed(vNextBOInspectionMaximizedImageDialog);
+        VNextBOInspectionMaximizedImageDialogValidations.verifyInspectionZoomedImageIsClosed(vNextBOInspectionMaximizedImageDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -79,12 +79,12 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        VNextBOInspectionsPageValidations.isInspectionNotesIconDisplayed();
+        VNextBOInspectionsPageValidations.verifyInspectionNotesIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickInspectionNotesIcon();
         VNextBOInspectionNoteDialog vNextBOInspectionNoteDialog = new  VNextBOInspectionNoteDialog();
-        VNextBOInspectionNoteDialogValidations.isInspectionNoteTextDisplayed();
+        VNextBOInspectionNoteDialogValidations.verifyInspectionNoteTextIsDisplayed();
         VNextBOInspectionNoteDialogSteps.closeInspectionNote();
-        VNextBOInspectionNoteDialogValidations.isNoteDialogClosed(vNextBOInspectionNoteDialog);
+        VNextBOInspectionNoteDialogValidations.verifyNoteDialogIsClosed(vNextBOInspectionNoteDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -92,9 +92,9 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        VNextBOInspectionsPageValidations.isPrintSupplementButtonDisplayed();
+        VNextBOInspectionsPageValidations.verifyPrintSupplementButtonIsDisplayed();
         VNextBOInspectionsPageSteps.clickPrintSupplementButton();
-        VNextBOInspectionsPageValidations.isPrintWindowOpened();
+        VNextBOInspectionsPageValidations.verifyPrintWindowIsOpened();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -102,8 +102,8 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        VNextBOInspectionsPageValidations.isPrintInspectionButtonDisplayed();
+        VNextBOInspectionsPageValidations.verifyPrintInspectionButtonIsDisplayed();
         VNextBOInspectionsPageSteps.clickPrintInspectionButton();
-        VNextBOInspectionsPageValidations.isPrintWindowOpened();
+        VNextBOInspectionsPageValidations.verifyPrintWindowIsOpened();
     }
 }

@@ -64,11 +64,11 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageSteps.clickInspectionApproveButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isYesButtonDisplayed();
-        VNextBOModalDialogValidations.isNoButtonDisplayed();
-        VNextBOModalDialogValidations.isCloseButtonDisplayed();
+        VNextBOModalDialogValidations.verifyYesButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyNoButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
         VNextBOModalDialogSteps.clickNoButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
@@ -77,6 +77,6 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.clickInspectionApproveButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
     }
 }
