@@ -489,7 +489,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         new VNextBODeviceManagementInteractions().clickActiveDevicesTab();
-        VNextBODeviceManagementSteps.searchByText(data.getDeviceName());
+        VNextBOSearchPanelSteps.searchByText(data.getDeviceName());
         Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getDeviceName()),
                 "The device hasn't been displayed");
         VNextBODeviceManagementSteps.verifyUserCanUncoverRegistrationCode(data.getDeviceName());
@@ -506,7 +506,7 @@ public class VNextBONewSmokeTestCases extends BaseTestCase {
 
         VNextBODeviceManagementSteps.openEditDeviceDialog(data.getDeviceName());
         VNextBOEditDeviceSteps.setAllValuesAndSubmit(data, data.getNickname());
-        VNextBODeviceManagementSteps.searchByText(data.getNickname());
+        VNextBOSearchPanelSteps.searchByText(data.getNickname());
         Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getNickname()),
                 "The device hasn't been displayed");
 

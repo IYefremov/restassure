@@ -7,8 +7,8 @@ import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOActive
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
-import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOActiveDevicesWebPage;
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
@@ -65,32 +65,32 @@ public class VNextBODeviceManagementSteps extends VNextBOBaseWebPageSteps {
                 "The 'Edit device dialog' is not opened");
     }
 
-    public static void searchByText(String searchText) {
-
-        new VNextBODeviceManagementInteractions().setDeviceManagementSearchText(searchText);
-        new VNextBODeviceManagementInteractions().clickDeviceManagementSearchLoupeIcon();
-    }
-
-    public static int getDevicesAmount() {
+    public static int getActiveDevicesAmount() {
 
         return new VNextBOActiveDevicesWebPage().getDeviceRecords().size();
     }
 
     public static void openActiveDevicesTab() {
 
-        Utils.clickElement(new VNextBOActiveDevicesWebPage().getActiveDevicesTab());
+        Utils.clickElement(new VNextBODeviceManagementWebPage().getActiveDevicesTab());
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openPendingRegistrationDevicesTab() {
 
-        Utils.clickElement(new VNextBOActiveDevicesWebPage().getPendingRegistrationTab());
+        Utils.clickElement(new VNextBODeviceManagementWebPage().getPendingRegistrationTab());
         WaitUtilsWebDriver.waitForLoading();
     }
 
+    public static String getDevicesNotFoundMessage() {
+
+        return Utils.getText(new VNextBODeviceManagementWebPage().getNoDevicesFoundMessage());
+    }
+
+
     public static List<String> getColumnValuesByTitleFromColumnWithText(String columnTitle) {
 
-        return new VNextBOActiveDevicesWebPage().columnTextCellsByTitle(columnTitle).stream().
+        return new VNextBODeviceManagementWebPage().columnTextCellsByTitle(columnTitle).stream().
                 map(WebElement::getText).collect(Collectors.toList());
     }
 
@@ -122,6 +122,14 @@ public class VNextBODeviceManagementSteps extends VNextBOBaseWebPageSteps {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBODevicesAdvancedSearchSteps.setVersionField(version);
+        VNextBODevicesAdvancedSearchSteps.clickSearchButton();
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void searchDevicesByPlatform(String platformTitle) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBODevicesAdvancedSearchSteps.setPlatformDropdownField(platformTitle);
         VNextBODevicesAdvancedSearchSteps.clickSearchButton();
         WaitUtilsWebDriver.waitForLoading();
     }

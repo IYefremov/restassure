@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.screens.deviceManagement;
+package com.cyberiansoft.test.vnextbo.screens.devicemanagement;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
@@ -50,7 +50,7 @@ public class VNextBODevicesAdvancedSearchForm extends VNextBOBaseWebPage {
 
 	public WebElement platformDropDownFieldOption(String platformName) {
 
-		return driver.findElement(By.xpath("//ul[@id='advSearchDevices-platform_listbox']/li[text()='" + platformName + "']"));
+		return driver.findElement(By.xpath("//ul[@aria-hidden='false']/li[text()='" + platformName + "']"));
 	}
 
 	public VNextBODevicesAdvancedSearchForm() {

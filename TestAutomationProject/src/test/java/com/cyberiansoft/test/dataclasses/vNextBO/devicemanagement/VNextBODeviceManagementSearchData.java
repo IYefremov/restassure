@@ -6,6 +6,9 @@ import lombok.Getter;
 @Getter
 public class VNextBODeviceManagementSearchData {
 
-    @JsonProperty("platform")
-    private String platform;
+    @JsonProperty("platformTitle")
+    private String platformTitle;
+
+    @JsonProperty("deviceIconClass")
+    private String deviceIconClass;
 }

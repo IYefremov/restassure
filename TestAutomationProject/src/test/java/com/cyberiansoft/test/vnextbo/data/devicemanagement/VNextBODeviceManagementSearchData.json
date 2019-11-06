@@ -90,10 +90,11 @@
       "targetProcessTestCaseData": [
         {
           "testCaseID": "90780",
-          "testCaseTitle": "User can search Devices by \"Platform â†’ Back Office\" using Advanced Search",
-          "platform": ""
+          "testCaseTitle": "User can search Devices by \"Platform â†’ Back Office\" using Advanced Search"
         }
-      ]
+      ],
+      "platformTitle": "Back Office",
+      "deviceIconClass": "icon-device-universal-client"
     },
     {
       "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.02",
@@ -103,7 +104,9 @@
           "testCaseID": "90781",
           "testCaseTitle": "User can search Devices by \"Platform â†’ Windows Classic\" using Advanced Search"
         }
-      ]
+      ],
+      "platformTitle": "Windows Classic",
+      "deviceIconClass": "icon-device-universal-client"
     },
     {
       "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.03",
@@ -113,7 +116,9 @@
           "testCaseID": "90782",
           "testCaseTitle": "User can search Devices by \"Platform â†’ iPhone\" using Advanced Search"
         }
-      ]
+      ],
+      "platformTitle": "iPhone",
+      "deviceIconClass": "icon-device-iphone"
     },
     {
       "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.04",
@@ -123,7 +128,9 @@
           "testCaseID": "90783",
           "testCaseTitle": "User can search Devices by \"Platform â†’ Android\" using Advanced Search"
         }
-      ]
+      ],
+      "platformTitle": "Android",
+      "deviceIconClass": "icon-device-android"
     },
     {
       "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.05",
@@ -133,7 +140,9 @@
           "testCaseID": "90784",
           "testCaseTitle": "User can search Devices by \"Platform â†’ Universal Client\" using Advanced Search"
         }
-      ]
+      ],
+      "platformTitle": "Universal Client",
+      "deviceIconClass": "icon-device-universal-client"
     },
     {
       "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.06",
@@ -143,7 +152,9 @@
           "testCaseID": "90785",
           "testCaseTitle": "User can search Devices by \"Platform â†’ iPad\" using Advanced Search"
         }
-      ]
+      ],
+      "platformTitle": "iPad",
+      "deviceIconClass": "icon-device-ipad"
     },
     {
       "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.07",
@@ -153,7 +164,9 @@
           "testCaseID": "90786",
           "testCaseTitle": "User can search Devices by \"Platform â†’ R360 Back Office\" using Advanced Search"
         }
-      ]
+      ],
+      "platformTitle": "R360 Back Office",
+      "deviceIconClass": "icon-device-universal-client"
     }
   ]
 }
