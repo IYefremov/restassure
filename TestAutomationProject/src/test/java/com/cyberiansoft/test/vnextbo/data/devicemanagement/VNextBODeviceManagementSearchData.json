@@ -1,0 +1,172 @@
+{
+  "verifyUserCanSearchDevicesUsingSearch": [
+    {
+      "rowID": "verifyUserCanSearchDevicesUsingSearch.01",
+      "description": "Test Case 90774: User can search Devices using \"Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90774",
+          "testCaseTitle": "User can search Devices using \"Search\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearSearchDetails": [
+    {
+      "rowID": "verifyUserCanClearSearchDetails.01",
+      "description": "Test Case 90775: User can clear search details",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90775",
+          "testCaseTitle": "User can clear search details"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanOpenAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanOpenAdvancedSearch.01",
+      "description": "Test Case 90776: User can open \"Advansed Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90776",
+          "testCaseTitle": "User can open \"Advansed Search\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchDevicesByTeamUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchDevicesByTeamUsingAdvancedSearch.01",
+      "description": "Test Case 90777: User can search Devices by \"Team\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90777",
+          "testCaseTitle": "User can search Devices by \"Team\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchDevicesByLicenseUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchDevicesByLicenseUsingAdvancedSearch.01",
+      "description": "Test Case 90778: User can search Devices by \"License\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90778",
+          "testCaseTitle": "User can search Devices by \"License\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchDevicesByNameUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchDevicesByLicenseUsingAdvancedSearch.01",
+      "description": "Test Case 90779: User can search Devices by \"Name\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90779",
+          "testCaseTitle": "User can search Devices by \"Name\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchDevicesByVersionUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchDevicesByVersionUsingAdvancedSearch.01",
+      "description": "Test Case 90787: User can search Devices by \"Version\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90787",
+          "testCaseTitle": "User can search Devices by \"Version\" using Advanced Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.01",
+      "description": "Test Case 90780: User can search Devices by \"Platform â†’ Back Office\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90780",
+          "testCaseTitle": "User can search Devices by \"Platform â†’ Back Office\" using Advanced Search"
+        }
+      ],
+      "platformTitle": "Back Office",
+      "deviceIconClass": "icon-device-universal-client"
+    },
+    {
+      "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.02",
+      "description": "Test Case 90781: User can search Devices by \"Platform â†’ Windows Classic\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90781",
+          "testCaseTitle": "User can search Devices by \"Platform â†’ Windows Classic\" using Advanced Search"
+        }
+      ],
+      "platformTitle": "Windows Classic",
+      "deviceIconClass": "icon-device-universal-client"
+    },
+    {
+      "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.03",
+      "description": "Test Case 90782: User can search Devices by \"Platform â†’ iPhone\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90782",
+          "testCaseTitle": "User can search Devices by \"Platform â†’ iPhone\" using Advanced Search"
+        }
+      ],
+      "platformTitle": "iPhone",
+      "deviceIconClass": "icon-device-iphone"
+    },
+    {
+      "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.04",
+      "description": "Test Case 90783: User can search Devices by \"Platform â†’ Android\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90783",
+          "testCaseTitle": "User can search Devices by \"Platform â†’ Android\" using Advanced Search"
+        }
+      ],
+      "platformTitle": "Android",
+      "deviceIconClass": "icon-device-android"
+    },
+    {
+      "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.05",
+      "description": "Test Case 90784: User can search Devices by \"Platform â†’ Universal Client\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90784",
+          "testCaseTitle": "User can search Devices by \"Platform â†’ Universal Client\" using Advanced Search"
+        }
+      ],
+      "platformTitle": "Universal Client",
+      "deviceIconClass": "icon-device-universal-client"
+    },
+    {
+      "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.06",
+      "description": "Test Case 90785: User can search Devices by \"Platform â†’ iPad\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90785",
+          "testCaseTitle": "User can search Devices by \"Platform â†’ iPad\" using Advanced Search"
+        }
+      ],
+      "platformTitle": "iPad",
+      "deviceIconClass": "icon-device-ipad"
+    },
+    {
+      "rowID": "verifyUserCanSearchDevicesByPlatformUsingAdvancedSearch.07",
+      "description": "Test Case 90786: User can search Devices by \"Platform â†’ R360 Back Office\" using Advanced Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90786",
+          "testCaseTitle": "User can search Devices by \"Platform â†’ R360 Back Office\" using Advanced Search"
+        }
+      ],
+      "platformTitle": "R360 Back Office",
+      "deviceIconClass": "icon-device-universal-client"
+    }
+  ]
+}

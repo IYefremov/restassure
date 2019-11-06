@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.interactions.deviceManagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOAddNewDeviceDialog;
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOAddNewDeviceDialog;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.support.PageFactory;
