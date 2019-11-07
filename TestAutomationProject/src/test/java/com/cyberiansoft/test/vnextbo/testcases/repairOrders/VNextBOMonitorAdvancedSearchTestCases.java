@@ -1,28 +1,22 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairOrders;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOCalendarWidgetDialog;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.VNextBORepairOrdersPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBOROPageValidations;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -33,46 +27,18 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
-
 public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOMonitorAdvancedSearchData.json";
+
+    private VNextBOROAdvancedSearchDialog advancedSearchDialog;
 
     @BeforeClass
     public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorAdvancedSearchTD();
     }
-
-    private VNextBOBreadCrumbInteractions breadCrumbInteractions;
-    private VNextBOROAdvancedSearchDialog advancedSearchDialog;
 
     @BeforeMethod
     public void BackOfficeLogin() {
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-        String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-
-        VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver, VNextBOLoginScreenWebPage.class);
-        loginPage.userLogin(userName, userPassword);
-
-        breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
         advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
-    }
-
-    @AfterMethod
-    public void BackOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null)
-            DriverBuilder.getInstance().quitDriver();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1022,8 +988,8 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         Assert.assertTrue(advancedSearchDialog.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
 
-        breadCrumbInteractions.setLocation(data.getLocations()[1]);
-        breadCrumbInteractions.setLocation(data.getLocations()[0]);
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocations()[1]);
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocations()[0]);
         VNextBORepairOrdersPageSteps.setSavedSearchOption(searchName);
         VNextBOROPageInteractions.clickEditIconForSavedSearch();
         new VNextBOROAdvancedSearchDialog()

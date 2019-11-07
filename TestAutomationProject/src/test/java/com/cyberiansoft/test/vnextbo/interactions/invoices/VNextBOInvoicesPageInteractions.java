@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.interactions.invoices;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
-import com.cyberiansoft.test.vnextbo.verifications.invoices.VNextBOInvoicesPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.invoices.VNextBOInvoicesPageValidations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

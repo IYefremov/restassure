@@ -31,6 +31,7 @@ import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -161,7 +162,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
                 webdriver, VNextBOApproveAccountWebPage.class);
         VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
 
-        loginpage.userLogin(userregmail, confirmpsw);
+        VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         Assert.assertFalse(leftmenu.isUsersMenuItemExists());
@@ -272,7 +273,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
                 webdriver, VNextBOApproveAccountWebPage.class);
         VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
 
-        loginpage.userLogin(userregmail, confirmpsw);
+        VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         Assert.assertTrue(leftmenu.isUsersMenuItemExists());
@@ -586,7 +587,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
                 webdriver, VNextBOApproveAccountWebPage.class);
         VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
 
-        loginpage.userLogin(userregmail, confirmpsw);
+        VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         Assert.assertFalse(leftmenu.isUsersMenuItemExists());
@@ -1056,7 +1057,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
                 webdriver, VNextBOApproveAccountWebPage.class);
         VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
 
-        loginpage.userLogin(userregmail, confirmpsw);
+        VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         leftMenuPanel.expandMainMenu();

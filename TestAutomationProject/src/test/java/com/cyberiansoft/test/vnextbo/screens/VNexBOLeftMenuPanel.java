@@ -190,14 +190,4 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         }
         waitForLoading();
     }
-
-    public boolean isMenuButtonDisplayed() {
-        try {
-            wait.until(ExpectedConditions.visibilityOf(menuButton));
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 }

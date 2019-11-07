@@ -6,6 +6,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
+import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -55,30 +56,20 @@ public class VNextBOLeftMenuInteractions {
         WaitUtilsWebDriver.waitForVisibilityIgnoringException(deviceManagementWebPage.getDeviceManagementBreadCrumb(), 5);
     }
 
-    public static boolean isUsersMenuItemExists() {
-        if (!isMainMenuExpanded()) {
-            expandMainMenu();
-        }
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//*[@data-automation-id='users']")).isDisplayed();
-    }
-
-    public static boolean isMainMenuExpanded() {
-        DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
-        WaitUtilsWebDriver.waitForVisibility(new VNexBOLeftMenuPanel().getBody());
-        return Utils.isElementWithAttributeContainingValueDisplayed(new VNexBOLeftMenuPanel().getBody(), "class", "left-menu--open", 10);
-    }
-
     public static void expandMainMenu() {
-        if (!isMainMenuExpanded()) {
-            Utils.clickElement(new VNexBOLeftMenuPanel().getMenuButton());
-            WaitUtilsWebDriver.waitForAttributeToContain(new VNexBOLeftMenuPanel().getBody(), "class", "left-menu--open");
+        if (!VNextBOLeftMenuValidations.isMainMenuExpanded()) {
+            final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
+            Utils.clickElement(leftMenuPanel.getMenuButton());
+            WaitUtilsWebDriver.waitForAttributeToContain(
+                    leftMenuPanel.getBody(), "class", "left-menu--open");
         }
     }
 
     public static void collapseMainMenu() {
-        if (isMainMenuExpanded()) {
-            Utils.clickElement(new VNexBOLeftMenuPanel().getMenuButton());
-            WaitUtilsWebDriver.waitForAttributeToBe(new VNexBOLeftMenuPanel().getBody(), "class", "body-mobile--scroll-hidden");
+        if (VNextBOLeftMenuValidations.isMainMenuExpanded()) {
+            final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
+            Utils.clickElement(leftMenuPanel.getMenuButton());
+            WaitUtilsWebDriver.waitForAttributeToBe(leftMenuPanel.getBody(), "class", "body-mobile--scroll-hidden");
         }
     }
 
@@ -93,9 +84,10 @@ public class VNextBOLeftMenuInteractions {
 
     private static void selectMenuItem(WebElement menuitem, String mainMenuItem) {
         try {
-            DriverBuilder.getInstance().getDriver().switchTo().frame(new VNexBOLeftMenuPanel().getTutorialFrame());
+            final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
+            DriverBuilder.getInstance().getDriver().switchTo().frame(leftMenuPanel.getTutorialFrame());
             WaitUtilsWebDriver.waitABit(1000);
-            Utils.clickElement(new VNexBOLeftMenuPanel().getTutorialSkipButton());
+            Utils.clickElement(leftMenuPanel.getTutorialSkipButton());
         } catch (Exception ignored) {}
 
         DriverBuilder.getInstance().getDriver().switchTo().defaultContent();

@@ -5,7 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOEditNotesDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBOROPageValidations;
 import com.google.common.base.CharMatcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

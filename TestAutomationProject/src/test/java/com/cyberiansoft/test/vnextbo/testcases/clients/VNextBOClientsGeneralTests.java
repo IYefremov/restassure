@@ -1,66 +1,36 @@
 package com.cyberiansoft.test.vnextbo.testcases.clients;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.*;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
-import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientsPageValidations;
-import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOPageSwitcherValidations;
-import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOSearchPanelValidations;
-import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOUsersPageValidations;
-import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.commonObjects.VNextBOPageSwitcherValidations;
+import com.cyberiansoft.test.vnextbo.validations.commonObjects.VNextBOSearchPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersPageValidations;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOClientsGeneralTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/clients/VNextBOClientsGeneralData.json";
-    private VNextBOLoginScreenWebPage loginPage;
-    String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-    String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-
     @BeforeClass
     public void settingUp() {
-
-        JSONDataProvider.dataFile = DATA_FILE;
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-
-        loginPage = new VNextBOLoginScreenWebPage();
-        loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.selectClientsMenu();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsTD();
     }
 
-    @AfterClass
-    public void backOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null) {
-            DriverBuilder.getInstance().quitDriver();
-        }
+    @BeforeMethod
+    public void BackOfficeLogin() {
+        VNextBOLeftMenuInteractions.selectClientsMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

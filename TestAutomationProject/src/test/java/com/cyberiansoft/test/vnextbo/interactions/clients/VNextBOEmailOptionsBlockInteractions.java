@@ -1,52 +1,43 @@
 package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOEmailOptionsBlock;
-import org.openqa.selenium.support.PageFactory;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOEmailOptionsBlock;
 
 public class VNextBOEmailOptionsBlockInteractions {
 
-    private VNextBOEmailOptionsBlock emailOptionsBlock;
-
-    public VNextBOEmailOptionsBlockInteractions() {
-        emailOptionsBlock = PageFactory.initElements(DriverBuilder.getInstance().getDriver(),
-                VNextBOEmailOptionsBlock.class);
+    public static void setDefaultRecipient(String value) {
+        Utils.clearAndType(new VNextBOEmailOptionsBlock().getDefaultRecipientInputField(), value);
     }
 
-    public void setDefaultRecipient(String value) {
-        Utils.clearAndType(emailOptionsBlock.getDefaultRecipientInputField(), value);
+    public static void setCc(String value) {
+        Utils.clearAndType(new VNextBOEmailOptionsBlock().getCcInputField(), value);
     }
 
-    public void setCc(String value) {
-        Utils.clearAndType(emailOptionsBlock.getCcInputField(), value);
+    public static void setBcc(String value) {
+        Utils.clearAndType(new VNextBOEmailOptionsBlock().getBccInputField(), value);
     }
 
-    public void setBcc(String value) {
-        Utils.clearAndType(emailOptionsBlock.getBccInputField(), value);
+    public static void clickInvoicesCheckbox() {
+        Utils.clickElement(new VNextBOEmailOptionsBlock().getInvoicesCheckbox());
     }
 
-    public void clickInvoicesCheckbox() {
-        Utils.clickElement(emailOptionsBlock.getInvoicesCheckbox());
+    public static void clickIInspectionsCheckbox() {
+        Utils.clickElement(new VNextBOEmailOptionsBlock().getInspectionsCheckbox());
     }
 
-    public void clickIInspectionsCheckbox() {
-        Utils.clickElement(emailOptionsBlock.getInspectionsCheckbox());
+    public static void clickIncludeInspectionCheckbox() {
+        Utils.clickElement(new VNextBOEmailOptionsBlock().getIncludeInspectionCheckbox());
     }
 
-    public void clickIncludeInspectionCheckbox() {
-        Utils.clickElement(emailOptionsBlock.getIncludeInspectionCheckbox());
+    public static boolean isInvoicesCheckboxClickable() {
+        return Utils.isElementClickable(new VNextBOEmailOptionsBlock().getInvoicesCheckbox());
     }
 
-    public boolean isInvoicesCheckboxClickable() {
-        return Utils.isElementClickable(emailOptionsBlock.getInvoicesCheckbox());
+    public static boolean isInspectionsCheckboxClickable() {
+        return Utils.isElementClickable(new VNextBOEmailOptionsBlock().getInspectionsCheckbox());
     }
 
-    public boolean isInspectionsCheckboxClickable() {
-        return Utils.isElementClickable(emailOptionsBlock.getInspectionsCheckbox());
-    }
-
-    public boolean isIncludeInspectionCheckboxClickable() {
-        return Utils.isElementClickable(emailOptionsBlock.getIncludeInspectionCheckbox());
+    public static boolean isIncludeInspectionCheckboxClickable() {
+        return Utils.isElementClickable(new VNextBOEmailOptionsBlock().getIncludeInspectionCheckbox());
     }
 }

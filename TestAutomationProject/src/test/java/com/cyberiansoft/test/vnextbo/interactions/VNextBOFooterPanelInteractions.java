@@ -20,6 +20,7 @@ public class VNextBOFooterPanelInteractions {
     }
 
     private static void clickFooterPanelElement(WebElement element) {
+        WaitUtilsWebDriver.waitABit(1000);
         WaitUtilsWebDriver.waitForVisibility(element);
         Utils.scrollToElement(element);
         Utils.clickElement(element);

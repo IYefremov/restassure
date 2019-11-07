@@ -3,12 +3,12 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
-
+@Getter
 public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//div[@class='loginForm']")
@@ -39,51 +39,4 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
 	}
-	
-	public void userLogin(String username, String userPsw) {
-		setEmailField(username);
-		setPasswordField(userPsw);
-		click(loginButton);
-		waitABit(2000);
-	}
-	
-	public void clickForgotPasswordLink() {
-		forgotPasswordLink.click();
-	}
-
-    public boolean isLoginFormDisplayed() {
-        return isElementDisplayed(loginForm);
-    }
-
-    public boolean isEmailFieldDisplayed() {
-        return isElementDisplayed(emailField.getWrappedElement());
-    }
-
-    public boolean isPasswordFieldDisplayed() {
-        return isElementDisplayed(passwordField.getWrappedElement());
-    }
-
-    public boolean isLoginButtonDisplayed() {
-        return isElementDisplayed(loginButton);
-    }
-
-    public boolean isForgotPasswordLinkDisplayed() {
-        return isElementDisplayed(forgotPasswordLink);
-    }
-
-    public String getValueFromEmailField() { return emailField.getValue(); }
-
-	public String getValueFromPasswordField() { return passwordField.getValue(); }
-
-	public void clickTermsAndConditionsLink() {
-		termsAndConditionsLink.click();
-	}
-
-	public String getEmailErrorMessage() { return emailErrorText.getText(); }
-
-	public String getPasswordErrorMessage() { return passwordErrorText.getText(); }
-
-	public void setEmailField(String username) { clearAndType(emailField.getWrappedElement(), username); }
-
-	public void setPasswordField(String userPsw) { clearAndType(passwordField.getWrappedElement(), userPsw); }
 }

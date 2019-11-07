@@ -314,8 +314,8 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	}
 
 	public void clickRepairOrdersBackwardsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(mainBreadCrumbsLink)).click();
-		waitForLoading();
+	    Utils.clickElement(mainBreadCrumbsLink);
+	    WaitUtilsWebDriver.waitForLoading();
 	}
 
 	public void typeStockNumber(String stockNumber) {
@@ -527,7 +527,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     }
 
 	@Nullable
-	private WebElement getServiceByName(String service) {
+	public WebElement getServiceByName(String service) {
 		try {
 		    return WaitUtilsWebDriver.waitForVisibility(By.xpath("//div[text()='" + service + "']"));
 		} catch (NoSuchElementException ignored) {
@@ -603,16 +603,6 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	public void clickLogInfoButton() {
 		wait.until(ExpectedConditions.elementToBeClickable(logInfoButton)).click();
 		waitForLoading();
-	}
-
-	private WebElement clickActionsIcon(String serviceId) {
-		final WebElement actionsIcon = driver.findElement(By
-				.xpath("//div[@class='serviceRow' and @data-order-service-id='" +
-						serviceId + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]"));
-		actions.moveToElement(actionsIcon);
-		Utils.clickElement(actionsIcon);
-		WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
-		return actionsIcon;
 	}
 
     public WebElement getActionIconForServiceId(String serviceId) {
@@ -851,5 +841,12 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	public WebElement getPhaseProblemIcon(String phase) {
 	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase
                 + "']//i[@class='icon-problem-indicator']"));
+    }
+
+    public WebElement clickActionsIcon(String serviceId) {
+        final WebElement actionsIcon = new VNextBORODetailsPage().getActionIconForServiceId(serviceId);
+        Utils.clickWithActions(actionsIcon);
+        WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
+        return actionsIcon;
     }
 }

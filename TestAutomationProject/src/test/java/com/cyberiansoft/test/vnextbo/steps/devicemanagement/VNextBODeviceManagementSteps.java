@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.steps.devicemanagement;
+package com.cyberiansoft.test.vnextbo.steps.deviceManagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
@@ -9,7 +9,7 @@ import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDe
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOActiveDevicesWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBOPendingRegistrationsValidations;
+import com.cyberiansoft.test.vnextbo.validations.VNextBOPendingRegistrationsValidations;
 import org.testng.Assert;
 
 public class VNextBODeviceManagementSteps extends VNextBOBaseWebPageSteps {

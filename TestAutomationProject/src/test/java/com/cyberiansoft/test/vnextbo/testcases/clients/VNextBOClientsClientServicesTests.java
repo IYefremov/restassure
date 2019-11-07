@@ -1,39 +1,34 @@
 package com.cyberiansoft.test.vnextbo.testcases.clients;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientServicesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientDetailsValidations;
-import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientServicesPageValidations;
-import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOPageSwitcherValidations;
-import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOSearchPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientDetailsValidations;
+import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientServicesPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.commonObjects.VNextBOPageSwitcherValidations;
+import com.cyberiansoft.test.vnextbo.validations.commonObjects.VNextBOSearchPanelValidations;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOClientsClientServicesTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/clients/VNextBOClientsClientServicesData.json";
     private static final String PRECONDITION_WHOLESALE_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/clients/VNextBOClientsPreconditionsWholesaleClient.json";
-    private VNextBOLoginScreenWebPage loginPage;
     String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
     String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
     VNextBOClientsData baseWholesaleClient;
@@ -42,22 +37,12 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() throws Exception {
-
-        JSONDataProvider.dataFile = DATA_FILE;
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsServicesTD();
 
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
 
-        loginPage = new VNextBOLoginScreenWebPage();
-        loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.selectClientsMenu();
+        VNextBOLoginSteps.userLogin(userName, userPassword);
+        VNextBOLeftMenuInteractions.selectClientsMenu();
 
         baseWholesaleClient = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITION_WHOLESALE_FILE), VNextBOClientsData.class);
         baseWholesaleClient.getEmployee().setCompanyName(baseWholesaleClient.getEmployee().getCompanyName() + RandomStringUtils.randomAlphabetic(10));
@@ -67,6 +52,14 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickServicesTab();
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
     }
+
+    @Override
+    @BeforeMethod
+    public void login() {}
+
+    @Override
+    @AfterMethod
+    public void logout() {}
 
     @AfterClass
     public void backOfficeLogout() {

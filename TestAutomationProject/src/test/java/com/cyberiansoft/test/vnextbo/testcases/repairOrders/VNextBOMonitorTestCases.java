@@ -1,40 +1,41 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairOrders;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOROAdvancedSearchValues;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORONotesPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOAddNewServiceMonitorDialog;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOAuditLogDialog;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOChangeTechnicianDialog;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesDescriptionWindow;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOPrivacyPolicyDialogSteps;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOTermsAndConditionsDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairOrders.*;
+import com.cyberiansoft.test.vnextbo.steps.termsConditionsPolicy.VNextBOPrivacyPolicyDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.termsConditionsPolicy.VNextBOTermsAndConditionsDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBOFooterPanelValidations;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROAdvancedSearchDialogVerifications;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBORODetailsPageVerifications;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
+import com.cyberiansoft.test.vnextbo.validations.general.VNextBOFooterPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBOROAdvancedSearchDialogVerifications;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBORODetailsPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBOROPageValidations;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -43,54 +44,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
-
 public class VNextBOMonitorTestCases extends BaseTestCase {
-	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextBOMonitorData.json";
 
 	@BeforeClass
 	public void settingUp() {
-		JSONDataProvider.dataFile = DATA_FILE;
+		JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
 	}
 
-	private String userName;
-	private String userPassword;
-	private VNextBOLoginScreenWebPage loginPage;
-	private VNextBOBreadCrumbInteractions breadCrumbInteractions;
-	private VNextBORODetailsPageInteractions roDetailsPageInteractions;
-	private VNextBOROWebPage repairOrdersPage;
 	private VNextBORODetailsPage detailsPage;
 
     @BeforeMethod
 	public void BackOfficeLogin() {
-		browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-		try {
-			DriverBuilder.getInstance().setDriver(browserType);
-		} catch (WebDriverException e) {
-			e.printStackTrace();
-		}
-		webdriver = DriverBuilder.getInstance().getDriver();
-
-		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-		userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-		userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-
-		loginPage = new VNextBOLoginScreenWebPage();
-		loginPage.userLogin(userName, userPassword);
-		repairOrdersPage = new VNextBOROWebPage();
 		detailsPage = new VNextBORODetailsPage();
-		breadCrumbInteractions = new VNextBOBreadCrumbInteractions();
-		roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
     }
-
-	@AfterMethod
-	public void BackOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-		if (DriverBuilder.getInstance().getDriver() != null) {
-			DriverBuilder.getInstance().quitDriver();
-		}
-	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanOpenMonitorWithFullSetOfElements(String rowID, String description, JSONObject testData) {
@@ -171,18 +137,18 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getSearchLocation());
-		Assert.assertTrue(breadCrumbInteractions.isLocationSearched(data.getSearchLocation()),
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSearched(data.getSearchLocation()),
 				"The location is not searched");
         VNextBOROPageInteractions.clickLocationInDropDown(data.getSearchLocation());
-		Assert.assertTrue(breadCrumbInteractions.isLocationExpanded(), "The location is not expanded");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationExpanded(), "The location is not expanded");
         VNextBOROPageInteractions.clickSearchTextToCloseLocationDropDown();
-		Assert.assertTrue(breadCrumbInteractions.isLocationSelected(data.getSearchLocation()), "The location has been changed");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSelected(data.getSearchLocation()), "The location has been changed");
 
-		Assert.assertTrue(breadCrumbInteractions.isLocationSearched(data.getLocation()),
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSearched(data.getLocation()),
 				"The location is not searched");
         VNextBOROPageInteractions.clickLocationInDropDown(data.getLocation());
 
-		Assert.assertTrue(breadCrumbInteractions.isLocationSelected(data.getLocation()), "The location hasn't been selected");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSelected(data.getLocation()), "The location hasn't been selected");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -190,10 +156,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
 		VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
-		Assert.assertTrue(breadCrumbInteractions.isLocationSearched(data.getSearchLocation()),
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSearched(data.getSearchLocation()),
 				"The location is not searched");
         VNextBOROPageInteractions.clickLocationInDropDown(data.getLocation());
-		Assert.assertTrue(breadCrumbInteractions.isLocationSelected(data.getLocation()), "The location hasn't been selected");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSelected(data.getLocation()), "The location hasn't been selected");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -307,7 +273,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-		Assert.assertTrue(breadCrumbInteractions.isLocationSet(data.getLocation()), "The location hasn't been set");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -315,7 +281,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-		Assert.assertTrue(breadCrumbInteractions.isLocationSet(data.getLocation()), "The location hasn't been set");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
 		VNextBOROSimpleSearchSteps.searchByText(data.getVinNum());
 
 		Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getVinNum()),
@@ -327,7 +293,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-		Assert.assertTrue(breadCrumbInteractions.isLocationSet(data.getLocation()), "The location hasn't been set");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
 
 		final String vinNum = data.getVinNum();
 		VNextBOROSimpleSearchSteps.searchByText(vinNum);
@@ -372,7 +338,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-		Assert.assertTrue(breadCrumbInteractions.isLocationSet(data.getLocation()), "The location hasn't been set");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		final VNextBOInvoicesDescriptionWindow invoicesDescription = new VNextBOInvoicesDescriptionWindow();
@@ -560,9 +526,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
                 .searchByActivePhase(data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
 
         VNextBORepairOrdersPageSteps.openRODetailsPage();
-        roDetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.setStatus(data.getStatus());
         VNextBOCloseRODialogSteps.closeROWithReason(data.getReason());
-        Assert.assertEquals(roDetailsPageInteractions.getRoStatusValue(), data.getStatus(),
+        Assert.assertEquals(VNextBORODetailsPageInteractions.getRoStatusValue(), data.getStatus(),
                 "The status hasn't been changed to 'Closed'");
 	}
 
@@ -1134,7 +1100,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBORONotesPageSteps.setRONoteMessage(data.getNotesMessage());
 		VNextBORONotesPageInteractions.clickRONoteSaveButton();
 
-		Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
+		Assert.assertTrue(VNextBONotesPageValidations.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 		Assert.assertEquals(notesNumber + 1, VNextBORONotesPageInteractions.getRepairNotesListNumber(),
 				"The services notes list number is not updated");
 	}
@@ -1747,7 +1713,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		System.out.println("Phase vendor price: " + detailsPage.getPhaseVendorPriceValue());
 		System.out.println("Phase vendor technician: " + detailsPage.getPhaseVendorTechnicianValue());
 		System.out.println("Phase status: " + detailsPage.getPhaseStatusValue());
-		System.out.println("Phase actions trigger: " + VNextBORODetailsPageVerifications.isPhaseActionsTriggerDisplayed());
+		System.out.println("Phase actions trigger: " + VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed());
 
 		Assert.assertEquals(detailsPage.getPhaseNameValue(), data.getServicePhaseHeaders()[0],
 				"The phase name value hasn't been displayed properly");
@@ -1757,7 +1723,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The phase vendor technician value hasn't been displayed properly");
 		Assert.assertEquals(detailsPage.getPhaseStatusValue(), data.getServicePhaseHeaders()[2],
 				"The phase status hasn't been displayed properly");
-		Assert.assertTrue(VNextBORODetailsPageVerifications.isPhaseActionsTriggerDisplayed(),
+		Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(),
 				"The phase actions trigger hasn't been displayed");
 	}
 
@@ -1970,15 +1936,15 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         }
         VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
+        VNextBORODetailsPageValidations.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
         VNextBORODetailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[0]);
-        VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[1], data.getServiceTabs()[1]);
-        VNextBORODetailsPageVerifications.verifyVendorTechnicianNameIsSet(selectedRandomTechnician);
+        VNextBORODetailsPageValidations.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[1], data.getServiceTabs()[1]);
+        VNextBORODetailsPageValidations.verifyVendorTechnicianNameIsSet(selectedRandomTechnician);
 
-		breadCrumbInteractions.clickFirstBreadCrumbLink();
+		VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
         VNextBOROPageValidations.verifyAnotherTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
         VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
-        VNextBORODetailsPageVerifications.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
+        VNextBORODetailsPageValidations.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
         VNextBORODetailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
 	}
 
@@ -2044,12 +2010,12 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBOHeaderPanelSteps.logout();
-        loginPage.userLogin(data.getUserName(), data.getUserPassword());
+        VNextBOLoginSteps.userLogin(data.getUserName(), data.getUserPassword());
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
         VNextBORepairOrdersPageSteps.openRODetailsPage();
-        VNextBORODetailsPageVerifications.verifyPhaseStatuses(data.getServiceStatuses());
+        VNextBORODetailsPageValidations.verifyPhaseStatuses(data.getServiceStatuses());
     }
 
     //todo continue after the blocker is resolved
@@ -2058,11 +2024,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         VNextBOHeaderPanelSteps.logout();
-        loginPage.userLogin(data.getUserName(), data.getUserPassword());
+        VNextBOLoginSteps.userLogin(data.getUserName(), data.getUserPassword());
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
         VNextBORepairOrdersPageSteps.openRODetailsPage();
-        VNextBORODetailsPageVerifications.verifyPhaseStatuses(data.getServiceStatuses());
+        VNextBORODetailsPageValidations.verifyPhaseStatuses(data.getServiceStatuses());
     }
 }

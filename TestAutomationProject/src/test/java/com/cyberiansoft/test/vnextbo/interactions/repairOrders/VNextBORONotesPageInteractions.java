@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOOrderServiceNotesDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOEditNotesDialog;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
+import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import org.openqa.selenium.WebElement;
 
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 public class VNextBORONotesPageInteractions {
 
     public static void openRONoteTextArea() {
-        if (!VNextBONotesPageVerifications.isRONoteTextAreaDisplayed()) {
+        if (!VNextBONotesPageValidations.isRONoteTextAreaDisplayed()) {
             clickAddNewNoteButton();
         }
     }

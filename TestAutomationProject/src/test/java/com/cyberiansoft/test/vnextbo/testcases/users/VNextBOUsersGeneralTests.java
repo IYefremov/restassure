@@ -1,67 +1,40 @@
 package com.cyberiansoft.test.vnextbo.testcases.users;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOUserProfileDialog;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOPageSwitcherValidations;
-import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOSearchPanelValidations;
-import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
-import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOUsersPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.commonObjects.VNextBOPageSwitcherValidations;
+import com.cyberiansoft.test.vnextbo.validations.commonObjects.VNextBOSearchPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
+import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
+import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersPageValidations;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOUsersGeneralTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/users/VNextBOUsersGeneralData.json";
-    private VNextBOLoginScreenWebPage loginPage;
-    String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-    String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-
     @BeforeClass
     public void settingUp() {
-
-        JSONDataProvider.dataFile = DATA_FILE;
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-
-        loginPage = new VNextBOLoginScreenWebPage();
-        loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.selectUsersMenu();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getUsersTD();
     }
 
-    @AfterClass
-    public void backOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null) {
-            DriverBuilder.getInstance().quitDriver();
-        }
+    @BeforeMethod
+    public void BackOfficeLogin() {
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -122,11 +95,10 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndCloseMainMenu(String rowID, String description, JSONObject testData) {
 
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.expandMainMenu();
-        Assert.assertTrue(leftMenuInteractions.isMainMenuExpanded(), "Main menu hasn't been opened");
-        leftMenuInteractions.collapseMainMenu();
-        Assert.assertFalse(leftMenuInteractions.isMainMenuExpanded(), "Main menu hasn't been closed");
+        VNextBOLeftMenuInteractions.expandMainMenu();
+        Assert.assertTrue(VNextBOLeftMenuValidations.isMainMenuExpanded(), "Main menu hasn't been opened");
+        VNextBOLeftMenuInteractions.collapseMainMenu();
+        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuExpanded(), "Main menu hasn't been closed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -134,7 +106,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.clickLogo();
         Assert.assertTrue(new VNextBOHomeWebPage(webdriver).isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
-        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -151,10 +123,10 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyUserCanLogout(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.logOut();
-        loginPage = new VNextBOLoginScreenWebPage();
-        Assert.assertTrue(loginPage.isLoginFormDisplayed(), "Login page hasn't been closed");
-        loginPage.userLogin(userName, userPassword);
-        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        Assert.assertTrue(VNextBOLoginValidations.isLoginFormDisplayed(), "Login page hasn't been closed");
+        VNextBOLoginSteps.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(),
+                VNextBOConfigInfo.getInstance().getVNextBOPassword());
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -190,7 +162,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOPageSwitcherSteps.openPageByNumber(4);
         VNextBOUsersPageSteps.clickLogo();
-        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
         VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("4");
     }
 
@@ -208,7 +180,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.changeItemsPerPage("50");
         VNextBOPageSwitcherSteps.openPageByNumber(2);
         VNextBOUsersPageSteps.clickLogo();
-        new VNextBOLeftMenuInteractions().selectUsersMenu();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
         VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("2");
         VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("50");
     }

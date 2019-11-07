@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.pageobjects.webpages.HomeWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
@@ -9,8 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
 
@@ -119,14 +118,15 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBOUserProfileDialog clickUserEmail() {
-        wait.until(ExpectedConditions.elementToBeClickable(userEmail)).click();
-        waitForLoading();
+        WaitUtilsWebDriver.waitForLoading();
+        Utils.clickElement(userEmail);
+        WaitUtilsWebDriver.waitForLoading();
         return PageFactory.initElements(driver, VNextBOUserProfileDialog.class);
     }
 
     public VNextBOLoginScreenWebPage clickLogoutButton() {
-        clickButton(logoutButton);
-        waitForLoading();
+        Utils.clickElement(logoutButton);
+        WaitUtilsWebDriver.waitForLoading();
         return PageFactory.initElements(driver, VNextBOLoginScreenWebPage.class);
     }
 
