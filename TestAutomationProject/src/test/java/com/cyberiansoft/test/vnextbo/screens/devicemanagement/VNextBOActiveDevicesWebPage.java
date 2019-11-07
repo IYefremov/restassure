@@ -1,5 +1,6 @@
-package com.cyberiansoft.test.vnextbo.screens.deviceManagement;
+package com.cyberiansoft.test.vnextbo.screens.devicemanagement;
 
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
