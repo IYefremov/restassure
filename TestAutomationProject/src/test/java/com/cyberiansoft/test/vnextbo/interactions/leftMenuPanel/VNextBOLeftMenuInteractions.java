@@ -5,7 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

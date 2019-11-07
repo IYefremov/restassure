@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.screens.deviceManagement;
+package com.cyberiansoft.test.vnextbo.screens.devicemanagement;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;

@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.deviceManagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODevicesAdvancedSearchForm;
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODevicesAdvancedSearchForm;
 import org.testng.Assert;
 
 public class VNextBODevicesAdvancedSearchValidations {

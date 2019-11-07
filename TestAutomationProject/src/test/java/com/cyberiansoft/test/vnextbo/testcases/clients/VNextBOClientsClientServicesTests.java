@@ -12,7 +12,7 @@ import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccor
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientServicesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientDetailsValidations;

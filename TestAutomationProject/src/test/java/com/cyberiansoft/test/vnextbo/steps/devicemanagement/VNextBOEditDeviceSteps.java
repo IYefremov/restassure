@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.steps.deviceManagement;
+package com.cyberiansoft.test.vnextbo.steps.devicemanagement;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBODeviceManagementData;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
