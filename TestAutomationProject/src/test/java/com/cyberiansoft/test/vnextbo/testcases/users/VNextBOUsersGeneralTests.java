@@ -105,7 +105,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyUserCanReturnToHomePageByClickingLogo(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickLogo();
-        Assert.assertTrue(new VNextBOHomeWebPage(webdriver).isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
+        Assert.assertTrue(new VNextBOHomeWebPage().isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
         VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 

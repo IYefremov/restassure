@@ -271,8 +271,6 @@ public class VNextBOServicesTestCases extends BaseTestCase {
                 + data.getServiceEdited()));
         }
 
-    //TODO BUG #94337
-    //TODO https://cyb.tpondemand.com/RestUI/Board.aspx#page=bug/94337&appConfig=eyJhY2lkIjoiNkZENTE5RjAzRTRCN0NCNTU0NzNFMEQ3NjE5QTgxOTIifQ==
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testResumeRemovedMoneyService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
@@ -293,7 +291,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         VNextBOAddNewServiceDialog addNewServiceDialog = servicespage
                 .clickEditServiceByServiceName(data.getPriceServiceName());
         Assert.assertEquals(addNewServiceDialog.getServiceName(), data.getPriceServiceName());
-//        Assert.assertEquals(addNewServiceDialog.getServiceType(), data.getServiceType());
+        Assert.assertEquals(addNewServiceDialog.getServiceType(), data.getServiceType());
         Assert.assertEquals(addNewServiceDialog.getServiceDescription(), data.getServiceDescription());
         Assert.assertEquals(addNewServiceDialog.getServicePricePercentageValueTxtField().getAttribute("value"),
                 VNextPriceCalculations.getPriceRepresentation(data.getServicePrice()));
@@ -329,10 +327,6 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 
         leftMenu.selectServicesMenu();
         servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), false);
-        servicespage.clickUnarchiveButtonForService(data.getPriceServiceName() + data.getServiceEdited());
-        Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickNoAndGetConfirmationDialogMessage(),
-                "Are you sure you want to restore \"" + data.getPriceServiceName() + data.getServiceEdited()
-                        + "\" service?");
         servicespage.unarchiveServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
         servicespage.advancedSearchService(data.getPriceServiceName() + data.getServiceEdited(), true);
         Assert.assertTrue(servicespage.isServicePresentOnCurrentPageByServiceName(data.getPriceServiceName()
@@ -340,8 +334,6 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage.deleteServiceByServiceName(data.getPriceServiceName() + data.getServiceEdited());
     }
 
-    //TODO BUG #94337
-    //TODO https://cyb.tpondemand.com/RestUI/Board.aspx#page=bug/94337&appConfig=eyJhY2lkIjoiNkZENTE5RjAzRTRCN0NCNTU0NzNFMEQ3NjE5QTgxOTIifQ==
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testResumeRemovedPercentageService(String rowID, String description, JSONObject testData) {
         VNextBOServicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOServicesData.class);
@@ -360,7 +352,7 @@ public class VNextBOServicesTestCases extends BaseTestCase {
 
         addnewservicedialog = servicespage.clickEditServiceByServiceName(data.getPercentageServiceName());
         Assert.assertEquals(addnewservicedialog.getServiceName(), data.getPercentageServiceName());
-//        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
+        Assert.assertEquals(addnewservicedialog.getServiceType(), data.getServiceType());
         Assert.assertEquals(addnewservicedialog.getServiceDescription(), data.getPercentageServiceDescription());
         Assert.assertEquals(addnewservicedialog.getServicePricePercentageValueTxtFieldValue(),
                 VNextPriceCalculations.getPercentageRepresentation(data.getServicePrice()).replace("%", ""));
@@ -396,10 +388,6 @@ public class VNextBOServicesTestCases extends BaseTestCase {
         servicespage = leftMenu.selectServicesMenu();
         servicespage.advancedSearchService(data.getPercentageServiceName()
                 + data.getServiceEdited(), false);
-        servicespage.clickUnarchiveButtonForService(data.getPercentageServiceName() + data.getServiceEdited());
-        Assert.assertEquals(VNextBOConfirmationDialogInteractions.clickNoAndGetConfirmationDialogMessage(),
-                "Are you sure you want to restore \"" + data.getPercentageServiceName()
-                        + data.getServiceEdited() + "\" service?");
         servicespage.unarchiveServiceByServiceName(data.getPercentageServiceName() + data.getServiceEdited());
         servicespage.advancedSearchService(data.getPercentageServiceName()
                 + data.getServiceEdited(), true);

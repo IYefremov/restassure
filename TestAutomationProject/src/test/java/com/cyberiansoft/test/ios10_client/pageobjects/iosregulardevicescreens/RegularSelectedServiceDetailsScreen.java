@@ -250,12 +250,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Done")).click();
 	}
 
-	public String saveSelectedServiceDetailsWithAlert() {
-		saveSelectedServiceDetails();
-		return Helpers.getAlertTextAndAccept();
-	}
-
 	public void selectTechniciansCustomView() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebElement priceFld = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeSegmentedControl")));
 		appiumdriver.findElementByClassName("XCUIElementTypeSegmentedControl").findElement(MobileBy.AccessibilityId("Custom")).click();
 	}
 
@@ -407,12 +404,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		return appiumdriver.
 				findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
 						+ technician + "\")]/XCUIElementTypeButton[@name=\"selected\"]").size() > 0;
-	}
-
-	public boolean isTechnicianNotSelected(String technician) {
-		return appiumdriver.
-				findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[contains(@name, \""
-						+ technician + "\")]/XCUIElementTypeButton[@name=\"unselected\"]").size() > 0;
 	}
 
 	public void selectVehiclePart(String vehiclepart) {

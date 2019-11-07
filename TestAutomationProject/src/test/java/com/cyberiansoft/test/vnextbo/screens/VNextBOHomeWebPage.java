@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.pageobjects.webpages.HomeWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.WebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -58,11 +58,9 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class, 'intercom-launcher' ) and contains (@class, 'active')]")
     private WebElement intercomOpen;
 
-    public VNextBOHomeWebPage(WebDriver driver) {
-        super(driver);
+    public VNextBOHomeWebPage() {
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        new WebDriverWait(driver, 30)
-                .until(ExpectedConditions.visibilityOf(logo));
     }
 
     public boolean isLogoDisplayed() {

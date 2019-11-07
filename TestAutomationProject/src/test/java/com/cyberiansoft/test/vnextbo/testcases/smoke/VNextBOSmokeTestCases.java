@@ -18,7 +18,7 @@ import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPa
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOAddNewDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOEditDeviceSteps;
@@ -455,7 +455,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         new VNextBODeviceManagementInteractions().clickActiveDevicesTab();
-        VNextBODeviceManagementSteps.searchByText(data.getDeviceName());
+        VNextBOSearchPanelSteps.searchByText(data.getDeviceName());
         Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getDeviceName()),
                 "The device hasn't been displayed");
         VNextBODeviceManagementSteps.verifyUserCanUncoverRegistrationCode(data.getDeviceName());
@@ -472,7 +472,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBODeviceManagementSteps.openEditDeviceDialog(data.getDeviceName());
         VNextBOEditDeviceSteps.setAllValuesAndSubmit(data, data.getNickname());
-        VNextBODeviceManagementSteps.searchByText(data.getNickname());
+        VNextBOSearchPanelSteps.searchByText(data.getNickname());
         Assert.assertTrue(new VNextBOActiveDevicesInteractions().isDeviceDisplayed(data.getNickname()),
                 "The device hasn't been displayed");
 

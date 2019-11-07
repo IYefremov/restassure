@@ -233,13 +233,6 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		MobileElement cancelButton = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND visible == 1 AND name == 'Cancel'"));
 		cancelButton.click();
 	}
-
-	public String saveSelectedServiceDetailsWithAlert() {
-		saveSelectedServiceDetails();
-		return Helpers.getAlertTextAndAccept();
-	}
-	
-
 	
 	public void removeService() {
 		appiumdriver.findElementByAccessibilityId("Remove").click();

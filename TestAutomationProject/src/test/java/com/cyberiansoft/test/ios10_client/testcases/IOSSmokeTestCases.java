@@ -5439,7 +5439,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
             Assert.assertEquals(servicesScreen.getNumberOfServiceSelectedItems(serviceData.getServiceName()), serviceData.getVehicleParts().size());
         Assert.assertEquals(servicesScreen.getSubTotalAmaunt(), workOrderData.getWorkOrderPrice());
         servicesScreen.cancelWizard();
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -5545,16 +5545,16 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         backofficeHeader.clickOperationsLink();
         operationsWebPage = new OperationsWebPage(webdriver);
         operationsWebPage.clickWorkOrdersLink();
-        WorkOrdersWebPage workorderspage = new WorkOrdersWebPage(webdriver);
-        workorderspage.makeSearchPanelVisible();
-        workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        workorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
-        workorderspage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
-        workorderspage.setSearchOrderNumber(workOrderNumber3);
+        WorkOrdersWebPage workOrdersWebPage = new WorkOrdersWebPage(webdriver);
+        workOrdersWebPage.makeSearchPanelVisible();
+        workOrdersWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
+        workOrdersWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        workOrdersWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
+        workOrdersWebPage.setSearchOrderNumber(workOrderNumber3);
 
-        workorderspage.clickFindButton();
+        workOrdersWebPage.clickFindButton();
 
-        Assert.assertEquals(workorderspage.getWorkOrdersTableRowCount(), 1);
+        Assert.assertEquals(workOrdersWebPage.getWorkOrdersTableRowCount(), 1);
         webdriver.quit();
     }
 
@@ -5571,7 +5571,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         customersScreen.swtchToWholesaleMode();
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O04TEST__CUSTOMER);
 
-        MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+        homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
         VehicleScreen vehicleScreen = new VehicleScreen();
         for (int i = 0; i < VINs.length; i++) {
@@ -5581,8 +5581,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
             vehicleScreen.clearVINCode();
         }
         vehicleScreen.cancelOrder();
-        myWorkOrdersScreen = new MyWorkOrdersScreen();
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -6249,12 +6248,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         NavigationSteps.navigateToVehicleInfoScreen();
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
-        techniciansPopup.selecTechnician(workOrderData.getVehicleInfoData().getNewTechnician().getTechnicianFullName());
-        techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
-        techniciansPopup.saveTechViewDetails();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
-        vehicleScreen = new VehicleScreen();
+        TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
         NavigationSteps.navigateToServicesScreen();
         for (ServiceData serviceData : workOrderData.getMoneyServices()) {
             SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
@@ -6262,14 +6258,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
                 ServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice2());
             if (serviceData.getServiceDefaultTechnician() != null) {
                 ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
-                techniciansPopup = new TechniciansPopup();
-                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
-                techniciansPopup.saveTechViewDetails();
+                TechniciansPopupValidations.verifyServiceTechnicianIsSelected(serviceData.getServiceDefaultTechnician());
+                TechniciansPopupSteps.saveTechViewDetails();
             } else {
                 ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
-                techniciansPopup = new TechniciansPopup();
-                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(workOrderData.getVehicleInfoData().getNewTechnician().getTechnicianFullName()));
-                techniciansPopup.saveTechViewDetails();
+                TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getNewTechnician());
+                TechniciansPopupSteps.saveTechViewDetails();
             }
             ServiceDetailsScreenSteps.saveServiceDetails();
         }
@@ -6515,9 +6509,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         HomeScreen homeScreen = new HomeScreen();
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        final String workOrderNumber = vehicleScreen.getInspectionNumber();
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        final String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
 
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
@@ -6529,23 +6522,20 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         orderSummaryScreen.saveWizard();
 
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-        vehicleScreen = new VehicleScreen();
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
         for (ServiceTechnician technician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            techniciansPopup.selecTechnician(technician.getTechnicianFullName());
-        techniciansPopup.saveTechViewDetails();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+            TechniciansPopupSteps.selectServiceTechnician(technician);
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
 
         NavigationSteps.navigateToServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList()) {
-            SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
-            techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
+            servicesScreen.openServiceDetails(serviceData.getServiceName());
+            ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
             for (ServiceTechnician technician : workOrderData.getVehicleInfoData().getNewTechnicians())
-                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(technician.getTechnicianFullName()));
-            techniciansPopup.saveTechViewDetails();
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
-            servicesScreen = new ServicesScreen();
+                TechniciansPopupValidations.verifyServiceTechnicianIsSelected(technician);
+            TechniciansPopupSteps.saveTechViewDetails();
+            ServiceDetailsScreenSteps.saveServiceDetails();
         }
 
         servicesScreen.cancelWizard();
@@ -6563,9 +6553,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         HomeScreen homeScreen = new HomeScreen();
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_SMOKE_TEST);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        final String workOrderNumber = vehicleScreen.getInspectionNumber();
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        final String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
 
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
@@ -6574,21 +6563,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         NavigationSteps.navigateToOrderSummaryScreen();
         OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
         orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
-        orderSummaryScreen.saveWizard();
-
+        WorkOrdersSteps.saveWorkOrder();
 
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
-        Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName()));
-        Assert.assertEquals(techniciansPopup.getTechnicianPercentage(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName()),
+        TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
+        TechniciansPopupValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
                 workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianPercentageValue());
-        techniciansPopup.cancelTechViewDetails();
+        TechniciansPopupSteps.cancelTechViewDetails();
         NavigationSteps.navigateToServicesScreen();
         Assert.assertEquals(servicesScreen.getTotalAmaunt(), PricesCalculations.getPriceRepresentation(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartPrice()));
 
-        servicesScreen.cancelWizard();
-        myWorkOrdersScreen.clickHomeButton();
+        WizardScreensSteps.cancelWizard();
+        NavigationSteps.navigateBackScreen();
 
     }
 
@@ -6726,9 +6713,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         HomeScreen homeScreen = new HomeScreen();
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_TYPE_FOR_MONITOR);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        final String workOrderNumber = vehicleScreen.getInspectionNumber();
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        final String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
 
         NavigationSteps.navigateToOrderSummaryScreen();
         OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
@@ -6736,32 +6722,30 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         orderSummaryScreen.saveWizard();
 
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-        vehicleScreen.waitVehicleScreenLoaded();
+        VehicleInfoScreenSteps.waitVehicleScreenLoaded();
 
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
         ServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
         ServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
         ServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
         ServiceDetailsScreenSteps.saveServiceDetails();
 
         NavigationSteps.navigateToVehicleInfoScreen();
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
-        techniciansPopup.selecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
-        techniciansPopup.saveTechnociansViewWithAlert();
+        TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
         NavigationSteps.navigateToServicesScreen();
 
-        SelectedServiceDetailsScreen serviceDetailsScreen = servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
-        techniciansPopup = serviceDetailsScreen.clickTechniciansIcon();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
-        techniciansPopup.isTechnicianIsSelected(workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianFullName());
-        techniciansPopup.clickCancelButton();
-        serviceDetailsScreen.clickCancelSelectedServiceDetails();
-        servicesScreen = new ServicesScreen();
-
-        servicesScreen.cancelWizard();
+        servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+        TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getServiceData().getServiceDefaultTechnician());
+        TechniciansPopupSteps.cancelTechViewDetails();
+        ServiceDetailsScreenSteps.cancelServiceDetails();
+        WizardScreensSteps.cancelWizard();
         myWorkOrdersScreen.clickHomeButton();
 
     }
@@ -6822,6 +6806,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        final String locationsFiler = "All locations";
 
         HomeScreen homeScreen = new HomeScreen();
         MainScreen mainScreen = homeScreen.clickLogoutButton();
@@ -6833,7 +6818,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         final String workOrderNumber = vehicleScreen.getInspectionNumber();
         NavigationSteps.navigateToServicesScreen();
-        ServicesScreen servicesScreen = new ServicesScreen();
         ServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
         ServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
         ServiceDetailsScreenSteps.selectServiceAdjustment(workOrderData.getServiceData().getServiceAdjustment());
@@ -6845,10 +6829,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
         orderSummaryScreen.saveWizard();
 
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
         TeamWorkOrdersScreen teamWorkOrdersScreen = homeScreen.clickTeamWorkordersButton();
         teamWorkOrdersScreen.clickSearchButton();
-        teamWorkOrdersScreen.selectSearchLocation("All locations");
+        teamWorkOrdersScreen.selectSearchLocation(locationsFiler);
         teamWorkOrdersScreen.setSearchWorkOrderNumber(workOrderNumber);
         teamWorkOrdersScreen.clickSearchSaveButton();
         teamWorkOrdersScreen.clickOnWO(workOrderNumber);
@@ -6866,9 +6850,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         techniciansPopup.cancelTechViewDetails();
         serviceDetailsPopup.clickServiceDetailsDoneButton();
-        orderMonitorScreen.clickBackButton();
-
-        teamWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
         homeScreen.clickLogoutButton();
         mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
@@ -6886,9 +6869,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_MONITOR_REQUIRED_SERVICES_ALL);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        final String workOrderNumber = vehicleScreen.getInspectionNumber();
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        final String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
         BundleServiceData bundleServiceData = workOrderData.getBundleService();
@@ -6902,27 +6884,21 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         serviceBundleScreen.clickCancelBundlePopupButton();
         NavigationSteps.navigateToVehicleInfoScreen();
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
-        techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
-        techniciansPopup.saveTechnociansViewWithAlert();
+            TechniciansPopupSteps.selectServiceTechnician(serviceTechnician);
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
         NavigationSteps.navigateToServicesScreen();
 
-        serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
-
+        servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
-            String techString = "";
             for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-                techString = techString + ", " + serviceTechnician.getTechnicianFullName();
-            techString = techString.replaceFirst(",", "").trim();
-            Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString);
-            selectedServiceDetailsScreen.clickCancelSelectedServiceDetails();
+                ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceTechnician, true);
+            ServiceDetailsScreenSteps.cancelServiceDetails();
             serviceBundleScreen.waitUntilBundlePopupOpened();
         }
         serviceBundleScreen.clickCancelBundlePopupButton();
-        servicesScreen = new ServicesScreen();
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
         ServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
         ServiceDetailsScreenSteps.saveServiceDetails();
@@ -6930,29 +6906,24 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         servicesScreen.selectServicePriceMatrices(workOrderData.getMatrixServiceData().getHailMatrixName());
         PriceMatrixScreenSteps.selectVehiclePart(workOrderData.getMatrixServiceData().getVehiclePartData());
         PriceMatrixScreenSteps.savePriceMatrixData();
-        servicesScreen = new ServicesScreen();
         servicesScreen.saveWizard();
 
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-        vehicleScreen.waitVehicleScreenLoaded();
+        VehicleInfoScreenSteps.waitVehicleScreenLoaded();
         NavigationSteps.navigateToServicesScreen();
-        serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
-            String techString = "";
             for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-                techString = techString + ", " + serviceTechnician.getTechnicianFullName();
-            techString = techString.replaceFirst(",", "").trim();
-            Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString);
-            selectedServiceDetailsScreen.clickCancelSelectedServiceDetails();
+                ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceTechnician, true);
+            ServiceDetailsScreenSteps.cancelServiceDetails();
             serviceBundleScreen.waitUntilBundlePopupOpened();
         }
         serviceBundleScreen.clickCancelBundlePopupButton();
-        servicesScreen = new ServicesScreen();
-        servicesScreen.saveWizard();
+        WorkOrdersSteps.saveWorkOrder();
 
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
         homeScreen.clickLogoutButton();
         mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
@@ -6970,9 +6941,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_BUNDLE_REQ_DEF_TECH);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        final String workOrderNumber = vehicleScreen.getInspectionNumber();
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        final String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
         BundleServiceData bundleServiceData = workOrderData.getBundleService();
@@ -6987,60 +6957,48 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         NavigationSteps.navigateToVehicleInfoScreen();
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
-        techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
-        techniciansPopup.saveTechnociansViewWithAlert();
+            TechniciansPopupSteps.selectServiceTechnician(serviceTechnician);
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
         NavigationSteps.navigateToServicesScreen();
-        serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         for (ServiceData serviceData : bundleServiceData.getServices()) {
-            SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             if (serviceData.getServiceNewTechnicians() != null) {
-                String techString = "";
                 for (ServiceTechnician serviceTechnician : serviceData.getServiceNewTechnicians())
-                    techString = techString + ", " + serviceTechnician.getTechnicianFullName();
-                techString = techString.replaceFirst(",", "").trim();
-                Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString);
+                    ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceTechnician, true);
             } else {
-                Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
+                ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceData.getServiceDefaultTechnician(), true);
             }
 
             if (serviceData.getVehiclePart() != null)
                 ServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
-
             ServiceDetailsScreenSteps.saveServiceDetails();
         }
-
         serviceBundleScreen.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());
         serviceBundleScreen.saveSelectedServiceDetails();
-
-        servicesScreen = new ServicesScreen();
-        servicesScreen.saveWizard();
+        WorkOrdersSteps.saveWorkOrder();
 
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-        vehicleScreen.waitVehicleScreenLoaded();
+        VehicleInfoScreenSteps.waitVehicleScreenLoaded();
         NavigationSteps.navigateToServicesScreen();
-        serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         for (ServiceData serviceData : bundleServiceData.getServices()) {
-            SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             if (serviceData.getServiceNewTechnicians() != null) {
-                String techString = "";
                 for (ServiceTechnician serviceTechnician : serviceData.getServiceNewTechnicians())
-                    techString = techString + ", " + serviceTechnician.getTechnicianFullName();
-                techString = techString.replaceFirst(",", "").trim();
-                Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString);
+                    ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceTechnician, true);
             } else {
-                Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
+                ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceData.getServiceDefaultTechnician(), true);
             }
-            selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+            ServiceDetailsScreenSteps.cancelServiceDetails();
             serviceBundleScreen.waitUntilBundlePopupOpened();
         }
         serviceBundleScreen.clickCancelBundlePopupButton();
-        servicesScreen = new ServicesScreen();
-        servicesScreen.saveWizard();
+        WorkOrdersSteps.saveWorkOrder();
 
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
         homeScreen.clickLogoutButton();
         mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
@@ -7058,9 +7016,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_BUNDLE_REQ_DEF_TECH);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        final String workOrderNumber = vehicleScreen.getInspectionNumber();
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        final String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
         BundleServiceData bundleServiceData = workOrderData.getBundleService();
@@ -7073,27 +7030,22 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         }
 
         serviceBundleScreen.clickCancelBundlePopupButton();
-
         NavigationSteps.navigateToVehicleInfoScreen();
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
-        techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
-        techniciansPopup.saveTechnociansViewWithAlert();
+            TechniciansPopupSteps.selectServiceTechnician(serviceTechnician);
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
         NavigationSteps.navigateToServicesScreen();
 
-        serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             SelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             if (serviceData.getServiceNewTechnicians() != null) {
-                String techString = "";
                 for (ServiceTechnician serviceTechnician : serviceData.getServiceNewTechnicians())
-                    techString = techString + ", " + serviceTechnician.getTechnicianFullName();
-                techString = techString.replaceFirst(",", "").trim();
-                Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString);
+                    ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceTechnician, true);
             } else {
-                Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
+                ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceData.getServiceDefaultTechnician(), true);
             }
 
             if (serviceData.getVehiclePart() != null)
@@ -7111,47 +7063,42 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
         servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
-        techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+        selectedServiceDetailsScreen.clickTechniciansIcon();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
-        techniciansPopup.saveTechViewDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.waitServicesScreenLoaded();
-        servicesScreen.saveWizard();
+            TechniciansPopupValidations.verifyServiceTechnicianIsSelected(serviceTechnician);
+        TechniciansPopupSteps.saveTechViewDetails();
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        ServicesScreenSteps.waitServicesScreenLoad();
+        WorkOrdersSteps.saveWorkOrder();
 
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-        vehicleScreen.waitVehicleScreenLoaded();
+        VehicleInfoScreenSteps.waitVehicleScreenLoaded();
         NavigationSteps.navigateToServicesScreen();
-        serviceBundleScreen = servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             if (serviceData.getServiceNewTechnicians() != null) {
-                String techString = "";
                 for (ServiceTechnician serviceTechnician : serviceData.getServiceNewTechnicians())
-                    techString = techString + ", " + serviceTechnician.getTechnicianFullName();
-                techString = techString.replaceFirst(",", "").trim();
-                Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString);
+                    ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceTechnician, true);
             } else {
-                Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
+                ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceData.getServiceDefaultTechnician(), true);
             }
             selectedServiceDetailsScreen.cancelSelectedServiceDetails();
             serviceBundleScreen.waitUntilBundlePopupOpened();
         }
 
         serviceBundleScreen.clickCancelBundlePopupButton();
-
         servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
-        techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+        selectedServiceDetailsScreen.clickTechniciansIcon();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
-        techniciansPopup.saveTechViewDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen = new ServicesScreen();
-        servicesScreen.saveWizard();
+            TechniciansPopupValidations.verifyServiceTechnicianIsSelected(serviceTechnician);
+        TechniciansPopupSteps.saveTechViewDetails();
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        WorkOrdersSteps.saveWorkOrder();
 
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
         homeScreen.clickLogoutButton();
         mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
@@ -7169,27 +7116,25 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_ALL_SERVICES);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        final String workOrderNumber = vehicleScreen.getInspectionNumber();
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        final String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            techniciansPopup.selecTechnician(serviceTechnician.getTechnicianFullName());
-        techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
-        techniciansPopup.saveTechnociansViewWithAlert();
+            TechniciansPopupSteps.selectServiceTechnician(serviceTechnician);
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
 
         NavigationSteps.navigateToServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList())
             ServicesScreenSteps.selectService(serviceData.getServiceName());
         for (ServiceData serviceData : workOrderData.getServicesList()) {
             ServicesScreen servicesScreen = new ServicesScreen();
-            SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
-            selectedServiceDetailsScreen.clickTechniciansIcon();
+            servicesScreen.openServiceDetails(serviceData.getServiceName());
+            ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
             for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
-            selectedServiceDetailsScreen.cancelSelectedServiceDetails();
-            selectedServiceDetailsScreen.cancelSelectedServiceDetails();
+                TechniciansPopupValidations.verifyServiceTechnicianIsSelected(serviceTechnician);
+            TechniciansPopupSteps.cancelTechViewDetails();
+            ServiceDetailsScreenSteps.cancelServiceDetails();
         }
 
         ServicesScreenSteps.selectMatrixService(workOrderData.getMatrixServiceData());
@@ -7197,40 +7142,34 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         PriceMatrixScreenSteps.verifyVehiclePartTechniciansValue(workOrderData.getVehicleInfoData().getNewTechnicians());
         PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
         priceMatrixScreen.clickDiscaunt(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartAdditionalService().getServiceName());
-        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
-        techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
+        ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
-        techniciansPopup.cancelTechViewDetails();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            TechniciansPopupValidations.verifyServiceTechnicianIsSelected(serviceTechnician);
+        TechniciansPopupSteps.cancelTechViewDetails();
+        ServiceDetailsScreenSteps.cancelServiceDetails();
         priceMatrixScreen.setTime(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartTime());
         priceMatrixScreen.clickSaveButton();
         ServicesScreen servicesScreen = new ServicesScreen();
 
         servicesScreen.openCustomServiceDetails(workOrderData.getBundleService().getBundleServiceName());
         SelectedServiceBundleScreen serviceBundleScreen = new SelectedServiceBundleScreen();
-        techniciansPopup = serviceBundleScreen.clickTechniciansIcon();
+        serviceBundleScreen.clickTechniciansIcon();
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceTechnician.getTechnicianFullName()));
-        techniciansPopup.clickCancelButton();
-        selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(workOrderData.getBundleService().getService().getServiceName());
-        String techString = "";
+            TechniciansPopupValidations.verifyServiceTechnicianIsSelected(serviceTechnician);
+        TechniciansPopupSteps.cancelTechViewDetails();
+        serviceBundleScreen.openBundleInfo(workOrderData.getBundleService().getService().getServiceName());
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-            techString = techString + ", " + serviceTechnician.getTechnicianFullName();
-        techString = techString.replaceFirst(",", "").trim();
-        Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString);
-        selectedServiceDetailsScreen.clickCancelSelectedServiceDetails();
+            ServiceDetailsScreenValidations.verifyTechnicianCellHasValue(serviceTechnician, true);
+        ServiceDetailsScreenSteps.cancelServiceDetails();
         serviceBundleScreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
         serviceBundleScreen.saveSelectedServiceDetails();
-        servicesScreen = new ServicesScreen();
         Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getBundleService().getBundleServiceName()));
         servicesScreen.clickSave();
         servicesScreen.clickFinalPopup();
         servicesScreen.clickSave();
-        myWorkOrdersScreen = new MyWorkOrdersScreen();
         Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
 
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
         homeScreen.clickLogoutButton();
         mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
@@ -7248,31 +7187,28 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_TYPE_FOR_CALC);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         VehicleInfoScreenSteps.clickTech();
-        TechniciansPopup techniciansPopup = new TechniciansPopup();
-        techniciansPopup.selecTechnician(workOrderData.getVehicleInfoData().getNewTechnician().getTechnicianFullName());
-        techniciansPopup.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
-        techniciansPopup.saveTechnociansViewWithAlert();
+        TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
 
         NavigationSteps.navigateToServicesScreen();
-        ServicesScreen servicesScreen = new ServicesScreen();
         ServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
         ServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
         ServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
         ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
-        Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianFullName()));
-        Assert.assertEquals(techniciansPopup.getTechnicianPrice(workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianFullName()),
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+        TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getServiceData().getServiceDefaultTechnician());
+        TechniciansPopupValidations.verifyServiceTechnicianPriceValue(workOrderData.getServiceData().getServiceDefaultTechnician(),
                 workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianPriceValue());
-        techniciansPopup.cancelTechViewDetails();
+        TechniciansPopupSteps.cancelTechViewDetails();
         ServiceDetailsScreenSteps.cancelServiceDetails();
-        servicesScreen.waitServicesScreenLoaded();
-        servicesScreen.cancelWizard();
+        ServicesScreenSteps.waitServicesScreenLoad();
+        WizardScreensSteps.cancelWizard();
 
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
         homeScreen.clickLogoutButton();
         mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
@@ -7415,20 +7351,17 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         customersScreen.swtchToWholesaleMode();
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-
         SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
         settingsScreen.setInspectionToNonSinglePageInspection();
         settingsScreen.clickHomeButton();
 
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_DELAY_START);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
-        vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
-        String workOrderNumber = vehicleScreen.getInspectionNumber();
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        VehicleInfoScreenSteps.selectLocation(workOrderData.getVehicleInfoData().getLocation());
+        String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
 
         NavigationSteps.navigateToServicesScreen();
-        ServicesScreen servicesScreen = new ServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList()) {
             ServicesScreenSteps.openCustomServiceDetails(serviceData.getServiceName());
             if (serviceData.getServicePrice() != null)
@@ -7436,10 +7369,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
             if (serviceData.getVehiclePart() != null)
                 ServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
             ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
-            TechniciansPopup techniciansPopup = new TechniciansPopup();
-            techniciansPopup.selecTechnician(serviceData.getServiceNewTechnician().getTechnicianFullName());
-            techniciansPopup.unselecTechnician(serviceData.getServiceDefaultTechnician().getTechnicianFullName());
-            techniciansPopup.saveTechViewDetails();
+            TechniciansPopupSteps.selectServiceTechnician(serviceData.getServiceNewTechnician());
+            TechniciansPopupSteps.unselectServiceTechnician(serviceData.getServiceDefaultTechnician());
+            TechniciansPopupSteps.saveTechViewDetails();
             ServiceDetailsScreenSteps.saveServiceDetails();
         }
         NavigationSteps.navigateToOrderSummaryScreen();

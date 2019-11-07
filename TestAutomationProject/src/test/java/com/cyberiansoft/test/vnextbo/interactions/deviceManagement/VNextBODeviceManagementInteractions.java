@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.interactions.deviceManagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.screens.commonObjects.VNextBOSearchPanel;
 import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
 import org.openqa.selenium.support.PageFactory;
 
@@ -50,11 +51,11 @@ public class VNextBODeviceManagementInteractions {
     }
 
     public void setDeviceManagementSearchText(String searchText) {
-        Utils.clearAndType(deviceManagementPage.getSearchInputField(), searchText);
+        Utils.clearAndType(new VNextBOSearchPanel().getSearchInputField(), searchText);
     }
 
     public void clickDeviceManagementSearchLoupeIcon() {
-        Utils.clickElement(deviceManagementPage.getSearchLoupeIcon());
+        Utils.clickElement(new VNextBOSearchPanel().getSearchLoupeIcon());
         WaitUtilsWebDriver.waitForLoading();
     }
 }

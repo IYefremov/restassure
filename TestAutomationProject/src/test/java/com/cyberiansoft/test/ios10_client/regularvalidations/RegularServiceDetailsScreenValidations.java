@@ -16,6 +16,14 @@ public class RegularServiceDetailsScreenValidations {
             Assert.assertFalse(selectedServiceDetailsScreen.isTechnicianSelected(serviceTechnician.getTechnicianFullName()));
     }
 
+    public static void verifyTechnicianCellHasValue(ServiceTechnician serviceTechnician, boolean isPresent) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        if (isPresent)
+            Assert.assertTrue(selectedServiceDetailsScreen.getTechniciansValue().contains(serviceTechnician.getTechnicianFullName()));
+        else
+            Assert.assertFalse(selectedServiceDetailsScreen.getTechniciansValue().contains(serviceTechnician.getTechnicianFullName()));
+    }
+
     public static void verifyServiceTechnicianPriceValue(ServiceTechnician serviceTechnician, String expactedPrice) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(serviceTechnician.getTechnicianFullName()),

@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnextbo.validations.commonObjects;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOSearchPanel;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.screens.commonObjects.VNextBOSearchPanel;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
 import org.testng.Assert;
 
@@ -34,5 +34,11 @@ public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations
 
         Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().contains(text),
                 "Search option under Search field hasn't been correct");
+    }
+
+    public static void isSearchFieldEmpty() {
+
+        Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().equals(""),
+                "Search field hasn't been cleared");
     }
 }

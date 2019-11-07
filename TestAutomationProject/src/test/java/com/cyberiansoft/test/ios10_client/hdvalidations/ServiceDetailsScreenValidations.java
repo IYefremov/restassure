@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.hdvalidations;
 
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import org.testng.Assert;
@@ -22,5 +23,13 @@ public class ServiceDetailsScreenValidations {
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
         for (VehiclePartData vehiclePartData : vehiclePartsData)
             Assert.assertTrue(selectedServiceDetailsScreen.getVehiclePartValue().contains(vehiclePartData.getVehiclePartName()));
+    }
+
+    public static void verifyTechnicianCellHasValue(ServiceTechnician serviceTechnician, boolean isPresent) {
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
+        if (isPresent)
+            Assert.assertTrue(selectedServiceDetailsScreen.getTechniciansValue().contains(serviceTechnician.getTechnicianFullName()));
+        else
+            Assert.assertFalse(selectedServiceDetailsScreen.getTechniciansValue().contains(serviceTechnician.getTechnicianFullName()));
     }
 }

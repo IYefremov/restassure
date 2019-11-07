@@ -118,6 +118,10 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.device.management.td");
     }
 
+    public String getDeviceManagementSearchTD() {
+        return properties.getProperty("vnextbo.device.management.search.td");
+    }
+
     public String getHomePageTD() {
         return properties.getProperty("vnextbo.home.page.td");
     }

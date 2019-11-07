@@ -377,9 +377,9 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         final String etaDate = etaDataValues.get(0);
         System.out.println("etaDate: " + etaDate);
         System.out.println("currentDate: "+ currentDate);
-//        Assert.assertTrue(etaDate.equals(currentDate) || etaDate.equals("")
-//                        || partsDetailsPanel.isDateAfter(etaDate, currentDate), // todo uncomment after bug #81900 fix
-//            "The ETA date is neither equal to the current date, nor after it, nor empty");
+        Assert.assertTrue(etaDate.equals(currentDate) || etaDate.equals("")
+                        || partsDetailsPanel.isDateAfter(etaDate, currentDate),
+            "The ETA date is neither equal to the current date, nor after it, nor empty");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
