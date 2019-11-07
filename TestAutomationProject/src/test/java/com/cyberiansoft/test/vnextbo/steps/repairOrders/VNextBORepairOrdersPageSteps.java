@@ -1,9 +1,9 @@
 package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOChangeTechniciansDialogInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBORODetailsPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBOROPageValidations;
 import org.testng.Assert;
 
 public class VNextBORepairOrdersPageSteps {
@@ -23,13 +23,13 @@ public class VNextBORepairOrdersPageSteps {
 
     public static void openRODetailsPage(String woNumber) {
         VNextBOROPageInteractions.clickWoLink(woNumber);
-        Assert.assertTrue(new VNextBORODetailsPageInteractions().isRODetailsSectionDisplayed(),
+        Assert.assertTrue(VNextBORODetailsPageValidations.isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 
     public static void openRODetailsPage() {
         VNextBOROPageInteractions.clickWoLink();
-        Assert.assertTrue(new VNextBORODetailsPageInteractions().isRODetailsSectionDisplayed(),
+        Assert.assertTrue(VNextBORODetailsPageValidations.isRODetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 

@@ -1,19 +1,12 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextWebServicesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
-import org.openqa.selenium.support.PageFactory;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -29,34 +22,12 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextWebServices extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/VNextWebServicesData.json";
-
     @BeforeClass
     public void settingUp() {
-        JSONDataProvider.dataFile = DATA_FILE;
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getWebServicesTD();
     }
 
     final String USER_AGENT = "Mozilla/5.0";
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
-    }
-
-    @AfterMethod
-    public void BackOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null)
-            DriverBuilder.getInstance().quitDriver();
-    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testSetupConfigurationToRunInvoiceListSuite(String rowID, String description, JSONObject testData) throws Exception {

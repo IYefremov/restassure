@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROAdvancedSearchDialogInteractions;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBOROPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBOROPageValidations;
 
 public class VNextBOROAdvancedSearchDialogSteps {
 

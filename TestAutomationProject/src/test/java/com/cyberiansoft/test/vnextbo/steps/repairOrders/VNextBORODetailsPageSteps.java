@@ -3,66 +3,59 @@ package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROProblemsInteractions;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBONotesPageVerifications;
-import com.cyberiansoft.test.vnextbo.verifications.repairOrders.VNextBORODetailsPageVerifications;
+import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBORODetailsPageValidations;
 import org.testng.Assert;
 
 public class VNextBORODetailsPageSteps {
 
     public static void openServicesTableForStatus(String status, String service) {
-        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-        roDetailsPageInteractions.setStatus(status);
-        roDetailsPageInteractions.expandServicesTable(service);
+        VNextBORODetailsPageInteractions.setStatus(status);
+        VNextBORODetailsPageInteractions.expandServicesTable(service);
     }
 
     public static void openServicesTableForStatus(String status) {
-        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-        roDetailsPageInteractions.setStatus(status);
-        roDetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.setStatus(status);
+        VNextBORODetailsPageInteractions.expandServicesTable();
     }
 
     public static void setServiceStatusForService(String phase, String status) {
-        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-        final String serviceId = roDetailsPageInteractions.getServiceId(phase);
-        roDetailsPageInteractions.setServiceStatusForService(serviceId, status);
+        final String serviceId = VNextBORODetailsPageInteractions.getServiceId(phase);
+        VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
         WaitUtilsWebDriver.waitForLoading();
-        Assert.assertEquals(roDetailsPageInteractions.getServiceStatusValue(serviceId), status,
+        Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), status,
                 "The status hasn't been set for service");
     }
 
     public static void setCheckInOptionForPhase() {
-        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-        roDetailsPageInteractions.openActionsDropDownForPhase();
-        Assert.assertTrue(VNextBORODetailsPageVerifications.isCheckInOptionDisplayedForPhase(),
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        Assert.assertTrue(VNextBORODetailsPageValidations.isCheckInOptionDisplayedForPhase(),
                 "The 'Check in' option hasn't been displayed for phase");
-        roDetailsPageInteractions.clickCheckInOptionForPhase();
+        VNextBORODetailsPageInteractions.clickCheckInOptionForPhase();
     }
 
     public static void setCheckOutOptionForPhase() {
-        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-        roDetailsPageInteractions.openActionsDropDownForPhase();
-        Assert.assertTrue(VNextBORODetailsPageVerifications.isCheckOutOptionDisplayedForPhase(),
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        Assert.assertTrue(VNextBORODetailsPageValidations.isCheckOutOptionDisplayedForPhase(),
                 "The 'Check out' option hasn't been displayed for phase");
-        roDetailsPageInteractions.clickCheckOutOptionForPhase();
+        VNextBORODetailsPageInteractions.clickCheckOutOptionForPhase();
     }
 
     public static void setReportProblemForPhase(String phase, String problem, String description) {
-        if (VNextBORODetailsPageVerifications.isProblemIconDisplayedForPhase(phase)) {
+        if (VNextBORODetailsPageValidations.isProblemIconDisplayedForPhase(phase)) {
             setResolveProblemForPhase(phase);
         }
-        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-        roDetailsPageInteractions.openActionsDropDownForPhase(phase);
-        roDetailsPageInteractions.clickReportProblemForPhase(phase);
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase(phase);
+        VNextBORODetailsPageInteractions.clickReportProblemForPhase(phase);
         handleReportProblemDialog(problem, description);
-        Assert.assertTrue(VNextBORODetailsPageVerifications.isProblemIconDisplayedForPhase(phase),
+        Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconDisplayedForPhase(phase),
                 "The Problem icon hasn't been displayed");
     }
 
     public static void setResolveProblemForPhase(String phase) {
-        final VNextBORODetailsPageInteractions roDetailsPageInteractions = new VNextBORODetailsPageInteractions();
-        roDetailsPageInteractions.openActionsDropDownForPhase(phase);
-        if (VNextBORODetailsPageVerifications.isResolveProblemOptionDisplayedForPhase(phase)) {
-            roDetailsPageInteractions.clickResolveProblemForPhase(phase);
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase(phase);
+        if (VNextBORODetailsPageValidations.isResolveProblemOptionDisplayedForPhase(phase)) {
+            VNextBORODetailsPageInteractions.clickResolveProblemForPhase(phase);
             new VNextBOROProblemsInteractions().clickResolveButton();
         }
     }
@@ -75,8 +68,8 @@ public class VNextBORODetailsPageSteps {
     }
 
     public static void openEditNotesDialog(String serviceId) {
-        new VNextBORODetailsPageInteractions().openNotesDialog(serviceId);
-        Assert.assertTrue(VNextBONotesPageVerifications.isEditOrderServiceNotesBlockDisplayed(),
+        VNextBORODetailsPageInteractions.openNotesDialog(serviceId);
+        Assert.assertTrue(VNextBONotesPageValidations.isEditOrderServiceNotesBlockDisplayed(),
                 "The notes block hasn't been displayed");
     }
 }

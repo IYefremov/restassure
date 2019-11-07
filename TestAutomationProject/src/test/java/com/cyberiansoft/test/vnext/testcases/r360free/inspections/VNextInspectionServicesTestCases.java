@@ -30,7 +30,7 @@ import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -238,9 +238,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceOfficeUrl);
-		VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
-				VNextBOLoginScreenWebPage.class);
-		loginPage.userLogin(deviceuser, devicepsw);
+        VNextBOLoginSteps.userLogin(deviceuser, devicepsw);
 		VNexBOLeftMenuPanel leftMenu = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
 		VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();

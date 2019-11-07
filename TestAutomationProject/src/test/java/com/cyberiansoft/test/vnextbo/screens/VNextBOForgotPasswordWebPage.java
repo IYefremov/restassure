@@ -3,14 +3,11 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
-import org.openqa.selenium.WebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.concurrent.TimeUnit;
 
 public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 
@@ -29,12 +26,9 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[contains(@data-bind, 'confirmEmail.hasError')]/p")
 	private WebElement errorMessage;
 	
-	public VNextBOForgotPasswordWebPage(WebDriver driver) {
-		super(driver);
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		new WebDriverWait(driver, 30)
-		  .until(ExpectedConditions.visibilityOf(submitBtn));
+	public VNextBOForgotPasswordWebPage() {
+		super(DriverBuilder.getInstance().getDriver());
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 	
 	public VNextBOLoginScreenWebPage sendConfirmationMail(String userMail) {

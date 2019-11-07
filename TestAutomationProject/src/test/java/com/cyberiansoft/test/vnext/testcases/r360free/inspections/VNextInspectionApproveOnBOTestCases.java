@@ -29,10 +29,10 @@ import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegi
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
-import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -101,7 +101,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginPage.waitABit(1000*20);
-		loginPage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
 				VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
 		VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);
@@ -172,7 +172,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
 				VNextBOLoginScreenWebPage.class);
 		loginPage.waitABit(1000*15);
-		loginPage.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
+        VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
 				VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
 		VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
 				VNexBOLeftMenuPanel.class);

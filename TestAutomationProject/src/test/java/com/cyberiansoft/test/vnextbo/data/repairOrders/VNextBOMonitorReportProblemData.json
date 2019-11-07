@@ -1,0 +1,34 @@
+{
+  "verifyUserCanReportProblemOnPhaseLevel": [
+    {
+      "rowID": "verifyUserCanReportProblemOnPhaseLevel.01",
+      "description": "Test Case 88119: Verify user can report problem on the phase level (select reason from the list)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91236"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station",
+      "reason": "No part"
+    }
+  ],
+
+  "verifyUserCanCheckInRO": [
+    {
+      "rowID": "verifyUserCanCheckInRO.01",
+      "description": "Test Case 83643: User can see Parts of RO. Test Case 83743: User can Chek - In RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91261"
+        },
+        {
+          "testCaseID": "91258"
+        }
+      ],
+      "location": "New_zayats_location",
+      "orderNumber": "O-000-152460"
+    }
+  ]
+}

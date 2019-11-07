@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairOrders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOChangeTechniciansDialogInteractions;
-import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOChangeTechniciansDialogVerifications;
+import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOChangeTechniciansDialogVerifications;
 
 public class VNextBOChangeTechniciansDialogSteps {
 

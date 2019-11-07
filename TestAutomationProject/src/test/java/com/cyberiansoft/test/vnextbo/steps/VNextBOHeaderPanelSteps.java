@@ -1,13 +1,13 @@
 package com.cyberiansoft.test.vnextbo.steps;
 
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOHeaderPanelInteractions;
-import com.cyberiansoft.test.vnextbo.verifications.VNextBOHeaderPanelVerifications;
+import com.cyberiansoft.test.vnextbo.validations.general.VNextBOHeaderPanelValidations;
 
 public class VNextBOHeaderPanelSteps {
 
     public static void logout() {
         try {
-            if (VNextBOHeaderPanelVerifications.logOutLinkExists()) {
+            if (VNextBOHeaderPanelValidations.logOutLinkExists()) {
                 new VNextBOHeaderPanelInteractions().userLogout();
             }
         } catch (RuntimeException ignored) {}

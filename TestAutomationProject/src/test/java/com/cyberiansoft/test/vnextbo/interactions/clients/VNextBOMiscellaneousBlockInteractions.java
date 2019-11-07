@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOMiscellaneousBlock;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOMiscellaneousBlock;
 import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOMiscellaneousBlockInteractions {
