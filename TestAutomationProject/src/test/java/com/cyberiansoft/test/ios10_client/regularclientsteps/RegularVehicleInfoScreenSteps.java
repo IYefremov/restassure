@@ -28,6 +28,11 @@ public class RegularVehicleInfoScreenSteps {
         vehicleScreen.setColor(vehicleColor);
     }
 
+    public static void selectLocation(String locationValue) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.selectLocation(locationValue);
+    }
+
     public static void setMileage(String mileage) {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setMileage(mileage);

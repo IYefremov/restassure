@@ -1,10 +1,9 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
-import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
@@ -14,37 +13,37 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 
-	@iOSXCUITFindBy(accessibility = "First Name")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField")
 	private IOSElement firstnamefld;
 
-	@iOSXCUITFindBy(accessibility = "Last Name")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeTextField")
     private IOSElement lastnamefld;
 
-	@iOSXCUITFindBy(accessibility = "Company")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[3]/XCUIElementTypeTextField")
     private IOSElement companyfld;
 
-	@iOSXCUITFindBy(accessibility = "Address 1")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[6]/XCUIElementTypeTextView")
     private IOSElement address1fld;
 
-	@iOSXCUITFindBy(accessibility = "Address 2")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[7]/XCUIElementTypeTextView")
 	private IOSElement address2fld;
 
-	@iOSXCUITFindBy(accessibility = "City")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[8]/XCUIElementTypeTextField")
     private IOSElement cityfld;
 
-	@iOSXCUITFindBy(accessibility = "State\nProvince")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[10]/XCUIElementTypeTextField")
 	private IOSElement statefld;
 
-	@iOSXCUITFindBy(accessibility = "Country")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[9]/XCUIElementTypeTextField")
     private IOSElement countryfld;
 
-	@iOSXCUITFindBy(accessibility = "ZIP\nPostal")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[11]/XCUIElementTypeTextField")
     private IOSElement zipfld;
 
-	@iOSXCUITFindBy(accessibility = "Phone")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeTextField")
     private IOSElement phonefld;
 
-	@iOSXCUITFindBy(accessibility = "Email")
+	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeTextField")
     private IOSElement mailfld;
 	
 	@iOSXCUITFindBy(accessibility = "Save")
@@ -58,39 +57,33 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
 	}
 
-	public void addCustomer(String firstname, String lastname,
-			String companyname, String address1, String city, String state,
-			String zip, String country, String phone, String mail) {
-		setFirstName(firstname);
-		setLastName(lastname);
-		setCompanyName(companyname);
+	public void addCustomer(RetailCustomer appCustomer) {
+		setFirstName(appCustomer.getFirstName());
+		setLastName(appCustomer.getLastName());
+		setCompanyName(appCustomer.getCompany());
 		Helpers.waitABit(2000);
-		setMail(mail);
-		setPhone(phone);
-		setAddress1(address1);
-		setCity(city);
-		selectCountry(country);
+		setMail(appCustomer.getMailAddress());
+		setPhone(appCustomer.getCustomerPhone());
+		setAddress1(appCustomer.getCustomerAddress1());
+		setCity(appCustomer.getCustomerCity());
+		selectCountry(appCustomer.getCustomerCountry());
 		Helpers.waitABit(2000);
-		selectState(state);
+		selectState(appCustomer.getCustomerState());
 		Helpers.waitABit(4000);
-		setZip(zip);
-			
-		
+		setZip(appCustomer.getCustomerZip());
 	}
 
-	public void editCustomer(String firstname, String lastname,
-			String companyname, String address1, String city, String state,
-			String zip, String country, String phone, String mail) {
+	public void editCustomer(RetailCustomer appCustomer) {
 		Helpers.waitABit(1000);
-		setFirstName(firstname);
-		setLastName(lastname);
-		setCompanyName(companyname);
+		setFirstName(appCustomer.getFirstName());
+		setLastName(appCustomer.getLastName());
+		setCompanyName(appCustomer.getCompany());
 		Helpers.waitABit(2000);
-		setMail(mail);
-		setPhone(phone);
-		setAddress1(address1);
-		setCity(city);
-		setZip(zip);
+		setMail(appCustomer.getMailAddress());
+		setPhone(appCustomer.getCustomerPhone());
+		setAddress1(appCustomer.getCustomerAddress1());
+		setCity(appCustomer.getCustomerCity());
+		setZip(appCustomer.getCustomerZip());
 	}
 
 	public void setFirstName(String firstname) {
