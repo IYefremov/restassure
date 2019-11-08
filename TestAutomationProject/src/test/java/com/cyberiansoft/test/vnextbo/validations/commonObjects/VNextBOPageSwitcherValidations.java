@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnextbo.validations.commonObjects;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOPageSwitcherElements;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
+import com.cyberiansoft.test.vnextbo.screens.commonObjects.VNextBOPageSwitcherElements;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
 import org.testng.Assert;
 

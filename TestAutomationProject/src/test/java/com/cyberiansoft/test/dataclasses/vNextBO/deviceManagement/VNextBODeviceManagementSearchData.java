@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.dataclasses.vNextBO.devicemanagement;
+package com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

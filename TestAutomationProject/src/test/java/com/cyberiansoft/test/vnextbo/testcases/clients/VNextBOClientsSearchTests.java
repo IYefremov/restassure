@@ -6,7 +6,7 @@ import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsAdvancedSearchValidations;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValidations;

@@ -1,12 +1,12 @@
 package com.cyberiansoft.test.vnextbo.testcases.deviceManagement;
 
-import com.cyberiansoft.test.dataclasses.vNextBO.devicemanagement.VNextBODeviceManagementSearchData;
+import com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement.VNextBODeviceManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBODeviceManagementSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.commonObjects.VNextBOSearchPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.deviceManagement.VNextBODeviceManagementPageValidations;

@@ -1,8 +1,8 @@
-package com.cyberiansoft.test.vnextbo.steps.devicemanagement;
+package com.cyberiansoft.test.vnextbo.steps.deviceManagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODevicesAdvancedSearchForm;
+import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODevicesAdvancedSearchForm;
 
 public class VNextBODevicesAdvancedSearchSteps {
 

@@ -1,8 +1,8 @@
-package com.cyberiansoft.test.vnextbo.steps.commonobjects;
+package com.cyberiansoft.test.vnextbo.steps.commonObjects;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOPageSwitcherElements;
+import com.cyberiansoft.test.vnextbo.screens.commonObjects.VNextBOPageSwitcherElements;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 
 public class VNextBOPageSwitcherSteps extends VNextBOBaseWebPageSteps {

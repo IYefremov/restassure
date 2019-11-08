@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.steps.devicemanagement;
+package com.cyberiansoft.test.vnextbo.steps.deviceManagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
@@ -7,10 +7,10 @@ import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOActive
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOPendingRegistrationsInteractions;
-import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
-import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
+import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOActiveDevicesWebPage;
+import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOPendingRegistrationsValidations;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

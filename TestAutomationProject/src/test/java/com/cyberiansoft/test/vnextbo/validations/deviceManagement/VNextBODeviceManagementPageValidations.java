@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnextbo.validations.deviceManagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBODeviceManagementSteps;
+import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBODeviceManagementWebPage;
+import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

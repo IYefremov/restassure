@@ -18,10 +18,10 @@ import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPa
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBODeviceManagementSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOAddNewDeviceSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOEditDeviceSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOAddNewDeviceSteps;
+import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBODeviceManagementSteps;
+import com.cyberiansoft.test.vnextbo.steps.deviceManagement.VNextBOEditDeviceSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;

@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.screens.devicemanagement;
+package com.cyberiansoft.test.vnextbo.screens.deviceManagement;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;

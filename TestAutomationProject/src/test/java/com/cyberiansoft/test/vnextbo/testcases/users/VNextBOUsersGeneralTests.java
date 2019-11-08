@@ -8,7 +8,7 @@ import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOUserProfileDialog;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonObjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;

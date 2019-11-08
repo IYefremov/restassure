@@ -1,9 +1,8 @@
 package com.cyberiansoft.test.vnextbo.validations.deviceManagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
+import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOActiveDevicesWebPage;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
 import org.testng.Assert;
 
