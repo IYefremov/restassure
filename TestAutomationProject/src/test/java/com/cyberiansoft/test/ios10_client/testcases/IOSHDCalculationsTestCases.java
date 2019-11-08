@@ -1010,7 +1010,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE, workOrderData.getWorkOrderPrice()));
 		orderSummaryScreen.swipeScreenLeft();
 		NavigationSteps.navigateToServicesScreen();
-		selectedServiceDetailsScreen = servicesScreen.openServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
+		selectedServiceDetailsScreen = servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity2());
 
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -1434,9 +1434,8 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.setServicePriceValue(workOrderData.getMoneyServiceData().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
-		servicesScreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
-		servicesScreen.selectPriceMatrix(matrixServiceData.getMatrixServiceName());
+		ServicesScreenSteps.selectMatrixService(matrixServiceData);
 		PriceMatrixScreen priceMatrixScreen = new PriceMatrixScreen();
 		VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
 		priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
@@ -2407,11 +2406,11 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		BaseUtils.waitABit(10 * 1000);
 		myInspectionsScreen.selectInspectionForEdit(inspNumber);
 		NavigationSteps.navigateToScreen(ScreenNamesConstants.TEST_PACK_FOR_CALC);
-		Assert.assertTrue(servicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
-		Assert.assertTrue(servicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE));
-		Assert.assertTrue(servicesScreen.isServiceApproved(iOSInternalProjectConstants.SR_S1_MONEY_PANEL));
-		Assert.assertTrue(servicesScreen.isServiceApproved(iOSInternalProjectConstants.SR_S1_MONEY));
-		Assert.assertTrue(servicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.TAX_DISCOUNT));
+		for (ServiceData serviceData : inspectionData.getMoneyServicesList())
+			Assert.assertTrue(servicesScreen.isServiceApproved(serviceData.getServiceName()));
+		for (ServiceData serviceData : inspectionData.getPercentageServicesList())
+			Assert.assertTrue(servicesScreen.isServiceDeclinedSkipped(serviceData.getServiceName()));
+		Assert.assertTrue(servicesScreen.isServiceDeclinedSkipped(inspectionData.getBundleService().getBundleServiceName()));
 		servicesScreen.cancelWizard();
 		myInspectionsScreen.clickHomeButton();
 	}

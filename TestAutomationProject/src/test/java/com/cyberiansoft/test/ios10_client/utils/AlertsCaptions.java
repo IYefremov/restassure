@@ -85,4 +85,5 @@ public class AlertsCaptions {
 	public static final String WOULD_YOU_LIKE_TO_REMOVE_SERVICE = "Would you like to remove service '%1$s'?";
 	public static final String SELECTED_TECHNICIANS_WILL_BE_ASSIGNED_TO_ALL_WO_SERVICES = "Assign Technicians\n"+
 			"Selected technician(s) will be assigned to all work order services.";
+	public static final String ORDER_MONITOR_IT_IS_IMPOSSIBLE_TO_CHANGE_PHASE_STATUS_UNTIL_YOU_START_PHASE = "Order Monitor It is impossible to change phase status until you start phase.";
 }

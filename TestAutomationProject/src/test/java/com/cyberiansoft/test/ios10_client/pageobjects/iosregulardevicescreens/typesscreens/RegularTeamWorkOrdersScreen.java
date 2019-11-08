@@ -193,19 +193,20 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void clickSaveFilter() {
 		appiumdriver.findElementByAccessibilityId("Save").click();
-		new RegularTeamWorkOrdersScreen();
 	}
 	
 	public boolean isWorkOrderExists(String workOrderID) {
-		return appiumdriver.findElements(MobileBy.AccessibilityId(workOrderID)).size() > 0;	
+		return teamOrdersTable.findElements(MobileBy.AccessibilityId(workOrderID)).size() > 0;
 	}
 	
 	public boolean isWorkOrderHasApproveIcon(String workOrderID) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_78')]")).size() > 0;
+		waitTeamWorkOrdersScreenLoaded();
+		return teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderID)).findElements(MobileBy.iOSNsPredicateString("name CONTAINS 'ButtonImageId_78'")).size() > 0;
 	}
 	
 	public boolean isWorkOrderHasActionIcon(String workOrderID) {
-		return teamOrdersTable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + workOrderID + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_79')]")).size() > 0;
+		waitTeamWorkOrdersScreenLoaded();
+		return teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderID)).findElements(MobileBy.iOSNsPredicateString("name CONTAINS 'ButtonImageId_79'")).size() > 0;
 	}
 	
 	public String getFirstWorkOrderNumberValue() {		

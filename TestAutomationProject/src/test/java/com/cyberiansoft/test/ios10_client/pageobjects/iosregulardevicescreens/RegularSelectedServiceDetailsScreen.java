@@ -485,7 +485,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategorypartname)));
 		appiumdriver.findElementByAccessibilityId(subcategorypartname).click();
-		//appiumdriver.findElementByAccessibilityId("Done").click();
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void selectServicePartSubcategoryPosition(String subcategorypositionname) {

@@ -77,9 +77,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selectPanel(String panelName) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
-		WebElement wotable = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
 		swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']")));
 		appiumdriver.findElementByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + panelName + "']").click();
 	}

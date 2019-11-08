@@ -6,6 +6,7 @@ public enum ReconProMenuItems {
 
     PAY("Pay"),
     COPY("Copy"),
+    CLOSE("Close"),
     EDIT("Edit"),
     CREATE_WORKORDER("Create\nWO"),
     CREATE_WORKORDER_HD("Create Work Order"),
