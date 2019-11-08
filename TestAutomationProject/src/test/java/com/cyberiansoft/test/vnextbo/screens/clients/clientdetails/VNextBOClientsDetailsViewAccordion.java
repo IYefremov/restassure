@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.screens.clients.clientDetails;
+package com.cyberiansoft.test.vnextbo.screens.clients.clientdetails;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;

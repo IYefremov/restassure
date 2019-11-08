@@ -2,8 +2,8 @@ package com.cyberiansoft.test.vnextbo.validations;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBODeviceManagementInteractions;
-import com.cyberiansoft.test.vnextbo.screens.deviceManagement.VNextBOPendingRegistrationWebPage;
+import com.cyberiansoft.test.vnextbo.interactions.devicemanagement.VNextBODeviceManagementInteractions;
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOPendingRegistrationWebPage;
 
 public class VNextBOPendingRegistrationsValidations {
 

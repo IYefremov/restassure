@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.VNextBOEmailOptionsBlock;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOEmailOptionsBlock;
 
 public class VNextBOEmailOptionsBlockInteractions {
 

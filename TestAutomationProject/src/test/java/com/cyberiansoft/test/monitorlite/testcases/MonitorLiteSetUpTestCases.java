@@ -2,9 +2,9 @@ package com.cyberiansoft.test.monitorlite.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOROPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
-import com.cyberiansoft.test.vnextbo.validations.repairOrders.VNextBOROPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -15,8 +15,8 @@ import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 
 public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	

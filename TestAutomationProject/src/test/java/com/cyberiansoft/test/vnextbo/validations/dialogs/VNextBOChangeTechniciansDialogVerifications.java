@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.dialogs;
 
-import com.cyberiansoft.test.vnextbo.interactions.repairOrders.VNextBOChangeTechniciansDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOChangeTechniciansDialogInteractions;
 import org.testng.Assert;
 
 public class VNextBOChangeTechniciansDialogVerifications {

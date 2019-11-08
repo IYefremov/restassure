@@ -1,0 +1,84 @@
+package com.cyberiansoft.test.vnextbo.validations.repairorders;
+
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
+import org.testng.Assert;
+
+public class VNextBORODetailsPageValidations {
+
+    public static String verifyServiceIsDisplayedForCollapsedPhase(String service, String phase) {
+        VNextBORODetailsPageInteractions.expandServicesTable(phase);
+        return verifyServiceIsDisplayedForExpandedPhase(service);
+    }
+
+    public static String verifyServiceIsDisplayedForExpandedPhase(String service) {
+        final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service " + service + " hasn't been displayed");
+        return serviceId;
+    }
+
+    public static void verifyVendorTechnicianNameIsSet(String name) {
+        Assert.assertNotEquals(0, VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(name),
+                "The Vendor/Technician '" + name + "' hasn't been found.");
+    }
+
+    public static void verifyServiceVendorPriceIsSet(String serviceId, String service, String vendorPrice) {
+        System.out.println("Vendor price: " + VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId));
+        System.out.println("vendor price to be inserted: " + vendorPrice);
+        VNextBORODetailsPageInteractions.setServiceVendorPrice(serviceId, service, vendorPrice);
+        Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId), vendorPrice,
+                "The Vendor Price hasn't been changed");
+    }
+
+    public static boolean isPhaseActionsTriggerDisplayed() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsTrigger());
+    }
+
+    public static boolean isPhaseActionsTriggerDisplayed(String phase) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsTrigger(phase));
+    }
+
+    public static boolean isCheckInOptionDisplayedForPhase() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsCheckInOption());
+    }
+
+    public static boolean isCheckOutOptionDisplayedForPhase() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsCheckOutOption());
+    }
+
+    public static void verifyCheckInOptionIsDisplayedForPhase() {
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        if (isCheckInOptionDisplayedForPhase()) {
+            VNextBORODetailsPageInteractions.closeActionsDropDownForPhase();
+        } else {
+            VNextBORODetailsPageInteractions.clickCheckOutOptionForPhase();
+        }
+    }
+
+    public static boolean isRODetailsSectionDisplayed() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getRoDetailsSection());
+    }
+
+    public static boolean isReportProblemOptionDisplayedForPhase(String phase) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsReportProblemOption(phase));
+    }
+
+    public static boolean isResolveProblemOptionDisplayedForPhase(String phase) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsResolveProblemOption(phase));
+    }
+
+    public static boolean isProblemIconDisplayedForPhase(String phase) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseProblemIcon(phase));
+    }
+
+    public static void verifyPhaseStatuses(String[] phaseStatuses) {
+        final boolean notMatching = VNextBORODetailsPageInteractions.getPhaseStatusValues()
+                .stream()
+                .allMatch(status -> status.equals(phaseStatuses[0])
+                        || status.equals(phaseStatuses[1])
+                        || status.equals(phaseStatuses[2])
+                        || status.equals(phaseStatuses[3]));
+        Assert.assertFalse(notMatching, "The phases contain the restricted statuses");
+    }
+}
