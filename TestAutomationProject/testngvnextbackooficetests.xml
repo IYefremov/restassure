@@ -18,16 +18,16 @@
             </methods>
         </class>
         <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.quickNotes.VNextBOQuickNotesTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.quicknotes.VNextBOQuickNotesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.services.VNextBOServicesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOOperationsInvoicesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorAdvancedSearchTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.repairOrders.VNextBOMonitorSimpleSearchTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.homePage.VNextBOHomePage"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.partsManagement.VNextBOPartsManagementSearchTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.partsManagement.VNextBOPartsManagementOrderDetailsTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.homePage.VNextBOHomePageAccessRightsTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorAdvancedSearchTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorSimpleSearchTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePage"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementSearchTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementOrderDetailsTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePageAccessRightsTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.login.VNextBOLoginTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.login.VNextBOForgotPasswordTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsGeneralTests"/>
@@ -43,8 +43,8 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsAddNewClientTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsEditClientTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsClientServicesTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.deviceManagement.VNextBODeviceManagementGeneralTests"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.deviceManagement.VNextBODeviceManagementSearchTests"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementGeneralTests"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementSearchTests"/>
     </classes>
   </test>
 </suite>

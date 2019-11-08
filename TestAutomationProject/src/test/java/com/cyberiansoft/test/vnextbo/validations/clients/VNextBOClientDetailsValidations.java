@@ -6,7 +6,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
-import com.cyberiansoft.test.vnextbo.screens.clients.clientDetails.*;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.*;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import org.testng.Assert;
 

@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.devicemanagement;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBODeviceManagementData;
-import com.cyberiansoft.test.vnextbo.interactions.deviceManagement.VNextBOEditDeviceDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.devicemanagement.VNextBOEditDeviceDialogInteractions;
 import org.testng.Assert;
 
 public class VNextBOEditDeviceSteps {

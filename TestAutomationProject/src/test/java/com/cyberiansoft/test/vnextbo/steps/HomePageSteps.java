@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps;
 
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
 import org.testng.Assert;
 

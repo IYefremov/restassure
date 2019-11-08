@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.validations;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOOrderServiceNotesDialog;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBOEditNotesDialog;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOEditNotesDialog;
 
 public class VNextBONotesPageValidations {
 
