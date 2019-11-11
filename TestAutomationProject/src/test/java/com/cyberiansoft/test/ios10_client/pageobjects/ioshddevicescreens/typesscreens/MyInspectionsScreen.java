@@ -214,13 +214,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 			appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 
-	public VehicleScreen selectDefaultInspectionType() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Default inspection type")));
-		appiumdriver.findElementByAccessibilityId("Default inspection type").click();
-		return new VehicleScreen();
-	}
-
 	public void selectInspectionInTable(String inspectionnumber) {
 		waitInspectionsScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
