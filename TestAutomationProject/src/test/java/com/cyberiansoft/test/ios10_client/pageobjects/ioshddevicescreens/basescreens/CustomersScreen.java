@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.AddCustomerScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
@@ -107,7 +108,10 @@ public class CustomersScreen extends BaseAppScreen {
 	}
 
 	public void selectCustomer(AppCustomer appCustomer) {
-		selectCustomer(appCustomer.getFullName().trim());
+		if (appCustomer instanceof RetailCustomer)
+			selectCustomer(appCustomer.getFirstName().trim());
+		else
+			selectCustomer(appCustomer.getFullName().trim());
 	}
 	
 	public HomeScreen selectCustomerWithoutEditing(String customer) {
