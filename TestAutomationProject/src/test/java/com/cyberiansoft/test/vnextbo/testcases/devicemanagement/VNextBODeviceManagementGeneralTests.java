@@ -15,6 +15,7 @@ import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOPageSwitcherValidations;
 import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOSearchPanelValidations;
+import com.cyberiansoft.test.vnextbo.verifications.devicemanagement.VNextBOActiveDevicesTabValidations;
 import com.cyberiansoft.test.vnextbo.verifications.devicemanagement.VNextBODeviceManagementPageValidations;
 import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
@@ -66,14 +67,14 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanOpenDeviceManagementPageWithFullSetOfElements(String rowID, String description, JSONObject testData) {
 
-        VNextBODeviceManagementPageValidations.verifyDevicesTableIsDisplayed();
+        VNextBOActiveDevicesTabValidations.verifyDevicesTableIsDisplayed();
         VNextBODeviceManagementPageValidations.verifyActiveDevicesTabIsDisplayed();
         VNextBODeviceManagementPageValidations.verifyPendingRegistrationsTabIsDisplayed();
         VNextBODeviceManagementPageValidations.verifyAddNewDeviceButtonIsDisplayed();
         VNextBOSearchPanelValidations.verifySearchFieldIsDisplayed();
         VNextBOPageSwitcherValidations.verifyPageNavigationElementsAreDisplayed();
-        VNextBODeviceManagementPageValidations.isTermsAndConditionsLinkDisplayed();
-        VNextBODeviceManagementPageValidations.isPrivacyPolicyLinkDisplayed();
+        VNextBODeviceManagementPageValidations.verifyTermsAndConditionsLinkIsDisplayed();
+        VNextBODeviceManagementPageValidations.verifyPrivacyPolicyLinkIsDisplayed();
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("10");
     }
 
@@ -83,19 +84,19 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.changeItemsPerPage("20");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("20");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
-        VNextBODeviceManagementPageValidations.verifyCorrectRecordsAmountIsDisplayed(20);
+        VNextBOActiveDevicesTabValidations.verifyCorrectRecordsAmountIsDisplayed(20);
         VNextBOPageSwitcherSteps.changeItemsPerPage("50");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("50");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
-        VNextBODeviceManagementPageValidations.verifyCorrectRecordsAmountIsDisplayed(50);
+        VNextBOActiveDevicesTabValidations.verifyCorrectRecordsAmountIsDisplayed(50);
         VNextBOPageSwitcherSteps.changeItemsPerPage("100");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("100");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
-        VNextBODeviceManagementPageValidations.verifyCorrectRecordsAmountIsDisplayed(100);
+        VNextBOActiveDevicesTabValidations.verifyCorrectRecordsAmountIsDisplayed(100);
         VNextBOPageSwitcherSteps.changeItemsPerPage("10");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("10");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
-        VNextBODeviceManagementPageValidations.verifyCorrectRecordsAmountIsDisplayed(10);
+        VNextBOActiveDevicesTabValidations.verifyCorrectRecordsAmountIsDisplayed(10);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
@@ -181,7 +182,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
 
         VNextBODeviceManagementSteps.openIntercomMessenger();
         WaitUtilsWebDriver.waitForLoading();
-        VNextBODeviceManagementPageValidations.isIntercomMessengerOpened();
+        VNextBODeviceManagementPageValidations.verifyIntercomMessengerIsOpened();
         VNextBODeviceManagementSteps.closeIntercom();
     }
 }

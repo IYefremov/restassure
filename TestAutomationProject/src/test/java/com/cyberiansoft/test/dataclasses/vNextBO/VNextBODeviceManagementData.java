@@ -26,5 +26,11 @@ public class VNextBODeviceManagementData {
     private String technician;
 
     @JsonProperty("deviceName")
-    private String deviceName;
+    public String deviceName;
+
+    @JsonProperty("licenseNumber")
+    private String licenseNumber;
+
+    @JsonProperty("phoneNumber")
+    private String phoneNumber;
 }

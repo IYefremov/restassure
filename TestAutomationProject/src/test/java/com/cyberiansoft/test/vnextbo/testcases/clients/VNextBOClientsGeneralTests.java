@@ -72,8 +72,8 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
         VNextBOClientsPageValidations.verifyClientsTableIsDisplayed();
         VNextBOSearchPanelValidations.verifySearchPanelIsDisplayed();
         VNextBOPageSwitcherValidations.verifyPageNavigationElementsAreDisplayed();
-        VNextBOClientsPageValidations.isTermsAndConditionsLinkDisplayed();
-        VNextBOClientsPageValidations.isPrivacyPolicyLinkDisplayed();
+        VNextBOClientsPageValidations.verifyTermsAndConditionsLinkIsDisplayed();
+        VNextBOClientsPageValidations.verifyPrivacyPolicyLinkIsDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -81,7 +81,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.openIntercomMessenger();
         WaitUtilsWebDriver.waitForLoading();
-        VNextBOUsersPageValidations.isIntercomMessengerOpened();
+        VNextBOUsersPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOUsersPageSteps.closeIntercom();
     }
 

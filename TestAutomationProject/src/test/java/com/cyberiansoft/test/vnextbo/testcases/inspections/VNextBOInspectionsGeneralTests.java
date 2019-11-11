@@ -67,12 +67,12 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyInspectionPageCanBeOpened(String rowID, String description, JSONObject testData) {
 
-        VNextBOInspectionsPageValidations.isTermsAndConditionsLinkDisplayed();
-        VNextBOInspectionsPageValidations.isPrivacyPolicyLinkDisplayed();
+        VNextBOInspectionsPageValidations.verifyTermsAndConditionsLinkIsDisplayed();
+        VNextBOInspectionsPageValidations.verifyPrivacyPolicyLinkIsDisplayed();
         VNextBOInspectionsPageValidations.verifyInspectionsListIsDisplayed();
         VNextBOInspectionsPageValidations.verifySearchFieldIsDisplayed();
         VNextBOInspectionsPageValidations.verifyInspectionDetailsPanelIsDisplayed();
-        VNextBOInspectionsPageValidations.isIntercomButtonDisplayed();
+        VNextBOInspectionsPageValidations.verifyIntercomButtonIsDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -137,7 +137,7 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.openIntercomMessenger();
         WaitUtilsWebDriver.waitForLoading();
-        VNextBOInspectionsPageValidations.isIntercomMessengerOpened();
+        VNextBOInspectionsPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOInspectionsPageSteps.closeIntercom();
     }
 

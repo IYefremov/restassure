@@ -68,17 +68,17 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageValidations.verifyAddNewUserBtnIsDisplayed();
         VNextBOUsersPageValidations.verifyUsersTableIsDisplayed();
-        VNextBOUsersPageValidations.isTermsAndConditionsLinkDisplayed();
-        VNextBOUsersPageValidations.isPrivacyPolicyLinkDisplayed();
-        VNextBOUsersPageValidations.isIntercomButtonDisplayed();
-        VNextBOUsersPageValidations.isLogoDisplayed();
-        VNextBOUsersPageValidations.isTimeBoxDisplayed();
+        VNextBOUsersPageValidations.verifyTermsAndConditionsLinkIsDisplayed();
+        VNextBOUsersPageValidations.verifyPrivacyPolicyLinkIsDisplayed();
+        VNextBOUsersPageValidations.verifyIntercomButtonIsDisplayed();
+        VNextBOUsersPageValidations.verifyLogoIsDisplayed();
+        VNextBOUsersPageValidations.verifyTimeBoxIsDisplayed();
         VNextBOSearchPanelValidations.verifySearchPanelIsDisplayed();
         VNextBOPageSwitcherValidations.verifyPageNavigationElementsAreDisplayed();
-        VNextBOUsersPageValidations.isUserInfoBlockDisplayed();
-        VNextBOUsersPageValidations.isLogoutButtonDisplayed();
-        VNextBOUsersPageValidations.isHelpButtonDisplayed();
-        VNextBOUsersPageValidations.isCopyRightTextDisplayed();
+        VNextBOUsersPageValidations.verifyUserInfoBlockIsDisplayed();
+        VNextBOUsersPageValidations.verifyLogoutButtonIsDisplayed();
+        VNextBOUsersPageValidations.verifyHelpButtonIsDisplayed();
+        VNextBOUsersPageValidations.verifyCopyRightTextIsDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -86,7 +86,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.openIntercomMessenger();
         WaitUtilsWebDriver.waitForLoading();
-        VNextBOUsersPageValidations.isIntercomMessengerOpened();
+        VNextBOUsersPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOUsersPageSteps.closeIntercom();
     }
 
@@ -159,7 +159,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyUserCanUseHelp(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.openHelpPage();
-        VNextBOUsersPageValidations.isHelpPageOpened();
+        VNextBOUsersPageValidations.verifyHelpPageIsOpened();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
