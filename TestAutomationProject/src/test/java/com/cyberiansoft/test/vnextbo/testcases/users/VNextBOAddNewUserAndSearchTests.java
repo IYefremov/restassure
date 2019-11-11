@@ -1,70 +1,41 @@
 package com.cyberiansoft.test.vnextbo.testcases.users;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOAddNewUserDialog;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOUsersWebPage;
 import com.cyberiansoft.test.vnextbo.screens.users.VNextBOUsersAdvancedSearchForm;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOAddNewUserDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.commonobjects.VNextBOSearchPanelValidations;
-import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOAddNewUserDialogValidations;
-import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOUsersAdvancedSearchValidations;
-import com.cyberiansoft.test.vnextbo.verifications.users.VNextBOUsersPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.users.VNextBOAddNewUserDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersAdvancedSearchValidations;
+import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersPageValidations;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/users/VNextBOAddNewUserAndSearchData.json";
-    private VNextBOLoginScreenWebPage loginPage;
-    String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-    String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
     String newUserEmail = "autoUsertest.mail.cyberiansoft@getnada.com";
     String newUserFirstName = "autoUserTestFirstName";
     String newUserLastName = "autoUserTestLastName";
 
     @BeforeClass
     public void settingUp() {
-
-        JSONDataProvider.dataFile = DATA_FILE;
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-
-        loginPage = new VNextBOLoginScreenWebPage();
-        loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions.selectUsersMenu();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getUsersAddingNewUserAndSearchTD();
     }
 
-    @AfterClass
-    public void backOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null) {
-            DriverBuilder.getInstance().quitDriver();
-        }
+    @BeforeMethod
+    public void BackOfficeLogin() {
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)

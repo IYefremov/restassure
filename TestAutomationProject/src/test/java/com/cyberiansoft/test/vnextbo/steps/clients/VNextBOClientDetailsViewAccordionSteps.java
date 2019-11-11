@@ -9,7 +9,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.cyberiansoft.test.vnextbo.interactions.clients.*;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientsDetailsViewAccordion;
-import com.cyberiansoft.test.vnextbo.verifications.clients.VNextBOClientDetailsValidations;
+import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientDetailsValidations;
 
 public class VNextBOClientDetailsViewAccordionSteps {
 
@@ -105,14 +105,13 @@ public class VNextBOClientDetailsViewAccordionSteps {
     public static void setEmailOptionsData(EmailOptionsData emailOptionsData, boolean wholesale) {
 
         if (!VNextBOClientDetailsValidations.verifyEmailOptionsBlockIsExpanded()) clickEmailOptionsTab();
-        final VNextBOEmailOptionsBlockInteractions emailOptionsBlockInteractions = new VNextBOEmailOptionsBlockInteractions();
-        emailOptionsBlockInteractions.setDefaultRecipient(emailOptionsData.getDefaultRecipient());
-        emailOptionsBlockInteractions.setCc(emailOptionsData.getCc());
-        emailOptionsBlockInteractions.setBcc(emailOptionsData.getBcc());
+        VNextBOEmailOptionsBlockInteractions.setDefaultRecipient(emailOptionsData.getDefaultRecipient());
+        VNextBOEmailOptionsBlockInteractions.setCc(emailOptionsData.getCc());
+        VNextBOEmailOptionsBlockInteractions.setBcc(emailOptionsData.getBcc());
         if (wholesale) {
-            emailOptionsBlockInteractions.clickInvoicesCheckbox();
-            emailOptionsBlockInteractions.clickIInspectionsCheckbox();
-            emailOptionsBlockInteractions.clickIncludeInspectionCheckbox();
+            VNextBOEmailOptionsBlockInteractions.clickInvoicesCheckbox();
+            VNextBOEmailOptionsBlockInteractions.clickIInspectionsCheckbox();
+            VNextBOEmailOptionsBlockInteractions.clickIncludeInspectionCheckbox();
         }
     }
 

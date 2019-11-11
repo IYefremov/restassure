@@ -60,8 +60,7 @@ public class VNextBOBaseWebPage {
     @FindBy(xpath = "//iframe[@name='intercom-messenger-frame']")
     public WebElement intercomMessengerFrame;
 
-    @FindBy(xpath = "//div[contains(@class,'intercom-messenger-new-conversation') or contains(@class,'intercom-messenger-home-screen')]")
-    public WebElement intercomNewConversionSpace;
+    @FindBy(xpath = "//div[contains(@class,'intercom-messenger-new-conversation') or contains(@class,'intercom-messenger-home-screen')]")    public WebElement intercomNewConversionSpace;
 
     @FindBy(xpath = "//iframe[@name='intercom-launcher-frame']")
     public WebElement intercomLauncherFrame;

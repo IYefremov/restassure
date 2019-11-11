@@ -30,6 +30,15 @@ public class VNextBOConfigInfo {
         return instance;
     }
 
+    private String checkForSystemProperty(String property) {
+        try {
+            if (!System.getProperty(property).isEmpty()) {
+                properties.setProperty(property, System.getProperty(property));
+            }
+        } catch (NullPointerException ignored) {}
+        return properties.getProperty(property);
+    }
+
     public String getVNextBOURL() {
         return properties.getProperty("vnextbo.url");
     }
@@ -80,14 +89,5 @@ public class VNextBOConfigInfo {
 
     public String getAzureURL() {
         return checkForSystemProperty("azure.url");
-    }
-
-    private String checkForSystemProperty(String property) {
-        try {
-            if (!System.getProperty(property).isEmpty()) {
-                properties.setProperty(property, System.getProperty(property));
-            }
-        } catch (NullPointerException ignored) {}
-        return properties.getProperty(property);
     }
 }

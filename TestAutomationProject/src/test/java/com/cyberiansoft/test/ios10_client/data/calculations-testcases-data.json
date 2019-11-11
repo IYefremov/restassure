@@ -1339,7 +1339,8 @@
           "servicePrice": "2.5"
         },
         "matrixService": {
-          "matrixServiceName": "PM_New",
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "PM_New",
           "vehiclePartData": {
             "vehiclePartName": "VP1 zayats",
             "vehiclePartOption": "PDR",

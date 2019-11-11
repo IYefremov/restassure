@@ -78,6 +78,7 @@ public class RegularMainScreen extends iOSBaseScreen {
 	}
 
 	public LicensesScreen clickLicenses() {
+		WaitUtils.waitUntilElementIsClickable(licenses);
 		licenses.click();
 		return new LicensesScreen();
 	}

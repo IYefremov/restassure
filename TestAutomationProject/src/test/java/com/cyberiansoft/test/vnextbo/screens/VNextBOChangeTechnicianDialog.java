@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.vnextbo.screens.repairOrders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

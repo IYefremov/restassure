@@ -4461,7 +4461,7 @@
           "serviceDefaultTechnician": {
             "technicianFirstName": "Employee",
             "technicianLastName": "Simple 20%",
-            "isSelected" :  true
+            "isSelected": true
           }
         },
         "workOrderTotalSale": "5"
@@ -4556,12 +4556,12 @@
             {
               "technicianFirstName": "Inspector",
               "technicianLastName": "1",
-              "isSelected" : true
+              "isSelected": true
             },
             {
               "technicianFirstName": "Man-Insp",
               "technicianLastName": "1",
-              "isSelected" : true
+              "isSelected": true
             }
           ]
         },
@@ -4696,12 +4696,12 @@
             {
               "technicianFirstName": "Inspector",
               "technicianLastName": "1",
-              "isSelected" : true
+              "isSelected": true
             },
             {
               "technicianFirstName": "Man-Insp",
               "technicianLastName": "1",
-              "isSelected" : true
+              "isSelected": true
             }
           ]
         },
@@ -4719,12 +4719,12 @@
                 {
                   "technicianFirstName": "Inspector",
                   "technicianLastName": "1",
-                  "isSelected" : true
+                  "isSelected": true
                 },
                 {
                   "technicianFirstName": "Man-Insp",
                   "technicianLastName": "1",
-                  "isSelected" : true
+                  "isSelected": true
                 }
               ],
               "vehiclePart": {
@@ -4778,12 +4778,12 @@
             {
               "technicianFirstName": "Vladimir",
               "technicianLastName": "Avsievich",
-              "isSelected" : true
+              "isSelected": true
             },
             {
               "technicianFirstName": "Nikolay",
               "technicianLastName": "Lomeko",
-              "isSelected" : true
+              "isSelected": true
             }
           ]
         },
@@ -4847,7 +4847,7 @@
             "technicianFirstName": "Employee",
             "technicianLastName": "Simple 20%",
             "technicianPriceValue": "0.00",
-            "isSelected" : true
+            "isSelected": true
           },
           "vehiclePart": {
             "vehiclePartName": "Grill"
@@ -4875,7 +4875,7 @@
           "newTechnician": {
             "technicianFirstName": "Vladimir",
             "technicianLastName": "Avsievich",
-            "isSelected" : true
+            "isSelected": true
           }
         },
         "service": {
@@ -5639,6 +5639,46 @@
           "vinNumber": "1D7HW48NX6S507810"
         }
       }
+    }
+  ],
+  "testCreateWorkOrderWithTypeIsAssignedToASpecificClient": [
+    {
+      "rowID": "testCreateWorkOrderWithTypeIsAssignedToASpecificClient.01",
+      "description": "Test Case 8430:Create work order with type is assigned to a specific client",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89024"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "ZWERTYASDFDDXZBVB"
+        },
+        "moneyService": {
+          "serviceName": "Wheel"
+        },
+        "workOrderPrice": "71.40"
+      },
+      "invoiceData": {
+        "poNumber": "1111 2222"
+      }
+    }
+  ],
+  "testCreateRetailCustomer": [
+    {
+      "rowID": "testCreateRetailCustomer.01",
+      "description": "Test Case 8441:Add Retail Customer in regular build",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89034"
+        },
+        {
+          "testCaseID": "89033"
+        },
+        {
+          "testCaseID": "89037"
+        }
+      ]
     }
   ]
 }

@@ -26,7 +26,7 @@ import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegi
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -527,9 +527,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         BaseUtils.waitABit(30000);
         WebDriver webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginpage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginpage.userLogin(deviceuser, devicepsw);
+        VNextBOLoginSteps.userLogin(deviceuser, devicepsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftmenu.selectInspectionsMenu();
@@ -584,9 +582,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         WebDriver webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceOfficeUrl);
-        VNextBOLoginScreenWebPage loginScreenWebPage = PageFactory.initElements(webdriver,
-                VNextBOLoginScreenWebPage.class);
-        loginScreenWebPage.userLogin(deviceuser, devicepsw);
+        VNextBOLoginSteps.userLogin(deviceuser, devicepsw);
         VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();

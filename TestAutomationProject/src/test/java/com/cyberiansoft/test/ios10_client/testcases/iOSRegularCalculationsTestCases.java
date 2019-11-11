@@ -956,9 +956,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(iOSInternalProjectConstants.SR_S1_MONEY);
-		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity2());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+		RegularServiceDetailsScreenSteps.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity2());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		selectedServicesScreen.waitSelectedServicesScreenLoaded();
 		RegularWorkOrdersSteps.saveWorkOrder();
 		RegularNavigationSteps.navigateBackScreen();
@@ -1347,9 +1347,8 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.setServicePriceValue(workOrderData.getMoneyServiceData().getServicePrice());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
-		servicesScreen.selectService(iOSInternalProjectConstants.TEST_SERVICE_PRICE_MATRIX);
 		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
-		servicesScreen.selectPriceMatrices(matrixServiceData.getMatrixServiceName());
+		RegularServicesScreenSteps.selectMatrixService(matrixServiceData);
 		RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
 		VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
 		RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
@@ -2320,11 +2319,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.BUNDLE1_DISC_EX));
-		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.DISCOUNT_5_10_SERVICE));
-		Assert.assertTrue(selectedServicesScreen.isServiceApproved(iOSInternalProjectConstants.SR_S1_MONEY_PANEL));
-		Assert.assertTrue(selectedServicesScreen.isServiceApproved(iOSInternalProjectConstants.SR_S1_MONEY));
-		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(iOSInternalProjectConstants.TAX_DISCOUNT));
+		for (ServiceData serviceData : inspectionData.getMoneyServicesList())
+			Assert.assertTrue(selectedServicesScreen.isServiceApproved(serviceData.getServiceName()));
+		for (ServiceData serviceData : inspectionData.getPercentageServicesList())
+			Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(serviceData.getServiceName()));
+		Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(inspectionData.getBundleService().getBundleServiceName()));
+
 		RegularInspectionsSteps.cancelCreatingInspection();
 		RegularNavigationSteps.navigateBackScreen();
 	}

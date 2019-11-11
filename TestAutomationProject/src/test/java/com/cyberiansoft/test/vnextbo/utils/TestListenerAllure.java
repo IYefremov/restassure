@@ -33,9 +33,6 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         System.out.println("FAILED: " + result.getMethod().getMethodName());
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
-//        AllureUtils.attachVideo();
-
-        DriverBuilder.getInstance().quitDriver();
     }
 
     @Override
@@ -43,9 +40,6 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         System.out.println("SKIPPED: " + result.getMethod().getMethodName());
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
-//        AllureUtils.attachVideo();
-
-        DriverBuilder.getInstance().quitDriver();
     }
 
     @Override
@@ -59,14 +53,6 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         if (allureResults.exists()) {
             try {
                 FileUtils.deleteDirectory(allureResults);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        File videoFolder = new File("./video");
-        if (videoFolder.exists()) {
-            try {
-                FileUtils.deleteDirectory(videoFolder);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.invoices;
 import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOAdvancedSearchInvoiceFormInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
 import com.cyberiansoft.test.vnextbo.utils.WebConstants;
-import com.cyberiansoft.test.vnextbo.verifications.invoices.VNextBOAdvancedSearchInvoiceFormValidations;
+import com.cyberiansoft.test.vnextbo.validations.invoices.VNextBOAdvancedSearchInvoiceFormValidations;
 
 public class VNextBOAdvancedSearchInvoiceFormSteps {
 

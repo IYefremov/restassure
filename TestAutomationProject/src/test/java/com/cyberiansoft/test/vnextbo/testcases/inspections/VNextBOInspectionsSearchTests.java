@@ -1,28 +1,23 @@
 package com.cyberiansoft.test.vnextbo.testcases.inspections;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInspectionSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.inspections.VNextBOInspectionsAdvancedSearchValidations;
-import com.cyberiansoft.test.vnextbo.verifications.inspections.VNextBOInspectionsPageValidations;
-import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionsAdvancedSearchValidations;
+import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionsPageValidations;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -30,12 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
-
 public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/inspections/VNextBOInspectionsSearchData.json";
-    private VNextBOLoginScreenWebPage loginPage;
     private VNextBOInspectionAdvancedSearchForm vNextBOInspectionAdvancedSearchForm;
     private List<String> expectedStatusDropDownOptions =
             Arrays.asList("All Active", "New", "Approved", "Archived", "Declined");
@@ -68,33 +59,12 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
-
-        JSONDataProvider.dataFile = DATA_FILE;
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-        String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-
-        loginPage = new VNextBOLoginScreenWebPage();
-        loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.selectInspectionsMenu();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsSearchTD();
     }
 
-    @AfterClass
-    public void BackOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null) {
-            DriverBuilder.getInstance().quitDriver();
-        }
+    @BeforeMethod
+    public void BackOfficeLogin() {
+        VNextBOLeftMenuInteractions.selectInspectionsMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
@@ -448,7 +418,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("To", "10/1/2019");
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOInspectionAdvancedSearchForm);
-        Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().equals("From: 01/01/2018, To: 10/01/2019"),
+        Assert.assertEquals("From: 01/01/2018, To: 10/01/2019", VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(),
                 "Search option under Search field hasn't been correct");
         Assert.assertTrue(VNextBOInspectionsPageSteps.getStatusesOfAllInspectionsInTheList().size() > 0,
                 "inspections have not been found");
