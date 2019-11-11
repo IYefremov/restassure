@@ -87,9 +87,9 @@
       ]
     }
   ],
-  "verifyUserCanEditDeviceSettingsANdNotSaveXIcon": [
+  "verifyUserCanEditDeviceSettingsAndNotSaveXIcon": [
     {
-      "rowID": "verifyUserCanEditDeviceSettingsANdNotSaveXIcon.01",
+      "rowID": "verifyUserCanEditDeviceSettingsAndNotSaveXIcon.01",
       "description": "Test Case 90794: User can edit \"Device Settings\" and not save it (X-icon)",
       "targetProcessTestCaseData": [
         {
@@ -102,9 +102,9 @@
       "timeZone": "(UTC-10:00) Aleutian Islands"
     }
   ],
-  "verifyUserCanEditDeviceSettingsANdNotSaveCancelButton": [
+  "verifyUserCanEditDeviceSettingsAndNotSaveCancelButton": [
     {
-      "rowID": "verifyUserCanEditDeviceSettingsANdNotSaveCancelButton.01",
+      "rowID": "verifyUserCanEditDeviceSettingsAndNotSaveCancelButton.01",
       "description": "Test Case 90795: User can edit \"Device Settings\" and not save it (Cancel)",
       "targetProcessTestCaseData": [
         {

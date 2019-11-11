@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.verifications.devicemanagement;
+package com.cyberiansoft.test.vnextbo.validations.devicemanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOAuditLogDialog;

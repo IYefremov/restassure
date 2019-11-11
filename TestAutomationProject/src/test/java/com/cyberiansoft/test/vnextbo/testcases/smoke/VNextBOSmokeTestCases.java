@@ -8,10 +8,6 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOAccountInfoBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOEmailOptionsBlockInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.devicemanagement.VNextBOActiveDevicesInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.devicemanagement.VNextBODeviceManagementInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.devicemanagement.VNextBOEditDeviceDialogInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.devicemanagement.VNextBOPendingRegistrationsInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.*;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
@@ -19,9 +15,7 @@ import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOAddNewDeviceSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBODeviceManagementSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOEditDeviceSteps;
+import com.cyberiansoft.test.vnextbo.steps.devicemanagement.*;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
@@ -31,8 +25,9 @@ import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSte
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORepairOrdersPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
-import com.cyberiansoft.test.vnextbo.validations.VNextBOPendingRegistrationsValidations;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOActiveDevicesTabValidations;
+import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOPendingRegistrationsTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
@@ -437,9 +432,9 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         VNextBODeviceManagementSteps.clickAddNewDeviceButton();
         VNextBOAddNewDeviceDialogSteps.setNewDeviceValuesAndSubmit(data);
-        VNextBOPendingRegistrationsValidations.verifyDevicesTableContainsDevice(data.getNickname());
+        VNextBOPendingRegistrationsTabValidations.verifyDevicesTableContainsDevice(data.getNickname());
         VNextBOPendingRegistrationTabSteps.deletePendingRegistrationDeviceByUser(data.getNickname());
-        VNextBOPendingRegistrationsValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

@@ -1,66 +1,34 @@
 package com.cyberiansoft.test.vnextbo.testcases.devicemanagement;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBODeviceManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.interactions.leftMenuPanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.*;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.verifications.devicemanagement.VNextBOActiveDevicesTabValidations;
-import com.cyberiansoft.test.vnextbo.verifications.devicemanagement.VNextBOAuditLogsDialogValidations;
-import com.cyberiansoft.test.vnextbo.verifications.devicemanagement.VNextBOPendingRegistrationsValidations;
-import com.cyberiansoft.test.vnextbo.verifications.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOActiveDevicesTabValidations;
+import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOAuditLogsDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOPendingRegistrationsTabValidations;
+import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.WebDriverException;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase {
 
-    private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/devicemanagement/VNextBODMActiveAndPendingRegistrationTabsData.json";
-    private VNextBOLoginScreenWebPage loginPage;
-    String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-    String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-
     @BeforeClass
     public void settingUp() {
-
-        JSONDataProvider.dataFile = DATA_FILE;
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        try {
-            DriverBuilder.getInstance().setDriver(browserType);
-        } catch (WebDriverException e) {
-            e.printStackTrace();
-        }
-        webdriver = DriverBuilder.getInstance().getDriver();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-
-        loginPage = new VNextBOLoginScreenWebPage();
-        loginPage.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions leftMenuInteractions = new VNextBOLeftMenuInteractions();
-        leftMenuInteractions.selectDeviceManagementMenu();
-        VNextBODeviceManagementSteps.openActiveDevicesTab();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getDeviceManagementActiveAndPendingRegistrationTabsTD();
     }
 
-    @AfterClass
-    public void backOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null) {
-            DriverBuilder.getInstance().quitDriver();
-        }
+    @BeforeMethod
+    public void BackOfficeLogin() {
+        com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
+        VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
@@ -77,7 +45,7 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
         VNextBOAddNewDeviceDialogSteps.setAllAddNewDeviceFields(deviceData);
         VNextBOAddNewDeviceDialogSteps.cancelAddingNewDeviceCancelButton();
         VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
-        VNextBOPendingRegistrationsValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
@@ -88,7 +56,7 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
         VNextBOAddNewDeviceDialogSteps.setAllAddNewDeviceFields(deviceData);
         VNextBOAddNewDeviceDialogSteps.cancelAddingNewDeviceXIcon();
         VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
-        VNextBOPendingRegistrationsValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
         VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
 
@@ -138,7 +106,7 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
-    public void verifyUserCanEditDeviceSettingsANdNotSaveXIcon(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanEditDeviceSettingsAndNotSaveXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         String testDeviceName = "AndroidZak";
@@ -155,7 +123,7 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
-    public void verifyUserCanEditDeviceSettingsANdNotSaveCancelButton(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanEditDeviceSettingsAndNotSaveCancelButton(String rowID, String description, JSONObject testData) {
 
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         String testDeviceName = "AndroidZak";
@@ -177,57 +145,62 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBODeviceManagementSteps.clickAddNewDeviceButton();
         VNextBOAddNewDeviceDialogSteps.setNewDeviceValuesAndSubmit(deviceData);
-        VNextBOPendingRegistrationsValidations.verifyDevicesTableContainsDevice(deviceData.getNickname());
+        VNextBOPendingRegistrationsTabValidations.verifyDevicesTableContainsDevice(deviceData.getNickname());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanSeePendingRegistrationsDevices(String rowID, String description, JSONObject testData) {
 
-        VNextBOPendingRegistrationsValidations.verifyDevicesTableContainsCorrectColumns();
+        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
+        VNextBOPendingRegistrationsTabValidations.verifyDevicesTableContainsCorrectColumns();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void verifyUserCanChangePhoneNumberOfPendingRegistrationDevice(String rowID, String description, JSONObject testData) {
 
+        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBOPendingRegistrationTabSteps.changePhoneNumberByDeviceNickName(deviceData.getNickname(), deviceData.getPhoneNumber());
-        VNextBOPendingRegistrationsValidations.verifyPhoneNumberIsCorrectByDeviceNickName(deviceData.getNickname(), "Phone", deviceData.getPhoneNumber());
+        VNextBOPendingRegistrationsTabValidations.verifyPhoneNumberIsCorrectByDeviceNickName(deviceData.getNickname(), "Phone", deviceData.getPhoneNumber());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserCanCancelDeletionPendingRegistrationDeviceCancelButton(String rowID, String description, JSONObject testData) {
 
+        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOPendingRegistrationTabSteps.clickDeleteButtonForDeviceByNickName(deviceData.getNickname());
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickCancelButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
-        VNextBOPendingRegistrationsValidations.verifyDevicesTableContainsDevice(deviceData.getNickname());
+        VNextBOPendingRegistrationsTabValidations.verifyDevicesTableContainsDevice(deviceData.getNickname());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
     public void verifyUserCanCancelDeletionPendingRegistrationDeviceXIcon(String rowID, String description, JSONObject testData) {
 
+        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOPendingRegistrationTabSteps.clickDeleteButtonForDeviceByNickName(deviceData.getNickname());
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickCloseButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
-        VNextBOPendingRegistrationsValidations.verifyDevicesTableContainsDevice(deviceData.getNickname());
+        VNextBOPendingRegistrationsTabValidations.verifyDevicesTableContainsDevice(deviceData.getNickname());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
     public void verifyUserCanDeleteDeviceFromPendingRegistrationsList(String rowID, String description, JSONObject testData) {
 
+        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOPendingRegistrationTabSteps.clickDeleteButtonForDeviceByNickName(deviceData.getNickname());
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickYesButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
-        VNextBOPendingRegistrationsValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
     }
 }

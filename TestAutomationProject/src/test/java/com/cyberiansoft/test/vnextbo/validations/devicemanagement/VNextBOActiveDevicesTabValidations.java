@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.verifications.devicemanagement;
+package com.cyberiansoft.test.vnextbo.validations.devicemanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
@@ -28,7 +28,7 @@ public class VNextBOActiveDevicesTabValidations extends VNextBODeviceManagementW
     public static void verifySearchResultIsCorrectForColumnWithText(String columnTitle, String expectedValue) {
 
         for (String cellValue : VNextBOActiveDevicesTabSteps.getColumnValuesByTitleFromColumnWithText(columnTitle)
-             ) {
+        ) {
             Assert.assertTrue(cellValue.toLowerCase().contains(expectedValue.toLowerCase()), "Search result hasn't been correct" );
         }
     }

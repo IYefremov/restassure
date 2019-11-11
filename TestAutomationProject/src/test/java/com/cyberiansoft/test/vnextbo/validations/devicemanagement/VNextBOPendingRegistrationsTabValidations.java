@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.verifications.devicemanagement;
+package com.cyberiansoft.test.vnextbo.validations.devicemanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOPendingRegistrationWebPage;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class VNextBOPendingRegistrationsValidations {
+public class VNextBOPendingRegistrationsTabValidations {
 
     public static void verifyPendingRegistrationDevicesNotFoundMessageIsCorrect() {
 
