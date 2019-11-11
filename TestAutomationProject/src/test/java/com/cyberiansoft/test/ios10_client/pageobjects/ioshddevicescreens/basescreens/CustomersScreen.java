@@ -85,8 +85,8 @@ public class CustomersScreen extends BaseAppScreen {
 		}
 	}
 
-	public AddCustomerScreen selectFirstCustomerToEdit() {
-		appiumdriver.findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]").click();
+	public AddCustomerScreen selectCustomerToEdit(RetailCustomer retailCustomer) {
+		selectCustomer(retailCustomer.getFirstName());
 		appiumdriver.findElementByAccessibilityId("Edit").click();
 		return new AddCustomerScreen();
 	}

@@ -9,40 +9,38 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class AddCustomerScreen extends iOSHDBaseScreen {
-
-	final static String scrollviewxpath = "//XCUIElementTypeScrollView/XCUIElementTypeOther";
 	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[1]")
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewFirstNameTextBox")
     private IOSElement firstnamefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[2]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewLastNameTextBox")
     private IOSElement lastnamefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[3]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewCompanyTextBox")
     private IOSElement companyfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[4]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewAddress1TextBox")
     private IOSElement streetfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[6]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewCityTextBox")
     private IOSElement cityfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[7]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewStateTextBox")
     private IOSElement statefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[8]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewZipTextBox")
     private IOSElement zipfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[9]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewPhoneTextBox")
     private IOSElement phonefld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeTextField[10]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewEmailTextbox")
     private IOSElement mailfld;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[1]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewStateButton")
     private IOSElement statebtn;
-	
-	@iOSXCUITFindBy(xpath = scrollviewxpath + "/XCUIElementTypeButton[2]")
+
+	@iOSXCUITFindBy(accessibility = "ClientInfoViewCountryButton")
     private IOSElement countrybtn;
 	
 	@iOSXCUITFindBy(accessibility = "Save")
