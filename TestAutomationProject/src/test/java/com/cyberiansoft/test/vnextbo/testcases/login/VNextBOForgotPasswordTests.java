@@ -82,8 +82,8 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage.setConfirmationMailFieldValue(NOT_REGISTERED_USER_EMAIL);
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(), "Warning",
                 "Dialog header hasn't been correct");
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogInformationMessage(),
@@ -100,8 +100,8 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(), "Information",
                 "Dialog header hasn't been correct");
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogInformationMessage(),

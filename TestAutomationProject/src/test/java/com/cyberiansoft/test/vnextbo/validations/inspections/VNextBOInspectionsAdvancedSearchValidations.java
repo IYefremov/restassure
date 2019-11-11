@@ -9,19 +9,19 @@ import java.util.Map;
 
 public class VNextBOInspectionsAdvancedSearchValidations {
 
-    public static void isAdvancedSearchFormDisplayed() {
+    public static void verifyAdvancedSearchFormIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionAdvancedSearchForm().advancedSearchFormContent),
                 "Advanced search form hasn't been displayed\"");
     }
 
-    public static void isAdvancedSearchFormNotDisplayed(VNextBOInspectionAdvancedSearchForm advancedSearchForm) {
+    public static void verifyAdvancedSearchFormIsNotDisplayed(VNextBOInspectionAdvancedSearchForm advancedSearchForm) {
 
         Assert.assertTrue(Utils.isElementNotDisplayed(advancedSearchForm.advancedSearchFormContent),
                 "Advanced search form hasn't been closed");
     }
 
-    public static void isSearchButtonDisplayed() {
+    public static void verifySearchButtonIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionAdvancedSearchForm().searchButton),
                 "Advanced Search button hasn't been displayed");

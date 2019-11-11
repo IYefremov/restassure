@@ -12,32 +12,32 @@ import org.testng.Assert;
 
 public class VNextBOClientDetailsValidations {
 
-    public static boolean isClientInfoPanelExpanded() {
+    public static boolean verifyClientInfoPanelIsExpanded() {
 
         return Utils.isElementDisplayed(new VNextBOClientInfoBlock().getClientInfoPanel());
     }
 
-    public static boolean isAccountInfoPanelExpanded() {
+    public static boolean verifyAccountInfoPanelIsExpanded() {
 
         return Utils.isElementDisplayed(new VNextBOAccountInfoBlock().getAccountInfoPanel());
     }
 
-    public static boolean isAddressPanelExpanded() {
+    public static boolean verifyAddressPanelIsExpanded() {
 
         return Utils.isElementDisplayed(new VNextBOAddressBlock().getAddressInfoPanel());
     }
 
-    public static boolean isEmailOptionsBlockExpanded() {
+    public static boolean verifyEmailOptionsBlockIsExpanded() {
 
         return Utils.isElementDisplayed(new VNextBOEmailOptionsBlock().getEmailOptionsPanel());
     }
 
-    public static boolean isPreferencesBlockExpanded() {
+    public static boolean verifyPreferencesBlockIsExpanded() {
 
         return Utils.isElementDisplayed(new VNextBOPreferencesBlock().getPreferencesPanel());
     }
 
-    public static boolean isMiscellaneousBlockExpanded() {
+    public static boolean verifyMiscellaneousBlockIsExpanded() {
 
         return Utils.isElementDisplayed(new VNextBOMiscellaneousBlock().getMiscellaneousPanel());
     }
@@ -186,7 +186,7 @@ public class VNextBOClientDetailsValidations {
 
     public static void verifyAllClientDetailsBlocksData(VNextBOClientsData clientsData, boolean wholesale, boolean selectedCheckboxes) {
 
-        if (!VNextBOClientDetailsValidations.isClientInfoPanelExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
+        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
         VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(clientsData.getEmployee());
         VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
         VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(clientsData.getAccountInfoData(), selectedCheckboxes);

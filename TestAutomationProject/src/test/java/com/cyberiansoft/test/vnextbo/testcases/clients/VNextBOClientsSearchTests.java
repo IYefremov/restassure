@@ -33,7 +33,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchClients(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByText("jack");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "jack");
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "jack");
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -43,7 +43,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchValidations.verifyAllElementsDisplayed();
         VNextBOClientsAdvancedSearchSteps.clickSearchButton();
-        VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("10");
+        VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("10");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -53,17 +53,17 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOClientsAdvancedSearchForm advancedSearchForm =
                 new VNextBOClientsAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.clickCloseButton();
-        VNextBOClientsAdvancedSearchValidations.isAdvancedSearchFormNotDisplayed(advancedSearchForm);
+        VNextBOClientsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(advancedSearchForm);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyAdvancedSearchWindowSavesSearchParameters(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByName("testName");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Name: testName");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Name: testName");
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOClientsAdvancedSearchValidations.isAdvancedSearchFormDisplayed();
-        VNextBOClientsAdvancedSearchValidations.doesNameFieldContainExpectedText("testName");
+        VNextBOClientsAdvancedSearchValidations.verifyAdvancedSearchFormIsDisplayed();
+        VNextBOClientsAdvancedSearchValidations.verifyNameFieldContainsExpectedText("testName");
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -89,10 +89,10 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOClientsAdvancedSearchSteps.setPhoneField("03867676767");
         VNextBOClientsAdvancedSearchSteps.clickCloseButton();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOClientsAdvancedSearchValidations.doesNameFieldContainExpectedText("testName");
-        VNextBOClientsAdvancedSearchValidations.doesAddressFieldContainExpectedText("testAddress");
-        VNextBOClientsAdvancedSearchValidations.doesEmailFieldContainExpectedText("testEmail@com");
-        VNextBOClientsAdvancedSearchValidations.doesPhoneFieldContainExpectedText("03867676767");
+        VNextBOClientsAdvancedSearchValidations.verifyNameFieldContainsExpectedText("testName");
+        VNextBOClientsAdvancedSearchValidations.verifyAddressFieldContainsExpectedText("testAddress");
+        VNextBOClientsAdvancedSearchValidations.verifyEmailFieldContainsExpectedText("testEmail@com");
+        VNextBOClientsAdvancedSearchValidations.verifyPhoneFieldContainsExpectedText("03867676767");
         VNextBOClientsAdvancedSearchSteps.clickCloseButton();
     }
 
@@ -100,8 +100,8 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByNameNegative(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByName("abracadabra");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Name: abracadabra");
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Name: abracadabra");
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -109,8 +109,8 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByNamePositive(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByName("TEST");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Name: TEST");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "TEST");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Name: TEST");
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "TEST");
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -118,8 +118,8 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByEmail(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByEmail("test@test.com");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Email: test@test.com");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Email", "test@test.com");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Email: test@test.com");
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Email", "test@test.com");
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -127,8 +127,8 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByPhone(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByPhone("1111111");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Phone: 1111111");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Phone", "1111111");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Phone: 1111111");
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Phone", "1111111");
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -136,8 +136,8 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByAddress(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByAddress("Hollywood");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Address: Hollywood");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Address", "Hollywood");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Address: Hollywood");
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Address", "Hollywood");
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -149,11 +149,11 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOClientsAdvancedSearchSteps.setEmailField("testEmail@com");
         VNextBOClientsAdvancedSearchSteps.setPhoneField("03867676767");
         VNextBOClientsAdvancedSearchSteps.setTypeDropDownField("Retail");
-        VNextBOClientsAdvancedSearchValidations.doesNameFieldContainExpectedText("testName");
-        VNextBOClientsAdvancedSearchValidations.doesAddressFieldContainExpectedText("testAddress");
-        VNextBOClientsAdvancedSearchValidations.doesEmailFieldContainExpectedText("testEmail@com");
-        VNextBOClientsAdvancedSearchValidations.doesPhoneFieldContainExpectedText("03867676767");
-        VNextBOClientsAdvancedSearchValidations.doesTypeFieldContainExpectedText("Retail");
+        VNextBOClientsAdvancedSearchValidations.verifyNameFieldContainsExpectedText("testName");
+        VNextBOClientsAdvancedSearchValidations.verifyAddressFieldContainsExpectedText("testAddress");
+        VNextBOClientsAdvancedSearchValidations.verifyEmailFieldContainsExpectedText("testEmail@com");
+        VNextBOClientsAdvancedSearchValidations.verifyPhoneFieldContainsExpectedText("03867676767");
+        VNextBOClientsAdvancedSearchValidations.verifyTypeFieldContainsExpectedText("Retail");
         VNextBOClientsAdvancedSearchSteps.clickCloseButton();
     }
 
@@ -161,9 +161,9 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByTypeRetail(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByType("Retail");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Client Type: Retail");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Client Type: Retail");
         VNextBOClientsPageSteps.getColumnValuesFromColumnWithCheckBoxes("Wholesale");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithCheckboxes("Wholesale", false);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Wholesale", false);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -171,9 +171,9 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByTypeWholesale(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByType("Wholesale");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Client Type: Wholesale");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Client Type: Wholesale");
         VNextBOClientsPageSteps.getColumnValuesFromColumnWithCheckBoxes("Wholesale");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithCheckboxes("Wholesale", true);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Wholesale", true);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 }

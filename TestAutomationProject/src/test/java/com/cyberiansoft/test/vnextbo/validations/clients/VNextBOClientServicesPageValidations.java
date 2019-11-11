@@ -14,26 +14,26 @@ import java.util.List;
 
 public class VNextBOClientServicesPageValidations extends VNextBOBaseWebPageValidations {
 
-    public static void isServicesTableDisplayed() {
+    public static void verifyServicesTableIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsClientServicesPage().getServicesTable()),
                 "Services table hasn't been displayed.");
     }
 
-    public static void isCorrectRecordsAmountDisplayed(int expectedRecordsAmount) {
+    public static void verifyCorrectRecordsAmountIsDisplayed(int expectedRecordsAmount) {
 
         Assert.assertEquals(VNextBOClientServicesPageSteps.getServicesAmount(), expectedRecordsAmount,
                 "Services table has contained incorrect clients amount.");
     }
 
-    public static void isSearchResultCorrectForColumnWithText(String columnTitle, String expectedValue) {
+    public static void verifySearchResultIsCorrectForColumnWithText(String columnTitle, String expectedValue) {
 
         for (String cellValue : VNextBOClientServicesPageSteps.getColumnValuesByTitleFromColumnWithText(columnTitle)) {
             Assert.assertTrue(cellValue.toLowerCase().contains(expectedValue.toLowerCase()), "Search result hasn't been correct" );
         }
     }
 
-    public static void isServicesNotFoundMessageDisplayed() {
+    public static void verifyServicesNotFoundMessageIsDisplayed() {
 
         Assert.assertEquals(VNextBOClientServicesPageSteps.getServicesNotFoundMessage(), "No records found. Please refine search criteria.",
                 "\"No records found. Please refine search criteria.\" message hasn't been displayed.");

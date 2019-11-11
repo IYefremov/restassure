@@ -43,9 +43,9 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
         VNextBOAddNewUserDialogSteps.clickSaveButton();
-        VNextBOAddNewUserDialogValidations.isErrorMessageDisplayed("First Name is required");
-        VNextBOAddNewUserDialogValidations.isErrorMessageDisplayed("Last Name is required");
-        VNextBOAddNewUserDialogValidations.isErrorMessageDisplayed("Email is required");
+        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed("First Name is required");
+        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed("Last Name is required");
+        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed("Email is required");
         VNextBOAddNewUserDialogSteps.closeDialog();
     }
 
@@ -58,13 +58,13 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         VNextBOAddNewUserDialogSteps.createNewUser(newUserFirstName, newUserLastName,
                 newUserEmail,"111111116", true);
-        VNextBOAddNewUserDialogValidations.isDialogClosed(vNexBOAddNewUserDialog);
+        VNextBOAddNewUserDialogValidations.verifyDialogIsClosed(vNexBOAddNewUserDialog);
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "New user hasn't been found");
-        Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentOnCurrentPageByText(newUserEmail));
-        Assert.assertTrue(VNextBOUsersPageValidations.isRedTriangleWarningIconDisplayed(),
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText(newUserEmail));
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyRedTriangleWarningIconIsDisplayed(),
                 "Red triangle warning icon hasn't been displayed.");
-        VNextBOUsersPageValidations.isReSendButtonDisplayed();
+        VNextBOUsersPageValidations.verifyReSendButtonIsDisplayed();
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("REGISTRATION");
@@ -99,7 +99,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOAddNewUserDialogSteps.setUserLastName(newUserLastName);
         VNextBOAddNewUserDialogSteps.setUserEmail(newUserEmail);
         VNextBOAddNewUserDialogSteps.clickSaveButton();
-        VNextBOAddNewUserDialogValidations.isErrorMessageDisplayed(
+        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed(
                 "Email address " + newUserEmail + " has been already registered. Please try another.");
         VNextBOAddNewUserDialogSteps.closeDialog();
     }
@@ -110,7 +110,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOUsersPageSteps.clickAddNewUserButton();
         VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         VNextBOAddNewUserDialogSteps.closeDialog();
-        VNextBOAddNewUserDialogValidations.isDialogClosed(vNexBOAddNewUserDialog);
+        VNextBOAddNewUserDialogValidations.verifyDialogIsClosed(vNexBOAddNewUserDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
@@ -119,8 +119,8 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOUsersAdvancedSearchForm vNextBOUsersAdvancedSearchForm = new VNextBOUsersAdvancedSearchForm();
         VNextBOUsersAdvancedSearchSteps.clickCloseButton();
-        VNextBOUsersAdvancedSearchValidations.isAdvancedSearchFormNotDisplayed(vNextBOUsersAdvancedSearchForm);
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("");
+        VNextBOUsersAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOUsersAdvancedSearchForm);
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
@@ -128,17 +128,17 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOUsersAdvancedSearchForm vNextBOUsersAdvancedSearchForm = new VNextBOUsersAdvancedSearchForm();
-        VNextBOUsersAdvancedSearchValidations.isAdvancedSearchFormDisplayed();
-        VNextBOUsersAdvancedSearchValidations.isEmailFieldDisplayed();
-        VNextBOUsersAdvancedSearchValidations.isPhoneFieldDisplayed();
-        VNextBOUsersAdvancedSearchValidations.isSearchButtonDisplayed();
-        VNextBOUsersAdvancedSearchValidations.isCloseButtonDisplayed();
+        VNextBOUsersAdvancedSearchValidations.verifyAdvancedSearchFormIsDisplayed();
+        VNextBOUsersAdvancedSearchValidations.verifyEmailFieldIsDisplayed();
+        VNextBOUsersAdvancedSearchValidations.verifyPhoneFieldIsDisplayed();
+        VNextBOUsersAdvancedSearchValidations.verifySearchButtonIsDisplayed();
+        VNextBOUsersAdvancedSearchValidations.verifyCloseButtonIsDisplayed();
         VNextBOUsersAdvancedSearchSteps.setEmailField(newUserEmail);
         VNextBOUsersAdvancedSearchSteps.clickSearchButton();
-        VNextBOUsersAdvancedSearchValidations.isAdvancedSearchFormNotDisplayed(vNextBOUsersAdvancedSearchForm);
+        VNextBOUsersAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOUsersAdvancedSearchForm);
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found by email");
-        Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentOnCurrentPageByText(newUserEmail));
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Email: " + newUserEmail);
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText(newUserEmail));
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Email: " + newUserEmail);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -147,8 +147,8 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.searchUserByPhone("1111111116");
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found by phone");
-        Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentOnCurrentPageByText("1111111116"));
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Phone: 1111111116");
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("1111111116"));
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Phone: 1111111116");
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -159,7 +159,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilter();
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 10,
                 "Search filter hasn't been cleared, all records haven't been displayed");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
@@ -167,8 +167,8 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
         VNextBOSearchPanelSteps.searchByText(newUserFirstName);
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found");
-        Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentOnCurrentPageByText(newUserFirstName));
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Name: " + newUserFirstName);
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText(newUserFirstName));
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Name: " + newUserFirstName);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -179,14 +179,14 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilter();
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 10,
                 "Search filter hasn't been cleared, all records haven't been displayed");
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserSeesMessageWhenSearchResultIsNegative(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByText("abracadabra");
-        VNextBOUsersPageValidations.isUsersNotFoundMessageDisplayed();
+        VNextBOUsersPageValidations.verifyUsersNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -196,16 +196,16 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         VNextBOUsersPageSteps.openUserDataForEdit();
-        VNextBOAddNewUserDialogValidations.isEmailFieldDisabled();
+        VNextBOAddNewUserDialogValidations.verifyEmailFieldIsDisabled();
         VNextBOAddNewUserDialogSteps.editUserData("autoUserEditedFirstName",
                 "autoUseEditedLastName", "222222227", false);
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOSearchPanelSteps.searchByText("autoUserEditedFirstName autoUseEditedLastName");
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "Edited user hasn't been found");
-        Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentOnCurrentPageByText("1222222227"));
-        Assert.assertTrue(VNextBOUsersPageValidations.isRedTriangleWarningIconNotDisplayed(vNexBOUsersWebPage),
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("1222222227"));
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyRedTriangleWarningIconIsNotDisplayed(vNexBOUsersWebPage),
                 "Red triangle warning icon has been displayed.");
-        Assert.assertTrue(VNextBOUsersPageValidations.isReSendButtonNotDisplayed(vNexBOUsersWebPage),
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyReSendButtonIsNotDisplayed(vNexBOUsersWebPage),
                 "Re-send button has been displayed.");
     }
 }

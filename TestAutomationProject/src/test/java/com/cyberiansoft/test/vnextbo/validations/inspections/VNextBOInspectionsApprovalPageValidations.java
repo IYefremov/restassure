@@ -5,15 +5,15 @@ import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsAppro
 
 public class VNextBOInspectionsApprovalPageValidations {
 
-    public static boolean isApprovePrintPageButtonDisplayed() {
+    public static boolean verifyApprovePrintPageButtonIsDisplayed() {
         return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getApproveServiceButton());
     }
 
-    public static boolean isNotesTextAreaDisplayed() {
+    public static boolean verifyNotesTextAreaIsDisplayed() {
         return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getNotesTextArea());
     }
 
-    public static boolean isPrintPageInspectionStatusDisplayed() {
+    public static boolean verifyPrintPageInspectionStatusIsDisplayed() {
         return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getInspectionStatus());
     }
 }

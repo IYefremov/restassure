@@ -296,7 +296,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        if (VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterName))
+        if (VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists(filterName))
             VNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterName);
 
 
@@ -327,7 +327,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        if (VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterNameEdited))
+        if (VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists(filterNameEdited))
             VNextBOInspectionsPageSteps.deleteSavedAdvancedSearchFilter(filterNameEdited);
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
@@ -389,7 +389,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        Assert.assertFalse(VNextBOInspectionsPageValidations.isSavedAdvancedSearchFilterExists(filterNameEdited));
+        Assert.assertFalse(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists(filterNameEdited));
         webdriver.quit();
     }
 

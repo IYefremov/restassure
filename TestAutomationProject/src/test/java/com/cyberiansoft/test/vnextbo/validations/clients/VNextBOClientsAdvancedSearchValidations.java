@@ -6,13 +6,13 @@ import org.testng.Assert;
 
 public class VNextBOClientsAdvancedSearchValidations {
 
-    public static void isAdvancedSearchFormDisplayed() {
+    public static void verifyAdvancedSearchFormIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOClientsAdvancedSearchForm().getAdvancedSearchFormContent()),
                 "Advanced search form hasn't been displayed\"");
     }
 
-    public static void isAdvancedSearchFormNotDisplayed(VNextBOClientsAdvancedSearchForm advancedSearchForm) {
+    public static void verifyAdvancedSearchFormIsNotDisplayed(VNextBOClientsAdvancedSearchForm advancedSearchForm) {
 
         Assert.assertTrue(Utils.isElementNotDisplayed(advancedSearchForm.getAdvancedSearchFormContent()),
                 "Advanced search form hasn't been closed");
@@ -35,31 +35,31 @@ public class VNextBOClientsAdvancedSearchValidations {
                 "Close x-icon button hasn't been displayed");
     }
 
-    public static void doesNameFieldContainExpectedText(String expectedText) {
+    public static void verifyNameFieldContainsExpectedText(String expectedText) {
 
         Assert.assertEquals(new VNextBOClientsAdvancedSearchForm().getNameField().getAttribute("value"), expectedText,
                 "Name field hasn't contained expected text");
     }
 
-    public static void doesEmailFieldContainExpectedText(String expectedText) {
+    public static void verifyEmailFieldContainsExpectedText(String expectedText) {
 
         Assert.assertEquals(new VNextBOClientsAdvancedSearchForm().getEmailField().getAttribute("value"), expectedText,
                 "Email field hasn't contained expected text");
     }
 
-    public static void doesAddressFieldContainExpectedText(String expectedText) {
+    public static void verifyAddressFieldContainsExpectedText(String expectedText) {
 
         Assert.assertEquals(new VNextBOClientsAdvancedSearchForm().getAddressField().getAttribute("value"), expectedText,
                 "Address field hasn't contained expected text");
     }
 
-    public static void doesPhoneFieldContainExpectedText(String expectedText) {
+    public static void verifyPhoneFieldContainsExpectedText(String expectedText) {
 
         Assert.assertEquals(new VNextBOClientsAdvancedSearchForm().getPhoneField().getAttribute("value"), expectedText,
                 "Phone field hasn't contained expected text");
     }
 
-    public static void doesTypeFieldContainExpectedText(String expectedText) {
+    public static void verifyTypeFieldContainsExpectedText(String expectedText) {
 
         Assert.assertEquals(Utils.getText(new VNextBOClientsAdvancedSearchForm().getTypeDropDownField()), expectedText,
                 "Type field hasn't contained expected text");

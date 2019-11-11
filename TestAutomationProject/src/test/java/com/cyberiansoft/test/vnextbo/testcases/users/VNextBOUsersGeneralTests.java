@@ -40,19 +40,19 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenUsersPage(String rowID, String description, JSONObject testData) {
 
-        VNextBOUsersPageValidations.isAddNewUserBtnDisplayed();
-        VNextBOUsersPageValidations.isUsersTableDisplayed();
-        VNextBOUsersPageValidations.isTermsAndConditionsLinkDisplayed();
-        VNextBOUsersPageValidations.isPrivacyPolicyLinkDisplayed();
-        VNextBOUsersPageValidations.isIntercomButtonDisplayed();
-        VNextBOUsersPageValidations.isLogoDisplayed();
-        VNextBOUsersPageValidations.isTimeBoxDisplayed();
-        VNextBOSearchPanelValidations.isSearchPanelDisplayed();
-        VNextBOPageSwitcherValidations.arePageNavigationElementsDisplayed();
-        VNextBOUsersPageValidations.isUserInfoBlockDisplayed();
-        VNextBOUsersPageValidations.isLogoutButtonDisplayed();
-        VNextBOUsersPageValidations.isHelpButtonDisplayed();
-        VNextBOUsersPageValidations.isCopyRightTextDisplayed();
+        VNextBOUsersPageValidations.verifyAddNewUserBtnIsDisplayed();
+        VNextBOUsersPageValidations.verifyUsersTableIsDisplayed();
+        VNextBOUsersPageValidations.verifyTermsAndConditionsLinkIsDisplayed();
+        VNextBOUsersPageValidations.verifyPrivacyPolicyLinkIsDisplayed();
+        VNextBOUsersPageValidations.verifyIntercomButtonIsDisplayed();
+        VNextBOUsersPageValidations.verifyLogoIsDisplayed();
+        VNextBOUsersPageValidations.verifyTimeBoxIsDisplayed();
+        VNextBOSearchPanelValidations.verifySearchPanelIsDisplayed();
+        VNextBOPageSwitcherValidations.verifyPageNavigationElementsAreDisplayed();
+        VNextBOUsersPageValidations.verifyUserInfoBlockIsDisplayed();
+        VNextBOUsersPageValidations.verifyLogoutButtonIsDisplayed();
+        VNextBOUsersPageValidations.verifyHelpButtonIsDisplayed();
+        VNextBOUsersPageValidations.verifyCopyRightTextIsDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -60,7 +60,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.openIntercomMessenger();
         WaitUtilsWebDriver.waitForLoading();
-        VNextBOUsersPageValidations.isIntercomMessengerOpened();
+        VNextBOUsersPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOUsersPageSteps.closeIntercom();
     }
 
@@ -69,13 +69,13 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.clickTermsAndConditionsLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "AMT Service Agreement Terms and Conditions",
                 "Dialog header hasn't been correct");
         VNextBOModalDialogSteps.clickOkButton();
-        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -83,13 +83,13 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.clickPrivacyPolicyLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "Privacy Policy",
                 "Dialog header hasn't been correct");
         VNextBOModalDialogSteps.clickOkButton();
-        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -133,28 +133,28 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyUserCanUseHelp(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.openHelpPage();
-        VNextBOUsersPageValidations.isHelpPageOpened();
+        VNextBOUsersPageValidations.verifyHelpPageIsOpened();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanNavigateBetweenPages(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("2");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("2");
         VNextBOPageSwitcherSteps.clickFooterPreviousPageButton();
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyFooterLastPageButtonIsClickable(),
                 "Bottom Last page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderLastPageButtonIsClickable(),
                 "Top Last page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderFirstPageButtonIsClickable(), "Top First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyFooterFirstPageButtonIsClickable(), "Bottom First page button has been clickable.");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("3");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -163,15 +163,15 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.openPageByNumber(4);
         VNextBOUsersPageSteps.clickLogo();
         VNextBOLeftMenuInteractions.selectUsersMenu();
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("4");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("4");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeItemsPerPage(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.changeItemsPerPage("20");
-        VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("20");
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
+        VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("20");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -181,7 +181,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.openPageByNumber(2);
         VNextBOUsersPageSteps.clickLogo();
         VNextBOLeftMenuInteractions.selectUsersMenu();
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("2");
-        VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("50");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("2");
+        VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("50");
     }
 }

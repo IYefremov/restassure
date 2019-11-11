@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations {
 
-    public static void isSearchPanelDisplayed() {
+    public static void verifySearchPanelIsDisplayed() {
 
         VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
         Assert.assertTrue(Utils.isElementDisplayed(searchPanel.getSearchPanel()),
@@ -21,7 +21,7 @@ public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations
                 "Advanced search drop down caret hasn't been displayed.");
     }
 
-    public static void isSearchFieldDisplayed() {
+    public static void verifySearchFieldIsDisplayed() {
 
         VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
         Assert.assertTrue(Utils.isElementDisplayed(searchPanel.getSearchInputField()),
@@ -30,13 +30,13 @@ public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations
                 "Search loupe icon hasn't been displayed.");
     }
 
-    public static void isSearchFilterTextCorrect(String text) {
+    public static void verifySearchFilterTextIsCorrect(String text) {
 
         Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().contains(text),
                 "Search option under Search field hasn't been correct");
     }
 
-    public static void isSearchFieldEmpty() {
+    public static void verifySearchFieldIsEmpty() {
 
         Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().equals(""),
                 "Search field hasn't been cleared");

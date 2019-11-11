@@ -43,8 +43,8 @@ public class VNextBOLoginTests extends BaseTestCase {
     public void verifyUserCanReadTermsAndConditions(String rowID, String description, JSONObject testData) {
 
         VNextBOFooterPanelInteractions.clickTermsAndConditionsLink();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "AMT Service Agreement Terms and Conditions",
                 "Dialog header hasn't been correct");
@@ -109,8 +109,8 @@ public class VNextBOLoginTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanLoginWhenClickBackBtnAndReturn(String rowID, String description, JSONObject testData) {
 
-//        VNextBOLoginInteractions.setEmailField(userName);
-//        VNextBOLoginInteractions.setPasswordField(userPassword);
+        VNextBOLoginInteractions.setEmailField(userName);
+        VNextBOLoginInteractions.setPasswordField(userPassword);
         webdriverGotoWebPage("https://www.google.com");
         webdriver.navigate().back();
         Assert.assertEquals(VNextBOLoginInteractions.getValueFromEmailField(), "",
