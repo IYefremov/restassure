@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionsP
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -29,11 +28,8 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
-        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsTD();
-    }
 
-    @BeforeMethod
-    public void BackOfficeLogin() {
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsTD();
         VNextBOLeftMenuInteractions.selectInspectionsMenu();
     }
 

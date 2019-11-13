@@ -10,11 +10,11 @@ public class VNextBOLoginValidations {
     }
 
     public static boolean isEmailFieldDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getEmailField().getWrappedElement());
+        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getEmailField());
     }
 
     public static boolean isPasswordFieldDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getPasswordField().getWrappedElement());
+        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getPasswordField());
     }
 
     public static boolean isLoginButtonDisplayed() {

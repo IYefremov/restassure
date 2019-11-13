@@ -134,9 +134,9 @@ public class VNextBOUsersPageSteps extends VNextBOBaseWebPageSteps {
         return getUsersTableRows().size();
     }
 
-    public static WebElement getTableRowWithText(String userMail) {
+    public static WebElement getTableRowWithText(String searchText) {
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
-        return vNexBOUsersWebPage.tableRowByText(userMail);
+        return vNexBOUsersWebPage.tableRowByText(searchText);
     }
 
     public static String getUsersNotFoundMessage() {

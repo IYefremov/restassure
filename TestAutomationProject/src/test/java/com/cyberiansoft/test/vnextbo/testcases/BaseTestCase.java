@@ -10,10 +10,7 @@ import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.*;
 
 import java.io.File;
 
@@ -46,16 +43,15 @@ public class BaseTestCase {
 			DriverBuilder.getInstance().quitDriver();
 	}
 
-	@BeforeMethod
+	@BeforeClass
     public void login() {
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
         final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-
         VNextBOLoginSteps.userLogin(userName, userPassword);
     }
 
-    @AfterMethod
+    @AfterClass
     public void logout() {
         VNextBOHeaderPanelSteps.logout();
     }

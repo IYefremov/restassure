@@ -14,7 +14,6 @@ import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOPageSwitch
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextBOClientsSearchTests extends BaseTestCase {
@@ -22,10 +21,6 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsSearchTD();
-    }
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
         VNextBOLeftMenuInteractions.selectClientsMenu();
     }
 

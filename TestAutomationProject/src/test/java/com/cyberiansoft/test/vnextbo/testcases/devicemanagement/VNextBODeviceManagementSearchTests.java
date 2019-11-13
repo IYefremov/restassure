@@ -4,7 +4,6 @@ import com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement.VNextBODeviceM
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
-import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOActiveDevicesTabSteps;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBODeviceManagementSteps;
@@ -13,20 +12,14 @@ import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPane
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOActiveDevicesTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBODevicesAdvancedSearchValidations;
 import org.json.simple.JSONObject;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class VNextBODeviceManagementSearchTests extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getDeviceManagementSearchTD();
-    }
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
-        VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
+        com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
 

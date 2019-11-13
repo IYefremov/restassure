@@ -12,7 +12,6 @@ import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValid
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
@@ -20,10 +19,6 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsArchiveRestoreTD();
-    }
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
         VNextBOLeftMenuInteractions.selectClientsMenu();
     }
 
