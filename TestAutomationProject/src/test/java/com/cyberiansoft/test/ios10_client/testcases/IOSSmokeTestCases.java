@@ -177,8 +177,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         addCustomerScreen.addCustomer(newCustomer);
         addCustomerScreen.clickSaveBtn();
         Assert.assertTrue(customersScreen.isCustomerExists(newCustomer.getFirstName()));
-        //customersScreen.selectCustomerWithoutEditing(newCustomer.getFirstName());
-        customersScreen.selectFirstCustomerToEdit();
+        customersScreen.selectCustomerToEdit(newCustomer);
 
         addCustomerScreen.editCustomer(editedCustomer);
         addCustomerScreen.clickSaveBtn();
