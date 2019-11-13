@@ -5746,7 +5746,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.selectPanel(firstMonitorServiceData.getMonitorService());
-		Assert.assertEquals(orderMonitorScreen.getTechnicianValue(), firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
+		Assert.assertEquals(orderMonitorScreen.getServiceTechnicianValue(), firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
 		orderMonitorScreen.clickServiceDetailsDoneButton();
 
 		orderMonitorScreen.clickStartOrderButton();

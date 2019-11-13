@@ -16,4 +16,16 @@ public class OrderMonitorData {
 
     @JsonProperty("monitorServicesData")
     List<MonitorServiceData> monitorServicesData;
+
+    @JsonProperty("defaultTechnician")
+    ServiceTechnician defaultTechnician;
+
+    @JsonProperty("defaultTechnicians")
+    List<ServiceTechnician> defaultTechnicians;
+
+    @JsonProperty("newTechnician")
+    ServiceTechnician newTechnician;
+
+    @JsonProperty("newTechnicians")
+    List<ServiceTechnician> newTechnicians;
 }

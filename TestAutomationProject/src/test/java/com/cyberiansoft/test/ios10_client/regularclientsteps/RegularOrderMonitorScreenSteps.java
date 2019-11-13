@@ -2,7 +2,7 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.OrderMonitorData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.WorkOrderStatuses;
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
@@ -50,13 +50,26 @@ public class RegularOrderMonitorScreenSteps {
     public static void changePhaseStatus(OrderMonitorData orderMonitorData, OrderMonitorStatuses orderPhaseStatus) {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         selectOrderPhase(orderMonitorData);
-        orderMonitorScreen.clickChangeStatus();
+        clickPhaseChangeStatus();
         orderMonitorScreen.selectOrderPhaseStatus(orderPhaseStatus);
+    }
+
+    public static void clickPhaseChangeStatus() {
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        orderMonitorScreen.clickChangeStatus();
     }
 
     public static void selectOrderPhase(OrderMonitorData orderMonitorData) {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.selectOrderPhase(orderMonitorData.getPhaseName());
+    }
+
+    public static void assignTechnicianToOrderPhase(OrderMonitorData orderMonitorData, ServiceTechnician serviceTechnician) {
+        selectOrderPhase(orderMonitorData);
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        orderMonitorScreen.clickAssignTechnician();
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
     }
 
     public static void clickStartService() {
