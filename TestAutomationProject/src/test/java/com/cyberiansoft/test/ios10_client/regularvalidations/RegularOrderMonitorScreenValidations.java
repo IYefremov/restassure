@@ -1,11 +1,9 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
-import com.cyberiansoft.test.dataclasses.OrderMonitorData;
-import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.ServiceStatus;
-import com.cyberiansoft.test.dataclasses.VehiclePartData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.AssignTechniciansSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
 import org.testng.Assert;
 
@@ -77,6 +75,11 @@ public class RegularOrderMonitorScreenValidations {
             Assert.assertTrue(orderMonitorScreen.isStartOrderButtonExists());
         else
             Assert.assertFalse(orderMonitorScreen.isStartOrderButtonExists());
+    }
+
+    public static void verifyServiceTechnicianValue(ServiceTechnician expectedTechnician) {
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        Assert.assertEquals(orderMonitorScreen.getServiceTechnicianValue(), expectedTechnician.getTechnicianFullName());
     }
 
 }

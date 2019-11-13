@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.hdvalidations;
 
+import com.cyberiansoft.test.dataclasses.OrderMonitorData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
@@ -26,5 +27,13 @@ public class OrderMonitorScreenValidations {
     public static void verifyOrderPhaseStatus(OrderMonitorStatuses expectedStatus) {
         OrderMonitorScreen orderMonitorScreen = new OrderMonitorScreen();
         Assert.assertEquals(orderMonitorScreen.getOrderMonitorPhaseStatusValue(), expectedStatus.getValue());
+    }
+
+    public static void verifyOrderPhasePresent(OrderMonitorData orderMonitorData, boolean isPresent) {
+        OrderMonitorScreen orderMonitorScreen = new OrderMonitorScreen();
+        if (isPresent)
+            Assert.assertTrue(orderMonitorScreen.isPhaseExists(orderMonitorData.getPhaseName()));
+        else
+            Assert.assertFalse(orderMonitorScreen.isPhaseExists(orderMonitorData.getPhaseName()));
     }
 }

@@ -172,6 +172,10 @@ public class  OrderMonitorScreen extends iOSHDBaseScreen {
 		return appiumdriver.findElementsByAccessibilityId("Repair phase").size() > 0;
 	}
 
+	public boolean isPhaseExists(String phaseName) {
+		return monitorservicestable.findElementsByAccessibilityId(phaseName).size() > 0;
+	}
+
 	public void clicksRepairPhaseLine() {
 		waitOrderMonitorScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
