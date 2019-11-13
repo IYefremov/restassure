@@ -10,11 +10,11 @@ public class VNextBOLoginInteractions {
     }
 
     public static  String getValueFromEmailField() {
-        return new VNextBOLoginScreenWebPage().getEmailField().getValue();
+        return Utils.getInputFieldValue(new VNextBOLoginScreenWebPage().getEmailField());
     }
 
     public static  String getValueFromPasswordField() {
-        return new VNextBOLoginScreenWebPage().getPasswordField().getValue();
+        return Utils.getInputFieldValue(new VNextBOLoginScreenWebPage().getPasswordField());
     }
 
     public static  String getEmailErrorMessage() {
@@ -26,10 +26,10 @@ public class VNextBOLoginInteractions {
     }
 
     public static  void setEmailField(String username) {
-        Utils.clearAndType(new VNextBOLoginScreenWebPage().getEmailField().getWrappedElement(), username);
+        Utils.clearAndType(new VNextBOLoginScreenWebPage().getEmailField(), username);
     }
 
     public static  void setPasswordField(String userPsw) {
-        Utils.clearAndType(new VNextBOLoginScreenWebPage().getPasswordField().getWrappedElement(), userPsw);
+        Utils.clearAndType(new VNextBOLoginScreenWebPage().getPasswordField(), userPsw);
     }
 }

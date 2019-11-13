@@ -14,19 +14,13 @@ import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOAuditLo
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOPendingRegistrationsTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getDeviceManagementActiveAndPendingRegistrationTabsTD();
-    }
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
         com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
@@ -151,14 +145,12 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanSeePendingRegistrationsDevices(String rowID, String description, JSONObject testData) {
 
-        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBOPendingRegistrationsTabValidations.verifyDevicesTableContainsCorrectColumns();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void verifyUserCanChangePhoneNumberOfPendingRegistrationDevice(String rowID, String description, JSONObject testData) {
 
-        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBOPendingRegistrationTabSteps.changePhoneNumberByDeviceNickName(deviceData.getNickname(), deviceData.getPhoneNumber());
@@ -168,7 +160,6 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserCanCancelDeletionPendingRegistrationDeviceCancelButton(String rowID, String description, JSONObject testData) {
 
-        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOPendingRegistrationTabSteps.clickDeleteButtonForDeviceByNickName(deviceData.getNickname());
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
@@ -181,7 +172,6 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
     public void verifyUserCanCancelDeletionPendingRegistrationDeviceXIcon(String rowID, String description, JSONObject testData) {
 
-        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOPendingRegistrationTabSteps.clickDeleteButtonForDeviceByNickName(deviceData.getNickname());
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
@@ -194,7 +184,6 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
     public void verifyUserCanDeleteDeviceFromPendingRegistrationsList(String rowID, String description, JSONObject testData) {
 
-        VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOPendingRegistrationTabSteps.clickDeleteButtonForDeviceByNickName(deviceData.getNickname());
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();

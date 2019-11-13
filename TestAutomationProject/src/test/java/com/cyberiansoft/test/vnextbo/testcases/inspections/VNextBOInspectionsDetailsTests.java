@@ -16,7 +16,6 @@ import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionNo
 import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionsPageValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextBOInspectionsDetailsTests extends BaseTestCase {
@@ -24,10 +23,6 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsDetailsTD();
-    }
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
         VNextBOLeftMenuInteractions.selectInspectionsMenu();
     }
 

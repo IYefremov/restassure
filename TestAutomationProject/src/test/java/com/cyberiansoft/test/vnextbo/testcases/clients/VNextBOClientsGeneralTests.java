@@ -18,18 +18,14 @@ import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersPageValidatio
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextBOClientsGeneralTests extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
-        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsTD();
-    }
 
-    @BeforeMethod
-    public void BackOfficeLogin() {
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsTD();
         VNextBOLeftMenuInteractions.selectClientsMenu();
     }
 

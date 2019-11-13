@@ -15,10 +15,10 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 	private WebElement loginForm;
 	
 	@FindBy(id = "email")
-	private TextField emailField;
+	private WebElement emailField;
 	
 	@FindBy(id = "password")
-	private TextField passwordField;
+	private WebElement passwordField;
 	
 	@FindBy(xpath = "//input[@value='Login']")
 	private WebElement loginButton;

@@ -19,7 +19,6 @@ import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersPageValidatio
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
@@ -31,10 +30,6 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getUsersAddingNewUserAndSearchTD();
-    }
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
         VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
