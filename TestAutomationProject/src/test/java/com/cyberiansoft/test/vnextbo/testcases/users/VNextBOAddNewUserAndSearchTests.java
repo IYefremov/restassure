@@ -23,9 +23,9 @@ import org.testng.annotations.Test;
 
 public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
-    String newUserEmail = "autoUsertest.mail.cyberiansoft@getnada.com";
-    String newUserFirstName = "autoUserTestFirstName";
-    String newUserLastName = "autoUserTestLastName";
+    String newUserEmail = "autoNewUsertest.mail.cyberiansoft@getnada.com";
+    String newUserFirstName = "autoNewUserTestFirstName";
+    String newUserLastName = "autoNewUserTestLastName";
 
     @BeforeClass
     public void settingUp() {
@@ -192,12 +192,12 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         VNextBOUsersPageSteps.openUserDataForEdit();
         VNextBOAddNewUserDialogValidations.verifyEmailFieldIsDisabled();
-        VNextBOAddNewUserDialogSteps.editUserData("autoUserEditedFirstName",
-                "autoUseEditedLastName", "222222227", false);
+        VNextBOAddNewUserDialogSteps.editUserData("autoNewUserEditedFirstName",
+                "autoNewUserEditedLastName", "222222227", false);
         VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText("autoUserEditedFirstName autoUseEditedLastName");
+        VNextBOSearchPanelSteps.searchByText("autoNewUserEditedFirstName autoNewUserEditedLastName");
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "Edited user hasn't been found");
-        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("1222222227"));
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("222222227"));
         Assert.assertTrue(VNextBOUsersPageValidations.verifyRedTriangleWarningIconIsNotDisplayed(vNexBOUsersWebPage),
                 "Red triangle warning icon has been displayed.");
         Assert.assertTrue(VNextBOUsersPageValidations.verifyReSendButtonIsNotDisplayed(vNexBOUsersWebPage),
