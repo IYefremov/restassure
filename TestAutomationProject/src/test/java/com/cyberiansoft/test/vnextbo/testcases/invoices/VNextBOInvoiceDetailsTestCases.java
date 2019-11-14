@@ -38,7 +38,7 @@ public class VNextBOInvoiceDetailsTestCases extends BaseTestCase {
 		System.out.println(usermail);
 		VNextBOAddNewUserDialogSteps.createNewUser(data.getTechFirstName(), data.getTechLastName(),
 				usermail, data.getTechUserPhone(), false);
-		Assert.assertTrue(VNextBOUsersPageValidations.isUserPresentInTableByText(usermail));
+		Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentInTableByText(usermail));
         VNextBOHeaderPanelSteps.logout();
 
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getBOoldURL());

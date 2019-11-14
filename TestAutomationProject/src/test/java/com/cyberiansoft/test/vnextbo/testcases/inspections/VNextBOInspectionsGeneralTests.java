@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionsP
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -29,23 +28,20 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
-        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsTD();
-    }
 
-    @BeforeMethod
-    public void BackOfficeLogin() {
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsTD();
         VNextBOLeftMenuInteractions.selectInspectionsMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyInspectionPageCanBeOpened(String rowID, String description, JSONObject testData) {
 
-        VNextBOInspectionsPageValidations.isTermsAndConditionsLinkDisplayed();
-        VNextBOInspectionsPageValidations.isPrivacyPolicyLinkDisplayed();
-        VNextBOInspectionsPageValidations.isInspectionsListDisplayed();
-        VNextBOInspectionsPageValidations.isSearchFieldDisplayed();
-        VNextBOInspectionsPageValidations.isInspectionDetailsPanelDisplayed();
-        VNextBOInspectionsPageValidations.isIntercomButtonDisplayed();
+        VNextBOInspectionsPageValidations.verifyTermsAndConditionsLinkIsDisplayed();
+        VNextBOInspectionsPageValidations.verifyPrivacyPolicyLinkIsDisplayed();
+        VNextBOInspectionsPageValidations.verifyInspectionsListIsDisplayed();
+        VNextBOInspectionsPageValidations.verifySearchFieldIsDisplayed();
+        VNextBOInspectionsPageValidations.verifyInspectionDetailsPanelIsDisplayed();
+        VNextBOInspectionsPageValidations.verifyIntercomButtonIsDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -53,14 +49,14 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickTermsAndConditionsLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "AMT Service Agreement Terms and Conditions",
                 "Dialog header hasn't been correct");
         VNextBOModalDialogSteps.clickOkButton();
-        VNextBOInspectionsPageValidations.isSearchFieldDisplayed();
-        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
+        VNextBOInspectionsPageValidations.verifySearchFieldIsDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -68,13 +64,13 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickTermsAndConditionsLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "AMT Service Agreement Terms and Conditions",
                 "Dialog header hasn't been correct");
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -82,13 +78,13 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickPrivacyPolicyLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "Privacy Policy",
                 "Dialog header hasn't been correct");
         VNextBOModalDialogSteps.clickOkButton();
-        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -96,13 +92,13 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickPrivacyPolicyLink();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
         Assert.assertEquals(VNextBOModalDialogSteps.getDialogHeader(),
                 "Privacy Policy",
                 "Dialog header hasn't been correct");
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(vNextBOTermsAndConditionsDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -110,7 +106,7 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.openIntercomMessenger();
         WaitUtilsWebDriver.waitForLoading();
-        VNextBOInspectionsPageValidations.isIntercomMessengerOpened();
+        VNextBOInspectionsPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOInspectionsPageSteps.closeIntercom();
     }
 
@@ -118,9 +114,9 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyAdvancedSearchFields(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
-        VNextBOInspectionsAdvancedSearchValidations.isAdvancedSearchFormDisplayed();
+        VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsDisplayed();
         Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getAllAdvancedSearchFieldsLabels(),
                 expectedAdvancedSearchFields);
-        VNextBOInspectionsAdvancedSearchValidations.isSearchButtonDisplayed();
+        VNextBOInspectionsAdvancedSearchValidations.verifySearchButtonIsDisplayed();
     }
 }

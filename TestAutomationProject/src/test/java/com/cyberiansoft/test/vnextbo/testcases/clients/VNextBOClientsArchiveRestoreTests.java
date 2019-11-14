@@ -12,7 +12,6 @@ import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValid
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
@@ -20,10 +19,6 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsArchiveRestoreTD();
-    }
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
         VNextBOLeftMenuInteractions.selectClientsMenu();
     }
 
@@ -34,14 +29,14 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
         VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
         VNextBOClientsPageSteps.clickArchiveDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
-        VNextBOModalDialogValidations.isCloseButtonDisplayed();
-        VNextBOModalDialogValidations.isCancelButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCancelButtonIsDisplayed();
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "RozstalnoyCO");
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -53,9 +48,9 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
         VNextBOClientsPageSteps.clickArchiveDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCancelButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "RozstalnoyCO");
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -64,12 +59,12 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
 
         VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
         VNextBOClientsPageSteps.archiveClient("RozstalnoyCO");
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOClientsPageSteps.openArchivedTab();
         VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "RozstalnoyCO");
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -81,14 +76,14 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
         VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
         VNextBOClientsPageSteps.clickRestoreDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isDialogDisplayed();
-        VNextBOModalDialogValidations.isOkButtonDisplayed();
-        VNextBOModalDialogValidations.isCloseButtonDisplayed();
-        VNextBOModalDialogValidations.isCancelButtonDisplayed();
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCancelButtonIsDisplayed();
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "RozstalnoyCO");
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -101,9 +96,9 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
         VNextBOClientsPageSteps.clickRestoreDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCancelButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "RozstalnoyCO");
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -113,12 +108,12 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
         VNextBOClientsPageSteps.openArchivedTab();
         VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
         VNextBOClientsPageSteps.restoreClient("RozstalnoyCO");
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOClientsPageSteps.openActiveTab();
         VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", "RozstalnoyCO");
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "RozstalnoyCO");
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 }

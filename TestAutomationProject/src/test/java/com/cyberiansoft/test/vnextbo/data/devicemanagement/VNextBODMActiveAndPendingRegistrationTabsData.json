@@ -1,0 +1,205 @@
+{
+  "verifyUserCanSeeActiveTabDetails": [
+    {
+      "rowID": "verifyUserCanSeeActiveTabDetails.01",
+      "description": "Test Case 90789: User can see details of the \"Active Devices\" tab",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90789",
+          "testCaseTitle": "User can see details of the \"Active Devices\" tab"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelAddingNewDeviceCancelButton": [
+    {
+      "rowID": "verifyUserCanCancelAddingNewDeviceCancelButton.01",
+      "description": "Test Case 90771: User can cancel adding New Device (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90771",
+          "testCaseTitle": "User can cancel adding New Device (Cancel)"
+        }
+      ],
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest_90771",
+      "licenseNumber": "0002-0392",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
+    }
+  ],
+  "verifyUserCanCancelAddingNewDeviceXIcon": [
+    {
+      "rowID": "verifyUserCanCancelAddingNewDeviceXIcon.01",
+      "description": "Test Case 90772: User can cancel adding New Device (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90772",
+          "testCaseTitle": "User can cancel adding New Device (X-icon)"
+        }
+      ],
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest_90772",
+      "licenseNumber": "0002-0393",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
+    }
+  ],
+  "verifyUserCanCancelDeviceLicenseDeletionCancelButton": [
+    {
+      "rowID": "verifyUserCanCancelDeviceLicenseDeletionCancelButton.01",
+      "description": "Test Case 90798: User can cancel deletion of device's license (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90798",
+          "testCaseTitle": "User can cancel deletion of device's license (Cancel)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelDeviceLicenseDeletionXIcon": [
+    {
+      "rowID": "verifyUserCanCancelDeviceLicenseDeletionXIcon.01",
+      "description": "Test Case 90797: User can cancel deletion of device's license (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90797",
+          "testCaseTitle": "User can cancel deletion of device's license (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseAuditLogWindow": [
+    {
+      "rowID": "verifyUserCanCloseAuditLogWindow.01",
+      "description": "Test Case 90799: User can close \"Audit Log\" window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90799",
+          "testCaseTitle": "User can close \"Audit Log\" window"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanEditDeviceSettingsAndNotSaveXIcon": [
+    {
+      "rowID": "verifyUserCanEditDeviceSettingsAndNotSaveXIcon.01",
+      "description": "Test Case 90794: User can edit \"Device Settings\" and not save it (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90794",
+          "testCaseTitle": "User can edit \"Device Settings\" and not save it (X-icon)"
+        }
+      ],
+      "nickname": "Autotest_90794",
+      "team": "02_TimeRep_team",
+      "timeZone": "(UTC-10:00) Aleutian Islands"
+    }
+  ],
+  "verifyUserCanEditDeviceSettingsAndNotSaveCancelButton": [
+    {
+      "rowID": "verifyUserCanEditDeviceSettingsAndNotSaveCancelButton.01",
+      "description": "Test Case 90795: User can edit \"Device Settings\" and not save it (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90795",
+          "testCaseTitle": "User can edit \"Device Settings\" and not save it (Cancel)"
+        }
+      ],
+      "nickname": "Autotest_90795",
+      "team": "02_TimeRep_team",
+      "timeZone": "(UTC-10:00) Aleutian Islands"
+    }
+  ],
+  "verifyUserCanAddNewDevice": [
+    {
+      "rowID": "verifyUserCanAddNewDevice.01",
+      "description": "Test Case 90769: User can add New Device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90769",
+          "testCaseTitle": "User can add New Device"
+        }
+      ],
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest_90769",
+      "licenseNumber": "0002-0393",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
+    }
+  ],
+  "verifyUserCanSeePendingRegistrationsDevices": [
+    {
+      "rowID": "verifyUserCanSeePendingRegistrationsDevices.01",
+      "description": "Test Case 90804: User can see \"Pending Registrations\" Devices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90804",
+          "testCaseTitle": "User can see \"Pending Registrations\" Devices"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanChangePhoneNumberOfPendingRegistrationDevice": [
+    {
+      "rowID": "verifyUserCanChangePhoneNumberOfPendingRegistrationDevice.01",
+      "description": "Test Case 90808: User can change phone number of Pending registration device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90808",
+          "testCaseTitle": "User can change phone number of Pending registration device"
+        }
+      ],
+      "nickname": "Autotest_90769",
+      "phoneNumber": "+380952222222"
+    }
+  ],
+  "verifyUserCanCancelDeletionPendingRegistrationDeviceCancelButton": [
+    {
+      "rowID": "verifyUserCanCancelDeletionPendingRegistrationDeviceCancelButton.01",
+      "description": "Test Case 90807: User can cancel deletion Device from the \"Pending Registrations\" list (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90807",
+          "testCaseTitle": "User can cancel deletion Device from the \"Pending Registrations\" list (Cancel)"
+        }
+      ],
+      "nickname": "Autotest_90769"
+    }
+  ],
+  "verifyUserCanCancelDeletionPendingRegistrationDeviceXIcon": [
+    {
+      "rowID": "verifyUserCanCancelDeletionPendingRegistrationDeviceXIcon.01",
+      "description": "Test Case 90806: User can cancel deletion Device from the \"Pending Registrations\" list (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90806",
+          "testCaseTitle": "User can cancel deletion Device from the \"Pending Registrations\" list (X-icon)"
+        }
+      ],
+      "nickname": "Autotest_90769"
+    }
+  ],
+  "verifyUserCanDeleteDeviceFromPendingRegistrationsList": [
+    {
+      "rowID": "verifyUserCanDeleteDeviceFromPendingRegistrationsList.01",
+      "description": "Test Case 90805: User can delete Device from the \"Pending Registrations\" list",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90805",
+          "testCaseTitle": "User can delete Device from the \"Pending Registrations\" list"
+        }
+      ],
+      "nickname": "Autotest_90769"
+    }
+  ]
+}

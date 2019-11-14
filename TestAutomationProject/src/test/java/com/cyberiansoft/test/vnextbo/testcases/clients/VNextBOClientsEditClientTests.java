@@ -4,14 +4,12 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOClientInfoBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientDetailsValidations;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValidations;
@@ -19,9 +17,7 @@ import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPane
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
@@ -30,20 +26,13 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
 
     private static final String PRECONDITION_RETAIL_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/clients/VNextBOClientsPreconditionsRetailClient.json";
     private static final String PRECONDITION_WHOLESALE_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/clients/VNextBOClientsPreconditionsWholesaleClient.json";
-    String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-    String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
     VNextBOClientsData baseRetailClient;
     VNextBOClientsData baseWholesaleClient;
 
     @BeforeClass
     public void settingUp() throws Exception {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsEditClientTD();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-
-        VNextBOLoginSteps.userLogin(userName, userPassword);
         VNextBOLeftMenuInteractions.selectClientsMenu();
-
         baseRetailClient = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITION_RETAIL_FILE), VNextBOClientsData.class);
         baseRetailClient.getEmployee().setEmployeeFirstName(baseRetailClient.getEmployee().getEmployeeFirstName() + RandomStringUtils.randomAlphabetic(10));
         VNextBOClientsPageSteps.createNewClient(baseRetailClient, false);
@@ -52,25 +41,17 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientsPageSteps.createNewClient(baseWholesaleClient, true);
     }
 
-    @Override
-    @BeforeMethod
-    public void login() {}
-
-    @Override
-    @AfterMethod
-    public void logout() {}
-
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanEditClientInfoFields(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
         VNextBOSearchPanelSteps.searchByText(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientsPageSteps.openClientsDetailsPage(baseWholesaleClient.getEmployee().getCompanyName());
-        Assert.assertTrue(VNextBOClientDetailsValidations.isClientInfoPanelExpanded(),
+        Assert.assertTrue(VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded(),
                 "Client info panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setClientInfoData(data.getEmployee());
         VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
-        Assert.assertFalse(VNextBOClientDetailsValidations.isClientInfoPanelExpanded(),
+        Assert.assertFalse(VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded(),
                 "Client info panel hasn't been collapsed");
         VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
         VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(data.getEmployee());
@@ -86,11 +67,11 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByText(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientsPageSteps.openClientsDetailsPage(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
-        Assert.assertTrue(VNextBOClientDetailsValidations.isAccountInfoPanelExpanded(),
+        Assert.assertTrue(VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded(),
                 "Account info panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setAccountInfoData(data.getAccountInfoData());
         VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
-        Assert.assertFalse(VNextBOClientDetailsValidations.isAccountInfoPanelExpanded(),
+        Assert.assertFalse(VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded(),
                 "Account info panel hasn't been collapsed");
         VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
         VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(data.getAccountInfoData(), false);
@@ -105,11 +86,11 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByText(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientsPageSteps.openClientsDetailsPage(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
-        Assert.assertTrue(VNextBOClientDetailsValidations.isAddressPanelExpanded(),
+        Assert.assertTrue(VNextBOClientDetailsValidations.verifyAddressPanelIsExpanded(),
                 "Address info panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setAddressData(data.getAddressData());
         VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
-        Assert.assertFalse(VNextBOClientDetailsValidations.isAddressPanelExpanded(),
+        Assert.assertFalse(VNextBOClientDetailsValidations.verifyAddressPanelIsExpanded(),
                 "Address info panel hasn't been collapsed");
         VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
         VNextBOClientDetailsValidations.verifyAddressFieldsContainCorrectData(data.getAddressData());
@@ -125,11 +106,11 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientsPageSteps.openClientsDetailsPage(baseWholesaleClient.getEmployee().getCompanyName());
         new VNextBOClientInfoBlockInteractions().setWholesaleCompanyType();
         VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
-        Assert.assertTrue(VNextBOClientDetailsValidations.isEmailOptionsBlockExpanded(),
+        Assert.assertTrue(VNextBOClientDetailsValidations.verifyEmailOptionsBlockIsExpanded(),
                 "Email options panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setEmailOptionsData(data.getEmailOptionsData(), true);
         VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
-        Assert.assertFalse(VNextBOClientDetailsValidations.isEmailOptionsBlockExpanded(),
+        Assert.assertFalse(VNextBOClientDetailsValidations.verifyEmailOptionsBlockIsExpanded(),
                 "Email options panel hasn't been collapsed");
         VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
         VNextBOClientDetailsValidations.verifyEmailOptionsFieldsContainCorrectData(data.getEmailOptionsData(), true, false);
@@ -145,11 +126,11 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByText(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientsPageSteps.openClientsDetailsPage(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
-        Assert.assertTrue(VNextBOClientDetailsValidations.isPreferencesBlockExpanded(),
+        Assert.assertTrue(VNextBOClientDetailsValidations.verifyPreferencesBlockIsExpanded(),
                 "Preferences panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setPreferencesData(data.getDefaultArea());
         VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
-        Assert.assertFalse(VNextBOClientDetailsValidations.isPreferencesBlockExpanded(),
+        Assert.assertFalse(VNextBOClientDetailsValidations.verifyPreferencesBlockIsExpanded(),
                 "Preferences panel hasn't been collapsed");
         VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
         VNextBOClientDetailsValidations.verifyPreferencesFieldsContainCorrectData(data.getDefaultArea(), false);
@@ -165,11 +146,11 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientsPageSteps.openClientsDetailsPage(baseWholesaleClient.getEmployee().getCompanyName());
         new VNextBOClientInfoBlockInteractions().setWholesaleCompanyType();
         VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
-        Assert.assertTrue(VNextBOClientDetailsValidations.isMiscellaneousBlockExpanded(),
+        Assert.assertTrue(VNextBOClientDetailsValidations.verifyMiscellaneousBlockIsExpanded(),
                 "Miscellaneous panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setMiscellaneousData(data.getNotes());
         VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
-        Assert.assertFalse(VNextBOClientDetailsValidations.isMiscellaneousBlockExpanded(),
+        Assert.assertFalse(VNextBOClientDetailsValidations.verifyMiscellaneousBlockIsExpanded(),
                 "Miscellaneous panel hasn't been collapsed");
         VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
         VNextBOClientDetailsValidations.verifyMiscellaneousFieldsContainCorrectData(data.getNotes(), true);
@@ -188,8 +169,8 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.setAllClientsData(retailClientData, false);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
         VNextBOSearchPanelSteps.searchByText(retailClientData.getEmployee().getEmployeeFirstName());
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Text: " + retailClientData.getEmployee().getEmployeeFirstName());
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: " + retailClientData.getEmployee().getEmployeeFirstName());
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -204,8 +185,8 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.setAllClientsData(wholesaleClientData, true);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
         VNextBOSearchPanelSteps.searchByText(wholesaleClientData.getEmployee().getEmployeeFirstName());
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Text: " + wholesaleClientData.getEmployee().getEmployeeFirstName());
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: " + wholesaleClientData.getEmployee().getEmployeeFirstName());
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -235,19 +216,19 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickOkButton();
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOSearchPanelSteps.searchByText(wholesaleClientData.getEmployee().getCompanyName());
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Text: " + wholesaleClientData.getEmployee().getCompanyName());
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client",
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: " + wholesaleClientData.getEmployee().getCompanyName());
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client",
                 wholesaleClientData.getEmployee().getCompanyName());
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithCheckboxes("Wholesale", true);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithCheckboxes("Single WO type", false);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithCheckboxes("PO#req.", false);
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Wholesale", true);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Single WO type", false);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("PO#req.", false);
         VNextBOClientsPageSteps.openClientsDetailsPage(wholesaleClientData.getEmployee().getCompanyName());
         VNextBOClientDetailsValidations.verifyAllClientDetailsBlocksData(wholesaleClientData, true, false);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOSearchPanelSteps.searchByText(baseWholesaleClient.getEmployee().getCompanyName());
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
@@ -263,18 +244,18 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickOkButton();
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOSearchPanelSteps.searchByText(retailClientData.getEmployee().getEmployeeFirstName());
-        VNextBOSearchPanelValidations.isSearchFilterTextCorrect("Text: " + retailClientData.getEmployee().getEmployeeFirstName());
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithText("Client", retailClientData.getEmployee().getEmployeeFirstName());
-        VNextBOClientsPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithCheckboxes("Wholesale", false);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithCheckboxes("Single WO type", false);
-        VNextBOClientsPageValidations.isSearchResultCorrectForColumnWithCheckboxes("PO#req.", false);
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: " + retailClientData.getEmployee().getEmployeeFirstName());
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", retailClientData.getEmployee().getEmployeeFirstName());
+        VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Wholesale", false);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Single WO type", false);
+        VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("PO#req.", false);
         VNextBOClientsPageSteps.openClientsDetailsPage(retailClientData.getEmployee().getEmployeeFirstName());
         VNextBOClientDetailsValidations.verifyAllClientDetailsBlocksData(retailClientData, false, false);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOSearchPanelSteps.searchByText(baseRetailClient.getEmployee().getEmployeeFirstName());
-        VNextBOClientsPageValidations.isClientsNotFoundMessageDisplayed();
+        VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 }

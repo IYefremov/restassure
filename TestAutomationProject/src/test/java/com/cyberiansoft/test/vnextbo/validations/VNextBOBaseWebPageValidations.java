@@ -8,56 +8,56 @@ import org.testng.Assert;
 
 public class VNextBOBaseWebPageValidations {
 
-    public static void isLogoDisplayed()
+    public static void verifyLogoIsDisplayed()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertTrue(Utils.isElementDisplayed(baseWebPage.logoBox), "Logo hasn't been displayed");
     }
 
-    public static void isTimeBoxDisplayed()
+    public static void verifyTimeBoxIsDisplayed()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertTrue(Utils.isElementDisplayed(baseWebPage.timeBox), "Time box hasn't been displayed");
     }
 
-    public static void isUserInfoBlockDisplayed()
+    public static void verifyUserInfoBlockIsDisplayed()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertTrue(Utils.isElementDisplayed(baseWebPage.userInfoBlock), "User info block hasn't been displayed");
     }
 
-    public static void isLogoutButtonDisplayed()
+    public static void verifyLogoutButtonIsDisplayed()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertTrue(Utils.isElementDisplayed(baseWebPage.logoutButton), "Logout button hasn't been displayed");
     }
 
-    public static void isHelpButtonDisplayed()
+    public static void verifyHelpButtonIsDisplayed()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertTrue(Utils.isElementDisplayed(baseWebPage.helpButton), "Help button hasn't been displayed");
     }
 
-    public static void isCopyRightTextDisplayed()
+    public static void verifyCopyRightTextIsDisplayed()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertTrue(Utils.getText(baseWebPage.copyRightLabel).contains("© Copyright 2019 AutoMobile Technologies, Inc."),
                 "Copyright text hasn't been displayed");
     }
 
-    public static void isTermsAndConditionsLinkDisplayed()
+    public static void verifyTermsAndConditionsLinkIsDisplayed()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertTrue(Utils.isElementDisplayed(baseWebPage.termsAndConditionsLink), "Terms and Conditions link hasn't been displayed");
     }
 
-    public static void isPrivacyPolicyLinkDisplayed()
+    public static void verifyPrivacyPolicyLinkIsDisplayed()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Assert.assertTrue(Utils.isElementDisplayed(baseWebPage.privacyPolicyLink), "Privacy Policy link hasn't been displayed");
     }
 
-    public static void isIntercomButtonDisplayed()
+    public static void verifyIntercomButtonIsDisplayed()
     {
         WebDriver driver = DriverBuilder.getInstance().getDriver();
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(driver);
@@ -67,7 +67,7 @@ public class VNextBOBaseWebPageValidations {
         Assert.assertTrue(isIntercomButtonDisplayed, "Intercom button hasn't been displayed");
     }
 
-    public static void isIntercomMessengerOpened()
+    public static void verifyIntercomMessengerIsOpened()
     {
         WebDriver driver = DriverBuilder.getInstance().getDriver();
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(driver);
@@ -77,7 +77,7 @@ public class VNextBOBaseWebPageValidations {
         Assert.assertTrue(isMessengerOpened, "Intercom messenger hasn't been opened");
     }
 
-    public static void isHelpPageOpened()
+    public static void verifyHelpPageIsOpened()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         String parentHandle = Utils.getParentTab();

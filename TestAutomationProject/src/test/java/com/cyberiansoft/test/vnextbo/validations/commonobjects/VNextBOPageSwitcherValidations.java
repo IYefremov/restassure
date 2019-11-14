@@ -8,7 +8,7 @@ import org.testng.Assert;
 
 public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidations {
 
-    public static void arePageNavigationElementsDisplayed() {
+    public static void verifyPageNavigationElementsAreDisplayed() {
 
         VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
         Assert.assertTrue(Utils.isElementDisplayed(switcherElements.getHeaderNextPageBtn()),
@@ -33,7 +33,7 @@ public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidation
                 "Footer Items per page field hasn't been displayed.");
     }
 
-    public static void isOpenedPageNumberCorrect(String expectedPageNumber) {
+    public static void verifyOpenedPageNumberIsCorrect(String expectedPageNumber) {
 
         Assert.assertEquals(VNextBOPageSwitcherSteps.getActivePageNumberFromHeaderPager(), expectedPageNumber,
                 "Header active page number hasn't been changed.");
@@ -41,27 +41,27 @@ public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidation
                 "Footer active page number hasn't been changed.");
     }
 
-    public static boolean isHeaderLastPageButtonClickable() {
+    public static boolean verifyHeaderLastPageButtonIsClickable() {
 
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderLastPageBtn());
     }
 
-    public static boolean isFooterLastPageButtonClickable() {
+    public static boolean verifyFooterLastPageButtonIsClickable() {
 
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterLastPageBtn());
     }
 
-    public static boolean isHeaderFirstPageButtonClickable() {
+    public static boolean verifyHeaderFirstPageButtonIsClickable() {
 
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderFirstPageBtn());
     }
 
-    public static boolean isFooterFirstPageButtonClickable() {
+    public static boolean verifyFooterFirstPageButtonIsClickable() {
 
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterFirstPageBtn());
     }
 
-    public static void isItemsPerPageNumberCorrect(String expectedItemsNumber) {
+    public static void verifyItemsPerPageNumberIsCorrect(String expectedItemsNumber) {
 
         Assert.assertTrue(VNextBOPageSwitcherSteps.getItemsPerPageNumberFromTopElement().contains(expectedItemsNumber),
                 "Top paging box has had incorrect items per page number.");

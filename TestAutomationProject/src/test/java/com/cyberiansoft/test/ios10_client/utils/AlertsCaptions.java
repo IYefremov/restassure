@@ -77,6 +77,8 @@ public class AlertsCaptions {
 			"You can add only one service '%1$s'";
 	public static final String INVOICE_PO_SHOULDNT_BE_EMPTY = "Invoice Payment\n" +
 			"Invoice PO# shouldn't be empty.";
+	public static final String INVOICE_PO_SHOULDNT_BE_EMPTY_HD = "Invoice Payment\n" +
+			"Invoice PO# shouldn't be empty";
 	public static final String STOP_WORKORDER_CREATION = "Stop Work Order Creation\nAny unsaved changes will be lost. Are you sure you want to stop creating this Work Order?";
 	public static final String STOP_WORKORDER_EDIT = "Stop Work Order Edit\nAny unsaved changes will be lost. Are you sure you want to stop editing this Work Order?";
 	public static final String NO_SELECTED_SERVICES = "Services\n" +

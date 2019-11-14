@@ -63,18 +63,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
     private RetailCustomer testRetailCustomer = new RetailCustomer("Retail", "Customer");
     private RetailCustomer johnRetailCustomer = new RetailCustomer("John", "Simple_PO#_Req");
 
-    private final String firstname = "supermy12";
-    private final String firstnamenew = "supernewmy12";
-    private final String lastname = "super";
-    private final String companyname = "supercompany";
-    private final String street = "First streer";
-    private final String city = "New York";
-    private final String zip = "79031";
-    private final String phone = "723-1234567";
-    private final String mail = "test@cyberiansoft.com";
-    private final String state = "Alberta";
-    private final String country = "Canada";
-
     @BeforeClass
     public void setUpSuite() {
         Specific_Client.setCompanyName("Specific_Client");
@@ -130,89 +118,100 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         //homeScreen.clickLogoutButton();
     }
 
-    //Test Case 8441:Add Retail Customer in regular build
-    @Test(testName = "Test Case 8441:Add Retail Customer in regular build", description = "Create retail customer")
-    public void testCreateRetailCustomer() {
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testCreateRetailCustomer(String rowID,
+                                         String description, JSONObject testData) {
 
-        //resrtartApplication();
-        //MainScreen mainScreeneen = new MainScreen();
-        //HomeScreen homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USER_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-        HomeScreen homeScreen = new HomeScreen();
-        CustomersScreen customersScreen = homeScreen.clickCustomersButton();
-        customersScreen.swtchToRetailMode();
-        AddCustomerScreen addCustomerScreen = customersScreen.clickAddCustomersButton();
+        RetailCustomer newCustomer = new RetailCustomer("supermy12", "super");
+        newCustomer.setCompanyName("supercompany");
+        newCustomer.setCustomerAddress1( "470 Copper Drive");
+        newCustomer.setCustomerCity("New Port");
+        newCustomer.setCustomerZip("19804");
+        newCustomer.setCustomerPhone("723-1234567");
+        newCustomer.setMailAddress("test@cyberiansoft.com");
+        newCustomer.setCustomerState("Delaware");
+        newCustomer.setCustomerCountry("United States");
 
-        addCustomerScreen.addCustomer(firstname, lastname, companyname, street,
-                city, state, zip, country, phone, mail);
-        addCustomerScreen.clickSaveBtn();
-        customersScreen.selectCustomerWithoutEditing(firstname);
-        Assert.assertTrue(customersScreen.isCustomerExists(firstname));
-
-        customersScreen.clickHomeButton();
-        //homeScreen.clickLogoutButton();
-    }
-
-    //Test Case 8439:Edit Customer
-    @Test(testName = "Test Case 8439:Edit Customer ", description = "Edit retail customer")
-    public void testEditRetailCustomer() {
-        final String lastname = "superedited";
-        final String companyname = "supercompanyedited";
-        final String street = "Second streer";
-        final String city = "New York";
-        final String zip = "79035";
-        final String phone = "723-1234576";
-        final String mail = "test123@cyberiansoft.com";
-
-        //resrtartApplication();
-        //MainScreen mainScreeneen = new MainScreen();
-        //HomeScreen homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USER_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-        HomeScreen homeScreen = new HomeScreen();
-        CustomersScreen customersScreen = homeScreen.clickCustomersButton();
-        customersScreen.swtchToRetailMode();
-
-        customersScreen.selectCustomerWithoutEditing(firstname);
-        AddCustomerScreen addCustomerScreen = customersScreen.selectFirstCustomerToEdit();
-
-        addCustomerScreen.editCustomer(firstnamenew, lastname, companyname,
-                street, city, city, zip, zip, phone, mail);
-        addCustomerScreen.clickSaveBtn();
-        customersScreen.selectCustomerWithoutEditing(firstnamenew);
-        Assert.assertTrue(customersScreen.isCustomerExists(firstnamenew));
-        customersScreen.clickHomeButton();
-        MainScreen mainScreeneen = homeScreen.clickLogoutButton();
-        mainScreeneen.updateDatabase();
-    }
-
-    // Test Case 8460: Delete Customer 
-    @Test(testName = "Test Case 8460: Delete Customer", description = "Delete retail customer")
-    public void testDeleteRetailCustomer() {
+        RetailCustomer editedCustomer = new RetailCustomer("supernewmy12", "superedited");
+        editedCustomer.setCompanyName("supercompanyedited");
+        editedCustomer.setCustomerAddress1( "600 Markley Street");
+        editedCustomer.setCustomerCity("Port Reading");
+        editedCustomer.setCustomerZip("07064");
+        editedCustomer.setCustomerPhone("723-1234576");
+        editedCustomer.setMailAddress("test@getnada.com");
+        editedCustomer.setCustomerState("California");
+        editedCustomer.setCustomerCountry("United States");
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
 
-        BackOfficeLoginWebPage loginWebpage = new BackOfficeLoginWebPage(webdriver);
-        loginWebpage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+        BackOfficeLoginWebPage loginWebPage = new BackOfficeLoginWebPage(webdriver);
+        loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
                 ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
-        BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
+        BaseUtils.waitABit(1000);
+        BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
         CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
-        backofficeHeader.clickCompanyLink();
-        ClientsWebPage clientspage = new ClientsWebPage(webdriver);
+        backOfficeHeaderPanel.clickCompanyLink();
+        ClientsWebPage clientsWebPage = new ClientsWebPage(webdriver);
         companyWebPage.clickClientsLink();
+        clientsWebPage.searchClientByName(newCustomer.getFullName());
+        if (clientsWebPage.isClientPresentInTable(newCustomer.getFullName()))
+            clientsWebPage.archiveFirstClient();
 
-        clientspage.deleteUserViaSearch(firstnamenew);
+        clientsWebPage.searchClientByName(editedCustomer.getFullName());
+        if (clientsWebPage.isClientPresentInTable(editedCustomer.getFullName()))
+            clientsWebPage.archiveFirstClient();
 
         DriverBuilder.getInstance().getDriver().quit();
 
-        //resrtartApplication();
-        MainScreen mainScreeneen = new MainScreen();
-        mainScreeneen.updateDatabase();
-        HomeScreen homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        HomeScreen homeScreen = new HomeScreen();
+        homeScreen.clickLogoutButton();
+        MainScreen mainScreen = new MainScreen();
+        mainScreen.updateDatabase();
+        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+
         CustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToRetailMode();
-        customersScreen.selectCustomerWithoutEditing(firstnamenew);
-        Assert.assertFalse(customersScreen.isCustomerExists(firstnamenew));
+        AddCustomerScreen addCustomerScreen = customersScreen.clickAddCustomersButton();
+
+        addCustomerScreen.addCustomer(newCustomer);
+        addCustomerScreen.clickSaveBtn();
+        Assert.assertTrue(customersScreen.isCustomerExists(newCustomer.getFirstName()));
+        customersScreen.selectCustomerToEdit(newCustomer);
+
+        addCustomerScreen.editCustomer(editedCustomer);
+        addCustomerScreen.clickSaveBtn();
+        customersScreen.selectCustomerWithoutEditing(editedCustomer.getFirstName());
+        Assert.assertTrue(customersScreen.isCustomerExists(editedCustomer.getFirstName()));
         customersScreen.clickHomeButton();
-        //homeScreen.clickLogoutButton();
+        homeScreen.clickLogoutButton();
+        mainScreen.updateDatabase();
+        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+
+        webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+        WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
+
+        loginWebPage = new BackOfficeLoginWebPage(webdriver);
+        loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+                ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+        BaseUtils.waitABit(1000);
+        backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
+        companyWebPage = new CompanyWebPage(webdriver);
+        backOfficeHeaderPanel.clickCompanyLink();
+        clientsWebPage = new ClientsWebPage(webdriver);
+        companyWebPage.clickClientsLink();
+
+        clientsWebPage.deleteUserViaSearch(editedCustomer.getFullName());
+
+        DriverBuilder.getInstance().getDriver().quit();
+
+        homeScreen.clickLogoutButton();
+        mainScreen.updateDatabase();
+        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        homeScreen.clickCustomersButton();
+        customersScreen.swtchToRetailMode();
+        Assert.assertFalse(customersScreen.isCustomerExists(editedCustomer.getFirstName()));
+        customersScreen.clickHomeButton();
     }
 
     @Test(testName = "Test Case 8685:Set Inspection to non Single page (HD) ", description = "Set Inspection To Non Single Page Inspection Type")
@@ -251,6 +250,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         vehicleScreen.saveWizard();
 
         myInspectionsScreen.selectInspectionForEdit(inspNumber);
+        VehicleInfoScreenSteps.waitVehicleScreenLoaded();
         WizardScreensSteps.clickNotesButton();
         NotesScreen notesScreen = new NotesScreen();
         notesScreen.setNotes(_notes1);
@@ -3086,7 +3086,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         //Helpers.acceptAlert();
         ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
         approveInspectionsScreen.approveInspectionWithSelectionAndSignature(inspectionNumber);
-        teamInspectionsScreen = new TeamInspectionsScreen();
         teamInspectionsScreen.clickBackServiceRequest();
         serviceRequestdetailsScreen.clickBackButton();
 
@@ -3969,25 +3968,24 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
         MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
-        myInspectionsScreen.clickAddInspectionButton();
-        VehicleScreen vehicleScreen = myInspectionsScreen.selectDefaultInspectionType();
-        vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
-        final String inspectionNumber = vehicleScreen.getInspectionNumber();
+        MyInspectionsSteps.startCreatingInspection(InspectionsTypes.DEFAULT);
+        VehicleInfoScreenSteps.setVIN(inspectionData.getVehicleInfo().getVINNumber());
+        final String inspectionNumber = VehicleInfoScreenSteps.getInspectionNumber();
         WizardScreensSteps.clickNotesButton();
         NotesScreen notesScreen = new NotesScreen();
         notesScreen.setNotes(notesText);
         notesScreen.clickSaveButton();
-        vehicleScreen.saveWizard();
+        InspectionsSteps.saveInspectionAsFinal();
         myInspectionsScreen.selectInspectionForCopy(inspectionNumber);
 
-        String copiedInspectionNumber = vehicleScreen.getInspectionNumber();
-        vehicleScreen.saveWizard();
+        String copiedInspectionNumber = VehicleInfoScreenSteps.getInspectionNumber();
+        InspectionsSteps.saveInspectionAsFinal();
 
         Assert.assertTrue(myInspectionsScreen.isNotesIconPresentForInspection(copiedInspectionNumber));
         notesScreen = myInspectionsScreen.openInspectionNotesScreen(copiedInspectionNumber);
         Assert.assertEquals(notesScreen.getAddedNotesText(), notesText);
         notesScreen.clickSaveButton();
-        myInspectionsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -4761,6 +4759,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         final String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
         NavigationSteps.navigateToServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList()) {
+            ServicesScreenSteps.selectService(serviceData.getServiceName());
             if (serviceData.getServiceNewTechnician() != null) {
                 ServicesScreen servicesScreen = new ServicesScreen();
                 servicesScreen.openServiceDetails(serviceData.getServiceName());
@@ -4771,8 +4770,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
                     TechniciansPopupSteps.selectServiceTechnician(serviceData.getServiceNewTechnician());
                 TechniciansPopupSteps.saveTechViewDetails();
                 ServiceDetailsScreenSteps.saveServiceDetails();
-            } else
-                ServicesScreenSteps.selectService(serviceData.getServiceName());
+            }
         }
         NavigationSteps.navigateToOrderSummaryScreen();
         OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
@@ -5259,7 +5257,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         myInvoicesScreen.selectInvoice(invoiceNumber);
         myInvoicesScreen.clickChangePOPopup();
         myInvoicesScreen.changePO(invoiceData.getNewPoNumber());
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY_HD);
         myInvoicesScreen.clickCancelButton();
 
         myInvoicesScreen.switchToTeamView();
@@ -5267,7 +5265,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         teaminvoicesscreen.selectInvoice(invoiceNumber);
         teaminvoicesscreen.clickChangePOPopup();
         teaminvoicesscreen.changePO(invoiceData.getNewPoNumber());
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
+        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY_HD);
         teaminvoicesscreen.clickCancelButton();
 
         myInvoicesScreen.clickHomeButton();
@@ -5689,8 +5687,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
             techniciansPopup.selecTechnician(serviceData.getServiceNewTechnician().getTechnicianFullName());
             techniciansPopup.clearSerchTechnician();
             DriverBuilder.getInstance().getAppiumDriver().hideKeyboard();
-            Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
-            Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
+            if (serviceData.getServicePrice().equals(zeroPrice)) {
+                Assert.assertFalse(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
+                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
+            } else {
+                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
+                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
+            }
             techniciansPopup.saveTechViewDetails();
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }
@@ -5802,12 +5805,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
         orderSummaryScreen.saveWizard();
         TechniciansPopup techniciansPopup = myWorkOrdersScreen.selectWorkOrderTechniciansMenuItem(workOrderNumber);
+        techniciansPopup.selecTechnician(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceDefaultTechnician().getTechnicianFullName());
         techniciansPopup.selecTechnician(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceNewTechnician().getTechnicianFullName());
-        techniciansPopup.saveTechViewDetails();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_CHANGE_DEFAULT_EMPLOYEES);
-        myWorkOrdersScreen = new MyWorkOrdersScreen();
+        TechniciansPopupSteps.saveTechViewDetails();
+        AssignTechniciansSteps.assignTechniciansToWorkOrder();
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-        vehicleScreen = new VehicleScreen();
+        VehicleInfoScreenSteps.waitVehicleScreenLoaded();
         Assert.assertEquals(vehicleScreen.getTechnician(), workOrderData.getMatrixServiceData().getVehiclePartData().getServiceNewTechnician().getTechnicianFullName() +
                 ", " + workOrderData.getMatrixServiceData().getVehiclePartData().getServiceDefaultTechnician().getTechnicianFullName());
         vehicleScreen.cancelOrder();
@@ -6278,7 +6281,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-
         HomeScreen homeScreen = new HomeScreen();
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_003_Test_Customer, WorkOrdersTypes.WO_GROUP_SERVICE_TYPE);
@@ -6360,7 +6362,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
         Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(moneyServicePanel.getServiceDefaultTechnician().getTechnicianFullName()));
         techniciansPopup.cancelSearchTechnician();
-        ServiceDetailsScreenSteps.saveServiceDetails();
+        ServiceDetailsScreenSteps.cancelServiceDetails();
 
         QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
 
@@ -6849,7 +6851,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
                 workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianPercentageValue());
 
         techniciansPopup.cancelTechViewDetails();
-        serviceDetailsPopup.clickServiceDetailsDoneButton();
+        serviceDetailsPopup.clickServiceDetailsCancelButton();
         NavigationSteps.navigateBackScreen();
         NavigationSteps.navigateBackScreen();
         homeScreen.clickLogoutButton();

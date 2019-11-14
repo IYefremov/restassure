@@ -12,7 +12,6 @@ import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextBOInspectionsApproveTests extends BaseTestCase {
@@ -20,10 +19,6 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsApproveTD();
-    }
-
-    @BeforeMethod
-    public void BackOfficeLogin() {
         VNextBOLeftMenuInteractions.selectInspectionsMenu();
     }
 
@@ -34,11 +29,11 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageSteps.clickInspectionApproveButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
-        VNextBOModalDialogValidations.isYesButtonDisplayed();
-        VNextBOModalDialogValidations.isNoButtonDisplayed();
-        VNextBOModalDialogValidations.isCloseButtonDisplayed();
+        VNextBOModalDialogValidations.verifyYesButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyNoButtonIsDisplayed();
+        VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
         VNextBOModalDialogSteps.clickNoButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
@@ -47,6 +42,6 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.clickInspectionApproveButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCloseButton();
-        VNextBOModalDialogValidations.isDialogClosed(confirmationDialog);
+        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
     }
 }

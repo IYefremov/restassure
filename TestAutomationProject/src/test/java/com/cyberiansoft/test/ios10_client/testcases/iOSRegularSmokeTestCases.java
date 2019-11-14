@@ -158,9 +158,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		homeScreen.clickLogoutButton();
-		RegularMainScreen mainScreeneen = new RegularMainScreen();
-		mainScreeneen.updateDatabase();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularMainScreen mainScreen = new RegularMainScreen();
+		mainScreen.updateDatabase();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
@@ -176,8 +176,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(customersScreen.checkCustomerExists(editedCustomer.getFirstName()));
 		customersScreen.clickHomeButton();
 		homeScreen.clickLogoutButton();
-		mainScreeneen.updateDatabase();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen.updateDatabase();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -197,8 +197,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		DriverBuilder.getInstance().getDriver().quit();
 
 		homeScreen.clickLogoutButton();
-		mainScreeneen.updateDatabase();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen.updateDatabase();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		homeScreen.clickCustomersButton();
 		customersScreen.swtchToRetailMode();
 		Assert.assertFalse(customersScreen.checkCustomerExists(editedCustomer.getFirstName()));
@@ -316,8 +316,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		final String license = "Iphone_Test_Spec_Client";
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
-		RegularMainScreen mainScreeneen = homeScreen.clickLogoutButton();
-		LicensesScreen licensesscreen = mainScreeneen.clickLicenses();
+		RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
+		LicensesScreen licensesscreen = mainScreen.clickLicenses();
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -339,7 +339,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularSelectEnvironmentScreen selectenvscreen = new RegularSelectEnvironmentScreen();
 		LoginScreen loginscreen = selectenvscreen.selectEnvironment(envType.getEnvironmentTypeName());
 		loginscreen.registeriOSDevice(regCode);
-		mainScreeneen.userLogin(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen.userLogin(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN, iOSInternalProjectConstants.USER_PASSWORD);
 
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
@@ -581,8 +581,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularInspectionsSteps.saveInspection();
 		RegularNavigationSteps.navigateBackScreen();
 
-		RegularMainScreen mainScreeneen = homeScreen.clickLogoutButton();
-		mainScreeneen.updateDatabase();
+		RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
+		mainScreen.updateDatabase();
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -599,8 +599,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		DriverBuilder.getInstance().getDriver().quit();
 
-		mainScreeneen.updateDatabase();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen.updateDatabase();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		Assert.assertTrue(myInspectionsScreen.isInspectionIsApproved(inpectionnumber));
@@ -631,8 +631,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		RegularInspectionsSteps.saveInspection();
 		RegularNavigationSteps.navigateBackScreen();
-		RegularMainScreen mainScreeneen = homeScreen.clickLogoutButton();
-		mainScreeneen.updateDatabase();
+		RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
+		mainScreen.updateDatabase();
 		Helpers.waitABit(10000);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -653,8 +653,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		DriverBuilder.getInstance().getDriver().quit();
 
-		mainScreeneen.updateDatabase();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen.updateDatabase();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
 		Assert.assertTrue(myInspectionsScreen.isInspectionIsApproved(inspectionNumber));
@@ -1958,8 +1958,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Helpers.waitABit(30 * 1000);
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
-		RegularMainScreen mainScreeneen = new RegularMainScreen();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularMainScreen mainScreen = new RegularMainScreen();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		Assert.assertTrue(myWorkOrdersScreen.isAutosavedWorkOrderExists());
@@ -1969,8 +1969,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
-		mainScreeneen = new RegularMainScreen();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen = new RegularMainScreen();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		Assert.assertTrue(myWorkOrdersScreen.isAutosavedWorkOrderExists());
 		myWorkOrdersScreen.selectDiscardWorkOrder();
@@ -4239,8 +4239,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		BaseUtils.waitABit(20 * 1000);
 		for (Employee employee : allEmployees) {
-			RegularMainScreen mainScreeneen = homeScreen.clickLogoutButton();
-			mainScreeneen.userLogin(employee.getEmployeeFirstName(), employee.getEmployeePassword());
+			RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
+			mainScreen.userLogin(employee.getEmployeeFirstName(), employee.getEmployeePassword());
 			RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
 			RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
 			teamWorkOrdersScreen.clickSearchButton();
@@ -4270,9 +4270,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			RegularNavigationSteps.navigateBackScreen();
 		}
 
-		RegularMainScreen mainScreeneen = homeScreen.clickLogoutButton();
+		RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
 
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -4314,9 +4314,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		}
 		RegularNavigationSteps.navigateBackScreen();
 		RegularNavigationSteps.navigateBackScreen();
-		mainScreeneen = homeScreen.clickLogoutButton();
+		mainScreen = homeScreen.clickLogoutButton();
 
-		mainScreeneen.userLogin(allEmployees.get(1).getEmployeeFirstName(), allEmployees.get(1).getEmployeePassword());
+		mainScreen.userLogin(allEmployees.get(1).getEmployeeFirstName(), allEmployees.get(1).getEmployeePassword());
 		RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
 		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
 		orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
@@ -4325,8 +4325,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		}
 		RegularNavigationSteps.navigateBackScreen();
 		RegularNavigationSteps.navigateBackScreen();
-		mainScreeneen = homeScreen.clickLogoutButton();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		mainScreen = homeScreen.clickLogoutButton();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -4808,8 +4808,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateBackScreen();
 		homeScreen.clickStatusButton();
 		homeScreen.updateDatabase();
-		RegularMainScreen mainScreeneen = new RegularMainScreen();
-		mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+		RegularMainScreen mainScreen = new RegularMainScreen();
+		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
 		//Create third WO
 		homeScreen.clickMyWorkOrdersButton();
@@ -5746,7 +5746,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.selectPanel(firstMonitorServiceData.getMonitorService());
-		Assert.assertEquals(orderMonitorScreen.getTechnicianValue(), firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
+		Assert.assertEquals(orderMonitorScreen.getServiceTechnicianValue(), firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
 		orderMonitorScreen.clickServiceDetailsDoneButton();
 
 		orderMonitorScreen.clickStartOrderButton();

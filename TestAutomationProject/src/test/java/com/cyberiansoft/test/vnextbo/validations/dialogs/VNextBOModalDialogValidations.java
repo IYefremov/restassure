@@ -6,43 +6,43 @@ import org.testng.Assert;
 
 public class VNextBOModalDialogValidations {
 
-    public static void isDialogDisplayed() {
+    public static void verifyDialogIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getDialogContent()),
                 "Modal dialog hasn't been opened");
     }
 
-    public static void isNoButtonDisplayed() {
+    public static void verifyNoButtonIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getNoButton()),
                 "Modal dialog hasn't had \"No\" button");
     }
 
-    public static void isYesButtonDisplayed() {
+    public static void verifyYesButtonIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getYesButton()),
                 "Modal dialog hasn't had \"Yes\" button");
     }
 
-    public static void isCloseButtonDisplayed() {
+    public static void verifyCloseButtonIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getCloseButton()),
                 "Modal dialog hasn't had \"Close\" x-icon");
     }
 
-    public static void isOkButtonDisplayed() {
+    public static void verifyOkButtonIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getConfirmOKButton()),
                 "Modal dialog hasn't had \"Ok\" button");
     }
 
-    public static void isCancelButtonDisplayed() {
+    public static void verifyCancelButtonIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getCancelButton()),
                 "Modal dialog hasn't had \"Cancel\" button");
     }
 
-    public static void isDialogClosed(VNextBOModalDialog confirmationDialog) {
+    public static void verifyDialogIsClosed(VNextBOModalDialog confirmationDialog) {
 
         Assert.assertTrue(Utils.isElementNotDisplayed(confirmationDialog.getDialogContent()),
                 "Modal dialog hasn't been closed");

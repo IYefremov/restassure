@@ -7,44 +7,45 @@ import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[1]/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_FirstName")
 	private IOSElement firstnamefld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[2]/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_LastName")
     private IOSElement lastnamefld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[3]/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Company")
     private IOSElement companyfld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[6]/XCUIElementTypeTextView")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Address")
     private IOSElement address1fld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[7]/XCUIElementTypeTextView")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Address2")
 	private IOSElement address2fld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[8]/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_City")
     private IOSElement cityfld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[10]/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_State")
 	private IOSElement statefld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[9]/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Country")
     private IOSElement countryfld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[11]/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Zip")
     private IOSElement zipfld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[5]/XCUIElementTypeTextField")
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Phone")
     private IOSElement phonefld;
 
-	@iOSXCUITFindBy(xpath = "//XCUIElementTypeTable/XCUIElementTypeCell[4]/XCUIElementTypeTextField")
-    private IOSElement mailfld;
+	@iOSXCUITFindBy(accessibility = "CustomerInfoCell_Email")
+	private IOSElement mailfld;
 	
 	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement savebtn;
@@ -61,24 +62,19 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 		setFirstName(appCustomer.getFirstName());
 		setLastName(appCustomer.getLastName());
 		setCompanyName(appCustomer.getCompany());
-		Helpers.waitABit(2000);
 		setMail(appCustomer.getMailAddress());
 		setPhone(appCustomer.getCustomerPhone());
 		setAddress1(appCustomer.getCustomerAddress1());
 		setCity(appCustomer.getCustomerCity());
 		selectCountry(appCustomer.getCustomerCountry());
-		Helpers.waitABit(2000);
 		selectState(appCustomer.getCustomerState());
-		Helpers.waitABit(4000);
 		setZip(appCustomer.getCustomerZip());
 	}
 
 	public void editCustomer(RetailCustomer appCustomer) {
-		Helpers.waitABit(1000);
 		setFirstName(appCustomer.getFirstName());
 		setLastName(appCustomer.getLastName());
 		setCompanyName(appCustomer.getCompany());
-		Helpers.waitABit(2000);
 		setMail(appCustomer.getMailAddress());
 		setPhone(appCustomer.getCustomerPhone());
 		setAddress1(appCustomer.getCustomerAddress1());
@@ -87,50 +83,57 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setFirstName(String firstname) {
-		firstnamefld.clear();
-		firstnamefld.sendKeys(firstname+"\n");
+		WebElement firstNameTxt = firstnamefld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		firstNameTxt.clear();
+		firstNameTxt.sendKeys(firstname+"\n");
 	}
 
 	public void setLastName(String lastname) {
-		lastnamefld.click();
-		lastnamefld.clear();
-		lastnamefld.sendKeys(lastname + "\n");
+		WebElement lastNameTxt = lastnamefld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		lastNameTxt.clear();
+		lastNameTxt.sendKeys(lastname + "\n");
 	}
 
 	public void setCompanyName(String companyname) {
-		companyfld.clear();
-		companyfld.sendKeys(companyname + "\n");
+		WebElement companyTxt = companyfld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		companyTxt.clear();
+		companyTxt.sendKeys(companyname + "\n");
 	}
 
 	public void setAddress1(String address1) {
-		address1fld.clear();
-		address1fld.setValue(address1 + "\n");
+		WebElement addressTxt = address1fld.findElementByAccessibilityId("CustomerInfoCellTextView");
+		addressTxt.clear();
+		addressTxt.sendKeys(address1 + "\n");
 	}
 
 	public void setAddress2(String address2) {
-		address2fld.clear();
-		address2fld.setValue(address2 + "\n");
+		WebElement address2Txt = address2fld.findElementByAccessibilityId("CustomerInfoCellTextView");
+		address2Txt.clear();
+		address2Txt.sendKeys(address2 + "\n");
 	}
 
 	public void setCity(String city) {
-		cityfld.clear();
-		cityfld.sendKeys(city + "\n");
+		WebElement cityTxt = cityfld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		cityTxt.clear();
+		cityTxt.sendKeys(city + "\n");
 	}
 
 	public void setZip(String zip) {
-		zipfld.clear();
-		zipfld.sendKeys(zip + "\n");
+		WebElement zipTxt = zipfld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		zipTxt.clear();
+		zipTxt.sendKeys(zip + "\n");
 	}
 
 	public void setPhone(String phone) {
-		phonefld.clear();
-		phonefld.click();
-		phonefld.sendKeys(phone + "\n");
+		WebElement phoneTxt = phonefld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		phoneTxt.clear();
+		phoneTxt.sendKeys(phone + "\n");
 	}
 
 	public void setMail(String mail) {
-		mailfld.clear();
-		mailfld.sendKeys(mail + "\n");
+		WebElement mailTxt = mailfld.findElementByAccessibilityId("CustomerInfoCellEditBox");
+		mailTxt.clear();
+		mailTxt.sendKeys(mail + "\n");
 	}
 
 	public void selectState(String state) {

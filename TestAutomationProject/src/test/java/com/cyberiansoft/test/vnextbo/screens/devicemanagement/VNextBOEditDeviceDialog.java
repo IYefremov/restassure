@@ -1,46 +1,34 @@
 package com.cyberiansoft.test.vnextbo.screens.devicemanagement;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
-
 @Getter
-public class VNextBOEditDeviceDialog extends VNextBODeviceDialog {
+public class VNextBOEditDeviceDialog extends VNextBOBaseWebPage {
 
-    @FindBy(id = "edit-device-popup")
+    @FindBy(xpath = "//div[@id='edit-device-popup']//div[@class='modal-content']")
     private WebElement editDeviceDialog;
 
-    @FindBy(id = "editDevicePopup-nickname")
-    private WebElement nicknameInputField;
+    @FindBy(xpath = "//input[@id='editDevicePopup-nickname']")
+    private WebElement nickNameField;
 
-    //DropDowns
-    @FindBy(xpath = "//div[@id='edit-device-popup']//div[@data-name='team']//span[contains(@class, 'k-icon')]")
-    private WebElement teamArrow;
+    @FindBy(xpath = "//span[@aria-owns='editDevicePopup-team_listbox']")
+    private WebElement teamDropDownField;
 
-    @FindBy(id = "editDevicePopup-team_listbox")
-    private WebElement teamDropDown;
+    @FindBy(xpath = "//ul[@id='editDevicePopup-team_listbox']")
+    private WebElement teamDropDownOptionsList;
 
-    @FindBy(xpath = "//ul[@id='editDevicePopup-team_listbox']/li")
-    private List<WebElement> teamListBoxOptions;
+    @FindBy(xpath = "//span[@aria-owns='editDevicePopup-timeZone_listbox']")
+    private WebElement timeZoneDropDownField;
 
-    @FindBy(xpath = "//div[@id='edit-device-popup']//div[@data-name='team']//span[contains(@class, 'k-input')]")
-    private WebElement teamInput;
-
-    @FindBy(xpath = "//span[@aria-owns='editDevicePopup-timeZone_listbox']//span[contains(@class, 'k-icon')]")
-    private WebElement timeZoneArrow;
-
-    @FindBy(id = "editDevicePopup-timeZone_listbox")
-    private WebElement timeZoneDropDown;
-
-    @FindBy(xpath = "//ul[@id='editDevicePopup-timeZone_listbox']/li")
-    private List<WebElement> timeZoneListBoxOptions;
-
-    @FindBy(xpath = "//span[@aria-owns='editDevicePopup-timeZone_listbox']//span[contains(@class, 'k-input')]")
-    private WebElement timeZoneInput;
+    @FindBy(xpath = "//ul[@id='editDevicePopup-timeZone_listbox']")
+    private WebElement timeZoneDropDownOptionsList;
 
     //Buttons
     @FindBy(xpath = "//div[@id='edit-device-popup']//button[@data-automation-id='editDevicePopup-submit']")
@@ -49,8 +37,16 @@ public class VNextBOEditDeviceDialog extends VNextBODeviceDialog {
     @FindBy(xpath = "//div[@id='edit-device-popup']//button[@data-automation-id='editDevicePopup-cancel']")
     private WebElement cancelButton;
 
+    @FindBy(xpath = "//div[@id='edit-device-popup']//button[@aria-label='Close']")
+    private WebElement xIconButton;
+
+    public WebElement dropDownFieldOption(String optionName) {
+
+        return driver.findElement(By.xpath("//ul[@aria-hidden='false']/li[text()='" + optionName + "']"));
+    }
+
     public VNextBOEditDeviceDialog() {
-        super();
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 }

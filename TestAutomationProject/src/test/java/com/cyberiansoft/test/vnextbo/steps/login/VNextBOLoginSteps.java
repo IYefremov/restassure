@@ -16,4 +16,12 @@ public class VNextBOLoginSteps {
             WaitUtilsWebDriver.waitABit(2000);
         }
     }
+
+    public static  void clearLoginFormData() {
+
+        VNextBOLoginScreenWebPage loginScreenWebPage = new VNextBOLoginScreenWebPage();
+        Utils.clear(loginScreenWebPage.getEmailField());
+        Utils.clear(loginScreenWebPage.getPasswordField());
+        WaitUtilsWebDriver.waitABit(2000);
+    }
 }

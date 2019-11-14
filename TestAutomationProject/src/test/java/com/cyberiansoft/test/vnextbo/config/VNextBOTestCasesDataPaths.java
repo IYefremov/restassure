@@ -122,6 +122,10 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.device.management.search.td");
     }
 
+    public String getDeviceManagementActiveAndPendingRegistrationTabsTD() {
+        return properties.getProperty("vnextbo.device.management.active.and.pending.registration.tabs.td");
+    }
+
     public String getHomePageTD() {
         return properties.getProperty("vnextbo.home.page.td");
     }

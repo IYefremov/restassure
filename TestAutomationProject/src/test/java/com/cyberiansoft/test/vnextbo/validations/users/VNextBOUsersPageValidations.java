@@ -10,123 +10,68 @@ import org.testng.Assert;
 
 public class VNextBOUsersPageValidations extends VNextBOBaseWebPageValidations {
 
-    public static void isAddNewUserBtnDisplayed()
-    {
+    public static void verifyAddNewUserBtnIsDisplayed() {
+
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         Assert.assertTrue(Utils.isElementDisplayed(vNexBOUsersWebPage.addNewUserBtn),
                 "\"Add New User\" button hasn't been displayed.");
     }
 
-    public static void isUsersTableDisplayed()
-    {
+    public static void verifyUsersTableIsDisplayed() {
+
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         Assert.assertTrue(Utils.isElementDisplayed(vNexBOUsersWebPage.usersTable.getWrappedElement()),
                 "\"Add New User\" button hasn't been displayed.");
     }
 
-    public static void isPageNavigationButtonsDisplayed()
-    {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
-        Assert.assertTrue(Utils.isElementDisplayed(vNexBOUsersWebPage.nextPageBtn) &
-                        Utils.isElementDisplayed(vNexBOUsersWebPage.previousPageBtn),
-                "Navigation buttons haven't been displayed.");
-    }
+    public static void verifyUsersNotFoundMessageIsDisplayed() {
 
-    public static void isOpenedPageNumberCorrect(String expectedPageNumber)
-    {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
-        Assert.assertEquals(VNextBOUsersPageSteps.getActivePageNumberFromTopPagingElement(), expectedPageNumber,
-                "Page hasn't been changed.");
-    }
-
-    public static void verifyTopAndBottomPagingElementsHaveSamePageNumber()
-    {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
-        Assert.assertEquals(VNextBOUsersPageSteps.getActivePageNumberFromBottomPagingElement(),
-                VNextBOUsersPageSteps.getActivePageNumberFromTopPagingElement(),
-                "Top and bottom paging elements haven't been synchronized.");
-    }
-
-    public static boolean isLastPageButtonClickable()
-    {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
-        return Utils.isElementClickable(vNexBOUsersWebPage.lastPageBtn);
-    }
-
-    public static boolean isFirstPageButtonClickable()
-    {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
-        return Utils.isElementClickable(vNexBOUsersWebPage.firstPageBtn);
-    }
-
-    public static void isItemsPerPageNumberCorrect(String expectedItemsNumber)
-    {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
-        Assert.assertTrue(VNextBOUsersPageSteps.getItemsPageNumberFromTopElement().contains(expectedItemsNumber),
-                "Paging box has had incorrect items per page number.");
-    }
-
-    public static void verifyTopAndBottomPagingPagingBoxesHaveSameItemsPerPageNumber()
-    {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
-        Assert.assertEquals(VNextBOUsersPageSteps.getItemsPageNumberFromTopElement(),
-                VNextBOUsersPageSteps.getItemsPageNumberFromBottomElement(),
-                "Top and bottom paging boxes elements haven't been synchronized.");
-    }
-
-    public static void isSearchFilterTextCorrect(String text)
-    {
-        Assert.assertTrue(VNextBOUsersPageSteps.getSearchFilterText().contains(text),
-                "Search option under Search field hasn't been correct");
-    }
-
-    public static void isUsersNotFoundMessageDisplayed()
-    {
-        VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersNotFoundMessage(), "No items to show",
                 "\"No items to show\" message hasn't been displayed.");
     }
 
-    public static boolean isRedTriangleWarningIconDisplayed()
-    {
+    public static boolean verifyRedTriangleWarningIconIsDisplayed() {
+
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         return Utils.isElementDisplayed(vNexBOUsersWebPage.redTriangleWarningIcon);
     }
 
-    public static boolean isRedTriangleWarningIconNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage)
-    {
+    public static boolean verifyRedTriangleWarningIconIsNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage) {
+
         return Utils.isElementNotDisplayed(vNexBOUsersWebPage.redTriangleWarningIcon);
     }
 
-    public static void isReSendButtonDisplayed()
-    {
+    public static void verifyReSendButtonIsDisplayed() {
+
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         Assert.assertTrue(Utils.isElementDisplayed(vNexBOUsersWebPage.reSendButton),
                 "Re-send button hasn't been displayed.");
     }
 
-    public static boolean isReSendButtonNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage)
-    {
+    public static boolean verifyReSendButtonIsNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage) {
+
         return Utils.isElementNotDisplayed(vNexBOUsersWebPage.reSendButton);
     }
 
-    public static boolean isUserPresentOnCurrentPageByText(String userMail) {
+    public static boolean verifyUserIsPresentOnCurrentPageByText(String searchText) {
+
         try {
-            VNextBOUsersPageSteps.getTableRowWithText(userMail);
+            VNextBOUsersPageSteps.getTableRowWithText(searchText);
         } catch (NullPointerException ignored) {}
-        WebElement row = VNextBOUsersPageSteps.getTableRowWithText(userMail);
+        WebElement row = VNextBOUsersPageSteps.getTableRowWithText(searchText);
         return row != null;
     }
 
-    public static boolean isUserPresentInTableByText(String userMail) {
+    public static boolean verifyUserIsPresentInTableByText(String searchText) {
+
         boolean found = false;
         boolean nextPage = true;
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         while (nextPage) {
             if (vNexBOUsersWebPage.nextPageBtn.getAttribute("disabled") != null) {
-                found = isUserPresentOnCurrentPageByText(userMail);
+                found = verifyUserIsPresentOnCurrentPageByText(searchText);
                 nextPage = false;
-            } else if (!isUserPresentOnCurrentPageByText(userMail)) {
+            } else if (!verifyUserIsPresentOnCurrentPageByText(searchText)) {
                 Utils.clickWithJS(vNexBOUsersWebPage.nextPageBtn);
                 WaitUtilsWebDriver.waitForLoading();
             } else {

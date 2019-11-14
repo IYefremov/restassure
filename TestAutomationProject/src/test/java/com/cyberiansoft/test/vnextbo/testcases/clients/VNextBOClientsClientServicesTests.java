@@ -3,17 +3,13 @@ package com.cyberiansoft.test.vnextbo.testcases.clients;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientServicesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientDetailsValidations;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientServicesPageValidations;
@@ -29,8 +25,6 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 public class VNextBOClientsClientServicesTests extends BaseTestCase {
 
     private static final String PRECONDITION_WHOLESALE_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/clients/VNextBOClientsPreconditionsWholesaleClient.json";
-    String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-    String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
     VNextBOClientsData baseWholesaleClient;
     final String servicePackageName = "01alex_Pack_ExteriorInspection";
     final String serviceName = "AMoneyFlatFee_VacuumCleaner";
@@ -38,12 +32,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() throws Exception {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getClientsServicesTD();
-
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-
-        VNextBOLoginSteps.userLogin(userName, userPassword);
         VNextBOLeftMenuInteractions.selectClientsMenu();
-
         baseWholesaleClient = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITION_WHOLESALE_FILE), VNextBOClientsData.class);
         baseWholesaleClient.getEmployee().setCompanyName(baseWholesaleClient.getEmployee().getCompanyName() + RandomStringUtils.randomAlphabetic(10));
         VNextBOClientsPageSteps.createNewClient(baseWholesaleClient, true);
@@ -53,29 +42,12 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
     }
 
-    @Override
-    @BeforeMethod
-    public void login() {}
-
-    @Override
-    @AfterMethod
-    public void logout() {}
-
-    @AfterClass
-    public void backOfficeLogout() {
-        VNextBOHeaderPanelSteps.logout();
-
-        if (DriverBuilder.getInstance().getDriver() != null) {
-            DriverBuilder.getInstance().quitDriver();
-        }
-    }
-
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanSeeServicesDetailsAndSelectServicePackage(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelValidations.isSearchFieldDisplayed();
-        VNextBOPageSwitcherValidations.arePageNavigationElementsDisplayed();
-        VNextBOClientServicesPageValidations.isServicesTableDisplayed();
+        VNextBOSearchPanelValidations.verifySearchFieldIsDisplayed();
+        VNextBOPageSwitcherValidations.verifyPageNavigationElementsAreDisplayed();
+        VNextBOClientServicesPageValidations.verifyServicesTableIsDisplayed();
         VNextBOClientServicesPageValidations.verifyAllColumnsAreDisplayed();
     }
 
@@ -83,7 +55,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
     public void verifyUserCanGoToPreviousPage(String rowID, String description, JSONObject testData) {
 
         VNextBOClientServicesPageSteps.clickClientServicesBackButton();
-        VNextBOClientDetailsValidations.isClientInfoPanelExpanded();
+        VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded();
 
     }
 
@@ -93,47 +65,47 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickServicesTab();
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
         VNextBOSearchPanelSteps.searchByText(serviceName);
-        VNextBOClientServicesPageValidations.isCorrectRecordsAmountDisplayed(1);
-        VNextBOClientServicesPageValidations.isSearchResultCorrectForColumnWithText("Service", "AMoneyFlatFee_VacuumCleaner");
+        VNextBOClientServicesPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOClientServicesPageValidations.verifySearchResultIsCorrectForColumnWithText("Service", "AMoneyFlatFee_VacuumCleaner");
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOSearchPanelSteps.searchByText("jkfhajkklaspasdklja");
-        VNextBOClientServicesPageValidations.isServicesNotFoundMessageDisplayed();
+        VNextBOClientServicesPageValidations.verifyServicesNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOClientServicesPageValidations.isServicesTableDisplayed();
+        VNextBOClientServicesPageValidations.verifyServicesTableIsDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyUserCanSwitchBetweenPages(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("2");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("2");
         VNextBOPageSwitcherSteps.clickFooterPreviousPageButton();
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyFooterLastPageButtonIsClickable(),
                 "Bottom Last page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderLastPageButtonIsClickable(),
                 "Top Last page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderFirstPageButtonIsClickable(), "Top First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyFooterFirstPageButtonIsClickable(), "Bottom First page button has been clickable.");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("3");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyUserCanUsePageFilter(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.changeItemsPerPage("20");
-        VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("20");
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
-        VNextBOClientServicesPageValidations.isCorrectRecordsAmountDisplayed(20);
+        VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("20");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
+        VNextBOClientServicesPageValidations.verifyCorrectRecordsAmountIsDisplayed(20);
         VNextBOPageSwitcherSteps.changeItemsPerPage("50");
-        VNextBOPageSwitcherValidations.isItemsPerPageNumberCorrect("50");
-        VNextBOPageSwitcherValidations.isOpenedPageNumberCorrect("1");
-        VNextBOClientServicesPageValidations.isCorrectRecordsAmountDisplayed(50);
+        VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("50");
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
+        VNextBOClientServicesPageValidations.verifyCorrectRecordsAmountIsDisplayed(50);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)

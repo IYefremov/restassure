@@ -288,7 +288,7 @@
 //		userslist.add(userMail);
 //		Assert.assertTrue(userswabpage.isRedWarningTrianglePresentForUser(userMail));
 //		adduserdialog = userswabpage.clickEditButtonForUser(userMail);
-//		Assert.assertTrue(adduserdialog.isEmailFieldDisabled());
+//		Assert.assertTrue(adduserdialog.verifyEmailFieldIsDisabled());
 //		adduserdialog.setUserFirstName(data.getFirstName() + data.getUserEdited());
 //		adduserdialog.setUserLastName(data.getLastName() + data.getUserEdited());
 //		adduserdialog.clickSaveButtonAndWait();
@@ -328,7 +328,7 @@
 //		userslist.add(userMail);
 //		Assert.assertFalse(userswabpage.isRedWarningTrianglePresentForUser(userMail));
 //		adduserdialog = userswabpage.clickEditButtonForUser(userMail);
-//		Assert.assertTrue(adduserdialog.isEmailFieldDisabled());
+//		Assert.assertTrue(adduserdialog.verifyEmailFieldIsDisabled());
 //		adduserdialog.setUserFirstName(data.getFirstName() + data.getUserEdited());
 //		adduserdialog.setUserLastName(data.getLastName() + data.getUserEdited());
 //		adduserdialog.clickSaveButtonAndWait();
