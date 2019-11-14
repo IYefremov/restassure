@@ -402,7 +402,7 @@
       "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
-      "reason": "No part"
+      "problemReason": "No part"
     }
   ]
 }

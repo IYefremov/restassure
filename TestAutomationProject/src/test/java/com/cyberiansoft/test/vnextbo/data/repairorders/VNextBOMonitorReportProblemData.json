@@ -1,34 +1,204 @@
 {
-  "verifyUserCanReportProblemOnPhaseLevel": [
+  "verifyUserCanReportAndResolveProblemOnPhaseLevel": [
     {
-      "rowID": "verifyUserCanReportProblemOnPhaseLevel.01",
-      "description": "Test Case 88119: Verify user can report problem on the phase level (select reason from the list)",
+      "rowID": "verifyUserCanReportAndResolveProblemOnPhaseLevel.01",
+      "description": "Test Case 88119: Verify user can report problem on the phase level (select reason from the list). Test Case 88121:Verify user can resolve the problem (Phase level)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91236"
+        },
+        {
+          "testCaseID": "91237"
         }
       ],
       "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
-      "reason": "No part"
+      "serviceStatuses": [
+        "Active"
+      ],
+      "problemReason": "No part"
     }
   ],
 
-  "verifyUserCanCheckInRO": [
+  "verifyUserCanInsertReasonDescriptionWhileReportingProblemOnPhaseLevel": [
     {
-      "rowID": "verifyUserCanCheckInRO.01",
-      "description": "Test Case 83643: User can see Parts of RO. Test Case 83743: User can Chek - In RO",
+      "rowID": "verifyUserCanInsertReasonDescriptionWhileReportingProblemOnPhaseLevel.01",
+      "description": "Test Case 88122: Verify user can report problem on the phase level (enter the reason description)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91261"
-        },
-        {
-          "testCaseID": "91258"
+          "testCaseID": "91238"
         }
       ],
-      "location": "New_zayats_location",
-      "orderNumber": "O-000-152460"
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station"
+    }
+  ],
+
+  "verifyPhaseStatusIsSetToTheInitialAfterResolvingTheProblemOnPhaseLevel": [
+    {
+      "rowID": "verifyPhaseStatusIsSetToTheInitialAfterResolvingTheProblemOnPhaseLevel.01",
+      "description": "Test Case 88123: Verify the phase status is set to the initial after resolving the problem (phase level)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91239"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station",
+      "serviceStatuses": [
+        "Rework",
+        "Problem"
+        ],
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheUserCannotReportProblemForCompletedPhase": [
+    {
+      "rowID": "verifyTheUserCannotReportProblemForCompletedPhase.01",
+      "description": "Test Case 88126: Verify user can't report the problem for completed phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91240"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station",
+      "serviceStatuses": [
+        "Completed",
+        "Problem"
+        ],
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheProblemIconIsShownForTheOrderOnTheROPage": [
+    {
+      "rowID": "verifyTheProblemIconIsShownForTheOrderOnTheROPage.01",
+      "description": "Test Case 88129: Verify the problem icon is shown for the order on the \"Repair Order\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91241"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station",
+      "serviceStatuses": [
+        "Active"
+      ],
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheUserCanViewTheOrderProblemFromTheROAndDetailsPage": [
+    {
+      "rowID": "verifyTheUserCanViewTheOrderProblemFromTheROAndDetailsPage.01",
+      "description": "Test Case 88133: Verify user can view the order problem from the \"Repair Order\" and details page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91242"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station",
+      "serviceStatuses": [
+        "Active"
+      ],
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheUserCanReportAndResolveProblemOnTheServiceLevel": [
+    {
+      "rowID": "verifyTheUserCanReportAndResolveProblemOnTheServiceLevel.01",
+      "description": "Test Case 88136: Verify user can report problem on the service level (select reason from the list). Test Case 88137: Verify user can resolve the problem (Service level). Test Case 88141: Verify user can report problem on the service level (enter the reason description)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91243"
+        },
+        {
+          "testCaseID": "91244"
+        },
+        {
+          "testCaseID": "91245"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "serviceStatuses": [
+        "Active"
+      ],
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheUserCanViewTheServicesFromROPageAndSystemExpandsThePhase": [
+    {
+      "rowID": "verifyTheUserCanViewTheServicesFromROPageAndSystemExpandsThePhase.01",
+      "description": "Test Case 88151: Verify user can view the problem services from the \"Repair Order\" page and system expands the phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91246"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "serviceStatuses": [
+        "Active"
+      ],
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheUserCannotReportProblemForTheCompletedService": [
+    {
+      "rowID": "verifyTheUserCannotReportProblemForTheCompletedService.01",
+      "description": "Test Case 88154: Verify user can't report problem for the \"Completed\" service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91247"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "serviceStatuses": [
+        "Active",
+        "Completed",
+        "Problem"
+      ],
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnThePhaseLevel": [
+    {
+      "rowID": "verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnThePhaseLevel.01",
+      "description": "Test Case 88155: Verify user can change the service's attributes after reporting the problem (phase level)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91248"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "serviceStatuses": [
+        "Active"
+      ],
+      "problemReason": "No part"
     }
   ]
 }

@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.vnextbo.validations.repairorders;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class VNextBORODetailsPageValidations {
@@ -69,7 +71,19 @@ public class VNextBORODetailsPageValidations {
     }
 
     public static boolean isProblemIconDisplayedForPhase(String phase) {
-        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseProblemIcon(phase));
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseProblemIcon(phase), 5);
+    }
+
+    public static boolean isProblemIconNotDisplayedForPhase(String phase) {
+        return Utils.isElementNotDisplayed(new VNextBORODetailsPage().getPhaseProblemIcon(phase), 5);
+    }
+
+    public static boolean isProblemIconDisplayedForService(String serviceId) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getServiceProblemIcon(serviceId), 5);
+    }
+
+    public static boolean isProblemIconNotDisplayedForService(String serviceId) {
+        return Utils.isElementNotDisplayed(new VNextBORODetailsPage().getServiceProblemIcon(serviceId), 5);
     }
 
     public static void verifyPhaseStatuses(String[] phaseStatuses) {
@@ -80,5 +94,34 @@ public class VNextBORODetailsPageValidations {
                         || status.equals(phaseStatuses[2])
                         || status.equals(phaseStatuses[3]));
         Assert.assertFalse(notMatching, "The phases contain the restricted statuses");
+    }
+
+    public static void verifyPhaseStatusIsDisplayed(String phase, String status) {
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsPage().getPhaseStatusBoxValue(phase)), status,
+                "The Phase status is not displayed as expected");
+    }
+
+    public static void verifyActionsMenuIconIsHiddenForPhase(String phase) {
+        Assert.assertTrue(Utils.isElementNotDisplayed(new VNextBORODetailsPage().getActionsTriggerForPhase(phase), 5),
+                "The actions trigger has been displayed for phase " + phase);
+    }
+
+    public static boolean isReportProblemOptionDisplayedForService(String serviceId) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getServiceReportProblemOption(serviceId), 4);
+    }
+
+    public static boolean isReportProblemOptionNotDisplayedForService(String serviceId) {
+        return Utils.isElementNotDisplayed(new VNextBORODetailsPage().getServiceReportProblemOption(serviceId), 4);
+    }
+
+    public static boolean isResolveProblemOptionDisplayedForService(String serviceId) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getServiceResolveProblemOption(serviceId), 4);
+    }
+
+    public static boolean isServiceStatusPresentInOptionsList(String option) {
+        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBORODetailsPage().getServiceStatusListBoxOptions())
+                .stream()
+                .map(WebElement::getText)
+                .anyMatch(service -> service.equals(option));
     }
 }

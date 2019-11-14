@@ -10,7 +10,7 @@ import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInte
 import com.cyberiansoft.test.vnextbo.screens.VNextBOCalendarWidgetDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORepairOrdersPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -990,7 +990,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOBreadCrumbInteractions.setLocation(data.getLocations()[1]);
         VNextBOBreadCrumbInteractions.setLocation(data.getLocations()[0]);
-        VNextBORepairOrdersPageSteps.setSavedSearchOption(searchName);
+        VNextBOROPageSteps.setSavedSearchOption(searchName);
         VNextBOROPageInteractions.clickEditIconForSavedSearch();
         new VNextBOROAdvancedSearchDialog()
                 .setFlag(data.getFlags()[1])
@@ -1027,7 +1027,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-        VNextBORepairOrdersPageSteps.setSavedSearchOption(searchName);
+        VNextBOROPageSteps.setSavedSearchOption(searchName);
         VNextBOROPageInteractions.clickAdvancedSearchCaret();
         advancedSearchDialog.setFlag(data.getFlag())
                 .setSearchName(searchName)

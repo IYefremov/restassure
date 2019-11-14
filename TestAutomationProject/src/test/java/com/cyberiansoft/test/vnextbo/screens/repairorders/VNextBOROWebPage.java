@@ -211,6 +211,9 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     @FindBy(className = "order-notes")
     private WebElement roNotesLink;
 
+    @FindBy(xpath = "//label[text()='View Problems']")
+    private WebElement viewProblemsLink;
+
     @FindBy(xpath = "//a[@class='order-no']")
     private List<WebElement> woNumbersList;
 
@@ -246,5 +249,10 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     public WebElement getTechniciansFieldForWO(String woNumber) {
         return tableBody.findElement(By.xpath("//strong[text()=\"" + woNumber
                 + "\"]/../../../parent::tr//div[contains(@data-bind, \"changeTechnicians\")]"));
+    }
+
+    public WebElement getProblemIndicatorForOrder(String order) {
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//a[@class='order-no']/strong[text()='"
+                + order + "']/../../i[@class='icon-problem-indicator']"));
     }
 }

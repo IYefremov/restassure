@@ -520,14 +520,14 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
+        VNextBOROPageSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps
                 .searchByActivePhase(data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
 
-        VNextBORepairOrdersPageSteps.openRODetailsPage();
+        VNextBOROPageSteps.openRODetailsPage();
         VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBOCloseRODialogSteps.closeROWithReason(data.getReason());
+        VNextBOCloseRODialogSteps.closeROWithReason(data.getProblemReason());
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRoStatusValue(), data.getStatus(),
                 "The status hasn't been changed to 'Closed'");
 	}
@@ -1451,7 +1451,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-		VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+		VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
         final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
 
@@ -1928,13 +1928,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
         final String priorTechniciansValue = VNextBOROPageInteractions.getTechniciansValueForWO(data.getOrderNumber());
-        String selectedRandomTechnician = VNextBORepairOrdersPageSteps.setTechnicianAndVendorByWoNumber(
+        String selectedRandomTechnician = VNextBOROPageSteps.setTechnicianAndVendorByWoNumber(
                 data.getOrderNumber(), data.getVendor());
         if (priorTechniciansValue.equals(selectedRandomTechnician)) {
-            selectedRandomTechnician = VNextBORepairOrdersPageSteps.setTechnicianAndVendorByWoNumber(
+            selectedRandomTechnician = VNextBOROPageSteps.setTechnicianAndVendorByWoNumber(
                     data.getOrderNumber(), data.getVendor());
         }
-        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
         VNextBORODetailsPageValidations.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
         VNextBORODetailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[0]);
@@ -1943,7 +1943,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
 		VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
         VNextBOROPageValidations.verifyAnotherTechnicianIsDisplayed(data.getOrderNumber(), selectedRandomTechnician);
-        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
         VNextBORODetailsPageValidations.verifyServiceIsDisplayedForCollapsedPhase(data.getServices()[0], data.getServiceTabs()[0]);
         VNextBORODetailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
 	}
@@ -1954,8 +1954,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         final VNextBOROAdvancedSearchDialog advSearchDialog = new VNextBOROAdvancedSearchDialog();
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
-        VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        VNextBOROPageSteps.openAdvancedSearchDialog();
         final VNextBOROAdvancedSearchValues searchValues = data.getSearchValues();
 
         Assert.assertEquals(advSearchDialog.getCustomerInputFieldValue(), searchValues.getCustomer());
@@ -1983,18 +1983,18 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
-        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
         Assert.assertTrue(VNextBOROPageValidations.isSavedSearchEditIconDisplayed(),
                 "The saved search edit icon hasn't been displayed");
-        VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
+        VNextBOROPageSteps.openAdvancedSearchDialog();
         Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSavedSearchNameClickable(),
                 "The saved search input field isn't clickable");
         Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSaveButtonClickable(),
                 "The save button isn't clickable");
         VNextBOROAdvancedSearchDialogSteps.closeAdvancedSearchDialog();
 
-        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
-        VNextBORepairOrdersPageSteps.openAdvancedSearchDialog();
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
+        VNextBOROPageSteps.openAdvancedSearchDialog();
         Assert.assertFalse(VNextBOROPageValidations.isSavedSearchEditIconDisplayed(),
                 "The saved search edit icon hasn't been displayed");
         Assert.assertFalse(VNextBOROAdvancedSearchDialogVerifications.isSavedSearchNameClickable(),
@@ -2013,8 +2013,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOLoginSteps.userLogin(data.getUserName(), data.getUserPassword());
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
-        VNextBORepairOrdersPageSteps.openRODetailsPage();
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        VNextBOROPageSteps.openRODetailsPage();
         VNextBORODetailsPageValidations.verifyPhaseStatuses(data.getServiceStatuses());
     }
 
@@ -2027,8 +2027,18 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOLoginSteps.userLogin(data.getUserName(), data.getUserPassword());
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        VNextBORepairOrdersPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
-        VNextBORepairOrdersPageSteps.openRODetailsPage();
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        VNextBOROPageSteps.openRODetailsPage();
+        VNextBORODetailsPageValidations.verifyPhaseStatuses(data.getServiceStatuses());
+    }
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanResolveProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
+        VNextBOROPageSteps.openRODetailsPage();
         VNextBORODetailsPageValidations.verifyPhaseStatuses(data.getServiceStatuses());
     }
 }

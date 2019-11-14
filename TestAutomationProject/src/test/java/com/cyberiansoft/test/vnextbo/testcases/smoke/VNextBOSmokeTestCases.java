@@ -28,7 +28,7 @@ import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSte
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORONotesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORepairOrdersPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOPendingRegistrationsValidations;
@@ -506,7 +506,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 //
 //        new VNextBOROAdvancedSearchDialogSteps().searchByActivePhase(
 //                data.getPhase(), data.getPhaseStatus(), data.getTimeFrame());
-        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 //        roDetailsPageSteps.openServicesTableForStatus(data.getStatus(), data.getPhase());
 //        final String serviceId = roDetailsPageVerifications
 //                .verifyServiceIsDisplayedForExpandedPhase(data.getService());
@@ -539,7 +539,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(),
                 "The phase actions trigger hasn't been displayed");
         VNextBORODetailsPageValidations.verifyCheckInOptionIsDisplayedForPhase();
@@ -553,11 +553,11 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        VNextBORepairOrdersPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 
-        VNextBORODetailsPageSteps.setReportProblemForPhase(data.getPhase(), data.getReason(), data.getProblemDescription());
+        VNextBORODetailsPageSteps.setReportProblemForPhase(data.getPhase(), data.getProblemReason(), data.getProblemDescription());
         VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
     }
 }

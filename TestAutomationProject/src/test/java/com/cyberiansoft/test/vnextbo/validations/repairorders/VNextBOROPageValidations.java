@@ -213,4 +213,8 @@ public class VNextBOROPageValidations {
     public static boolean isAdvancedSearchCaretDisplayed() {
         return Utils.isElementDisplayed(new VNextBOROWebPage().getAdvancedSearchCaret());
     }
+
+    public static boolean isProblemIndicatorDisplayedForOrder(String order) {
+        return Utils.isElementDisplayed(new VNextBOROWebPage().getProblemIndicatorForOrder(order), 4);
+    }
 }
