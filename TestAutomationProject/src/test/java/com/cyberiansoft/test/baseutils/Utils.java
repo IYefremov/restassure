@@ -31,6 +31,15 @@ public class Utils {
         try {
             waitForElementToBeClickable(element).click();
         } catch (Exception ignored) {
+            WaitUtilsWebDriver.waitABit(500);
+            clickWithJS(element);
+        }
+    }
+
+    public static void clickElement(WebElement element, int timeOutInSeconds) {
+        try {
+            WaitUtilsWebDriver.waitForElementToBeClickable(element, timeOutInSeconds).click();
+        } catch (Exception ignored) {
             clickWithJS(element);
         }
     }
@@ -70,11 +79,15 @@ public class Utils {
     }
 
     public static void clear(WebElement element) {
-        scrollToElement(element);
         try {
             waitForElementToBeClickable(element).clear();
         } catch (Exception e) {
-            Assert.fail("The text field has not been displayed", e);
+            try {
+                scrollToElement(element);
+                waitForElementToBeClickable(element).clear();
+            } catch (Exception ignored) {
+                Assert.fail("The text field has not been displayed", e);
+            }
         }
     }
 
@@ -163,7 +176,7 @@ public class Utils {
             getMatchingOptionInListBox(listBox, selection)
                     .ifPresent((option) -> {
                         scrollListBoxDownWhileElementIsNotDisplayed(dropDown, listBox, option);
-                        WaitUtilsWebDriver.waitForElementToBeClickable(option, 5).click();
+                        Utils.clickElement(option, 5);
                     });
             WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
         } else {
@@ -186,7 +199,7 @@ public class Utils {
 
     private static void scrollListBoxDownWhileElementIsNotDisplayed(WebElement dropDown, List<WebElement> listBox, WebElement option) {
         for (int i = 0; i < listBox.size(); i++) {
-            if (!WaitUtilsWebDriver.waitForVisibility(option, 5).isDisplayed()) {
+            if (Utils.isElementNotDisplayed(option, 5)) {
                 dropDown.sendKeys(Keys.ARROW_DOWN);
             } else {
                 break;

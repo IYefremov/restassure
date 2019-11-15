@@ -417,7 +417,7 @@
       "location": "Best Location Automation",
       "timeFrame": "Last Year",
       "status": "Closed",
-      "reason": "(None)",
+      "problemReason": "(None)",
       "phase": "PDR Station",
       "phaseStatus": "Active"
     }

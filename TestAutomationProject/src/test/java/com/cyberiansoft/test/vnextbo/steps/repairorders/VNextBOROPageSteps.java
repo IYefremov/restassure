@@ -6,7 +6,7 @@ import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPa
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.testng.Assert;
 
-public class VNextBORepairOrdersPageSteps {
+public class VNextBOROPageSteps {
 
     public static String setTechnicianAndVendorByWoNumber(String woNumber, String vendor) {
         VNextBOROPageInteractions.clickTechniciansFieldForWO(woNumber);
@@ -41,5 +41,10 @@ public class VNextBORepairOrdersPageSteps {
     public static void openAdvancedSearchDialog() {
         VNextBOROPageInteractions.clickAdvancedSearchCaret();
         VNextBOROPageValidations.verifyAdvancedSearchDialogIsDisplayed();
+    }
+
+    public static void selectViewProblemsOptionInOtherDropDown(String order) {
+        VNextBOROPageInteractions.clickWorkOrderOtherMenuButton(order);
+        VNextBOROPageInteractions.clickViewProblemsLink();
     }
 }
