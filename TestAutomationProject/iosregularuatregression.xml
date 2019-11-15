@@ -11,11 +11,7 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
 
-          <include name="testVerifyWorkWithIndividualServicesUnderMonitor" />
-          <include name="testVerifyWorkWithServicesUnderAvailableSelectedTabsWhenCreateInspection" />
-          <include name="testInspectionsMultipleInspectionsApproval" />
-          <include name="testVerifyCalculationForServiceWithPricePolicyVehiclePricePolicyPanelOnPrintOut" />
-          <include name="testInspectionsMultipleInspectionsApproval" />
+          <include name="testVerifyCalculationAndCorrectDisplayOfArbitrationData" />
 
 
           <include name="testCreateInspectionVerifyOnBO" />
@@ -54,6 +50,16 @@
           <include name="testVerifyUpdateApplicationFromLastDBVersionForNewOne" />
           <include name="testSRVerifyActionsOnCalendarForSRAppointments" />
           <include name="testVerifySearchForSR" />
+          <include name="testVerifyCalculationForServiceWithPricePolicyVehiclePricePolicyPanelOnPrintOut" />
+          <include name="testVerifyWorkWithIndividualServicesUnderMonitor" />
+          <include name="testVerifyMonitorOfPartServices" />
+          <include name="testVerifyLinkPartsAndLaborServices" />
+          <include name="testVerifyCreatingInspectionAndWOWithServiceGroupingNoGroupServicesParts" />
+          <include name="testVerifyLaborTimesGettingFromDB" />
+          <include name="testVerifyPhaseEnforcementUnderMonitor" />
+          <include name="testVerifyAssignTechUnderMonitor" />
+          <include name="testVerifyAssignVendorTeamForServicesUnderMonitor" />
+          <include name="testVerifyCalculationAndCorrectDisplayOfArbitrationData" />
         </methods>
       </class>
     </classes>

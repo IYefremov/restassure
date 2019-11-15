@@ -1657,7 +1657,6 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularInspectionsSteps.saveInspectionAsFinal();
 
-
         RegularMyInspectionsSteps.selectSendEmailMenuForInspection(inspectionID);
         NadaEMailService nada = new NadaEMailService();
         RegularEmailScreenSteps.sendEmailToAddress(nada.getEmailId());

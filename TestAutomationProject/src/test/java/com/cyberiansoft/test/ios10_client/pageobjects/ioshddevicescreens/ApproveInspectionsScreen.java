@@ -245,17 +245,17 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 
 	public boolean isServiceApproved(String serviceName) {
 		return !getServiceCell(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'approve little'"))
-				.getAttribute("value").contains("off");
+				.getAttribute("name").contains("off");
 	}
 
 	public boolean isServiceSkipped(String serviceName) {
 		return !getServiceCell(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'skip little'"))
-				.getAttribute("value").contains("off");
+				.getAttribute("name").contains("off");
 	}
 
 	public boolean isServiceDeclibed(String serviceName) {
 		return !getServiceCell(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'decline little'"))
-				.getAttribute("value").contains("off");
+				.getAttribute("name").contains("off");
 	}
 
 }
