@@ -109,33 +109,43 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 		return servicestable.getTableRows();
 	}
 
-	public WebElement getTableRowWithRepairOrderService(String servicename) {
+	private WebElement getTableRowWithRepairOrderService(String serviceName) {
 		List<WebElement> rows = getRepairOrderServiceTableRows();
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[@class='col_2']")).getText().contains(servicename)) {
+			if (row.findElement(By.xpath(".//td[@class='col_2']")).getText().contains(serviceName)) {
 				return row;
 			}
 		}
 		return null;
 	}
 
-	public void changeRepairOrderServiceVendor(String servicename, String vendorname) {
-		WebElement row = getTableRowWithRepairOrderService(servicename);
+	public void changeRepairOrderServiceVendor(String serviceName, String vendorName) {
+		WebElement row = getTableRowWithRepairOrderService(serviceName);
 		if (row != null) {
 			row.findElement(By.xpath(".//input[contains(@id, 'comboVendor_Input')]")).click();
-			combovendordd.selectByVisibleText(vendorname);
+			combovendordd.selectByVisibleText(vendorName);
 		} else
-			Assert.assertTrue(false, "Can't find " + servicename + " repair order service");
+			Assert.assertTrue(false, "Can't find " + serviceName + " repair order service");
 	}
 
-	public String getRepairOrderServiceTechnician(String servicename) {
+	public String getRepairOrderServiceTechnician(String serviceName) {
 		String tech = "";
-		WebElement row = getTableRowWithRepairOrderService(servicename);
+		WebElement row = getTableRowWithRepairOrderService(serviceName);
 		if (row != null) {
 			tech = row.findElement(By.xpath(".//input[contains(@id, 'comboEmployee_Input')]")).getAttribute("value");
 		} else
-			Assert.assertTrue(false, "Can't find " + servicename + " repair order service");
+			Assert.assertTrue(false, "Can't find " + serviceName + " repair order service");
 		return tech;
+	}
+
+	public String getRepairOrderServiceVendor(String serviceName) {
+		String vendorName = "";
+		WebElement row = getTableRowWithRepairOrderService(serviceName);
+		if (row != null) {
+			vendorName = row.findElement(By.xpath(".//input[contains(@id, 'comboVendor_Input')]")).getAttribute("value");
+		} else
+			Assert.assertTrue(false, "Can't find " + serviceName + " repair order service");
+		return vendorName;
 	}
 
 }

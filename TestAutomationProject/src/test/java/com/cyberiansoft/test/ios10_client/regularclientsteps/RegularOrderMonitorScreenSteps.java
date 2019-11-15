@@ -76,4 +76,5 @@ public class RegularOrderMonitorScreenSteps {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.clickStartService();
     }
+
 }

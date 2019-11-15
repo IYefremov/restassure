@@ -281,4 +281,12 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Final")).click();
 	}
 
+	public String getDateValue() {
+		return appiumdriver.findElement(MobileBy.AccessibilityId("Date")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
+
+	public String getArbitrationDateValue() {
+		return appiumdriver.findElement(MobileBy.AccessibilityId("Arbitration\nDate")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
+
 }

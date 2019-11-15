@@ -14,6 +14,11 @@ public class RegularOrderMonitorScreenValidations {
         Assert.assertEquals(orderMonitorScreen.getPanelStatus(serviceData), expectedStatus.getValue());
     }
 
+    public static void verifyServiceTeamValue(ServiceData serviceData, String expectedTeamValue) {
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
+        Assert.assertEquals(orderMonitorScreen.getServiceTeamValue(serviceData), expectedTeamValue);
+    }
+
     public static void verifyServiceStatus(ServiceData serviceData, VehiclePartData vehiclePartData, OrderMonitorServiceStatuses expectedStatus) {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         Assert.assertEquals(orderMonitorScreen.getPanelStatus(serviceData, vehiclePartData), expectedStatus.getValue());
