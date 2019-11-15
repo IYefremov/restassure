@@ -8,6 +8,10 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
+          <include name="testCreateRetailCustomer" />
+
+
+
 
           <!--<include name="testUpdateDatabase" />
           <include name="testUpdateVIN" />
@@ -54,7 +58,6 @@
           <include name="testSRVerifySummaryActionForAppointmentOnSRsCalendar" />
           <include name="testWOVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices" />
           <include name="testInspectionsVerifyThatOnlyAssignedServicesOnMatrixPanelIsAvailableAsAdditionalServices" />
-          <include name="testWOMonitorCreateWOForMonitor" />
           <include name="testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService" />
           <include name="testWOMonitorVerifyThatStartDateIsSetWhenStartService" />
           <include name="testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase" />
@@ -155,7 +158,7 @@
           <include name="testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase" />
           <include name="testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder" />
           <include name="testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted" />
-
+          <include name="testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption" />
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
         </methods>

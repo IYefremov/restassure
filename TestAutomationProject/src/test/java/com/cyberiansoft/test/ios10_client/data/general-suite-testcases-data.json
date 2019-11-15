@@ -5684,7 +5684,7 @@
   "testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption": [
     {
       "rowID": "testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption.01",
-      "description": "Test Case 58663:User can change 'Approved' status of percentage service to 'Declined', only using 'Decline All' option",
+      "description": "Test Case :User can change 'Approved' status of percentage service to 'Declined', only using 'Decline All' option",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "96255"
