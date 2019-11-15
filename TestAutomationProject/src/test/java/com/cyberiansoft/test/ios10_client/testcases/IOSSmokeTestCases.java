@@ -7477,4 +7477,59 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         homeScreen.clickLogoutButton();
         mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption(String rowID,
+                                                      String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        final String declineReason = "Decline 2";
+
+        HomeScreen homeScreen = new HomeScreen();
+        MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+        MyInspectionsSteps.startCreatingInspection(_002_Test_Customer, InspectionsTypes.INSPECTION_ALL_SERVICES);
+        VehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = VehicleInfoScreenSteps.getInspectionNumber();
+        NavigationSteps.navigateToServicesScreen();
+        ServicesScreenSteps.selectService(inspectionData.getPercentageServiceData().getServiceName());
+        InspectionsSteps.saveInspectionAsFinal();
+
+        myInspectionsScreen.selectInspectionForApprove(inspectionNumber);
+        SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
+        selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+        ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
+        approveInspectionsScreen.selectInspectionForApprove(inspectionNumber);
+
+        final String serviceName = inspectionData.getPercentageServiceData().getServiceName();
+        Assert.assertTrue(approveInspectionsScreen.isServiceApproved(serviceName));
+        Assert.assertFalse(approveInspectionsScreen.isServiceSkipped(serviceName));
+        Assert.assertFalse(approveInspectionsScreen.isServiceDeclibed(serviceName));
+
+        approveInspectionsScreen.selectInspectionServiceToSkip(serviceName);
+        Assert.assertTrue(approveInspectionsScreen.isServiceApproved(serviceName));
+        Assert.assertFalse(approveInspectionsScreen.isServiceSkipped(serviceName));
+        Assert.assertFalse(approveInspectionsScreen.isServiceDeclibed(serviceName));
+
+        approveInspectionsScreen.selectInspectionServiceToDecline(serviceName);
+        Assert.assertTrue(approveInspectionsScreen.isServiceApproved(serviceName));
+        Assert.assertFalse(approveInspectionsScreen.isServiceSkipped(serviceName));
+        Assert.assertFalse(approveInspectionsScreen.isServiceDeclibed(serviceName));
+
+        approveInspectionsScreen.clickSkipAllServicesButton();
+        Assert.assertFalse(approveInspectionsScreen.isServiceApproved(serviceName));
+        Assert.assertTrue(approveInspectionsScreen.isServiceSkipped(serviceName));
+        Assert.assertFalse(approveInspectionsScreen.isServiceDeclibed(serviceName));
+
+        approveInspectionsScreen.clickDeclineAllServicesButton();
+        Assert.assertFalse(approveInspectionsScreen.isServiceApproved(serviceName));
+        Assert.assertFalse(approveInspectionsScreen.isServiceSkipped(serviceName));
+        Assert.assertTrue(approveInspectionsScreen.isServiceDeclibed(serviceName));
+
+        approveInspectionsScreen.clickSaveButton();
+        approveInspectionsScreen.selectStatusReason(declineReason);
+        approveInspectionsScreen.drawSignatureAfterSelection();
+        approveInspectionsScreen.clickDoneStatusReasonButton();
+        myInspectionsScreen.clickHomeButton();
+    }
 }

@@ -146,4 +146,14 @@ public class RegularVehicleInfoScreenSteps {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.clickTech();
     }
+
+    public static String getDateValue() {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        return vehicleScreen.getDateValue();
+    }
+
+    public static String getArbitrationDateValue() {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        return vehicleScreen.getArbitrationDateValue();
+    }
 }

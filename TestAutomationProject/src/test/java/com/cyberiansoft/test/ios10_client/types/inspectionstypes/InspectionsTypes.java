@@ -31,6 +31,7 @@ public enum InspectionsTypes implements IInspectionsTypes {
     INSPECTION_DIRECT_ASSIGN("Inspection_direct_assign"),
     INSPECTION_VIN_ONLY("Inspection_VIN_only"),
     INSP_FOR_AUTO_WO_LINE_APPR_SIMPLE("Insp_for_auto_WO_line_appr_simple"),
+    INSPECTION_ALL_SERVICES("Inspection - All services"),
     INSP_SMOKE_TEST("Insp_smoke_test");
 
     @Getter

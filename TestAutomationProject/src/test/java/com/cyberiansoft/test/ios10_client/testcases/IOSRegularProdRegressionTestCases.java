@@ -19,8 +19,7 @@ import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.enums.ServiceRequestAppointmentStatuses;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.OrderSummaryScreenSteps;
-import com.cyberiansoft.test.ios10_client.hdvalidations.OrderMonitorScreenValidations;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
@@ -38,7 +37,11 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -2005,5 +2008,117 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         }
         RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyAssignVendorTeamForServicesUnderMonitor(String rowID,
+                                                 String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+        final String allLocations = "All locations";
+        final String defLocation = "Default team";
+        final String location = "location zayats";
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_MONITOR);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        final String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
+            RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
+        }
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularWorkOrdersSteps.saveWorkOrder();
+
+        RegularMyWorkOrdersSteps.switchToTeamView();
+        RegularTeamWorkOrdersSteps.selectSearchLocation(allLocations);
+        RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+        for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorData().getMonitorServicesData())
+            RegularOrderMonitorScreenValidations.verifyServiceTeamValue(monitorServiceData.getMonitorService(), defLocation);
+
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+
+        webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+        WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
+
+        BackOfficeLoginWebPage loginWebPage = new BackOfficeLoginWebPage(webdriver);
+        loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+                ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+        BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
+        backOfficeHeaderPanel.clickMonitorLink();
+        MonitorWebPage monitorWebPage = new MonitorWebPage(webdriver);
+        monitorWebPage.clickRepairOrdersLink();
+
+        RepairOrdersWebPage repairOrdersWebPage = new RepairOrdersWebPage(webdriver);
+        repairOrdersWebPage.selectSearchLocation(location);
+        repairOrdersWebPage.setSearchWoNumber(workOrderNumber);
+        repairOrdersWebPage.clickFindButton();
+        repairOrdersWebPage.clickOnWorkOrderLinkInTable(workOrderNumber);
+        VendorOrderServicesWebPage vendorOrderServicesWebPage = new VendorOrderServicesWebPage(webdriver);
+        for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorData().getMonitorServicesData()) {
+            Assert.assertEquals(vendorOrderServicesWebPage.getRepairOrderServiceVendor(monitorServiceData.getMonitorService().getServiceName()), defLocation);
+            vendorOrderServicesWebPage.changeRepairOrderServiceVendor(monitorServiceData.getMonitorService().getServiceName(), monitorServiceData.getServiceVendor());
+            vendorOrderServicesWebPage.waitABit(3000);
+        }
+        DriverBuilder.getInstance().getDriver().quit();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.switchToTeamView();
+        RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+        for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorData().getMonitorServicesData())
+            RegularOrderMonitorScreenValidations.verifyServiceTeamValue(monitorServiceData.getMonitorService(), monitorServiceData.getServiceVendor());
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyCalculationAndCorrectDisplayOfArbitrationData(String rowID,
+                                         String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        final List<Integer> arbDays = new ArrayList<>();
+        arbDays.add(10);
+        arbDays.add(5);
+        final DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+
+        for (Integer arbitrationDaysValue : arbDays) {
+            webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
+            WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
+
+            BackOfficeLoginWebPage loginWebPage = new BackOfficeLoginWebPage(webdriver);
+            loginWebPage.userLogin(ReconProIOSStageInfo.getInstance().getUserStageUserName(),
+                    ReconProIOSStageInfo.getInstance().getUserStageUserPassword());
+            BackOfficeHeaderPanel backOfficeHeaderPanel = new BackOfficeHeaderPanel(webdriver);
+            backOfficeHeaderPanel.clickCompanyLink();
+            CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
+
+            companyWebPage.clickInspectionTypesLink();
+            InspectionTypesWebPage inspectionTypesWebPage = new InspectionTypesWebPage(webdriver);
+            inspectionTypesWebPage.clickEditInspectionType(UATInspectionTypes.INSP_ARBITRATION_DATE.getInspectionTypeName());
+            NewInspectionTypeDialogWebPage newInspectionTypeDialogWebPage = new NewInspectionTypeDialogWebPage(webdriver);
+            newInspectionTypeDialogWebPage.selectOtherTab();
+            newInspectionTypeDialogWebPage.setArbitrationWindowValue(arbitrationDaysValue.toString());
+            newInspectionTypeDialogWebPage.clickOKButton();
+            BaseUtils.waitABit(2000);
+            DriverBuilder.getInstance().getDriver().quit();
+
+            RegularHomeScreenSteps.navigateToStatusScreen();
+            RegularStatusScreenSteps.updateMainDataBase(testuser);
+
+            RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+            RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_ARBITRATION_DATE);
+            RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+
+            LocalDate vehicleDate = LocalDate.parse(RegularVehicleInfoScreenSteps.getDateValue(), df);
+            LocalDate vehicleArbDate = LocalDate.parse(RegularVehicleInfoScreenSteps.getArbitrationDateValue(), df);
+            Period period = Period.between(vehicleDate, vehicleArbDate);
+            Assert.assertEquals(Integer.valueOf(period.getDays()), arbitrationDaysValue);
+
+            RegularInspectionsSteps.cancelCreatingInspection();
+            NavigationSteps.navigateBackScreen();
+        }
     }
 }

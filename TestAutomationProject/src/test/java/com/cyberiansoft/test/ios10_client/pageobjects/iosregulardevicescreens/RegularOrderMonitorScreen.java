@@ -124,16 +124,27 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		}
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
-		return monitorserviceslist.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
+		WebElement serviceStatusCell = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		return serviceStatusCell.getAttribute("value");
 	}
 
 	public String getPanelStatus(ServiceData serviceData, VehiclePartData vehiclePartData) {
 
 		String panelName = serviceData.getServiceName() + " (" + vehiclePartData.getVehiclePartName() + ")";
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
-		return monitorserviceslist.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
+		WebElement serviceStatusCell = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		return serviceStatusCell.getAttribute("value");
+	}
+
+	public String getServiceTeamValue(ServiceData serviceData) {
+		String panelName = serviceData.getServiceName();
+		if (serviceData.getVehiclePart() != null) {
+			panelName = panelName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
+		}
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		WebElement serviceTeamCell = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblTeamName")));
+		return serviceTeamCell.getAttribute("value");
 	}
 
 	public String getServiceStatusInPopup(String panelname) {
