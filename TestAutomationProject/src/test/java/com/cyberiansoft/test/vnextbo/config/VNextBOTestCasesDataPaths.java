@@ -46,12 +46,12 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.monitor.td");
     }
 
-    public String getServicesPartsAndLaborBundleTD() {
-        return properties.getProperty("vnextbo.services.parts.and.labor.bundle.td");
+    public String getServicesPartsAndLaborServicesTD() {
+        return properties.getProperty("vnextbo.services.parts.and.labor.services.td");
     }
 
-    public String getServicesTD() {
-        return properties.getProperty("vnextbo.services.td");
+    public String getServicesMoneyAndPercentageTD() {
+        return properties.getProperty("vnextbo.services.money.and.percentage.td");
     }
 
     public String getQuickNotesTD() {
