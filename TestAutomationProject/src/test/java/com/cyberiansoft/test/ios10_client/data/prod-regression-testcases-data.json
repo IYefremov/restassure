@@ -2394,5 +2394,45 @@
         }
       }
     }
+  ],
+  "testVerifyAccessToStatusMenuFromLoginScreen": [
+    {
+      "rowID": "testVerifyAccessToStatusMenuFromLoginScreen.01",
+      "description": "Test Case: 69 - Verify access to Status menu from Login screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83703",
+          "testCaseTitle": "Test Case: 69 - Verify access to Status menu from Login screen"
+        }
+      ]
+    }
+  ],
+  "testVerifyReSendDataFromDevice": [
+    {
+      "rowID": "testVerifyReSendDataFromDevice.01",
+      "description": "Test Case: 70 - Verify re-send data from device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83704",
+          "testCaseTitle": "Test Case: 70 - Verify re-send data from device"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      },
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
   ]
 }

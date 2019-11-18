@@ -49,6 +49,8 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     private List<String> workOrdersForInvoice = new ArrayList<>();
 
+
+
     @BeforeClass
     public void setUpSuite() {
         JSONDataProvider.dataFile = IOSReconProTestCasesDataPaths.getInstance().getProdRegressionSuiteTestCasesDataPath();
@@ -2119,5 +2121,41 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
             RegularInspectionsSteps.cancelCreatingInspection();
             NavigationSteps.navigateBackScreen();
         }
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyAccessToStatusMenuFromLoginScreen(String rowID,
+                                         String description, JSONObject testData) {
+
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.clickStatusIcon();
+        RegularStatusScreenSteps.updateMainDataBase(testuser);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyReSendDataFromDevice(String rowID,
+                                                            String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_ARBITRATION_DATE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(workOrderData.getWholesailCustomer(), UATWorkOrderTypes.WO_FINAL_INVOICE);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(workOrderData.getVehicleInfoData());
+        RegularWorkOrdersSteps.saveWorkOrder();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToStatusScreen();
+        RegularStatusScreenSteps.resendInspectionsAndWorkOrders();
+        NavigationSteps.navigateBackScreen();
+
+
     }
 }

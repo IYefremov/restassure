@@ -6,6 +6,7 @@ import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSt
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.google.inject.internal.cglib.core.$MethodWrapper;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -35,6 +36,9 @@ public class RegularMainScreen extends iOSBaseScreen {
 
 	@iOSXCUITFindBy(accessibility = "LoginView")
 	private IOSElement loginView;
+
+	@iOSXCUITFindBy(accessibility = "iconStatus")
+	private IOSElement iconStatus;
 
 	public RegularMainScreen() {
 		super();
@@ -81,5 +85,9 @@ public class RegularMainScreen extends iOSBaseScreen {
 		WaitUtils.waitUntilElementIsClickable(licenses);
 		licenses.click();
 		return new LicensesScreen();
+	}
+
+	public void clickStatusIcon() {
+		iconStatus.click();
 	}
 }
