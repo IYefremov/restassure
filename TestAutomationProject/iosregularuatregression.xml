@@ -11,9 +11,6 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSRegularProdRegressionTestCases">
         <methods>
 
-          <include name="testVerifyCalculationAndCorrectDisplayOfArbitrationData" />
-
-
           <include name="testCreateInspectionVerifyOnBO" />
           <include name="testCreateNewWOUsingCopyVehicleInfoAction_VerifyNewWOOnBO" />
           <include name="testCreateNewWOUsingCopyServicesInfoAction_VerifyNewWOOnBO" />
@@ -60,6 +57,8 @@
           <include name="testVerifyAssignTechUnderMonitor" />
           <include name="testVerifyAssignVendorTeamForServicesUnderMonitor" />
           <include name="testVerifyCalculationAndCorrectDisplayOfArbitrationData" />
+          <include name="testVerifyAccessToStatusMenuFromLoginScreen" />
+          <include name="testVerifyReSendDataFromDevice" />
         </methods>
       </class>
     </classes>
