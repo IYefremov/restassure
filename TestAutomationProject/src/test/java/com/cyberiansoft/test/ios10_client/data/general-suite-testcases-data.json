@@ -5680,5 +5680,24 @@
         }
       ]
     }
+  ],
+  "testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption": [
+    {
+      "rowID": "testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption.01",
+      "description": "Test Case :User can change 'Approved' status of percentage service to 'Declined', only using 'Decline All' option",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "96255"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "percentageService" : {
+          "serviceName": "Little Service"
+        }
+      }
+    }
   ]
 }

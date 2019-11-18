@@ -12,7 +12,10 @@ public class MonitorServiceData {
     ServiceData monitorService;
 
     @JsonProperty("monitorServiceStatus")
-    private String monitorServiceStatus;
+    String monitorServiceStatus;
+
+    @JsonProperty("serviceVendor")
+    String serviceVendor;
 
     @JsonProperty("startService")
     boolean startService;

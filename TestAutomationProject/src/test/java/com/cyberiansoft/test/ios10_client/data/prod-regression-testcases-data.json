@@ -1166,7 +1166,42 @@
               }
             }
           ]
-        }
+        },
+        "orderMonitorsData": [
+          {
+            "phaseName": "Start phase",
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "Dye_Panel"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "PPP_service"
+                }
+              }
+            ]
+          },
+          {
+            "phaseName": "Repair phase",
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "PPV_service"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Service_PP_Vehicle",
+                  "vehiclePart": {
+                    "vehiclePartName": "Front Bumper"
+                  }
+                }
+              }
+            ]
+          }
+        ]
       }
     }
   ],
@@ -1862,7 +1897,7 @@
               "serviceName": "3/4\" - Penny Size"
             },
             {
-              "serviceName": "Oksi_Part_Service_Name"
+              "serviceName": "Oksi_Part_Service_Several"
             },
             {
               "serviceName": "Oksi_Part_Service_None"
@@ -1886,11 +1921,11 @@
             ]
           },
           {
-            "phaseName": "Repair phase",
+            "phaseName": "Order phase",
             "monitorServicesData": [
               {
                 "monitorService": {
-                  "serviceName": "Oksi_Part_Service_Name"
+                  "serviceName": "Oksi_Part_Service_Several"
                 }
               }
             ]
@@ -2101,26 +2136,25 @@
             "laborServicePart": "Remove/Replace Left Front Door Armrest"
           }
         ],
-        "laborService":
-          {
-            "serviceName": "Labor_Vehicle_data_all_Motor",
-            "laborServiceRate": "1",
-            "laborServiceTime": "1",
-            "partServiceDataList": [
-              {
-                "serviceName": "roz_part_with_categories",
-                "category": "Brake",
-                "subCategory": "Disc Pads and Brake Shoes",
-                "partName": {
-                  "partNameList": [
-                    "Disc Brake Pad"
-                  ],
-                  "isMultiSelect": false
-                },
-                "partPosition": "N/A"
-              }
-            ]
-          },
+        "laborService": {
+          "serviceName": "Labor_Vehicle_data_all_Motor",
+          "laborServiceRate": "1",
+          "laborServiceTime": "1",
+          "partServiceDataList": [
+            {
+              "serviceName": "roz_part_with_categories",
+              "category": "Brake",
+              "subCategory": "Disc Pads and Brake Shoes",
+              "partName": {
+                "partNameList": [
+                  "Disc Brake Pad"
+                ],
+                "isMultiSelect": false
+              },
+              "partPosition": "N/A"
+            }
+          ]
+        },
         "insuranceCompany": {
           "insuranceCompanyName": "USG",
           "claimNumber": "QWERTY",
@@ -2213,6 +2247,151 @@
           }
         ],
         "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyAssignTechUnderMonitor": [
+    {
+      "rowID": "testVerifyAssignTechUnderMonitor.01",
+      "description": "Test Case: 75 - Verify assign tech under Monitor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83709",
+          "testCaseTitle": "Test Case: 75 - Verify assign tech under Monitor"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            {
+              "serviceName": "Labor_Vehicle_data_all_Motor"
+            },
+            {
+              "serviceName": "Labor_Vehilce_data_R&R"
+            },
+            {
+              "serviceName": "Labor service - MOTOR source"
+            }
+          ]
+        },
+        "orderMonitorsData": [
+          {
+            "phaseName": "Start phase",
+            "newTechnician": {
+              "technicianFirstName": "Oksi",
+              "technicianLastName": "Manager"
+            },
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "3/4\" - Penny Size"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor_Vehicle_data_all_Motor"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor_Vehilce_data_R&R"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Labor service - MOTOR source"
+                }
+              }
+            ]
+          }
+        ],
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyAssignVendorTeamForServicesUnderMonitor": [
+    {
+      "rowID": "testVerifyAssignVendorTeamForServicesUnderMonitor.01",
+      "description": "76 - Verify assign vendor team for services under Monitor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83709",
+          "testCaseTitle": "76 - Verify assign vendor team for services under Monitor"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "Labor_Vehilce_data_R&R"
+            }
+          ]
+        },
+        "orderMonitorData": {
+          "phaseName": "Start phase",
+          "monitorServicesData": [
+            {
+              "serviceVendor": "Second vendor",
+              "monitorService": {
+                "serviceName": "3/4\" - Penny Size"
+              }
+            },
+            {
+              "serviceVendor": "Vendor team",
+              "monitorService": {
+                "serviceName": "Dye_Panel"
+              }
+            },
+            {
+              "serviceVendor": "Default team",
+              "monitorService": {
+                "serviceName": "Labor_Vehilce_data_R&R"
+              }
+            }
+          ]
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyCalculationAndCorrectDisplayOfArbitrationData": [
+    {
+      "rowID": "testVerifyCalculationAndCorrectDisplayOfArbitrationData.01",
+      "description": "Test Case: 68 - Verify calculation and correct display of Arbitration data",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83702",
+          "testCaseTitle": "Test Case: 68 - Verify calculation and correct display of Arbitration data"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
       }
     }
   ]

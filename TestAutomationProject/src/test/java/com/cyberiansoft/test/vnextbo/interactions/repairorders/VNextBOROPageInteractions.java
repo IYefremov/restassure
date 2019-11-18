@@ -375,6 +375,11 @@ public class VNextBOROPageInteractions {
         wotablerow.findElement(By.xpath(".//i[@data-bind='click: dropMenuClicked']")).click();
     }
 
+    public static void clickViewProblemsLink() {
+        Utils.clickElement(new VNextBOROWebPage().getViewProblemsLink());
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
     public static void clickStartRoForWorkOrder(String orderNumber) {
         clickWorkOrderOtherMenuButton(orderNumber);
         Utils.clickElement(By.xpath("//i[@class='icon-start-ro']"));

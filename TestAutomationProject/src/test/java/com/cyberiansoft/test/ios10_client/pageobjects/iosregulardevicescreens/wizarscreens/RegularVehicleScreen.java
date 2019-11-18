@@ -184,13 +184,14 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	
 	public void setMileage(String mileage) {
 		vehicleinfotbl.findElementByAccessibilityId("Mileage").click();
-		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Mileage' and type = 'XCUIElementTypeCell'")).sendKeys(mileage);
-		//appiumdriver.getKeyboard().sendKeys(mileage);
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Mileage' and type = 'XCUIElementTypeCell'"))
+				.findElementByClassName("XCUIElementTypeTextField").sendKeys(mileage);
 	}
 	
 	public void setFuelTankLevel(String fueltanklevel) {
 		vehicleinfotbl.findElementByAccessibilityId("Fuel Tank Level").click();
-		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Fuel Tank Level' and type = 'XCUIElementTypeCell'")).sendKeys(fueltanklevel);
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Fuel Tank Level' and type = 'XCUIElementTypeCell'"))
+				.findElementByClassName("XCUIElementTypeTextField").sendKeys(fueltanklevel);
 	}
 	
 	public void setLicensePlate(String licplate) {
@@ -252,16 +253,19 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 
 	public void setStock(String stock) {
 		vehicleinfotbl.findElementByAccessibilityId("Stock#").click();
-		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Stock#' and type = 'XCUIElementTypeCell'")).sendKeys(stock + "\n");
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'Stock#' and type = 'XCUIElementTypeCell'"))
+				.findElementByClassName("XCUIElementTypeTextField").sendKeys(stock + "\n");
 		
 	}
 
 	public void setRO(String ro) {
-		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'RO#' and type = 'XCUIElementTypeCell'")).sendKeys(ro + "\n");
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'RO#' and type = 'XCUIElementTypeCell'"))
+				.findElementByClassName("XCUIElementTypeTextField").sendKeys(ro + "\n");
 	}
 	
 	public void setPO(String po) {
-		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'")).sendKeys(po + "\n");
+		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'"))
+				.findElementByClassName("XCUIElementTypeTextField").sendKeys(po + "\n");
 	}
 	
 	public String getCustomerValue() {
@@ -275,6 +279,14 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Final")));
 		appiumdriver.findElement(MobileBy.AccessibilityId("Final")).click();
+	}
+
+	public String getDateValue() {
+		return appiumdriver.findElement(MobileBy.AccessibilityId("Date")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
+
+	public String getArbitrationDateValue() {
+		return appiumdriver.findElement(MobileBy.AccessibilityId("Arbitration\nDate")).findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 
 }

@@ -211,4 +211,17 @@ public class NewInspectionTypeDialogWebPage extends BaseWebPage {
 		clickAndWait(insertvisulinspbtn);
 		Assert.assertEquals(visualformstable.getTableRowCount(), rowcountbefore+1);
 	}
+
+	public void selectOtherTab() {
+		driver.findElement(By.xpath("//td[@class='ModalDialog']")).findElement(By.xpath(".//span[@class='rtsTxt' and text()='Other']")).click();
+	}
+
+	public void setArbitrationWindowValue(String newArbitrationWindowValue) {
+		driver.findElement(By.xpath("//td[@class='ModalDialog']")).findElement(By.xpath(".//input[contains(@id, 'Card_tbArbitrationWindowInDays')]")).clear();
+		driver.findElement(By.xpath("//td[@class='ModalDialog']")).findElement(By.xpath(".//input[contains(@id, 'Card_tbArbitrationWindowInDays')]")).sendKeys(newArbitrationWindowValue);
+	}
+
+	public void clickOKButton() {
+		driver.findElement(By.xpath("//td[@class='ModalDialog']")).findElement(By.xpath(".//input[contains(@name, 'BtnOk')]")).click();
+	}
 }

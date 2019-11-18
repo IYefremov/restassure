@@ -149,6 +149,12 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[text()='Vendor Price']")
 	private WebElement vendorPriceTitle;
 
+	@FindBy(xpath = "//div[@aria-hidden='false']//span[@data-automation-label='reconmonitor-details-service-status-item']/../../..")
+	private WebElement serviceStatusDropDown;
+
+	@FindBy(xpath = "//div[@aria-hidden='false']//span[@data-automation-label='reconmonitor-details-service-status-item']")
+	private List<WebElement> serviceStatusListBoxOptions;
+
 	@FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/span")
 	private List<WebElement> vendorPricesList;
 
@@ -166,6 +172,9 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//ul[@class='k-list k-reset' and @aria-hidden='false']/li")
 	private List<WebElement> listBoxOptions;
+
+	@FindBy(xpath = "//span[@data-automation-label='reconmonitor-details-phase-status-item']/..")
+	private List<WebElement> phaseStatusListBoxOptions;
 
 
 	public VNextBORODetailsPage() {
@@ -843,10 +852,49 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
                 + "']//i[@class='icon-problem-indicator']"));
     }
 
+	public WebElement getServiceProblemIcon(String serviceId) {
+	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-order-service-id='" + serviceId
+                + "']//i[@class='icon-problem-indicator']"));
+    }
+
     public WebElement clickActionsIcon(String serviceId) {
         final WebElement actionsIcon = new VNextBORODetailsPage().getActionIconForServiceId(serviceId);
         Utils.clickWithActions(actionsIcon);
         WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
         return actionsIcon;
+    }
+
+    public WebElement getPhaseStatusBox(String phaseStatusBox) {
+	    return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phaseStatusBox +
+                "']//div[contains(@class, 'clmn_5')]//span[contains(@class, 'group-status-dropdown')]"));
+    }
+
+    public WebElement getPhaseStatusBoxValue(String phaseStatusBox) {
+	    return getPhaseStatusBox(phaseStatusBox).findElement(By.xpath(".//span[contains(@class, 'k-input')]"));
+    }
+
+    public WebElement getActionsTriggerForPhase(String phase) {
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase
+                + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]"));
+    }
+
+    public WebElement getServiceReportProblemOption(String serviceId) {
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-order-service-id='"
+                + serviceId + "']//label[text()='Report Problem']"));
+    }
+
+    public WebElement getServiceResolveProblemOption(String serviceId) {
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-order-service-id='"
+                + serviceId + "']//label[text()='Resolve Problem']"));
+    }
+
+    public WebElement getServiceStatusByServiceId(String serviceId) {
+	    return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+                        + "']//span[contains(@class, 'service-status-dropdown')]//span[@class='k-input']"));
+    }
+
+    public WebElement getServiceStatusBoxByServiceId(String serviceId) {
+	    return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+                        + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
     }
 }

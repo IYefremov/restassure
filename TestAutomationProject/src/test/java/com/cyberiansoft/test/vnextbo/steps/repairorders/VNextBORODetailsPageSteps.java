@@ -21,6 +21,10 @@ public class VNextBORODetailsPageSteps {
 
     public static void setServiceStatusForService(String phase, String status) {
         final String serviceId = VNextBORODetailsPageInteractions.getServiceId(phase);
+        setServiceStatusForServiceByServiceId(serviceId, status);
+    }
+
+    public static void setServiceStatusForServiceByServiceId(String serviceId, String status) {
         VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
         WaitUtilsWebDriver.waitForLoading();
         Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), status,
@@ -42,34 +46,71 @@ public class VNextBORODetailsPageSteps {
     }
 
     public static void setReportProblemForPhase(String phase, String problem, String description) {
-        if (VNextBORODetailsPageValidations.isProblemIconDisplayedForPhase(phase)) {
-            setResolveProblemForPhase(phase);
-        }
         VNextBORODetailsPageInteractions.openActionsDropDownForPhase(phase);
+        if (VNextBORODetailsPageValidations.isProblemIconDisplayedForPhase(phase)) {
+            VNextBORODetailsPageInteractions.clickResolveProblemForPhase(phase);
+            VNextBOROProblemsInteractions.clickResolveButton();
+        }
         VNextBORODetailsPageInteractions.clickReportProblemForPhase(phase);
         handleReportProblemDialog(problem, description);
         Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconDisplayedForPhase(phase),
-                "The Problem icon hasn't been displayed");
+                "The Problem icon is not displayed for phase after reporting the problem");
+    }
+
+    public static void setReportProblemForPhase(String phase, String description) {
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase(phase);
+        if (VNextBORODetailsPageValidations.isProblemIconDisplayedForPhase(phase)) {
+            VNextBORODetailsPageInteractions.clickResolveProblemForPhase(phase);
+            VNextBOROProblemsInteractions.clickResolveButton();
+        }
+        VNextBORODetailsPageInteractions.clickReportProblemForPhase(phase);
+        VNextBOROProblemsInteractions.setProblemDescription(description);
+        VNextBOROProblemsInteractions.clickAddProblemButton();
+        Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconDisplayedForPhase(phase),
+                "The Problem icon is not displayed for phase after reporting the problem");
     }
 
     public static void setResolveProblemForPhase(String phase) {
         VNextBORODetailsPageInteractions.openActionsDropDownForPhase(phase);
         if (VNextBORODetailsPageValidations.isResolveProblemOptionDisplayedForPhase(phase)) {
             VNextBORODetailsPageInteractions.clickResolveProblemForPhase(phase);
-            new VNextBOROProblemsInteractions().clickResolveButton();
+            VNextBOROProblemsInteractions.clickResolveButton();
         }
+        Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconNotDisplayedForPhase(phase),
+                "The Problem icon is displayed for phase after resolving the problem");
     }
 
     public static void handleReportProblemDialog(String problem, String description) {
-        final VNextBOROProblemsInteractions roProblemsInteractions = new VNextBOROProblemsInteractions();
-        roProblemsInteractions.setReportProblem(problem);
-        roProblemsInteractions.setProblemDescription(description);
-        roProblemsInteractions.clickAddProblemButton();
+        VNextBOROProblemsInteractions.setReportProblem(problem);
+        VNextBOROProblemsInteractions.setProblemDescription(description);
+        VNextBOROProblemsInteractions.clickAddProblemButton();
     }
 
     public static void openEditNotesDialog(String serviceId) {
         VNextBORODetailsPageInteractions.openNotesDialog(serviceId);
         Assert.assertTrue(VNextBONotesPageValidations.isEditOrderServiceNotesBlockDisplayed(),
                 "The notes block hasn't been displayed");
+    }
+
+    public static void setReportProblemForService(String serviceId, String problem, String description) {
+        VNextBORODetailsPageInteractions.clickActionsIcon(serviceId);
+        if (VNextBORODetailsPageValidations.isResolveProblemOptionDisplayedForService(serviceId)) {
+            VNextBORODetailsPageInteractions.clickResolveProblemForService(serviceId);
+            VNextBOROProblemsInteractions.clickResolveButton();
+        }
+        VNextBORODetailsPageInteractions.clickReportProblemForService(serviceId);
+        handleReportProblemDialog(problem, description);
+        Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconDisplayedForService(serviceId),
+                "The Problem icon is not displayed for service after reporting the problem");
+    }
+
+    public static void setResolveProblemForService(String serviceId) {
+        VNextBORODetailsPageInteractions.clickActionsIcon(serviceId);
+        if (VNextBORODetailsPageValidations.isResolveProblemOptionDisplayedForService(serviceId)) {
+            VNextBORODetailsPageInteractions.clickResolveProblemForService(serviceId);
+            VNextBOROProblemsInteractions.clickResolveButton();
+        }
+        Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconNotDisplayedForService(serviceId),
+                "The Problem icon is displayed for service after resolving the problem");
     }
 }

@@ -125,11 +125,15 @@ public class AddCustomerScreen extends iOSHDBaseScreen {
 
 	public void selectState(String state) {
 		statebtn.click();
+		if (!appiumdriver.findElement(MobileBy.AccessibilityId(state)).isDisplayed())
+			appiumdriver.findElement(MobileBy.AccessibilityId(state)).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(state)).click();
 	}
 
 	public void selectCountry(String country) {
 		countrybtn.click();
+		if (!appiumdriver.findElement(MobileBy.AccessibilityId(country)).isDisplayed())
+			appiumdriver.findElement(MobileBy.AccessibilityId(country)).click();
 		appiumdriver.findElement(MobileBy.AccessibilityId(country)).click();
 	}
 
