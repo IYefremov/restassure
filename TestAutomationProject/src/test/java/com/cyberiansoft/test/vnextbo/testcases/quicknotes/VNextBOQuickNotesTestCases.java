@@ -37,7 +37,7 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
 
         VNextBOLoginSteps.userLogin(userName, userPassword);
         VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel();
-        headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOServicesPartsAndLaborBundleData.java after fix
+        headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOLaborServiceData.java after fix
         leftMenu = new VNexBOLeftMenuPanel();
     }
 
