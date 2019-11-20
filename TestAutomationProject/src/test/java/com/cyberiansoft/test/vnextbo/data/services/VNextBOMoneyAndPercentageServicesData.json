@@ -136,16 +136,62 @@
     }
   ],
 
-  "verifyUserCanEditMatrixService": [
+  "verifyUserCanAdNewServiceWithClarificationOptional": [
     {
-      "rowID": "verifyUserCanEditMatrixService.01",
-      "description": "Test Case 90576: vNext: Edit matrix service",
+      "rowID": "verifyUserCanAdNewServiceWithClarificationOptional.01",
+      "description": "Test Case 91575: vNext: User can add New Service with Clarification â†’ Optional",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "90576",
-          "testCaseTitle": "vNext: Edit matrix service"
+          "testCaseID": "91575",
+          "testCaseTitle": "User can add New Service with Clarification â†’ Optional"
         }
-      ]
+      ],
+      "serviceName": "Test Service 91575",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test service with optional clarification",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00",
+      "serviceClarification": "Optional",
+      "serviceClarificationPrefix": "roof"
+    }
+  ],
+
+  "verifyUserCanAdNewServiceWithClarificationRequired": [
+    {
+      "rowID": "verifyUserCanAdNewServiceWithClarificationRequired.01",
+      "description": "Test Case 91576: User can add New Service with Clarification â†’ Required",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91576",
+          "testCaseTitle": "User can add New Service with Clarification â†’ Required"
+        }
+      ],
+      "serviceName": "Test Service 91576",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test service with required clarification",
+      "servicePriceType": "Percentage",
+      "servicePrice": "5.000",
+      "serviceClarification": "Required",
+      "serviceClarificationPrefix": "1111"
+    }
+  ],
+
+  "verifyUserCanEditServiceWithClarification": [
+    {
+      "rowID": "verifyUserCanEditServiceWithClarification.01",
+      "description": "Test Case 91577: User can edit service with Clarification",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91577",
+          "testCaseTitle": "User can edit service with Clarification"
+        }
+      ],
+      "serviceName": "Test Service 91577",
+      "serviceType": "Detail",
+      "serviceDescription": "test service with none clarification",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00",
+      "serviceClarification": "None"
     }
   ],
 

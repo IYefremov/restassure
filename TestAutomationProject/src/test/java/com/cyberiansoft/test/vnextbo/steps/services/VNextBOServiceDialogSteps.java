@@ -125,6 +125,16 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(new VNextBOServiceDialog().getUseLaborTimesCheckbox());
     }
 
+    private static void setClarificationFields(VNextBOServiceData serviceData) {
+
+        if (serviceData.getServiceClarification() != null) {
+            setClarification(serviceData.getServiceClarification());
+            if (serviceData.getServiceClarificationPrefix() != null) {
+                setClarificationPrefix(serviceData.getServiceClarificationPrefix());
+            }
+        }
+    }
+
     public static void clickAddButton() {
 
         Utils.clickElement(new VNextBOServiceDialog().getAddButton());
@@ -143,6 +153,7 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         setBaseServiceData(serviceData, true);
         if (serviceData.getServicePriceType().equals("Money")) setMoneyServicePrice(serviceData.getServicePrice());
         if (serviceData.getServicePriceType().equals("Percentage")) setPercentageServicePrice(serviceData.getServicePrice());
+        setClarificationFields(serviceData);
         clickSaveButton();
         WaitUtilsWebDriver.waitForLoading();
     }
@@ -169,6 +180,7 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         setBaseServiceData(serviceData, false);
         if (serviceData.getServicePriceType().equals("Money")) setMoneyServicePrice(serviceData.getServicePrice());
         if (serviceData.getServicePriceType().equals("Percentage")) setPercentageServicePrice(serviceData.getServicePrice());
+        setClarificationFields(serviceData);
         clickSaveButton();
         WaitUtilsWebDriver.waitForLoading();
     }

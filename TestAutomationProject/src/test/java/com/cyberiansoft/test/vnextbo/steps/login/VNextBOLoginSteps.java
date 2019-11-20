@@ -13,7 +13,7 @@ public class VNextBOLoginSteps {
             VNextBOLoginInteractions.setEmailField(username);
             VNextBOLoginInteractions.setPasswordField(userPsw);
             Utils.clickElement(new VNextBOLoginScreenWebPage().getLoginButton());
-            WaitUtilsWebDriver.waitABit(2000);
+            WaitUtilsWebDriver.waitForLoading();
         }
     }
 
