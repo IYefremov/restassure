@@ -713,7 +713,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 
-		questionsScreen.drawRegularSignature();
+		questionsScreen.drawSignature();
 		servicesScreen.clickSave();
 		Helpers.waitForAlert();
 		alertText = Helpers.getAlertTextAndAccept();
@@ -2007,7 +2007,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 
-		questionsScreen.drawRegularSignature();
+		questionsScreen.drawSignature();
 		servicesScreen.clickSave();
 		Helpers.waitForAlert();
 		alertText = Helpers.getAlertTextAndAccept();
@@ -2068,7 +2068,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 
-		questionsScreen.drawRegularSignature();
+		questionsScreen.drawSignature();
 		servicesScreen.clickSave();
 		Helpers.waitForAlert();
 		alertText = Helpers.getAlertTextAndAccept();
@@ -3624,7 +3624,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularInspectionsSteps.saveInspectionAsFinal();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
-		questionsScreen.drawRegularSignature();
+		questionsScreen.drawSignature();
 		RegularInspectionsSteps.saveInspectionAsFinal();
 		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreenSteps.answerQuestion(inspectionData.getQuestionScreensData().get(1).getQuestionData());

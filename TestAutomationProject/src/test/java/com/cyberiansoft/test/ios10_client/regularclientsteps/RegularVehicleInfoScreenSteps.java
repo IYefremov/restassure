@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
@@ -135,13 +136,6 @@ public class RegularVehicleInfoScreenSteps {
         return vehicleScreen.getWorkOrderNumber();
     }
 
-    public static void selectAdditionalTechnician(ServiceTechnician technician) {
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        clickTech();
-        vehicleScreen.selectAdditionalTechnician(technician.getTechnicianFullName());
-        RegularWizardScreensSteps.clickSaveButton();
-    }
-
     public static void clickTech() {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.clickTech();
@@ -155,5 +149,11 @@ public class RegularVehicleInfoScreenSteps {
     public static String getArbitrationDateValue() {
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         return vehicleScreen.getArbitrationDateValue();
+    }
+
+    public static void selectOwner(AppCustomer vehicleOwner) {
+        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
+        vehicleScreen.clickOwnerCell();
+        RegularSelectCustomerSteps.selectCustomer(vehicleOwner);
     }
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 
 public class RegularNotesScreenSteps {
@@ -10,21 +11,34 @@ public class RegularNotesScreenSteps {
     }
 
     public static void addImageNote() {
-        RegularNotesScreen notesScreen = new RegularNotesScreen();
+        int oneImageNumber = 1;
         switchToPhotosView();
-        notesScreen.clickLibraryButton();
-        addPhotoFromMomentsLibrary();
-        notesScreen.clickCancel();
+        addImegesFromLibrary(oneImageNumber);
+        clickCancelGalleryButton();
     }
 
     public static void addImageNotes(int numberOfImages) {
-        RegularNotesScreen notesScreen = new RegularNotesScreen();
         switchToPhotosView();
+        addImegesFromLibrary(numberOfImages);
+        clickCancelGalleryButton();
+    }
+
+    public static void addImegesFromLibrary(int numberOfImages) {
+        RegularNotesScreen notesScreen = new RegularNotesScreen();
         notesScreen.clickLibraryButton();
         for (int i =0; i < numberOfImages; i++) {
             addPhotoFromMomentsLibrary();
         }
-        notesScreen.clickCancel();
+    }
+
+    public static void clickCancelGalleryButton() {
+        RegularNotesScreen notesScreen = new RegularNotesScreen();
+        notesScreen.clickCancelGallery();
+    }
+
+    public static void clickBackButton() {
+        RegularNotesScreen notesScreen = new RegularNotesScreen();
+        notesScreen.clickBackButton();
     }
 
     public static void deleteImageNotes(int numberOfImages) {
@@ -50,5 +64,10 @@ public class RegularNotesScreenSteps {
     public static void saveNotes() {
         RegularNotesScreen notesScreen = new RegularNotesScreen();
         notesScreen.clickSaveButton();
+    }
+
+    public static void clickCancelButton() {
+        RegularNotesScreen notesScreen = new RegularNotesScreen();
+        notesScreen.clickCancel();
     }
 }

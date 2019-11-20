@@ -44,7 +44,7 @@ public class QuestionsScreenSteps {
             answerTextQuestion(questionData);
         else if (questionData.getQuestionAnswer() != null)
             questionsScreen.selectAnswerForQuestion(questionData);
-        else if (questionData.isSignatureQuestion())
+        else if (questionData.getSignatureQuestion() != null)
             questionsScreen.drawSignature();
         else
             questionsScreen.selectAnswerForQuestion(questionData);

@@ -1378,8 +1378,11 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularSummaryApproveScreenSteps.approveWorkOrder();
 
         RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
-        RegularVehicleInfoScreenSteps.selectAdditionalTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
-        RegularAlertValidations.acceprAlertAndVerifyAlertMessage(AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+        RegularVehicleInfoScreenSteps.clickTech();
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
@@ -2155,7 +2158,31 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularHomeScreenSteps.navigateToStatusScreen();
         RegularStatusScreenSteps.resendInspectionsAndWorkOrders();
         NavigationSteps.navigateBackScreen();
-
-
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection(String rowID,
+                                                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        RetailCustomer vehicleOwner = new RetailCustomer("Testowner", "Testownerlast");
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_SUPPLEMENT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularVehicleInfoScreenSteps.selectOwner(vehicleOwner);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        for (QuestionScreenData questionScreenData : inspectionData.getQuestionScreensData())
+            RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(questionScreenData);
+
+        RegularInspectionsSteps.saveInspectionAsDraft();
+        RegularMyInspectionsSteps.selectInspection(inspectionNumber);
+        RegularMenuValidations.menuShouldBePresent(ReconProMenuItems.ADD_SUPPLEMENT, false);
+        RegularMenuItemsScreenSteps.closeMenuScreen();
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+
 }

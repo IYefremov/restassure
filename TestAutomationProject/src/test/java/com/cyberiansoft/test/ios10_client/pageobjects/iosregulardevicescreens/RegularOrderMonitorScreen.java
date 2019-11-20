@@ -109,6 +109,13 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		appiumdriver.findElementByAccessibilityId("Assign Technician").click();
 	}
 
+	public void selectPhaseVendor(String vendorName) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("Teams")));
+		appiumdriver.findElementByAccessibilityId(vendorName).click();
+	}
+
 	public String getPanelStatus(String panelname) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
@@ -124,8 +131,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		}
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
 
-		WebElement serviceStatusCell = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
-		return serviceStatusCell.getAttribute("value");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		return monitorserviceslist.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}
 
 	public String getPanelStatus(ServiceData serviceData, VehiclePartData vehiclePartData) {

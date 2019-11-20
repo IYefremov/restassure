@@ -59,6 +59,7 @@
           <include name="testVerifyCalculationAndCorrectDisplayOfArbitrationData" />
           <include name="testVerifyAccessToStatusMenuFromLoginScreen" />
           <include name="testVerifyReSendDataFromDevice" />
+          <include name="testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection" />
         </methods>
       </class>
     </classes>
