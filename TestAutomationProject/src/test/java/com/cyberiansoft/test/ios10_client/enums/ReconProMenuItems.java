@@ -33,6 +33,7 @@ public enum ReconProMenuItems {
     ARCHIVE("Archive"),
     VOID("Void"),
     MONITOR("Monitor"),
+    ADD_SUPPLEMENT("Add\nSupplement"),
     SUMMARY("Summary");
 
     @Getter

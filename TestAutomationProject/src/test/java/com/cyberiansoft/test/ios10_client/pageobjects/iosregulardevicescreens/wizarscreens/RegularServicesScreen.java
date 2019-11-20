@@ -153,10 +153,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElementByAccessibilityId("PriceMatrixesTable").findElement(MobileBy.AccessibilityId(servicepricematrices)).click();
 		return new RegularPriceMatrixScreen();
 	}
-	
-	public boolean priceMatricesPopupIsDisplayed() {
-		return appiumdriver.findElement(MobileBy.AccessibilityId("Price Matrices")).isDisplayed();
-	}
 
 	public RegularPriceMatrixScreen selectPriceMatrices(String pricematrice) {
 		appiumdriver.findElementByAccessibilityId(pricematrice).click();

@@ -731,7 +731,9 @@
             "screenName": "Follow up Requested",
             "questionsData": [
               {
-                "signatureQuestion": true,
+                "signatureQuestion": {
+
+              },
                 "screenIndex": 1,
                 "screenHDIndex": 0
               },

@@ -4,11 +4,11 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
-import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.PointOption;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 import static io.appium.java_client.touch.offset.ElementOption.element;
@@ -34,88 +35,10 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Questions")));
 	}
 
-	public void acceptForReminderNoDrilling() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("REMINDER NO DRILLING AND USE E-COAT")));
-		clickAccept();
-	}
-
-	public void clickAccept() {
-		appiumdriver.findElementByName("Accept").click();
-	}
-	
-	public void clickCustomButtonEstimateConditions() {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Estimate Conditions")));
-	}
-
-	public void selectOtherQuestions() {
-		clickCustomButtonEstimateConditions();
-		appiumdriver.findElementByName("Other").click();
-	}
-
-	public void selectOutsideQuestions() {
-		clickCustomButtonEstimateConditions();
-		appiumdriver.findElementByName("Outside").click();
-	}
-
-	public void selectProperQuestions() {
-		clickCustomButtonEstimateConditions();
-		appiumdriver.findElementByName("Proper").click();
-	}
-
-
 	public void clearTextQuestion() {
 		appiumdriver.findElementByAccessibilityId("Clear").click();	
 	}
-	
-	public void setOwnerInfo(String ownername, String owneraddress, String ownercity, String ownerstate,
-			String ownercountry, String ownerzip) {
-		scrollScreenUp();
-		scrollScreenUp();
-		setRegularSetFieldValue((IOSElement) appiumdriver.findElementByAccessibilityId("Owner Name_TextView"), ownername);
-		scrollScreenUp();
-		setRegularSetFieldValue((IOSElement) appiumdriver.findElementByAccessibilityId("Owner Address_TextView"), owneraddress);
-		scrollScreenUp();
-		setRegularSetFieldValue((IOSElement) appiumdriver.findElementByAccessibilityId("Owner City_TextView"), ownercity);
-		scrollScreenUp();
-		setOwnerState(ownerstate);
-		scrollScreenUp();
-		setOwnerCountry(ownercountry);
-		scrollScreenUp();
-		scrollScreenUp();
-		scrollScreenUp();
-		setRegularSetFieldValue((IOSElement) appiumdriver.findElementByAccessibilityId("Owner Zip_TextView"), ownerzip);
-	}
-	
-	public void setRegularSetFieldValue(IOSElement txtfld, String txtvalue) {
-		txtfld.click();
-		txtfld.sendKeys(txtvalue + "\n");
-		appiumdriver.findElementByAccessibilityId("Done").click();
-	}
 
-	public void setOwnerState(String ownerstate) {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(ownerstate)));
-		if (!appiumdriver.findElementByName(ownerstate).isDisplayed())
-			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + ownerstate + "']/..")));
-		appiumdriver.findElementByName(ownerstate).click();
-		//Thread.sleep(1000);
-		swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='Yukon']/..")));
-	}
-
-	public void setOwnerCountry(String ownercountry) {
-		Helpers.waitABit(2000);
-		if (appiumdriver.findElementsByName(ownercountry).size() <= 0)
-			scrollScreenUp();
-		appiumdriver.findElementByName(ownercountry).click();
-	}
-	
-	public void chooseAVISCode(String aviscode) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Choose One AVIS Code")));
-		appiumdriver.findElementByName(aviscode).click();
-	}
 
 	public void selectListQuestion(QuestionsData questionsData) {
 		for (int i = 0; i < 10; i++)
@@ -131,19 +54,6 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 
 	}
 	
-	public void chooseConsignor(String consignor) {
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Consignor")));
-		Helpers.scroolTo(consignor);
-		appiumdriver.findElementByName(consignor).click();
-	}
-	
-	public void makeCaptureForQuestion(String question) {
-		String elementname = question + "_Image_Cell";
-		appiumdriver.findElementByXPath("//UIATableCell[@name=\"" + elementname  + "\"]").click();
-		Helpers.makeCapture();
-	}
-	
 	public void makeCaptureForQuestionRegular(String question) {
 		String elementname = question + "_Image_Cell";
 		appiumdriver.findElementByXPath("//UIATableCell[@name=\"" + elementname  + "\"]").click();
@@ -152,11 +62,6 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 	}
 
 	public void drawSignature() {
-		appiumdriver.findElementByXPath("//UIAScrollView[1]/UIATableView[2]/UIATableCell[2]/UIAStaticText[1]").click();
-		Helpers.drawQuestionsSignature();
-	}
-	
-	public void drawRegularSignature() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
 		WebElement signature = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Signature_Handwriting")));
 		int xx = signature.getLocation().getX()/2;
@@ -166,11 +71,26 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 		action.tap(element(signature, xx, yy)).perform();
 		Helpers.drawRegularQuestionsSignature();
 	}
+	
+	public void drawQuestionFormSignature() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		WebElement signature = wait.until(ExpectedConditions.elementToBeClickable(MobileBy.className("XCUIElementTypeImage")));
+		int xx = signature.getLocation().getX();
+
+		int yy = signature.getLocation().getY();
+		TouchAction action = new TouchAction(appiumdriver);
+		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(1))).
+				moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
+	}
 
 
 	public void waitForQuestionSectionLoad(String questionSectionName) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.name(questionSectionName)));
+	}
+
+	public void clickQuestionCell(String questionName) {
+		appiumdriver.findElementByName(questionName).click();
 	}
 	
 	public void selectAnswerForQuestion(String question, String answer) {
@@ -210,7 +130,12 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 	public void answerQuestion(QuestionsData questionsData) {
 		if (questionsData.getQuestionName() != null)
 			appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).click();
-		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionAnswer())).click();
+		if (questionsData.getQuestionAnswers() != null ) {
+			for (String answer : questionsData.getQuestionAnswers())
+				appiumdriver.findElement(MobileBy.AccessibilityId(answer)).click();
+			clickDoneButton();
+		} else
+			appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionAnswer())).click();
 	}
 
 	public void answerLogicalQuestion(QuestionsData questionsData) {
@@ -223,9 +148,12 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 	public void answerTextQuestion(QuestionsData questionsData) {
 		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).clear();
 		appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionName())).findElement(MobileBy.className("XCUIElementTypeTextView")).sendKeys(questionsData.getQuestionAnswer()+ "\n");
-		appiumdriver.findElementByAccessibilityId("Done").click();
+		clickDoneButton();
 	}
 
+	public void clickDoneButton() {
+		appiumdriver.findElementByAccessibilityId("Done").click();
+	}
 
 	public String getQuestion2Value() {
 		return appiumdriver.findElement(MobileBy.AccessibilityId("QuestionTypeSelect_Question 2")).getAttribute("label");

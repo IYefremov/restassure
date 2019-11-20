@@ -26,6 +26,9 @@ public class OrderMonitorData {
     @JsonProperty("newTechnician")
     ServiceTechnician newTechnician;
 
+    @JsonProperty("phaseVendor")
+    String phaseVendor;
+
     @JsonProperty("newTechnicians")
     List<ServiceTechnician> newTechnicians;
 }

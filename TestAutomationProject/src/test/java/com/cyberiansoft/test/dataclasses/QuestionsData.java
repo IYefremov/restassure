@@ -23,8 +23,8 @@ public class QuestionsData {
     private int screenIndex;
     @JsonProperty("screenHDIndex")
     private int screenHDIndex;
-    @JsonProperty("signatureQuestion")
-    private boolean signatureQuestion;
+    //@JsonProperty("signatureQuestion")
+    //private boolean signatureQuestion;
     @JsonProperty("logicalQuestion")
     private boolean logicalQuestion;
     @JsonProperty("logicalQuestionValue")
@@ -33,4 +33,10 @@ public class QuestionsData {
     private boolean textQuestion;
     @JsonProperty("listQuestion")
     private boolean listQuestion;
+    @JsonProperty("imageQuestion")
+    private ImageQuestion imageQuestion;
+    @JsonProperty("datePickerQuestion")
+    private DatePickerQuestion datePickerQuestion;
+    @JsonProperty("signatureQuestion")
+    private SignatureQuestion signatureQuestion;
 }
