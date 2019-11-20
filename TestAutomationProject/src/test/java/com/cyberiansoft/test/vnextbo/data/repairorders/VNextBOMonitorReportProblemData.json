@@ -200,5 +200,47 @@
       ],
       "problemReason": "No part"
     }
+  ],
+
+  "verifyUserCanOpenCompleteCurrentPhasePopupWindowWithAllProblemServices": [
+    {
+      "rowID": "verifyUserCanOpenCompleteCurrentPhasePopupWindowWithAllProblemServices.01",
+      "description": "Test Case 88942: Verify user can report the problem for the part service. Test Case 88945: Verify the user can open the \"Complete Current Phase\" pop-up window and all the problem services are presented",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91251"
+        },        {
+          "testCaseID": "91252"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "serviceStatuses": [
+        "Active"
+      ],
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyUserCanCompleteCurrentPhaseWithProblemServices": [
+    {
+      "rowID": "verifyUserCanCompleteCurrentPhaseWithProblemServices.01",
+      "description": "Test Case 88948: Verify user can complete the current phase with the problem services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91253"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "serviceStatuses": [
+        "Active"
+      ],
+      "problemReason": "No part"
+    }
   ]
 }

@@ -5,11 +5,13 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -51,7 +53,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()),
@@ -74,7 +76,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()),
@@ -101,7 +103,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-        Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()),
@@ -112,7 +114,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
                 "The RO details page breadCrumb with RO# hasn't been displayed");
 
         detailsPage.waitForLoading();
-        detailsPage.clickRepairOrdersBackwardsLink();
+        VNextBORODetailsPageInteractions.clickRepairOrdersBackwardsLink();
         Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
     }

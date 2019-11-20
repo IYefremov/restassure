@@ -153,12 +153,12 @@ public class Utils {
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
+        final Actions actions = getActions();
         getMatchingOptionInListBox(listBox, selection)
-                .ifPresent((option) -> getActions()
-                        .moveToElement(option)
-                        .click()
-                        .build()
-                        .perform());
+                .ifPresent((option) -> {
+                    actions.moveToElement(option).build().perform();
+                    Utils.clickElement(option);
+                });
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
     }
 

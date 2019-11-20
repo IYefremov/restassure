@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOROAdvancedSearchValues;
@@ -50,13 +51,6 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	public void settingUp() {
 		JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
 	}
-
-	private VNextBORODetailsPage detailsPage;
-
-    @BeforeMethod
-	public void BackOfficeLogin() {
-		detailsPage = new VNextBORODetailsPage();
-    }
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanOpenMonitorWithFullSetOfElements(String rowID, String description, JSONObject testData) {
@@ -302,11 +296,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 
 		Assert.assertEquals(VNextBOROPageInteractions.getTableTitleDisplayed(0), data.getTitle(),
 				"The table title is incorrect");
-		final VNextBORODetailsPage repairOrderDetailsPage = new VNextBORODetailsPage();
         VNextBOROPageInteractions.clickWoLink(vinNum);
-		Assert.assertTrue(repairOrderDetailsPage.isRoDetailsSectionDisplayed(),
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(),
 				"The RO details section hasn't been displayed");
-		repairOrderDetailsPage.goToPreviousPage();
+        Utils.goToPreviousPage();
 
         VNextBOROPageInteractions.hideNoteForWorkOrder(vinNum);
 		Assert.assertTrue(VNextBOROPageValidations.isWoTypeDisplayed(data.getWoType()));
@@ -406,7 +399,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -420,10 +413,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.typeStockNumber(data.getStockNumbers()[1]);
-		detailsPage.typeStockNumber(data.getStockNumbers()[0]);
+        VNextBORODetailsPageInteractions.typeStockNumber(data.getStockNumbers()[1]);
+        VNextBORODetailsPageInteractions.typeStockNumber(data.getStockNumbers()[0]);
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -437,10 +430,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.typeRoNumber(data.getRoNumbers()[1]);
-		detailsPage.typeRoNumber(data.getRoNumbers()[0]);
+        VNextBORODetailsPageInteractions.typeRoNumber(data.getRoNumbers()[1]);
+        VNextBORODetailsPageInteractions.typeRoNumber(data.getRoNumbers()[0]);
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -454,11 +447,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.setStatus(data.getStatus());
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getRoStatus(), data.getStatus(), "The status hasn't been set");
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRoStatus(), data.getStatus(), "The status hasn't been set");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -472,12 +465,12 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.setStatus(data.getStatus());
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getRoStatus(), data.getStatus(), "The status hasn't been set");
-		Assert.assertTrue(detailsPage.isImageOnHoldStatusDisplayed(),
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRoStatus(), data.getStatus(), "The status hasn't been set");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isImageOnHoldStatusDisplayed(),
 				"The On Hold image notification hasn't been displayed");
 	}
 
@@ -492,10 +485,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.setStatus(data.getStatus());
-		Assert.assertEquals(detailsPage.getRoStatus(), data.getStatus(), "The status hasn't been set");
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRoStatus(), data.getStatus(), "The status hasn't been set");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -509,10 +502,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.setStatus(data.getStatus());
-		Assert.assertNotEquals(detailsPage.getRoStatus(), data.getStatus(), "The status has been changed to 'Draft'");
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+		Assert.assertNotEquals(VNextBORODetailsPageInteractions.getRoStatus(), data.getStatus(), "The status has been changed to 'Draft'");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -543,10 +536,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.setPriority(data.getPriority());
-		detailsPage.clickRepairOrdersBackwardsLink();
+        VNextBORODetailsPageInteractions.setPriority(data.getPriority());
+        VNextBORODetailsPageInteractions.clickRepairOrdersBackwardsLink();
         VNextBOROPageInteractions.clickCancelSearchIcon();
 
 		if (VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber())) {
@@ -566,10 +559,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.setPriority(data.getPriority());
-		detailsPage.clickRepairOrdersBackwardsLink();
+        VNextBORODetailsPageInteractions.setPriority(data.getPriority());
+        VNextBORODetailsPageInteractions.clickRepairOrdersBackwardsLink();
         VNextBOROPageInteractions.clickCancelSearchIcon();
 
 		if (VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber())) {
@@ -591,10 +584,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
-		detailsPage.clickAddNewServiceButton();
+		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
 		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
@@ -608,24 +601,24 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				.clickSubmitButton()
 				.refreshPage();
 
-		detailsPage.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(serviceDescription);
+		VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		if (serviceId.isEmpty()) {
-			Assert.assertTrue(detailsPage.isServiceNotificationToBeAddedLaterDisplayed(),
+			Assert.assertTrue(VNextBORODetailsPageValidations.isServiceNotificationToBeAddedLaterDisplayed(),
 					"The notification about the service to be added later hasn't been displayed");
 		} else {
 			Assert.assertNotEquals(serviceId, "",
 					"The created service hasn't been displayed");
-			System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
-			Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
+			System.out.println("description: " + VNextBORODetailsPageInteractions.getServiceDescription(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceDescription(serviceId), serviceDescription,
 					"The service description name is not equal to the inserted description value");
 
-			System.out.println("quantity: " + detailsPage.getServiceQuantity(serviceId));
-			Assert.assertEquals(detailsPage.getServiceQuantity(serviceId), data.getServiceQuantity(),
+			System.out.println("quantity: " + VNextBORODetailsPageInteractions.getServiceQuantity(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId), data.getServiceQuantity(),
 					"The service quantity is not equal to the inserted quantity value");
 
-			System.out.println("price: " + detailsPage.getServicePrice(serviceId));
-			Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServicePrice(),
+			System.out.println("price: " + VNextBORODetailsPageInteractions.getServicePrice(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServicePrice(serviceId), data.getServicePrice(),
 					"The service price is not equal to the inserted price value");
 		}
 	}
@@ -641,10 +634,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.setPriority(data.getPriority());
-		detailsPage.clickRepairOrdersBackwardsLink();
+        VNextBORODetailsPageInteractions.setPriority(data.getPriority());
+		VNextBORODetailsPageInteractions.clickRepairOrdersBackwardsLink();
         VNextBOROPageInteractions.clickCancelSearchIcon();
 
 		if (VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber())) {
@@ -664,10 +657,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
-		detailsPage.clickAddNewServiceButton();
+		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
 		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
@@ -680,23 +673,23 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				.setServiceQuantity(data.getServiceQuantity())
 				.clickSubmitButton();
 
-		detailsPage.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(serviceDescription);
+		VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		if (serviceId.isEmpty()) {
-			Assert.assertTrue(detailsPage.isServiceNotificationToBeAddedLaterDisplayed(),
+			Assert.assertTrue(VNextBORODetailsPageValidations.isServiceNotificationToBeAddedLaterDisplayed(),
 					"The notification about the service to be added later hasn't been displayed");
 		} else {
 			Assert.assertNotEquals(serviceId, "", "The created service hasn't been displayed");
-			System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
-			Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
+			System.out.println("description: " + VNextBORODetailsPageInteractions.getServiceDescription(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceDescription(serviceId), serviceDescription,
 					"The service description name is not equal to the inserted description value");
 
-			System.out.println("quantity: " + detailsPage.getServiceQuantity(serviceId));
-			Assert.assertEquals(detailsPage.getServiceQuantity(serviceId), data.getServiceQuantity(),
+			System.out.println("quantity: " + VNextBORODetailsPageInteractions.getServiceQuantity(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId), data.getServiceQuantity(),
 					"The service quantity is not equal to the inserted quantity value");
 
-			System.out.println("price: " + detailsPage.getServicePrice(serviceId));
-			Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServicePrice(),
+			System.out.println("price: " + VNextBORODetailsPageInteractions.getServicePrice(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServicePrice(serviceId), data.getServicePrice(),
 					"The service price is not equal to the inserted price value");
 		}
 	}
@@ -712,10 +705,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
-		detailsPage.clickAddNewServiceButton();
+		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
 		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
@@ -728,22 +721,22 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				.setServiceLaborTime(data.getServiceLaborTime())
 				.clickSubmitButton();
 
-		detailsPage.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(serviceDescription);
+        VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		if (serviceId.isEmpty()) {
-			Assert.assertTrue(detailsPage.isServiceNotificationToBeAddedLaterDisplayed(),
+			Assert.assertTrue(VNextBORODetailsPageValidations.isServiceNotificationToBeAddedLaterDisplayed(),
 					"The notification about the service to be added later hasn't been displayed");
 		} else {
-			System.out.println("description: " + detailsPage.getServiceDescription(serviceId));
-			Assert.assertEquals(detailsPage.getServiceDescription(serviceId), serviceDescription,
+			System.out.println("description: " + VNextBORODetailsPageInteractions.getServiceDescription(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceDescription(serviceId), serviceDescription,
 					"The service description name is not equal to the inserted description value");
 
-			System.out.println("quantity: " + detailsPage.getServiceLaborTime(serviceId));
-			Assert.assertEquals(detailsPage.getServiceLaborTime(serviceId), data.getServiceLaborTime(),
+			System.out.println("quantity: " + VNextBORODetailsPageInteractions.getServiceLaborTime(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceLaborTime(serviceId), data.getServiceLaborTime(),
 					"The service labor time is not equal to the inserted labor time value");
 
-			System.out.println("price: " + detailsPage.getServicePrice(serviceId));
-			Assert.assertEquals(detailsPage.getServicePrice(serviceId), data.getServiceLaborRate(),
+			System.out.println("price: " + VNextBORODetailsPageInteractions.getServicePrice(serviceId));
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getServicePrice(serviceId), data.getServiceLaborRate(),
 					"The service labor rate is not equal to the inserted labor rate value");
 		}
 	}
@@ -759,10 +752,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
-		detailsPage.clickAddNewServiceButton();
+		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
 		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
@@ -786,7 +779,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 			newServiceMonitorDialog.clickSubmitButton();
 			if (!newServiceMonitorDialog.isPartDescriptionDisplayed(data.getServiceCategory() + " -> " + selectedCategory)) {
 				System.out.println("Refreshing the page...");
-				detailsPage.refreshPage();
+				Utils.refreshPage();
 			}
 
 			Assert.assertTrue(newServiceMonitorDialog
@@ -806,10 +799,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
-		detailsPage.clickAddNewServiceButton();
+		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
 		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
@@ -822,8 +815,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				.clickXButton()
 				.refreshPage();
 
-		detailsPage.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(serviceDescription);
+		VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		Assert.assertEquals(serviceId, "",
 				"The service has been added after closing the 'New Service Dialog' with X button");
 	}
@@ -839,10 +832,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
-		detailsPage.clickAddNewServiceButton();
+		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
 		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
@@ -855,8 +848,8 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				.clickCancelButton()
 				.refreshPage();
 
-		detailsPage.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(serviceDescription);
+		VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		Assert.assertEquals(serviceId, "",
 				"The service has been added after closing the 'New Service Dialog' with X button");
 	}
@@ -872,11 +865,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-		detailsPage.clickFlagIcon();
-		Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
-		detailsPage.selectFlagColor(data.getFlag());
-		Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        VNextBORODetailsPageInteractions.clickFlagIcon();
+		Assert.assertTrue(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+		VNextBORODetailsPageInteractions.selectFlagColor(data.getFlag());
+		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -890,11 +883,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-		detailsPage.clickFlagIcon();
-		Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
-		detailsPage.selectFlagColor(data.getFlag());
-		Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        VNextBORODetailsPageInteractions.clickFlagIcon();
+		Assert.assertTrue(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+		VNextBORODetailsPageInteractions.selectFlagColor(data.getFlag());
+		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -908,11 +901,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-		detailsPage.clickFlagIcon();
-		Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
-		detailsPage.selectFlagColor(data.getFlag());
-		Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        VNextBORODetailsPageInteractions.clickFlagIcon();
+		Assert.assertTrue(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+		VNextBORODetailsPageInteractions.selectFlagColor(data.getFlag());
+		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -926,11 +919,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-		detailsPage.clickFlagIcon();
-		Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
-		detailsPage.selectFlagColor(data.getFlag());
-		Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        VNextBORODetailsPageInteractions.clickFlagIcon();
+		Assert.assertTrue(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+		VNextBORODetailsPageInteractions.selectFlagColor(data.getFlag());
+		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -944,11 +937,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-		detailsPage.clickFlagIcon();
-		Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
-		detailsPage.selectFlagColor(data.getFlag());
-		Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        VNextBORODetailsPageInteractions.clickFlagIcon();
+		Assert.assertTrue(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+		VNextBORODetailsPageInteractions.selectFlagColor(data.getFlag());
+		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -962,11 +955,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-		detailsPage.clickFlagIcon();
-		Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
-		detailsPage.selectFlagColor(data.getFlag());
-		Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        VNextBORODetailsPageInteractions.clickFlagIcon();
+		Assert.assertTrue(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+		VNextBORODetailsPageInteractions.selectFlagColor(data.getFlag());
+		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -980,11 +973,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
-		detailsPage.clickFlagIcon();
-		Assert.assertTrue(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
-		detailsPage.selectFlagColor(data.getFlag());
-		Assert.assertFalse(detailsPage.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+        VNextBORODetailsPageInteractions.clickFlagIcon();
+		Assert.assertTrue(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been opened");
+		VNextBORODetailsPageInteractions.selectFlagColor(data.getFlag());
+		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -998,18 +991,18 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		final List<String> fields = Arrays.asList(data.getServicesTableFields());
 		fields.forEach(System.out::println);
 		System.out.println("*****************************************");
 		System.out.println();
 
-		detailsPage.getServicesTableHeaderValues().forEach(System.out::println);
+		VNextBORODetailsPageInteractions.getServicesTableHeaderValues().forEach(System.out::println);
 		System.out.println("*****************************************");
 		System.out.println();
 
-		Assert.assertTrue(detailsPage.getServicesTableHeaderValues()
+		Assert.assertTrue(VNextBORODetailsPageInteractions.getServicesTableHeaderValues()
 						.containsAll(fields),
 				"The services table header values have not been displayed properly");
 	}
@@ -1025,26 +1018,25 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
-		final String serviceId = detailsPage.getServiceId(data.getService());
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
-		detailsPage.setServiceVendorPrice(serviceId, data.getServiceVendorPrices()[0]);
-        Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[0],
+		System.out.println("Vendor price: " + VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId));
+		VNextBORODetailsPageInteractions.setServiceVendorPrice(serviceId, data.getServiceVendorPrices()[0]);
+        Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[0],
 				"The Vendor Price hasn't been changed");
 
-		System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
-		detailsPage.setServiceVendorPrice(serviceId, data.getServiceVendorPrices()[1]);
-		Assert.assertEquals(detailsPage.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[1],
+		System.out.println("Vendor price: " + VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId));
+		VNextBORODetailsPageInteractions.setServiceVendorPrice(serviceId, data.getServiceVendorPrices()[1]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId), data.getServiceVendorPrices()[1],
 				"The Vendor Price hasn't been changed");
 
-		System.out.println("Vendor price: " + detailsPage.getServiceVendorPrice(serviceId));
+		System.out.println("Vendor price: " + VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1058,19 +1050,18 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
-		detailsPage.setVendor(serviceId, data.getVendor());
-		detailsPage.setTechnician(serviceId, data.getTechnician());
+        VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+        VNextBORODetailsPageInteractions.setVendor(serviceId, data.getVendor());
+        VNextBORODetailsPageInteractions.setTechnician(serviceId, data.getTechnician());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1084,14 +1075,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
         VNextBORODetailsPageSteps.openEditNotesDialog(serviceId);
@@ -1116,19 +1106,18 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
-		detailsPage.setVendor(serviceId, data.getVendor());
-		detailsPage.setTechnician(serviceId, data.getTechnician());
+        VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+        VNextBORODetailsPageInteractions.setVendor(serviceId, data.getVendor());
+        VNextBORODetailsPageInteractions.setTechnician(serviceId, data.getTechnician());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1142,17 +1131,16 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.openMoreInformation();
+        VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.openMoreInformation();
 		final List<String> infoFields = Arrays.asList(data.getInformationFields());
 		System.out.println();
 		infoFields.forEach(System.out::println);
 		System.out.println();
 
-		Assert.assertTrue(detailsPage
+		Assert.assertTrue(VNextBORODetailsPageInteractions
 						.getMoreInformationFieldsText()
 						.containsAll(infoFields),
 				"The More Information fields haven't been fully displayed");
@@ -1169,14 +1157,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
         VNextBORODetailsPageSteps.openEditNotesDialog(serviceId);
@@ -1211,32 +1198,31 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
+		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
 
-		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
+		final String serviceStartedDate = VNextBORODetailsPageInteractions.getServiceStartedDate(serviceId);
 		Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
 				"The service started date is wrong");
-		Assert.assertFalse(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+		Assert.assertFalse(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date shouldn't be displayed with the Active status");
 
-		detailsPage.hoverOverServiceHelperIcon(serviceId);
-		Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[0]));
+		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
+		Assert.assertTrue(VNextBORODetailsPageValidations.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[0]));
 
 		System.out.println("JSON: " + data.getServicePhase());
-		System.out.println(detailsPage.getOrderCurrentPhase());
+		System.out.println(VNextBORODetailsPageInteractions.getOrderCurrentPhase());
 
-		Assert.assertEquals(detailsPage.getOrderCurrentPhase(), data.getServicePhase(),
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getOrderCurrentPhase(), data.getServicePhase(),
 				"The Current Phase is not displayed properly");
 	}
 
@@ -1251,34 +1237,33 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
-		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
-		final String serviceCompletedDate = detailsPage.getServiceCompletedDate(serviceId);
+		final String serviceStartedDate = VNextBORODetailsPageInteractions.getServiceStartedDate(serviceId);
+		final String serviceCompletedDate = VNextBORODetailsPageInteractions.getServiceCompletedDate(serviceId);
 		Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
 				"The service started date is wrong");
 
-		Assert.assertTrue(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+		Assert.assertTrue(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date should be displayed with the Completed status");
 		System.out.println(serviceCompletedDate);
 		System.out.println(data.getServiceCompletedDate());
 		Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
 				"The service completed date is wrong");
 
-		detailsPage.hoverOverServiceHelperIcon(serviceId);
-		Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
+		Assert.assertTrue(VNextBORODetailsPageValidations.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
 				"The helper info dialog isn't displayed");
 	}
 
@@ -1293,34 +1278,33 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
-		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
-		final String serviceCompletedDate = detailsPage.getServiceCompletedDate(serviceId);
+		final String serviceStartedDate = VNextBORODetailsPageInteractions.getServiceStartedDate(serviceId);
+		final String serviceCompletedDate = VNextBORODetailsPageInteractions.getServiceCompletedDate(serviceId);
 		Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
 				"The service started date is wrong");
 
-		Assert.assertTrue(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+		Assert.assertTrue(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date should be displayed with the Audited status");
 		System.out.println(serviceCompletedDate);
 		System.out.println(data.getServiceCompletedDate());
 		Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
 				"The service completed date is wrong");
 
-		detailsPage.hoverOverServiceHelperIcon(serviceId);
-		Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
+		Assert.assertTrue(VNextBORODetailsPageValidations.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
 				"The helper info dialog isn't displayed");
 	}
 
@@ -1335,34 +1319,33 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
-		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
-		final String serviceCompletedDate = detailsPage.getServiceCompletedDate(serviceId);
+		final String serviceStartedDate = VNextBORODetailsPageInteractions.getServiceStartedDate(serviceId);
+		final String serviceCompletedDate = VNextBORODetailsPageInteractions.getServiceCompletedDate(serviceId);
 		Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
 				"The service started date is wrong");
 
-		Assert.assertTrue(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+		Assert.assertTrue(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date should be displayed with the Refused status");
 		System.out.println(serviceCompletedDate);
 		System.out.println(data.getServiceCompletedDate());
 		Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
 				"The service completed date is wrong");
 
-		detailsPage.hoverOverServiceHelperIcon(serviceId);
-		Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
+		Assert.assertTrue(VNextBORODetailsPageValidations.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
 				"The helper info dialog isn't displayed");
 	}
 
@@ -1377,28 +1360,27 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
-		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
+		final String serviceStartedDate = VNextBORODetailsPageInteractions.getServiceStartedDate(serviceId);
 		Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
 				"The service started date is wrong");
-		Assert.assertFalse(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+		Assert.assertFalse(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date shouldn't be displayed with the Rework status");
 
-		detailsPage.hoverOverServiceHelperIcon(serviceId);
-		Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
+		Assert.assertTrue(VNextBORODetailsPageValidations.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
 				"The helper info dialog isn't displayed");
 	}
 
@@ -1413,34 +1395,33 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
 		final String service = data.getService();
-		final String serviceId = detailsPage.getServiceId(service);
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
-		final String serviceStartedDate = detailsPage.getServiceStartedDate(serviceId);
-		final String serviceCompletedDate = detailsPage.getServiceCompletedDate(serviceId);
+		final String serviceStartedDate = VNextBORODetailsPageInteractions.getServiceStartedDate(serviceId);
+		final String serviceCompletedDate = VNextBORODetailsPageInteractions.getServiceCompletedDate(serviceId);
 		Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
 				"The service started date is wrong");
 
-		Assert.assertTrue(detailsPage.isServiceCompletedDateDisplayed(serviceId),
+		Assert.assertTrue(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date should be displayed with the Refused status");
 		System.out.println(serviceCompletedDate);
 		System.out.println(data.getServiceCompletedDate());
 		Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
 				"The service completed date is wrong");
 
-		detailsPage.hoverOverServiceHelperIcon(serviceId);
-		Assert.assertTrue(detailsPage.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
+		Assert.assertTrue(VNextBORODetailsPageValidations.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
 				"The helper info dialog isn't displayed");
 	}
 
@@ -1453,23 +1434,20 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
-
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
+		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[0]);
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[0]);
 
-		detailsPage.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(detailsPage.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
 		final VNextBOAuditLogDialog auditLogDialog = new VNextBOAuditLogDialog(webdriver);
-		detailsPage.clickLogInfoButton();
+		VNextBORODetailsPageInteractions.clickLogInfoButton();
 		Assert.assertTrue(auditLogDialog.isAuditLogDialogDisplayed(), "The audit log modal dialog hasn't been opened");
 
 		auditLogDialog.getAuditLogsTabsNames().forEach(System.out::println);
@@ -1500,26 +1478,25 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
 		String serviceQuantity = RandomStringUtils.randomNumeric(2);
-		final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
+		final String serviceTotalPrice = VNextBORODetailsPageInteractions.getTotalServicesPrice();
 		System.out.println("serviceTotalPrice: " + serviceTotalPrice);
 		System.out.println("Random serviceQuantity: " + serviceQuantity);
-		System.out.println("ServiceQuantity: " + detailsPage.getServiceQuantity(serviceId));
+		System.out.println("ServiceQuantity: " + VNextBORODetailsPageInteractions.getServiceQuantity(serviceId));
 
-		if (serviceQuantity.equals(detailsPage.getServiceQuantity(serviceId))) {
+		if (serviceQuantity.equals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId))) {
 			serviceQuantity = RandomStringUtils.randomNumeric(2);
 			System.out.println("Random serviceQuantity 2: " + serviceQuantity);
 		}
-		detailsPage.setServiceQuantity(serviceId, serviceQuantity);
-		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
-		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
-		Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
+		VNextBORODetailsPageInteractions.setServiceQuantity(serviceId, serviceQuantity);
+		VNextBORODetailsPageInteractions.updateTotalServicePrice(VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		System.out.println("Updated total services price: " + VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		Assert.assertNotEquals(serviceTotalPrice, VNextBORODetailsPageInteractions.getTotalServicesPrice(),
 				"The service total price hasn't been recalculated after changing the service quantity");
 	}
 
@@ -1534,34 +1511,33 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
 		String negativeServiceQuantity = String.valueOf(-(RandomUtils.nextInt(10, 100)));
 		String serviceQuantity = String.valueOf(RandomUtils.nextInt(1, 100));
-        detailsPage.setServiceQuantity(serviceId, serviceQuantity);
-        detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
+        VNextBORODetailsPageInteractions.setServiceQuantity(serviceId, serviceQuantity);
+        VNextBORODetailsPageInteractions.updateTotalServicePrice(VNextBORODetailsPageInteractions.getTotalServicesPrice());
 
-        final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
+        final String serviceTotalPrice = VNextBORODetailsPageInteractions.getTotalServicesPrice();
 		System.out.println("serviceTotalPrice: " + serviceTotalPrice);
 		System.out.println("Random negative serviceQuantity: " + negativeServiceQuantity);
 		System.out.println("Random serviceQuantity: " + negativeServiceQuantity);
-		System.out.println("ServiceQuantity: " + detailsPage.getServiceQuantity(serviceId) + "\n");
+		System.out.println("ServiceQuantity: " + VNextBORODetailsPageInteractions.getServiceQuantity(serviceId) + "\n");
 
-		if (String.valueOf(Math.abs(Integer.valueOf(negativeServiceQuantity))).equals(detailsPage.getServiceQuantity(serviceId))) {
+		if (String.valueOf(Math.abs(Integer.valueOf(negativeServiceQuantity))).equals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId))) {
 			negativeServiceQuantity = String.valueOf(-(RandomUtils.nextInt(10, 100)));
 			System.out.println("Random serviceQuantity 2: " + negativeServiceQuantity);
 		}
-		detailsPage.setServiceQuantity(serviceId, negativeServiceQuantity);
-		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
-		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
+		VNextBORODetailsPageInteractions.setServiceQuantity(serviceId, negativeServiceQuantity);
+		VNextBORODetailsPageInteractions.updateTotalServicePrice(VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		System.out.println("Updated total services price: " + VNextBORODetailsPageInteractions.getTotalServicesPrice());
         //todo the total price sometimes is not recalculated, but can hardly be reproduced manually
-//		Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
+//		Assert.assertNotEquals(serviceTotalPrice, VNextBORODetailsPageInteractions.getTotalServicesPrice(),
 //				"The service total price hasn't been recalculated after setting the negative number for the service quantity");
-		Assert.assertEquals(detailsPage.getServiceQuantity(serviceId), String.valueOf(0),
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId), String.valueOf(0),
                 "The service quantity hasn't been changed to 0");
 	}
 
@@ -1576,22 +1552,21 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
-		final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
+		final String serviceTotalPrice = VNextBORODetailsPageInteractions.getTotalServicesPrice();
 		System.out.println("ServiceID: " + serviceId);
 		System.out.println("serviceTotalPrice: " + serviceTotalPrice);
 		System.out.println("ServiceQuantity: " + data.getServiceQuantity());
-		System.out.println("ServiceQuantity: " + detailsPage.getServiceQuantity(serviceId));
+		System.out.println("ServiceQuantity: " + VNextBORODetailsPageInteractions.getServiceQuantity(serviceId));
 
-		detailsPage.setServiceQuantity(serviceId, data.getServiceQuantity());
-		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
-		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
-		Assert.assertEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
+		VNextBORODetailsPageInteractions.setServiceQuantity(serviceId, data.getServiceQuantity());
+		VNextBORODetailsPageInteractions.updateTotalServicePrice(VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		System.out.println("Updated total services price: " + VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		Assert.assertEquals(serviceTotalPrice, VNextBORODetailsPageInteractions.getTotalServicesPrice(),
 				"The service total price has been recalculated after entering the text " +
 						"into the service quantity input field");
 	}
@@ -1607,26 +1582,25 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
 		String servicePrice = String.valueOf(RandomUtils.nextInt(10, 100));
-		final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
+		final String serviceTotalPrice = VNextBORODetailsPageInteractions.getTotalServicesPrice();
 		System.out.println("serviceTotalPrice: " + serviceTotalPrice);
 		System.out.println("Random servicePrice: " + servicePrice);
-		System.out.println("ServicePrice: " + detailsPage.getServicePrice(serviceId));
+		System.out.println("ServicePrice: " + VNextBORODetailsPageInteractions.getServicePrice(serviceId));
 
-		if (servicePrice.equals(detailsPage.getServicePrice(serviceId))) {
+		if (servicePrice.equals(VNextBORODetailsPageInteractions.getServicePrice(serviceId))) {
 			servicePrice = String.valueOf(RandomUtils.nextInt(10, 100));
 			System.out.println("Random servicePrice 2: " + servicePrice);
 		}
-		detailsPage.setServicePrice(serviceId, servicePrice);
-		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
-		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
-		Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
+		VNextBORODetailsPageInteractions.setServicePrice(serviceId, servicePrice);
+		VNextBORODetailsPageInteractions.updateTotalServicePrice(VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		System.out.println("Updated total services price: " + VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		Assert.assertNotEquals(serviceTotalPrice, VNextBORODetailsPageInteractions.getTotalServicesPrice(),
 				"The service total price hasn't been recalculated after changing the service price");
 	}
 
@@ -1641,26 +1615,25 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
 		String servicePrice = String.valueOf(-(RandomUtils.nextInt(10, 100)));
-		final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
+		final String serviceTotalPrice = VNextBORODetailsPageInteractions.getTotalServicesPrice();
 		System.out.println("serviceTotalPrice: " + serviceTotalPrice);
 		System.out.println("Random servicePrice: " + servicePrice);
-		System.out.println("ServicePrice: " + detailsPage.getServicePrice(serviceId));
+		System.out.println("ServicePrice: " + VNextBORODetailsPageInteractions.getServicePrice(serviceId));
 
-		if (String.valueOf(Math.abs(Integer.valueOf(servicePrice))).equals(detailsPage.getServiceQuantity(serviceId))) {
+		if (String.valueOf(Math.abs(Integer.valueOf(servicePrice))).equals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId))) {
 			servicePrice = String.valueOf(-(RandomUtils.nextInt(10, 100)));
 			System.out.println("Random servicePrice 2: " + servicePrice);
 		}
-		detailsPage.setServicePrice(serviceId, servicePrice);
-		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
-		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
-		Assert.assertNotEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
+		VNextBORODetailsPageInteractions.setServicePrice(serviceId, servicePrice);
+		VNextBORODetailsPageInteractions.updateTotalServicePrice(VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		System.out.println("Updated total services price: " + VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		Assert.assertNotEquals(serviceTotalPrice, VNextBORODetailsPageInteractions.getTotalServicesPrice(),
 				"The service total price hasn't been recalculated " +
 						"after setting the negative number for the service price");
 	}
@@ -1676,21 +1649,20 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
-		final String serviceId = detailsPage.getServiceId(data.getService());
-		final String serviceTotalPrice = detailsPage.getTotalServicesPrice();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
+		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
+		final String serviceTotalPrice = VNextBORODetailsPageInteractions.getTotalServicesPrice();
 		System.out.println("serviceTotalPrice: " + serviceTotalPrice);
 		System.out.println("ServicePrice: " + data.getServicePrice());
-		System.out.println("ServicePrice: " + detailsPage.getServicePrice(serviceId));
+		System.out.println("ServicePrice: " + VNextBORODetailsPageInteractions.getServicePrice(serviceId));
 
-		detailsPage.setServicePrice(serviceId, data.getServicePrice());
-		detailsPage.updateTotalServicePrice(detailsPage.getTotalServicesPrice());
-		System.out.println("Updated total services price: " + detailsPage.getTotalServicesPrice());
-		Assert.assertEquals(serviceTotalPrice, detailsPage.getTotalServicesPrice(),
+		VNextBORODetailsPageInteractions.setServicePrice(serviceId, data.getServicePrice());
+		VNextBORODetailsPageInteractions.updateTotalServicePrice(VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		System.out.println("Updated total services price: " + VNextBORODetailsPageInteractions.getTotalServicesPrice());
+		Assert.assertEquals(serviceTotalPrice, VNextBORODetailsPageInteractions.getTotalServicesPrice(),
 				"The service total price has been recalculated after entering the text " +
 						"into the service price input field");
 	}
@@ -1706,22 +1678,22 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage.setStatus(data.getStatus());
-		System.out.println("Phase name: " + detailsPage.getPhaseNameValue());
-		System.out.println("Phase vendor price: " + detailsPage.getPhaseVendorPriceValue());
-		System.out.println("Phase vendor technician: " + detailsPage.getPhaseVendorTechnicianValue());
-		System.out.println("Phase status: " + detailsPage.getPhaseStatusValue());
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+		System.out.println("Phase name: " + VNextBORODetailsPageInteractions.getPhaseNameValue());
+		System.out.println("Phase vendor price: " + VNextBORODetailsPageInteractions.getPhaseVendorPriceValue());
+		System.out.println("Phase vendor technician: " + VNextBORODetailsPageInteractions.getPhaseVendorTechnicianValue());
+		System.out.println("Phase status: " + VNextBORODetailsPageInteractions.getPhaseStatusValue());
 		System.out.println("Phase actions trigger: " + VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed());
 
-		Assert.assertEquals(detailsPage.getPhaseNameValue(), data.getServicePhaseHeaders()[0],
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getPhaseNameValue(), data.getServicePhaseHeaders()[0],
 				"The phase name value hasn't been displayed properly");
-		Assert.assertNotEquals(detailsPage.getPhaseVendorPriceValue(), "",
+		Assert.assertNotEquals(VNextBORODetailsPageInteractions.getPhaseVendorPriceValue(), "",
 				"The phase vendor price hasn't been displayed");
-		Assert.assertEquals(detailsPage.getPhaseVendorTechnicianValue(), data.getServicePhaseHeaders()[1],
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getPhaseVendorTechnicianValue(), data.getServicePhaseHeaders()[1],
 				"The phase vendor technician value hasn't been displayed properly");
-		Assert.assertEquals(detailsPage.getPhaseStatusValue(), data.getServicePhaseHeaders()[2],
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getPhaseStatusValue(), data.getServicePhaseHeaders()[2],
 				"The phase status hasn't been displayed properly");
 		Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(),
 				"The phase actions trigger hasn't been displayed");
@@ -1738,15 +1710,14 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
-//        final String calculatedPrice = detailsPage.getPhasePriceValue().replace("$", ""); //todo add method after bug #79907 fix!!!
+//        final String calculatedPrice = VNextBORODetailsPageInteractions.getPhasePriceValue().replace("$", ""); //todo add method after bug #79907 fix!!!
 //        System.out.println("Phase price: " + calculatedPrice);
-//        final List<String> pricesValuesList = detailsPage.getVendorPricesValuesList();
+//        final List<String> pricesValuesList = VNextBORODetailsPageInteractions.getVendorPricesValuesList();
 //
 //        final List<String> values = new ArrayList<>();
 //        for (String price : pricesValuesList) {
@@ -1778,15 +1749,14 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
-		final String calculatedVendorPrice = detailsPage.getPhaseVendorPriceValue().replace("$", "");
+		final String calculatedVendorPrice = VNextBORODetailsPageInteractions.getPhaseVendorPriceValue().replace("$", "");
 		System.out.println("Phase vendor price: " + calculatedVendorPrice);
-		final List<String> vendorPricesValuesList = detailsPage.getVendorPricesValuesList();
+		final List<String> vendorPricesValuesList = VNextBORODetailsPageInteractions.getVendorPricesValuesList();
 
 		final List<String> values = new ArrayList<>();
 		for (String vendorPrice : vendorPricesValuesList) {
@@ -1818,31 +1788,28 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog(webdriver);
-		detailsPage.setStatus(data.getStatus());
-		detailsPage.clickPhaseVendorTechnicianLink();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+		VNextBORODetailsPageInteractions.clickPhaseVendorTechnicianLink();
 
 		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
         VNextBOChangeTechniciansDialogSteps.setOptionsAndClickOkButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
 
-		final VNextBORODetailsPage repairOrderDetailsPage = PageFactory.initElements(
-				DriverBuilder.getInstance().getDriver(), VNextBORODetailsPage.class);
-		repairOrderDetailsPage.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
-		Assert.assertNotEquals(detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()), 0);
-		Assert.assertNotEquals(detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()), 0);
-		Assert.assertEquals(detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
-				detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
+		Assert.assertNotEquals(VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getVendor()), 0);
+		Assert.assertNotEquals(VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()), 0);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
+				VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
 				"The vendor and technician options haven't been changed for all repair orders with the 'Active' status");
 
 		// clearing the test data
-		detailsPage
-				.setStatus(data.getStatus())
-				.clickPhaseVendorTechnicianLink();
+        VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.clickPhaseVendorTechnicianLink();
 
 		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
@@ -1861,27 +1828,26 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
-		final int numberOfVendorOptions = detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor());
-		final int numberOfTechnicianOptions = detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician());
+		final int numberOfVendorOptions = VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getVendor());
+		final int numberOfTechnicianOptions = VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getTechnician());
 
 		final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog(webdriver);
-		detailsPage.clickPhaseVendorTechnicianLink();
+		VNextBORODetailsPageInteractions.clickPhaseVendorTechnicianLink();
 
 		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
         VNextBOChangeTechniciansDialogSteps.setOptionsAndClickXButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
 
-		Assert.assertEquals(numberOfVendorOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
+		Assert.assertEquals(numberOfVendorOptions, VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
 				"The vendor options number has been changed for repair orders with the 'Active' status");
 
-		Assert.assertEquals(numberOfTechnicianOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
+		Assert.assertEquals(numberOfTechnicianOptions, VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
 				"The vendor options number has been changed for repair orders with the 'Active' status");
 	}
 
@@ -1896,27 +1862,26 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The work order is not displayed after search by order number after clicking the 'Search' icon");
 
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
-		Assert.assertTrue(detailsPage.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
+		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		detailsPage
-				.setStatus(data.getStatus())
-				.expandServicesTable();
+        VNextBORODetailsPageInteractions.setStatus(data.getStatus());
+        VNextBORODetailsPageInteractions.expandServicesTable();
 
-		final int numberOfVendorOptions = detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor());
-		final int numberOfTechnicianOptions = detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician());
+		final int numberOfVendorOptions = VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getVendor());
+		final int numberOfTechnicianOptions = VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getTechnician());
 
 		final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog(webdriver);
-		detailsPage.clickPhaseVendorTechnicianLink();
+		VNextBORODetailsPageInteractions.clickPhaseVendorTechnicianLink();
 
 		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
         VNextBOChangeTechniciansDialogSteps.setOptionsAndClickXButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
 
-		Assert.assertEquals(numberOfVendorOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
+		Assert.assertEquals(numberOfVendorOptions, VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getVendor()),
 				"The vendor options number has been changed for repair orders with the 'Active' status");
 
-		Assert.assertEquals(numberOfTechnicianOptions, detailsPage.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
+		Assert.assertEquals(numberOfTechnicianOptions, VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getTechnician()),
 				"The vendor options number has been changed for repair orders with the 'Active' status");
 	}
 

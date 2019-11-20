@@ -26,14 +26,16 @@ public class VNextBOROProblemsInteractions {
         WaitUtilsWebDriver.waitForInvisibility(reportProblemDialog.getReportProblemDialog(), 5);
     }
 
-    public static void clickCloseResolveProblemButton() {
+    public static void clickCloseResolveProblemDialogButton() {
         Utils.clickElement(new VNextBOROResolveProblemDialog().getResolveProblemCloseButton());
     }
 
     public static void clickResolveButton() {
         final VNextBOROResolveProblemDialog resolveProblemDialog = new VNextBOROResolveProblemDialog();
-        Utils.clickElement(resolveProblemDialog.getResolveProblemButton());
-        WaitUtilsWebDriver.waitForInvisibility(resolveProblemDialog.getResolveProblemDialog(), 5);
-        WaitUtilsWebDriver.waitForLoading();
+        if (Utils.isElementDisplayed(resolveProblemDialog.getResolveProblemButton(), 3)) {
+            Utils.clickElement(resolveProblemDialog.getResolveProblemButton());
+            WaitUtilsWebDriver.waitForInvisibility(resolveProblemDialog.getResolveProblemDialog(), 5);
+            WaitUtilsWebDriver.waitABit(2500);
+        }
     }
 }

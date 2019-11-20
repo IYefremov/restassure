@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
 public class VNextBORODetailsPageValidations {
@@ -78,6 +79,10 @@ public class VNextBORODetailsPageValidations {
         return Utils.isElementNotDisplayed(new VNextBORODetailsPage().getPhaseProblemIcon(phase), 5);
     }
 
+    public static boolean isCompleteCurrentPhaseDisplayedForPhase(String phase) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getCompleteCurrentPhaseActionsOption(phase));
+    }
+
     public static boolean isProblemIconDisplayedForService(String serviceId) {
         return Utils.isElementDisplayed(new VNextBORODetailsPage().getServiceProblemIcon(serviceId), 5);
     }
@@ -123,5 +128,46 @@ public class VNextBORODetailsPageValidations {
                 .stream()
                 .map(WebElement::getText)
                 .anyMatch(service -> service.equals(option));
+    }
+
+    public static void verifyStatusHasBeenSetForService(String serviceId, String status) {
+        try {
+            WaitUtilsWebDriver.getWait().until((ExpectedCondition<Boolean>) service ->
+                    VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId).equals(status));
+        } catch (Exception ignored) {}
+        Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), status,
+                "The status hasn't been set for service");
+    }
+
+    public static boolean isRoDetailsSectionDisplayed() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getRoDetailsSection());
+    }
+
+    public static boolean isImageOnHoldStatusDisplayed() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getOnHoldValue());
+    }
+
+    public static boolean isFlagsDropDownOpened() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getFlagsDropDown(), 5);
+    }
+
+    public static boolean isStartOrderButtonVisible() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getStartOrderButton());
+    }
+
+    public static boolean isToBeAddedLaterServiceNotificationDisplayed() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getToBeAddedLaterServiceNotification(), 10);
+    }
+
+    public static boolean isServiceNotificationToBeAddedLaterDisplayed() {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getToBeAddedLaterServiceNotification(), 10);
+    }
+
+    public static boolean isHelpInfoDialogDisplayed(String serviceId, String status) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getInfoDialog(serviceId, status));
+    }
+
+    public static boolean isServiceCompletedDateDisplayed(String serviceId) {
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getServiceCompletedDate(serviceId));
     }
 }

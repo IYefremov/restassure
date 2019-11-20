@@ -1,9 +1,12 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROResolveProblemDialog;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCurrentPhaseValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import org.testng.Assert;
 
@@ -25,10 +28,17 @@ public class VNextBORODetailsPageSteps {
     }
 
     public static void setServiceStatusForServiceByServiceId(String serviceId, String status) {
-        VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
+        System.out.println(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId));
+        if (VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId).equals("Problem")) {
+            VNextBORODetailsPageInteractions.clickServiceStatusBox(serviceId);
+            if (Utils.isElementDisplayed(new VNextBOROResolveProblemDialog().getResolveProblemButton(), 5)) {
+                VNextBOROProblemsInteractions.clickResolveButton();
+            }
+            VNextBORODetailsPageInteractions.selectServiceStatus(status);
+        } else {
+            VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
+        }
         WaitUtilsWebDriver.waitForLoading();
-        Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), status,
-                "The status hasn't been set for service");
     }
 
     public static void setCheckInOptionForPhase() {
@@ -78,6 +88,15 @@ public class VNextBORODetailsPageSteps {
         }
         Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconNotDisplayedForPhase(phase),
                 "The Problem icon is displayed for phase after resolving the problem");
+    }
+
+    public static void setCompleteCurrentPhaseForPhase(String phase) {
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase(phase);
+        if (VNextBORODetailsPageValidations.isCompleteCurrentPhaseDisplayedForPhase(phase)) {
+            VNextBORODetailsPageInteractions.clickCompleteCurrentPhaseForPhase(phase);
+        }
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isCompleteCurrentPhaseDialogDisplayed(),
+                "The Complete Current phase dialog hasn't been opened");
     }
 
     public static void handleReportProblemDialog(String problem, String description) {
