@@ -1,7 +1,12 @@
 package com.cyberiansoft.test.vnextbo.utils;
 
 import com.cyberiansoft.test.baseutils.AllureUtils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.dataclasses.TargetProcessTestCaseData;
+import com.cyberiansoft.test.dataclasses.TestCaseData;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.codehaus.plexus.util.FileUtils;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
@@ -13,6 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class TestListenerAllure extends TestListenerAdapter implements IInvokedMethodListener, IReporter {
+
+    private TPIntegrationService tpIntegrationService = new TPIntegrationService();
 
     @Override
     public void onTestStart(ITestResult iTestResult) {}
@@ -33,6 +40,7 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         System.out.println("FAILED: " + result.getMethod().getMethodName());
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
+        setTestCaseAutomatedField(result);
     }
 
     @Override
@@ -40,11 +48,14 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         System.out.println("SKIPPED: " + result.getMethod().getMethodName());
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
+        setTestCaseAutomatedField(result);
     }
 
     @Override
-    public void onTestSuccess(ITestResult iTestResult) {
-        System.out.println("SUCCESS: " + iTestResult.getMethod().getMethodName());
+    public void onTestSuccess(ITestResult result) {
+        setTestCaseAutomatedField(result);
+        System.out.println("SUCCESS: " + result.getMethod().getMethodName());
+        setTestCaseAutomatedField(result);
     }
 
     @Override
@@ -78,5 +89,29 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
                 System.out.println("Skipped tests: " + testContext.getSkippedTests().getAllResults().size());
             }
         }
+    }
+
+    private void setTestCaseAutomatedField(ITestResult testResult) {
+        TestCaseData testCaseData = getTestCasesData(testResult);
+        if (testCaseData != null) {
+            if (testCaseData.getTargetProcessTestCaseData() != null) {
+                for (TargetProcessTestCaseData targetProcessTestCaseData : testCaseData.getTargetProcessTestCaseData()) {
+                    try {
+                        tpIntegrationService.setTestCaseAutomatedField(targetProcessTestCaseData.getTestCaseID());
+                    } catch (UnirestException e) {
+                        e.printStackTrace();
+                    } catch (UnrecognizedPropertyException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    private TestCaseData getTestCasesData(ITestResult testResult) {
+        Object[] parameters = testResult.getParameters();
+        return JSonDataParser.getTestDataFromJson((parameters[parameters.length - 1].toString()), TestCaseData.class);
     }
 }

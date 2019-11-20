@@ -14,11 +14,14 @@ import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.validations.services.VNextBOServiceDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.services.VNextBOServicesPageValidations;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.io.IOException;
 
 public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
 
@@ -26,6 +29,9 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
     private VNextBOServiceData percentageServiceBaseData;
     private VNextBOServiceData editedMoneyServiceData;
     private VNextBOServiceData editedPercentageServiceData;
+    private VNextBOServiceData moneyServiceWithClarification;
+    private VNextBOServiceData percentageServiceWithClarification;
+    private VNextBOServiceData editedServiceWithClarification;
 
     @BeforeClass
     public void settingUp() {
@@ -44,10 +50,16 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByText(editedPercentageServiceData.getServiceName());
         VNextBOServicesWebPageSteps.deleteServiceByName(editedPercentageServiceData.getServiceName());
         VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.searchByText(editedServiceWithClarification.getServiceName());
+        VNextBOServicesWebPageSteps.deleteServiceByName(editedServiceWithClarification.getServiceName());
+        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.searchByText(percentageServiceWithClarification.getServiceName());
+        VNextBOServicesWebPageSteps.deleteServiceByName(percentageServiceWithClarification.getServiceName());
+        VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
-    public void verifyUserCanAddMoneyService(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanAddMoneyService(String rowID, String description, JSONObject testData) throws IOException, UnirestException {
 
         moneyServiceBaseData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
         moneyServiceBaseData.setServiceName(RandomStringUtils.randomAlphabetic(5) + moneyServiceBaseData.getServiceName());
@@ -162,6 +174,49 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
+    public void verifyUserCanAdNewServiceWithClarificationOptional(String rowID, String description, JSONObject testData) {
+
+        moneyServiceWithClarification = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        moneyServiceWithClarification.setServiceName(RandomStringUtils.randomAlphabetic(5) + moneyServiceWithClarification.getServiceName());
+        VNextBOServicesWebPageSteps.addMoneyOrPercentageService(moneyServiceWithClarification);
+        VNextBOSearchPanelSteps.searchByText(moneyServiceWithClarification.getServiceName());
+        VNextBOServicesPageValidations.verifyMoneyServiceRecordDataAreCorrect(moneyServiceWithClarification);
+        VNextBOServicesWebPageSteps.clickEditButtonForService(moneyServiceWithClarification.getServiceName());
+        VNextBOServiceDialogValidations.verifyClarificationFields(moneyServiceWithClarification);
+        VNextBOServiceDialogSteps.closeServiceDialog();
+        VNextBOSearchPanelSteps.clearSearchFilter();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    public void verifyUserCanAdNewServiceWithClarificationRequired(String rowID, String description, JSONObject testData) {
+
+        percentageServiceWithClarification = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        percentageServiceWithClarification.setServiceName(RandomStringUtils.randomAlphabetic(5) + percentageServiceWithClarification.getServiceName());
+        VNextBOServicesWebPageSteps.addMoneyOrPercentageService(percentageServiceWithClarification);
+        VNextBOSearchPanelSteps.searchByText(percentageServiceWithClarification.getServiceName());
+        VNextBOServicesPageValidations.verifyPercentageServiceRecordDataAreCorrect(percentageServiceWithClarification);
+        VNextBOServicesWebPageSteps.clickEditButtonForService(percentageServiceWithClarification.getServiceName());
+        VNextBOServiceDialogValidations.verifyClarificationFields(percentageServiceWithClarification);
+        VNextBOServiceDialogSteps.closeServiceDialog();
+        VNextBOSearchPanelSteps.clearSearchFilter();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
+    public void verifyUserCanEditServiceWithClarification(String rowID, String description, JSONObject testData) {
+
+        editedServiceWithClarification = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        editedServiceWithClarification.setServiceName(RandomStringUtils.randomAlphabetic(5) + editedServiceWithClarification.getServiceName());
+        VNextBOSearchPanelSteps.searchByText(moneyServiceWithClarification.getServiceName());
+        VNextBOServicesWebPageSteps.editMoneyOrPercentageService(moneyServiceWithClarification.getServiceName(), editedServiceWithClarification);
+        VNextBOSearchPanelSteps.searchByText(editedServiceWithClarification.getServiceName());
+        VNextBOServicesPageValidations.verifyMoneyServiceRecordDataAreCorrect(editedServiceWithClarification);
+        VNextBOServicesWebPageSteps.clickEditButtonForService(editedServiceWithClarification.getServiceName());
+        VNextBOServiceDialogValidations.verifyClarificationFields(editedServiceWithClarification);
+        VNextBOServiceDialogSteps.closeServiceDialog();
+        VNextBOSearchPanelSteps.clearSearchFilter();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
     public void verifyUserCanChangeSequenceNumberForMoneyServiceOrder(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByText(editedMoneyServiceData.getServiceName());
@@ -171,7 +226,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         Utils.refreshPage();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
     public void verifyUserCanChangeSequenceNumberForPercentageServiceOrder(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByText(editedPercentageServiceData.getServiceName());

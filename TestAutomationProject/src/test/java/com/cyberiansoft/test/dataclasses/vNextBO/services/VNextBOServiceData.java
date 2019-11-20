@@ -23,9 +23,6 @@ public class VNextBOServiceData {
     @JsonProperty("servicePrice")
     protected String servicePrice;
 
-    @JsonProperty("serviceClarification")
-    protected String serviceClarification;
-
     @JsonProperty("serviceLaborRate")
     private String serviceLaborRate;
 
@@ -43,4 +40,10 @@ public class VNextBOServiceData {
 
     @JsonProperty("servicePartName")
     private String servicePartName;
+
+    @JsonProperty("serviceClarification")
+    private String serviceClarification;
+
+    @JsonProperty("serviceClarificationPrefix")
+    private String serviceClarificationPrefix;
 }
