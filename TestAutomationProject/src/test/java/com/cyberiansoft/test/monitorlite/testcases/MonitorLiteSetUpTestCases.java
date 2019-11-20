@@ -2,8 +2,10 @@ package com.cyberiansoft.test.monitorlite.testcases;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
@@ -227,21 +229,20 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 
         VNextBOROPageInteractions.searchRepairOrderByNumber(srWONumber);
 		
-		VNextBORODetailsPage rodetailspage = new VNextBORODetailsPage();
         VNextBOROPageInteractions.openWorkOrderDetailsPage(srWONumber);
-		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);		
-		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
-		rodetailspage.expandRepairOrderServiceDetailsTable();
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
+        VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
 		for (int i = 0; i < services.length; i++)
-			Assert.assertEquals(rodetailspage.getRepairOrderServicesStatus(services[i]), serviceQueuedStatus);		
-		rodetailspage.clickStartOrderButton();
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(services[i]), serviceQueuedStatus);
+        VNextBORODetailsPageInteractions.clickStartOrderButton();
 		
-		Assert.assertFalse(rodetailspage.isStartOrderButtonVisible());
-		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatusNEW);		
-		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceActiveStatus);
-		rodetailspage.expandRepairOrderServiceDetailsTable();
+		Assert.assertFalse(VNextBORODetailsPageValidations.isStartOrderButtonVisible());
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woActivePhaseStatusNEW);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), serviceActiveStatus);
+        VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
 		for (int i = 0; i < services.length; i++)
-			Assert.assertEquals(rodetailspage.getRepairOrderServicesStatus(services[i]), serviceActiveStatus);		
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(services[i]), serviceActiveStatus);
 	}
 	
 	@Test(testName = "Test Case 68407:Repair Orders: Complete WO on the Order Details", 
@@ -300,29 +301,29 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 		
 		VNextBORODetailsPage rodetailspage = new VNextBORODetailsPage();
 		VNextBOROPageInteractions.openWorkOrderDetailsPage(srWONumber);
-		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);		
-		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
-		rodetailspage.expandRepairOrderServiceDetailsTable();
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
+        VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
 		for (int i = 0; i < services.length; i++)
-			Assert.assertEquals(rodetailspage.getRepairOrderServicesStatus(services[i]), serviceQueuedStatus);		
-		rodetailspage.clickStartOrderButton();
-		
-		rodetailspage.expandRepairOrderServiceDetailsTable();
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(services[i]), serviceQueuedStatus);
+        VNextBORODetailsPageInteractions.clickStartOrderButton();
+
+        VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
 		for (int i = 0 ; i < services.length; i++) {
-			rodetailspage.changeStatusForrepairorderService(services[i], woCompletedPhaseStatus);
+            VNextBORODetailsPageInteractions.changeStatusForRepairOrderService(services[i], woCompletedPhaseStatus);
 			if (i ==0) {
-				Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woActivePhaseStatusNEW);		
-				Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), serviceActiveStatus);
-				Assert.assertEquals(rodetailspage.getRepairOrderCompletedValue(), woHalfCopleteValue);
+				Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woActivePhaseStatusNEW);
+				Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), serviceActiveStatus);
+				Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderCompletedValue(), woHalfCopleteValue);
 			}
 		}
 
-		Assert.assertEquals(rodetailspage.getRepairOrderActivePhaseStatus(), woCompletedPhaseStatus);		
-		Assert.assertEquals(rodetailspage.getRepairOrderServicesPhaseStatus(), woCompletedPhaseStatus);
-		Assert.assertEquals(rodetailspage.getRepairOrderCompletedValue(), woCopleteValue);
-		rodetailspage.expandRepairOrderServiceDetailsTable();
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woCompletedPhaseStatus);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), woCompletedPhaseStatus);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderCompletedValue(), woCopleteValue);
+        VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
 		for (int i = 0; i < services.length; i++)
-			Assert.assertEquals(rodetailspage.getRepairOrderServicesStatus(services[i]), woCompletedPhaseStatus);		
+			Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(services[i]), woCompletedPhaseStatus);
 	}
 
 }

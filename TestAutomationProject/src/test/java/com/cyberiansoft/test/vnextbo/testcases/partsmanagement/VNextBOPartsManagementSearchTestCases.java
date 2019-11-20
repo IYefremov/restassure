@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORONotesPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOPartsDetailsPanel;
@@ -539,11 +540,11 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
                 "The work order type is not displayed after search by order number");
 
         VNextBOROPageInteractions.clickWoLink(firstWONum);
-        final String partId = detailsPage.getFirstPartIdFromPartsList();
+        final String partId = VNextBORODetailsPageInteractions.getFirstPartIdFromPartsList();
         Assert.assertNotEquals(partId, "", "The service hasn't been displayed");
 
         final WebElement partActionsIcon = detailsPage.clickPartActionsIconForPart(data.getPart());
-        detailsPage.openNotesDialogForPart(partActionsIcon);
+        VNextBORODetailsPageInteractions.openNotesDialogForPart(partActionsIcon);
 
         Assert.assertTrue(VNextBONotesPageValidations.isEditOrderServiceNotesBlockDisplayed(), "The notes dialog hasn't been opened");
 
@@ -596,7 +597,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
                 "The work order type is not displayed after search by order number");
 
         VNextBOROPageInteractions.clickWoLink(firstWONum);
-        Assert.assertEquals(detailsPage.getPartsOrderedFromTableValues().get(0), data.getOrderedFrom(),
+        Assert.assertEquals(VNextBORODetailsPageInteractions.getPartsOrderedFromTableValuesData().get(0), data.getOrderedFrom(),
                 "The Parts 'Ordered From' value is not the same as it has been set for order");
     }
 

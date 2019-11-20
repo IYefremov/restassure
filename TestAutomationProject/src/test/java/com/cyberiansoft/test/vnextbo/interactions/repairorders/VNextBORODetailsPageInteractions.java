@@ -10,12 +10,46 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static com.cyberiansoft.test.baseutils.Utils.setAttributeWithJS;
+
 public class VNextBORODetailsPageInteractions {
+
+    public static List<String> getVendorPricesValuesList() {
+        WaitUtilsWebDriver.waitABit(1000);
+        final List<WebElement> vendorPricesList = new VNextBORODetailsPage().getVendorPricesList();
+        for (WebElement vendorPrice : vendorPricesList) {
+            setAttributeWithJS(vendorPrice, "style", "display: block");
+        }
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(vendorPricesList);
+        final List<String> vendorPricesValuesList = vendorPricesList.stream()
+                .map(WebElement::getText)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+
+        for (WebElement vendorPrice : vendorPricesList) {
+            setAttributeWithJS(vendorPrice, "style", "display: none");
+        }
+        return vendorPricesValuesList;
+    }
+
+    public static String getRoStatus() {
+        return Utils.getText(new VNextBORODetailsPage().getRoStatusElement());
+    }
+
+    public static void clickFlagIcon() {
+        WaitUtilsWebDriver.waitForLoading();
+        Utils.clickElement(new VNextBORODetailsPage().getFlagIcon());
+    }
+
+    public static String getPhaseVendorPriceValue() {
+        return Utils.getText(new VNextBORODetailsPage().getPhaseVendorPrice());
+    }
 
     public static void setStatus(String status) {
         clickStatusBox();
@@ -65,7 +99,8 @@ public class VNextBORODetailsPageInteractions {
                     .getShortWait()
                     .until((ExpectedCondition<Boolean>) driver ->
                             !getRoStatusValue().equals(previousStatus));
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
     }
 
     public static String getServiceId(String description) {
@@ -85,7 +120,7 @@ public class VNextBORODetailsPageInteractions {
     public static void expandServicesTable() {
         final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
         Utils.clickElement(detailsPage.getServicesExpandArrow());
-        WaitUtilsWebDriver.waitForInvisibility(detailsPage.getServicesExpandArrow());
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(detailsPage.getServicesExpandArrow());
         WaitUtilsWebDriver.waitForLoading();
     }
 
@@ -138,9 +173,9 @@ public class VNextBORODetailsPageInteractions {
         Utils.clickElement(service);
     }
 
-    private static void selectServiceStatus(String status) {
+    public static void selectServiceStatus(String status) {
         Utils.selectOptionInDropDown(new VNextBORODetailsPage().getServiceStatusDropDown(),
-                new VNextBORODetailsPage().getServiceStatusListBoxOptions(), status, true);
+                new VNextBORODetailsPage().getServiceStatusListBoxOptions(), status);
     }
 
     public static String getServiceStatusValue(String serviceId) {
@@ -179,20 +214,40 @@ public class VNextBORODetailsPageInteractions {
         setTextValue(serviceId, serviceDescription, "/div[@class='clmn_3_1']/input", newValue);
     }
 
+    public static void setServiceVendorPrice(String serviceId, String newValue) {
+        setTextValue(serviceId, "/div[@class='clmn_3_1']/input", newValue);
+    }
+
+    public static void setServicePrice(String serviceId, String newValue) {
+        setTextValue(serviceId, "//div[@class='clmn_3 grid__number']/input", newValue);
+    }
+
+    public static void setServiceQuantity(String serviceId, String newValue) {
+        setTextValue(serviceId, "//div[@class='clmn_2_1 grid__number']/input", newValue);
+    }
+
+    private static void setTextValue(String serviceId, String xpath, String newValue) {
+        final WebElement element = new VNextBORODetailsPage().getElementInServicesTable(serviceId, xpath);
+        Utils.clearAndTypeUsingKeyboard(element, newValue);
+        Utils.clickElement(new VNextBORODetailsPage().getVendorPriceTitle());
+//		clickServiceDescriptionName(serviceDescription);
+        WaitUtilsWebDriver.waitABit(500);
+    }
+
     private static String getTextValue(String serviceId, String xpath, String replacement) {
         final WebElement element = new VNextBORODetailsPage().getElementInServicesTable(serviceId, xpath);
-        Utils.setAttributeWithJS(element, "style", "display: block;");
+        setAttributeWithJS(element, "style", "display: block;");
         WaitUtilsWebDriver.waitABit(1000);
         final String text = WaitUtilsWebDriver.waitForVisibility(element).getText().replace(replacement, "");
-        Utils.setAttributeWithJS(element, "style", "display: none;");
+        setAttributeWithJS(element, "style", "display: none;");
         return text;
     }
 
     private static String getTextValue(String serviceId, String xpath) {
         final WebElement element = new VNextBORODetailsPage().getElementInServicesTable(serviceId, xpath);
-        Utils.setAttributeWithJS(element, "style", "display: block;");
+        setAttributeWithJS(element, "style", "display: block;");
         final String text = WaitUtilsWebDriver.waitForVisibility(element).getText();
-        Utils.setAttributeWithJS(element, "style", "display: none;");
+        setAttributeWithJS(element, "style", "display: none;");
         return text;
     }
 
@@ -214,15 +269,19 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static void openActionsDropDownForPhase(String phase) {
+        WaitUtilsWebDriver.waitABit(1000);
         final WebElement actionsTrigger = WaitUtilsWebDriver.waitForElementNotToBeStale(new VNextBORODetailsPage()
                 .getActionsTriggerForPhase(phase));
         try {
-            WaitUtilsWebDriver.waitForVisibility(actionsTrigger.findElement(By.xpath("./div[contains(@class, 'drop checkout')]")), 3);
+            WaitUtilsWebDriver.waitForVisibility(actionsTrigger
+                    .findElement(By.xpath("./div[contains(@class, 'drop checkout')]")), 3);
         } catch (Exception ignored) {
-            final WebElement triggerElement = actionsTrigger.findElement(By.xpath("./i[contains(@class, 'checkout-arrow')]"));
-            WaitUtilsWebDriver.waitForElementNotToBeStale(triggerElement);
+            WaitUtilsWebDriver.waitABit(1500);
+            final WebElement triggerElement = WaitUtilsWebDriver.waitForElementNotToBeStale(actionsTrigger
+                    .findElement(By.xpath("./i[contains(@class, 'checkout-arrow')]")));
             Utils.clickElement(triggerElement);
-            WaitUtilsWebDriver.waitForVisibility(actionsTrigger.findElement(By.xpath("./div[contains(@class, 'drop checkout')]")));
+            WaitUtilsWebDriver.waitForVisibility(actionsTrigger
+                    .findElement(By.xpath("./div[contains(@class, 'drop checkout')]")), 5);
         }
     }
 
@@ -252,6 +311,10 @@ public class VNextBORODetailsPageInteractions {
         setOption(new VNextBORODetailsPage().getPhaseActionsResolveProblemOption(phase));
     }
 
+    public static void clickCompleteCurrentPhaseForPhase(String phase) {
+        setOption(new VNextBORODetailsPage().getCompleteCurrentPhaseActionsOption(phase));
+    }
+
     public static void clickCheckInOptionForPhase() {
         setOption(new VNextBORODetailsPage().getPhaseActionsCheckInOption());
     }
@@ -269,14 +332,16 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static void clickActionsIcon(String serviceId) {
-        final WebElement actionsIcon = new VNextBORODetailsPage().getActionIconForServiceId(serviceId);
+        WaitUtilsWebDriver.waitABit(1500);
+        final WebElement actionsIcon = WaitUtilsWebDriver
+                .waitForElementNotToBeStale(new VNextBORODetailsPage().getActionIconForServiceId(serviceId));
         Utils.clickWithActions(actionsIcon);
-        WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
+        WaitUtilsWebDriver.waitForElementNotToBeStale(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
     }
 
     public static List<String> getPhaseStatusValues() {
         try {
-            return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBORODetailsPage().getPhaseStatus())
+            return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBORODetailsPage().getPhaseStatusListBoxOptions())
                     .stream()
                     .map(WebElement::getText)
                     .collect(Collectors.toList());
@@ -291,5 +356,278 @@ public class VNextBORODetailsPageInteractions {
 
     public static void clickReportProblemForService(String serviceId) {
         setOption(new VNextBORODetailsPage().getServiceReportProblemOption(serviceId));
+    }
+
+    public static void selectFlagColor(String color) {
+        final WebElement flagColorElement = WaitUtilsWebDriver
+                .waitForVisibility(new VNextBORODetailsPage().getFlagColorElement(color));
+        try {
+            Utils.clickElement(flagColorElement);
+            WaitUtilsWebDriver.waitForAttributeToBe(flagColorElement, "class", "active");
+            WaitUtilsWebDriver.waitForInvisibility(new VNextBORODetailsPage().getFlagsDropDown());
+        } catch (Exception e) {
+            Assert.fail("The flag " + color + " hasn't been selected", e);
+        }
+    }
+
+    public static String getRepairOrderActivePhaseStatus() {
+        return Utils.getText(new VNextBORODetailsPage().getOrderDetails().findElement(By.id("serviceName"))).trim();
+    }
+
+    public static String getRepairOrderCompletedValue() {
+        return Utils.getText(new VNextBORODetailsPage().getOrderDetails().findElement(By.id("progressBarText"))).trim();
+    }
+
+    public static void expandRepairOrderServiceDetailsTable() {
+        final WebElement orderServiceArrowDown = WaitUtilsWebDriver.waitForVisibility(
+                new VNextBORODetailsPage().getOrderServiceArrowDown());
+        if (Utils.isElementDisplayed(orderServiceArrowDown)) {
+            Utils.clickElement(orderServiceArrowDown);
+            WaitUtilsWebDriver.waitForVisibility(new VNextBORODetailsPage().getOrderServiceArrowUp(), 25);
+        }
+    }
+
+    public static void clickStartOrderButton() {
+        Utils.clickElement(new VNextBORODetailsPage().getStartOrderButton());
+        WaitUtilsWebDriver.waitForInvisibility(new VNextBORODetailsPage().getStartOrderButton(), 25);
+        WaitUtilsWebDriver.waitABit(1000);
+    }
+
+    public static String getRepairOrderServicesPhaseStatus() {
+        return Utils.getText(new VNextBORODetailsPage().getOrderServicesTable().findElement(By.xpath(".//div[@class='clmn_5']/div/div"))).trim();
+    }
+
+    public static String getRepairOrderServicesStatus(String serviceName) {
+        return Utils.getText(new VNextBORODetailsPage().getRepairOrderServiceColumn(serviceName)
+                .findElement(By.xpath(".//div[@class='clmn_5']/div"))).trim();
+    }
+
+    public static void changeStatusForRepairOrderService(String serviceName, String newStatus) {
+        WaitUtilsWebDriver.waitABit(2000);
+        final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
+        WebElement serviceRow = detailsPage.getRepairOrderServiceColumn(serviceName);
+        Utils.clickElement(serviceRow.findElement(By.xpath(".//div[@class='clmn_5']/div/span/span")));
+        serviceRow = detailsPage.getRepairOrderServiceColumn(serviceName);
+        Utils.clickElement(serviceRow.findElement(By.xpath(".//div[@class='clmn_5']/div/span/span")));
+        WaitUtilsWebDriver.waitABit(2000);
+        List<WebElement> popups = detailsPage.getRepairOrderServicePopups();
+        for (WebElement pp : popups)
+            if (pp.isDisplayed()) {
+                pp.findElement(By.xpath("./li[text()='" + newStatus + "']")).click();
+
+            }
+        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitABit(1000);
+    }
+
+    public static void clickRepairOrdersBackwardsLink() {
+        Utils.clickElement(new VNextBORODetailsPage().getMainBreadCrumbsLink());
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void typeStockNumber(String stockNumber) {
+        clearAndTypeOrderNumber(new VNextBORODetailsPage().getStockNumInputField(), stockNumber);
+    }
+
+    public static void typeRoNumber(String roNumber) {
+        clearAndTypeOrderNumber(new VNextBORODetailsPage().getRoNumInputField(), roNumber);
+    }
+
+    private static void clearAndTypeOrderNumber(WebElement inputField, String roNumber) {
+        Utils.clearAndType(inputField, roNumber);
+        Utils.clickElement(new VNextBORODetailsPage().getPhaseTextElement());
+    }
+
+    public static void setVendor(String serviceId, String vendor) {
+        clickVendorBox(serviceId);
+        selectVendor(vendor);
+    }
+
+    private static void clickVendorBox(String serviceId) {
+        WaitUtilsWebDriver.waitForLoading();
+        WebElement element = new VNextBORODetailsPage().getVendorBox(serviceId);
+        Utils.moveToElement(element);
+        Utils.clickElement(element);
+    }
+
+    private static void selectVendor(String vendor) {
+        Utils.selectOptionInDropDown(new VNextBORODetailsPage().getListBoxOptions().get(0),
+                new VNextBORODetailsPage().getListBoxOptions(), vendor);
+    }
+
+    public static void setTechnician(String serviceId, String technician) {
+        clickTechnicianBox(serviceId);
+        selectTechnician(technician);
+    }
+
+    private static void clickTechnicianBox(String serviceId) {
+        WaitUtilsWebDriver.waitForLoading();
+        WebElement element = new VNextBORODetailsPage().getTechnicianBox(serviceId);
+        Utils.moveToElement(element);
+        Utils.clickElement(element);
+    }
+
+    private static void selectTechnician(String technician) {
+        Utils.selectOptionInDropDown(new VNextBORODetailsPage().getListBoxOptions().get(0),
+                new VNextBORODetailsPage().getListBoxOptions(), technician);
+    }
+
+    public static void setPriority(String priority) {
+        clickPriorityBox();
+        selectPriority(priority);
+    }
+
+    private static void clickPriorityBox() {
+        WaitUtilsWebDriver.waitForLoading();
+        Utils.clickElement(new VNextBORODetailsPage().getPriorityListBox());
+    }
+
+    private static void selectPriority(String priority) {
+        final List<WebElement> priorityListBoxOptions = new VNextBORODetailsPage().getPriorityListBoxOptions();
+        Utils.selectOptionInDropDown(priorityListBoxOptions.get(0), priorityListBoxOptions, priority);
+    }
+
+    public static List<String> getServicesTableHeaderValues() {
+        final List<WebElement> servicesTableColumns = new VNextBORODetailsPage().getServicesTableColumns();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(servicesTableColumns);
+        final List<String> stringCollection = servicesTableColumns
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+        return stringCollection.subList(1, stringCollection.size());
+    }
+
+    public static void clickLogInfoButton() {
+        Utils.clickElement(new VNextBORODetailsPage().getLogInfoButton());
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void openMoreInformation() {
+        clickMoreInformationLink();
+        WaitUtilsWebDriver.waitForVisibility(new VNextBORODetailsPage().getMoreInformationLink());
+    }
+
+    public static void closeMoreInformation() {
+        clickLessInformationLink();
+        WaitUtilsWebDriver.waitForInvisibility(new VNextBORODetailsPage().getMoreInformationLink());
+    }
+
+    private static void clickMoreInformationLink() {
+        Utils.clickElement(new VNextBORODetailsPage().getMoreInformationLink());
+    }
+
+    private static void clickLessInformationLink() {
+        Utils.clickElement(new VNextBORODetailsPage().getLessInformationLink());
+    }
+
+    public static List<String> getMoreInformationFieldsText() {
+        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBORODetailsPage().getMoreInformationFields())
+                .stream()
+                .map(WebElement::getText)
+                .peek(System.out::println)
+                .collect(Collectors.toList());
+    }
+
+    public static String getServiceStartedDate(String serviceId) {
+        return Utils.getText(DriverBuilder.getInstance().getDriver()
+                .findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+                        + "']//div[@class='clmn_6']//span[text()][1]")));
+    }
+
+    public static String getServiceCompletedDate(String serviceId) {
+        return Utils.getText(DriverBuilder.getInstance().getDriver()
+                .findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+                        + "']//div[@class='clmn_6']//span[text()][2]")));
+    }
+
+    public static void hoverOverServiceHelperIcon(String serviceId) {
+        try {
+//            final WebElement helpInfo = driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+//                    + "']//span[@class='helpInfo']/.."));
+            final WebElement helpInfo = DriverBuilder.getInstance().getDriver()
+                    .findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+                            + "']//i[@class='help']"));
+            WaitUtilsWebDriver.waitForVisibility(helpInfo);
+            Utils.moveToElement(helpInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getServiceIdContainingName(String description) {
+        return getService(new VNextBORODetailsPage().getServiceContainingName(description));
+    }
+
+    private static String getService(WebElement serviceElement) {
+        System.out.println(serviceElement);
+        if (serviceElement != null) {
+            WaitUtilsWebDriver.waitForElementNotToBeStale(serviceElement);
+            final String id = WaitUtilsWebDriver.waitForVisibility(serviceElement)
+                    .findElement(By.xpath(".//../..")).getAttribute("data-order-service-id");
+            System.out.println(id);
+            return id;
+        }
+        return "";
+    }
+
+    public static void clickAddNewServiceButton() {
+        Utils.clickElement(new VNextBORODetailsPage().getAddNewServiceButton());
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void clickPhaseVendorTechnicianLink() {
+        Utils.clickElement(new VNextBORODetailsPage().getPhaseVendorTechnician());
+    }
+
+    public static String getPhaseNameValue() {
+        return Utils.getText(new VNextBORODetailsPage().getPhaseName());
+    }
+
+    public static String getPhaseVendorTechnicianValue() {
+        return Utils.getText(new VNextBORODetailsPage().getPhaseVendorTechnician());
+    }
+
+    public static String getPhaseStatusValue() {
+        return Utils.getText(new VNextBORODetailsPage().getPhaseStatusListBoxOptions().get(0));
+    }
+
+    public static String getOrderCurrentPhase() {
+        final WebElement orderDetailsPhaseName = new VNextBORODetailsPage().getOrderDetailsPhaseName();
+        Utils.moveToElement(orderDetailsPhaseName);
+        return Utils.getText(orderDetailsPhaseName);
+    }
+
+    public static String getTotalServicesPrice() {
+        final WebElement totalServicePrice = new VNextBORODetailsPage().getTotalServicePrice();
+        Utils.moveToElement(totalServicePrice);
+        return Utils.getText(totalServicePrice);
+    }
+
+    public static void updateTotalServicePrice(String totalPrice) {
+        final WebElement totalServicePrice = new VNextBORODetailsPage().getTotalServicePrice();
+        try {
+            WaitUtilsWebDriver.waitForVisibility(totalServicePrice);
+            Utils.moveToElement(totalServicePrice);
+            WaitUtilsWebDriver.getWebDriverWait(20)
+                    .until((ExpectedCondition<Boolean>) driver -> !totalPrice.equals(getTotalServicesPrice()));
+        } catch (Exception ignored) {}
+    }
+
+    public static String getFirstPartIdFromPartsList() {
+        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBORODetailsPage().getPartsList())
+                .get(0).getAttribute("data-order-service-id");
+    }
+
+    public static void openNotesDialogForPart(WebElement partsAction) {
+        Utils.clickElement(partsAction.findElement(By.xpath(".//label[text()='Notes']")));
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static List<String> getPartsOrderedFromTableValuesData() {
+        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(
+                new VNextBORODetailsPage().getPartsOrderedFromTableValues())
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 }
