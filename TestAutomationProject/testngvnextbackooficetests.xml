@@ -6,20 +6,8 @@
 
   <test name="Back Office Test Cases" preserve-order="true">
     <classes>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.services.VNextBOServicesPartsAndLaborBundleTestCases">
-            <methods>
-                <include name="verifyUserCanAddLaborPriceServiceWithUseLaborTimes"/>
-                <include name="verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName"/>
-                <include name="verifyUserCanChangeSequenceNumberForMoneyServiceOrder"/>
-                <include name="verifyUserCanDeletePartPriceService"/>
-                <include name="verifyUserCanEditLaborPriceService"/>
-                <include name="verifyUserCanRestoreDeletedPartPriceService"/>
-                <include name="verifyUserCannotAddLaborServiceWithClickedRejectIcon"/>
-            </methods>
-        </class>
         <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.quicknotes.VNextBOQuickNotesTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.services.VNextBOServicesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOOperationsInvoicesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorAdvancedSearchTestCases"/>
@@ -46,6 +34,8 @@
         <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementGeneralTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODeviceManagementSearchTests"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.devicemanagement.VNextBODMActiveAndPendingRegistrationTabTests"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.services.VNextBOMoneyAndPercentageServicesTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.services.VNextBOLaborAndPartServicesTestCases"/>
     </classes>
   </test>
 </suite>

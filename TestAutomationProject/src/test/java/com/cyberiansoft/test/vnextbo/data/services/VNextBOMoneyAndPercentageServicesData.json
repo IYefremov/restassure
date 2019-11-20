@@ -1,0 +1,223 @@
+{
+  "verifyUserCanAddMoneyService": [
+    {
+      "rowID": "verifyUserCanAddMoneyService.01",
+      "description": "Test Case 90567: vNext: add money service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90567",
+          "testCaseTitle": "vNext: add money service"
+        }
+      ],
+      "serviceName": "Test Money Service 90567",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00"
+    }
+  ],
+
+  "verifyUserCanAddPercentageService": [
+    {
+      "rowID": "verifyUserCanAddPercentageService.01",
+      "description": "Test Case 90568: vNext: add percentage service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90568",
+          "testCaseTitle": "vNext: add percentage service"
+        }
+      ],
+      "serviceName": "Test Percentage Service 90568",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test percentage service",
+      "servicePriceType": "Percentage",
+      "servicePrice": "5.000"
+    }
+  ],
+
+  "verifyUserCanEditMoneyService": [
+    {
+      "rowID": "verifyUserCanEditMoneyService.01",
+      "description": "Test Case 90569: vNext: Edit money service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90569",
+          "testCaseTitle": "vNext: Edit money service"
+        }
+      ],
+      "serviceName": "Edited Test Money Service 90569",
+      "serviceType": "Autre",
+      "serviceDescription": "Edited test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "35.01"
+    }
+  ],
+
+  "verifyUserCanEditPercentageService": [
+    {
+      "rowID": "verifyUserCanEditPercentageService.01",
+      "description": "Test Case 90570: vNext: Edit percentage service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90570",
+          "testCaseTitle": "vNext: Edit percentage service"
+        }
+      ],
+      "serviceName": "Edited Test Percentage Service 90570",
+      "serviceType": "Body Shop",
+      "serviceDescription": "Edited test percentage service",
+      "servicePriceType": "Percentage",
+      "servicePrice": "99.999"
+    }
+  ],
+
+  "verifyUserCanRemoveMoneyService": [
+    {
+      "rowID": "verifyUserCanRemoveMoneyService.01",
+      "description": "Test Case 90571: vNext: Remove money service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90571",
+          "testCaseTitle": "vNext: Remove money service"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanRemovePercentageService": [
+    {
+      "rowID": "verifyUserCanRemovePercentageService.01",
+      "description": "Test Case 90573: vNext: Remove percentage service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90573",
+          "testCaseTitle": "vNext: Remove percentage service"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanResumeRemovedMoneyService": [
+    {
+      "rowID": "verifyUserCanResumeRemovedMoneyService.01",
+      "description": "Test Case 90572: vNext: Resume removed money service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90572",
+          "testCaseTitle": "vNext: Resume removed money service"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanResumeRemovedPercentageService": [
+    {
+      "rowID": "verifyUserCanResumeRemovedPercentageService.01",
+      "description": "Test Case 90574: vNext: Resume removed percentage service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90574",
+          "testCaseTitle": "vNext: Resume removed percentage service"
+        }
+      ]
+    }
+  ],
+
+  "verifyErrorMessagesOnCreateEditServiceDialog": [
+    {
+      "rowID": "verifyErrorMessagesOnCreateEditServiceDialog.01",
+      "description": "Test Case 90575: vNext: verify error messages on Create-Edit service dialog",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90575",
+          "testCaseTitle": "vNext: verify error messages on Create-Edit service dialog"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanAdNewServiceWithClarificationOptional": [
+    {
+      "rowID": "verifyUserCanAdNewServiceWithClarificationOptional.01",
+      "description": "Test Case 91575: vNext: User can add New Service with Clarification â†’ Optional",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91575",
+          "testCaseTitle": "User can add New Service with Clarification â†’ Optional"
+        }
+      ],
+      "serviceName": "Test Service 91575",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test service with optional clarification",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00",
+      "serviceClarification": "Optional",
+      "serviceClarificationPrefix": "roof"
+    }
+  ],
+
+  "verifyUserCanAdNewServiceWithClarificationRequired": [
+    {
+      "rowID": "verifyUserCanAdNewServiceWithClarificationRequired.01",
+      "description": "Test Case 91576: User can add New Service with Clarification â†’ Required",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91576",
+          "testCaseTitle": "User can add New Service with Clarification â†’ Required"
+        }
+      ],
+      "serviceName": "Test Service 91576",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test service with required clarification",
+      "servicePriceType": "Percentage",
+      "servicePrice": "5.000",
+      "serviceClarification": "Required",
+      "serviceClarificationPrefix": "1111"
+    }
+  ],
+
+  "verifyUserCanEditServiceWithClarification": [
+    {
+      "rowID": "verifyUserCanEditServiceWithClarification.01",
+      "description": "Test Case 91577: User can edit service with Clarification",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91577",
+          "testCaseTitle": "User can edit service with Clarification"
+        }
+      ],
+      "serviceName": "Test Service 91577",
+      "serviceType": "Detail",
+      "serviceDescription": "test service with none clarification",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00",
+      "serviceClarification": "None"
+    }
+  ],
+
+  "verifyUserCanChangeSequenceNumberForMoneyServiceOrder": [
+    {
+      "rowID": "verifyUserCanChangeSequenceNumberForMoneyServiceOrder.01",
+      "description": "Test Case 91571: Verify user can change sequence number for \"Money\" service order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91571",
+          "testCaseTitle": "Verify user can change sequence number for \"Money\" service order"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeSequenceNumberForPercentageServiceOrder": [
+    {
+      "rowID": "verifyUserCanChangeSequenceNumberForPercentageServiceOrder.01",
+      "description": "Test Case 91572: Verify user can change sequence number for \"Percentage\" service order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91572",
+          "testCaseTitle": "Verify user can change sequence number for \"Percentage\" service order"
+        }
+      ]
+    }
+  ]
+}

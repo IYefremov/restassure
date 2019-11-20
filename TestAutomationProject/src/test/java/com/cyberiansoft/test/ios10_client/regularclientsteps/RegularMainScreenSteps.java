@@ -15,4 +15,9 @@ public class RegularMainScreenSteps {
         RegularMainScreen mainScreen = new RegularMainScreen();
         mainScreen.updateDatabase();
     }
+
+    public static void clickStatusIcon() {
+        RegularMainScreen mainScreen = new RegularMainScreen();
+        mainScreen.clickStatusIcon();
+    }
 }

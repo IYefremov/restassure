@@ -12,9 +12,7 @@
 
           <include name="testUpdateDatabase" />
           <include name="testUpdateVIN" />
-          <!--<include name="testCreateRetailCustomer" />
-          <include name="testEditRetailCustomer" />
-          <include name="testDeleteRetailCustomer" /> -->
+          <include name="testCreateRetailCustomer" />
           <include name="testEditRetailInspectionNotes" />
           <include name="testApproveInspectionOnDevice" />
           <include name="testArchiveAndUnArchiveTheInspection" />
@@ -147,7 +145,7 @@
           <include name="testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase" />
           <include name="testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder" />
           <include name="testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted" />
-
+         <include name="testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption" />
 
           <include name="testCreateWorkOrderWithTypeIsAssignedToASpecificClient" />
         </methods>

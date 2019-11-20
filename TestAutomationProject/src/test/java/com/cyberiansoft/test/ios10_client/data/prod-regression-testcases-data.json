@@ -2136,26 +2136,25 @@
             "laborServicePart": "Remove/Replace Left Front Door Armrest"
           }
         ],
-        "laborService":
-          {
-            "serviceName": "Labor_Vehicle_data_all_Motor",
-            "laborServiceRate": "1",
-            "laborServiceTime": "1",
-            "partServiceDataList": [
-              {
-                "serviceName": "roz_part_with_categories",
-                "category": "Brake",
-                "subCategory": "Disc Pads and Brake Shoes",
-                "partName": {
-                  "partNameList": [
-                    "Disc Brake Pad"
-                  ],
-                  "isMultiSelect": false
-                },
-                "partPosition": "N/A"
-              }
-            ]
-          },
+        "laborService": {
+          "serviceName": "Labor_Vehicle_data_all_Motor",
+          "laborServiceRate": "1",
+          "laborServiceTime": "1",
+          "partServiceDataList": [
+            {
+              "serviceName": "roz_part_with_categories",
+              "category": "Brake",
+              "subCategory": "Disc Pads and Brake Shoes",
+              "partName": {
+                "partNameList": [
+                  "Disc Brake Pad"
+                ],
+                "isMultiSelect": false
+              },
+              "partPosition": "N/A"
+            }
+          ]
+        },
         "insuranceCompany": {
           "insuranceCompanyName": "USG",
           "claimNumber": "QWERTY",
@@ -2316,6 +2315,123 @@
           }
         ],
         "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyAssignVendorTeamForServicesUnderMonitor": [
+    {
+      "rowID": "testVerifyAssignVendorTeamForServicesUnderMonitor.01",
+      "description": "76 - Verify assign vendor team for services under Monitor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83709",
+          "testCaseTitle": "76 - Verify assign vendor team for services under Monitor"
+        }
+      ],
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "servicesScreen": {
+          "moneyServices": [
+            {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            {
+              "serviceName": "Dye_Panel"
+            },
+            {
+              "serviceName": "Labor_Vehilce_data_R&R"
+            }
+          ]
+        },
+        "orderMonitorData": {
+          "phaseName": "Start phase",
+          "monitorServicesData": [
+            {
+              "serviceVendor": "Second vendor",
+              "monitorService": {
+                "serviceName": "3/4\" - Penny Size"
+              }
+            },
+            {
+              "serviceVendor": "Vendor team",
+              "monitorService": {
+                "serviceName": "Dye_Panel"
+              }
+            },
+            {
+              "serviceVendor": "Default team",
+              "monitorService": {
+                "serviceName": "Labor_Vehilce_data_R&R"
+              }
+            }
+          ]
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyCalculationAndCorrectDisplayOfArbitrationData": [
+    {
+      "rowID": "testVerifyCalculationAndCorrectDisplayOfArbitrationData.01",
+      "description": "Test Case: 68 - Verify calculation and correct display of Arbitration data",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83702",
+          "testCaseTitle": "Test Case: 68 - Verify calculation and correct display of Arbitration data"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
+  ],
+  "testVerifyAccessToStatusMenuFromLoginScreen": [
+    {
+      "rowID": "testVerifyAccessToStatusMenuFromLoginScreen.01",
+      "description": "Test Case: 69 - Verify access to Status menu from Login screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83703",
+          "testCaseTitle": "Test Case: 69 - Verify access to Status menu from Login screen"
+        }
+      ]
+    }
+  ],
+  "testVerifyReSendDataFromDevice": [
+    {
+      "rowID": "testVerifyReSendDataFromDevice.01",
+      "description": "Test Case: 70 - Verify re-send data from device",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "83704",
+          "testCaseTitle": "Test Case: 70 - Verify re-send data from device"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      },
+      "workOrderData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
       }
     }
   ]
