@@ -75,7 +75,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	public void selectPanel(String panelName) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("MonitorOrderServicesList")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MonitorOrderServicesList")));
 		swipeToElement(monitorserviceslist.findElement(MobileBy.AccessibilityId(panelName)));
 		monitorserviceslist.findElementByAccessibilityId(panelName).click();
 	}

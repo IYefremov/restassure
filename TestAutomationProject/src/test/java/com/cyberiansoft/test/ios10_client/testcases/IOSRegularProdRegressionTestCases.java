@@ -2184,5 +2184,29 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyCreatingInspectionAndWOWithALotOfPagesQFVisualPagesPriceMatrixServicePackages(String rowID,
+                                                                               String description, JSONObject testData) {
 
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        RetailCustomer vehicleOwner = new RetailCustomer("Testowner", "Testownerlast");
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_SUPPLEMENT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularVehicleInfoScreenSteps.selectOwner(vehicleOwner);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        for (QuestionScreenData questionScreenData : inspectionData.getQuestionScreensData())
+            RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(questionScreenData);
+
+        RegularNavigationSteps.navigateToScreen(inspectionData.getServicesScreen().getScreenName());
+        RegularSelectedServicesSteps.openSelectedServiceDetailsViaCustomButton(inspectionData.getServicesScreen().getMoneyService().getServiceName());
+        RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(inspectionData.getServicesScreen().getMoneyService());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getInspectionTotalPrice());
+
+        RegularNavigationSteps.navigateBackScreen();
+    }
 }
