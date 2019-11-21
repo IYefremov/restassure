@@ -10,7 +10,7 @@ public class AlertsValidations {
     }
 
     public static void acceptAlertAndValidateAlertMessage(String expectedMessage) {
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), expectedMessage);
+        Assert.assertEquals(Helpers.getAlertTextAndAccept().replace("\n", " "), expectedMessage);
     }
 
 }

@@ -150,13 +150,13 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
 
     public void clickOnSelectedService(String serviceName) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)));
-        List<MobileElement> selectedservices = selectedservicestable.findElementsByAccessibilityId(serviceName);
-        if (selectedservices.size() > 1) {
-            ((WebElement) selectedservicestable.findElementsByAccessibilityId(serviceName).get(1)).click();
-        } else {
-            selectedservices.get(0).click();
-        }
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName))).click();
+    }
+
+    public void clickCustomServiceDetailsButton(String serviceName) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)))
+                .findElement(MobileBy.AccessibilityId("custom detail button")).click();
     }
 
     public RegularSelectedServiceBundleScreen openSelectBundleServiceDetails(String serviceName) {

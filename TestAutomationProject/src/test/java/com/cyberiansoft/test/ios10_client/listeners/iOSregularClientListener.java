@@ -20,6 +20,7 @@ import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunDTO;
 import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnext.listeners.TestNG_ConsoleRunner;
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.simple.JSONObject;
 import org.testng.*;
@@ -84,6 +85,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
 
     @Override
     public synchronized void onTestSuccess(ITestResult testResult) {
+        setTestCaseAutomatedField(testResult);
         extentTest.get().log(Status.PASS, "<font color=#00af00>" + Status.PASS.toString().toUpperCase() + "</font>");
         extentTest.get().getModel().setEndTime(getTime(testResult.getEndMillis()));
         setTestCaseStatusInTargetProcess(testResult, TestCaseRunStatus.PASSED);
@@ -91,6 +93,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
 
     @Override
     public synchronized void onTestFailure(ITestResult testResult) {
+        setTestCaseAutomatedField(testResult);
         setTestCaseStatusInTargetProcess(testResult, TestCaseRunStatus.FAILED);
         extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
         extentTest.get().log(Status.INFO, "EXCEPTION = [" + testResult.getThrowable().getMessage() + "]");
@@ -118,6 +121,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
 
     @Override
     public synchronized void onTestSkipped(ITestResult testResult) {
+        setTestCaseAutomatedField(testResult);
         setTestCaseStatusInTargetProcess(testResult, TestCaseRunStatus.NOT_RUN);
         extentTest.get().log(Status.SKIP, "<font color=#2196F3>" + Status.SKIP.toString().toUpperCase() + "</font>");
         extentTest.get().log(Status.INFO, "EXCEPTION = [" + testResult.getThrowable().getMessage() + "]");
@@ -187,5 +191,24 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
 
+    }
+
+    private void setTestCaseAutomatedField(ITestResult testResult) {
+        TestCaseData testCaseData = getTestCasesData(testResult);
+        if (testCaseData != null) {
+            if (testCaseData.getTargetProcessTestCaseData() != null) {
+                for (TargetProcessTestCaseData targetProcessTestCaseData : testCaseData.getTargetProcessTestCaseData()) {
+                    try {
+                        tpIntegrationService.setTestCaseAutomatedField(targetProcessTestCaseData.getTestCaseID());
+                    } catch (UnirestException e) {
+                        e.printStackTrace();
+                    } catch (UnrecognizedPropertyException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
     }
 }

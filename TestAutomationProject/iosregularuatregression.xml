@@ -60,6 +60,7 @@
           <include name="testVerifyAccessToStatusMenuFromLoginScreen" />
           <include name="testVerifyReSendDataFromDevice" />
           <include name="testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection" />
+          <include name="testVerifyCreatingInspectionAndWOWithALotOfPagesQFVisualPagesPriceMatrixServicePackages" />
         </methods>
       </class>
     </classes>

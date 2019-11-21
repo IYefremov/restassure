@@ -21,6 +21,11 @@ public class RegularSelectedServicesSteps {
         selectedServicesScreen.openSelectedServiceDetails(serviceName);
     }
 
+    public static void openSelectedServiceDetailsViaCustomButton(String serviceName) {
+        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
+        selectedServicesScreen.clickCustomServiceDetailsButton(serviceName);
+    }
+
     public static void deleteSelectedService(String serviceName) {
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         selectedServicesScreen.openSelectedServiceDetails(serviceName);
