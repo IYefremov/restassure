@@ -124,7 +124,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         RetailCustomer newCustomer = new RetailCustomer("supermy12", "super");
         newCustomer.setCompanyName("supercompany");
-        newCustomer.setCustomerAddress1( "470 Copper Drive");
+        newCustomer.setCustomerAddress1("470 Copper Drive");
         newCustomer.setCustomerCity("New Port");
         newCustomer.setCustomerZip("19804");
         newCustomer.setCustomerPhone("723-1234567");
@@ -134,7 +134,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         RetailCustomer editedCustomer = new RetailCustomer("supernewmy12", "superedited");
         editedCustomer.setCompanyName("supercompanyedited");
-        editedCustomer.setCustomerAddress1( "600 Markley Street");
+        editedCustomer.setCustomerAddress1("600 Markley Street");
         editedCustomer.setCustomerCity("Port Reading");
         editedCustomer.setCustomerZip("07064");
         editedCustomer.setCustomerPhone("723-1234576");
@@ -718,7 +718,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         VehicleScreen vehicleScreen = new VehicleScreen();
         final VehicleInfoData vehicleInfoData = serviceRequestData.getVihicleInfo();
         vehicleScreen.setVIN(vehicleInfoData.getVINNumber());
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.THE_VIN_IS_INCORRECT);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.THE_VIN_IS_INCORRECT);
 
         vehicleScreen.setMakeAndModel(vehicleInfoData.getVehicleMake(), vehicleInfoData.getVehicleModel());
         vehicleScreen.setColor(vehicleInfoData.getVehicleColor());
@@ -746,20 +746,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         claimScreen.selectInsuranceCompany(serviceRequestData.getInsuranceCompany().getInsuranceCompanyName());
         servicesScreen.clickSave();
         Helpers.waitForAlert();
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
         QuestionsScreen questionsScreen = new QuestionsScreen();
         questionsScreen.drawSignature();
         questionsScreen.clickSave();
 
-        alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
-        questionsScreen = new QuestionsScreen();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
         questionsScreen.selectAnswerForQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
         servicesScreen.clickSave();
-        alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         String newserviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         Assert.assertEquals(serviceRequestsScreen.getServiceRequestClient(newserviceRequestNumber), iOSInternalProjectConstants.TEST_COMPANY_CUSTOMER);
         Assert.assertTrue(serviceRequestsScreen.getServiceRequestVehicleInfo(newserviceRequestNumber).contains(serviceRequestData.getVihicleInfo().getVINNumber()));
@@ -929,16 +924,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(workOrderData.getBundleService().getBundleServiceName());
         selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
         selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen = new ServicesScreen();
         servicesScreen.clickSave();
-        Helpers.waitForAlert();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.THE_VIN_IS_INVALID_AND_SAVE_WORKORDER);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.THE_VIN_IS_INVALID_AND_SAVE_WORKORDER);
         serviceRequestsScreen.clickHomeButton();
 
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
-        homeScreen = myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
 
     }
 
@@ -1055,14 +1047,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
         InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
         invoiceInfoScreen.clickSave();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_PO_IS_REQUIRED_REGULAR);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_PO_IS_REQUIRED_REGULAR);
         invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
         String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
         invoiceInfoScreen.clickSaveInvoiceAsDraft();
         myWorkOrdersScreen.clickHomeButton();
         MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
         myInvoicesScreen.myInvoiceExists(invoiceNumber);
-        myInvoicesScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1726,8 +1718,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.startCreatingWorkOrder(_002_Test_Customer, WorkOrdersTypes.WOTYPE_BLOCK_VIN_ON);
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
         QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
         NavigationSteps.navigateToOrderSummaryScreen();
@@ -1737,9 +1728,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         orderSummaryScreen.waitForCustomWarningMessage(String.format(AlertsCaptions.ALERT_YOU_CANT_CREATE_WORK_ORDER_BECAUSE_VIN_EXISTS,
                 WorkOrdersTypes.WOTYPE_BLOCK_VIN_ON.getWorkOrderTypeName(), workOrderData.getVehicleInfoData().getVINNumber()), "Cancel");
 
-        myWorkOrdersScreen = new MyWorkOrdersScreen();
-        myWorkOrdersScreen.clickHomeButton();
-
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2006,8 +1995,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 
         vehicleScreen.clickSave();
-        Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         String newserviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         ServiceRequestSteps.startCreatingInspectionFromServiceRequest(newserviceRequestNumber, InspectionsTypes.INSPTYPE_FOR_SR_INSPTYPE);
         vehicleScreen.waitVehicleScreenLoaded();
@@ -2016,14 +2004,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceData serviceData : serviceRequestData.getMoneyServices())
             servicesScreen.checkServiceIsSelectedWithServiceValues(serviceData.getServiceName(), serviceData.getServicePrice2());
         servicesScreen.saveWizard();
-        serviceRequestsScreen = new ServiceRequestsScreen();
         serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
         ServiceRequestdetailsScreen serviceRequestdetailsScreen = serviceRequestsScreen.selectDetailsRequestAction();
         TeamInspectionsScreen teamInspectionsScreen = serviceRequestdetailsScreen.clickServiceRequestSummaryInspectionsButton();
         Assert.assertTrue(teamInspectionsScreen.isInspectionExists(inspectionNumber));
         teamInspectionsScreen.clickBackServiceRequest();
         serviceRequestdetailsScreen.clickBackButton();
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2098,18 +2085,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
         servicesScreen.clickSave();
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
         QuestionsScreen questionsScreen = new QuestionsScreen();
         questionsScreen.drawSignature();
         servicesScreen.clickSave();
-        alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
 
         QuestionsScreenSteps.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
         servicesScreen.clickSave();
-        alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         serviceRequestsScreen.waitServiceRequestsScreenLoaded();
         final String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
@@ -2155,19 +2139,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
         servicesScreen.clickSave();
-        String alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
         QuestionsScreen questionsScreen = new QuestionsScreen();
         questionsScreen.drawSignature();
         servicesScreen.clickSave();
-        alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
 
         QuestionsScreenSteps.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
         servicesScreen.clickSave();
-        alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         final String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.ON_HOLD.getValue());
         serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
@@ -2343,15 +2323,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
         Assert.assertTrue(serviceDetailsPopup.isStartServiceButtonPresent());
         serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS);
         serviceDetailsPopup.clickStartService();
         serviceDetailsPopup = orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
         serviceDetailsPopup.setCompletedServiceStatus();
         List<String> statuses = orderMonitorScreen.getPanelsStatuses(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
         for (String status : statuses)
             Assert.assertEquals(status, orderMonitorData.getMonitorServiceData().getMonitorServiceStatus());
-        teamWorkordersScreen = orderMonitorScreen.clickBackButton();
-        teamWorkordersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2402,7 +2382,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(orderMonitorScreen.isRepairPhaseExists());
         Assert.assertTrue(orderMonitorScreen.isStartPhaseButtonPresent());
         orderMonitorScreen.clicksRepairPhaseLine();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
         orderMonitorScreen.clickStartPhase();
 
 
@@ -2411,15 +2391,15 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(serviceDetailsPopup.isServiceStartDateExists());
 
         serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE);
         serviceDetailsPopup.clickServiceDetailsDoneButton();
 
         orderMonitorScreen.clicksRepairPhaseLine();
         orderMonitorScreen.setCompletedPhaseStatus();
         for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorData().getMonitorServicesData())
             Assert.assertEquals(orderMonitorScreen.getPanelStatus(monitorServiceData.getMonitorService().getServiceName()), monitorServiceData.getMonitorServiceStatus());
-        teamWorkordersScreen = orderMonitorScreen.clickBackButton();
-        teamWorkordersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2468,8 +2448,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
         Assert.assertTrue(serviceDetailsPopup.isServiceStartDateExists());
         serviceDetailsPopup.clickServiceDetailsDoneButton();
-        teamWorkordersScreen = orderMonitorScreen.clickBackButton();
-        teamWorkordersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2569,13 +2549,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 
         servicesScreen.clickSave();
-        String alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         Assert.assertEquals(serviceRequestsScreen.getServiceRequestClient(serviceRequestNumber), iOSInternalProjectConstants.O02TEST__CUSTOMER);
         Assert.assertTrue(serviceRequestsScreen.getServiceRequestVehicleInfo(serviceRequestNumber).contains(serviceRequestData.getVihicleInfo().getVINNumber()));
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2601,15 +2579,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
 
         servicesScreen.clickSave();
-        String alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         Assert.assertEquals(serviceRequestsScreen.getServiceRequestClient(serviceRequestNumber), iOSInternalProjectConstants.O02TEST__CUSTOMER);
         Assert.assertTrue(serviceRequestsScreen.getServiceRequestVehicleInfo(serviceRequestNumber).contains(serviceRequestData.getVihicleInfo().getVINNumber()));
         serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
         serviceRequestsScreen.selectCheckInMenu();
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2634,9 +2610,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         ServicesScreen servicesScreen = new ServicesScreen();
         servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
         servicesScreen.clickSave();
-        String alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         Assert.assertEquals(serviceRequestsScreen.getServiceRequestClient(serviceRequestNumber), iOSInternalProjectConstants.O02TEST__CUSTOMER);
         Assert.assertTrue(serviceRequestsScreen.getServiceRequestVehicleInfo(serviceRequestNumber).contains(serviceRequestData.getVihicleInfo().getVINNumber()));
@@ -2646,7 +2620,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         serviceRequestsScreen.selectUndoCheckMenu();
         serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
         serviceRequestsScreen.selectCheckInMenu();
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -3020,9 +2994,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
         QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
         vehicleScreen.clickSave();
-        Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 
-        serviceRequestsScreen = new ServiceRequestsScreen();
         String serviceRequestNumber1 = serviceRequestsScreen.getFirstServiceRequestNumber();
         serviceRequestsScreen.rejectServiceRequest(serviceRequestNumber1);
         ServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE);
@@ -3033,7 +3006,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         serviceRequestsScreen.selectServiceRequest(serviceRequestNumber2);
         serviceRequestsScreen.selectRejectAction();
         serviceRequestsScreen.waitServiceRequestsScreenLoaded();
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -3062,7 +3035,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         ServicesScreenSteps.selectService(serviceRequestData.getMoneyService().getServiceName());
         QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
         vehicleScreen.clickSave();
-        Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         Assert.assertEquals(serviceRequestsScreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.ON_HOLD.getValue());
 
@@ -3268,11 +3241,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         ServicesScreen servicesScreen = new ServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList()) {
             ServicesScreenSteps.selectServiceWithServiceData(serviceData);
-            Assert.assertEquals(Helpers.getAlertTextAndAccept(), String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
+            AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
             Assert.assertEquals(servicesScreen.getNumberOfServiceSelectedItems(serviceData.getServiceName()), 1);
         }
         servicesScreen.cancelWizard();
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -3358,9 +3331,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
         Assert.assertTrue(serviceRequestsScreen.isCloseActionExists());
         serviceRequestsScreen.selectCloseAction();
-        String alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
-        serviceRequestsScreen.clickHomeButton();
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -3456,10 +3428,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
         Assert.assertTrue(serviceRequestsScreen.isCloseActionExists());
         serviceRequestsScreen.selectCloseAction();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
         serviceRequestsScreen.clickCancelCloseReasonDialog();
-        serviceRequestsScreen = new ServiceRequestsScreen();
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -3493,15 +3464,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
         Assert.assertTrue(serviceRequestsScreen.isCloseActionExists());
         serviceRequestsScreen.selectCloseAction();
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
         serviceRequestsScreen.selectUIAPickerValue(answerReason);
         serviceRequestsScreen.clickDoneButton();
         QuestionsPopup questionspopup = new QuestionsPopup();
         questionspopup.answerQuestion2(answerQuestion);
         serviceRequestsScreen.clickCloseSR();
         Assert.assertFalse(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -3534,10 +3504,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
         Assert.assertTrue(serviceRequestsScreen.isCloseActionExists());
         serviceRequestsScreen.selectCloseAction();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
         serviceRequestsScreen.selectDoneReason(answerReason);
         Assert.assertFalse(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -3564,9 +3534,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceData serviceData : serviceRequestData.getMoneyServices())
             ServicesScreenSteps.selectService(serviceData.getServiceName());
         servicesScreen.clickSave();
-        String alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         ServiceRequestSteps.startCreatingWorkOrderFromServiceRequest(serviceRequestNumber, WorkOrdersTypes.WO_TYPE_FOR_CALC);
         VehicleInfoScreenSteps.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo());
@@ -3580,7 +3548,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         orderSummaryScreen.clickSave();
 
         for (int i = 0; i < serviceRequestData.getMoneyServices().size(); i++) {
-            alertText = Helpers.getAlertTextAndAccept();
+            String alertText = Helpers.getAlertTextAndAccept();
             String servicedetails = alertText.substring(alertText.indexOf("'") + 1, alertText.indexOf("' require"));
             for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
                 if (serviceData.getServiceName().equals(servicedetails)) {
@@ -3628,8 +3596,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceData serviceData : serviceRequestData.getMoneyServices())
             ServicesScreenSteps.selectService(serviceData.getServiceName());
         servicesScreen.clickSave();
-        String alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
         String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         ServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_FOR_CALC);
         VehicleInfoScreenSteps.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo());
@@ -3641,7 +3608,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         servicesScreen.clickSave();
 
         for (int i = 0; i < serviceRequestData.getMoneyServices().size(); i++) {
-            alertText = Helpers.getAlertTextAndAccept();
+            String alertText = Helpers.getAlertTextAndAccept();
             String servicedetails = alertText.substring(alertText.indexOf("'") + 1, alertText.indexOf("' require"));
             for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
                 if (serviceData.getServiceName().equals(servicedetails)) {
@@ -3714,7 +3681,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), inspectionData.getInspectionTotalPrice());
         vehicleScreen.saveWizard();
         myInspectionsScreen.selectInspectionForAction(inspectionnumber);
-        selectEmployeePopup = new SelectEmployeePopup();
         selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
         approveInspectionsScreen = new ApproveInspectionsScreen();
         approveInspectionsScreen.selectInspectionForApprove(inspectionnumber);
@@ -3722,9 +3688,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertFalse(approveInspectionsScreen.isInspectionServiceExistsForApprove(inspectionData.getServicesToApprovesList().get(1).getServiceName()));
         approveInspectionsScreen.clickCancelButton();
         approveInspectionsScreen.clickCancelButton();
-        ;
-        myInspectionsScreen.clickHomeButton();
-
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -3859,10 +3823,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         servicesScreen.selectService(serviceRequestData.getMoneyService().getServiceName());
         QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
         vehicleScreen.clickSave();
-        String alertText = Helpers.getAlertTextAndCancel();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 
-        serviceRequestsScreen = new ServiceRequestsScreen();
         String serviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
         ServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_DRAFT_MODE);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -4079,17 +4041,17 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         }
         servicesScreen.clickSave();
         servicesScreen.clickFinalPopup();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
         QuestionsScreen questionsScreen = new QuestionsScreen();
         questionsScreen.drawSignature();
         questionsScreen.clickSave();
         questionsScreen.clickFinalPopup();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
         QuestionsScreenSteps.answerQuestion(inspectionData.getQuestionScreensData().get(1).getQuestionData());
         questionsScreen.clickSave();
         questionsScreen.clickFinalPopup();
         Assert.assertTrue(myInspectionsScreen.isInspectionExists(inspectionNumber));
-        myInspectionsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -4795,7 +4757,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
                     else
                         Assert.assertFalse(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
                 } else if (serviceData.getServiceNewTechnician() == null) {
-					Assert.assertFalse(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
+                    Assert.assertFalse(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
                 } else if (serviceData.getServiceNewTechnician().getTechnicianFullName().equals(employee.getEmployeeName())) {
                     if (serviceData.getServiceNewTechnician().isSelected())
                         Assert.assertTrue(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
@@ -4809,7 +4771,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
             NavigationSteps.navigateBackScreen();
         }
 
-		MainScreen mainScreeneen = homeScreen.clickLogoutButton();
+        MainScreen mainScreeneen = homeScreen.clickLogoutButton();
 
         homeScreen = mainScreeneen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
@@ -4821,7 +4783,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         BackOfficeHeaderPanel backofficeHeader = new BackOfficeHeaderPanel(webdriver);
         MonitorWebPage monitorpage = new MonitorWebPage(webdriver);
         backofficeHeader.clickMonitorLink();
-		backofficeHeader.clickMonitorLink();
+        backofficeHeader.clickMonitorLink();
         RepairOrdersWebPage repairorderspage = new RepairOrdersWebPage(webdriver);
         monitorpage.clickRepairOrdersLink();
         repairorderspage.makeSearchPanelVisible();
@@ -4844,11 +4806,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         OrderMonitorScreen orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
 
         for (ServiceData serviceData : workOrderData.getServicesList()) {
-			if (serviceData.getServiceDefaultTechnician().isSelected())
-				Assert.assertTrue(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
-			else
-				Assert.assertFalse(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
-		}
+            if (serviceData.getServiceDefaultTechnician().isSelected())
+                Assert.assertTrue(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
+            else
+                Assert.assertFalse(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
+        }
 
         teamWorkordersScreen = orderMonitorScreen.clickBackButton();
         homeScreen = teamWorkordersScreen.clickHomeButton();
@@ -4859,9 +4821,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         teamWorkordersScreen.clickOnWO(workOrderNumber);
         orderMonitorScreen = teamWorkordersScreen.selectWOMonitor();
         orderMonitorScreen.waitOrderMonitorScreenLoaded();
-		for (ServiceData serviceData : workOrderData.getServicesList()) {
-			Assert.assertTrue(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
-		}
+        for (ServiceData serviceData : workOrderData.getServicesList()) {
+            Assert.assertTrue(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
+        }
 
         teamWorkordersScreen = orderMonitorScreen.clickBackButton();
         homeScreen = teamWorkordersScreen.clickHomeButton();
@@ -4935,7 +4897,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush(String rowID,
-                                                                                              String description, JSONObject testData) {
+                                                                                 String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -5139,7 +5101,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer(String rowID,
-                                                                                                                String description, JSONObject testData) {
+                                                                                   String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -5249,14 +5211,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         invoiceInfoScreen.setPO(invoiceData.getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
         invoiceInfoScreen.clickSaveInvoiceAsDraft();
-
         NavigationSteps.navigateBackScreen();
 
         MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
         myInvoicesScreen.selectInvoice(invoiceNumber);
         myInvoicesScreen.clickChangePOPopup();
         myInvoicesScreen.changePO(invoiceData.getNewPoNumber());
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY_HD);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY_HD);
         myInvoicesScreen.clickCancelButton();
 
         myInvoicesScreen.switchToTeamView();
@@ -5264,15 +5225,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         teaminvoicesscreen.selectInvoice(invoiceNumber);
         teaminvoicesscreen.clickChangePOPopup();
         teaminvoicesscreen.changePO(invoiceData.getNewPoNumber());
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY_HD);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY_HD);
         teaminvoicesscreen.clickCancelButton();
-
-        myInvoicesScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling(String rowID,
-                                                                                                      String description, JSONObject testData) {
+                                                                                                    String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -5669,12 +5629,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
             if (serviceData.getServicePrice().equals(zeroPrice)) {
                 ServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
                 if (serviceData.getServicePrice().equals(zeroPrice))
-                    Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
+                    AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
                 selectedServiceDetailsScreen.clickTechniciansIcon();
-                Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+                AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
             } else {
                 selectedServiceDetailsScreen.clickTechniciansIcon();
-                Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+                AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
                 selectedServiceDetailsScreen.cancelSelectedServiceDetails();
                 selectedServiceDetailsScreen.setServiceRateValue(serviceData.getServicePrice());
                 selectedServiceDetailsScreen.clickTechniciansIcon();
@@ -5718,12 +5678,12 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         VehicleScreen vehicleScreen = new VehicleScreen();
         vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         vehicleScreen.clickSave();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TRIM_REQUIRED);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TRIM_REQUIRED);
         vehicleScreen.setTrim(trimvalue);
         Assert.assertEquals(vehicleScreen.getTrim(), trimvalue);
         QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
         vehicleScreen.saveWizard();
-        homeScreen = myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
 
@@ -5962,22 +5922,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_SMOKE_TEST);
         VehicleScreen vehicleScreen = new VehicleScreen();
         vehicleScreen.clickCancelButton();
-        Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.STOP_WORKORDER_CREATION);
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_CREATION);
         vehicleScreen.clickCancelButton();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.STOP_WORKORDER_CREATION);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_CREATION);
 
         String workOrderNumber = myWorkOrdersScreen.getFirstWorkOrderNumberValue();
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
-        vehicleScreen = new VehicleScreen();
         vehicleScreen.clickCancelButton();
-        Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.STOP_WORKORDER_EDIT);
+        AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_EDIT);
         vehicleScreen.clickCancelButton();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.STOP_WORKORDER_EDIT);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_EDIT);
         myWorkOrdersScreen.openWorkOrderDetails(workOrderNumber);
-        vehicleScreen = new VehicleScreen();
         vehicleScreen.clickCancelButton();
-
-        homeScreen = myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -6028,16 +5985,14 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(serviceRequestsScreen.isDeclineActionExists());
         serviceRequestsScreen.selectAcceptAction();
 
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
-        serviceRequestsScreen = new ServiceRequestsScreen();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
         Assert.assertTrue(serviceRequestsScreen.isServiceRequestOnHold(serviceRequestNumber));
         serviceRequestsScreen.selectServiceRequest(serviceRequestNumber);
         Assert.assertFalse(serviceRequestsScreen.isAcceptActionExists());
         Assert.assertFalse(serviceRequestsScreen.isDeclineActionExists());
         serviceRequestsScreen.selectRejectAction();
         serviceRequestsScreen.waitServiceRequestsScreenLoaded();
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
 
     }
 
@@ -6089,11 +6044,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(serviceRequestsScreen.isDeclineActionExists());
         serviceRequestsScreen.selectDeclineAction();
 
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertEquals(alertText, AlertsCaptions.ALERT_DECLINE_SERVICEREQUEST);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_DECLINE_SERVICEREQUEST);
         serviceRequestsScreen.clickDoneCloseReasonDialog();
         Assert.assertFalse(serviceRequestsScreen.isServiceRequestExists(serviceRequestNumber));
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -6150,11 +6104,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(serviceRequestsScreen.isAcceptActionExists());
         Assert.assertTrue(serviceRequestsScreen.isDeclineActionExists());
         serviceRequestsScreen.selectAcceptAction();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
         serviceRequestsScreen.waitServiceRequestsScreenLoaded();
-
-        serviceRequestsScreen.clickHomeButton();
-
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -6289,13 +6241,11 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
         servicesScreen.clickTechnicianToolbarIcon();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.NO_SELECTED_SERVICES);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.NO_SELECTED_SERVICES);
         for (DamageData damageData : workOrderData.getDamagesData()) {
             ServicesScreenSteps.selectPanelServiceData(damageData);
             servicesScreen.clickServiceTypesButton();
         }
-
-        servicesScreen = new ServicesScreen();
         servicesScreen.clickTechnicianToolbarIcon();
         ServiceTypesScreen serviceTypesScreen = new ServiceTypesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList())
@@ -6417,25 +6367,21 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         TechniciansPopup techniciansPopup = serviceDetailsPopup.clickTech();
         techniciansPopup.selecTechnician(firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
         techniciansPopup.saveTechViewDetails();
-        orderMonitorScreen = new OrderMonitorScreen();
         orderMonitorScreen.selectPanel(firstMonitorServiceData.getMonitorService());
         Assert.assertEquals(serviceDetailsPopup.getTechnicianValue(), firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
         serviceDetailsPopup.clickServiceDetailsDoneButton();
 
-        orderMonitorScreen = new OrderMonitorScreen();
         orderMonitorScreen.clickStartOrderButton();
-        Assert.assertTrue(Helpers.getAlertTextAndAccept().contains(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER));
-        orderMonitorScreen = new OrderMonitorScreen();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER);
 
         MonitorServiceData secondMonitorServiceData = orderMonitorData.getMonitorServicesData().get(1);
         orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
         serviceDetailsPopup.clickTech();
         techniciansPopup.selecTechnician(secondMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
         techniciansPopup.saveTechViewDetails();
-        orderMonitorScreen = new OrderMonitorScreen();
-        serviceDetailsPopup = orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
+        orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
         serviceDetailsPopup.clickStartService();
-        serviceDetailsPopup = orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
+        orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
         serviceDetailsPopup.setCompletedServiceStatus();
         Assert.assertEquals(orderMonitorScreen.getPanelStatus(secondMonitorServiceData.getMonitorService()), secondMonitorServiceData.getMonitorServiceStatus());
         orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
@@ -6785,19 +6731,18 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
         priceMatrixScreen.setPrice(serviceZeroPrice);
 
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT);
         priceMatrixScreen.clickOnTechnicians();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART);
         TechniciansPopup techniciansPopup = new TechniciansPopup();
         Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(vehiclePartData.getServiceDefaultTechnician().getTechnicianFullName()));
         Assert.assertEquals(techniciansPopup.getTechnicianPrice(vehiclePartData.getServiceDefaultTechnician().getTechnicianFullName()), PricesCalculations.getPriceRepresentation(serviceZeroPrice));
         techniciansPopup.saveTechViewDetails();
-        priceMatrixScreen = new PriceMatrixScreen();
         priceMatrixScreen.clickSaveButton();
 
         servicesScreen.waitServicesScreenLoaded();
         servicesScreen.cancelWizard();
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
 
     }
 
@@ -7259,22 +7204,19 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         OrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
         OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(workOrderData.getMatrixServiceData().getMatrixServiceName());
         serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
         serviceDetailsPopup.clickServiceDetailsCancelButton();
 
         orderMonitorScreen.clickStartPhase();
         serviceDetailsPopup = orderMonitorScreen.selectPanel(workOrderData.getMatrixServiceData().getMatrixServiceName());
         serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
         serviceDetailsPopup.clickServiceDetailsCancelButton();
 
         orderMonitorScreen.clickStartPhaseCheckOutButton();
         serviceDetailsPopup = orderMonitorScreen.selectPanel(workOrderData.getMatrixServiceData().getMatrixServiceName());
         serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
         serviceDetailsPopup.clickServiceDetailsCancelButton();
 
         orderMonitorScreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
@@ -7389,13 +7331,9 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         OrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
         orderMonitorScreen.clickStartOrderButton();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
-        orderMonitorScreen = new OrderMonitorScreen();
-
-        orderMonitorScreen.clickBackButton();
-        teamWorkOrdersScreen.clickHomeButton();
-
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
+        NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -7458,8 +7396,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
         OrderMonitorServiceDetailsPopup serviceDetailsPopup = orderMonitorScreen.selectPanel(workOrderData.getServicesList().get(workOrderData.getServicesList().size() - 1));
         serviceDetailsPopup.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-                AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
         serviceDetailsPopup.clickServiceDetailsCancelButton();
 
         orderMonitorScreen.clickOrderStartDateButton();
@@ -7479,7 +7416,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testUserCanChangeApprovedStatusOfPercentageServiceToDeclinedOnlyUsingDeclineAllOption(String rowID,
-                                                      String description, JSONObject testData) {
+                                                                                                      String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();

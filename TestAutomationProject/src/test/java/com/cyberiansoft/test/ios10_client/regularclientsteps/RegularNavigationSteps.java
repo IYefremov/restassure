@@ -55,7 +55,7 @@ public class RegularNavigationSteps {
     public static void navigateToScreen(String screenName) {
         RegularBaseWizardScreen baseWizardScreen = new RegularBaseWizardScreen();
         baseWizardScreen.selectNextScreen(screenName);
-        //baseWizardScreen.waitScreenLoaded(screenName);
+        baseWizardScreen.waitScreenLoaded(screenName);
     }
 
     public static void navigateToPriceMatrixScreen(String screenName) {

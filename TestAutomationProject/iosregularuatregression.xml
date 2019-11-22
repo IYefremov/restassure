@@ -61,6 +61,7 @@
           <include name="testVerifyReSendDataFromDevice" />
           <include name="testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection" />
           <include name="testVerifyCreatingInspectionAndWOWithALotOfPagesQFVisualPagesPriceMatrixServicePackages" />
+          <include name="testVerifyThatWhenAddSupplementAfterApproveStatusOfServicesIsChangedToNew" />
         </methods>
       </class>
     </classes>

@@ -14,6 +14,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
+import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.*;
 import com.cyberiansoft.test.ios10_client.hdvalidations.InvoiceInfoScreenValidations;
 import com.cyberiansoft.test.ios10_client.hdvalidations.MyWorkOrdersScreenValidations;
@@ -93,14 +94,11 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		NavigationSteps.navigateToVisualExteriorScreen();
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
 		visualInteriorScreen.clickSave();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_VIN_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_VIN_REQUIRED);
 
-		vehicleScreen = new VehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		visualInteriorScreen.clickSave();
-		alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_MAKE_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_MAKE_REQUIRED);
 
 		vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
@@ -139,12 +137,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		VehicleScreen vehicleScreen = new VehicleScreen();
 		final String inspNumber = vehicleScreen.getInspectionNumber();
 		vehicleScreen.clickSave();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_VIN_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_VIN_REQUIRED);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		vehicleScreen.clickSave();
-		alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_MAKE_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_MAKE_REQUIRED);
 
 		vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
@@ -1006,11 +1002,10 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.clickSave();
 
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE, workOrderData.getWorkOrderPrice()));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE, workOrderData.getWorkOrderPrice()));
 		orderSummaryScreen.swipeScreenLeft();
 		NavigationSteps.navigateToServicesScreen();
-		selectedServiceDetailsScreen = servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
+		servicesScreen.openServiceDetails(workOrderData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity2());
 
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -1087,8 +1082,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectNextScreen(WizardScreenTypes.INVOICE_INFO);
 		invoiceInfoScreen.addTeamWorkOrder(workOrders.get(1));
 		invoiceInfoScreen.clickSave();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, testCaseData.getInvoiceData().getInvoiceTotal()));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, testCaseData.getInvoiceData().getInvoiceTotal()));
 		invoiceInfoScreen.swipeScreenLeft();
 		invoiceInfoScreen.cancelInvoice();
 		myinvoicesscreen.clickHomeButton();
@@ -1120,14 +1114,12 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		servicesScreen.clickSave();
-		String alertText = Helpers.getAlertTextAndAccept();
-
-		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INSPECTION_IS_HUGE, inspectionData.getInspectionPrice()));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INSPECTION_IS_HUGE, inspectionData.getInspectionPrice()));
 		selectedServiceDetailsScreen = servicesScreen.openServiceDetails(inspectionData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.setServiceQuantityValue(inspectionData.getServiceData().getServiceQuantity2());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		servicesScreen.clickSaveAsDraft();
-		myInspectionsScreen.clickHomeButton();
+		NavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1158,12 +1150,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		QuestionsScreen questionsScreen = new QuestionsScreen();
 		questionsScreen.selectAnswerForQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
 		questionsScreen.clickSave();
-		Assert.assertTrue(DriverBuilder.getInstance().getAppiumDriver().findElement(
-				MobileBy.name(AlertsCaptions.ALERT_CREATE_APPOINTMENT)).isDisplayed());
-		DriverBuilder.getInstance().getAppiumDriver().findElement(
-				MobileBy.name("No"))
-				.click();
-		serviceRequestsScreen = new ServiceRequestsScreen();
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		String srnumber = serviceRequestsScreen.getFirstServiceRequestNumber();
 		ServiceRequestSteps.startCreatingInspectionFromServiceRequest(srnumber, InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
 		VisualInteriorScreen visualInteriorScreen = new VisualInteriorScreen();
@@ -2029,8 +2016,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			}
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			if (serviceData.isNotMultiple()) {
-				String alertText = Helpers.getAlertTextAndAccept();
-				Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
+				AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
 			}
 			Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
 		}

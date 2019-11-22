@@ -122,6 +122,11 @@ public class RegularMyInspectionsSteps {
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.DETAILS);
     }
 
+    public static void selectInspectionForAddingSupplement(String inspectionID) {
+        selectInspection(inspectionID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.ADD_SUPPLEMENT);
+    }
+
     public static void clickActionButton() {
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         myInspectionsScreen.clickActionButton();
