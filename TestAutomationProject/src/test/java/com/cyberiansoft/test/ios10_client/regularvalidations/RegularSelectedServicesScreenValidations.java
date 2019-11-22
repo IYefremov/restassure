@@ -37,6 +37,15 @@ public class RegularSelectedServicesScreenValidations {
                     servicesData.getVehiclePart().getVehiclePartName()), expectedPriceValue);
         } else
             Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(servicesData.getServiceName()), expectedPriceValue);
+    }
 
+    public static void verifyServiceDeclinedOrSkipped(String serviceName) {
+        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
+        Assert.assertTrue(selectedServicesScreen.isServiceDeclinedSkipped(serviceName));
+    }
+
+    public static void verifyServiceApproved(String serviceName) {
+        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
+        Assert.assertTrue(selectedServicesScreen.isServiceApproved(serviceName));
     }
 }

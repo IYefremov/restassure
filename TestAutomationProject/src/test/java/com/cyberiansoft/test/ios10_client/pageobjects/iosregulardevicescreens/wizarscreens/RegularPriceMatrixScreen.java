@@ -82,7 +82,8 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	
 	public RegularVehiclePartScreen selectPriceMatrix(String pricematrix) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		MobileElement priceMatrixCell = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(pricematrix)));
+		MobileElement priceMatrixVehiclePartList = (MobileElement) wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("PriceMatrixVehiclePartList")));
+		MobileElement priceMatrixCell = priceMatrixVehiclePartList.findElementByAccessibilityId(pricematrix);
 		if (!priceMatrixCell.isDisplayed()) {
 			SwipeUtils.swipeToElement(pricematrix);
 		}

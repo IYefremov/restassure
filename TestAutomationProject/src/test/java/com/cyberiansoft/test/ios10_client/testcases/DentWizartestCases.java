@@ -1461,8 +1461,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		TeamWorkOrdersScreen teamworkordersscreen = homeScreen.clickTeamWorkordersButton();
 		teamworkordersscreen.clickCreateInvoiceIconForWO(workOrderNumber);
 		teamworkordersscreen.clickiCreateInvoiceButton();
-		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttext.contains(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO);
 		NavigationSteps.navigateBackScreen();
 		
 	}
@@ -2632,8 +2631,7 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		teamworkordersscreen.clickCreateInvoiceIconForWO(workOrderNumber);
 
 		teamworkordersscreen.clickiCreateInvoiceButton();
-		String alerttext = Helpers.getAlertTextAndAccept();
-		Assert.assertTrue(alerttext.contains(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO);
 		NavigationSteps.navigateBackScreen();
 	}
 

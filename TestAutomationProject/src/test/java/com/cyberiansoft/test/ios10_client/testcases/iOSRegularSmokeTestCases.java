@@ -314,6 +314,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
 		final String license = "Iphone_Test_Spec_Client";
+		final String percService = "Test Tax";
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
@@ -357,7 +358,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.selectService(workOrderData.getMoneyServiceData().getServiceName());
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		Assert.assertTrue(selectedServicesScreen.isDefaultServiceIsSelected());
+		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(percService));
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(workOrderData.getMoneyServiceData().getServiceName()));
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
