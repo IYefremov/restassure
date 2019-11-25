@@ -21,14 +21,12 @@ public class BaseTestCase {
 	protected WebDriver webdriver;
 	protected static BrowserType browserType;
 	protected File app;
+    private final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+    private final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
 	public void setDriver() {
         webdriver = DriverBuilder.getInstance().getDriver();
     }
-
-	public static WebElement wait(By locator) {
-		return Helpers.wait(locator);
-	}
 
 	@BeforeSuite
     public void init() {
@@ -43,16 +41,22 @@ public class BaseTestCase {
 			DriverBuilder.getInstance().quitDriver();
 	}
 
-	@BeforeClass
-    public void login() {
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-        VNextBOLoginSteps.userLogin(userName, userPassword);
-    }
+//	@BeforeClass
+//    public void login() {
+//        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+//        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+//        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+//        VNextBOLoginSteps.userLogin(userName, userPassword);
+//    }
 
     @AfterClass
     public void logout() {
         VNextBOHeaderPanelSteps.logout();
+    }
+
+    @BeforeMethod
+    public void setUp() {
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        VNextBOLoginSteps.userLogin(userName, userPassword);
     }
 }

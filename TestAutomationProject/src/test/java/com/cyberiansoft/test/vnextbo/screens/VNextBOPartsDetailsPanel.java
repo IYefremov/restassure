@@ -9,6 +9,7 @@ import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -456,6 +457,13 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
             e.printStackTrace();
             return 0;
         }
+    }
+
+    public void waitForNumberOfPartsToBeChanged(int expectedNumberOfParts) {
+        try {
+            WaitUtilsWebDriver.getLongWait()
+                    .until((ExpectedCondition<Boolean>) driver -> partsNamesList.size() == expectedNumberOfParts);
+        } catch (Exception ignored) {}
     }
 
     public int getPartOrderByName(String partsName) {

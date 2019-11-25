@@ -21,8 +21,8 @@ import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprova
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORONotesPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValidations;
@@ -205,7 +205,9 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
                 .clickSearchLoupeIcon();
-        Assert.assertEquals(numberOfParts + 1, partsDetailsPanel.getNumberOfParts(),
+        final int increasedNumberOfParts = numberOfParts + 1;
+        partsDetailsPanel.waitForNumberOfPartsToBeChanged(increasedNumberOfParts);
+        Assert.assertEquals(increasedNumberOfParts, partsDetailsPanel.getNumberOfParts(),
                 "The number of parts hasn't been increased by 1 after duplicating");
     }
 
@@ -241,7 +243,9 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         partsManagementSearch
                 .setPartsSearchText(data.getWoNum())
                 .clickSearchLoupeIcon();
-        Assert.assertEquals(numberOfParts - 1, partsDetailsPanel.getNumberOfParts(),
+        final int reducedNumberOfParts = numberOfParts - 1;
+        partsDetailsPanel.waitForNumberOfPartsToBeChanged(reducedNumberOfParts);
+        Assert.assertEquals(reducedNumberOfParts, partsDetailsPanel.getNumberOfParts(),
                 "The number of parts hasn't been decreased by 1 after deleting");
     }
 
@@ -454,6 +458,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void verifyUserCanEditDeviceSettings(String rowID, String description, JSONObject testData) {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
+        VNextBOActiveDevicesTabSteps.openActiveDevicesTab();
         VNextBOSearchPanelSteps.searchByText(data.getDeviceName());
         VNextBOActiveDevicesTabSteps.openEditDeviceDialog(data.getDeviceName());
         VNextBOEditDeviceDialogSteps.setNewDeviceValuesAndSubmit(data);
@@ -466,7 +471,6 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeVendorPrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-        final VNextBOROPageValidations roPageVerifications = new VNextBOROPageValidations();
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());

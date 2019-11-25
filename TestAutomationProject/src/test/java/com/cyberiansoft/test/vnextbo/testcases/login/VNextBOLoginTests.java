@@ -6,7 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOFooterPanelInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOFooterPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
@@ -18,22 +18,23 @@ import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOLoginTests extends BaseTestCase {
 
-    private String userName;
-    private String userPassword;
+    private String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+    private String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-    @Override
     @BeforeClass
     public void login() {
-
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginTD();
-        userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+    }
+
+    @BeforeMethod
+    public void setUp() {
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
     }
 

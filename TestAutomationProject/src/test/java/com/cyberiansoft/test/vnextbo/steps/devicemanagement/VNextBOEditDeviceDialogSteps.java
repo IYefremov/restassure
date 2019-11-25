@@ -36,6 +36,7 @@ public class VNextBOEditDeviceDialogSteps {
 
         editDeviceFields(deviceManagementData);
         Utils.clickElement(new VNextBOEditDeviceDialog().getSubmitButton());
+        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickCancelButton() {
