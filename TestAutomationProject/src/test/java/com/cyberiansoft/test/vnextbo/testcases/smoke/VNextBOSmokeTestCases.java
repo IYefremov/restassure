@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.smoke;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -19,6 +20,8 @@ import com.cyberiansoft.test.vnextbo.steps.devicemanagement.*;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprovalPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOAddNewPartDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORONotesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
@@ -29,6 +32,9 @@ import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValid
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOActiveDevicesTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOPendingRegistrationsTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAddNewPartDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsOrdersListPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -43,9 +49,6 @@ import java.util.Arrays;
 
 public class VNextBOSmokeTestCases extends BaseTestCase {
 
-    private VNextBOPartsManagementSearchPanel partsManagementSearch;
-    private VNextBOPartsOrdersListPanel partsOrdersListPanel;
-    private VNextBOPartsDetailsPanel partsDetailsPanel;
     private VNextBOCompanyInfoWebPage companyInfoWebPage;
     private VNextBOHomeWebPage homePage;
     private VNextBOInspectionsWebPage inspectionsWebPage;
@@ -58,9 +61,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
     @BeforeMethod
     public void BackOfficeLogin() {
-        partsManagementSearch = PageFactory.initElements(webdriver, VNextBOPartsManagementSearchPanel.class);
-        partsOrdersListPanel = PageFactory.initElements(webdriver, VNextBOPartsOrdersListPanel.class);
-        partsDetailsPanel = PageFactory.initElements(webdriver, VNextBOPartsDetailsPanel.class);
+
         companyInfoWebPage = PageFactory.initElements(webdriver, VNextBOCompanyInfoWebPage.class);
         homePage = PageFactory.initElements(webdriver, VNextBOHomeWebPage.class);
         inspectionsWebPage = PageFactory.initElements(webdriver, VNextBOInspectionsWebPage.class);
@@ -119,60 +120,38 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddNewParts(String rowID, String description, JSONObject testData) {
-        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
+        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-
-        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
-                "The WO order hasn't been displayed after search");
-        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
-                "Tha Parts details panel hasn't been displayed");
-
-        final VNextBOAddNewPartDialog addNewPartDialog = partsDetailsPanel.clickAddNewPartButton();
-        Assert.assertTrue(partsDetailsPanel.isAddNewPartDialogDisplayed(), "The part dialog hasn't been displayed");
-
-        addNewPartDialog.setService(data.getService());
-        Assert.assertEquals(addNewPartDialog.getServiceFieldValue(), data.getService(), "The service hasn't been set");
-
-        addNewPartDialog
-                .setServiceDescription(data.getServiceDescription())
-                .setCategory(data.getServiceCategory())
-                .setSubcategory(data.getServiceSubcategory());
-
-        final int partsCounterValueBefore = Integer.valueOf(addNewPartDialog.getPartsCounterValue());
-
-        addNewPartDialog.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
-        final int partsCounterValueAfter = Integer.valueOf(addNewPartDialog.getPartsCounterValue());
-
-        Assert.assertEquals(partsCounterValueBefore + data.getPartItems().length, partsCounterValueAfter,
-                "The parts counter value hasn't been recalculated");
-
-        addNewPartDialog.clickSubmitButton();
-        Assert.assertTrue(partsDetailsPanel.isAddNewPartDialogNotDisplayed());
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
+        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(true);
+        VNextBOAddNewPartDialogSteps.setServiceField(data.getService());
+        VNextBOAddNewPartDialogValidations.verifyServiceFieldIsCorrect(data.getService());
+        VNextBOAddNewPartDialogSteps.setDescription(data.getServiceDescription());
+        VNextBOAddNewPartDialogSteps.setCategory(data.getServiceCategory());
+        VNextBOAddNewPartDialogSteps.setSubCategory(data.getServiceSubcategory());
+        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogSteps.getSelectedPartsCounter());
+        VNextBOAddNewPartDialogSteps.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
+        VNextBOAddNewPartDialogValidations.verifySelectedPartsCounterValueIsCorrect(String.valueOf(partsCounterValueBefore + data.getPartItems().length));
+        VNextBOAddNewPartDialogSteps.clickSubmitButton();
+        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeStatusOfThePartToOrdered(String rowID, String description, JSONObject testData) {
-        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
+        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-
-        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
-                "The WO order hasn't been displayed after search");
-        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
-                "Tha Parts details panel hasn't been displayed");
-
-        partsDetailsPanel.verifyStatusIsChanged(data.getStatus());
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsDetailsPanelSteps.setStatusForPartByPartNumberInList(0, data.getStatus());
+        VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(0, data.getStatus());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -181,32 +160,13 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-
-        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
-                "The WO order hasn't been displayed after search");
-        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
-                "Tha Parts details panel hasn't been displayed");
-
-        final int numberOfParts = partsDetailsPanel.getNumberOfParts();
-
-        partsDetailsPanel.clickActionsButton(0);
-        Assert.assertTrue(partsDetailsPanel.isActionsPartsMenuDisplayed(0));
-        partsDetailsPanel.clickDuplicateActionsButton(0);
-
-        Assert.assertTrue(partsDetailsPanel.isConfirmationPartDialogDisplayed(),
-                "The Confirm duplicating dialog hasn't been displayed");
-
-        partsDetailsPanel.clickConfirmationPartButton();
-
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-        Assert.assertEquals(numberOfParts + 1, partsDetailsPanel.getNumberOfParts(),
-                "The number of parts hasn't been increased by 1 after duplicating");
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
+        VNextBOPartsDetailsPanelSteps.duplicatePartByNumberInList(0);
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsCorrect(numberOfParts + 1);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -215,98 +175,38 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-
-        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
-                "The WO order hasn't been displayed after search");
-        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
-                "Tha Parts details panel hasn't been displayed");
-
-        final int numberOfParts = partsDetailsPanel.getNumberOfParts();
-        final int partOrder = partsDetailsPanel.getPartOrderByName(data.getPartItems()[0]);
-        System.out.println(partOrder);
-        partsDetailsPanel.clickActionsButton(partOrder);
-
-        Assert.assertTrue(partsDetailsPanel.isActionsPartsMenuDisplayed(partOrder));
-        partsDetailsPanel.clickDeleteActionsButton(partOrder);
-
-        Assert.assertTrue(partsDetailsPanel.isConfirmationPartDialogDisplayed(),
-                "The Confirm deleting part dialog hasn't been displayed");
-
-        partsDetailsPanel.clickConfirmationPartButton();
-
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-        Assert.assertEquals(numberOfParts - 1, partsDetailsPanel.getNumberOfParts(),
-                "The number of parts hasn't been decreased by 1 after deleting");
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
+        VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartItems()[0]));
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsCorrect(numberOfParts - 1);
     }
 
-    // Company Info
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddAndDeleteLabor(String rowID, String description, JSONObject testData) {
-        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
+        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-
-        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
-                "The WO order hasn't been displayed after search");
-        Assert.assertTrue(partsDetailsPanel.isPartsDetailsTableDisplayed(),
-                "Tha Parts details panel hasn't been displayed");
-
-        partsDetailsPanel.clickPartsArrow(0);
-        Assert.assertTrue(partsDetailsPanel.isAddLaborButtonDisplayed(0),
-                "The Add Labor button hasn't been displayed");
-
-        final int numberOfLaborBlocksBefore = partsDetailsPanel.getNumberOfLaborBlocks();
-        System.out.println("before: " + numberOfLaborBlocksBefore);
-
-        final VNextBOAddLaborPartsDialog laborPartsDialog = partsDetailsPanel.clickAddLaborButton(0);
-        Assert.assertTrue(laborPartsDialog.isAddLaborDialogDisplayed(),
-                "The Labor dialog hasn't been displayed");
-
-        Assert.assertFalse(laborPartsDialog.isLaborClearIconDisplayed(),
-                "The Labor Clear icon has been displayed before selecting the labor");
-        laborPartsDialog.setLaborService(data.getLabor());
-        Assert.assertTrue(laborPartsDialog.isLaborClearIconDisplayed(), "The Labor Clear icon hasn't been displayed");
-
-        laborPartsDialog.clickAddLaborButtonForDialog();
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-
-        Assert.assertEquals(partsOrdersListPanel.getWoNumsListOptions().get(0), data.getWoNum(),
-                "The WO hasn't been displayed after search");
-
-        partsDetailsPanel.clickPartsArrow(0);
-        Assert.assertTrue(partsDetailsPanel.isAddLaborButtonDisplayed(0),
-                "The Add Labor button hasn't been displayed");
-        final int numberOfLaborBlocksAfter = partsDetailsPanel.getNumberOfLaborBlocks();
-        System.out.println("after: " + numberOfLaborBlocksAfter);
-        Assert.assertEquals(numberOfLaborBlocksAfter, numberOfLaborBlocksBefore + 1,
-                "The labor hasn't been added");
-
-        partsDetailsPanel
-                .clickDeleteLaborButton(numberOfLaborBlocksBefore)
-                .clickConfirmDeletingButton();
-        partsDetailsPanel.refreshPage();
-
-        partsManagementSearch
-                .setPartsSearchText(data.getWoNum())
-                .clickSearchLoupeIcon();
-
-        partsDetailsPanel.clickPartsArrow(0);
-
-        Assert.assertEquals(partsDetailsPanel.getNumberOfLaborBlocks(), numberOfLaborBlocksBefore,
-                "The labor hasn't been deleted");
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
+        VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
+        final int numberOfLaborBlocksBefore = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
+        VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, data.getLabor());
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
+        VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
+        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore + 1);
+        VNextBOPartsDetailsPanelSteps.deleteLaborForPartByNumberInListANdLaborServiceName(0, data.getLabor());
+        Utils.refreshPage();
+        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
+        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

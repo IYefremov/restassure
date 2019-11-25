@@ -5,6 +5,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsManagementWebPage;
 import com.cyberiansoft.test.vnextbo.screens.services.VNextBOServicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOUsersWebPage;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
