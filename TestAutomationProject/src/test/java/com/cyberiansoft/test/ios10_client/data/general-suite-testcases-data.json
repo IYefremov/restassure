@@ -92,7 +92,7 @@
           },
           "moneyService": {
             "serviceName": "Dye",
-            "servicePrice": "$10.00",
+            "servicePrice": "10.00",
             "serviceQuantity": "3.00",
             "serviceAdjustment": {
               "adjustmentTotalAmaunt": "$0.50"
@@ -100,7 +100,7 @@
           },
           "percentageService": {
             "serviceName": "Disc_Ex_Service1",
-            "servicePrice": "$100.00",
+            "servicePrice": "100.00",
             "serviceAdjustment": {
               "adjustmentTotalAmaunt": "-$5.00",
               "adjustmentData": {
@@ -773,14 +773,14 @@
         ],
         "moneyService": {
           "serviceName": "Dye",
-          "servicePrice": "$10.00",
+          "servicePrice": "10.00",
           "serviceAdjustment": {
             "adjustmentTotalAmaunt": "$0.50"
           }
         },
         "percentageService": {
           "serviceName": "Disc_Ex_Service1",
-          "servicePrice": "$100.00",
+          "servicePrice": "100.00",
           "serviceAdjustment": {
             "adjustmentTotalAmaunt": "-$5.00",
             "adjustmentData": {

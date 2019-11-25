@@ -1373,9 +1373,9 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
-        selectedServiceDetailsScreen.setServicePriceValue(workOrderData.getPercentageServiceData().getServicePrice());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
+        RegularServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getPercentageServiceData().getServicePrice());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
         RegularSelectedServicesSteps.switchToAvailableServices();
         RegularServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
         RegularNavigationSteps.navigateToOrderSummaryScreen();
@@ -2028,11 +2028,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
-
-        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.
-                openCustomServiceDetails(workOrderData.getDamagesData().get(workOrderData.getDamagesData().size() - 1).getMoneyService().getServiceName());
+        RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getDamagesData().get(workOrderData.getDamagesData().size() - 1).getMoneyService().getServiceName());
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.removeService();
         RegularSelectedServicesSteps.switchToAvailableServices();
 
@@ -2083,8 +2080,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
-        teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-        RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+        RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+        RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.selectPanelToChangeStatus(workOrderData.getDamagesData().get(0).getDamageGroupName());
         orderMonitorScreen.setCompletedPhaseStatus();
 
@@ -2147,8 +2144,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
         for (WorkOrderData workOrderData : workOrdersData ) {
-            teamWorkOrdersScreen.clickOnWO(workOrderData.getWorkOrderID());
-            RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+            RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderData.getWorkOrderID());
+            RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
             for (DamageData damageData : workOrderData.getDamagesData()) {
                 orderMonitorScreen.selectPanelToChangeStatus(damageData.getOrderPanelName());
                 orderMonitorScreen.setCompletedPhaseStatus();
@@ -2638,13 +2635,12 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
 
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails("E-Coat");
-        selectedServiceDetailsScreen.setServicePriceValue("20");
-        selectedServiceDetailsScreen.clickNotesCell();
+        RegularServicesScreenSteps.openCustomServiceDetails("E-Coat");
+        RegularServiceDetailsScreenSteps.setServicePriceValue("20");
+        RegularWizardScreensSteps.clickNotesButton();
         notesScreen.addNotesCapture();
         notesScreen.clickSaveButton();
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
 
         RegularNavigationSteps.navigateToScreen(UtilConstants.PRICE_MATRIX_SCREEN_CAPTION);
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();

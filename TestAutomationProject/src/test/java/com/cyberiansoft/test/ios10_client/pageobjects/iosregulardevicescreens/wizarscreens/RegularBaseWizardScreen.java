@@ -43,13 +43,6 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void clickSave() {
-        /*WaitUtils.elementShouldBeVisible(appiumdriver.findElementByAccessibilityId("viewTitle"), true);
-        List<WebElement> btns = appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").findElements(MobileBy.className("XCUIElementTypeButton"));
-        for (WebElement bt : btns)
-            System.out.println("========" + bt.getAttribute("value"));
-        if (!btns.get(1).getAttribute("label").equals("Save"))
-            btns.get(1).click();*/
-
         BaseUtils.waitABit(1000);
         if (!elementExists("Save"))
             clickChangeScreen();

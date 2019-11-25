@@ -126,27 +126,25 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(servicesubsrvicename)).click();
 	}
 	
-	public WebElement getServiceTableCell(String servicename) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + servicename + "']/.."));
+	public WebElement getServiceTableCell(String serviceName) {
+		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + serviceName + "']/.."));
 	}
 
-	public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String servicename) {
+	public void openCustomServiceDetails(String serviceName) {
 
 		WebElement searchFild = appiumdriver.findElementByClassName("XCUIElementTypeSearchField");
 		if (!(searchFild.getAttribute("value") == null))
 			searchFild.clear();
 
 		IOSElement servicecell = (IOSElement) availableservicestbl.
-				findElement(MobileBy.AccessibilityId(servicename));
+				findElement(MobileBy.AccessibilityId(serviceName));
 		if (!servicecell.isDisplayed()) {
-			searchFild.sendKeys(servicename + "\n");
+			searchFild.sendKeys(serviceName + "\n");
 		}
-		IOSElement el = (IOSElement) availableservicestbl.findElement(MobileBy.AccessibilityId(servicename))
+		IOSElement el = (IOSElement) availableservicestbl.findElement(MobileBy.AccessibilityId(serviceName))
 				.findElementByAccessibilityId("custom detail button");
 		TouchAction action = new TouchAction(appiumdriver);
 		action.tap(PointOption.point(el.getLocation().getX()+2, el.getLocation().getY()+2)).perform();
-
-		return new RegularSelectedServiceDetailsScreen();
 	}
 
 	public RegularPriceMatrixScreen selectServicePriceMatrices(String servicepricematrices) {
@@ -186,7 +184,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElementByAccessibilityId("DefaultEmployeeSelectorView").
 			findElement(MobileBy.xpath("//XCUIElementTypeCell[@name='"
 				+ techname + "']/XCUIElementTypeButton[@name='unselected']")).click();
-		//}
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Save']").click();
 		appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Service Types']/XCUIElementTypeButton[@name='Save']").click();
 	}

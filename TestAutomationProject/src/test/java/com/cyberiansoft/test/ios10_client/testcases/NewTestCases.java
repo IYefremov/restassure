@@ -137,14 +137,14 @@ public class NewTestCases extends BaseTestCase {
 		vehicleScreen.setRO(_ro);
 
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedservicescreen = servicesScreen.openCustomServiceDetails("Dye_Panel");
-		selectedservicescreen.clickVehiclePartsCell();
+		RegularServicesScreenSteps.openCustomServiceDetails("Dye_Panel");
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		selectedServiceDetailsScreen.clickVehiclePartsCell();
 		for (int i = 0; i < vehicleparts.length; i++) {
-			selectedservicescreen.selectVehiclePart(vehicleparts[i]);
+			selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
 		}
-		selectedservicescreen.saveSelectedServiceDetails();
-		selectedservicescreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularWorkOrdersSteps.saveWorkOrder();
@@ -222,7 +222,8 @@ public class NewTestCases extends BaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails("3/4\" - Penny Size");
+		RegularServicesScreenSteps.openCustomServiceDetails("3/4\" - Penny Size");
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.setServiceQuantityValue("3");
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		servicesScreen.selectService("SR_Money_Vehicle");

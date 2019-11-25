@@ -23,7 +23,7 @@ public class AssignTechniciansSteps {
 
     public static void assignTechniciansToWorkOrder() {
         selectWorkOrderToAssignTechnicians();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.SELECTED_TECHNICIANS_WILL_BE_ASSIGNED_TO_ALL_WO_SERVICES);
+        //AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.SELECTED_TECHNICIANS_WILL_BE_ASSIGNED_TO_ALL_WO_SERVICES);
         clickDoneButton();
     }
 

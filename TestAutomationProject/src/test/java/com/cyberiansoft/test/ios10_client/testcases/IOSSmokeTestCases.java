@@ -1393,7 +1393,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 
         NavigationSteps.navigateToServicesScreen();
-        ServicesScreen servicesScreen = new ServicesScreen();
         ServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
 
         NavigationSteps.navigateToOrderSummaryScreen();
@@ -6167,7 +6166,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(serviceRequestsScreen.isDeclineAppointmentRequestActionExists());
         serviceRequestsScreen.clickCloseButton();
 
-        serviceRequestsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -6330,6 +6329,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         final String defaultLocationValue = "Test Location ZZZ";
+        final DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
         HomeScreen homeScreen = new HomeScreen();
         MainScreen mainScreen = homeScreen.clickLogoutButton();
@@ -6372,7 +6372,8 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         serviceDetailsPopup.clickServiceDetailsDoneButton();
 
         orderMonitorScreen.clickStartOrderButton();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER);
+        final LocalDate repairOrderDate = LocalDate.now();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER, repairOrderDate.format(df)));
 
         MonitorServiceData secondMonitorServiceData = orderMonitorData.getMonitorServicesData().get(1);
         orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());

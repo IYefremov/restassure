@@ -57,6 +57,11 @@ public class RegularServiceDetailsScreenValidations {
         Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
     }
 
+    public static void verifyServiceAdjustmentsValue(String expectedAdjustmentValue) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getServiceAdjustmentsValue(), expectedAdjustmentValue);
+    }
+
     public static void verifyLaborServiceTimeValue(String expectedTime) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         Assert.assertEquals(selectedServiceDetailsScreen.getTimeValue(), expectedTime);
