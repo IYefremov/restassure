@@ -24,8 +24,8 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOAddNewPartDial
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORONotesPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValidations;
@@ -354,6 +354,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void verifyUserCanEditDeviceSettings(String rowID, String description, JSONObject testData) {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
+        VNextBOActiveDevicesTabSteps.openActiveDevicesTab();
         VNextBOSearchPanelSteps.searchByText(data.getDeviceName());
         VNextBOActiveDevicesTabSteps.openEditDeviceDialog(data.getDeviceName());
         VNextBOEditDeviceDialogSteps.setNewDeviceValuesAndSubmit(data);
@@ -366,7 +367,6 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeVendorPrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-        final VNextBOROPageValidations roPageVerifications = new VNextBOROPageValidations();
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());

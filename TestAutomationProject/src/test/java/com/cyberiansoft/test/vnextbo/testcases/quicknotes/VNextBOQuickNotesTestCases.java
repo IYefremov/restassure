@@ -30,14 +30,14 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
 
     @Override
     @BeforeMethod
-    public void login() {
+    public void setUp() {
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
         final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
         VNextBOLoginSteps.userLogin(userName, userPassword);
         VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel();
-        headerPanel.executeJsForAddOnSettings(); //todo use the method getJsForAddOnSettings() from VNextBOLaborServiceData.java after fix
+        headerPanel.executeJsForAddOnSettings();
         leftMenu = new VNexBOLeftMenuPanel();
     }
 

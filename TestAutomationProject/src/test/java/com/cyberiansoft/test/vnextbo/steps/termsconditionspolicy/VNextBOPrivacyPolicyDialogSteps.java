@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy;
 
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOFooterPanelInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOFooterPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.termsconditionspolicy.VNextBOPrivacyPolicyDialogInteractions;
 import com.cyberiansoft.test.vnextbo.validations.termsconditionspolicy.VNextBOPrivacyPolicyDialogValidations;
 

@@ -27,6 +27,9 @@ public class VNextBOInspectionsApprovalWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@class='btn icon ok middle' and @value='SaveWholeEstimation']")
     private WebElement generalApproveButton;
 
+    @FindBy(id = "btnApprove")
+    private WebElement generalApproveWithNoteButton;
+
     @FindBy(xpath = "//button[@class='btn icon save middle' and @value='SaveWholeEstimation']")
     private WebElement saveButton;
 

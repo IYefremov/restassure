@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
@@ -31,7 +32,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     private String userPassword;
     private VNextBOForgotPasswordWebPage forgotPasswordPage;
 
-    @Override
     @BeforeClass
     public void login() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginForgotPasswordTD();
@@ -42,6 +42,10 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         VNextBOLoginInteractions.clickForgotPasswordLink();
         forgotPasswordPage = new VNextBOForgotPasswordWebPage();
     }
+
+    @Override
+    @BeforeMethod
+    public void setUp() {}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserIsRedirectedToForgotPasswordPage(String rowID, String description, JSONObject testData) {
