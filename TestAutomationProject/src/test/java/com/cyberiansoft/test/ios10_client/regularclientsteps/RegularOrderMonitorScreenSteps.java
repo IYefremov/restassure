@@ -68,6 +68,8 @@ public class RegularOrderMonitorScreenSteps {
         selectOrderPhase(orderMonitorData);
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.clickAssignTechnician();
+        if (orderMonitorData.getPhaseVendor() != null)
+            orderMonitorScreen.selectPhaseVendor(orderMonitorData.getPhaseVendor());
         RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
         RegularServiceDetailsScreenSteps.saveServiceDetails();
     }

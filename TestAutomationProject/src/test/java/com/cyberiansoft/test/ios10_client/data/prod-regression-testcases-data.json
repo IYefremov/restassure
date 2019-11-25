@@ -2434,5 +2434,441 @@
         }
       }
     }
+  ],
+  "testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection": [
+    {
+      "rowID": "testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection.01",
+      "description": "Test Case: 82 - Inspections: Verify that it is not possible to Add Supplement for Draft Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93620",
+          "testCaseTitle": "Test Case: 82 - Inspections: Verify that it is not possible to Add Supplement for Draft Inspection"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Question for order test",
+            "questionsData": [
+              {
+                "questionAnswer": "Full",
+                "listQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QWERTY Long Long Long Long Long Long LongLong Long Long Long Long Long Long QUESTION_TextView",
+                "questionAnswer": "Test text",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Immediate Attention Required",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              }
+            ]
+          },
+          {
+            "screenName": "A lot of answers",
+            "questionsData": [
+              {
+                "questionName": "QuestionTypeTrafficLight_Q2",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeLogical_Q3",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeMultiSelect_Q5",
+                "questionAnswers": [
+                  "A1",
+                  "A3",
+                  "A5"
+                ],
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeSelect_Q4",
+                "questionAnswer": "A3",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeText_Q6",
+                "questionAnswer": "Test answer",
+                "textQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "imageQuestion": {
+                  "questionName": "QuestionTypeImage_Q7",
+                  "numberOFImages": 1
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeDate_Q8"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeTime_Q9"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "signatureQuestion": {
+                  "questionName": "QuestionTypeHandwriting_Q10"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyCreatingInspectionAndWOWithALotOfPagesQFVisualPagesPriceMatrixServicePackages": [
+    {
+      "rowID": "testVerifyCreatingInspectionAndWOWithALotOfPagesQFVisualPagesPriceMatrixServicePackages.01",
+      "description": "Test Case: 42 - Verify creating Inspection and WO with a lot of pages (QF, visual pages, price matrix, service packages, )",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97008",
+          "testCaseTitle": "Test Case: 42 - Verify creating Inspection and WO with a lot of pages (QF, visual pages, price matrix, service packages, )"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Question for order test",
+            "questionsData": [
+              {
+                "questionAnswer": "Full",
+                "listQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QWERTY Long Long Long Long Long Long LongLong Long Long Long Long Long Long QUESTION_TextView",
+                "questionAnswer": "Test text",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Immediate Attention Required",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              }
+            ]
+          },
+          {
+            "screenName": "A lot of answers",
+            "questionsData": [
+              {
+                "questionName": "QuestionTypeTrafficLight_Q2",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeLogical_Q3",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeMultiSelect_Q5",
+                "questionAnswers": [
+                  "A1",
+                  "A3",
+                  "A5"
+                ],
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeSelect_Q4",
+                "questionAnswer": "A3",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeText_Q6",
+                "questionAnswer": "Test answer",
+                "textQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "imageQuestion": {
+                  "questionName": "QuestionTypeImage_Q7",
+                  "numberOFImages": 1
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeDate_Q8"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeTime_Q9"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "signatureQuestion": {
+                  "questionName": "QuestionTypeHandwriting_Q10"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              }
+            ]
+          }
+        ],
+        "servicesScreen": {
+          "screenName": "Question Answers",
+          "moneyService": {
+            "serviceName": "SR_Money_Vehicle",
+            "servicePrice": "20",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Dashboard"
+              }
+            ]
+          }
+        },
+        "inspectionTotalPrice": "$61.00"
+      }
+    }
+  ],
+  "testVerifyThatWhenAddSupplementAfterApproveStatusOfServicesIsChangedToNew": [
+    {
+      "rowID": "testVerifyThatWhenAddSupplementAfterApproveStatusOfServicesIsChangedToNew.01",
+      "description": "Test Case: 83 - Inspections: Verify that when add supplement after approve status of services is changed to New",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97008",
+          "testCaseTitle": "Test Case: 83 - Inspections: Verify that when add supplement after approve status of services is changed to New"
+        }
+      ],
+      "inspectionData": {
+        "wholesailCustomer": {
+          "companyName": "Amazimg Nissan"
+        },
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Question for order test",
+            "questionsData": [
+              {
+                "questionAnswer": "Full",
+                "listQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              },
+              {
+                "questionAnswer": "Yes",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QWERTY Long Long Long Long Long Long LongLong Long Long Long Long Long Long QUESTION_TextView",
+                "questionAnswer": "Test text",
+                "textQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 0
+              },
+              {
+                "questionAnswer": "Immediate Attention Required",
+                "listQuestion": true,
+                "screenIndex": 1,
+                "screenHDIndex": 1
+              }
+            ]
+          },
+          {
+            "screenName": "A lot of answers",
+            "questionsData": [
+              {
+                "questionName": "QuestionTypeTrafficLight_Q2",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeLogical_Q3",
+                "logicalQuestion": true,
+                "logicalQuestionValue": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeMultiSelect_Q5",
+                "questionAnswers": [
+                  "A1",
+                  "A3",
+                  "A5"
+                ],
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeSelect_Q4",
+                "questionAnswer": "A3",
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "questionName": "QuestionTypeText_Q6",
+                "questionAnswer": "Test answer",
+                "textQuestion": true,
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "imageQuestion": {
+                  "questionName": "QuestionTypeImage_Q7",
+                  "numberOFImages": 1
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeDate_Q8"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "datePickerQuestion": {
+                  "questionName": "QuestionTypeTime_Q9"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              },
+              {
+                "signatureQuestion": {
+                  "questionName": "QuestionTypeHandwriting_Q10"
+                },
+                "screenIndex": 0,
+                "screenHDIndex": 0
+              }
+            ]
+          }
+        ],
+        "servicesScreen": {
+          "screenName": "Question Answers",
+          "moneyService": {
+            "serviceName": "SR_Money_Vehicle",
+            "servicePrice": "20",
+            "serviceStatus": "Approved",
+            "vehiclePart":
+              {
+                "vehiclePartName": "Dashboard"
+              }
+          }
+        },
+        "moneyService": {
+          "serviceName": "Dye_Panel",
+          "serviceStatus": "Skipped"
+        },
+        "inspectionTotalPrice": "$61.00",
+        "inspApprovedPrice": "$20.00"
+      }
+    }
   ]
 }

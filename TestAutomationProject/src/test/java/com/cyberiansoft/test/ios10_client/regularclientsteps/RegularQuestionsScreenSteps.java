@@ -48,9 +48,24 @@ public class RegularQuestionsScreenSteps {
             questionsScreen.selectListQuestion(questionData);
         else if (questionData.getQuestionAnswer() != null)
             questionsScreen.answerQuestion(questionData);
-        else if (questionData.isSignatureQuestion())
-            questionsScreen.drawRegularSignature();
-        else
+        else if (questionData.getImageQuestion() != null) {
+            if (questionData.getImageQuestion().getQuestionName() != null)
+                questionsScreen.clickQuestionCell(questionData.getImageQuestion().getQuestionName());
+            RegularNotesScreenSteps.addImegesFromLibrary(questionData.getImageQuestion().getNumberOFImages());
+            RegularNotesScreenSteps.clickBackButton();
+        } else if (questionData.getDatePickerQuestion() != null) {
+            if (questionData.getDatePickerQuestion().getQuestionName() != null)
+                questionsScreen.clickQuestionCell(questionData.getDatePickerQuestion().getQuestionName());
+            questionsScreen.clickDoneButton();
+        }
+        else if (questionData.getSignatureQuestion() != null) {
+            if (questionData.getSignatureQuestion().getQuestionName() != null) {
+                questionsScreen.clickQuestionCell(questionData.getSignatureQuestion().getQuestionName());
+                questionsScreen.drawQuestionFormSignature();
+                questionsScreen.clickSave();
+            } else
+                questionsScreen.drawSignature();
+        } else
             questionsScreen.answerQuestion(questionData);
     }
 

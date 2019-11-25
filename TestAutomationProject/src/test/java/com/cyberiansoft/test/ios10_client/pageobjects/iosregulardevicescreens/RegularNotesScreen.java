@@ -144,4 +144,13 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 		deleteImgBtn.click();
 	}
 
+	public void clickCancelGallery() {
+		appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Photos'")).
+				findElement(MobileBy.AccessibilityId("Cancel")).click();
+	}
+
+	public void clickBackButton() {
+		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularNotesScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
@@ -112,6 +113,11 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 		swipeToElement(vehicleinfotbl.findElement(By.xpath("//XCUIElementTypeCell[@name='Advisor']")));
 		vehicleinfotbl.findElementByAccessibilityId("Advisor").click();
 		appiumdriver.findElementByAccessibilityId(advisor).click();
+	}
+
+	public void clickOwnerCell() {
+		swipeToElement(vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("type =  'XCUIElementTypeCell' AND name='Owner'")));
+		vehicleinfotbl.findElementByAccessibilityId("Owner").click();
 	}
 	
 	

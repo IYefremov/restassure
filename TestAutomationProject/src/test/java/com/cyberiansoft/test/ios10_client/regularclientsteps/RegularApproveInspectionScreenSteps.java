@@ -1,8 +1,9 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularApproveInspectionsScreen;
 
-public class RegularApproveInspectionScreenActions {
+public class RegularApproveInspectionScreenSteps {
 
     public static void clickApproveAllServicesButton() {
         RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
@@ -33,5 +34,10 @@ public class RegularApproveInspectionScreenActions {
     public static void clickDeclinePopupButton() {
         RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
         approveInspectionsScreen.clickDeclinePopupButton();
+    }
+
+    public static void selectApproveInspectionServiceStatus(ServiceData serviceData) {
+        RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
+        approveInspectionsScreen.selectApproveInspectionServiceStatus(serviceData);
     }
 }

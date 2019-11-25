@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceBundleScreen;
@@ -20,8 +19,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
-
-    final static String defaultServiceValue = "Test Tax";
 
     @iOSXCUITFindBy(accessibility = "SelectedServicesView")
     private IOSElement selectedservicestable;
@@ -150,13 +147,13 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
 
     public void clickOnSelectedService(String serviceName) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)));
-        List<MobileElement> selectedservices = selectedservicestable.findElementsByAccessibilityId(serviceName);
-        if (selectedservices.size() > 1) {
-            ((WebElement) selectedservicestable.findElementsByAccessibilityId(serviceName).get(1)).click();
-        } else {
-            selectedservices.get(0).click();
-        }
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName))).click();
+    }
+
+    public void clickCustomServiceDetailsButton(String serviceName) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName)))
+                .findElement(MobileBy.AccessibilityId("custom detail button")).click();
     }
 
     public RegularSelectedServiceBundleScreen openSelectBundleServiceDetails(String serviceName) {
@@ -192,18 +189,13 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public boolean isServiceApproved(String serviceName) {
-        return selectedservicestable.findElement(MobileBy.iOSNsPredicateString("name CONTAINS '" +
+        return appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.iOSNsPredicateString("name CONTAINS '" +
                 serviceName + "' and type = 'XCUIElementTypeCell'")).findElements(MobileBy.AccessibilityId("SelectedServiceIcon_Selected")).size() > 0;
     }
 
     public boolean isServiceDeclinedSkipped(String serviceName) {
-        return selectedservicestable.findElement(MobileBy.iOSNsPredicateString("name CONTAINS '" +
+        return appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.iOSNsPredicateString("name CONTAINS '" +
                 serviceName + "' and type = 'XCUIElementTypeCell'")).findElements(MobileBy.AccessibilityId("SelectedServiceIcon_Declined")).size() > 0;
-    }
-
-    public boolean isDefaultServiceIsSelected() {
-        return selectedservicestable.findElement(MobileBy.iOSNsPredicateString("name = '" +
-                defaultServiceValue + "' and type = 'XCUIElementTypeCell'")).isDisplayed();
     }
 
 }

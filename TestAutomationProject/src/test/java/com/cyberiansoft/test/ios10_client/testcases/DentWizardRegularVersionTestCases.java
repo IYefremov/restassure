@@ -1410,8 +1410,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertTrue(alertText.contains(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO));
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO);
         teamWorkOrdersScreen.clickHomeButton();
     }
 
@@ -2499,8 +2498,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularWorkOrdersSteps.saveWorkOrder();
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
-        String alertText = Helpers.getAlertTextAndAccept();
-        Assert.assertTrue(alertText.contains(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO));
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO);
         teamWorkOrdersScreen.clickHomeButton();
     }
 

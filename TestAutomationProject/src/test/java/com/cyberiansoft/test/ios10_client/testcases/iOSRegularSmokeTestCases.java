@@ -314,6 +314,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
 		final String license = "Iphone_Test_Spec_Client";
+		final String percService = "Test Tax";
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
@@ -357,7 +358,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.selectService(workOrderData.getMoneyServiceData().getServiceName());
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		Assert.assertTrue(selectedServicesScreen.isDefaultServiceIsSelected());
+		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(percService));
 		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(workOrderData.getMoneyServiceData().getServiceName()));
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
@@ -683,7 +684,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		final VehicleInfoData vehicleInfoData = serviceRequestData.getVihicleInfo();
 		vehicleScreen.setVIN(vehicleInfoData.getVINNumber());
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.THE_VIN_IS_INCORRECT);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.THE_VIN_IS_INCORRECT);
 
 		vehicleScreen.setMakeAndModel(vehicleInfoData.getVehicleMake(), vehicleInfoData.getVehicleModel());
 		vehicleScreen.setColor(vehicleInfoData.getVehicleColor());
@@ -708,20 +709,15 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularClaimScreen claimScreen = new RegularClaimScreen();
 		claimScreen.selectInsuranceCompany(serviceRequestData.getInsuranceCompany().getInsuranceCompanyName());
 		servicesScreen.clickSave();
-		Helpers.waitForAlert();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 
-		questionsScreen.drawRegularSignature();
+		questionsScreen.drawSignature();
 		servicesScreen.clickSave();
-		Helpers.waitForAlert();
-		alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);;
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);;
 		questionsScreen.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
 		servicesScreen.clickSave();
-		String alerText = Helpers.getAlertTextAndCancel();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		serviceRequestSscreen.waitForServiceRequestScreenLoad();
 		final String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.ON_HOLD.getValue());
@@ -860,8 +856,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		selectedServicesScreen.waitSelectedServicesScreenLoaded();
 
 		selectedServicesScreen.clickSave();
-		Helpers.waitForAlert();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.THE_VIN_IS_INVALID_AND_SAVE_WORKORDER);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.THE_VIN_IS_INVALID_AND_SAVE_WORKORDER);
 		serviceRequestSscreen.waitForServiceRequestScreenLoad();
 		serviceRequestSscreen.clickHomeButton();
 
@@ -991,7 +986,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularInvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
 		RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
 		invoiceInfoScreen.clickSave();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_PO_IS_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_PO_IS_REQUIRED);
 		invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
 		String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
 		invoiceInfoScreen.clickSaveAsDraft();
@@ -1914,7 +1909,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		RegularNavigationSteps.navigateToServicesScreen();
 		servicesScreen.clickSave();
-		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		serviceRequestSscreen.waitForServiceRequestScreenLoad();
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSPTYPE_FOR_SR_INSPTYPE);
@@ -2002,19 +1997,16 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		servicesScreen.clickSave();
-		Helpers.waitForAlert();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 
-		questionsScreen.drawRegularSignature();
+		questionsScreen.drawSignature();
 		servicesScreen.clickSave();
 		Helpers.waitForAlert();
-		alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreenSteps.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
 		servicesScreen.clickSave();
-		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		final String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestSscreen.selectAppointmentRequestAction();
@@ -2033,8 +2025,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.SCHEDULED.getValue());
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestSscreen.selectRejectAction();
-		String alerText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		serviceRequestSscreen.clickHomeButton();
 	}
 
@@ -2063,20 +2054,17 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularServicesScreenSteps.waitServicesScreenLoad();
 		servicesScreen.clickSave();
-		Helpers.waitForAlert();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
 
-		questionsScreen.drawRegularSignature();
+		questionsScreen.drawSignature();
 		servicesScreen.clickSave();
 		Helpers.waitForAlert();
-		alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreenSteps.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
 
 		servicesScreen.clickSave();
-		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		serviceRequestSscreen.waitForServiceRequestScreenLoad();
 		final String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
@@ -2104,7 +2092,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestSscreen = new RegularServiceRequestsScreen();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestSscreen.selectRejectAction();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_REJECT_SERVICEREQUEST);
 		serviceRequestSscreen.clickHomeButton();
 	}
 
@@ -2191,7 +2179,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.selectLocation(workOrderData.getVehicleInfoData().getLocation());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
@@ -2216,12 +2203,12 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		Assert.assertTrue(orderMonitorScreen.isStartServiceButtonPresent());
 		orderMonitorScreen.clickServiceStatusCell();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_YOU_MUST_SERVICE_PHASE_BEFORE_CHANGING_STATUS);
 		orderMonitorScreen.clickStartService();
 		orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		orderMonitorScreen.setCompletedServiceStatus();
 		Assert.assertEquals(orderMonitorScreen.getPanelStatus(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName()), orderMonitorData.getMonitorServiceData().getMonitorServiceStatus());
-		teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
+		RegularNavigationSteps.navigateBackScreen();
 		RegularNavigationSteps.navigateBackScreen();
 	}
 
@@ -2270,7 +2257,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(orderMonitorScreen.isRepairPhaseExists());
 		Assert.assertTrue(orderMonitorScreen.isStartPhaseButtonExists());
 		orderMonitorScreen.clicksRepairPhaseLine();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_YOU_MUST_START_PHASE_BEFORE_CHANGING_STATUS);
 		orderMonitorScreen.clickStartPhaseButton();
 
 		orderMonitorScreen.selectPanel(dyeService);
@@ -2278,7 +2265,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(orderMonitorScreen.isServiceStartDateExists());
 
 		orderMonitorScreen.clickServiceStatusCell();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_YOU_CANNOT_CHANGE_STATUS_OF_SERVICE_FOR_THIS_PHASE);
 		orderMonitorScreen.clickServiceDetailsDoneButton();
 
 		orderMonitorScreen.clicksRepairPhaseLine();
@@ -2566,7 +2553,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.selectService(serviceRequestData.getMoneyService().getServiceName());
 		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.clickSave();
-		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 
 		String serviceRequestNumber1 = serviceRequestSscreen.getFirstServiceRequestNumber();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber1);
@@ -2609,8 +2596,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.selectService(serviceRequestData.getMoneyService().getServiceName());
 		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.clickSave();
-		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-		serviceRequestSscreen = new RegularServiceRequestsScreen();
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.ON_HOLD.getValue());
 
@@ -2819,7 +2805,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
-			Assert.assertEquals(Helpers.getAlertTextAndAccept(), String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
+			AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
 			RegularServicesScreenSteps.waitServicesScreenLoad();
 		}
 		RegularServicesScreenSteps.switchToSelectedServices();
@@ -3007,8 +2993,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		Assert.assertTrue(serviceRequestSscreen.isCloseActionExists());
 		serviceRequestSscreen.selectCloseAction();
-		String alerText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
 		serviceRequestSscreen.clickCancelCloseReasonDialog();
 		serviceRequestSscreen.clickHomeButton();
 	}
@@ -3045,8 +3030,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
 		Assert.assertTrue(serviceRequestSscreen.isCloseActionExists());
 		serviceRequestSscreen.selectCloseAction();
-		String alerText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
 		serviceRequestSscreen.selectUIAPickerValue(answerReason);
 		serviceRequestSscreen.clickDoneCloseReasonDialog();
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
@@ -3087,8 +3071,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
 		Assert.assertTrue(serviceRequestSscreen.isCloseActionExists());
 		serviceRequestSscreen.selectCloseAction();
-		String alerText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CLOSE_SERVICEREQUEST);
 		serviceRequestSscreen.selectDoneReason(answerReason);
 		Assert.assertFalse(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
 		serviceRequestSscreen.clickHomeButton();
@@ -3119,8 +3102,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		servicesScreen.clickSave();
-		String alerText = Helpers.getAlertTextAndCancel();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestSscreen.selectCreateWorkOrderRequestAction();
@@ -3138,7 +3120,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.clickSave();
 
 		for (int i = 0; i < serviceRequestData.getMoneyServices().size(); i++) {
-			alerText = Helpers.getAlertTextAndAccept();
+			String alerText = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerText.substring(alerText.indexOf("'") + 1, alerText.lastIndexOf("'"));
 			RegularServicesScreenSteps.switchToSelectedServices();
 			for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
@@ -3187,9 +3169,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		servicesScreen.clickSave();
-		String alerText = Helpers.getAlertTextAndCancel();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-		serviceRequestSscreen = new RegularServiceRequestsScreen();
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_FOR_CALC);
 		RegularVehicleInfoScreenSteps.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo());
@@ -3204,7 +3184,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		selectedServicesScreen.clickSave();
 
 		for (int i = 0; i < serviceRequestData.getMoneyServices().size(); i++) {
-			alerText = Helpers.getAlertTextAndAccept();
+			String alerText = Helpers.getAlertTextAndAccept();
 			String servicedetails = alerText.substring(alerText.indexOf("'") + 1, alerText.lastIndexOf("'"));
 			RegularServicesScreenSteps.switchToSelectedServices();
 			for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
@@ -3622,11 +3602,11 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		}
 		servicesScreen.waitServicesScreenLoaded();
 		RegularInspectionsSteps.saveInspectionAsFinal();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_SIGNATURE_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
-		questionsScreen.drawRegularSignature();
+		questionsScreen.drawSignature();
 		RegularInspectionsSteps.saveInspectionAsFinal();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
 		RegularQuestionsScreenSteps.answerQuestion(inspectionData.getQuestionScreensData().get(1).getQuestionData());
 		RegularInspectionsSteps.saveInspectionAsFinal();
 		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
@@ -4581,7 +4561,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		myInvoicesScreen.selectInvoice(invoiceNumber);
 		RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHANGE_PO);
 		myInvoicesScreen.changePO(invoiceData.getNewPoNumber());
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
 		myInvoicesScreen.clickCancel();
 
 		myInvoicesScreen.switchToTeamView();
@@ -4590,7 +4570,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamInvoicesScreen.selectInvoice(invoiceNumber);
 		RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CHANGE_PO);
 		teamInvoicesScreen.changePO(invoiceData.getNewPoNumber());
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
 		teamInvoicesScreen.clickCancel();
 		teamInvoicesScreen.clickHomeButton();
 	}
@@ -4963,13 +4943,13 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			if (serviceData.getServicePrice().equals(zeroPrice)) {
 				RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
 				if (serviceData.getServicePrice().equals(zeroPrice))
-					Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
+					AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
 				selectedServiceDetailsScreen.clickTechniciansIcon();
-				Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+				AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
 			} else {
 
 				selectedServiceDetailsScreen.clickTechniciansIcon();
-				Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
+				AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
 				selectedServiceDetailsScreen.cancelSelectedServiceDetails();
 				selectedServiceDetailsScreen.setServiceRateValue(serviceData.getServicePrice());
 				selectedServiceDetailsScreen.clickTechniciansIcon();
@@ -4981,8 +4961,13 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			selectedServiceDetailsScreen.searchTechnician(serviceData.getServiceNewTechnician().getTechnicianFirstName());
 			selectedServiceDetailsScreen.selecTechnician(serviceData.getServiceNewTechnician().getTechnicianFullName());
 			selectedServiceDetailsScreen.cancelSearchTechnician();
-			RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(serviceData.getServiceDefaultTechnician());
-			RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(serviceData.getServiceNewTechnician());
+			if (serviceData.getServicePrice().equals(zeroPrice)) {
+				Assert.assertFalse(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
+				Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
+			} else {
+				Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
+				Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
+			}
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
@@ -5009,7 +4994,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		vehicleScreen.clickSave();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TRIM_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TRIM_REQUIRED);
 		vehicleScreen.setTrim(trimvalue);
 		Assert.assertEquals(vehicleScreen.getTrim(), trimvalue);
 
@@ -5267,9 +5252,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.clickChangeScreen();
 		vehicleScreen.clickCancel();
-		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.STOP_WORKORDER_CREATION);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_CREATION);
 		vehicleScreen.clickCancel();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.STOP_WORKORDER_CREATION);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_CREATION);
 
 		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		String workOrderNumber = myWorkOrdersScreen.getFirstWorkOrderNumberValue();
@@ -5277,14 +5262,13 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.clickChangeScreen();
 		vehicleScreen.clickCancel();
-		Assert.assertEquals(Helpers.getAlertTextAndCancel(), AlertsCaptions.STOP_WORKORDER_EDIT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_EDIT);
 		vehicleScreen.clickCancel();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.STOP_WORKORDER_EDIT);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_EDIT);
 
 		RegularMyWorkOrdersSteps.openWorkOrderDetails(workOrderNumber);
 		vehicleScreen.clickChangeScreen();
 		vehicleScreen.clickCancel();
-
 		RegularNavigationSteps.navigateBackScreen();
 	}
 
@@ -5336,9 +5320,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(serviceRequestSscreen.isAcceptActionExists());
 		Assert.assertTrue(serviceRequestSscreen.isDeclineActionExists());
 		serviceRequestSscreen.selectAcceptAction();
-
-		String alerText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
 
 		Assert.assertTrue(serviceRequestSscreen.isServiceRequestOnHold(serviceRequestNumber));
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
@@ -5398,8 +5380,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(serviceRequestSscreen.isDeclineActionExists());
 		serviceRequestSscreen.selectDeclineAction();
 
-		String alerText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alerText, AlertsCaptions.ALERT_DECLINE_SERVICEREQUEST);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_DECLINE_SERVICEREQUEST);
 		serviceRequestSscreen.clickDoneCloseReasonDialog();
 		serviceRequestSscreen.waitForServiceRequestScreenLoad();
 		Assert.assertFalse(serviceRequestSscreen.isServiceRequestExists(serviceRequestNumber));
@@ -5547,7 +5528,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		servicesScreen.clickTechnicianToolbarIcon();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.NO_SELECTED_SERVICES);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.NO_SELECTED_SERVICES);
 		for (DamageData damageData : workOrderData.getDamagesData()) {
 			RegularServicesScreenSteps.selectPanelServiceData(damageData);
 			servicesScreen.clickBackServicesButton();
@@ -5750,7 +5731,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		orderMonitorScreen.clickServiceDetailsDoneButton();
 
 		orderMonitorScreen.clickStartOrderButton();
-		Assert.assertTrue(Helpers.getAlertTextAndAccept().contains(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER);
 		orderMonitorScreen = new RegularOrderMonitorScreen();
 
 		MonitorServiceData secondMonitorServiceData = orderMonitorData.getMonitorServicesData().get(1);
@@ -6134,10 +6115,10 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
 
 		vehiclePartScreen.setPrice(serviceZeroPrice);
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT);
 
 		vehiclePartScreen.clickOnTechnicians();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_VEHICLE_PART);
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(vehiclePartData.getServiceDefaultTechnician().getTechnicianFullName()));
 		Assert.assertEquals(selectedServiceDetailsScreen.getTechnicianPrice(vehiclePartData.getServiceDefaultTechnician().getTechnicianFullName()), PricesCalculations.getPriceRepresentation(serviceZeroPrice));
@@ -6696,22 +6677,19 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
 		orderMonitorScreen.selectPanel(workOrderData.getMatrixServiceData().getMatrixServiceName());
 		orderMonitorScreen.clickServiceStatusCell();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
 		orderMonitorScreen.clickServiceDetailsCancelButton();
 
 		orderMonitorScreen.clickStartPhase();
 		orderMonitorScreen.selectPanel(workOrderData.getMatrixServiceData().getMatrixServiceName());
 		orderMonitorScreen.clickServiceStatusCell();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
 		orderMonitorScreen.clickServiceDetailsCancelButton();
 
 		orderMonitorScreen.clickStartPhaseCheckOutButton();
 		orderMonitorScreen.selectPanel(workOrderData.getMatrixServiceData().getMatrixServiceName());
 		orderMonitorScreen.clickServiceStatusCell();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
 		orderMonitorScreen.clickServiceDetailsCancelButton();
 
 		orderMonitorScreen.changeStatusForStartPhase(OrderMonitorPhases.COMPLETED);
@@ -6815,10 +6793,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
 
 		orderMonitorScreen.clickStartOrderButton();
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
-		orderMonitorScreen = new RegularOrderMonitorScreen();
-
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
 		orderMonitorScreen.clickBackButton();
 		teamWorkOrdersScreen.clickHomeButton();
 
@@ -6877,8 +6852,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		orderMonitorScreen.selectPanel(workOrderData.getServicesList().get(workOrderData.getServicesList().size() - 1));
 		orderMonitorScreen.clickServiceStatusCell();
 
-		Assert.assertEquals(Helpers.getAlertTextAndAccept(),
-				AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
 		orderMonitorScreen.clickServiceDetailsCancelButton();
 		orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.clickOrderStartDateButton();

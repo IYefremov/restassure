@@ -37,7 +37,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
@@ -106,9 +105,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
 
         RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionID);
-        RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
-        RegularApproveInspectionScreenActions.saveApprovedServices();
-        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+        RegularApproveInspectionScreenSteps.clickApproveAllServicesButton();
+        RegularApproveInspectionScreenSteps.saveApprovedServices();
+        RegularApproveInspectionScreenSteps.clickSingnAndDrawSignature();
 
         RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionID, inspectionData.getInspectionTotalPrice());
         RegularMyInspectionsScreenValidations.verifyInspectionApprovedPrice(inspectionID, inspectionData.getInspectionTotalPrice());
@@ -450,9 +449,9 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularInspectionsSteps.saveInspectionAsFinal();
 
         RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionNumber);
-        RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
-        RegularApproveInspectionScreenActions.saveApprovedServices();
-        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+        RegularApproveInspectionScreenSteps.clickApproveAllServicesButton();
+        RegularApproveInspectionScreenSteps.saveApprovedServices();
+        RegularApproveInspectionScreenSteps.clickSingnAndDrawSignature();
 
         RegularMyInspectionsSteps.selectSendEmailMenuForInspection(inspectionNumber);
 
@@ -743,17 +742,17 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         }
         RegularMyInspectionsScreenValidations.verifyApproveIconPresentForInspection(inspectionsIDs.get(0), true);
         RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionsIDs.get(0));
-        RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
-        RegularApproveInspectionScreenActions.saveApprovedServices();
-        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+        RegularApproveInspectionScreenSteps.clickApproveAllServicesButton();
+        RegularApproveInspectionScreenSteps.saveApprovedServices();
+        RegularApproveInspectionScreenSteps.clickSingnAndDrawSignature();
         RegularMyInspectionsScreenValidations.verifyApproveIconPresentForInspection(inspectionsIDs.get(0), false);
 
         RegularMyInspectionsSteps.switchToTeamView();
         RegularMyInspectionsScreenValidations.verifyApproveIconPresentForInspection(inspectionsIDs.get(1), true);
         RegularMyInspectionsSteps.selectInspectionForApprovaViaAction(inspectionsIDs.get(1));
-        RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
-        RegularApproveInspectionScreenActions.saveApprovedServices();
-        RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+        RegularApproveInspectionScreenSteps.clickApproveAllServicesButton();
+        RegularApproveInspectionScreenSteps.saveApprovedServices();
+        RegularApproveInspectionScreenSteps.clickSingnAndDrawSignature();
         RegularMyInspectionsScreenValidations.verifyApproveIconPresentForInspection(inspectionsIDs.get(1), false);
 
         RegularNavigationSteps.navigateBackScreen();
@@ -1378,8 +1377,11 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularSummaryApproveScreenSteps.approveWorkOrder();
 
         RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
-        RegularVehicleInfoScreenSteps.selectAdditionalTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
-        RegularAlertValidations.acceprAlertAndVerifyAlertMessage(AlertsCaptions.CHANGING_DEFAULT_EMPLOYEES);
+        RegularVehicleInfoScreenSteps.clickTech();
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
+        RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
         for (ServiceData serviceData : workOrderData.getServicesScreen().getMoneyServices()) {
@@ -1519,14 +1521,14 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         for (InspectionData inspectionData : inspectionsData) {
             RegularCustomersScreenSteps.clickOnCustomer(inspectionData.getWholesailCustomer());
-            RegularApproveInspectionScreenActions.selectInspectionForApprove(inspectionData.getInspectionNumber());
+            RegularApproveInspectionScreenSteps.selectInspectionForApprove(inspectionData.getInspectionNumber());
             if (!inspectionData.getWholesailCustomer().getCompany().equals(companyInspToDecline)) {
-                RegularApproveInspectionScreenActions.clickApproveAllServicesButton();
-                RegularApproveInspectionScreenActions.saveApprovedServices();
+                RegularApproveInspectionScreenSteps.clickApproveAllServicesButton();
+                RegularApproveInspectionScreenSteps.saveApprovedServices();
             } else
-                RegularApproveInspectionScreenActions.clickDeclinePopupButton();
+                RegularApproveInspectionScreenSteps.clickDeclinePopupButton();
 
-            RegularApproveInspectionScreenActions.clickSingnAndDrawSignature();
+            RegularApproveInspectionScreenSteps.clickSingnAndDrawSignature();
         }
 
         RegularNavigationSteps.navigateBackScreen();
@@ -2155,7 +2157,106 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularHomeScreenSteps.navigateToStatusScreen();
         RegularStatusScreenSteps.resendInspectionsAndWorkOrders();
         NavigationSteps.navigateBackScreen();
+    }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyThatItIsNotPossibleToAddSupplementForDraftInspection(String rowID,
+                                                                               String description, JSONObject testData) {
 
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        RetailCustomer vehicleOwner = new RetailCustomer("Testowner", "Testownerlast");
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_SUPPLEMENT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularVehicleInfoScreenSteps.selectOwner(vehicleOwner);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        for (QuestionScreenData questionScreenData : inspectionData.getQuestionScreensData())
+            RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(questionScreenData);
+
+        RegularInspectionsSteps.saveInspectionAsDraft();
+        RegularMyInspectionsSteps.selectInspection(inspectionNumber);
+        RegularMenuValidations.menuShouldBePresent(ReconProMenuItems.ADD_SUPPLEMENT, false);
+        RegularMenuItemsScreenSteps.closeMenuScreen();
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyCreatingInspectionAndWOWithALotOfPagesQFVisualPagesPriceMatrixServicePackages(String rowID,
+                                                                               String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        RetailCustomer vehicleOwner = new RetailCustomer("Testowner", "Testownerlast");
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_SUPPLEMENT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularVehicleInfoScreenSteps.selectOwner(vehicleOwner);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        for (QuestionScreenData questionScreenData : inspectionData.getQuestionScreensData())
+            RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(questionScreenData);
+
+        RegularNavigationSteps.swipeScreenRight();
+        RegularNavigationSteps.swipeScreenRight();
+        RegularSelectedServicesSteps.openSelectedServiceDetailsViaCustomButton(inspectionData.getServicesScreen().getMoneyService().getServiceName());
+        RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(inspectionData.getServicesScreen().getMoneyService());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getInspectionTotalPrice());
+
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyThatWhenAddSupplementAfterApproveStatusOfServicesIsChangedToNew(String rowID,
+                                                                                                        String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        RetailCustomer vehicleOwner = new RetailCustomer("Testowner", "Testownerlast");
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsSteps.startCreatingInspection(inspectionData.getWholesailCustomer(), UATInspectionTypes.INSP_SUPPLEMENT);
+        RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());
+        final String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
+        RegularVehicleInfoScreenSteps.selectOwner(vehicleOwner);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        for (QuestionScreenData questionScreenData : inspectionData.getQuestionScreensData())
+            RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(questionScreenData);
+
+        RegularNavigationSteps.swipeScreenRight();
+        RegularNavigationSteps.swipeScreenRight();
+        RegularSelectedServicesSteps.openSelectedServiceDetailsViaCustomButton(inspectionData.getServicesScreen().getMoneyService().getServiceName());
+        RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(inspectionData.getServicesScreen().getMoneyService());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+        RegularMyInspectionsScreenValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getInspectionTotalPrice());
+
+        RegularMyInspectionsSteps.selectInspectionForAddingSupplement(inspectionNumber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.selectService(inspectionData.getMoneyServiceData().getServiceName());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+
+        RegularMyInspectionsSteps.selectInspectionForApprove(inspectionNumber);
+        RegularApproveInspectionScreenSteps.clickDeclineAllServicesButton();
+        RegularApproveInspectionScreenSteps.selectApproveInspectionServiceStatus(inspectionData.getServicesScreen().getMoneyService());
+        RegularApproveInspectionScreenSteps.selectApproveInspectionServiceStatus(inspectionData.getMoneyServiceData());
+        RegularApproveInspectionScreenSteps.saveApprovedServices();
+        RegularApproveInspectionScreenSteps.clickSingnAndDrawSignature();
+
+        RegularMyInspectionsScreenValidations.verifyInspectionApprovedPrice(inspectionNumber, inspectionData.getInspectionApprovedPrice());
+        RegularMyInspectionsSteps.selectInspectionForAddingSupplement(inspectionNumber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.switchToSelectedServices();
+        RegularSelectedServicesScreenValidations.verifyServiceDeclinedOrSkipped(inspectionData.getMoneyServiceData().getServiceName());
+        RegularNavigationSteps.swipeScreenRight();
+        RegularServicesQuestionsScreenValidations.verifyServiceApproved(inspectionData.getServicesScreen().getMoneyService().getServiceName());
+        RegularInspectionsSteps.saveInspectionAsFinal();
+
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

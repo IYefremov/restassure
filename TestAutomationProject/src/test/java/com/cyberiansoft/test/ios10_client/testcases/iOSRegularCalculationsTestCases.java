@@ -16,6 +16,7 @@ import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
+import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.ServicePartSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
@@ -83,14 +84,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		servicesScreen.clickSave();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_VIN_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_VIN_REQUIRED);
 
 		vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		vehicleScreen.clickSave();
-		alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_MAKE_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_MAKE_REQUIRED);
 
 		vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
@@ -125,13 +124,11 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInspectionsSteps.startCreatingInspection(testRetailCustomer, InspectionsTypes.DEFAULT);
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.clickSave();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_VIN_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_VIN_REQUIRED);
 		vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
 		final String inspectionNumber = vehicleScreen.getInspectionNumber();
 		vehicleScreen.clickSave();
-		alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, AlertsCaptions.ALERT_MAKE_REQUIRED);
+		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_MAKE_REQUIRED);
 
 		vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
 		vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
@@ -950,8 +947,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		orderSummaryScreen.clickSave();
 
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE, workOrderData.getWorkOrderPrice()));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE, workOrderData.getWorkOrderPrice()));
 		orderSummaryScreen.swipeScreenLeft();
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
@@ -1017,6 +1013,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickHomeButton();
 		homeScreen.clickMyWorkOrdersButton();
 		myWorkOrdersScreen.approveWorkOrder(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+		BaseUtils.waitABit(1000);
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrders.get(1));
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		vehicleScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
@@ -1029,8 +1026,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToInvoiceInfoScreen();
 		invoiceInfoScreen.addTeamWorkOrder(workOrders.get(1));
 		invoiceInfoScreen.clickSave();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, testCaseData.getInvoiceData().getInvoiceTotal()));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE, testCaseData.getInvoiceData().getInvoiceTotal()));
 		invoiceInfoScreen.swipeScreenLeft();
 		questionsScreen.waitQuestionsScreenLoaded();
 		RegularInvoicesSteps.cancelCreatingInvoice();
@@ -1057,8 +1053,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		RegularServicesScreenSteps.selectServiceWithServiceData(inspectionData.getServiceData());
 		servicesScreen.clickSave();
-		String alertText = Helpers.getAlertTextAndAccept();
-		Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INSPECTION_IS_HUGE, inspectionData.getInspectionPrice()));
+		AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_TOTAL_AMAUNT_OF_INSPECTION_IS_HUGE, inspectionData.getInspectionPrice()));
 
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
@@ -1098,7 +1093,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.swipeScreenUp();
 		questionsScreen.selectAnswerForQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
 		questionsScreen.clickSave();
-		Assert.assertTrue(Helpers.getAlertTextAndCancel().contains(AlertsCaptions.ALERT_CREATE_APPOINTMENT));
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_FOR_AUTO_WO_LINE_APPR_MULTISELECT);
@@ -1893,8 +1888,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			}
 			selectedServiceDetailsScreen.saveSelectedServiceDetails();
 			if (serviceData.isNotMultiple()) {
-				String alertText = Helpers.getAlertTextAndAccept();
-				Assert.assertEquals(alertText, String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
+				AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
 			}
 			Assert.assertEquals(selectedServiceBundleScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
 		}

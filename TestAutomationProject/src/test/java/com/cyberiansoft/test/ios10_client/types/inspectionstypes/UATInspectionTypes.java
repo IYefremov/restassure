@@ -9,6 +9,7 @@ public enum UATInspectionTypes implements IInspectionsTypes {
     INSPECTION_SERVICE_GROUP("Inspection_Service_Group_AQA"),
     INSPECTION_NO_GROUP("Inspection_No_Group"),
     AUTOCREATEWO("AutoCreateWO"),
+    INSP_SUPPLEMENT("Insp_Supplement"),
     INSP_ARBITRATION_DATE("Insp_arbitration_date");
 
     @Getter
