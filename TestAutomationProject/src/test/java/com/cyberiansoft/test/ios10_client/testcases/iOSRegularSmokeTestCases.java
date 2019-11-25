@@ -20,6 +20,7 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SinglePageInspectionScreen;
@@ -174,6 +175,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		addcustomerscreen.editCustomer(editedCustomer);
 		addcustomerscreen.clickSaveBtn();
 		Assert.assertTrue(customersScreen.checkCustomerExists(editedCustomer.getFirstName()));
+		customersScreen.clickCancel();
 		customersScreen.clickHomeButton();
 		homeScreen.clickLogoutButton();
 		mainScreen.updateDatabase();
@@ -398,64 +400,61 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
-
-		Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), workOrderData.getMoneyServiceData().getServicePrice());
-		Assert.assertEquals(selectedServiceDetailsScreen.getServiceAdjustmentsValue(), workOrderData.getMoneyServiceData().getServiceAdjustment().getAdjustmentTotalAmaunt());
-		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceQuantity());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
+		RegularServiceDetailsScreenValidations.verifyServicePriceValue(workOrderData.getMoneyServiceData().getServicePrice());
+		RegularServiceDetailsScreenValidations.verifyServiceAdjustmentsValue(workOrderData.getMoneyServiceData().getServiceAdjustment().getAdjustmentTotalAmaunt());
+		RegularServiceDetailsScreenSteps.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceQuantity());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		// =====================================
 
-		servicesScreen.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
-		Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), workOrderData.getPercentageServiceData().getServicePrice());
-		selectedServiceDetailsScreen.clickAdjustments();
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
+		RegularServiceDetailsScreenValidations.verifyServicePriceValue(workOrderData.getPercentageServiceData().getServicePrice());
+		RegularServiceDetailsScreenSteps.clickAdjustmentsCell();
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		Assert.assertEquals(selectedServiceDetailsScreen.getAdjustmentValue(workOrderData.getPercentageServiceData().getServiceAdjustment().getAdjustmentData().getAdjustmentName()),
 				workOrderData.getPercentageServiceData().getServiceAdjustment().getAdjustmentData().getAdjustmentQuantity());
 		selectedServiceDetailsScreen.selectAdjustment(workOrderData.getPercentageServiceData().getServiceAdjustment().getAdjustmentData().getAdjustmentName());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedServiceDetailsScreen.getServiceAdjustmentsValue(), workOrderData.getPercentageServiceData().getServiceAdjustment().getAdjustmentTotalAmaunt());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
+		RegularServiceDetailsScreenValidations.verifyServiceAdjustmentsValue( workOrderData.getPercentageServiceData().getServiceAdjustment().getAdjustmentTotalAmaunt());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		// =====================================
-		servicesScreen.openCustomServiceDetails(workOrderData.getBundleService().getBundleServiceName());
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getBundleService().getBundleServiceName());
 		RegularSelectedServiceBundleScreen selectedServiceBundleScreen = new RegularSelectedServiceBundleScreen();
 		for (ServiceData serviceData : workOrderData.getBundleService().getServices()) {
 			if (serviceData.isSelected()) {
 				Assert.assertTrue(selectedServiceBundleScreen.checkBundleIsSelected(serviceData.getServiceName()));
 				selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
-				selectedServiceDetailsScreen.setServiceQuantityValue(serviceData.getServiceQuantity());
+				RegularServiceDetailsScreenSteps.setServiceQuantityValue(serviceData.getServiceQuantity());
 			} else {
 				Assert.assertTrue(selectedServiceBundleScreen.checkBundleIsNotSelected(serviceData.getServiceName()));
 				selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
 			}
 		}
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 
 		// =====================================
 		for (ServiceData serviceData : workOrderData.getPercentageServices()) {
-			selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			RegularServicesScreenSteps.openCustomServiceDetails(serviceData.getServiceName());
+			RegularServiceDetailsScreenSteps.saveServiceDetails();
 		}
 
 		// =====================================
 		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
-		servicesScreen.selectService(matrixServiceData.getMatrixServiceName());
-		RegularPriceMatrixScreen priceMatrixScreen = servicesScreen.selectServicePriceMatrices(matrixServiceData.getHailMatrixName());
-		RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(matrixServiceData.getVehiclePartData().getVehiclePartName());
-		vehiclePartScreen.setSizeAndSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSize(), matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
+		RegularServicesScreenSteps.selectMatrixService(matrixServiceData);
+		RegularVehiclePartsScreenSteps.selectVehiclePart(matrixServiceData.getVehiclePartData());
+		RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
 		Assert.assertEquals(vehiclePartScreen.getPrice(), matrixServiceData.getVehiclePartData().getVehiclePartPrice());
 		Assert.assertTrue(vehiclePartScreen.isNotesExists());
 		for (ServiceData serviceData : matrixServiceData.getVehiclePartData().getVehiclePartAdditionalServices()) {
 			vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
-			selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			RegularServiceDetailsScreenSteps.saveServiceDetails();
 		}
-		vehiclePartScreen.saveVehiclePart();
+		RegularVehiclePartsScreenSteps.saveVehiclePart();
 
-		priceMatrixScreen.clickSave();
-		servicesScreen.switchToSelectedServicesTab();
+		RegularPriceMatrixScreenSteps.savePriceMatrix();
+		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreenValidations.verifyServicesAreSelected(workOrderData.getSelectedServices());
 
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
@@ -467,7 +466,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularMyWorkOrdersSteps.startCopyingServicesForWorkOrder(workOrderNumber, Specific_Client, WorkOrdersTypes.SPECIFIC_CLIENT_TEST_WO1);
 		vehicleScreen.setVIN(workOrderDataCopiedServices.getVehicleInfoData().getVINNumber());
 		RegularNavigationSteps.navigateToServicesScreen();
-		servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreenValidations.verifyServicesAreSelected(workOrderDataCopiedServices.getSelectedServices());
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		orderSummaryScreen.waitWorkOrderSummaryScreenLoad();
@@ -717,7 +716,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);;
 		questionsScreen.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
 		servicesScreen.clickSave();
-		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		serviceRequestSscreen.waitForServiceRequestScreenLoad();
 		final String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.ON_HOLD.getValue());
@@ -783,26 +782,29 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : inspectionData.getMoneyServicesList()) {
 			Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceData.getServiceName(), serviceData.getServicePrice2()));
 			if (serviceData.getQuestionData() != null) {
-				RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-				selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
-				selectedServiceDetailsScreen.saveSelectedServiceDetails();
+				RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+				RegularServiceDetailsScreenSteps.answerServiceQuestion(serviceData.getQuestionData());
+				RegularServiceDetailsScreenSteps.saveServiceDetails();
 			}
 		}
 
 		BundleServiceData bundleServiceData = inspectionData.getBundleService();
 		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(bundleServiceData.getBundleServiceName(), bundleServiceData.getBundleServiceAmount()));
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			if (serviceData.getServiceQuantity() != null) {
+				RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 				selectedServiceDetailsScreen.changeBundleQuantity(serviceData.getServiceName(), serviceData.getServiceQuantity());
-				selectedServiceDetailsScreen.saveSelectedServiceDetails();
-			} else
+				RegularServiceDetailsScreenSteps.saveServiceDetails();
+			} else {
+				RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 				selectedServiceDetailsScreen.selectBundle(serviceData.getServiceName());
+			}
 		}
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		RegularServicesScreenSteps.waitServicesScreenLoad();
 		RegularServiceRequestSteps.saveServiceRequest();
-		homeScreen = serviceRequestSscreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 
 		RegularHomeScreenSteps.navigateToMyInspectionsScreen();
 		RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
@@ -850,9 +852,10 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice2()));
 		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getBundleService().getBundleServiceName(), PricesCalculations.getPriceRepresentation(workOrderData.getBundleService().getBundleServiceAmount())));
 
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getBundleService().getBundleServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getBundleService().getBundleServiceName());
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		selectedServicesScreen.waitSelectedServicesScreenLoaded();
 
 		selectedServicesScreen.clickSave();
@@ -883,17 +886,12 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		String workOrderNumber1 = vehicleScreen.getWorkOrderNumber();
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
-		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		selectedServiceDetailsScreen.selectVehicleParts(workOrderData.getMoneyServiceData().getVehicleParts());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		servicesScreen.waitServicesScreenLoaded();
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
+		RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(workOrderData.getMoneyServiceData());
+		RegularServicesScreenSteps.waitServicesScreenLoad();
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		Assert.assertEquals(orderSummaryScreen.getOrderSumm(), workOrderData.getWorkOrderPrice());
-
 		RegularWorkOrdersSteps.saveWorkOrder();
 
 		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
@@ -935,34 +933,36 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		String workOrderNumber1 = vehicleScreen.getWorkOrderNumber();
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
-		selectedServiceDetailsScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceQuantity());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
+		RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(workOrderData.getMoneyServiceData());
 
-		servicesScreen.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
-		selectedServiceDetailsScreen.clickAdjustments();
-		selectedServiceDetailsScreen.selectAdjustment(workOrderData.getPercentageServiceData().
-				getServiceAdjustment().getAdjustmentData().getAdjustmentName());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		Assert.assertEquals(servicesScreen.getTotalAmaunt(), workOrderData.getPercentageServiceData().getServicePrice());
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
+		RegularServiceDetailsScreenSteps.clickAdjustmentsCell();
+		RegularServiceDetailsScreenSteps.selectServiceAdjustment(workOrderData.getPercentageServiceData().
+				getServiceAdjustment());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
+		RegularWizardScreenValidations.verifyScreenTotalPrice(workOrderData.getPercentageServiceData().getServicePrice());
 
 		BundleServiceData bundleServiceData = workOrderData.getBundleService();
-		servicesScreen.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
+		RegularServicesScreenSteps.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			if (serviceData.getServiceQuantity() != null) {
+				RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 				selectedServiceDetailsScreen.changeBundleQuantity(serviceData.getServiceName(), serviceData.getServiceQuantity());
-				selectedServiceDetailsScreen.saveSelectedServiceDetails();
-			} else
+				RegularServiceDetailsScreenSteps.saveServiceDetails();
+			} else {
+				RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 				selectedServiceDetailsScreen.selectBundle(serviceData.getServiceName());
+			}
 		}
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 		for (ServiceData serviceData : workOrderData.getPercentageServices())
-			servicesScreen.selectService(serviceData.getServiceName());
+			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
-		servicesScreen.openCustomServiceDetails(matrixServiceData.getMatrixServiceName());
+		RegularServicesScreenSteps.openCustomServiceDetails(matrixServiceData.getMatrixServiceName());
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		RegularPriceMatrixScreen priceMatrixScreen = selectedServiceDetailsScreen.selectMatrics(matrixServiceData.getHailMatrixName());
 		VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
 		priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
@@ -1205,57 +1205,54 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(questionScreenData);
 
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
-		Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), inspectionData.getMoneyServiceData().getServicePrice());
-		Assert.assertEquals(selectedServiceDetailsScreen.getServiceAdjustmentsValue(), inspectionData.getMoneyServiceData().getServiceAdjustment().getAdjustmentTotalAmaunt());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServicesScreenSteps.openCustomServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
+		RegularServiceDetailsScreenValidations.verifyServicePriceValue(inspectionData.getMoneyServiceData().getServicePrice());
+		RegularServiceDetailsScreenValidations.verifyServiceAdjustmentsValue(inspectionData.getMoneyServiceData().getServiceAdjustment().getAdjustmentTotalAmaunt());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		// =====================================
-		servicesScreen.openCustomServiceDetails(inspectionData.getPercentageServiceData().getServiceName());
-		Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), inspectionData.getPercentageServiceData().getServicePrice());
-		selectedServiceDetailsScreen.clickAdjustments();
+		RegularServicesScreenSteps.openCustomServiceDetails(inspectionData.getPercentageServiceData().getServiceName());
+		RegularServiceDetailsScreenValidations.verifyServicePriceValue(inspectionData.getPercentageServiceData().getServicePrice());
+		RegularServiceDetailsScreenSteps.clickAdjustmentsCell();
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		Assert.assertEquals(selectedServiceDetailsScreen.getAdjustmentValue(inspectionData.getPercentageServiceData().getServiceAdjustment().getAdjustmentData().getAdjustmentName()),
 				inspectionData.getPercentageServiceData().getServiceAdjustment().getAdjustmentData().getAdjustmentQuantity());
-		selectedServiceDetailsScreen.selectAdjustment(inspectionData.getPercentageServiceData().getServiceAdjustment().getAdjustmentData().getAdjustmentName());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		Assert.assertEquals(selectedServiceDetailsScreen.getServiceAdjustmentsValue(), inspectionData.getPercentageServiceData().getServiceAdjustment().getAdjustmentTotalAmaunt());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.selectServiceAdjustment(inspectionData.getPercentageServiceData().getServiceAdjustment());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
+		RegularServiceDetailsScreenValidations.verifyServiceAdjustmentsValue(inspectionData.getPercentageServiceData().getServiceAdjustment().getAdjustmentTotalAmaunt());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		// =====================================
 		BundleServiceData bundleServiceData = inspectionData.getBundleService();
-		servicesScreen.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
+		RegularServicesScreenSteps.openCustomServiceDetails(bundleServiceData.getBundleServiceName());
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			if (serviceData.getServiceQuantity() != null) {
 				selectedServiceDetailsScreen.changeBundleQuantity(serviceData.getServiceName(), serviceData.getServiceQuantity());
-				selectedServiceDetailsScreen.saveSelectedServiceDetails();
+				RegularServiceDetailsScreenSteps.saveServiceDetails();
 			} else
 				selectedServiceDetailsScreen.selectBundle(serviceData.getServiceName());
 		}
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		// =====================================
 		for (ServiceData serviceData : inspectionData.getPercentageServicesList())
-			servicesScreen.selectService(serviceData.getServiceName());
+			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		// =====================================
 		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
-		servicesScreen.selectService(matrixServiceData.getMatrixServiceName());
-		RegularPriceMatrixScreen priceMatrixScreen = servicesScreen.selectServicePriceMatrices(matrixServiceData.getHailMatrixName());
+		RegularServicesScreenSteps.selectMatrixService(matrixServiceData);
+		RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
 		RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(matrixServiceData.getVehiclePartData().getVehiclePartName());
 		vehiclePartScreen.setSizeAndSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSize(), matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
 		Assert.assertEquals(vehiclePartScreen.getPrice(), matrixServiceData.getVehiclePartData().getVehiclePartPrice());
 		Assert.assertTrue(vehiclePartScreen.isNotesExists());
 		for (ServiceData serviceData : matrixServiceData.getVehiclePartData().getVehiclePartAdditionalServices()) {
 			vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
-			selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			RegularServiceDetailsScreenSteps.saveServiceDetails();
 		}
 		vehiclePartScreen.saveVehiclePart();
 
 		priceMatrixScreen.clickSave();
-		servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreenValidations.verifyServicesAreSelected(inspectionData.getSelectedServices());
 		RegularInspectionsSteps.saveInspection();
 		RegularMyInspectionsSteps.selectInspectionForCopy(inspNumber);
-		vehicleScreen = new RegularVehicleScreen();
 		Assert.assertEquals(vehicleScreen.getMake(), inspectionData.getVehicleInfo().getVehicleMake());
 		Assert.assertEquals(vehicleScreen.getModel(), inspectionData.getVehicleInfo().getVehicleModel());
 
@@ -1277,7 +1274,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(singlepageinspectionscreen.isAnswerPresent("Test Answer 1"));
 		RegularNavigationSteps.navigateToScreen(ScreenNamesConstants.PACKAGE_FOR_MONITOR);
 
-		servicesScreen.switchToSelectedServicesTab();
+		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreenValidations.verifyServicesAreSelected(inspectionData.getSelectedServices());
 
 		RegularInspectionsSteps.saveInspection();
@@ -1336,13 +1333,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		String workOrderNumber1 = vehicleScreen.getWorkOrderNumber();
 
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
-		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		selectedServiceDetailsScreen.selectVehicleParts(workOrderData.getMoneyServiceData().getVehicleParts());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		servicesScreen.waitServicesScreenLoaded();
+		RegularServicesScreenSteps.selectServiceWithServiceData(workOrderData.getMoneyServiceData());
+		RegularServicesScreenSteps.waitServicesScreenLoad();
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularWorkOrdersSteps.saveWorkOrder();
 		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
@@ -1900,16 +1892,16 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			if (serviceData.getServiceQuantity() != null) {
-				RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-				selectedServiceDetailsScreen.setServiceQuantityValue(serviceData.getServiceQuantity());
-				selectedServiceDetailsScreen.saveSelectedServiceDetails();
+				RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+				RegularServiceDetailsScreenSteps.setServiceQuantityValue(serviceData.getServiceQuantity());
+				RegularServiceDetailsScreenSteps.saveServiceDetails();
 			}
 		servicesScreen.waitServicesScreenLoaded();
 		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 
 		RegularNavigationSteps.navigateToServicesScreen();
 		servicesScreen.clickSave();
-		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		serviceRequestSscreen.waitForServiceRequestScreenLoad();
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSPTYPE_FOR_SR_INSPTYPE);
@@ -2196,9 +2188,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		OrderMonitorData orderMonitorData = workOrderData.getOrderMonitorData();
 		orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		Assert.assertTrue(orderMonitorScreen.isStartServiceButtonPresent());
@@ -2250,10 +2241,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
 
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
-
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		Assert.assertTrue(orderMonitorScreen.isRepairPhaseExists());
 		Assert.assertTrue(orderMonitorScreen.isStartPhaseButtonExists());
 		orderMonitorScreen.clicksRepairPhaseLine();
@@ -2314,8 +2303,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		OrderMonitorData orderMonitorData = workOrderData.getOrderMonitorData();
 		orderMonitorScreen.selectPanel(orderMonitorData.getMonitorServiceData().getMonitorService().getServiceName());
 		Assert.assertFalse(orderMonitorScreen.isServiceStartDateExists());
@@ -2370,9 +2359,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorsData().get(0).getMonitorServicesData()) {
 			orderMonitorScreen.selectPanel(monitorServiceData.getMonitorService().getServiceName());
 			Assert.assertTrue(orderMonitorScreen.isStartServiceButtonPresent());
@@ -2553,7 +2541,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.selectService(serviceRequestData.getMoneyService().getServiceName());
 		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.clickSave();
-		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 
 		String serviceRequestNumber1 = serviceRequestSscreen.getFirstServiceRequestNumber();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber1);
@@ -2596,7 +2584,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.selectService(serviceRequestData.getMoneyService().getServiceName());
 		RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
 		vehicleScreen.clickSave();
-		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.ON_HOLD.getValue());
 
@@ -3102,7 +3090,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		servicesScreen.clickSave();
-		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestSscreen.selectCreateWorkOrderRequestAction();
@@ -3125,15 +3113,11 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			RegularServicesScreenSteps.switchToSelectedServices();
 			for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
 				if (serviceData.getServiceName().equals(servicedetails)) {
-					RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openSelectedServiceDetails(serviceData.getServiceName());
-					selectedServiceDetailsScreen.clickVehiclePartsCell();
-					selectedServiceDetailsScreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
-					selectedServiceDetailsScreen.saveSelectedServiceDetails();
-					selectedServiceDetailsScreen.saveSelectedServiceDetails();
+					RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+					RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
 					RegularServicesScreenSteps.waitServicesScreenLoad();
 				}
 			}
-			servicesScreen = new RegularServicesScreen();
 			servicesScreen.clickSave();
 		}
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
@@ -3189,18 +3173,13 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			RegularServicesScreenSteps.switchToSelectedServices();
 			for (ServiceData serviceData : serviceRequestData.getMoneyServices()) {
 				if (serviceData.getServiceName().equals(servicedetails)) {
-					RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openSelectedServiceDetails(serviceData.getServiceName());
-					selectedServiceDetailsScreen.clickVehiclePartsCell();
-					selectedServiceDetailsScreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
-					selectedServiceDetailsScreen.saveSelectedServiceDetails();
-					selectedServiceDetailsScreen.saveSelectedServiceDetails();
+					RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+					RegularServiceDetailsScreenSteps.setServiceDetailsDataAndSave(serviceData);
 					RegularServicesScreenSteps.waitServicesScreenLoad();
 				}
 			}
-			servicesScreen = new RegularServicesScreen();
 			servicesScreen.clickSave();
 		}
-		serviceRequestSscreen = new RegularServiceRequestsScreen();
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestSscreen.selectDetailsRequestAction();
 		RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
@@ -3208,8 +3187,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		Assert.assertTrue(teamInspectionsScreen.isInspectionExists(inspectionNumberber));
 		teamInspectionsScreen.clickBackButton();
 		serviceRequestSscreen.clickBackButton();
-		serviceRequestSscreen = new RegularServiceRequestsScreen();
-		serviceRequestSscreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -4226,8 +4204,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			teamWorkOrdersScreen.clickSearchButton();
 			teamWorkOrdersScreen.selectSearchLocation(locationFilterValue);
 			teamWorkOrdersScreen.clickSearchSaveButton();
-			teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-			RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+			RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+			RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 			orderMonitorScreen.checkMyWorkCheckbox();
 			for (ServiceData serviceData : workOrderData.getServicesList()) {
 				if (serviceData.getServiceDefaultTechnician().getTechnicianFullName().equals(employee.getEmployeeName())) {
@@ -4298,14 +4276,13 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		mainScreen.userLogin(allEmployees.get(1).getEmployeeFirstName(), allEmployees.get(1).getEmployeePassword());
 		RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			Assert.assertTrue(orderMonitorScreen.isServicePresent(serviceData.getServiceName()));
 		}
 		RegularNavigationSteps.navigateBackScreen();
 		RegularNavigationSteps.navigateBackScreen();
-		mainScreen = homeScreen.clickLogoutButton();
+		homeScreen.clickLogoutButton();
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
 
@@ -4421,11 +4398,11 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
-			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-			notesScreen = selectedServiceDetailsScreen.clickNotesCell();
-			notesScreen.setNotes(servicenotes);
-			notesScreen.clickSaveButton();
-			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+			RegularServiceDetailsScreenSteps.clickNotes();
+			RegularNotesScreenSteps.setTextNotes(servicenotes);
+			RegularNotesScreenSteps.saveNotes();
+			RegularServiceDetailsScreenSteps.saveServiceDetails();
 		}
 		for (ServiceData serviceData : inspectionData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isNotesIconPresentForSelectedService(serviceData.getServiceName()));
@@ -4652,7 +4629,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		servicesScreen.changeTechnician("Dent", workOrderData.getServiceData().getServiceNewTechnician().getTechnicianFullName());
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
 		selectedServiceDetailsScreen.clickTechniciansIcon();
 		Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianFullName()));
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
@@ -5500,11 +5477,11 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
 		serviceRequestSscreen.selectAppointmentRequestAction();
+		BaseUtils.waitABit(2000);
 		Assert.assertTrue(serviceRequestSscreen.isAcceptAppointmentRequestActionExists());
 		Assert.assertTrue(serviceRequestSscreen.isDeclineAppointmentRequestActionExists());
-		serviceRequestSscreen.clickBackButton();
-
-		serviceRequestSscreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
+		RegularNavigationSteps.navigateBackScreen();
 
 	}
 
@@ -5549,7 +5526,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		servicesScreen.selectServicePanel(moneyServicePanel.getDamageGroupName());
 		for (ServiceData serviceData : moneyServicePanel.getMoneyServices()) {
-			selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(serviceData.getServiceName());
+			RegularServicesScreenSteps.openCustomServiceDetails(serviceData.getServiceName());
 			selectedServiceDetailsScreen.clickTechniciansIcon();
 			Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(moneyServicePanel.getServiceDefaultTechnician().getTechnicianFullName()));
 			selectedServiceDetailsScreen.clickCancel();
@@ -5658,7 +5635,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		for (ServiceData serviceData : workOrderData.getMoneyServices()) {
-			selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
+			RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
 			if (serviceData.getServicePrice2() != null)
 				RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice2());
 			if (serviceData.getServiceDefaultTechnician() != null) {
@@ -5684,6 +5661,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 		final String defaultLocationValue = "Test Location ZZZ";
+		final DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
+
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
@@ -5715,8 +5694,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.selectSearchLocation(defaultLocationValue);
 		teamWorkOrdersScreen.clickSearchSaveButton();
 
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		Assert.assertTrue(orderMonitorScreen.isStartOrderButtonExists());
 		OrderMonitorData orderMonitorData = workOrderData.getOrderMonitorData();
 		MonitorServiceData firstMonitorServiceData = orderMonitorData.getMonitorServicesData().get(0);
@@ -5725,19 +5704,17 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.selecTechnician(firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
-		orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.selectPanel(firstMonitorServiceData.getMonitorService());
 		Assert.assertEquals(orderMonitorScreen.getServiceTechnicianValue(), firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
 		orderMonitorScreen.clickServiceDetailsDoneButton();
 
 		orderMonitorScreen.clickStartOrderButton();
-		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER);
-		orderMonitorScreen = new RegularOrderMonitorScreen();
+		final LocalDate repairOrderDate = LocalDate.now();
+		AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER, repairOrderDate.format(df)));
 
 		MonitorServiceData secondMonitorServiceData = orderMonitorData.getMonitorServicesData().get(1);
 		orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
 		orderMonitorScreen.clickTech();
-		selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.selecTechnician(secondMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 
@@ -5750,9 +5727,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		orderMonitorScreen.clickTech();
 		orderMonitorScreen.clickServiceDetailsDoneButton();
 
-		orderMonitorScreen.clickBackButton();
-
-		teamWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
+		RegularNavigationSteps.navigateBackScreen();
 		homeScreen.clickLogoutButton();
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
@@ -5797,17 +5773,16 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.selectSearchLocation(defaultLocationValue);
 		teamWorkOrdersScreen.clickSearchSaveButton();
 
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
-
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.changeStatusForWorkOrder(workOrderMonitorStatus, statusReason);
 		orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService());
 		orderMonitorScreen.clickTech();
 
 		orderMonitorScreen.clickServiceDetailsCancelButton();
-		teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
-		teamWorkOrdersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
+		RegularNavigationSteps.navigateBackScreen();
 		homeScreen.clickLogoutButton();
 		mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 	}
@@ -6067,8 +6042,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
-		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		selectedServicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
 		RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
 		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
 		RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getServiceData().getServiceDefaultTechnician());
@@ -6167,8 +6141,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateBackScreen();
 		RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
 		RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.selectSearchLocation("All locations");
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		Assert.assertEquals(orderMonitorScreen.getMonitorServiceAmauntValue(workOrderData.getServiceData()), workOrderData.getServiceData().getServicePrice2());
 		orderMonitorScreen.selectPanel(workOrderData.getServiceData());
 		Assert.assertEquals(orderMonitorScreen.getServiceDetailsPriceValue(), BackOfficeUtils.getFormattedServicePriceValue(BackOfficeUtils.getServicePriceValue(workOrderData.getServiceData().getServicePrice())));
@@ -6242,7 +6217,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		selectedServicesScreen.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
 		RegularServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		selectedServicesScreen.clickOnSelectedService(workOrderData.getMatrixServiceData().getMatrixServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getMatrixServiceData().getMatrixServiceName());
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.selectPriceMatrices(workOrderData.getMatrixServiceData().getHailMatrixName());
 		RegularVehiclePartsScreenSteps.selectVehiclePart(workOrderData.getMatrixServiceData().getVehiclePartData());
@@ -6254,7 +6229,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
 
-		serviceBundleScreen = selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+		selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 
 		for (ServiceData serviceData : bundleServiceData.getServices()) {
 			selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
@@ -6429,7 +6404,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 		servicesScreen.switchToSelectedServicesTab();
-		selectedServicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
 		RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
 		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
@@ -6457,7 +6432,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		}
 		serviceBundleScreen.clickSaveButton();
 		RegularServicesScreenSteps.switchToSelectedServices();
-		selectedServicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
 		RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
 		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
@@ -6503,9 +6478,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 
 		RegularServicesScreenSteps.switchToSelectedServices();
-		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
-			selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
+			RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
 			RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
 			for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 				RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(serviceTechnician);
@@ -6541,9 +6515,9 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		selectedServiceBundleScreen.clickSaveButton();
 		RegularServicesScreenSteps.waitServicesScreenLoad();
 		RegularServicesScreenSteps.switchToSelectedServices();
-		Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(workOrderData.getBundleService().getBundleServiceName()));
+		RegularSelectedServicesScreenValidations.verifyServiceIsSelected(workOrderData.getBundleService().getBundleServiceName(), true);
 		RegularInspectionsSteps.saveInspectionAsFinal();
-		selectedServicesScreen.clickSave();
+		RegularWizardScreensSteps.clickSaveButton();
 		RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, true);
 		RegularNavigationSteps.navigateBackScreen();
 		homeScreen.clickLogoutButton();
@@ -6673,8 +6647,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.selectPanel(workOrderData.getMatrixServiceData().getMatrixServiceName());
 		orderMonitorScreen.clickServiceStatusCell();
 		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
@@ -6735,8 +6709,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService());
 		Assert.assertTrue(orderMonitorScreen.isStartServiceButtonPresent());
 		orderMonitorScreen.clickServiceDetailsDoneButton();
@@ -6789,8 +6763,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 
 		orderMonitorScreen.clickStartOrderButton();
 		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
@@ -6844,8 +6818,8 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		teamWorkOrdersScreen.clickSearchButton();
 		teamWorkOrdersScreen.selectSearchLocation(workOrderData.getVehicleInfoData().getLocation());
 		teamWorkOrdersScreen.clickSearchSaveButton();
-		teamWorkOrdersScreen.clickOnWO(workOrderNumber);
-		RegularOrderMonitorScreen orderMonitorScreen = teamWorkOrdersScreen.selectWOMonitor();
+		RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
+		RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			Assert.assertEquals(orderMonitorScreen.getPanelStatus(serviceData),
 					OrderMonitorPhases.QUEUED.getrderMonitorPhaseName());
@@ -6854,7 +6828,6 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_MUST_START_REPAIR_ORDER_BECAUSE_YOU_ARE_NOT_ASSIGNED_TO_SERVICES);
 		orderMonitorScreen.clickServiceDetailsCancelButton();
-		orderMonitorScreen = new RegularOrderMonitorScreen();
 		orderMonitorScreen.clickOrderStartDateButton();
 		LocalDate date = LocalDate.now();
 		orderMonitorScreen.setOrderStartYearValue(date.getYear() + 1);

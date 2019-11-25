@@ -6,7 +6,7 @@ import org.testng.Assert;
 public class AlertsValidations {
 
     public static void cancelAlertAndValidateAlertMessage(String expectedMessage) {
-        Assert.assertEquals(Helpers.getAlertTextAndCancel(), expectedMessage);
+        Assert.assertEquals(Helpers.getAlertTextAndCancel().replace("\n", " "), expectedMessage);
     }
 
     public static void acceptAlertAndValidateAlertMessage(String expectedMessage) {

@@ -8,16 +8,10 @@
     <classes>
       <class name="com.cyberiansoft.test.ios10_client.testcases.IOSSmokeTestCases">
         <methods>
-          <include name="testCreateRetailCustomer" />
 
-
-
-
-          <!--<include name="testUpdateDatabase" />
+          <include name="testUpdateDatabase" />
           <include name="testUpdateVIN" />
           <include name="testCreateRetailCustomer" />
-          <include name="testEditRetailCustomer" />
-          <include name="testDeleteRetailCustomer" />-->
           <include name="testSetInspectionToNonSinglePage" />
           <include name="testEditRetailInspectionNotes" />
           <include name="testApproveInspectionOnDevice" />
@@ -27,7 +21,6 @@
           <include name="testApproveInspectionsOnDeviceViaAction" />
           <include name="testArchiveInspectionsOnDeviceViaAction" />
           <include name="testApproveInspectionOnBackOfficeFullInspectionApproval" />
-
           <include name="testCreateInspectionFromWO" />
           <include name="testCreateInvoiceWithTwoWOsAndCopyVehicle" />
           <include name="testCreateInspectionFromInvoiceWithTwoWOs" />

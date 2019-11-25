@@ -479,12 +479,10 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 			if (serviceData.getServicePrice2() != null) {
 				RegularServicesScreenSteps.switchToSelectedServices();
-				RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-				selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-				RegularSelectedServiceDetailsScreen selectedselectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
-				selectedServicesScreen.switchToAvailableServicesTab();
+				RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+				RegularServiceDetailsScreenValidations.verifyServicePriceValue(serviceData.getServicePrice2());
+				RegularServiceDetailsScreenSteps.saveServiceDetails();
+				RegularSelectedServicesSteps.switchToAvailableServices();
 			}
 		}
 
@@ -515,12 +513,10 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
 			if (serviceData.getServicePrice2() != null) {
 				RegularServicesScreenSteps.switchToSelectedServices();
-				RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-				selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-				RegularSelectedServiceDetailsScreen selectedselectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
-				selectedServicesScreen.switchToAvailableServicesTab();
+				RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+				RegularServiceDetailsScreenValidations.verifyServicePriceValue(serviceData.getServicePrice2());
+				RegularServiceDetailsScreenSteps.saveServiceDetails();
+				RegularSelectedServicesSteps.switchToAvailableServices();
 			}
 		}
 		RegularWorkOrdersSteps.cancelCreatingWorkOrder();
@@ -552,9 +548,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			if (serviceData.getServicePrice2() != null) {
 				RegularServicesScreenSteps.switchToSelectedServices();
 				RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-				RegularSelectedServiceDetailsScreen selectedselectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(serviceData.getServiceName());
-				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+				RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+				RegularServiceDetailsScreenValidations.verifyServicePriceValue(serviceData.getServicePrice2());
+				RegularServiceDetailsScreenSteps.saveServiceDetails();
 				selectedServicesScreen.switchToAvailableServicesTab();
 			}
 		}
@@ -951,11 +947,11 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		orderSummaryScreen.swipeScreenLeft();
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
-		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		selectedServicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
 		RegularServiceDetailsScreenSteps.setServiceQuantityValue(workOrderData.getServiceData().getServiceQuantity2());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		selectedServicesScreen.waitSelectedServicesScreenLoaded();
+		RegularSelectedServicesSteps.waitSelectedServicesScreenLoaded();
 		RegularWorkOrdersSteps.saveWorkOrder();
 		RegularNavigationSteps.navigateBackScreen();
 	}
@@ -1057,9 +1053,9 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
-		selectedServiceDetailsScreen.setServiceQuantityValue(inspectionData.getServiceData().getServiceQuantity2());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getServiceData().getServiceName());
+		RegularServiceDetailsScreenSteps.setServiceQuantityValue(inspectionData.getServiceData().getServiceQuantity2());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		RegularInspectionsSteps.saveInspectionAsDraft();
 		RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
 		RegularNavigationSteps.navigateBackScreen();
@@ -1229,10 +1225,10 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		}
 
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
+		RegularServicesScreenSteps.openCustomServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
 		RegularServiceDetailsScreenValidations.verifyServicePartValue(inspectionData.getMoneyServiceData().getServicePartData());
-		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getMoneyServiceData().getServicePrice());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.setServicePriceValue(inspectionData.getMoneyServiceData().getServicePrice());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 		RegularNavigationSteps.navigateToScreen(ScreenNamesConstants.FUTURE_AUDI_CAR);
 		RegularVisualInteriorScreen visualInteriorScreen = new RegularVisualInteriorScreen();
@@ -1243,11 +1239,10 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		visualInteriorScreen.selectSubService(inspectionData.getDamageData().getMoneyService().getServiceName());
 		Helpers.tapRegularCarImage();
 		Helpers.tapRegularCarImage();
-		selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-		selectedServiceDetailsScreen.clickServicePartCell();
+		RegularServiceDetailsScreenSteps.clickServicePartCell();
 		RegularServicePartSteps.selectServicePartData(inspectionData.getDamageData().getMoneyService().getServicePartData());
-		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.setServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 		final PriceMatrixScreenData priceMatrixScreenData = inspectionData.getPriceMatrixScreenData();
 		RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
@@ -1258,17 +1253,15 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehiclePartScreen.setPrice(vehiclePartData.getVehiclePartPrice());
 		for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
 			vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
-			selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-			selectedServiceDetailsScreen.clickServicePartCell();
+			RegularServiceDetailsScreenSteps.clickServicePartCell();
 			RegularServicePartSteps.selectServicePartData(serviceData.getServicePartData());
-			Assert.assertEquals(selectedServiceDetailsScreen.getServicePartValue(), serviceData.getServicePartData().getServicePartValue());
-			selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
-			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			RegularServiceDetailsScreenValidations.verifyServicePartValue(serviceData.getServicePartData());
+			RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
+			RegularServiceDetailsScreenSteps.saveServiceDetails();
 		}
 		vehiclePartScreen.clickDiscaunt(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
-		selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-		selectedServiceDetailsScreen.setServiceQuantityValue(vehiclePartData.getVehiclePartAdditionalService().getServiceQuantity());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.setServiceQuantityValue(vehiclePartData.getVehiclePartAdditionalService().getServiceQuantity());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 		vehiclePartScreen.saveVehiclePart();
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
@@ -1337,10 +1330,10 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		}
 
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
 		RegularServiceDetailsScreenValidations.verifyServicePartValue(workOrderData.getMoneyServiceData().getServicePartData());
-		selectedServiceDetailsScreen.setServicePriceValue(workOrderData.getMoneyServiceData().getServicePrice());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getMoneyServiceData().getServicePrice());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 		MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
 		RegularServicesScreenSteps.selectMatrixService(matrixServiceData);
@@ -1351,20 +1344,18 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		vehiclePartScreen.setPrice(vehiclePartData.getVehiclePartPrice());
 		for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
 			vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
-			selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-			selectedServiceDetailsScreen.clickServicePartCell();
+			RegularServiceDetailsScreenSteps.clickServicePartCell();
 			ServicePartSteps.selectServicePartData(serviceData.getServicePartData());
-			Assert.assertEquals(selectedServiceDetailsScreen.getServicePartValue(), serviceData.getServicePartData().getServicePartValue());
-			selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
-			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			RegularServiceDetailsScreenValidations.verifyServicePartValue(serviceData.getServicePartData());
+			RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
+			RegularServiceDetailsScreenSteps.saveServiceDetails();
 		}
 
 
 		Assert.assertEquals(priceMatrixScreen.getPriceMatrixVehiclePartSubTotalPrice(), vehiclePartData.getVehiclePartSubTotalPrice());
 		vehiclePartScreen.clickDiscaunt(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
-		selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-		selectedServiceDetailsScreen.setServiceQuantityValue(vehiclePartData.getVehiclePartAdditionalService().getServiceQuantity());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.setServiceQuantityValue(vehiclePartData.getVehiclePartAdditionalService().getServiceQuantity());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		vehiclePartScreen.saveVehiclePart();
 		priceMatrixScreen.clickSave();
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
@@ -1713,15 +1704,13 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyInspectionsSteps.selectInspectionForEdit(inspnumber);
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
-		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(inspectionData.getServiceData().getServiceName());
-		selectedServiceDetailsScreen.setServicePriceValue(inspectionData.getServiceData().getServicePrice2());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getServiceData().getServiceName());
+		RegularServiceDetailsScreenSteps.setServicePriceValue(inspectionData.getServiceData().getServicePrice2());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		RegularInspectionsSteps.saveInspection();
 
 		myInspectionsScreen.selectInspectionForAction(inspnumber);
 		myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-		approveInspectionsScreen = new RegularApproveInspectionsScreen();
 		approveInspectionsScreen.selectInspection(inspnumber);
 		Assert.assertEquals(approveInspectionsScreen.getInspectionServicePrice(inspectionData.getServiceData().getServiceName()), PricesCalculations.getPriceRepresentation(inspectionData.getServiceData().getServicePrice2()));
 		approveInspectionsScreen.clickCancelButton();
@@ -1934,13 +1923,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
 
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (TaxServiceData taxServiceData : workOrderData.getTaxServicesData()) {
-			RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(taxServiceData.getTaxServiceName());
+			RegularServicesScreenSteps.openCustomServiceDetails(taxServiceData.getTaxServiceName());
 			for (ServiceRateData serviceRateData : taxServiceData.getServiceRatesData()) {
-				Assert.assertEquals(selectedServiceDetailsScreen.getServiceRateValue(serviceRateData), serviceRateData.getServiceRateValue());
+				RegularServiceDetailsScreenValidations.verifyLaborServiceRateValue(serviceRateData.getServiceRateValue());
 			}
-			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			RegularServiceDetailsScreenSteps.saveServiceDetails();
 		}
 
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
@@ -1953,15 +1941,16 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getTaxServicesData().get(0).getTaxServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getTaxServicesData().get(0).getTaxServiceName());
+		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		Assert.assertFalse(selectedServiceDetailsScreen.isServiceRateFieldEditable(workOrderData.getTaxServicesData().get(0).getServiceRatesData().get(0)));
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
-		selectedServiceDetailsScreen = selectedServicesScreen.openCustomServiceDetails(workOrderData.getTaxServiceData().getTaxServiceName());
+		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getTaxServiceData().getTaxServiceName());
 		selectedServiceDetailsScreen.setServiceRateFieldValue(workOrderData.getTaxServiceData().getServiceRateData());
 		Assert.assertEquals(selectedServiceDetailsScreen.getServiceRateValue(workOrderData.getTaxServiceData().getServiceRateData()), "%" + workOrderData.getTaxServiceData().getServiceRateData().getServiceRateValue());
 		Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsTotalValue(), workOrderData.getTaxServiceData().getTaxServiceTotal());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		selectedServicesScreen.waitSelectedServicesScreenLoaded();
 		RegularWorkOrdersSteps.saveWorkOrder();
 		RegularNavigationSteps.navigateBackScreen();
@@ -1997,13 +1986,12 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
 		for (ServiceData serviceData : workOrderData.getServicesList()) {
 			RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		}
-		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
-		Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsPriceValue(), workOrderData.getPercentageServiceData().getServicePrice());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
+		RegularServiceDetailsScreenValidations.verifyServicePriceValue(workOrderData.getPercentageServiceData().getServicePrice());
+		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());

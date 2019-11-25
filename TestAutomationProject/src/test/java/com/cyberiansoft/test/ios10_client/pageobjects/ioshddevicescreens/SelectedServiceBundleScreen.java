@@ -99,8 +99,9 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 
 	public void saveSelectedServiceDetails() {
 
-		MobileElement navBar = (MobileElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeNavigationBar' AND visible == 1"));
-		navBar.findElementByAccessibilityId("Save").click();
+		MobileElement saveButton = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypePopover").
+				findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND name == 'Save'"));
+		saveButton.click();
 	}
 
 	public TechniciansPopup clickTechniciansIcon() {
