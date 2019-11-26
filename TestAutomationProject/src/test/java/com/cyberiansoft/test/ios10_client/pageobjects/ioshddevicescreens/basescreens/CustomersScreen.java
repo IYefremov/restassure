@@ -75,13 +75,13 @@ public class CustomersScreen extends BaseAppScreen {
 		if (elementExists("ClientsView")) {
 			appiumdriver.findElementByAccessibilityId("Search").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
-			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer);
-			appiumdriver.findElementByAccessibilityId("Close").click();
+			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer + "\n");
+			//appiumdriver.findElementByAccessibilityId("Close").click();
 		} else {
 			
 			appiumdriver.findElementByAccessibilityId("Search").click();
 			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
-			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer);
+			appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(customer + "\n");
 		}
 	}
 

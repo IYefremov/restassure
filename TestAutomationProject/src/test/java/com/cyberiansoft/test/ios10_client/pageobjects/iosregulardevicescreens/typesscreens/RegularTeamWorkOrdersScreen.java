@@ -73,12 +73,10 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		waitTeamWorkOrdersScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(workOrderID))).click();
-		//appiumdriver.findElementByAccessibilityId(workOrderID).click();
 	}
 	
-	public RegularOrderMonitorScreen selectWOMonitor() {
+	public void selectWOMonitor() {
 		womonitor.click();
-		return new RegularOrderMonitorScreen();
 	}
 	
 	public void selectEditWO() {
@@ -107,9 +105,8 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		wait.until(ExpectedConditions.elementToBeClickable(searchbtn)).click();
 	}
 	
-	public RegularTeamWorkOrdersScreen clickSearchSaveButton() {
+	public void clickSearchSaveButton() {
 		searccsavebtn.click();
-		return this;
 	}
 	
 	public void selectSearchLocation(String _location) {
@@ -119,9 +116,6 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(_location)));
 		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(_location)).click();
-
-		//wait = new WebDriverWait(appiumdriver, 10);
-		//wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByName(_location))).click();
 	}
 	
 	public void setSearchType(String wotype)  {
@@ -130,9 +124,7 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectWorkOrderForApprove(String workOrderID) {
-
 		teamOrdersTable.findElementByAccessibilityId(workOrderID).findElementByClassName("XCUIElementTypeOther").click();
-		
 	}
 	
 	public void approveWorkOrder(String workOrderID, String employee, String pwd) {
@@ -153,8 +145,6 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 			appiumdriver.
 				findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workordertype + "']")).click();
 		}
-		//appiumdriver.
-		//		findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='" + workordertype + "']")).click();
 	}
 	
 	public void selectEmployeeAndTypePassword(String employee, String password) {
@@ -226,7 +216,6 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void clickBackButton()  {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Back"))).click();
 	}
 }

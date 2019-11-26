@@ -35,7 +35,7 @@ public class AppiumConfiguration {
 		//californiaTime = californiaTime.minusDays(1);
 		ZoneId kyivTimeZone = ZoneId.of("Europe/Budapest");
 		ZonedDateTime kyivTime = ZonedDateTime.ofInstant(date, kyivTimeZone);
-		//kyivTime = kyivTime.minusDays(1);
+		kyivTime = kyivTime.minusDays(1);
 		switch (mplatform) {
 			case ANDROID:
 				File appDir = new File("data/");

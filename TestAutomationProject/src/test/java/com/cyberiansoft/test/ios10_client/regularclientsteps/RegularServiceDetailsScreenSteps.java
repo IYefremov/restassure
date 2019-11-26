@@ -30,7 +30,7 @@ public class RegularServiceDetailsScreenSteps {
         if (serviceData.getPreExistingDamage() != null)
             selectPreExistingDamage(serviceData.getPreExistingDamage());
         if (serviceData.getQuestionData() != null)
-            selectedServiceDetailsScreen.answerQuestion2(serviceData.getQuestionData());
+            selectedServiceDetailsScreen.answerServiceQuestion(serviceData.getQuestionData());
         if (serviceData.getQuestionsData() != null)
             selectedServiceDetailsScreen.answerQuestions(serviceData.getQuestionsData());
         if (serviceData.getServicePartData() != null) {
@@ -116,8 +116,8 @@ public class RegularServiceDetailsScreenSteps {
     }
 
     public static void selectServiceAdjustment(ServiceAdjustmentData serviceAdjustmentData) {
+        clickAdjustmentsCell();
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.clickAdjustments();
         selectedServiceDetailsScreen.selectAdjustment(serviceAdjustmentData.getAdjustmentData().getAdjustmentName());
     }
 
@@ -190,6 +190,21 @@ public class RegularServiceDetailsScreenSteps {
     public static void clickRemoveServiceButton() {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.clickRemoveServiceButton();
+    }
+
+    public static void answerServiceQuestion(QuestionsData questionsData) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.answerServiceQuestion(questionsData);
+    }
+
+    public static void clickAdjustmentsCell() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickAdjustments();
+    }
+
+    public static void clickServicePartCell() {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.clickServicePartCell();
     }
 
 }

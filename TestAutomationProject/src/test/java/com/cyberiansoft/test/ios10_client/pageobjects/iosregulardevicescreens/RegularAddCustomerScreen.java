@@ -83,6 +83,8 @@ public class RegularAddCustomerScreen extends iOSRegularBaseScreen {
 	}
 
 	public void setFirstName(String firstname) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("CustomerInfoCellEditBox")));
 		WebElement firstNameTxt = firstnamefld.findElementByAccessibilityId("CustomerInfoCellEditBox");
 		firstNameTxt.clear();
 		firstNameTxt.sendKeys(firstname+"\n");

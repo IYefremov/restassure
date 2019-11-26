@@ -35,7 +35,6 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public boolean checkServiceIsSelected(String serviceName) {
-
         return selectedservicestable.findElementsByAccessibilityId(serviceName).size() > 0;
     }
 
@@ -56,19 +55,9 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
         appiumdriver.findElementByClassName("XCUIElementTypeSearchField").clear();
     }
 
-    public RegularSelectedServiceDetailsScreen openCustomServiceDetails(String serviceName) {
-        WebElement searchFild = appiumdriver.findElementByClassName("XCUIElementTypeSearchField");
-        if (!(searchFild.getAttribute("value") == null))
-            searchFild.clear();
-
-        IOSElement servicecell = (IOSElement) selectedservicestable.
-                findElement(MobileBy.AccessibilityId(serviceName));
-        if (!servicecell.isDisplayed()) {
-            searchFild.sendKeys(serviceName + "\n");
-        }
-        selectedservicestable.findElement(MobileBy.AccessibilityId(serviceName)).click();
-
-        return new RegularSelectedServiceDetailsScreen();
+    public void openSelectedServiceDetails(String serviceName) {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName))).click();
     }
 
     public void openCustomServiceDetails(String serviceName, VehiclePartData vehiclePartData) {
@@ -138,16 +127,6 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     public int getNumberOfServiceSelectedItems(String serviceName) {
         return selectedservicestable.findElements(MobileBy.iOSNsPredicateString("name = '" +
                 serviceName + "' and type = 'XCUIElementTypeCell'")).size();
-    }
-
-    public RegularSelectedServiceDetailsScreen openSelectedServiceDetails(String serviceName) {
-        clickOnSelectedService(serviceName);
-        return new RegularSelectedServiceDetailsScreen();
-    }
-
-    public void clickOnSelectedService(String serviceName) {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(serviceName))).click();
     }
 
     public void clickCustomServiceDetailsButton(String serviceName) {

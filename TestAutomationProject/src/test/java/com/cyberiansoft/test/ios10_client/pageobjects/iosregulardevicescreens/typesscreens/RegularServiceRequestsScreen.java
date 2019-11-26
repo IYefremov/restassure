@@ -126,10 +126,11 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 
 	public void selectServiceRequest(String serviceRequestNumber) {
 		waitForServiceRequestScreenLoad();
-		if (!serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber).isDisplayed()) {
-			swipeToElement(serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber));
+		WebElement seCell = serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber);
+		if (!seCell.isDisplayed()) {
+			swipeToElement(seCell);
 		}
-		serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber).click();
+		seCell.click();
 	}
 	
 	public void selectEditServiceRequestAction() {
@@ -194,9 +195,8 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 
 	
 	public String getServiceRequestClient(String srnumber) {
-		return appiumdriver.
-				findElementByXPath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[@name='" + srnumber + "']/XCUIElementTypeStaticText[@name='labelServiceRequestClient']")
-				.getAttribute("value");
+		MobileElement srTable = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypeTable");
+		return srTable.findElementByAccessibilityId(srnumber).findElementByAccessibilityId("labelServiceRequestClient").getAttribute("value");
 	}
 	
 	public String getServiceRequestDetails(String srnumber) {

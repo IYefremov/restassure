@@ -28,7 +28,6 @@ import com.cyberiansoft.test.ios10_client.types.invoicestypes.UATInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.UATServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.UATWorkOrderTypes;
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import org.json.simple.JSONObject;
@@ -1711,7 +1710,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
         RegularOrderMonitorScreenSteps.selectServicePanel(workOrderData.getServicesScreen().getMoneyServices().get(0));
         RegularOrderMonitorScreenSteps.clickServiceStatusCell();
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE);
         RegularOrderMonitorScreenSteps.clickServiceDetailsCancelButton();
 
         RegularOrderMonitorScreenSteps.changePhaseStatus(workOrderData.getOrderMonitorsData().get(0), OrderMonitorStatuses.COMPLETED);
@@ -1720,7 +1719,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         }
 
         RegularOrderMonitorScreenSteps.selectOrderPhase(workOrderData.getOrderMonitorsData().get(1));
-        Assert.assertEquals(Helpers.getAlertTextAndAccept(), AlertsCaptions.YOU_CANT_CHANGE_STATUS_OF_THE_PHASE);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.YOU_CANT_CHANGE_STATUS_OF_THE_PHASE);
 
         for (MonitorServiceData monitorServiceData : workOrderData.getOrderMonitorsData().get(1).getMonitorServicesData()) {
             RegularOrderMonitorScreenSteps.selectServicePanel(monitorServiceData.getMonitorService());
@@ -1810,24 +1809,24 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
         RegularServiceDetailsScreenSteps.clickRemoveServiceButton();
-        AlertsValidations.cancelAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE.replace("\n", " "),
+        AlertsValidations.cancelAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE,
                 inspectionData.getMoneyServiceData().getServiceName()));
         RegularServiceDetailsScreenSteps.cancelServiceDetails();
 
         RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getLaborServiceData().getServiceName());
         RegularServiceDetailsScreenSteps.clickRemoveServiceButton();
-        AlertsValidations.cancelAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE.replace("\n", " "),
+        AlertsValidations.cancelAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE,
                 inspectionData.getLaborServiceData().getServiceName()));
         RegularServiceDetailsScreenSteps.cancelServiceDetails();
 
         RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
         RegularServiceDetailsScreenSteps.clickRemoveServiceButton();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE.replace("\n", " "),
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE,
                 inspectionData.getMoneyServiceData().getServiceName()));
 
         RegularSelectedServicesSteps.openSelectedServiceDetails(inspectionData.getLaborServiceData().getServiceName());
         RegularServiceDetailsScreenSteps.clickRemoveServiceButton();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE.replace("\n", " "),
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_REMOVE_SERVICE,
                 inspectionData.getLaborServiceData().getServiceName()));
 
         RegularSelectedServicesScreenValidations.verifyServiceIsSelected(inspectionData.getMoneyServiceData().getServiceName(), false);
