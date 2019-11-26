@@ -70,7 +70,7 @@ public class AlertsCaptions {
 			" "+
 			"Maximum allowed total amount is %1$s";
 	public static final String ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE = "Warning! "+
-			"Total amount of invoice is huge. "+
+			"Total amount of invoice is huge."+
 			" "+
 			"Maximum allowed total amount is %1$s";
 	public static final String ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE = "Warning! "+

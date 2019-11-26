@@ -85,26 +85,16 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 
 	public String getServicePriceValue() {
-		WebElement pricecell = appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Price' and type = 'XCUIElementTypeCell' AND visible == 1"));
+		WebElement priceCell = appiumdriver.findElementByClassName("XCUIElementTypePopover").
+				findElement(MobileBy.iOSNsPredicateString("name = 'Price' and type = 'XCUIElementTypeCell'"));
 
-		IOSElement pricefld = (IOSElement) pricecell.findElement(MobileBy.className("XCUIElementTypeTextField"));
-		return pricefld.getText();
+		IOSElement priceFld = (IOSElement) priceCell.findElement(MobileBy.className("XCUIElementTypeTextField"));
+		return priceFld.getText();
 	}
 
 	public String getServiceAdjustmentsValue() {
 		return getAdjustmentsValue();
 	}
-
-	/*public void setServicePriceValue(String _price)	 {
-
-		WebElement pricefld = appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'Price' and type = 'XCUIElementTypeCell' AND visible == 1"));
-		pricefld.click();
-		if (pricefld.findElements(MobileBy.AccessibilityId("Clear text")).size() > 0)
-			pricefld.findElement(MobileBy.AccessibilityId("Clear text")).click();
-		pricefld.sendKeys(_price + "\n");
-		BaseUtils.waitABit(1000);
-	}*/
-
 
 	public void setServicePriceValue(String _price) {
 		appiumdriver.findElementByAccessibilityId("Price").click();

@@ -16,10 +16,7 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.*;
-import com.cyberiansoft.test.ios10_client.hdvalidations.InvoiceInfoScreenValidations;
-import com.cyberiansoft.test.ios10_client.hdvalidations.MyWorkOrdersScreenValidations;
-import com.cyberiansoft.test.ios10_client.hdvalidations.PriceMatrixScreenValidations;
-import com.cyberiansoft.test.ios10_client.hdvalidations.WizardScreenValidations;
+import com.cyberiansoft.test.ios10_client.hdvalidations.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
@@ -491,14 +488,14 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			if (serviceData.getVehiclePart() != null) {
 				selectedselectedServiceDetailsScreen.clickVehiclePartsCell();
 				selectedselectedServiceDetailsScreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+				ServiceDetailsScreenSteps.saveServiceDetails();
 			}
-			selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+			ServiceDetailsScreenSteps.saveServiceDetails();
 
 			if (serviceData.getServicePrice2() != null) {
-				selectedselectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
-				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+				servicesScreen.openServiceDetails(serviceData.getServiceName());
+				ServiceDetailsScreenValidations.verifyServiceDetailsPriceValue(serviceData.getServicePrice2());
+				ServiceDetailsScreenSteps.saveServiceDetails();
 			}
 		}
 
@@ -531,14 +528,14 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			if (serviceData.getVehiclePart() != null) {
 				selectedselectedServiceDetailsScreen.clickVehiclePartsCell();
 				selectedselectedServiceDetailsScreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+				ServiceDetailsScreenSteps.saveServiceDetails();
 			}
-			selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+			ServiceDetailsScreenSteps.saveServiceDetails();
 
 			if (serviceData.getServicePrice2() != null) {
-				selectedselectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
-				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+				servicesScreen.openServiceDetails(serviceData.getServiceName());
+				ServiceDetailsScreenValidations.verifyServiceDetailsPriceValue(serviceData.getServicePrice2());
+				ServiceDetailsScreenSteps.saveServiceDetails();
 			}
 		}
 
@@ -571,14 +568,14 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			if (serviceData.getVehiclePart() != null) {
 				selectedselectedServiceDetailsScreen.clickVehiclePartsCell();
 				selectedselectedServiceDetailsScreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+				ServiceDetailsScreenSteps.saveServiceDetails();
 			}
-			selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+			ServiceDetailsScreenSteps.saveServiceDetails();
 
 			if (serviceData.getServicePrice2() != null) {
-				selectedselectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
-				Assert.assertEquals(selectedselectedServiceDetailsScreen.getServiceDetailsPriceValue(), serviceData.getServicePrice2());
-				selectedselectedServiceDetailsScreen.saveSelectedServiceDetails();
+				servicesScreen.openServiceDetails(serviceData.getServiceName());
+				ServiceDetailsScreenValidations.verifyServiceDetailsPriceValue(serviceData.getServicePrice2());
+				ServiceDetailsScreenSteps.saveServiceDetails();
 			}
 		}
 
@@ -2135,14 +2132,14 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 			if (serviceData.getVehiclePart() != null) {
 				selectedServiceDetailsScreen.clickVehiclePartsCell();
 				selectedServiceDetailsScreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
-				selectedServiceDetailsScreen.saveSelectedServiceDetails();
+				ServiceDetailsScreenSteps.saveServiceDetails();
 			}
-			selectedServiceDetailsScreen.saveSelectedServiceDetails();
+			ServiceDetailsScreenSteps.saveServiceDetails();
 		}
 
-		SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
-		Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsPriceValue(), workOrderData.getPercentageServiceData().getServicePrice());
-		selectedServiceDetailsScreen.saveSelectedServiceDetails();
+		servicesScreen.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
+		ServiceDetailsScreenValidations.verifyServiceDetailsPriceValue(workOrderData.getPercentageServiceData().getServicePrice());
+		ServiceDetailsScreenSteps.saveServiceDetails();
 
 		InspectionToolBar inspectionToolBar = new InspectionToolBar();
 		Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
@@ -2735,7 +2732,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		final String subTotal = "$203.90";
 		final String subTotal2 = "$303.90";
 
 		HomeScreen homeScreen = new HomeScreen();
@@ -2771,7 +2767,6 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		ServicesScreenSteps.selectMatrixServiceData(workOrderData.getServicesScreen().getMatrixService());
 		PriceMatrixScreenValidations.verifyPriceMatrixScreenTotalValue(workOrderData.getServicesScreen().getMatrixService().getVehiclePartData().getVehiclePartTotalPrice());
 		PriceMatrixScreenSteps.savePriceMatrixData();
-		WizardScreenValidations.verifyScreenSubTotalPrice(subTotal);
 		ServicesScreenSteps.selectLaborServiceAndSetData(workOrderData.getServicesScreen().getLaborService());
 		ServiceDetailsScreenSteps.saveServiceDetails();
 		WizardScreenValidations.verifyScreenSubTotalPrice(subTotal2);
@@ -2786,9 +2781,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		WorkOrderSummaryScreenSteps.setTotalSale(workOrderData.getWorkOrderTotalSale());
 
 		WorkOrdersSteps.saveWorkOrder();
-
 		MyWorkOrdersScreenValidations.verifyWorkOrderTotalPrice(workOrderNumber, workOrderData.getWorkOrderPrice());
-
 		NavigationSteps.navigateBackScreen();
 
 	}

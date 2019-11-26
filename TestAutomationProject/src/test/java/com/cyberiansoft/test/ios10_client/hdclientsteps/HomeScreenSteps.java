@@ -17,4 +17,9 @@ public class HomeScreenSteps {
         homeScreen.clickMyWorkOrdersButton();
         MyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
+
+    public static void navigateToStatusScreen() {
+        HomeScreen homeScreen = new HomeScreen();
+        homeScreen.clickStatusButton();
+    }
 }

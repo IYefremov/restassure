@@ -357,7 +357,7 @@
         {
           "serviceName": "Discount 5-10%",
           "servicePrice": "6",
-          "servicePrice2": "$2.90"
+          "servicePrice2": "2.90"
         }
       ]
     }
@@ -389,7 +389,7 @@
         {
           "serviceName": "Discount 5-10%",
           "servicePrice": "6",
-          "servicePrice2": "$2.48"
+          "servicePrice2": "2.48"
         }
       ]
     }
@@ -421,7 +421,7 @@
         {
           "serviceName": "Discount 5-10%",
           "servicePrice": "6",
-          "servicePrice2": "$1.69"
+          "servicePrice2": "1.69"
         }
       ]
     }
@@ -2955,7 +2955,7 @@
         },
         "servicesScreen": {
           "screenPrice": "$303.90",
-          "screenTotalPrice": "$449.85",
+          "screenTotalPrice": "$218.43",
           "percentageServices": [
             {
               "serviceName": "Calc_Discount",
@@ -3037,7 +3037,7 @@
             }
           }
         },
-        "workOrderPrice": "$207.93",
+        "workOrderPrice": "$218.43",
         "workOrderTotalSale": "3",
         "questionScreenData": {
           "screenName": "Zayats Section1",
