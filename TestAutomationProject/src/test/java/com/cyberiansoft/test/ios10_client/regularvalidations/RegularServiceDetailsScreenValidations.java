@@ -54,7 +54,20 @@ public class RegularServiceDetailsScreenValidations {
 
     public static void verifyServicePriceValue(String expectedPrice) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
+        if (expectedPrice.contains("%"))
+            verifyPercentageServicePriceValue(expectedPrice);
+        else
+            Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
+    }
+
+    public static void verifyServiceDetailsPriceValue(String expectedPrice){
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsPriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
+    }
+
+    public static void verifyPercentageServicePriceValue(String expectedPrice) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getServicePriceValue(), expectedPrice);
     }
 
     public static void verifyServiceAdjustmentsValue(String expectedAdjustmentValue) {

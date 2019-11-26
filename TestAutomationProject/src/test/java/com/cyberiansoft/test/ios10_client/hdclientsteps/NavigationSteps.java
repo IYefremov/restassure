@@ -70,8 +70,8 @@ public class NavigationSteps {
     public static void navigateToScreen(String screenName) {
         BaseWizardScreen baseWizardScreen = new BaseWizardScreen();
         baseWizardScreen.selectNextScreen(screenName);
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 10);
-        wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId(screenName)));
+        //WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 10);
+        //wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(screenName)));
     }
 
     public static void navigateBackScreen() {

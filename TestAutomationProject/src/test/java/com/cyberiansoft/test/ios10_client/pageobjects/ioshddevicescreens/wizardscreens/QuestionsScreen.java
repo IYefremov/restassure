@@ -170,35 +170,25 @@ public class QuestionsScreen extends BaseWizardScreen {
 	public void drawSignature() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
 		WebElement signature = wait.until(ExpectedConditions.presenceOfElementLocated(By.name("Signature_Handwriting")));
-		//WebElement signature = appiumdriver.findElementByAccessibilityId("Tap here to sign");
 		int x = signature.getLocation().getX()/2;
 
 		int y = signature.getLocation().getY()/2;
 		TouchAction action = new TouchAction(appiumdriver);
 		action.tap(element(signature, x, y)).perform();
 		
-		
-		
 		Helpers.waitABit(500);
-		
-		//int yy = element.getLocation().getX();
-
-		//int xx = element.getLocation().getY();
 		MobileElement element = (MobileElement) appiumdriver.findElementByAccessibilityId("Signature_Handwriting_Cell");
 		int xx = element.getLocation().getX();
+
 
 		int yy = element.getLocation().getY();
 
 		action = new TouchAction(appiumdriver);
-		//action.press(xx + 100,yy + 100).waitAction(duration).moveTo(xx + 200, yy + 200).release().perform();
 		action.press(PointOption.point(xx + 100,yy + 100)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3))).moveTo(PointOption.point(xx + 200, yy + 200)).release().perform();
-		
-	
+
 		action = new TouchAction(appiumdriver);
-		//action.press(xx - 10,yy + 50).waitAction(3000).moveTo(xx + 200, yy + 200).release().perform();
-		//action.tap(xx - 20, yy + 10).perform();
 		action.tap(element(element, 30, element.getSize().getHeight() - 20)).perform();
-		
+		appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void selectTaxPoint(String taxpoint) {

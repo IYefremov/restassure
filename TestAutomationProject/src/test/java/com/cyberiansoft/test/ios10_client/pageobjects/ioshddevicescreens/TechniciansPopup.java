@@ -97,7 +97,7 @@ public class TechniciansPopup extends iOSHDBaseScreen {
     }
 
     public void cancelSearchTechnician() {
-        appiumdriver.findElement(MobileBy.iOSNsPredicateString("name == 'Cancel' AND visible == 1")).click();
+        appiumdriver.findElementByClassName("XCUIElementTypePopover").findElement(MobileBy.iOSNsPredicateString("name == 'Cancel'")).click();
     }
 
     public void unselecTechnician(String technician) {
