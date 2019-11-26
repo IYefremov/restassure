@@ -41,7 +41,6 @@ public class AlertsCaptions {
 			"Question 'Signature' in section 'Follow up Requested' should be answered.";
 	public static final String ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT = "Technician Split " +
 			"Order's technician split will be assigned to this order service if you set zero amount. " +
-			" " +
 			"Continue?";
 	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE = "Technician Split " +
 			"Set non-zero amount for service to assign multiple technicians.";
