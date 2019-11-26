@@ -14,7 +14,7 @@ public class VNextBOInspectionsApprovalPageSteps {
 
     public static boolean isApprovePrintPageButtonDisplayed() {
 
-        return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getApproveServiceButton());
+        return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getApproveServiceButton(), 5);
     }
 
     public static void clickInspectionApprovePrintPageButton() {
@@ -23,29 +23,27 @@ public class VNextBOInspectionsApprovalPageSteps {
                 new VNextBOInspectionsApprovalWebPage();
         if (isApprovePrintPageButtonDisplayed()) {
             Utils.clickElement(inspectionsApprovalWebPage.getApproveServiceButton());
-            WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getGeneralApproveButton());
+            WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton());
         } else {
             Utils.clickElement(inspectionsApprovalWebPage.getApproveAndCompleteServiceButton());
             WaitUtilsWebDriver.waitForLoading();
         }
     }
 
-    private static VNextBOInspectionsApprovalWebPage setPrintPageNotes(String notes) {
+    private static void setPrintPageNotes(String notes) {
 
         Utils.clearAndType(new VNextBOInspectionsApprovalWebPage().getNotesTextArea(), notes);
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
-    public static VNextBOInspectionsApprovalWebPage clickConfirmApprovePrintPageButtonIfDisplayed() {
+    public static void clickConfirmApprovePrintPageButtonIfDisplayed() {
 
         VNextBOInspectionsApprovalWebPage inspectionsApprovalWebPage =
                 new VNextBOInspectionsApprovalWebPage();
-        if (Utils.isElementDisplayed(inspectionsApprovalWebPage.getGeneralApproveButton())) {
-            Utils.clickElement(inspectionsApprovalWebPage.getGeneralApproveButton());
+        if (Utils.isElementDisplayed(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton())) {
+            Utils.clickElement(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton());
             WaitUtilsWebDriver.waitForLoading();
         }
         WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getInspectionStatus());
-        return PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOInspectionsApprovalWebPage.class);
     }
 
     public static String getPrintPageInspectionStatus() {

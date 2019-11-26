@@ -27,8 +27,9 @@ public class VNextBOActiveDevicesTabValidations extends VNextBODeviceManagementW
 
     public static void verifySearchResultIsCorrectForColumnWithText(String columnTitle, String expectedValue) {
 
-        for (String cellValue : VNextBOActiveDevicesTabSteps.getColumnValuesByTitleFromColumnWithText(columnTitle)
-        ) {
+        for (String cellValue : VNextBOActiveDevicesTabSteps.getColumnValuesByTitleFromColumnWithText(columnTitle)) {
+            System.out.println(VNextBOActiveDevicesTabSteps.getColumnValuesByTitleFromColumnWithText(columnTitle));
+            System.out.println(cellValue);
             Assert.assertTrue(cellValue.toLowerCase().contains(expectedValue.toLowerCase()), "Search result hasn't been correct" );
         }
     }

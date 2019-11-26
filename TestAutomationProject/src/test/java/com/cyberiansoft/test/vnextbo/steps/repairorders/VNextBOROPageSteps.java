@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOChangeTechniciansDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOChangeTechniciansDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.testng.Assert;
@@ -10,13 +11,12 @@ public class VNextBOROPageSteps {
 
     public static String setTechnicianAndVendorByWoNumber(String woNumber, String vendor) {
         VNextBOROPageInteractions.clickTechniciansFieldForWO(woNumber);
-        final VNextBOChangeTechniciansDialogInteractions changeTechniciansDialogInteractions = new VNextBOChangeTechniciansDialogInteractions();
-        Assert.assertTrue(changeTechniciansDialogInteractions.isChangeTechnicianDialogDisplayed(),
+        Assert.assertTrue(VNextBOChangeTechniciansDialogValidations.isChangeTechnicianDialogDisplayed(),
                 "The Change Technician dialog hasn't been opened");
-        changeTechniciansDialogInteractions.setVendor(vendor);
-        final String technician = changeTechniciansDialogInteractions.setTechnician();
-        changeTechniciansDialogInteractions.clickOkButton();
-        Assert.assertFalse(changeTechniciansDialogInteractions.isChangeTechnicianDialogDisplayed(),
+        VNextBOChangeTechniciansDialogInteractions.setVendor(vendor);
+        final String technician = VNextBOChangeTechniciansDialogInteractions.setTechnician();
+        VNextBOChangeTechniciansDialogInteractions.clickOkButton();
+        Assert.assertFalse(VNextBOChangeTechniciansDialogValidations.isChangeTechnicianDialogDisplayed(),
                 "The Change Technician dialog hasn't been closed");
         return technician;
     }

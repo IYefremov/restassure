@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
@@ -56,78 +57,9 @@ public class VNextBOChangeTechnicianDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='orderServices_PhaseVendorTechnician_ModalTemplate']//span[contains(@class, 'dropdown k-header')]//span[@class='k-input']")
     private List<WebElement> selectedListBoxOptions;
 
-    public VNextBOChangeTechnicianDialog(WebDriver driver) {
-        super(driver);
+    public VNextBOChangeTechnicianDialog() {
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-    }
-
-    public VNextBOChangeTechnicianDialog setVendor(String vendor) {
-        clickVendorBox();
-        selectVendor(vendor);
-        return this;
-    }
-
-    private VNextBOChangeTechnicianDialog clickVendorBox() {
-        waitForLoading();
-        wait.until(ExpectedConditions.elementToBeClickable(changeOrderServiceTechnicianListBoxes.get(0))).click();
-        return this;
-    }
-
-    private VNextBOChangeTechnicianDialog selectVendor(String vendor) {
-        selectOptionInDropDown(vendorListBoxOptions.get(0), vendorListBoxOptions, vendor);
-        return this;
-    }
-
-    public VNextBOChangeTechnicianDialog setTechnician(String technician) {
-        clickTechnicianBox();
-        selectTechnician(technician);
-        return this;
-    }
-
-    private VNextBOChangeTechnicianDialog clickTechnicianBox() {
-        waitForLoading();
-        wait.until(ExpectedConditions.elementToBeClickable(changeOrderServiceTechnicianListBoxes.get(1))).click();
-        return this;
-    }
-
-    private VNextBOChangeTechnicianDialog selectTechnician(String technician) {
-        selectOptionInDropDown(technicianListBoxOptions.get(0), technicianListBoxOptions, technician);
-        return this;
-    }
-
-    public String getVendor() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(selectedListBoxOptions.get(0))).getText();
-        } catch (Exception ignored) {
-            return "";
-        }
-    }
-
-    public String getTechnician() {
-        try {
-            return wait.until(ExpectedConditions.visibilityOf(selectedListBoxOptions.get(1))).getText();
-        } catch (Exception ignored) {
-            return "";
-        }
-    }
-
-    public VNextBORODetailsPage clickOkButton() {
-        return clickChangeTechnicianButton(changeOrderServiceTechnicianOkButton);
-    }
-
-    public VNextBORODetailsPage clickCancelButton() {
-        return clickChangeTechnicianButton(changeOrderServiceTechnicianCancelButton);
-    }
-
-    public VNextBORODetailsPage clickXButton() {
-        return clickChangeTechnicianButton(changeOrderServiceTechnicianXButton);
-    }
-
-    private VNextBORODetailsPage clickChangeTechnicianButton(WebElement button) {
-        Utils.clickElement(button);
-        WaitUtilsWebDriver.waitForLoading();
-        return PageFactory.initElements(driver, VNextBORODetailsPage.class);
     }
 
     public boolean isChangeTechnicianDialogDisplayed() {

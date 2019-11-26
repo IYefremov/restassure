@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps;
 
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOHeaderPanelInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOHeaderPanelInteractions;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOHeaderPanelValidations;
 
 public class VNextBOHeaderPanelSteps {

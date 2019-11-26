@@ -6,19 +6,10 @@ import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOROAdvancedSearchValues;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORONotesPageInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOAddNewServiceMonitorDialog;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOAuditLogDialog;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOChangeTechnicianDialog;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesDescriptionWindow;
-import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROAdvancedSearchDialog;
-import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.*;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -26,19 +17,15 @@ import com.cyberiansoft.test.vnextbo.steps.repairorders.*;
 import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOPrivacyPolicyDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOTermsAndConditionsDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOFooterPanelValidations;
-import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
-import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROAdvancedSearchDialogVerifications;
-import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
-import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.*;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -61,7 +48,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(VNextBOROPageValidations.isSavedSearchContainerDisplayed(),
 				"The search container isn't displayed");
 
-//        repairOrdersPage.setDepartmentsTabActive(); todo add verifies for narrow screen, if necessary
+//        repairOrdersPage.setDepartmentsTabActive();
 //        Assert.assertTrue(repairOrdersPage.isDepartmentsTabDisplayed(),
 //                "The department tab isn't displayed");
 
@@ -334,10 +321,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-		final VNextBOInvoicesDescriptionWindow invoicesDescription = new VNextBOInvoicesDescriptionWindow();
 		VNextBOROPageInteractions.clickInvoiceNumberInTable(data.getOrderNumber(), data.getInvoiceNumber());
 		Assert.assertEquals(webdriver.getWindowHandles().size(), 2);
-		invoicesDescription.closeWindows();
+		Utils.closeWindows();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -586,20 +572,13 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
-		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
+		Assert.assertTrue(VNextBOAddNewServiceMonitorDialogValidations.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
-		newServiceMonitorDialog
-				.setPriceType(data.getPriceType())
-				.setService(data.getService())
-				.setServiceDetails(data.getServiceDetails())
-				.setServiceDescription(serviceDescription)
-				.setServicePrice(data.getServicePrice())
-				.setServiceQuantity(data.getServiceQuantity())
-				.clickSubmitButton()
-				.refreshPage();
+        VNextBOAddNewServiceMonitorDialogSteps
+                .setAddNewServiceMonitorFieldsForAllOrMoneyPriceTypesWithSubmit(data, serviceDescription);
+        Utils.refreshPage();
 
 		VNextBORODetailsPageInteractions.expandServicesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
@@ -659,19 +638,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
-		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
+		Assert.assertTrue(VNextBOAddNewServiceMonitorDialogValidations.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
-		newServiceMonitorDialog
-				.setPriceType(data.getPriceType())
-				.setService(data.getService())
-				.setServiceDetails(data.getServiceDetails())
-				.setServiceDescription(serviceDescription)
-				.setServicePrice(data.getServicePrice())
-				.setServiceQuantity(data.getServiceQuantity())
-				.clickSubmitButton();
+        VNextBOAddNewServiceMonitorDialogSteps.setAddNewServiceMonitorFieldsForAllOrMoneyPriceTypesWithSubmit(data, serviceDescription);
 
 		VNextBORODetailsPageInteractions.expandServicesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
@@ -707,19 +678,12 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
-		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
+		Assert.assertTrue(VNextBOAddNewServiceMonitorDialogValidations.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
-		newServiceMonitorDialog
-				.setPriceType(data.getPriceType())
-				.setService(data.getService())
-				.setServiceDetails(data.getServiceDetails())
-				.setServiceDescription(serviceDescription)
-				.setServiceLaborRate(data.getServiceLaborRate())
-				.setServiceLaborTime(data.getServiceLaborTime())
-				.clickSubmitButton();
+
+        VNextBOAddNewServiceMonitorDialogSteps.setAddNewLaborServiceMonitorValues(data, serviceDescription);
 
         VNextBORODetailsPageInteractions.expandServicesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
@@ -754,35 +718,32 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
-		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
+		Assert.assertTrue(VNextBOAddNewServiceMonitorDialogValidations.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
-		final String selectedCategory = newServiceMonitorDialog
-				.setPriceType(data.getPriceType())
-				.setService(data.getService())
-				.setServiceDescription(serviceDescription)
-				.setCategory(data.getServiceCategory())
-				.setSubcategory();
+		final String selectedCategory = VNextBOAddNewServiceMonitorDialogSteps
+                .getSubcategoryWhileAddingNewPartServiceMonitorValues(data, serviceDescription);
 		System.out.println("*******************************************");
 		System.out.println(selectedCategory);
 
-		final String selectedAddPartsNumberBefore = newServiceMonitorDialog.getSelectedAddPartsNumber();
-		if (!newServiceMonitorDialog.getPartsOptions().isEmpty()) {
-			newServiceMonitorDialog.selectRandomAddPartsOption();
+		final String selectedAddPartsNumberBefore =
+                VNextBOAddNewServiceMonitorDialogInteractions.getSelectedAddPartsNumber();
+		if (!VNextBOAddNewServiceMonitorDialogValidations.arePartsOptionsDisplayed()) {
+            VNextBOAddNewServiceMonitorDialogInteractions.selectRandomAddPartsOption();
 
-			final String selectedAddPartsNumberAfter = newServiceMonitorDialog.getSelectedAddPartsNumber();
+			final String selectedAddPartsNumberAfter =
+                    VNextBOAddNewServiceMonitorDialogInteractions.getSelectedAddPartsNumber();
 			Assert.assertNotEquals(selectedAddPartsNumberBefore, selectedAddPartsNumberAfter);
 			Assert.assertTrue(Integer.valueOf(selectedAddPartsNumberBefore) < Integer.valueOf(selectedAddPartsNumberAfter));
 
-			newServiceMonitorDialog.clickSubmitButton();
-			if (!newServiceMonitorDialog.isPartDescriptionDisplayed(data.getServiceCategory() + " -> " + selectedCategory)) {
-				System.out.println("Refreshing the page...");
+            VNextBOAddNewServiceMonitorDialogInteractions.clickSubmitButton();
+			if (!VNextBOAddNewServiceMonitorDialogValidations.isPartDescriptionDisplayed(data.getServiceCategory()
+                    + " -> " + selectedCategory)) {
 				Utils.refreshPage();
 			}
 
-			Assert.assertTrue(newServiceMonitorDialog
+			Assert.assertTrue(VNextBOAddNewServiceMonitorDialogValidations
 							.isPartDescriptionDisplayed(data.getServiceCategory() + " -> " + selectedCategory),
 					"The Part service description hasn't been displayed.");
 		}
@@ -801,21 +762,14 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
-		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
+		Assert.assertTrue(VNextBOAddNewServiceMonitorDialogValidations.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
-		newServiceMonitorDialog
-				.setPriceType(data.getPriceType())
-				.setService(data.getService())
-				.setServiceDescription(serviceDescription)
-				.setServicePrice(data.getServicePrice())
-				.setServiceQuantity(data.getServiceQuantity())
-				.clickXButton()
-				.refreshPage();
+        VNextBOAddNewServiceMonitorDialogSteps
+                .setAddNewServiceMonitorFieldsForAllOrMoneyPriceTypesWithXButton(data, serviceDescription);
 
-		VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandServicesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		Assert.assertEquals(serviceId, "",
 				"The service has been added after closing the 'New Service Dialog' with X button");
@@ -834,19 +788,12 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		final VNextBOAddNewServiceMonitorDialog newServiceMonitorDialog = new VNextBOAddNewServiceMonitorDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickAddNewServiceButton();
-		Assert.assertTrue(newServiceMonitorDialog.isNewServicePopupDisplayed());
+		Assert.assertTrue(VNextBOAddNewServiceMonitorDialogValidations.isNewServicePopupDisplayed());
 
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
-		newServiceMonitorDialog
-				.setPriceType(data.getPriceType())
-				.setService(data.getService())
-				.setServiceDescription(serviceDescription)
-				.setServicePrice(data.getServicePrice())
-				.setServiceQuantity(data.getServiceQuantity())
-				.clickCancelButton()
-				.refreshPage();
+        VNextBOAddNewServiceMonitorDialogSteps
+                .setAddNewServiceMonitorFieldsForAllOrMoneyPriceTypesWithCancelButton(data, serviceDescription);
 
 		VNextBORODetailsPageInteractions.expandServicesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
@@ -1446,11 +1393,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		WaitUtilsWebDriver.waitForLoading();
 		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
 
-		final VNextBOAuditLogDialog auditLogDialog = new VNextBOAuditLogDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickLogInfoButton();
-		Assert.assertTrue(auditLogDialog.isAuditLogDialogDisplayed(), "The audit log modal dialog hasn't been opened");
+		Assert.assertTrue(VNextBOAuditLogDialogValidations.isAuditLogDialogDisplayed(), "The audit log modal dialog hasn't been opened");
 
-		auditLogDialog.getAuditLogsTabsNames().forEach(System.out::println);
+        VNextBOAuditLogDialogInteractions.getAuditLogsTabsNames().forEach(System.out::println);
 		System.out.println("*****************************************");
 		System.out.println();
 
@@ -1459,11 +1405,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		System.out.println("*****************************************");
 		System.out.println();
 
-		Assert.assertTrue(auditLogDialog.getAuditLogsTabsNames().containsAll(tabs),
+		Assert.assertTrue(VNextBOAuditLogDialogInteractions.getAuditLogsTabsNames().containsAll(tabs),
 				"The audit logs tabs are not displayed");
 
-		auditLogDialog.clickAuditLogsPhasesAndDepartmentsTab();
-		final String phasesLastRecord = auditLogDialog.getDepartmentsAndPhasesLastRecord();
+        VNextBOAuditLogDialogInteractions.clickAuditLogsPhasesAndDepartmentsTab();
+		final String phasesLastRecord = VNextBOAuditLogDialogInteractions.getDepartmentsAndPhasesLastRecord();
 		Assert.assertTrue(!phasesLastRecord.isEmpty(), "The last phase record hasn't been displayed");
 	}
 
@@ -1790,11 +1736,10 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
-		final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog(webdriver);
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
 		VNextBORODetailsPageInteractions.clickPhaseVendorTechnicianLink();
 
-		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
+		Assert.assertTrue(VNextBOChangeTechniciansDialogValidations.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
         VNextBOChangeTechniciansDialogSteps.setOptionsAndClickOkButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
@@ -1811,7 +1756,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBORODetailsPageInteractions.setStatus(data.getStatus());
         VNextBORODetailsPageInteractions.clickPhaseVendorTechnicianLink();
 
-		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
+		Assert.assertTrue(VNextBOChangeTechniciansDialogValidations.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
         VNextBOChangeTechniciansDialogSteps.setOptionsAndClickOkButtonForTechniciansDialog(data.getVendor1(), data.getTechnician1());
@@ -1836,10 +1781,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final int numberOfVendorOptions = VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getVendor());
 		final int numberOfTechnicianOptions = VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getTechnician());
 
-		final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickPhaseVendorTechnicianLink();
 
-		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
+		Assert.assertTrue(VNextBOChangeTechniciansDialogValidations.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
         VNextBOChangeTechniciansDialogSteps.setOptionsAndClickXButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
@@ -1870,10 +1814,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final int numberOfVendorOptions = VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getVendor());
 		final int numberOfTechnicianOptions = VNextBORODetailsPageInteractions.getNumberOfVendorTechnicianOptionsByName(data.getTechnician());
 
-		final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog(webdriver);
 		VNextBORODetailsPageInteractions.clickPhaseVendorTechnicianLink();
 
-		Assert.assertTrue(changeTechnicianDialog.isChangeTechnicianDialogDisplayed(),
+		Assert.assertTrue(VNextBOChangeTechniciansDialogValidations.isChangeTechnicianDialogDisplayed(),
 				"The Change Technician dialog hasn't been opened");
 
         VNextBOChangeTechniciansDialogSteps.setOptionsAndClickXButtonForTechniciansDialog(data.getVendor(), data.getTechnician());
@@ -1916,30 +1859,29 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanSearchBySavedSearchForm(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-        final VNextBOROAdvancedSearchDialog advSearchDialog = new VNextBOROAdvancedSearchDialog();
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchName());
         VNextBOROPageSteps.openAdvancedSearchDialog();
         final VNextBOROAdvancedSearchValues searchValues = data.getSearchValues();
 
-        Assert.assertEquals(advSearchDialog.getCustomerInputFieldValue(), searchValues.getCustomer());
-        Assert.assertEquals(advSearchDialog.getEmployeeInputFieldValue(), searchValues.getEmployee());
-        Assert.assertEquals(advSearchDialog.getPhaseInputFieldValue(), searchValues.getPhase());
-        Assert.assertEquals(advSearchDialog.getPhaseStatusInputFieldValue(), searchValues.getPhaseStatus());
-        Assert.assertEquals(advSearchDialog.getDepartmentInputFieldValue(), searchValues.getDepartment());
-        Assert.assertEquals(advSearchDialog.getWoTypeInputFieldValue(), searchValues.getWoType());
-        Assert.assertEquals(advSearchDialog.getWoNumInputFieldValue(), searchValues.getWoNum());
-        Assert.assertEquals(advSearchDialog.getRoNumInputFieldValue(), searchValues.getRoNum());
-        Assert.assertEquals(advSearchDialog.getStockInputFieldValue(), searchValues.getStockNum());
-        Assert.assertEquals(advSearchDialog.getVinInputFieldValue(), searchValues.getVinNum());
-        Assert.assertEquals(advSearchDialog.getTimeFrameInputFieldValue(), searchValues.getTimeFrame());
-        Assert.assertEquals(advSearchDialog.getRepairStatusInputFieldValue(), searchValues.getRepairStatus());
-        Assert.assertEquals(advSearchDialog.getDaysInProcessInputFieldValue(), searchValues.getDaysInProcess());
-        Assert.assertEquals(advSearchDialog.getDaysInPhaseInputFieldValue(), searchValues.getDaysInPhase());
-        Assert.assertEquals(advSearchDialog.getFlagInputFieldValue(), searchValues.getFlag());
-        Assert.assertEquals(advSearchDialog.getSortByInputFieldValue(), searchValues.getSortBy());
-        Assert.assertEquals(advSearchDialog.getSearchNameInputFieldValue(), searchValues.getSearchName());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getCustomerInputFieldValue(), searchValues.getCustomer());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getEmployeeInputFieldValue(), searchValues.getEmployee());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getPhaseInputFieldValue(), searchValues.getPhase());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getPhaseStatusInputFieldValue(), searchValues.getPhaseStatus());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getDepartmentInputFieldValue(), searchValues.getDepartment());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getWoTypeInputFieldValue(), searchValues.getWoType());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getWoNumInputFieldValue(), searchValues.getWoNum());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getRoNumInputFieldValue(), searchValues.getRoNum());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getStockInputFieldValue(), searchValues.getStockNum());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getVinInputFieldValue(), searchValues.getVinNum());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getTimeFrameInputFieldValue(), searchValues.getTimeFrame());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getRepairStatusInputFieldValue(), searchValues.getRepairStatus());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getDaysInProcessInputFieldValue(), searchValues.getDaysInProcess());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getDaysInPhaseInputFieldValue(), searchValues.getDaysInPhase());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getFlagInputFieldValue(), searchValues.getFlag());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getSortByInputFieldValue(), searchValues.getSortBy());
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getSearchNameInputFieldValue(), searchValues.getSearchName());
     }
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1952,9 +1894,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOROPageValidations.isSavedSearchEditIconDisplayed(),
                 "The saved search edit icon hasn't been displayed");
         VNextBOROPageSteps.openAdvancedSearchDialog();
-        Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSavedSearchNameClickable(),
+        Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isSavedSearchNameClickable(),
                 "The saved search input field isn't clickable");
-        Assert.assertTrue(VNextBOROAdvancedSearchDialogVerifications.isSaveButtonClickable(),
+        Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isSaveButtonClickable(),
                 "The save button isn't clickable");
         VNextBOROAdvancedSearchDialogSteps.closeAdvancedSearchDialog();
 
@@ -1962,9 +1904,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
         VNextBOROPageSteps.openAdvancedSearchDialog();
         Assert.assertFalse(VNextBOROPageValidations.isSavedSearchEditIconDisplayed(),
                 "The saved search edit icon hasn't been displayed");
-        Assert.assertFalse(VNextBOROAdvancedSearchDialogVerifications.isSavedSearchNameClickable(),
+        Assert.assertFalse(VNextBOROAdvancedSearchDialogValidations.isSavedSearchNameClickable(),
                 "The saved search input field is clickable");
-        Assert.assertFalse(VNextBOROAdvancedSearchDialogVerifications.isSaveButtonClickable(),
+        Assert.assertFalse(VNextBOROAdvancedSearchDialogValidations.isSaveButtonClickable(),
                 "The save button is clickable");
         VNextBOROAdvancedSearchDialogSteps.closeAdvancedSearchDialog();
     }

@@ -35,15 +35,14 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
      * remove methods with TestNG annotations,
      * if the unique locators for the services dropdowns on the RO details page are added.
      */
-    @Override
     @BeforeClass
     public void login() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorReportProblemTD();
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
     }
 
     @BeforeMethod
     public void setUp() {
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
         final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
         VNextBOLoginSteps.userLogin(userName, userPassword);
