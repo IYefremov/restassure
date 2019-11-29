@@ -8,6 +8,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class VNextBORODetailsPageValidations {
 
     public static String verifyServiceIsDisplayedForCollapsedPhase(String service, String phase) {
@@ -104,6 +107,38 @@ public class VNextBORODetailsPageValidations {
     public static void verifyPhaseStatusIsDisplayed(String phase, String status) {
         Assert.assertEquals(Utils.getText(new VNextBORODetailsPage().getPhaseStatusBoxValue(phase)), status,
                 "The Phase status is not displayed as expected");
+    }
+
+    public static void verifyPhaseStatus(String phase, String ...phaseStatusesNotToBeDisplayed) {
+        final WebElement phaseStatusBoxValue = new VNextBORODetailsPage().getPhaseStatusBoxValue(phase);
+        for (String status : phaseStatusesNotToBeDisplayed) {
+            Assert.assertNotEquals(Utils.getText(phaseStatusBoxValue), status,
+                    "The phase status shouldn't contain the status " + status);
+        }
+    }
+
+    public static void verifyPhaseStatusOrPartPhaseStatusIsDisplayed(String phase, String status, String[] phaseStatuses) {
+        try {
+            if (!Utils.getText(new VNextBORODetailsPage().getPhaseStatusBoxValue(phase)).equals(status)) {
+                verifyPartPhaseStatusIsCorrect(phaseStatuses);
+            }
+        } catch (Exception e) {
+            verifyPartPhaseStatusIsCorrect(phaseStatuses);
+        }
+    }
+
+    private static void verifyPartPhaseStatusIsCorrect(String[] phaseStatuses) {
+        final List<WebElement> partsPhaseStatusDropDowns = new VNextBORODetailsPage().getPartsPhaseStatusDropDowns();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(
+                partsPhaseStatusDropDowns);
+        if (!partsPhaseStatusDropDowns.isEmpty()) {
+            final List<String> statuses = partsPhaseStatusDropDowns.stream().map(Utils::getText).collect(Collectors.toList());
+            final boolean matching = statuses.stream().allMatch(partStatus -> partStatus.equals(phaseStatuses[0])
+                    || partStatus.equals(phaseStatuses[1])
+                    || partStatus.equals(phaseStatuses[2])
+                    || partStatus.equals(phaseStatuses[3]));
+            Assert.assertTrue(matching, "The parts phases contain the restricted statuses");
+        }
     }
 
     public static void verifyActionsMenuIconIsHiddenForPhase(String phase) {

@@ -1234,9 +1234,11 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
-		VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, data.getServiceStatuses()[1]);
+        final String status = data.getServiceStatuses()[1];
+        VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
 		WaitUtilsWebDriver.waitForLoading();
-		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), data.getServiceStatuses()[1]);
+        VNextBORODetailsPageInteractions.waitForServiceStatusToBeChanged(serviceId, status);
+		Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), status);
 
 		final String serviceStartedDate = VNextBORODetailsPageInteractions.getServiceStartedDate(serviceId);
 		final String serviceCompletedDate = VNextBORODetailsPageInteractions.getServiceCompletedDate(serviceId);
@@ -1251,7 +1253,7 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 				"The service completed date is wrong");
 
 		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
-		Assert.assertTrue(VNextBORODetailsPageValidations.isHelpInfoDialogDisplayed(serviceId, data.getServiceStatuses()[1]),
+		Assert.assertTrue(VNextBORODetailsPageValidations.isHelpInfoDialogDisplayed(serviceId, status),
 				"The helper info dialog isn't displayed");
 	}
 

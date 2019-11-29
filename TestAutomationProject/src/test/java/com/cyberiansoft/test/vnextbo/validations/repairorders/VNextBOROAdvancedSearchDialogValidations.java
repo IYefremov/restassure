@@ -17,6 +17,10 @@ public class VNextBOROAdvancedSearchDialogValidations {
         return Utils.isElementDisplayed(new VNextBOROAdvancedSearchDialog().getAdvancedSearchDialog());
     }
 
+    public static boolean isAdvancedSearchDialogDisplayed(int timeOut) {
+        return Utils.isElementDisplayed(new VNextBOROAdvancedSearchDialog().getAdvancedSearchDialog(), timeOut);
+    }
+
     public static boolean isAdvancedSearchDialogNotDisplayed() {
         return Utils.isElementNotDisplayed(new VNextBOROAdvancedSearchDialog().getAdvancedSearchDialog());
     }

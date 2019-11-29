@@ -16,7 +16,7 @@ public class CustomDateProvider {
         return LocalDate.now();
     }
 
-    private static LocalDate getCurrentDateLocalized() {
+    public static LocalDate getCurrentDateLocalized() {
         return LocalDate.now(getZoneId());
     }
 
@@ -137,6 +137,10 @@ public class CustomDateProvider {
 
     public static LocalDate getLastYearStartDate() {
         return getCurrentDateLocalized().minusYears(1).withDayOfYear(1);
+    }
+
+    public static LocalDate getThreeMonthsBeforeCurrentDate() {
+        return getCurrentDateLocalized().minusMonths(3).minusDays(1);
     }
 
     public static LocalDate getLastYearEndDate() {

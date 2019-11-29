@@ -111,7 +111,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	private WebElement phaseVendorTechnician;
 
 	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_5']//div[contains(@data-bind, 'statusText')]")
-	private List<WebElement> phaseStatus;
+	private List<WebElement> phaseStatusesList;
 
 	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]")
 	private WebElement phaseActionsTrigger;
@@ -176,11 +176,18 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//span[@data-automation-label='reconmonitor-details-phase-status-item']/..")
 	private List<WebElement> phaseStatusListBoxOptions;
 
+	@FindBy(xpath = "//tr[@class='serviceRow']//span[contains(@class, 'service-status')]//span[@class='k-input']")
+	private List<WebElement> partsPhaseStatusDropDowns;
+
 
 	public VNextBORODetailsPage() {
 		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
+
+	public WebElement getPhaseByName(String phase) {
+	    return driver.findElement(By.xpath("//div[@data-name='" + phase + "']"));
+    }
 
 	public WebElement getFlagColorElement(String color) {
 	    return driver.findElement(By.xpath("//div[@class='drop flags']//span[contains(@title, '" + color + "')]"));
@@ -348,7 +355,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     }
 
     public WebElement getPhaseStatusBox(String phaseStatusBox) {
-	    return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phaseStatusBox +
+	    return driver.findElement(By.xpath("//div[@data-name='" + phaseStatusBox +
                 "']//div[contains(@class, 'clmn_5')]//span[contains(@class, 'group-status-dropdown')]"));
     }
 
@@ -357,27 +364,27 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     }
 
     public WebElement getActionsTriggerForPhase(String phase) {
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase
+        return driver.findElement(By.xpath("//div[@data-name='" + phase
                 + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]"));
     }
 
     public WebElement getServiceReportProblemOption(String serviceId) {
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-order-service-id='"
+        return driver.findElement(By.xpath("//div[@data-order-service-id='"
                 + serviceId + "']//label[text()='Report Problem']"));
     }
 
     public WebElement getServiceResolveProblemOption(String serviceId) {
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-order-service-id='"
+        return driver.findElement(By.xpath("//div[@data-order-service-id='"
                 + serviceId + "']//label[text()='Resolve Problem']"));
     }
 
     public WebElement getServiceStatusByServiceId(String serviceId) {
-	    return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+	    return driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
                         + "']//span[contains(@class, 'service-status-dropdown')]//span[@class='k-input']"));
     }
 
     public WebElement getServiceStatusBoxByServiceId(String serviceId) {
-	    return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-order-service-id='" + serviceId
+	    return driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
                         + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
     }
 }

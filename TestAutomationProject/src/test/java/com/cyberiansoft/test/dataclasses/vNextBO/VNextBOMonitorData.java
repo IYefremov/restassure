@@ -57,11 +57,11 @@ public class VNextBOMonitorData  {
     @JsonProperty("phase")
     private String phase;
 
-    @JsonProperty("problemReason")
-    private String problemReason;
-
     @JsonProperty("phaseStatus")
     private String phaseStatus;
+
+    @JsonProperty("problemReason")
+    private String problemReason;
 
     @JsonProperty("department")
     private String department;

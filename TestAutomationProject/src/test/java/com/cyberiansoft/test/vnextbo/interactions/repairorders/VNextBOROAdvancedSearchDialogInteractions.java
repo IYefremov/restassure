@@ -14,8 +14,8 @@ public class VNextBOROAdvancedSearchDialogInteractions {
     public static void setTimeFrame(String timeFrame) {
         final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
         Utils.clickElement(advancedSearchDialog.getTimeFrameListBox());
-        Utils.selectOptionInDropDown(advancedSearchDialog.getTimeFrameDropDown(),
-                advancedSearchDialog.getTimeFrameListBoxOptions(), timeFrame, true);
+        Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getTimeFrameDropDown(),
+                advancedSearchDialog.getTimeFrameOption(timeFrame));
     }
 
     public static void setPhase(String phase) {
@@ -30,6 +30,11 @@ public class VNextBOROAdvancedSearchDialogInteractions {
         Utils.clickElement(advancedSearchDialog.getPhaseStatusListBox());
         Utils.selectOptionInDropDown(advancedSearchDialog.getPhaseStatusDropDown(),
                 advancedSearchDialog.getPhaseStatusListBoxOptions(), phaseStatus);
+    }
+
+    public static void clickHasProblemsCheckbox() {
+        Utils.clickElement(new VNextBOROAdvancedSearchDialog().getHasProblemsCheckbox());
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void clickSearchButton() {

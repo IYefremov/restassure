@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -214,8 +215,15 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='orderSortOptionsDropdown_listbox']//span[@class='k-input']")
     private WebElement sortBySelection;
 
+    @FindBy(id = "repairOrders-search-hasProblem")
+    private WebElement hasProblemsCheckbox;
+
     public VNextBOROAdvancedSearchDialog() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+    }
+
+    public WebElement getTimeFrameOption(String timeFrame) {
+        return driver.findElement(By.xpath("//ul[@id='orderTimeframeDropdown_listbox']/li[text()='" + timeFrame + "']"));
     }
 }

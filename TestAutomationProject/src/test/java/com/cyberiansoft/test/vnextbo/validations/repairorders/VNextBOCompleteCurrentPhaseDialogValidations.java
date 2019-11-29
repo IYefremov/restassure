@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.validations.repairorders;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOCompleteCurrentPhaseDialog;
 
-public class VNextBOCompleteCurrentPhaseValidations {
+public class VNextBOCompleteCurrentPhaseDialogValidations {
 
     public static boolean isCompleteCurrentPhaseDialogDisplayed() {
         return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getCompleteCurrentPhaseDialog());
@@ -31,5 +31,10 @@ public class VNextBOCompleteCurrentPhaseValidations {
 
     public static boolean isCompleteCurrentPhaseButtonDisplayed() {
         return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getCompleteCurrentPhaseButton());
+    }
+
+    public static boolean isResolvedButtonDisplayedForService(String service) {
+        return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getResolvedButtonForService(service),
+                10);
     }
 }

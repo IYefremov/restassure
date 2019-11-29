@@ -7,7 +7,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCompleteCurrentPhaseInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCompleteCurrentPhaseDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
@@ -17,7 +17,7 @@ import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageStep
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCurrentPhaseValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCurrentPhaseDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.json.simple.JSONObject;
@@ -265,20 +265,20 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setReportProblemForService(serviceId, data.getProblemReason(), data.getProblemDescription());
 
         VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhase(data.getPhase());
-        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isServiceNameGridDisplayed(),
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isServiceNameGridDisplayed(),
                 "The service name grid hasn't been displayed");
-        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isProblemReasonGridDisplayed(),
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isProblemReasonGridDisplayed(),
                 "The problem reason grid hasn't been displayed");
-        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isProblemDescriptionGridDisplayed(),
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isProblemDescriptionGridDisplayed(),
                 "The problem description grid hasn't been displayed");
-        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isActionGridDisplayed(),
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isActionGridDisplayed(),
                 "The action grid hasn't been displayed");
-        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isCancelButtonDisplayed(),
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isCancelButtonDisplayed(),
                 "The 'Cancel' button hasn't been displayed");
-        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isCompleteCurrentPhaseButtonDisplayed(),
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isCompleteCurrentPhaseButtonDisplayed(),
                 "The 'Complete Current phase' button hasn't been displayed");
 
-        Assert.assertEquals(VNextBOCompleteCurrentPhaseInteractions.getServiceName(service), service,
+        Assert.assertEquals(VNextBOCompleteCurrentPhaseDialogInteractions.getServiceName(service), service,
                 "The service " + service + " hasn't been displayed");
     }
 
@@ -302,10 +302,15 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setReportProblemForService(serviceId, data.getProblemReason(), data.getProblemDescription());
 
         VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhase(data.getPhase());
-        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isServiceNameGridDisplayed(),
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isServiceNameGridDisplayed(),
                 "The service name grid hasn't been displayed");
 
-        Assert.assertEquals(VNextBOCompleteCurrentPhaseInteractions.getServiceName(service), service,
+        Assert.assertEquals(VNextBOCompleteCurrentPhaseDialogInteractions.getServiceName(service), service,
                 "The service " + service + " hasn't been displayed");
+
+        VNextBOCompleteCurrentPhaseDialogInteractions.clickResolveButtonForService(service);
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isResolvedButtonDisplayedForService(service),
+                "The 'Resolved' button hasn't been displayed for service after clicking 'Resolve'");
+        VNextBOCompleteCurrentPhaseDialogInteractions.clickResolveButtonForService(service);
     }
 }
