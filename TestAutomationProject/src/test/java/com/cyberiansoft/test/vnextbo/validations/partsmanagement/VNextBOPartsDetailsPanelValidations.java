@@ -5,6 +5,11 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetails
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import org.testng.Assert;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyDetailsPanelIsDisplayed() {
@@ -41,5 +46,17 @@ public class VNextBOPartsDetailsPanelValidations {
 
         Assert.assertEquals(VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(partNumber), expectedLaborsAmount,
                 "Labors amount hasn't been correct");
+    }
+
+    public static void verifyEtaDateIsCorrect(String orderPhase) throws ParseException {
+
+        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        Date currentDate = new Date();
+        String actualEtaDate = Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartEtaField().get(0));
+        if (orderPhase.equals("Past Due Parts"))
+            Assert.assertTrue(dateFormat.parse(actualEtaDate).before(currentDate), "Part order's ETA date hasn't been correct");
+        if (orderPhase.equals("In Progress"))
+            Assert.assertTrue( actualEtaDate.equals("") || dateFormat.parse(actualEtaDate).equals(currentDate) ||
+                    dateFormat.parse(actualEtaDate).after(currentDate), "Part order's ETA date hasn't been correct");
     }
 }

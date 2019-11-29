@@ -41,7 +41,6 @@ public class AlertsCaptions {
 			"Question 'Signature' in section 'Follow up Requested' should be answered.";
 	public static final String ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT = "Technician Split " +
 			"Order's technician split will be assigned to this order service if you set zero amount. " +
-			" " +
 			"Continue?";
 	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE = "Technician Split " +
 			"Set non-zero amount for service to assign multiple technicians.";
@@ -70,7 +69,7 @@ public class AlertsCaptions {
 			" "+
 			"Maximum allowed total amount is %1$s";
 	public static final String ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE = "Warning! "+
-			"Total amount of invoice is huge. "+
+			"Total amount of invoice is huge."+
 			" "+
 			"Maximum allowed total amount is %1$s";
 	public static final String ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE = "Warning! "+

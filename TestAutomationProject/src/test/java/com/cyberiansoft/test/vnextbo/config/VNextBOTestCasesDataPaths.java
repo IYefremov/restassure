@@ -67,7 +67,7 @@ public class VNextBOTestCasesDataPaths {
     }
 
     public String getPartsManagementTD() {
-        return properties.getProperty("vnextbo.parts.management.td");
+        return properties.getProperty("vnextbo.parts.management.dashboard.td");
     }
 
     public String getSmokeTD() {

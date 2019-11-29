@@ -480,7 +480,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			if (serviceData.getServicePrice2() != null) {
 				RegularServicesScreenSteps.switchToSelectedServices();
 				RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
-				RegularServiceDetailsScreenValidations.verifyServicePriceValue(serviceData.getServicePrice2());
+				RegularServiceDetailsScreenValidations.verifyServiceDetailsPriceValue(serviceData.getServicePrice2());
 				RegularServiceDetailsScreenSteps.saveServiceDetails();
 				RegularSelectedServicesSteps.switchToAvailableServices();
 			}
@@ -514,7 +514,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			if (serviceData.getServicePrice2() != null) {
 				RegularServicesScreenSteps.switchToSelectedServices();
 				RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
-				RegularServiceDetailsScreenValidations.verifyServicePriceValue(serviceData.getServicePrice2());
+				RegularServiceDetailsScreenValidations.verifyServiceDetailsPriceValue(serviceData.getServicePrice2());
 				RegularServiceDetailsScreenSteps.saveServiceDetails();
 				RegularSelectedServicesSteps.switchToAvailableServices();
 			}
@@ -549,7 +549,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 				RegularServicesScreenSteps.switchToSelectedServices();
 				RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 				RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
-				RegularServiceDetailsScreenValidations.verifyServicePriceValue(serviceData.getServicePrice2());
+				RegularServiceDetailsScreenValidations.verifyServiceDetailsPriceValue(serviceData.getServicePrice2());
 				RegularServiceDetailsScreenSteps.saveServiceDetails();
 				selectedServicesScreen.switchToAvailableServicesTab();
 			}
@@ -1990,7 +1990,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
 		}
 		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
-		RegularServiceDetailsScreenValidations.verifyServicePriceValue(workOrderData.getPercentageServiceData().getServicePrice());
+		RegularServiceDetailsScreenValidations.verifyServiceDetailsPriceValue(workOrderData.getPercentageServiceData().getServicePrice());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
 
 		RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
@@ -2651,7 +2651,6 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-		final String subTotal = "$203.90";
 		final String subTotal2 = "$303.90";
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
@@ -2689,7 +2688,6 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularServicesScreenSteps.selectMatrixServiceData(workOrderData.getServicesScreen().getMatrixService());
 		RegularPriceMatrixScreenValidations.verifyPriceMatrixScreenSubTotalValue(workOrderData.getServicesScreen().getMatrixService().getVehiclePartData().getVehiclePartTotalPrice());
 		RegularPriceMatrixScreenSteps.savePriceMatrix();
-		RegularWizardScreenValidations.verifyScreenSubTotalPrice(subTotal);
 		RegularServicesScreenSteps.selectLaborServiceAndSetData(workOrderData.getServicesScreen().getLaborService());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		RegularWizardScreenValidations.verifyScreenSubTotalPrice(subTotal2);
@@ -2704,9 +2702,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularWorkOrderSummaryScreenSteps.setTotalSale(workOrderData.getWorkOrderTotalSale());
 
 		RegularWorkOrdersSteps.saveWorkOrder();
-
 		RegularMyWorkOrdersScreenValidations.verifyWorkOrderTotalPrice(workOrderNumber, workOrderData.getWorkOrderPrice());
-
 		RegularNavigationSteps.navigateBackScreen();
 
 	}
