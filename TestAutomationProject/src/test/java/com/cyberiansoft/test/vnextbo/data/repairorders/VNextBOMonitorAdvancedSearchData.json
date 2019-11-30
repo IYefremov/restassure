@@ -40,7 +40,6 @@
       ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
-      "timeFrame": "Year To Date",
       "phase": "PDR Station"
     }
   ],
@@ -56,7 +55,6 @@
       ],
       "location": "1111 Automation",
       "customer": "Mike's Techs",
-      "timeFrame": "Year To Date",
       "department": "Default"
     }
   ],
@@ -72,8 +70,7 @@
       ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
-      "woType": "Best",
-      "timeFrame": "Year To Date"
+      "woType": "Best"
     }
   ],
 
@@ -88,8 +85,7 @@
       ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
-      "woNum": "O-361-00004",
-      "timeFrame": "Year To Date"
+      "woNum": "O-361-00004"
     }
   ],
 
@@ -105,7 +101,6 @@
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
       "woNum": "O-361-00004",
-      "timeFrame": "Year To Date",
       "roNum": "RO#ForAuto"
     }
   ],
@@ -121,8 +116,7 @@
       ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
-      "stockNum": "S00054",
-      "timeFrame": "Year To Date"
+      "stockNum": "S00054"
     }
   ],
 
@@ -137,8 +131,7 @@
       ],
       "location": "Best Location Automation",
       "customer": "Mike's Techs",
-      "vinNum": "1ESFCVGDE34ES2589",
-      "timeFrame": "Year To Date"
+      "vinNum": "1ESFCVGDE34ES2589"
     }
   ],
 
@@ -451,17 +444,16 @@
     }
   ],
 
-  "verifyUserCanSearchByLast3WeeksTimeFrame": [
+  "verifyUserCanSearchByLast90DaysTimeFrame": [
     {
-      "rowID": "verifyUserCanSearchByLast3WeeksTimeFrame.01",
-      "description": "Test Case 82221:User can search by \"Timeframe\" (Last 3 weeks)",
+      "rowID": "verifyUserCanSearchByLast90DaysTimeFrame.01",
+      "description": "Test Case 82221:User can search by \"Timeframe\" (Last 90 days)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91431"
         }
       ],
-      "location": "Best Location Automation",
-      "timeFrame": "Last 3 weeks"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -767,7 +759,6 @@
       "roNum": "RO#ForAuto",
       "stockNum": "StockForAuto",
       "vinNum": "asdfasd",
-      "timeFrame": "Last 90 days",
       "repairStatus": "In Progress - On Hold",
       "daysInProcess": "<",
       "daysInPhase": "<=",
@@ -791,6 +782,92 @@
       "daysInProcessText": " Days in process: < 10",
       "daysInPhaseText": " Days in phase: <= 20",
       "flagText": " Flag: Important"
+    }
+  ],
+
+  "verifyUserCanSearchByCurrentPhaseStatus": [
+    {
+      "rowID": "verifyUserCanSearchByCurrentPhaseStatus.01",
+      "description": "Test Case 87452:User can search by Phase Status → Current",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91471"
+        }
+      ],
+      "location": "zayats location",
+      "phase": "Repair phase",
+      "phaseStatus": "Current"
+    }
+  ],
+
+  "verifyUserCanSearchByActivePhaseStatus": [
+    {
+      "rowID": "verifyUserCanSearchByActivePhaseStatus.01",
+      "description": "Test Case 87453:User can search by Phase Status → Active",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91472"
+        }
+      ],
+      "location": "zayats location",
+      "phase": "Repair phase",
+      "phaseStatus": "Active",
+      "serviceStatuses": [
+        "Ordered",
+        "Received",
+        "Audited",
+        "Re-Ordered"
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByNotCompletedPhaseStatus": [
+    {
+      "rowID": "verifyUserCanSearchByNotCompletedPhaseStatus.01",
+      "description": "Test Case 87454:User can search by Phase Status → Not Completed",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91473"
+        }
+      ],
+      "location": "zayats location",
+      "phase": "Repair phase",
+      "phaseStatus": "Not Completed",
+      "serviceStatuses": [
+        "Completed",
+        "Skipped"
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByCompletedPhaseStatus": [
+    {
+      "rowID": "verifyUserCanSearchByCompletedPhaseStatus.01",
+      "description": "Test Case 87455:User can search by Phase Status → Completed",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91474"
+        }
+      ],
+      "location": "zayats location",
+      "phase": "Repair phase",
+      "phaseStatus": "Completed",
+      "serviceStatuses": [
+        "Completed"
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByHasProblemsOption": [
+    {
+      "rowID": "verifyUserCanSearchByHasProblemsOption.01",
+      "description": "Test Case 87547:User can search by \"Has problems\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91475"
+        }
+      ],
+      "location": "zayats location"
     }
   ]
 }

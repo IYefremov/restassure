@@ -1,5 +1,4 @@
 <suite name="Cyberiansoft R360 ReconPro tests" verbose="10" configfailurepolicy="continue">
-       <!--parallel="classes" thread-count="3"-->>
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
     </listeners>
@@ -7,8 +6,8 @@
   <test name="Back Office Test Cases" preserve-order="true">
     <classes>
         <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>
-        <class name="com.cyberiansoft.test.vnextbo.testcases.quicknotes.VNextBOQuickNotesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOOperationsInvoicesTestCases"/>
+        <class name="com.cyberiansoft.test.vnextbo.testcases.quicknotes.VNextBOQuickNotesTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorAdvancedSearchTestCases"/>
         <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorSimpleSearchTestCases"/>

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.repairorders;
 
+import com.cyberiansoft.test.baseutils.DataUtils;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
@@ -10,6 +11,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,8 +60,7 @@ public class VNextBOROPageValidations {
     }
 
     private static boolean isWorkOrderDisplayed(String text) {
-            return Utils.isElementDisplayed(new VNextBOROWebPage().getTableBody()
-                    .findElement(By.xpath(".//strong[contains(text(), \"" + text + "\")]")));
+        return Utils.isElementDisplayed(By.xpath("//strong[contains(text(), \"" + text + "\")]"));
     }
 
     public static boolean areTableHeaderTitlesDisplayed(List<String> titles, List<String> repeaterTitles) {
@@ -203,7 +205,7 @@ public class VNextBOROPageValidations {
     }
 
     public static boolean isTableDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOROWebPage().getTable());
+        return Utils.isElementDisplayed(new VNextBOROWebPage().getTable(), 5);
     }
 
     public static boolean isTextNoRecordsDisplayed() {
@@ -216,5 +218,61 @@ public class VNextBOROPageValidations {
 
     public static boolean isProblemIndicatorDisplayedForOrder(String order) {
         return Utils.isElementDisplayed(new VNextBOROWebPage().getProblemIndicatorForOrder(order), 4);
+    }
+
+    private static void verifyDateOrNotStartedPhaseForOrderWithoutDate(LocalDate dateBeforeCurrentDate) {
+        final List<String> ordersDatesList = VNextBOROPageInteractions.getOrdersDatesList();
+        final List<String> ordersCurrentPhaseList = VNextBOROPageInteractions.getOrdersCurrentPhaseList();
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData());
+
+        ordersDatesList.forEach(System.out::println);
+        ordersCurrentPhaseList.forEach(System.out::println);
+        for (int i = 0; i < ordersDatesList.size(); i++) {
+            if (ordersDatesList.get(i).isEmpty()) {
+                Assert.assertEquals("Not Started", ordersCurrentPhaseList.get(i),
+                        "The current phase of the order should be 'Not started'");
+            } else {
+                Assert.assertTrue(LocalDate.parse(ordersDatesList.get(i), formatter).isAfter(dateBeforeCurrentDate),
+                        "The order started date is not within the given date boundaries");
+            }
+        }
+    }
+
+    private static void verifyCurrentPhaseForOrder(String currentPhase) {
+        final List<String> ordersCurrentPhaseList = VNextBOROPageInteractions.getOrdersCurrentPhaseList();
+
+        ordersCurrentPhaseList.forEach(phase -> {
+            System.out.println(phase);
+            if (!phase.equals("Not Started")) {
+                Assert.assertEquals(currentPhase, phase,
+                        "The current phase is not equal to the phase from the search criterion");
+            }
+        });
+    }
+
+    public static void verifyOrdersAfterSearchByDate(LocalDate dateBeforeCurrentDate) {
+        if (!isTableDisplayed()) {
+            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+        } else {
+            verifyDateOrNotStartedPhaseForOrderWithoutDate(dateBeforeCurrentDate);
+        }
+    }
+
+    public static void verifyOrdersAfterSearchByPhase(String currentPhase) {
+        if (!isTableDisplayed()) {
+            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+        } else {
+            verifyCurrentPhaseForOrder(currentPhase);
+        }
+    }
+
+    public static void verifyAllOrdersHaveProblemIndicators() {
+        if (!isTableDisplayed()) {
+            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+        } else {
+            final VNextBOROWebPage roPage = new VNextBOROWebPage();
+            Assert.assertEquals(roPage.getProblemIndicatorsList().size(), roPage.getOrdersDisplayedOnPage().size(),
+                    "The problem indicators are not displayed for all orders");
+        }
     }
 }

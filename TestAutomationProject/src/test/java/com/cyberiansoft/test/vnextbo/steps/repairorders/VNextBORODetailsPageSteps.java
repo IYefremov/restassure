@@ -6,7 +6,7 @@ import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsP
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROResolveProblemDialog;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
-import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCurrentPhaseValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCurrentPhaseDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import org.testng.Assert;
 
@@ -95,7 +95,7 @@ public class VNextBORODetailsPageSteps {
         if (VNextBORODetailsPageValidations.isCompleteCurrentPhaseDisplayedForPhase(phase)) {
             VNextBORODetailsPageInteractions.clickCompleteCurrentPhaseForPhase(phase);
         }
-        Assert.assertTrue(VNextBOCompleteCurrentPhaseValidations.isCompleteCurrentPhaseDialogDisplayed(),
+        Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isCompleteCurrentPhaseDialogDisplayed(),
                 "The Complete Current phase dialog hasn't been opened");
     }
 

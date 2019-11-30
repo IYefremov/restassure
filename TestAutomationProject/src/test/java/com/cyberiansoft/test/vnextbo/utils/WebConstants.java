@@ -3,13 +3,13 @@ package com.cyberiansoft.test.vnextbo.utils;
 public class WebConstants {
 
 	public enum TimeFrameValues {
-		TIMEFRAME_WEEKTODATE("Week to date"),
+		TIMEFRAME_WEEKTODATE("Week To Date"),
 		TIMEFRAME_LASTWEEK("Last Week"),
-		TIMEFRAME_MONTHTODATE("Month to date"),
+		TIMEFRAME_MONTHTODATE("Month to Date"),
 		TIMEFRAME_LASTMONTH("Last Month"),
-		TIMEFRAME_30_DAYS("Last 30 Days"),
-		TIMEFRAME_90_DAYS("Last 90 Days"),
-		TIMEFRAME_YEARTODATE("Year to date"),
+		TIMEFRAME_30_DAYS("Last 30 days"),
+		TIMEFRAME_90_DAYS("Last 90 days"),
+		TIMEFRAME_YEARTODATE("Year To Date"),
 		TIMEFRAME_LASTYEAR("Last Year"),
 		TIMEFRAME_CUSTOM("Custom");
 		 
