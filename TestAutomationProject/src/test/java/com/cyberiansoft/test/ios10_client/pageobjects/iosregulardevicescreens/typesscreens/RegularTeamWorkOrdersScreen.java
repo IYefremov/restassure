@@ -84,9 +84,9 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void verifyCreateInvoiceIsActivated(String workOrderID) {
-		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name= '"
-				+ workOrderID + "']/XCUIElementTypeOther[contains(@name, \"EntityInfoButtonChecked\")]").size() > 0);
-		Assert.assertTrue(appiumdriver.findElementsByXPath("//XCUIElementTypeButton[@name='invoice new']").size() > 0);
+		Assert.assertTrue(teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderID))
+				.findElements(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeOther' and name CONTAINS 'EntityInfoButtonChecked'")).size() > 0);
+		Assert.assertTrue(appiumdriver.findElementsByAccessibilityId("invoice new").size() > 0);
 	}
 
 	public void clickCreateInvoiceIconForWO(String workOrderNumber)  {

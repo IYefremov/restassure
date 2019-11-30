@@ -69,7 +69,12 @@
           "damageGroupName": "PDR",
           "moneyService": {
             "serviceName": "PDR Panel",
-            "servicePrice": "200"
+            "servicePrice": "200",
+            "vehicleParts": [
+              {
+                "vehiclePartName": "Grill"
+              }
+            ]
           }
         }
       }
@@ -462,7 +467,7 @@
       "workOrderData": {
         "vihicleInfo": {
           "vinNumber": "1FTRX02W35K097028",
-          "vehicleStock": "1234",
+          "stockNumber": "1234",
           "roNumber": "ASDF"
         }
       }
@@ -579,7 +584,7 @@
           "vehicleMake": "Ford",
           "vehicleModel": "Crown Victoria",
           "vehicleYear": "2004",
-          "vehicleStock": "AC45G"
+          "stockNumber": "AC45G"
         },
         "moneyServices": [
           {
@@ -648,7 +653,7 @@
           "vehicleMake": "GMC",
           "vehicleModel": "Sierra 1500",
           "vehicleYear": "1991",
-          "vehicleStock": "28932",
+          "stockNumber": "28932",
           "defaultTechnician": {
             "technicianFirstName": "Troy",
             "technicianLastName": "Banks",
@@ -742,7 +747,7 @@
           "vehicleMake": "Ford",
           "vehicleModel": "Explorer",
           "vehicleYear": "2004",
-          "vehicleStock": "DW2890",
+          "stockNumber": "DW2890",
           "defaultTechnician": {
             "technicianFirstName": "Troy",
             "technicianLastName": "Banks",
@@ -808,7 +813,7 @@
           "vehicleMake": "Honda",
           "vehicleModel": "Odyssey",
           "vehicleYear": "2007",
-          "vehicleStock": "534CGBH"
+          "stockNumber": "534CGBH"
         },
         "moneyService": {
           "serviceName": "Fix Price",
@@ -904,7 +909,7 @@
           "vehicleMake": "Chevrolet",
           "vehicleModel": "Silverado 3500HD",
           "vehicleYear": "2008",
-          "vehicleStock": "EF-a12"
+          "stockNumber": "EF-a12"
         },
         "services": [
           {
@@ -3039,7 +3044,7 @@
           "vehicleMake": "Ford",
           "vehicleModel": "F-150",
           "vehicleYear": "2001",
-          "vehicleStock": "765106",
+          "stockNumber": "765106",
           "roNumber": "FTP"
         },
         "damagesData": [
@@ -3178,7 +3183,7 @@
           "vehicleMake": "Chevrolet",
           "vehicleModel": "Chevy Van",
           "vehicleYear": "1995",
-          "vehicleStock": "700043"
+          "stockNumber": "700043"
         },
         "damagesData": [
           {
@@ -3476,7 +3481,7 @@
           "vehicleMake": "Acura",
           "vehicleModel": "Integra",
           "vehicleYear": "2001",
-          "vehicleStock": "347401",
+          "stockNumber": "347401",
           "roNumber": "85901"
         },
         "damagesData": [
@@ -3739,7 +3744,7 @@
           "vehicleMake": "Ford",
           "vehicleModel": "F-350 Super Duty",
           "vehicleYear": "2006",
-          "vehicleStock": "JDkd"
+          "stockNumber": "JDkd"
         },
         "damagesData": [
           {
@@ -4025,7 +4030,7 @@
           "vehicleMake": "Toyota",
           "vehicleModel": "Supra",
           "vehicleYear": "1995",
-          "vehicleStock": "10534920",
+          "stockNumber": "10534920",
           "roNumber": "7340"
         },
         "damagesData": [

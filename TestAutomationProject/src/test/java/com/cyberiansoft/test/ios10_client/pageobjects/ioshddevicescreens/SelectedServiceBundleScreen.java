@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -50,7 +51,9 @@ public class SelectedServiceBundleScreen extends iOSHDBaseScreen {
 	public SelectedServiceDetailsScreen openBundleInfo(String bundle) {
 		IOSElement bundleview = (IOSElement) appiumdriver.findElement(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'"));
 		if (!bundleview.findElement(MobileBy.AccessibilityId(bundle)).isDisplayed()) {
-			scrollToElement(bundleview.findElement(MobileBy.AccessibilityId(bundle)));
+			SwipeUtils.swipeToElement(bundleview.
+					findElement(MobileBy.AccessibilityId(bundle)));
+			bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		}
 
 		bundleview.findElement(MobileBy.AccessibilityId(bundle)).findElement(MobileBy.AccessibilityId("custom detail button")).click();

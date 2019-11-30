@@ -139,8 +139,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 
 		String panelName = serviceData.getServiceName() + " (" + vehiclePartData.getVehiclePartName() + ")";
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-		WebElement serviceStatusCell = wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
-		return serviceStatusCell.getAttribute("value");
+		wait.until(ExpectedConditions.visibilityOfElementLocated(MobileBy.AccessibilityId("lblServiceStatus")));
+		return monitorserviceslist.findElementByAccessibilityId(panelName).findElementByAccessibilityId("lblServiceStatus").getAttribute("value");
 	}
 
 	public String getServiceTeamValue(ServiceData serviceData) {
@@ -240,7 +240,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public String getServiceStartDate() {
-		return appiumdriver.findElementByAccessibilityId("MonitorDetailsCell_Start Date")
+		return appiumdriver.findElementByAccessibilityId("MonitorDetailsCell_StartDate")
 				.findElements(MobileBy.className("XCUIElementTypeStaticText")).get(1).getAttribute("name");
 	}
 
@@ -292,8 +292,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		return appiumdriver.findElementsByAccessibilityId("Start").size() > 0;
 	}
 
-	public boolean isServicePresent(String servicename) {
-		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']").size() > 0;
+	public boolean isServicePresent(String serviceName) {
+		return monitorserviceslist.findElementsByAccessibilityId(serviceName).size() > 0;
 	}
 
 	public void checkMyWorkCheckbox() {

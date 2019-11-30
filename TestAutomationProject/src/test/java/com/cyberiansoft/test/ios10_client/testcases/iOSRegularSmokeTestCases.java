@@ -835,7 +835,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
-		homeScreen = customersScreen.clickHomeButton();
+		RegularNavigationSteps.navigateBackScreen();
 
 		//test case
 		RegularHomeScreenSteps.navigateToServiceRequestScreen();
@@ -846,7 +846,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 		String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 		RegularNavigationSteps.navigateToServicesScreen();
-		RegularServicesScreen servicesScreen = new RegularServicesScreen();
+
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice2()));
@@ -3153,7 +3153,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceData serviceData : serviceRequestData.getMoneyServices())
 			RegularServicesScreenSteps.selectService(serviceData.getServiceName());
 		servicesScreen.clickSave();
-		AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
+		AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 		String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
 		RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_FOR_CALC);
 		RegularVehicleInfoScreenSteps.verifyMakeModelyearValues(serviceRequestData.getVihicleInfo());
@@ -5066,7 +5066,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceDefaultTechnician());
 		RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceNewTechnician());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+		RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
 		Assert.assertEquals(vehicleScreen.getTechnician(), workOrderData.getMatrixServiceData().getVehiclePartData().getServiceNewTechnician().getTechnicianFullName() +
@@ -5629,7 +5629,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
 		//selectedServiceDetailsScreen.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+		RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
@@ -5817,7 +5817,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceTechnician technician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			RegularServiceDetailsScreenSteps.selectServiceTechnician(technician);
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+		RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
@@ -5868,7 +5868,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServiceDetailsScreenValidations.verifyServiceTechnicianPercentageValue(workOrderData.getVehicleInfoData().getDefaultTechnician(),
 				workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianPercentageValue());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+		RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 		RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
 		RegularNavigationSteps.navigateToServicesScreen();
 		Assert.assertEquals(servicesScreen.getTotalAmaunt(),
@@ -6039,7 +6039,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularVehicleInfoScreenSteps.clickTech();
 		RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+		RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
@@ -6201,7 +6201,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
 			RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+		RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
 
@@ -6287,7 +6287,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
 		//selectedServiceDetailsScreen.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+		RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
 
@@ -6375,7 +6375,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 			RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceTechnician);
 
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		RegularAssignTechniciansSteps.assignTechniciansToWorkOrder();
+		RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.switchToSelectedServices();
 

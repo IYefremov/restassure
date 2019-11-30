@@ -145,6 +145,8 @@ public class RegularNotesScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickCancelGallery() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Photos'")));
 		appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Photos'")).
 				findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
