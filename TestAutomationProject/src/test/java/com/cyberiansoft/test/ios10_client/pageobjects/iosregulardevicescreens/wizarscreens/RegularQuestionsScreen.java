@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -48,8 +49,10 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 			} else {
 				i=11;
 			}
-		if (!appiumdriver.findElementByName(questionsData.getQuestionAnswer()).isDisplayed())
-			swipeToElement(appiumdriver.findElement(By.xpath("//XCUIElementTypeStaticText[@name='" + questionsData.getQuestionAnswer() + "']/..")));
+		if (!appiumdriver.findElementByName(questionsData.getQuestionAnswer()).isDisplayed()) {
+			SwipeUtils.swipeToElement(appiumdriver.findElementByAccessibilityId(questionsData.getQuestionAnswer()));
+			appiumdriver.findElementByName(questionsData.getQuestionAnswer()).click();
+		}
 		appiumdriver.findElementByName(questionsData.getQuestionAnswer()).click();
 
 	}

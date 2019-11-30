@@ -1410,8 +1410,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO);
-        teamWorkOrdersScreen.clickHomeButton();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO, workOrderNumber));
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1451,7 +1451,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
                 RegularOrderMonitorScreenValidations.verifyServiceStatus(damageData.getMoneyService(), OrderMonitorServiceStatuses.COMPLETED);
             }
         }
-        teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
+        RegularNavigationSteps.navigateBackScreen();
 
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.verifyCreateInvoiceIsActivated(workOrderNumber);
@@ -1460,7 +1460,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
         Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
         invoiceInfoScreen.clickSaveAsFinal();
-        teamWorkOrdersScreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1528,14 +1528,14 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         for (VehiclePartData vehiclePartData : wheelsDamage.getMoneyService().getVehicleParts())
             RegularOrderMonitorScreenValidations.verifyServiceStatus(wheelsDamage.getMoneyService(), vehiclePartData, OrderMonitorServiceStatuses.COMPLETED);
 
-        teamWorkOrdersScreen = orderMonitorScreen.clickBackButton();
+        RegularNavigationSteps.navigateBackScreen();
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
         RegularInvoiceTypesSteps.selectInvoiceType(DentWizardInvoiceTypes.NO_ORDER_TYPE);
         RegularInvoiceInfoScreen invoiceInfoScreen = new RegularInvoiceInfoScreen();
         Assert.assertEquals(invoiceInfoScreen.getOrderSumm(), PricesCalculations.getPriceRepresentation(workOrderData.getWorkOrderPrice()));
         invoiceInfoScreen.clickSaveAsFinal();
-        teamWorkOrdersScreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -2233,7 +2233,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         for (DamageData damageData : workOrderData.getDamagesData()) {
             Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(damageData.getMoneyService().getServiceName()));
             Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(damageData.getMoneyService().getServiceName()),
-                    (PricesCalculations.getPriceRepresentation(damageData.getMoneyService().getServicePrice()) + " x 1.00").replaceAll(" ", ""));
+                    (PricesCalculations.getPriceRepresentation(damageData.getMoneyService().getServicePrice()) + " x 1.00"));
         }
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
@@ -2495,7 +2495,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularWorkOrdersSteps.saveWorkOrder();
         teamWorkOrdersScreen.clickCreateInvoiceForWO(workOrderNumber);
         teamWorkOrdersScreen.clickiCreateInvoiceButton();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO);
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO, workOrderNumber));
         teamWorkOrdersScreen.clickHomeButton();
     }
 

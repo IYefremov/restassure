@@ -5639,12 +5639,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
                 selectedServiceDetailsScreen.setServiceRateValue(serviceData.getServicePrice());
                 selectedServiceDetailsScreen.clickTechniciansIcon();
             }
-            TechniciansPopup techniciansPopup = selectedServiceDetailsScreen.clickTechniciansIcon();
+            TechniciansPopup techniciansPopup = new TechniciansPopup();
             techniciansPopup.searchTechnician(serviceData.getServiceDefaultTechnician().getTechnicianFirstName());
             techniciansPopup.selecTechnician(serviceData.getServiceDefaultTechnician().getTechnicianFullName());
+            techniciansPopup.cancelTechViewDetails();
             techniciansPopup.searchTechnician(serviceData.getServiceNewTechnician().getTechnicianFirstName());
             techniciansPopup.selecTechnician(serviceData.getServiceNewTechnician().getTechnicianFullName());
-            techniciansPopup.clearSerchTechnician();
+            techniciansPopup.cancelTechViewDetails();
             DriverBuilder.getInstance().getAppiumDriver().hideKeyboard();
             if (serviceData.getServicePrice().equals(zeroPrice)) {
                 Assert.assertFalse(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
@@ -5767,14 +5768,13 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         techniciansPopup.selecTechnician(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceDefaultTechnician().getTechnicianFullName());
         techniciansPopup.selecTechnician(workOrderData.getMatrixServiceData().getVehiclePartData().getServiceNewTechnician().getTechnicianFullName());
         TechniciansPopupSteps.saveTechViewDetails();
-        AssignTechniciansSteps.assignTechniciansToWorkOrder();
+        AssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
         myWorkOrdersScreen.selectWorkOrderForEidt(workOrderNumber);
         VehicleInfoScreenSteps.waitVehicleScreenLoaded();
         Assert.assertEquals(vehicleScreen.getTechnician(), workOrderData.getMatrixServiceData().getVehiclePartData().getServiceNewTechnician().getTechnicianFullName() +
                 ", " + workOrderData.getMatrixServiceData().getVehiclePartData().getServiceDefaultTechnician().getTechnicianFullName());
         vehicleScreen.cancelOrder();
-        myWorkOrdersScreen = new MyWorkOrdersScreen();
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -5794,7 +5794,6 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
         NavigationSteps.navigateToServicesScreen();
         ServicesScreen servicesScreen = new ServicesScreen();
-        NavigationSteps.navigateToServicesScreen();
         for (DamageData damageData : inspectionData.getDamagesData()) {
             servicesScreen.selectGroupServiceItem(damageData.getDamageGroupName());
             for (ServiceData serviceData : damageData.getMoneyServices())
@@ -5802,7 +5801,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
             servicesScreen.clickServiceTypesButton();
         }
         servicesScreen.cancelWizard();
-        myInspectionsScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -5839,7 +5838,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceData serviceData : workOrderData.getDamageData().getMoneyServices())
             Assert.assertTrue(servicesScreen.isServiceWithSubSrviceSelected(workOrderData.getDamageData().getDamageGroupName(), serviceData.getServiceName()));
         servicesScreen.saveWizard();
-        homeScreen = myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -5873,7 +5872,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getServiceData().getServiceName()));
 
         servicesScreen.cancelWizard();
-        myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -5903,7 +5902,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceData serviceData : workOrderData.getServicesList())
             Assert.assertTrue(servicesScreen.checkServiceIsSelected(serviceData.getServiceName()));
         servicesScreen.cancelWizard();
-        homeScreen = myWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -6204,10 +6203,10 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         VehicleInfoScreenSteps.clickTech();
         TechniciansPopupSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
         TechniciansPopupSteps.saveTechViewDetails();
-        AssignTechniciansSteps.assignTechniciansToWorkOrder();
+        AssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
         NavigationSteps.navigateToServicesScreen();
         for (ServiceData serviceData : workOrderData.getMoneyServices()) {
-            SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
+            servicesScreen.openServiceDetails(serviceData.getServiceName());
             if (serviceData.getServicePrice2() != null)
                 ServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice2());
             if (serviceData.getServiceDefaultTechnician() != null) {
@@ -6475,7 +6474,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceTechnician technician : workOrderData.getVehicleInfoData().getNewTechnicians())
             TechniciansPopupSteps.selectServiceTechnician(technician);
         TechniciansPopupSteps.saveTechViewDetails();
-        AssignTechniciansSteps.assignTechniciansToWorkOrder();
+        AssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
 
         NavigationSteps.navigateToServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList()) {
@@ -6835,7 +6834,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
             TechniciansPopupSteps.selectServiceTechnician(serviceTechnician);
         TechniciansPopupSteps.saveTechViewDetails();
-        AssignTechniciansSteps.assignTechniciansToWorkOrder();
+        AssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
         NavigationSteps.navigateToServicesScreen();
 
         servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
@@ -6908,7 +6907,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
             TechniciansPopupSteps.selectServiceTechnician(serviceTechnician);
         TechniciansPopupSteps.saveTechViewDetails();
-        AssignTechniciansSteps.assignTechniciansToWorkOrder();
+        AssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
         NavigationSteps.navigateToServicesScreen();
         servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         for (ServiceData serviceData : bundleServiceData.getServices()) {
@@ -6983,7 +6982,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
             TechniciansPopupSteps.selectServiceTechnician(serviceTechnician);
         TechniciansPopupSteps.saveTechViewDetails();
-        AssignTechniciansSteps.assignTechniciansToWorkOrder();
+        AssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
         NavigationSteps.navigateToServicesScreen();
 
         servicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());

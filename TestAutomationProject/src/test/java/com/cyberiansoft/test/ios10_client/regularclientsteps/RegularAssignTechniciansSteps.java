@@ -27,4 +27,10 @@ public class RegularAssignTechniciansSteps {
         //AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.SELECTED_TECHNICIANS_WILL_BE_ASSIGNED_TO_ALL_WO_SERVICES);
         clickDoneButton();
     }
+
+    public static void assignTechniciansToWorkOrderWithServices() {
+        selectWorkOrderToAssignTechnicians();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.SELECTED_TECHNICIANS_WILL_BE_ASSIGNED_TO_ALL_WO_SERVICES);
+        clickDoneButton();
+    }
 }
