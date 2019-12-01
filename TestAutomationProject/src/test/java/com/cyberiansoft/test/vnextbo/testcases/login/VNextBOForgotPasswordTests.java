@@ -43,7 +43,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         forgotPasswordPage = new VNextBOForgotPasswordWebPage();
     }
 
-    @Override
+    //@Override
     @BeforeMethod
     public void setUp() {}
 

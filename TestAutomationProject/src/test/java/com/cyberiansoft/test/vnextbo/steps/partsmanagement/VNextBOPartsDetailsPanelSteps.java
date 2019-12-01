@@ -6,7 +6,9 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetails
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VNextBOPartsDetailsPanelSteps {

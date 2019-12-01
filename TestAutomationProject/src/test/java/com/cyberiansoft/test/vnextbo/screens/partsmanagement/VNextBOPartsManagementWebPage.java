@@ -36,12 +36,15 @@ public class VNextBOPartsManagementWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='advSearchPartsOrders-savedSearchList']//i[@class='icon-gear']")
     private WebElement savedSearchListGearIcon;
 
-    private WebElement locationOptionByName(String locationName) {
+    @FindBy(xpath = "//div[@id='advSearchPartsOrders-savedSearchList']//i[@class='icon-gear']")
+    private WebElement searchListGearIcon;
 
-        return driver.findElement(By.xpath("//ul[@class='scroll-pane-locations']//label[text()='" + locationName + "']"));
+    public WebElement savedSearchOptionByName(String searchName) {
+
+        return driver.findElement(By.xpath("//span[@data-bind=\"click: applySavedSearch\" and text()='" + searchName + "']"));
     }
 
-    private WebElement editSavedSearchButtonByName(String searchName) {
+    public WebElement editSavedSearchButtonByName(String searchName) {
 
         return driver.findElement(By.xpath("//span[text()='" + searchName + "']/following-sibling::i[@data-bind='click: editSavedSearch']"));
     }

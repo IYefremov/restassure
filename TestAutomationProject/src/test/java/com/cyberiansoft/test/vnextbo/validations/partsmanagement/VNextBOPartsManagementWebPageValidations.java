@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsManagementWebPage;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 
 public class VNextBOPartsManagementWebPageValidations extends VNextBOBaseWebPageValidations {
@@ -43,4 +44,18 @@ public class VNextBOPartsManagementWebPageValidations extends VNextBOBaseWebPage
                 "\"Completed\" box hasn't been highlighted with green border");
     }
 
+    public static void verifySavedSearchIsPresentedInTheList(String savedSearchName, boolean shouldBeDisplayed) {
+
+        if (shouldBeDisplayed)
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsManagementWebPage().savedSearchOptionByName(savedSearchName)),
+                "Saved search hasn't been presented in the list with saved searches");
+        else if (!shouldBeDisplayed) {
+            try {
+                boolean isSavedSearchPresentedInTheList = Utils.isElementNotDisplayed(new VNextBOPartsManagementWebPage().savedSearchOptionByName(savedSearchName));
+                Assert.assertFalse(isSavedSearchPresentedInTheList, "Saved search has been presented in the list with saved searches");
+            } catch (NoSuchElementException ex) {
+                Assert.assertFalse(false, "Saved search has been presented in the list with saved searches");
+            }
+        }
+    }
 }

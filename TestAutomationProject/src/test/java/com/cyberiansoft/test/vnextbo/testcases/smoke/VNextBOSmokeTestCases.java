@@ -126,7 +126,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
         VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(true);
         VNextBOAddNewPartDialogSteps.setServiceField(data.getService());
@@ -149,7 +149,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.setStatusForPartByPartNumberInList(0, data.getStatus());
         VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(0, data.getStatus());
     }
@@ -162,7 +162,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.duplicatePartByNumberInList(0);
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
@@ -177,7 +177,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartItems()[0]));
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
@@ -192,13 +192,13 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
         VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
         final int numberOfLaborBlocksBefore = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, data.getLabor());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
         VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
         VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore + 1);
