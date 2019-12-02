@@ -41,4 +41,12 @@ public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations
         Assert.assertTrue(VNextBOSearchPanelSteps.getSearchFilterText().equals(""),
                 "Search field hasn't been cleared");
     }
+
+    public static void verifyXIconIsDisplayed(boolean shouldBeDisplayed) {
+
+        if (shouldBeDisplayed) Assert.assertTrue(Utils.isElementDisplayed(new VNextBOSearchPanel().getSearchXIcon()),
+                "Search XIcon hasn't been displayed");
+        else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOSearchPanel().getSearchXIcon()),
+                "Search XIcon has been displayed");
+    }
 }

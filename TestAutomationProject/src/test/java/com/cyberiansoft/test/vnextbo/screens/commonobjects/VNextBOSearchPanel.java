@@ -20,7 +20,7 @@ public class VNextBOSearchPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//i[@class='icon-search']")
     private WebElement searchLoupeIcon;
 
-    @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//i[contains(@class, 'caret')]")
+    @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//*[contains(@class, 'caret')]")
     private WebElement advancedSearchCaret;
 
     @FindBy(xpath = "//section[@class='view']//div[contains(@class, 'pull-right custom-search')]//i[contains(@class, 'cancel')]")
