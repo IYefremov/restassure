@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.screens.repairorders;
 
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
@@ -40,7 +39,16 @@ public class VNextBOCompleteCurrentPhaseDialog extends VNextBOBaseWebPage {
     }
 
     public WebElement getService(String service) {
-        return WaitUtilsWebDriver.waitForVisibility(driver
-                .findElement(By.xpath("//div[@id='problem-list-popup']//td[contains(text(), '" + service + "')]")));
+        return driver.findElement(By.xpath("//div[@id='problem-list-popup']//td[contains(text(), '" + service + "')]"));
+    }
+
+    public WebElement getResolveButtonForService(String service) {
+        return getService(service)
+                .findElement(By.xpath("//..//button[contains(@data-bind, 'problemList.resolveAction')]"));
+    }
+
+    public WebElement getResolvedButtonForService(String service) {
+        return getService(service)
+                .findElement(By.xpath("//..//button/span[text()='Resolved']"));
     }
 }

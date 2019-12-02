@@ -6,6 +6,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.Selecte
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -234,18 +235,19 @@ public class ServicesScreen extends BaseWizardScreen {
 	}
 
 	public SelectedServiceDetailsScreen openCustomBundleServiceDetails(String serviceName) {
-		if (!appiumdriver.findElementByAccessibilityId(serviceName).isDisplayed()) {
-			scrollToElement(serviceName);
+		if (!appiumdriver.findElementByClassName("XCUIElementTypePopover").
+				findElement(MobileBy.AccessibilityId(serviceName)).isDisplayed()) {
+			//scrollToElement(serviceName);
+			SwipeUtils.swipeToElement(appiumdriver.findElementByClassName("XCUIElementTypePopover").
+					findElement(MobileBy.AccessibilityId(serviceName)));
+			appiumdriver.findElementByClassName("XCUIElementTypePopover").
+					findElement(MobileBy.AccessibilityId(serviceName))
+					.findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		}
-		appiumdriver.findElement(MobileBy.AccessibilityId(serviceName))
+		appiumdriver.findElementByClassName("XCUIElementTypePopover").
+				findElement(MobileBy.AccessibilityId(serviceName))
 				.findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		return new SelectedServiceDetailsScreen();
-	}
-	
-	public void searchSelectedService(String serviceName) {
-		appiumdriver.findElementByAccessibilityId("SelectedServicesView").findElement(MobileBy.className("XCUIElementTypeSearchField")).click();
-		appiumdriver.findElementByAccessibilityId("SelectedServicesView").findElement(MobileBy.className("XCUIElementTypeSearchField")).clear();
-		appiumdriver.findElementByAccessibilityId("SelectedServicesView").findElement(MobileBy.className("XCUIElementTypeSearchField")).sendKeys(serviceName + "\n");
 	}
 	
 	public void cancelSearchAvailableService() {

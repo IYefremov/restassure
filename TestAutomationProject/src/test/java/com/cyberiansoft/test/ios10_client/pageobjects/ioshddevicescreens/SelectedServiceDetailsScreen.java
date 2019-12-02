@@ -238,10 +238,11 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public TechniciansPopup clickTechniciansIcon() {
-		List<IOSElement> techtoolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
+		appiumdriver.findElementByClassName("XCUIElementTypePopover").findElement(MobileBy.AccessibilityId("technician")).click();
+		/*List<IOSElement> techtoolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
 		for (IOSElement techtoolbar : techtoolbars)
 			if (techtoolbar.findElementsByAccessibilityId("technician").size() > 0)
-				techtoolbar.findElementByAccessibilityId("technician").click();
+				techtoolbar.findElementByAccessibilityId("technician").click();*/
 		return new TechniciansPopup();
 	}
 
@@ -329,25 +330,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public String getServiceDetailsPriceValue() {
-		MobileElement toolbar = null;
-		List<MobileElement> toolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
-		for (MobileElement tbr : toolbars)
-			if (tbr.isDisplayed()) {
-				toolbar = tbr;
-				break;
-			}
-		return toolbar.findElementByClassName("XCUIElementTypeStaticText").getAttribute("value");
+		return appiumdriver.findElementByClassName("XCUIElementTypePopover").findElement(MobileBy.className("XCUIElementTypeToolbar"))
+				.findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
 	}
 	
 	public String getServiceDetailsTotalValue() {
-		MobileElement toolbar = null;
-		List<MobileElement> toolbars = appiumdriver.findElementsByClassName("XCUIElementTypeToolbar");
-		for (MobileElement tbr : toolbars)
-			if (tbr.isDisplayed()) {
-				toolbar = tbr;
-				break;
-			}
-		return toolbar.findElementsByClassName("XCUIElementTypeStaticText").get(1).getAttribute("value");
+		return appiumdriver.findElementByClassName("XCUIElementTypePopover").findElement(MobileBy.className("XCUIElementTypeToolbar"))
+				.findElements(MobileBy.className("XCUIElementTypeStaticText")).get(1).getAttribute("value");
 	}
 	
 	public String getServiceRateValue(ServiceRateData serviceRateData) {

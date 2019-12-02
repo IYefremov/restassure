@@ -11,7 +11,6 @@ public class AlertsCaptions {
 	public static final String THE_VIN_IS_INCORRECT = "The VIN# is incorrect.";
 	public static final String THE_VIN_IS_INVALID_AND_SAVE_WORKORDER = "Warning! " +
 			"The VIN is invalid. " +
-			" " +
 			"Would you like to save work order?";
 	public static final String THE_VIN_IS_INCORRECT_HD = "The VIN# is incorrect.";
 	public static final String ALERT_ADVISOR_REQUIRED = "Warning! Advisor is required";
@@ -21,7 +20,7 @@ public class AlertsCaptions {
 	public static final String ALERT_TOTAL_AMAUNT_NOT_EQUAL = "Warning! Total amount is not equal.";
 	public static final String ALERT_SPLIT_TOTAL_AMAUNT_NOT_EQUAL = "Warning! Split amount should be equal to total amount.";
 	public static final String ALERT_TOTAL_SALE_REQUIRED = "Warning! Total Sale is required.";
-	public static final String ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO = "You cannot create invoice from not completed RO";
+	public static final String ALERT_CANNOT_CREATE_INVOICE_NOT_COMPLETED_RO = "You cannot create invoice from not completed RO %1$s ";
 	public static final String ALERT_CLAIM_REQUIRED = "Warning! Claim# is required.";
 	public static final String ALERT_CLOSE_SERVICEREQUEST = "Would you like to close selected service request?";
 	public static final String ALERT_REJECT_SERVICEREQUEST = "Would you like to reject selected service request?";
@@ -41,7 +40,6 @@ public class AlertsCaptions {
 			"Question 'Signature' in section 'Follow up Requested' should be answered.";
 	public static final String ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT = "Technician Split " +
 			"Order's technician split will be assigned to this order service if you set zero amount. " +
-			" " +
 			"Continue?";
 	public static final String ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE = "Technician Split " +
 			"Set non-zero amount for service to assign multiple technicians.";
@@ -50,7 +48,6 @@ public class AlertsCaptions {
 	public static final String ALERT_YOU_CANT_CREATE_WORK_ORDER_BECAUSE_VIN_EXISTS = "You cannot create work order of type '%1$s' with VIN '%2$s' because it already exists.";
 	public static final String ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT = "Technician Split " +
 			"Default technician split will be assigned to this vehicle part if you set zero amount. " +
-			" " +
 			"Continue?";
 	public static final String YOU_CANT_CHANGE_STATUSES_OF_SERVICES_FOR_THIS_PHASE = "Order Monitor " +
 			"You cannot change the status of services for this phase. You can only change the status of the whole phase.";
@@ -62,12 +59,10 @@ public class AlertsCaptions {
 			"You must start the repair order before you can change the status of the service.";
 	public static final String ALERT_TOTAL_AMAUNT_OF_WO_IS_HUGE = "Warning! "+
 			"Total amount of work order is huge. "+
-			" "+
 			"Maximum allowed total amount is %1$s";
 
 	public static final String ALERT_TOTAL_AMAUNT_OF_INSPECTION_IS_HUGE = "Warning! "+
 			"Total amount of inspection is huge. "+
-			" "+
 			"Maximum allowed total amount is %1$s";
 	public static final String ALERT_TOTAL_AMAUNT_OF_INVOICE_IS_HUGE = "Warning! "+
 			"Total amount of invoice is huge."+

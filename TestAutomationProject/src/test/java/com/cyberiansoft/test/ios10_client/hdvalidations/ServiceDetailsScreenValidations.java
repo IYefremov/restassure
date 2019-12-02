@@ -49,7 +49,7 @@ public class ServiceDetailsScreenValidations {
 
     public static void verifyServiceDetailsPriceValue(String expectedPrice) {
         SelectedServiceDetailsScreen selectedServiceDetailsScreen = new SelectedServiceDetailsScreen();
-        Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsTotalValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
+        Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsPriceValue(), PricesCalculations.getPriceRepresentation(expectedPrice));
     }
 
 }

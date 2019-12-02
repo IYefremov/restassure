@@ -107,8 +107,8 @@ public class VisualInteriorScreen extends BaseWizardScreen {
 		int yy = imagecar.getLocation().getY();	
 		
 		//action.press(appiumdriver.manage().window().getSize().width - yy - imagecar .getSize().getHeight()/2 + 30, xx + imagecar.getSize().getWidth()/(times+1)).waitAction(1000).
-		action.tap(element(imagecar, imagecar.getSize().getWidth()- times*40, imagecar.getSize().getHeight()/2 + 130)).perform();
-
+		//action.tap(element(imagecar, imagecar.getSize().getWidth()- times*40, imagecar.getSize().getHeight()/2 + 130)).perform();
+		action.tap(element(imagecar, imagecar.getSize().getWidth()/2 + times*40, imagecar.getSize().getHeight()/2 + times*40)).perform();
 	}
 
 	public void tapExterior() {

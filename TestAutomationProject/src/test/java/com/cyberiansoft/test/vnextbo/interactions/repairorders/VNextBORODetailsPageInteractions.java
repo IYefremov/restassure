@@ -182,6 +182,14 @@ public class VNextBORODetailsPageInteractions {
         return Utils.getText(new VNextBORODetailsPage().getServiceStatusByServiceId(serviceId));
     }
 
+    public static String waitForServiceStatusToBeChanged(String serviceId, String service) {
+        try {
+            WaitUtilsWebDriver.getWait().until((ExpectedCondition<Boolean>) driver ->
+                    getServiceStatusValue(serviceId).equals(service));
+        } catch (Exception ignored) {}
+        return getServiceStatusValue(serviceId);
+    }
+
     public static String getServiceDescription(String serviceId) {
         return WaitUtilsWebDriver
                 .getWait()
@@ -529,15 +537,13 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static String getServiceStartedDate(String serviceId) {
-        return Utils.getText(DriverBuilder.getInstance().getDriver()
-                .findElement(By.xpath("//div[@data-order-service-id='" + serviceId
-                        + "']//div[@class='clmn_6']//span[text()][1]")));
+        return Utils.getText(By.xpath("//div[@data-order-service-id='" + serviceId
+                        + "']//div[@class='clmn_6']//span[text()][1]"));
     }
 
     public static String getServiceCompletedDate(String serviceId) {
-        return Utils.getText(DriverBuilder.getInstance().getDriver()
-                .findElement(By.xpath("//div[@data-order-service-id='" + serviceId
-                        + "']//div[@class='clmn_6']//span[text()][2]")));
+        return Utils.getText(By.xpath("//div[@data-order-service-id='" + serviceId
+                        + "']//div[@class='clmn_6']//span[text()][2]"));
     }
 
     public static void hoverOverServiceHelperIcon(String serviceId) {

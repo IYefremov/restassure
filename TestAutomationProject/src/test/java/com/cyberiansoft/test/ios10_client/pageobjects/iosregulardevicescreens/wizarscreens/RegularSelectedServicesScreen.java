@@ -76,7 +76,7 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public String getSelectedServicePriceValue(String serviceName) {
-        return selectedservicestable.findElement(MobileBy.AccessibilityId(serviceName + "_SelectedServiceIconSelected"))
+        return selectedservicestable.findElement(MobileBy.AccessibilityId(serviceName))
                 .findElements(MobileBy.className("XCUIElementTypeStaticText")).get(2).getAttribute("value")
                 .replaceAll("[^a-zA-Z0-9$.%]", " ");
     }

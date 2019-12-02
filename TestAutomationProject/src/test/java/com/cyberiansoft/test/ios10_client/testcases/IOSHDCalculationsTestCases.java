@@ -500,7 +500,7 @@ public class IOSHDCalculationsTestCases extends ReconProBaseTestCase {
 		}
 
 		servicesScreen.cancelWizard();
-		myWorkOrdersScreen.clickHomeButton();
+		NavigationSteps.navigateBackScreen();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

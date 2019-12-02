@@ -220,6 +220,15 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//ul[@data-template='repairOrders-filterInfoList-item']/li")
     private List<WebElement> searchOptions;
 
+    @FindBy(xpath = "//b[contains(@data-bind, 'orderDateF')]")
+    private List<WebElement> ordersDateList;
+
+    @FindBy(xpath = "//td[@class='phase']//i[contains(@class, 'truncated')]")
+    private List<WebElement> ordersCurrentPhaseList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//i[@class='icon-problem-indicator']")
+    private List<WebElement> problemIndicatorsList;
+
     public VNextBOROWebPage() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -252,7 +261,7 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     }
 
     public WebElement getProblemIndicatorForOrder(String order) {
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//a[@class='order-no']/strong[text()='"
+        return driver.findElement(By.xpath("//a[@class='order-no']/strong[text()='"
                 + order + "']/../../i[@class='icon-problem-indicator']"));
     }
 }

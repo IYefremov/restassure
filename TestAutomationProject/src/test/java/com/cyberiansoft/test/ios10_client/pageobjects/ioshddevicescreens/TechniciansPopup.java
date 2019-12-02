@@ -88,7 +88,7 @@ public class TechniciansPopup extends iOSHDBaseScreen {
         clearSerchTechnician();
         if (!((IOSDriver) appiumdriver).isKeyboardShown())
             appiumdriver.findElementByXPath("//XCUIElementTypeNavigationBar[@name='Technicians']/XCUIElementTypeButton[@name='Search']").click();
-        appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(technician);
+        appiumdriver.findElementByClassName("XCUIElementTypeSearchField").sendKeys(technician+"\n");
     }
 
     public  void clearSerchTechnician() {

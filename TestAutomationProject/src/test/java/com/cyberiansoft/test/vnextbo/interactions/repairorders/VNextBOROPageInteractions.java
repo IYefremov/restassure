@@ -301,6 +301,22 @@ public class VNextBOROPageInteractions {
         return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOROWebPage().getOrdersDisplayedOnPage()).size();
     }
 
+    public static List<String> getOrdersDatesList() {
+        final List<WebElement> ordersDateList = new VNextBOROWebPage().getOrdersDateList();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersDateList);
+        return ordersDateList.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getOrdersCurrentPhaseList() {
+        final List<WebElement> ordersCurrentPhaseList = new VNextBOROWebPage().getOrdersCurrentPhaseList();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersCurrentPhaseList);
+        return ordersCurrentPhaseList.stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
     public static void setPhasesTabActive() {
         makeTabActive(new VNextBOROWebPage().getPhasesWideTab(), new VNextBOROWebPage().getPhasesWideTabActive(),
                 new VNextBOROWebPage().getPhasesNarrowTab(), new VNextBOROWebPage().getPhasesNarrowTabActive());

@@ -50,8 +50,8 @@ public class Utils {
 
     public static void clickWithActions(WebElement element) {
         try {
+            moveToElement(element);
             getActions()
-                    .moveToElement(element)
                     .click()
                     .build()
                     .perform();
@@ -450,6 +450,14 @@ public class Utils {
     public static String getText(WebElement element) {
         try {
             return WaitUtilsWebDriver.waitForVisibility(element).getText();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String getText(By by) {
+        try {
+            return WaitUtilsWebDriver.waitForVisibility(DriverBuilder.getInstance().getDriver().findElement(by)).getText();
         } catch (Exception e) {
             return "";
         }

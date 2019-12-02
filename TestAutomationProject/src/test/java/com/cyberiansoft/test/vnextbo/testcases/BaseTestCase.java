@@ -18,45 +18,45 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class BaseTestCase {
 
-	protected WebDriver webdriver;
-	protected static BrowserType browserType;
-	protected File app;
+    protected WebDriver webdriver;
+    protected static BrowserType browserType;
+    protected File app;
     private final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
     private final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
-	public void setDriver() {
+    public void setDriver() {
         webdriver = DriverBuilder.getInstance().getDriver();
     }
 
-	@BeforeSuite
+    @BeforeSuite
     public void init() {
         browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
         DriverBuilder.getInstance().setDriver(browserType);
         webdriver = DriverBuilder.getInstance().getDriver();
     }
 
-	@AfterSuite
-	public void tearDown() {
-		if (DriverBuilder.getInstance().getDriver() != null)
-			DriverBuilder.getInstance().quitDriver();
-	}
-
-	@BeforeClass
-    public void login() {
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-        VNextBOLoginSteps.userLogin(userName, userPassword);
+    @AfterSuite
+    public void tearDown() {
+        if (DriverBuilder.getInstance().getDriver() != null)
+            DriverBuilder.getInstance().quitDriver();
     }
+
+//	@BeforeClass
+//    public void login() {
+//        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+//        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+//        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+//        VNextBOLoginSteps.userLogin(userName, userPassword);
+//    }
 
     @AfterClass
     public void logout() {
         VNextBOHeaderPanelSteps.logout();
     }
 
-    //@BeforeMethod
-    //public void setUp() {
-    //    webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-    //    VNextBOLoginSteps.userLogin(userName, userPassword);
-    //}
+    @BeforeMethod
+    public void setUp() {
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        VNextBOLoginSteps.userLogin(userName, userPassword);
+    }
 }
