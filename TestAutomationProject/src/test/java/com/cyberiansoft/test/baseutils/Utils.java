@@ -236,10 +236,7 @@ public class Utils {
         try {
             WaitUtilsWebDriver.waitForVisibility(element);
             return true;
-        } catch (NoSuchElementException exception) {
-            return false;
-        }
-        catch (Exception ignored) {
+        } catch (Exception ignored) {
             return false;
         }
     }

@@ -23,7 +23,7 @@ public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
 		JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getHomePageAccessRightsTD();
 	}
 
-	//@Override
+	@Override
     @BeforeMethod
     public void setUp() {
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());

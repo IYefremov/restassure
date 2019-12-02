@@ -28,7 +28,7 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
 
     private VNexBOLeftMenuPanel leftMenu;
 
-    //@Override
+    @Override
     @BeforeMethod
     public void setUp() {
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
