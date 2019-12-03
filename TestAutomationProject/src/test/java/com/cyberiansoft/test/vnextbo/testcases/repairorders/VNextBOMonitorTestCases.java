@@ -9,13 +9,18 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairorders.*;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.*;
 import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOPrivacyPolicyDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOTermsAndConditionsDialogSteps;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOAddNewServiceMonitorDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORONotesPageInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOAuditLogDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
@@ -728,9 +733,9 @@ public class VNextBOMonitorTestCases extends BaseTestCase {
 		System.out.println(selectedCategory);
 
 		final String selectedAddPartsNumberBefore =
-                VNextBOAddNewServiceMonitorDialogInteractions.getSelectedAddPartsNumber();
+                com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOAddNewServiceMonitorDialogInteractions.getSelectedAddPartsNumber();
 		if (!VNextBOAddNewServiceMonitorDialogValidations.arePartsOptionsDisplayed()) {
-            VNextBOAddNewServiceMonitorDialogInteractions.selectRandomAddPartsOption();
+            com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOAddNewServiceMonitorDialogInteractions.selectRandomAddPartsOption();
 
 			final String selectedAddPartsNumberAfter =
                     VNextBOAddNewServiceMonitorDialogInteractions.getSelectedAddPartsNumber();

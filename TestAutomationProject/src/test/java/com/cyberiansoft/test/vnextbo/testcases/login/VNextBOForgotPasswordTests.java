@@ -32,6 +32,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     private String userPassword;
     private VNextBOForgotPasswordWebPage forgotPasswordPage;
 
+    @Override
     @BeforeClass
     public void login() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginForgotPasswordTD();
@@ -42,10 +43,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         VNextBOLoginInteractions.clickForgotPasswordLink();
         forgotPasswordPage = new VNextBOForgotPasswordWebPage();
     }
-
-    @Override
-    @BeforeMethod
-    public void setUp() {}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserIsRedirectedToForgotPasswordPage(String rowID, String description, JSONObject testData) {
