@@ -3,44 +3,30 @@ package com.cyberiansoft.test.vnextbo.testcases.quicknotes;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOQuickNotesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBONewNotesDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOQuickNotesWebPage;
-import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOQuickNotesTestCases extends BaseTestCase {
 
-    @BeforeClass
-    public void settingUp() {
-        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getQuickNotesTD();
-    }
-
     private VNexBOLeftMenuPanel leftMenu;
 
-    @Override
-    @BeforeMethod
-    public void setUp() {
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOURL());
-        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+    @BeforeClass
+    public void settingUp() {
 
-        VNextBOLoginSteps.userLogin(userName, userPassword);
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getQuickNotesTD();
         VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel();
         headerPanel.executeJsForAddOnSettings();
         leftMenu = new VNexBOLeftMenuPanel();
     }
-
+    
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddQuickNotes(String rowID, String description, JSONObject testData) {
         VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
