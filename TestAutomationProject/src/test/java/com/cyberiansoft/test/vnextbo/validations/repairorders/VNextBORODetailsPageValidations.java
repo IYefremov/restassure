@@ -166,10 +166,7 @@ public class VNextBORODetailsPageValidations {
     }
 
     public static void verifyStatusHasBeenSetForService(String serviceId, String status) {
-        try {
-            WaitUtilsWebDriver.getWait().until((ExpectedCondition<Boolean>) service ->
-                    VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId).equals(status));
-        } catch (Exception ignored) {}
+        WaitUtilsWebDriver.waitForLoading();
         Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), status,
                 "The status hasn't been set for service");
     }

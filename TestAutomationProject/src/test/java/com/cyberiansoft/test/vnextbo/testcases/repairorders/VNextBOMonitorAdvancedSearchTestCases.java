@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -12,6 +13,7 @@ import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvanced
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOCalendarWidgetDialog;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
@@ -29,6 +31,8 @@ import org.testng.annotations.Test;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,7 +43,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorAdvancedSearchTD();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanSelectCustomer(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -54,7 +58,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.selectCustomerNameFromBoxList(data.getCustomer());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanSearchByEmployee(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -78,7 +82,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanSearchByPhase(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -99,7 +103,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyUserCanSearchByDepartment(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -120,7 +124,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyUserCanSearchByWoType(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -141,7 +145,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
     public void verifyUserCanSearchByWoNumber(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -162,7 +166,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
     public void verifyUserCanSearchByRoNumber(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -183,7 +187,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
     public void verifyUserCanSearchByStockNumber(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -204,7 +208,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyUserCanSearchByVinNumber(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -225,7 +229,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanSearchByDaysInPhaseLess(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -243,7 +247,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void verifyUserCanSearchByWhiteFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -266,7 +270,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         }
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserCanSearchByCustomer(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -277,7 +281,6 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not opened");
 
         VNextBOROAdvancedSearchDialogInteractions.typeCustomerName(data.getCustomer());
-        Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isCustomerDisplayed(data.getCustomer()));
         VNextBOROAdvancedSearchDialogInteractions.selectCustomerNameFromBoxList(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
         VNextBOROAdvancedSearchDialogInteractions.clickSearchButton();
@@ -288,7 +291,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The work order hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
     public void verifyUserCanSearchByRedFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -311,7 +314,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         }
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
     public void verifyUserCanSearchByOrangeFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -334,7 +337,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         }
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 14)
     public void verifyUserCanSearchByYellowFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -357,7 +360,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         }
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 15)
     public void verifyUserCanSearchByGreenFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -380,7 +383,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         }
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 16)
     public void verifyUserCanSearchByBlueFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -403,7 +406,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         }
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 17)
     public void verifyUserCanSearchByPurpleFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -426,7 +429,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         }
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 18)
     public void verifyUserCanSearchByDaysInPhaseLessOrEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -444,7 +447,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 19)
     public void verifyUserCanSearchByDaysInPhaseEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -462,7 +465,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 20)
     public void verifyUserCanSearchByDaysInPhaseMoreOrEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -480,7 +483,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 21)
     public void verifyUserCanSearchByDaysInPhaseMore(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -498,7 +501,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 22)
     public void verifyUserCanSearchByDaysInPhaseBetween(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -517,7 +520,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 23)
     public void verifyUserCanSearchByDaysInProcessLess(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -535,7 +538,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 24)
     public void verifyUserCanSearchByDaysInProcessLessOrEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -553,7 +556,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 25)
     public void verifyUserCanSearchByDaysInProcessEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -571,7 +574,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 26)
     public void verifyUserCanSearchByDaysInProcessMoreOrEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -589,7 +592,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 27)
     public void verifyUserCanSearchByDaysInProcessMore(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -607,7 +610,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 28)
     public void verifyUserCanSearchByDaysInProcessBetween(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -626,7 +629,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 29)
     public void verifyUserCanSearchByCustomTimeFrame(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -639,34 +642,22 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogDisplayed(),
                 "The advanced search dialog is not opened");
 
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("M/d/yyyy");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/M/d");
 
-        LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
-        final int monthValue = now.getMonthValue();
-        final int prevMonthValue = monthValue - 1;
-        LocalDateTime before = now.minusDays(7);
-
-        String beforeMinusMonth = VNextBOCalendarWidgetDialogInteractions.getMonthReplace(monthValue, prevMonthValue, before);
-        String nowMinusMonth = VNextBOCalendarWidgetDialogInteractions.getMonthReplace(monthValue, prevMonthValue, now);
-        System.out.println("beforeMinusMonth: " + beforeMinusMonth);
-        System.out.println("nowMinusMonth: " + nowMinusMonth);
-        String beforeFormatted = before.format(format);
-        String nowFormatted = now.format(format);
-        System.out.println("beforeFormatted: " + beforeFormatted);
-        System.out.println("nowFormatted: " + nowFormatted);
-
+        LocalDateTime toDate = LocalDateTime.now(ZoneId.of("US/Pacific")).minusMonths(1);
+        LocalDateTime fromDate = toDate.minusDays(2);
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
         VNextBOROAdvancedSearchDialogInteractions.clickFromDateButton();
-        VNextBOCalendarWidgetDialogInteractions.selectFromDate(beforeMinusMonth);
+        VNextBOCalendarWidgetDialogInteractions.selectFromDate(fromDate.format(format));
         VNextBOROAdvancedSearchDialogInteractions.clickToDateButton();
-        VNextBOCalendarWidgetDialogInteractions.selectToDate(nowMinusMonth);
+        VNextBOCalendarWidgetDialogInteractions.selectToDate(toDate.format(format));
         VNextBOROAdvancedSearchDialogInteractions.clickSearchButton();
 
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 30)
     public void verifyUserCanSearchByLast90DaysTimeFrame(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -685,7 +676,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROPageValidations.verifyOrdersAfterSearchByDate(CustomDateProvider.getThreeMonthsBeforeCurrentDate());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 31)
     public void verifyUserCanSearchByRepairStatusInProgressRework(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -703,7 +694,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 32)
     public void verifyUserCanSearchByRepairStatusInProgressActive(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -720,7 +711,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 33)
     public void verifyUserCanSearchByRepairStatusInProgressQueued(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -737,7 +728,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 34)
     public void verifyUserCanSearchByRepairStatusInProgressOnHold(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -754,7 +745,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 35)
     public void verifyUserCanSearchByRepairStatusInProgressNotOnHold(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -771,7 +762,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 36)
     public void verifyUserCanSearchByRepairStatusInProgressQAReady(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -788,7 +779,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 37)
     public void verifyUserCanSearchByRepairStatusCompletedQAReady(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -805,7 +796,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 38)
     public void verifyUserCanSearchByRepairStatusCompletedNotBilled(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -822,7 +813,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 39)
     public void verifyUserCanSearchByRepairStatusCompletedOnSite(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -839,7 +830,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 40)
     public void verifyUserCanSearchByRepairStatusCompletedAll(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -856,7 +847,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 41)
     public void verifyUserCanSearchByRepairStatusInProgressAll(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -873,7 +864,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 42)
     public void verifyUserCanFillInAdvancedSearchWindow(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -901,7 +892,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.clickSearchButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 43)
     public void verifyUserCanSaveAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -920,7 +911,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 44)
     public void verifyUserCanEditSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -955,7 +946,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOConfirmationDialogInteractions.clickConfirmButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 45)
     public void verifyUserCanUseStoredAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -982,7 +973,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.clickClearButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 46)
     public void verifyUserCanCloseAdvancedSearchWindow(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -995,7 +986,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 47)
     public void verifyUserCanClearAllFieldsInAdvancedSearchWindow(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1037,7 +1028,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 .containsAll(data.getAdvancedSearchDialogDefaultTextList()), "The data hasn't been cleared");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 48)
     public void verifyUserSeesSearchMaskWithAllEnteredInfo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1065,27 +1056,14 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
-
-        VNextBOROPageInteractions.movePointerToSearchResultsField();
-
-        System.out.println("Inserted values");
-        final List<String> searchResultsList = VNextBOROPageInteractions
-                .getSearchResultsList()
-                .stream()
-                .map(String::trim)
-                .collect(Collectors.toList());
-        searchResultsList.forEach(System.out::println);
-
-        System.out.println();
-        System.out.println("Displayed values");
         final List<String> advancedSearchDialogElements = data.getFullAdvancedSearchElementsList();
         advancedSearchDialogElements.forEach(System.out::println);
 
-        Assert.assertTrue(searchResultsList.containsAll(advancedSearchDialogElements),
+        Assert.assertTrue(new ArrayList<String>(Arrays.asList(VNextBOROPageInteractions.getSearchFilterText().split("; "))).containsAll(advancedSearchDialogElements),
                 "The data hasn't been inserted");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 49)
     public void verifyUserCanSearchByCurrentPhaseStatus(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1101,7 +1079,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROPageValidations.verifyOrdersAfterSearchByPhase(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 50)
     public void verifyUserCanSearchByActivePhaseStatus(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1115,11 +1093,12 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 "The advanced search dialog is not closed");
 
         VNextBOROPageInteractions.clickWoLink();
+        WaitUtilsWebDriver.waitForLoading();
         VNextBORODetailsPageValidations.verifyPhaseStatusOrPartPhaseStatusIsDisplayed(
                 data.getPhase(), data.getPhaseStatus(), data.getServiceStatuses());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 51)
     public void verifyUserCanSearchByNotCompletedPhaseStatus(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1131,12 +1110,13 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
+        WaitUtilsWebDriver.waitForLoading();
 
         VNextBOROPageInteractions.clickWoLink();
         VNextBORODetailsPageValidations.verifyPhaseStatus(data.getPhase(), data.getServiceStatuses());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 52)
     public void verifyUserCanSearchByCompletedPhaseStatus(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1153,7 +1133,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBORODetailsPageValidations.verifyPhaseStatus(data.getPhase(), data.getServiceStatuses());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 53)
     public void verifyUserCanSearchByHasProblemsOption(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
