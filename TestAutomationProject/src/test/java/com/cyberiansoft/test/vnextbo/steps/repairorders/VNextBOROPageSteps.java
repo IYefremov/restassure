@@ -11,8 +11,6 @@ public class VNextBOROPageSteps {
 
     public static String setTechnicianAndVendorByWoNumber(String woNumber, String vendor) {
         VNextBOROPageInteractions.clickTechniciansFieldForWO(woNumber);
-        Assert.assertTrue(VNextBOChangeTechniciansDialogValidations.isChangeTechnicianDialogDisplayed(),
-                "The Change Technician dialog hasn't been opened");
         VNextBOChangeTechniciansDialogInteractions.setVendor(vendor);
         final String technician = VNextBOChangeTechniciansDialogInteractions.setTechnician();
         VNextBOChangeTechniciansDialogInteractions.clickOkButton();

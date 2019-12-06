@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.interactions.repairorders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROAdvancedSearchDialog;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -14,6 +15,7 @@ public class VNextBOROAdvancedSearchDialogInteractions {
     public static void setTimeFrame(String timeFrame) {
         final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
         Utils.clickElement(advancedSearchDialog.getTimeFrameListBox());
+        WaitUtilsWebDriver.waitABit(1000);
         Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getTimeFrameDropDown(),
                 advancedSearchDialog.getTimeFrameOption(timeFrame));
     }

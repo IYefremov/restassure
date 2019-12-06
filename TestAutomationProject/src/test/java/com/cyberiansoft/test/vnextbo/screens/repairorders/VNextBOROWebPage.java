@@ -229,6 +229,9 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@id='tableBody']//i[@class='icon-problem-indicator']")
     private List<WebElement> problemIndicatorsList;
 
+    @FindBy(xpath = "//span[contains(@data-bind, 'search.info')]")
+    private WebElement searchFilterText;
+
     public VNextBOROWebPage() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
