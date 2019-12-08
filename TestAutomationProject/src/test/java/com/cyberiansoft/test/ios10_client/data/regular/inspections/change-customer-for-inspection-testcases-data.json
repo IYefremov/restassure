@@ -1,0 +1,76 @@
+{
+
+  "testChangeCustomerOptionForInspection": [
+    {
+      "rowID": "testChangeCustomerOptionForInspection.01",
+      "description": "Test Case 23401:Test 'Change customer' option for inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88623"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa": [
+    {
+      "rowID": "testChangeCustomerOptionForInspectionAsChangeWholesaleToRetailAndViceVersa.01",
+      "description": "Test Case 23402:Test 'Change customer' option for Inspection as change 'Wholesale' to 'Retail' and vice versa'",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88622"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies": [
+    {
+      "rowID": "testChangeCustomerOptionForInspectionsBasedOnTypeWithPreselectedCompanies.01",
+      "description": "Test Case 23421:Test 'Change customer' option for Inspections based on type with preselected Companies",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88621"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        }
+      }
+    }
+  ]
+}

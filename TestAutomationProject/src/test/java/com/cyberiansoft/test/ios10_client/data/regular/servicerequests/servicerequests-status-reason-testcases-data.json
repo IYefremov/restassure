@@ -1,0 +1,75 @@
+{
+
+  "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO": [
+    {
+      "rowID": "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsShownInCaseItIsAssignedToReasonOnBO.01",
+      "description": "Test Case 31752:SR: Verify that when Status reason is selected Question section is shown in case it is assigned to reason on BO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88851"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Bundle1_Disc_Ex"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO": [
+    {
+      "rowID": "testVerifyThatWhenStatusReasonIsSelectedQuestionSectionIsNotShownInCaseItIsNotAssignedToReasonOnBO.01",
+      "description": "Test Case 31753:SR: Verify that when Status reason is selected Question section is not shown in case it is not assigned to reason on BO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88850"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Bundle1_Disc_Ex"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected": [
+    {
+      "rowID": "testVerifyThatWhenSRIsDeclinedStatusReasonShouldBeSelected.01",
+      "description": "Test Case 35953:SR: Verify that when SR is declined status reason should be selected",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88849"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008",
+          "vehicleMake": "Chrysler",
+          "vehicleModel": "Town and Country"
+        }
+      }
+    }
+  ]
+}

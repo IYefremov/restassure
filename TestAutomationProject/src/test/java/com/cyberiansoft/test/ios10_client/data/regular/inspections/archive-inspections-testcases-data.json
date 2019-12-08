@@ -1,0 +1,51 @@
+{
+
+  "testArchiveAndUnArchiveTheInspection": [
+    {
+      "rowID": "testArchiveAndUnArchiveTheInspection.01",
+      "description": "Test Case 8586:Archive and Un-Archive the Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88654"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "TESTVINNO",
+        "vehicleMake": "Acura",
+        "vehicleModel": "1.6 EL",
+        "vehicleColor": "Black"
+      },
+      "archiveReason": "Reason 2"
+    }
+  ],
+  "testArchiveInspectionsOnDeviceViaAction": [
+    {
+      "rowID": "testArchiveInspectionsOnDeviceViaAction.01",
+      "description": "Archive Inspections On Device via Action",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88654"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "TESTVINNO",
+            "vehicleMake": "Acura",
+            "vehicleModel": "1.6 EL",
+            "vehicleColor": "Black"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "TESTVINNO",
+            "vehicleMake": "Acura",
+            "vehicleModel": "1.6 EL",
+            "vehicleColor": "Black"
+          }
+        }
+      ],
+      "archiveReason": "Reason 2"
+    }
+  ]
+}

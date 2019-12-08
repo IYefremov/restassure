@@ -1,0 +1,455 @@
+{
+
+  "testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit": [
+    {
+      "rowID": "testWOVerifyThatWOIsSavedCorrectWithSelectedSubService_NoMessageWithIncorrectTechSplit.01",
+      "description": "Test Case 57101:WO: Verify that WO is saved correct with selected sub service (no message with incorrect tech split)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88747"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "damageData": {
+          "damageGroupName": "Service_with_sub_service",
+          "moneyServices": [
+            {
+              "serviceName": "Wash partly"
+            },
+            {
+              "serviceName": "Wash whole"
+            }
+          ]
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit": [
+    {
+      "rowID": "testWOVerifyThatItIsNotPossibleToChangeDefaultTechViaServiceTypeSplit.01",
+      "description": "Test Case 34551:WO: Verify that it is not possible to change default tech via service type split",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88472"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "service": {
+          "serviceName": "Service_with_default_Tech",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Simple 20%"
+          },
+          "serviceNewTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats"
+          },
+          "vehiclePart": {
+            "vehiclePartName": "Back Glass"
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians": [
+    {
+      "rowID": "testWOVerifyThatItIsPossibleToAssignTechToOrderByActionTechnicians.01",
+      "description": "Test Case 40821:WO: Verify that it is possible to assign tech to order by action Technicians",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88473"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size"
+          },
+          {
+            "serviceName": "Tax discount"
+          },
+          {
+            "serviceName": "Sales Tax"
+          }
+        ],
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye",
+              "isSelected": "false"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2.00",
+              "isSelected": "true"
+            }
+          ]
+        },
+        "moneyServices": [
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Front Bumper"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            }
+          },
+          {
+            "serviceName": "Service_with_default_Tech",
+            "vehiclePart": {
+              "vehiclePartName": "Back Glass"
+            }
+          }
+        ],
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP2 zayats",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartPrice": "21",
+            "vehiclePartAdditionalService": {
+              "serviceName": "Test service zayats"
+            },
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats"
+            }
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown": [
+    {
+      "rowID": "testInspectionsVerifyThatWhenPanelGroupingIsUsedForPackageForSelectedPanelOnlyLinkedServicesAreShown.01",
+      "description": "Test Case 58663:Inspections: Verify that when Panel grouping is used for package for selected Panel only linked services are shown",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88473"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Buff",
+            "moneyServices": [
+              {
+                "serviceName": "Oksi_Service_PP_Panel"
+              },
+              {
+                "serviceName": "Oksi_Service_PP_Service"
+              },
+              {
+                "serviceName": "Oksi_Service_PP_Vehicle"
+              }
+            ]
+          },
+          {
+            "damageGroupName": "Dye",
+            "moneyServices": [
+              {
+                "serviceName": "Calc_Money_PP_Vehicle"
+              },
+              {
+                "serviceName": "Calc_Money_PP_Panel"
+              },
+              {
+                "serviceName": "Calc_Money_PP_Service"
+              }
+            ]
+          },
+          {
+            "damageGroupName": "Miscellaneous",
+            "moneyServices": [
+              {
+                "serviceName": "3/4\" - Penny Size"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "testWOVerifyAssignTechToServiceTypeInsteadOfIndividualServices": [
+    {
+      "rowID": "testWOVerifyAssignTechToServiceTypeInsteadOfIndividualServices.01",
+      "description": "Test Case 34427:WO: Verify Assign tech to service type, instead of individual services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88471"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "damagesData": [
+          {
+            "damageGroupName": "Buff",
+            "moneyServices": [
+              {
+                "serviceName": "SR_S1_Money",
+                "vehiclePart": {
+                  "vehiclePartName": "Hood"
+                }
+              },
+              {
+                "serviceName": "SR_S1_Money_FlatFee"
+              },
+              {
+                "serviceName": "SR_S1_Money_Panel",
+                "vehiclePart": {
+                  "vehiclePartName": "Front Bumper"
+                }
+              }
+            ],
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%"
+            },
+            "moneyService": {
+              "serviceName": "Service_PP_Vehicle_not_multiple",
+              "vehiclePart": {
+                "vehiclePartName": "Back Glass"
+              }
+            }
+          },
+          {
+            "damageGroupName": "Miscellaneous",
+            "bundleService": {
+              "bundleServiceName": "Bundle1_Disc_Ex",
+              "services": [
+                {
+                  "serviceName": "Dye",
+                  "servicePrice": "80"
+                }
+              ]
+            },
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Inspector",
+              "technicianLastName": "1"
+            }
+          },
+          {
+            "damageGroupName": "Wash Detail",
+            "matrixService": {
+              "matrixServiceName": "Test service price matrix",
+              "hailMatrixName": "Price Matrix Zayats",
+              "vehiclePartData": {
+                "vehiclePartName": "VP2 zayats",
+                "vehiclePartSize": "DIME",
+                "vehiclePartSeverity": "MEDIUM",
+                "vehiclePartPrice": "150.00",
+                "vehiclePartAdditionalServices": [
+                  {
+                    "serviceName": "Dye"
+                  },
+                  {
+                    "serviceName": "Test service zayats"
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "services": [
+          {
+            "serviceName": "Buff"
+          },
+          {
+            "serviceName": "SR_S1_Money"
+          },
+          {
+            "serviceName": "SR_S1_Money_FlatFee"
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel"
+          },
+          {
+            "serviceName": "Miscellaneous"
+          },
+          {
+            "serviceName": "Bundle1_Disc_Ex"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Detail"
+          },
+          {
+            "serviceName": "Test service price matrix"
+          }
+        ],
+        "damageData": {
+          "damageGroupName": "WHEEL REPAIR",
+          "bundleService": {
+            "bundleServiceName": "Bundle1_Disc_Ex",
+            "service": {
+              "serviceName": "Wheel"
+            }
+          },
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Inspector",
+            "technicianLastName": "1"
+          },
+          "serviceNewTechnician": {
+            "technicianFirstName": "Man-Insp",
+            "technicianLastName": "1"
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyThatDefaultTechIsNotChangedWhenResetOrderSplit": [
+    {
+      "rowID": "testWOVerifyThatDefaultTechIsNotChangedWhenResetOrderSplit.01",
+      "description": "Test Case 50029:WO: Verify that default tech is not changed when reset order split",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88474"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Simple 20%"
+          },
+          "newTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats",
+            "isSelected": true
+          }
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "moneyServices": [
+          {
+            "serviceName": "Service_with_default_Tech_oksi",
+            "servicePrice": "21",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Oksi",
+              "technicianLastName": "Employee",
+              "isSelected": true
+            }
+          },
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice2": "21"
+          }
+        ],
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyThatTechSplitAssignedFormVehicleScreenIsSetToServicesUnderList": [
+    {
+      "rowID": "testWOVerifyThatTechSplitAssignedFormVehicleScreenIsSetToServicesUnderList.01",
+      "description": "Test Case 66362:WO: Verify that Tech split assigned form Vehicle screen is set to services under list",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88475"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "newTechnicians": [
+            {
+              "technicianFirstName": "Inspector",
+              "technicianLastName": "1",
+              "isSelected": true
+            },
+            {
+              "technicianFirstName": "Man-Insp",
+              "technicianLastName": "1",
+              "isSelected": true
+            }
+          ]
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          }
+        ],
+        "workOrderTotalSale": "5"
+      }
+    }
+  ]
+}

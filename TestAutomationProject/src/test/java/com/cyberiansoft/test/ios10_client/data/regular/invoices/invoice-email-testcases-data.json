@@ -1,0 +1,62 @@
+{
+
+  "testVerifyThatWhenCustomerApprovalRequiredIsSetToONAutoEmailIsNotSentWhenApprovalDoesNotExist": [
+    {
+      "rowID": "testVerifyThatWhenCustomerApprovalRequiredIsSetToONAutoEmailIsNotSentWhenApprovalDoesNotExist.01",
+      "description": "Test Case 26662:Invoices: Verify that when ‘Customer approval required’ is set to ON - auto email is not sent when approval does not exist",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88707"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "3"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testVerifyThatWhenCustomerApprovalRequiredIsSetToOffAutoEmailIsSentWhenInvoiceAsAutoApproved": [
+    {
+      "rowID": "testVerifyThatWhenCustomerApprovalRequiredIsSetToOffAutoEmailIsSentWhenInvoiceAsAutoApproved.01",
+      "description": "Test Case 26663:Invoices: verify that when ‘Customer approval required’ is set to OFF - auto email is sent when invoice is auto approved",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88706"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "3"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ]
+
+}
