@@ -1,0 +1,20 @@
+{
+
+  "testVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen": [
+    {
+      "rowID": "testVerifyThatKeyboardIsNotShownOverTheVINWhenItIsEnteredInCaseOnlyVINIsPresentOnVehicleScreen.01",
+      "description": "Test Case 31963:Inspections: Verify that keyboard is not shown over the VIN when it is entered in case only VIN is present on Vehicle screen",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88557"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
+  ]
+
+}

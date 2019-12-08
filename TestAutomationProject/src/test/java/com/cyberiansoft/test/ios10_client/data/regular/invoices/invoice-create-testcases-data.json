@@ -1,0 +1,166 @@
+{
+
+  "testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer": [
+    {
+      "rowID": "testInvoicesCreateInvoiceWithTwoWOsAndCopyVehicleForRetailCustomer.01",
+      "description": "Test Case 26265:Invoices : Create Invoice with two WOs and copy vehicle for Retail customer",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88703"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "vehicleMake": "Dodge",
+          "vehicleModel": "Dakota",
+          "vehicleColor": "Black",
+          "vehicleYear": "2012",
+          "mileage": "77777",
+          "vehicleFuelTankLevel": "25",
+          "vehicleType": "Used",
+          "vehicleStock": "Stock1",
+          "roNumber": "123"
+        },
+        "moneyService": {
+          "serviceName": "Dye",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Cowl, Other"
+            },
+            {
+              "vehiclePartName": "Hood"
+            }
+          ]
+        },
+        "workOrderPrice": "$19.00"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling": [
+    {
+      "rowID": "testInvoicesVerifyThatCreateInvoiceCheckMarkIsNotShownForWOThatIsSelectedForBilling.01",
+      "description": "Test Case 40023:Invoices: Verify that 'Create invoice' check mark is not shown for WO that is selected for billing",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88702"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        }
+      }
+    }
+  ],
+  "testCreateInvoiceWithTwoWOsAndCopyVehicle": [
+    {
+      "rowID": "testCreateInvoiceWithTwoWOsAndCopyVehicle.01",
+      "description": "Test Case 26266:Create Invoice with two WOs and copy vehicle",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89041"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397",
+          "vehicleMake": "Mitsubishi",
+          "vehicleModel": "Montero Sport",
+          "vehicleYear": "2000"
+        },
+        "moneyService": {
+          "serviceName": "Dye",
+          "vehicleParts": [
+            {
+              "vehiclePartName": "Cowl, Other"
+            },
+            {
+              "vehiclePartName": "Hood"
+            }
+          ]
+        },
+        "workOrderPrice": "$13.50"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testCreateInvoiceFromWOInMyWOsList": [
+    {
+      "rowID": "testCreateInvoiceFromWOInMyWOsList.01",
+      "description": "Test Case 16664:Create Invoice from WO in 'My WOs' list",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89019"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "Dye",
+          "serviceQuantity": "3"
+        },
+        "percentageServices": [
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          }
+        ],
+        "percentageService": {
+          "serviceName": "Disc_Ex_Service1",
+          "servicePrice": "$108.50",
+          "serviceAdjustment": {
+            "adjustmentData": {
+              "adjustmentName": "For_SP_Cl"
+            }
+          }
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2"
+            }
+          ]
+        },
+        "matrixService": {
+          "matrixServiceName": "Dent Removal",
+          "hailMatrixName": "Hail Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "HOOD",
+            "vehiclePartSize": "NKL",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartPrice": "$100.00",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Discount 5-10%"
+              },
+              {
+                "serviceName": "Discount 10-20$"
+              }
+            ]
+          }
+        }
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ]
+}

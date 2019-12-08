@@ -1,0 +1,88 @@
+{
+
+  "testChangeCustomerOptionForWorkOrder": [
+    {
+      "rowID": "testChangeCustomerOptionForWorkOrder.01",
+      "description": "Test Case 23422:Test 'Change customer' option for Work Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88798"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "3/4\" - Penny Size"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies": [
+    {
+      "rowID": "testChangeCustomerOptionForWOBasedOnTypeWithPreselectedCompanies.01",
+      "description": "Test Case 23423:Test 'Change customer' option for WO based on type with preselected Companies",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88797"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "3/4\" - Penny Size"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa": [
+    {
+      "rowID": "testChangeCustomerOptionForWOAsChangeWholesaleToRetailAndViceVersa.01",
+      "description": "Test Case 23424:Test 'Change customer' option for WO as change 'Wholesale' to 'Retail' and vice versa'",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88796"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "3/4\" - Penny Size"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ]
+
+}

@@ -1,0 +1,60 @@
+{
+
+  "testSRVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON": [
+    {
+      "rowID": "testSRVerifyThatCheckInActionIsPresentForSRWhenAppropriateSRTypeHasOptionCheckInON.01",
+      "description": "Test Case 26215:SR: Verify that Check In action is present for SR when appropriate SR type has option Check in ON",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88914"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Disc_Ex_Service1"
+        }
+      }
+    }
+  ],
+  "testSRVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa": [
+    {
+      "rowID": "testSRVerifyThatCheckInActionIsChangedToUndoCheckInAfterPressingOnItAndViceVersa.01",
+      "description": "Test Case 26216:SR: Verify that Check In action is changed to Undo Check In after pressing on it and vice versa",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88913"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Disc_Ex_Service1"
+        }
+      }
+    }
+  ],
+  "testSRVerifyThatFilterNotCheckedInIsWorkingCorrectly": [
+    {
+      "rowID": "testSRVerifyThatFilterNotCheckedInIsWorkingCorrectly.01",
+      "description": "Test Case 26217:SR: Verify that filter 'Not Checked In' is working correctly",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88912"
+        }
+      ],
+      "serviceRequestData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "moneyService": {
+          "serviceName": "Disc_Ex_Service1"
+        }
+      }
+    }
+  ]
+}

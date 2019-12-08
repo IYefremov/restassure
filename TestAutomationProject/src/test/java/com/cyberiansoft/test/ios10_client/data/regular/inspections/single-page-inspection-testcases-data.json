@@ -1,0 +1,39 @@
+{
+
+  "testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush": [
+    {
+      "rowID": "testInspectionsVerifyThatSinglePageInspectionIsSavedWithoutCrush.01",
+      "description": "Test Case 50249:Inspections: HD - Verify that Single-page inspection is saved without crush",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88562"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "PM_New",
+          "vehiclePartsData": [
+            {
+              "vehiclePartName": "123",
+              "vehiclePartOption": "PDR",
+              "vehiclePartPrice": "100"
+            }
+          ]
+        },
+        "declineReason": "Reason 1"
+      }
+    }
+  ]
+}

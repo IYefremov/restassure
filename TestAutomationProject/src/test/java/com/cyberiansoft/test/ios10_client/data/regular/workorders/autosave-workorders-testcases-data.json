@@ -1,0 +1,166 @@
+{
+
+  "testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService": [
+    {
+      "rowID": "testBlockForTheSameServicesIsONVerifyDuplicateServicesMessageWhenCreate2WOWithOneService.01",
+      "description": "Test Case 23459:WO: Verify that 'Duplicate message' is shown for WO with the same VIN number",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88778"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size"
+          },
+          {
+            "serviceName": "AMoneyService_AdjustHeadlight"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testEditOptionOfDuplicateServicesMessageForWO": [
+    {
+      "rowID": "testEditOptionOfDuplicateServicesMessageForWO.01",
+      "description": "Test Case 23432:WO: Test 'Edit' option of 'Duplicate services' message for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88785"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "moneyService": {
+          "serviceName": "3/4\" - Penny Size"
+        },
+        "service": {
+          "serviceName": "AMoneyService_AdjustHeadlight"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testOverrideOptionOfDuplicateServicesMessageForWO": [
+    {
+      "rowID": "testOverrideOptionOfDuplicateServicesMessageForWO.01",
+      "description": "Test Case 23433:WO: Test 'Override' option of 'Duplicate services' message for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88784"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size"
+          },
+          {
+            "serviceName": "AMoneyService_AdjustHeadlight"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testCancelOptionOfDuplicateServicesMessageForWO": [
+    {
+      "rowID": "testCancelOptionOfDuplicateServicesMessageForWO.01",
+      "description": "Test Case 23434:WO: Test 'Cancel' option of 'Duplicate services' message for WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88783"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "JA4LS31H8YP047397"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size"
+          },
+          {
+            "serviceName": "AMoneyService_AdjustHeadlight"
+          }
+        ],
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
+        },
+        "workOrderTotalSale": "4"
+      }
+    }
+  ],
+  "testThatAutoSavedWOIsCreatedCorrectly": [
+    {
+      "rowID": "testThatAutoSavedWOIsCreatedCorrectly.01",
+      "description": "Test Case 24657:WO: Test that auto-saved WO is created correctly, Test Case 23435:WO: Test 'Continue' option of 'Auto-saved' WO, Test Case 23436:WO: Test 'Discard' option of 'Auto-saved' WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88776"
+        },
+        {
+          "testCaseID": "88782"
+        },
+        {
+          "testCaseID": "88781"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1FMFU18L53LC13897",
+          "vehicleMake": "Ford",
+          "vehicleModel": "Expedition",
+          "vehicleYear": "2003"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A2",
+            "screenIndex": 1
+          }
+        }
+      }
+    }
+  ]
+}

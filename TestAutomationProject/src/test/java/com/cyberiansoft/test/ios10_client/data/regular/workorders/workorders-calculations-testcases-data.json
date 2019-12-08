@@ -1,0 +1,87 @@
+{
+
+  "testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO": [
+    {
+      "rowID": "testWOVerifyThatMessageIsShownForMoneyAndLaborServiceWhenPriceIsChangedTo0UnderWO.01",
+      "description": "Test Case 53824:WO: Verify that message is shown for Money and Labor service when price is changed to 0$ under WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88761"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "services": [
+          {
+            "serviceName": "AMoneyVehicleFF_Washing",
+            "servicePrice": "0",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Manager",
+              "technicianLastName": "1",
+              "isSelected": false
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats",
+              "isSelected": true
+            }
+          },
+          {
+            "serviceName": "Calc_Labor",
+            "servicePrice": "12",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Manager",
+              "technicianLastName": "1",
+              "isSelected": true
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats",
+              "isSelected": true
+            }
+          }
+        ],
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet": [
+    {
+      "rowID": "testWOVerifyThatAnswerServicesAreCorrectlyAddedForWOWhenPanelGroupIsSet.01",
+      "description": "Test Case 54542:WO: Verify that answer services are correctly added for WO when Panel group is set",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88760"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "service": {
+          "serviceName": "Oksi_Service_PP_Vehicle"
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ]
+
+}
