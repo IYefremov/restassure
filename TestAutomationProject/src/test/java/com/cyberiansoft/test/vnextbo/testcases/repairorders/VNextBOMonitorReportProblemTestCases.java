@@ -10,6 +10,7 @@ import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbIn
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCompleteCurrentPhaseDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOCompleteCurrentPhaseDialog;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -312,5 +313,29 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isResolvedButtonDisplayedForService(service),
                 "The 'Resolved' button hasn't been displayed for service after clicking 'Resolve'");
         VNextBOCompleteCurrentPhaseDialogInteractions.clickResolveButtonForService(service);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
+        VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
+
+        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        final String service = data.getService();
+        final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
+        Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
+
+        final String activeStatus = data.getServiceStatuses()[0];
+        VNextBORODetailsPageSteps.setServiceStatusForServiceByServiceId(serviceId, activeStatus);
+        VNextBOROProblemsInteractions.clickResolveButton();
+        VNextBORODetailsPageValidations.verifyStatusHasBeenSetForService(serviceId, activeStatus);
+        VNextBORODetailsPageSteps.setReportProblemForService(serviceId, data.getProblemReason(), data.getProblemDescription());
+
+        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhase(data.getPhase());
+        VNextBOCompleteCurrentPhaseDialogInteractions.cancelCompletingCurrentPhase();
+        VNextBORODetailsPageValidations.verifyStatusHasBeenSetForService(serviceId, data.getServiceStatuses()[1]);
     }
 }

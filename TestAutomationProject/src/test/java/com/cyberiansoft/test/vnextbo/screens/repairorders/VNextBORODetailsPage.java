@@ -6,18 +6,16 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
-import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.jetbrains.annotations.Nullable;
 import org.testng.Assert;
 
-import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Getter
@@ -348,7 +346,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     }
 
     public WebElement clickActionsIcon(String serviceId) {
-        final WebElement actionsIcon = new VNextBORODetailsPage().getActionIconForServiceId(serviceId);
+        final WebElement actionsIcon = getActionIconForServiceId(serviceId);
         Utils.clickWithActions(actionsIcon);
         WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
         return actionsIcon;

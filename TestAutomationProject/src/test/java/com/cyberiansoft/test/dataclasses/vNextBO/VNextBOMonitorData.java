@@ -123,6 +123,9 @@ public class VNextBOMonitorData  {
     @JsonProperty("flag")
     private String flag;
 
+    @JsonProperty("sortBy")
+    private String sortBy;
+
     @JsonProperty("searchName")
     private String searchName;
 
@@ -261,6 +264,9 @@ public class VNextBOMonitorData  {
     @JsonProperty("roNumbers")
     private String[] roNumbers;
 
+    @JsonProperty("sortByOptions")
+    private String[] sortByOptions;
+
     @JsonProperty("serviceVendorPrices")
     private String[] serviceVendorPrices;
 
@@ -275,6 +281,9 @@ public class VNextBOMonitorData  {
 
     @JsonProperty("servicePhaseHeaders")
     private String[] servicePhaseHeaders;
+
+    @JsonProperty("pages")
+    private String[] pages;
 
     @JsonProperty("searchValues")
     private VNextBOROAdvancedSearchValues searchValues;

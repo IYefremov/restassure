@@ -20,7 +20,6 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LicensesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.LoginScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SinglePageInspectionScreen;
@@ -743,7 +742,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		serviceRequestsListInteractions.selectSearchTeam(teamName);
 		serviceRequestsListInteractions.selectSearchTechnician("Employee Simple 20%");
 		serviceRequestsListInteractions.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		serviceRequestsListInteractions.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		serviceRequestsListInteractions.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
 		serviceRequestsListInteractions.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 
 		serviceRequestsListInteractions.setSearchFreeText(serviceRequestNumber);
@@ -1372,7 +1371,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
 		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchInvoiceNumber(invoicenum);
 		invoicesWebPage.clickFindButton();
@@ -3958,7 +3957,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
 		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
 
@@ -4044,7 +4043,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
 		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesWebPage.clickFindButton();
@@ -4119,7 +4118,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
 		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesWebPage.clickFindButton();
@@ -4737,7 +4736,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
 		operationsWebPage.clickInvoicesLink();
 		invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
 		invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesWebPage.clickFindButton();
@@ -4794,7 +4793,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 
 		workorderspage.makeSearchPanelVisible();
 		workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-		workorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+		workorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
 		workorderspage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		workorderspage.setSearchOrderNumber(workOrder3);
 		workorderspage.clickFindButton();

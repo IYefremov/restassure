@@ -77,11 +77,17 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']")
     private WebElement flagsListBox;
 
+    @FindBy(xpath = "//span[@aria-owns='orderSortOptionsDropdown_listbox']")
+    private WebElement sortByListBox;
+
     @FindBy(id = "orderDaysInPhaseDropdown_listbox")
     private WebElement daysInPhaseDropDown;
 
     @FindBy(id = "orderFlagDropdown_listbox")
     private WebElement flagDropDown;
+
+    @FindBy(id = "orderSortOptionsDropdown_listbox")
+    private WebElement sortByDropDown;
 
     @FindBy(xpath = "//span[@aria-owns='orderTimeframeDropdown_listbox']")
     private WebElement timeFrameListBox;
@@ -127,6 +133,9 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//ul[@id='orderFlagDropdown_listbox']/li//span[not(@class)]")
     private List<WebElement> flagsListBoxOptions;
+
+    @FindBy(xpath = "//ul[@id='orderSortOptionsDropdown_listbox']/li")
+    private List<WebElement> sortByListBoxOptions;
 
     @FindBy(xpath = "//ul[@id='orderDaysInProcessDropdown_listbox']/li")
     private List<WebElement> daysInProcessListBoxOptions;

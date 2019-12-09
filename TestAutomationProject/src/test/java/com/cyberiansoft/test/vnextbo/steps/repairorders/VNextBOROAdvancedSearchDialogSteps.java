@@ -23,6 +23,12 @@ public class VNextBOROAdvancedSearchDialogSteps {
                 "The advanced search dialog is not opened");
     }
 
+    public static void search() {
+        VNextBOROAdvancedSearchDialogInteractions.clickSearchButton();
+        Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
+                "The advanced search dialog is not closed");
+    }
+
     public static void closeAdvancedSearchDialog() {
         VNextBOROAdvancedSearchDialogInteractions.closeAdvancedSearchDialog();
         VNextBOROPageValidations.verifyAdvancedSearchDialogIsClosed();

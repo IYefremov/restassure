@@ -3,7 +3,7 @@ package com.cyberiansoft.test.enums;
 import lombok.Getter;
 
 @Getter
-public enum  OrderMonitorServiceStatuses {
+public enum OrderMonitorServiceStatuses {
     COMPLETED("Completed"),
     ACTIVE("Active"),
     RECEIVED("Received"),

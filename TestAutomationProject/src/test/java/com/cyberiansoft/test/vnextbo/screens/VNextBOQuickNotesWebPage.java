@@ -93,7 +93,7 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
 //                "                setData: function(type, val){" +
 //                "                    this.data[type] = val;" +
 //                "                }," +
-//                "                getData: function(type){" +
+//                "                getDate: function(type){" +
 //                "                    return this.data[type];" +
 //                "                }" +
 //                "            };" +

@@ -37,7 +37,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
         TechnicianCommissionsWebPage techCommissionPage = new TechnicianCommissionsWebPage(webdriver);
 		techCommissionPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		techCommissionPage.setSearchFromDate(data.getFromTime());
-		techCommissionPage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
+		techCommissionPage.setSearchToDate(CustomDateProvider.getCurrentDateInShortFormat());
 
 		techCommissionPage.clickFindButton();
 		techCommissionPage.verifyInvoicesTableColumnsAreVisible();
@@ -94,7 +94,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		wopage.makeSearchPanelVisible();
 		wopage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
 		wopage.setSearchFromDate(data.getFromTime());
-		wopage.setSearchToDate(CustomDateProvider.getCurrentDateFormatted());
+		wopage.setSearchToDate(CustomDateProvider.getCurrentDateInShortFormat());
 		wopage.clickFindButton();
 		wopage.verifyWorkOrdersTableColumnsAreVisible();
 

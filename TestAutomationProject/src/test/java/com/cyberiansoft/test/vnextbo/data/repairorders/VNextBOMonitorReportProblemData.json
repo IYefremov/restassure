@@ -242,5 +242,26 @@
       ],
       "problemReason": "No part"
     }
+  ],
+
+  "verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving": [
+    {
+      "rowID": "verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving.01",
+      "description": "Test Case 88950: Verify user can close the \"Complete current phase\" pop-up window without problem resolving",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91255"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "serviceStatuses": [
+        "Active",
+        "Problem"
+      ],
+      "problemReason": "No part"
+    }
   ]
 }

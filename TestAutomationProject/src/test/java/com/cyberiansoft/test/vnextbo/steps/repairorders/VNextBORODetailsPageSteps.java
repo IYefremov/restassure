@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCompleteCurrentPhaseDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROResolveProblemDialog;

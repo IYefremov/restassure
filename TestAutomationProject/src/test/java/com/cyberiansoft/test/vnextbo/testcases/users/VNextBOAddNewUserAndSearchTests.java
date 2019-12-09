@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases.users;
 
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
+import com.cyberiansoft.test.enums.ErrorMessages;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOAddNewUserDialog;
@@ -38,9 +39,9 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
         VNextBOAddNewUserDialogSteps.clickSaveButton();
-        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed("First Name is required");
-        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed("Last Name is required");
-        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed("Email is required");
+        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed(ErrorMessages.FIRST_NAME_IS_REQUIRED.getErrorMessage());
+        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed(ErrorMessages.LAST_NAME_IS_REQUIRED.getErrorMessage());
+        VNextBOAddNewUserDialogValidations.verifyErrorMessageIsDisplayed(ErrorMessages.EMAIL_IS_REQUIRED.getErrorMessage());
         VNextBOAddNewUserDialogSteps.closeDialog();
     }
 

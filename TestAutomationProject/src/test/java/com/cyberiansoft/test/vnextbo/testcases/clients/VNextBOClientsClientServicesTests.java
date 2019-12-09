@@ -20,8 +20,6 @@ import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
-
 public class VNextBOClientsClientServicesTests extends BaseTestCase {
 
     private static final String PRECONDITION_WHOLESALE_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/clients/VNextBOClientsPreconditionsWholesaleClient.json";
@@ -82,7 +80,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickFooterPreviousPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyFooterLastPageButtonIsClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
                 "Bottom Last page button has been clickable.");
         Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderLastPageButtonIsClickable(),
                 "Top Last page button has been clickable.");

@@ -1,14 +1,12 @@
 package com.cyberiansoft.test.bo.testcases;
 
-import com.cyberiansoft.test.baseutils.DataUtils;
+import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.dataclasses.bo.BOOperationsTimeFrameData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -110,27 +108,27 @@ public class BackOfficeOperationsTimeFrameTestCases extends BaseTestCase {
 		vendorBillsPage.selectSearchStatus(data.getStatusAll());
 		vendorBillsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_WEEKTODATE);
 		vendorBillsPage.clickFindButton();
-		vendorBillsPage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getCurrentDate(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData()));
+		vendorBillsPage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getCurrentDate(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getDate()));
 
 		vendorBillsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTWEEK);
 		vendorBillsPage.clickFindButton();
-		vendorBillsPage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getLastWeekEnd(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData()));
+		vendorBillsPage.verifyTableDateRangeForAllTablePages(data.getWeekStart(), data.getLastWeekEnd(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getDate()));
 
 		vendorBillsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_MONTHTODATE);
 		vendorBillsPage.clickFindButton();
-		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartMonth(), data.getCurrentDate(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData()));
+		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartMonth(), data.getCurrentDate(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getDate()));
 
 		vendorBillsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTMONTH);
 		vendorBillsPage.clickFindButton();
-		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastMonth(), data.getEndLastMonth(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData()));
+		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastMonth(), data.getEndLastMonth(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getDate()));
 
 		vendorBillsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_YEARTODATE);
 		vendorBillsPage.clickFindButton();
-		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartYear(), data.getCurrentDate(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData()));
+		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartYear(), data.getCurrentDate(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getDate()));
 
 		vendorBillsPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_LASTYEAR);
 		vendorBillsPage.clickFindButton();
-		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastYear(), data.getEndLastYear(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DataUtils.THE_SHORTEST_DATE_FORMAT.getData()));
+		vendorBillsPage.verifyTableDateRangeForFirstAndLastTablePages(data.getStartLastYear(), data.getEndLastYear(), vendorBillsPage.getVendorBillsTable(), VendorBillsWebPage.WOTABLE_DATE_COLUMN_NAME, DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getDate()));
 	}
 
 	//todo edge

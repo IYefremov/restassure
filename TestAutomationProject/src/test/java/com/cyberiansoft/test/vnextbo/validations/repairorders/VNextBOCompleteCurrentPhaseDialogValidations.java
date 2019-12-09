@@ -9,6 +9,10 @@ public class VNextBOCompleteCurrentPhaseDialogValidations {
         return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getCompleteCurrentPhaseDialog());
     }
 
+    public static boolean isCompleteCurrentPhaseDialogClosed() {
+        return Utils.isElementNotDisplayed(new VNextBOCompleteCurrentPhaseDialog().getCompleteCurrentPhaseDialog(), 5);
+    }
+
     public static boolean isServiceNameGridDisplayed() {
         return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getServiceNameGrid());
     }
