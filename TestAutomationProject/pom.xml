@@ -23,6 +23,7 @@
 				<configuration>
 					<suiteXmlFiles>
 						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
+                        <argLine>-Xmx2048m</argLine>
                     </suiteXmlFiles>
                     <systemPropertyVariables>
                         <browser>${browser}</browser>
