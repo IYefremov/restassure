@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.invoices;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOOperationsInvoicesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -7,6 +8,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.invoices.VNextBOAdvancedSearchInvoiceFormSteps;
 import com.cyberiansoft.test.vnextbo.steps.invoices.VNextBOInvoicesPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
@@ -14,6 +16,7 @@ import com.cyberiansoft.test.vnextbo.validations.invoices.VNextBOInvoicesPageVal
 import org.apache.commons.lang3.RandomUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -26,7 +29,12 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInvoicesTD();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @AfterMethod
+    public void refreshPage() {
+        Utils.refreshPage();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanVoidInvoice(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
@@ -38,7 +46,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 "The invoice is displayed after being voided");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCannotVoidInvoiceAfterClickingNo(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
@@ -53,7 +61,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 "The invoice is not displayed after clicking 'No' button");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCannotVoidInvoiceAfterClickingReject(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
@@ -68,7 +76,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 "The invoice is not displayed after clicking the 'No' button");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyUserCanVoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
@@ -95,7 +103,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 "The invoice " + firstInvoiceNames[2] + " is displayed after clicking the 'Yes' button");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyUserCanUnvoidInvoice(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
@@ -104,10 +112,48 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         final String invoiceNumber = VNextBOInvoicesPageInteractions.getFirstInvoiceName();
         VNextBOInvoicesPageSteps.confirmUnvoidingFirstInvoice();
 
-        VNextBOInvoicesPageInteractions.clickClearSearchIconIfDisplayed();
-        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoiceNumber, data.getStatus2());
+        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.searchByText(invoiceNumber);
         Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoiceNumber),
                 "The invoice is not displayed after being unvoided");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    public void verifyUserCanApproveInvoice(String rowID, String description, JSONObject testData) {
+        VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
+
+        VNextBOLeftMenuInteractions.selectInvoicesMenu();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(data.getFromDate(), data.getStatus());
+
+        final String invoice =
+                VNextBOInvoicesPageInteractions.getInvoiceName(RandomUtils.nextInt(0, 8));
+        VNextBOInvoicesPageInteractions.searchByText(invoice);
+        VNextBOInvoicesPageSteps.cancelApprovingFirstInvoiceWithButton();
+        VNextBOInvoicesPageSteps.approveInvoiceWithIcon();
+
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoice, data.getStatus2());
+
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoice),
+                "The invoice hasn't been found");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isRollbackApprovalButtonDisplayed(),
+                "The rollback approval button hasn't been shown");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isRollbackApprovalIconDisplayed(),
+                "The rollback approval icon hasn't been shown");
+        Assert.assertTrue(VNextBOInvoicesPageInteractions.getInvoiceStatusByName(invoice).contains(data.getStatus2()),
+                "The status hasn't been changed to 'Approved'");
+
+        VNextBOInvoicesPageSteps.cancelFirstInvoiceRollbackApprovalWithIcon();
+        VNextBOInvoicesPageSteps.approveInvoiceRollbackApprovalWithIcon();
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoice, data.getStatus());
+
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoice),
+                "The invoice hasn't been found");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isApproveButtonDisplayed(),
+                "The 'Approve invoice' button hasn't been shown");
+        Assert.assertTrue(VNextBOInvoicesPageValidations.isApproveIconDisplayed(),
+                "The 'Approve invoice' icon hasn't been shown");
+        Assert.assertTrue(VNextBOInvoicesPageInteractions.getInvoiceStatusByName(invoice).contains(data.getStatus()),
+                "The status hasn't been changed to 'New'");
     }
 
     /**
@@ -117,7 +163,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
      */
     // todo bug 94937
     // https://cyb.tpondemand.com/RestUI/Board.aspx#page=board/4692469321793274828&appConfig=eyJhY2lkIjoiMTA1MTA5MDU0OEY2QTUyQjlFM0JCODkwRjYwQUVGMEIifQ==&boardPopup=bug/94937
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
     public void verifyUserCanUnvoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
@@ -161,43 +207,5 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
                 .forEach((inv) -> Assert.assertTrue(VNextBOInvoicesPageValidations
                                 .isInvoiceDisplayed(inv),
                         "The invoice " + inv + " is not displayed after being unvoided"));
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanApproveInvoice(String rowID, String description, JSONObject testData) {
-        VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
-
-        VNextBOLeftMenuInteractions.selectInvoicesMenu();
-        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameWithFromDateAndStatus(data.getFromDate(), data.getStatus());
-
-        final String invoice =
-                VNextBOInvoicesPageInteractions.getInvoiceName(RandomUtils.nextInt(0, 8));
-        VNextBOInvoicesPageInteractions.searchByText(invoice);
-        VNextBOInvoicesPageSteps.cancelApprovingFirstInvoiceWithButton();
-        VNextBOInvoicesPageSteps.approveInvoiceWithIcon();
-
-        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoice, data.getStatus2());
-
-        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoice),
-                "The invoice hasn't been found");
-        Assert.assertTrue(VNextBOInvoicesPageValidations.isRollbackApprovalButtonDisplayed(),
-                "The rollback approval button hasn't been shown");
-        Assert.assertTrue(VNextBOInvoicesPageValidations.isRollbackApprovalIconDisplayed(),
-                "The rollback approval icon hasn't been shown");
-        Assert.assertTrue(VNextBOInvoicesPageInteractions.getInvoiceStatusByName(invoice).contains(data.getStatus2()),
-                "The status hasn't been changed to 'Approved'");
-
-        VNextBOInvoicesPageSteps.cancelFirstInvoiceRollbackApprovalWithIcon();
-        VNextBOInvoicesPageSteps.approveInvoiceRollbackApprovalWithIcon();
-        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndStatus(invoice, data.getStatus());
-
-        Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoice),
-                "The invoice hasn't been found");
-        Assert.assertTrue(VNextBOInvoicesPageValidations.isApproveButtonDisplayed(),
-                "The 'Approve invoice' button hasn't been shown");
-        Assert.assertTrue(VNextBOInvoicesPageValidations.isApproveIconDisplayed(),
-                "The 'Approve invoice' icon hasn't been shown");
-        Assert.assertTrue(VNextBOInvoicesPageInteractions.getInvoiceStatusByName(invoice).contains(data.getStatus()),
-                "The status hasn't been changed to 'New'");
     }
 }

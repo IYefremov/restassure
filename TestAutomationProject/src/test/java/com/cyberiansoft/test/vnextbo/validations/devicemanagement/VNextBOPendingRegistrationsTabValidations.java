@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.validations.devicemanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOPendingRegistrationWebPage;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOPendingRegistrationTabSteps;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -34,6 +35,17 @@ public class VNextBOPendingRegistrationsTabValidations {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPendingRegistrationWebPage().deviceRowByName(deviceNickName)),
                 "Device hasn't been displayed on the \"Pending Registration\" tab");
+    }
+
+    public static void verifyDevicesTableDoesNotContainDevice(String deviceNickName) {
+
+        boolean isDeviceDisplayed = false;
+        try {
+            isDeviceDisplayed = Utils.isElementDisplayed(new VNextBOPendingRegistrationWebPage().deviceRowByName(deviceNickName));
+            Assert.assertFalse(isDeviceDisplayed, "Device hasn't been deleted from the \"Pending Registration\" tab");
+        } catch (NoSuchElementException ex) {
+            Assert.assertFalse(isDeviceDisplayed, "Device hasn't been deleted from the \"Pending Registration\" tab");
+        }
     }
 
     public static void verifyPhoneNumberIsCorrectByDeviceNickName(String deviceNickName, String columnName, String expectedValue) {
