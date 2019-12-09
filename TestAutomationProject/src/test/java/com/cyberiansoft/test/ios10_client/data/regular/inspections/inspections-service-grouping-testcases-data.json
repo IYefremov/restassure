@@ -1,0 +1,64 @@
+{
+
+  "testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard": [
+    {
+      "rowID": "testVerifyThatServicesOnServicePackageAreGroupedByTypeSelectedOnInspTypeWizard.01",
+      "description": "Test Case 33869:Inspections: Verify that Services on Service Package are grouped by type selected on Insp type->Wizard",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88536"
+        }
+      ],
+      "inspectionData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "questionScreensData": [
+          {
+            "screenName": "Zayats Section1",
+            "questionData": {
+              "questionName": "Question 2",
+              "questionAnswer": "A1",
+              "screenIndex": 1
+            }
+          },
+          {
+            "screenName": "",
+            "questionData": {
+              "questionName": "Tax_Point_1",
+              "questionAnswer": "Test Answer 1",
+              "screenIndex": 1
+            }
+          }
+        ],
+        "service": {
+          "serviceName": "Wheel"
+        },
+        "servicesScreens": [
+          {
+            "screenName": "Test_pack_for_calc",
+            "damageData": {
+              "damageGroupName": "Back Glass",
+              "moneyService": {
+                "serviceName": "Oksi_Service_PP_Vehicle",
+                "questionData": {
+                  "questionName": "QuestionTypeSelect_Question 2",
+                  "questionAnswer": "A1"
+                }
+              }
+            }
+          },
+          {
+            "screenName": "SR_FeeBundle",
+            "damageData": {
+              "damageGroupName": "Price Adjustment",
+              "moneyService": {
+                "serviceName": "SR_S6_Bl_I1_Percent"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

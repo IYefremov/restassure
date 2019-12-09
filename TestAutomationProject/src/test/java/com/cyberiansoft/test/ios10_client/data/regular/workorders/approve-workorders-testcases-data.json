@@ -1,0 +1,24 @@
+{
+
+  "testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO": [
+    {
+      "rowID": "testWOVerifyThatApproveWOIsWorkingCorrectUnderTeamWO.01",
+      "description": "Test Case 51336:WO: Verify that approve WO is working correct under Team WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88801"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "service": {
+          "serviceName": "Disc_Ex_Service1"
+        },
+        "workOrderTotalSale": "3"
+      }
+    }
+  ]
+
+}

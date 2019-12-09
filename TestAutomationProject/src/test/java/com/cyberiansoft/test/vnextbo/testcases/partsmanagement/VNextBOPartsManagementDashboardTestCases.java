@@ -62,18 +62,19 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageValidations.verifyPastDuePartsBoxIsHighlighted();
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsOrdersListPanelSteps.openPartOrderDetailsByNumberInList(2);
-        VNextBOPartsDetailsPanelValidations.verifyEtaDateIsCorrect("Past Due Parts");
+        VNextBOPartsDetailsPanelValidations.verifyEtaDateIsCorrectDependsOnPhase(0, "Past Due Parts");
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsManagementWebPageSteps.clickPastDuePartsButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
-    public void verifyUserCanSelectOrdersWithInProgressParts(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanSelectOrdersWithInProgressParts(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.clickInProgressButton();
         VNextBOPartsManagementWebPageValidations.verifyInProgressBoxIsHighlighted();
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsOrdersListPanelSteps.openPartOrderDetailsByNumberInList(4);
+        VNextBOPartsDetailsPanelValidations.verifyEtaDateIsCorrectDependsOnPhase(0, "In Progress");
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsManagementWebPageSteps.clickInProgressButton();
     }

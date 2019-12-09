@@ -17,7 +17,7 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private WebElement partsDetailsTable;
 
     @FindBy(xpath = "//div[contains(@data-bind, 'addPart')]")
-    public WebElement addNewPartButton;
+    private WebElement addNewPartButton;
 
     @FindBy(xpath = "//div[@id='part-entity-details']//div[contains(@data-bind, 'deleteParts')]")
     private WebElement deletePartButton;
@@ -56,16 +56,16 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private List<WebElement> partVendorPriceField;
 
     @FindBy(xpath = "//span[contains(@class,'service-condition-dropdown')]//span[@class='k-input']")
-    public List<WebElement> partConditionField;
+    private List<WebElement> partConditionField;
 
     @FindBy(xpath = "//span[contains(@class,'service-core-status-dropdown')]//span[@class='k-input']")
-    public List<WebElement> partCoreStatusField;
+    private List<WebElement> partCoreStatusField;
 
     @FindBy(xpath = "//ul[@id='partsOrderingCorePriceStatus_listbox']")
-    public List<WebElement> partCoreStatusDropDown;
+    private List<WebElement> partCoreStatusDropDown;
 
     @FindBy(xpath = "//span[contains(@class,'service-status-dropdown')]//span[@class='k-input']")
-    public List<WebElement> partStatusField;
+    private List<WebElement> partStatusField;
 
     @FindBy(xpath = "//div[@class='k-animation-container']/div[contains(@class, 'k-list-container')]")
     private WebElement partStatusDropDown;
@@ -74,22 +74,22 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private List<WebElement> partStatusListBoxOptions;
 
     @FindBy(xpath = "//span[contains(@class,'service-provider-dropdown')]//span[@class='k-input']")
-    public List<WebElement> partProviderField;
+    private List<WebElement> partProviderField;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'estimatedTimeArrival')]")
-    public List<WebElement> partEtaField;
+    private List<WebElement> partEtaField;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'quantityFormatted')]")
-    public List<WebElement> partQuantityField;
+    private List<WebElement> partQuantityField;
 
     @FindBy(xpath = "//span[contains(@data-bind, 'laborHours')]")
-    public List<WebElement> partLaborValue;
+    private List<WebElement> partLaborValue;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'corePriceFormatted')]")
-    public List<WebElement> partCorePriceField;
+    private List<WebElement> partCorePriceField;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'laborCreditFormatted')]")
-    public List<WebElement> partLaborCreditField;
+    private List<WebElement> partLaborCreditField;
 
     @FindBy(xpath = "//div[contains(@data-bind, 'isActionsButtonVisible')]")
     private List<WebElement> actionsButton;

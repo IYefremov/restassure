@@ -121,6 +121,10 @@ public class VNextBOROPageInteractions {
         Utils.moveToElement(searchResults);
     }
 
+    public static String getSearchFilterText() {
+        return Utils.getText(new VNextBOROWebPage().getSearchFilterText());
+    }
+
     public static List<String> getSearchResultsList() {
         return WaitUtilsWebDriver
                 .waitForVisibilityOfAllOptions(new VNextBOROWebPage().getSearchOptions())

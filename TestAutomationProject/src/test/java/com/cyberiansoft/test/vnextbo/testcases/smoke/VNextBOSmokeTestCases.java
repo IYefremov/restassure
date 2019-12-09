@@ -41,6 +41,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -68,57 +69,13 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         quickNotesPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOQuickNotesWebPage.class);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanMaximizeMinimizeMenu(String rowID, String description, JSONObject testData) {
-        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
+    @AfterMethod
+    public void refreshPage() {
 
-        Assert.assertTrue(VNextBOLeftMenuValidations.isMenuButtonDisplayed(), "The Menu button hasn't been displayed");
-        Assert.assertTrue(homePage.isLogoDisplayed(), "The logo hasn't been displayed");
-        Assert.assertTrue(homePage.isUserEmailDisplayed(), "The email hasn't been displayed");
-        Assert.assertTrue(homePage.isLogoutButtonDisplayed(), "The logout button hasn't been displayed");
-        Assert.assertTrue(homePage.isHelpButtonDisplayed(), "The help button hasn't been displayed");
-        Assert.assertTrue(homePage.isAccessClientPortalLinkDisplayed(),
-                "The access client portal link hasn't been displayed");
-        Assert.assertTrue(homePage.isAccessReconProBOLinkDisplayed(),
-                "The access ReconPro BO link hasn't been displayed");
-        Assert.assertTrue(homePage.isSupportForBOButtonDisplayed(),
-                "The support for BO button hasn't been displayed");
-        Assert.assertTrue(homePage.isSupportForMobileAppButtonDisplayed(),
-                "The support for Mobile App button hasn't been displayed");
-        Assert.assertTrue(homePage.isTermsAndConditionsLinkDisplayed(),
-                "The Terms And Conditions Link hasn't been displayed");
-        Assert.assertTrue(homePage.isPrivacyPolicyLinkDisplayed(),
-                "The Privacy Policy Link hasn't been displayed");
-        Assert.assertTrue(homePage.isIntercomDisplayed(),
-                "The Intercom Link hasn't been displayed");
-
-        VNextBOLeftMenuInteractions.expandMainMenu();
-        Assert.assertTrue(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been expanded");
-        VNextBOLeftMenuInteractions.collapseMainMenu();
-        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been collapsed");
+        Utils.refreshPage();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanApproveInspection(String rowID, String description, JSONObject testData) {
-        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
-
-        VNextBOLeftMenuInteractions.selectInspectionsMenu();
-
-        VNextBOInspectionsPageSteps.openAdvancedSearchForm();
-        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[0]);
-        VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
-        final String inspectionNumber = VNextBOBreadCrumbInteractions.getLastBreadCrumbText();
-        VNextBOInspectionsApprovalPageSteps.approveInspection(data.getNote());
-
-        VNextBOInspectionsPageSteps.openAdvancedSearchForm();
-        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionNumber);
-        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[1]);
-        VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
-        Assert.assertEquals(inspectionsWebPage.getFirstInspectionStatus(), data.getStatuses()[1],
-                "The status of inspection hasn't been changed from 'New' to 'Approved'");
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanAddNewParts(String rowID, String description, JSONObject testData) {
 
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
@@ -126,7 +83,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
         VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(true);
         VNextBOAddNewPartDialogSteps.setServiceField(data.getService());
@@ -141,7 +98,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanChangeStatusOfThePartToOrdered(String rowID, String description, JSONObject testData) {
 
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
@@ -149,12 +106,12 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.setStatusForPartByPartNumberInList(0, data.getStatus());
         VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(0, data.getStatus());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanDuplicateThePart(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
@@ -162,14 +119,14 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.duplicatePartByNumberInList(0);
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsCorrect(numberOfParts + 1);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyUserCanDeleteThePart(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
@@ -177,14 +134,14 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartItems()[0]));
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsCorrect(numberOfParts - 1);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyUserCanAddAndDeleteLabor(String rowID, String description, JSONObject testData) {
 
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
@@ -192,13 +149,13 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
         VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
         final int numberOfLaborBlocksBefore = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, data.getLabor());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumberIsCorrectForAllOrders(data.getWoNum());
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
         VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
         VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore + 1);
@@ -209,7 +166,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
     public void verifyUserCanChangeCompanyInfoAndSaveIt(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
@@ -269,7 +226,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         Assert.assertEquals(companyInfoWebPage.getEmailValue(), data.getEmail()[1]);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
     public void verifyUserCanAddDeleteAndEditQuickNotes(String rowID, String description, JSONObject testData) {
         VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
 
@@ -299,7 +256,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         quickNotesPage.deleteQuickNote(data.getQuickNotesDescriptionEdited());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
     public void verifyUserCanEditAddressFields(String rowID, String description, JSONObject testData) {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
 
@@ -325,7 +282,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.setMiscellaneousData(data.getNotes());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyUserCanDeleteDeviceFromPendingRegistrationsList(String rowID, String description, JSONObject testData) {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
 
@@ -334,10 +291,12 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOAddNewDeviceDialogSteps.setNewDeviceValuesAndSubmit(data);
         VNextBOPendingRegistrationsTabValidations.verifyDevicesTableContainsDevice(data.getNickname());
         VNextBOPendingRegistrationTabSteps.deletePendingRegistrationDeviceByUser(data.getNickname());
-        VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        if (VNextBOPendingRegistrationTabSteps.checkWhetherDevicesNotFoundMessageIsDisplayed())
+            VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        else VNextBOPendingRegistrationsTabValidations.verifyDevicesTableDoesNotContainDevice(data.getNickname());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanUncoverHideNewRegistrationCode(String rowID, String description, JSONObject testData) {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
 
@@ -350,7 +309,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOActiveDevicesTabValidations.verifyReplaceButtonIsDisplayedForDevice(data.getDeviceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void verifyUserCanEditDeviceSettings(String rowID, String description, JSONObject testData) {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
@@ -364,7 +323,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
     //todo bug 87314 change the serviceVendorPrice test data from 5 to 1 to test the boundary values after the bug fix
     //todo bug fixed, add advanced search options steps
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserCanChangeVendorPrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -385,7 +344,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 //                        .verifyServiceVendorPriceIsSet(serviceId, data.getService(), vendorPrice));
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
     public void verifyUserCanSeeAndCreateNotes(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -402,7 +361,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOROPageValidations.verifyNoteTextIsDisplayed(note);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
     public void verifyUserCanCheckInRO(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -416,7 +375,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setCheckOutOptionForPhase();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 14)
     public void verifyUserCanReportProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -428,5 +387,55 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBORODetailsPageSteps.setReportProblemForPhase(data.getPhase(), data.getProblemReason(), data.getProblemDescription());
         VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 15)
+    public void verifyUserCanMaximizeMinimizeMenu(String rowID, String description, JSONObject testData) {
+        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
+
+        Assert.assertTrue(VNextBOLeftMenuValidations.isMenuButtonDisplayed(), "The Menu button hasn't been displayed");
+        Assert.assertTrue(homePage.isLogoDisplayed(), "The logo hasn't been displayed");
+        Assert.assertTrue(homePage.isUserEmailDisplayed(), "The email hasn't been displayed");
+        Assert.assertTrue(homePage.isLogoutButtonDisplayed(), "The logout button hasn't been displayed");
+        Assert.assertTrue(homePage.isHelpButtonDisplayed(), "The help button hasn't been displayed");
+        Assert.assertTrue(homePage.isAccessClientPortalLinkDisplayed(),
+                "The access client portal link hasn't been displayed");
+        Assert.assertTrue(homePage.isAccessReconProBOLinkDisplayed(),
+                "The access ReconPro BO link hasn't been displayed");
+        Assert.assertTrue(homePage.isSupportForBOButtonDisplayed(),
+                "The support for BO button hasn't been displayed");
+        Assert.assertTrue(homePage.isSupportForMobileAppButtonDisplayed(),
+                "The support for Mobile App button hasn't been displayed");
+        Assert.assertTrue(homePage.isTermsAndConditionsLinkDisplayed(),
+                "The Terms And Conditions Link hasn't been displayed");
+        Assert.assertTrue(homePage.isPrivacyPolicyLinkDisplayed(),
+                "The Privacy Policy Link hasn't been displayed");
+        Assert.assertTrue(homePage.isIntercomDisplayed(),
+                "The Intercom Link hasn't been displayed");
+
+        VNextBOLeftMenuInteractions.expandMainMenu();
+        Assert.assertTrue(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been expanded");
+        VNextBOLeftMenuInteractions.collapseMainMenu();
+        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been collapsed");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 16)
+    public void verifyUserCanApproveInspection(String rowID, String description, JSONObject testData) {
+        VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
+
+        VNextBOLeftMenuInteractions.selectInspectionsMenu();
+
+        VNextBOInspectionsPageSteps.openAdvancedSearchForm();
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[0]);
+        VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
+        final String inspectionNumber = VNextBOBreadCrumbInteractions.getLastBreadCrumbText();
+        VNextBOInspectionsApprovalPageSteps.approveInspection(data.getNote());
+
+        VNextBOInspectionsPageSteps.openAdvancedSearchForm();
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionNumber);
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Status", data.getStatuses()[1]);
+        VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
+        Assert.assertEquals(inspectionsWebPage.getFirstInspectionStatus(), data.getStatuses()[1],
+                "The status of inspection hasn't been changed from 'New' to 'Approved'");
     }
 }

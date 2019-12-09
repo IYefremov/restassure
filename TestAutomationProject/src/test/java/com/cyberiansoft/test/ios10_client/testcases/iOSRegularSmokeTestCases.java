@@ -149,7 +149,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		clientsWebPage.searchClientByName(newCustomer.getFullName());
 		if (clientsWebPage.isClientPresentInTable(newCustomer.getFullName()))
 			clientsWebPage.archiveFirstClient();
-		
+
 		clientsWebPage.searchClientByName(editedCustomer.getFullName());
 		if (clientsWebPage.isClientPresentInTable(editedCustomer.getFullName()))
 			clientsWebPage.archiveFirstClient();
@@ -6025,7 +6025,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
 		RegularWorkOrdersSteps.saveWorkOrder();
-		
+
 		RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
 		RegularNavigationSteps.navigateToServicesScreen();
 		RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
@@ -6131,7 +6131,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
 		RegularServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
 		RegularServiceDetailsScreenSteps.saveServiceDetails();
-		
+
 		RegularNavigationSteps.navigateToOrderSummaryScreen();
 		RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
 		orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
@@ -6268,7 +6268,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		final String workOrderNumber = vehicleScreen.getWorkOrderNumber();
 		RegularNavigationSteps.navigateToServicesScreen();
-		
+
 		RegularServicesScreenSteps.switchToSelectedServices();
 		RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
 		BundleServiceData bundleServiceData = workOrderData.getBundleService();
@@ -6583,7 +6583,7 @@ public class iOSRegularSmokeTestCases extends ReconProBaseTestCase {
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 		RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_TYPE_FOR_CALC);
-		
+
 		RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 		RegularVehicleInfoScreenSteps.clickTech();
 		RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());

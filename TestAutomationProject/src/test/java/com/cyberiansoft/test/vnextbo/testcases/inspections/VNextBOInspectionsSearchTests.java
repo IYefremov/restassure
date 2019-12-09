@@ -232,9 +232,9 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     public void verifyUserCanSearchInspectionByCustomer(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        VNextBOInspectionsPageSteps.advancedSearchInspectionByCustomer("Amazing Nissan");
+        VNextBOInspectionsPageSteps.advancedSearchInspectionByCustomer("Best Customer");
         WaitUtilsWebDriver.waitForLoading();
-        Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Customer: Amazing Nissan"),
+        Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Customer: Best Customer"),
                 "Search option under Search field hasn't been correct");
         if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
         {
@@ -242,7 +242,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
         }
         else {
-            VNextBOInspectionsPageValidations.verifyCustomerNameIsCorrect("Amazing Nissan");
+            VNextBOInspectionsPageValidations.verifyCustomerNameIsCorrect("Best Customer");
         }
     }
 

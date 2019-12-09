@@ -6,17 +6,14 @@ import lombok.Getter;
 @Getter
 public class VNextBOPartsManagementSearchData extends VNextBOBaseData {
 
-    @JsonProperty("location")
-    private String location;
-
-    @JsonProperty("type")
-    private String type;
-
     @JsonProperty("customer")
     private String customer;
 
     @JsonProperty("phase")
     private String phase;
+
+    @JsonProperty("repairStatus")
+    private String repairStatus;
 
     @JsonProperty("woNum")
     private String woNum;
@@ -24,8 +21,14 @@ public class VNextBOPartsManagementSearchData extends VNextBOBaseData {
     @JsonProperty("stockNum")
     private String stockNum;
 
-    @JsonProperty("oemNum")
-    private String oemNum;
+    @JsonProperty("etaFromDate")
+    private String etaFromDate;
+
+    @JsonProperty("etaToDate")
+    private String etaToDate;
+
+    @JsonProperty("partNum")
+    private String partNum;
 
     @JsonProperty("vinNum")
     private String vinNum;
@@ -36,30 +39,15 @@ public class VNextBOPartsManagementSearchData extends VNextBOBaseData {
     @JsonProperty("notes")
     private String notes;
 
+    @JsonProperty("fromDate")
+    private String fromDate;
+
+    @JsonProperty("toDate")
+    private String toDate;
+
     @JsonProperty("orderedFrom")
     private String orderedFrom;
 
     @JsonProperty("searchName")
     private String searchName;
-
-    @JsonProperty("defaultValue")
-    private String defaultValue;
-
-    @JsonProperty("emptyPartsListMessage")
-    private String emptyPartsListMessage;
-
-    @JsonProperty("typeChanged")
-    private String typeChanged;
-
-    @JsonProperty("phaseChanged")
-    private String phaseChanged;
-
-    @JsonProperty("woTypeChanged")
-    private String woTypeChanged;
-
-    @JsonProperty("searchNameChanged")
-    private String searchNameChanged;
-
-    @JsonProperty("part")
-    private String part;
 }

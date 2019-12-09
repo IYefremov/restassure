@@ -26,6 +26,7 @@ public class VNextBOAdvancedSearchInvoiceFormInteractions {
         Utils.clickElement(new VNextBOAdvancedSearchInvoiceForm().getTimeFrameListBox());
         Utils.selectOptionInDropDown(new VNextBOAdvancedSearchInvoiceForm().getTimeFrameDropDown(),
                 new VNextBOAdvancedSearchInvoiceForm().getTimeFrameListBoxOptions(), timeFrame, true);
+        WaitUtilsWebDriver.waitABit(2000);
     }
 
     public static void setFromDate(String date) {

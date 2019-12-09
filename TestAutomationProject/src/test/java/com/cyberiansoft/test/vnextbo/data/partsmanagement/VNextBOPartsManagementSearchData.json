@@ -2,434 +2,469 @@
   "verifyUserCanSearchROUsingSearch": [
     {
       "rowID": "verifyUserCanSearchROUsingSearch.01",
-      "description": "Test Case 83750:User can search RO using \"Search\"",
+      "description": "Test Case 91107: User can search RO using \"Search\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91107"
+          "testCaseID": "91107",
+          "testCaseTitle": "User can search RO using \"Search\""
+        },
+        {
+          "testCaseID": "92567",
+          "testCaseTitle": "User can search order by \"RO\""
         }
-      ],
-      "location": "Best Location Automation",
-      "type": "123"
+      ]
     }
   ],
 
   "verifyUserCanDeleteSearchOptions": [
     {
       "rowID": "verifyUserCanDeleteSearchOptions.01",
-      "description": "Test Case 83751:User can delete search options",
+      "description": "Test Case 91108: User can delete search options",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91108"
+          "testCaseID": "91108",
+          "testCaseTitle": "User can delete search options"
         }
-      ],
-      "location": "Best Location Automation",
-      "type": "123"
+      ]
     }
   ],
 
   "verifyUserCanUseAdvancedSearchForROSearch": [
     {
       "rowID": "verifyUserCanUseAdvancedSearchForROSearch.01",
-      "description": "Test Case 83752:User can use Advanced Search to the search of RO",
+      "description": "Test Case 91109: User can use Advanced Search to the search of RO",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91109"
+          "testCaseID": "91109",
+          "testCaseTitle": "User can use Advanced Search to the search of RO"
         }
-      ],
-      "location": "Best Location Automation",
-      "type": "123"
+      ]
+    }
+  ],
+
+  "verifyUserCanCloseAdvancedSearchFormByClickingXIcon": [
+    {
+      "rowID": "verifyUserCanCloseAdvancedSearchFormByClickingXIcon.01",
+      "description": "Test Case 91124: User can close Advanced Search by the clicking on \"X-icon\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91124",
+          "testCaseTitle": "User can close Advanced Search by the clicking on \"X-icon\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanCloseAdvancedSearchFormByClickingOutside": [
+    {
+      "rowID": "verifyUserCanCloseAdvancedSearchFormByClickingOutside.01",
+      "description": "Test Case 91125: User can close Advanced Search by the clicking outside of the Search window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91125",
+          "testCaseTitle": "User can close Advanced Search by the clicking outside of the Search window"
+        }
+      ]
     }
   ],
 
   "verifyUserCanSearchROByCustomerUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByCustomerUsingAdvancedSearch.01",
-      "description": "Test Case 83754:User can search RO by \"Customer\" using Advanced Search",
+      "description": "Test Case 91110: User can search RO by \"Customer\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91110"
+          "testCaseID": "91110",
+          "testCaseTitle": "User can search RO by \"Customer\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "type": "mik",
-      "customer": "Mike's Techs"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByPhaseUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByPhaseUsingAdvancedSearch.01",
-      "description": "Test Case 83755:User can search RO by \"Phase\" using Advanced Search",
+      "description": "Test Case 91111: User can search RO by \"Phase\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91111"
+          "testCaseID": "91111",
+          "testCaseTitle": "User can search RO by \"Phase\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "phase": "Third"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByWONumUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByWONumUsingAdvancedSearch.01",
-      "description": "Test Case 83758:User can search RO by \"WO#\" using Advanced Search",
+      "description": "Test Case 91112: User can search RO by \"WO#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91112"
+          "testCaseID": "91112",
+          "testCaseTitle": "User can search RO by \"WO#\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-062-00068"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByWOTypeUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByWOTypeUsingAdvancedSearch.01",
-      "description": "Test Case 83759:User can search RO by \"WO Type\" using Advanced Search",
+      "description": "Test Case 91113: User can search RO by \"WO Type\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91113"
+          "testCaseID": "91113",
+          "testCaseTitle": "User can search RO by \"WO Type\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "woType": "Best"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByStockNumUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByStockNumUsingAdvancedSearch.01",
-      "description": "Test Case 83781:User can search RO by \"Stock#\" using Advanced Search",
+      "description": "Test Case 91114: User can search RO by \"Stock#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91114"
+          "testCaseID": "91114",
+          "testCaseTitle": "User can search RO by \"Stock#\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "stockNum": "Autotests"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByETAFromUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByETAFromUsingAdvancedSearch.01",
-      "description": "Test Case 83786:User can search RO by \"ETA From\" using Advanced Search",
+      "description": "Test Case 91115: User can search RO by \"ETA From\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91115"
+          "testCaseID": "91115",
+          "testCaseTitle": "User can search RO by \"ETA From\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByETAToUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByETAToUsingAdvancedSearch.01",
-      "description": "Test Case 83787:User can search RO by \"ETA To\" using Advanced Search",
+      "description": "Test Case 91116: User can search RO by \"ETA To\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91116"
+          "testCaseID": "91116",
+          "testCaseTitle": "User can search RO by \"ETA To\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByVINNumUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByVINNumUsingAdvancedSearch.01",
-      "description": "Test Case 83788:User can search RO by \"VIN\" using Advanced Search",
+      "description": "Test Case 91117: User can search RO by \"VIN\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91117"
+          "testCaseID": "91117",
+          "testCaseTitle": "User can search RO by \"VIN\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "vinNum": "11111"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByOEMNumUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByOEMNumUsingAdvancedSearch.01",
-      "description": "Test Case 83789:User can search RO by \"OEM#\" using Advanced Search",
+      "description": "Test Case 91118: User can search RO by \"Part#\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91118"
+          "testCaseID": "91118",
+          "testCaseTitle": "User can search RO by \"Part#\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "oemNum": "My OEM"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByNotesUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByNotesUsingAdvancedSearch.01",
-      "description": "Test Case 83790:User can search RO by \"Notes\" using Advanced Search",
+      "description": "Test Case 91119: User can search RO by \"Notes\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91119"
+          "testCaseID": "91119",
+          "testCaseTitle": "User can search RO by \"Notes\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "notes": "Autotest258",
-      "part": "New part service (Bumper)"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByOrderedFromUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByOrderedFromUsingAdvancedSearch.01",
-      "description": "Test Case 83796:User can search RO by \"Ordered From\" using Advanced Search",
+      "description": "Test Case 91122: User can search RO by \"Ordered From\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91122"
+          "testCaseID": "91122",
+          "testCaseTitle": "User can search RO by \"Ordered From\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation",
-      "orderedFrom": "Test Team"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByFromOptionUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByFromOptionUsingAdvancedSearch.01",
-      "description": "Test Case 83792:User can search RO by \"From\" using Advanced Search",
+      "description": "Test Case 91120: User can search RO by \"From\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91120"
+          "testCaseID": "91120",
+          "testCaseTitle": "User can search RO by \"From\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation"
+      ]
     }
   ],
 
   "verifyUserCanSearchROByToOptionUsingAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROByToOptionUsingAdvancedSearch.01",
-      "description": "Test Case 83793:User can search RO by \"To\" using Advanced Search",
+      "description": "Test Case 91121: User can search RO by \"To\" using Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91121"
+          "testCaseID": "91121",
+          "testCaseTitle": "User can search RO by \"To\" using Advanced Search"
         }
-      ],
-      "location": "Best Location Automation"
+      ]
     }
   ],
 
   "verifyUserCanFillAllFieldsOfAdvancedSearch": [
     {
       "rowID": "verifyUserCanFillAllFieldsOfAdvancedSearch.01",
-      "description": "Test Case 83803:User can fill all fields of Advanced Search",
+      "description": "Test Case 91123: User can fill all fields of Advanced Search",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91123"
+          "testCaseID": "91123",
+          "testCaseTitle": "User can fill all fields of Advanced Search"
         }
       ],
-      "location": "Best Location Automation",
-      "type": "mik",
       "customer": "Mike's Techs",
-      "phase": "All",
-      "woType": "All",
-      "woNum": "O-000-152292",
-      "stockNum": "eeqwe",
-      "vinNum": "32434234234234",
-      "oemNum": "sdsfdsfsd",
-      "notes": "aaaaaaaaa",
-      "orderedFrom": "01_TimeRep_team",
-      "searchName": "TestWO"
-    }
-  ],
-
-  "verifyAdvancedSearchDataIsNotClearedAfterClosingByClickingXIconAndOutsideSearchWindow": [
-    {
-      "rowID": "verifyAdvancedSearchDataIsNotClearedAfterClosingByClickingXIconAndOutsideSearchWindow.01",
-      "description": "Test Case 83808:User can close Advanced Search by the clicking on \"X-icon\". Test Case 83811:User can close Advanced Search by the clicking outside of the Search window",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91124"
-        },
-        {
-          "testCaseID": "91125"
-        }
-      ],
-      "location": "Best Location Automation",
-      "type": "mik",
-      "customer": "Mike's Techs",
-      "phase": "All",
-      "woType": "All",
-      "woNum": "O-000-152292",
-      "stockNum": "eeqwe",
-      "vinNum": "32434234234234",
-      "oemNum": "sdsfdsfsd",
-      "notes": "aaaaaaaaa",
-      "orderedFrom": "01_TimeRep_team",
-      "searchName": "TestWO"
+      "phase": "PDR Station",
+      "woType": "Best",
+      "repairStatus": "In Progress - All",
+      "woNum": "O-062-00068",
+      "stockNum": "Autotests",
+      "etaFromDate": "10/30/2018",
+      "etaToDate": "10/30/2019",
+      "vinNum": "11111",
+      "partNum": "My OEM",
+      "notes": "Autotest",
+      "fromDate": "12/14/2016",
+      "toDate": "12/14/2018",
+      "orderedFrom": "Test Team",
+      "searchName": "Test91123"
     }
   ],
 
   "verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog": [
     {
       "rowID": "verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog.01",
-      "description": "Test Case 83812:User can clear all entered values",
+      "description": "Test Case 91126: User can clear all entered values",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91126"
+          "testCaseID": "91126",
+          "testCaseTitle": "User can clear all entered values"
         }
       ],
-      "location": "Best Location Automation",
-      "type": "mik",
-      "customer": "Mike's Techs",
+      "customer": "",
       "phase": "All",
       "woType": "All",
-      "woNum": "O-000-152292",
-      "stockNum": "eeqwe",
-      "vinNum": "32434234234234",
-      "oemNum": "sdsfdsfsd",
-      "notes": "aaaaaaaaa",
-      "orderedFrom": "01_TimeRep_team",
-      "searchName": "TestWO",
-      "defaultValue": ""
-    }
-  ],
-
-  "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog": [
-    {
-      "rowID": "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog.01",
-      "description": "Test Case 83815:User can Save options of \"Advanced Search\".",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91127"
-        }
-      ],
-      "location": "Best Location Automation",
-      "type": "mik",
-      "customer": "Mike's Techs",
-      "phase": "All",
-      "woType": "All",
-      "woNum": "O-000-152292",
-      "stockNum": "eeqwe",
-      "vinNum": "32434234234234",
-      "oemNum": "sdsfdsfsd",
-      "notes": "aaaaaaaaa",
-      "orderedFrom": "01_TimeRep_team",
-      "searchName": "TestWO",
-      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+      "woNum": "",
+      "repairStatus": "All",
+      "stockNum": "",
+      "etaFromDate": "",
+      "etaToDate": "",
+      "vinNum": "",
+      "partNum": "",
+      "notes": "",
+      "fromDate": "",
+      "toDate": "",
+      "orderedFrom": "",
+      "searchName": ""
     }
   ],
 
   "verifyUserCanSearchROUsingOptionsOfAdvancedSearch": [
     {
       "rowID": "verifyUserCanSearchROUsingOptionsOfAdvancedSearch.01",
-      "description": "Test Case 83816:User can search RO using options of the \"Advanced Search\"",
+      "description": "Test Case 91128: User can search RO using options of the \"Advanced Search\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91128"
+          "testCaseID": "91128",
+          "testCaseTitle": "User can search RO using options of the \"Advanced Search\""
         }
       ],
-      "location": "Best Location Automation",
-      "type": "mik",
       "customer": "Mike's Techs",
       "phase": "All",
       "woType": "All",
       "woNum": "O-000-152292",
+      "repairStatus": "All",
       "stockNum": "eeqwe",
+      "etaFromDate": "01/25/2019",
+      "etaToDate": "01/25/2019",
       "vinNum": "32434234234234",
-      "oemNum": "sdsfdsfsd",
+      "partNum": "sdsfdsfsd",
       "notes": "aaaaaaaaa",
+      "fromDate": "01/26/2019",
+      "toDate": "01/26/2019",
       "orderedFrom": "01_TimeRep_team",
-      "searchName": "TestWO",
-      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+      "searchName": "Test91128"
     }
   ],
 
-  "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch": [
+  "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog": [
     {
-      "rowID": "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch.01",
-      "description": "Test Case 83817:User can search RO using saved options of the \"Advanced Search\"",
+      "rowID": "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog.01",
+      "description": "Test Case 91127: User can Save options of \"Advanced Search\".",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91129"
+          "testCaseID": "91127",
+          "testCaseTitle": "User can Save options of \"Advanced Search\"."
         }
       ],
-      "location": "Best Location Automation",
-      "type": "",
-      "customer": "",
-      "phase": "All",
-      "woType": "All",
-      "woNum": "O-000-152292",
-      "stockNum": "",
-      "vinNum": "",
-      "oemNum": "",
-      "notes": "",
-      "orderedFrom": "",
-      "searchName": "TestWO",
-      "defaultValue": "",
-      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+      "customer": "Mike's Techs",
+      "phase": "PDR Station",
+      "woType": "Best",
+      "repairStatus": "In Progress - All",
+      "woNum": "O-062-00068",
+      "stockNum": "Autotests",
+      "etaFromDate": "10/30/2018",
+      "etaToDate": "10/30/2019",
+      "vinNum": "11111",
+      "partNum": "My OEM",
+      "notes": "Autotest",
+      "fromDate": "12/14/2016",
+      "toDate": "12/14/2018",
+      "orderedFrom": "Test Team",
+      "searchName": "Test91127"
     }
   ],
 
   "verifyUserCanChangeValuesOfTheSavedAdvancedSearch": [
     {
       "rowID": "verifyUserCanChangeValuesOfTheSavedAdvancedSearch.01",
-      "description": "Test Case 83823:User can change values of the saved \"Advanced Search\"",
+      "description": "Test Case 91130: User can change values of the saved \"Advanced Search\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91130"
+          "testCaseID": "91130",
+          "testCaseTitle": "User can change values of the saved \"Advanced Search\""
         }
       ],
-      "location": "Best Location Automation",
-      "type": "mik",
-      "customer": "Mike's Techs",
-      "phase": "All",
-      "woType": "All",
+      "customer": "Mike boll",
+      "phase": "Third",
+      "woType": "_no_sharing",
+      "repairStatus": "In Progress - Active",
       "woNum": "O-000-152292",
       "stockNum": "eeqwe",
+      "etaFromDate": "05/30/2019",
+      "etaToDate": "06/01/2019",
       "vinNum": "32434234234234",
-      "oemNum": "sdsfdsfsd",
+      "partNum": "sdsfdsfsd",
       "notes": "aaaaaaaaa",
+      "fromDate": "05/01/2019",
+      "toDate": "06/01/2019",
       "orderedFrom": "01_TimeRep_team",
-      "searchName": "TestWO",
-      "typeChanged": "mike",
-      "phaseChanged": "First",
-      "woTypeChanged": "_no_sharing",
-      "searchNameChanged": "222",
-      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+      "searchName": "Test91130"
     }
   ],
 
-  "verifyUserCanClickSavedAdvancedSearchModalDialogDeleteButtons": [
+  "verifyUserCanCancelSavedSearchDeletingWithXIcon": [
     {
-      "rowID": "verifyUserCanClickSavedAdvancedSearchModalDialogDeleteButtons.01",
-      "description": "Test Case 83825:User can click Delete but not deleted saved \"Advances Search\" clicking the \"X-icon\". Test Case 83826:User can click Delete but not deleted saved \"Advances Search\" clicking \"No\". Test Case 83827:User can Delete saved \"Advances Search\"",
+      "rowID": "verifyUserCanCancelSavedSearchDeletingWithXIcon.01",
+      "description": "Test Case 91131: User can click Delete but not deleted saved \"Advances Search\" clicking the \"X-icon\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91131"
-        },
-        {
-          "testCaseID": "91132"
-        },
-        {
-          "testCaseID": "91133"
+          "testCaseID": "91131",
+          "testCaseTitle": "User can click Delete but not deleted saved \"Advances Search\" clicking the \"X-icon\""
         }
-      ],
-      "location": "Best Location Automation",
-      "type": "mik",
-      "customer": "Mike's Techs",
-      "phase": "All",
-      "woType": "All",
-      "woNum": "O-000-152292",
-      "stockNum": "eeqwe",
-      "vinNum": "32434234234234",
-      "oemNum": "sdsfdsfsd",
-      "notes": "aaaaaaaaa",
-      "orderedFrom": "01_TimeRep_team",
-      "searchName": "TestWO",
-      "emptyPartsListMessage": "Click here to learn how to create your first work order"
+      ]
+    }
+  ],
+
+  "verifyUserCanCancelSavedSearchDeletingWithNoButton": [
+    {
+      "rowID": "verifyUserCanCancelSavedSearchDeletingWithNoButton.01",
+      "description": "Test Case 91132: User can click Delete but not deleted saved \"Advances Search\" clicking \"No\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91132",
+          "testCaseTitle": "User can click Delete but not deleted saved \"Advances Search\" clicking \"No\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanDeleteSavedAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanDeleteSavedAdvancedSearch.01",
+      "description": "Test Case 91133: User can Delete saved \"Advances Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91133",
+          "testCaseTitle": "User can Delete saved \"Advances Search\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch.01",
+      "description": "Test Case 91129: User can search RO using saved options of the \"Advanced Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91129",
+          "testCaseTitle": "User can search RO using saved options of the \"Advanced Search\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByCorePrice": [
+    {
+      "rowID": "verifyUserCanSearchROByCorePrice.01",
+      "description": "Test Case 93081: User can search RO by \"Core Price\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93081",
+          "testCaseTitle": "User can search RO by \"Core Price\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByLaborCredit": [
+    {
+      "rowID": "verifyUserCanSearchROByLaborCredit.01",
+      "description": "Test Case 93082: User can search RO by \"Labor Credit\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93082",
+          "testCaseTitle": "User can search RO by \"Labor Credit\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchROByCoreStatus": [
+    {
+      "rowID": "verifyUserCanSearchROByCoreStatus.01",
+      "description": "Test Case 93083: User can search RO by \"Core Status\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93083",
+          "testCaseTitle": "User can search RO by \"Core Status\""
+        }
+      ]
     }
   ]
 }

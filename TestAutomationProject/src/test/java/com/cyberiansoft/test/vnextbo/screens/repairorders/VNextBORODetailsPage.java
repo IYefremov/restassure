@@ -154,7 +154,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@aria-hidden='false']//span[@data-automation-label='reconmonitor-details-service-status-item']")
 	private List<WebElement> serviceStatusListBoxOptions;
 
-	@FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/span")
+	@FindBy(xpath = "//div[contains(@class, 'innerTable')]//div[@class='clmn_3_1']/input")
 	private List<WebElement> vendorPricesList;
 
 	@FindBy(xpath = "//tbody[contains(@data-template, 'part-list') and not (contains(@data-bind, 'Cached'))]/tr")
@@ -172,8 +172,10 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//ul[@class='k-list k-reset' and @aria-hidden='false']/li")
 	private List<WebElement> listBoxOptions;
 
-	@FindBy(xpath = "//span[@data-automation-label='reconmonitor-details-phase-status-item']/..")
+	@FindBy(xpath = "//ul[@aria-hidden='false']//span")
 	private List<WebElement> phaseStatusListBoxOptions;
+
+
 
 	@FindBy(xpath = "//tr[@class='serviceRow']//span[contains(@class, 'service-status')]//span[@class='k-input']")
 	private List<WebElement> partsPhaseStatusDropDowns;
@@ -182,6 +184,10 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	public VNextBORODetailsPage() {
 		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+	}
+
+	public WebElement getPhaseStatusOptionByName(String phaseStatus) {
+		return driver.findElement(By.xpath("//ul[@aria-hidden='false']//span[text()='" + phaseStatus + "']"));
 	}
 
 	public WebElement getPhaseByName(String phase) {
@@ -370,7 +376,6 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     public WebElement clickActionsIcon(String serviceId) {
         final WebElement actionsIcon = getActionIconForServiceId(serviceId);
         Utils.clickWithActions(actionsIcon);
-        WaitUtilsWebDriver.waitForVisibility(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
         return actionsIcon;
     }
 
@@ -384,8 +389,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     }
 
     public WebElement getActionsTriggerForPhase(String phase) {
-        return driver.findElement(By.xpath("//div[@data-name='" + phase
-                + "']//div[@class='clmn_7']/div[contains(@data-bind, 'actions')]"));
+        return driver.findElement(By.xpath("//div[@data-name='" + phase + "']//div[contains(@class, 'order-service-menu')]/i[contains(@class, 'icon-list')]"));
     }
 
     public WebElement getServiceReportProblemOption(String serviceId) {

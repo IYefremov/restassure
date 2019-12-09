@@ -1,0 +1,184 @@
+{
+
+  "testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice": [
+    {
+      "rowID": "testInvoicesVerifyThatItIsPosibleToAddPaymentFromDeviceForDraftInvoice.01",
+      "description": "Test Case 27717:Invoices: Verify that it is posible to add payment from device for draft invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88499"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartOption": "PDR",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Test service zayats"
+              },
+              {
+                "serviceName": "Wheel"
+              }
+            ]
+          }
+        },
+        "services": [
+          {
+            "serviceName": "SR_S4_Bl_I1_M"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "3"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
+    }
+  ],
+  "testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice": [
+    {
+      "rowID": "testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderMyInvoice.01",
+      "description": "Test Case 27739:Invoices: Verify that payment is send to BO when PO# is changed under My invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88500"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartOption": "PDR",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Test service zayats"
+              },
+              {
+                "serviceName": "Wheel"
+              }
+            ]
+          }
+        },
+        "services": [
+          {
+            "serviceName": "SR_S4_Bl_I1_M"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "3"
+      },
+      "invoiceData": {
+        "poNumber": "123po",
+        "newPoNumber": "New test PO"
+      }
+    }
+  ],
+  "testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice": [
+    {
+      "rowID": "testInvoicesVerifyThatPaymentIsSendToBOWhenPONumberIsChangedUnderTeamInvoice.01",
+      "description": "Test Case 27741:Invoices: Verify that payment is send to BO when PO# is changed under Team invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88501"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartOption": "PDR",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Test service zayats"
+              },
+              {
+                "serviceName": "Wheel"
+              }
+            ]
+          }
+        },
+        "services": [
+          {
+            "serviceName": "SR_S4_Bl_I1_M"
+          },
+          {
+            "serviceName": "Test service zayats"
+          }
+        ],
+        "workOrderTotalSale": "3"
+      },
+      "invoiceData": {
+        "poNumber": "123po",
+        "newPoNumber": "New test PO from Team"
+      }
+    }
+  ],
+  "testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamAndMyInvoices": [
+    {
+      "rowID": "testInvoicesVerifyThatMessageInvoicPONumberShouldntBeEmptyIsShownForTeamAndMyInvoices.01",
+      "description": "Test Case 30509:Invoices: Verify that message 'Invoice PO# shouldn't be empty' is shown for Team Invoices, Test Case 30510:Invoices: Verify that message 'Invoice PO# shouldn't be empty' is shown for MY Invoices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88691"
+        },
+        {
+          "testCaseID": "88690"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "2A4RR4DE2AR286008"
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartOption": "PDR",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              }
+            ]
+          }
+        },
+        "workOrderTotalSale": "3"
+      },
+      "invoiceData": {
+        "poNumber": "123po",
+        "newPoNumber": ""
+      }
+    }
+  ]
+
+}

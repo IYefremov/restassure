@@ -12,6 +12,8 @@ import org.jtwig.JtwigTemplate;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class TPIntegrationService {
 
@@ -20,7 +22,8 @@ public class TPIntegrationService {
     private static final String TESTCASE_RUN_ID_ROUTE_PARAM = "testcaserun-id";
     private static final String TESTCASE_ID_ROUTE_PARAM = "testcase-id";
     private static final String TARGET_PROCESS_API_URL = "https://cyb.tpondemand.com/api/v1/";
-    private static final String TARGET_PROCESS_CREATE_TESTPLAN_RUN_PARAM = TARGET_PROCESS_API_URL + "TestPlanRuns?resultFormat=json&resultInclude=[Id,TestCaseRuns[Id,TestCase]]&access_token={access-token}";
+    private static final String TARGET_PROCESS_CREATE_TESTPLAN_RUN_PARAM = TARGET_PROCESS_API_URL + "TestPlanRuns?resultFormat=json&resultInclude=[Id,TestCaseRuns[Id,TestCase],TestPlanRuns[Id]]&access_token={access-token}";
+    private static final String TARGET_PROCESS_GET_TESTPLAN_RUN__INFO_PARAM = TARGET_PROCESS_API_URL + "TestPlanRuns/{testcaserun-id}?resultFormat=json&resultInclude=[Id,TestCaseRuns[Id,TestCase],TestPlanRuns[Id]]&access_token={access-token}";
     private static final String TARGET_PROCESS_SET_TESTCASE_STATUS_PARAM = TARGET_PROCESS_API_URL + "TestCaseRuns/{testcaserun-id}?access_token={access-token}";
     private static final String TARGET_PROCESS_SET_TESTCASE_AUTOMATED_FIELD = TARGET_PROCESS_API_URL + "TestCases/{testcase-id}?access_token={access-token}";
 
@@ -45,6 +48,7 @@ public class TPIntegrationService {
     }
 
     public TestPlanRunDTO createTestPlanRun(String testplan_Id) throws UnirestException, IOException {
+        Unirest.setTimeouts(10000000, 10000000);
         String msgs = Unirest.post(TARGET_PROCESS_CREATE_TESTPLAN_RUN_PARAM)
                 .routeParam(ACCESS_TOKEN_ROUTE_PARAM, "Mzc6bzRIZXc0VW1acktsNlVNeDYwUVNDUnVod2hsY250b1ljVXBZTTZOUUdsTT0=")
                 .header("accept", POST_REQUEST_CONTENT_TYPE)
@@ -57,18 +61,48 @@ public class TPIntegrationService {
         return MAPPER.readValue(msgs, TestPlanRunDTO.class);
     }
 
-    public TestPlanRunDTO setTestCaseAutomatedField(String testCaseId) throws UnirestException, IOException {
-        String msgs = Unirest.post(TARGET_PROCESS_SET_TESTCASE_AUTOMATED_FIELD)
-                .routeParam(TESTCASE_ID_ROUTE_PARAM, testCaseId)
+    public TestPlanRunDTO getTestPlanRunInfo(String testPlanRunId) throws IOException, UnirestException {
+        String msgs = Unirest.get(TARGET_PROCESS_GET_TESTPLAN_RUN__INFO_PARAM)
+                .routeParam(TESTCASE_RUN_ID_ROUTE_PARAM, testPlanRunId)
                 .routeParam(ACCESS_TOKEN_ROUTE_PARAM, "Mzc6bzRIZXc0VW1acktsNlVNeDYwUVNDUnVod2hsY250b1ljVXBZTTZOUUdsTT0=")
                 .header("accept", POST_REQUEST_CONTENT_TYPE)
                 .header("Content-Type", POST_REQUEST_CONTENT_TYPE)
-                .body(getSetAutomatedFieldBodyRequest())
                 .asJson()
                 .getBody()
                 .getObject()
                 .toString();
         return MAPPER.readValue(msgs, TestPlanRunDTO.class);
+    }
+
+    public void setTestCaseAutomatedField(String testCaseId) throws UnirestException, IOException {
+        Unirest.post(TARGET_PROCESS_SET_TESTCASE_AUTOMATED_FIELD)
+                .routeParam(TESTCASE_ID_ROUTE_PARAM, testCaseId)
+                .routeParam(ACCESS_TOKEN_ROUTE_PARAM, "Mzc6bzRIZXc0VW1acktsNlVNeDYwUVNDUnVod2hsY250b1ljVXBZTTZOUUdsTT0=")
+                .header("accept", POST_REQUEST_CONTENT_TYPE)
+                .header("Content-Type", POST_REQUEST_CONTENT_TYPE)
+                .body(getSetAutomatedFieldBodyRequest())
+                .asJson();
+    }
+
+    public Map<String, String> testCaseToTestRunMap(TestPlanRunDTO testPlanRunDTO) {
+        Map<String, String> testCaseToTestRunMap = new HashMap<>();
+        testPlanRunDTO.getTestCaseRuns().getItems().forEach(testCaseRunDTO -> {
+            testCaseToTestRunMap.put(String.valueOf(testCaseRunDTO.getTestCase().getId()), String.valueOf(testCaseRunDTO.getId()));
+        });
+        return testCaseToTestRunMap;
+    }
+
+    public Map<String, String> testCaseToTestRunMapRecursevley(TestPlanRunDTO testPlanRunDTO) {
+        Map<String, String> testCaseToTestRunMap = new HashMap<>();
+        testPlanRunDTO.getTestCaseRuns().getItems().forEach(testCaseRunDTO -> testCaseToTestRunMap.put(String.valueOf(testCaseRunDTO.getTestCase().getId()), String.valueOf(testCaseRunDTO.getId())));
+        testPlanRunDTO.getTestPlanRuns().getItems().forEach(testPlanRun-> {
+            try {
+                testCaseToTestRunMap.putAll(this.testCaseToTestRunMapRecursevley(this.getTestPlanRunInfo(String.valueOf(testPlanRun.getId()))));
+            } catch (IOException | UnirestException e) {
+                e.printStackTrace();
+            }
+        });
+        return testCaseToTestRunMap;
     }
 
     private String getCreateTestPlanRunBodyRequest(String testplan_Id) {
@@ -91,6 +125,3 @@ public class TPIntegrationService {
         return template.render(model);
     }
 }
-
-
-

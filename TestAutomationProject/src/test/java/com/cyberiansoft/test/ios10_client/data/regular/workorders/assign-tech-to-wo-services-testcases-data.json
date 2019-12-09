@@ -1,0 +1,618 @@
+{
+
+  "testWOVerifyThatTechSplitsIsSavedInPriceMatrices": [
+    {
+      "rowID": "testWOVerifyThatTechSplitsIsSavedInPriceMatrices.01",
+      "description": "Test Case 33115:WO: Verify that Tech splits is saved in price matrices",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88470"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A3",
+            "screenIndex": 1
+          }
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP2 zayats",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "MEDIUM",
+            "vehiclePartPrice": "100",
+            "vehiclePartAdditionalService": {
+              "serviceName": "Dye"
+            },
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats"
+            }
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount": [
+    {
+      "rowID": "testWOVerifyPriceMatrixItemDoesntHaveAdditionalServicesItsMainServicesTechSplitAmountIsEqualToMainServicesAmount.01",
+      "description": "Test Case 68296:WO: Verify price matrix item doesn't have additional services - its main service's tech split amount is equal to main service's amount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88480"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Simple 20%",
+            "technicianPercentageValue": "100.00"
+          }
+        },
+        "matrixService": {
+          "matrixServiceName": "Calc_Price_Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Back Glass",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartPrice": "100.00"
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount": [
+    {
+      "rowID": "testWOVerifyPriceMatrixItemHasMoneyAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmount.01",
+      "description": "Test Case 68297:WO: Verify price matrix item has money additional service - its main service's tech split amount is equal to main service's amount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88481"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "matrixService": {
+          "matrixServiceName": "Calc_Price_Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Back Glass",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartPrice": "100.00",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%",
+              "technicianPercentageValue": "%100.00",
+              "technicianPriceValue": "$100.00"
+            },
+            "vehiclePartAdditionalService": {
+              "serviceName": "Calc_Money_PP_Panel",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Employee",
+                "technicianLastName": "Simple 20%",
+                "technicianPercentageValue": "%100.00",
+                "technicianPriceValue": "$100.00"
+              }
+            },
+            "vehiclePartTotalPrice": "$110.00"
+          }
+        },
+        "workOrderTotalSale": "5",
+        "workOrderPrice": "$110.00"
+      }
+    }
+  ],
+  "testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage": [
+    {
+      "rowID": "testWOVerifyPriceMatrixItemHasPercentageAdditionalServiceItsMainServicesTechSplitAmountIsEqualToMainServicesAmountPlusAdditionalPercentage.01",
+      "description": "Test Case 68298:WO: price matrix item has percentage additional service - its main service's tech split amount is equal to main service's amount + additional percentage service's amount",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88482"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "matrixService": {
+          "matrixServiceName": "Calc_Price_Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Back Glass",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartPrice": "100.00",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%",
+              "technicianPercentageValue": "%100.00",
+              "technicianPriceValue": "$100.00"
+            },
+            "vehiclePartAdditionalService": {
+              "serviceName": "Calc_Discount",
+              "servicePrice": "-20",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Employee",
+                "technicianLastName": "Simple 20%",
+                "technicianPercentageValue": "%100.00",
+                "technicianPriceValue": "$80.00"
+              }
+            },
+            "vehiclePartTotalPrice": "$80.00"
+          }
+        },
+        "workOrderTotalSale": "5",
+        "workOrderPrice": "$80.00"
+      }
+    }
+  ],
+  "testWOVerifyIfServiceHasDefaultTechnicianAndItsAmountIs0ThenDefaultTechnicianShouldBeAssignedToTheService_NotTechnicianSplitAtWorkOrderLevel": [
+    {
+      "rowID": "testWOVerifyIfServiceHasDefaultTechnicianAndItsAmountIs0ThenDefaultTechnicianShouldBeAssignedToTheService_NotTechnicianSplitAtWorkOrderLevel.01",
+      "description": "Test Case 81676:WO: if service has default technician and its amount is 0 then default technician should be assigned to the service (not technician split at work order level)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88484"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Ded",
+            "technicianLastName": "Talash"
+          }
+        },
+        "service": {
+          "serviceName": "Service_with_default_Tech",
+          "servicePrice": "0",
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          },
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Simple 20%",
+            "isSelected": true
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0": [
+    {
+      "rowID": "testWOVerifyThatCorrectTechSplitAmountIsShownForMatrixServiceWhenChangePriceTo0.01",
+      "description": "Test Case 81677:WO: Verify that correct tech split amount is shown for matrix service when change price to 0",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88485"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "matrixService": {
+          "matrixServiceName": "Test service price matrix",
+          "hailMatrixName": "Price Matrix Zayats",
+          "vehiclePartData": {
+            "vehiclePartName": "VP1 zayats",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "MEDIUM",
+            "vehiclePartPrice": "5",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%"
+            }
+          }
+        },
+        "workOrderTotalSale": "5",
+        "workOrderPrice": "$80.00"
+      }
+    }
+  ],
+  "testWOVerifyThatTechSplitAmountIsShownCorrectUnderMonitorForServiceWithAdjustments": [
+    {
+      "rowID": "testWOVerifyThatTechSplitAmountIsShownCorrectUnderMonitorForServiceWithAdjustments.01",
+      "description": "Test Case 81699:WO: Monitor - Verify that tech split amount is shown correct under monitor for service with Adjustments",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88486"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "service": {
+          "serviceName": "SR_S1_Money",
+          "servicePrice": "2000",
+          "servicePrice2": "$1,600.00 x 1.00",
+          "vehiclePart": {
+            "vehiclePartName": "Hood"
+          },
+          "serviceAdjustment": {
+            "adjustmentData": {
+              "adjustmentName": "OWO_Discount"
+            }
+          },
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats",
+            "technicianPercentageValue": "%100.00",
+            "technicianPriceValue": "$1,600.00"
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyThatRequiredServicesHasCorrectTech": [
+    {
+      "rowID": "testVerifyThatRequiredServicesHasCorrectTech.01",
+      "description": "Test Case 82189:WO: Verify that required services has correct tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88487"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats"
+          },
+          "newTechnicians": [
+            {
+              "technicianFirstName": "Inspector",
+              "technicianLastName": "1",
+              "isSelected": true
+            },
+            {
+              "technicianFirstName": "Man-Insp",
+              "technicianLastName": "1",
+              "isSelected": true
+            }
+          ]
+        },
+        "bundleService": {
+          "bundleServiceName": "Calc_Bundle",
+          "services": [
+            {
+              "serviceName": "SR_S6_BI_I3_Money",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Oksana",
+                "technicianLastName": "Zayats"
+              }
+            },
+            {
+              "serviceName": "Oksi_Service_PP_Labor",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Oksana",
+                "technicianLastName": "Zayats"
+              }
+            }
+          ]
+        },
+        "service": {
+          "serviceName": "Calc_Money_PP_Vehicle",
+          "vehiclePart": {
+            "vehiclePartName": "Hood"
+          }
+        },
+        "matrixService": {
+          "matrixServiceName": "Calc_Price_Matrix",
+          "hailMatrixName": "Calc_Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Back Glass",
+            "vehiclePartSize": "CENT",
+            "vehiclePartSeverity": "LIGHT"
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyThatRequiredBundleItemsHasCorrectDefTech": [
+    {
+      "rowID": "testVerifyThatRequiredBundleItemsHasCorrectDefTech.01",
+      "description": "Test Case 82190:WO: Verify that required bundle items has correct def tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88488"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats"
+          },
+          "newTechnicians": [
+            {
+              "technicianFirstName": "Inspector",
+              "technicianLastName": "1"
+            },
+            {
+              "technicianFirstName": "Man-Insp",
+              "technicianLastName": "1"
+            }
+          ]
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle_with_def_tech_required_service",
+          "bundleServiceAmount": "25",
+          "services": [
+            {
+              "serviceName": "Oksi_Service_PP_Vehicle",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Oksana",
+                "technicianLastName": "Zayats"
+              },
+              "serviceNewTechnicians": [
+                {
+                  "technicianFirstName": "Inspector",
+                  "technicianLastName": "1"
+                },
+                {
+                  "technicianFirstName": "Man-Insp",
+                  "technicianLastName": "1"
+                }
+              ],
+              "vehiclePart": {
+                "vehiclePartName": "Hood"
+              }
+            },
+            {
+              "serviceName": "Service_with_default_Tech_oksi",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Oksi",
+                "technicianLastName": "Employee"
+              }
+            },
+            {
+              "serviceName": "Service_with_default_Tech",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Employee",
+                "technicianLastName": "Simple 20%"
+              },
+              "vehiclePart": {
+                "vehiclePartName": "Grill"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testVerifyThatRequiredBundleItemsAndServiceWithExpensesAnd0PriceHasCorrectDefTechAfterEditWO": [
+    {
+      "rowID": "testVerifyThatRequiredBundleItemsAndServiceWithExpensesAnd0PriceHasCorrectDefTechAfterEditWO.01",
+      "description": "Test Case 82196:WO: Verify that required bundle items and service with expenses and 0 price has correct def tech after edit WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88489"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats"
+          },
+          "newTechnicians": [
+            {
+              "technicianFirstName": "Inspector",
+              "technicianLastName": "1",
+              "isSelected": true
+            },
+            {
+              "technicianFirstName": "Man-Insp",
+              "technicianLastName": "1",
+              "isSelected": true
+            }
+          ]
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle_with_def_tech_required_service",
+          "bundleServiceAmount": "25",
+          "services": [
+            {
+              "serviceName": "Oksi_Service_PP_Vehicle",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Oksana",
+                "technicianLastName": "Zayats"
+              },
+              "serviceNewTechnicians": [
+                {
+                  "technicianFirstName": "Inspector",
+                  "technicianLastName": "1",
+                  "isSelected": true
+                },
+                {
+                  "technicianFirstName": "Man-Insp",
+                  "technicianLastName": "1",
+                  "isSelected": true
+                }
+              ],
+              "vehiclePart": {
+                "vehiclePartName": "Hood"
+              }
+            },
+            {
+              "serviceName": "Service_with_default_Tech_oksi",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Oksi",
+                "technicianLastName": "Employee"
+              }
+            },
+            {
+              "serviceName": "Service_with_default_Tech",
+              "serviceDefaultTechnician": {
+                "technicianFirstName": "Employee",
+                "technicianLastName": "Simple 20%"
+              },
+              "vehiclePart": {
+                "vehiclePartName": "Grill"
+              }
+            }
+          ]
+        },
+        "service": {
+          "serviceName": "Money_Service_with_expences",
+          "servicePrice": "0"
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyThatSelectedServicesHaveCorrectTechSplitWhenChangeIsDuringCreatingWO": [
+    {
+      "rowID": "testVerifyThatSelectedServicesHaveCorrectTechSplitWhenChangeIsDuringCreatingWO.01",
+      "description": "Test Case 82197:WO - Verify that selected services has correct tech split when change is during creating WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88490"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats"
+          },
+          "newTechnicians": [
+            {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich",
+              "isSelected": true
+            },
+            {
+              "technicianFirstName": "Nikolay",
+              "technicianLastName": "Lomeko",
+              "isSelected": true
+            }
+          ]
+        },
+        "matrixService": {
+          "matrixServiceName": "Matrix Service",
+          "hailMatrixName": "Test Matrix Labor",
+          "vehiclePartData": {
+            "vehiclePartName": "Back Glass",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartTime": "2",
+            "vehiclePartAdditionalService": {
+              "serviceName": "Oksi_Service_PP_Vehicle"
+            }
+          }
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "bundleServiceAmount": "70",
+          "service": {
+            "serviceName": "Wheel"
+          }
+        },
+        "services": [
+          {
+            "serviceName": "Turbo Service"
+          },
+          {
+            "serviceName": "Vovan Service"
+          }
+        ],
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyIfServicePriceIs0AndHasDefTechAssignToServiceDefTech": [
+    {
+      "rowID": "testVerifyIfServicePriceIs0AndHasDefTechAssignToServiceDefTech.01",
+      "description": "Test Case 82200:WO - If service price is 0 and has def tech assign to service def tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88493"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats"
+          },
+          "newTechnician": {
+            "technicianFirstName": "Inspector",
+            "technicianLastName": "1"
+          }
+        },
+        "service": {
+          "serviceName": "Service_with_default_Tech",
+          "servicePrice": "0",
+          "serviceDefaultTechnician": {
+            "technicianFirstName": "Employee",
+            "technicianLastName": "Simple 20%",
+            "technicianPriceValue": "0.00",
+            "isSelected": true
+          },
+          "vehiclePart": {
+            "vehiclePartName": "Grill"
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyIfServicePriceIs0AssignWOSplitToServiceInCaseNoDefTech": [
+    {
+      "rowID": "testVerifyIfServicePriceIs0AssignWOSplitToServiceInCaseNoDefTech.01",
+      "description": "Test Case 82201:WO - If service price is 0 assign WO split to service in case no def tech",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88494"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810",
+          "defaultTechnician": {
+            "technicianFirstName": "Oksana",
+            "technicianLastName": "Zayats"
+          },
+          "newTechnician": {
+            "technicianFirstName": "Vladimir",
+            "technicianLastName": "Avsievich",
+            "isSelected": true
+          }
+        },
+        "service": {
+          "serviceName": "3/4\" - Penny Size",
+          "servicePrice": "0.00"
+        }
+      }
+    }
+  ]
+
+}

@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,17 +25,9 @@ public class VNextBORODetailsPageInteractions {
     public static List<String> getVendorPricesValuesList() {
         WaitUtilsWebDriver.waitABit(1000);
         final List<WebElement> vendorPricesList = new VNextBORODetailsPage().getVendorPricesList();
-        for (WebElement vendorPrice : vendorPricesList) {
-            setAttributeWithJS(vendorPrice, "style", "display: block");
-        }
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(vendorPricesList);
-        final List<String> vendorPricesValuesList = vendorPricesList.stream()
-                .map(WebElement::getText)
-                .peek(System.out::println)
-                .collect(Collectors.toList());
-
-        for (WebElement vendorPrice : vendorPricesList) {
-            setAttributeWithJS(vendorPrice, "style", "display: none");
+        List<String> vendorPricesValuesList = new ArrayList<>();
+        for (WebElement vendorPrice : new VNextBORODetailsPage().getVendorPricesList()) {
+            vendorPricesValuesList.add(vendorPrice.getAttribute("value"));
         }
         return vendorPricesValuesList;
     }
@@ -81,8 +74,9 @@ public class VNextBORODetailsPageInteractions {
     }
 
     private static void selectPhaseStatus(String status) {
-        Utils.selectOptionInDropDown(new VNextBORODetailsPage().getDropDownContainer(),
-                new VNextBORODetailsPage().getPhaseStatusListBoxOptions(), status, true);
+        //Utils.selectOptionInDropDown(new VNextBORODetailsPage().getDropDownContainer(),
+        //        new VNextBORODetailsPage().getPhaseStatusListBoxOptions(), status, true);
+        Utils.clickWithJS(new VNextBORODetailsPage().getPhaseStatusOptionByName(status));
         WaitUtilsWebDriver.waitABit(500);
     }
 
@@ -193,6 +187,7 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static String getServiceStatusValue(String serviceId) {
+        WaitUtilsWebDriver.waitForLoading();
         return Utils.getText(new VNextBORODetailsPage().getServiceStatusByServiceId(serviceId));
     }
 
@@ -291,20 +286,7 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static void openActionsDropDownForPhase(String phase) {
-        WaitUtilsWebDriver.waitABit(1000);
-        final WebElement actionsTrigger = WaitUtilsWebDriver.waitForElementNotToBeStale(new VNextBORODetailsPage()
-                .getActionsTriggerForPhase(phase));
-        try {
-            WaitUtilsWebDriver.waitForVisibility(actionsTrigger
-                    .findElement(By.xpath("./div[contains(@class, 'drop checkout')]")), 3);
-        } catch (Exception ignored) {
-            WaitUtilsWebDriver.waitABit(1500);
-            final WebElement triggerElement = WaitUtilsWebDriver.waitForElementNotToBeStale(actionsTrigger
-                    .findElement(By.xpath("./i[contains(@class, 'checkout-arrow')]")));
-            Utils.clickElement(triggerElement);
-            WaitUtilsWebDriver.waitForVisibility(actionsTrigger
-                    .findElement(By.xpath("./div[contains(@class, 'drop checkout')]")), 5);
-        }
+        Utils.clickElement(new VNextBORODetailsPage().getActionsTriggerForPhase(phase));
     }
 
     public static void closeActionsDropDownForPhase() {
@@ -355,10 +337,7 @@ public class VNextBORODetailsPageInteractions {
 
     public static void clickActionsIcon(String serviceId) {
         WaitUtilsWebDriver.waitABit(1500);
-        final WebElement actionsIcon = WaitUtilsWebDriver
-                .waitForElementNotToBeStale(new VNextBORODetailsPage().getActionIconForServiceId(serviceId));
-        Utils.clickWithActions(actionsIcon);
-        WaitUtilsWebDriver.waitForElementNotToBeStale(actionsIcon.findElement(By.xpath("./div[@class='drop checkout']")));
+        Utils.clickWithJS(new VNextBORODetailsPage().getActionIconForServiceId(serviceId));
     }
 
     public static List<String> getPhaseStatusValues() {
@@ -526,7 +505,7 @@ public class VNextBORODetailsPageInteractions {
 
     public static void openMoreInformation() {
         clickMoreInformationLink();
-        WaitUtilsWebDriver.waitForVisibility(new VNextBORODetailsPage().getMoreInformationLink());
+        WaitUtilsWebDriver.waitForVisibility(new VNextBORODetailsPage().getLessInformationLink());
     }
 
     public static void closeMoreInformation() {
@@ -608,7 +587,7 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static String getPhaseStatusValue() {
-        return Utils.getText(new VNextBORODetailsPage().getPhaseStatusListBoxOptions().get(0));
+        return Utils.getText(new VNextBORODetailsPage().getPhaseStatusesList().get(0));
     }
 
     public static String getOrderCurrentPhase() {

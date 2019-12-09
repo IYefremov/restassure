@@ -1,0 +1,23 @@
+{
+
+  "testBugWithCrashOnCopyVehicle": [
+    {
+      "rowID": "testBugWithCrashOnCopyVehicle.01",
+      "description": "Test Case 10498:Regression test: test bug with crash on 'Copy Vehicle",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "89014"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "TESTVINNO",
+          "vehicleMake": "BMW",
+          "vehicleModel": "323i U",
+          "vehicleColor": "Black"
+        }
+      }
+    }
+  ]
+
+}

@@ -1,0 +1,704 @@
+{
+
+  "testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService": [
+    {
+      "rowID": "testWOMonitorVerifyThatItIsNotPossibleToChangeServiceStatusBeforeStartService.01",
+      "description": "Test Case 26054:WO Monitor: Regular - Create WO for monitor, Test Case 26091:WO Monitor: Regular - Verify that it is not possible to change Service Status before Start Service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88942"
+        },
+        {
+          "testCaseID": "88929"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "vehicleMake": "Dodge",
+          "vehicleModel": "Ram Pickup 1500",
+          "vehicleYear": "2009",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "workOrderTotalSale": "3",
+        "orderMonitorData": {
+          "monitorServiceData": {
+            "monitorService": {
+              "serviceName": "Wheel"
+            },
+            "monitorServiceStatus": "Completed",
+            "startService": true,
+            "completeService": "true"
+          }
+        }
+      }
+    }
+  ],
+  "testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase": [
+    {
+      "rowID": "testWOMonitorVerifyThatItIsNotPossibleToChangePhaseStatusBeforeStartPhase.01",
+      "description": "Test Case 26092:WO Monitor: Regular - Verify that it is not possible to change Phase Status before Start phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88930"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "workOrderTotalSale": "3",
+        "orderMonitorData": {
+          "monitorServicesData": [
+            {
+              "monitorService": {
+                "serviceName": "Dye"
+              },
+              "monitorServiceStatus": "Completed"
+            },
+            {
+              "monitorService": {
+                "serviceName": "Disc_Ex_Service1"
+              },
+              "monitorServiceStatus": "Completed"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "testWOMonitorVerifyThatStartDateIsSetWhenStartService": [
+    {
+      "rowID": "testWOMonitorVerifyThatStartDateIsSetWhenStartService.01",
+      "description": "Test Case 26094:WO Monitor: Regular - Verify that Start date is set when Start Service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88928"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "workOrderTotalSale": "3",
+        "orderMonitorData": {
+          "monitorServiceData": {
+            "monitorService": {
+              "serviceName": "Wheel",
+              "serviceStatus": "Completed"
+            },
+            "startService": true,
+            "completeService": true
+          }
+        }
+      }
+    }
+  ],
+  "testWOVerifyThatItIsPossibleToAssignTechWhenWOIsNotStarted": [
+    {
+      "rowID": "testWOVerifyThatItIsPossibleToAssignTechWhenWOIsNotStarted.01",
+      "description": "Test Case 53502:WO Monitor: Verify that it is possible to assign tech when WO is not started, Test Case 53503:WO Monitor: Verify that it is possible to assign tech when Service is not completed and vice versa",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88476"
+        },
+        {
+          "testCaseID": "88477"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "123"
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "servicePrice2": "2000",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_FlatFee",
+            "servicePrice2": "1000"
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "servicePrice2": "1000",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "servicePrice2": "1000",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          }
+        ],
+        "orderMonitorData": {
+          "monitorServicesData": [
+            {
+              "monitorService": {
+                "serviceName": "3/4\" - Penny Size",
+                "serviceDefaultTechnician": {
+                  "technicianFirstName": "Oksi",
+                  "technicianLastName": "Test User",
+                  "isSelected": true
+                }
+              },
+              "monitorServiceStatus": "Completed"
+            },
+            {
+              "monitorService": {
+                "serviceName": "SR_S1_Money_Panel",
+                "vehiclePart": {
+                  "vehiclePartName": "Grill"
+                },
+                "serviceDefaultTechnician": {
+                  "technicianFirstName": "Manager",
+                  "technicianLastName": "1",
+                  "isSelected": true
+                }
+              },
+              "monitorServiceStatus": "Completed"
+            }
+          ]
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold": [
+    {
+      "rowID": "testWOVerifyThatItIsNotPossibleToAssignTechWhenWOIsOnHold.01",
+      "description": "Test Case 53505:WO Monitor: Verify that it is not possible to assign tech when WO is On Hold",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88478"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D7HW48NX6S507810"
+        },
+        "moneyServices": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "123"
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "servicePrice2": "2000",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_FlatFee",
+            "servicePrice2": "1000"
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "servicePrice2": "1000",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Panel",
+            "servicePrice2": "1000",
+            "vehiclePart": {
+              "vehiclePartName": "Grill"
+            }
+          }
+        ],
+        "orderMonitorData": {
+          "monitorServiceData": {
+            "monitorService": {
+              "serviceName": "3/4\" - Penny Size"
+            },
+            "monitorServiceStatus": "Completed"
+          }
+        },
+        "workOrderTotalSale": "5"
+      }
+    }
+  ],
+  "testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired": [
+    {
+      "rowID": "testVerifyThatItIsNotPossibleToChangeStatusForServiceOrPhaseWhenCheckOutRequired.01",
+      "description": "Test Case 26115:WO Monitor: Verify that it is not possible to change status for Service or Phase when Check out required",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88944"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location check out required"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "matrixService": {
+          "matrixServiceName": "Dent Removal",
+          "hailMatrixName": "Hail Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "HOOD",
+            "vehiclePartSize": "NKL",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Discount 5-10%"
+              }
+            ]
+          }
+        },
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase": [
+    {
+      "rowID": "testVerifyThatWhenOptionPhaseEnforcementIsOFFAndStartServiceRequiredItIsPossibleToStartServiceFromInactivePhase.01",
+      "description": "Test Case 29181:WO Monitor: Verify that when option 'Phase enforcement' is OFF and 'Start service required' it possible to start service from inactive phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88931"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "matrixService": {
+          "matrixServiceName": "Dent Removal",
+          "hailMatrixName": "Hail Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "HOOD",
+            "vehiclePartSize": "NKL",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Discount 5-10%"
+              }
+            ]
+          }
+        },
+        "orderMonitorData": {
+          "monitorServiceData": {
+            "monitorService": {
+              "serviceName": "Wheel"
+            }
+          }
+        },
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder": [
+    {
+      "rowID": "testVerifyThatTechWhoIsNotAssignedToOrderServiceCannotStartOrder.01",
+      "description": "Test Case 30546:WO Monitor:  Verify that Tech who is not assigned to order service cannot start order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88935"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "5",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_FlatFee",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            },
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            },
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich"
+            }
+          }
+        ],
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted": [
+    {
+      "rowID": "testVerifyThatIsItImpossibleToChangeStatusForServiceOrPhaseWhenOrderIsNotStarted.01",
+      "description": "Test Case 30547:WO Monitor: Verify that is it impossible to change status for service/phase when order is not started, Test Case 30548:WO Monitor: Verify that when order is not started Start date can be changed but not for future",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88938"
+        },
+        {
+          "testCaseID": "88932"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "3/4\" - Penny Size",
+            "servicePrice": "5",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_FlatFee",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money_Vehicle",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            },
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich"
+            }
+          },
+          {
+            "serviceName": "SR_S1_Money",
+            "vehiclePart": {
+              "vehiclePartName": "Hood"
+            },
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats"
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Vladimir",
+              "technicianLastName": "Avsievich"
+            }
+          }
+        ],
+        "workOrderTotalSale": "3"
+      }
+    }
+  ],
+  "testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase": [
+    {
+      "rowID": "testWOMonitorVerifyThatWhenChangeStatusForPhaseWithDoNotTrackIndividualServiceStatusesONPhaseStatusIsSetToAllServicesAssignedToPhase.01",
+      "description": "Test Case 26013:WO Monitor: HD - Verify that when change Status for Phase with 'Do not track individual service statuses' ON Phase status is set to all services assigned to phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88934"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733",
+          "location": "Test Location ZZZ"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1"
+          },
+          {
+            "serviceName": "Dye"
+          },
+          {
+            "serviceName": "Wheel"
+          },
+          {
+            "serviceName": "Test Tax"
+          },
+          {
+            "serviceName": "Discount 5-10%"
+          },
+          {
+            "serviceName": "VPS1"
+          }
+        ],
+        "matrixService": {
+          "matrixServiceName": "Dent Removal",
+          "hailMatrixName": "Hail Matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "HOOD",
+            "vehiclePartSize": "NKL",
+            "vehiclePartSeverity": "VERY LIGHT",
+            "vehiclePartPrice": "$100.00",
+            "vehiclePartAdditionalServices": [
+              {
+                "serviceName": "Dye"
+              },
+              {
+                "serviceName": "Discount 5-10%"
+              },
+              {
+                "serviceName": "Discount 10-20$"
+              }
+            ]
+          }
+        },
+        "workOrderTotalSale": "3",
+        "orderMonitorsData": [
+          {
+            "phaseName": "Start phase",
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "Wheel"
+                }
+              }
+            ]
+          },
+          {
+            "phaseName": "Repair phase",
+            "monitorServicesData": [
+              {
+                "monitorService": {
+                  "serviceName": "Dye"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Disc_Ex_Service1"
+                }
+              },
+              {
+                "monitorService": {
+                  "serviceName": "Dent Removal"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn": [
+    {
+      "rowID": "testInvoicesVerifyFilterForTeamWOThatReturnsOnlyWorkAssignedToTechWhoIsLoggedIn.01",
+      "description": "Test Case 40033:WO Monitor: Verify filter for Team WO that returns only work assigned to tech who is logged in, Test Case 40034:WO Monitor: Verify that employee with Manager role may see and change all services of repair order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "88955"
+        },
+        {
+          "testCaseID": "88508"
+        }
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "WDZPE7CD9E5889222"
+        },
+        "services": [
+          {
+            "serviceName": "Disc_Ex_Service1",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%",
+              "isSelected": true
+            }
+          },
+          {
+            "serviceName": "Dye",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%",
+              "isSelected": false
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats",
+              "isSelected": true
+            }
+          },
+          {
+            "serviceName": "Wheel",
+            "serviceDefaultTechnician": {
+              "technicianFirstName": "Employee",
+              "technicianLastName": "Simple 20%",
+              "isSelected": true
+            },
+            "serviceNewTechnician": {
+              "technicianFirstName": "Oksana",
+              "technicianLastName": "Zayats",
+              "isSelected": true
+            }
+          }
+        ],
+        "workOrderTotalSale": "5"
+      }
+    }
+  ]
+}

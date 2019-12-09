@@ -29,6 +29,8 @@ import org.testng.annotations.Test;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -462,27 +464,15 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("M/d/yyyy");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/M/d");
 
-        LocalDateTime now = LocalDateTime.now(ZoneId.of("US/Pacific"));
-        final int monthValue = now.getMonthValue();
-        final int prevMonthValue = monthValue - 1;
-        LocalDateTime before = now.minusDays(7);
-
-        String beforeMinusMonth = VNextBOCalendarWidgetDialogInteractions.getMonthReplace(monthValue, prevMonthValue, before);
-        String nowMinusMonth = VNextBOCalendarWidgetDialogInteractions.getMonthReplace(monthValue, prevMonthValue, now);
-        System.out.println("beforeMinusMonth: " + beforeMinusMonth);
-        System.out.println("nowMinusMonth: " + nowMinusMonth);
-        String beforeFormatted = before.format(format);
-        String nowFormatted = now.format(format);
-        System.out.println("beforeFormatted: " + beforeFormatted);
-        System.out.println("nowFormatted: " + nowFormatted);
-
+        LocalDateTime toDate = LocalDateTime.now(ZoneId.of("US/Pacific")).minusMonths(1);
+        LocalDateTime fromDate = toDate.minusDays(2);
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
         VNextBOROAdvancedSearchDialogInteractions.clickFromDateButton();
-        VNextBOCalendarWidgetDialogInteractions.selectFromDate(beforeMinusMonth);
+        VNextBOCalendarWidgetDialogInteractions.selectFromDate(fromDate.format(format));
         VNextBOROAdvancedSearchDialogInteractions.clickToDateButton();
-        VNextBOCalendarWidgetDialogInteractions.selectToDate(nowMinusMonth);
+        VNextBOCalendarWidgetDialogInteractions.selectToDate(toDate.format(format));
         VNextBOROAdvancedSearchDialogSteps.search();
     }
 
@@ -817,7 +807,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         final List<String> advancedSearchDialogElements = data.getFullAdvancedSearchElementsList();
         advancedSearchDialogElements.forEach(System.out::println);
 
-        Assert.assertTrue(searchResultsList.containsAll(advancedSearchDialogElements),
+        Assert.assertTrue(new ArrayList<String>(Arrays.asList(VNextBOROPageInteractions.getSearchFilterText().split("; "))).containsAll(advancedSearchDialogElements),
                 "The data hasn't been inserted");
     }
 
