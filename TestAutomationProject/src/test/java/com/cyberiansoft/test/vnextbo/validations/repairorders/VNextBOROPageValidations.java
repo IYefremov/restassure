@@ -250,43 +250,45 @@ public class VNextBOROPageValidations {
             }
             final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
             final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
-
-            Assert.assertTrue(next.isAfter(dateBeforeCurrentDate),
-                    "The order started date is not within the given date boundaries");
-
+            verifyOrderNextTargetDateIsAfterDateStarted(dateBeforeCurrentDate, next);
             if (previous.isEqual(next)) {
                 continue;
             }
-            System.out.println("previous: "+previous);
-            System.out.println("next: "+next);
-            if (previous.isBefore(next)) {
-                Assert.fail("The order target date is not within the given date boundaries");
-            }
+            verifyOrderTargetDateIsWithinBoundaries(previous, next);
         }
     }
 
     private static void verifyTargetDateForOrders(LocalDate dateStarted, LocalDate dateFinished, List<String> ordersDatesList) {
         final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
 
-        ordersDatesList.forEach(System.out::println);
         for (int i = 0; i < ordersDatesList.size(); i++) {
             if (i == 0) {
                 continue;
             }
             final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
             final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
-
-            Assert.assertTrue(next.isAfter(dateStarted),
-                    "The order started date is not within the given date boundaries");
-
+            verifyOrderNextTargetDateIsAfterDateStarted(dateStarted, next);
             if (previous.isEqual(next)) {
                 continue;
             }
-            System.out.println("previous: "+previous);
-            System.out.println("next: "+next);
-            if (previous.isBefore(next) || next.isAfter(dateFinished)) {
-                Assert.fail("The order target date is not within the given date boundaries");
-            }
+            verifyOrderTargetDateIsWithinBoundaries(previous, next, dateFinished);
+        }
+    }
+
+    private static void verifyOrderNextTargetDateIsAfterDateStarted(LocalDate dateStarted, LocalDate next) {
+        Assert.assertTrue(next.isAfter(dateStarted),
+                "The order target date is not within the given date boundaries");
+    }
+
+    private static void verifyOrderTargetDateIsWithinBoundaries(LocalDate previous, LocalDate next, LocalDate dateFinished) {
+        if (previous.isBefore(next) || next.isAfter(dateFinished)) {
+            Assert.fail("The order target date is not within the given date boundaries");
+        }
+    }
+
+    private static void verifyOrderTargetDateIsWithinBoundaries(LocalDate previous, LocalDate next) {
+        if (previous.isBefore(next)) {
+            Assert.fail("The order target date is not within the given date boundaries");
         }
     }
 
