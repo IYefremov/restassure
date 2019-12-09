@@ -21,7 +21,7 @@
 				<version>2.22.2</version>
 				<inherited>true</inherited>
 				<configuration>
-                    <argLine>-Xmx2048m</argLine>
+                    <argLine>-Xms${ram}m -Xmx${ram}m</argLine>
 					<suiteXmlFiles>
 						<suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
