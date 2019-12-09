@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 @Getter
 public class VNextBOCompleteCurrentPhaseDialog extends VNextBOBaseWebPage {
 
@@ -45,6 +47,11 @@ public class VNextBOCompleteCurrentPhaseDialog extends VNextBOBaseWebPage {
     public WebElement getResolveButtonForService(String service) {
         return getService(service)
                 .findElement(By.xpath("//..//button[contains(@data-bind, 'problemList.resolveAction')]"));
+    }
+
+    public List<WebElement> getResolveButtonsForService(String service) {
+        return getService(service)
+                .findElements(By.xpath("//..//button[contains(@data-bind, 'problemList.resolveAction')]"));
     }
 
     public WebElement getResolvedButtonForService(String service) {

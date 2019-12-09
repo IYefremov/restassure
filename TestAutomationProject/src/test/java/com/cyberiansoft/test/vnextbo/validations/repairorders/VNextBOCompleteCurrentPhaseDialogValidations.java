@@ -41,4 +41,9 @@ public class VNextBOCompleteCurrentPhaseDialogValidations {
         return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getResolvedButtonForService(service),
                 10);
     }
+
+    public static boolean isResolveButtonDisplayedForService(String service) {
+        return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getResolveButtonForService(service),
+                10);
+    }
 }

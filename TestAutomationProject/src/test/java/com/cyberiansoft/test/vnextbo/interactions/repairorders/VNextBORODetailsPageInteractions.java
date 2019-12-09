@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -115,6 +116,19 @@ public class VNextBORODetailsPageInteractions {
             return id;
         }
         return "";
+    }
+
+    public static List<String> getAllServicesId(String description) {
+        final List<WebElement> allServicesByName = new VNextBORODetailsPage().getAllServicesByName(description);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(allServicesByName);
+        try {
+            return allServicesByName.stream().map(element -> WaitUtilsWebDriver.getWait()
+                    .ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.visibilityOf(element))
+                    .findElement(By.xpath(".//../..")).getAttribute("data-order-service-id")).collect(Collectors.toList());
+        } catch (Exception ignored) {
+            return Collections.emptyList();
+        }
     }
 
     public static void expandServicesTable() {

@@ -11,6 +11,8 @@ import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCur
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import org.testng.Assert;
 
+import java.util.List;
+
 public class VNextBORODetailsPageSteps {
 
     public static void openServicesTableForStatus(String status, String service) {
@@ -40,6 +42,13 @@ public class VNextBORODetailsPageSteps {
             VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
         }
         WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void setServiceStatusForMultipleServicesByServiceId(List<String> serviceIds, String status) {
+        for (String serviceId : serviceIds) {
+            setServiceStatusForServiceByServiceId(serviceId, status);
+            VNextBOROProblemsInteractions.clickResolveButton();
+        }
     }
 
     public static void setCheckInOptionForPhase() {
@@ -122,6 +131,12 @@ public class VNextBORODetailsPageSteps {
         handleReportProblemDialog(problem, description);
         Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconDisplayedForService(serviceId),
                 "The Problem icon is not displayed for service after reporting the problem");
+    }
+
+    public static void setReportProblemForMultipleServices(List<String> serviceIds, String problem, String description) {
+        for (String serviceId : serviceIds) {
+            setReportProblemForService(serviceId, problem, description);
+        }
     }
 
     public static void setResolveProblemForService(String serviceId) {

@@ -174,6 +174,12 @@ public class VNextBORODetailsPageValidations {
                 "The status hasn't been set for service");
     }
 
+    public static void verifyStatusHasBeenSetForAllServices(List<String> serviceIds, String status) {
+        for (String serviceId : serviceIds) {
+            verifyStatusHasBeenSetForService(serviceId, status);
+        }
+    }
+
     public static boolean isRoDetailsSectionDisplayed() {
         return Utils.isElementDisplayed(new VNextBORODetailsPage().getRoDetailsSection());
     }
