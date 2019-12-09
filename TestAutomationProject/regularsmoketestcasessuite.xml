@@ -1,0 +1,46 @@
+<suite name="Cyberiansoft iOS Regular client tests" verbose="10" configfailurepolicy="continue">
+    <parameter name="ios.udid" value="e80c0135055f336bd77e60483142facccb22b702"/>
+    <parameter name="tpsuite.id" value="83604"/>
+    <parameter name="tp.integration" value="false"/>
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.ios10_client.listeners.IOSRegularTestCasesListener"/>
+    </listeners>
+    <test name="Smoke tests for iOS client" preserve-order="true">
+        <classes>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.deviceregistrationupdate.IOSDeviceRegistrationAndUpdateCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSArchiveInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSCreateInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSApproveInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSChangeCustomerForInspection"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSDraftModeInspectionsTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSInspectionsNotesTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSCreateWOFromInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSAcceptRejectInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSInspectionsQuestionFormsTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSInspectionsValidationsTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSInspectionsServiceGroupingTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.inspections.IOSCreateInspectionfromWOTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSCreateWorkOrderTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSApproveWorkOrdersTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSAutoSaveWorkOrdersTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSWorkOrdersCalculationsTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSWorkOrdersTechSplitTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSAssignTechToWOServicesTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSWorkOrdersChangeCustomerTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSWorkOrdersBillingTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.workorders.IOSWorkOrdersServicesTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.servicerequests.IOSServiceRequestsCreateWOAndInspectionTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.servicerequests.IOSServiceRequestsCreateAppointmentTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.servicerequests.IOSServiceRequestsRejectAcceptTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.servicerequests.IOSServiceRequestsCloseTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.servicerequests.IOSServiceRequestsStatusReasonTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoiceApproveTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoicesCreateTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoicePaymentTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoiceChangeCustomerTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.ordermonitor.IOSOrderMonitorTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.customers.IOSCustomersCRUDTestCases"/>
+            <class name="com.cyberiansoft.test.ios10_client.testcases.regular.carhistory.IOSCarHistoryTestCases"/>
+        </classes>
+    </test>
+</suite>

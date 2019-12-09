@@ -6,6 +6,7 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.driverutils.AppiumServiceManager;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
+import com.cyberiansoft.test.ios10_client.listeners.IOSRegularTestCasesListener;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSteps;
@@ -14,11 +15,16 @@ import com.cyberiansoft.test.ios10_client.types.envtypes.IOSReconproEnvironmentT
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.TestUser;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
+import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class IOSRegularBaseTestCase {
 
@@ -31,6 +37,24 @@ public class IOSRegularBaseTestCase {
 
     @BeforeSuite
     public void setUp() {
+
+        //Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
+        Optional<String> testCaseIdFromMaven = Optional.ofNullable("88423");
+        if (testCaseIdFromMaven.isPresent()) {
+            TPIntegrationService tpIntegrationService = new TPIntegrationService();
+            String testPlanId = testCaseIdFromMaven.get();
+            try {
+                IOSRegularTestCasesListener.setTestToTestRunMap(
+                        tpIntegrationService.testCaseToTestRunMapRecursevley(
+                                tpIntegrationService.createTestPlanRun(testPlanId)));
+            } catch (UnirestException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         AppiumServiceManager.startAppium();
         browsertype = BaseUtils.getBrowserType(ReconProIOSStageInfo.getInstance().getDefaultBrowser());
         mobilePlatform = MobilePlatform.IOS_REGULAR;
