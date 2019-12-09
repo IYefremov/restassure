@@ -39,7 +39,9 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
         VNextBOAddNewDeviceDialogSteps.setAllAddNewDeviceFields(deviceData);
         VNextBOAddNewDeviceDialogSteps.cancelAddingNewDeviceCancelButton();
         VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
-        VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        if (VNextBOPendingRegistrationTabSteps.checkWhetherDevicesNotFoundMessageIsDisplayed())
+            VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        else VNextBOPendingRegistrationsTabValidations.verifyDevicesTableDoesNotContainDevice(deviceData.getNickname());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
@@ -50,7 +52,9 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
         VNextBOAddNewDeviceDialogSteps.setAllAddNewDeviceFields(deviceData);
         VNextBOAddNewDeviceDialogSteps.cancelAddingNewDeviceXIcon();
         VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
-        VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        if (VNextBOPendingRegistrationTabSteps.checkWhetherDevicesNotFoundMessageIsDisplayed())
+            VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        else VNextBOPendingRegistrationsTabValidations.verifyDevicesTableDoesNotContainDevice(deviceData.getNickname());
         VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
 
@@ -190,6 +194,8 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickYesButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
-        VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        if (VNextBOPendingRegistrationTabSteps.checkWhetherDevicesNotFoundMessageIsDisplayed())
+            VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        else VNextBOPendingRegistrationsTabValidations.verifyDevicesTableDoesNotContainDevice(deviceData.getNickname());
     }
 }
