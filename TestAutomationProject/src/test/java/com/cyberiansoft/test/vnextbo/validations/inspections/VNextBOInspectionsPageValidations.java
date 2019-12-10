@@ -113,7 +113,7 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
     public static void verifyPrintWindowIsOpened() {
 
         String parentHandle = Utils.getParentTab();
-        new VNextBOInspectionsWebPage().waitForNewTab();
+        WaitUtilsWebDriver.waitForNewTab();
         String newWindow = Utils.getNewTab(parentHandle);
         DriverBuilder.getInstance().getDriver().switchTo().window(parentHandle);
         boolean isPrintWindowOpened = false;

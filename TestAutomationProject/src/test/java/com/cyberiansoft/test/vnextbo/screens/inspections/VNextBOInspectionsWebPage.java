@@ -1,12 +1,12 @@
 package com.cyberiansoft.test.vnextbo.screens.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -208,8 +208,8 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
         VNextBOConfirmationDialogInteractions.clickYesButton();
-		waitForNewTab();
-		String newWindow = Utils.getNewTab(parentHandle);
+        WaitUtilsWebDriver.waitForNewTab();
+        String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
 		driver.findElement(By.xpath("//p/button[@type='submit' and @class='btn icon ok']")).click();
 		waitLong.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtAreaNotes"))));
@@ -225,8 +225,8 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
         VNextBOConfirmationDialogInteractions.clickYesButton();
-		waitForNewTab();
-		String newWindow = Utils.getNewTab(parentHandle);
+        WaitUtilsWebDriver.waitForNewTab();
+        String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
 		waitForLoading();
 	}
@@ -235,8 +235,8 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
         VNextBOConfirmationDialogInteractions.clickYesButton();
-		waitForNewTab();
-		String newWindow = Utils.getNewTab(parentHandle);
+        WaitUtilsWebDriver.waitForNewTab();
+        String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
 		driver.findElement(By.xpath("//p/button[@type='submit' and @class='btn icon cancel']")).click();
 		new WebDriverWait(driver, 60)
@@ -260,8 +260,8 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	public VNextBOInspectionInfoWebPage clickSelectedInspectionPrintIcon() {
 		String mainWindowHandle = driver.getWindowHandle();
 		printInspectionIcon.click();
-		waitForNewTab();
-		driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
+        WaitUtilsWebDriver.waitForNewTab();
+        driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
 		for (String activeHandle : driver.getWindowHandles()) {
 			if (!activeHandle.equals(mainWindowHandle)) {
 				driver.switchTo().window(activeHandle);

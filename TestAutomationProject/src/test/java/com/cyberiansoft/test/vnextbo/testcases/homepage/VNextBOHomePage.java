@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.homepage;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOHomePageData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -187,7 +188,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         final String helpWindow = homePage.openHelpWindow(mainWindow);
-        final String currentUrl = homePage.getUrl();
+        final String currentUrl = Utils.getUrl();
         System.out.println(mainWindow);
         System.out.println(helpWindow);
 
@@ -196,7 +197,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         Assert.assertTrue(currentUrl.contains(data.getUrl()), "The \"Help\" page hasn't been opened");
 
-        homePage.closeNewTab(mainWindow);
+        Utils.closeNewTab(mainWindow);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -207,11 +208,11 @@ public class VNextBOHomePage extends BaseTestCase {
         final String learnWindow = homePage.openLearnWindow(mainWindow);
         String currentUrl;
         try {
-            currentUrl = homePage.getUrl();
+            currentUrl = Utils.getUrl();
         } catch (Exception e) {
             e.printStackTrace();
             webdriver.switchTo().window(learnWindow);
-            currentUrl = homePage.getUrl();
+            currentUrl = Utils.getUrl();
         }
         System.out.println(mainWindow);
         System.out.println(learnWindow);
@@ -221,7 +222,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         Assert.assertTrue(currentUrl.contains(data.getUrl()), "The \"Learn\" page hasn't been opened");
 
-        homePage.closeNewTab(mainWindow);
+        Utils.closeNewTab(mainWindow);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -230,7 +231,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         final String AccessClientPortalWindow = homePage.openAccessClientPortalWindow(mainWindow);
-        final String currentUrl = homePage.getUrl();
+        final String currentUrl = Utils.getUrl();
         System.out.println(mainWindow);
         System.out.println(AccessClientPortalWindow);
 
@@ -239,7 +240,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         Assert.assertTrue(currentUrl.contains(data.getUrl()), "The \"Access Client Portal\" page hasn't been opened");
 
-        homePage.closeNewTab(mainWindow);
+        Utils.closeNewTab(mainWindow);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -248,7 +249,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         homePage.openAccessReconProBOWindow(mainWindow);
-        final String currentUrl = homePage.getUrl();
+        final String currentUrl = Utils.getUrl();
         System.out.println(mainWindow);
 
         System.out.println("actual homepage Url: " + currentUrl);
@@ -263,7 +264,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         final String AccessClientPortalWindow = homePage.openSupportForBOWindow(mainWindow);
-        final String currentUrl = homePage.getUrl();
+        final String currentUrl = Utils.getUrl();
         System.out.println(mainWindow);
         System.out.println(AccessClientPortalWindow);
 
@@ -272,7 +273,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         Assert.assertTrue(currentUrl.contains(data.getUrl()), "The \"Support For BO\" page hasn't been opened");
 
-        homePage.closeNewTab(mainWindow);
+        Utils.closeNewTab(mainWindow);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -281,7 +282,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         final String mainWindow = webdriver.getWindowHandle();
         final String AccessClientPortalWindow = homePage.openSupportForMobileAppWindow(mainWindow);
-        final String currentUrl = homePage.getUrl();
+        final String currentUrl = Utils.getUrl();
         System.out.println(mainWindow);
         System.out.println(AccessClientPortalWindow);
 
@@ -290,7 +291,7 @@ public class VNextBOHomePage extends BaseTestCase {
 
         Assert.assertTrue(currentUrl.contains(data.getUrl()), "The \"Support For Mobile App\" page hasn't been opened");
 
-        homePage.closeNewTab(mainWindow);
+        Utils.closeNewTab(mainWindow);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

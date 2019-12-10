@@ -4,12 +4,10 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import lombok.Getter;
 import org.apache.commons.lang3.RandomUtils;
-import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -17,12 +15,8 @@ import org.testng.Assert;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import static org.awaitility.Awaitility.await;
 
 @Getter
 public class VNextBOBaseWebPage {
@@ -96,17 +90,6 @@ public class VNextBOBaseWebPage {
         }
     }
 
-    public void checkboxSelect(WebElement checkbox) {
-        if (!isCheckboxChecked(checkbox))
-            checkbox.click();
-    }
-
-    public void checkboxUnselect(WebElement checkbox) {
-        if (isCheckboxChecked(checkbox)) {
-            wait.until(ExpectedConditions.elementToBeClickable(checkbox)).click();
-        }
-    }
-
     public boolean isCheckboxChecked(WebElement element) {
         boolean result = false;
         String selected = element.getAttribute("checked");
@@ -115,49 +98,6 @@ public class VNextBOBaseWebPage {
                 result = true;
         }
         return result;
-    }
-
-    public void waitForNewTab() {
-        try {
-            waitLong.until((ExpectedCondition<Boolean>) driver -> (
-                    Objects
-                            .requireNonNull(driver)
-                            .getWindowHandles()
-                            .size() != 1));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public String getUrl() {
-        try {
-            await().atMost(15, TimeUnit.SECONDS)
-                    .ignoreExceptions()
-                    .pollInterval(500, TimeUnit.MILLISECONDS)
-                    .until(driver::getCurrentUrl);
-        } catch (ConditionTimeoutException ignored) {}
-
-        return driver.getCurrentUrl();
-    }
-
-    public void closeNewTab(String mainWindowHandle) {
-        driver.close();
-        driver.switchTo().window(mainWindowHandle);
-    }
-
-    public void closeMainWindow(String mainWindow) {
-        driver.switchTo().window(mainWindow);
-        driver.close();
-        waitABit(1000);
-    }
-
-    public void closeWindows() {
-        final Set<String> windowHandles = driver.getWindowHandles();
-        for (String window : windowHandles) {
-            driver.switchTo().window(window);
-            driver.close();
-            waitABit(1000);
-        }
     }
 
     public void waitForLoading() {

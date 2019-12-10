@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
 
@@ -130,7 +129,7 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
 
     public String openHelpWindow(String mainWindow) {
         clickButton(helpButton);
-        waitForNewTab();
+        WaitUtilsWebDriver.waitForNewTab();
         return getNewTab(mainWindow);
     }
 
@@ -138,25 +137,25 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
         wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(helpButton)));
         actions.moveToElement(helpButton).build().perform();
         wait.until(ExpectedConditions.elementToBeClickable(helpLearnButton)).click();
-        waitForNewTab();
+        WaitUtilsWebDriver.waitForNewTab();
         return getNewTab(mainWindow);
     }
 
     public String openAccessClientPortalWindow(String mainWindow) {
         Utils.clickElement(accessClientPortalLink);
-        waitForNewTab();
+        WaitUtilsWebDriver.waitForNewTab();
         return getNewTab(mainWindow);
     }
 
     public String openSupportForBOWindow(String mainWindow) {
         Utils.clickElement(supportForBOButton);
-        waitForNewTab();
+        WaitUtilsWebDriver.waitForNewTab();
         return getNewTab(mainWindow);
     }
 
     public String openSupportForMobileAppWindow(String mainWindow) {
         Utils.clickElement(supportForMobileAppButton);
-        waitForNewTab();
+        WaitUtilsWebDriver.waitForNewTab();
         return getNewTab(mainWindow);
     }
 

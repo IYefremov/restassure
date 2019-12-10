@@ -108,7 +108,7 @@ public class IOSInvoicePaymentTestCases extends IOSRegularBaseTestCase {
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
 
@@ -194,7 +194,7 @@ public class IOSInvoicePaymentTestCases extends IOSRegularBaseTestCase {
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();
@@ -269,7 +269,7 @@ public class IOSInvoicePaymentTestCases extends IOSRegularBaseTestCase {
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();

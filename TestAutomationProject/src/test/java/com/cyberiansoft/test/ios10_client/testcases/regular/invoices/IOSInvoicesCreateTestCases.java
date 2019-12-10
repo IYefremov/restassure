@@ -105,7 +105,7 @@ public class IOSInvoicesCreateTestCases extends IOSRegularBaseTestCase {
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoicenum);
         invoicesWebPage.clickFindButton();

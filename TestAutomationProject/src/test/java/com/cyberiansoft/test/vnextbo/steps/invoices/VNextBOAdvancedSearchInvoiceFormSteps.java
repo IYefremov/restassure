@@ -49,7 +49,7 @@ public class VNextBOAdvancedSearchInvoiceFormSteps {
         VNextBOInvoicesPageInteractions.clickAdvancedSearchCaret();
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
         VNextBOAdvancedSearchInvoiceFormInteractions.setInvoiceNumber(invoice);
-        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
+        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM.getName());
         VNextBOAdvancedSearchInvoiceFormInteractions.setToDate(toDate);
         VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
         VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
