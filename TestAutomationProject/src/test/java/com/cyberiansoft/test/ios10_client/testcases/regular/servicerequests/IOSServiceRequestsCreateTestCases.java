@@ -129,7 +129,7 @@ public class IOSServiceRequestsCreateTestCases extends IOSRegularBaseTestCase {
         serviceRequestsListInteractions.selectSearchTeam(teamName);
         serviceRequestsListInteractions.selectSearchTechnician("Employee Simple 20%");
         serviceRequestsListInteractions.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        serviceRequestsListInteractions.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        serviceRequestsListInteractions.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         serviceRequestsListInteractions.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 
         serviceRequestsListInteractions.setSearchFreeText(serviceRequestNumber);

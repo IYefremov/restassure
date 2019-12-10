@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases.r360free.inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.MatrixServiceData;
@@ -27,9 +28,7 @@ import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import org.json.simple.JSONObject;
@@ -113,8 +112,8 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         Assert.assertEquals(inspectionsWebPage.getSelectedInspectionTotalAmountValue(), inspectionData.getInspectionPrice());
         String mainWindowHandle = webdriver.getWindowHandle();
 
-        VNextBOInspectionInfoWebPage inspectionInfoWebPage = inspectionsWebPage.clickSelectedInspectionPrintIcon();
-        inspectionInfoWebPage.closeNewTab(mainWindowHandle);
+        inspectionsWebPage.clickSelectedInspectionPrintIcon();
+        Utils.closeNewTab(mainWindowHandle);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

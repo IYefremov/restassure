@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.WebDriver;
@@ -79,9 +80,8 @@ public class VNextBOBaseWebPageValidations {
 
     public static void verifyHelpPageIsOpened()
     {
-        VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         String parentHandle = Utils.getParentTab();
-        baseWebPage.waitForNewTab();
+        WaitUtilsWebDriver.waitForNewTab();
         String newWindow = Utils.getNewTab(parentHandle);
         DriverBuilder.getInstance().getDriver().switchTo().window(parentHandle);
         boolean isHelpPageOpened = false;

@@ -293,7 +293,7 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
         InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();
@@ -350,7 +350,7 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
 
         workorderspage.makeSearchPanelVisible();
         workorderspage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        workorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        workorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         workorderspage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         workorderspage.setSearchOrderNumber(workOrder3);
         workorderspage.clickFindButton();
