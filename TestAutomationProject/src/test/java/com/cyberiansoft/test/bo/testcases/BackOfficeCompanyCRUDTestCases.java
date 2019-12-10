@@ -7,7 +7,6 @@ import com.cyberiansoft.test.dataclasses.bo.BOCompanyCRUDData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -178,7 +177,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		jobsPage.setNewJobDescription(data.getJobDesc());
 		jobsPage.selectJobClient(data.getCustomer());
 		jobsPage.selectJobParentClient(data.getParentCustomer());
-		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateFormatted());
+		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateInShortFormat());
 		jobsPage.setNewJobEndDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		jobsPage.setNewJobAccountingID(data.getJobAccId());
 		jobsPage.setNewJobAccountingID(data.getJobAcc2Id());
@@ -197,7 +196,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		jobsPage.setNewJobDescription(data.getJobDesc());
 		jobsPage.selectJobClient(data.getCustomer());
 		jobsPage.selectJobParentClient(data.getParentCustomer());
-		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateFormatted());
+		jobsPage.setNewJobStartDate(CustomDateProvider.getCurrentDateInShortFormat());
 		jobsPage.setNewJobEndDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		jobsPage.setNewJobAccountingID(data.getJobAccId());
 		jobsPage.setNewJobAccountingID2(data.getJobAcc2Id());
@@ -205,7 +204,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		Assert.assertEquals(data.getJobDesc(), jobsPage.getTableJobDescription(data.getJobEdited()));
 		Assert.assertEquals(data.getCustomer(), jobsPage.getTableJobClient(data.getJobEdited()));
-		Assert.assertEquals(CustomDateProvider.getLocalizedCurrentDateFormattedTheShortest(), jobsPage.getTableJobStartDate(data.getJobEdited()));
+		Assert.assertEquals(CustomDateProvider.getLocalizedCurrentDateInTheShortestFormat(), jobsPage.getTableJobStartDate(data.getJobEdited()));
 		Assert.assertEquals(CustomDateProvider.getTomorrowLocalizedDateFormattedTheShortest(), jobsPage.getTableJobEndDate(data.getJobEdited()));
 		Assert.assertEquals(data.getJobAccId(), jobsPage.getTableJobAccountingID(data.getJobEdited()));
 		Assert.assertEquals(data.getJobAcc2Id(), jobsPage.getTableJobAccountingID2(data.getJobEdited()));

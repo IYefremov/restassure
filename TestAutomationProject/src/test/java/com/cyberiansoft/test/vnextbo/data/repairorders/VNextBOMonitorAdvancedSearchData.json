@@ -869,5 +869,176 @@
       ],
       "location": "zayats location"
     }
+  ],
+
+  "verifyUserCanSearchBySortByRoNumOption": [
+    {
+      "rowID": "verifyUserCanSearchBySortByRoNumOption.01",
+      "description": "Test Case 90091:User can search by \"Sort by → #RO, Newest to Oldest\". Test Case 90092:User can search by \"Sort by → #RO, Oldest to Newest\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91476"
+        },
+        {
+          "testCaseID": "91477"
+        }
+      ],
+      "location": "Best Location Automation",
+      "sortByOptions": [
+        "RO#, Newest to Oldest",
+        "RO#, Oldest to Newest"
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchBySortByPriorityOldestToNewestOption": [
+    {
+      "rowID": "verifyUserCanSearchBySortByPriorityOldestToNewestOption.01",
+      "description": "User can search by → \"Priority, Oldest to Newest\".",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92848"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "repairStatus": "In Progress - Active",
+      "pages": [
+        "100"
+      ],
+      "sortByOptions": [
+        "Priority, Oldest to Newest"
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchBySortByPriorityNewestToOldest": [
+    {
+      "rowID": "verifyUserCanSearchBySortByPriorityNewestToOldest.01",
+      "description": "User can search by → \"Priority, Newest to Oldest\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92849"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "repairStatus": "In Progress - Active",
+      "pages": [
+        "100"
+      ],
+      "sortByOptions": [
+        "Priority, Newest to Oldest"
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchBySortByArbitrationDateOption": [
+    {
+      "rowID": "verifyUserCanSearchBySortByArbitrationDateOption.01",
+      "description": "Test Case 90642:User can search by \"Sort by → Arbitration Date, Priority\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91478"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "repairStatus": "All",
+      "sortByOptions": [
+        "Arbitration Date, Priority"
+      ],
+      "pages": [
+        "100"
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameLast30Days": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameLast30Days.01",
+      "description": "User can search by \"Timeframe\" (Last 30 days)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98986"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameWeekToDate": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameWeekToDate.01",
+      "description": "User can search by \"Timeframe\" (Week To Date)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98988"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameLastWeek": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameLastWeek.01",
+      "description": "User can search by \"Timeframe\" (Last Week)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98989"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameToday": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameToday.01",
+      "description": "User can search by \"Timeframe\" (Today)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98987"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameMonthToDate": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameMonthToDate.01",
+      "description": "User can search by \"Timeframe\" (Month to Date)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98990"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameYearToDate": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameYearToDate.01",
+      "description": "User can search by \"Timeframe\" (Year To Date)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98992"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameLastYear": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameLastYear.01",
+      "description": "User can search by \"Timeframe\" (Last Year)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98993"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
   ]
 }

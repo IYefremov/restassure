@@ -9,6 +9,10 @@ public class VNextBOCompleteCurrentPhaseDialogValidations {
         return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getCompleteCurrentPhaseDialog());
     }
 
+    public static boolean isCompleteCurrentPhaseDialogClosed() {
+        return Utils.isElementNotDisplayed(new VNextBOCompleteCurrentPhaseDialog().getCompleteCurrentPhaseDialog(), 5);
+    }
+
     public static boolean isServiceNameGridDisplayed() {
         return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getServiceNameGrid());
     }
@@ -35,6 +39,11 @@ public class VNextBOCompleteCurrentPhaseDialogValidations {
 
     public static boolean isResolvedButtonDisplayedForService(String service) {
         return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getResolvedButtonForService(service),
+                10);
+    }
+
+    public static boolean isResolveButtonDisplayedForService(String service) {
+        return Utils.isElementDisplayed(new VNextBOCompleteCurrentPhaseDialog().getResolveButtonForService(service),
                 10);
     }
 }

@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCompleteCurrentPhaseDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROResolveProblemDialog;
@@ -9,6 +10,8 @@ import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCurrentPhaseDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import org.testng.Assert;
+
+import java.util.List;
 
 public class VNextBORODetailsPageSteps {
 
@@ -39,6 +42,13 @@ public class VNextBORODetailsPageSteps {
             VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
         }
         WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void setServiceStatusForMultipleServicesByServiceId(List<String> serviceIds, String status) {
+        for (String serviceId : serviceIds) {
+            setServiceStatusForServiceByServiceId(serviceId, status);
+            VNextBOROProblemsInteractions.clickResolveButton();
+        }
     }
 
     public static void setCheckInOptionForPhase() {
@@ -121,6 +131,12 @@ public class VNextBORODetailsPageSteps {
         handleReportProblemDialog(problem, description);
         Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconDisplayedForService(serviceId),
                 "The Problem icon is not displayed for service after reporting the problem");
+    }
+
+    public static void setReportProblemForMultipleServices(List<String> serviceIds, String problem, String description) {
+        for (String serviceId : serviceIds) {
+            setReportProblemForService(serviceId, problem, description);
+        }
     }
 
     public static void setResolveProblemForService(String serviceId) {

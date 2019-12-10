@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnextbo.steps.invoices;
 
+import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOAdvancedSearchInvoiceFormInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
-import com.cyberiansoft.test.vnextbo.utils.WebConstants;
 import com.cyberiansoft.test.vnextbo.validations.invoices.VNextBOAdvancedSearchInvoiceFormValidations;
 
 public class VNextBOAdvancedSearchInvoiceFormSteps {
@@ -12,7 +12,7 @@ public class VNextBOAdvancedSearchInvoiceFormSteps {
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
 
-        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
+        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM.getName());
         VNextBOAdvancedSearchInvoiceFormInteractions.setFromDate(fromDate);
         VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
         VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
@@ -25,7 +25,7 @@ public class VNextBOAdvancedSearchInvoiceFormSteps {
 
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
 
-        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
+        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM.getName());
         VNextBOAdvancedSearchInvoiceFormInteractions.setFromDate(fromDate);
         VNextBOAdvancedSearchInvoiceFormInteractions.setToDate(toDate);
         VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
@@ -83,7 +83,7 @@ public class VNextBOAdvancedSearchInvoiceFormSteps {
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
 
         VNextBOAdvancedSearchInvoiceFormInteractions.setInvoiceNumber(invoice);
-        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM.getName());
+        VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM.getName());
         VNextBOAdvancedSearchInvoiceFormInteractions.setFromDate(fromDate);
         VNextBOAdvancedSearchInvoiceFormInteractions.setToDate(toDate);
         VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);

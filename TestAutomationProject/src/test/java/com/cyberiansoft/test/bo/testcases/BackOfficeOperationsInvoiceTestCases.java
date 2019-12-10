@@ -114,7 +114,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		InvoicePaymentsTabWebPage invoicepaymentstab = new InvoicePaymentsTabWebPage(webdriver);
 		invoicespage.clickInvoicePayments(data.getInvoiceNumber());
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowPaidColumnValue()
-				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
+				.contains(CustomDateProvider.getTheShortestCurrentDateWithTimeZone()));
 		Assert.assertTrue(invoicepaymentstab.getInvoicesPaymentsLastTableRowDescriptionColumnValue().contains(data.getPo()));
 		invoicepaymentstab.clickNotesForInvoicesPaymentsLastTableRow();
 		Assert.assertEquals(invoicepaymentstab.getInvoicePaymentNoteValue(), data.getNotes());
@@ -226,19 +226,19 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		final String oldivoicenotesvalue = invoiceedittab.getInvoiceNotesValue();
 		// TODO when webdriver version will be updated
-		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateFormatted());
+		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateInShortFormat());
 		invoiceedittab.closeNewTab(mainWindowHandle);
 
 		invoiceedittab = new InvoiceEditTabWebPage(webdriver);
 		invoicespage.clickEditInvoice(data.getInvoiceNumber());
 		Assert.assertEquals(oldivoicenotesvalue, invoiceedittab.getInvoiceNotesValue());
-		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateFormatted());
+		invoiceedittab.setEditableNotes(CustomDateProvider.getCurrentDateInShortFormat());
 		invoiceedittab.clickSaveInvoiceButton();
 		invoiceedittab.closeNewTab(mainWindowHandle);
 
 		invoiceedittab = new InvoiceEditTabWebPage(webdriver);
 		invoicespage.clickEditInvoice(data.getInvoiceNumber());
-		Assert.assertEquals(CustomDateProvider.getCurrentDateFormatted(), invoiceedittab.getInvoiceNotesValue());
+		Assert.assertEquals(CustomDateProvider.getCurrentDateInShortFormat(), invoiceedittab.getInvoiceNotesValue());
 		invoiceedittab.closeNewTab(mainWindowHandle);
 	}
 
@@ -266,7 +266,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickEmailActivity(data.getInvoiceNumber());
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowRecipientsValue().contains(data.getUserMail()));
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue()
-				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
+				.contains(CustomDateProvider.getTheShortestCurrentDateWithTimeZone()));
 		Assert.assertEquals("true", invoiceemailactivitytab.getFirstRowSendCheckboxValue());
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}
@@ -304,7 +304,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicespage.clickEmailActivity(data.getInvoiceNumber());
 		Assert.assertEquals(data.getUserMail(), invoiceemailactivitytab.getFirstRowRecipientsValue());
 		Assert.assertTrue(invoiceemailactivitytab.getFirstRowSentTimeValue()
-				.contains(CustomDateProvider.getCurrentTimeWithTimeZoneTheShortest()));
+				.contains(CustomDateProvider.getTheShortestCurrentDateWithTimeZone()));
 		Assert.assertEquals("true", invoiceemailactivitytab.getFirstRowSendCheckboxValue());
 		invoiceemailactivitytab.closeNewTab(mainWindowHandle);
 	}

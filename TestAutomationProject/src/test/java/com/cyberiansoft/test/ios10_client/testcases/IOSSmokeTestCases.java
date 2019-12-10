@@ -36,7 +36,6 @@ import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorP
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
-import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -48,7 +47,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -782,7 +780,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         serviceRequestsListInteractions.selectSearchTeam(teamName);
         serviceRequestsListInteractions.selectSearchTechnician("Employee Simple 20%");
         serviceRequestsListInteractions.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        serviceRequestsListInteractions.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        serviceRequestsListInteractions.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         serviceRequestsListInteractions.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         serviceRequestsListInteractions.setSearchFreeText(newserviceRequestNumber);
         serviceRequestsListInteractions.clickFindButton();
@@ -1432,7 +1430,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoicenum);
         invoicesWebPage.clickFindButton();
@@ -4508,7 +4506,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();
@@ -4593,7 +4591,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_ALL);
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();
@@ -4791,7 +4789,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         repairorderspage.makeSearchPanelVisible();
         repairorderspage.selectSearchLocation("Default Location");
         repairorderspage.selectSearchTimeframe("Custom");
-        repairorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        repairorderspage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         repairorderspage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         repairorderspage.setSearchWoNumber(workOrderNumber);
         repairorderspage.clickFindButton();
@@ -5173,7 +5171,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoicenum);
         invoicesWebPage.clickFindButton();
@@ -5448,7 +5446,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         InvoicesWebPage invoicesWebPage = new InvoicesWebPage(webdriver);
         operationsWebPage.clickInvoicesLink();
         invoicesWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        invoicesWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         invoicesWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         invoicesWebPage.setSearchInvoiceNumber(invoiceNumber);
         invoicesWebPage.clickFindButton();
@@ -5506,7 +5504,7 @@ public class IOSSmokeTestCases extends ReconProBaseTestCase {
         WorkOrdersWebPage workOrdersWebPage = new WorkOrdersWebPage(webdriver);
         workOrdersWebPage.makeSearchPanelVisible();
         workOrdersWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
-        workOrdersWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateFormatted());
+        workOrdersWebPage.setSearchFromDate(CustomDateProvider.getCurrentDateInShortFormat());
         workOrdersWebPage.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         workOrdersWebPage.setSearchOrderNumber(workOrderNumber3);
 

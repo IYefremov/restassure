@@ -390,21 +390,6 @@ public class VNextBOBaseWebPage {
         return this;
     }
 
-    VNextBOBaseWebPage selectDataFromBoxList(List<WebElement> listBox, WebElement list, String data) {
-        waitForVisibilityOfAllOptions(listBox);
-        for (WebElement selected : listBox) {
-            if (selected.getText().equals(data)) {
-                actions.moveToElement(selected)
-                        .click()
-                        .build()
-                        .perform();
-                break;
-            }
-        }
-        waitForListToDisappear(list);
-        return this;
-    }
-
     private void waitForListToDisappear(WebElement list) {
         try {
             wait.until(ExpectedConditions.attributeToBe(list, "aria-hidden", "true"));
@@ -415,19 +400,6 @@ public class VNextBOBaseWebPage {
             } catch (Exception ignored) {
                 waitABit(1000);
             }
-        }
-    }
-
-    public boolean isDataDisplayed(List<WebElement> listBox, String data) {
-        try {
-            return wait
-                    .until(ExpectedConditions.visibilityOfAllElements(listBox))
-                    .stream()
-                    .map(WebElement::getText)
-                    .anyMatch(option -> option.equals(data));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
         }
     }
 }

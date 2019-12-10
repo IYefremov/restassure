@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.interactions.repairorders;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOEditNotesDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
@@ -12,8 +13,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class VNextBOROPageInteractions {
 
@@ -305,8 +309,8 @@ public class VNextBOROPageInteractions {
         return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOROWebPage().getOrdersDisplayedOnPage()).size();
     }
 
-    public static List<String> getOrdersDatesList() {
-        final List<WebElement> ordersDateList = new VNextBOROWebPage().getOrdersDateList();
+    public static List<String> getOrdersTargetDatesList() {
+        final List<WebElement> ordersDateList = new VNextBOROWebPage().getTargetDateOrdersList();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersDateList);
         return ordersDateList.stream()
                 .map(WebElement::getText)
@@ -460,5 +464,90 @@ public class VNextBOROPageInteractions {
 
     public static String getTechniciansValueForWO(String woNumber) {
         return Utils.getText(new VNextBOROWebPage().getTechniciansFieldForWO(woNumber));
+    }
+
+    public static List<String> getArbitrationDatesList() {
+        return Utils.getText(new VNextBOROWebPage().getArbitrationDatesList());
+    }
+
+    public static List<String> getRoNumbersListValues() {
+        return Utils.getTextByValue(new VNextBOROWebPage().getRoNumbersList());
+    }
+
+    public static List<String> getDescSortedRoNumbersListValues() {
+        return Utils.getTextByValue(new VNextBOROWebPage().getRoNumbersList())
+                .stream()
+                .sorted(String::compareTo)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getAscSortedRoNumbersListValues() {
+        return Utils.getTextByValue(new VNextBOROWebPage().getRoNumbersList())
+                .stream()
+                .sorted((first, second) -> first.isEmpty() ? first.compareTo(second) : second.compareTo(first))
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getOrdersPriorityValues() {
+        final List<WebElement> priorityIconsList = new VNextBOROWebPage().getPriorityIconsList();
+        List<String> priorityValuesList = new ArrayList<>();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(priorityIconsList);
+        priorityIconsList.forEach(icon -> {
+            if (icon.getAttribute("style").contains("red")) {
+                priorityValuesList.add(OrderPriority.HIGH.getValue());
+            } else if (icon.getAttribute("style").contains("green")) {
+                priorityValuesList.add(OrderPriority.LOW.getValue());
+            } else {
+                priorityValuesList.add(OrderPriority.NORMAL.getValue());
+            }
+        });
+        return priorityValuesList;
+    }
+
+    public static List<String> sortByPriority(List<String> ordersPriorityValues) {
+        List<String> high = new ArrayList<>();
+        List<String> normal = new ArrayList<>();
+        List<String> low = new ArrayList<>();
+
+        for (String ordersPriorityValue : ordersPriorityValues) {
+            if (ordersPriorityValue.equals(OrderPriority.HIGH.getValue())) {
+                high.add(ordersPriorityValue);
+            } else if (ordersPriorityValue.equals(OrderPriority.NORMAL.getValue())) {
+                normal.add(ordersPriorityValue);
+            } else if (ordersPriorityValue.equals(OrderPriority.LOW.getValue())) {
+                low.add(ordersPriorityValue);
+            }
+        }
+        return Stream.concat(
+                Stream.concat(high.stream(), normal.stream()),
+                low.stream())
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getHighPriorityDates() {
+        return getDatesByPriority(new VNextBOROWebPage().getHighPriorityOrdersTargetDatesList());
+    }
+
+    public static List<String> getNormalPriorityDates() {
+        return getDatesByPriority(new VNextBOROWebPage().getNormalPriorityOrdersTargetDatesList());
+    }
+
+    public static List<String> getLowPriorityDates() {
+        return getDatesByPriority(new VNextBOROWebPage().getLowPriorityOrdersTargetDatesList());
+    }
+
+    private static List<String> getDatesByPriority(List<WebElement> priorityOrdersDatesList) {
+        try {
+            System.out.println("in getDatesByPriority");
+            priorityOrdersDatesList.stream().map(WebElement::getText).forEach(System.out::println);
+            final List<String> collect = WaitUtilsWebDriver.waitForVisibilityOfAllOptions(priorityOrdersDatesList)
+                    .stream()
+                    .map(WebElement::getText)
+                    .collect(Collectors.toList());
+            System.out.println(collect);
+            return collect;
+        } catch (Exception e) {
+            return Collections.emptyList();
+        }
     }
 }

@@ -1,11 +1,14 @@
 package com.cyberiansoft.test.vnextbo.validations.repairorders;
 
-import com.cyberiansoft.test.baseutils.DataUtils;
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
+import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOPageSwitcherValidations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -94,7 +97,7 @@ public class VNextBOROPageValidations {
                 new VNextBOROWebPage().getDepartmentNarrowDropdownActive());
     }
 
-    private static boolean isElementForDifferentResolutionsDisplayed(WebElement wideScreen,WebElement narrowScreen) {
+    private static boolean isElementForDifferentResolutionsDisplayed(WebElement wideScreen, WebElement narrowScreen) {
         try {
             WaitUtilsWebDriver.waitForVisibility(wideScreen);
             return true;
@@ -221,9 +224,9 @@ public class VNextBOROPageValidations {
     }
 
     private static void verifyDateOrNotStartedPhaseForOrderWithoutDate(LocalDate dateBeforeCurrentDate) {
-        final List<String> ordersDatesList = VNextBOROPageInteractions.getOrdersDatesList();
+        final List<String> ordersDatesList = VNextBOROPageInteractions.getOrdersTargetDatesList();
         final List<String> ordersCurrentPhaseList = VNextBOROPageInteractions.getOrdersCurrentPhaseList();
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData());
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
 
         ordersDatesList.forEach(System.out::println);
         ordersCurrentPhaseList.forEach(System.out::println);
@@ -235,6 +238,57 @@ public class VNextBOROPageValidations {
                 Assert.assertTrue(LocalDate.parse(ordersDatesList.get(i), formatter).isAfter(dateBeforeCurrentDate),
                         "The order started date is not within the given date boundaries");
             }
+        }
+    }
+
+    private static void verifyTargetDateForOrders(LocalDate dateBeforeCurrentDate, List<String> ordersDatesList) {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+
+        for (int i = 0; i < ordersDatesList.size(); i++) {
+            if (i == 0) {
+                continue;
+            }
+            final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
+            final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
+            verifyOrderNextTargetDateIsAfterDateStarted(dateBeforeCurrentDate, next);
+            if (previous.isEqual(next)) {
+                continue;
+            }
+            verifyOrderTargetDateIsWithinBoundaries(previous, next);
+        }
+    }
+
+    private static void verifyTargetDateForOrders(LocalDate dateStarted, LocalDate dateFinished, List<String> ordersDatesList) {
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+
+        for (int i = 0; i < ordersDatesList.size(); i++) {
+            if (i == 0) {
+                continue;
+            }
+            final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
+            final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
+            verifyOrderNextTargetDateIsAfterDateStarted(dateStarted, next);
+            if (previous.isEqual(next)) {
+                continue;
+            }
+            verifyOrderTargetDateIsWithinBoundaries(previous, next, dateFinished);
+        }
+    }
+
+    private static void verifyOrderNextTargetDateIsAfterDateStarted(LocalDate dateStarted, LocalDate next) {
+        Assert.assertTrue(next.isAfter(dateStarted),
+                "The order target date is not within the given date boundaries");
+    }
+
+    private static void verifyOrderTargetDateIsWithinBoundaries(LocalDate previous, LocalDate next, LocalDate dateFinished) {
+        if (previous.isBefore(next) || next.isAfter(dateFinished)) {
+            Assert.fail("The order target date is not within the given date boundaries");
+        }
+    }
+
+    private static void verifyOrderTargetDateIsWithinBoundaries(LocalDate previous, LocalDate next) {
+        if (previous.isBefore(next)) {
+            Assert.fail("The order target date is not within the given date boundaries");
         }
     }
 
@@ -258,6 +312,32 @@ public class VNextBOROPageValidations {
         }
     }
 
+    public static void verifyOrdersAfterSearchByTimeFrame(LocalDate dateBeforeCurrentDate) {
+        if (!isTableDisplayed()) {
+            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+        } else {
+            System.out.println("high priority");
+            verifyTargetDateForOrders(dateBeforeCurrentDate, VNextBOROPageInteractions.getHighPriorityDates());
+            System.out.println("normal priority");
+            verifyTargetDateForOrders(dateBeforeCurrentDate, VNextBOROPageInteractions.getNormalPriorityDates());
+            System.out.println("low priority");
+            verifyTargetDateForOrders(dateBeforeCurrentDate, VNextBOROPageInteractions.getLowPriorityDates());
+        }
+    }
+
+    public static void verifyOrdersAfterSearchByTimeFrame(LocalDate dateStarted, LocalDate dateFinished) {
+        if (!isTableDisplayed()) {
+            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+        } else {
+            System.out.println("high priority");
+            verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getHighPriorityDates());
+            System.out.println("normal priority");
+            verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getNormalPriorityDates());
+            System.out.println("low priority");
+            verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getLowPriorityDates());
+        }
+    }
+
     public static void verifyOrdersAfterSearchByPhase(String currentPhase) {
         if (!isTableDisplayed()) {
             Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
@@ -274,5 +354,115 @@ public class VNextBOROPageValidations {
             Assert.assertEquals(roPage.getProblemIndicatorsList().size(), roPage.getOrdersDisplayedOnPage().size(),
                     "The problem indicators are not displayed for all orders");
         }
+    }
+
+    public static boolean isArbitrationDateMoreThanCurrentDate(String arbitrationDate) {
+        final LocalDate currentDate = CustomDateProvider.getCurrentDateLocalized();
+        final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getDate());
+        return currentDate.isBefore(LocalDate.parse(arbitrationDate, dateFormat));
+    }
+
+    public static boolean areOrdersWithArbitrationDatesDisplayedBeforeAnotherOrders(List<String> arbitrationDatesList) {
+        boolean foundFirstEmptyOrder = false;
+
+        for (String order : arbitrationDatesList) {
+            if (foundFirstEmptyOrder && !order.isEmpty()) {
+                return false;
+            }
+            if (!foundFirstEmptyOrder && order.isEmpty()) {
+                foundFirstEmptyOrder = true;
+            }
+        }
+        return true;
+    }
+
+    public static void verifyOrdersAreDisplayedByPriority(List<String> ordersPriorityValues) {
+        final List<String> sortedList = VNextBOROPageInteractions.sortByPriority(ordersPriorityValues);
+        Assert.assertEquals(ordersPriorityValues, sortedList, "The orders are not sorted by priority");
+    }
+
+    public static void verifyOrdersAreDisplayedByPriorityOnTheLastPage() {
+        if (VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable()) {
+            VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
+            final List<String> ordersPriorityValues = VNextBOROPageInteractions.getOrdersPriorityValues();
+            final int size = ordersPriorityValues.size();
+            final List<String> ordersPriorityValuesOnTheLastPage
+                    = ordersPriorityValues.subList(size - (size % 100), size);
+            verifyOrdersAreDisplayedByPriority(ordersPriorityValuesOnTheLastPage);
+        }
+    }
+
+    private static void verifyOrdersAreSortedByDateInDescendingOrder(List<String> priorityDates) {
+        if (priorityDates != null) {
+            final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+            for (int i = 0; i < priorityDates.size(); i++) {
+                if (i == 0) {
+                    continue;
+                }
+                final String current = priorityDates.get(i);
+                final String previous = priorityDates.get(i - 1);
+                verifyOrdersByDatesInDescendingOrder(dateFormat, current, previous);
+            }
+        }
+    }
+
+    private static void verifyOrdersAreSortedByDateInAscendingOrder(List<String> priorityDates) {
+        if (priorityDates != null) {
+            final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+            for (int i = 0; i < priorityDates.size(); i++) {
+                if (i == 0) {
+                    continue;
+                }
+                final String current = priorityDates.get(i);
+                final String previous = priorityDates.get(i - 1);
+                verifyOrdersByDatesInAscendingOrder(dateFormat, current, previous);
+            }
+        }
+    }
+
+    private static void verifyOrdersByDatesInDescendingOrder(DateTimeFormatter dateFormat, String current, String previous) {
+        if (!LocalDate.parse(current, dateFormat).isEqual(LocalDate.parse(previous, dateFormat))) {
+            Assert.assertTrue(LocalDate.parse(current, dateFormat)
+                            .isBefore(LocalDate.parse(previous, dateFormat)),
+                    "The orders are not sorted by dates in descending order");
+        }
+    }
+
+    private static void verifyOrdersByDatesInAscendingOrder(DateTimeFormatter dateFormat, String current, String previous) {
+        if (!LocalDate.parse(current, dateFormat).isEqual(LocalDate.parse(previous, dateFormat))) {
+            Assert.assertTrue(LocalDate.parse(current, dateFormat)
+                            .isAfter(LocalDate.parse(previous, dateFormat)),
+                    "The orders are not sorted by dates in ascending order");
+        }
+    }
+
+    public static void verifyHighPriorityOrdersAreSortedByDateInDescendingOrder() {
+        final List<String> highPriorityDates = VNextBOROPageInteractions.getHighPriorityDates();
+        verifyOrdersAreSortedByDateInDescendingOrder(highPriorityDates);
+    }
+
+    public static void verifyNormalPriorityOrdersAreSortedByDateInDescendingOrder() {
+        final List<String> normalPriorityDates = VNextBOROPageInteractions.getNormalPriorityDates();
+        verifyOrdersAreSortedByDateInDescendingOrder(normalPriorityDates);
+    }
+
+    public static void verifyLowPriorityOrdersAreSortedByDateInDescendingOrder() {
+        final List<String> lowPriorityDates = VNextBOROPageInteractions.getLowPriorityDates();
+        verifyOrdersAreSortedByDateInDescendingOrder(lowPriorityDates);
+    }
+
+    public static void verifyHighPriorityOrdersAreSortedByDateInAscendingOrder() {
+        final List<String> highPriorityDates = VNextBOROPageInteractions.getHighPriorityDates();
+        verifyOrdersAreSortedByDateInAscendingOrder(highPriorityDates);
+    }
+
+    public static void verifyNormalPriorityOrdersAreSortedByDateInAscendingOrder() {
+        final List<String> normalPriorityDates = VNextBOROPageInteractions.getNormalPriorityDates();
+        verifyOrdersAreSortedByDateInAscendingOrder(normalPriorityDates);
+    }
+
+    public static void verifyLowPriorityOrdersAreSortedByDateInAscendingOrder() {
+        final List<String> lowPriorityDates = VNextBOROPageInteractions.getLowPriorityDates();
+        verifyOrdersAreSortedByDateInAscendingOrder(lowPriorityDates);
     }
 }

@@ -7,21 +7,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import com.cyberiansoft.test.baseutils.DataUtils;
-import org.openqa.selenium.WebDriver;
+import com.cyberiansoft.test.enums.DateUtils;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.WebTable;
 
 class TimeframeFilter {
 	
@@ -36,7 +30,7 @@ class TimeframeFilter {
 	}
 	
 	public void verifyTableDateRangeForCurrentTablePage(Date startrange, Date endrange, List<WebElement> datecells) {
-		DateFormat dateFormat = new SimpleDateFormat(DataUtils.FULL_DATE_FORMAT.getData());
+		DateFormat dateFormat = new SimpleDateFormat(DateUtils.FULL_DATE_FORMAT.getDate());
 		for (WebElement datecell : datecells) {
 			try {
 				Date datevalue = dateFormat.parse(datecell.getText());

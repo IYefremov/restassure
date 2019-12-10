@@ -12,6 +12,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.cyberiansoft.test.baseutils.WaitUtilsWebDriver.waitForDropDownToBeOpened;
 import static com.cyberiansoft.test.baseutils.WaitUtilsWebDriver.waitForElementToBeClickable;
@@ -458,6 +459,22 @@ public class Utils {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public static List<String> getText(List<WebElement> list) {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(list);
+        return list
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getTextByValue(List<WebElement> list) {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(list);
+        return list
+                .stream()
+                .map(e -> e.getAttribute("value"))
+                .collect(Collectors.toList());
     }
 
     public static void acceptAlertIfPresent() {

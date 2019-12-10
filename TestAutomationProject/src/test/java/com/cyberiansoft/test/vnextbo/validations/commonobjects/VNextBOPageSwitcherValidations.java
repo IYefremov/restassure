@@ -46,7 +46,7 @@ public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidation
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderLastPageBtn());
     }
 
-    public static boolean verifyFooterLastPageButtonIsClickable() {
+    public static boolean isFooterLastPageButtonClickable() {
 
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterLastPageBtn());
     }

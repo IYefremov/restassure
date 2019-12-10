@@ -183,6 +183,11 @@ public class VNextBOROAdvancedSearchDialogInteractions {
         selectFlag(flag);
     }
 
+    public static void setSortBy(String sortBy) {
+        clickSortByBox();
+        selectSortBy(sortBy);
+    }
+
     public static String getFlagSelected() {
         return Utils.getText(new VNextBOROAdvancedSearchDialog().getFlagDisplayed());
     }
@@ -265,6 +270,10 @@ public class VNextBOROAdvancedSearchDialogInteractions {
         Utils.clickElement(new VNextBOROAdvancedSearchDialog().getFlagsListBox());
     }
 
+    private static void clickSortByBox() {
+        Utils.clickElement(new VNextBOROAdvancedSearchDialog().getSortByListBox());
+    }
+
     private static void clickDaysInProcessBox() {
         Utils.clickElement(new VNextBOROAdvancedSearchDialog().getDaysInProcessListBox());
     }
@@ -298,11 +307,13 @@ public class VNextBOROAdvancedSearchDialogInteractions {
     }
 
     private static void selectFlag(String flag) {
-//        wait.until(ExpectedConditions.visibilityOf(flagDropDown));
-//        final Select select = new Select(flagDropDown);
-//        select.selectByVisibleText(flag);
         Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getFlagDropDown(),
                 new VNextBOROAdvancedSearchDialog().getFlagsListBoxOptions(), flag, true);
+    }
+
+    private static void selectSortBy(String sortBy) {
+        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getSortByDropDown(),
+                new VNextBOROAdvancedSearchDialog().getSortByListBoxOptions(), sortBy, true);
     }
 
     public static void clickAdvancedSearchCloseButton() {

@@ -14,9 +14,6 @@
       "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
-      "serviceStatuses": [
-        "Active"
-      ],
       "problemReason": "No part"
     }
   ],
@@ -68,10 +65,6 @@
       "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
-      "serviceStatuses": [
-        "Completed",
-        "Problem"
-        ],
       "problemReason": "No part"
     }
   ],
@@ -88,9 +81,6 @@
       "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
-      "serviceStatuses": [
-        "Active"
-      ],
       "problemReason": "No part"
     }
   ],
@@ -107,9 +97,6 @@
       "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
-      "serviceStatuses": [
-        "Active"
-      ],
       "problemReason": "No part"
     }
   ],
@@ -133,9 +120,6 @@
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
-      "serviceStatuses": [
-        "Active"
-      ],
       "problemReason": "No part"
     }
   ],
@@ -195,9 +179,6 @@
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
-      "serviceStatuses": [
-        "Active"
-      ],
       "problemReason": "No part"
     }
   ],
@@ -217,9 +198,6 @@
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
-      "serviceStatuses": [
-        "Active"
-      ],
       "problemReason": "No part"
     }
   ],
@@ -237,9 +215,40 @@
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
-      "serviceStatuses": [
-        "Active"
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving": [
+    {
+      "rowID": "verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving.01",
+      "description": "Test Case 88950: Verify user can close the \"Complete current phase\" pop-up window without problem resolving",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91255"
+        }
       ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase": [
+    {
+      "rowID": "verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase.01",
+      "description": "Test Case 88951: Verify user can resolve problem using \"Complete current phase\" pop-up window without completing current phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91256"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
       "problemReason": "No part"
     }
   ]

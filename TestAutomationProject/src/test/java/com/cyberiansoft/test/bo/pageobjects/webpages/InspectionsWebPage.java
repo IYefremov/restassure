@@ -2,8 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
-import com.cyberiansoft.test.baseutils.DataUtils;
-import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
+import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.bo.webelements.*;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import org.openqa.selenium.Alert;
@@ -401,7 +400,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	public void approveInspectionByNumber(String inspnumber) {
 		makeSearchPanelVisible();
 		selectSearchTimeframe("Custom");
-		setTimeFrame(CustomDateProvider.getCurrentDateFormatted(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
+		setTimeFrame(CustomDateProvider.getCurrentDateInShortFormat(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		setInspectionNumberSearchCriteria(inspnumber);
 		clickFindButton();
 		waitForLoading();
@@ -672,8 +671,8 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public String getChangedInspectionDate(int day) {
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DataUtils.FULL_DATE_FORMAT.getData());
-		LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of(DataUtils.ZONE_ID.getData())));
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+		LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of(DateUtils.ZONE_ID.getDate())));
 		localDate = localDate.minusMonths(1);
 		return localDate.withDayOfMonth(day).format(dateFormat);
 	}

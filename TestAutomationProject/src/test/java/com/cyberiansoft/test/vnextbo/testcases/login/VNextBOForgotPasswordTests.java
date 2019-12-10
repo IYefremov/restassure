@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOForgotPasswordData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
+import com.cyberiansoft.test.enums.ErrorMessages;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
@@ -68,7 +69,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
 
         VNextBOLoginInteractions.clickForgotPasswordLink();
         forgotPasswordPage.clickSubmitButton();
-        Assert.assertEquals(forgotPasswordPage.getErrorMessageValue(), "Email is not valid!",
+        Assert.assertEquals(forgotPasswordPage.getErrorMessageValue(), ErrorMessages.EMAIL_IS_INVALID.getErrorMessage(),
                 "Error message hasn't been correct or not displayed");
     }
 

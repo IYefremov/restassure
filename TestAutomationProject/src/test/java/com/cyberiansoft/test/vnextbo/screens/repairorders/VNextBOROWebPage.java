@@ -221,13 +221,34 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     private List<WebElement> searchOptions;
 
     @FindBy(xpath = "//b[contains(@data-bind, 'orderDateF')]")
-    private List<WebElement> ordersDateList;
+    private List<WebElement> startDateOrdersList;
+
+    @FindBy(xpath = "//b[contains(@data-bind, 'targetDateF')]")
+    private List<WebElement> targetDateOrdersList;
 
     @FindBy(xpath = "//td[@class='phase']//i[contains(@class, 'truncated')]")
     private List<WebElement> ordersCurrentPhaseList;
 
     @FindBy(xpath = "//tbody[@id='tableBody']//i[@class='icon-problem-indicator']")
     private List<WebElement> problemIndicatorsList;
+
+    @FindBy(xpath = "//input[@title='RO #']")
+    private List<WebElement> roNumbersList;
+
+    @FindBy(xpath = "//tr[@data-id]//strong[contains(@data-bind, 'arbitrationDateDisplay')]")
+    private List<WebElement> arbitrationDatesList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon')]")
+    private List<WebElement> priorityIconsList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'red')]/../..//b[contains(@data-bind, 'targetDateF')]")
+    private List<WebElement> highPriorityOrdersTargetDatesList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'none')]/../..//b[contains(@data-bind, 'targetDateF')]")
+    private List<WebElement> normalPriorityOrdersTargetDatesList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'green')]/../..//b[contains(@data-bind, 'targetDateF')]")
+    private List<WebElement> lowPriorityOrdersTargetDatesList;
 
     @FindBy(xpath = "//span[contains(@data-bind, 'search.info')]")
     private WebElement searchFilterText;
