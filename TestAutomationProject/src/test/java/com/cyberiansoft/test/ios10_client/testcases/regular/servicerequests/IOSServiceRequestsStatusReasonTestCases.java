@@ -150,9 +150,7 @@ public class IOSServiceRequestsStatusReasonTestCases extends IOSRegularBaseTestC
         final String serviceRequestNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
         DriverBuilder.getInstance().getDriver().quit();
 
-
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);

@@ -5,34 +5,43 @@ import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
+import com.cyberiansoft.test.dataclasses.TargetProcessTestCaseData;
+import com.cyberiansoft.test.dataclasses.TestCaseData;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.MainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
+import com.cyberiansoft.test.ios10_client.testcases.hd.IOSHDBaseTestCase;
 import com.cyberiansoft.test.ios10_client.utils.TestUser;
+import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
+import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnext.listeners.TestNG_ConsoleRunner;
+import com.mashape.unirest.http.exceptions.UnirestException;
+import io.qameta.allure.Allure;
+import lombok.Getter;
+import lombok.Setter;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.testng.*;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
-import java.util.Calendar;
-import java.util.Date;
+import java.io.*;
+import java.util.*;
+import java.util.stream.Collectors;
 
-public class iOSHDClientListener extends TestListenerAdapter implements IInvokedMethodListener {
-	
-	
-	//private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
-	private ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
+public class iOSHDClientListener implements ITestListener, IInvokedMethodListener, IConfigurationListener {
+
+
+	@Getter
+	@Setter
+	private static Map<String, String> testToTestRunMap = new HashMap<>();
+	private TPIntegrationService tpIntegrationService = new TPIntegrationService();
 	
     @Override
 	public synchronized void onStart(ITestContext context) {
-    	ExtentManager.createInstance(ReconProIOSStageInfo.getInstance().getReportFolder() +
-				ReconProIOSStageInfo.getInstance().getReportFileName());
-    	//ExtentTest parent = extent.createTest(getClass().getName());
-        //parentTest.set(parent);
+
 	}
 
 	@Override
@@ -41,102 +50,130 @@ public class iOSHDClientListener extends TestListenerAdapter implements IInvoked
 	}
 	
 	@Override
-	public synchronized void onTestStart(ITestResult result) {
-		ExtentTest extent;
+	public synchronized void onTestStart(ITestResult testResult) {
+		if (!testToTestRunMap.isEmpty()) {
+			boolean testShouldBeExecuted = false;
+			if (getTestCasesData(testResult) != null && getTestCasesData(testResult).getTargetProcessTestCaseData() != null) {
+				List<String> targetProcessTestCaseIds =
+						this.getTestCasesData(testResult).getTargetProcessTestCaseData()
+								.stream().map(TargetProcessTestCaseData::getTestCaseID)
+								.collect(Collectors.toList());
+				for (String id : targetProcessTestCaseIds) {
+					if (testToTestRunMap.containsKey(id)) {
+						testShouldBeExecuted = true;
+						break;
+					}
+				}
+			}
 
-		if ( getTestParams(result).isEmpty() ) {
-			extent = ExtentManager.getInstance().createTest(result.getMethod().getMethodName());
-        }
-
-        else {
-            if ( getTestParams(result).split(",")[0].contains(result.getMethod().getMethodName()) ) {
-            	extent = ExtentManager.getInstance().createTest(getTestParams(result).split(",")[0], getTestParams(result).split(",")[1]);
-            }
-
-            else {
-            	extent = ExtentManager.getInstance().createTest(result.getMethod().getMethodName(), getTestParams(result).split(",")[1]);
-            }
-        }
-		
-		extent.getModel().setStartTime(getTime(result.getStartMillis()));
-		
-		extentTest.set(extent);
-		//ExtentTest child = parentTest.get().createNode(result.getMethod().getMethodName());
-        //test.set(child);
+			if (!testShouldBeExecuted)
+				throw new SkipException("Test is not in desired suite");
+		}
 	}
 
 	@Override
-	public synchronized void onTestSuccess(ITestResult result) {
-		extentTest.get().log(Status.PASS, "<font color=#00af00>" + Status.PASS.toString().toUpperCase() + "</font>");
-		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
+	public synchronized void onTestSuccess(ITestResult testResult) {
+		if (!testToTestRunMap.isEmpty()) {
+			if (getTestCasesData(testResult) != null && getTestCasesData(testResult).getTargetProcessTestCaseData() != null)
+				this.getTestCasesData(testResult).getTargetProcessTestCaseData()
+						.stream().map(TargetProcessTestCaseData::getTestCaseID)
+						.forEach(id -> {
+							try {
+								tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.PASSED, "Hello from automation :)");
+							} catch (UnirestException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						});
+		}
 	}
 
 	@Override
-	public synchronized void onTestFailure(ITestResult result) {
-		extentTest.get().log(Status.FAIL, "<font color=#F7464A>" + Status.FAIL.toString().toUpperCase() + "</font>");
-		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
-		try {
-			extentTest.get().log(Status.INFO, "SCREENSHOT", MediaEntityBuilder.createScreenCaptureFromPath(AppiumUtils.createScreenshot("report", "fail")).build());
-		} catch (org.openqa.selenium.NoSuchSessionException e) {
-			DriverBuilder.getInstance().setAppiumDriver(MobilePlatform.IOS_HD);
-			DriverBuilder.getInstance().getAppiumDriver().launchApp();
-		} catch (IOException e) {
-			e.printStackTrace();
+	public synchronized void onTestFailure(ITestResult testResult) {
+		if (!testToTestRunMap.isEmpty()) {
+			if (getTestCasesData(testResult) != null && getTestCasesData(testResult).getTargetProcessTestCaseData() != null)
+				this.getTestCasesData(testResult).getTargetProcessTestCaseData()
+						.stream().map(TargetProcessTestCaseData::getTestCaseID)
+						.forEach(id -> {
+							try {
+								tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.FAILED, "Hello from automation :)");
+							} catch (UnirestException e) {
+								e.printStackTrace();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+						});
 		}
-		if ( !getTestParams(result).isEmpty() ) {
-			extentTest.get().log(Status.INFO, "STACKTRACE" + getStrackTrace(result));
-		}
-		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
 		DriverBuilder.getInstance().getAppiumDriver().closeApp();
 		DriverBuilder.getInstance().getAppiumDriver().launchApp();
 
 		MainScreen mainscr = new MainScreen();
-		TestUser testuser = ((BaseTestCase) result.getInstance()).getTestUser();
+		TestUser testuser = ((IOSHDBaseTestCase) testResult.getInstance()).getTestUser();
 		mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
 
 	}
 
 	@Override
-	public synchronized void onTestSkipped(ITestResult result) {
-		extentTest.get().log(Status.SKIP, "<font color=#2196F3>" + Status.SKIP.toString().toUpperCase() + "</font>");
-		extentTest.get().log(Status.INFO, "EXCEPTION = [" + result.getThrowable().getMessage() + "]");
-		extentTest.get().getModel().setEndTime(getTime(result.getEndMillis()));
+	public synchronized void onTestSkipped(ITestResult testResult) {
 	}
 
 	@Override
-	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult result) {
-		
-	}
-	
-	private String getStrackTrace(ITestResult result) {
-        Writer writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-        result.getThrowable().printStackTrace(printWriter);
-
-        return "<br/>\n" + writer.toString().replace(System.lineSeparator(), "<br/>\n");
-    }
-	
-	private String getTestParams(ITestResult tr) {
-        TestNG_ConsoleRunner runner = new TestNG_ConsoleRunner();
-
-        return runner.getTestParams(tr);
-    }
-	
-	private Date getTime(long millis) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(millis);
-        
-        return calendar.getTime();
-    }
-
-	@Override
-	public void afterInvocation(IInvokedMethod method, ITestResult result) {
-
+	public synchronized void onTestFailedButWithinSuccessPercentage(ITestResult testResult) {
 		
 	}
 
+	private TestCaseData getTestCasesData(ITestResult testResult) {
+		try {
+			Object[] parameters = testResult.getParameters();
+			return JSonDataParser.getTestDataFromJson((parameters[parameters.length - 1].toString()), TestCaseData.class);
+		} catch (Exception ex) {
+			return null;
+		}
+	}
+
 	@Override
-	public void beforeInvocation(IInvokedMethod method, ITestResult result) {
+	public void afterInvocation(IInvokedMethod method, ITestResult testResult) {
+
+		if (!testResult.isSuccess()) {
+			try {
+				AppiumUtils.createScreenshot("report", "fail");
+				Allure.addAttachment("failScreen",
+						"image/png",
+						new ByteArrayInputStream(((TakesScreenshot) DriverBuilder.getInstance().getAppiumDriver()).getScreenshotAs(OutputType.BYTES)),
+						".png");
+			} catch (org.openqa.selenium.NoSuchSessionException e) {
+				AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
+			} catch (RuntimeException e) {
+				AppiumInicializator.getInstance().initAppium(MobilePlatform.IOS_HD);
+				e.printStackTrace();
+			}
+		}
+	}
+
+	@Override
+	public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
+
+	}
+
+	@Override
+	public void onConfigurationSuccess(ITestResult testResult) {
+
+	}
+
+	@Override
+	public void onConfigurationFailure(ITestResult testResult) {
+		DriverBuilder.getInstance().getAppiumDriver().closeApp();
+		DriverBuilder.getInstance().getAppiumDriver().launchApp();
+
+		MainScreen mainscr = new MainScreen();
+		TestUser testuser = ((BaseTestCase) testResult.getInstance()).getTestUser();
+		mainscr.userLogin(testuser.getTestUserName(), testuser.getTestUserPassword());
+
+	}
+
+	@Override
+	public void onConfigurationSkip(ITestResult testResult) {
 
 	}
 }

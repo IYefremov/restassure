@@ -38,8 +38,8 @@ public class IOSRegularBaseTestCase {
     @BeforeSuite
     public void setUp() {
 
-        //Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
-        Optional<String> testCaseIdFromMaven = Optional.ofNullable("88423");
+        Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
+        //Optional<String> testCaseIdFromMaven = Optional.ofNullable("88423");
         if (testCaseIdFromMaven.isPresent()) {
             TPIntegrationService tpIntegrationService = new TPIntegrationService();
             String testPlanId = testCaseIdFromMaven.get();

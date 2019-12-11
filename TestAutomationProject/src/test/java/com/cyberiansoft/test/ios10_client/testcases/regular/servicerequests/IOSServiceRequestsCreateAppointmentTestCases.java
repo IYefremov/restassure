@@ -177,8 +177,8 @@ public class IOSServiceRequestsCreateAppointmentTestCases extends IOSRegularBase
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
         teamWorkOrdersScreen.isWorkOrderExists(workOrderNumber);
         teamWorkOrdersScreen.clickBackButton();
-        serviceRequestSscreen.clickBackButton();
-        serviceRequestSscreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

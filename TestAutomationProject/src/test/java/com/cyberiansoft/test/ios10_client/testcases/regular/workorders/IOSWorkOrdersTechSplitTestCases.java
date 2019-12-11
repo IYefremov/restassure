@@ -197,7 +197,6 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
             for (ServiceData serviceData : damageData.getMoneyServices())
                 RegularAvailableServicesScreenValidations.verifyServiceExixts(serviceData.getServiceName(), true);
             servicesScreen.clickBackServicesButton();
-            servicesScreen = new RegularServicesScreen();
         }
         RegularInspectionsSteps.saveInspection();
         RegularNavigationSteps.navigateBackScreen();
@@ -417,6 +416,5 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
         }
         RegularWorkOrdersSteps.cancelCreatingWorkOrder();
         RegularNavigationSteps.navigateBackScreen();
-
     }
 }

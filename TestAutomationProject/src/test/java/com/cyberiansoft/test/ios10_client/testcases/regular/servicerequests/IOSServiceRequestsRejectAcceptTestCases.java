@@ -203,7 +203,7 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
         Assert.assertFalse(serviceRequestSscreen.isRejectActionExists());
         serviceRequestSscreen.selectCancelAction();
-        serviceRequestSscreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -387,7 +387,6 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         serviceRequestsListInteractions.saveNewServiceRequest();
         final String serviceRequestNumber = serviceRequestsListInteractions.getFirstInTheListServiceRequestNumber();
         DriverBuilder.getInstance().getDriver().quit();
-
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
 

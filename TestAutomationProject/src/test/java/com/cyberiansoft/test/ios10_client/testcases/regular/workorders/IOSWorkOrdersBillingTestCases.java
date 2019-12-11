@@ -28,7 +28,6 @@ import java.util.List;
 
 public class IOSWorkOrdersBillingTestCases extends IOSRegularBaseTestCase {
 
-
     @BeforeClass(description = "Work Orders Billing Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = IOSReconProTestCasesDataPaths.getInstance().getWorkOrdersBillingTestCasesDataPath();
