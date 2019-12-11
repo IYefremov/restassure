@@ -27,7 +27,6 @@ import org.testng.annotations.Test;
 
 public class IOSWorkOrdersCalculationsTestCases extends IOSRegularBaseTestCase {
 
-
     @BeforeClass(description = "Work Orders Calculations Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = IOSReconProTestCasesDataPaths.getInstance().getWorkOrdersCalculationsTestCasesDataPath();

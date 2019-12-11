@@ -139,10 +139,8 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void selectReasonToArchive(String reason) {
 		selectUIAPickerValue(reason);
-		if (appiumdriver.findElements(MobileBy.name("Done")).size() > 1)
-			((WebElement) appiumdriver.findElements(MobileBy.name("Done")).get(1)).click();
-		else
-			appiumdriver.findElement(MobileBy.name("Done")).click();
+		appiumdriver.findElementByAccessibilityId("StringPickerVC_Status Reason")
+				.findElement(MobileBy.AccessibilityId("Done")).click();
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {
