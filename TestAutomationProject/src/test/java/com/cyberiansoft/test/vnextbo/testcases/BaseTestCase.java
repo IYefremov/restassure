@@ -23,21 +23,12 @@ public class BaseTestCase {
         webdriver = DriverBuilder.getInstance().getDriver();
     }
 
-    @BeforeSuite
-    public void init() {
+	@BeforeClass
+    public void login() {
+
         browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
         DriverBuilder.getInstance().setDriver(browserType);
         webdriver = DriverBuilder.getInstance().getDriver();
-    }
-
-    @AfterSuite
-    public void tearDown() {
-        if (DriverBuilder.getInstance().getDriver() != null)
-            DriverBuilder.getInstance().quitDriver();
-    }
-
-	@BeforeClass
-    public void login() {
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
         final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
@@ -46,6 +37,9 @@ public class BaseTestCase {
 
     @AfterClass
     public void logout() {
+
         VNextBOHeaderPanelSteps.logout();
+        if (DriverBuilder.getInstance().getDriver() != null)
+            DriverBuilder.getInstance().quitDriver();
     }
 }
