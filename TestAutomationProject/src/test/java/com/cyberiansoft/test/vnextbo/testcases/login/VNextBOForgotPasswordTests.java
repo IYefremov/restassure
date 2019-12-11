@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases.login;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOForgotPasswordData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -95,7 +96,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userName);
         nada.deleteAllMessages();
-
+        WaitUtilsWebDriver.waitForLoading();
         forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
@@ -122,6 +123,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
                 "User's email hasn't been correct");
 
         vNextBOResetPasswordPage.setNewPassword(userPassword);
+        WaitUtilsWebDriver.waitForLoading();
         Assert.assertEquals(VNextBOLoginInteractions.getValueFromEmailField(), userName,
                 "Email field hasn't been correct");
         Utils.refreshPage();
@@ -134,7 +136,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userName);
         nada.deleteAllMessages();
-
+        WaitUtilsWebDriver.waitForLoading();
         forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
@@ -163,7 +165,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userName);
         nada.deleteAllMessages();
-
+        WaitUtilsWebDriver.waitForLoading();
         forgotPasswordPage.setConfirmationMailFieldValue(data.getEmail());
         forgotPasswordPage.clickSubmitButton();
 
