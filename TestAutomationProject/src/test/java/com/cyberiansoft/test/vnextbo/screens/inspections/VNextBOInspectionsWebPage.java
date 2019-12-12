@@ -133,7 +133,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 
 	public void selectInspectionInTheList(String inspectionNumber) {
 		Utils.clickElement(driver.findElement(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspectionNumber + "']")));
-		waitABit(4000);
+        WaitUtilsWebDriver.waitABit(4000);
 	}
 
 	private WebElement getInspectionCell(String inspectionNumber) {
@@ -183,7 +183,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		exists = notesModalDialog.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
 		new WebDriverWait(driver, 30)
 				.until(ExpectedConditions.elementToBeClickable(notesModalDialog.findElement(By.xpath(".//button[@class='close']")))).click();
-		waitABit(500);
+        WaitUtilsWebDriver.waitABit(500);
 		return exists;
 	}
 
@@ -200,7 +200,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		exists = notesModalDialog.findElement(By.xpath("//div[@class='image-notes__preview--modal']")).isDisplayed();
 		new WebDriverWait(driver, 30)
 				.until(ExpectedConditions.elementToBeClickable(notesModalDialog.findElement(By.xpath(".//button[@class='close']")))).click();
-		waitABit(500);
+        WaitUtilsWebDriver.waitABit(500);
 		return exists;
 	}
 
@@ -215,7 +215,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		waitLong.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtAreaNotes"))));
 		driver.findElement(By.name("txtAreaNotes")).sendKeys(approveNotes);
 		driver.findElement(By.xpath("//button[@id='btnApprove']")).click();
-		waitABit(5000);
+        WaitUtilsWebDriver.waitABit(5000);
 		driver.close();
 		driver.switchTo().window(parentHandle);
 		driver.navigate().refresh();
@@ -228,7 +228,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
         WaitUtilsWebDriver.waitForNewTab();
         String newWindow = Utils.getNewTab(parentHandle);
 		driver.switchTo().window(newWindow);
-		waitForLoading();
+        WaitUtilsWebDriver.waitForLoading();
 	}
 
 	public void declineInspection(String declineNotes) {
@@ -243,7 +243,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 				.until(ExpectedConditions.visibilityOf(driver.findElement(By.name("txtDeclineNotes"))));
 		driver.findElement(By.name("txtDeclineNotes")).sendKeys(declineNotes);
 		driver.findElement(By.xpath("//button[@class='btn icon cancel' and @id='btnDecline']")).click();
-		waitABit(5000);
+        WaitUtilsWebDriver.waitABit(5000);
 		driver.close();
 		driver.switchTo().window(parentHandle);
 		driver.navigate().refresh();
@@ -272,7 +272,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 	}
 
 	public VNextBOInspectionAdvancedSearchForm openSavedAdvancedSearchFilter(String filterName) {
-		waitABit(2000);
+        WaitUtilsWebDriver.waitABit(2000);
 		Actions act = new Actions(driver);
 		act.moveToElement(savedSearchListForm.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i"))).perform();
 

@@ -130,6 +130,7 @@ public class VNextBOROPageInteractions {
                 .waitForVisibilityOfAllOptions(new VNextBOROWebPage().getSearchOptions())
                 .stream()
                 .map(WebElement::getText)
+                .map(String::trim)
                 .collect(Collectors.toList());
     }
 
@@ -538,13 +539,11 @@ public class VNextBOROPageInteractions {
 
     private static List<String> getDatesByPriority(List<WebElement> priorityOrdersDatesList) {
         try {
-            System.out.println("in getDatesByPriority");
             priorityOrdersDatesList.stream().map(WebElement::getText).forEach(System.out::println);
             final List<String> collect = WaitUtilsWebDriver.waitForVisibilityOfAllOptions(priorityOrdersDatesList)
                     .stream()
                     .map(WebElement::getText)
                     .collect(Collectors.toList());
-            System.out.println(collect);
             return collect;
         } catch (Exception e) {
             return Collections.emptyList();

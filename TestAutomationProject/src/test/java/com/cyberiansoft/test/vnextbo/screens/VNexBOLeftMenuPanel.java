@@ -1,15 +1,17 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
+import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsManagementWebPage;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.screens.services.VNextBOServicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOUsersWebPage;
-import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
-import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -17,7 +19,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 @Getter
@@ -166,16 +167,16 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
                     .elementToBeClickable(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"))))
                     .click();
         } catch (Exception e) {
-            scrollToElement(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
-            clickWithJS(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            Utils.scrollToElement(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
+            Utils.clickWithJS(this.mainMenu.findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]")));
         }
-        waitABit(1000);
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     private void selectMenuItem(WebElement menuitem, String mainMenuItem) {
         try {
             driver.switchTo().frame(tutorialFrame);
-            waitABit(1000);
+            WaitUtilsWebDriver.waitABit(1000);
             wait.until(ExpectedConditions.elementToBeClickable(tutorialSkipButton)).click();
         } catch (Exception ignored) {
         }
@@ -186,9 +187,9 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(menuitem)).click();
         } catch (TimeoutException e) {
-            scrollToElement(menuitem);
-            clickWithJS(menuitem);
+            Utils.scrollToElement(menuitem);
+            Utils.clickWithJS(menuitem);
         }
-        waitForLoading();
+        WaitUtilsWebDriver.waitForLoading();
     }
 }

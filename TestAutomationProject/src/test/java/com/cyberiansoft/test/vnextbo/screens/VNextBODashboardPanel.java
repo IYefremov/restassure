@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -80,7 +81,7 @@ public class VNextBODashboardPanel extends VNextBOBaseWebPage {
     private void clickDashboardOptionLink(WebElement option) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(option)).click();
-            waitForLoading();
+            WaitUtilsWebDriver.waitForLoading();
         } catch (Exception e) {
             e.printStackTrace();
         }

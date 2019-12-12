@@ -109,7 +109,7 @@ public class DriverBuilder {
                 selenoidChromeOptions.addArguments("--window-size=1800,1000");
                 DesiredCapabilities capabilities = new DesiredCapabilities();
                 capabilities.setBrowserName("chrome");
-                capabilities.setVersion("75.0");
+                capabilities.setVersion("78.0");
                 capabilities.setCapability("enableVNC", true);
                 capabilities.setCapability("enableVideo", false);
                 capabilities.setCapability("sessionTimeout", "2m");

@@ -224,6 +224,21 @@
     }
   ],
 
+  "verifyUserCanResolveProblemOnPhaseLevel": [
+    {
+      "rowID": "verifyUserCanResolveProblemOnPhaseLevel.01",
+      "description": "Test Case 83641:User can see Invoice of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91386"
+        }
+      ],
+      "location": "New_zayats_location",
+      "orderNumber": "O-000-152441",
+      "invoiceNumber": "I-000-00997"
+    }
+  ],
+
   "verifyUserCanSeeInvoiceOfRo": [
     {
       "rowID": "verifyUserCanSeeInvoiceOfRo.01",

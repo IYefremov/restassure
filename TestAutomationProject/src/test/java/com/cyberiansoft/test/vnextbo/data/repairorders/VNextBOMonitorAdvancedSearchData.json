@@ -1040,5 +1040,18 @@
       ],
       "location": "Best Location Automation"
     }
+  ],
+
+  "verifyUserCanSeeDefaultSearchSettings": [
+    {
+      "rowID": "verifyUserCanSeeDefaultSearchSettings.01",
+      "description": "Test Case 91008:User can see default search settings",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98993"
+        }
+      ],
+      "location": "1111 Automation"
+    }
   ]
 }
