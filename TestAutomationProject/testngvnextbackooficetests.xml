@@ -17,21 +17,6 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.quicknotes.VNextBOQuickNotesTestCases"/>
         </classes>
     </test>
-    <test name="Monitor Test Cases">
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCases"/>
-        </classes>
-    </test>
-    <test name="Monitor Advanced Search Test Cases">
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorAdvancedSearchTestCases"/>
-        </classes>
-    </test>
-    <test name="Monitor Simple Search Test Cases">
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorSimpleSearchTestCases"/>
-        </classes>
-    </test>
     <test name="Home Page Test Cases">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePage"/>
@@ -160,6 +145,36 @@
     <test name="Parts Management Order Details Status CheckBox Test Cases">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsStatusCheckBoxTests"/>
+        </classes>
+    </test>
+    <test name="Monitor Advanced Search Test Cases">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorAdvancedSearchTestCases"/>
+        </classes>
+    </test>
+    <test name="Monitor Simple Search Test Cases">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorSimpleSearchTestCases"/>
+        </classes>
+    </test>
+    <test name="Monitor Test Cases Part 1">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart1"/>
+        </classes>
+    </test>
+    <test name="Monitor Test Cases Part 2">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart2"/>
+        </classes>
+    </test>
+    <test name="Monitor Test Cases Part 3">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart3"/>
+        </classes>
+    </test>
+    <test name="Monitor Test Cases Part 4">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart4"/>
         </classes>
     </test>
 </suite>
