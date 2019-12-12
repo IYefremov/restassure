@@ -3,6 +3,7 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularApproveInvoicesScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularPrintSelectorScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInvoicesScreen;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.IInspectionsTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
@@ -112,5 +113,14 @@ public class RegularMyInvoicesScreenSteps {
     public static void clickInvoicesSearchButton() {
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
         myInvoicesScreen.clickInvoicesSearchButton();
+    }
+
+    public static void printInvoice(String invoiceID, String printServerName) {
+        selectInvoice(invoiceID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.PRINT);
+        RegularPrintSelectorScreen printSelectorScreen = new RegularPrintSelectorScreen();
+        printSelectorScreen.checkRemotePrintServerAndSelectPrintServer(printServerName);
+        printSelectorScreen.clickPrintSelectorPrintButton();
+        printSelectorScreen.clickPrintOptionsPrintButton();
     }
 }

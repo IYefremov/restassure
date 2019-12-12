@@ -38,7 +38,10 @@
       <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoicesCreateTestCases"/>
       <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoicePaymentTestCases"/>
       <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoiceChangeCustomerTestCases"/>
+      <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoiceEmailTestCases"/>
+      <class name="com.cyberiansoft.test.ios10_client.testcases.regular.invoices.IOSInvoicePrintTestCases"/>
       <class name="com.cyberiansoft.test.ios10_client.testcases.regular.ordermonitor.IOSOrderMonitorTestCases"/>
+      <class name="com.cyberiansoft.test.ios10_client.testcases.regular.calculations.IOSCalculationsTestCases"/>
       <class name="com.cyberiansoft.test.ios10_client.testcases.regular.customers.IOSCustomersCRUDTestCases"/>
       <class name="com.cyberiansoft.test.ios10_client.testcases.regular.carhistory.IOSCarHistoryTestCases"/>
     </classes>
