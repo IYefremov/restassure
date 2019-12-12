@@ -8,7 +8,19 @@
         {
           "testCaseID": "88506"
         }
-      ]
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733"
+        },
+        "moneyService" : {
+          "serviceName": "Wheel"
+        },
+        "workOrderTotalSale": "5"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
     }
   ],
   "testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices": [
@@ -19,7 +31,19 @@
         {
           "testCaseID": "88507"
         }
-      ]
+      ],
+      "workOrderData": {
+        "vihicleInfo": {
+          "vinNumber": "1D3HV13T19S825733"
+        },
+        "moneyService" : {
+          "serviceName": "Wheel"
+        },
+        "workOrderTotalSale": "5"
+      },
+      "invoiceData": {
+        "poNumber": "123po"
+      }
     }
   ],
   "testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices": [
