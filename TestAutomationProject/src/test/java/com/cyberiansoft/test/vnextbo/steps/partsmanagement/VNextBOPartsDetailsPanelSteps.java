@@ -6,9 +6,7 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetails
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VNextBOPartsDetailsPanelSteps {
@@ -105,6 +103,20 @@ public class VNextBOPartsDetailsPanelSteps {
 
         clickDeleteLaborButtonForPartByNumberInListAndServiceName(partNumber, laborServiceName);
         VNextBOModalDialogSteps.clickYesButton();
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void displayPartsByStatus(String status) {
+
+        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(detailsPanel.getStatusesCheckbox());
+        Utils.selectOptionInDropDownWithJs(detailsPanel.getStatusesCheckboxDropDown(), detailsPanel.statusCheckBoxDropDownItem(status));
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void clickStatusesCheckBox() {
+
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getStatusesCheckbox());
         WaitUtilsWebDriver.waitForLoading();
     }
 }
