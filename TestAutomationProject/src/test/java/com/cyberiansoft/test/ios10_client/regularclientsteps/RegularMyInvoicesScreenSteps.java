@@ -123,4 +123,9 @@ public class RegularMyInvoicesScreenSteps {
         printSelectorScreen.clickPrintSelectorPrintButton();
         printSelectorScreen.clickPrintOptionsPrintButton();
     }
+
+    public static void openInvoiceSummary(String invoiceID) {
+        selectInvoice(invoiceID);
+        RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.SUMMARY);
+    }
 }

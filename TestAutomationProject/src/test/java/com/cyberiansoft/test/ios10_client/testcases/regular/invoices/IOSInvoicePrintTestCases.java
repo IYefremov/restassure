@@ -5,17 +5,20 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSummaryScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularOrderSummaryScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.RegularMyInvoicesScreenValidations;
+import com.cyberiansoft.test.ios10_client.regularvalidations.RegularSelectedServicesScreenValidations;
 import com.cyberiansoft.test.ios10_client.testcases.regular.IOSRegularBaseTestCase;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.InvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.json.simple.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -38,7 +41,6 @@ public class IOSInvoicePrintTestCases extends IOSRegularBaseTestCase {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.swtchToWholesaleMode();
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
@@ -63,7 +65,6 @@ public class IOSInvoicePrintTestCases extends IOSRegularBaseTestCase {
         RegularInvoicesSteps.saveInvoiceAsFinal();
         RegularNavigationSteps.navigateBackScreen();
 
-
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
         RegularMyInvoicesScreenSteps.printInvoice(invoicenum, printServerName);
         RegularNavigationSteps.navigateBackScreen();
@@ -73,7 +74,7 @@ public class IOSInvoicePrintTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices(String rowID,
                                                                                       String description, JSONObject testData) {
 
@@ -85,7 +86,6 @@ public class IOSInvoicePrintTestCases extends IOSRegularBaseTestCase {
         RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.swtchToWholesaleMode();
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
@@ -117,6 +117,53 @@ public class IOSInvoicePrintTestCases extends IOSRegularBaseTestCase {
         Helpers.waitABit(20000);
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();
         RegularMyInvoicesScreenValidations.verifyInvoiceHasPrintIcon(invoicenum, true);
+        RegularNavigationSteps.navigateBackScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testWOVerifyThatOnInvoiceSummaryMainServiceOfThePanelIsDisplayedAsFirstThenAdditionalServices(String rowID,
+                                                                                                              String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToCustomersScreen();
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
+        customersScreen.swtchToWholesaleMode();
+        customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
+        RegularVehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.selectMatrixServiceData(workOrderData.getMatrixServiceData());
+        RegularServicesScreenSteps.switchToSelectedServices();
+        RegularSelectedServicesScreenValidations.verifyServiceIsSelected(workOrderData.getMatrixServiceData().getMatrixServiceName(), true);
+        RegularNavigationSteps.navigateToOrderSummaryScreen();
+        RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
+        orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
+        RegularWorkOrdersSteps.saveWorkOrder();
+        RegularMyWorkOrdersSteps.selectWorkOrderForApprove(workOrderNumber);
+        RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
+        myWorkOrdersScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularSummaryApproveScreenSteps.approveWorkOrder();
+
+        myWorkOrdersScreen.selectWorkOrderForAction(workOrderNumber);
+        myWorkOrdersScreen.clickInvoiceIcon();
+        RegularInvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+        RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoicenum = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
+        RegularInvoicesSteps.saveInvoiceAsFinal();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInvoicesScreen();
+        RegularMyInvoicesScreenSteps.openInvoiceSummary(invoicenum);
+
+        RegularSummaryScreen summaryScreen = new RegularSummaryScreen();
+        Assert.assertTrue(summaryScreen.isSummaryPDFExists());
+        RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
     }
 }
