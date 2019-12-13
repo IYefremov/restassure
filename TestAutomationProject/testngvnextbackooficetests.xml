@@ -147,6 +147,11 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsStatusCheckBoxTests"/>
         </classes>
     </test>
+    <test name="Parts Management Order Details Parts Details Status Test Cases">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsStatusTests"/>
+        </classes>
+    </test>
     <test name="Monitor Advanced Search Test Cases">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorAdvancedSearchTestCases"/>

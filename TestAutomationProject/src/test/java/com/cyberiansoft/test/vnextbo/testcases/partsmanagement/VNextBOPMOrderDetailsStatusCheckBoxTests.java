@@ -19,7 +19,7 @@ public class VNextBOPMOrderDetailsStatusCheckBoxTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
 
-        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsStatusCheckBoxDataTD();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsStatusCheckBoxTD();
         com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
         VNextBOSearchPanelSteps.searchByText("O-000-152414");
