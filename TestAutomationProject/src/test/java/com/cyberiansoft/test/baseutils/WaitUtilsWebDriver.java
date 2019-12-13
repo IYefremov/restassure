@@ -268,4 +268,16 @@ public class WaitUtilsWebDriver {
     public static WebElement waitForElementNotToBeStale(By by) {
         return waitForElementNotToBeStale(DriverBuilder.getInstance().getDriver().findElement(by));
     }
+
+    public static void waitForPendingRequestsToComplete() {
+
+        boolean requestsAreCompleted = false;
+        try {
+            do {
+                requestsAreCompleted = (boolean) ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("return angular.element(document.body).injector().get('$http').pendingRequests.length === 0");
+            } while (!requestsAreCompleted);
+        } catch (Exception ignored) {
+            waitABit(1500);
+        }
+    }
 }

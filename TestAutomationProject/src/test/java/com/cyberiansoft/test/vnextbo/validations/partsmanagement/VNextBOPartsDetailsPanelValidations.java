@@ -28,6 +28,18 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Status hasn't been correct");
     }
 
+    public static void verifyPartPriceIsCorrect(int partNumber, String expectedPrice) {
+
+        Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartPriceField().get(partNumber)), expectedPrice,
+                "Price hasn't been correct");
+    }
+
+    public static void verifyPartQuantityIsCorrect(int partNumber, String expectedQuantity) {
+
+        Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartQuantityField().get(partNumber)), expectedQuantity,
+                "Price hasn't been correct");
+    }
+
     public static void verifyPartNumberIsCorrect(int partNumberInList, String expectedPartNumber) {
 
         Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartNumberField().get(partNumberInList)), expectedPartNumber,
@@ -127,7 +139,6 @@ public class VNextBOPartsDetailsPanelValidations {
                 Assert.assertEquals(partCheckBox.getAttribute("checked"), null, "Not all checkboxes were deactivated for parts with status ");
             }
         }
-
     }
 
     public static void verifyDeleteSelectedPartsButtonIsDisplayed(boolean shouldBeDisplayed) {

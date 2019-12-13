@@ -62,6 +62,24 @@ public class VNextBOPartsDetailsPanelSteps {
         Utils.clickElement(detailsPanel.getPartStatusField().get(partNumber));
         Utils.selectOptionInDropDown(detailsPanel.getPartStatusDropDown(), detailsPanel.getPartStatusListBoxOptions(), status, true);
         WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+    }
+
+    public static void setPriceForPartByPartNumberInList(int partNumber, String price) {
+
+        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(detailsPanel.getPartPriceField().get(partNumber));
+        Utils.clearAndType(detailsPanel.getPartPriceField().get(partNumber), price);
+        Utils.clickElement(detailsPanel.getPartQuantityField().get(partNumber));
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void setQuantityForPartByPartNumberInList(int partNumber, String quantity) {
+
+        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(detailsPanel.getPartQuantityField().get(partNumber));
+        Utils.clearAndType(detailsPanel.getPartQuantityField().get(partNumber), quantity);
+        Utils.clickElement(detailsPanel.getPartPriceField().get(partNumber));
     }
 
     public static void duplicatePartByNumberInList(int partNumber) {

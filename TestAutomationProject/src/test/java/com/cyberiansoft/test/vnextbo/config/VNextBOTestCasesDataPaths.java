@@ -70,8 +70,12 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.parts.management.dashboard.td");
     }
 
-    public String getPMOrderDetailsStatusCheckBoxDataTD() {
+    public String getPMOrderDetailsStatusCheckBoxTD() {
         return properties.getProperty("vnextbo.parts.management.order.details.status.checkbox.td");
+    }
+
+    public String getPMOrderDetailsPartsDetailsStatusTD() {
+        return properties.getProperty("vnextbo.parts.management.order.details.parts.details.status.td");
     }
 
     public String getSmokeTD() {
