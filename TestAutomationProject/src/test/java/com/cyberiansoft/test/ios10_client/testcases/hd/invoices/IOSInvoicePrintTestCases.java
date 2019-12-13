@@ -29,7 +29,7 @@ import org.testng.annotations.Test;
 
 public class IOSInvoicePrintTestCases extends IOSHDBaseTestCase {
 
-    @BeforeClass(description = "Car History Test Cases")
+    @BeforeClass(description = "Invoice Print Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = IOSReconProTestCasesDataPaths.getInstance().getInvoicePrintTestCasesDataPath();
     }
@@ -38,15 +38,42 @@ public class IOSInvoicePrintTestCases extends IOSHDBaseTestCase {
     public void testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedMyInvoices(String rowID,
                                                                                       String description, JSONObject testData) {
 
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         final String printServerName = "TA_Print_Server";
 
         HomeScreen homeScreen = new HomeScreen();
         CustomersScreen customersScreen = homeScreen.clickCustomersButton();
-        customersScreen.swtchToWholesaleMode();
-        customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
+        customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+        SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
+        settingsScreen.setInspectionToNonSinglePageInspection();
+        settingsScreen.clickHomeButton();
+
+        MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+        MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
+        NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
+        ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
+        ServicesScreen servicesScreen = new ServicesScreen();
+        Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getMatrixServiceData().getMatrixServiceName()));
+        NavigationSteps.navigateToOrderSummaryScreen();
+        OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
+        orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
+        orderSummaryScreen.saveWizard();
+        myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+
+        myWorkOrdersScreen.selectWorkOrderForAction(workOrderNumber);
+        myWorkOrdersScreen.clickInvoiceIcon();
+        InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.DEFAULT_INVOICETYPE);
+        InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
+        invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
+        final String invoicenum = invoiceInfoScreen.getInvoiceNumber();
+        invoiceInfoScreen.clickSaveInvoiceAsFinal();
+        NavigationSteps.navigateBackScreen();
 
         MyInvoicesScreen myInvoicesScreen = homeScreen.clickMyInvoices();
-        final String invoicenum = myInvoicesScreen.getFirstInvoiceValue();
         myInvoicesScreen.printInvoice(invoicenum, printServerName);
         NavigationSteps.navigateBackScreen();
         Helpers.waitABit(20000);
@@ -59,15 +86,49 @@ public class IOSInvoicePrintTestCases extends IOSHDBaseTestCase {
     public void testVerifyThatPrintIconIsShownNextToInvoiceWhenItWasPrintedTeamInvoices(String rowID,
                                                                                         String description, JSONObject testData) {
 
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         final String printServerName = "TA_Print_Server";
+
         HomeScreen homeScreen = new HomeScreen();
-        TeamInvoicesScreen teaminvoicesscreen = homeScreen.clickTeamInvoices();
-        final String invoicenum = teaminvoicesscreen.getFirstInvoiceValue();
-        teaminvoicesscreen.printInvoice(invoicenum, printServerName);
+        CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+        customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
+
+        SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
+        settingsScreen.setInspectionToNonSinglePageInspection();
+        settingsScreen.clickHomeButton();
+
+        MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+        MyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INV_PRINT);
+        VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
+        String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
+        NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
+        ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
+        ServicesScreen servicesScreen = new ServicesScreen();
+        Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getMatrixServiceData().getMatrixServiceName()));
+        NavigationSteps.navigateToOrderSummaryScreen();
+        OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
+        orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
+        orderSummaryScreen.saveWizard();
+        myWorkOrdersScreen.approveWorkOrderWithoutSignature(workOrderNumber, iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+
+        myWorkOrdersScreen.selectWorkOrderForAction(workOrderNumber);
+        myWorkOrdersScreen.clickInvoiceIcon();
+        InvoiceTypesSteps.selectInvoiceType(InvoicesTypes.CUSTOMER_APPROVALON_INVOICETYPE);
+        InvoiceInfoScreen invoiceInfoScreen = new InvoiceInfoScreen();
+        invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
+        final String invoicenum = invoiceInfoScreen.getInvoiceNumber();
+        invoiceInfoScreen.clickSaveInvoiceAsFinal();
+        NavigationSteps.navigateBackScreen();
+
+        Helpers.waitABit(10000);
+        homeScreen.clickTeamInvoices();
+        TeamInvoicesScreen teamInvoicesScreen = new TeamInvoicesScreen();
+        teamInvoicesScreen.printInvoice(invoicenum, printServerName);
         NavigationSteps.navigateBackScreen();
         Helpers.waitABit(20000);
         homeScreen.clickTeamInvoices();
-        Assert.assertTrue(teaminvoicesscreen.isInvoicePrintButtonExists(invoicenum));
+        Assert.assertTrue(teamInvoicesScreen.isInvoicePrintButtonExists(invoicenum));
         NavigationSteps.navigateBackScreen();
     }
 
