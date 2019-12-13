@@ -125,10 +125,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	public void selectServiceSubSrvice(String servicesubsrvicename) {
 		appiumdriver.findElementByClassName("XCUIElementTypeTable").findElement(MobileBy.AccessibilityId(servicesubsrvicename)).click();
 	}
-	
-	public WebElement getServiceTableCell(String serviceName) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + serviceName + "']/.."));
-	}
 
 	public void openCustomServiceDetails(String serviceName) {
 
@@ -169,8 +165,8 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	}
 
 	public String getListOfSelectedVehicleParts() {
-		WebElement par = getServiceTableCell("Vehicle Part");	
-		return par.findElement(MobileBy.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
+		return appiumdriver.findElementByAccessibilityId("ClarificationBox_VehiclePartSelector")
+				.findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
 	}
 	
 	public void clickTechnicianToolbarIcon() {

@@ -40,7 +40,7 @@ public class IOSRegularTestCasesListener implements ITestListener, IInvokedMetho
 
     @Override
     public synchronized void onFinish(ITestContext context) {
-        ExtentManager.getInstance().flush();
+        //ExtentManager.getInstance().flush();
     }
 
     @Override
