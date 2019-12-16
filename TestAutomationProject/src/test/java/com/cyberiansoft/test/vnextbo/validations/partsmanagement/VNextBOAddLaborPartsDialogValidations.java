@@ -14,21 +14,21 @@ public class VNextBOAddLaborPartsDialogValidations {
                 "Dialog hasn't been displayed");
     }
 
-    public static void verifyClearLabourServiceFieldIconIsDisplayed() {
+    public static void verifyClearLaborServiceFieldIconIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOAddLaborPartsDialog().getClearServiceFieldIcon()),
                 "Clear icon hasn't been displayed");
     }
 
-    public static void verifyLabourServiceDropDownIsDisplayed() {
+    public static void verifyLaborServiceDropDownIsDisplayed() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOAddLaborPartsDialog().getLaborServicesDropDown()),
                 "Dropdown hasn't been displayed");
     }
 
-    public static void verifyLabourServiceFieldContainsCorrectValue(String expectedValue) {
+    public static void verifyLaborServiceFieldContainsCorrectValue(String expectedValue) {
 
         Assert.assertEquals(Utils.getInputFieldValue(new VNextBOAddLaborPartsDialog().getSelectLaborServiceField()), expectedValue,
-                "Labour service field has contained incorrect value");
+                "Labor service field has contained incorrect value");
     }
 }

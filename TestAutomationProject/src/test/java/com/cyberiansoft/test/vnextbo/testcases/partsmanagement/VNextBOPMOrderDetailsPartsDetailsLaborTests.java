@@ -19,14 +19,14 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextBOPMOrderDetailsPartsDetailsLabourTests extends BaseTestCase {
+public class VNextBOPMOrderDetailsPartsDetailsLaborTests extends BaseTestCase {
 
-    int laboursAmountBeforeAdding;
+    int laborsAmountBeforeAdding;
 
     @BeforeClass
     public void settingUp() {
 
-        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsPartsDetailsLabourTD();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsPartsDetailsLaborTD();
         com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
         VNextBOSearchPanelSteps.searchByText("O-000-152414");
@@ -46,14 +46,14 @@ public class VNextBOPMOrderDetailsPartsDetailsLabourTests extends BaseTestCase {
     public void verifyUserMinimizeMaximizeThePartTab(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
-        VNextBOPartsDetailsPanelValidations.verifyLabourBlockIsDisplayed(0, true);
-        laboursAmountBeforeAdding = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
+        VNextBOPartsDetailsPanelValidations.verifyLaborBlockIsDisplayed(0, true);
+        laborsAmountBeforeAdding = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
-        VNextBOPartsDetailsPanelValidations.verifyLabourBlockIsDisplayed(0, false);
+        VNextBOPartsDetailsPanelValidations.verifyLaborBlockIsDisplayed(0, false);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
-    public void verifyUserCanCancelAddingLabourXIcon(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanCancelAddingLaborXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.clickAddLaborButtonForPartByNumberInList(0);
@@ -63,7 +63,7 @@ public class VNextBOPMOrderDetailsPartsDetailsLabourTests extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
-    public void verifyUserCanCancelAddingLabourCancelButton(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanCancelAddingLaborCancelButton(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.clickAddLaborButtonForPartByNumberInList(0);
@@ -73,41 +73,41 @@ public class VNextBOPMOrderDetailsPartsDetailsLabourTests extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
-    public void verifyUserCanTypeLabourServiceNameAddingLabour(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanTypeLaborServiceNameAddingLabor(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.clickAddLaborButtonForPartByNumberInList(0);
         VNextBOAddLaborPartsDialogSteps.populateLaborServiceField("Paint");
-        VNextBOAddLaborPartsDialogValidations.verifyLabourServiceDropDownIsDisplayed();
-        VNextBOAddLaborPartsDialogValidations.verifyClearLabourServiceFieldIconIsDisplayed();
-        VNextBOAddLaborPartsDialogValidations.verifyLabourServiceFieldContainsCorrectValue("Paint");
+        VNextBOAddLaborPartsDialogValidations.verifyLaborServiceDropDownIsDisplayed();
+        VNextBOAddLaborPartsDialogValidations.verifyClearLaborServiceFieldIconIsDisplayed();
+        VNextBOAddLaborPartsDialogValidations.verifyLaborServiceFieldContainsCorrectValue("Paint");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
-    public void verifyUserCanClearTypedNameOfLabourServiceClickingOnXIcon(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanClearTypedNameOfLaborServiceClickingOnXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.clickAddLaborButtonForPartByNumberInList(0);
         VNextBOAddLaborPartsDialogSteps.populateLaborServiceField("Paint");
-        VNextBOAddLaborPartsDialogSteps.clearLabourServiceField();
-        VNextBOAddLaborPartsDialogValidations.verifyLabourServiceFieldContainsCorrectValue("");
-        VNextBOAddLaborPartsDialogValidations.verifyLabourServiceDropDownIsDisplayed();
+        VNextBOAddLaborPartsDialogSteps.clearLaborServiceField();
+        VNextBOAddLaborPartsDialogValidations.verifyLaborServiceFieldContainsCorrectValue("");
+        VNextBOAddLaborPartsDialogValidations.verifyLaborServiceDropDownIsDisplayed();
         VNextBOAddLaborPartsDialogSteps.closeDialogWithXIcon();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
-    public void verifyUserCanAddLabour(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanAddLabor(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, "Labor AM");
         refreshPage();
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
-        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laboursAmountBeforeAdding + 1);
-        VNextBOPartsDetailsPanelValidations.verifyPartContainsLabourByPartNumberAndLabourServiceName(0, "Labor AM (01_New)");
+        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laborsAmountBeforeAdding + 1);
+        VNextBOPartsDetailsPanelValidations.verifyPartContainsLaborByPartNumberAndLaborServiceName(0, "Labor AM (01_New)");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
-    public void verifyUserCanCancelDeletingLabourXIcon(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanCancelDeletingLaborXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.clickDeleteLaborButtonForPartByNumberInListAndServiceName(0, "Labor AM (01_New)");
@@ -115,11 +115,11 @@ public class VNextBOPMOrderDetailsPartsDetailsLabourTests extends BaseTestCase {
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickCloseButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
-        VNextBOPartsDetailsPanelValidations.verifyPartContainsLabourByPartNumberAndLabourServiceName(0, "Labor AM (01_New)");
+        VNextBOPartsDetailsPanelValidations.verifyPartContainsLaborByPartNumberAndLaborServiceName(0, "Labor AM (01_New)");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
-    public void verifyUserCanCancelDeletingLabourNoButton(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanCancelDeletingLaborNoButton(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.clickDeleteLaborButtonForPartByNumberInListAndServiceName(0, "Labor AM (01_New)");
@@ -127,16 +127,16 @@ public class VNextBOPMOrderDetailsPartsDetailsLabourTests extends BaseTestCase {
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickNoButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
-        VNextBOPartsDetailsPanelValidations.verifyPartContainsLabourByPartNumberAndLabourServiceName(0, "Labor AM (01_New)");
+        VNextBOPartsDetailsPanelValidations.verifyPartContainsLaborByPartNumberAndLaborServiceName(0, "Labor AM (01_New)");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
-    public void verifyUserCanDeleteLabour(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanDeleteLabor(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.deleteLaborForPartByNumberInListANdLaborServiceName(0, "Labor AM (01_New)");
         refreshPage();
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
-        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laboursAmountBeforeAdding);
+        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laborsAmountBeforeAdding);
     }
 }

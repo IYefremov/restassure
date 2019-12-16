@@ -152,9 +152,9 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsStatusTests"/>
         </classes>
     </test>
-    <test name="Parts Management Order Details Parts Details Labour Tests">
+    <test name="Parts Management Order Details Parts Details Labor Tests">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsLabourTests"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsLaborTests"/>
         </classes>
     </test>
     <test name="Monitor Advanced Search Tests">

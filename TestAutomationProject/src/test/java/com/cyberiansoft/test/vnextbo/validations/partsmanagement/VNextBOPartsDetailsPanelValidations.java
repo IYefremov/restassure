@@ -59,12 +59,12 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Parts amount hasn't been correct");
     }
 
-    public static void verifyLabourBlockIsDisplayed(int partNumber, boolean shouldBeMaximized) {
+    public static void verifyLaborBlockIsDisplayed(int partNumber, boolean shouldBeMaximized) {
 
         if (shouldBeMaximized) Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getPartLaborsBlock().get(partNumber)),
-                "Labour block hasn't been maximized");
+                "Labor block hasn't been maximized");
         else Assert.assertTrue(Utils.isElementNotDisplayed(new VNextBOPartsDetailsPanel().getPartLaborsBlock().get(partNumber)),
-                "Labour block hasn't been minimized");
+                "Labor block hasn't been minimized");
     }
 
     public static void verifyAddLaborButtonIsDisplayed(int partNumber) {
@@ -79,10 +79,10 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Labors amount hasn't been correct");
     }
 
-    public static void verifyPartContainsLabourByPartNumberAndLabourServiceName(int partNumber, String labourService) {
+    public static void verifyPartContainsLaborByPartNumberAndLaborServiceName(int partNumber, String laborService) {
 
         Assert.assertTrue(new VNextBOPartsDetailsPanel().laborsNamesListForPartByNumberInList(0).
-                stream().map(WebElement::getText).collect(Collectors.toList()).contains(labourService), "Part hasn't contained labour service");
+                stream().map(WebElement::getText).collect(Collectors.toList()).contains(laborService), "Part hasn't contained labor service");
     }
 
     public static void verifyEtaDateIsCorrectDependsOnPhase(int partNumber, String orderPhase) throws ParseException {

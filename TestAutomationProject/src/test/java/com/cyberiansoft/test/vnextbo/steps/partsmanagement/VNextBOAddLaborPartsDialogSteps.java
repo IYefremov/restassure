@@ -47,7 +47,7 @@ public class VNextBOAddLaborPartsDialogSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void clearLabourServiceField() {
+    public static void clearLaborServiceField() {
 
         Utils.clickElement(new VNextBOAddLaborPartsDialog().getClearServiceFieldIcon());
         WaitUtilsWebDriver.waitForLoading();

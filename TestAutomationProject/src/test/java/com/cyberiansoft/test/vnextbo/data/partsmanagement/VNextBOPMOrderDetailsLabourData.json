@@ -11,69 +11,69 @@
       ]
     }
   ],
-  "verifyUserCanCancelAddingLabourXIcon": [
+  "verifyUserCanCancelAddingLaborXIcon": [
     {
-      "rowID": "verifyUserCanCancelAddingLabourXIcon.01",
-      "description": "Test Case 91145: User can cancel Adding labour (X-icon)",
+      "rowID": "verifyUserCanCancelAddingLaborXIcon.01",
+      "description": "Test Case 91145: User can cancel Adding labor (X-icon)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91145",
-          "testCaseTitle": "User can cancel Adding labour (X-icon)"
+          "testCaseTitle": "User can cancel Adding labor (X-icon)"
         }
       ]
     }
   ],
-  "verifyUserCanCancelAddingLabourCancelButton": [
+  "verifyUserCanCancelAddingLaborCancelButton": [
     {
-      "rowID": "verifyUserCanCancelAddingLabourCancelButton.01",
-      "description": "Test Case 91146: User can cancel Adding labour (Cancel)",
+      "rowID": "verifyUserCanCancelAddingLaborCancelButton.01",
+      "description": "Test Case 91146: User can cancel Adding labor (Cancel)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91146",
-          "testCaseTitle": "User can cancel Adding labour (Cancel)"
+          "testCaseTitle": "User can cancel Adding labor (Cancel)"
         }
       ]
     }
   ],
-  "verifyUserCanTypeLabourServiceNameAddingLabour": [
+  "verifyUserCanTypeLaborServiceNameAddingLabor": [
     {
-      "rowID": "verifyUserCanTypeLabourServiceNameAddingLabour.01",
-      "description": "Test Case 91143: User can type labour service name Adding labour",
+      "rowID": "verifyUserCanTypeLaborServiceNameAddingLabor.01",
+      "description": "Test Case 91143: User can type labor service name Adding labor",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91143",
-          "testCaseTitle": "User can type labour service name Adding labour"
+          "testCaseTitle": "User can type labor service name Adding labor"
         }
       ]
     }
   ],
-  "verifyUserCanClearTypedNameOfLabourServiceClickingOnXIcon": [
+  "verifyUserCanClearTypedNameOfLaborServiceClickingOnXIcon": [
     {
-      "rowID": "verifyUserCanClearTypedNameOfLabourServiceClickingOnXIcon.01",
-      "description": "Test Case 91144: User can clear typed name of Labour service clicking on \"X-icon\"",
+      "rowID": "verifyUserCanClearTypedNameOfLaborServiceClickingOnXIcon.01",
+      "description": "Test Case 91144: User can clear typed name of Labor service clicking on \"X-icon\"",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91144",
-          "testCaseTitle": "User can clear typed name of Labour service clicking on \"X-icon\""
+          "testCaseTitle": "User can clear typed name of Labor service clicking on \"X-icon\""
         }
       ]
     }
   ],
-  "verifyUserCanAddLabour": [
+  "verifyUserCanAddLabor": [
     {
-      "rowID": "verifyUserCanAddLabour.01",
-      "description": "Test Case 91139: User can Add labour",
+      "rowID": "verifyUserCanAddLabor.01",
+      "description": "Test Case 91139: User can Add labor",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91139",
-          "testCaseTitle": "User can Add labour"
+          "testCaseTitle": "User can Add labor"
         }
       ]
     }
   ],
-  "verifyUserCanCancelDeletingLabourXIcon": [
+  "verifyUserCanCancelDeletingLaborXIcon": [
     {
-      "rowID": "verifyUserCanCancelDeletingLabourXIcon.01",
+      "rowID": "verifyUserCanCancelDeletingLaborXIcon.01",
       "description": "Test Case 91141: User can cancel deleting (X-icon)",
       "targetProcessTestCaseData": [
         {
@@ -83,9 +83,9 @@
       ]
     }
   ],
-  "verifyUserCanCancelDeletingLabourNoButton": [
+  "verifyUserCanCancelDeletingLaborNoButton": [
     {
-      "rowID": "verifyUserCanCancelDeletingLabourNoButton.01",
+      "rowID": "verifyUserCanCancelDeletingLaborNoButton.01",
       "description": "Test Case 91142: User can cancel deleting (No)",
       "targetProcessTestCaseData": [
         {
@@ -95,14 +95,14 @@
       ]
     }
   ],
-  "verifyUserCanDeleteLabour": [
+  "verifyUserCanDeleteLabor": [
     {
-      "rowID": "verifyUserCanDeleteLabour.01",
-      "description": "Test Case 91140: User can delete labour",
+      "rowID": "verifyUserCanDeleteLabor.01",
+      "description": "Test Case 91140: User can delete labor",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91140",
-          "testCaseTitle": "User can delete labour"
+          "testCaseTitle": "User can delete labor"
         }
       ]
     }
