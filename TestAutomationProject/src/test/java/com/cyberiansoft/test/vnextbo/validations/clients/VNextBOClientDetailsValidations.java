@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
@@ -8,43 +9,47 @@ import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.*;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 public class VNextBOClientDetailsValidations {
 
     public static boolean verifyClientInfoPanelIsExpanded() {
-
-        return Utils.isElementDisplayed(new VNextBOClientInfoBlock().getClientInfoPanel());
+        return new VNextBOClientInfoBlock().getClientInfoPanel().getAttribute("aria-expanded").equals("true");
     }
 
     public static boolean verifyAccountInfoPanelIsExpanded() {
-
-        return Utils.isElementDisplayed(new VNextBOAccountInfoBlock().getAccountInfoPanel());
+        return isPanelExpanded(new VNextBOAccountInfoBlock().getAccountInfoPanel());
     }
 
     public static boolean verifyAddressPanelIsExpanded() {
-
-        return Utils.isElementDisplayed(new VNextBOAddressBlock().getAddressInfoPanel());
+        return isPanelExpanded(new VNextBOAddressBlock().getAddressInfoPanel());
     }
 
     public static boolean verifyEmailOptionsBlockIsExpanded() {
-
-        return Utils.isElementDisplayed(new VNextBOEmailOptionsBlock().getEmailOptionsPanel());
+        return isPanelExpanded(new VNextBOEmailOptionsBlock().getEmailOptionsPanel());
     }
 
     public static boolean verifyPreferencesBlockIsExpanded() {
-
-        return Utils.isElementDisplayed(new VNextBOPreferencesBlock().getPreferencesPanel());
+        return isPanelExpanded(new VNextBOPreferencesBlock().getPreferencesPanel());
     }
 
     public static boolean verifyMiscellaneousBlockIsExpanded() {
+        return isPanelExpanded(new VNextBOMiscellaneousBlock().getMiscellaneousPanel());
+    }
 
-        return Utils.isElementDisplayed(new VNextBOMiscellaneousBlock().getMiscellaneousPanel());
+    private static boolean isPanelExpanded(WebElement element) {
+        if (element.getAttribute("aria-expanded") == null)
+            return false;
+        else
+            return element.getAttribute("aria-expanded").equals("true");
     }
 
     public static void verifyClientInfoFieldsContainCorrectData(Employee employee) {
 
+
         VNextBOClientInfoBlock clientInfoBlock = new VNextBOClientInfoBlock();
+        WaitUtilsWebDriver.waitForElementToBeClickable(clientInfoBlock.getCompanyInputField());
         Assert.assertEquals(Utils.getInputFieldValue(clientInfoBlock.getCompanyInputField()), employee.getCompanyName(),
                 "\"Company\" field has contained incorrect value");
         Assert.assertEquals(Utils.getInputFieldValue(clientInfoBlock.getFirstNameInputField()), employee.getEmployeeFirstName(),
@@ -73,6 +78,7 @@ public class VNextBOClientDetailsValidations {
     public static void verifyAccountInfoFieldsContainCorrectData(AccountInfoData accountInfoData, boolean poNumberRequiredCheckbox) {
 
         VNextBOAccountInfoBlock accountInfoBlock = new VNextBOAccountInfoBlock();
+        WaitUtilsWebDriver.waitForElementToBeClickable(accountInfoBlock.getAccountingId());
         Assert.assertEquals(Utils.getInputFieldValue(accountInfoBlock.getAccountingId()), accountInfoData.getAccountingId(),
                 "\"Accounting ID\" field has contained incorrect value");
         Assert.assertEquals(Utils.getInputFieldValue(accountInfoBlock.getAccountingId2()), accountInfoData.getAccountingId2(),

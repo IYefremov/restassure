@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.dialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import org.testng.Assert;
 
@@ -8,6 +9,7 @@ public class VNextBOModalDialogValidations {
 
     public static void verifyDialogIsDisplayed() {
 
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOModalDialog().getDialogContent());
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getDialogContent()),
                 "Modal dialog hasn't been opened");
     }

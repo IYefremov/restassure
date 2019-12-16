@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.steps.dialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 
 public class VNextBOModalDialogSteps {
@@ -21,7 +22,7 @@ public class VNextBOModalDialogSteps {
     }
 
     public static void clickCloseButton() {
-
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOModalDialog().getCloseButton());
         Utils.clickElement(new VNextBOModalDialog().getCloseButton());
     }
 

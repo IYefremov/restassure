@@ -281,4 +281,28 @@ public class WaitUtilsWebDriver {
             waitABit(1500);
         }
     }
+
+    public static void waitForNumberOfElementsToBe(By by, int elementsNumber) {
+        getWait().until(ExpectedConditions.numberOfElementsToBe(by, elementsNumber));
+    }
+
+
+    public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible) {
+        getWait().
+                until((webDriver) -> {
+                    if (shoulBeVisible)
+                        try {
+                            return element.isDisplayed();
+                        } catch (NoSuchElementException ex) {
+                            return false;
+                        }
+                    else {
+                        try {
+                            return !element.isDisplayed();
+                        } catch (NoSuchElementException ex) {
+                            return true;
+                        }
+                    }
+                });
+    }
 }

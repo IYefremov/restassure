@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.vnextbo.validations.devicemanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOActiveDevicesTabSteps;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -21,6 +23,7 @@ public class VNextBOActiveDevicesTabValidations extends VNextBODeviceManagementW
 
     public static void verifyCorrectRecordsAmountIsDisplayed(int expectedRecordsAmount) {
 
+        WaitUtilsWebDriver.waitForNumberOfElementsToBe(By.xpath("//tbody[@data-template='devices-view-row-template']/tr"), expectedRecordsAmount);
         Assert.assertEquals(VNextBOActiveDevicesTabSteps.getActiveDevicesAmount(), expectedRecordsAmount,
                 "Devices table has contained incorrect clients amount.");
     }

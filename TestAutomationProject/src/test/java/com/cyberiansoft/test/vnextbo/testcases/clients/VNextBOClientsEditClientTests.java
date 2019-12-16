@@ -38,6 +38,7 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientsPageSteps.createNewClient(baseRetailClient, false);
         baseWholesaleClient = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITION_WHOLESALE_FILE), VNextBOClientsData.class);
         baseWholesaleClient.getEmployee().setCompanyName(baseWholesaleClient.getEmployee().getCompanyName() + RandomStringUtils.randomAlphabetic(10));
+        Utils.refreshPage();
         VNextBOClientsPageSteps.createNewClient(baseWholesaleClient, true);
     }
 
