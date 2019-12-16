@@ -173,7 +173,7 @@ public class Utils {
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
         if (draggable) {
             waitForDropDownToBeOpened(dropDown);
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 3);
             getMatchingOptionInListBox(listBox, selection)
                     .ifPresent((option) -> {
                         scrollListBoxDownWhileElementIsNotDisplayed(dropDown, listBox, option);

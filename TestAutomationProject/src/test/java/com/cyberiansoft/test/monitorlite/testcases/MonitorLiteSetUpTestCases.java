@@ -1,9 +1,18 @@
 package com.cyberiansoft.test.monitorlite.testcases;
 
-import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeLoginWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListInteractions;
+import com.cyberiansoft.test.core.BrowserType;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.monitorlite.config.MonitorLiteConfigInfo;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
+import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
+import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
@@ -12,13 +21,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import com.cyberiansoft.test.core.BrowserType;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
-import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
-import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 
 public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 	
@@ -102,7 +104,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 				VNexBOLeftMenuPanel.class);
 		
 		leftmenu.selectRepairOrdersMenu();
-        VNextBOROPageInteractions.searchRepairOrderByNumber(srWONumber);
+        VNextBOROPageInteractions.search(srWONumber);
 		
 		Assert.assertTrue(VNextBOROPageValidations.isRepairOrderPresentInTable(srWONumber));
 		Assert.assertEquals(VNextBOROPageInteractions.getWorkOrderActivePhaseValue(srWONumber), woActivePhaseStatus);
@@ -164,7 +166,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
 				VNexBOLeftMenuPanel.class);
 		
 		VNextBOROWebPage repairorderspage = leftmenu.selectRepairOrdersMenu();
-        VNextBOROPageInteractions.searchRepairOrderByNumber(srWONumber);
+        VNextBOROPageInteractions.search(srWONumber);
 		
 		Assert.assertTrue(VNextBOROPageValidations.isRepairOrderPresentInTable(srWONumber));
 		Assert.assertEquals(VNextBOROPageInteractions.getWorkOrderActivePhaseValue(srWONumber), woActivePhaseStatus);
@@ -227,7 +229,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         VNextBOLoginSteps.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
 				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 
-        VNextBOROPageInteractions.searchRepairOrderByNumber(srWONumber);
+        VNextBOROPageInteractions.search(srWONumber);
 		
         VNextBOROPageInteractions.openWorkOrderDetailsPage(srWONumber);
 		Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);
@@ -297,7 +299,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         VNextBOLoginSteps.userLogin(MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserName(),
 				MonitorLiteConfigInfo.getInstance().getUserMonitorLiteUserPassword());
 
-        VNextBOROPageInteractions.searchRepairOrderByNumber(srWONumber);
+        VNextBOROPageInteractions.search(srWONumber);
 		
 		VNextBORODetailsPage rodetailspage = new VNextBORODetailsPage();
 		VNextBOROPageInteractions.openWorkOrderDetailsPage(srWONumber);

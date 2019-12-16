@@ -87,6 +87,9 @@ public class VNextBOInvoicesWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='invoices-search']//i[contains(@data-bind, 'click: clear')]")
     private WebElement clearSearchIcon;
+
+    @FindBy(xpath = "//section[@id='invoices-view']//div[@class='progress-wrapper']//a[@class='link--underlined']")
+    private WebElement noInvoicesLink;
 	
 	public VNextBOInvoicesWebPage() {
 		super(DriverBuilder.getInstance().getDriver());

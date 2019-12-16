@@ -349,8 +349,8 @@ public class VNextBOROPageInteractions {
         Utils.clickElement(new VNextBOROWebPage().getPhasesWideTab());
     }
 
-    public static void searchRepairOrderByNumber(String roNumber) {
-        setRepairOrdersSearchText(roNumber);
+    public static void search(String search) {
+        setRepairOrdersSearchText(search);
         clickSearchIcon();
     }
 

@@ -2,10 +2,15 @@ package com.cyberiansoft.test.vnextbo.validations.invoices;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOOperationsInvoicesData;
+import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOInvoicesWebPage;
+import com.cyberiansoft.test.vnextbo.steps.invoices.VNextBOAdvancedSearchInvoiceFormSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class VNextBOInvoicesPageValidations {
@@ -54,5 +59,34 @@ public class VNextBOInvoicesPageValidations {
 
     public static boolean isApproveIconDisplayed() {
         return Utils.isElementDisplayed(new VNextBOInvoicesWebPage().getApproveInvoiceIcon(), 10);
+    }
+
+    public static boolean isNoInvoicesMessageDisplayed() {
+        return Utils.isElementDisplayed(new VNextBOInvoicesWebPage().getNoInvoicesLink(), 4);
+    }
+
+    public static boolean isMinimumNumberOfInvoicesDisplayed(int minNumber, int timeOut) {
+        if (!isNoInvoicesMessageDisplayed()) {
+            try {
+                VNextBOInvoicesPageInteractions.getInvoiceName(minNumber - 1, timeOut);
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public static void verifyInvoicesAreUnvoided(String[] invoices, VNextBOOperationsInvoicesData data) {
+        if (invoices != null) {
+            VNextBOInvoicesPageInteractions.clickClearSearchIconIfDisplayed();
+
+            VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
+                    data.getFromDate(), data.getToDate(), data.getStatus2());
+            Arrays.stream(invoices)
+                    .forEach((inv) -> Assert.assertTrue(VNextBOInvoicesPageValidations
+                                    .isInvoiceDisplayed(inv),
+                            "The invoice " + inv + " is not displayed after being unvoided"));
+        }
     }
 }

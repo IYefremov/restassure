@@ -1,7 +1,11 @@
 package com.cyberiansoft.test.vnextbo.steps.invoices;
 
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOOperationsInvoicesData;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
+import com.cyberiansoft.test.vnextbo.validations.invoices.VNextBOInvoicesPageValidations;
+
+import java.util.Arrays;
 
 public class VNextBOInvoicesPageSteps {
 
@@ -41,6 +45,12 @@ public class VNextBOInvoicesPageSteps {
         VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
     }
 
+    public static void voidSelectedInvoices(String ...invoices) {
+        VNextBOInvoicesPageInteractions.clickCheckbox(invoices);
+        VNextBOInvoicesPageInteractions.clickHeaderIconVoidButton();
+        VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
+    }
+
     public static void cancelApprovingFirstInvoiceWithButton() {
         VNextBOInvoicesPageInteractions.clickFirstInvoice();
         VNextBOInvoicesPageInteractions.clickApproveInvoiceButton();
@@ -61,5 +71,22 @@ public class VNextBOInvoicesPageSteps {
     public static void approveInvoiceRollbackApprovalWithIcon() {
         VNextBOInvoicesPageInteractions.clickRollbackApprovalIcon();
         VNextBOConfirmationDialogInteractions.clickInvoiceYesButton();
+    }
+
+    public static void unvoidFirstInvoices(String[] invoices, VNextBOOperationsInvoicesData data) {
+        System.out.println("Selected invoices: " + Arrays.toString(invoices));
+
+        if (invoices != null) {
+            VNextBOInvoicesPageSteps.unvoidSelectedInvoices(invoices);
+            VNextBOInvoicesPageValidations.verifyInvoicesAreUnvoided(invoices, data);
+        }
+    }
+
+    public static void voidFirstInvoices(String[] invoices, VNextBOOperationsInvoicesData data) {
+        System.out.println("Selected invoices: " + Arrays.toString(invoices));
+
+        if (invoices != null) {
+            VNextBOInvoicesPageSteps.voidSelectedInvoices(invoices);
+        }
     }
 }

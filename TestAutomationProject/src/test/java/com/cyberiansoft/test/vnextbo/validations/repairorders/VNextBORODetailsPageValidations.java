@@ -5,7 +5,6 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
 import java.util.List;
@@ -63,11 +62,11 @@ public class VNextBORODetailsPageValidations {
     }
 
     public static boolean isRODetailsSectionDisplayed() {
-        return Utils.isElementDisplayed(new VNextBORODetailsPage().getRoDetailsSection());
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getRoDetailsSection(), 5);
     }
 
     public static boolean isReportProblemOptionDisplayedForPhase(String phase) {
-        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsReportProblemOption(phase));
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsReportProblemOption(phase), 5);
     }
 
     public static boolean isResolveProblemOptionDisplayedForPhase(String phase) {
