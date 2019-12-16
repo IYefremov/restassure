@@ -115,6 +115,11 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind, 'partsMenuVisible')]//label[text()='Notes']")
     private List<WebElement> notesActionButton;
 
+    public List<WebElement> laborsNamesListForPartByNumberInList(int partNumber) {
+
+        return partDetails.get(partNumber).findElements(By.xpath(".//div[@class='grid-flex__row grid-flex__divider']//span[@data-bind='text: serviceName']"));
+    }
+
     public List<WebElement> laborsListForPartByNumberInList(int partNumber) {
 
         return partDetails.get(partNumber).findElements(By.xpath(".//div[@class='grid-flex__row grid-flex__divider']"));

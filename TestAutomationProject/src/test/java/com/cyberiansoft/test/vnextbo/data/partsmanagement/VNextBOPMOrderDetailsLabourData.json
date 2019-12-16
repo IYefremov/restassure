@@ -1,0 +1,110 @@
+{
+  "verifyUserMinimizeMaximizeThePartTab": [
+    {
+      "rowID": "verifyUserMinimizeMaximizeThePartTab.01",
+      "description": "Test Case 91147: User can minimize/maximize the @Part tab",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91147",
+          "testCaseTitle": "User can minimize/maximize the @Part tab"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelAddingLabourXIcon": [
+    {
+      "rowID": "verifyUserCanCancelAddingLabourXIcon.01",
+      "description": "Test Case 91145: User can cancel Adding labour (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91145",
+          "testCaseTitle": "User can cancel Adding labour (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelAddingLabourCancelButton": [
+    {
+      "rowID": "verifyUserCanCancelAddingLabourCancelButton.01",
+      "description": "Test Case 91146: User can cancel Adding labour (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91146",
+          "testCaseTitle": "User can cancel Adding labour (Cancel)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanTypeLabourServiceNameAddingLabour": [
+    {
+      "rowID": "verifyUserCanTypeLabourServiceNameAddingLabour.01",
+      "description": "Test Case 91143: User can type labour service name Adding labour",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91143",
+          "testCaseTitle": "User can type labour service name Adding labour"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearTypedNameOfLabourServiceClickingOnXIcon": [
+    {
+      "rowID": "verifyUserCanClearTypedNameOfLabourServiceClickingOnXIcon.01",
+      "description": "Test Case 91144: User can clear typed name of Labour service clicking on \"X-icon\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91144",
+          "testCaseTitle": "User can clear typed name of Labour service clicking on \"X-icon\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanAddLabour": [
+    {
+      "rowID": "verifyUserCanAddLabour.01",
+      "description": "Test Case 91139: User can Add labour",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91139",
+          "testCaseTitle": "User can Add labour"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelDeletingLabourXIcon": [
+    {
+      "rowID": "verifyUserCanCancelDeletingLabourXIcon.01",
+      "description": "Test Case 91141: User can cancel deleting (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91141",
+          "testCaseTitle": "User can cancel deleting (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelDeletingLabourNoButton": [
+    {
+      "rowID": "verifyUserCanCancelDeletingLabourNoButton.01",
+      "description": "Test Case 91142: User can cancel deleting (No)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91142",
+          "testCaseTitle": "User can cancel deleting (No)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanDeleteLabour": [
+    {
+      "rowID": "verifyUserCanDeleteLabour.01",
+      "description": "Test Case 91140: User can delete labour",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91140",
+          "testCaseTitle": "User can delete labour"
+        }
+      ]
+    }
+  ]
+}
