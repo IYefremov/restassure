@@ -511,7 +511,7 @@
   "verifyUserCanAddNewLaborService": [
     {
       "rowID": "verifyUserCanAddNewLaborService.01",
-      "description": "Test Case 86121:User can add new service (Labour)",
+      "description": "Test Case 86121:User can add new service (Labor)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91367"

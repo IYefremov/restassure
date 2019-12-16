@@ -46,12 +46,12 @@ public class VNextBOPartsDetailsPanelSteps {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getDeleteActionButton().get(partNumber));
     }
 
-    private static void clickAddLaborButtonForPartByNumberInList(int partNumber) {
+    public static void clickAddLaborButtonForPartByNumberInList(int partNumber) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().getAddLaborButton().get(partNumber));
     }
 
-    private static void clickDeleteLaborButtonForPartByNumberInListAndServiceName(int partNumber, String laborServiceName) {
+    public static void clickDeleteLaborButtonForPartByNumberInListAndServiceName(int partNumber, String laborServiceName) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().deleteLaborButton(partNumber, laborServiceName));
     }
@@ -100,9 +100,11 @@ public class VNextBOPartsDetailsPanelSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void expandLaborBlock(int partNumber) {
+    public static void expandLaborBlockForPartByNumberInList(int partNumber) {
 
-        Utils.clickElement(new VNextBOPartsDetailsPanel().getLaborsExpander().get(partNumber));
+        Utils.clickWithJS(new VNextBOPartsDetailsPanel().getLaborsExpander().get(partNumber));
+        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitForLoading();
     }
 
@@ -122,6 +124,7 @@ public class VNextBOPartsDetailsPanelSteps {
         clickDeleteLaborButtonForPartByNumberInListAndServiceName(partNumber, laborServiceName);
         VNextBOModalDialogSteps.clickYesButton();
         WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void displayPartsByStatus(String status) {

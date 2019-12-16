@@ -19,7 +19,7 @@
   "verifyUserCanAddAndDeleteLabor": [
     {
       "rowID": "verifyUserCanAddAndDeleteLabor.01",
-      "description": "Test Case 83937:User can Add labour. Test Case 83938:User can delete labour. Test Case 83939:User can cancel deleting (X-icon). Test Case 83940:User can cancel deleting (No)",
+      "description": "Test Case 83937:User can Add labor. Test Case 83938:User can delete labor. Test Case 83939:User can cancel deleting (X-icon). Test Case 83940:User can cancel deleting (No)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91139"
@@ -43,7 +43,7 @@
   "verifyUserCanTypeLaborServiceNameAddingLabor": [
     {
       "rowID": "verifyUserCanTypeLaborServiceNameAddingLabor.01",
-      "description": "Test Case 83943:User can type labour service name Adding labour. Test Case 83944:User can clear typed name of Labour service clicking on \"X-icon\"",
+      "description": "Test Case 83943:User can type labor service name Adding labor. Test Case 83944:User can clear typed name of Labor service clicking on \"X-icon\"",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91143"
@@ -62,7 +62,7 @@
   "verifyUserCanCancelAddingLabor": [
     {
       "rowID": "verifyUserCanCancelAddingLabor.01",
-      "description": "Test Case 83945:User can cancel Adding labour (X-icon). Test Case 83947:User can cancel Adding labour (Cancel)",
+      "description": "Test Case 83945:User can cancel Adding labor (X-icon). Test Case 83947:User can cancel Adding labor (Cancel)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91145"

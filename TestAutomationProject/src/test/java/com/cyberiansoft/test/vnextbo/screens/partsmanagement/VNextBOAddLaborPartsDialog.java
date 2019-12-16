@@ -34,7 +34,6 @@ public class VNextBOAddLaborPartsDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='parts-labor-service-form']//span[@title='clear']")
     private WebElement clearServiceFieldIcon;
 
-
     public WebElement serviceDropDownOption(String optionName) {
 
         return driver.findElement(By.xpath("//ul[@aria-hidden='false']/li[text()='" + optionName + "']"));
