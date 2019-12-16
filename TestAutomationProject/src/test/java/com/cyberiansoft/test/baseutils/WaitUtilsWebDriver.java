@@ -53,6 +53,7 @@ public class WaitUtilsWebDriver {
                 .ignoring(WebDriverException.class);
     }
 
+    @Deprecated
     public static void waitForLoading() {
         try {
             waitForVisibility(VNextBOBaseWebPage.loadingProcess);
