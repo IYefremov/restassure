@@ -35,7 +35,7 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public boolean checkServiceIsSelected(String serviceName) {
-        return selectedservicestable.findElementsByAccessibilityId(serviceName).size() > 0;
+        return selectedservicestable.findElementByClassName("XCUIElementTypeTable").findElementsByAccessibilityId(serviceName).size() > 0;
     }
 
     public void removeSelectedService(String serviceName) {
