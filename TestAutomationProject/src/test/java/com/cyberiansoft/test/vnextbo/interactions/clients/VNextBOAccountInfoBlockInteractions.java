@@ -29,7 +29,7 @@ public class VNextBOAccountInfoBlockInteractions {
 
     public void setExportAs(String exportAs) {
         Utils.clearAndType(accountInfoBlock.getExportAsInputField(), exportAs);
-        WaitUtilsWebDriver.waitABit(2000);
+        WaitUtilsWebDriver.waitABit(3000);
         Utils.selectOptionInDropDownWithJs(accountInfoBlock.getExportAsDropDown(),
                 accountInfoBlock.getExportAsListBoxOptionByText(exportAs));
     }

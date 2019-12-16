@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.clients;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.Employee;
@@ -8,67 +9,70 @@ import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.cyberiansoft.test.vnextbo.interactions.clients.*;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientInfoBlock;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientsDetailsViewAccordion;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientDetailsValidations;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void clickClientsInfoTab() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getClientsInfo());
-        WaitUtilsWebDriver.waitForLoading();
+        BaseUtils.waitABit(1000);
     }
 
     public static void clickAccountInfoTab() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getAccountInfo());
-        WaitUtilsWebDriver.waitForLoading();
+        BaseUtils.waitABit(1000);
     }
 
     public static void clickAddressTab() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getAddress());
-        WaitUtilsWebDriver.waitForLoading();
+        BaseUtils.waitABit(1000);
     }
 
     public static void clickEmailOptionsTab() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getEmailOptions());
-        WaitUtilsWebDriver.waitForLoading();
+        BaseUtils.waitABit(1000);
     }
 
     public static void clickPreferencesTab() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getPreferences());
-        WaitUtilsWebDriver.waitForLoading();
+        BaseUtils.waitABit(1000);
     }
 
     public static void clickMiscellaneousTab() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getMiscellaneous());
-        WaitUtilsWebDriver.waitForLoading();
+        BaseUtils.waitABit(1000);
     }
 
     public static void clickServicesTab() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getServices());
-        WaitUtilsWebDriver.waitForLoading();
+        BaseUtils.waitABit(1000);
     }
 
     public static void clickCancelButton() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getCancelButton());
-        WaitUtilsWebDriver.waitForLoading();
+        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickOkButton() {
 
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getOkButton());
-        WaitUtilsWebDriver.waitForLoading();
+        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void setClientInfoData(Employee employee) {
 
+        WaitUtilsWebDriver.waitForElementToBeClickable(new VNextBOClientsDetailsViewAccordion().getClientsInfo());
         if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) clickClientsInfoTab();
         final VNextBOClientInfoBlockInteractions clientInfoBlockInteractions = new VNextBOClientInfoBlockInteractions();
         if (employee.getClientType().toLowerCase().equals("retail")) {

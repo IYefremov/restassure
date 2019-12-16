@@ -172,14 +172,14 @@ public class Utils {
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
         if (draggable) {
-            waitForDropDownToBeOpened(dropDown);
+            //waitForDropDownToBeOpened(dropDown);
             WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
             getMatchingOptionInListBox(listBox, selection)
                     .ifPresent((option) -> {
                         scrollListBoxDownWhileElementIsNotDisplayed(dropDown, listBox, option);
                         Utils.clickElement(option, 5);
                     });
-            WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
+           // WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
         } else {
             selectOptionInDropDown(dropDown, listBox, selection);
         }

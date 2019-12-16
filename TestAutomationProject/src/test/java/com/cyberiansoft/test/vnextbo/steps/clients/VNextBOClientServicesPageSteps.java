@@ -4,7 +4,9 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientsClientServicesPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public class VNextBOClientServicesPageSteps extends VNextBOBaseWebPageSteps {
     public static void clickClientServicesBackButton() {
 
         Utils.clickElement(new VNextBOClientsClientServicesPage().getClientServicesBackButton());
-        WaitUtilsWebDriver.waitForLoading();
+        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void setServicePackage(String packageName) {
@@ -24,7 +26,7 @@ public class VNextBOClientServicesPageSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(servicesPage.getServicesPackageDropDownField());
         Utils.selectOptionInDropDown(servicesPage.getServicesPackageDropDownField(),
                 servicesPage.getServicesPackageDropDownOptions(), packageName, true);
-        WaitUtilsWebDriver.waitForLoading();
+        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static int getServicesAmount() {
@@ -52,6 +54,7 @@ public class VNextBOClientServicesPageSteps extends VNextBOBaseWebPageSteps {
     public static void changeFirstLineRequiredFieldValue(String value) {
 
         VNextBOClientsClientServicesPage clientServicesPage = new VNextBOClientsClientServicesPage();
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("(//select[contains(@data-bind, 'value: clientService_IsRequired')])[1]")));
         Select selectRequired = new Select(clientServicesPage.getFirstLineRequiredDropDownField());
         selectRequired.selectByVisibleText(value);
     }
@@ -61,7 +64,7 @@ public class VNextBOClientServicesPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOClientsClientServicesPage clientServicesPage = new VNextBOClientsClientServicesPage();
         Utils.clickElement(clientServicesPage.getFirstLineTechnicianDropDownField());
         Utils.clickWithJS(clientServicesPage.technicianOptionByName(value));
-        WaitUtilsWebDriver.waitForLoading();
+       // WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clearFirstLineEffectiveDate() {
