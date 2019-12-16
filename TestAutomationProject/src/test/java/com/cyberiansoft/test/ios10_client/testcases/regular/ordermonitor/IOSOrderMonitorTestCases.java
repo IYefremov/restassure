@@ -14,6 +14,7 @@ import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
@@ -212,6 +213,7 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         Assert.assertTrue(orderMonitorScreen.isServiceStartDateExists());
         orderMonitorScreen.clickServiceDetailsDoneButton();
         RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -336,7 +338,7 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.changeStatusForWorkOrder(workOrderMonitorStatus, statusReason);
-        orderMonitorScreen = new RegularOrderMonitorScreen();
+        orderMonitorScreen.waitOrderMonitorScreenLoaded();
         orderMonitorScreen.selectPanel(workOrderData.getOrderMonitorData().getMonitorServiceData().getMonitorService());
         orderMonitorScreen.clickTech();
 
@@ -571,8 +573,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         Assert.assertEquals(orderMonitorScreen.getOrderStartYearValue(), Integer.toString(date.getYear() - 1));
         orderMonitorScreen.closeSelectorderDatePicker();
         orderMonitorScreen.waitOrderMonitorScreenLoaded();
-        orderMonitorScreen.clickBackButton();
-        teamWorkOrdersScreen.clickHomeButton();
+        NavigationSteps.navigateBackScreen();
+        NavigationSteps.navigateBackScreen();
 
         homeScreen.clickLogoutButton();
         mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
