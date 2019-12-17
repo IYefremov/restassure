@@ -40,7 +40,7 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         System.out.println("FAILED: " + result.getMethod().getMethodName());
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
-        setTestCaseAutomatedField(result);
+        //setTestCaseAutomatedField(result);
     }
 
     @Override
@@ -48,14 +48,14 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
         System.out.println("SKIPPED: " + result.getMethod().getMethodName());
         AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
-        setTestCaseAutomatedField(result);
+        //setTestCaseAutomatedField(result);
     }
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        setTestCaseAutomatedField(result);
+        //setTestCaseAutomatedField(result);
         System.out.println("SUCCESS: " + result.getMethod().getMethodName());
-        setTestCaseAutomatedField(result);
+        //setTestCaseAutomatedField(result);
     }
 
     @Override
