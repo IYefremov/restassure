@@ -283,9 +283,6 @@ public class VNextBOMonitorData  {
     @JsonProperty("servicePhaseHeaders")
     private String[] servicePhaseHeaders;
 
-//    @JsonProperty("pages")
-//    private String[] pages;
-
     @JsonProperty("searchValues")
     private VNextBOROAdvancedSearchValues searchValues;
 
