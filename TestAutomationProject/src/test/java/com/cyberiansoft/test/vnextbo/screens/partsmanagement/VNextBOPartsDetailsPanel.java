@@ -20,10 +20,16 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private WebElement addNewPartButton;
 
     @FindBy(xpath = "//div[@id='part-entity-details']//div[contains(@data-bind, 'deleteParts')]")
-    private WebElement deletePartButton;
+    private WebElement deleteSelectedPartsButton;
 
     @FindBy(xpath = "//div[contains(@class, 'entity-details__head__all-items-toggle  pull-left')]")
-    private WebElement partsDetailsGeneralCheckbox;
+    private WebElement statusesCheckbox;
+
+    @FindBy(xpath = "//div[@id='partsCheckAllDropDown']")
+    private WebElement statusesCheckboxDropDown;
+
+    @FindBy(xpath = "//div[@class='parts-check-all-status']")
+    private List<WebElement> partsStatusesList;
 
     @FindBy(xpath = "//button[contains(@data-bind, 'addLaborServices')]")
     private List<WebElement> addLaborButton;
@@ -109,6 +115,11 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind, 'partsMenuVisible')]//label[text()='Notes']")
     private List<WebElement> notesActionButton;
 
+    public List<WebElement> laborsNamesListForPartByNumberInList(int partNumber) {
+
+        return partDetails.get(partNumber).findElements(By.xpath(".//div[@class='grid-flex__row grid-flex__divider']//span[@data-bind='text: serviceName']"));
+    }
+
     public List<WebElement> laborsListForPartByNumberInList(int partNumber) {
 
         return partDetails.get(partNumber).findElements(By.xpath(".//div[@class='grid-flex__row grid-flex__divider']"));
@@ -118,6 +129,18 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
 
         return partDetails.get(partNumber).findElement(By.xpath("//span[@data-bind='text: serviceName' and contains(text(),'" +
                 laborServiceName + "')]/ancestor::div[@class='grid-flex__row grid-flex__divider']//i[@class='icon-delete']"));
+    }
+
+    public WebElement statusCheckBoxDropDownItem(String status) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='parts-check-all-status' and contains(text(), '  " + status + "')]"));
+    }
+
+    public List<WebElement> partCheckBoxesByPartStatus(String status) {
+
+        return DriverBuilder.getInstance().getDriver().findElements(
+                By.xpath("//span[contains(@class,'service-status-dropdown')]//span[@class='k-input' and contains(., '  " +
+                        status +"')]/ancestor::div[@class='grid-flex__row']//input[@class='control-checkbox']"));
     }
 
     public VNextBOPartsDetailsPanel() {

@@ -53,6 +53,7 @@ public class WaitUtilsWebDriver {
                 .ignoring(WebDriverException.class);
     }
 
+    @Deprecated
     public static void waitForLoading() {
         try {
             waitForVisibility(VNextBOBaseWebPage.loadingProcess);
@@ -267,5 +268,41 @@ public class WaitUtilsWebDriver {
 
     public static WebElement waitForElementNotToBeStale(By by) {
         return waitForElementNotToBeStale(DriverBuilder.getInstance().getDriver().findElement(by));
+    }
+
+    public static void waitForPendingRequestsToComplete() {
+
+        boolean requestsAreCompleted = false;
+        try {
+            do {
+                requestsAreCompleted = (boolean) ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("return angular.element(document.body).injector().get('$http').pendingRequests.length === 0");
+            } while (!requestsAreCompleted);
+        } catch (Exception ignored) {
+            waitABit(1500);
+        }
+    }
+
+    public static void waitForNumberOfElementsToBe(By by, int elementsNumber) {
+        getWait().until(ExpectedConditions.numberOfElementsToBe(by, elementsNumber));
+    }
+
+
+    public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible) {
+        getWait().
+                until((webDriver) -> {
+                    if (shoulBeVisible)
+                        try {
+                            return element.isDisplayed();
+                        } catch (NoSuchElementException ex) {
+                            return false;
+                        }
+                    else {
+                        try {
+                            return !element.isDisplayed();
+                        } catch (NoSuchElementException ex) {
+                            return true;
+                        }
+                    }
+                });
     }
 }

@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class VNextBOEmailOptionsBlock extends VNextBOClientsDetailsViewAccordion {
 
-    @FindBy(xpath = "//div[@id='collapseEmailOptions']/div[@class='panel-body']/div")
+    @FindBy(xpath = "//div[@id='client-details-view-headingEmailOptions']/div/div")
     private WebElement emailOptionsPanel;
 
     @FindBy(id = "clientEditForm-email-default-recepient")

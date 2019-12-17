@@ -30,4 +30,12 @@ public class RegularMyInvoicesScreenValidations {
         RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
         Assert.assertEquals(myInvoicesScreen.getInvoicePrice(invoiceID), expectedPrice);
     }
+
+    public static void verifyInvoiceHasPrintIcon(String invoiceID, boolean isPresent) {
+        RegularMyInvoicesScreen myInvoicesScreen = new RegularMyInvoicesScreen();
+        if (isPresent)
+            Assert.assertTrue(myInvoicesScreen.isInvoiceHasPrintIcon(invoiceID));
+        else
+            Assert.assertFalse(myInvoicesScreen.isInvoiceHasPrintIcon(invoiceID));
+    }
 }

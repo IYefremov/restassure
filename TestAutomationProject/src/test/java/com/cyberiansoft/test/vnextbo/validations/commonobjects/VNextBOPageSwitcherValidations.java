@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.commonobjects;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOPageSwitcherElements;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
@@ -35,8 +36,10 @@ public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidation
 
     public static void verifyOpenedPageNumberIsCorrect(String expectedPageNumber) {
 
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(new VNextBOPageSwitcherElements().getHeaderActivePageNumber(), expectedPageNumber);
         Assert.assertEquals(VNextBOPageSwitcherSteps.getActivePageNumberFromHeaderPager(), expectedPageNumber,
                 "Header active page number hasn't been changed.");
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(new VNextBOPageSwitcherElements().getFooterActivePageNumber(), expectedPageNumber);
         Assert.assertEquals(VNextBOPageSwitcherSteps.getActivePageNumberFromFooterPager(), expectedPageNumber,
                 "Footer active page number hasn't been changed.");
     }

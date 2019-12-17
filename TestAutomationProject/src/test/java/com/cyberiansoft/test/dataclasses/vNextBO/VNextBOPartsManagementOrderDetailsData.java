@@ -23,6 +23,6 @@ public class VNextBOPartsManagementOrderDetailsData extends VNextBOBaseData {
     @JsonProperty("oemNum")
     private String oemNum;
 
-    @JsonProperty("statuses")
-    private List<String> statuses;
+    @JsonProperty("status")
+    private String status;
 }

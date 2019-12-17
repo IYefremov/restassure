@@ -147,6 +147,10 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 				getAttribute("name").equals("EntityInfoButtonUnchecked, ButtonImageId_65");
 	}
 
+	public boolean isInvoiceHasPrintIcon(String invoiceNumber) {
+		return invoicesTable.findElementByAccessibilityId(invoiceNumber).findElements(MobileBy.AccessibilityId("INVOICE_PRINTED")).size() > 0;
+	}
+
 	public void clickInvoicesSearchButton() {
 		waitInvoicesScreenLoaded();
 		searchBtn.click();

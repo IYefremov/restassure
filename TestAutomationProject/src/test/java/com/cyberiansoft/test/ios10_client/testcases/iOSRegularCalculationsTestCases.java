@@ -27,6 +27,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wi
 import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
 import com.cyberiansoft.test.ios10_client.regularvalidations.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
+import com.cyberiansoft.test.ios10_client.testcases.regular.IOSRegularBaseTestCase;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.InvoicesTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
@@ -45,14 +46,14 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
+public class iOSRegularCalculationsTestCases extends IOSRegularBaseTestCase {
 
 	private RetailCustomer testRetailCustomer = new RetailCustomer("Retail", "Customer");
 
-	@BeforeClass
+	@BeforeClass(description = "Calculations Test Cases")
 	public void setUpSuite() {
 		JSONDataProvider.dataFile = IOSReconProTestCasesDataPaths.getInstance().getCalculationsTestCasesDataPath();
-		mobilePlatform = MobilePlatform.IOS_REGULAR;
+		/*mobilePlatform = MobilePlatform.IOS_REGULAR;
 		initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 		DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,
 				ReconProIOSStageInfo.getInstance().getUserStageUserName(), ReconProIOSStageInfo.getInstance().getUserStageUserPassword(), "AutomationCalculations_Regular2",
@@ -63,7 +64,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularHomeScreenSteps.navigateToSettingsScreen();
 		RegularSettingsScreen settingsScreen = new RegularSettingsScreen();
 		settingsScreen.setShowAvailableSelectedServicesOn();
-		RegularNavigationSteps.navigateBackScreen();
+		RegularNavigationSteps.navigateBackScreen();*/
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -192,7 +193,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
 		customersScreen.swtchToWholesaleMode();
 		customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-		
+
 		RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
 
 		//customer approval ON
@@ -214,7 +215,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyIfOneFeeBundleItemIsRelatedTo2OrMoreFeeBundlePackagesAndAssignedServiceIsSelectedInWOThenAmountOfTheFeeWillBeMultipleToPackageQuantity(String rowID,
-																																								   String description, JSONObject testData) {
+																																								 String description, JSONObject testData) {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
@@ -393,7 +394,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatFeeBundleServicesIsCalculatedForAdditionalMatrixServices(String rowID,
-																						 String description, JSONObject testData) {
+																					   String description, JSONObject testData) {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
@@ -560,7 +561,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAmountIsCalculatedAndRoundedCorrectly(String rowID,
-																	  String description, JSONObject testData) {
+																	String description, JSONObject testData) {
 
 		WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
@@ -621,7 +622,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatInspectionIsSavedAsDeclinedWhenAllServicesAreSkippedOrDeclined(String rowID,
-																							   String description, JSONObject testData) {
+																							 String description, JSONObject testData) {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -692,7 +693,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAmountOfApprovedServicesAreShownOnBOInspectionsListInColumnApprovedAmount(String rowID,
-																										  String description, JSONObject testData) {
+																										String description, JSONObject testData) {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -755,7 +756,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyThatAmountOfSkippedDeclinedServicesAreNotCalc(String rowID,
-																		  String description, JSONObject testData) {
+																		String description, JSONObject testData) {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
@@ -985,7 +986,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			orderSummaryScreen.setTotalSale(testCaseData.getWorkOrderData().getWorkOrderTotalSale());
 			RegularWorkOrdersSteps.saveWorkOrder();
 		}
-		
+
 		RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
 		myWorkOrdersScreen.approveWorkOrder(workOrders.get(0), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
 		RegularMyWorkOrdersSteps.switchToTeamView();
@@ -1443,7 +1444,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyCalculationWithPriceMatrixLaborType(String rowID,
-																  String description, JSONObject testData) {
+																String description, JSONObject testData) {
 		final String filterBillingValue = "All";
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1563,7 +1564,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyRoundingMoneyAmountValues(String rowID,
-															  String description, JSONObject testData) {
+															String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2057,7 +2058,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 			customersScreen.selectCustomerWithoutEditing(workOrderData.getWholesailCustomer().getCompany());
 
 			RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
- 			RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.valueOf(workOrderData.getWorkOrderType()));
+			RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.valueOf(workOrderData.getWorkOrderType()));
 			RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
 			vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
 			String workOrderNumber = vehicleScreen.getWorkOrderNumber();
@@ -2140,7 +2141,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatCalculationIsCorrectForWOWithAllTypeOfServices(String rowID,
-																		 String description, JSONObject testData) throws Exception {
+																			   String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2313,7 +2314,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances(String rowID,
-																			   String description, JSONObject testData) throws Exception {
+																													String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2343,7 +2344,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatDiscountsAreCalculatedCorrectlyOnAllLevels(String rowID,
-																			   String description, JSONObject testData) throws Exception {
+																		   String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2441,7 +2442,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyThatOnPrintOutOfAllProTemplateAllCalculationDataIsCorrectProductionData(String rowID,
-																													String description, JSONObject testData) throws Exception {
+																										  String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2514,7 +2515,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyThatOnPrintOutOfAutoWorkListNetTemplateAllCalculationDataIsCorrect_ProdData(String rowID,
-																		   String description, JSONObject testData) throws Exception {
+																											  String description, JSONObject testData) throws Exception {
 
 		final String listTotal = "2368.00";
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -2602,7 +2603,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testInvoicesVerifyThatOnPrintOutOfDentWizardHailTemplateAllCalculationDataIsCorrect_ProductionData(String rowID,
-																		   String description, JSONObject testData) {
+																												   String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2638,7 +2639,6 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 		RegularMyWorkOrdersSteps.clickInvoiceIcon();
 
 		RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-		final String invoiceNumber = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
 		RegularInvoiceInfoScreenValidations.verifyInvoiceTotalValue(testCaseData.getInvoiceData().getInvoiceTotal());
 		RegularInvoicesSteps.saveInvoiceAsFinal();
 		RegularNavigationSteps.navigateBackScreen();
@@ -2646,7 +2646,7 @@ public class iOSRegularCalculationsTestCases extends ReconProBaseTestCase {
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testWOVerifyThatUpChargesAndDiscountsAreCalculatedCorrectlyOnAllLevels(String rowID,
-																		   String description, JSONObject testData) throws Exception {
+																					   String description, JSONObject testData) throws Exception {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		WorkOrderData workOrderData = testCaseData.getWorkOrderData();

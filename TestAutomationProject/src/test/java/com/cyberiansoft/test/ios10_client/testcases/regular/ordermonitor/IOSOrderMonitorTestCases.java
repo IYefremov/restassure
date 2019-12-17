@@ -454,8 +454,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         Assert.assertTrue(orderMonitorScreen.isStartPhaseButtonExists());
         orderMonitorScreen.clickStartPhaseButton();
         Assert.assertFalse(orderMonitorScreen.isStartPhaseButtonExists());
-        orderMonitorScreen.clickBackButton();
-        teamWorkOrdersScreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

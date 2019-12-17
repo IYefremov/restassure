@@ -145,7 +145,6 @@ public class IOSServiceRequestsCloseTestCases extends IOSRegularBaseTestCase {
         vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
         RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
         RegularServicesScreenSteps.selectService(serviceRequestData.getMoneyService().getServiceName());
         RegularServiceRequestSteps.saveServiceRequest();
 

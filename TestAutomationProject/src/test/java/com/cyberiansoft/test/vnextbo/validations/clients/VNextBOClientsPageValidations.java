@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.vnextbo.validations.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class VNextBOClientsPageValidations extends VNextBOBaseWebPageValidations {
@@ -33,7 +35,7 @@ public class VNextBOClientsPageValidations extends VNextBOBaseWebPageValidations
     }
 
     public static void verifyCorrectRecordsAmountIsDisplayed(int expectedRecordsAmount) {
-
+        WaitUtilsWebDriver.waitForNumberOfElementsToBe(By.xpath("//tbody[@data-template='clients-view-row-template']/tr"), expectedRecordsAmount);
         Assert.assertEquals(VNextBOClientsPageSteps.getClientsAmount(), expectedRecordsAmount,
                 "Clients table has contained incorrect clients amount.");
     }

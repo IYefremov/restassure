@@ -94,9 +94,9 @@ public class IOSServiceRequestsCreateWOAndInspectionTestCases extends IOSRegular
         RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
         RegularTeamInspectionsScreen teamInspectionsScreen = new RegularTeamInspectionsScreen();
         Assert.assertTrue(teamInspectionsScreen.isInspectionExists(inspectnumber));
-        teamInspectionsScreen.clickBackButton();
-        serviceRequestSscreen.clickBackButton();
-        serviceRequestSscreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -153,8 +153,8 @@ public class IOSServiceRequestsCreateWOAndInspectionTestCases extends IOSRegular
         RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
         RegularTeamInspectionsScreen teamInspectionsScreen = new RegularTeamInspectionsScreen();
         Assert.assertTrue(teamInspectionsScreen.isInspectionExists(inspectionNumberber));
-        teamInspectionsScreen.clickBackButton();
-        serviceRequestSscreen.clickBackButton();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
     }
 
@@ -217,9 +217,8 @@ public class IOSServiceRequestsCreateWOAndInspectionTestCases extends IOSRegular
         RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
         for (String workOrderNumber : workOrderNumbers)
             Assert.assertTrue(teamWorkOrdersScreen.isWorkOrderExists(workOrderNumber));
-        teamInspectionsScreen.clickBackButton();
-        serviceRequestSscreen.clickBackButton();
-        serviceRequestSscreen = new RegularServiceRequestsScreen();
-        serviceRequestSscreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

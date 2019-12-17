@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 public class VNextBOAddressBlock extends VNextBOClientsDetailsViewAccordion {
 
-    @FindBy(xpath = "//div[@id='collapseAddressInfo']/div[@class='panel-body']/div")
+    @FindBy(xpath = "//div[@id='client-details-view-headingAddressInfo']/div/div")
     private WebElement addressInfoPanel;
 
     //ship to

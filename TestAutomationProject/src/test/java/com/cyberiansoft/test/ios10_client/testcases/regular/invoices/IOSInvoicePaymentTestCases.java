@@ -141,7 +141,6 @@ public class IOSInvoicePaymentTestCases extends IOSRegularBaseTestCase {
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
-
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
@@ -221,7 +220,6 @@ public class IOSInvoicePaymentTestCases extends IOSRegularBaseTestCase {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
-
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
         RegularMyWorkOrdersSteps.startCreatingWorkOrder(WorkOrdersTypes.WO_FOR_INVOICE_PRINT);
@@ -334,6 +332,6 @@ public class IOSInvoicePaymentTestCases extends IOSRegularBaseTestCase {
         teamInvoicesScreen.changePO(invoiceData.getNewPoNumber());
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.INVOICE_PO_SHOULDNT_BE_EMPTY);
         teamInvoicesScreen.clickCancel();
-        teamInvoicesScreen.clickHomeButton();
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

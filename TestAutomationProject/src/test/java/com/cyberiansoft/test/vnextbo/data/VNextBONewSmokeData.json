@@ -106,7 +106,7 @@
   "verifyUserCanAddAndDeleteLabor": [
     {
       "rowID": "verifyUserCanAddAndDeleteLabor.01",
-      "description": "Test Case 83937:User can Add labour. Test Case 83938:User can delete labour.",
+      "description": "Test Case 83937:User can Add labor. Test Case 83938:User can delete labor.",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91139"

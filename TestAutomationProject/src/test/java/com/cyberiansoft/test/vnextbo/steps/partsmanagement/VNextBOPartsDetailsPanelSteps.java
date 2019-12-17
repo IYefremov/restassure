@@ -6,9 +6,7 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetails
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VNextBOPartsDetailsPanelSteps {
@@ -48,12 +46,12 @@ public class VNextBOPartsDetailsPanelSteps {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getDeleteActionButton().get(partNumber));
     }
 
-    private static void clickAddLaborButtonForPartByNumberInList(int partNumber) {
+    public static void clickAddLaborButtonForPartByNumberInList(int partNumber) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().getAddLaborButton().get(partNumber));
     }
 
-    private static void clickDeleteLaborButtonForPartByNumberInListAndServiceName(int partNumber, String laborServiceName) {
+    public static void clickDeleteLaborButtonForPartByNumberInListAndServiceName(int partNumber, String laborServiceName) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().deleteLaborButton(partNumber, laborServiceName));
     }
@@ -64,6 +62,24 @@ public class VNextBOPartsDetailsPanelSteps {
         Utils.clickElement(detailsPanel.getPartStatusField().get(partNumber));
         Utils.selectOptionInDropDown(detailsPanel.getPartStatusDropDown(), detailsPanel.getPartStatusListBoxOptions(), status, true);
         WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+    }
+
+    public static void setPriceForPartByPartNumberInList(int partNumber, String price) {
+
+        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(detailsPanel.getPartPriceField().get(partNumber));
+        Utils.clearAndType(detailsPanel.getPartPriceField().get(partNumber), price);
+        Utils.clickElement(detailsPanel.getPartQuantityField().get(partNumber));
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void setQuantityForPartByPartNumberInList(int partNumber, String quantity) {
+
+        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(detailsPanel.getPartQuantityField().get(partNumber));
+        Utils.clearAndType(detailsPanel.getPartQuantityField().get(partNumber), quantity);
+        Utils.clickElement(detailsPanel.getPartPriceField().get(partNumber));
     }
 
     public static void duplicatePartByNumberInList(int partNumber) {
@@ -84,9 +100,11 @@ public class VNextBOPartsDetailsPanelSteps {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void expandLaborBlock(int partNumber) {
+    public static void expandLaborBlockForPartByNumberInList(int partNumber) {
 
-        Utils.clickElement(new VNextBOPartsDetailsPanel().getLaborsExpander().get(partNumber));
+        Utils.clickWithJS(new VNextBOPartsDetailsPanel().getLaborsExpander().get(partNumber));
+        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitForLoading();
     }
 
@@ -105,6 +123,21 @@ public class VNextBOPartsDetailsPanelSteps {
 
         clickDeleteLaborButtonForPartByNumberInListAndServiceName(partNumber, laborServiceName);
         VNextBOModalDialogSteps.clickYesButton();
+        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+    }
+
+    public static void displayPartsByStatus(String status) {
+
+        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(detailsPanel.getStatusesCheckbox());
+        Utils.selectOptionInDropDownWithJs(detailsPanel.getStatusesCheckboxDropDown(), detailsPanel.statusCheckBoxDropDownItem(status));
+        WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void clickStatusesCheckBox() {
+
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getStatusesCheckbox());
         WaitUtilsWebDriver.waitForLoading();
     }
 }

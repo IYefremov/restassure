@@ -172,14 +172,14 @@ public class Utils {
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
         if (draggable) {
-            waitForDropDownToBeOpened(dropDown);
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 3);
+            //waitForDropDownToBeOpened(dropDown);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
             getMatchingOptionInListBox(listBox, selection)
                     .ifPresent((option) -> {
                         scrollListBoxDownWhileElementIsNotDisplayed(dropDown, listBox, option);
                         Utils.clickElement(option, 5);
                     });
-            WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
+           // WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
         } else {
             selectOptionInDropDown(dropDown, listBox, selection);
         }
@@ -233,6 +233,7 @@ public class Utils {
         return selectedText;
     }
 
+    @Deprecated
     public static boolean isElementDisplayed(WebElement element) {
         try {
             WaitUtilsWebDriver.waitForVisibility(element);
@@ -242,6 +243,7 @@ public class Utils {
         }
     }
 
+    @Deprecated
     public static boolean isElementDisplayed(By by) {
         try {
             WaitUtilsWebDriver.waitForVisibility(DriverBuilder.getInstance().getDriver().findElement(by));
@@ -251,6 +253,7 @@ public class Utils {
         }
     }
 
+    @Deprecated
     public static boolean isElementDisplayed(WebElement element, int timeoutInSeconds) {
         try {
             WaitUtilsWebDriver.waitForVisibility(element, timeoutInSeconds);
@@ -260,6 +263,7 @@ public class Utils {
         }
     }
 
+    @Deprecated
     public static boolean isElementNotDisplayed(WebElement element) {
         try {
             WaitUtilsWebDriver.waitForInvisibility(element);
@@ -269,6 +273,7 @@ public class Utils {
         }
     }
 
+    @Deprecated
     public static boolean isElementNotDisplayed(WebElement element, int timeoutSeconds) {
         try {
             WaitUtilsWebDriver.getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(timeoutSeconds))

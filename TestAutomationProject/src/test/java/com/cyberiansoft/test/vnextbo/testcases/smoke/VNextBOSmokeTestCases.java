@@ -150,19 +150,19 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
-        VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
+        VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
         final int numberOfLaborBlocksBefore = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, data.getLabor());
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
-        VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
+        VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
         VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore + 1);
         VNextBOPartsDetailsPanelSteps.deleteLaborForPartByNumberInListANdLaborServiceName(0, data.getLabor());
         Utils.refreshPage();
         VNextBOSearchPanelSteps.searchByText(data.getWoNum());
-        VNextBOPartsDetailsPanelSteps.expandLaborBlock(0);
+        VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore);
     }
 

@@ -1,0 +1,126 @@
+{
+  "verifyUserCanChangeStatusOfThePart": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.01",
+      "description": "Test Case 91162: User can change Status of the Part to \"On Hold\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91162",
+          "testCaseTitle": "User can change Status of the Part to \"On Hold\""
+        }
+      ],
+      "status": "On Hold"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.10",
+      "description": "Test Case 91171: User can change Status of the Part to \"Problem\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91171",
+          "testCaseTitle": "User can change Status of the Part to \"Problem\""
+        }
+      ],
+      "status": "Problem"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.02",
+      "description": "Test Case 91163: User can change Status of the Part to \"Return to Vendor (RTV)\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91163",
+          "testCaseTitle": "User can change Status of the Part to \"Return to Vendor (RTV)\""
+        }
+      ],
+      "status": "Return to Vendor (RTV)"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.03",
+      "description": "Test Case 91164: User can change Status of the Part to \"Quote Received\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91164",
+          "testCaseTitle": "User can change Status of the Part to \"Quote Received\""
+        }
+      ],
+      "status": "Quote Received"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.04",
+      "description": "Test Case 91165: User can change Status of the Part to \"Ordered\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91165",
+          "testCaseTitle": "User can change Status of the Part to \"Ordered\""
+        }
+      ],
+      "status": "Ordered"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.05",
+      "description": "Test Case 91166: User can change Status of the Part to \"Re - Ordered\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91166",
+          "testCaseTitle": "User can change Status of the Part to \"Re - Ordered\""
+        }
+      ],
+      "status": "Re-Ordered"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.06",
+      "description": "Test Case 91167: User can change Status of the Part to \"Received (final)\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91167",
+          "testCaseTitle": "User can change Status of the Part to \"Received (final)\""
+        }
+      ],
+      "status": "Received"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.07",
+      "description": "Test Case 91168: User can change Status of the Part to \"RTV Complete (final)\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91168",
+          "testCaseTitle": "User can change Status of the Part to \"RTV Complete (final)\""
+        }
+      ],
+      "status": "RTV Complete"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.08",
+      "description": "Test Case 91169: User can change Status of the Part to \"Refused\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91169",
+          "testCaseTitle": "User can change Status of the Part to \"Refused\""
+        }
+      ],
+      "status": "Refused"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfThePart.09",
+      "description": "Test Case 91170: User can change Status of the Part to \"Audited\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91170",
+          "testCaseTitle": "User can change Status of the Part to \"Audited\""
+        }
+      ],
+      "status": "Audited"
+    }
+  ],
+  "verifyPriceAndQuantityAreChangedAfterTheStatusChanging": [
+    {
+      "rowID": "verifyPriceAndQuantityAreChangedAfterTheStatusChanging.01",
+      "description": "Test Case 92559: \"Price\" and \"Qty\" are changed after the status changing (bundle part + non bundle)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92559",
+          "testCaseTitle": "\"Price\" and \"Qty\" are changed after the status changing (bundle part + non bundle)"
+        }
+      ]
+    }
+  ]
+}

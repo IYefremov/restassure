@@ -40,6 +40,8 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         Assert.assertFalse(VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded(),
                 "Client info panel hasn't been collapsed");
         VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
+        Assert.assertTrue(VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded(),
+                "Client info panel hasn't been expanded");
         VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(data.getEmployee());
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
@@ -58,6 +60,8 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         Assert.assertFalse(VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded(),
                 "Account info panel hasn't been collapsed");
         VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
+        Assert.assertTrue(VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded(),
+                "Account info panel hasn't been expanded");
         VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(data.getAccountInfoData(), true);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }

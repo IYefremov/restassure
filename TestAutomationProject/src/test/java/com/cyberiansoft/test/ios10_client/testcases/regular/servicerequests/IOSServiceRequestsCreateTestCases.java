@@ -99,7 +99,7 @@ public class IOSServiceRequestsCreateTestCases extends IOSRegularBaseTestCase {
 
         questionsScreen.drawSignature();
         servicesScreen.clickSave();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);;
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_QUESTION_TAX_POINT_1_SHOULD_BE_ANSWERED);
         questionsScreen.answerQuestion(serviceRequestData.getQuestionScreenData().getQuestionData());
         servicesScreen.clickSave();
         AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
