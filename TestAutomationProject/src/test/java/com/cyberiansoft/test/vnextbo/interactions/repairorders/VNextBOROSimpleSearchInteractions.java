@@ -7,25 +7,25 @@ import org.openqa.selenium.Keys;
 
 public class VNextBOROSimpleSearchInteractions {
 
-    private VNextBOROWebPage repairOrdersPage;
-
-    public VNextBOROSimpleSearchInteractions() {
-        repairOrdersPage = new VNextBOROWebPage();
-    }
-
-    public void setRepairOrdersSearchText(String repairOrderText) {
+    public static void setRepairOrdersSearchText(String repairOrderText) {
+        final VNextBOROWebPage repairOrdersPage = new VNextBOROWebPage();
         WaitUtilsWebDriver.waitForVisibility(repairOrdersPage.getRepairOrdersSearchTextField());
         Utils.clearAndType(repairOrdersPage.getRepairOrdersSearchTextField(), repairOrderText);
         WaitUtilsWebDriver.waitABit(500);
     }
 
-    public void clickSearchIcon() {
-        Utils.clickElement(repairOrdersPage.getSearchIcon());
-        WaitUtilsWebDriver.waitForLoading();
+    public static void waitForLoading() {
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(new VNextBOROWebPage().getAppProgressSpinner(), 3);
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(new VNextBOROWebPage().getAppProgressSpinner(), 3);
     }
 
-    public void clickEnterToSearch() {
-        Utils.getActions().sendKeys(repairOrdersPage.getSearchInput(), Keys.ENTER).build().perform();
-        WaitUtilsWebDriver.waitForLoading();
+    public static void clickSearchIcon() {
+        Utils.clickElement(new VNextBOROWebPage().getSearchIcon());
+        waitForLoading();
+    }
+
+    public static void clickEnterToSearch() {
+        Utils.getActions().sendKeys(new VNextBOROWebPage().getSearchInput(), Keys.ENTER).build().perform();
+        waitForLoading();
     }
 }

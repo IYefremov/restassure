@@ -737,7 +737,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setRoNum(data.getRoNum());
         VNextBOROAdvancedSearchDialogInteractions.setStockNum(data.getStockNum());
         VNextBOROAdvancedSearchDialogInteractions.setVinNum(data.getVinNum());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTMONTH.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
         VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
         VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
@@ -922,7 +922,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setSortBy(data.getSortByOptions()[0]);
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages()[0]);
+        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages().getHundred());
         final List<String> ordersPriorityValues = VNextBOROPageInteractions.getOrdersPriorityValues();
         VNextBOROPageValidations.verifyOrdersAreDisplayedByPriority(ordersPriorityValues);
 
@@ -949,7 +949,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setSortBy(data.getSortByOptions()[0]);
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages()[0]);
+        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages().getHundred());
         final List<String> ordersPriorityValues = VNextBOROPageInteractions.getOrdersPriorityValues();
         VNextBOROPageValidations.verifyOrdersAreDisplayedByPriority(ordersPriorityValues);
 
@@ -976,7 +976,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setSortBy(data.getSortByOptions()[0]);
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages()[0]);
+        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages().getHundred());
 
         final List<String> arbitrationDatesList = VNextBOROPageInteractions.getArbitrationDatesList();
         arbitrationDatesList.forEach(System.out::println);
@@ -1112,29 +1112,6 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageSteps.openRODetailsPage();
-        VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
-
-        VNextBOROPageInteractions.movePointerToSearchResultsField();
-        final String searchFilterText = VNextBOROPageInteractions.getSearchFilterText();
-
-        Assert.assertTrue(searchFilterText.contains(TimeFrameValues.TIMEFRAME_90_DAYS.getName()),
-                "The search filter doesn't contain the timeFrame " + TimeFrameValues.TIMEFRAME_90_DAYS.getName());
-        Assert.assertTrue(searchFilterText.contains(OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue()),
-                "The search filter doesn't contain the repair status "
-                        + OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchByServiceOrTaskName(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        VNextBOROPageInteractions.search(data.getService());
-
-        VNextBOROPageSteps.openRODetailsPage();
-//        VNextBORODetailsPageInteractions
-
-
         VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
 
         VNextBOROPageInteractions.movePointerToSearchResultsField();

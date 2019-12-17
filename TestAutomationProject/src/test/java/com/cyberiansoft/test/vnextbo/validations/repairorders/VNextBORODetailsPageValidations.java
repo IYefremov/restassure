@@ -65,6 +65,14 @@ public class VNextBORODetailsPageValidations {
         return Utils.isElementDisplayed(new VNextBORODetailsPage().getRoDetailsSection(), 5);
     }
 
+    public static void verifyServiceOrTaskDescriptionsContainText(String text) {
+        final boolean present = VNextBORODetailsPageInteractions.getServiceAndTaskDescriptionsList()
+                .stream()
+                .anyMatch(string -> string.contains(text));
+
+        Assert.assertTrue(present, "The order contains neither the service nor the task '" + text + "'.");
+    }
+
     public static boolean isReportProblemOptionDisplayedForPhase(String phase) {
         return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsReportProblemOption(phase), 5);
     }
@@ -108,7 +116,7 @@ public class VNextBORODetailsPageValidations {
                 "The Phase status is not displayed as expected");
     }
 
-    public static void verifyPhaseStatus(String phase, String ...phaseStatusesNotToBeDisplayed) {
+    public static void verifyPhaseStatus(String phase, String... phaseStatusesNotToBeDisplayed) {
         final WebElement phaseStatusBoxValue = new VNextBORODetailsPage().getPhaseStatusBoxValue(phase);
         for (String status : phaseStatusesNotToBeDisplayed) {
             Assert.assertNotEquals(Utils.getText(phaseStatusBoxValue), status,

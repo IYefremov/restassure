@@ -184,17 +184,19 @@ public class WaitUtilsWebDriver {
 
     public static void waitForDropDownToBeOpened(WebElement dropDown) {
         try {
-            WaitUtilsWebDriver.waitForAttributeToBe(dropDown, "aria-hidden", "false", 4);
+            WaitUtilsWebDriver.waitForAttributeToBe(dropDown, "aria-hidden", "false", 2);
         } catch (Exception ignored) {}
     }
 
     public static void waitForDropDownToBeClosed(WebElement dropDown) {
+        waitForDropDownToBeClosed(dropDown, 5);
+    }
+
+    public static void waitForDropDownToBeClosed(WebElement dropDown, int timeout) {
         try {
-            getShortWait().ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.attributeToBe(dropDown, "aria-hidden", "true"));
-        } catch (Exception ignored) {
-            waitABit(1000);
-        }
+            waitForElementNotToBeStale(dropDown, timeout);
+            waitForAttributeToBe(dropDown, "aria-hidden", "true");
+        } catch (Exception ignored) {}
     }
 
     public static void waitForListToDisappear(WebElement list) {
@@ -222,6 +224,15 @@ public class WaitUtilsWebDriver {
         return getWait().until(ExpectedConditions.attributeContains(element, attribute, value));
     }
 
+    public static boolean waitForAttributeToContain(WebElement element, String attribute, String value, int timeout) {
+        return getWebDriverWait(timeout).until(ExpectedConditions.attributeContains(element, attribute, value));
+    }
+
+    public static boolean waitForAttributeNotToContain(WebElement element, String attribute, String value, int timeout) {
+        return getWebDriverWait(timeout)
+                .until(ExpectedConditions.not(ExpectedConditions.attributeContains(element, attribute, value)));
+    }
+
     public static boolean waitForAttributeToContainIgnoringException(WebElement element, String attribute, String value) {
         try {
             return waitForAttributeToContain(element, attribute, value);
@@ -236,10 +247,6 @@ public class WaitUtilsWebDriver {
         } catch (Exception ignored) {
             return false;
         }
-    }
-
-    public static boolean waitForAttributeToContain(WebElement element, String attribute, String value, int timeout) {
-        return getWebDriverWait(timeout).until(ExpectedConditions.attributeContains(element, attribute, value));
     }
 
     public static void waitForInputFieldValueIgnoringException(WebElement element, String value) {
@@ -258,11 +265,13 @@ public class WaitUtilsWebDriver {
     }
 
     public static WebElement waitForElementNotToBeStale(WebElement element) {
+        return waitForElementNotToBeStale(element, 10);
+    }
+
+    public static WebElement waitForElementNotToBeStale(WebElement element, int timeOut) {
         try {
-            getWait().until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
-        } catch (Exception ignored) {
-            waitABit(1500);
-        }
+            getWebDriverWait(timeOut).until(ExpectedConditions.not(ExpectedConditions.stalenessOf(element)));
+        } catch (Exception ignored) {}
         return element;
     }
 
@@ -286,23 +295,51 @@ public class WaitUtilsWebDriver {
         getWait().until(ExpectedConditions.numberOfElementsToBe(by, elementsNumber));
     }
 
+    public static boolean elementShouldBeVisible(WebElement element, boolean shouldBeVisible) {
+        return elementShouldBeVisible(element, shouldBeVisible, 15);
+    }
 
-    public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible) {
-        getWait().
-                until((webDriver) -> {
-                    if (shoulBeVisible)
-                        try {
-                            return element.isDisplayed();
-                        } catch (NoSuchElementException ex) {
-                            return false;
+    public static boolean elementShouldBeVisible(WebElement element, boolean shouldBeVisible, int timeOut) {
+        try {
+            return getWebDriverWait(timeOut)
+                    .until((webDriver) -> {
+                        if (shouldBeVisible)
+                            try {
+                                return element.isDisplayed();
+                            } catch (NoSuchElementException ex) {
+                                return false;
+                            }
+                        else {
+                            try {
+                                return !element.isDisplayed();
+                            } catch (NoSuchElementException ex) {
+                                return true;
+                            }
                         }
-                    else {
-                        try {
-                            return !element.isDisplayed();
-                        } catch (NoSuchElementException ex) {
-                            return true;
-                        }
-                    }
-                });
+                    });
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public static boolean elementShouldBeClickable(WebElement element, boolean condition, int timeOut) {
+        final WebDriverWait wait = WaitUtilsWebDriver.getWebDriverWait(timeOut);
+        if (condition) {
+            try {
+                wait.until(ExpectedConditions.elementToBeClickable(element));
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            try {
+                wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(element)));
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
     }
 }

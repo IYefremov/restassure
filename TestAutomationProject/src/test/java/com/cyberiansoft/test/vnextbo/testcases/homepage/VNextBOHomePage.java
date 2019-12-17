@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOUserProfileDialog;
@@ -101,20 +102,20 @@ public class VNextBOHomePage extends BaseTestCase {
         Assert.assertTrue(homePage.isIntercomDisplayed(),
                 "The Intercom Link hasn't been displayed");
 
-        leftMenu.expandMainMenu();
-        Assert.assertTrue(leftMenu.isMainMenuExpanded(), "The main menu hasn't been expanded");
-        leftMenu.collapseMainMenu();
-        Assert.assertFalse(leftMenu.isMainMenuExpanded(), "The main menu hasn't been collapsed");
+        VNextBOLeftMenuInteractions.expandMainMenu();
+        Assert.assertTrue(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been expanded");
+        VNextBOLeftMenuInteractions.collapseMainMenu();
+        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been collapsed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanMinimizeMaximizeMenu(String rowID, String description, JSONObject testData) {
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
 
-        leftMenu.collapseMainMenu();
-        Assert.assertFalse(leftMenu.isMainMenuExpanded(), "The main menu hasn't been collapsed");
-        leftMenu.expandMainMenu();
-        Assert.assertTrue(leftMenu.isMainMenuExpanded(), "The main menu hasn't been expanded");
+        VNextBOLeftMenuInteractions.collapseMainMenu();
+        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been collapsed");
+        VNextBOLeftMenuInteractions.expandMainMenu();
+        Assert.assertTrue(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been expanded");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

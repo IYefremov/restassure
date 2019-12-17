@@ -1,12 +1,10 @@
 package com.cyberiansoft.test.dataclasses.vNextBO;
 
+import com.cyberiansoft.test.dataclasses.vNextBO.general.VNextBOPageSwitcherValues;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -237,6 +235,9 @@ public class VNextBOMonitorData  {
     @JsonProperty("userPassword")
     private String userPassword;
 
+    @JsonProperty("arbitrationDate")
+    private String arbitrationDate;
+
     @JsonProperty("services")
     private String[] services;
 
@@ -282,11 +283,14 @@ public class VNextBOMonitorData  {
     @JsonProperty("servicePhaseHeaders")
     private String[] servicePhaseHeaders;
 
-    @JsonProperty("pages")
-    private String[] pages;
+//    @JsonProperty("pages")
+//    private String[] pages;
 
     @JsonProperty("searchValues")
     private VNextBOROAdvancedSearchValues searchValues;
+
+    @JsonProperty("pages")
+    private VNextBOPageSwitcherValues pages;
 
     public List<String> getFullAdvancedSearchElementsList() {
         return Stream.of(departmentText, phaseText, customerText, stockNumText, vinNumText, roNumText, woNumText,
@@ -303,11 +307,6 @@ public class VNextBOMonitorData  {
     public List<String> getAdvancedSearchDialogDefaultTextList() {
         return Arrays.asList(phaseText, timeFrameText, departmentText,
                 repairStatusText, daysInProcessText, daysInPhaseText, flagText);
-    }
-
-    public String getServiceCompletedDate() {
-        LocalDate date = LocalDate.now(ZoneId.of("US/Pacific"));
-        return date.format(DateTimeFormatter.ofPattern("MM/dd/uuuu"));
     }
 
     public String getProblemDescription() {

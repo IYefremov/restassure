@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnextbo.validations.general;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 
 public class VNextBOLeftMenuValidations {
@@ -20,10 +19,13 @@ public class VNextBOLeftMenuValidations {
     }
 
     public static boolean isMainMenuExpanded() {
-        DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
         final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
-        WaitUtilsWebDriver.waitForVisibility(leftMenuPanel.getBody());
+        WaitUtilsWebDriver.elementShouldBeVisible(leftMenuPanel.getBody(), true);
         return Utils.isElementWithAttributeContainingValueDisplayed(
-                leftMenuPanel.getBody(), "class", "left-menu--open", 10);
+                leftMenuPanel.getBody(), "class", "left-menu--open", 2);
+    }
+
+    public static boolean isMainMenuCollapsed() {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNexBOLeftMenuPanel().getClosedMenu(), true);
     }
 }

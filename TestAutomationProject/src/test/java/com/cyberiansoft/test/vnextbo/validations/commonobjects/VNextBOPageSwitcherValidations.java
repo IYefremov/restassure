@@ -36,36 +36,66 @@ public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidation
 
     public static void verifyOpenedPageNumberIsCorrect(String expectedPageNumber) {
 
-        WaitUtilsWebDriver.waitForTextToBePresentInElement(new VNextBOPageSwitcherElements().getHeaderActivePageNumber(), expectedPageNumber);
+        final VNextBOPageSwitcherElements switcherElements = new VNextBOPageSwitcherElements();
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(switcherElements.getHeaderActivePageNumber(), expectedPageNumber);
         Assert.assertEquals(VNextBOPageSwitcherSteps.getActivePageNumberFromHeaderPager(), expectedPageNumber,
                 "Header active page number hasn't been changed.");
-        WaitUtilsWebDriver.waitForTextToBePresentInElement(new VNextBOPageSwitcherElements().getFooterActivePageNumber(), expectedPageNumber);
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(switcherElements.getFooterActivePageNumber(), expectedPageNumber);
         Assert.assertEquals(VNextBOPageSwitcherSteps.getActivePageNumberFromFooterPager(), expectedPageNumber,
                 "Footer active page number hasn't been changed.");
     }
 
-    public static boolean verifyHeaderLastPageButtonIsClickable() {
+    public static boolean isHeaderLastPageButtonClickable(boolean expected) {
 
-        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderLastPageBtn());
+        return WaitUtilsWebDriver.elementShouldBeClickable(
+                new VNextBOPageSwitcherElements().getHeaderLastPageBtn(), expected, 5);
     }
 
-    public static boolean isFooterLastPageButtonClickable() {
+    public static boolean isFooterLastPageButtonClickable(boolean expected) {
 
-        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterLastPageBtn());
+        return WaitUtilsWebDriver.elementShouldBeClickable(
+                new VNextBOPageSwitcherElements().getFooterLastPageBtn(), expected, 5);
     }
 
-    public static boolean verifyHeaderFirstPageButtonIsClickable() {
+    public static boolean isHeaderFirstPageButtonClickable(boolean expected) {
 
-        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderFirstPageBtn());
+        return WaitUtilsWebDriver.elementShouldBeClickable(
+                new VNextBOPageSwitcherElements().getHeaderFirstPageBtn(), expected, 5);
     }
 
-    public static boolean verifyFooterFirstPageButtonIsClickable() {
+    public static boolean isFooterFirstPageButtonClickable(boolean expected) {
 
-        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterFirstPageBtn());
+        return WaitUtilsWebDriver.elementShouldBeClickable(
+                new VNextBOPageSwitcherElements().getFooterFirstPageBtn(), expected, 5);
+    }
+
+    public static boolean isHeaderPreviousPageButtonClickable(boolean expected) {
+
+        return WaitUtilsWebDriver.elementShouldBeClickable(
+                new VNextBOPageSwitcherElements().getHeaderPreviousPageBtn(), expected, 5);
+    }
+
+    public static boolean isFooterPreviousPageButtonClickable(boolean expected) {
+
+        return WaitUtilsWebDriver.elementShouldBeClickable(
+                new VNextBOPageSwitcherElements().getFooterPreviousPageBtn(), expected, 5);
+    }
+
+    public static boolean isHeaderNextPageButtonClickable(boolean expected) {
+
+        return WaitUtilsWebDriver.elementShouldBeClickable(
+                new VNextBOPageSwitcherElements().getHeaderNextPageBtn(), expected, 5);
+    }
+
+    public static boolean isFooterNextPageButtonClickable(boolean expected) {
+
+        return WaitUtilsWebDriver.elementShouldBeClickable(
+                new VNextBOPageSwitcherElements().getFooterNextPageBtn(), expected, 5);
     }
 
     public static void verifyItemsPerPageNumberIsCorrect(String expectedItemsNumber) {
 
+        WaitUtilsWebDriver.waitABit(1000);
         Assert.assertTrue(VNextBOPageSwitcherSteps.getItemsPerPageNumberFromTopElement().contains(expectedItemsNumber),
                 "Top paging box has had incorrect items per page number.");
         Assert.assertTrue(VNextBOPageSwitcherSteps.getItemsPerPageNumberFromBottomElement().contains(expectedItemsNumber),

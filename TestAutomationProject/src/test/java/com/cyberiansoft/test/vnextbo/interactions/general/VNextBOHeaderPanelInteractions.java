@@ -6,22 +6,16 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
 
 public class VNextBOHeaderPanelInteractions {
 
-    private VNextBOHeaderPanel headerPanel;
-
-    public VNextBOHeaderPanelInteractions() {
-        headerPanel = new VNextBOHeaderPanel();
+    public static void clickLogout() {
+        Utils.clickElement(new VNextBOHeaderPanel().getLogoutLink());
     }
 
-    public void clickLogout() {
-        Utils.clickElement(headerPanel.getLogoutLink());
-    }
-
-    public void userLogout() {
+    public static void userLogout() {
         clickLogout();
         WaitUtilsWebDriver.waitForLoading();
     }
 
     public void clickUpgradeNowBanner() {
-        Utils.clickElement(headerPanel.getUpgradeNowButton());
+        Utils.clickElement(new VNextBOHeaderPanel().getUpgradeNowButton());
     }
 }

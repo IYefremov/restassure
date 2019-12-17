@@ -153,33 +153,32 @@ public class Utils {
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
         waitForDropDownToBeOpened(dropDown);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
         final Actions actions = getActions();
         getMatchingOptionInListBox(listBox, selection)
                 .ifPresent((option) -> {
                     actions.moveToElement(option).build().perform();
                     Utils.clickElement(option);
                 });
-        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
+        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }
 
     public static void selectOptionInDropDownWithJs(WebElement dropDown, WebElement option) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibility(option);
         Utils.clickWithJS(option);
-        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
+        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
         if (draggable) {
-            //waitForDropDownToBeOpened(dropDown);
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
-            getMatchingOptionInListBox(listBox, selection)
-                    .ifPresent((option) -> {
-                        scrollListBoxDownWhileElementIsNotDisplayed(dropDown, listBox, option);
-                        Utils.clickElement(option, 5);
-                    });
-           // WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 2);
+            final WebElement webElement = listBox
+                    .stream()
+                    .filter(option -> option.getText().equals(selection))
+                    .findAny()
+                    .orElseThrow(() -> new NoSuchElementException("The option " + selection + " hasn't been found"));
+            Utils.clickElement(webElement);
         } else {
             selectOptionInDropDown(dropDown, listBox, selection);
         }
@@ -188,13 +187,7 @@ public class Utils {
     private static Optional<WebElement> getMatchingOptionInListBox(List<WebElement> listBox, String selection) {
         return listBox
                 .stream()
-                .filter((option) -> {
-                    WaitUtilsWebDriver
-                            .getWait()
-                            .ignoring(StaleElementReferenceException.class)
-                            .until(ExpectedConditions.not(ExpectedConditions.stalenessOf(option)));
-                    return option.getText().equals(selection);
-                })
+                .filter((option) -> WaitUtilsWebDriver.waitForElementNotToBeStale(option).getText().equals(selection))
                 .findFirst();
     }
 
@@ -494,6 +487,6 @@ public class Utils {
     }
 
     public static boolean elementContainsText(WebElement element, String text) {
-        return WaitUtilsWebDriver.waitForVisibility(element).getText().contains(text);
+        return WaitUtilsWebDriver.waitForVisibility(element, 3).getText().contains(text);
     }
 }

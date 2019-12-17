@@ -3,14 +3,9 @@ package com.cyberiansoft.test.vnextbo.steps.commonobjects;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOSearchPanel;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
 
