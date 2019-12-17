@@ -61,8 +61,8 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         final String srCustomer = "Test";
         final String VIN = "1GNEK13R4TJ423282";
 
-        final String[] services = {"Glass Repair", "Bumper Repair"};
-        final String[] servicesprices = {"100", "150"};
+        final String[] services = { "Glass Repair", "Bumper Repair" };
+        final String[] servicesprices = { "100", "150" };
         final String servicesquantity = "1";
         final String woActivePhaseStatus = "Not Started";
         final String woActivePhaseStatusNEW = "QC";
@@ -118,8 +118,8 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         final String srCustomer = "Test";
         final String VIN = "1GNEK13R4TJ423282";
 
-        final String[] services = {"Glass Repair", "Bumper Repair"};
-        final String[] servicesprices = {"100", "150"};
+        final String[] services = { "Glass Repair", "Bumper Repair" };
+        final String[] servicesprices = { "100", "150" };
         final String servicesquantity = "1";
         final String woActivePhaseStatus = "Not Started";
         final String woHalfCopleteValue = "50%";
@@ -182,8 +182,8 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         final String srCustomer = "Test";
         final String VIN = "1GNEK13R4TJ423282";
 
-        final String[] services = {"Glass Repair", "Bumper Repair"};
-        final String[] servicesprices = {"100", "150"};
+        final String[] services = { "Glass Repair", "Bumper Repair" };
+        final String[] servicesprices = { "100", "150" };
         final String servicesquantity = "1";
         final String woActivePhaseStatus = "Not Started";
         final String serviceQueuedStatus = "Queued";
@@ -248,8 +248,8 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         final String srCustomer = "Test";
         final String VIN = "1GNEK13R4TJ423282";
 
-        final String[] services = {"Glass Repair", "Bumper Repair"};
-        final String[] servicesprices = {"100", "150"};
+        final String[] services = { "Glass Repair", "Bumper Repair" };
+        final String[] servicesprices = { "100", "150" };
         final String servicesquantity = "1";
         final String woActivePhaseStatus = "Not Started";
         final String serviceQueuedStatus = "Queued";
