@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnextbo.steps.clients;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsAdvancedSearchForm;
 
 public class VNextBOClientsAdvancedSearchSteps {

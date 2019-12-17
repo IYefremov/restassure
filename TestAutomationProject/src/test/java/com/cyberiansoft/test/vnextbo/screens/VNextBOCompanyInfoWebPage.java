@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -83,80 +83,80 @@ public class VNextBOCompanyInfoWebPage extends VNextBOBaseWebPage {
     }
 
     public VNextBOCompanyInfoWebPage setCompanyName(String companyName) {
-        setData(companyNameInputField, companyName);
+        Utils.clearAndType(companyNameInputField, companyName);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setAddressLine1(String addressLine1) {
-        setData(address1InputField, addressLine1);
+        Utils.clearAndType(address1InputField, addressLine1);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setAddressLine2(String addressLine2) {
-        setData(address2InputField, addressLine2);
+        Utils.clearAndType(address2InputField, addressLine2);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setCity(String city) {
-        setData(cityInputField, city);
+        Utils.clearAndType(cityInputField, city);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setZip(String zip) {
-        setData(zipInputField, zip);
+        Utils.clearAndType(zipInputField, zip);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setPhoneCode(String phoneCode) {
-        clickElement(phoneCodeArrow);
+        Utils.clickElement(phoneCodeArrow);
         selectPhoneCode(phoneCode);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setPhone(String phone) {
-        setData(phoneInputField, phone);
+        Utils.clearAndType(phoneInputField, phone);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setEmail(String email) {
-        setData(emailInputField, email);
+        Utils.clearAndType(emailInputField, email);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setCountry(String country) {
-        clickElement(countryArrow);
+        Utils.clickElement(countryArrow);
         selectCountry(country);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage setStateProvince(String stateProvince) {
-        clickElement(stateProvinceArrow);
+        Utils.clickElement(stateProvinceArrow);
         selectStateProvince(stateProvince);
         return this;
     }
 
     private VNextBOCompanyInfoWebPage selectCountry(String country) {
-        selectOptionInDropDown(countryDropDown, countryListBoxOptions, country);
+        Utils.selectOptionInDropDown(countryDropDown, countryListBoxOptions, country);
         return this;
     }
 
     private VNextBOCompanyInfoWebPage selectPhoneCode(String phoneCode) {
-        selectOptionInDropDown(phoneCodeDropDown, phoneCodeListBoxOptions, phoneCode, true);
+        Utils.selectOptionInDropDown(phoneCodeDropDown, phoneCodeListBoxOptions, phoneCode, true);
         return this;
     }
 
     private VNextBOCompanyInfoWebPage selectStateProvince(String state) {
-        selectOptionInDropDown(stateProvinceDropDown, stateProvinceListBoxOptions, state);
+        Utils.selectOptionInDropDown(stateProvinceDropDown, stateProvinceListBoxOptions, state);
         return this;
     }
 
     public VNextBOCompanyInfoWebPage clickSaveButton() {
-        clickElement(saveButton);
+        Utils.clickElement(saveButton);
         return this;
     }
 
     public boolean isSuccessNotificationDisplayed() {
-        return isElementDisplayed(successMessage);
+        return Utils.isElementDisplayed(successMessage);
     }
 
     public String getCompanyValue() {

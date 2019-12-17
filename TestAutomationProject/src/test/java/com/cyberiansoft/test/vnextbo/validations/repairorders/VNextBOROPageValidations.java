@@ -382,7 +382,7 @@ public class VNextBOROPageValidations {
     }
 
     public static void verifyOrdersAreDisplayedByPriorityOnTheLastPage() {
-        if (VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable()) {
+        if (VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(true)) {
             VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
             final List<String> ordersPriorityValues = VNextBOROPageInteractions.getOrdersPriorityValues();
             final int size = ordersPriorityValues.size();
@@ -464,5 +464,20 @@ public class VNextBOROPageValidations {
     public static void verifyLowPriorityOrdersAreSortedByDateInAscendingOrder() {
         final List<String> lowPriorityDates = VNextBOROPageInteractions.getLowPriorityDates();
         verifyOrdersAreSortedByDateInAscendingOrder(lowPriorityDates);
+    }
+
+    public static void verifyMaximumNumberOfOrdersOnPage(int expectedMaxNumber) {
+        final int ordersOnPage = VNextBOROPageInteractions.getOrdersNumberOnPage();
+        try {
+            WaitUtilsWebDriver.getWait().until((ExpectedCondition<Boolean>) driver -> ordersOnPage <= expectedMaxNumber);
+        } catch (Exception ignored) {}
+
+        if (ordersOnPage < expectedMaxNumber) {
+            Assert.assertTrue(true, "The number of orders on page " + ordersOnPage
+                    + " is less than the expected max number of items per page - " + expectedMaxNumber);
+        } else {
+            Assert.assertEquals(ordersOnPage, expectedMaxNumber,
+                    "The number of orders on page is not equal to the max number of orders");
+        }
     }
 }

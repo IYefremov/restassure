@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases.r360free.inspections;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.InsuranceCompanyData;
 import com.cyberiansoft.test.dataclasses.MatrixServiceData;
@@ -29,7 +30,6 @@ import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegi
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -98,9 +98,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceOfficeUrl);
-		VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
-				VNextBOLoginScreenWebPage.class);
-		loginPage.waitABit(1000*20);
+        WaitUtilsWebDriver.waitABit(1000*20);
         VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
 				VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
 		VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
@@ -169,9 +167,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		WebDriver
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceOfficeUrl);
-		VNextBOLoginScreenWebPage loginPage = PageFactory.initElements(webdriver,
-				VNextBOLoginScreenWebPage.class);
-		loginPage.waitABit(1000*15);
+        WaitUtilsWebDriver.waitABit(1000*15);
         VNextBOLoginSteps.userLogin(VNextFreeRegistrationInfo.getInstance().getR360UserUserName(),
 				VNextFreeRegistrationInfo.getInstance().getR360UserPassword());
 		VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,

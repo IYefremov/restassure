@@ -253,6 +253,9 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[contains(@data-bind, 'search.info')]")
     private WebElement searchFilterText;
 
+    @FindBy(id = "app-progress-spinner")
+    private WebElement appProgressSpinner;
+
     public VNextBOROWebPage() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

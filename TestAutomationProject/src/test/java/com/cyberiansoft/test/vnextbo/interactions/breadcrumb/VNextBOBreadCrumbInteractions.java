@@ -24,7 +24,7 @@ public class VNextBOBreadCrumbInteractions {
     }
 
     public static void setLocation(String location) {
-        if (!VNextBOBreadCrumbValidations.isLocationExpanded()) {
+        if (VNextBOBreadCrumbValidations.isLocationCollapsed()) {
             Utils.clickElement(new VNextBOBreadCrumbPanel().getLocationName());
         }
         selectLocation(location);
@@ -42,8 +42,8 @@ public class VNextBOBreadCrumbInteractions {
     }
 
     private static void selectLocation(String location) {
-        Utils.selectOptionInDropDown(
-                new VNextBOBreadCrumbPanel().getLocationsDropDown(), new VNextBOBreadCrumbPanel().getLocationsList(), location, true);
+        Utils.selectOptionInDropDown(new VNextBOBreadCrumbPanel().getLocationsDropDown(),
+                new VNextBOBreadCrumbPanel().getLocationsList(), location, true);
         Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSelected(location), "The location hasn't been selected");
     }
 

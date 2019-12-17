@@ -6,8 +6,6 @@ import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClient
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientServicesPageSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 

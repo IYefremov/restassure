@@ -1,32 +1,18 @@
 package com.cyberiansoft.test.ios10_client.testcases;
 
-import com.cyberiansoft.test.baseutils.CustomDateProvider;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
-import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.core.MobilePlatform;
-import com.cyberiansoft.test.dataclasses.*;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
-import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.*;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.MainScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.*;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.*;
 import com.cyberiansoft.test.ios10_client.templatepatterns.DeviceRegistrator;
-import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
-import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
-import com.cyberiansoft.test.ios10_client.utils.*;
-import org.json.simple.JSONObject;
-import org.testng.Assert;
+import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 
 public class IOSSmokeTestCases extends ReconProBaseTestCase {

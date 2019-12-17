@@ -12,8 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -24,7 +24,6 @@ public class VNextBORODetailsPageInteractions {
 
     public static List<String> getVendorPricesValuesList() {
         WaitUtilsWebDriver.waitABit(1000);
-        final List<WebElement> vendorPricesList = new VNextBORODetailsPage().getVendorPricesList();
         List<String> vendorPricesValuesList = new ArrayList<>();
         for (WebElement vendorPrice : new VNextBORODetailsPage().getVendorPricesList()) {
             vendorPricesValuesList.add(vendorPrice.getAttribute("value"));
@@ -206,6 +205,15 @@ public class VNextBORODetailsPageInteractions {
                         .visibilityOfElementLocated(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
                                 + serviceId + "']/div[@class='clmn_2']/div[@title]")))
                 .getText();
+    }
+
+    public static List<String> getServiceAndTaskDescriptionsList() {
+        final List<WebElement> serviceAndTaskDescriptionsList = new VNextBORODetailsPage().getServiceAndTaskDescriptionsList();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(serviceAndTaskDescriptionsList, 3);
+        return serviceAndTaskDescriptionsList
+                .stream()
+                .map(WebElement::getText)
+                .collect(Collectors.toList());
     }
 
     public static String getServiceQuantity(String serviceId) {

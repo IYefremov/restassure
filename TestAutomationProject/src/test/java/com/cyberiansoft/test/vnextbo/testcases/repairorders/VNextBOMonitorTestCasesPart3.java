@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
@@ -496,9 +497,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 
 		Assert.assertTrue(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date should be displayed with the Completed status");
-		System.out.println(serviceCompletedDate);
-		System.out.println(data.getServiceCompletedDate());
-		Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
+		Assert.assertEquals(serviceCompletedDate, CustomDateProvider.getCurrentDateInFullFormat(true),
 				"The service completed date is wrong");
 
 		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
@@ -534,14 +533,14 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 
 		final String serviceStartedDate = VNextBORODetailsPageInteractions.getServiceStartedDate(serviceId);
 		final String serviceCompletedDate = VNextBORODetailsPageInteractions.getServiceCompletedDate(serviceId);
+
 		Assert.assertEquals(serviceStartedDate, data.getServiceStartedDate(),
 				"The service started date is wrong");
 
 		Assert.assertTrue(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date should be displayed with the Audited status");
-		System.out.println(serviceCompletedDate);
-		System.out.println(data.getServiceCompletedDate());
-		Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
+
+        Assert.assertEquals(serviceCompletedDate, CustomDateProvider.getCurrentDateInFullFormat(true),
 				"The service completed date is wrong");
 
 		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
@@ -580,9 +579,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 
 		Assert.assertTrue(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date should be displayed with the Refused status");
-		System.out.println(serviceCompletedDate);
-		System.out.println(data.getServiceCompletedDate());
-		Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
+		Assert.assertEquals(serviceCompletedDate, CustomDateProvider.getCurrentDateInFullFormat(true),
 				"The service completed date is wrong");
 
 		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);
@@ -656,9 +653,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 
 		Assert.assertTrue(VNextBORODetailsPageValidations.isServiceCompletedDateDisplayed(serviceId),
 				"The service completed date should be displayed with the Refused status");
-		System.out.println(serviceCompletedDate);
-		System.out.println(data.getServiceCompletedDate());
-		Assert.assertEquals(serviceCompletedDate, data.getServiceCompletedDate(),
+		Assert.assertEquals(serviceCompletedDate, CustomDateProvider.getCurrentDateInFullFormat(true),
 				"The service completed date is wrong");
 
 		VNextBORODetailsPageInteractions.hoverOverServiceHelperIcon(serviceId);

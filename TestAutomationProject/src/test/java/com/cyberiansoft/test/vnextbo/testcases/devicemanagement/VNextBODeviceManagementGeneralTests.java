@@ -15,7 +15,8 @@ import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBODeviceM
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
 
@@ -69,14 +70,14 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickFooterPreviousPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(false),
                 "Bottom Last page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderLastPageButtonIsClickable(),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(false),
                 "Top Last page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderFirstPageButtonIsClickable(), "Top First page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyFooterFirstPageButtonIsClickable(), "Bottom First page button has been clickable.");
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(false), "Top First page button has been clickable.");
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(false), "Bottom First page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");

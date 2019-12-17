@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.baseutils.Utils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
@@ -35,10 +35,10 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
         System.out.println("source: "+source + "\n" + source.isDisplayed());
         System.out.println("target: "+target + "\n" + target.isDisplayed());
         System.out.println(source.isDisplayed());
-        scrollToElement(source);
-        waitABit(1000);
+        Utils.scrollToElement(source);
+        WaitUtilsWebDriver.waitABit(1000);
 
-        actions.dragAndDrop(source, target).build().perform();   //variant 1
+        Utils.getActions().dragAndDrop(source, target).build().perform();   //variant 1
 //        new Actions(driver).clickAndHold(source).moveToElement(target).release().perform();   //variant 2
 //        String xto=Integer.toString(source.getLocation().x);   //variant 3
 //        String yto=Integer.toString(target.getLocation().y);
@@ -110,7 +110,7 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
 //                "})(jQuery);";
 
 //        ((JavascriptExecutor)driver).executeScript(script+ "$('div:contains("+ quickNoteSource + ")').simulateDragDrop({ dropTarget: 'div:contains(" + quickNoteTarget + ")'});");
-        waitForLoading();
+        WaitUtilsWebDriver.waitForLoading();
         return this;
     }
 
@@ -193,8 +193,8 @@ public class VNextBOQuickNotesWebPage extends VNextBOBaseWebPage {
                 .findFirst()
                 .get()
                 .findElement(By.xpath(locator));
-        scrollToElement(webElement);
-        clickWithJS(webElement);
+        Utils.scrollToElement(webElement);
+        Utils.clickWithJS(webElement);
         WaitUtilsWebDriver.waitABit(2000);
     }
 

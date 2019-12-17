@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.quicknotes;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOQuickNotesData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -23,7 +24,7 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getQuickNotesTD();
         VNextBOHeaderPanel headerPanel = new VNextBOHeaderPanel();
-        headerPanel.executeJsForAddOnSettings();
+        Utils.executeJsForAddOnSettings();
         leftMenu = new VNexBOLeftMenuPanel();
     }
     

@@ -29,10 +29,7 @@ import org.testng.annotations.Test;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
@@ -740,7 +737,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setRoNum(data.getRoNum());
         VNextBOROAdvancedSearchDialogInteractions.setStockNum(data.getStockNum());
         VNextBOROAdvancedSearchDialogInteractions.setVinNum(data.getVinNum());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTMONTH.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
         VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
         VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
@@ -795,11 +792,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROPageInteractions.movePointerToSearchResultsField();
 
         System.out.println("Inserted values");
-        final List<String> searchResultsList = VNextBOROPageInteractions
-                .getSearchResultsList()
-                .stream()
-                .map(String::trim)
-                .collect(Collectors.toList());
+        final List<String> searchResultsList = VNextBOROPageInteractions.getSearchResultsList();
         searchResultsList.forEach(System.out::println);
 
         System.out.println();
@@ -807,8 +800,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         final List<String> advancedSearchDialogElements = data.getFullAdvancedSearchElementsList();
         advancedSearchDialogElements.forEach(System.out::println);
 
-        Assert.assertTrue(new ArrayList<String>(Arrays.asList(VNextBOROPageInteractions.getSearchFilterText().split("; "))).containsAll(advancedSearchDialogElements),
-                "The data hasn't been inserted");
+        Assert.assertTrue(searchResultsList.containsAll(advancedSearchDialogElements), "The data hasn't been inserted");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -930,7 +922,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setSortBy(data.getSortByOptions()[0]);
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages()[0]);
+        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages().getHundred());
         final List<String> ordersPriorityValues = VNextBOROPageInteractions.getOrdersPriorityValues();
         VNextBOROPageValidations.verifyOrdersAreDisplayedByPriority(ordersPriorityValues);
 
@@ -957,7 +949,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setSortBy(data.getSortByOptions()[0]);
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages()[0]);
+        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages().getHundred());
         final List<String> ordersPriorityValues = VNextBOROPageInteractions.getOrdersPriorityValues();
         VNextBOROPageValidations.verifyOrdersAreDisplayedByPriority(ordersPriorityValues);
 
@@ -984,7 +976,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setSortBy(data.getSortByOptions()[0]);
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages()[0]);
+        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages().getHundred());
 
         final List<String> arbitrationDatesList = VNextBOROPageInteractions.getArbitrationDatesList();
         arbitrationDatesList.forEach(System.out::println);
@@ -1105,5 +1097,30 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
                 CustomDateProvider.getYearToDateStartDate(), CustomDateProvider.getYearStartDate());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeDefaultSearchSettings(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
+
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_90_DAYS.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
+                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+        VNextBOROAdvancedSearchDialogSteps.search();
+
+        VNextBOROPageSteps.openRODetailsPage();
+        VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
+
+        VNextBOROPageInteractions.movePointerToSearchResultsField();
+        final String searchFilterText = VNextBOROPageInteractions.getSearchFilterText();
+
+        Assert.assertTrue(searchFilterText.contains(TimeFrameValues.TIMEFRAME_90_DAYS.getName()),
+                "The search filter doesn't contain the timeFrame " + TimeFrameValues.TIMEFRAME_90_DAYS.getName());
+        Assert.assertTrue(searchFilterText.contains(OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue()),
+                "The search filter doesn't contain the repair status "
+                        + OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
     }
 }

@@ -3,8 +3,6 @@ package com.cyberiansoft.test.dataclasses.vNextBO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
-import java.util.List;
-
 @Getter
 public class VNextBOPartsManagementOrderDetailsData extends VNextBOBaseData {
 

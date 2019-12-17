@@ -1,8 +1,5 @@
 package com.cyberiansoft.test.ios10_client.listeners;
 
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.Status;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.TargetProcessTestCaseData;
@@ -11,14 +8,12 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.extentreportproviders.ExtentManager;
-import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.MainScreen;
 import com.cyberiansoft.test.ios10_client.testcases.BaseTestCase;
 import com.cyberiansoft.test.ios10_client.testcases.hd.IOSHDBaseTestCase;
 import com.cyberiansoft.test.ios10_client.utils.TestUser;
 import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
-import com.cyberiansoft.test.vnext.listeners.TestNG_ConsoleRunner;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import io.qameta.allure.Allure;
 import lombok.Getter;
@@ -27,8 +22,11 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.*;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class iOSHDClientListener implements ITestListener, IInvokedMethodListener, IConfigurationListener {

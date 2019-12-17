@@ -45,7 +45,23 @@ public class VNextBOInvoicesPageInteractions {
     }
 
     public static String getInvoiceName(int index) {
-        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOInvoicesWebPage().getInvoiceNumbers()).get(index).getText();
+        return WaitUtilsWebDriver.waitForVisibility(new VNextBOInvoicesWebPage().getInvoiceNumbers().get(index)).getText();
+    }
+
+    public static String getInvoiceName(int index, int timeOut) {
+        return WaitUtilsWebDriver.waitForVisibility(
+                new VNextBOInvoicesWebPage().getInvoiceNumbers().get(index), timeOut).getText();
+    }
+
+    public static String[] getFirstInvoicesNames(int number) {
+        if (VNextBOInvoicesPageValidations.isMinimumNumberOfInvoicesDisplayed(number, 5)) {
+            return new String[]{
+                    VNextBOInvoicesPageInteractions.getInvoiceName(0, 1),
+                    VNextBOInvoicesPageInteractions.getInvoiceName(1, 1),
+                    VNextBOInvoicesPageInteractions.getInvoiceName(2, 1)
+            };
+        }
+        return null;
     }
 
     public static String[] getFirstInvoiceNames(int number) {

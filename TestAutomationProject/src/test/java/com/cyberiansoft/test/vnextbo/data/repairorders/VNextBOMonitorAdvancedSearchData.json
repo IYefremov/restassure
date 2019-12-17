@@ -902,9 +902,9 @@
       ],
       "location": "Rozstalnoy_location",
       "repairStatus": "In Progress - Active",
-      "pages": [
-        "100"
-      ],
+      "pages": {
+        "hundred": "100"
+      },
       "sortByOptions": [
         "Priority, Oldest to Newest"
       ]
@@ -922,9 +922,9 @@
       ],
       "location": "Rozstalnoy_location",
       "repairStatus": "In Progress - Active",
-      "pages": [
-        "100"
-      ],
+      "pages": {
+        "hundred": "100"
+      },
       "sortByOptions": [
         "Priority, Newest to Oldest"
       ]
@@ -945,9 +945,9 @@
       "sortByOptions": [
         "Arbitration Date, Priority"
       ],
-      "pages": [
-        "100"
-      ]
+      "pages": {
+        "hundred": "100"
+      }
     }
   ],
 
@@ -1039,6 +1039,19 @@
         }
       ],
       "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSeeDefaultSearchSettings": [
+    {
+      "rowID": "verifyUserCanSeeDefaultSearchSettings.01",
+      "description": "Test Case 91008:User can see default search settings",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91487"
+        }
+      ],
+      "location": "1111 Automation"
     }
   ]
 }
