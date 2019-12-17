@@ -17,21 +17,22 @@ import com.cyberiansoft.test.enums.ServiceRequestStatus;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularApproveInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularClaimScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularQuestionsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVehicleScreen;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularNavigationSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularServiceRequestSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularServicesScreenSteps;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.*;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.*;
+import com.cyberiansoft.test.ios10_client.regularvalidations.RegularMyWorkOrdersScreenValidations;
 import com.cyberiansoft.test.ios10_client.testcases.regular.IOSRegularBaseTestCase;
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -143,5 +144,93 @@ public class IOSServiceRequestsCreateTestCases extends IOSRegularBaseTestCase {
         Assert.assertEquals(serviceRequestsListInteractions.getCustomerValueForSelectedServiceRequest(), serviceName);
         Assert.assertEquals(serviceRequestsListInteractions.getEmployeeValueForSelectedServiceRequest(), "Employee Simple 20% (Default team)");
         DriverBuilder.getInstance().getDriver().quit();
+
+
+        //Create inspection
+
+        InspectionData inspectionData = testCaseData.getInspectionData();
+        RegularHomeScreenSteps.navigateToServiceRequestScreen();
+        serviceRequestSscreen.waitForServiceRequestScreenLoad();
+
+        RegularServiceRequestSteps.startCreatingInspectionFromServiceRequest(serviceRequestNumber, InspectionsTypes.INSP_FOR_SR_INSPTYPE);
+        vehicleScreen.waitVehicleScreenLoaded();
+        String inspectionNumberber = vehicleScreen.getInspectionNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+        RegularServicesScreenSteps.switchToSelectedServices();
+        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
+        for (ServiceData serviceData : inspectionData.getMoneyServicesList()) {
+            Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(serviceData.getServiceName(), serviceData.getServicePrice2()));
+            if (serviceData.getQuestionData() != null) {
+                RegularSelectedServicesSteps.openSelectedServiceDetails(serviceData.getServiceName());
+                RegularServiceDetailsScreenSteps.answerServiceQuestion(serviceData.getQuestionData());
+                RegularServiceDetailsScreenSteps.saveServiceDetails();
+            }
+        }
+
+        BundleServiceData bundleServiceData = inspectionData.getBundleService();
+        Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(bundleServiceData.getBundleServiceName(), bundleServiceData.getBundleServiceAmount()));
+        RegularSelectedServicesSteps.openSelectedServiceDetails(bundleServiceData.getBundleServiceName());
+        for (ServiceData serviceData : bundleServiceData.getServices()) {
+            if (serviceData.getServiceQuantity() != null) {
+                RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+                selectedServiceDetailsScreen.changeBundleQuantity(serviceData.getServiceName(), serviceData.getServiceQuantity());
+                RegularServiceDetailsScreenSteps.saveServiceDetails();
+            } else {
+                RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+                selectedServiceDetailsScreen.selectBundle(serviceData.getServiceName());
+            }
+        }
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        RegularServicesScreenSteps.waitServicesScreenLoad();
+        RegularServiceRequestSteps.saveServiceRequest();
+        RegularNavigationSteps.navigateBackScreen();
+
+        RegularHomeScreenSteps.navigateToMyInspectionsScreen();
+        RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
+        Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspectionNumberber));
+        Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumberber), inspectionData.getInspectionPrice());
+        myInspectionsScreen.clickActionButton();
+        myInspectionsScreen.selectInspectionForAction(inspectionNumberber);
+
+        myInspectionsScreen.clickApproveInspections();
+        myInspectionsScreen.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+
+        RegularApproveInspectionsScreen approveInspectionsScreen = new RegularApproveInspectionsScreen();
+        approveInspectionsScreen.selectInspection(inspectionNumberber);
+        approveInspectionsScreen.clickApproveButton();
+        approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
+        approveInspectionsScreen.clickDoneButton();
+        myInspectionsScreen.waitMyInspectionsScreenLoaded();
+        RegularNavigationSteps.navigateBackScreen();
+
+
+        //Create WO
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        RegularHomeScreenSteps.navigateToServiceRequestScreen();
+        serviceRequestSscreen.selectServiceRequest(serviceRequestSscreen.getFirstServiceRequestNumber());
+        serviceRequestSscreen.selectCreateWorkOrderRequestAction();
+        RegularWorkOrderTypesSteps.selectWorkOrderType(WorkOrdersTypes.WO_FOR_SR);
+        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
+        RegularNavigationSteps.navigateToServicesScreen();
+
+        RegularServicesScreenSteps.switchToSelectedServices();
+        Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice2()));
+        Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getBundleService().getBundleServiceName(), PricesCalculations.getPriceRepresentation(workOrderData.getBundleService().getBundleServiceAmount())));
+
+        RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getBundleService().getBundleServiceName());
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
+        selectedServicesScreen.waitSelectedServicesScreenLoaded();
+
+        selectedServicesScreen.clickSave();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.THE_VIN_IS_INVALID_AND_SAVE_WORKORDER);
+        serviceRequestSscreen.waitForServiceRequestScreenLoad();
+        serviceRequestSscreen.clickHomeButton();
+
+        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
+        RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, true);
+        RegularNavigationSteps.navigateBackScreen();
     }
 }

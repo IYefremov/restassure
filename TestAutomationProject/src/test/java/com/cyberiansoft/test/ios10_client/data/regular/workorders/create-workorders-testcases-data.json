@@ -386,27 +386,6 @@
       }
     }
   ],
-  "testCreateWOFromServiceRequest": [
-    {
-      "rowID": "testCreateWOFromServiceRequest.01",
-      "description": "Test Case 21585:Create WO from Service Request",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "89009"
-        }
-      ],
-      "workOrderData": {
-        "moneyService": {
-          "serviceName": "Wheel",
-          "servicePrice2": "$70.00 x 3.00"
-        },
-        "bundleService": {
-          "bundleServiceName": "Bundle1_Disc_Ex",
-          "bundleServiceAmount": "70"
-        }
-      }
-    }
-  ],
   "testCreateWorkOrderWithTypeIsAssignedToASpecificClient": [
     {
       "rowID": "testCreateWorkOrderWithTypeIsAssignedToASpecificClient.01",

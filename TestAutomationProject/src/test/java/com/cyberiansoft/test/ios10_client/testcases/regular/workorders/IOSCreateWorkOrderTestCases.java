@@ -579,49 +579,6 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCreateWOFromServiceRequest(String rowID,
-                                               String description, JSONObject testData) {
-
-        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-
-        RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
-        customersScreen.swtchToWholesaleMode();
-        RegularNavigationSteps.navigateBackScreen();
-
-        //test case
-        RegularHomeScreenSteps.navigateToServiceRequestScreen();
-        RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
-        serviceRequestSscreen.selectServiceRequest(serviceRequestSscreen.getFirstServiceRequestNumber());
-        serviceRequestSscreen.selectCreateWorkOrderRequestAction();
-        RegularWorkOrderTypesSteps.selectWorkOrderType(WorkOrdersTypes.WO_FOR_SR);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
-        RegularNavigationSteps.navigateToServicesScreen();
-
-        RegularServicesScreenSteps.switchToSelectedServices();
-        RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
-        Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice2()));
-        Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getBundleService().getBundleServiceName(), PricesCalculations.getPriceRepresentation(workOrderData.getBundleService().getBundleServiceAmount())));
-
-        RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getBundleService().getBundleServiceName());
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
-        RegularServiceDetailsScreenSteps.saveServiceDetails();
-        selectedServicesScreen.waitSelectedServicesScreenLoaded();
-
-        selectedServicesScreen.clickSave();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.THE_VIN_IS_INVALID_AND_SAVE_WORKORDER);
-        serviceRequestSscreen.waitForServiceRequestScreenLoad();
-        serviceRequestSscreen.clickHomeButton();
-
-        RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
-        RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, true);
-        RegularNavigationSteps.navigateBackScreen();
-    }
-
     //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient(String rowID,
                                                                        String description, JSONObject testData) {

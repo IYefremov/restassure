@@ -37,7 +37,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,17 +109,18 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(testRetailCustomer, InspectionsTypes.DEFAULT);
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.clickSave();
+        vehicleScreen.waitVehicleScreenLoaded();
+        RegularInspectionsSteps.saveInspectionAsFinal();
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_VIN_REQUIRED);
         vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
         final String inspectionNumber = vehicleScreen.getInspectionNumber();
-        vehicleScreen.clickSave();
+        RegularInspectionsSteps.saveInspectionAsFinal();
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_MAKE_REQUIRED);
 
         vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
         vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
         vehicleScreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-        RegularInspectionsSteps.saveInspection();
+        RegularInspectionsSteps.saveInspectionAsDraft();
         RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 
         int tapXCoordInicial = 100;
@@ -141,7 +144,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
             Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), visualScreenData.getScreenPrice());
         }
 
-        RegularInspectionsSteps.saveInspection();
+        RegularInspectionsSteps.saveInspectionAsDraft();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
         RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
@@ -163,7 +166,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
             Assert.assertEquals(inspectionToolBar.getInspectionSubTotalPrice(), visualScreenData.getScreenPrice2());
         }
 
-        RegularInspectionsSteps.saveInspection();
+        RegularInspectionsSteps.saveInspectionAsFinal();
         RegularNavigationSteps.navigateBackScreen();
     }
 
@@ -1910,7 +1913,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         for (TaxServiceData taxServiceData : workOrderData.getTaxServicesData()) {
             RegularServicesScreenSteps.openCustomServiceDetails(taxServiceData.getTaxServiceName());
             for (ServiceRateData serviceRateData : taxServiceData.getServiceRatesData()) {
-                RegularServiceDetailsScreenValidations.verifyLaborServiceRateValue(serviceRateData.getServiceRateValue());
+                RegularServiceDetailsScreenValidations.verifyServiceRateValue(serviceRateData);
             }
             RegularServiceDetailsScreenSteps.saveServiceDetails();
         }
@@ -2126,6 +2129,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
     public void testWOVerifyThatCalculationIsCorrectForWOWithAllTypeOfServices(String rowID,
                                                                                String description, JSONObject testData) throws Exception {
 
+        final DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM dd, yyyy");
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
@@ -2167,6 +2171,9 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularMyWorkOrdersSteps.switchToTeamView();
         RegularTeamWorkOrdersSteps.clickOpenMonitorForWO(workOrderNumber);
         RegularOrderMonitorScreenSteps.startWorkOrder();
+        final LocalDate repairOrderDate = LocalDate.now();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER, repairOrderDate.format(df)));
+
         RegularOrderMonitorScreenSteps.selectWorkOrderPhaseStatus(OrderMonitorStatuses.COMPLETED);
         RegularOrderMonitorScreenValidations.verifyOrderPhaseStatus(OrderMonitorStatuses.COMPLETED);
         RegularNavigationSteps.navigateBackScreen();
