@@ -559,65 +559,6 @@ public class IOSCreateWorkOrderTestCases extends IOSHDBaseTestCase {
         NavigationSteps.navigateBackScreen();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testCreateWOFromServiceRequest(String rowID,
-                                               String description, JSONObject testData) {
-
-        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
-
-        HomeScreen homeScreen = new HomeScreen();
-        SettingsScreen settingsScreen = homeScreen.clickSettingsButton();
-        settingsScreen.setInspectionToNonSinglePageInspection();
-        homeScreen = settingsScreen.clickHomeButton();
-
-        CustomersScreen customersScreen = homeScreen.clickCustomersButton();
-        customersScreen.swtchToWholesaleMode();
-        homeScreen = customersScreen.clickHomeButton();
-        ServiceRequestsScreen serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-        String newserviceRequestNumber = serviceRequestsScreen.getFirstServiceRequestNumber();
-        serviceRequestsScreen.clickHomeButton();
-        //test case
-        boolean createWOExists = false;
-        final int timaoutMinules = 15;
-        int iterator = 0;
-        while ((iterator < timaoutMinules) | (!createWOExists)) {
-
-            serviceRequestsScreen = homeScreen.clickServiceRequestsButton();
-            serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
-            createWOExists = serviceRequestsScreen.isCreateWorkOrderActionExists();
-            if (!createWOExists) {
-                serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
-                serviceRequestsScreen.clickHomeButton();
-                Helpers.waitABit(1000 * 30);
-            } else {
-                serviceRequestsScreen.selectCreateWorkOrderRequestAction();
-                WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
-                workOrderTypesPopup.selectWorkOrderType(WorkOrdersTypes.WO_FOR_SR.getWorkOrderTypeName());
-                break;
-            }
-
-        }
-        VehicleScreen vehicleScreen = new VehicleScreen();
-        String workOrderNumber = vehicleScreen.getInspectionNumber();
-
-        NavigationSteps.navigateToServicesScreen();
-        ServicesScreen servicesScreen = new ServicesScreen();
-        Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice2()));
-        Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(workOrderData.getBundleService().getBundleServiceName(), PricesCalculations.getPriceRepresentation(workOrderData.getBundleService().getBundleServiceAmount())));
-
-        SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(workOrderData.getBundleService().getBundleServiceName());
-        selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
-        servicesScreen.clickSave();
-        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.THE_VIN_IS_INVALID_AND_SAVE_WORKORDER);
-        serviceRequestsScreen.clickHomeButton();
-
-        MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
-        Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
-        NavigationSteps.navigateBackScreen();
-    }
-
     //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateWorkOrderWithTypeIsAssignedToASpecificClient(String rowID,
                                                                        String description, JSONObject testData) {

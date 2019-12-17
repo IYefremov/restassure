@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.testcases.hd.servicerequests;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
@@ -18,21 +19,22 @@ import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.ServiceRequestSteps;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectedServiceDetailsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInspectionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.ServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ClaimScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.QuestionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
 import com.cyberiansoft.test.ios10_client.testcases.hd.IOSHDBaseTestCase;
+import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequestTypes;
-import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import com.cyberiansoft.test.ios10_client.utils.ScreenNamesConstants;
-import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
+import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
+import com.cyberiansoft.test.ios10_client.utils.*;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -148,6 +150,122 @@ public class IOSServiceRequestsCreateTestCases extends IOSHDBaseTestCase {
         Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Quest_Req_Serv $10.00 (1.00)"));
         Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Wheel $70.00 (3.00)"));
         DriverBuilder.getInstance().getDriver().quit();
+
+        //Create inspection
+        InspectionData inspectionData = testCaseData.getInspectionData();
+
+        final String questionValue = "Test Answer 1";
+
+        homeScreen.clickSettingsButton();
+        settingsScreen.setInspectionToSinglePageInspection();
+        settingsScreen.clickHomeButton();
+
+        homeScreen.clickServiceRequestsButton();
+        ServiceRequestSteps.startCreatingInspectionFromServiceRequest(newserviceRequestNumber, InspectionsTypes.INSP_FOR_SR_INSPTYPE);
+
+        SinglePageInspectionScreen singlePageInspectionScreen = new SinglePageInspectionScreen();
+        String inspectionNumber = singlePageInspectionScreen.getInspectionNumber();
+        singlePageInspectionScreen.expandToFullScreeenSevicesSection();
+        BaseUtils.waitABit(2000);
+        for (ServiceData serviceData : inspectionData.getMoneyServicesList()) {
+            Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(serviceData.getServiceName(), serviceData.getServicePrice2()));
+            if (serviceData.getQuestionData() != null) {
+                SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(serviceData.getServiceName());
+                selectedServiceDetailsScreen.answerQuestion(serviceData.getQuestionData());
+                selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            }
+        }
+        BundleServiceData bundleServiceData = inspectionData.getBundleService();
+        Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(bundleServiceData.getBundleServiceName(), bundleServiceData.getBundleServiceAmount()));
+        SelectedServiceDetailsScreen selectedServiceDetailsScreen = servicesScreen.openServiceDetails(bundleServiceData.getBundleServiceName());
+        for (ServiceData serviceData : bundleServiceData.getServices()) {
+            if (serviceData.getServiceQuantity() != null) {
+                selectedServiceDetailsScreen.changeBundleQuantity(serviceData.getServiceName(), serviceData.getServiceQuantity());
+                selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            } else
+                selectedServiceDetailsScreen.selectBundle(serviceData.getServiceName());
+        }
+        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+
+
+        singlePageInspectionScreen.collapseFullScreen();
+        singlePageInspectionScreen.expandToFullScreeenQuestionsSection();
+
+        Assert.assertTrue(singlePageInspectionScreen.isSignaturePresent());
+        singlePageInspectionScreen.swipeScreenRight();
+        singlePageInspectionScreen.swipeScreenRight();
+        singlePageInspectionScreen.swipeScreenUp();
+
+        Assert.assertTrue(singlePageInspectionScreen.isAnswerPresent(questionValue));
+        singlePageInspectionScreen.collapseFullScreen();
+        singlePageInspectionScreen.clickSaveButton();
+        serviceRequestsScreen.clickHomeButton();
+
+        MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
+        Assert.assertTrue(myInspectionsScreen.isInspectionExists(inspectionNumber));
+        Assert.assertEquals(myInspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
+
+        myInspectionsScreen.clickActionButton();
+        myInspectionsScreen.selectInspectionForAction(inspectionNumber);
+        myInspectionsScreen.clickApproveInspections();
+        SelectEmployeePopup selectEmployeePopup = new SelectEmployeePopup();
+        selectEmployeePopup.selectEmployeeAndTypePassword(iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
+        ApproveInspectionsScreen approveInspectionsScreen = new ApproveInspectionsScreen();
+        approveInspectionsScreen.selectInspectionForApprove(inspectionNumber);
+        approveInspectionsScreen.clickApproveButton();
+        approveInspectionsScreen.drawSignatureAfterSelection();
+        approveInspectionsScreen.clickDoneButton();
+        myInspectionsScreen.waitInspectionsScreenLoaded();
+        NavigationSteps.navigateBackScreen();
+
+        homeScreen.clickSettingsButton();
+        settingsScreen.setInspectionToNonSinglePageInspection();
+        settingsScreen.clickHomeButton();
+
+
+        //Create WO
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        homeScreen.clickServiceRequestsButton();
+        serviceRequestsScreen.clickHomeButton();
+        //test case
+        boolean createWOExists = false;
+        final int timaoutMinules = 15;
+        int iterator = 0;
+        while ((iterator < timaoutMinules) | (!createWOExists)) {
+
+            homeScreen.clickServiceRequestsButton();
+            serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
+            createWOExists = serviceRequestsScreen.isCreateWorkOrderActionExists();
+            if (!createWOExists) {
+                serviceRequestsScreen.selectServiceRequest(newserviceRequestNumber);
+                serviceRequestsScreen.clickHomeButton();
+                Helpers.waitABit(1000 * 30);
+            } else {
+                serviceRequestsScreen.selectCreateWorkOrderRequestAction();
+                WorkOrderTypesPopup workOrderTypesPopup = new WorkOrderTypesPopup();
+                workOrderTypesPopup.selectWorkOrderType(WorkOrdersTypes.WO_FOR_SR.getWorkOrderTypeName());
+                break;
+            }
+
+        }
+        String workOrderNumber = vehicleScreen.getInspectionNumber();
+
+        NavigationSteps.navigateToServicesScreen();
+        Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice2()));
+        Assert.assertTrue(servicesScreen.checkServiceIsSelectedWithServiceValues(workOrderData.getBundleService().getBundleServiceName(), PricesCalculations.getPriceRepresentation(workOrderData.getBundleService().getBundleServiceAmount())));
+
+        servicesScreen.openServiceDetails(workOrderData.getBundleService().getBundleServiceName());
+        selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
+        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        servicesScreen.clickSave();
+        AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.THE_VIN_IS_INVALID_AND_SAVE_WORKORDER);
+        serviceRequestsScreen.clickHomeButton();
+
+        MyWorkOrdersScreen myWorkOrdersScreen = homeScreen.clickMyWorkOrdersButton();
+        Assert.assertTrue(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
+        NavigationSteps.navigateBackScreen();
+
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

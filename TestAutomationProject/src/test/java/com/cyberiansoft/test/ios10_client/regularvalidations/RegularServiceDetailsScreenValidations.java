@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
 import com.cyberiansoft.test.dataclasses.ServicePartData;
+import com.cyberiansoft.test.dataclasses.ServiceRateData;
 import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
@@ -80,8 +81,13 @@ public class RegularServiceDetailsScreenValidations {
         Assert.assertEquals(selectedServiceDetailsScreen.getTimeValue(), expectedTime);
     }
 
-    public static void verifyLaborServiceRateValue(String expectedRate) {
+    public static void verifyLaborServiceRateValue(String expactedRate) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        Assert.assertEquals(selectedServiceDetailsScreen.getRateValue(), expectedRate);
+        Assert.assertEquals(selectedServiceDetailsScreen.getLaborRateValue(), expactedRate);
+    }
+
+    public static void verifyServiceRateValue(ServiceRateData serviceRateData) {
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+        Assert.assertEquals(selectedServiceDetailsScreen.getRateValue(serviceRateData.getServiceRateName()), serviceRateData.getServiceRateValue());
     }
 }

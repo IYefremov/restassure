@@ -200,8 +200,13 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		time.findElement(By.className("XCUIElementTypeTextField")).sendKeys(_ratevalue + "\n");
 	}
 
-	public String getRateValue() {
+	public String getLaborRateValue() {
 		return appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name='Rate'")).
+				findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
+	}
+
+	public String getRateValue(String rateName) {
+		return appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name='" + rateName + "'")).
 				findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
 	}
 
