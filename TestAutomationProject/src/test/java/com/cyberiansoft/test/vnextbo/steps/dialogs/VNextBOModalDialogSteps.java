@@ -17,27 +17,32 @@ public class VNextBOModalDialogSteps {
     }
 
     public static void clickOkButton() {
-
-        Utils.clickElement(new VNextBOModalDialog().getConfirmOKButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        Utils.clickElement(modalDialog.getConfirmOKButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getConfirmOKButton(), 2);
     }
 
     public static void clickCloseButton() {
-        WaitUtilsWebDriver.waitForVisibility(new VNextBOModalDialog().getCloseButton());
-        Utils.clickElement(new VNextBOModalDialog().getCloseButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        Utils.clickElement(modalDialog.getCloseButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCloseButton(), 2);
     }
 
     public static void clickYesButton() {
-
-        Utils.clickElement(new VNextBOModalDialog().getYesButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        Utils.clickElement(modalDialog.getYesButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getYesButton(), 2);
     }
 
     public static void clickNoButton() {
-
-        Utils.clickElement(new VNextBOModalDialog().getNoButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        Utils.clickElement(modalDialog.getNoButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getNoButton(), 2);
     }
 
     public static void clickCancelButton() {
-
-        Utils.clickElement(new VNextBOModalDialog().getCancelButton());
+        VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        Utils.clickElement(modalDialog.getCancelButton());
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCancelButton(), 2);
     }
 }

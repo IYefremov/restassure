@@ -22,7 +22,7 @@ public class VNextBOPMOrderDetailsPartsDetailsStatusTests extends BaseTestCase {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsPartsDetailsStatusTD();
         com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
-        VNextBOSearchPanelSteps.searchByText("O-000-152414");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-000-152414");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
@@ -37,13 +37,13 @@ public class VNextBOPMOrderDetailsPartsDetailsStatusTests extends BaseTestCase {
     public void verifyPriceAndQuantityAreChangedAfterTheStatusChanging(String rowID, String description, JSONObject testData) {
 
         VNextBOBreadCrumbInteractions.setLocation("Rozstalnoy_location");
-        VNextBOSearchPanelSteps.searchByText("O-385-00027");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-385-00027");
         VNextBOPartsDetailsPanelSteps.setStatusForPartByPartNumberInList(0, "Ordered");
         VNextBOPartsDetailsPanelSteps.setPriceForPartByPartNumberInList(0, "10");
         VNextBOPartsDetailsPanelSteps.setQuantityForPartByPartNumberInList(0, "10");
         VNextBOPartsDetailsPanelSteps.setStatusForPartByPartNumberInList(0, "Refused");
         Utils.refreshPage();
-        VNextBOSearchPanelSteps.searchByText("O-385-00027");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-385-00027");
         VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(0, "Refused");
         VNextBOPartsDetailsPanelValidations.verifyPartPriceIsCorrect(0, "$0.00");
         VNextBOPartsDetailsPanelValidations.verifyPartQuantityIsCorrect(0, "1.000");

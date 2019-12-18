@@ -29,16 +29,16 @@ public class VNextBOPMOrderDetailsPartsDetailsLaborTests extends BaseTestCase {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsPartsDetailsLaborTD();
         com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
-        VNextBOSearchPanelSteps.searchByText("O-000-152414");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-000-152414");
     }
 
     @AfterMethod
     public void refreshPage() {
 
         Utils.refreshPage();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        VNextBOSearchPanelSteps.searchByText("O-000-152414");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-000-152414");
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 

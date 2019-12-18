@@ -18,19 +18,17 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
     public static void clickAddNewClientButton() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getAddNewClientButton());
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void openActiveTab() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getActiveTab());
-        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openArchivedTab() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getArchivedTab());
-        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static int getClientsAmount() {
@@ -67,26 +65,24 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
     public static void clickEditDropMenuButton() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getEditDropMenuButton());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void clickArchiveDropMenuButton() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getArchiveDropMenuButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickRestoreDropMenuButton() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getRestoreDropMenuButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openClientsDetailsPage(String client) {
 
         clickActionsButtonForClient(client);
         clickEditDropMenuButton();
-        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void searchClientByEmail(String email) {
@@ -94,7 +90,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setEmailField(email);
         VNextBOClientsAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchClientByPhone(String phone) {
@@ -102,7 +98,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setPhoneField(phone);
         VNextBOClientsAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchClientByName(String name) {
@@ -110,7 +106,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setNameField(name);
         VNextBOClientsAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchClientByAddress(String address) {
@@ -118,7 +114,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setAddressField(address);
         VNextBOClientsAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchClientByType(String clientType) {
@@ -126,12 +122,12 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOClientsAdvancedSearchSteps.setTypeDropDownField(clientType);
         VNextBOClientsAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void archiveClient(String clientName) {
 
-        //VNextBOSearchPanelSteps.searchByText(clientName);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(clientName);
         clickActionsButtonForClient(clientName);
         clickArchiveDropMenuButton();
         VNextBOModalDialogSteps.clickOkButton();
@@ -139,7 +135,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
 
     public static void restoreClient(String clientName) {
 
-        //VNextBOSearchPanelSteps.searchByText(clientName);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(clientName);
         clickActionsButtonForClient(clientName);
         clickRestoreDropMenuButton();
         VNextBOModalDialogSteps.clickOkButton();
@@ -149,6 +145,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
 
         VNextBOClientsPageSteps.clickAddNewClientButton();
         VNextBOClientDetailsViewAccordionSteps.setAllClientsData(clientsData, wholesale);
+        WaitUtilsWebDriver.waitABit(1000);
         VNextBOClientDetailsViewAccordionSteps.clickOkButton();
         WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOClientsWebPage().getAddNewClientButton(), true);
     }

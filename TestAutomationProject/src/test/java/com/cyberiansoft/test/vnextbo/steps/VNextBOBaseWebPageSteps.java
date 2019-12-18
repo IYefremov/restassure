@@ -36,14 +36,12 @@ public class VNextBOBaseWebPageSteps {
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.termsAndConditionsLink);
-        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickPrivacyPolicyLink()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.privacyPolicyLink);
-        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openIntercomMessenger()

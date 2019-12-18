@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.devicemanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOPendingRegistrationWebPage;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOPendingRegistrationTabSteps;
 import org.openqa.selenium.NoSuchElementException;
@@ -39,6 +40,7 @@ public class VNextBOPendingRegistrationsTabValidations {
 
     public static void verifyDevicesTableDoesNotContainDevice(String deviceNickName) {
 
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         boolean isDeviceDisplayed = false;
         try {
             isDeviceDisplayed = Utils.isElementDisplayed(new VNextBOPendingRegistrationWebPage().deviceRowByName(deviceNickName));

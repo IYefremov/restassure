@@ -24,15 +24,15 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectClientsMenu();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanSearchClients(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("jack");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("jack");
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "jack");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanClickSearchWithEmptyAdvancedSearchFields(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -41,7 +41,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("10");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanCloseAdvancedSearchPopUp(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -51,7 +51,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOClientsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(advancedSearchForm);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyAdvancedSearchWindowSavesSearchParameters(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByName("testName");
@@ -62,7 +62,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyAdvancedSearchWindowFromActiveAndArchivedTabs(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.openArchivedTab();
@@ -74,7 +74,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOClientsAdvancedSearchSteps.clickCloseButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
     public void verifyAdvancedSearchWindowSavesEnteredValuesWithoutSearching(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -91,7 +91,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOClientsAdvancedSearchSteps.clickCloseButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
     public void verifyUserCanSearchByNameNegative(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByName("abracadabra");
@@ -100,34 +100,34 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
     public void verifyUserCanSearchByNamePositive(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByName("TEST");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Name: TEST");
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "TEST");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyUserCanSearchByEmail(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByEmail("test@test.com");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Email: test@test.com");
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Email", "test@test.com");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanSearchByPhone(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByPhone("1111111");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Phone: 1111111");
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Phone", "1111111");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void verifyUserCanSearchByAddress(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByAddress("Hollywood");
@@ -135,7 +135,8 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Address", "Hollywood");
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserCanFillInAllAdvancedSearchFields(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -150,9 +151,15 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOClientsAdvancedSearchValidations.verifyPhoneFieldContainsExpectedText("03867676767");
         VNextBOClientsAdvancedSearchValidations.verifyTypeFieldContainsExpectedText("Retail");
         VNextBOClientsAdvancedSearchSteps.clickCloseButton();
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOClientsAdvancedSearchSteps.setNameField("");
+        VNextBOClientsAdvancedSearchSteps.setAddressField("");
+        VNextBOClientsAdvancedSearchSteps.setEmailField("");
+        VNextBOClientsAdvancedSearchSteps.setPhoneField("");
+        VNextBOClientsAdvancedSearchSteps.clickCloseButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
     public void verifyUserCanSearchByTypeRetail(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByType("Retail");
@@ -162,7 +169,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
     public void verifyUserCanSearchByTypeWholesale(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.searchClientByType("Wholesale");

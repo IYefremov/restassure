@@ -12,6 +12,5 @@ public class VNextBOAuditLogsDialogSteps extends VNextBOBaseWebPageSteps {
     public static void closeDialog() {
 
         Utils.clickElement(new VNextBOAuditLogDialog().getCloseDialogXIcon());
-        WaitUtilsWebDriver.waitForLoading();
     }
 }

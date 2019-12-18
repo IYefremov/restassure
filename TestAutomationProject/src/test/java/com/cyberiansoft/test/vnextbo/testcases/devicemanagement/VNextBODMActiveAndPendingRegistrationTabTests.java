@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOAuditLogDialog;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.*;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
@@ -62,15 +63,15 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     public void verifyUserCanCancelDeviceLicenseDeletionCancelButton(String rowID, String description, JSONObject testData) {
 
         String testDeviceName = "AndroidZak";
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabSteps.clickActionsButtonForDevice(testDeviceName);
         VNextBOActiveDevicesTabSteps.clickDeleteButtonForDevice(testDeviceName);
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickCancelButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
-        VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Name", testDeviceName);
     }
 
@@ -78,15 +79,15 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     public void verifyUserCanCancelDeviceLicenseDeletionXIcon(String rowID, String description, JSONObject testData) {
 
         String testDeviceName = "AndroidZak";
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabSteps.clickActionsButtonForDevice(testDeviceName);
         VNextBOActiveDevicesTabSteps.clickDeleteButtonForDevice(testDeviceName);
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickCloseButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
-        VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Name", testDeviceName);
     }
 
@@ -94,13 +95,14 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     public void verifyUserCanCloseAuditLogWindow(String rowID, String description, JSONObject testData) {
 
         String testDeviceName = "AndroidZak";
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabSteps.clickActionsButtonForDevice(testDeviceName);
         VNextBOActiveDevicesTabSteps.clickAuditLogButtonForDevice(testDeviceName);
-        VNextBOAuditLogsDialogValidations.verifyDialogIsDisplayed(true);
+        VNextBOAuditLogsDialogValidations.verifyDialogIsDisplayed();
+        VNextBOAuditLogDialog auditLogDialog = new VNextBOAuditLogDialog();
         VNextBOAuditLogsDialogSteps.closeDialog();
-        VNextBOAuditLogsDialogValidations.verifyDialogIsDisplayed(false);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOAuditLogsDialogValidations.verifyDialogIsClosed(auditLogDialog);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
@@ -108,15 +110,15 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
 
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         String testDeviceName = "AndroidZak";
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabSteps.openEditDeviceDialog(testDeviceName);
         VNextBOEditDeviceDialogSteps.editDeviceFields(deviceData);
         VNextBOEditDeviceDialogSteps.clickCloseXIconButton();
-        VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText(deviceData.getNickname());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(deviceData.getNickname());
         VNextBOActiveDevicesTabValidations.verifyActiveDevicesNotFoundMessageIsCorrect();
-        VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Name", testDeviceName);
     }
 
@@ -125,15 +127,15 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
 
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         String testDeviceName = "AndroidZak";
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabSteps.openEditDeviceDialog(testDeviceName);
         VNextBOEditDeviceDialogSteps.editDeviceFields(deviceData);
         VNextBOEditDeviceDialogSteps.clickCancelButton();
-        VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText(deviceData.getNickname());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(deviceData.getNickname());
         VNextBOActiveDevicesTabValidations.verifyActiveDevicesNotFoundMessageIsCorrect();
-        VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText(testDeviceName);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testDeviceName);
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Name", testDeviceName);
     }
 

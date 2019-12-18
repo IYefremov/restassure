@@ -32,7 +32,7 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBODevicesAdvancedSearchSteps.setTeamDropdownField(teamName);
         VNextBODevicesAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchDevicesByLicense(String license) {
@@ -40,7 +40,7 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBODevicesAdvancedSearchSteps.setLicenseField(license);
         VNextBODevicesAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchDevicesByName(String name) {
@@ -48,7 +48,7 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBODevicesAdvancedSearchSteps.setNameField(name);
         VNextBODevicesAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchDevicesByVersion(String version) {
@@ -56,7 +56,7 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBODevicesAdvancedSearchSteps.setVersionField(version);
         VNextBODevicesAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchDevicesByPlatform(String platformTitle) {
@@ -64,7 +64,7 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBODevicesAdvancedSearchSteps.setPlatformDropdownField(platformTitle);
         VNextBODevicesAdvancedSearchSteps.clickSearchButton();
-        //WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickActionsButtonForDevice(String deviceName) {
@@ -75,7 +75,6 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
     public static void clickEditButtonForDevice(String deviceName) {
 
         Utils.clickElement(new VNextBOActiveDevicesWebPage().editDeviceButtonByDeviceName(deviceName));
-        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickDeleteButtonForDevice(String deviceName) {
@@ -86,7 +85,6 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
     public static void clickAuditLogButtonForDevice(String deviceName) {
 
         Utils.clickElement(new VNextBOActiveDevicesWebPage().auditLogButtonByDeviceName(deviceName));
-        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void openEditDeviceDialog(String deviceName) {
@@ -98,12 +96,11 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
     public static void clickReplaceButtonByDeviceName(String deviceName) {
 
         Utils.clickElement(new VNextBOActiveDevicesWebPage().replaceButtonByDeviceName(deviceName));
-        //WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void hideRegistrationCodeByDeviceName(String deviceName) {
 
         Utils.clickElement(new VNextBOActiveDevicesWebPage().hideRegistrationCodeXIconByDeviceName(deviceName));
-        WaitUtilsWebDriver.waitForLoading();
+        //WaitUtilsWebDriver.waitForLoading();
     }
 }

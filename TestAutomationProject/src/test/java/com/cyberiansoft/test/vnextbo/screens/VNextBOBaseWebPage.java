@@ -21,7 +21,7 @@ import java.util.concurrent.TimeUnit;
 @Getter
 public class VNextBOBaseWebPage {
 
-    @FindBy(xpath = "//div[contains(@class, 'k-loading-mask')]")
+    @FindBy(xpath = "//div[contains(@class, 'k-loading-image')]")
     public static WebElement spinner;
 
     @FindBy(id = "app-progress-spinner")

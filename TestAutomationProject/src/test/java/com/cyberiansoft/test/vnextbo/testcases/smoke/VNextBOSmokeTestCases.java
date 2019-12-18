@@ -81,7 +81,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
@@ -104,7 +104,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.setStatusForPartByPartNumberInList(0, data.getStatus());
@@ -117,12 +117,12 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.duplicatePartByNumberInList(0);
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsCorrect(numberOfParts + 1);
     }
 
@@ -132,12 +132,12 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartItems()[0]));
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsCorrect(numberOfParts - 1);
     }
 
@@ -147,21 +147,21 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
         final int numberOfLaborBlocksBefore = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, data.getLabor());
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelValidations.verifyAddLaborButtonIsDisplayed(0);
         VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore + 1);
         VNextBOPartsDetailsPanelSteps.deleteLaborForPartByNumberInListANdLaborServiceName(0, data.getLabor());
         Utils.refreshPage();
-        VNextBOSearchPanelSteps.searchByText(data.getWoNum());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, numberOfLaborBlocksBefore);
     }
@@ -261,7 +261,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
 
         VNextBOLeftMenuInteractions.selectClientsMenu();
-        VNextBOSearchPanelSteps.searchByText(data.getSearch());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearch());
         VNextBOClientsPageValidations.verifyClientsTableIsDisplayed();
 
         VNextBOClientsPageSteps.openClientsDetailsPage(data.getTypes()[0]);
@@ -302,7 +302,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         VNextBODeviceManagementSteps.openActiveDevicesTab();
-        VNextBOSearchPanelSteps.searchByText(data.getDeviceName());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getDeviceName());
         VNextBOActiveDevicesTabSteps.clickReplaceButtonByDeviceName(data.getDeviceName());
         VNextBOActiveDevicesTabValidations.verifyRegistrationNumberIsDisplayedForDevice(data.getDeviceName());
         VNextBOActiveDevicesTabSteps.hideRegistrationCodeByDeviceName(data.getDeviceName());
@@ -314,10 +314,10 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBODeviceManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
         VNextBOActiveDevicesTabSteps.openActiveDevicesTab();
-        VNextBOSearchPanelSteps.searchByText(data.getDeviceName());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getDeviceName());
         VNextBOActiveDevicesTabSteps.openEditDeviceDialog(data.getDeviceName());
         VNextBOEditDeviceDialogSteps.setNewDeviceValuesAndSubmit(data);
-        VNextBOSearchPanelSteps.searchByText(data.getNickname());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getNickname());
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Name", data.getNickname());
     }
 

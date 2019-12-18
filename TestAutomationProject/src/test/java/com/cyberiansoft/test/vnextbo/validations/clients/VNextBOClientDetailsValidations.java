@@ -15,7 +15,7 @@ import org.testng.Assert;
 public class VNextBOClientDetailsValidations {
 
     public static boolean verifyClientInfoPanelIsExpanded() {
-        return new VNextBOClientInfoBlock().getClientInfoPanel().getAttribute("aria-expanded").equals("true");
+        return isPanelExpanded(new VNextBOClientInfoBlock().getClientInfoPanel());
     }
 
     public static boolean verifyAccountInfoPanelIsExpanded() {
@@ -38,7 +38,7 @@ public class VNextBOClientDetailsValidations {
         return isPanelExpanded(new VNextBOMiscellaneousBlock().getMiscellaneousPanel());
     }
 
-    private static boolean isPanelExpanded(WebElement element) {
+    public static boolean isPanelExpanded(WebElement element) {
         if (element.getAttribute("aria-expanded") == null)
             return false;
         else
