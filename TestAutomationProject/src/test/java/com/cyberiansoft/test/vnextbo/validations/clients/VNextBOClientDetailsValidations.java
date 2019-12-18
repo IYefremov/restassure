@@ -192,17 +192,17 @@ public class VNextBOClientDetailsValidations {
 
     public static void verifyAllClientDetailsBlocksData(VNextBOClientsData clientsData, boolean wholesale, boolean selectedCheckboxes) {
 
-        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
+        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab("true");
         VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(clientsData.getEmployee());
-        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab("true");
         VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(clientsData.getAccountInfoData(), selectedCheckboxes);
-        VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAddressTab("true");
         VNextBOClientDetailsValidations.verifyAddressFieldsContainCorrectData(clientsData.getAddressData());
-        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
+        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab("true");
         VNextBOClientDetailsValidations.verifyEmailOptionsFieldsContainCorrectData(clientsData.getEmailOptionsData(), wholesale, selectedCheckboxes);
-        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
+        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab("true");
         VNextBOClientDetailsValidations.verifyPreferencesFieldsContainCorrectData(clientsData.getDefaultArea(), selectedCheckboxes);
-        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
+        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab("true");
         VNextBOClientDetailsValidations.verifyMiscellaneousFieldsContainCorrectData(clientsData.getNotes(), wholesale);
     }
 }

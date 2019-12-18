@@ -8,45 +8,47 @@ import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.cyberiansoft.test.vnextbo.interactions.clients.*;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientsDetailsViewAccordion;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientDetailsValidations;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOClientDetailsViewAccordionSteps {
 
-    public static void clickClientsInfoTab() {
+    public static void clickClientsInfoTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getClientsInfo());
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getClientsInfoPanel(), shouldBeExpanded);
     }
 
-    public static void clickAccountInfoTab() {
+    public static void clickAccountInfoTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getAccountInfo());
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getAccountInfoPanel(), shouldBeExpanded);
     }
 
-    public static void clickAddressTab() {
+    public static void clickAddressTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getAddress());
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getAddressPanel(), shouldBeExpanded);
     }
 
-    public static void clickEmailOptionsTab() {
+    public static void clickEmailOptionsTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getEmailOptions());
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getEmailOptionsPanel(), shouldBeExpanded);
     }
 
-    public static void clickPreferencesTab() {
+    public static void clickPreferencesTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getPreferences());
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getPreferencesPanel(), shouldBeExpanded);
     }
 
-    public static void clickMiscellaneousTab() {
+    public static void clickMiscellaneousTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getMiscellaneous());
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getMiscellaneousPanel(), shouldBeExpanded);
     }
 
-    public static void clickServicesTab() {
+    public static void clickServicesTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getServices());
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickCancelButton() {
@@ -64,7 +66,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
     public static void setClientInfoData(Employee employee) {
 
         WaitUtilsWebDriver.waitForElementToBeClickable(new VNextBOClientsDetailsViewAccordion().getClientsInfo(), 2);
-        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) clickClientsInfoTab();
+        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) clickClientsInfoTab("true");
         final VNextBOClientInfoBlockInteractions clientInfoBlockInteractions = new VNextBOClientInfoBlockInteractions();
         if (employee.getClientType().toLowerCase().equals("retail")) {
             clientInfoBlockInteractions.setRetailCompanyType();
@@ -80,7 +82,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setAccountInfoData(AccountInfoData accountInfoData) {
 
-        if (!VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded()) clickAccountInfoTab();
+        if (!VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded()) clickAccountInfoTab("true");
         final VNextBOAccountInfoBlockInteractions accountInfoBlockInteractions = new VNextBOAccountInfoBlockInteractions();
         accountInfoBlockInteractions.setAccountingId(accountInfoData.getAccountingId());
         accountInfoBlockInteractions.setAccountingId2(accountInfoData.getAccountingId2());
@@ -92,14 +94,14 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setAddressData(AddressData addressData) {
 
-        if (!VNextBOClientDetailsValidations.verifyAddressPanelIsExpanded()) clickAddressTab();
+        if (!VNextBOClientDetailsValidations.verifyAddressPanelIsExpanded()) clickAddressTab("true");
         setAddressShipToData(addressData);
         setAddressBillToData(addressData);
     }
 
     public static void setEmailOptionsData(EmailOptionsData emailOptionsData, boolean wholesale) {
 
-        if (!VNextBOClientDetailsValidations.verifyEmailOptionsBlockIsExpanded()) clickEmailOptionsTab();
+        if (!VNextBOClientDetailsValidations.verifyEmailOptionsBlockIsExpanded()) clickEmailOptionsTab("true");
         VNextBOEmailOptionsBlockInteractions.setDefaultRecipient(emailOptionsData.getDefaultRecipient());
         VNextBOEmailOptionsBlockInteractions.setCc(emailOptionsData.getCc());
         VNextBOEmailOptionsBlockInteractions.setBcc(emailOptionsData.getBcc());
@@ -112,7 +114,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setPreferencesData(String defaultArea) {
 
-        if (!VNextBOClientDetailsValidations.verifyPreferencesBlockIsExpanded()) clickPreferencesTab();
+        if (!VNextBOClientDetailsValidations.verifyPreferencesBlockIsExpanded()) clickPreferencesTab("true");
         final VNextBOPreferencesBlockInteractions preferencesBlockInteractions = new VNextBOPreferencesBlockInteractions();
         preferencesBlockInteractions.clickUseSingleWoTypeCheckbox();
         preferencesBlockInteractions.clickVehicleHistoryEnforcedCheckbox();
@@ -121,7 +123,7 @@ public class VNextBOClientDetailsViewAccordionSteps {
 
     public static void setMiscellaneousData(String notes) {
 
-        if (!VNextBOClientDetailsValidations.verifyMiscellaneousBlockIsExpanded()) clickMiscellaneousTab();
+        if (!VNextBOClientDetailsValidations.verifyMiscellaneousBlockIsExpanded()) clickMiscellaneousTab("true");
         new VNextBOMiscellaneousBlockInteractions().setNotes(notes);
     }
 
@@ -155,5 +157,10 @@ public class VNextBOClientDetailsViewAccordionSteps {
         addressBlockInteractions.setCountryBillTo(addressData.getCountry2());
         addressBlockInteractions.setStateProvinceBillTo(addressData.getStateProvince2());
         addressBlockInteractions.setZipBillTo(addressData.getZip2());
+    }
+
+    private static void waitUntilPanelIsExpanded(WebElement infoPanel, String shouldBeExpanded) {
+        WaitUtilsWebDriver.getWebDriverWait(2).
+                until(ExpectedConditions.attributeToBe(infoPanel, "aria-expanded", shouldBeExpanded));
     }
 }

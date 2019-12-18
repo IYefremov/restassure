@@ -38,11 +38,11 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         Assert.assertTrue(VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded(),
                 "Client info panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setClientInfoData(data.getEmployee());
-        VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
+        VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab("false");
         Assert.assertFalse(VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded(),
                 "Client info panel hasn't been collapsed");
         WaitUtilsWebDriver.waitABit(500);
-        VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
+        VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab("true");
         Assert.assertTrue(VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded(),
                 "Client info panel hasn't been expanded");
         VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(data.getEmployee());
@@ -55,15 +55,15 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
         Utils.refreshPage();
         VNextBOClientsPageSteps.clickAddNewClientButton();
-        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab("true");
         Assert.assertTrue(VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded(),
                 "Account info panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setAccountInfoData(data.getAccountInfoData());
-        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab("false");
         Assert.assertFalse(VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded(),
                 "Account info panel hasn't been collapsed");
         WaitUtilsWebDriver.waitABit(500);
-        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab("true");
         Assert.assertTrue(VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded(),
                 "Account info panel hasn't been expanded");
         VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(data.getAccountInfoData(), true);
@@ -75,15 +75,15 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
 
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
         VNextBOClientsPageSteps.clickAddNewClientButton();
-        VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAddressTab("true");
         Assert.assertTrue(VNextBOClientDetailsValidations.verifyAddressPanelIsExpanded(),
                 "Address info panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setAddressData(data.getAddressData());
-        VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAddressTab("false");
         Assert.assertFalse(VNextBOClientDetailsValidations.verifyAddressPanelIsExpanded(),
                 "Address info panel hasn't been collapsed");
         WaitUtilsWebDriver.waitABit(500);
-        VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAddressTab("true");
         VNextBOClientDetailsValidations.verifyAddressFieldsContainCorrectData(data.getAddressData());
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
@@ -94,15 +94,15 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
         VNextBOClientsPageSteps.clickAddNewClientButton();
         new VNextBOClientInfoBlockInteractions().setWholesaleCompanyType();
-        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
+        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab("true");
         Assert.assertTrue(VNextBOClientDetailsValidations.verifyEmailOptionsBlockIsExpanded(),
                 "Email options panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setEmailOptionsData(data.getEmailOptionsData(), true);
-        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
+        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab("false");
         Assert.assertFalse(VNextBOClientDetailsValidations.verifyEmailOptionsBlockIsExpanded(),
                 "Email options panel hasn't been collapsed");
         WaitUtilsWebDriver.waitABit(500);
-        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
+        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab("true");
         VNextBOClientDetailsValidations.verifyEmailOptionsFieldsContainCorrectData(data.getEmailOptionsData(), true, true);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
@@ -113,15 +113,15 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
         Utils.refreshPage();
         VNextBOClientsPageSteps.clickAddNewClientButton();
-        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
+        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab("true");
         Assert.assertTrue(VNextBOClientDetailsValidations.verifyPreferencesBlockIsExpanded(),
                 "Preferences panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setPreferencesData(data.getDefaultArea());
-        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
+        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab("false");
         Assert.assertFalse(VNextBOClientDetailsValidations.verifyPreferencesBlockIsExpanded(),
                 "Preferences panel hasn't been collapsed");
         WaitUtilsWebDriver.waitABit(500);
-        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
+        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab("true");
         VNextBOClientDetailsValidations.verifyPreferencesFieldsContainCorrectData(data.getDefaultArea(), true);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
@@ -132,15 +132,15 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
         VNextBOClientsPageSteps.clickAddNewClientButton();
         new VNextBOClientInfoBlockInteractions().setWholesaleCompanyType();
-        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
+        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab("true");
         Assert.assertTrue(VNextBOClientDetailsValidations.verifyMiscellaneousBlockIsExpanded(),
                 "Miscellaneous panel hasn't been expanded");
         VNextBOClientDetailsViewAccordionSteps.setMiscellaneousData(data.getNotes());
-        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
+        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab("false");
         Assert.assertFalse(VNextBOClientDetailsValidations.verifyMiscellaneousBlockIsExpanded(),
                 "Miscellaneous panel hasn't been collapsed");
         WaitUtilsWebDriver.waitABit(500);
-        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
+        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab("true");
         VNextBOClientDetailsValidations.verifyMiscellaneousFieldsContainCorrectData(data.getNotes(), true);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }

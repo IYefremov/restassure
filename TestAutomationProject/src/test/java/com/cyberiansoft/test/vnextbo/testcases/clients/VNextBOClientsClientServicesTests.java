@@ -36,7 +36,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientsPageSteps.createNewClient(baseWholesaleClient, true);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientsPageSteps.openClientsDetailsPage(baseWholesaleClient.getEmployee().getCompanyName());
-        VNextBOClientDetailsViewAccordionSteps.clickServicesTab();
+        VNextBOClientDetailsViewAccordionSteps.clickServicesTab("true");
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
     }
 
@@ -60,7 +60,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanSearchServices(String rowID, String description, JSONObject testData) {
 
-        VNextBOClientDetailsViewAccordionSteps.clickServicesTab();
+        VNextBOClientDetailsViewAccordionSteps.clickServicesTab("true");
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
@@ -152,7 +152,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageSteps.changeFirstLineRequiredFieldValue("Yes");
         VNextBOClientServicesPageSteps.clickClientServicesBackButton();
-        VNextBOClientDetailsViewAccordionSteps.clickServicesTab();
+        VNextBOClientDetailsViewAccordionSteps.clickServicesTab("true");
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageValidations.verifyFirstLineRequiredDropDownFieldContainsCorrectValue("Yes");
