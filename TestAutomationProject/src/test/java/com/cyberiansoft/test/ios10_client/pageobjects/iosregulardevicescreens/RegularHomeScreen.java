@@ -124,9 +124,8 @@ public class RegularHomeScreen extends iOSRegularBaseScreen {
 		Helpers.acceptAlert();
 	}
 
-	public RegularMainScreen clickLogoutButton() {
+	public void clickLogOutButton() {
 		logoutbtn.click();
-		return new RegularMainScreen();
 	}
 
 	public String getActiveCustomerValue() {

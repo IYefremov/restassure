@@ -590,7 +590,8 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
         final String percService = "Test Tax";
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreen mainScreen = new RegularMainScreen();
         LicensesScreen licensesscreen = mainScreen.clickLicenses();
         licensesscreen.clickAddLicenseButtonAndAcceptAlert();
 

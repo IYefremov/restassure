@@ -13,9 +13,9 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAddCustomerScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSteps;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMainScreenSteps;
 import com.cyberiansoft.test.ios10_client.testcases.regular.IOSRegularBaseTestCase;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.json.simple.JSONObject;
@@ -76,13 +76,12 @@ public class IOSCustomersCRUDTestCases extends IOSRegularBaseTestCase {
 
         DriverBuilder.getInstance().getDriver().quit();
 
-        RegularHomeScreen homeScreen = new RegularHomeScreen();
-        homeScreen.clickLogoutButton();
-        RegularMainScreen mainScreen = new RegularMainScreen();
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
-        RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
+        RegularHomeScreenSteps.navigateToCustomersScreen();
+        RegularCustomersScreen customersScreen = new RegularCustomersScreen();
         customersScreen.swtchToRetailMode();
         customersScreen.clickAddCustomersButton();
         RegularAddCustomerScreen addcustomerscreen = new RegularAddCustomerScreen();
@@ -96,9 +95,9 @@ public class IOSCustomersCRUDTestCases extends IOSRegularBaseTestCase {
         Assert.assertTrue(customersScreen.checkCustomerExists(editedCustomer.getFirstName()));
         customersScreen.clickCancel();
         customersScreen.clickHomeButton();
-        homeScreen.clickLogoutButton();
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -117,10 +116,10 @@ public class IOSCustomersCRUDTestCases extends IOSRegularBaseTestCase {
 
         DriverBuilder.getInstance().getDriver().quit();
 
-        homeScreen.clickLogoutButton();
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
-        homeScreen.clickCustomersButton();
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.navigateToCustomersScreen();
         customersScreen.swtchToRetailMode();
         Assert.assertFalse(customersScreen.checkCustomerExists(editedCustomer.getFirstName()));
         customersScreen.clickHomeButton();

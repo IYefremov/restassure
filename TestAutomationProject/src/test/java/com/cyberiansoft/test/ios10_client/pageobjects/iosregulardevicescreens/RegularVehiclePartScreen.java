@@ -52,13 +52,8 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
     public String getTechniciansValue() {
         WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Technicians")));
-        WebElement par = getTableParentCell("Technicians");
-        return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
-    }
-
-    public WebElement getTableParentCell(String cellname) {
-        return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
+        WebElement technicians = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name = 'Technicians'"))));
+        return technicians.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
     }
 
     public void selectDiscaunt(String discaunt) {
@@ -77,9 +72,8 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
     public String getPrice() {
         WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-        wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("Price")));
-        WebElement par = getTableParentCell("Price");
-        return par.findElement(By.xpath("//XCUIElementTypeTextField")).getAttribute("value");
+        WebElement priceCell = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice")));
+        return priceCell.findElement(MobileBy.className("XCUIElementTypeTextField")).getAttribute("value");
     }
 
     public String getPriceMatrixVehiclePartSubTotalPrice() {
@@ -91,10 +85,9 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
         appiumdriver.findElement(MobileBy.AccessibilityId("Save")).click();
     }
 
-    public RegularPriceMatrixScreen saveVehiclePart() {
+    public void saveVehiclePart() {
         waitVehiclePartScreenLoaded();
         clickSave();
-        return new RegularPriceMatrixScreen();
     }
 
     public RegularSelectedServiceDetailsScreen openTechniciansPopup() {
@@ -105,9 +98,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     public void clickOnTechnicians() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Technicians"))).click();
-       // appiumdriver.findElementByAccessibilityId("Technicians").click();
     }
-
 
     public void switchOffOption(String optionname) {
         appiumdriver.findElementByAccessibilityId("Other").click();
@@ -115,23 +106,22 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
     }
 
     public void setPrice(String price) {
-        WebElement par = getTableParentCell("Price");
-        WebElement cell = par.findElement(By.xpath("//XCUIElementTypeTextField"));
+        WebElement cell = appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellPrice")
+                .findElement(MobileBy.className("XCUIElementTypeTextField"));
         cell.click();
         cell.clear();
         cell.sendKeys(price + "\n");
     }
 
     public void setTime(String timevalue) {
-        WebElement par = getTableParentCell("Time");
-        par.findElement(By.xpath("//XCUIElementTypeTextField")).sendKeys(timevalue + "\n");
+        appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetailsCellTime")
+                .findElement(MobileBy.className("XCUIElementTypeTextField")).sendKeys(timevalue + "\n");
     }
 
-    public RegularPriceMatrixScreen clickBackButton() {
+    public void clickBackButton() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
         appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails").findElement(MobileBy.AccessibilityId("Back")).click();
-        return new RegularPriceMatrixScreen();
     }
 
     public String getPriceMatrixTotalPriceValue() {

@@ -18,7 +18,6 @@ import com.cyberiansoft.test.ios10_client.enums.ReconProMenuItems;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularApproveInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamInspectionsScreen;
@@ -192,10 +191,9 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         serviceRequestsListInteractions.saveNewServiceRequest();
         serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 
-        RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
         RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
@@ -241,10 +239,9 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
 
         DriverBuilder.getInstance().getDriver().quit();
 
-        RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
         RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
@@ -281,9 +278,9 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
 
         DriverBuilder.getInstance().getDriver().quit();
 
-        mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
         serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
         Assert.assertFalse(serviceRequestSscreen.isRejectActionExists());

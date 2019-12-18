@@ -16,7 +16,6 @@ import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
@@ -227,8 +226,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
 
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -291,8 +290,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
 
         RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -306,8 +305,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         final String statusReason = "On Hold new reason";
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -345,8 +344,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         orderMonitorScreen.clickServiceDetailsCancelButton();
         RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -518,8 +517,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -576,8 +575,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         NavigationSteps.navigateBackScreen();
         NavigationSteps.navigateBackScreen();
 
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -721,8 +720,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
 
         BaseUtils.waitABit(20 * 1000);
         for (Employee employee : allEmployees) {
-            RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-            mainScreen.userLogin(employee.getEmployeeFirstName(), employee.getEmployeePassword());
+            RegularHomeScreenSteps.logoutUser();
+            RegularMainScreenSteps.userLogin(employee.getEmployeeFirstName(), employee.getEmployeePassword());
             RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
             RegularTeamWorkOrdersScreen teamWorkOrdersScreen = new RegularTeamWorkOrdersScreen();
             teamWorkOrdersScreen.clickSearchButton();
@@ -752,9 +751,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
             RegularNavigationSteps.navigateBackScreen();
         }
 
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -796,9 +794,9 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         }
         RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
-        mainScreen = homeScreen.clickLogoutButton();
+        RegularHomeScreenSteps.logoutUser();
 
-        mainScreen.userLogin(allEmployees.get(1).getEmployeeFirstName(), allEmployees.get(1).getEmployeePassword());
+        RegularMainScreenSteps.userLogin(allEmployees.get(1).getEmployeeFirstName(), allEmployees.get(1).getEmployeePassword());
         RegularHomeScreenSteps.navigateToTeamWorkOrdersScreen();
         RegularTeamWorkOrdersSteps.openTeamWorkOrderMonitor(workOrderNumber);
         for (ServiceData serviceData : workOrderData.getServicesList()) {
@@ -806,8 +804,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         }
         RegularNavigationSteps.navigateBackScreen();
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
 }

@@ -119,8 +119,9 @@ public class ProdDataManipulationTestCases extends BaseTestCase {
         RegularNavigationSteps.navigateToScreen("State Farm");
         RegularPriceMatrixScreen pricematrix = new RegularPriceMatrixScreen();
         for (VehiclePartData vehiclePartData : inspdata.getMatrixServiceData().getVehiclePartsData()) {
-            RegularVehiclePartScreen vehiclePartScreen = pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
-            vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
+            pricematrix.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+            RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
+                    vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
             for (ServiceData service : vehiclePartData.getVehiclePartAdditionalServices())
                 vehiclePartScreen.selectDiscaunt(service.getServiceName());
             vehiclePartScreen.clickSave();

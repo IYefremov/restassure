@@ -329,7 +329,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.clickSave();
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-        vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
 
         vehiclePartScreen.setPrice(serviceZeroPrice);
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_DEFAULT_TECH_SPLIT_WILL_BE_ASSIGNED_IF_SET_ZERO_AMAUNT);
@@ -356,8 +356,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -402,8 +402,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         orderMonitorScreen.clickBackButton();
 
         teamWorkOrdersScreen.clickHomeButton();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -414,8 +414,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -429,8 +429,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         BundleServiceData bundleServiceData = workOrderData.getBundleService();
-        RegularSelectedServiceBundleScreen serviceBundleScreen = selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
-
+        selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        RegularSelectedServiceBundleScreen serviceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
@@ -487,8 +487,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularWorkOrdersSteps.saveWorkOrder();
 
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -499,8 +499,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -515,7 +515,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         BundleServiceData bundleServiceData = workOrderData.getBundleService();
-        RegularSelectedServiceBundleScreen serviceBundleScreen = selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        RegularSelectedServiceBundleScreen serviceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
@@ -533,7 +534,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
 
-        serviceBundleScreen = selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             if (serviceData.getServiceNewTechnicians() != null) {
@@ -575,8 +576,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularWorkOrdersSteps.saveWorkOrder();
 
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -587,8 +588,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -604,7 +605,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         BundleServiceData bundleServiceData = workOrderData.getBundleService();
-        RegularSelectedServiceBundleScreen serviceBundleScreen = selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
+        RegularSelectedServiceBundleScreen serviceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
@@ -685,8 +687,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularWorkOrdersSteps.saveWorkOrder();
 
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -697,8 +699,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -762,8 +764,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularWizardScreensSteps.clickSaveButton();
         RegularMyWorkOrdersScreenValidations.verifyWorkOrderPresent(workOrderNumber, true);
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -774,8 +776,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -806,8 +808,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularWorkOrdersSteps.cancelCreatingWorkOrder();
 
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -818,8 +820,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.userLogin("Zayats", "1111");
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin("Zayats", "1111");
 
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
@@ -849,7 +851,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularWorkOrdersSteps.cancelCreatingWorkOrder();
 
         RegularNavigationSteps.navigateBackScreen();
-        homeScreen.clickLogoutButton();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
     }
 }

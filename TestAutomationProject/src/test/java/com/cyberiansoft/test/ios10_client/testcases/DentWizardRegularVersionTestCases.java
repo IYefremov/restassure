@@ -2644,7 +2644,8 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
 
         RegularNavigationSteps.navigateToScreen(UtilConstants.PRICE_MATRIX_SCREEN_CAPTION);
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix("Roof");
+        priceMatrixScreen.selectPriceMatrix("Roof");
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.setSizeAndSeverity(PriceMatrixScreen.NKL_SIZE, PriceMatrixScreen.MODERATE_SEVERITY);
         vehiclePartScreen.saveVehiclePart();
         priceMatrixScreen.clickNotesButton();

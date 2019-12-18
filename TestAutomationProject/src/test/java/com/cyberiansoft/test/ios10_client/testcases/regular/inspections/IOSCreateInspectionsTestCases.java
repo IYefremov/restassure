@@ -103,7 +103,8 @@ public class IOSCreateInspectionsTestCases extends IOSRegularBaseTestCase {
         MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
         RegularServicesScreenSteps.selectMatrixService(matrixServiceData);
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(matrixServiceData.getVehiclePartData().getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(matrixServiceData.getVehiclePartData().getVehiclePartName());
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.setSizeAndSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSize(), matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
         Assert.assertEquals(vehiclePartScreen.getPrice(), matrixServiceData.getVehiclePartData().getVehiclePartPrice());
         Assert.assertTrue(vehiclePartScreen.isNotesExists());
