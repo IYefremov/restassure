@@ -4,9 +4,12 @@ import com.cyberiansoft.test.baseutils.AllureUtils;
 import com.cyberiansoft.test.dataclasses.TargetProcessTestCaseData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.mashape.unirest.http.exceptions.UnirestException;
+import lombok.Getter;
+import lombok.Setter;
 import org.codehaus.plexus.util.FileUtils;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
@@ -14,15 +17,40 @@ import org.testng.xml.XmlSuite;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class TestListenerAllure extends TestListenerAdapter implements IInvokedMethodListener, IReporter {
 
+    @Getter
+    @Setter
+    private static Map<String, String> testToTestRunMap = new HashMap<>();
     private TPIntegrationService tpIntegrationService = new TPIntegrationService();
 
     @Override
-    public void onTestStart(ITestResult iTestResult) {}
+    public void onTestStart(ITestResult testResult) {
+        if (!testToTestRunMap.isEmpty()) {
+            boolean testShouldBeExecuted = false;
+            if (getTestCasesData(testResult) != null && getTestCasesData(testResult).getTargetProcessTestCaseData() != null) {
+                List<String> targetProcessTestCaseIds =
+                        this.getTestCasesData(testResult).getTargetProcessTestCaseData()
+                                .stream().map(TargetProcessTestCaseData::getTestCaseID)
+                                .collect(Collectors.toList());
+                for (String id : targetProcessTestCaseIds) {
+                    if (testToTestRunMap.containsKey(id)) {
+                        testShouldBeExecuted = true;
+                        break;
+                    }
+                }
+            }
+
+            if (!testShouldBeExecuted)
+                throw new SkipException("Test is not in desired suite");
+        }
+
+    }
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult testResult) {
@@ -36,11 +64,25 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
     public void afterInvocation(IInvokedMethod iInvokedMethod, ITestResult iTestResult) {}
 
     @Override
-    public void onTestFailure(ITestResult result) {
-        System.out.println("FAILED: " + result.getMethod().getMethodName());
-        AllureUtils.attachLog(Arrays.toString(result.getThrowable().getStackTrace()));
+    public void onTestFailure(ITestResult testResult) {
+        System.out.println("FAILED: " + testResult.getMethod().getMethodName());
+        AllureUtils.attachLog(Arrays.toString(testResult.getThrowable().getStackTrace()));
         AllureUtils.attachScreenshot();
-        //setTestCaseAutomatedField(result);
+
+        if (!testToTestRunMap.isEmpty()) {
+            if (getTestCasesData(testResult) != null && getTestCasesData(testResult).getTargetProcessTestCaseData() != null)
+                this.getTestCasesData(testResult).getTargetProcessTestCaseData()
+                        .stream().map(TargetProcessTestCaseData::getTestCaseID)
+                        .forEach(id -> {
+                            try {
+                                tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.FAILED, "Hello from automation :)");
+                            } catch (UnirestException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+        }
     }
 
     @Override
@@ -52,10 +94,24 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
     }
 
     @Override
-    public void onTestSuccess(ITestResult result) {
+    public void onTestSuccess(ITestResult testResult) {
         //setTestCaseAutomatedField(result);
-        System.out.println("SUCCESS: " + result.getMethod().getMethodName());
-        //setTestCaseAutomatedField(result);
+        System.out.println("SUCCESS: " + testResult.getMethod().getMethodName());
+
+        if (!testToTestRunMap.isEmpty()) {
+            if (getTestCasesData(testResult) != null && getTestCasesData(testResult).getTargetProcessTestCaseData() != null)
+                this.getTestCasesData(testResult).getTargetProcessTestCaseData()
+                        .stream().map(TargetProcessTestCaseData::getTestCaseID)
+                        .forEach(id -> {
+                            try {
+                                tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.PASSED, "Hello from automation :)");
+                            } catch (UnirestException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        });
+        }
     }
 
     @Override
@@ -111,7 +167,11 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
     }
 
     private TestCaseData getTestCasesData(ITestResult testResult) {
-        Object[] parameters = testResult.getParameters();
-        return JSonDataParser.getTestDataFromJson((parameters[parameters.length - 1].toString()), TestCaseData.class);
+        try {
+            Object[] parameters = testResult.getParameters();
+            return JSonDataParser.getTestDataFromJson((parameters[parameters.length - 1].toString()), TestCaseData.class);
+        } catch (Exception ex) {
+            return null;
+        }
     }
 }

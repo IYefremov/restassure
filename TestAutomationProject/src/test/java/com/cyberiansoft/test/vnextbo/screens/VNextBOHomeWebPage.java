@@ -105,12 +105,12 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
     public boolean isIntercomDisplayed() {
         wait.until(ExpectedConditions.visibilityOf(intercomFrame));
         driver.switchTo().frame(intercomFrame);
-        return isElementDisplayed(intercom);
+        return Utils.isElementDisplayed(intercom);
     }
 
     public VNextBOHomeWebPage clickLogo() {
         wait.until(ExpectedConditions.elementToBeClickable(logo)).click();
-        waitForLoading();
+        WaitUtilsWebDriver.waitForLoading();
         return this;
     }
 
@@ -130,40 +130,40 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
     public String openHelpWindow(String mainWindow) {
         clickButton(helpButton);
         WaitUtilsWebDriver.waitForNewTab();
-        return getNewTab(mainWindow);
+        return Utils.getNewTab(mainWindow);
     }
 
     public String openLearnWindow(String mainWindow) {
         wait.until(ExpectedConditions.not(ExpectedConditions.stalenessOf(helpButton)));
-        actions.moveToElement(helpButton).build().perform();
+        Utils.moveToElement(helpButton);
         wait.until(ExpectedConditions.elementToBeClickable(helpLearnButton)).click();
         WaitUtilsWebDriver.waitForNewTab();
-        return getNewTab(mainWindow);
+        return Utils.getNewTab(mainWindow);
     }
 
     public String openAccessClientPortalWindow(String mainWindow) {
         Utils.clickElement(accessClientPortalLink);
         WaitUtilsWebDriver.waitForNewTab();
-        return getNewTab(mainWindow);
+        return Utils.getNewTab(mainWindow);
     }
 
     public String openSupportForBOWindow(String mainWindow) {
         Utils.clickElement(supportForBOButton);
         WaitUtilsWebDriver.waitForNewTab();
-        return getNewTab(mainWindow);
+        return Utils.getNewTab(mainWindow);
     }
 
     public String openSupportForMobileAppWindow(String mainWindow) {
         Utils.clickElement(supportForMobileAppButton);
         WaitUtilsWebDriver.waitForNewTab();
-        return getNewTab(mainWindow);
+        return Utils.getNewTab(mainWindow);
     }
 
     public String openAccessReconProBOWindow(String mainWindow) {
         Utils.clickElement(accessReconProBOLink);
         final HomeWebPage BOHomeWebPage = PageFactory.initElements(driver, HomeWebPage.class);
         BOHomeWebPage.waitForLoading();
-        return getNewTab(mainWindow);
+        return Utils.getNewTab(mainWindow);
     }
 
     public void clickButton(WebElement link) {

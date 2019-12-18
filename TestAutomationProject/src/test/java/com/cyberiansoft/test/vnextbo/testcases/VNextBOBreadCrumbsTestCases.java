@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -113,7 +114,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         Assert.assertEquals(VNextBOBreadCrumbInteractions.getLastBreadCrumbText(), data.getOrderNumber(),
                 "The RO details page breadCrumb with RO# hasn't been displayed");
 
-        detailsPage.waitForLoading();
+        WaitUtilsWebDriver.waitForLoading();
         VNextBORODetailsPageInteractions.clickRepairOrdersBackwardsLink();
         Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");

@@ -8,7 +8,7 @@ public class VNextBOHeaderPanelSteps {
     public static void logout() {
         try {
             if (VNextBOHeaderPanelValidations.logOutLinkExists()) {
-                new VNextBOHeaderPanelInteractions().userLogout();
+                VNextBOHeaderPanelInteractions.userLogout();
             }
         } catch (RuntimeException ignored) {}
     }

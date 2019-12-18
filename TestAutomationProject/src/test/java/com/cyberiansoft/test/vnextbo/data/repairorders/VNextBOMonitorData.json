@@ -224,6 +224,21 @@
     }
   ],
 
+  "verifyUserCanResolveProblemOnPhaseLevel": [
+    {
+      "rowID": "verifyUserCanResolveProblemOnPhaseLevel.01",
+      "description": "Test Case 83641:User can see Invoice of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91386"
+        }
+      ],
+      "location": "New_zayats_location",
+      "orderNumber": "O-000-152441",
+      "invoiceNumber": "I-000-00997"
+    }
+  ],
+
   "verifyUserCanSeeInvoiceOfRo": [
     {
       "rowID": "verifyUserCanSeeInvoiceOfRo.01",
@@ -236,6 +251,21 @@
       "location": "New_zayats_location",
       "orderNumber": "O-000-152441",
       "invoiceNumber": "I-000-00997"
+    }
+  ],
+
+  "verifyUserCanSeeArbitrationDate": [
+    {
+      "rowID": "verifyUserCanSeeArbitrationDate.01",
+      "description": "User can see \"Arbitration Date\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92577"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "orderNumber": "O-000-152744",
+      "arbitrationDate": "10/1/2019"
     }
   ],
 
@@ -1467,6 +1497,25 @@
         "Refused",
         "Skipped"
       ]
+    }
+  ],
+
+  "verifyUserCanUsePaginationFilter": [
+    {
+      "rowID": "verifyUserCanUsePaginationFilter.01",
+      "description": "User can use pagination filter",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98316"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "pages": {
+        "ten": "10",
+        "twenty": "20",
+        "fifty": "50",
+        "hundred": "100"
+      }
     }
   ]
 }

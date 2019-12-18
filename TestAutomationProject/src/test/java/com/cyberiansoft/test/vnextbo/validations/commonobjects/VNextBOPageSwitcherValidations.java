@@ -44,7 +44,7 @@ public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidation
                 "Footer active page number hasn't been changed.");
     }
 
-    public static boolean verifyHeaderLastPageButtonIsClickable() {
+    public static boolean isHeaderLastPageButtonClickable() {
 
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderLastPageBtn(), 1);
     }
@@ -54,14 +54,31 @@ public class VNextBOPageSwitcherValidations extends VNextBOBaseWebPageValidation
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterLastPageBtn(), 1);
     }
 
-    public static boolean verifyHeaderFirstPageButtonIsClickable() {
+    public static boolean isHeaderFirstPageButtonClickable() {
 
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderFirstPageBtn(), 1);
     }
 
-    public static boolean verifyFooterFirstPageButtonIsClickable() {
+    public static boolean isFooterFirstPageButtonClickable() {
 
         return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterFirstPageBtn(), 1);
+    }
+
+    public static boolean isHeaderPreviousPageButtonClickable() {
+
+        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderPreviousPageBtn(), 1);
+    }
+
+    public static boolean isFooterPreviousPageButtonClickable() {
+        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterPreviousPageBtn(), 1);
+    }
+
+    public static boolean isHeaderNextPageButtonClickable() {
+        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getHeaderNextPageBtn(), 1);
+    }
+
+    public static boolean isFooterNextPageButtonClickable() {
+        return Utils.isElementClickable(new VNextBOPageSwitcherElements().getFooterNextPageBtn(), 1);
     }
 
     public static void verifyItemsPerPageNumberIsCorrect(String expectedItemsNumber) {

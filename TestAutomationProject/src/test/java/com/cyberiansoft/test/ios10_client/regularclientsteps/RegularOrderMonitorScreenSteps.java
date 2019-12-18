@@ -38,7 +38,6 @@ public class RegularOrderMonitorScreenSteps {
     public static void startWorkOrder() {
         RegularOrderMonitorScreen orderMonitorScreen = new RegularOrderMonitorScreen();
         orderMonitorScreen.clickStartOrderButton();
-        Assert.assertTrue(Helpers.getAlertTextAndAccept().contains(AlertsCaptions.WOULD_YOU_LIKE_TO_START_REPAIR_ORDER));
     }
 
     public static void selectWorkOrderPhaseStatus(OrderMonitorStatuses orderPhaseStatus) {

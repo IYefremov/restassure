@@ -61,7 +61,7 @@ public class VNextBOLeftMenuInteractions {
             final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
             Utils.clickElement(leftMenuPanel.getMenuButton());
             WaitUtilsWebDriver.waitForAttributeToContain(
-                    leftMenuPanel.getBody(), "class", "left-menu--open");
+                    leftMenuPanel.getBody(), "class", "left-menu--open", 1);
         }
     }
 
@@ -79,21 +79,13 @@ public class VNextBOLeftMenuInteractions {
                 .findElement(By.xpath(".//span[contains(text(), '" + mainMenu + "')]"));
         WaitUtilsWebDriver.waitForElementNotToBeStale(menuElement);
         Utils.clickElement(menuElement);
-        WaitUtilsWebDriver.waitABit(1000);
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     private static void selectMenuItem(WebElement menuitem, String mainMenuItem) {
-        try {
-            final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
-            DriverBuilder.getInstance().getDriver().switchTo().frame(leftMenuPanel.getTutorialFrame());
-            WaitUtilsWebDriver.waitABit(1000);
-            Utils.clickElement(leftMenuPanel.getTutorialSkipButton());
-        } catch (Exception ignored) {}
-
-        DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
         expandMainMenu();
         clickMainMenuItem(mainMenuItem);
         Utils.clickElement(menuitem);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitABit(1000);
     }
 }

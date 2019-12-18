@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
@@ -34,6 +33,9 @@ public class VNextBOLoginScreenWebPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//span[@data-bind='text: password.errorText']")
 	private WebElement passwordErrorText;
+
+	@FindBy(tagName = "body")
+	private WebElement body;
 	
 	public VNextBOLoginScreenWebPage() {
 		super(DriverBuilder.getInstance().getDriver());

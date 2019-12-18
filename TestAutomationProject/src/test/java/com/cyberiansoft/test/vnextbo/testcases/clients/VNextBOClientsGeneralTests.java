@@ -116,12 +116,12 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
         Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
                 "Bottom Last page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderLastPageButtonIsClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "Top Last page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderFirstPageButtonIsClickable(), "Top First page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyFooterFirstPageButtonIsClickable(), "Bottom First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");
@@ -139,12 +139,12 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
         Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
                 "Bottom Last page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderLastPageButtonIsClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "Top Last page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyHeaderFirstPageButtonIsClickable(), "Top First page button has been clickable.");
-        Assert.assertFalse(VNextBOPageSwitcherValidations.verifyFooterFirstPageButtonIsClickable(), "Bottom First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");

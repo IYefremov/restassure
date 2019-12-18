@@ -29,7 +29,11 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
-import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextPaymentInfoWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextUpgradeInfoWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.mashape.unirest.http.exceptions.UnirestException;
@@ -160,7 +164,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         WebDriverUtils.webdriverGotoWebPage(newbourl);
         VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
                 webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
+        approvedaccountwebpage.clickLoginLink();
 
         VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
@@ -271,7 +275,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         WebDriverUtils.webdriverGotoWebPage(newbourl);
         VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
                 webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
+        approvedaccountwebpage.clickLoginLink();
 
         VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
@@ -585,7 +589,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         WebDriverUtils.webdriverGotoWebPage(newbourl);
         VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
                 webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
+        approvedaccountwebpage.clickLoginLink();
 
         VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
         VNexBOLeftMenuPanel leftmenu = PageFactory.initElements(webdriver,
@@ -1055,12 +1059,10 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         WebDriverUtils.webdriverGotoWebPage(newbourl);
         VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
                 webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginScreenWebPage loginpage = approvedaccountwebpage.clickLoginLink();
+        approvedaccountwebpage.clickLoginLink();
 
         VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
-        VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                VNexBOLeftMenuPanel.class);
-        leftMenuPanel.expandMainMenu();
+        VNextBOLeftMenuInteractions.expandMainMenu();
         VNextBOHeaderPanelSteps.clickUpgradeNowBanner();
         VNextUpgradeInfoWebPage upgradeinfopage = new VNextUpgradeInfoWebPage(webdriver);
 

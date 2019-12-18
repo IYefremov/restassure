@@ -20,8 +20,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-
 public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
 
     @BeforeClass
@@ -157,55 +155,21 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
     }
 
     /**
-     * commented several steps because
+     * the first several steps have been deleted because
      * a) these steps are already tested in the other TCs
      * b) the necessary invoices cannot be found in a large scope of created invoices
      */
-    // todo bug 94937
-    // https://cyb.tpondemand.com/RestUI/Board.aspx#page=board/4692469321793274828&appConfig=eyJhY2lkIjoiMTA1MTA5MDU0OEY2QTUyQjlFM0JCODkwRjYwQUVGMEIifQ==&boardPopup=bug/94937
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
     public void verifyUserCanUnvoidInvoicesUsingCheckboxes(String rowID, String description, JSONObject testData) {
         VNextBOOperationsInvoicesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOOperationsInvoicesData.class);
 
         VNextBOLeftMenuInteractions.selectInvoicesMenu();
-
-//        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
-//                data.getFromDate(), data.getToDate(), data.getStatus2());
-//
-//        final String[] invoices = {
-//                VNextBOInvoicesPageInteractions.getInvoiceName(0),
-//                VNextBOInvoicesPageInteractions.getInvoiceName(1),
-//                VNextBOInvoicesPageInteractions.getInvoiceName(2)
-//        };
-//
-//        Arrays.stream(invoices)
-//                .forEach((invoice) ->
-//                        VNextBOInvoicesPageSteps.confirmVoidingFirstInvoice());
-//
-//        Arrays.stream(invoices)
-//                .forEach((invoice) -> Assert.assertFalse(VNextBOInvoicesPageValidations
-//                                .isInvoiceDisplayed(invoice),
-//                        "The invoice " + invoice + " is displayed after being voided"));
-
         VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
                 data.getFromDate(), data.getToDate(), data.getStatus());
+        final String[] invoices = VNextBOInvoicesPageInteractions.getFirstInvoicesNames(3);
+        VNextBOInvoicesPageSteps.unvoidFirstInvoices(invoices, data);
 
-        final String[] invoices = {
-                VNextBOInvoicesPageInteractions.getInvoiceName(0),
-                VNextBOInvoicesPageInteractions.getInvoiceName(1),
-                VNextBOInvoicesPageInteractions.getInvoiceName(2)
-        };
-        System.out.println(Arrays.toString(invoices));
-        VNextBOInvoicesPageSteps.unvoidSelectedInvoices(invoices);
-
-        VNextBOInvoicesPageInteractions.clickClearSearchIconIfDisplayed();
-        VNextBOAdvancedSearchInvoiceFormSteps.searchByCustomTimeFrameAndStatus(
-                data.getFromDate(), data.getToDate(), data.getStatus2());
-//        VNextBOInvoicesPageInteractions.scrollInvoices();  todo uncomment here, if the test becomes not stable
-
-        Arrays.stream(invoices)
-                .forEach((inv) -> Assert.assertTrue(VNextBOInvoicesPageValidations
-                                .isInvoiceDisplayed(inv),
-                        "The invoice " + inv + " is not displayed after being unvoided"));
+        final String[] voidInvoices = VNextBOInvoicesPageInteractions.getFirstInvoicesNames(3);
+        VNextBOInvoicesPageSteps.voidFirstInvoices(voidInvoices, data);
     }
 }

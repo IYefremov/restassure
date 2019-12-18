@@ -25,6 +25,12 @@
       "description": "Test Case 20786:Creating Service Request with Inspection, WO and Appointment required on device",
       "targetProcessTestCaseData": [
         {
+          "testCaseID": "89009"
+        },
+        {
+          "testCaseID": "89010"
+        },
+        {
           "testCaseID": "89011"
         }
       ],
@@ -61,6 +67,46 @@
             "questionName": "Tax_Point_1",
             "questionAnswer": "Test Answer 1"
           }
+        }
+      },
+      "inspectionData": {
+        "moneyServices": [
+          {
+            "serviceName": "Quest_Req_Serv",
+            "servicePrice2": "$10.00 x 1.00",
+            "questionData": {
+              "questionName": "QuestionTypeSelect_Tax_Point_1",
+              "questionAnswer": "Test Answer 1"
+            }
+          },
+          {
+            "serviceName": "Wheel",
+            "servicePrice2": "$70.00 x 3.00"
+          }
+        ],
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "services": [
+            {
+              "serviceName": "Dye"
+            },
+            {
+              "serviceName": "Wheel",
+              "serviceQuantity": "2"
+            }
+          ],
+          "bundleServiceAmount": "$70.00"
+        },
+        "inspPrice": "$438.60"
+      },
+      "workOrderData": {
+        "moneyService": {
+          "serviceName": "Wheel",
+          "servicePrice2": "$70.00 x 3.00"
+        },
+        "bundleService": {
+          "bundleServiceName": "Bundle1_Disc_Ex",
+          "bundleServiceAmount": "70"
         }
       }
     }

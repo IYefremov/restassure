@@ -37,7 +37,11 @@ public class VNextBOBreadCrumbValidations {
     }
 
     public static boolean isLocationExpanded() {
-        return Utils.isElementDisplayed(new VNextBOBreadCrumbPanel().getLocationExpanded(), 5);
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOBreadCrumbPanel().getLocationExpanded(), true);
+    }
+
+    public static boolean isLocationCollapsed() {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOBreadCrumbPanel().getLocationExpanded(), false, 2);
     }
 
     public static boolean isLocationSearched(String searchLocation) {

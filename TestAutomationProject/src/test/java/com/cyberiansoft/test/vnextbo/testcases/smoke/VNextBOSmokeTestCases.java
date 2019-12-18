@@ -10,7 +10,9 @@ import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbIn
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOAccountInfoBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOEmailOptionsBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.*;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOCompanyInfoWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOQuickNotesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;

@@ -103,6 +103,9 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_2']")
 	private WebElement phaseName;
 
+	@FindBy(xpath = "//div[@id='orderServices']//div[@data-item-id]/div[@class='clmn_2']/div[1]")
+	private List<WebElement> serviceAndTaskDescriptionsList;
+
 	@FindBy(xpath = "//div[@data-name]//div[@class='clmn_3_1']/span")
 	private WebElement phaseVendorPrice;
 

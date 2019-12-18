@@ -99,5 +99,19 @@
       "firstName": "Alex1",
       "lastName": "Zakaulov1"
     }
+  ],
+
+  "verifyUserCanSearchByServiceOrTaskName": [
+    {
+      "rowID": "verifyUserCanSearchByServiceOrTaskName.01",
+      "description": "Test Case 91022:User can search by service or task name",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91488"
+        }
+      ],
+      "location": "1111 Automation",
+      "service": "PP_Panel"
+    }
   ]
 }

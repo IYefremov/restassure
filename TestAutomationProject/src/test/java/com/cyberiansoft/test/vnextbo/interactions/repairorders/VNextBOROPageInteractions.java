@@ -130,6 +130,7 @@ public class VNextBOROPageInteractions {
                 .waitForVisibilityOfAllOptions(new VNextBOROWebPage().getSearchOptions())
                 .stream()
                 .map(WebElement::getText)
+                .map(String::trim)
                 .collect(Collectors.toList());
     }
 
@@ -348,23 +349,6 @@ public class VNextBOROPageInteractions {
         Utils.clickElement(new VNextBOROWebPage().getPhasesWideTab());
     }
 
-    public static void searchRepairOrderByNumber(String roNumber) {
-        setRepairOrdersSearchText(roNumber);
-        clickSearchIcon();
-    }
-
-    public static void setRepairOrdersSearchText(String repairOrderText) {
-        final WebElement repairOrdersSearchTextField = new VNextBOROWebPage().getRepairOrdersSearchTextField();
-        WaitUtilsWebDriver.waitForVisibility(repairOrdersSearchTextField);
-        Utils.clearAndType(repairOrdersSearchTextField, repairOrderText);
-        WaitUtilsWebDriver.waitABit(500);
-    }
-
-    public static void clickSearchIcon() {
-        Utils.clickElement(new VNextBOROWebPage().getSearchIcon());
-        WaitUtilsWebDriver.waitForLoading();
-    }
-
     public static String getTableTitleDisplayed(int titleHeaderNumber) {
         final List<WebElement> tableHeader = new VNextBOROWebPage().getTableHeader();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(tableHeader);
@@ -538,16 +522,18 @@ public class VNextBOROPageInteractions {
 
     private static List<String> getDatesByPriority(List<WebElement> priorityOrdersDatesList) {
         try {
-            System.out.println("in getDatesByPriority");
-            priorityOrdersDatesList.stream().map(WebElement::getText).forEach(System.out::println);
-            final List<String> collect = WaitUtilsWebDriver.waitForVisibilityOfAllOptions(priorityOrdersDatesList)
+            return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(priorityOrdersDatesList)
                     .stream()
                     .map(WebElement::getText)
                     .collect(Collectors.toList());
-            System.out.println(collect);
-            return collect;
         } catch (Exception e) {
             return Collections.emptyList();
         }
+    }
+
+    public static int getOrdersNumberOnPage() {
+        final List<WebElement> ordersNumber = new VNextBOROWebPage().getWoNumbersList();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersNumber, 5);
+        return ordersNumber.size();
     }
 }

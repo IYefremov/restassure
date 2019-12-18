@@ -7,7 +7,6 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 
@@ -34,11 +33,7 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	public VNextBOLoginScreenWebPage sendConfirmationMail(String userMail) {
 		setConfirmationMailFieldValue(userMail);
 		clickSubmitButton();
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(alertOKBtn)).click();
-        } catch (Exception e) {
-            clickWithJS(alertOKBtn);
-        }
+		Utils.clickElement(alertOKBtn);
 
         return PageFactory.initElements(
 				driver, VNextBOLoginScreenWebPage.class);
