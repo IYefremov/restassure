@@ -68,7 +68,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         String resetPasswordUrl = nada.getUrlsFromMessage(mailMessage, "click here", "http", "\">").get(0);
         Assert.assertTrue(resetPasswordUrl.contains("confirm?invitation"), "User hasn't got link to complete registration");
         nada.deleteAllMessages();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
@@ -135,7 +135,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found by email");
         Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText(newUserEmail));
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Email: " + newUserEmail);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
@@ -145,14 +145,14 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found by phone");
         Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("1111111116"));
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Phone: 1111111116");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyUserCanClearAdvancedSearchFilter(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 10,
                 "Search filter hasn't been cleared, all records haven't been displayed");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
@@ -161,18 +161,18 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanSearchByName(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText(newUserFirstName);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(newUserFirstName);
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found");
         Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText(newUserFirstName));
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Name: " + newUserFirstName);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void verifyUserCanClearSearchByNameFilter(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText(newUserFirstName);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(newUserFirstName);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 10,
                 "Search filter hasn't been cleared, all records haven't been displayed");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
@@ -181,9 +181,9 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserSeesMessageWhenSearchResultIsNegative(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("abracadabra");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("abracadabra");
         VNextBOUsersPageValidations.verifyUsersNotFoundMessageIsDisplayed();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
@@ -195,8 +195,8 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOAddNewUserDialogValidations.verifyEmailFieldIsDisabled();
         VNextBOAddNewUserDialogSteps.editUserData("autoNewUserAndSearchEditedFirstName",
                 "autoNewUserAndSearchEditedLastName", "222222227", false);
-        VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText("autoNewUserAndSearchEditedFirstName autoNewUserAndSearchEditedLastName");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("autoNewUserAndSearchEditedFirstName autoNewUserAndSearchEditedLastName");
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "Edited user hasn't been found");
         Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("222222227"));
         Assert.assertTrue(VNextBOUsersPageValidations.verifyRedTriangleWarningIconIsNotDisplayed(vNexBOUsersWebPage),

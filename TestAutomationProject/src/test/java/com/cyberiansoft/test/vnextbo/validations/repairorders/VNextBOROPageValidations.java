@@ -382,7 +382,7 @@ public class VNextBOROPageValidations {
     }
 
     public static void verifyOrdersAreDisplayedByPriorityOnTheLastPage() {
-        if (VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(true)) {
+        if (VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable()) {
             VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
             final List<String> ordersPriorityValues = VNextBOROPageInteractions.getOrdersPriorityValues();
             final int size = ordersPriorityValues.size();

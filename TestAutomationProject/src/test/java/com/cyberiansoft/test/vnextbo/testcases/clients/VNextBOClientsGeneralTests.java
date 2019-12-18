@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.testcases.clients;
 
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -46,7 +45,6 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyIntercomMessengerCanBeOpenedClosed(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.openIntercomMessenger();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOUsersPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOUsersPageSteps.closeIntercom();
     }
@@ -116,14 +114,14 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickFooterPreviousPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(false),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
                 "Bottom Last page button has been clickable.");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(false),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "Top Last page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(false), "Top First page button has been clickable.");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(false), "Bottom First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");
@@ -133,19 +131,20 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyUserCanSwitchBetweenPagesArchivedTab(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.openArchivedTab();
+        VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("2");
         VNextBOPageSwitcherSteps.clickFooterPreviousPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(false),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
                 "Bottom Last page button has been clickable.");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(false),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "Top Last page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(false), "Top First page button has been clickable.");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(false), "Bottom First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");

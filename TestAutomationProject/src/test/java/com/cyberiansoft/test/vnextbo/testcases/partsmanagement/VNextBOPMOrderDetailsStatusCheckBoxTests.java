@@ -22,7 +22,7 @@ public class VNextBOPMOrderDetailsStatusCheckBoxTests extends BaseTestCase {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsStatusCheckBoxTD();
         com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
-        VNextBOSearchPanelSteps.searchByText("O-000-152414");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-000-152414");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)

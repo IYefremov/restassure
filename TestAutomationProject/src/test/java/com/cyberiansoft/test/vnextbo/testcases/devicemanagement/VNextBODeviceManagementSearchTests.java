@@ -26,17 +26,16 @@ public class VNextBODeviceManagementSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanSearchDevicesUsingSearch(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("vlad");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("vlad");
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Name", "vlad");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanClearSearchDetails(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("vlad");
-        VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Name", "vlad");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("vlad");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelValidations.verifySearchFieldIsEmpty();
     }
 
@@ -54,7 +53,7 @@ public class VNextBODeviceManagementSearchTests extends BaseTestCase {
         VNextBOActiveDevicesTabSteps.searchDevicesByTeam("zayats test team");
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Team", "zayats test team");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Team: zayats test team");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
@@ -63,7 +62,7 @@ public class VNextBODeviceManagementSearchTests extends BaseTestCase {
         VNextBOActiveDevicesTabSteps.searchDevicesByLicense("0086");
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("License", "0086");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("License: 0086");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
@@ -72,7 +71,7 @@ public class VNextBODeviceManagementSearchTests extends BaseTestCase {
         VNextBOActiveDevicesTabSteps.searchDevicesByName("AndroidZak");
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Name", "AndroidZak");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Name: AndroidZak");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
@@ -81,7 +80,7 @@ public class VNextBODeviceManagementSearchTests extends BaseTestCase {
         VNextBOActiveDevicesTabSteps.searchDevicesByVersion("2454");
         VNextBOActiveDevicesTabValidations.verifySearchResultIsCorrectForColumnWithText("Platform", "2454");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Version: 2454");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
@@ -97,6 +96,6 @@ public class VNextBODeviceManagementSearchTests extends BaseTestCase {
         else {
             VNextBOActiveDevicesTabValidations.verifyActiveDevicesNotFoundMessageIsCorrect();
         }
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }

@@ -682,64 +682,64 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
         VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(),
                 "The header first page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(),
                 "The footer first page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),
                 "The header last page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterPreviousPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterPreviousPageButtonClickable(),
                 "The footer last page button is not clickable");
 
         VNextBOPageSwitcherSteps.clickHeaderPreviousPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
         VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "The header last page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
                 "The footer last page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderNextPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderNextPageButtonClickable(),
                 "The header next page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterNextPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterNextPageButtonClickable(),
                 "The footer next page button is not clickable");
 
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
         VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(false),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "The header last page button is clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(false),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
                 "The footer last page button is clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderNextPageButtonClickable(false),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderNextPageButtonClickable(),
                 "The header next page button is clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterNextPageButtonClickable(false),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterNextPageButtonClickable(),
                 "The footer next page button is clickable");
 
         VNextBOPageSwitcherSteps.clickHeaderFirstPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
         VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(false),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(),
                 "The header last page button is clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(false),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(),
                 "The footer last page button is clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(false),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),
                 "The header previous page button is clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterPreviousPageButtonClickable(false),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterPreviousPageButtonClickable(),
                 "The footer previous page button is clickable");
 
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
         VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(),
                 "The header first page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(),
                 "The footer first page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),
                 "The header last page button is not clickable");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterPreviousPageButtonClickable(true),
+        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterPreviousPageButtonClickable(),
                 "The footer last page button is not clickable");
 	}
 }

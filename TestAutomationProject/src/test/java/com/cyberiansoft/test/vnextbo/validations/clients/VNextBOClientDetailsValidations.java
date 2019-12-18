@@ -15,7 +15,7 @@ import org.testng.Assert;
 public class VNextBOClientDetailsValidations {
 
     public static boolean verifyClientInfoPanelIsExpanded() {
-        return new VNextBOClientInfoBlock().getClientInfoPanel().getAttribute("aria-expanded").equals("true");
+        return isPanelExpanded(new VNextBOClientInfoBlock().getClientInfoPanel());
     }
 
     public static boolean verifyAccountInfoPanelIsExpanded() {
@@ -38,7 +38,7 @@ public class VNextBOClientDetailsValidations {
         return isPanelExpanded(new VNextBOMiscellaneousBlock().getMiscellaneousPanel());
     }
 
-    private static boolean isPanelExpanded(WebElement element) {
+    public static boolean isPanelExpanded(WebElement element) {
         if (element.getAttribute("aria-expanded") == null)
             return false;
         else
@@ -192,17 +192,17 @@ public class VNextBOClientDetailsValidations {
 
     public static void verifyAllClientDetailsBlocksData(VNextBOClientsData clientsData, boolean wholesale, boolean selectedCheckboxes) {
 
-        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab();
+        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab("true");
         VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(clientsData.getEmployee());
-        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab("true");
         VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(clientsData.getAccountInfoData(), selectedCheckboxes);
-        VNextBOClientDetailsViewAccordionSteps.clickAddressTab();
+        VNextBOClientDetailsViewAccordionSteps.clickAddressTab("true");
         VNextBOClientDetailsValidations.verifyAddressFieldsContainCorrectData(clientsData.getAddressData());
-        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab();
+        VNextBOClientDetailsViewAccordionSteps.clickEmailOptionsTab("true");
         VNextBOClientDetailsValidations.verifyEmailOptionsFieldsContainCorrectData(clientsData.getEmailOptionsData(), wholesale, selectedCheckboxes);
-        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab();
+        VNextBOClientDetailsViewAccordionSteps.clickPreferencesTab("true");
         VNextBOClientDetailsValidations.verifyPreferencesFieldsContainCorrectData(clientsData.getDefaultArea(), selectedCheckboxes);
-        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab();
+        VNextBOClientDetailsViewAccordionSteps.clickMiscellaneousTab("true");
         VNextBOClientDetailsValidations.verifyMiscellaneousFieldsContainCorrectData(clientsData.getNotes(), wholesale);
     }
 }

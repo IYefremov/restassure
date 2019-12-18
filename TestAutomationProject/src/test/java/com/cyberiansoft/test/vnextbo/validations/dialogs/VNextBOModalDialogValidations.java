@@ -8,8 +8,7 @@ import org.testng.Assert;
 public class VNextBOModalDialogValidations {
 
     public static void verifyDialogIsDisplayed() {
-
-        WaitUtilsWebDriver.waitForVisibility(new VNextBOModalDialog().getDialogContent());
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOModalDialog().getDialogContent(), 2);
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getDialogContent()),
                 "Modal dialog hasn't been opened");
     }
@@ -46,7 +45,7 @@ public class VNextBOModalDialogValidations {
 
     public static void verifyDialogIsClosed(VNextBOModalDialog confirmationDialog) {
 
-        Assert.assertTrue(Utils.isElementNotDisplayed(confirmationDialog.getDialogContent()),
+        Assert.assertFalse(Utils.isElementDisplayed(confirmationDialog.getDialogContent()),
                 "Modal dialog hasn't been closed");
     }
 }

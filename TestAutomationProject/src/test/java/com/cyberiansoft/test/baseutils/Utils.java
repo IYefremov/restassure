@@ -226,14 +226,8 @@ public class Utils {
         return selectedText;
     }
 
-    @Deprecated
     public static boolean isElementDisplayed(WebElement element) {
-        try {
-            WaitUtilsWebDriver.waitForVisibility(element);
-            return true;
-        } catch (Exception ignored) {
-            return false;
-        }
+        return element.isDisplayed();
     }
 
     @Deprecated

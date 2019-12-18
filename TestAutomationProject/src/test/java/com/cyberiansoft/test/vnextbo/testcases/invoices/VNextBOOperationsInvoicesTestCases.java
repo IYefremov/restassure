@@ -110,8 +110,8 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         final String invoiceNumber = VNextBOInvoicesPageInteractions.getFirstInvoiceName();
         VNextBOInvoicesPageSteps.confirmUnvoidingFirstInvoice();
 
-        VNextBOSearchPanelSteps.clearSearchFilter();
-        VNextBOSearchPanelSteps.searchByText(invoiceNumber);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(invoiceNumber);
         Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoiceNumber),
                 "The invoice is not displayed after being unvoided");
     }
