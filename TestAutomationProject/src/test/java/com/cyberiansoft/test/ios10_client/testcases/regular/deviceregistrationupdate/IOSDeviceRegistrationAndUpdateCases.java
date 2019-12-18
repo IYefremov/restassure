@@ -4,7 +4,8 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularMainScreen;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSteps;
+import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMainScreenSteps;
 import com.cyberiansoft.test.ios10_client.testcases.regular.IOSRegularBaseTestCase;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
 import org.json.simple.JSONObject;
@@ -23,13 +24,12 @@ public class IOSDeviceRegistrationAndUpdateCases extends IOSRegularBaseTestCase 
                                    String description, JSONObject testData) {
         DriverBuilder.getInstance().getAppiumDriver().closeApp();
         DriverBuilder.getInstance().getAppiumDriver().launchApp();
-        RegularMainScreen mainScreen = new RegularMainScreen();
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
         RegularHomeScreen homeScreen = new RegularHomeScreen();
         homeScreen.clickStatusButton();
         homeScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
     }
 
@@ -37,9 +37,9 @@ public class IOSDeviceRegistrationAndUpdateCases extends IOSRegularBaseTestCase 
     public void testUpdateVIN(String rowID,
                               String description, JSONObject testData) {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.updateVIN();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateVINDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
         homeScreen.clickStatusButton();
         homeScreen.updateVIN();
         homeScreen.clickHomeButton();
