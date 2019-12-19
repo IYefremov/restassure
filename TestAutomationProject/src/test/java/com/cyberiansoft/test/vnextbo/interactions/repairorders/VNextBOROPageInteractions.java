@@ -7,7 +7,6 @@ import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOEditNotesDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
-import com.google.common.base.CharMatcher;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -44,7 +43,7 @@ public class VNextBOROPageInteractions {
     }
 
     public static void revealNoteForWorkOrder(String woNumber) {
-        if (!VNextBOROPageValidations.isNoteForWorkOrderDisplayed(woNumber)) {
+        if (VNextBOROPageValidations.isNoteForWorkOrderDisplayed(woNumber, false)) {
             clickNoteForWo(woNumber);
         }
     }
@@ -60,8 +59,8 @@ public class VNextBOROPageInteractions {
     }
 
     public static void hideNoteForWorkOrder(String woNumber) {
-        if (VNextBOROPageValidations.isNoteForWorkOrderDisplayed(woNumber)) {
-            WaitUtilsWebDriver.waitForLoading();
+        if (VNextBOROPageValidations.isNoteForWorkOrderDisplayed(woNumber, true)) {
+            WaitUtilsWebDriver.waitABit(1000);
             clickNoteForWo(woNumber);
         }
     }
@@ -90,7 +89,7 @@ public class VNextBOROPageInteractions {
     }
 
     public static void clickXIconToCloseNoteForWorkOrder(String woNumber) {
-        if (VNextBOROPageValidations.isNoteForWorkOrderDisplayed(woNumber)) {
+        if (VNextBOROPageValidations.isNoteForWorkOrderDisplayed(woNumber, true)) {
             Utils.clickElement(By.xpath("//strong[text()='" + woNumber
                     + "']/../../../div[@data-bind='visible: orderDescriptionDisplay']//a[@class='x']"));
         }
@@ -158,23 +157,14 @@ public class VNextBOROPageInteractions {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    private static void makeTabActive(WebElement wideTab, WebElement wideTabActive, WebElement narrowTab, WebElement narrowTabActive) {
-        try {
-            WaitUtilsWebDriver.waitForVisibility(wideTabActive, 5);
-        } catch (Exception ignored) {
-            try {
-                Utils.clickElement(wideTab);
-                WaitUtilsWebDriver.waitForVisibility(wideTabActive, 5);
-            } catch (Exception e) {
-                Utils.clickElement(narrowTab);
-                WaitUtilsWebDriver.waitForVisibility(narrowTabActive, 5);
-            }
-        }
+    private static void makeTabActive(WebElement wideTab, WebElement wideTabActive) {
+        Utils.clickElement(wideTab);
+        WaitUtilsWebDriver.waitForVisibility(wideTabActive, 5);
     }
 
     public static void setDepartmentsTabActive() {
-        makeTabActive(new VNextBOROWebPage().getDepartmentsWideTab(), new VNextBOROWebPage().getDepartmentsWideTabActive(),
-                new VNextBOROWebPage().getDepartmentsNarrowTab(), new VNextBOROWebPage().getDepartmentsNarrowTabActive());
+        final VNextBOROWebPage roWebPage = new VNextBOROWebPage();
+        makeTabActive(roWebPage.getDepartmentsWideTab(), roWebPage.getDepartmentsWideTabActive());
     }
 
     public static String getAllDepartmentsSum() {
@@ -187,9 +177,9 @@ public class VNextBOROPageInteractions {
 
     private static String getCalculatedSum(List<WebElement> values) {
         if (VNextBOROPageValidations.areValuesDisplayed(values)) {
-            String sum = values.get(0).getText();
-            System.out.println("Sum: " + sum);
-            return sum;
+            final WebElement element = values.get(0);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(element, 10);
+            return Utils.getText(element);
         }
         return "";
     }
@@ -197,30 +187,23 @@ public class VNextBOROPageInteractions {
     private static String calculateSum(List<WebElement> values) {
         if (VNextBOROPageValidations.areValuesDisplayed(values)) {
             final List<WebElement> collection = values.subList(1, values.size());
-            final String calculatedSum = collection
+            return collection
                     .stream()
-                    .map(value -> {
-                        if (value.getText().equals("")) {
-                            return 0;
-                        }
-                        return Integer.valueOf(value.getText());
-                    })
-                    .collect(Collectors.toList())
-                    .stream()
+                    .map((value) -> WaitUtilsWebDriver.waitForElementNotToBeStale(value, 3)
+                            .getText()
+                            .equals("") ? 0 : Integer.valueOf(value.getText()))
                     .reduce((val1, val2) -> val1 + val2)
                     .get()
                     .toString();
-            System.out.println("Sum calculation: " + calculatedSum);
-            return calculatedSum;
         }
         return "";
     }
 
-    public static String getDepartmentsValues() {
+    public static String getDepartmentsValuesSum() {
         return calculateSum(new VNextBOROWebPage().getAllDepartmentsWideScreenValues());
     }
 
-    public static String getPhasesValues() {
+    public static String getPhasesValuesSum() {
         return calculateSum(new VNextBOROWebPage().getAllPhasesWideScreenValues());
     }
 
@@ -232,39 +215,33 @@ public class VNextBOROPageInteractions {
         }
     }
 
-    public static String getDepartmentsValue(int order) {
-        return handleTabValues(order, new VNextBOROWebPage().getAllDepartmentsWideScreenValues(),
-                new VNextBOROWebPage().getAllDepartmentsNarrowScreenValues(), new VNextBOROWebPage().getDepartmentsTabPane());
+    public static int getDepartmentsValue(int order) {
+        return handleWideTabValues(order, new VNextBOROWebPage().getAllDepartmentsWideScreenValues());
     }
 
-    public static String getPhasesValue(int order) {
-        return handleTabValues(order, new VNextBOROWebPage().getAllPhasesWideScreenValues(),
-                new VNextBOROWebPage().getAllPhasesNarrowScreenValues(), new VNextBOROWebPage().getPhasesTabPane());
+    public static int getPhasesValue(int order) {
+        final VNextBOROWebPage roWebPage = new VNextBOROWebPage();
+        return handleWideTabValues(order, roWebPage.getAllPhasesWideScreenValues());
     }
 
-    private static String handleTabValues(int order, List<WebElement> allPhasesWideScreenValues,
-                                   List<WebElement> allPhasesNarrowScreenValues, WebElement phasesTabPane) {
-        if (VNextBOROPageValidations.areValuesDisplayed(allPhasesWideScreenValues)) {
-            final String value = VNextBOROPageInteractions.getValue(allPhasesWideScreenValues, order);
-            assert value != null;
-            return value.equals("") ? "0" : value;
-        } else {
-            try {
-                WaitUtilsWebDriver.waitForVisibilityOfAllOptions(allPhasesNarrowScreenValues, 5);
-            } catch (Exception ignored) {
-                Utils.clickElement(phasesTabPane);
-                WaitUtilsWebDriver.waitABit(1000);
-            }
-            String value = VNextBOROPageInteractions.getValue(allPhasesNarrowScreenValues, order);
-            System.out.println("VALUE: " + value + " ORDER: " + order);
-            if (value == null) {
-                value = "0";
-            }
-            System.out.println("VALUE after replacement: " + CharMatcher.inRange('0', '9').retainFrom(value));
-            value = CharMatcher.inRange('0', '9').retainFrom(value);
-            Utils.clickElement(phasesTabPane);
-            return value.equals("") ? "0" : value;
-        }
+    public static List<Integer> getDepartmentsValues() {
+        return Utils.getText(new VNextBOROWebPage().getAllDepartmentsWideScreenValues())
+                .stream()
+                .map(e -> e.equals("") ? 0 : Integer.valueOf(e))
+                .collect(Collectors.toList());
+    }
+
+    public static List<Integer> getPhasesValues() {
+        return Utils.getText(new VNextBOROWebPage().getAllPhasesWideScreenValues())
+                .stream()
+                .map(e -> e.equals("") ? 0 : Integer.valueOf(e))
+                .collect(Collectors.toList());
+    }
+
+    private static int handleWideTabValues(int order, List<WebElement> allPhasesWideScreenValues) {
+        final String value = VNextBOROPageInteractions.getValue(allPhasesWideScreenValues, order);
+        assert value != null;
+        return value.equals("") || value.equals("0") ? 0 : Integer.valueOf(value);
     }
 
     public static void clickDepartmentForWideScreen(String department) {
@@ -307,7 +284,11 @@ public class VNextBOROPageInteractions {
     }
 
     public static int getNumOfOrdersOnPage() {
-        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOROWebPage().getOrdersDisplayedOnPage()).size();
+        try {
+            return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOROWebPage().getOrdersDisplayedOnPage()).size();
+        } catch (Exception ignored) {
+            return 0;
+        }
     }
 
     public static List<String> getOrdersTargetDatesList() {
@@ -327,8 +308,8 @@ public class VNextBOROPageInteractions {
     }
 
     public static void setPhasesTabActive() {
-        makeTabActive(new VNextBOROWebPage().getPhasesWideTab(), new VNextBOROWebPage().getPhasesWideTabActive(),
-                new VNextBOROWebPage().getPhasesNarrowTab(), new VNextBOROWebPage().getPhasesNarrowTabActive());
+        final VNextBOROWebPage ROWebPage = new VNextBOROWebPage();
+        makeTabActive(ROWebPage.getPhasesWideTab(), ROWebPage.getPhasesWideTabActive());
     }
 
     public static void openIntercom() {

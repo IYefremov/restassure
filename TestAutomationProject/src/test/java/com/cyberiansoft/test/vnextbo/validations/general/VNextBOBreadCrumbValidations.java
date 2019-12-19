@@ -37,7 +37,7 @@ public class VNextBOBreadCrumbValidations {
     }
 
     public static boolean isLocationExpanded() {
-        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOBreadCrumbPanel().getLocationExpanded(), true);
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOBreadCrumbPanel().getLocationExpanded(), true, 3);
     }
 
     public static boolean isLocationCollapsed() {
@@ -47,7 +47,7 @@ public class VNextBOBreadCrumbValidations {
     public static boolean isLocationSearched(String searchLocation) {
         final VNextBOBreadCrumbPanel breadCrumbPanel = new VNextBOBreadCrumbPanel();
         try {
-            WaitUtilsWebDriver.waitForVisibility(breadCrumbPanel.getLocationExpanded());
+            WaitUtilsWebDriver.waitForVisibility(breadCrumbPanel.getLocationExpanded(), 3);
         } catch (Exception e) {
             Utils.clickElement(breadCrumbPanel.getLocationName());
         }

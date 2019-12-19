@@ -50,7 +50,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber(), true),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -73,7 +73,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber(), true),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -100,7 +100,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber(), true),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
 
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
