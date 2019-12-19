@@ -7,7 +7,6 @@ import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOROAdvancedSearchValues;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOAuditLogDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
@@ -16,7 +15,6 @@ import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInte
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
-import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.*;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
@@ -94,9 +92,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -127,9 +122,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -168,9 +160,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -198,9 +187,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -231,9 +217,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -266,9 +249,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -295,9 +275,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -327,9 +304,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -366,9 +340,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -405,9 +376,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -444,9 +412,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -477,9 +442,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getOrderNumber()),
-                "The work order is not displayed after search by order number after clicking the 'Search' icon");
-
         VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
@@ -566,7 +528,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
-        Assert.assertTrue(VNextBOROPageValidations.isSavedSearchEditIconDisplayed(),
+        Assert.assertTrue(VNextBOROPageValidations.isSavedSearchEditIconDisplayed(true),
                 "The saved search edit icon hasn't been displayed");
         VNextBOROPageSteps.openAdvancedSearchDialog();
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isSavedSearchNameClickable(),
@@ -577,7 +539,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
 
         VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
         VNextBOROPageSteps.openAdvancedSearchDialog();
-        Assert.assertFalse(VNextBOROPageValidations.isSavedSearchEditIconDisplayed(),
+        Assert.assertTrue(VNextBOROPageValidations.isSavedSearchEditIconDisplayed(false),
                 "The saved search edit icon hasn't been displayed");
         Assert.assertFalse(VNextBOROAdvancedSearchDialogValidations.isSavedSearchNameClickable(),
                 "The saved search input field is clickable");
@@ -624,8 +586,6 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
 //        VNextBORODetailsPageValidations.verifyPhaseStatuses(data.getServiceStatuses());
 //    }
 
-    // todo bug 100353 (step#2)
-    // https://cyb.tpondemand.com/RestUI/Board.aspx#page=board/4857349958080318572&appConfig=eyJhY2lkIjoiMTA1MTA5MDU0OEY2QTUyQjlFM0JCODkwRjYwQUVGMEIifQ==&boardPopup=Bug/100353/silent
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 72)
     public void verifyUserCanSeeInvoiceOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
@@ -633,10 +593,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageInteractions.clickInvoiceNumberInTable(data.getOrderNumber(), data.getInvoiceNumber());
-        Assert.assertEquals(webdriver.getWindowHandles().size(), 2);
-
-        VNextBOInspectionsPageSteps.clickTheApproveInspectionButton();
-        VNextBOConfirmationDialogInteractions.clickYesButton();
+        VNextBOROPageValidations.verifyInvoiceWindowIsOpened();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 72)

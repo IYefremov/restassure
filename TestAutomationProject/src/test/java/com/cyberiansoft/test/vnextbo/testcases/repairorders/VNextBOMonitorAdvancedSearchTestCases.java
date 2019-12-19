@@ -64,7 +64,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isEmployeeDisplayed(data.getEmployee()));
         VNextBOROAdvancedSearchDialogInteractions.selectEmployeeNameFromBoxList(data.getEmployee());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -79,7 +79,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setPhase(data.getPhase());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -94,7 +94,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setDepartment(data.getDepartment());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -109,7 +109,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setWoType(data.getWoType());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -124,7 +124,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setWoNum(data.getWoNum());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -139,7 +139,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setRoNum(data.getRoNum());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -154,7 +154,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setStockNum(data.getStockNum());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -169,7 +169,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setVinNum(data.getVinNum());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -196,7 +196,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.search();
 
         if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
         }
@@ -214,7 +214,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.selectCustomerNameFromBoxList(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
         VNextBOROAdvancedSearchDialogSteps.search();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
     }
 
@@ -229,7 +229,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.search();
 
         if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
         }
@@ -246,7 +246,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.search();
 
         if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
         }
@@ -263,7 +263,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.search();
 
         if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
         }
@@ -280,7 +280,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.search();
 
         if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
         }
@@ -297,7 +297,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.search();
 
         if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
         }
@@ -314,7 +314,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.search();
 
         if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
         }

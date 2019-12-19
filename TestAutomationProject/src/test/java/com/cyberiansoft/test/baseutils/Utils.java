@@ -6,7 +6,6 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.time.Duration;
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.cyberiansoft.test.baseutils.WaitUtilsWebDriver.waitForDropDownToBeOpened;
-import static com.cyberiansoft.test.baseutils.WaitUtilsWebDriver.waitForElementToBeClickable;
 
 public class Utils {
 
@@ -30,7 +28,9 @@ public class Utils {
     
     public static void clickElement(WebElement element) {
         try {
-            waitForElementToBeClickable(element).click();
+            WaitUtilsWebDriver.waitForElementNotToBeStale(element, 3);
+            WaitUtilsWebDriver.elementShouldBeClickable(element, true, 7);
+            element.click();
         } catch (Exception ignored) {
             WaitUtilsWebDriver.waitABit(500);
             clickWithJS(element);
@@ -73,6 +73,12 @@ public class Utils {
         WaitUtilsWebDriver.waitABit(500);
     }
 
+    public static void clearAndTypeWithJS(WebElement element, String name) {
+        sendKeysWithJS(element, "");
+        Utils.sendKeysWithJS(element, name);
+        WaitUtilsWebDriver.waitABit(500);
+    }
+
     public static void sendKeysWithEnter(WebElement element, String name) {
         clear(element);
         Utils.getActions().sendKeys(element, name).sendKeys(Keys.ENTER).build().perform();
@@ -81,14 +87,10 @@ public class Utils {
 
     public static void clear(WebElement element) {
         try {
-            waitForElementToBeClickable(element).clear();
+            WaitUtilsWebDriver.elementShouldBeClickable(element, true, 7);
+            element.clear();
         } catch (Exception e) {
-            try {
-                scrollToElement(element);
-                waitForElementToBeClickable(element).clear();
-            } catch (Exception ignored) {
-                Assert.fail("The text field has not been displayed", e);
-            }
+            Utils.sendKeysWithJS(element, "");
         }
     }
 
@@ -383,6 +385,7 @@ public class Utils {
                 WaitUtilsWebDriver.waitABit(1000);
             }
         }
+        driver.switchTo().window(mainWindow);
     }
 
     public static void executeJsForAddOnSettings() {
@@ -399,7 +402,7 @@ public class Utils {
         final WebDriver driver = DriverBuilder.getInstance().getDriver();
         ((JavascriptExecutor) driver).executeScript("arguments[1].value = arguments[0]; ", value, element);
         try {
-            WaitUtilsWebDriver.waitForTextToBePresentInElement(element, value, 3);
+            WaitUtilsWebDriver.waitForTextToBePresentInElement(element, value, 2);
         } catch (Exception ignored) {}
     }
 

@@ -3,6 +3,8 @@ package com.cyberiansoft.test.vnextbo.validations.repairorders;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROAdvancedSearchDialog;
@@ -45,8 +47,8 @@ public class VNextBOROPageValidations {
                 new VNextBOROAdvancedSearchDialog().getAdvancedSearchDialogContainer(), "style", "display: none", 5);
     }
 
-    public static boolean isNoteForWorkOrderDisplayed(String woNumber) {
-        return isArrowDisplayed(woNumber, "/../../..//div[@class='dark box']");
+    public static boolean isNoteForWorkOrderDisplayed(String woNumber, boolean expected) {
+        return isArrowDisplayed(woNumber, "/../../..//div[@class='dark box']", expected);
     }
 
     public static void verifyNoteTextIsDisplayed(String noteMessage) {
@@ -54,16 +56,17 @@ public class VNextBOROPageValidations {
                 "The order note text hasn't been displayed");
     }
 
-    public static boolean isSavedSearchEditIconDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOROWebPage().getSavedSearchEditIcon(), 5);
+    public static boolean isSavedSearchEditIconDisplayed(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getSavedSearchEditIcon(), expected, 5);
     }
 
-    public static boolean isWorkOrderDisplayedByVin(String vin) {
-        return isWorkOrderDisplayed(vin);
+    public static boolean isWorkOrderDisplayedByVin(String vin, boolean expected) {
+        return isWorkOrderDisplayed(vin, expected);
     }
 
-    private static boolean isWorkOrderDisplayed(String text) {
-        return Utils.isElementDisplayed(By.xpath("//strong[contains(text(), \"" + text + "\")]"));
+    private static boolean isWorkOrderDisplayed(String text, boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                By.xpath("//strong[contains(text(), \"" + text + "\")]"), expected, 10);
     }
 
     public static boolean areTableHeaderTitlesDisplayed(List<String> titles, List<String> repeaterTitles) {
@@ -88,71 +91,61 @@ public class VNextBOROPageValidations {
                 "disabled", "true", 5);
     }
 
-    public static boolean isSavedSearchContainerDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOROWebPage().getSavedSearchContainer());
+    public static boolean isSavedSearchContainerDisplayed(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getSavedSearchContainer(), expected);
     }
 
-    public static boolean isDepartmentDropdownDisplayed() {
-        return isElementForDifferentResolutionsDisplayed(new VNextBOROWebPage().getDepartmentWideDropdownActive(),
-                new VNextBOROWebPage().getDepartmentNarrowDropdownActive());
+    public static boolean isDepartmentDropdownDisplayed(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getDepartmentWideDropdownActive(), expected);
     }
 
-    private static boolean isElementForDifferentResolutionsDisplayed(WebElement wideScreen, WebElement narrowScreen) {
-        try {
-            WaitUtilsWebDriver.waitForVisibility(wideScreen);
-            return true;
-        } catch (Exception e) {
-            return Utils.isElementDisplayed(narrowScreen);
-        }
+    public static boolean isPhasesDropdownDisplayed(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getPhasesWideDropdownActive(), expected);
     }
 
-    public static boolean isPhasesDropdownDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOROWebPage().getPhasesWideDropdownActive());
+    public static boolean isSearchInputFieldDisplayed(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getSearchInput(), expected);
     }
 
-    public static boolean isSearchInputFieldDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOROWebPage().getSearchInput());
+    public static boolean isPhasesTabDisplayed(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getPhasesWideTab(), expected);
     }
 
-    public static boolean isPhasesTabDisplayed() {
-        return isElementForDifferentResolutionsDisplayed(new VNextBOROWebPage().getPhasesWideTab(), new VNextBOROWebPage().getPhasesNarrowTab());
+    public static boolean isDepartmentsTabDisplayed(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getDepartmentsWideTab(), expected);
     }
 
-    public static boolean isDepartmentsTabDisplayed() {
-        return isElementForDifferentResolutionsDisplayed(new VNextBOROWebPage().getDepartmentsWideTab(), new VNextBOROWebPage().getDepartmentsNarrowTab());
+    public static boolean isWorkOrderDisplayedByOrderNumber(String orderNumber, boolean expected) {
+        return isWorkOrderDisplayed(orderNumber, expected);
     }
 
-    public static boolean isWorkOrderDisplayedByOrderNumber(String orderNumber) {
-        return isWorkOrderDisplayed(orderNumber);
+    public static boolean isWorkOrderDisplayedByRoNumber(String roNumber, boolean expected) {
+        return isWorkOrderDisplayed(roNumber, expected);
     }
 
-    public static boolean isWorkOrderDisplayedByRoNumber(String roNumber) {
-        return isWorkOrderDisplayed(roNumber);
+    public static boolean isWorkOrderDisplayedByFirstName(String firstName, boolean expected) {
+        return isWorkOrderDisplayedByPartialText(firstName, expected);
     }
 
-    public static boolean isWorkOrderDisplayedByFirstName(String firstName) {
-        return isWorkOrderDisplayedByPartialText(firstName);
+    public static boolean isWorkOrderDisplayedByLastName(String lastName, boolean expected) {
+        return isWorkOrderDisplayedByPartialText(lastName, expected);
     }
 
-    public static boolean isWorkOrderDisplayedByLastName(String lastName) {
-        return isWorkOrderDisplayedByPartialText(lastName);
+    public static boolean isWorkOrderDisplayedByName(String name, boolean expected) {
+        return isWorkOrderDisplayed(name, expected);
     }
 
-    public static boolean isWorkOrderDisplayedByName(String name) {
-        return isWorkOrderDisplayed(name);
+    public static boolean isWorkOrderDisplayedAfterSearchByEmail(String name, boolean expected) {
+        return isWorkOrderDisplayed(name, expected);
     }
 
-    public static boolean isWorkOrderDisplayedAfterSearchByEmail(String name) {
-        return isWorkOrderDisplayed(name);
+    public static boolean isWorkOrderDisplayedAfterSearchByCompanyName(String name, boolean expected) {
+        return isWorkOrderDisplayed(name, expected);
     }
 
-    public static boolean isWorkOrderDisplayedAfterSearchByCompanyName(String name) {
-        return isWorkOrderDisplayed(name);
-    }
-
-    private static boolean isWorkOrderDisplayedByPartialText(String text) {
-        return Utils.isElementDisplayed(new VNextBOROWebPage().getTableBody()
-                .findElement(By.xpath(".//strong[contains(text(), '" + text + "')]")));
+    private static boolean isWorkOrderDisplayedByPartialText(String text, boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getTableBody()
+                .findElement(By.xpath(".//strong[contains(text(), '" + text + "')]")), expected, 5);
     }
 
     public static boolean isWoTypeDisplayed(String woType) {
@@ -160,35 +153,35 @@ public class VNextBOROPageValidations {
                 .getTableBody())
                 .findElements(By.xpath(".//div"))
                 .stream()
-                .anyMatch(e -> e
-                        .getText()
-                        .contains(woType));
+                .anyMatch(e -> e.getText().contains(woType));
     }
 
-    public static boolean isArrowDownDisplayed(String wo) {
-        return isArrowDisplayed(wo, "//i[@class='icon-arrow-down']");
+    public static boolean isArrowDownDisplayed(String wo, boolean expected) {
+        return isArrowDisplayed(wo, "//i[@class='icon-arrow-down']", expected);
     }
 
-    public static boolean isArrowUpDisplayed(String wo) {
-        return isArrowDisplayed(wo, "//i[@class='icon-arrow-up']");
+    public static boolean isArrowUpDisplayed(String wo, boolean expected) {
+        return isArrowDisplayed(wo, "//i[@class='icon-arrow-up']", expected);
     }
 
-    private static boolean isArrowDisplayed(String wo, String arrow) {
-        return Utils.isElementDisplayed(By.xpath("//strong[text()='" +
-                wo + "']/../../.." + arrow));
+    private static boolean isArrowDisplayed(String wo, String arrow, boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(By.xpath("//strong[text()='" +
+                wo + "']/../../.." + arrow), expected, 5);
     }
 
     public static boolean isRepairOrderPresentInTable(String orderNumber) {
-        return new VNextBOROWebPage().getRepairOrdersTableBody().findElements(By.xpath(".//strong[text()='" + orderNumber + "']")).size() > 0;
+        return new VNextBOROWebPage().getRepairOrdersTableBody()
+                .findElements(By.xpath(".//strong[text()='" + orderNumber + "']")).size() > 0;
     }
 
-    public static boolean isPoNumClickable() {
-        return Utils.isElementClickable(new VNextBOROWebPage().getPoNumTitle(), 5);
+    public static boolean isPoNumClickable(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeClickable(new VNextBOROWebPage().getPoNumTitle(), expected, 5);
     }
 
     public static boolean areValuesDisplayed(List<WebElement> values) {
         try {
-            WaitUtilsWebDriver.getWait().until((ExpectedCondition<Boolean>) sum -> !values.get(0).getText().equals(""));
+            WaitUtilsWebDriver.getWebDriverWait(5)
+                    .until((ExpectedCondition<Boolean>) sum -> !values.get(0).getText().equals(""));
             return true;
         } catch (Exception e) {
             return false;
@@ -211,8 +204,8 @@ public class VNextBOROPageValidations {
         return Utils.isElementDisplayed(new VNextBOROWebPage().getTable(), 5);
     }
 
-    public static boolean isTextNoRecordsDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOROWebPage().getNoRecordsFound(), 5);
+    public static boolean isTextNoRecordsDisplayed(boolean expected) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getNoRecordsFound(), expected, 3);
     }
 
     public static boolean isAdvancedSearchCaretDisplayed() {
@@ -306,7 +299,7 @@ public class VNextBOROPageValidations {
 
     public static void verifyOrdersAfterSearchByDate(LocalDate dateBeforeCurrentDate) {
         if (!isTableDisplayed()) {
-            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             verifyDateOrNotStartedPhaseForOrderWithoutDate(dateBeforeCurrentDate);
         }
@@ -314,7 +307,7 @@ public class VNextBOROPageValidations {
 
     public static void verifyOrdersAfterSearchByTimeFrame(LocalDate dateBeforeCurrentDate) {
         if (!isTableDisplayed()) {
-            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             System.out.println("high priority");
             verifyTargetDateForOrders(dateBeforeCurrentDate, VNextBOROPageInteractions.getHighPriorityDates());
@@ -327,7 +320,7 @@ public class VNextBOROPageValidations {
 
     public static void verifyOrdersAfterSearchByTimeFrame(LocalDate dateStarted, LocalDate dateFinished) {
         if (!isTableDisplayed()) {
-            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             System.out.println("high priority");
             verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getHighPriorityDates());
@@ -340,7 +333,7 @@ public class VNextBOROPageValidations {
 
     public static void verifyOrdersAfterSearchByPhase(String currentPhase) {
         if (!isTableDisplayed()) {
-            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             verifyCurrentPhaseForOrder(currentPhase);
         }
@@ -348,7 +341,7 @@ public class VNextBOROPageValidations {
 
     public static void verifyAllOrdersHaveProblemIndicators() {
         if (!isTableDisplayed()) {
-            Assert.assertTrue(isTextNoRecordsDisplayed(), "The text notification is not displayed");
+            Assert.assertTrue(isTextNoRecordsDisplayed(true), "The text notification is not displayed");
         } else {
             final VNextBOROWebPage roPage = new VNextBOROWebPage();
             Assert.assertEquals(roPage.getProblemIndicatorsList().size(), roPage.getOrdersDisplayedOnPage().size(),
@@ -478,6 +471,44 @@ public class VNextBOROPageValidations {
         } else {
             Assert.assertEquals(ordersOnPage, expectedMaxNumber,
                     "The number of orders on page is not equal to the max number of orders");
+        }
+    }
+
+    public static void verifyInvoiceWindowIsOpened() {
+        String mainWindow = Utils.getParentTab();
+        WaitUtilsWebDriver.waitForNewTab();
+        Assert.assertEquals(DriverBuilder.getInstance().getDriver().getWindowHandles().size(), 2,
+                "The invoice hasn't been opened");
+        Utils.closeNewWindow(mainWindow);
+    }
+
+    public static void verifyPhasesForWideScreen(List<Integer> phasesValues, VNextBOMonitorData data) {
+        for (int i = 0; i < phasesValues.size(); i++) {
+            VNextBOROPageInteractions.clickPhaseForWideScreen(data.getPhases().get(i));
+            if (phasesValues.get(i) == 0) {
+                Assert.assertFalse(VNextBOROPageValidations.isTableDisplayed(), "The table shouldn't be displayed");
+                Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true),
+                        "The text notification is not displayed");
+            } else {
+                Assert.assertTrue(phasesValues.get(i) >= VNextBOROPageInteractions.getNumOfOrdersOnPage(),
+                        "The phases repair orders number in table " +
+                                "is less than value displayed in menu container");
+            }
+        }
+    }
+
+    public static void verifyDepartmentsForWideScreen(List<Integer> departmentValues, VNextBOMonitorData data) {
+        for (int i = 0; i < departmentValues.size(); i++) {
+            VNextBOROPageInteractions.clickDepartmentForWideScreen(data.getDepartments().get(i));
+            if (departmentValues.get(i) == 0) {
+                Assert.assertFalse(VNextBOROPageValidations.isTableDisplayed(), "The table shouldn't be displayed");
+                Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true),
+                        "The text notification is not displayed");
+            } else {
+                Assert.assertTrue(departmentValues.get(0) >= VNextBOROPageInteractions.getNumOfOrdersOnPage(),
+                        "The departments repair orders number in table " +
+                                "is less than value displayed in menu container");
+            }
         }
     }
 }

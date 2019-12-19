@@ -302,6 +302,14 @@ public class WaitUtilsWebDriver {
         return elementShouldBeVisible(element, shouldBeVisible, 15);
     }
 
+    public static boolean elementShouldBeVisible(By by, boolean shouldBeVisible) {
+        return elementShouldBeVisible(DriverBuilder.getInstance().getDriver().findElement(by), shouldBeVisible, 15);
+    }
+
+    public static boolean elementShouldBeVisible(By by, boolean shouldBeVisible, int timeOut) {
+        return elementShouldBeVisible(DriverBuilder.getInstance().getDriver().findElement(by), shouldBeVisible, timeOut);
+    }
+
     public static boolean elementShouldBeVisible(WebElement element, boolean shouldBeVisible, int timeOut) {
         try {
             return getWebDriverWait(timeOut)
@@ -332,7 +340,6 @@ public class WaitUtilsWebDriver {
                 wait.until(ExpectedConditions.elementToBeClickable(element));
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
                 return false;
             }
         } else {
@@ -340,7 +347,6 @@ public class WaitUtilsWebDriver {
                 wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(element)));
                 return true;
             } catch (Exception e) {
-                e.printStackTrace();
                 return false;
             }
         }

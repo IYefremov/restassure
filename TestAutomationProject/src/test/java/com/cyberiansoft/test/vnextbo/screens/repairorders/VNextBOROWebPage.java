@@ -193,7 +193,7 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     @FindBy(className = "searchResults")
     private WebElement searchResults;
 
-    @FindBy(className = "//input[@title='PO #']")
+    @FindBy(xpath = "//input[@title='PO #']")
     private WebElement poNumTitle;
 
     @FindBy(xpath = "//div[contains(@data-bind, 'menuVisible')]")
