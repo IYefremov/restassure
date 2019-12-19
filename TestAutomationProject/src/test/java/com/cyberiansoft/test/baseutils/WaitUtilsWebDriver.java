@@ -13,6 +13,7 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import static org.awaitility.Awaitility.await;
 
@@ -61,15 +62,12 @@ public class WaitUtilsWebDriver {
         try {
             waitForInvisibility(VNextBOBaseWebPage.loadingProcess);
         } catch (Exception ignored) {}
-        waitABit(2000);
     }
 
     public static void waitForSpinnerToDisappear() {
-            waitForVisibilityIgnoringException(VNextBOBaseWebPage.spinner);
-        try {
-            waitForInvisibility(VNextBOBaseWebPage.spinner);
-        } catch (Exception ignored) {}
-        waitABit(2000);
+        getWebDriverWait(3).until(ExpectedConditions.visibilityOf(VNextBOBaseWebPage.spinner));
+        WebElement spinner = DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[contains(@class, 'k-loading-image')]"));
+        getWait().until(ExpectedConditions.invisibilityOf(spinner));
     }
 
     public static WebElement waitForVisibility(WebElement element) {
@@ -289,6 +287,11 @@ public class WaitUtilsWebDriver {
         } catch (Exception ignored) {
             waitABit(1500);
         }
+    }
+
+    public static void waitUntilPageIsLoadedWithJs() {
+        new WebDriverWait(DriverBuilder.getInstance().getDriver(), 5).until(
+                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 
     public static void waitForNumberOfElementsToBe(By by, int elementsNumber) {

@@ -25,7 +25,7 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanCancelArchiveXIcon(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("RozstalnoyCO");
         VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
         VNextBOClientsPageSteps.clickArchiveDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
@@ -62,7 +62,7 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
         VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOClientsPageSteps.openArchivedTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("RozstalnoyCO");
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "RozstalnoyCO");
         VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOSearchPanelSteps.clearSearchFilter();
@@ -72,7 +72,7 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
     public void verifyUserCanCancelRestoreXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.openArchivedTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("RozstalnoyCO");
         VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
         VNextBOClientsPageSteps.clickRestoreDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
@@ -91,7 +91,7 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
     public void verifyUserCanCancelRestoreCancelButton(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.openArchivedTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("RozstalnoyCO");
         VNextBOClientsPageSteps.clickActionsButtonForClient("RozstalnoyCO");
         VNextBOClientsPageSteps.clickRestoreDropMenuButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
@@ -106,12 +106,12 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
     public void verifyUserCanRestoreClient(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsPageSteps.openArchivedTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("RozstalnoyCO");
         VNextBOClientsPageSteps.restoreClient("RozstalnoyCO");
         VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();
         VNextBOClientsPageSteps.openActiveTab();
-        VNextBOSearchPanelSteps.searchByText("RozstalnoyCO");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("RozstalnoyCO");
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", "RozstalnoyCO");
         VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOSearchPanelSteps.clearSearchFilter();

@@ -335,9 +335,10 @@ public class NewTestCases extends BaseTestCase {
 	{
 
 		RegularHomeScreen homeScreen = new RegularHomeScreen();
-		RegularMainScreen mainscreen = homeScreen.clickLogoutButton();
+		RegularHomeScreenSteps.logoutUser();
 		BaseUtils.waitABit(2000);
-		LicensesScreen licensesscreen = mainscreen.clickLicenses();
+		RegularMainScreen mainScreen = new RegularMainScreen();
+		LicensesScreen licensesscreen = mainScreen.clickLicenses();
 		licensesscreen.clickAddLicenseButtonAndAcceptAlert();
 
 		webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);

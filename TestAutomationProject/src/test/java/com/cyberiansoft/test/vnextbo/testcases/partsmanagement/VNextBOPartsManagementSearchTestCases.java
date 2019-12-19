@@ -40,7 +40,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanSearchROUsingSearch(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByText("123");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("123");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersAreDisplayed();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: 123");
         VNextBOSearchPanelValidations.verifyXIconIsDisplayed(true);
@@ -49,7 +49,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanDeleteSearchOptions(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelValidations.verifyXIconIsDisplayed(false);
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
@@ -85,7 +85,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Customer: Mike's Techs");
         VNextBOPartsOrdersListPanelValidations.verifyCustomerNamesAreCorrect("Mike's Techs");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
@@ -96,7 +96,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Phase: PDR Station");
         VNextBOPartsOrdersListPanelValidations.verifyPhasesAreCorrect("PDR Station");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
@@ -107,7 +107,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("WO#: O-062-00068");
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect("O-062-00068");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
@@ -118,7 +118,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("WO Type: Best");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersAreDisplayed();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
@@ -129,7 +129,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Stock#: Autotests");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersStockNumbersAreCorrect("Autotests");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
@@ -140,7 +140,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("ETA From: 10/30/2018");
         VNextBOPartsDetailsPanelValidations.verifyEtaDateIsCorrectAfterSearch("10/30/2018", "ETA From");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
@@ -151,7 +151,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("ETA To: 10/30/2019");
         VNextBOPartsDetailsPanelValidations.verifyEtaDateIsCorrectAfterSearch("10/30/2019", "ETA To");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
@@ -162,7 +162,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("VIN: 11111");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersVinNumbersAreCorrect("11111");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
@@ -173,7 +173,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Part#: My OEM");
         VNextBOPartsDetailsPanelValidations.verifyPartNumberIsCorrect(0, "My OEM");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 14)
@@ -184,7 +184,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Notes: Autotest");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersAreDisplayed();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 15)
@@ -195,7 +195,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Ordered From: Test Team");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersVendorsAreCorrect("Test Team");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 16)
@@ -206,7 +206,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("From: 12/14/2016");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersDatesAreCorrectAfterSearch("12/14/2016", "From");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 17)
@@ -217,7 +217,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("To: 12/14/2018");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersDatesAreCorrectAfterSearch("12/14/2018", "To");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 18)
@@ -228,7 +228,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Core Price: Parts with Core Price");
         VNextBOPartsDetailsPanelValidations.verifyAtLeastOnePartHasCorePriceMoreThanZero();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 19)
@@ -239,7 +239,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Labor Credit: Parts with Labor Credit");
         VNextBOPartsDetailsPanelValidations.verifyAtLeastOnePartHasLaborCreditMoreThanZero();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 20)
@@ -251,7 +251,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOPartsDetailsPanelValidations.verifyAtLeastOnePartHasCorePriceMoreThanZero();
         VNextBOPartsDetailsPanelValidations.verifyAtLeastOnePartHasCorrectCoreStatus("RTV Complete");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 21)
@@ -280,7 +280,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.setAllFields(data);
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOPartsOrdersListPanelValidations.verifyOrdersListEmptyStateIsCorrect();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 24)
@@ -343,12 +343,12 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.setWONumberField("O-000-149577");
         VNextBOAdvancedSearchDialogSteps.setSearchName("Test91129");
         VNextBOAdvancedSearchDialogSteps.saveSearch();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch("Test91129");
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect("O-000-149577");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch("Test91129");
         VNextBOAdvancedSearchDialogSteps.clickDeleteButton();

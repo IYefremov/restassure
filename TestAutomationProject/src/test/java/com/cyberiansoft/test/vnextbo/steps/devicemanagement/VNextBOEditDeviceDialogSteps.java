@@ -36,18 +36,15 @@ public class VNextBOEditDeviceDialogSteps {
 
         editDeviceFields(deviceManagementData);
         Utils.clickElement(new VNextBOEditDeviceDialog().getSubmitButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickCancelButton() {
 
         Utils.clickElement(new VNextBOEditDeviceDialog().getCancelButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickCloseXIconButton() {
 
         Utils.clickElement(new VNextBOEditDeviceDialog().getXIconButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 }

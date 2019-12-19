@@ -74,6 +74,6 @@ public class RegularHomeScreenSteps {
 
     public static void logoutUser() {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
-        homeScreen.clickLogoutButton();
+        homeScreen.clickLogOutButton();
     }
 }

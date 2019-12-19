@@ -135,10 +135,8 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
                 .findElement(MobileBy.AccessibilityId("custom detail button")).click();
     }
 
-    public RegularSelectedServiceBundleScreen openSelectBundleServiceDetails(String serviceName) {
+    public void openSelectBundleServiceDetails(String serviceName) {
         selectedservicestable.findElementByAccessibilityId(serviceName).click();
-
-        return new RegularSelectedServiceBundleScreen();
     }
 
     public boolean isNotesIconPresentForSelectedService(String serviceName) {

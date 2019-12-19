@@ -9,13 +9,11 @@ public class VNextBODevicesAdvancedSearchSteps {
     public static void clickSearchButton() {
 
         Utils.clickElement(new VNextBODevicesAdvancedSearchForm().getSearchButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickCloseButton() {
 
         Utils.clickElement(new VNextBODevicesAdvancedSearchForm().getCloseButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void setNameField(String name) {

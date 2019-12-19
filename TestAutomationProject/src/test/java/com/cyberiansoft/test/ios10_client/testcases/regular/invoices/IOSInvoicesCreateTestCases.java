@@ -40,11 +40,13 @@ import org.testng.annotations.Test;
 public class IOSInvoicesCreateTestCases extends IOSRegularBaseTestCase {
 
     private WholesailCustomer _002_Test_Customer = new WholesailCustomer();
+    private WholesailCustomer ZAZ_Motors = new WholesailCustomer();
 
     @BeforeClass(description = "Invoice Create Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = IOSReconProTestCasesDataPaths.getInstance().getInvoiceCreateTestCasesDataPath();
         _002_Test_Customer.setCompanyName("002 - Test Company");
+        ZAZ_Motors.setCompanyName("Zaz Motors");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -127,7 +129,7 @@ public class IOSInvoicesCreateTestCases extends IOSRegularBaseTestCase {
         customersScreen.clickHomeButton();
 
         RegularHomeScreenSteps.navigateToMyWorkOrdersScreen();
-        RegularMyWorkOrdersSteps.startCreatingWorkOrder(_002_Test_Customer, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
+        RegularMyWorkOrdersSteps.startCreatingWorkOrder(ZAZ_Motors, WorkOrdersTypes.WO_FORR_MONITOR_WOTYPE);
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         String workOrderNumber1 = vehicleScreen.getWorkOrderNumber();

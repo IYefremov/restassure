@@ -61,7 +61,6 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Cancel")).click();
 	}
 
-	
 	public String getServicePriceValue(String servicename) {
 		return appiumdriver.findElement(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + servicename + "']/XCUIElementTypeStaticText[3]")).getAttribute("value").replaceAll("[^a-zA-Z0-9$.%]", "");
 	}
@@ -142,25 +141,18 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 		action.tap(PointOption.point(el.getLocation().getX()+2, el.getLocation().getY()+2)).perform();
 	}
 
-	public RegularPriceMatrixScreen selectServicePriceMatrices(String servicepricematrices) {
-		appiumdriver.findElementByAccessibilityId("PriceMatrixesTable").findElement(MobileBy.AccessibilityId(servicepricematrices)).click();
-		return new RegularPriceMatrixScreen();
-	}
-
-	public RegularPriceMatrixScreen selectPriceMatrices(String pricematrice) {
+	public void selectPriceMatrices(String pricematrice) {
 		appiumdriver.findElementByAccessibilityId(pricematrice).click();
-		return new RegularPriceMatrixScreen();
 	}
 
 	public void clickVehiclePartsButton() {
 		appiumdriver.findElement(MobileBy.name("Vehicle Parts")).click();
 	}
 
-	public RegularServicesScreen clickBackServicesButton() {
+	public void clickBackServicesButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Service Types")));
 		appiumdriver.findElement(MobileBy.name("Service Types")).click();
-		return this;
 	}
 
 	public String getListOfSelectedVehicleParts() {

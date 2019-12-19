@@ -20,7 +20,6 @@ public class VNextBOPendingRegistrationTabSteps extends VNextBODeviceManagementS
         WaitUtilsWebDriver.waitABit(1000);
         Utils.sendKeysWithJS(pendingRegistrationWebPage.phoneNumberFieldByDeviceName(deviceNickName), newPhoneNumber);
         Utils.clickElement(pendingRegistrationWebPage.getPendingRegistrationTab());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickDeleteButtonForDeviceByNickName(String deviceNickName) {
@@ -32,7 +31,6 @@ public class VNextBOPendingRegistrationTabSteps extends VNextBODeviceManagementS
 
         clickDeleteButtonForDeviceByNickName(deviceNickName);
         VNextBOModalDialogSteps.clickYesButton();
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static boolean checkWhetherDevicesNotFoundMessageIsDisplayed() {

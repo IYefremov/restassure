@@ -399,7 +399,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         servicesScreen.selectService(workOrderData.getMatrixServiceData().getMatrixServiceName());
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartName());
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.switchOffOption(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartOption());
         vehiclePartScreen.setPrice(workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartPrice());
         for (ServiceData serviceData : workOrderData.getMatrixServiceData().getVehiclePartData().getVehiclePartAdditionalServices())
@@ -631,7 +632,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateToScreen(ScreenNamesConstants.DEFAULT);
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
         for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
-            RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+            priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+            RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
             vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
             vehiclePartScreen.saveVehiclePart();
         }
@@ -868,7 +870,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
             RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
             RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-            RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(priceMatrixScreenData.getVehiclePartData().getVehiclePartName());
+            priceMatrixScreen.selectPriceMatrix(priceMatrixScreenData.getVehiclePartData().getVehiclePartName());
+            RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
             vehiclePartScreen.setSizeAndSeverity(priceMatrixScreenData.getVehiclePartData().getVehiclePartSize(),
                     priceMatrixScreenData.getVehiclePartData().getVehiclePartSeverity());
             if (priceMatrixScreenData.getVehiclePartData().getVehiclePartAdditionalService() != null)
@@ -1139,7 +1142,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
             RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
             RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
             VehiclePartData vehiclePartData = priceMatrixScreenData.getVehiclePartData();
-            RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+            priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+            RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
             if (vehiclePartData.getVehiclePartSize() != null)
                 vehiclePartScreen.setSizeAndSeverity(vehiclePartData.getVehiclePartSize(), vehiclePartData.getVehiclePartSeverity());
             if (vehiclePartData.getVehiclePartOption() != null)
@@ -1235,7 +1239,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
         final VehiclePartData vehiclePartData = priceMatrixScreenData.getVehiclePartData();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.switchOffOption(vehiclePartData.getVehiclePartOption());
         vehiclePartScreen.setPrice(vehiclePartData.getVehiclePartPrice());
         for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
@@ -1326,7 +1331,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularServicesScreenSteps.selectMatrixService(matrixServiceData);
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
         VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.switchOffOption(vehiclePartData.getVehiclePartOption());
         vehiclePartScreen.setPrice(vehiclePartData.getVehiclePartPrice());
         for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
@@ -1385,7 +1391,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         servicesScreen.selectPriceMatrices(matrixServiceData.getHailMatrixName());
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
         VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.switchOffOption(vehiclePartData.getVehiclePartOption());
         vehiclePartScreen.setPrice(vehiclePartData.getVehiclePartPrice());
         for (ServiceData serviceData : vehiclePartData.getVehiclePartAdditionalServices()) {
@@ -1483,7 +1490,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         servicesScreen.selectService(matrixServiceData.getMatrixServiceName());
         RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen();
         RegularPriceMatrixScreen priceMatrixScreen = priceMatricesScreen.selectPriceMatrice(matrixServiceData.getHailMatrixName());
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(matrixServiceData.getVehiclePartData().getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(matrixServiceData.getVehiclePartData().getVehiclePartName());
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.switchOffOption(matrixServiceData.getVehiclePartData().getVehiclePartOption());
         vehiclePartScreen.setTime(matrixServiceData.getVehiclePartData().getVehiclePartTime());
         for (ServiceData serviceData : matrixServiceData.getVehiclePartData().getVehiclePartAdditionalServices()) {
@@ -1578,7 +1586,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         servicesScreen.selectPriceMatrices(matrixServiceData.getHailMatrixName());
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
         VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
-        RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        priceMatrixScreen.selectPriceMatrix(vehiclePartData.getVehiclePartName());
+        RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
         vehiclePartScreen.switchOffOption(vehiclePartData.getVehiclePartOption());
         vehiclePartScreen.setPrice(vehiclePartData.getVehiclePartPrice());
         vehiclePartScreen.clickDiscaunt(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
@@ -1936,7 +1945,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getTaxServiceData().getTaxServiceName());
         selectedServiceDetailsScreen.setServiceRateFieldValue(workOrderData.getTaxServiceData().getServiceRateData());
         Assert.assertEquals(selectedServiceDetailsScreen.getServiceRateValue(workOrderData.getTaxServiceData().getServiceRateData()), "%" + workOrderData.getTaxServiceData().getServiceRateData().getServiceRateValue());
-        Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsTotalValue(), workOrderData.getTaxServiceData().getTaxServiceTotal());
+        Assert.assertEquals(selectedServiceDetailsScreen.getServiceDetailsPercentageTotalValue(), workOrderData.getTaxServiceData().getTaxServiceTotal());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
         selectedServicesScreen.waitSelectedServicesScreenLoaded();
         RegularWorkOrdersSteps.saveWorkOrder();
@@ -2263,7 +2272,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         for (PriceMatrixScreenData priceMatrixScreenData : inspectionData.getPriceMatrixScreensData()) {
             RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
             RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();
-            RegularVehiclePartScreen vehiclePartScreen = priceMatrixScreen.selectPriceMatrix(priceMatrixScreenData.getVehiclePartData().getVehiclePartName());
+            priceMatrixScreen.selectPriceMatrix(priceMatrixScreenData.getVehiclePartData().getVehiclePartName());
+            RegularVehiclePartScreen vehiclePartScreen = new RegularVehiclePartScreen();
             if (priceMatrixScreenData.getVehiclePartData().getVehiclePartSize() != null)
                 vehiclePartScreen.setSizeAndSeverity(priceMatrixScreenData.getVehiclePartData().getVehiclePartSize(), priceMatrixScreenData.getVehiclePartData().getVehiclePartSeverity());
             if (priceMatrixScreenData.getVehiclePartData().getVehiclePartOption() != null) {

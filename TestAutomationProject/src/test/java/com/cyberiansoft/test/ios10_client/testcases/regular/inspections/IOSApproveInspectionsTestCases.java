@@ -75,8 +75,8 @@ public class IOSApproveInspectionsTestCases extends IOSRegularBaseTestCase {
         RegularInspectionsSteps.saveInspection();
         RegularNavigationSteps.navigateBackScreen();
 
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.updateDatabase();
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateMainDataBase();
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -93,8 +93,8 @@ public class IOSApproveInspectionsTestCases extends IOSRegularBaseTestCase {
 
         DriverBuilder.getInstance().getDriver().quit();
 
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         Assert.assertTrue(myInspectionsScreen.isInspectionIsApproved(inpectionnumber));
@@ -124,8 +124,8 @@ public class IOSApproveInspectionsTestCases extends IOSRegularBaseTestCase {
 
         RegularInspectionsSteps.saveInspection();
         RegularNavigationSteps.navigateBackScreen();
-        RegularMainScreen mainScreen = homeScreen.clickLogoutButton();
-        mainScreen.updateDatabase();
+        RegularHomeScreenSteps.logoutUser();
+        RegularMainScreenSteps.updateMainDataBase();
         Helpers.waitABit(10000);
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -146,8 +146,8 @@ public class IOSApproveInspectionsTestCases extends IOSRegularBaseTestCase {
 
         DriverBuilder.getInstance().getDriver().quit();
 
-        mainScreen.updateDatabase();
-        mainScreen.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
+        RegularMainScreenSteps.updateMainDataBase();
+        RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         Assert.assertTrue(myInspectionsScreen.isInspectionIsApproved(inspectionNumber));
@@ -440,6 +440,12 @@ public class IOSApproveInspectionsTestCases extends IOSRegularBaseTestCase {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
         final String declineReason = "Decline 2";
+
+        RegularHomeScreen homeScreen = new RegularHomeScreen();
+        RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
+        customersScreen.swtchToWholesaleMode();
+        RegularNavigationSteps.navigateToServicesScreen();
+
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(_002_Test_Customer, InspectionsTypes.INSPECTION_ALL_SERVICES);
         RegularVehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());

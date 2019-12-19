@@ -6,7 +6,6 @@ import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSt
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import com.google.inject.internal.cglib.core.$MethodWrapper;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -53,10 +52,9 @@ public class RegularMainScreen extends iOSBaseScreen {
 		Helpers.acceptAlert();
 	}
 
-	public void updateVIN() {
+	public void clickUpdateVINDatabase() {
 		Helpers.waitUntilCheckLicenseDialogDisappears();
 		updatevin.click();
-		Helpers.acceptAlert();
 	}
 
 	public void userLogin(String employeeName, String password)  {

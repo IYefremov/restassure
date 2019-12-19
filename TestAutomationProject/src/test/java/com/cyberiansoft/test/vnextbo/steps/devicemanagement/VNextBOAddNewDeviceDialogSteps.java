@@ -82,12 +82,10 @@ public class VNextBOAddNewDeviceDialogSteps {
     public static void cancelAddingNewDeviceCancelButton() {
 
         Utils.clickElement(new VNextBOAddNewDeviceDialog().getCancelButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void cancelAddingNewDeviceXIcon() {
 
         Utils.clickElement(new VNextBOAddNewDeviceDialog().getXIconButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 }
