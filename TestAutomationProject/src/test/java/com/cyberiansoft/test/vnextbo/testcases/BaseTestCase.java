@@ -48,7 +48,7 @@ public class BaseTestCase {
         }
     }
 
-	@BeforeClass
+    @BeforeClass
     public void login() {
 
         browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
@@ -61,9 +61,7 @@ public class BaseTestCase {
     }
 
     @AfterClass
-    public void logout() {
-
-        VNextBOHeaderPanelSteps.logout();
+    public void tearDown() {
         if (DriverBuilder.getInstance().getDriver() != null)
             DriverBuilder.getInstance().quitDriver();
     }
