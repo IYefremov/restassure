@@ -224,19 +224,19 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	
 	public void selectBundle(String bundleName) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		WebElement bundleTable = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("BundleItemsView")));
+		WebElement bundleTable = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeTable' and name = 'BundleItemsView'"))));
 		bundleTable.findElement(MobileBy.AccessibilityId(bundleName)).findElement(MobileBy.AccessibilityId("unselected")).click();
 	}
 	
 	public void changeBundleQuantity(String bundleName, String _quantity) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
-		WebElement bundleTable = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElementByAccessibilityId("BundleItemsView")));
+		WebElement bundleTable = wait.until(ExpectedConditions.visibilityOf(appiumdriver.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeTable' and name = 'BundleItemsView'"))));
 		bundleTable.findElement(MobileBy.AccessibilityId(bundleName)).findElement(MobileBy.AccessibilityId("custom detail button")).click();
 		setServiceQuantityValue(_quantity);
 	}
 	
 	public RegularPriceMatrixScreen selectMatrics(String matrics) {
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + matrics + "']")).click();;
+		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + matrics + "']")).click();
 		return new RegularPriceMatrixScreen();
 	}
 
@@ -328,6 +328,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void selecTechnician(String technician) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.
+				iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Technicians'")));
 		appiumdriver.findElementByClassName("XCUIElementTypeTable")
 				.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name CONTAINS '" + technician + "'"))
 				.findElement(MobileBy.AccessibilityId("unselected")).click();
@@ -346,6 +349,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public void unselecTechnician(String technician) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.
+				iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Technicians'")));
 		appiumdriver.findElementByClassName("XCUIElementTypeTable")
 				.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name CONTAINS '" + technician + "'"))
 				.findElement(MobileBy.AccessibilityId("selected")).click();
@@ -389,6 +395,9 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public boolean isTechnicianSelected(String technician) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.
+				iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Technicians'")));
 		return appiumdriver.findElementByClassName("XCUIElementTypeTable")
 				.findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeCell' and name CONTAINS '" + technician + "'"))
 				.findElements(MobileBy.AccessibilityId("selected")).size() > 0;
