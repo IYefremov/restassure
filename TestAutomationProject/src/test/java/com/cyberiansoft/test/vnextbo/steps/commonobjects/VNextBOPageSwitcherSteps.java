@@ -50,6 +50,7 @@ public class VNextBOPageSwitcherSteps extends VNextBOBaseWebPageSteps {
     public static void openPageByNumber(int pageNumber) {
 
         Utils.clickElement(new VNextBOPageSwitcherElements().specificPageButton(pageNumber));
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static String getActivePageNumberFromHeaderPager() {

@@ -29,7 +29,7 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//body[@class='body-mobile--scroll-hidden']")
     private WebElement closedMenu;
 
-    @FindBy(xpath = "//div[@id='page-wrapper']/parent::body")
+    @FindBy(xpath = "//nav[@class='left-menu__nav']")
     private WebElement body;
 
     @FindBy(xpath = "//*[@data-automation-id='inspections']")
@@ -74,6 +74,14 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     public VNexBOLeftMenuPanel() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+    }
+
+    public WebElement mainMenuItemByName(String menuItemName) {
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@data-parent='#mainMenu' and contains(text(),'" + menuItemName + "')]"));
+    }
+
+    public WebElement subMenuItemByName(String subMenuItemName) {
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//ul[@data-template='submenu-item-template']//span[text()='" + subMenuItemName + "']/parent::a"));
     }
 
     public VNextBOInspectionsWebPage selectInspectionsMenu() {
