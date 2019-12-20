@@ -61,6 +61,8 @@ public class VNextBOInspectionAdvancedSearchForm extends VNextBOBaseWebPage {
 	public VNextBOInspectionAdvancedSearchForm() {
 		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+		WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+		WaitUtilsWebDriver.waitForPendingRequestsToComplete();
 		WaitUtilsWebDriver.waitForVisibility(advancedSearchFormContent);
 	}
 }

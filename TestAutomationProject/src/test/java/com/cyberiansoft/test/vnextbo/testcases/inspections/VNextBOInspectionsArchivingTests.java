@@ -29,7 +29,7 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
     public void verifyUserCanCancelArchivingWithNoButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageValidations.verifyArchiveIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickArchiveIcon();
         VNextBOInspectionsPageSteps.selectArchiveReason("Reason: Test");

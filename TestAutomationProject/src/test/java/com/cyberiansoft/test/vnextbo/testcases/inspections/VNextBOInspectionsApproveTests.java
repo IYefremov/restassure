@@ -26,7 +26,7 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
     public void verifyUserCanCancelApprovingWithNoButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageSteps.clickInspectionApproveButton();
         VNextBOModalDialog confirmationDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyYesButtonIsDisplayed();

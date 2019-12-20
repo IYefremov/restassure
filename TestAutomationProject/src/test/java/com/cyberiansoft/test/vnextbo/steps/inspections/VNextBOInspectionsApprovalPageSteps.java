@@ -14,7 +14,7 @@ public class VNextBOInspectionsApprovalPageSteps {
 
     public static boolean isApprovePrintPageButtonDisplayed() {
 
-        return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getApproveServiceButton(), 5);
+        return Utils.isElementDisplayed(new VNextBOInspectionsApprovalWebPage().getApproveServiceButton());
     }
 
     public static void clickInspectionApprovePrintPageButton() {
@@ -26,7 +26,7 @@ public class VNextBOInspectionsApprovalPageSteps {
             WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton());
         } else {
             Utils.clickElement(inspectionsApprovalWebPage.getApproveAndCompleteServiceButton());
-            WaitUtilsWebDriver.waitForLoading();
+            //WaitUtilsWebDriver.waitForLoading();
         }
     }
 
@@ -41,7 +41,7 @@ public class VNextBOInspectionsApprovalPageSteps {
                 new VNextBOInspectionsApprovalWebPage();
         if (Utils.isElementDisplayed(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton())) {
             Utils.clickElement(inspectionsApprovalWebPage.getGeneralApproveWithNoteButton());
-            WaitUtilsWebDriver.waitForLoading();
+            //WaitUtilsWebDriver.waitForLoading();
         }
         WaitUtilsWebDriver.waitForVisibility(inspectionsApprovalWebPage.getInspectionStatus());
     }
