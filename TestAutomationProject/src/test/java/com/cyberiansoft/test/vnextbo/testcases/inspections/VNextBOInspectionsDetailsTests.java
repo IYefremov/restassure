@@ -30,7 +30,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeeInspectionImage(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageValidations.verifyInspectionImageZoomIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickInspectionImageZoomIcon();
         VNextBOInspectionMaximizedImageDialog vNextBOInspectionMaximizedImageDialog =
@@ -44,7 +44,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeeInspectionNotes(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageValidations.verifyInspectionNotesIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickInspectionNotesIcon();
         VNextBOInspectionNoteDialog vNextBOInspectionNoteDialog = new  VNextBOInspectionNoteDialog();
@@ -57,7 +57,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeePrintSupplementDetails(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageValidations.verifyPrintSupplementButtonIsDisplayed();
         VNextBOInspectionsPageSteps.clickPrintSupplementButton();
         VNextBOInspectionsPageValidations.verifyPrintWindowIsOpened();
@@ -67,7 +67,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
     public void verifyUserCanSeePrintInspectionDetails(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
+        VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageValidations.verifyPrintInspectionButtonIsDisplayed();
         VNextBOInspectionsPageSteps.clickPrintInspectionButton();
         VNextBOInspectionsPageValidations.verifyPrintWindowIsOpened();

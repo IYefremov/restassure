@@ -1210,7 +1210,6 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
         vehicleScreen.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
 
         for (ServiceData serviceData : inspectionData.getServicesList()) {
             RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);

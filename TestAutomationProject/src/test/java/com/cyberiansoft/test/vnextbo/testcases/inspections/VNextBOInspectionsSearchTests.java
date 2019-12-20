@@ -60,6 +60,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsSearchTD();
         VNextBOLeftMenuInteractions.selectInspectionsMenu();
+        VNextBOInspectionsPageSteps.waitUntilInspectionsPageIsOpened();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
@@ -140,7 +141,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(valuesForSearch);
         VNextBOInspectionsAdvancedSearchSteps.clickSaveButton();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOInspectionsPageValidations.verifyEditAdvancedSearchIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         Assert.assertTrue(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists("AutomationSearchTest"),
@@ -157,6 +157,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyUserCanEditSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
 
+        WaitUtilsWebDriver.waitABit(5000);
         VNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(editedValuesForSearch);
         VNextBOInspectionsAdvancedSearchValidations.verifyAllAdvancedSearchFormFields(editedValuesForSearch);
     }
@@ -167,11 +168,9 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickSaveButton();
         VNextBOInspectionsPageValidations.verifyEditAdvancedSearchIconIsDisplayed();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOInspectionAdvancedSearchForm);
         VNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsDisplayed();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOInspectionsAdvancedSearchValidations.verifyAllAdvancedSearchFormFields(editedValuesForSearch);
     }
 
@@ -193,7 +192,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsAdvancedSearchSteps.clickCloseButton();
         VNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsDisplayed();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOInspectionsAdvancedSearchValidations.verifyAllAdvancedSearchFormFields(editedValuesForSearch);
     }
 
@@ -207,7 +205,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOModalDialogValidations.verifyYesButtonIsDisplayed();
         VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
         VNextBOModalDialogSteps.clickNoButton();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOInspectionAdvancedSearchForm);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         Assert.assertTrue(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists("AutomationSearchTest2"),
@@ -221,7 +218,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickDeleteButton();
         VNextBOModalDialogSteps.clickYesButton();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOInspectionAdvancedSearchForm);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         Assert.assertFalse(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists("AutomationSearchTest2"),
@@ -233,7 +229,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByCustomer("Best Customer");
-        WaitUtilsWebDriver.waitForLoading();
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Customer: Best Customer"),
                 "Search option under Search field hasn't been correct");
         if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
@@ -251,7 +246,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByPONumber("123");
-        WaitUtilsWebDriver.waitForLoading();
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("PO#: 123"),
                 "Search option under Search field hasn't been correct");
         if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
@@ -271,7 +265,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByRONumber("123");
-        WaitUtilsWebDriver.waitForLoading();
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("RO#: 123"),
                 "Search option under Search field hasn't been correct");
         if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
@@ -290,7 +283,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByStockNumber("123");
-        WaitUtilsWebDriver.waitForLoading();
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Stock#: 123"),
                 "Search option under Search field hasn't been correct");
         if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
@@ -309,7 +301,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByVIN("123");
-        WaitUtilsWebDriver.waitForLoading();
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("VIN: 123"),
                 "Search option under Search field hasn't been correct");
         if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
@@ -328,7 +319,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByInspectionNumber("222");
-        WaitUtilsWebDriver.waitForLoading();
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Inspection#: 222"),
                 "Search option under Search field hasn't been correct");
         if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
@@ -353,7 +343,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionSearchData.class);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByStatus(data.getValueForSearch());
-        WaitUtilsWebDriver.waitForLoading();
         if (!data.getValueForSearch().equals("All Active"))
         {
             Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Status: " + data.getValueForSearch()),
@@ -387,8 +376,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionSearchData.class);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        VNextBOInspectionsPageSteps.findInspectionByCustomTimeFrame(data.getValueForSearch());
-        WaitUtilsWebDriver.waitForLoading();
+        VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrame(data.getValueForSearch());
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Timeframe: " + data.getValueForSearch()),
                 "Search option under Search field hasn't been correct");
         if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())

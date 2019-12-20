@@ -165,6 +165,7 @@ public class ServiceRequestsListInteractions {
     }
 
     public void clickCustomerEditButton() {
+		WaitUtilsWebDriver.elementShouldBeVisible(getCustomerEditButton(), true);
         Utils.clickElement(getCustomerEditButton());
     }
 

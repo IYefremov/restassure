@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ public class VNextBOInspectionsAdvancedSearchSteps {
     public static void clickSearchButton() {
 
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().searchButton);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickCloseButton() {
@@ -25,6 +28,8 @@ public class VNextBOInspectionsAdvancedSearchSteps {
     public static void clickSaveButton() {
 
         Utils.clickElement(new VNextBOInspectionAdvancedSearchForm().saveButton);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickClearButton() {
@@ -118,7 +123,8 @@ public class VNextBOInspectionsAdvancedSearchSteps {
                 new VNextBOInspectionAdvancedSearchForm();
         WebElement fieldWithAutocomplete = advancedSearchForm.autoPopulatedFieldByName(fieldLabel);
         Utils.clearAndType(fieldWithAutocomplete, value);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         Utils.clickWithJS(advancedSearchForm.dropDownFieldOption(value));
     }
 
