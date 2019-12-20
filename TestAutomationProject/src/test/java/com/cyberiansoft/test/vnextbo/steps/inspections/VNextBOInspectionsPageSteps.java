@@ -1,9 +1,13 @@
 package com.cyberiansoft.test.vnextbo.steps.inspections;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +27,8 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
     public static void clickEditAdvancedSearchIcon() {
 
         Utils.clickElement(new VNextBOInspectionsWebPage().editAdvancedSearchIcon);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickExpandAdvancedSearchPanel() {
@@ -197,14 +203,14 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void findInspectionByCustomTimeFrame(String timeFrame) {
+    public static void searchInspectionByCustomTimeFrame(String timeFrame) {
 
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchDropDownField("Timeframe", timeFrame);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
     }
 
-    public static void findInspectionByCustomTimeFrameAndNumber(String inspectionId, String fromDate, String toDate) {
+    public static void searchInspectionByCustomTimeFrameAndNumber(String inspectionId, String fromDate, String toDate) {
 
         openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionId);
@@ -233,5 +239,11 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
     public static String getSelectedInspectionParameterValueByName(String parameterName) {
 
         return Utils.getText(new VNextBOInspectionsWebPage().selectedInspectionFieldValueByName(parameterName));
+    }
+
+    public static void waitUntilInspectionsPageIsOpened() {
+        VNextBOInspectionsWebPage inspectionsWebPage = new VNextBOInspectionsWebPage();
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(inspectionsWebPage.getInspectionsList()));
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(inspectionsWebPage.getInspectionDetailsPanel()));
     }
 }
