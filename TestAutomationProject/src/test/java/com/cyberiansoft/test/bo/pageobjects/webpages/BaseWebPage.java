@@ -107,7 +107,7 @@ public abstract class BaseWebPage {
 	        waitABit(5000);
         }
 		waitABit(5000);
-		wait.until((ExpectedCondition<Boolean>) d -> (d.getWindowHandles().size() > 1));
+		wait.until((ExpectedCondition<Boolean>) d -> d.getWindowHandles().size() > 1);
 	}
 
     // Bot actions

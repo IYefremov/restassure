@@ -83,15 +83,15 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public void clickCompanyLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(companytab)).click();
+	    Utils.clickElement(companytab);
 	}
 
 	public void clickMonitorLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(monitortab)).click();
+		Utils.clickElement(monitortab);
 	}
 
 	public void clickSuperUserLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(superusertab)).click();
+		Utils.clickElement(superusertab);
 	}
 
 	public void clickMiscellaneousLink() {
@@ -99,7 +99,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public void clickReportsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(reportstab)).click();
+        Utils.clickElement(reportstab);
 	}
 
 	public void refresh() {
@@ -108,7 +108,7 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
 	public void clickTimesheetsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(timesheetstab)).click();
+        Utils.clickElement(timesheetstab);
 	}
 
 }

@@ -138,13 +138,13 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),
                 "The previous page button is not disabled");
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
         Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),
                 "The previous page button is not enabled");
         VNextBOPageSwitcherSteps.clickHeaderPreviousPageButton();
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),
                 "The previous page button is not disabled");
 	}
 

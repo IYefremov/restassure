@@ -26,7 +26,6 @@ public class ClientContactsWebPage extends BaseWebPage {
 	public ClientContactsWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		wait.until(ExpectedConditions.visibilityOf(adduserbtn));
 	}
 
 
