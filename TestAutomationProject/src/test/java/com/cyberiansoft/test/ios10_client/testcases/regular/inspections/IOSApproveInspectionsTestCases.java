@@ -444,7 +444,7 @@ public class IOSApproveInspectionsTestCases extends IOSRegularBaseTestCase {
         RegularHomeScreen homeScreen = new RegularHomeScreen();
         RegularCustomersScreen customersScreen = homeScreen.clickCustomersButton();
         customersScreen.swtchToWholesaleMode();
-        RegularNavigationSteps.navigateToServicesScreen();
+        RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(_002_Test_Customer, InspectionsTypes.INSPECTION_ALL_SERVICES);
