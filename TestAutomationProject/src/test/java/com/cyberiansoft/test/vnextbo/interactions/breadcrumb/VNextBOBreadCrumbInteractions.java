@@ -32,7 +32,6 @@ public class VNextBOBreadCrumbInteractions {
 
     public static void setLocation(String location, boolean isSetWithEnter) {
         if (isSetWithEnter) {
-            System.out.println("isSetWithEnter");
             VNextBOBreadCrumbValidations.isLocationSearched(location);
             Utils.getActions().sendKeys(Keys.ENTER);
             setLocation(location);
@@ -42,8 +41,9 @@ public class VNextBOBreadCrumbInteractions {
     }
 
     private static void selectLocation(String location) {
-        Utils.selectOptionInDropDown(new VNextBOBreadCrumbPanel().getLocationsDropDown(),
-                new VNextBOBreadCrumbPanel().getLocationsList(), location, true);
+        final VNextBOBreadCrumbPanel breadCrumbPanel = new VNextBOBreadCrumbPanel();
+        Utils.selectOptionInDropDown(breadCrumbPanel.getLocationsDropDown(),
+                breadCrumbPanel.getLocationsList(), location, true);
         Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSelected(location), "The location hasn't been selected");
     }
 

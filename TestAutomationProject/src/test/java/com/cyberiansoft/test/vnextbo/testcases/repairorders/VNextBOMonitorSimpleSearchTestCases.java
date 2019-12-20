@@ -30,12 +30,12 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getVinNum());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getVinNum()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getVinNum(), true),
                 "The work order is not displayed after search by VIN after clicking the 'Search' icon");
         VNextBOROPageInteractions.clickCancelSearchIcon();
         VNextBOROSimpleSearchSteps.searchWithEnter(data.getVinNum());
 
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getVinNum()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByVin(data.getVinNum(), true),
                 "The work order is not displayed after search by VIN after clicking the 'Enter' key");
     }
 
@@ -45,12 +45,12 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber(), true),
                 "The work order is not displayed after search by order number after clicking the 'Search' icon");
         VNextBOROPageInteractions.clickCancelSearchIcon();
         VNextBOROSimpleSearchSteps.searchWithEnter(data.getOrderNumber());
 
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByOrderNumber(data.getOrderNumber(), true),
                 "The work order is not displayed after search by order number after clicking the 'Enter' key");
     }
 
@@ -60,12 +60,12 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getRoNumber());
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByRoNumber(data.getRoNumber()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByRoNumber(data.getRoNumber(), true),
                 "The work order is not displayed after search by RO number after clicking the 'Search' icon");
         VNextBOROPageInteractions.clickCancelSearchIcon();
         VNextBOROSimpleSearchSteps.searchWithEnter(data.getRoNumber());
 
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByRoNumber(data.getRoNumber()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByRoNumber(data.getRoNumber(), true),
                 "The work order is not displayed after search by RO number after clicking the 'Enter' key");
     }
 
@@ -75,13 +75,10 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getFirstName());
-
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByFirstName(data.getFirstName()),
-                "The work order is not displayed after search by first name after clicking the 'Search' icon");
         VNextBOROPageInteractions.clickCancelSearchIcon();
         VNextBOROSimpleSearchSteps.searchWithEnter(data.getFirstName());
 
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByFirstName(data.getFirstName()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByFirstName(data.getFirstName(), true),
                 "The work order is not displayed after search by first name after clicking the 'Enter' key");
     }
 
@@ -91,13 +88,10 @@ public class VNextBOMonitorSimpleSearchTestCases extends BaseTestCase {
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getLastName());
-
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByLastName(data.getLastName()),
-                "The work order is not displayed after search by last name after clicking the 'Search' icon");
         VNextBOROPageInteractions.clickCancelSearchIcon();
         VNextBOROSimpleSearchSteps.searchWithEnter(data.getLastName());
 
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByLastName(data.getLastName()),
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByLastName(data.getLastName(), true),
                 "The work order is not displayed after search by last name after clicking the 'Enter' key");
     }
 

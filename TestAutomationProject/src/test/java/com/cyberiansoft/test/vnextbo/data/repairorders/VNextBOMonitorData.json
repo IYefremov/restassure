@@ -139,7 +139,8 @@
       "phases": [
         "All",
         "Started",
-        "Completed"
+        "Completed",
+        "QC"
       ]
     }
   ],

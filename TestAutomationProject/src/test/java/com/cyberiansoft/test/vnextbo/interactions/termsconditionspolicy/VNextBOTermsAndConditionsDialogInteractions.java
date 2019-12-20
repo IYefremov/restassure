@@ -21,10 +21,7 @@ public class VNextBOTermsAndConditionsDialogInteractions {
 
     private static void clickTermsAndConditionsButton(WebElement element) {
         Utils.clickElement(element);
-        try {
-            WaitUtilsWebDriver.waitForInvisibility(new VNextBOTermsAndConditionsDialog().getTermsAndConditionsDialog());
-        } catch (Exception e) {
-            Utils.clickElement(element);
-        }
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(
+                new VNextBOTermsAndConditionsDialog().getTermsAndConditionsDialog());
     }
 }
