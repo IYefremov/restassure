@@ -246,7 +246,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		Assert.assertEquals(data.getFirstName() + " " + data.getLastName(), serviceadvisorspage.getTableServiceAdvisorFullName(data.getFirstName(), data.getLastName()));
 		Assert.assertEquals(data.getEmail(), serviceadvisorspage.getTableServiceAdvisorEmail(data.getFirstName(), data.getLastName()));
-		Assert.assertEquals("..., CA", serviceadvisorspage.getTableServiceAdvisorAddress(data.getFirstName(), data.getLastName()).trim());
+		Assert.assertEquals("..., AZ", serviceadvisorspage.getTableServiceAdvisorAddress(data.getFirstName(), data.getLastName()).trim());
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorPhone(data.getFirstName(), data.getLastName()).trim());
 		Assert.assertEquals(data.getRole(), serviceadvisorspage.getTableServiceAdvisorRoles(data.getFirstName(), data.getLastName()));
 		Assert.assertEquals("", serviceadvisorspage.getTableServiceAdvisorAccountingID(data.getFirstName(), data.getLastName()).trim());
@@ -352,7 +352,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		pricematricespage.selectPriceMatrixService(data.getPriceMatrixService());
 		pricematricespage.selectPriceMarixType(data.getPriceMatrixType());
 		pricematricespage.clickCancelNewPriceMatrix();
-		Assert.assertEquals("_testStas1", pricematricespage.getTablePriceMatrixService(data.getPriceMatrixName()));
+		Assert.assertEquals("_testStas13234", pricematricespage.getTablePriceMatrixService(data.getPriceMatrixName()));
 		Assert.assertEquals("Money", pricematricespage.getTablePriceMatrixType(data.getPriceMatrixName()));
 
 		pricematricespage.clickEditPriceMatrix(data.getPriceMatrixName());

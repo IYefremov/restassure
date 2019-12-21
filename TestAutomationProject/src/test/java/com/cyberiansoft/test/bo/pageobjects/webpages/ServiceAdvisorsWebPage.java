@@ -180,18 +180,12 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 		return serviceadvisorstable.getTableRows();
 	}
 	
-	public WebElement getTableRowWithServiceAdvisor(String firstname, String lastname) {
+	private WebElement getTableRowWithServiceAdvisor(String firstName, String lastName) {
 		List<WebElement> rows = getServiceAdvisorsTableRows();
 		return rows.stream().filter(row -> {
 		    WaitUtilsWebDriver.waitABit(500);
-		    return row.getText().contains(firstname + " " + lastname);
+		    return WaitUtilsWebDriver.waitForElementNotToBeStale(row).getText().contains(firstName + " " + lastName);
         }).findFirst().orElse(null);
-//		for (WebElement row : rows) {
-//			if (row.findElement(By.xpath(".//td[4]")).getText().contains(firstname + " " + lastname)) {
-//				return row;
-//			}
-//		}
-//		return null;
 	}
 	
 	public void setUserSearchCriteria(String _user) {

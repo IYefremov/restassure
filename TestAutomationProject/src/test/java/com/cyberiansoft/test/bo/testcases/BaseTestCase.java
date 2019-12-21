@@ -13,7 +13,6 @@ import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.service.local.AppiumDriverLocalService;
-import org.monte.screenrecorder.ScreenRecorder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
@@ -29,7 +28,6 @@ import java.io.File;
 
 public class BaseTestCase {
 
-	private ScreenRecorder screenRecorder;
 	protected AppiumDriver<MobileElement> appiumdriver;
 	protected WebDriver webdriver;
 	protected DesiredCapabilities appiumcap;
@@ -37,7 +35,6 @@ public class BaseTestCase {
 	protected static BrowserType browserType;
 	protected static MobilePlatform mobilePlatform = MobilePlatform.IOS_REGULAR;
 	protected File app;
-	String bundleid = "";
 	protected static AppiumDriverLocalService service;
     protected ServiceRequestsListVerifications serviceRequestsListVerifications;
 

@@ -15,7 +15,6 @@ import org.testng.annotations.Test;
 
 import java.util.Random;
 
-//@Listeners(VideoListener.class)
 public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOoperationsSRdata.json";

@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -101,11 +103,12 @@ public class CompanyWebPage extends BaseWebPage {
 	}
 
 	public void clickClientsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(clientslink)).click();
+        WaitUtilsWebDriver.elementShouldBeVisible(clientslink, true);
+        Utils.clickElement(clientslink);
 	}
 
 	public void clickClientUsersLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(clientUsersLink)).click();
+        Utils.clickElement(clientUsersLink);
 	}
 
 	public void clickServicePackagesLink() {
@@ -138,7 +141,7 @@ public class CompanyWebPage extends BaseWebPage {
 	}
 
 	public void clickEmailTemplatesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(emailtemplateslink)));
+	    Utils.clickElement(emailtemplateslink);
 	}
 
 	public void clickPrintServersLink() {

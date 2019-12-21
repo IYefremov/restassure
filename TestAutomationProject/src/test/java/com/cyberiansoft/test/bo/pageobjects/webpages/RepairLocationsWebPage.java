@@ -1,12 +1,14 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
 import java.util.List;
@@ -70,7 +72,8 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 	}
 
 	public void clickAddRepairLocationButton() {
-		clickAndWait(addrepairlocationbtn);
+        Utils.clickElement(addrepairlocationbtn);
+        WaitUtilsWebDriver.waitABit(2000);
 	}
 
 	public void addNewRepairLocation(String repairlocationname, String approxrepairtime, String workingday, String starttime, String finishtime, boolean phaseenforcement) {
@@ -217,7 +220,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 
 	public void deleteRepairLocationIfExists(String repairlocation) {
 		if (repairLocationExists(repairlocation)) {
-			deleteRepairLocation(repairlocation);
+            deleteRepairLocation(repairlocation);
 		}
 	}
 
@@ -235,13 +238,15 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 	}
 
 	public List<WebElement> getRepairLocationsTableRows() {
-		return repairlocationstable.getTableRows();
+		return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(repairlocationstable.getTableRows());
 	}
 
-	public WebElement getTableRowWithRepairLocation(String repairlocation) {
+	public WebElement getTableRowWithRepairLocation(String repairLocation) {
 		List<WebElement> rows = getRepairLocationsTableRows();
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[9]")).getText().equals(repairlocation)) {
+            final WebElement element = row.findElement(By.xpath(".//td[10]"));
+            WaitUtilsWebDriver.elementShouldBeVisible(element, true);
+			if (element.getText().equals(repairLocation)) {
 				return row;
 			}
 		}
@@ -257,10 +262,14 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 		Assert.assertTrue(repairlocationstable.tableColumnExists("Status"));
 	}
 
-	public boolean repairLocationExists(String repairlocation) {
+	public boolean repairLocationExists(String repairLocation) {
 		try {
-			return repairlocationstable.getWrappedElement()
-					.findElements(By.xpath(".//tr/td[text()='" + repairlocation + "']")).size() > 0;
+			return wait.until((ExpectedCondition<Boolean>) driver -> {
+                final List<WebElement> elements = repairlocationstable.getWrappedElement()
+                        .findElements(By.xpath(".//tr/td[text()='" + repairLocation + "']"));
+                WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(elements);
+                return elements.size() > 0;
+            });
 		} catch (Exception ignored) {
 			return false;
 		}
