@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.utils;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.TextField;
@@ -84,23 +86,12 @@ public class WebElementsBot {
 	}
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String value) {
-        WebDriver driver = DriverBuilder.getInstance().getDriver();
-        try {
-            new WebDriverWait(driver, 50)
-                    .until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement())).click();
-        } catch (Exception e) {
-            Assert.fail("The combobox is not clickable.", e);
-        }
-		try {
-            new WebDriverWait(driver, 50)
-                    .until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
-        } catch (TimeoutException ignored) {}
+        Utils.clickElement(combobox.getWrappedElement());
+        WaitUtilsWebDriver.elementShouldBeVisible(droplist.getWrappedElement(), true);
         combobox.clearAndType(value);
         waitABit(1000);
         combobox.sendKeys(Keys.ENTER);
-        try {
-            waitUntilDropListDisappears(droplist, new WebDriverWait(driver, 50));
-        } catch (Exception ignored) {}
+        WaitUtilsWebDriver.elementShouldBeVisible(droplist.getWrappedElement(), false);
     }
 	
 	public static void selectComboboxValueWithTyping(TextField combobox, DropDown droplist, String typevalue, String selectvalue) {

@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.enums.DateUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -55,7 +55,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	
 	public void verifyTableDateRangeForCurrentTablePage(LocalDate startrange, LocalDate endrange, List<WebElement> datecells) {
 		DateTimeFormatter dateFormat =
-                DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+                DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
 		for (WebElement datecell : datecells) {
 			LocalDate datevalue = LocalDate.parse(datecell.getText(), dateFormat);
 			Assert.assertTrue((datevalue.isAfter(startrange) & datevalue.isBefore(endrange)), "Date " + datecell.getText() + " is not after " + startrange + " or not before " + endrange);

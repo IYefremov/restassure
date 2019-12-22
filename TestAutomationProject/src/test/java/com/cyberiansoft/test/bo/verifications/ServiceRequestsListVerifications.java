@@ -4,9 +4,12 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.pageobjects.webpages.ServiceRequestsListWebPage;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.enums.DateUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.text.ParseException;
@@ -21,51 +24,50 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static com.cyberiansoft.test.baseutils.WaitUtilsWebDriver.getWait;
 import static com.cyberiansoft.test.baseutils.WaitUtilsWebDriver.waitForLoading;
 
 public class ServiceRequestsListVerifications {
 
-    private ServiceRequestsListWebPage srListPage;
-
-    public ServiceRequestsListVerifications() {
-        srListPage = new ServiceRequestsListWebPage();
+    public static boolean isSearchPanelExpanded() {
+        return Utils.isElementDisplayed(new ServiceRequestsListWebPage().getSearchTabExpanded(), 7);
     }
 
-    public boolean isSearchPanelExpanded() {
-        return Utils.isElementDisplayed(srListPage.getSearchTabExpanded(), 7);
+    public static void verifySearchFieldsAreVisible() {
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
+        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getStatuscmb().getWrappedElement(), true));
+        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getTeamcmb().getWrappedElement(), true));
+        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getTechniciancmb().getWrappedElement(), true));
+        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getTagsfld().getWrappedElement(), true));
+        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getFreetextfld(), true));
+        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getFindbtn(), true));
     }
 
-    public void verifySearchFieldsAreVisible() {
-        Assert.assertTrue(srListPage.getStatuscmb().isDisplayed());
-        Assert.assertTrue(srListPage.getTeamcmb().isDisplayed());
-        Assert.assertTrue(srListPage.getTechniciancmb().isDisplayed());
-        Assert.assertTrue(srListPage.getTagsfld().isDisplayed());
-        Assert.assertTrue(srListPage.getFreetextfld().isDisplayed());
-        Assert.assertTrue(srListPage.getFindbtn().isDisplayed());
+    public static boolean isAcceptIconNotDisplayedForFirstServiceRequestFromList() {
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
+        Utils.clickWithActions(srListPage.getServiceRequestsPopoverList().get(0));
+        return WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getServiceRequestsAcceptButton(), false);
     }
 
-    public boolean isAcceptIconPresentForFirstServiceRequestFromList() {
-        Utils.getActions().moveToElement(srListPage.getFirstSRFromList(), 10, 10).click().perform();
-        return Utils.isElementDisplayed(srListPage.getFirstSRFromList().findElement(By.xpath(".//a[@title='Accept']")));
+    public static boolean isAppointmentPresentForFirstServiceRequestFromList(String appointmentTime) {
+        return Utils.getText(new ServiceRequestsListWebPage().getFirstSRFromList().findElement(By.xpath(".//a/span"))).equals(appointmentTime);
     }
 
-    public boolean appointmentExistsForFirstServiceRequestFromList(String appointmentTime) {
-        return Utils.getText(srListPage.getFirstSRFromList().findElement(By.xpath(".//a/span"))).equals(appointmentTime);
-    }
-
-    public boolean isInsuranceCompanyPresentForFirstServiceRequestFromList(String insuranceCompany) {
+    public static boolean isInsuranceCompanyPresentForFirstServiceRequestFromList(String insuranceCompany) {
         WaitUtilsWebDriver.waitForLoading();
-        return srListPage.getFirstSRFromList().findElements(By.xpath(".//div[@class='" + insuranceCompany + "  ']")).size() > 0;
+        return new ServiceRequestsListWebPage().getFirstSRFromList().findElements(By.xpath(".//div[@class='" + insuranceCompany + "  ']")).size() > 0;
     }
 
-    public boolean verifySearchResultsByServiceName(String servicename) {
+    public static boolean verifySearchResultsByServiceName(String servicename) {
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         WaitUtilsWebDriver.waitForVisibility(srListPage.getServiceRequestsList());
         return srListPage.getFirstSRFromList()
                 .findElements(By.xpath(".//div[@class='name' and contains(text(), '" + servicename + "')]")).size() > 0;
     }
 
-    public boolean verifySearchResultsByModelIN(String _make, String _model, String _year, String vin) {
+    public static boolean verifySearchResultsByModelIN(String _make, String _model, String _year, String vin) {
         boolean result = false;
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         if (!(srListPage.getFirstSRFromList() == null)) {
             result = srListPage.getFirstSRFromList().findElements(By.xpath(
                     ".//div[@class='modelVin' and text()='" + _year + " " + _make + " " + _model + " " + vin + "']"))
@@ -74,33 +76,40 @@ public class ServiceRequestsListVerifications {
         return result;
     }
 
-    public boolean isCheckInButtonVisible() {
-        return isDisplayed(srListPage.getServiceRequestCheckInButton());
+    public static boolean isCheckInButtonVisible() {
+        return isDisplayed(new ServiceRequestsListWebPage().getServiceRequestCheckInButton(), true);
     }
 
-    public boolean isServiceIsPresentForForSelectedServiceRequest(String servicename) {
-        DriverBuilder.getInstance().getDriver().switchTo().frame(srListPage.getEditServiceRequestPanelFrame());
-        return isDisplayed(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[contains(text(), '" + servicename + "')]")));
+    public static boolean isCheckInButtonInvisible() {
+        return isDisplayed(new ServiceRequestsListWebPage().getServiceRequestCheckInButton(), false);
     }
 
-    private boolean isDisplayed(WebElement element) {
+    public static boolean isServiceIsPresentForForSelectedServiceRequest(String servicename) {
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        driver.switchTo().frame(new ServiceRequestsListWebPage().getEditServiceRequestPanelFrame());
+        return isDisplayed(driver.findElement(By.xpath("//span[contains(text(), '" + servicename + "')]")), true);
+    }
+
+    private static boolean isDisplayed(WebElement element, boolean expected) {
         verifyServiceRequestInfoFrameIsOn();
-        boolean visible = Utils.isElementDisplayed(element);
+        boolean visible = WaitUtilsWebDriver.elementShouldBeVisible(element, expected);
         DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
         return visible;
     }
 
-    public void verifyServiceRequestInfoFrameIsOn() {
+    public static void verifyServiceRequestInfoFrameIsOn() {
         DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
         try {
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(srListPage.getEditServiceRequestPanelFrame()));
+            WaitUtilsWebDriver.getWait().until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(
+                    new ServiceRequestsListWebPage().getEditServiceRequestPanelFrame()));
         } catch (TimeoutException | StaleElementReferenceException e) {
             WaitUtilsWebDriver.waitABit(2000);
         }
     }
 
-    public boolean checkTimeOfLastDescription() {
+    public static boolean checkTimeOfLastDescription() {
         verifyServiceRequestInfoFrameIsOn();
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         Utils.clickElement(srListPage.getInfoBlockEditButton());
         WaitUtilsWebDriver.waitForElementToBeClickable(srListPage.getAddSRDescription().getWrappedElement());
         try {
@@ -113,8 +122,9 @@ public class ServiceRequestsListVerifications {
         }
     }
 
-    public boolean verifyTagsAreAdded(String... tags) {
+    public static boolean verifyTagsAreAdded(String... tags) {
         for (String tag : tags) {
+            final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
             if (srListPage.getAllAddedTags().stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
                     .collect(Collectors.toList()).contains(tag)) {
                 srListPage.getTagField().sendKeys(tag);
@@ -128,14 +138,16 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
-    public boolean isFirstTagRemoved() {
+    public static boolean isFirstTagRemoved() {
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         int prevSize = srListPage.getAllAddedTags().size();
         srListPage.getAllAddedTags().get(0).findElement(By.xpath("//a[contains(@title, 'Removing tag')]")).click();
         return prevSize - srListPage.getAllAddedTags().size() == 1;
     }
 
-    public boolean areTagsAdded(String... tags) {
+    public static boolean areTagsAdded(String... tags) {
         verifyServiceRequestInfoFrameIsOn();
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         System.out.println(srListPage.getAllAddedTags().stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
                 .collect(Collectors.toList()));
         List tagsToCheck = new LinkedList(Arrays.asList(tags));
@@ -146,8 +158,9 @@ public class ServiceRequestsListVerifications {
         return result;
     }
 
-    public boolean isNewDescriptionAddedAndCheckedOld(String newDescription, String prevDescription) {
+    public static boolean isNewDescriptionAddedAndCheckedOld(String newDescription, String prevDescription) {
         verifyServiceRequestInfoFrameIsOn();
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         Utils.clickElement(srListPage.getInfoBlockEditButton());
         WaitUtilsWebDriver.waitForElementToBeClickable(srListPage.getAddSRDescription().getWrappedElement());
         Utils.clearAndType(srListPage.getAddSRDescription().getWrappedElement(), newDescription);
@@ -162,24 +175,22 @@ public class ServiceRequestsListVerifications {
                 .getAttribute("style").equals("display: none;");
     }
 
-    public boolean verifyServiceDescriptionIsPresent(String string) {
-        verifyServiceRequestInfoFrameIsOn();
-        WaitUtilsWebDriver.waitABit(3000);
-        Utils.clickElement(srListPage.getInfoBlockEditButton());
-        WaitUtilsWebDriver.waitForElementToBeClickable(srListPage.getAddSRDescription().getWrappedElement());
-        WebElement lastDescription = srListPage.getOldDescriptions().get(0);
-        return lastDescription.findElement(By.tagName("span")).getText().equals(string);
+    public static boolean verifyServiceDescriptionIsPresent(String string) {
+        WaitUtilsWebDriver.waitABit(1000);
+        return WaitUtilsWebDriver.getWait().until((ExpectedCondition<Boolean>) driver -> Utils.getText(
+                new ServiceRequestsListWebPage().getDescriptionTextBlock()).equals(string));
     }
 
-    public boolean verifyDescriptionIconsAreVisible() {
+    public static boolean verifyDescriptionIconsAreVisible() {
         verifyServiceRequestInfoFrameIsOn();
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         boolean documentShown = WaitUtilsWebDriver.waitForAttributeToContain(srListPage.getDescriptionDocuments().findElement(By.tagName("i")), "style", "display : none;");
         boolean answerShown = WaitUtilsWebDriver.waitForAttributeToContain(srListPage.getDescriptionAnswers().findElement(By.tagName("i")), "style", "display : none;");
 
         return documentShown || answerShown;
     }
 
-    public boolean isServiceRequestDocumentIconVisible() {
+    public static boolean isServiceRequestDocumentIconVisible() {
         verifyServiceRequestInfoFrameIsOn();
         return WaitUtilsWebDriver.getWait().until(ExpectedConditions
                 .not(ExpectedConditions
@@ -187,12 +198,13 @@ public class ServiceRequestsListVerifications {
                                 .findElement(By.tagName("i")), "style", "display : none;")));
     }
 
-    public boolean checkElementsInDocument() {
+    public static boolean checkElementsInDocument() {
         try {
-            srListPage.getDocumentContent().findElement(By.xpath("//h2[contains(text(), 'Documents')]"));
-            srListPage.getDocumentContent().findElement(By.xpath("//h3[contains(text(), 'Service Request:')]"));
-            srListPage.getDocumentContent().findElement(By.className("add"));
-            return srListPage.getDocumentContent().findElements(By.className("rgHeader"))
+            final WebElement documentContent = new ServiceRequestsListWebPage().getDocumentContent();
+            documentContent.findElement(By.xpath("//h2[contains(text(), 'Documents')]"));
+            documentContent.findElement(By.xpath("//h3[contains(text(), 'Service Request:')]"));
+            documentContent.findElement(By.className("add"));
+            return documentContent.findElements(By.className("rgHeader"))
                     .stream()
                     .map(WebElement::getText)
                     .collect(Collectors.toList())
@@ -202,15 +214,17 @@ public class ServiceRequestsListVerifications {
         }
     }
 
-    public boolean areImageButtonsDisplayed() {
+    public static boolean areImageButtonsDisplayed() {
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         return Utils.areElementsDisplayed(Arrays.asList(srListPage.getImagesOkButton(), srListPage.getImagesCancelButton(), srListPage.getAddFileButton()));
     }
 
-    public boolean isAddAppointmentFromSRListClosed() {
-        return Utils.isElementNotDisplayed(srListPage.getAddAppointmentButton(), 10);
+    public static boolean isAddAppointmentFromSRListClosed() {
+        return Utils.isElementNotDisplayed(new ServiceRequestsListWebPage().getAddAppointmentButton(), 10);
     }
 
-    public boolean checkDefaultAppointmentValuesAndAddAppointmentFomSREdit() {
+    public static boolean checkDefaultAppointmentValuesAndAddAppointmentFomSREdit() {
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         if (!(srListPage.getAppointmentFromDateSRedit().getText().isEmpty() && srListPage.getAppointmentToDateSRedit().getText().isEmpty()
                 && srListPage.getAppointmentFromTimeSRedit().getText().isEmpty() && srListPage.getAppointmentToTimeSRedit().getText().isEmpty())) {
             return false;
@@ -263,21 +277,21 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
-    public boolean isStatusDisplayed(String status) {
+    public static boolean isStatusDisplayed(String status) {
         DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
         try {
-            final String srStatus = WaitUtilsWebDriver.waitForVisibility(By.className("serviceRequestStatus")).getText();
-            System.out.println(srStatus);
-            return srStatus.equals(status);
+            return getWait().until((ExpectedCondition<Boolean>) driver -> Utils
+                    .getText(By.className("serviceRequestStatus"))
+                    .equals(status));
         } catch (TimeoutException e) {
-            e.printStackTrace();
             return false;
         }
     }
 
-    public boolean checkDefaultAppointmentValuesFromCalendar(String subject) {
+    public static boolean checkDefaultAppointmentValuesFromCalendar(String subject) {
         WaitUtilsWebDriver.waitABit(1000);
 
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         Utils.clickElement(srListPage.getAppointmentContentFromCalendar()
                 .findElement(By.id("ctl00_ctl00_Content_Main_rcbAppLocations_Input")));
 
@@ -350,18 +364,20 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
-    public boolean checkShowHideTechs() {
+    public static boolean checkShowHideTechs() {
         try {
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(srListPage.getTechniciansField())).click();
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
+            final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
+            final WebDriverWait wait = WaitUtilsWebDriver.getWait();
+            wait.until(ExpectedConditions.elementToBeClickable(srListPage.getTechniciansField())).click();
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
             WaitUtilsWebDriver.waitABit(2000);
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
                     .findElements(By.tagName("li")).get(0).click();
             WaitUtilsWebDriver.waitABit(500);
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(srListPage.getTechniciansField())).click();
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
+            wait.until(ExpectedConditions.elementToBeClickable(srListPage.getTechniciansField())).click();
+            wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.tagName("li")));
             WaitUtilsWebDriver.waitABit(2000);
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("rcbList")))
                     .findElements(By.tagName("li")).get(1).click();
             if (DriverBuilder.getInstance().getDriver().findElement(By.id("gvTechnicians")).findElements(By.tagName("tr")).size() != 4
                     && DriverBuilder.getInstance().getDriver().findElement(By.id("gvTechnicians")).findElements(By.className("datepicker-container"))
@@ -369,15 +385,15 @@ public class ServiceRequestsListVerifications {
                 return false;
             }
 
-            if (!WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).getText()
+            if (!wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).getText()
                     .equals("Hide")) {
                 return false;
             }
             WaitUtilsWebDriver.waitABit(2000);
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).click();
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.invisibilityOfElementLocated(By.className("gvTechnicians-table")));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).click();
+            wait.until(ExpectedConditions.invisibilityOfElementLocated(By.className("gvTechnicians-table")));
 
-            if (!WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).getText()
+            if (!wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("showHideTech"))).getText()
                     .equals("Show")) {
                 return false;
             }
@@ -388,7 +404,8 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
-    public boolean checkDefaultAppointmentDateFromSREdit(String startDate) {
+    public static boolean checkDefaultAppointmentDateFromSREdit(String startDate) {
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         if (!WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(srListPage.getPhaseField())).getAttribute("value").equals("Estimating"))
             return false;
 
@@ -420,28 +437,29 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
-    public boolean isSRLifeCycleDisplayed() {
+    public static boolean isSRLifeCycleDisplayed() {
         return Utils.isElementDisplayed(By.xpath("//table[contains(@id, 'Content_Main_report_fixedTable')]" +
                 "//div[contains(text(), 'Service Request')]"));
     }
 
-    public void checkAcceptanceOfSRInLifeCycle() {
+    public static void checkAcceptanceOfSRInLifeCycle() {
         checkSRInLifeCycle("//div[contains(text(), 'ServiceRequests Accepted')]");
     }
 
-    public void checkRejectOfSRInLifeCycle() {
+    public static void checkRejectOfSRInLifeCycle() {
         checkSRInLifeCycle("//div[contains(text(), 'ServiceRequests Rejected')]");
     }
 
-    private void checkSRInLifeCycle(String srState) {
-        LocalDateTime dateToCheck = LocalDateTime.now(ZoneId.of("US/Pacific")).minusHours(10);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+    private static void checkSRInLifeCycle(String srState) {
+        LocalDateTime dateToCheck = LocalDateTime.now(ZoneId.of("US/Pacific"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getFormat());
         String dateSTR = dateToCheck.format(formatter);
-        Assert.assertTrue(Utils.isElementDisplayed(By.xpath(srState)));
-        Assert.assertTrue(Utils.isElementDisplayed(By.xpath("//div[contains(text(), '" + dateSTR + "')]")));
+        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(By.xpath(srState), true));
+        Assert.assertTrue(WaitUtilsWebDriver
+                .elementShouldBeVisible(By.xpath("//div[contains(text(), '" + dateSTR + "')]"), true));
     }
 
-    public void checkSRSearchCriteria() {
+    public static void checkSRSearchCriteria() {
         Assert.assertTrue(Utils.isElementDisplayed(By.id("ctl00_ctl00_Content_Main_ctl01_rbxPhases_Input")));
         Assert.assertTrue(Utils.isElementDisplayed(By.id("ctl00_ctl00_Content_Main_ctl01_rbcTeamsForFilter_Input")));
         Assert.assertTrue(Utils.isElementDisplayed(By.id("ctl00_ctl00_Content_Main_ctl01_rbcTechsForFilter_Input")));
@@ -451,7 +469,8 @@ public class ServiceRequestsListVerifications {
         Assert.assertTrue(Utils.isElementDisplayed(By.id("ctl00_ctl00_Content_Main_ctl01_btnSearch")));
     }
 
-    public boolean checkPresenceOfServiceAdvisersByFilter(String filter) {
+    public static boolean checkPresenceOfServiceAdvisersByFilter(String filter) {
+        final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         Utils.clearAndType(srListPage.getAddsrvcustomercmb().getWrappedElement(), filter);
         int index = RandomUtils.nextInt(0, srListPage.getClients().size());
         try {
@@ -466,33 +485,34 @@ public class ServiceRequestsListVerifications {
             Utils.clickElement(srListPage.getClients().get(index));
             WaitUtilsWebDriver.waitForInvisibility(srListPage.getAddsrvcustomerdd().getWrappedElement());
             return result;
-        } catch (TimeoutException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
 
-    public boolean checkTechniciansFromSchedulerAfterResetting() {
-        if (DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 0)
+    public static boolean checkTechniciansFromSchedulerAfterResetting() {
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")).size() != 0)
             return false;
 
-        if (DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 0)
+        if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")).size() != 0)
             return false;
 
-        if (DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]"))
+        if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]"))
                 .size() != 0)
             return false;
 
-        if (DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")).size() != 0)
+        if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")).size() != 0)
             return false;
 
-        return DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")).size() == 0;
+        return driver.findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")).size() == 0;
     }
 
-    public boolean checkLifeCycleDate() {
+    public static boolean checkLifeCycleDate() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
         try {
-            return WaitUtilsWebDriver.waitForVisibility(srListPage.getLifeCycleBlock())
+            return WaitUtilsWebDriver.waitForVisibility(new ServiceRequestsListWebPage().getLifeCycleBlock())
                     .getText()
                     .contains(LocalDate.now(ZoneId.of("US/Pacific")).format(formatter));
         } catch (TimeoutException e) {
@@ -501,37 +521,39 @@ public class ServiceRequestsListVerifications {
         }
     }
 
-    public boolean checkTechniciansFromScheduler() {
+    public static boolean checkTechniciansFromScheduler() {
         try {
-            WaitUtilsWebDriver.getWait().ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.elementToBeClickable(srListPage.getTechniciansAreasFromSchedulerArrow()));
-            WaitUtilsWebDriver.getWait().ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.elementToBeClickable(srListPage.getTechniciansTeamsFromScheduler()));
-            WaitUtilsWebDriver.getWait().ignoring(StaleElementReferenceException.class)
-                    .until(ExpectedConditions.elementToBeClickable(srListPage.getTechniciansFromScheduler()));
+            final WebDriverWait wait = WaitUtilsWebDriver.getWait();
+            wait.ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(new ServiceRequestsListWebPage().getTechniciansAreasFromSchedulerArrow()));
+            wait.ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(new ServiceRequestsListWebPage().getTechniciansTeamsFromScheduler()));
+            wait.ignoring(StaleElementReferenceException.class)
+                    .until(ExpectedConditions.elementToBeClickable(new ServiceRequestsListWebPage().getTechniciansFromScheduler()));
         } catch (TimeoutException e) {
             return false;
         }
         return true;
     }
 
-    public boolean check5TechniciansFromScheduler() {
+    public static boolean check5TechniciansFromScheduler() {
         try {
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
+            final WebDriverWait wait = WaitUtilsWebDriver.getWait();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'sr-btn btn-apply')]")))
                     .click();
             waitForLoading();
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfElementLocated(
+            wait.until(ExpectedConditions.visibilityOfElementLocated(
                     By.id("ctl00_ctl00_Content_Main_AppointmentsScheduler1_RadScheduler1_ctl36_pnlColor")));
 
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@style, 'background-color:Blue;height:5px;')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@style, 'background-color:LimeGreen;height:5px;')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")));
 
             if (DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]"))
@@ -554,19 +576,20 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
-    public boolean isLifeCycleContentDisplayed() {
+    public static boolean isLifeCycleContentDisplayed() {
         WaitUtilsWebDriver.waitABit(5000);
         try {
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'SR')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Year')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'VIN')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Make')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Stock')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Model')]")));
+            final WebDriverWait wait = WaitUtilsWebDriver.getWait();
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'SR')]")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Year')]")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'VIN')]")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Make')]")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Stock')]")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Model')]")));
 
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions
+            wait.until(ExpectedConditions
                     .presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_tbVin")));
-            if (WaitUtilsWebDriver.getWait().until(ExpectedConditions
+            if (wait.until(ExpectedConditions
                     .presenceOfElementLocated(By.id("ctl00_ctl00_Content_Main_ctl01_filterer_tbSrNumber")))
                     .getAttribute("value").isEmpty()) {
                 return false;
@@ -577,17 +600,18 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
-    public boolean checkLifeCycleDocumentsContent() {
+    public static boolean checkLifeCycleDocumentsContent() {
         WaitUtilsWebDriver.waitABit(1000);
 
         try {
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Photos')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Documents')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions
+            final WebDriverWait wait = WaitUtilsWebDriver.getWait();
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Photos')]")));
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Documents')]")));
+            wait.until(ExpectedConditions
                     .presenceOfElementLocated(By.xpath("//div[contains(text(), 'Service Request Type')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions
+            wait.until(ExpectedConditions
                     .presenceOfElementLocated(By.xpath("//div[contains(text(), 'Service Request Creation')]")));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions
+            wait.until(ExpectedConditions
                     .presenceOfElementLocated(By.xpath("//div[contains(text(), 'Service Request Description')]")));
         } catch (TimeoutException e) {
             return false;
@@ -595,16 +619,17 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
-    public boolean checkDocumentDownloadingInLC() {
-        String parentFrame = DriverBuilder.getInstance().getDriver().getWindowHandle();
-        DriverBuilder.getInstance().getDriver().findElement(By.xpath("//a[contains(text(), 'Link to Documents')]")).click();
-        Set windows = DriverBuilder.getInstance().getDriver().getWindowHandles();
+    public static boolean checkDocumentDownloadingInLC() {
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        String parentFrame = driver.getWindowHandle();
+        driver.findElement(By.xpath("//a[contains(text(), 'Link to Documents')]")).click();
+        Set windows = driver.getWindowHandles();
         windows.remove(parentFrame);
-        DriverBuilder.getInstance().getDriver().switchTo().window((String) windows.iterator().next());
+        driver.switchTo().window((String) windows.iterator().next());
         return true;
     }
 
-    public boolean areTwoWindowsOpened() {
+    public static boolean areTwoWindowsOpened() {
         return DriverBuilder.getInstance().getDriver().getWindowHandles().size() == 2;
     }
 }

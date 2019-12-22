@@ -23,7 +23,7 @@ public class BackOfficeUtils {
     }
 
     private static ZoneId getZoneId() {
-        return ZoneId.of(DateUtils.ZONE_ID.getDate());
+        return ZoneId.of(DateUtils.ZONE_ID.getFormat());
     }
 
     private static LocalDate getCurrentDatePlusDays(int days) {
@@ -39,11 +39,11 @@ public class BackOfficeUtils {
     }
 
     private static String getFormattedLocalizedDate(LocalDate date, DateUtils format) {
-        return date.format(DateTimeFormatter.ofPattern(format.getDate(), Locale.US));
+        return date.format(DateTimeFormatter.ofPattern(format.getFormat(), Locale.US));
     }
 
     private static String getFormattedLocalizedDateTime(LocalDateTime dateTime, DateUtils format) {
-        return dateTime.format(DateTimeFormatter.ofPattern(format.getDate(), Locale.US));
+        return dateTime.format(DateTimeFormatter.ofPattern(format.getFormat(), Locale.US));
     }
 
     private static TemporalField getUSField() {
@@ -74,7 +74,7 @@ public class BackOfficeUtils {
         if (isLocalized[0]) {
             return getFormattedLocalizedDate(DateUtils.FULL_DATE_FORMAT);
         } else {
-            return getCurrentDate().format(DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate()));
+            return getCurrentDate().format(DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat()));
         }
     }
 
@@ -183,14 +183,14 @@ public class BackOfficeUtils {
 			servicePriceString = servicePriceString.replace("$", "").trim();
 		else
 			servicePriceString = servicePriceString.trim();
-		return Float.valueOf(servicePriceString).floatValue();
+		return Float.valueOf(servicePriceString);
 	}
 
 	public static float getServiceQuantityValue(String serviceQuantityString) {
 		String quantityValue = serviceQuantityString.trim();
 		if (quantityValue.equals("0") || quantityValue.equals("0.00"))
 			quantityValue = "1.00";
-		return Float.valueOf(quantityValue).floatValue();
+		return Float.valueOf(quantityValue);
 	}
 
 	public static String getFormattedServicePriceValue(float servicePrice) {

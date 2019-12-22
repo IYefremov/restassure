@@ -454,7 +454,7 @@
       "description": "Test Case 57879:Operation - Service Request Life Cycle - Rejected",
       "clientName": "Alex SASHAZ",
       "status": "Scheduled",
-      "newStatus": "Scheduled",
+      "newStatus": "Request Rejected",
       "customer": "007 - Test Company",
       "serviceRequestType": "Oleksa_AcceptanceAndAllRequired",
       "vehicleStock": "123",
@@ -852,21 +852,8 @@
     {
       "rowID": "testServiceRequestAdviserListing.01",
       "description": "Test Case 65611:Operation - Service Request - Adviser Listing",
-      "event": "Appointment Failed",
-      "alert": "test appointment Appointment Failed",
-      "selected": "My Service Requests",
-      "serviceRequestType": "01_Alex2SRT",
-      "customer": "007 - Test Company",
-      "notificationDropDown": "ServiceRequest Checked In",
-      "eventNewName": "test appointment SR Checked In",
-      "serviceRequestGeneralInfo": "Automation1 Primary  Tech",
-      "technician": "Automation 2 Appointment Tech",
-      "emailKeyWord": "Service Request with RO#",
-      "testDescription": "top",
-      "VIN": "VIN",
-      "stockNum": "Stock",
-      "roNum": "RO",
-      "stock123": "123"
+      "serviceRequestType": "AppendTORO_NEW",
+      "customer": "000 555"
     }
   ],
 

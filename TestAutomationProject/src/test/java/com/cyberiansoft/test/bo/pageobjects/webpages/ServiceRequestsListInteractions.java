@@ -78,7 +78,7 @@ public class ServiceRequestsListInteractions {
         Utils.clickWithActions(srListPage.getServiceRequestsPopoverList().get(0));
         waitForLoading();
         WaitUtilsWebDriver.waitABit(1500);
-        srListVerifications.verifyServiceRequestInfoFrameIsOn();
+        ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
     }
 
     //todo needs clarification!!!
@@ -102,19 +102,21 @@ public class ServiceRequestsListInteractions {
 
 	public void acceptFirstServiceRequestFromList() {
         WaitUtilsWebDriver.waitABit(2000);
+        Utils.clickWithActions(srListPage.getServiceRequestsPopoverList().get(0));
         Utils.clickElement(srListPage.getServiceRequestsAcceptButton());
-        waitForLoading();
+        WaitUtilsWebDriver.waitABit(1000);
 	}
 
 	public void rejectFirstServiceRequestFromList() {
-	    WaitUtilsWebDriver.waitABit(3000);
-	    Utils.clickWithActions(srListPage.getFirstSRFromList().findElement(By.xpath(".//a[@title='Reject']")));
+        WaitUtilsWebDriver.waitABit(2000);
+        Utils.clickWithActions(srListPage.getServiceRequestsPopoverList().get(0));
+        Utils.clickElement(srListPage.getServiceRequestsRejectButton());
         Utils.acceptAlertIfPresent();
 		WaitUtilsWebDriver.waitForInvisibility(srListPage.getEditServiceRequestPanelImage());
 	}
 
-	public String getStatusOfFirstServiceRequestFromList() {
-		return srListPage.getFirstSRFromList()
+	public static String getStatusOfFirstServiceRequestFromList() {
+		return new ServiceRequestsListWebPage().getFirstSRFromList()
 				.findElement(By.xpath(".//span[@class='serviceRequestStatus']"))
 				.getText()
 				.replaceAll("\\u00A0", "")
@@ -127,8 +129,8 @@ public class ServiceRequestsListInteractions {
 		return srnumber.substring(0, srnumber.length() - 1);
 	}
 
-	public void clickAddAppointmentToFirstServiceRequestFromList() {
-	    Utils.clickElement(srListPage.getFirstSRFromList().findElement(By.xpath(".//i[contains(@class, 'icon-calendar')]")));
+	public static void clickAddAppointmentToFirstServiceRequestFromList() {
+	    Utils.clickElement(new ServiceRequestsListWebPage().getFirstSRFromList().findElement(By.xpath(".//i[contains(@class, 'icon-calendar')]")));
 	    WaitUtilsWebDriver.waitABit(2000);
 	}
 
@@ -165,8 +167,9 @@ public class ServiceRequestsListInteractions {
     }
 
     public void clickCustomerEditButton() {
-		WaitUtilsWebDriver.elementShouldBeVisible(getCustomerEditButton(), true);
-        Utils.clickElement(getCustomerEditButton());
+        final WebElement customerEditButton = getCustomerEditButton();
+        WaitUtilsWebDriver.elementShouldBeVisible(customerEditButton, true);
+        Utils.clickElement(customerEditButton);
     }
 
     public void clickVehicleInfoEditButton() {
@@ -179,7 +182,7 @@ public class ServiceRequestsListInteractions {
     }
 
     public void clickClaimInfoEditButton() {
-        srListVerifications.verifyServiceRequestInfoFrameIsOn();
+        ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
         Utils.clickElement(By.id("Card_divCliamInfoAll"));
     }
 
@@ -188,10 +191,10 @@ public class ServiceRequestsListInteractions {
     }
 
     public WebElement getGeneralInfoEditButton() {
-        Utils.getActions().moveToElement(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='infoBlock-content']"))).build().perform();
-        Utils.getActions().moveToElement(
-                DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='infoBlock-content']/b[text()='General Info:']"))).build().perform();
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']"));
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        Utils.moveToElement(driver.findElement(By.xpath("//div[@class='infoBlock-content']")));
+        Utils.moveToElement(driver.findElement(By.xpath("//div[@class='infoBlock-content']/b[text()='General Info:']")));
+        return driver.findElement(By.xpath("//div[@class='infoBlock-content']/span[@class='infoBlock-editBtn']"));
     }
 
     public WebElement getCustomerEditButton() {
@@ -203,8 +206,8 @@ public class ServiceRequestsListInteractions {
         return srListPage.getCustomerEditIcon();
     }
 
-    public WebElement getVehicleInfoEditButton() {
-        return WaitUtilsWebDriver.waitForVisibility(srListPage.getVehicleInfoButton());
+    public boolean isVehicleInfoEditButtonNotDisplayed() {
+	    return WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getVehicleInfoButton(), false);
     }
 
     public void setServiceRequestGeneralInfoAssignedTo(String value) {
@@ -292,14 +295,14 @@ public class ServiceRequestsListInteractions {
 	}
 
 	public void clickCheckInButtonForSelectedSR() {
-		srListVerifications.verifyServiceRequestInfoFrameIsOn();
+		ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
 		Utils.clickElement(srListPage.getServiceRequestCheckInButton());
 		DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
 		WaitUtilsWebDriver.waitABit(5000);
 	}
 
     private String getTextValue(WebElement element) {
-        srListVerifications.verifyServiceRequestInfoFrameIsOn();
+        ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
         String value = Utils.getText(element);
         DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
         return value;
@@ -377,7 +380,7 @@ public class ServiceRequestsListInteractions {
 	}
 
 	public void clickDocumentButton() {
-		srListVerifications.verifyServiceRequestInfoFrameIsOn();
+		ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
 		String oldWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
 		Utils.clickElement(srListPage.getDescriptionDocuments().findElement(By.tagName("i")));
 		Set allWindows = DriverBuilder.getInstance().getDriver().getWindowHandles();
@@ -446,6 +449,11 @@ public class ServiceRequestsListInteractions {
         clickAddAppointmentButtonFromSRList();
 	}
 
+    public void addAppointmentFromSRList(String fromDate, String toDate) {
+        setAppointmentValues(fromDate, toDate);
+        clickAddAppointmentButtonFromSRList();
+	}
+
 	public void clickAddAppointmentButton() {
 	    Utils.clickElement(srListPage.getAddAppButton());
 	    WaitUtilsWebDriver.waitForInvisibilityIgnoringException(srListPage.getAppointmentTable());
@@ -453,7 +461,7 @@ public class ServiceRequestsListInteractions {
 	}
 
 	public void openAddAppointmentForFirstSR() {
-        srListVerifications.verifyServiceRequestInfoFrameIsOn();
+        ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
         try {
 			clickAddAppointmentButtonFromSREdit();
 		} catch (TimeoutException e) {
@@ -476,7 +484,7 @@ public class ServiceRequestsListInteractions {
     }
 
 	public void setSuggestedStartDate(String startDate) {
-		srListVerifications.verifyServiceRequestInfoFrameIsOn();
+		ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
         srListPage.getServiceRequestInfoBlocks().get(0).click();
 		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(srListPage.getSuggestedStart())).sendKeys(startDate);
 		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(srListPage.getAcceptGeneralInfoBTN())).click();
@@ -594,8 +602,8 @@ public class ServiceRequestsListInteractions {
     }
 
     private void addTechnician(String technician) {
-        Utils.clickElement(srListPage.getTechniciansSchedulerArrow());
-        Utils.selectOptionInDropDown(srListPage.getTechniciansDropDown(), srListPage.getTechniciansListBox(), technician, true);
+        Utils.clickElement(srListPage.getTechniciansArrow());
+        selectComboboxValueWithTyping(srListPage.getAddSRAppTechCombobox(), srListPage.getAddSRAppTechnicianDropDown(), technician);
         Utils.clickElement(srListPage.getTechniciansSchedulerAddButton());
     }
 
@@ -647,16 +655,18 @@ public class ServiceRequestsListInteractions {
     }
 
     public void goToLifeCycle() {
-		String parentFrame = DriverBuilder.getInstance().getDriver().getWindowHandle();
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        String parentFrame = driver.getWindowHandle();
         clickSRLifeCycleButton();
-        Set windows = DriverBuilder.getInstance().getDriver().getWindowHandles();
-		DriverBuilder.getInstance().getDriver().close();
+        Set windows = driver.getWindowHandles();
+		driver.close();
 		windows.remove(parentFrame);
-		DriverBuilder.getInstance().getDriver().switchTo().window((String) windows.iterator().next());
+		driver.switchTo().window((String) windows.iterator().next());
 	}
 
     public void clickSRLifeCycleButton() {
-        srListVerifications.verifyServiceRequestInfoFrameIsOn();
+        ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
+        WaitUtilsWebDriver.waitABit(1000);
         Utils.clickElement(srListPage.getSrLifeCycle());
         WaitUtilsWebDriver.waitABit(1000);
     }
@@ -669,13 +679,13 @@ public class ServiceRequestsListInteractions {
 	}
 
 	public void clickVehicleEditButton() {
-		DriverBuilder.getInstance().getDriver().findElement(By.id("Card_divVehInfoAll")).click();
-		// click(getVehicleEditButton());
+	    Utils.clickElement(By.id("Card_divVehInfoAll"));
 	}
 
 	public void setVehicleInfo(String stock, String vin) {
-		DriverBuilder.getInstance().getDriver().findElement(By.id("Card_tbStock")).sendKeys(stock);
-		DriverBuilder.getInstance().getDriver().findElement(By.id("Card_vehicleVin")).sendKeys(vin);
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        driver.findElement(By.id("Card_tbStock")).sendKeys(stock);
+		driver.findElement(By.id("Card_vehicleVin")).sendKeys(vin);
 	}
 
     public void goToWOFromLifeCycle() {
@@ -700,7 +710,7 @@ public class ServiceRequestsListInteractions {
 
 	public void addAppointmentWithTechnician(String startDate, String endDate, String string) {
 		WaitUtilsWebDriver.waitABit(3000);
-		srListVerifications.verifyServiceRequestInfoFrameIsOn();
+		ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
 
 		clickAddAppointmentButtonFromSREdit();
 		WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(srListPage.getAppointmentFromDateSRedit()));

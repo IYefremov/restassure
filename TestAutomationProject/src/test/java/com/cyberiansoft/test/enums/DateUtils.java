@@ -13,7 +13,7 @@ public enum DateUtils {
         this.data = data;
     }
 
-    public String getDate() {
+    public String getFormat() {
         return data;
     }
 }

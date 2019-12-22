@@ -23,7 +23,7 @@ public class CustomDateProvider {
     }
 
     private static ZoneId getZoneId() {
-        return ZoneId.of(DateUtils.ZONE_ID.getDate());
+        return ZoneId.of(DateUtils.ZONE_ID.getFormat());
     }
 
     private static LocalDate getCurrentDatePlusDays(int days) {
@@ -39,11 +39,11 @@ public class CustomDateProvider {
     }
 
     private static String getFormattedLocalizedDate(LocalDate date, DateUtils format) {
-        return date.format(DateTimeFormatter.ofPattern(format.getDate(), Locale.US));
+        return date.format(DateTimeFormatter.ofPattern(format.getFormat(), Locale.US));
     }
 
     private static String getFormattedLocalizedDateTime(LocalDateTime dateTime, DateUtils format) {
-        return dateTime.format(DateTimeFormatter.ofPattern(format.getDate(), Locale.US));
+        return dateTime.format(DateTimeFormatter.ofPattern(format.getFormat(), Locale.US));
     }
 
     private static TemporalField getUSField() {
@@ -74,7 +74,7 @@ public class CustomDateProvider {
         if (isLocalized[0]) {
             return getFormattedLocalizedDate(DateUtils.FULL_DATE_FORMAT);
         } else {
-            return getCurrentDate().format(DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate()));
+            return getCurrentDate().format(DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat()));
         }
     }
 
