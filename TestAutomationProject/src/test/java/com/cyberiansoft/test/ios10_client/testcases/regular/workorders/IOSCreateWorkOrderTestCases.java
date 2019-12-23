@@ -166,9 +166,8 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         servicesScreen.selectService(inspectionData.getBundleService().getBundleServiceName());
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.changeAmountOfBundleService(inspectionData.getBundleService().getBundleServiceAmount());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularSelectedBundleServiceScreenSteps.changeAmountOfBundleService(inspectionData.getBundleService().getBundleServiceAmount());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         Assert.assertTrue(selectedServicesScreen.checkServiceIsSelected(inspectionData.getBundleService().getBundleServiceName()));

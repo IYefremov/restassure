@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
 import com.cyberiansoft.test.dataclasses.*;
-import com.cyberiansoft.test.dataclasses.partservice.PartName;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class RegularServiceDetailsScreenSteps {
         if (serviceData.getServiceNotes() != null)
             setServiceNotes(serviceData.getServiceNotes());
         if (serviceData.getVehiclePart() != null)
-            slectServiceVehiclePart(serviceData.getVehiclePart());
+            selectServiceVehiclePart(serviceData.getVehiclePart());
         if (serviceData.getVehicleParts() != null)
             selectServiceVehicleParts(serviceData.getVehicleParts());
         if (serviceData.getPreExistingDamage() != null)
@@ -65,7 +63,7 @@ public class RegularServiceDetailsScreenSteps {
         selectedServiceDetailsScreen.setServiceQuantityValue(serviceQuantity);
     }
 
-    public static void slectServiceVehiclePart(VehiclePartData vehiclePartData) {
+    public static void selectServiceVehiclePart(VehiclePartData vehiclePartData) {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.clickVehiclePartsCell();
         selectedServiceDetailsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
