@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -173,7 +174,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 
 	public void archiveServiceForActiveAllTab(String serviceName) {
 		waitABit(1000);
-		wait.until(ExpectedConditions.elementToBeClickable(activeAllTab)).click();
+        Utils.clickElement(activeAllTab);
 		archiveService(serviceName);
 	}
 

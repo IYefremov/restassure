@@ -73,11 +73,6 @@ public class AddEditClientUsersContactsDialogWebPage extends BaseWebPage {
 	public AddEditClientUsersContactsDialogWebPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-		try {
-			wait.until(ExpectedConditions.visibilityOf(buttoncnsl));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 

@@ -28,7 +28,6 @@ public class WebElementsBot {
 	    	new WebDriverWait(DriverBuilder.getInstance().getDriver() , 50)
 	    	.until(ExpectedConditions.elementToBeClickable(element));
 	    } catch (StaleElementReferenceException | TimeoutException e) {
-            // just retry finding the element in the refreshed DOM
             waitABit(5000);
 	    }
         element.click();

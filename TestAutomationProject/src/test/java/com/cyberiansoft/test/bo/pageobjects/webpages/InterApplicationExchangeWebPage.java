@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ComboBox;
 import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
@@ -156,7 +157,7 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	}
 
 	private void selectProfileDetailsDocumentType(String documentType) {
-		selectComboboxValue(documentTypeCombobox, documentTypeDropDown, documentType);
+	    selectComboboxValue(documentTypeCombobox, documentTypeDropDown, documentType);
 		waitForLoading();
 	}
 
@@ -191,12 +192,12 @@ public class InterApplicationExchangeWebPage extends WebPageWithPagination {
 	}
 
 	public void clickCancelButton() {
-		wait.until(ExpectedConditions.elementToBeClickable(cancelButton)).click();
+        Utils.clickElement(cancelButton);
 		waitForLoading();
 	}
 
 	public void clickInsertButton() {
-		wait.until(ExpectedConditions.elementToBeClickable(insertButton)).click();
+	    Utils.clickElement(insertButton);
 		waitForLoading();
 	}
 

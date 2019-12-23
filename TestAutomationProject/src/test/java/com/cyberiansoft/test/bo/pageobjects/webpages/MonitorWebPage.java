@@ -2,12 +2,10 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class MonitorWebPage extends BaseWebPage {
 
@@ -59,59 +57,55 @@ public class MonitorWebPage extends BaseWebPage {
 	}
 
 	public void clickRepairOrdersLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(repairorderslink)).click();
+        Utils.clickElement(repairorderslink);
 	}
 
 	public void clickVendorsTeamsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(vendorsteamslink)).click();
+        Utils.clickElement(vendorsteamslink);
 	}
 
 	public void clickRepairLocationsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(repairlocationslink)).click();
+	    Utils.clickElement(repairlocationslink);
 	}
 
 	public void clickVendorOrdersLink() {
-		try {
-			wait.until(ExpectedConditions.elementToBeClickable(vendororderslink)).click();
-		} catch (TimeoutException e) {
-			vendororderslink.click();
-		}
+	    Utils.clickElement(vendororderslink);
 	}
 
 	public void clickMonitorSettingsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(monitorsettingslink)).click();
+	    Utils.clickElement(monitorsettingslink);
 	}
 
 	public void clickRepairCycleTimeLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(repairCycleTimeLink)).click();
+	    Utils.clickElement(repairCycleTimeLink);
 	}
 
 	public void clickVehicleTimeTrackingLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(vehicleTimeTrackingLink)).click();
+	    Utils.clickElement(vehicleTimeTrackingLink);
 	}
 
 	public void clickCycleTimeTrendingLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(cycleTimeTrendingLink)).click();
+	    Utils.clickElement(cycleTimeTrendingLink);
 	}
 
 	public void clickEventsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(eventslink)).click();
+        Utils.clickElement(eventslink);
 	}
 
 	public void clickWhiteBoardLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(whiteBoardLink)).click();
+        Utils.clickElement(whiteBoardLink);
 	}
 
 	public void clickProductionDashboardLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(productionDashboardLink)).click();
+        Utils.clickElement(productionDashboardLink);
 	}
 
 	public void clickWipSummaryLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(wipSummaryLink)).click();
+        Utils.clickElement(wipSummaryLink);
 	}
 
 	public void clickServiceCountLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(serviceCountLink)).click();
+        Utils.clickElement(serviceCountLink);
 	}
 
 	public void clickActiveVehiclesByPhaseLink() {

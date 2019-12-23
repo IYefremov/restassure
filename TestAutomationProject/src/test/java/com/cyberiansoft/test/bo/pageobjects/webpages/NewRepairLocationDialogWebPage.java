@@ -47,8 +47,8 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_countryState_ddlCountry_Input")
 	private WebElement locationcountrycmb;
 
-	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_countryState_txtState")
-	private TextField locationstatefld;
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_countryState_ddlState_Input")
+	private WebElement locationstatecmb;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_ctl01_Card_tbZip")
 	private TextField locationzipfld;
@@ -138,7 +138,7 @@ public class NewRepairLocationDialogWebPage extends BaseWebPage {
 		wait.until(ExpectedConditions.visibilityOf(locationaddress2fld.getWrappedElement()));
 		wait.until(ExpectedConditions.visibilityOf(locationcityfld.getWrappedElement()));
 		wait.until(ExpectedConditions.visibilityOf(locationcountrycmb));
-		wait.until(ExpectedConditions.visibilityOf(locationstatefld.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(locationstatecmb));
 		wait.until(ExpectedConditions.visibilityOf(locationzipfld.getWrappedElement()));
 		wait.until(ExpectedConditions.visibilityOf(locationmailfld.getWrappedElement()));
 		wait.until(ExpectedConditions.visibilityOf(locationphonefld.getWrappedElement()));
