@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -42,11 +43,7 @@ public class InspectionEditorWebPage extends BaseWebPage {
 	}
 
 	public boolean isDateInputDisplayed() {
-		try {
-			return wait.until(ExpectedConditions.visibilityOf(dateInput)).isDisplayed();
-		} catch (Exception ignored) {
-			return false;
-		}
+	    return WaitUtilsWebDriver.elementShouldBeVisible(dateInput, true);
 	}
 
 	public void clickDateInput() {

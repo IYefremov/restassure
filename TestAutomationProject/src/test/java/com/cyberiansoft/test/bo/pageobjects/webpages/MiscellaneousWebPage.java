@@ -1,12 +1,12 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class MiscellaneousWebPage extends BaseWebPage {
 	
@@ -19,6 +19,7 @@ public class MiscellaneousWebPage extends BaseWebPage {
 	}
 
 	public void clickEventsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(eventstab)).click();
+        WaitUtilsWebDriver.elementShouldBeVisible(eventstab, true);
+        Utils.clickElement(eventstab);
 	}
 }

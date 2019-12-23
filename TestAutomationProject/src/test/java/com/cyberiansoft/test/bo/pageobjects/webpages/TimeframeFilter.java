@@ -1,6 +1,12 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
+import com.cyberiansoft.test.bo.utils.WebConstants;
+import com.cyberiansoft.test.bo.webelements.ComboBox;
+import com.cyberiansoft.test.bo.webelements.DropDown;
+import com.cyberiansoft.test.enums.DateUtils;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.testng.Assert;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -8,14 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import com.cyberiansoft.test.enums.DateUtils;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.testng.Assert;
-
-import com.cyberiansoft.test.bo.utils.WebConstants;
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 class TimeframeFilter {
 	
@@ -30,7 +29,7 @@ class TimeframeFilter {
 	}
 	
 	public void verifyTableDateRangeForCurrentTablePage(Date startrange, Date endrange, List<WebElement> datecells) {
-		DateFormat dateFormat = new SimpleDateFormat(DateUtils.FULL_DATE_FORMAT.getDate());
+		DateFormat dateFormat = new SimpleDateFormat(DateUtils.FULL_DATE_FORMAT.getFormat());
 		for (WebElement datecell : datecells) {
 			try {
 				Date datevalue = dateFormat.parse(datecell.getText());

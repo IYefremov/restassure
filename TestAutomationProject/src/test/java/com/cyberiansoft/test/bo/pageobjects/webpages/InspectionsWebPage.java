@@ -2,9 +2,9 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
-import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.bo.webelements.*;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.enums.DateUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -671,8 +671,8 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public String getChangedInspectionDate(int day) {
-		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
-		LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of(DateUtils.ZONE_ID.getDate())));
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
+		LocalDate localDate = LocalDate.parse(getFirstInspectionDate(), dateFormat.withZone(ZoneId.of(DateUtils.ZONE_ID.getFormat())));
 		localDate = localDate.minusMonths(1);
 		return localDate.withDayOfMonth(day).format(dateFormat);
 	}

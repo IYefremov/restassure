@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.dataclasses.bo;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
+import com.cyberiansoft.test.enums.DateUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.time.DayOfWeek;
@@ -328,8 +330,8 @@ public class BOoperationsSRdata {
     }
 
     public String getFirstDay() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
-        final LocalDate now = LocalDate.now(ZoneId.of("US/Pacific"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getFormat());
+        final LocalDate now = CustomDateProvider.getCurrentDateLocalized();
         System.out.println(now.format(formatter));
         if (now.getDayOfWeek().equals(DayOfWeek.FRIDAY)) {
             return now.plusDays(3).format(formatter);

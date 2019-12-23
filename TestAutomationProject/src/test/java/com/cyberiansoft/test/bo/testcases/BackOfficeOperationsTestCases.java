@@ -12,16 +12,13 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-//@Listeners(VideoListener.class)
 public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOOperationsData.json";
-	private ServiceRequestsListVerifications serviceRequestsListVerifications;
 
 	@BeforeClass
 	public void settingUp() {
 		JSONDataProvider.dataFile = DATA_FILE;
-		serviceRequestsListVerifications = new ServiceRequestsListVerifications();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -206,13 +203,13 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 
-		serviceRequestsListVerifications.verifySearchFieldsAreVisible();
+		ServiceRequestsListVerifications.verifySearchFieldsAreVisible();
 
 		serviceRequestsListInteractions.selectSearchTeam(data.getTeamName());
 		serviceRequestsListInteractions.setSearchFreeText(data.getTextSearchParameter());
 		serviceRequestsListInteractions.setServiceRequestType(data.getServiceType());
 		serviceRequestsListInteractions.clickFindButton();
-		serviceRequestsListVerifications.verifySearchResultsByServiceName(data.getTextSearchParameter());
+		ServiceRequestsListVerifications.verifySearchResultsByServiceName(data.getTextSearchParameter());
 
 		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getServiceTypeVit());
 		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
@@ -242,8 +239,8 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.setServiceRequestType(data.getServiceTypeVit());
 		serviceRequestsListInteractions.clickFindButton();
-		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByServiceName(data.getNewServiceRequest()));
-		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
+		Assert.assertTrue(ServiceRequestsListVerifications.verifySearchResultsByServiceName(data.getNewServiceRequest()));
+		Assert.assertTrue(ServiceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
 
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
@@ -251,7 +248,7 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.clickFindButton();
-		Assert.assertTrue(serviceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
+		Assert.assertTrue(ServiceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
 		Assert.assertEquals(serviceRequestsListInteractions.getFirstServiceRequestStatus(), data.getStatus());
 	}
 

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.testcases;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.config.BOConfigInfo;
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
+import com.cyberiansoft.test.bo.verifications.ServiceRequestsListVerifications;
 import com.cyberiansoft.test.dataclasses.bo.BOoperationsSRdata;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -67,7 +68,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.clickFindButton();
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
@@ -77,8 +78,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		appointmentpopup.clickAddAppointment();
-        serviceRequestsListVerifications
-				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
+        ServiceRequestsListVerifications
+				.isAppointmentPresentForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -121,7 +122,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.clickFindButton();
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
 		appointmentpopup.setEndTimeValue(data.getEndTime());
@@ -131,8 +132,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		String appointmentfromdate = appointmentpopup.getFromDateValue();
 		String appointmentstarttime = appointmentpopup.getStartTimeValue();
 		appointmentpopup.clickAddAppointment();
-        serviceRequestsListVerifications
-				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
+        ServiceRequestsListVerifications
+				.isAppointmentPresentForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -174,12 +175,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.clickFindButton();
 
-		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
+		Assert.assertTrue(ServiceRequestsListVerifications.isAcceptIconNotDisplayedForFirstServiceRequestFromList());
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+        Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 
 		appointmentpopup.setFromDateValue(CustomDateProvider.getDayAfterTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setToDateValue(CustomDateProvider.getDayAfterTomorrowLocalizedDateFormattedShort());
@@ -196,10 +197,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		appointmentpopup.setClientZipValue(data.getClientZip());
 		appointmentpopup.clickAddAppointment();
 
-		serviceRequestsListVerifications
-				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
+		ServiceRequestsListVerifications
+				.isAppointmentPresentForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 
 		Assert.assertEquals(appointmentpopup.getClientAddressValue(), data.getClientAddress());
@@ -248,14 +249,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.clickFindButton();
-//todo  org.openqa.selenium.interactions.Actions moveToElement
-//INFO: When using the W3C Action commands, offsets are from the center of element
-		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+        Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
@@ -267,10 +265,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 
 		appointmentpopup.selectLocationType(data.getLocationType());
 		appointmentpopup.clickAddAppointment();
-        serviceRequestsListVerifications
-				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
+        ServiceRequestsListVerifications
+				.isAppointmentPresentForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 
 		appointmentpopup.clickAddAppointment();
@@ -317,12 +315,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.clickFindButton();
 
-		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+        Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
@@ -333,10 +330,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 		appointmentpopup.selectLocationType(data.getLocationType());
 		appointmentpopup.clickAddAppointment();
-        serviceRequestsListVerifications
-				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
+        ServiceRequestsListVerifications.isAppointmentPresentForFirstServiceRequestFromList(
+                appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 	}
 
@@ -377,14 +374,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.saveNewServiceRequest();
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
-		// serviceRequestsListInteractions.clickFindButton();
+		serviceRequestsListInteractions.clickFindButton();
 
-		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+        Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 
 		SRAppointmentInfoPopup appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		appointmentpopup.setFromDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setToDateValue(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
 		appointmentpopup.setStartTimeValue(data.getStartTime());
@@ -397,10 +393,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		appointmentpopup.selectLocationType(data.getLocationType());
 		appointmentpopup.selectLocation(data.getLocation());
 		appointmentpopup.clickAddAppointment();
-        serviceRequestsListVerifications
-				.appointmentExistsForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
+        ServiceRequestsListVerifications
+				.isAppointmentPresentForFirstServiceRequestFromList(appointmentfromdate + " " + appointmentstarttime);
 		appointmentpopup = new SRAppointmentInfoPopup(webdriver);
-		serviceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
+		ServiceRequestsListInteractions.clickAddAppointmentToFirstServiceRequestFromList();
 		Assert.assertEquals(appointmentpopup.getClientInfoNameValue(), data.getNewServiceRequest());
 
 		appointmentpopup.clickAddAppointment();
@@ -432,10 +428,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
 		serviceRequestsListInteractions.clickFindButton();
-		Assert.assertFalse(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
+		Assert.assertTrue(ServiceRequestsListVerifications.isAcceptIconNotDisplayedForFirstServiceRequestFromList());
 		serviceRequestsListInteractions.rejectFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
-	}
+        Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
+    }
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationsCLUserVerifyThatAcceptedSRIsInReadOnlyMode_NotPossibleToEdit(String rowID, String description, JSONObject testData) throws InterruptedException {
@@ -471,9 +467,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
 		serviceRequestsListInteractions.clickFindButton();
-		Assert.assertTrue(serviceRequestsListVerifications.isAcceptIconPresentForFirstServiceRequestFromList());
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
-		Assert.assertEquals(serviceRequestsListInteractions.getStatusOfFirstServiceRequestFromList(), data.getStatus());
+        Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 
 		backOfficeHeader.clickLogout();
 		loginpage = PageFactory.initElements(webdriver, BackOfficeLoginWebPage.class);
@@ -490,10 +485,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
 		serviceRequestsListInteractions.clickFindButton();
 		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
-		serviceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
+		ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
 		Assert.assertFalse(serviceRequestsListInteractions.getGeneralInfoEditButton().isDisplayed());
 		Assert.assertFalse(serviceRequestsListInteractions.getCustomerEditButton().isDisplayed());
-		Assert.assertFalse(serviceRequestsListInteractions.getVehicleInfoEditButton().isDisplayed());
+		Assert.assertTrue(serviceRequestsListInteractions.isVehicleInfoEditButtonNotDisplayed());
 		serviceRequestsListInteractions.clickCloseServiceRequestButton();
 	}
 
@@ -547,7 +542,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
 		serviceRequestsListInteractions.clickFindButton();
 		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
-		Assert.assertFalse(serviceRequestsListVerifications.isCheckInButtonVisible());
+		Assert.assertTrue(ServiceRequestsListVerifications.isCheckInButtonInvisible());
 		serviceRequestsListInteractions.rejectFirstServiceRequestFromList();
 	}
 
@@ -577,9 +572,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
 		serviceRequestsListInteractions.clickFindButton();
 		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
-		Assert.assertFalse(serviceRequestsListVerifications.isCheckInButtonVisible());
+		Assert.assertTrue(ServiceRequestsListVerifications.isCheckInButtonInvisible());
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.isCheckInButtonVisible());
+		Assert.assertTrue(ServiceRequestsListVerifications.isCheckInButtonVisible());
 		serviceRequestsListInteractions.closeFirstServiceRequestFromTheList();
 	}
 
@@ -609,10 +604,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.setSearchFreeText(data.getVIN());
 		serviceRequestsListInteractions.clickFindButton();
 		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
-		Assert.assertFalse(serviceRequestsListVerifications.isCheckInButtonVisible());
+		Assert.assertTrue(ServiceRequestsListVerifications.isCheckInButtonInvisible());
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
 //		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.isCheckInButtonVisible());
+		Assert.assertTrue(ServiceRequestsListVerifications.isCheckInButtonVisible());
 		Assert.assertEquals(serviceRequestsListInteractions.getCheckInButtonValueForSelectedSR(), data.getCheckInButton());
 		serviceRequestsListInteractions.clickCheckInButtonForSelectedSR();
 		Assert.assertEquals(serviceRequestsListInteractions.getCheckInButtonValueForSelectedSR(), data.getUndoCheckInButton());
@@ -634,7 +629,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setServiceRequestDescription(description);
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.checkTimeOfLastDescription());
+		Assert.assertTrue(ServiceRequestsListVerifications.checkTimeOfLastDescription());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -648,13 +643,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
-		serviceRequestsListVerifications.verifyTagsAreAdded(data.getTags());
-		Assert.assertTrue(serviceRequestsListVerifications.verifyTagsAreAdded(data.getTags()[data.getTags().length - 1]));
-		serviceRequestsListVerifications.verifyTagsAreAdded(data.getSymbol());
-		Assert.assertTrue(serviceRequestsListVerifications.isFirstTagRemoved());
+		ServiceRequestsListVerifications.verifyTagsAreAdded(data.getTags());
+		Assert.assertTrue(ServiceRequestsListVerifications.verifyTagsAreAdded(data.getTags()[data.getTags().length - 1]));
+		ServiceRequestsListVerifications.verifyTagsAreAdded(data.getSymbol());
+		Assert.assertTrue(ServiceRequestsListVerifications.isFirstTagRemoved());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.areTagsAdded(data.getTags()));
+		Assert.assertTrue(ServiceRequestsListVerifications.areTagsAdded(data.getTags()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -671,7 +666,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[0]);
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.isNewDescriptionAddedAndCheckedOld(data.getDescriptions()[1],
+		Assert.assertTrue(ServiceRequestsListVerifications.isNewDescriptionAddedAndCheckedOld(data.getDescriptions()[1],
 				data.getDescriptions()[0]));
 	}
 
@@ -686,7 +681,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
-		Assert.assertFalse(serviceRequestsListVerifications.verifyDescriptionIconsAreVisible());
+		Assert.assertFalse(ServiceRequestsListVerifications.verifyDescriptionIconsAreVisible());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -704,7 +699,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setServiceRequestDescription(data.getDescriptions()[1]);
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.verifyServiceDescriptionIsPresent(data.getDescriptions()[1]));
+		Assert.assertTrue(ServiceRequestsListVerifications.verifyServiceDescriptionIsPresent(data.getDescriptions()[1]));
 	}
 
 
@@ -721,11 +716,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.isServiceRequestDocumentIconVisible());
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceRequestDocumentIconVisible());
 		serviceRequestsWebPage.clickDocumentButton();
-		Assert.assertTrue(serviceRequestsListVerifications.checkElementsInDocument());
+		Assert.assertTrue(ServiceRequestsListVerifications.checkElementsInDocument());
 		serviceRequestsWebPage.clickAddImageButton();
-		Assert.assertTrue(serviceRequestsListVerifications.areImageButtonsDisplayed());
+		Assert.assertTrue(ServiceRequestsListVerifications.areImageButtonsDisplayed());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -747,13 +742,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setAppointmentValues(data.getFirstDay(), data.getSecondDay());
 		serviceRequestsWebPage.clickAddAppointmentButtonFromSRList();
-        Assert.assertTrue(serviceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
+        Assert.assertTrue(ServiceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
                 "The Add Appointment dialog hasn't been closed");
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		new ServiceRequestsListInteractions().openAddAppointmentForFirstSR();
 		Assert.assertTrue(
-				serviceRequestsListVerifications.checkDefaultAppointmentValuesAndAddAppointmentFomSREdit());
-		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
+				ServiceRequestsListVerifications.checkDefaultAppointmentValuesAndAddAppointmentFomSREdit());
+		Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -775,13 +770,13 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setAppointmentValues(data.getFirstDay(), data.getSecondDay());
 		serviceRequestsWebPage.clickAddAppointmentButtonFromSRList();
-		Assert.assertTrue(serviceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
+		Assert.assertTrue(ServiceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
                 "The Add Appointment dialog hasn't been closed");
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.openAddAppointmentForFirstSR();
 		serviceRequestsWebPage.setAppointmentSREditValues(data.getFirstDay(), data.getSecondDay());
-        Assert.assertTrue(serviceRequestsListVerifications.checkShowHideTechs());
-		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
+        Assert.assertTrue(ServiceRequestsListVerifications.checkShowHideTechs());
+		Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -801,10 +796,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.clickDoneButton();
 		serviceRequestsListInteractions.saveNewServiceRequest();
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
+		Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 		serviceRequestsListInteractions.setAppointmentValues(data.getFirstDay(), data.getSecondDay());
-		Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentValuesFromCalendar(data.getCustomer()));
-		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
+		Assert.assertTrue(ServiceRequestsListVerifications.checkDefaultAppointmentValuesFromCalendar(data.getCustomer()));
+		Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -826,7 +821,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDay());
         serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
-        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
+        Assert.assertTrue(ServiceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -848,7 +843,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
         serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
-        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
+        Assert.assertTrue(ServiceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.reloadPage();
 		int afterRequestsCount = serviceRequestsWebPage.checkSchedulerByDateMonth(data.getFirstDay());
@@ -867,11 +862,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
         serviceRequestsWebPage.goToMonthInScheduler();
         serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
-        Assert.assertTrue(serviceRequestsListVerifications.checkTechniciansFromScheduler());
+        Assert.assertTrue(ServiceRequestsListVerifications.checkTechniciansFromScheduler());
 		Assert.assertEquals(5, serviceRequestsWebPage.getMaximumTechniciansListSize(),
                 "The maximum technicians list size is not 5");
 		serviceRequestsWebPage.clickArrowTechniciansLink();
-		Assert.assertTrue(serviceRequestsListVerifications.check5TechniciansFromScheduler());
+		Assert.assertTrue(ServiceRequestsListVerifications.check5TechniciansFromScheduler());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -893,11 +888,11 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
 		serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
-		Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
+		Assert.assertTrue(ServiceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.goToMonthInScheduler();
 		serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
-		Assert.assertTrue(serviceRequestsListVerifications.checkTechniciansFromScheduler());
+		Assert.assertTrue(ServiceRequestsListVerifications.checkTechniciansFromScheduler());
 		serviceRequestsWebPage.applyTechniciansFromScheduler();
 		serviceRequestsWebPage.countSR();
         System.out.println(serviceRequestsWebPage.countSR());
@@ -924,17 +919,17 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
         serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
-        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
+        Assert.assertTrue(ServiceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.goToMonthInScheduler();
         serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
-        Assert.assertTrue(serviceRequestsListVerifications.checkTechniciansFromScheduler());
+        Assert.assertTrue(ServiceRequestsListVerifications.checkTechniciansFromScheduler());
 		Assert.assertEquals(5, serviceRequestsWebPage.getMaximumTechniciansListSize(),
                 "The maximum technicians list size is not 5");
 		serviceRequestsWebPage.clickArrowTechniciansLink();
-		Assert.assertTrue(serviceRequestsListVerifications.check5TechniciansFromScheduler());
+		Assert.assertTrue(ServiceRequestsListVerifications.check5TechniciansFromScheduler());
 		serviceRequestsWebPage.resetTechniciansFromScheduler();
-		Assert.assertTrue(serviceRequestsListVerifications.checkTechniciansFromSchedulerAfterResetting());
+		Assert.assertTrue(ServiceRequestsListVerifications.checkTechniciansFromSchedulerAfterResetting());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -956,7 +951,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		// serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDay());
         serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
-        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
+        Assert.assertTrue(ServiceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -972,7 +967,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.goToSRMenu();
 		serviceRequestsWebPage.clickAddSRButton();
 		serviceRequestsWebPage.clickSRLifeCycleButton();
-		Assert.assertFalse(serviceRequestsListVerifications.areTwoWindowsOpened());
+		Assert.assertFalse(ServiceRequestsListVerifications.areTwoWindowsOpened());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -993,15 +988,15 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.setSuggestedStartDate(data.getFirstDayTime());
         serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
-        Assert.assertTrue(serviceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
+        Assert.assertTrue(ServiceRequestsListVerifications.checkDefaultAppointmentDateFromSREdit(data.getFirstDay()));
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickAddAppointmentButtonFromSREdit();
 		serviceRequestsWebPage.setSubjectForSRAppointment("");
 		serviceRequestsWebPage.clickAddAppointmentButton();
-		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
+		Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 		serviceRequestsWebPage.goToLifeCycle();
-		Assert.assertTrue(serviceRequestsListVerifications.checkLifeCycleDate());
+		Assert.assertTrue(ServiceRequestsListVerifications.checkLifeCycleDate());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1021,12 +1016,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
-		Assert.assertTrue(serviceRequestsListVerifications.isLifeCycleContentDisplayed());
+		Assert.assertTrue(ServiceRequestsListVerifications.isLifeCycleContentDisplayed());
 		serviceRequestsWebPage.goToDocumentLinkFromLC();
-		Assert.assertTrue(serviceRequestsListVerifications.checkLifeCycleDocumentsContent());
-		Assert.assertTrue(serviceRequestsListVerifications.checkDocumentDownloadingInLC());
+		Assert.assertTrue(ServiceRequestsListVerifications.checkLifeCycleDocumentsContent());
+		Assert.assertTrue(ServiceRequestsListVerifications.checkDocumentDownloadingInLC());
         serviceRequestsWebPage.clickAddImageButton();
-        Assert.assertTrue(serviceRequestsListVerifications.areImageButtonsDisplayed());
+        Assert.assertTrue(ServiceRequestsListVerifications.areImageButtonsDisplayed());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1052,7 +1047,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.goToLifeCycle();
 		serviceRequestsWebPage.goToWOFromLifeCycle();
-		Assert.assertTrue(serviceRequestsListVerifications.isSRLifeCycleDisplayed());
+		Assert.assertTrue(ServiceRequestsListVerifications.isSRLifeCycleDisplayed());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1067,18 +1062,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
-		serviceRequestsWebPage.clickCustomerEditButton();
-		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleEditButton();
-		serviceRequestsWebPage.setVehicleInfo(data.getVehicleStock(), data.getVehicleVIN());
-		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
-		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		serviceRequestsWebPage.goToLifeCycle();
-		serviceRequestsListVerifications.checkAcceptanceOfSRInLifeCycle();
+		Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
+        serviceRequestsWebPage.selectFirstServiceRequestFromList();
+        serviceRequestsWebPage.goToLifeCycle();
+		ServiceRequestsListVerifications.checkAcceptanceOfSRInLifeCycle();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1093,18 +1082,12 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
-		serviceRequestsWebPage.clickCustomerEditButton();
-		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickVehicleEditButton();
-		serviceRequestsWebPage.setVehicleInfo(data.getVehicleStock(), data.getVehicleVIN());
-		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.rejectFirstServiceRequestFromList();
-		Assert.assertTrue(serviceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
-		serviceRequestsWebPage.selectFirstServiceRequestFromList();
-		serviceRequestsWebPage.goToLifeCycle();
-		serviceRequestsListVerifications.checkRejectOfSRInLifeCycle();
+		Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getNewStatus()));
+        serviceRequestsWebPage.selectFirstServiceRequestFromList();
+        serviceRequestsWebPage.goToLifeCycle();
+		ServiceRequestsListVerifications.checkRejectOfSRInLifeCycle();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1118,7 +1101,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.makeSearchPanelVisible();
-		serviceRequestsListVerifications.checkSRSearchCriteria();
+		ServiceRequestsListVerifications.checkSRSearchCriteria();
 		// serviceRequestsWebPage.selectAddServiceRequestDropDown(data.getServiceRequestType());
 		// serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		// serviceRequestsWebPage.clickCustomerEditButton();
@@ -1280,7 +1263,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
-		serviceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
+		ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
 		serviceRequestsWebPage.saveNewServiceRequest();
 //		Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWord()));
 
@@ -1303,7 +1286,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testMiscellaneousEventsAppointmentCreated(String rowID, String description, JSONObject testData) throws Exception {
+	public void testMiscellaneousEventsAppointmentCreated(String rowID, String description, JSONObject testData) {
 
 		BOoperationsSRdata data = JSonDataParser.getTestDataFromJson(testData, BOoperationsSRdata.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -1333,12 +1316,10 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickGeneralInfoEditButton();
-		serviceRequestsWebPage.setServiceRequestGeneralInfo(data.getServiceRequestGeneralInfo());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.addAppointmentFromSRList(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
-        Assert.assertTrue(serviceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
+        Assert.assertTrue(ServiceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
                 "The Add Appointment dialog hasn't been closed");
 //        Assert.assertTrue(mailChecker.checkEmails(data.getEmailKeyWordWasCreated()) || mailChecker.checkTestEmails());
 
@@ -1395,8 +1376,8 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.setServiceRequestGeneralInfo(data.getServiceRequestGeneralInfo());
 		serviceRequestsWebPage.saveNewServiceRequest();
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
-		serviceRequestsWebPage.addAppointmentFromSRList(data.getFirstDay(), data.getSecondDay(), data.getTechnician());
-        Assert.assertTrue(serviceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
+		serviceRequestsWebPage.addAppointmentFromSRList(data.getFirstDay(), data.getSecondDay());
+        Assert.assertTrue(ServiceRequestsListVerifications.isAddAppointmentFromSRListClosed(),
                 "The Add Appointment dialog hasn't been closed");
 // todo uncomment after BO will be configured.
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
@@ -1787,7 +1768,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.acceptFirstServiceRequestFromList();
 		serviceRequestsWebPage.selectFirstServiceRequestFromList();
 		serviceRequestsWebPage.clickCheckInButtonForSelectedSR();
-		serviceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
+		ServiceRequestsListVerifications.verifyServiceRequestInfoFrameIsOn();
 		serviceRequestsWebPage.saveNewServiceRequest();
 		// todo uncomment after BO will be configured.
 //        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
@@ -2229,7 +2210,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.makeSearchPanelVisible();
-		serviceRequestsListVerifications.checkSRSearchCriteria();
+		ServiceRequestsListVerifications.checkSRSearchCriteria();
 		serviceRequestsWebPage.selectAddServiceRequestsComboboxValue(data.getServiceRequestType());
 		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickGeneralInfoEditButton();
@@ -2269,9 +2250,9 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		operationsPage.clickNewServiceRequestList();
 		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
 		serviceRequestsWebPage.clickCustomerEditButton();
-		Assert.assertTrue(serviceRequestsListVerifications.checkPresenceOfServiceAdvisersByFilter(data.getTestDescription()));
-		serviceRequestsWebPage.clickDoneButton();
-		serviceRequestsWebPage.clickCustomerEditButton();
+//		Assert.assertTrue(serviceRequestsListVerifications.checkPresenceOfServiceAdvisersByFilter(data.getCustomer()));
+//		serviceRequestsWebPage.clickDoneButton();
+//		serviceRequestsWebPage.clickCustomerEditButton();
 		serviceRequestsWebPage.selectServiceRequestCustomer(data.getCustomer());
 		serviceRequestsWebPage.clickDoneButton();
 		serviceRequestsWebPage.saveNewServiceRequest();

@@ -9,8 +9,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.click;
-
 public class CompanyWebPage extends BaseWebPage {
 
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Clients']")
@@ -112,32 +110,32 @@ public class CompanyWebPage extends BaseWebPage {
 	}
 
 	public void clickServicePackagesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(servicepackageslink)));
+        Utils.clickElement(servicepackageslink);
 	}
 
 	public void clickUsersLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(userslink)));
+        Utils.clickElement(userslink);
 	}
 
 	public void clickEmployeesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(employeeslink)));
+        Utils.clickElement(employeeslink);
 	}
 
 	public void clickServicesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(serviceslink)));
+        Utils.clickElement(serviceslink);
 		wait.until(ExpectedConditions.titleContains("Services"));
 	}
 
 	public void clickTeamsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(teamslink)));
+        Utils.clickElement(teamslink);
 	}
 
 	public void clickJobsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(jobslink)));
+        Utils.clickElement(jobslink);
 	}
 
 	public void clickAreasLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(areaslink)));
+        Utils.clickElement(areaslink);
 	}
 
 	public void clickEmailTemplatesLink() {
@@ -145,74 +143,74 @@ public class CompanyWebPage extends BaseWebPage {
 	}
 
 	public void clickPrintServersLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(printserverslink)));
+        Utils.clickElement(printserverslink);
 	}
 
 	public void clickPrintTemplatesConfigurationsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(printtemplatesconfiglink)));
+        Utils.clickElement(printtemplatesconfiglink);
 	}
 
 	public void clickInsuranceCompaniesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(insurancecompanieslink)));
+        Utils.clickElement(insurancecompanieslink);
 	}
 
 	public void clickServiceAdvisorsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(serviceadvisorslink)));
+        Utils.clickElement(serviceadvisorslink);
 	}
 
 	public void clickQuestionsFormsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(questionsformslink)));
+        Utils.clickElement(questionsformslink);
 	}
 
 	public void clickInspectionTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(inspectiontypeslink)));
+        Utils.clickElement(inspectiontypeslink);
 	}
 
 	public void clickSuppliesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(supplieslink)));
+        Utils.clickElement(supplieslink);
 	}
 
 	public void clickExpensesTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(expensestypeslink)));
+        Utils.clickElement(expensestypeslink);
 	}
 
 	public void clickInvoiceTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(invoicetypeslink)));
+        Utils.clickElement(invoicetypeslink);
 	}
 
 	public void clickWorkOrderTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(workordertypeslink)));
+        Utils.clickElement(workordertypeslink);
 	}
 
 	public void clickPriceMatricesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(pricematriceslink)));
+	    Utils.clickElement(pricematriceslink);
 	}
 
 	public void clickServiceContractTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(servicecontracttypeslink)));
+	    Utils.clickElement(servicecontracttypeslink);
 	}
 
 	public void clickServiceRequestTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(servicerequesttypeslink)));
+	    Utils.clickElement(servicerequesttypeslink);
 	}
 
 	public void clickVehiclePartsLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(vehiclepartslink)));
+        Utils.clickElement(vehiclepartslink);
 	}
 
 	public void clickTimesheetTypesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(timesheetypesslink)));
+        Utils.clickElement(timesheetypesslink);
 	}
 
 	public void clickManageLicencesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(managelicenceslink)));
+        Utils.clickElement(managelicenceslink);
 	}
 
 	public void clickManageDevicesLink() {
-		click(wait.until(ExpectedConditions.elementToBeClickable(managedeviceslink)));
+        Utils.clickElement(managedeviceslink);
 	}
 
 	public void clickInterApplicationExchangeLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(interApplicationExchangeLink)).click();
+        Utils.clickElement(interApplicationExchangeLink);
 	}
 }

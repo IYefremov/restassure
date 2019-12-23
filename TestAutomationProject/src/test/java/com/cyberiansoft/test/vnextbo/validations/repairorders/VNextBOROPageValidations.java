@@ -219,7 +219,7 @@ public class VNextBOROPageValidations {
     private static void verifyDateOrNotStartedPhaseForOrderWithoutDate(LocalDate dateBeforeCurrentDate) {
         final List<String> ordersDatesList = VNextBOROPageInteractions.getOrdersTargetDatesList();
         final List<String> ordersCurrentPhaseList = VNextBOROPageInteractions.getOrdersCurrentPhaseList();
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
 
         ordersDatesList.forEach(System.out::println);
         ordersCurrentPhaseList.forEach(System.out::println);
@@ -235,7 +235,7 @@ public class VNextBOROPageValidations {
     }
 
     private static void verifyTargetDateForOrders(LocalDate dateBeforeCurrentDate, List<String> ordersDatesList) {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
 
         for (int i = 0; i < ordersDatesList.size(); i++) {
             if (i == 0) {
@@ -252,7 +252,7 @@ public class VNextBOROPageValidations {
     }
 
     private static void verifyTargetDateForOrders(LocalDate dateStarted, LocalDate dateFinished, List<String> ordersDatesList) {
-        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
 
         for (int i = 0; i < ordersDatesList.size(); i++) {
             if (i == 0) {
@@ -351,7 +351,7 @@ public class VNextBOROPageValidations {
 
     public static boolean isArbitrationDateMoreThanCurrentDate(String arbitrationDate) {
         final LocalDate currentDate = CustomDateProvider.getCurrentDateLocalized();
-        final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getDate());
+        final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getFormat());
         return currentDate.isBefore(LocalDate.parse(arbitrationDate, dateFormat));
     }
 
@@ -387,7 +387,7 @@ public class VNextBOROPageValidations {
 
     private static void verifyOrdersAreSortedByDateInDescendingOrder(List<String> priorityDates) {
         if (priorityDates != null) {
-            final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+            final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
             for (int i = 0; i < priorityDates.size(); i++) {
                 if (i == 0) {
                     continue;
@@ -401,7 +401,7 @@ public class VNextBOROPageValidations {
 
     private static void verifyOrdersAreSortedByDateInAscendingOrder(List<String> priorityDates) {
         if (priorityDates != null) {
-            final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getDate());
+            final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
             for (int i = 0; i < priorityDates.size(); i++) {
                 if (i == 0) {
                     continue;

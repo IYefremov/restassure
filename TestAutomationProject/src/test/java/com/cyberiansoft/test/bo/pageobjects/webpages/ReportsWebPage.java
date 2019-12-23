@@ -1,13 +1,11 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import org.testng.Assert;
 
 public class ReportsWebPage extends BaseWebPage {
 
@@ -23,10 +21,10 @@ public class ReportsWebPage extends BaseWebPage {
 	}
 
 	public void clickTechnicianCommissionsLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(technicianCommissionLink)).click();
+        Utils.clickElement(technicianCommissionLink);
 	}
 
 	public void clickAPADStatementLink() {
-		wait.until(ExpectedConditions.elementToBeClickable(apadStatementLink)).click();
+	    Utils.clickElement(apadStatementLink);
 	}
 }
