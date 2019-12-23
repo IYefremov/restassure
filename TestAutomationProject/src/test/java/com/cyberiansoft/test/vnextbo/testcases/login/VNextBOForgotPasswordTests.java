@@ -10,6 +10,7 @@ import com.cyberiansoft.test.enums.ErrorMessages;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOForgotPasswordWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOResetPasswordPage;
@@ -20,6 +21,7 @@ import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -95,7 +97,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userName);
         nada.deleteAllMessages();
-        WaitUtilsWebDriver.waitForLoading();
         forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
@@ -117,12 +118,13 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         webdriverGotoWebPage(resetPasswordUrl);
         Utils.refreshPage();
 
-        VNextBOResetPasswordPage vNextBOResetPasswordPage = new VNextBOResetPasswordPage(webdriver);
+        VNextBOResetPasswordPage vNextBOResetPasswordPage = new VNextBOResetPasswordPage();
+        vNextBOResetPasswordPage.waitUntilPageIsLoaded();
         Assert.assertEquals(vNextBOResetPasswordPage.getUserEmail(), userName,
                 "User's email hasn't been correct");
 
         vNextBOResetPasswordPage.setNewPassword(userPassword);
-        WaitUtilsWebDriver.waitForLoading();
+        VNextBOLoginInteractions.waitUntilPageIsLoaded();
         Assert.assertEquals(VNextBOLoginInteractions.getValueFromEmailField(), userName,
                 "Email field hasn't been correct");
         Utils.refreshPage();
@@ -135,7 +137,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userName);
         nada.deleteAllMessages();
-        WaitUtilsWebDriver.waitForLoading();
         forgotPasswordPage.setConfirmationMailFieldValue(userName);
         forgotPasswordPage.clickSubmitButton();
 
@@ -164,7 +165,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userName);
         nada.deleteAllMessages();
-        WaitUtilsWebDriver.waitForLoading();
         forgotPasswordPage.setConfirmationMailFieldValue(data.getEmail());
         forgotPasswordPage.clickSubmitButton();
 

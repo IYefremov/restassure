@@ -9,6 +9,5 @@ public class VNextBOPartsOrdersListPanelSteps {
     public static void openPartOrderDetailsByNumberInList(int orderNumberInList) {
 
         Utils.clickElement(new VNextBOPartsOrdersListPanel().getListOptions().get(orderNumberInList));
-        WaitUtilsWebDriver.waitForLoading();
     }
 }

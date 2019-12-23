@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.text.DateFormat;
@@ -18,7 +20,7 @@ import java.util.stream.Collectors;
 public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyDetailsPanelIsDisplayed() {
-
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNextBOPartsDetailsPanel().getPartsDetailsTable()));
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getPartsDetailsTable()),
                 "Parts details panel hasn't been displayed");
     }

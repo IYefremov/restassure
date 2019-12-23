@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.openqa.selenium.WebElement;
@@ -19,6 +20,18 @@ public class VNextBOLoginSteps {
             Utils.clickElement(loginButton);
             WaitUtilsWebDriver.getWait().until(ExpectedConditions.invisibilityOf(loginButton));
             WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNexBOLeftMenuPanel().getMenuButton()));
+            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNextBOHomeWebPage().getSupportForBOButton()));
+            WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+            WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        }
+    }
+
+    public static  void userLoginWithInvalidUserData(String username, String userPsw) {
+        if (VNextBOLoginValidations.isLoginFormDisplayed()) {
+            WebElement loginButton = new VNextBOLoginScreenWebPage().getLoginButton();
+            VNextBOLoginInteractions.setEmailField(username);
+            VNextBOLoginInteractions.setPasswordField(userPsw);
+            Utils.clickElement(loginButton);
             WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
             WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         }

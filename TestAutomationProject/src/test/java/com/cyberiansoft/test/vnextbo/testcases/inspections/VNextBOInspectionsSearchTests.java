@@ -60,7 +60,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsSearchTD();
         VNextBOLeftMenuInteractions.selectInspectionsMenu();
-        VNextBOInspectionsPageSteps.waitUntilInspectionsPageIsOpened();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)

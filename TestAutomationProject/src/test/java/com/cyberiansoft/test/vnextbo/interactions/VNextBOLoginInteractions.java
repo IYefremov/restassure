@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnextbo.interactions;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOLoginInteractions {
 
@@ -31,5 +33,9 @@ public class VNextBOLoginInteractions {
 
     public static  void setPasswordField(String userPsw) {
         Utils.clearAndType(new VNextBOLoginScreenWebPage().getPasswordField(), userPsw);
+    }
+
+    public static void waitUntilPageIsLoaded() {
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(new VNextBOLoginScreenWebPage().getEmailField()));
     }
 }
