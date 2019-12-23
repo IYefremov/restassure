@@ -483,7 +483,7 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
             if (serviceData.getServicePrice() != null)
                 RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
             if (serviceData.getVehiclePart() != null)
-                RegularServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
+                RegularServiceDetailsScreenSteps.selectServiceVehiclePart(serviceData.getVehiclePart());
             RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
             RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceData.getServiceNewTechnician());
             RegularServiceDetailsScreenSteps.unselectServiceTechnician(serviceData.getServiceDefaultTechnician());
@@ -536,7 +536,7 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
             if (serviceData.getServicePrice() != null)
                 RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
             if (serviceData.getVehiclePart() != null)
-                RegularServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
+                RegularServiceDetailsScreenSteps.selectServiceVehiclePart(serviceData.getVehiclePart());
             RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
             RegularServiceDetailsScreenSteps.selectServiceTechnician(serviceData.getServiceNewTechnician());
             RegularServiceDetailsScreenSteps.unselectServiceTechnician(serviceData.getServiceDefaultTechnician());

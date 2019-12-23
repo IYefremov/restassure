@@ -96,29 +96,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 
 	public String getTechniciansValue() {
-		WebElement par = getTableParentCell("Technicians");
-		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")).getAttribute("value");
-	}
-
-	public void answerQuestion(QuestionsData questionsData) {
-
-		appiumdriver.findElementByAccessibilityId("Questions").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[2]")));
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[2]")).click();
-		if (questionsData.getQuestionAnswer() != null)
-			appiumdriver.findElement(MobileBy.AccessibilityId(questionsData.getQuestionAnswer())).click();
-		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();
-	}
-
-	public void answerQuestion(String answer) {
-
-		appiumdriver.findElementByAccessibilityId("Questions").click();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[2]")));
-		appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable[1]/XCUIElementTypeCell[2]")).click();
-		appiumdriver.findElement(MobileBy.AccessibilityId(answer)).click();	
-		appiumdriver.findElement(MobileBy.AccessibilityId("Back")).click();	
+		WebElement par = appiumdriver.findElementByAccessibilityId("TechniciansSelector");
+		return par.findElements(MobileBy.className("XCUIElementTypeStaticText")) .get(1).getAttribute("value");
 	}
 	
 	public void answerQuestion2(String answer) {
@@ -166,8 +145,7 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isQuestionFormCellExists() {
-		boolean exists =  appiumdriver.findElements(MobileBy.AccessibilityId("Questions")).size() > 0;
-		return exists;
+		return appiumdriver.findElements(MobileBy.AccessibilityId("Questions")).size() > 0;
 	}
 
 	public void setServiceQuantityValue(String _quantity) {
@@ -379,20 +357,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 				.findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("label");
 		return techitianlabel.substring(techitianlabel.lastIndexOf("%"), techitianlabel.indexOf(")"));
 	}
-	
-	public void changeAmountOfBundleService(String newamount) {
-		List<WebElement> toolbarbtns = appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElements(MobileBy.className("XCUIElementTypeButton"));
-		for (WebElement btn : toolbarbtns)
-			if (btn.getAttribute("name").contains("$")) {
-				btn.click();
-				break;
-			}
-		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
-		amountfld.clear();
-		amountfld.sendKeys(newamount);
-		appiumdriver.findElementByAccessibilityId("Override").click();
-
-	}
 
 	public boolean isTechnicianSelected(String technician) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
@@ -438,7 +402,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	//Service Parts /////////
 	
 	public String getServicePartValue() {
-		return appiumdriver.findElementByAccessibilityId("ClarificationBox_PartSelector").findElement(MobileBy.className("XCUIElementTypeStaticText")) .getAttribute("value");
+		return appiumdriver.findElementByAccessibilityId("ClarificationBox_PartSelector").
+				findElement(MobileBy.className("XCUIElementTypeStaticText")) .getAttribute("value");
 	}
 	
 	public void clickServicePartCell() {
@@ -451,8 +416,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getServicePartCategoryValue() {
-		WebElement par = getTableParentCell("Category");
-		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")) .getAttribute("value");
+		WebElement par = appiumdriver.findElementByAccessibilityId("ServicePartOemCell_Category");
+		return par.findElements(MobileBy.className("XCUIElementTypeStaticText")) .get(1).getAttribute("value");
 	}
 	
 	public void selectServicePartSubcategory(String subcategoryname) {
@@ -462,8 +427,8 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public String getServicePartSubCategoryValue() {
-		WebElement par = getTableParentCell("Subcategory");
-		return par.findElement(By.xpath("//XCUIElementTypeStaticText[2]")) .getAttribute("value");
+		WebElement par = appiumdriver.findElementByAccessibilityId("ServicePartOemCell_Subcategory");
+		return par.findElements(MobileBy.className("XCUIElementTypeStaticText")) .get(1).getAttribute("value");
 	}
 	
 	public void selectServicePartSubcategoryPart(String subcategorypartname) {
@@ -477,10 +442,6 @@ public class RegularSelectedServiceDetailsScreen extends iOSRegularBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(subcategorypositionname)));
 		appiumdriver.findElementByAccessibilityId(subcategorypositionname).click();
-	}
-	
-	public WebElement getTableParentCell(String cellname) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 
 	public void clickSaveButton() {

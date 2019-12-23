@@ -46,7 +46,7 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 		bundleview.findElementByAccessibilityId(bundle).findElementByAccessibilityId("unselected").click();
 	}
 
-	public RegularSelectedServiceDetailsScreen openBundleInfo(String bundle) {
+	public void openBundleInfo(String bundle) {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 		MobileElement bundleview = (MobileElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("name = 'BundleItemsView' and type = 'XCUIElementTypeTable'")));
 		if (!bundleview.findElementByAccessibilityId(bundle).isDisplayed())
@@ -54,7 +54,6 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 					findElement(MobileBy.AccessibilityId(bundle)));
 		bundleview.findElement(MobileBy.AccessibilityId(bundle))
 				.findElement(MobileBy.AccessibilityId("custom detail button")).click();
-		return new RegularSelectedServiceDetailsScreen();
 	}
 	
 	public void clickServicesIcon() {
@@ -76,12 +75,7 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	}
 
 	public void changeAmountOfBundleService(String newamount) {
-		List<WebElement> toolbarbtns = appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElements(MobileBy.className("XCUIElementTypeButton"));
-		for (WebElement btn : toolbarbtns)
-			if (btn.getAttribute("name").contains("$")) {
-				btn.click();
-				break;
-			}
+		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("BundleItemsView_BundleServiceAmount"));
 		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
 		amountfld.clear();
 		amountfld.sendKeys(newamount);

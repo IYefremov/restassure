@@ -162,7 +162,8 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public boolean isServiceWithSubSrviceSelected(String serviceName, String serviceSubsrviceName) {
-        return selectedservicestable.findElements(MobileBy.xpath("//XCUIElementTypeCell[@name='" + serviceName + "']/XCUIElementTypeStaticText[@name='" + serviceSubsrviceName + "']")).size() > 0;
+        return selectedservicestable.findElementByAccessibilityId(serviceName).
+                findElements(MobileBy.AccessibilityId(serviceSubsrviceName)).size() > 0;
     }
 
     public boolean isServiceApproved(String serviceName) {

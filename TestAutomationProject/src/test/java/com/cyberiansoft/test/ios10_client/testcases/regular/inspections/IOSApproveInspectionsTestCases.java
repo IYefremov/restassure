@@ -239,9 +239,8 @@ public class IOSApproveInspectionsTestCases extends IOSRegularBaseTestCase {
             RegularNavigationSteps.navigateToServicesScreen();
             RegularServicesScreen servicesScreen = new RegularServicesScreen();
             servicesScreen.selectService(inspectionData.getBundleService().getBundleServiceName());
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-            selectedServiceDetailsScreen.changeAmountOfBundleService(inspectionData.getBundleService().getBundleServiceAmount());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularSelectedBundleServiceScreenSteps.changeAmountOfBundleService(inspectionData.getBundleService().getBundleServiceAmount());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
             RegularInspectionsSteps.saveInspectionAsFinal();
             RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
 

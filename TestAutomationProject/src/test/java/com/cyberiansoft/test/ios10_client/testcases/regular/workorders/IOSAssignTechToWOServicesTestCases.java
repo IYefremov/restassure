@@ -275,7 +275,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
         RegularServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
-        RegularServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
+        RegularServiceDetailsScreenSteps.selectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
 
         RegularNavigationSteps.navigateToVehicleInfoScreen();
@@ -372,7 +372,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
         RegularServiceDetailsScreenSteps.selectServiceAdjustment(workOrderData.getServiceData().getServiceAdjustment());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
+        RegularServiceDetailsScreenSteps.selectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
 
         RegularNavigationSteps.navigateToOrderSummaryScreen();
@@ -432,7 +432,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         RegularSelectedServiceBundleScreen serviceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
             Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
             selectedServiceDetailsScreen.clickCancel();
         }
@@ -457,7 +458,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         }
         serviceBundleScreen.clickSaveButton();
         selectedServicesScreen.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
-        RegularServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
+        RegularServiceDetailsScreenSteps.selectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
         RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getMatrixServiceData().getMatrixServiceName());
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
@@ -474,7 +475,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
 
         for (ServiceData serviceData : bundleServiceData.getServices()) {
-            selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
             String techString = "";
             for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
                 techString = techString + ", " + serviceTechnician.getTechnicianFullName();
@@ -518,7 +519,8 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         RegularSelectedServiceBundleScreen serviceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
             Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
             selectedServiceDetailsScreen.cancelSelectedServiceDetails();
         }
@@ -545,7 +547,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
             }
 
             if (serviceData.getVehiclePart() != null)
-                RegularServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
+                RegularServiceDetailsScreenSteps.selectServiceVehiclePart(serviceData.getVehiclePart());
 
             RegularServiceDetailsScreenSteps.saveServiceDetails();
         }
@@ -601,14 +603,14 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         final String workOrderNumber = vehicleScreen.getWorkOrderNumber();
         RegularNavigationSteps.navigateToServicesScreen();
 
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         BundleServiceData bundleServiceData = workOrderData.getBundleService();
         selectedServicesScreen.openSelectBundleServiceDetails(bundleServiceData.getBundleServiceName());
         RegularSelectedServiceBundleScreen serviceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
             Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
             selectedServiceDetailsScreen.cancelSelectedServiceDetails();
         }
@@ -634,7 +636,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
             }
 
             if (serviceData.getVehiclePart() != null)
-                RegularServiceDetailsScreenSteps.slectServiceVehiclePart(serviceData.getVehiclePart());
+                RegularServiceDetailsScreenSteps.selectServiceVehiclePart(serviceData.getVehiclePart());
 
             RegularServiceDetailsScreenSteps.saveServiceDetails();
         }
@@ -643,11 +645,11 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         serviceBundleScreen.clickSaveButton();
 
         selectedServicesScreen.switchToAvailableServicesTab();
-        servicesScreen.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
+        RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
         RegularServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
 
-        servicesScreen.switchToSelectedServicesTab();
+        RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getServiceData().getServiceName());
         RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_SET_NON_ZERO_AMAUNT_FOR_SERVICE);
@@ -793,7 +795,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         RegularServicesScreenSteps.openCustomServiceDetails(workOrderData.getServiceData().getServiceName());
-        RegularServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
+        RegularServiceDetailsScreenSteps.selectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
         RegularServiceDetailsScreenSteps.setServicePriceValue(workOrderData.getServiceData().getServicePrice());
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_TECH_SPLIT_WITH_ZERO_AMAUNT);
         RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
