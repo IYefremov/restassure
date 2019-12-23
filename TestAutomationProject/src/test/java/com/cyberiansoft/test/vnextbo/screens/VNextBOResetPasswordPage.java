@@ -1,8 +1,11 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -24,12 +27,11 @@ public class VNextBOResetPasswordPage extends VNextBOBaseWebPage {
     private TextField confirmNewPasswordField;
 
     @FindBy(xpath = "//div[@data-bind = 'text: invintationUserProfile.email']")
-    private WebElement userEmail;
+    public WebElement userEmail;
 
-    public VNextBOResetPasswordPage(WebDriver driver) {
-        super(driver);
+    public VNextBOResetPasswordPage() {
+        super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         new WebDriverWait(driver, 30)
                 .until(ExpectedConditions.visibilityOf(submitBtn));
     }
@@ -43,5 +45,9 @@ public class VNextBOResetPasswordPage extends VNextBOBaseWebPage {
         newPasswordField.clearAndType(newPassword);
         confirmNewPasswordField.clearAndType(newPassword);
         submitBtn.click();
+    }
+
+    public void waitUntilPageIsLoaded() {
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(userEmail));
     }
 }

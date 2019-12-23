@@ -1,13 +1,16 @@
 package com.cyberiansoft.test.vnextbo.testcases.login;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOHomePageData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOFooterPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOHeaderPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
@@ -28,8 +31,15 @@ public class VNextBOLoginTests extends BaseTestCase {
     private String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
     private String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
 
+
+    @Override
     @BeforeClass
     public void login() {
+
+        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
+        DriverBuilder.getInstance().setDriver(browserType);
+        webdriver = DriverBuilder.getInstance().getDriver();
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginTD();
     }
 
@@ -55,7 +65,7 @@ public class VNextBOLoginTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanNotLoginWithoutEmail(String rowID, String description, JSONObject testData) {
 
-        VNextBOLoginSteps.userLogin("", userPassword);
+        VNextBOLoginSteps.userLoginWithInvalidUserData("", userPassword);
         Assert.assertEquals(VNextBOLoginInteractions.getEmailErrorMessage(), "Email is required!",
                 "Email error message hasn't been correct or not displayed");
         VNextBOLoginSteps.clearLoginFormData();
@@ -65,7 +75,7 @@ public class VNextBOLoginTests extends BaseTestCase {
     public void verifyUserCanNotLoginWithoutPassword(String rowID, String description, JSONObject testData) {
 
         Utils.refreshPage();
-        VNextBOLoginSteps.userLogin(userName, "");
+        VNextBOLoginSteps.userLoginWithInvalidUserData(userName, "");
         Assert.assertEquals(VNextBOLoginInteractions.getPasswordErrorMessage(), "Password is required!",
                 "Password error message hasn't been correct or not displayed");
         VNextBOLoginSteps.clearLoginFormData();
@@ -75,7 +85,7 @@ public class VNextBOLoginTests extends BaseTestCase {
     public void verifyUserCanNotLoginWithoutEmailAndPassword(String rowID, String description, JSONObject testData) {
 
         Utils.refreshPage();
-        VNextBOLoginSteps.userLogin("", "");
+        VNextBOLoginSteps.userLoginWithInvalidUserData("", "");
         Assert.assertEquals(VNextBOLoginInteractions.getEmailErrorMessage(), "Email is required!",
                 "Email error message hasn't been correct or not displayed");
         Assert.assertEquals(VNextBOLoginInteractions.getPasswordErrorMessage(), "Password is required!",
@@ -86,7 +96,7 @@ public class VNextBOLoginTests extends BaseTestCase {
     public void verifyUserCanNotLoginWithInvalidUserData(String rowID, String description, JSONObject testData) {
 
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
-        VNextBOLoginSteps.userLogin(data.getLogin(), data.getPassword());
+        VNextBOLoginSteps.userLoginWithInvalidUserData(data.getLogin(), data.getPassword());
         Assert.assertEquals(VNextBOLoginInteractions.getPasswordErrorMessage(),
                 "Your login attempt was not successful. Please try again.",
                 "Error message hasn't been correct or not displayed");
@@ -96,7 +106,7 @@ public class VNextBOLoginTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
     public void verifyUserCanNotLoginWithPasswordInsteadOfEmail(String rowID, String description, JSONObject testData) {
 
-        VNextBOLoginSteps.userLogin(userPassword, userName);
+        VNextBOLoginSteps.userLoginWithInvalidUserData(userPassword, userName);
         Assert.assertEquals(VNextBOLoginInteractions.getEmailErrorMessage(), "Email is invalid!",
                 "Email error message hasn't been correct or not displayed");
         VNextBOLoginSteps.clearLoginFormData();
@@ -123,6 +133,7 @@ public class VNextBOLoginTests extends BaseTestCase {
                 "Email field hasn't been empty");
         Assert.assertEquals(VNextBOLoginInteractions.getValueFromPasswordField(), "",
                 "Password field hasn't been empty");
+        VNextBOLoginInteractions.waitUntilPageIsLoaded();
         VNextBOLoginSteps.userLogin(userName, userPassword);
         VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
         Assert.assertTrue(vNextBOHomeWebPage.isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");

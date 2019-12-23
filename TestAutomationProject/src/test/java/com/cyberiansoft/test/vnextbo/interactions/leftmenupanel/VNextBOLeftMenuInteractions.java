@@ -4,12 +4,15 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOLeftMenuInteractions {
 
     public static void selectInspectionsMenu() {
         selectMenuItem(MainMenuItems.OPERATIONS.getMenu(), "Inspections");
+        VNextBOInspectionsPageSteps.waitUntilInspectionsPageIsOpened();
     }
 
     public static void selectInvoicesMenu() {
@@ -18,6 +21,7 @@ public class VNextBOLeftMenuInteractions {
 
     public static void selectPartsManagementMenu() {
         selectMenuItem(MainMenuItems.OPERATIONS.getMenu(), "Parts Management");
+        VNextBOPartsManagementWebPageSteps.waitUntilPartsManagementPageIsLoaded();
     }
 
     public static void selectUsersMenu() {

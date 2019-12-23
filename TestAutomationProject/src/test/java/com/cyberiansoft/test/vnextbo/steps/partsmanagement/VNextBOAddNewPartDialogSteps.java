@@ -54,6 +54,5 @@ public class VNextBOAddNewPartDialogSteps {
     public static void clickSubmitButton() {
 
         Utils.clickElement(new VNextBOAddNewPartDialog().getSubmitButton());
-        WaitUtilsWebDriver.waitForLoading();
     }
 }

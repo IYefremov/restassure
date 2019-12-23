@@ -8,7 +8,7 @@ import org.testng.Assert;
 public class VNextBOModalDialogValidations {
 
     public static void verifyDialogIsDisplayed() {
-        WaitUtilsWebDriver.waitForVisibility(new VNextBOModalDialog().getDialogContent(), 2);
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOModalDialog().getDialogContent(), 4);
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOModalDialog().getDialogContent()),
                 "Modal dialog hasn't been opened");
     }

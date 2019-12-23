@@ -149,7 +149,6 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
     public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openIntercomMessenger();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOPartsManagementWebPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOPartsManagementWebPageSteps.closeIntercom();
     }

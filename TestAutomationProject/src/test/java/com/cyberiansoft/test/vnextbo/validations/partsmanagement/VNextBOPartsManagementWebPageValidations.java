@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsManagementWebPage;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
 import org.openqa.selenium.NoSuchElementException;
@@ -45,7 +46,8 @@ public class VNextBOPartsManagementWebPageValidations extends VNextBOBaseWebPage
     }
 
     public static void verifySavedSearchIsPresentedInTheList(String savedSearchName, boolean shouldBeDisplayed) {
-
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         if (shouldBeDisplayed)
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsManagementWebPage().savedSearchOptionByName(savedSearchName)),
                 "Saved search hasn't been presented in the list with saved searches");
