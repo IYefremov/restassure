@@ -18,7 +18,6 @@ public class RegularWorkOrdersSteps {
         RegularWizardScreensSteps.cancelWizard();
         Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
         alert.accept();
-        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
     }
 
 }

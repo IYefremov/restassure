@@ -75,7 +75,7 @@ public class RegularSelectedServiceBundleScreen extends iOSRegularBaseScreen {
 	}
 
 	public void changeAmountOfBundleService(String newamount) {
-		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("BundleItemsView_BundleServiceAmount"));
+		appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.AccessibilityId("BundleItemsView_BundleServiceAmount")).click();
 		IOSElement amountfld = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.className("XCUIElementTypeTextField"));
 		amountfld.clear();
 		amountfld.sendKeys(newamount);
