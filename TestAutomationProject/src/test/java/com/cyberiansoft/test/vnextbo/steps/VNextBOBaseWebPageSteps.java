@@ -19,12 +19,6 @@ public class VNextBOBaseWebPageSteps {
         Utils.clickElement(baseWebPage.userInfoBlock);
     }
 
-    public static void logOut()
-    {
-        VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(baseWebPage.logoutButton);
-    }
-
     public static void openHelpPage()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());

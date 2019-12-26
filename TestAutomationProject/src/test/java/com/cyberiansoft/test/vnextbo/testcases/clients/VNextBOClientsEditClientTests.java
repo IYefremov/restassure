@@ -55,8 +55,7 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
                 "Client info panel hasn't been collapsed");
         WaitUtilsWebDriver.waitABit(500);
         VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab("true");
-        //TODO check why Company name field is empty
-        //VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(data.getEmployee());
+        VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(data.getEmployee());
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
@@ -205,8 +204,7 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(baseRetailClient.getEmployee().getEmployeeFirstName());
         VNextBOClientsPageSteps.openClientsDetailsPage(baseRetailClient.getEmployee().getEmployeeFirstName());
         VNextBOClientDetailsViewAccordionSteps.setAllClientsData(retailClientData, false);
-        //TODO check why Company name field is empty
-        //VNextBOClientDetailsValidations.verifyAllClientDetailsBlocksData(retailClientData, false, false);
+        VNextBOClientDetailsValidations.verifyAllClientDetailsBlocksData(retailClientData, false, false);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
         VNextBOSearchPanelSteps.clearSearchFilter();
     }
@@ -222,7 +220,7 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientsPageSteps.openClientsDetailsPage(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientDetailsViewAccordionSteps.setAllClientsData(wholesaleClientData, true);
         VNextBOClientDetailsViewAccordionSteps.clickOkButton();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(wholesaleClientData.getEmployee().getCompanyName());
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: " + wholesaleClientData.getEmployee().getCompanyName());
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client",
@@ -234,7 +232,7 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientsPageSteps.openClientsDetailsPage(wholesaleClientData.getEmployee().getCompanyName());
         VNextBOClientDetailsValidations.verifyAllClientDetailsBlocksData(wholesaleClientData, true, false);
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(baseWholesaleClient.getEmployee().getCompanyName());
         VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilter();

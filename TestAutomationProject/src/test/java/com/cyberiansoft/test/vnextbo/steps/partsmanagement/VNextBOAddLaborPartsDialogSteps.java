@@ -29,6 +29,8 @@ public class VNextBOAddLaborPartsDialogSteps {
     public static void populateLaborServiceField(String laborServiceName) {
 
         Utils.clearAndType(new VNextBOAddLaborPartsDialog().getSelectLaborServiceField(), laborServiceName);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void addLaborServiceToPart(String laborServiceName) {

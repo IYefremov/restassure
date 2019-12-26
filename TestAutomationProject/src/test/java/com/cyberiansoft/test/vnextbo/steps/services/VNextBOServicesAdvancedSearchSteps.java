@@ -5,11 +5,12 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.services.VNextBOServicesAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOServicesAdvancedSearchSteps extends VNextBOBaseWebPageSteps {
 
     private static void setNameField(String serviceName) {
-
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(new VNextBOServicesAdvancedSearchDialog().getNameField()));
         Utils.clearAndType(new VNextBOServicesAdvancedSearchDialog().getNameField(), serviceName);
     }
 
@@ -29,6 +30,7 @@ public class VNextBOServicesAdvancedSearchSteps extends VNextBOBaseWebPageSteps 
     private static void clickSearchButton() {
 
         Utils.clickElement(new VNextBOServicesAdvancedSearchDialog().getSearchButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void searchArchivedServiceByName(String serviceName) {
@@ -37,6 +39,5 @@ public class VNextBOServicesAdvancedSearchSteps extends VNextBOBaseWebPageSteps 
         setNameField(serviceName);
         selectArchivedCheckBox();
         clickSearchButton();
-        WaitUtilsWebDriver.waitForLoading();
     }
 }

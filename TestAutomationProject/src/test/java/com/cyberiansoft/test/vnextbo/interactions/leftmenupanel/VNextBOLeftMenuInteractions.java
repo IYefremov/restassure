@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOLeftMenuInteractions {
@@ -26,6 +27,7 @@ public class VNextBOLeftMenuInteractions {
 
     public static void selectUsersMenu() {
         selectMenuItem(MainMenuItems.SETTINGS.getMenu(), "Users");
+        VNextBOUsersPageSteps.waitUntilPageIsOpened();
     }
 
     public static void selectServicesMenu() {

@@ -24,9 +24,10 @@ import org.testng.annotations.Test;
 
 public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
 
-    String newUserEmail = "autoNewUserAndSearchtest.mail.cyberiansoft@getnada.com";
-    String newUserFirstName = "autoNewUserAndSearchTestFirstName";
-    String newUserLastName = "autoNewUserAndSearchTestLastName";
+    String newUserEmail = "usersearchtest6.mail.cyberiansoft@getnada.com";
+    String newUserFirstName = "userSearchTestFirstName6";
+    String newUserLastName = "userSearchTestLastName6";
+    String newUserPhone = "161616166";
 
     @BeforeClass
     public void settingUp() {
@@ -53,7 +54,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOUsersPageSteps.clickAddNewUserButton();
         VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         VNextBOAddNewUserDialogSteps.createNewUser(newUserFirstName, newUserLastName,
-                newUserEmail,"111111116", true);
+                newUserEmail,newUserPhone, true);
         VNextBOAddNewUserDialogValidations.verifyDialogIsClosed(vNexBOAddNewUserDialog);
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "New user hasn't been found");
@@ -141,10 +142,10 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
     public void verifyUserCanSearchByPhone(String rowID, String description, JSONObject testData) {
 
-        VNextBOUsersPageSteps.searchUserByPhone("1111111116");
+        VNextBOUsersPageSteps.searchUserByPhone(newUserPhone);
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found by phone");
-        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("1111111116"));
-        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Phone: 1111111116");
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText(newUserPhone));
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Phone: " + newUserPhone);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
@@ -193,15 +194,15 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();
         VNextBOUsersPageSteps.openUserDataForEdit();
         VNextBOAddNewUserDialogValidations.verifyEmailFieldIsDisabled();
-        VNextBOAddNewUserDialogSteps.editUserData("autoNewUserAndSearchEditedFirstName",
-                "autoNewUserAndSearchEditedLastName", "222222227", false);
+        VNextBOAddNewUserDialogSteps.editUserData("userSearchTestFirstName6Edited",
+                "userSearchTestLastName6Edited", "161616167", false);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("autoNewUserAndSearchEditedFirstName autoNewUserAndSearchEditedLastName");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("userSearchTestFirstName6Edited userSearchTestLastName6Edited");
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "Edited user hasn't been found");
-        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("222222227"));
-        Assert.assertTrue(VNextBOUsersPageValidations.verifyRedTriangleWarningIconIsNotDisplayed(vNexBOUsersWebPage),
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("161616167"));
+        Assert.assertFalse(VNextBOUsersPageValidations.verifyRedTriangleWarningIconIsNotDisplayed(vNexBOUsersWebPage),
                 "Red triangle warning icon has been displayed.");
-        Assert.assertTrue(VNextBOUsersPageValidations.verifyReSendButtonIsNotDisplayed(vNexBOUsersWebPage),
+        Assert.assertFalse(VNextBOUsersPageValidations.verifyReSendButtonIsNotDisplayed(vNexBOUsersWebPage),
                 "Re-send button has been displayed.");
     }
 }

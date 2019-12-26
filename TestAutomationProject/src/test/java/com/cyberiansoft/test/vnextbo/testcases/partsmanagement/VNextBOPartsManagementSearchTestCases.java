@@ -302,7 +302,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch(searchDataForEdit.getSearchName());
         VNextBOAdvancedSearchDialogSteps.setAllFields(editedSearchData);
         VNextBOAdvancedSearchDialogSteps.saveSearch();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOPartsManagementWebPageSteps.waitUntilPartsManagementPageIsLoaded();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(editedSearchData.getSearchName(), true);

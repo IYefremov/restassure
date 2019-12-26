@@ -128,6 +128,7 @@ public class VNextBOAdvancedSearchDialogSteps {
     public static void clickSearchButton() {
 
         Utils.clickElement(new VNextBOAdvancedSearchDialog().getSearchButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clearAllFields() {
@@ -138,11 +139,13 @@ public class VNextBOAdvancedSearchDialogSteps {
     public static void saveSearch() {
 
         Utils.clickElement(new VNextBOAdvancedSearchDialog().getSaveButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickDeleteButton() {
 
         Utils.clickElement(new VNextBOAdvancedSearchDialog().getDeleteButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void setAllFields(VNextBOPartsManagementSearchData searchData) {

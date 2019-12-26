@@ -2,9 +2,11 @@ package com.cyberiansoft.test.vnextbo.steps.users;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOAddNewUserDialog;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,13 +16,13 @@ public class VNextBOAddNewUserDialogSteps extends VNextBOBaseWebPageSteps {
     public static void clickSaveButton() {
         VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         Utils.clickElement(vNexBOAddNewUserDialog.saveBtn);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.visibilityOf(vNexBOAddNewUserDialog.saveBtn));
     }
 
     public static void closeDialog() {
         VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         Utils.clickElement(vNexBOAddNewUserDialog.closeDialogBtn);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(vNexBOAddNewUserDialog.closeDialogBtn));
     }
 
     public static void setUserFirstName(String firstName) {
@@ -56,6 +58,9 @@ public class VNextBOAddNewUserDialogSteps extends VNextBOBaseWebPageSteps {
         if (webAccess)
             clickWebAccessCheckbox();
         clickSaveButton();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void editUserData(String firstName, String lastName, String phoneNumber, boolean webAccess) {

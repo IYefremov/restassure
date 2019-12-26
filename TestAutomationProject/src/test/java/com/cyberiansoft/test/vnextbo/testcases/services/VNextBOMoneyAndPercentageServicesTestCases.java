@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases.services;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.services.VNextBOServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -162,8 +163,9 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServiceDialogValidations.verifyErrorMessageIsCorrect("Service name is required!");
         VNextBOServiceDialogSteps.setServiceName(" ");
         VNextBOServiceDialogSteps.clickSaveButton();
-        VNextBOServiceDialogSteps.closeServiceDialog();
         VNextBOServiceDialogValidations.verifyErrorMessageIsCorrect("Service name is required!");
+        VNextBOServiceDialogSteps.closeServiceDialog();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPercentageServiceData.getServiceName());
         VNextBOServicesWebPageSteps.clickEditButtonForService(editedPercentageServiceData.getServiceName());
         VNextBOServiceDialogSteps.setServiceName(" ");
@@ -230,6 +232,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
     public void verifyUserCanChangeSequenceNumberForPercentageServiceOrder(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPercentageServiceData.getServiceName());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(editedPercentageServiceData.getServiceName(), "14");
         VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(editedPercentageServiceData.getServiceName(), "14");
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();

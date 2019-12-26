@@ -89,6 +89,7 @@ public class VNextBOHomeWebPage extends VNextBOBaseWebPage {
     }
 
     public boolean isSupportForBOButtonDisplayed() {
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(supportForBOButton));
         return Utils.isElementDisplayed(supportForBOButton);
     }
 
