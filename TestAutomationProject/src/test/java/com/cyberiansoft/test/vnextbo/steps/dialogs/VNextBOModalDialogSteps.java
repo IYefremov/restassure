@@ -18,12 +18,14 @@ public class VNextBOModalDialogSteps {
     public static void clickOkButton() {
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
         Utils.clickElement(modalDialog.getConfirmOKButton());
-        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getConfirmOKButton(), 2);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getConfirmOKButton(), 4);
     }
 
     public static void clickCloseButton() {
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
         Utils.clickElement(modalDialog.getCloseButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCloseButton(), 2);
     }
 

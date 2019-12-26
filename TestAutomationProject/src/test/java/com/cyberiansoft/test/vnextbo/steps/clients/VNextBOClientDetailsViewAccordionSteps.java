@@ -19,52 +19,74 @@ public class VNextBOClientDetailsViewAccordionSteps {
     public static void clickClientsInfoTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getClientsInfo());
         waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getClientsInfoPanel(), shouldBeExpanded);
+        WaitUtilsWebDriver.waitABit(1000);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickAccountInfoTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getAccountInfo());
         waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getAccountInfoPanel(), shouldBeExpanded);
+        WaitUtilsWebDriver.waitABit(1000);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickAddressTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getAddress());
         waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getAddressPanel(), shouldBeExpanded);
+        WaitUtilsWebDriver.waitABit(1000);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickEmailOptionsTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getEmailOptions());
         waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getEmailOptionsPanel(), shouldBeExpanded);
+        WaitUtilsWebDriver.waitABit(1000);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickPreferencesTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getPreferences());
         waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getPreferencesPanel(), shouldBeExpanded);
+        WaitUtilsWebDriver.waitABit(1000);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickMiscellaneousTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getMiscellaneous());
         waitUntilPanelIsExpanded(new VNextBOClientsDetailsViewAccordion().getMiscellaneousPanel(), shouldBeExpanded);
+        WaitUtilsWebDriver.waitABit(1000);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickServicesTab(String shouldBeExpanded) {
         Utils.clickElement(new VNextBOClientsDetailsViewAccordion().getServices());
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickCancelButton() {
         WebElement cancelButton = new VNextBOClientsDetailsViewAccordion().getCancelButton();
         Utils.clickElement(cancelButton);
         WaitUtilsWebDriver.waitForInvisibility(cancelButton, 2);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickOkButton() {
         WebElement okButton = new VNextBOClientsDetailsViewAccordion().getOkButton();
         Utils.clickElement(okButton);
-        WaitUtilsWebDriver.waitForInvisibility(okButton, 2);
+        WaitUtilsWebDriver.waitForInvisibility(okButton, 4);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void setClientInfoData(Employee employee) {
-
+        WaitUtilsWebDriver.waitABit(2000);
         WaitUtilsWebDriver.waitForElementToBeClickable(new VNextBOClientsDetailsViewAccordion().getClientsInfo(), 2);
         if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) clickClientsInfoTab("true");
         final VNextBOClientInfoBlockInteractions clientInfoBlockInteractions = new VNextBOClientInfoBlockInteractions();

@@ -19,8 +19,8 @@ public class VNextBOLoginSteps {
             VNextBOLoginInteractions.setPasswordField(userPsw);
             Utils.clickElement(loginButton);
             WaitUtilsWebDriver.getWait().until(ExpectedConditions.invisibilityOf(loginButton));
+            WaitUtilsWebDriver.waitForSpinnerToDisappear();
             WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNexBOLeftMenuPanel().getMenuButton()));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNextBOHomeWebPage().getSupportForBOButton()));
             WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
             WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         }

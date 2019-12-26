@@ -29,7 +29,7 @@ public class VNexBOLeftMenuPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//body[@class='body-mobile--scroll-hidden']")
     private WebElement closedMenu;
 
-    @FindBy(xpath = "//nav[@class='left-menu__nav']")
+    @FindBy(xpath = "//nav[@class='left-menu__nav']/ul")
     private WebElement body;
 
     @FindBy(xpath = "//*[@data-automation-id='inspections']")

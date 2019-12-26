@@ -3,19 +3,26 @@ package com.cyberiansoft.test.vnextbo.steps.services;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.services.VNextBOServiceData;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.services.VNextBOServiceDialog;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
 
     public static void clickSaveButton() {
 
         Utils.clickElement(new VNextBOServiceDialog().getSaveButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void closeServiceDialog() {
 
         Utils.clickElement(new VNextBOServiceDialog().getCloseButton());
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(new VNextBOServiceDialog().getCloseButton()));
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void setServiceName(String serviceName) {
@@ -42,7 +49,7 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(addNewServiceDialog.getPriceTypeField());
         Utils.selectOptionInDropDownWithJs(addNewServiceDialog.getPriceTypeDropDown(),
                 addNewServiceDialog.dropDownFieldOption(priceType));
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     private static void setMoneyServicePrice(String price) {
@@ -82,7 +89,7 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(addNewServiceDialog.getCategoryField());
         Utils.selectOptionInDropDownWithJs(addNewServiceDialog.getCategoryFieldDropDown(),
                 addNewServiceDialog.dropDownFieldOption(category));
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     private static void setSubCategory(String subCategory) {
@@ -91,7 +98,7 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(addNewServiceDialog.getSubCategoryField());
         Utils.selectOptionInDropDownWithJs(addNewServiceDialog.getSubCategoryFieldDropDown(),
                 addNewServiceDialog.dropDownFieldOption(subCategory));
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     private static void setPartName(String partName) {
@@ -155,7 +162,9 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         if (serviceData.getServicePriceType().equals("Percentage")) setPercentageServicePrice(serviceData.getServicePrice());
         setClarificationFields(serviceData);
         clickSaveButton();
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void setLaborServiceData(VNextBOServiceData serviceData) {
@@ -182,7 +191,9 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         if (serviceData.getServicePriceType().equals("Percentage")) setPercentageServicePrice(serviceData.getServicePrice());
         setClarificationFields(serviceData);
         clickSaveButton();
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void editAllPartServiceData(VNextBOServiceData serviceData) {

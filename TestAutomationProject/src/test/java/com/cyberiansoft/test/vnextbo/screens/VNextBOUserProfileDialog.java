@@ -1,12 +1,14 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BaseWebPage;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import javax.rmi.CORBA.Util;
 import java.util.concurrent.TimeUnit;
@@ -47,6 +49,7 @@ public class VNextBOUserProfileDialog extends BaseWebPage {
     }
 
     public boolean isUserProfileDialogDisplayed() {
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.visibilityOf(userProfileDialog));
         return Utils.isElementDisplayed(userProfileDialog);
     }
 

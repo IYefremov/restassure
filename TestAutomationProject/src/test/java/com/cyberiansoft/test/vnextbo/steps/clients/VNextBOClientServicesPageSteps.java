@@ -17,6 +17,7 @@ public class VNextBOClientServicesPageSteps extends VNextBOBaseWebPageSteps {
     public static void clickClientServicesBackButton() {
 
         Utils.clickElement(new VNextBOClientsClientServicesPage().getClientServicesBackButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void setServicePackage(String packageName) {
@@ -55,6 +56,7 @@ public class VNextBOClientServicesPageSteps extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.xpath("(//select[contains(@data-bind, 'value: clientService_IsRequired')])[1]")));
         Select selectRequired = new Select(clientServicesPage.getFirstLineRequiredDropDownField());
         selectRequired.selectByVisibleText(value);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void changeFirstLineTechnicianFieldValue(String value) {

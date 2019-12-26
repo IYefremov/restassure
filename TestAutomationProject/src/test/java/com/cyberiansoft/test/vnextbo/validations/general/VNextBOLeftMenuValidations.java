@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.validations.general;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOLeftMenuValidations {
 
@@ -20,12 +21,18 @@ public class VNextBOLeftMenuValidations {
 
     public static boolean isMainMenuExpanded() {
         final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
-        WaitUtilsWebDriver.elementShouldBeVisible(leftMenuPanel.getBody(), true);
-        return Utils.isElementWithAttributeContainingValueDisplayed(
-                leftMenuPanel.getBody(), "class", "left-menu--open", 2);
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.visibilityOf(leftMenuPanel.getBody()));
+        return Utils.isElementDisplayed(leftMenuPanel.getBody());
     }
 
     public static boolean isMainMenuCollapsed() {
-        return WaitUtilsWebDriver.elementShouldBeVisible(new VNexBOLeftMenuPanel().getClosedMenu(), true);
+        final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
+        try {
+            WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(leftMenuPanel.getBody()));
+            return Utils.isElementDisplayed(leftMenuPanel.getBody());
+        } catch (Exception ex) {
+            return false;
+        }
+
     }
 }

@@ -1,10 +1,13 @@
 package com.cyberiansoft.test.vnextbo.validations.services;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.services.VNextBOServiceData;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.services.VNextBOServicesWebPage;
 import com.cyberiansoft.test.vnextbo.steps.services.VNextBOServicesWebPageSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 public class VNextBOServicesPageValidations extends VNextBOBaseWebPageValidations {
@@ -54,7 +57,7 @@ public class VNextBOServicesPageValidations extends VNextBOBaseWebPageValidation
     }
 
     public static void verifyServicesNotFoundMessageIsDisplayed() {
-
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.visibilityOf(new VNextBOServicesWebPage().getServicesNotFoundMessage()));
         Assert.assertEquals(Utils.getText(new VNextBOServicesWebPage().getServicesNotFoundMessage()), "No services to show",
                 "Not found message hasn't been displayed or has been incorrect");
     }

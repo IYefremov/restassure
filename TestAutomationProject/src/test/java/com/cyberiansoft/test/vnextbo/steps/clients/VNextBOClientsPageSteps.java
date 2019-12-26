@@ -24,11 +24,13 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
     public static void openActiveTab() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getActiveTab());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void openArchivedTab() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getArchivedTab());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static int getClientsAmount() {

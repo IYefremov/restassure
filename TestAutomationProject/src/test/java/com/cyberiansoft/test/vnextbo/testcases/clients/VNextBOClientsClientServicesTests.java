@@ -66,10 +66,10 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOClientServicesPageValidations.verifySearchResultIsCorrectForColumnWithText("Service", "AMoneyFlatFee_VacuumCleaner");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("jkfhajkklaspasdklja");
         VNextBOClientServicesPageValidations.verifyServicesNotFoundMessageIsDisplayed();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOClientServicesPageValidations.verifyServicesTableIsDisplayed();
     }
 
@@ -157,7 +157,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageValidations.verifyFirstLineRequiredDropDownFieldContainsCorrectValue("Yes");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)

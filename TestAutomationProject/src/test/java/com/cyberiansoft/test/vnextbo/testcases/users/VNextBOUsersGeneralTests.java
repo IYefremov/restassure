@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.users;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
@@ -8,6 +9,7 @@ import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOUserProfileDialog;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -55,7 +57,6 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyIntercomMessengerCanBeOpenedClosed(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.openIntercomMessenger();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOUsersPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOUsersPageSteps.closeIntercom();
     }
@@ -92,9 +93,10 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyUserCanOpenAndCloseMainMenu(String rowID, String description, JSONObject testData) {
 
         VNextBOLeftMenuInteractions.expandMainMenu();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         Assert.assertTrue(VNextBOLeftMenuValidations.isMainMenuExpanded(), "Main menu hasn't been opened");
         VNextBOLeftMenuInteractions.collapseMainMenu();
-        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuExpanded(), "Main menu hasn't been closed");
+        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuCollapsed(), "Main menu hasn't been closed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
@@ -118,8 +120,10 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
     public void verifyUserCanLogout(String rowID, String description, JSONObject testData) {
 
-        VNextBOUsersPageSteps.logOut();
+        VNextBOHeaderPanelSteps.logout();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         Assert.assertTrue(VNextBOLoginValidations.isLoginFormDisplayed(), "Login page hasn't been closed");
+        Utils.refreshPage();
         VNextBOLoginSteps.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(),
                 VNextBOConfigInfo.getInstance().getVNextBOPassword());
     }
@@ -129,6 +133,10 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.openHelpPage();
         VNextBOUsersPageValidations.verifyHelpPageIsOpened();
+        Utils.refreshPage();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
@@ -139,14 +147,15 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickFooterPreviousPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
                 "Bottom Last page button has been clickable.");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "Top Last page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyTopAndBottomPagingElementsHaveSamePageNumber();
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
-        Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(), "Top First page button has been clickable.");
+        Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(), "Bottom First page button has been clickable.");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");
