@@ -1198,9 +1198,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
 
         RegularHomeScreenSteps.navigateToMyInspectionsScreen();
         RegularMyInspectionsSteps.startCreatingInspection(InspectionsTypes.INSP_WITH_PART_SERVICES);
-        RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
-        vehicleScreen.setVIN(inspectionData.getVehicleInfo().getVINNumber());
-        String inspectionNumber = vehicleScreen.getInspectionNumber();
+        RegularVehicleInfoScreenSteps.setVIN(inspectionData.getVehicleInfo().getVINNumber());
+        String inspectionNumber = RegularVehicleInfoScreenSteps.getInspectionNumber();
         RegularNavigationSteps.navigateToScreen(inspectionData.getQuestionScreenData().getScreenName());
         RegularQuestionsScreen questionsScreen = new RegularQuestionsScreen();
         questionsScreen.swipeScreenUp();
@@ -1208,7 +1207,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularInspectionsSteps.saveInspectionAsDraft();
         RegularMyInspectionsSteps.waitMyInspectionsScreenLoaded();
         RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
-        vehicleScreen.waitVehicleScreenLoaded();
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
 
         for (ServiceData serviceData : inspectionData.getServicesList()) {
@@ -1273,7 +1272,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         approveInspectionsScreen.clickDoneButton();
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         RegularMyInspectionsSteps.createWorkOrderFromInspection(inspectionNumber, WorkOrdersTypes.WO_WITH_PART_SERVICE);
-        String workOrderNumber = vehicleScreen.getWorkOrderNumber();
+        String workOrderNumber = RegularVehicleInfoScreenSteps.getWorkOrderNumber();
         Assert.assertEquals(inspectionToolBar.getInspectionTotalPrice(), workOrderData.getWorkOrderPrice());
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
@@ -1480,11 +1479,9 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
                 selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
             }
         }
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularSelectedBundleServiceScreenSteps.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
 
-        servicesScreen = new RegularServicesScreen();
         MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
         servicesScreen.selectService(matrixServiceData.getMatrixServiceName());
         RegularPriceMatricesScreen priceMatricesScreen = new RegularPriceMatricesScreen();
@@ -1495,9 +1492,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         vehiclePartScreen.setTime(matrixServiceData.getVehiclePartData().getVehiclePartTime());
         for (ServiceData serviceData : matrixServiceData.getVehiclePartData().getVehiclePartAdditionalServices()) {
             vehiclePartScreen.clickDiscaunt(serviceData.getServiceName());
-            selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-            selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
         }
 
         vehiclePartScreen.saveVehiclePart();
@@ -1590,9 +1586,8 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         vehiclePartScreen.switchOffOption(vehiclePartData.getVehiclePartOption());
         vehiclePartScreen.setPrice(vehiclePartData.getVehiclePartPrice());
         vehiclePartScreen.clickDiscaunt(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.setServicePriceValue(vehiclePartData.getVehiclePartAdditionalService().getServicePrice());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularServiceDetailsScreenSteps.setServicePriceValue(vehiclePartData.getVehiclePartAdditionalService().getServicePrice());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
         vehiclePartScreen.saveVehiclePart();
         priceMatrixScreen.clickSave();
 
@@ -1604,15 +1599,12 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularSelectedServiceBundleScreen selectedServiceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
-            selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
-            selectedServiceDetailsScreen.clickVehiclePartsCell();
-            selectedServiceDetailsScreen.selectVehiclePart(serviceData.getVehiclePart().getVehiclePartName());
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
+            RegularServiceDetailsScreenSteps.selectServiceVehiclePart(serviceData.getVehiclePart());
         }
 
-        selectedServiceDetailsScreen.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularSelectedBundleServiceScreenSteps.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
 
         servicesScreen.waitServicesScreenLoaded();
         RegularInspectionToolBar inspectionToolBar = new RegularInspectionToolBar();
@@ -1747,9 +1739,9 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularSelectedServiceBundleScreen selectedServiceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             if (serviceData.getServicePrice() != null) {
-                RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
-                selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
-                selectedServiceDetailsScreen.saveSelectedServiceDetails();
+                selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
+                RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
+                RegularServiceDetailsScreenSteps.saveServiceDetails();
             } else
                 selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
         }
@@ -1803,9 +1795,9 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularSelectedServiceBundleScreen selectedServiceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             if (serviceData.getServicePrice() != null) {
-                RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
-                selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
-                selectedServiceDetailsScreen.saveSelectedServiceDetails();
+                selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
+                RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
+                RegularServiceDetailsScreenSteps.saveServiceDetails();
             } else
                 selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
         }
@@ -1860,17 +1852,15 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         servicesScreen.selectService(bundleServiceData.getBundleServiceName());
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             RegularSelectedServiceBundleScreen selectedServiceBundleScreen = new RegularSelectedServiceBundleScreen();
-            RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
+            selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
             if (serviceData.getServicePrice() != null)
-                selectedServiceDetailsScreen.setServicePriceValue(serviceData.getServicePrice());
+                RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
             if (serviceData.getServiceQuantity() != null)
-                selectedServiceDetailsScreen.setServiceQuantityValue(serviceData.getServiceQuantity());
+                RegularServiceDetailsScreenSteps.setServiceQuantityValue(serviceData.getServiceQuantity());
             if (serviceData.getVehicleParts() != null) {
-                selectedServiceDetailsScreen.clickVehiclePartsCell();
-                selectedServiceDetailsScreen.selectVehicleParts(serviceData.getVehicleParts());
-                selectedServiceDetailsScreen.saveSelectedServiceDetails();
+                RegularServiceDetailsScreenSteps.selectServiceVehicleParts(serviceData.getVehicleParts());
             }
-            selectedServiceDetailsScreen.saveSelectedServiceDetails();
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
             if (serviceData.isNotMultiple()) {
                 AlertsValidations.acceptAlertAndValidateAlertMessage(String.format(AlertsCaptions.ALERT_YOU_CAN_ADD_ONLY_ONE_SERVICE, serviceData.getServiceName()));
             }
@@ -1878,14 +1868,15 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         }
 
         RegularSelectedServiceBundleScreen selectedServiceBundleScreen = new RegularSelectedServiceBundleScreen();
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo(bundleServiceData.getLaborService().getServiceName());
+        selectedServiceBundleScreen.openBundleInfo(bundleServiceData.getLaborService().getServiceName());
+        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.setServiceTimeValue(bundleServiceData.getLaborService().getLaborServiceTime());
         selectedServiceDetailsScreen.setServiceRateValue(bundleServiceData.getLaborService().getLaborServiceRate());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
         Assert.assertEquals(selectedServiceBundleScreen.getServiceDetailsPriceValue(), bundleServiceData.getBundleServiceAmount());
 
-        selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getWorkOrderPrice());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularSelectedBundleServiceScreenSteps.changeAmountOfBundleService(workOrderData.getWorkOrderPrice());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
 
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
@@ -2251,9 +2242,9 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularSelectedServiceBundleScreen selectedServiceBundleScreen = new RegularSelectedServiceBundleScreen();
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             if (serviceData.getServiceQuantity() != null) {
-                RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
-                selectedServiceDetailsScreen.setServiceQuantityValue(serviceData.getServiceQuantity());
-                selectedServiceDetailsScreen.saveSelectedServiceDetails();
+                selectedServiceBundleScreen.openBundleInfo(serviceData.getServiceName());
+                RegularServiceDetailsScreenSteps.setServiceQuantityValue(serviceData.getServiceQuantity());
+                RegularServiceDetailsScreenSteps.saveServiceDetails();
             } else
                 selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
         }

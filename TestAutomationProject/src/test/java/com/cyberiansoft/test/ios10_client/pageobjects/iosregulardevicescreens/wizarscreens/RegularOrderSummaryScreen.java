@@ -90,8 +90,8 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	}
 
 	public String getTotalSaleValue() {
-		WebElement par = getTableParentNode("Total Sale");
-		return par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).getAttribute("value");
+		return appiumdriver.findElementByAccessibilityId("OrderSummaryCell_TotalSale")
+				.findElement(MobileBy.AccessibilityId("OrderSummaryCell_TextFieldValue")).getAttribute("value");
 	}
 	
 	public void setTotalSale(String totalsale) {
@@ -102,23 +102,14 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void setTotalSaleWithoutHidingkeyboard(String totalsale) {
-		WebElement par = getTableParentNode("Total Sale");
-		par.findElement(By.xpath("//XCUIElementTypeTextField[1]")).sendKeys(totalsale);
-		//appiumdriver.findElement(By.xpath("//XCUIElementTypeButton[@name='Return']")).click();
-	}
-
-	public static String getOrderSummaryScreenCaption() {
-		return ordersummaryscreencapt;
+		appiumdriver.findElementByAccessibilityId("OrderSummaryCell_TotalSale")
+				.findElement(MobileBy.AccessibilityId("OrderSummaryCell_TextFieldValue")).sendKeys(totalsale);
 	}
 	
 	public void clickSave() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Save")));
 		appiumdriver.findElementByAccessibilityId("Save").click();
-	}
-	
-	public WebElement getTableParentNode(String cellname) {
-		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='" + cellname + "']/.."));
 	}
 	
 	public void closeDublicaterServicesWarningByClickingEdit() {
@@ -141,11 +132,5 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	
 	public boolean isTotalSaleFieldPresent()  {
 		return appiumdriver.findElementsByAccessibilityId("Total Sale").size() > 0;
-	}
-
-	public RegularMyWorkOrdersScreen saveWizardAndAcceptAlert() {
-		clickSave();
-		Helpers.acceptAlert();
-		return new RegularMyWorkOrdersScreen();
 	}
 }
