@@ -291,4 +291,18 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
         return driver.findElement(By.xpath("//a[@class='order-no']/strong[text()='"
                 + order + "']/../../i[@class='icon-problem-indicator']"));
     }
+
+    public List<WebElement> getChangePhaseStatusOptions(String orderNumber) {
+        WebElement woTableRow = new VNextBOROWebPage().getTableRowWithWorkOrder(orderNumber);
+        return woTableRow.findElements(By.xpath(".//*[@data-bind='click: changeServiceStatus']"));
+    }
+
+    public WebElement getCompleteCurrentPhaseOption(String orderNumber) {
+        WebElement woTableRow = new VNextBOROWebPage().getTableRowWithWorkOrder(orderNumber);
+        return woTableRow.findElement(By.xpath(".//div[contains(@data-bind, 'completeActivePhase')]"));
+    }
+
+    public WebElement getPhaseMenuArrow(String orderNumber) {
+        return getTableRowWithWorkOrder(orderNumber).findElement(By.xpath(".//i[@data-bind='click: phaseMenuClicked']"));
+    }
 }

@@ -175,7 +175,6 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.clickFindButton();
 
-		Assert.assertTrue(ServiceRequestsListVerifications.isAcceptIconNotDisplayedForFirstServiceRequestFromList());
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();
         Assert.assertTrue(ServiceRequestsListVerifications.isStatusDisplayed(data.getStatus()));
 
@@ -680,7 +679,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		backOfficeHeader.clickOperationsLink();
 		ServiceRequestsListInteractions serviceRequestsWebPage = new ServiceRequestsListInteractions();
 		operationsPage.clickNewServiceRequestList();
-		serviceRequestsWebPage.clickAddServiceRequestButtonAndSave();
+		serviceRequestsWebPage.clickAddServiceRequestButtonWithoutSaving();
 		Assert.assertFalse(ServiceRequestsListVerifications.verifyDescriptionIconsAreVisible());
 	}
 
@@ -863,7 +862,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         serviceRequestsWebPage.goToMonthInScheduler();
         serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
         Assert.assertTrue(ServiceRequestsListVerifications.checkTechniciansFromScheduler());
-		Assert.assertEquals(5, serviceRequestsWebPage.getMaximumTechniciansListSize(),
+		Assert.assertEquals(serviceRequestsWebPage.getMaximumTechniciansListSize(), 5,
                 "The maximum technicians list size is not 5");
 		serviceRequestsWebPage.clickArrowTechniciansLink();
 		Assert.assertTrue(ServiceRequestsListVerifications.check5TechniciansFromScheduler());

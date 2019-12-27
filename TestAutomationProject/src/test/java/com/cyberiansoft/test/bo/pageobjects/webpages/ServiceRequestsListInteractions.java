@@ -68,6 +68,11 @@ public class ServiceRequestsListInteractions {
         selectFirstServiceRequestFromList();
 	}
 
+	public void clickAddServiceRequestButtonWithoutSaving() {
+        clickAddSRButton();
+		DriverBuilder.getInstance().getDriver().switchTo().frame(srListPage.getEditServiceRequestPanelFrame());
+	}
+
     public void clickAddSRButton() {
         Utils.clickElement(srListPage.getAddServiceRequestButton());
         waitForLoading();
@@ -769,7 +774,7 @@ public class ServiceRequestsListInteractions {
 		waitForLoading();
 		return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(srListPage.getClients())
                 .stream()
-                .map(WebElement::getText)
+                .map(Utils::getText)
                 .findFirst()
                 .get();
 	}

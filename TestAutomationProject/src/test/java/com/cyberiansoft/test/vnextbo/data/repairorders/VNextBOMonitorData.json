@@ -298,6 +298,22 @@
     }
   ],
 
+  "verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion": [
+    {
+      "rowID": "verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion.01",
+      "description": "Test Case 91018:Verify that \"Phases\" update w/o refresh after its completion",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91416"
+        }
+      ],
+      "location": "1111 Automation",
+      "orderNumber": "O-000-152661",
+      "phase": "Started",
+      "service": "Oil Change & Tire Rotation"
+    }
+  ],
+
   "verifyUserCanTypeAndNotSaveNotesWithXIcon": [
     {
       "rowID": "verifyUserCanTypeAndNotSaveNotesWithXIcon.01",

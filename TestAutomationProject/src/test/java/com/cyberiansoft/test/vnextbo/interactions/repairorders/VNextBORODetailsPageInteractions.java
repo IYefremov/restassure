@@ -168,15 +168,14 @@ public class VNextBORODetailsPageInteractions {
     }
 
     private static void clickServiceStatusBox(int order) {
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         final WebElement serviceStatus = new VNextBORODetailsPage().getServicesStatusWidgetList().get(order);
         Utils.clickElement(serviceStatus);
     }
 
     public static void clickServiceStatusBox(String serviceId) {
-        WaitUtilsWebDriver.waitForLoading();
         final WebElement service = new VNextBORODetailsPage().getServiceStatusBoxByServiceId(serviceId);
-        Utils.getActions().moveToElement(service).build().perform();
+        Utils.moveToElement(service);
         Utils.clickElement(service);
     }
 
@@ -186,7 +185,6 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static String getServiceStatusValue(String serviceId) {
-        WaitUtilsWebDriver.waitForLoading();
         return Utils.getText(new VNextBORODetailsPage().getServiceStatusByServiceId(serviceId));
     }
 
