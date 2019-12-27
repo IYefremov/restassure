@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
@@ -122,28 +124,11 @@ public class WhiteBoardWebPage extends BaseWebPage {
 
 	public boolean checkIntervalField(int interval) {
 		setAttribute(intervalField, "value", "");
-		wait.until(ExpectedConditions.elementToBeClickable(intervalField)).clear();
-
-		wait.until(ExpectedConditions.elementToBeClickable(intervalField)).sendKeys(Integer.toString(interval));
-		try {
-			wait.until(ExpectedConditions.elementToBeClickable(autoRefreshButton)).click();
-		} catch (Exception e) {
-			waitABit(2000);
-			autoRefreshButton.click();
-		}
+		Utils.clearAndType(intervalField, Integer.toString(interval));
+		Utils.clickElement(autoRefreshButton);
 		waitForLoading();
-		try {
-			wait.until(ExpectedConditions.elementToBeClickable(intervalField));
-		} catch (Exception e) {
-			waitABit(3000);
-		}
-		try {
-			return wait.until(ExpectedConditions.elementToBeClickable(intervalField))
-					.getAttribute("value")
-					.equals(String.valueOf(interval));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return true;
-		}
+        WaitUtilsWebDriver.elementShouldBeVisible(intervalField, true, 15);
+        WaitUtilsWebDriver.elementShouldBeClickable(intervalField, true, 15);
+        return Utils.getInputFieldValue(intervalField).equals(String.valueOf(interval));
 	}
 }

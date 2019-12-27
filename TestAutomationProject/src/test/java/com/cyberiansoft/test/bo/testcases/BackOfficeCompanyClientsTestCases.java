@@ -9,8 +9,6 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-@SuppressWarnings("LossyEncoding")
-//@Listeners(VideoListener.class)
 public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
 	private static final String DATA_FILE = "src/test/java/com/cyberiansoft/test/bo/data/BOCompanyClientsData.json";
@@ -458,7 +456,6 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		ClientContactsWebPage clientContactsWebPage = new ClientContactsWebPage(webdriver);
 		clientsPage.clickContactsLinkForClientOpenDialogWindow(data.getClientName());
 
-
 		if (clientContactsWebPage.isClientContactPresentInTable(data.getUserFirstName(), data.getUserLastName())) {
 			clientContactsWebPage.clickDeleteClientContact(data.getUserFirstName());
 		}
@@ -480,11 +477,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 		Assert.assertEquals(data.getContactEmail(), addEditClientUsersContactsDialogWebPage1.getContactEmail());
 
 		ClientContactsWebPage clientContactsWebPage2 = new ClientContactsWebPage(webdriver);
-		addEditClientUsersContactsDialogWebPage1.
-				createContactWithAllFields(data.getUserFirstName(), data.getUserLastName(), data.getContactEmail(),
-						data.getCompanyName(), data.getContactPhone(), data.getUserAddress(), data.getUserAddress2(),
-						data.getUserCity(), data.getUserCountry(), data.getUserStateProvince(), data.getUserZipPostCode());
-
+		addEditClientUsersContactsDialogWebPage1.createContactWithAllFields(data);
 
 		AddEditClientUsersContactsDialogWebPage addEditClientUsersContactsDialogWebPage2 =
 				new AddEditClientUsersContactsDialogWebPage(webdriver);

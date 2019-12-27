@@ -3,12 +3,14 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Getter
 public class CompanyWebPage extends BaseWebPage {
 
 	@FindBy(xpath = "//span[@class='navLinkTitle' and text()='Clients']")
