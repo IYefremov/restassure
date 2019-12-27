@@ -12,7 +12,7 @@ import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOEmailOptionsBlo
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOCompanyInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOQuickNotesWebPage;
+import com.cyberiansoft.test.vnextbo.screens.quicknotes.VNextBOQuickNotesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
@@ -24,6 +24,7 @@ import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsApprova
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOAddNewPartDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.quicknotes.VNextBOQuickNotesWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORONotesPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
@@ -37,6 +38,7 @@ import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidati
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAddNewPartDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsOrdersListPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.quicknotes.VNextBOQuickNotesWebPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -233,29 +235,16 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOQuickNotesData data = JSonDataParser.getTestDataFromJson(testData, VNextBOQuickNotesData.class);
 
         VNextBOLeftMenuInteractions.selectQuickNotesMenu();
-        final int numberOfQuickNotes = quickNotesPage.getNumberOfQuickNotesDisplayed(data.getQuickNotesDescription());
-        quickNotesPage
-                .clickAddNotesButton()
-                .typeDescription(data.getQuickNotesDescription())
-                .clickQuickNotesDialogAddButton();
-        Assert.assertEquals(numberOfQuickNotes + 1,
-                quickNotesPage.getNumberOfQuickNotesDisplayed(data.getQuickNotesDescription()));
-
-        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
-        quickNotesPage
-                .deleteQuickNote(data.getQuickNotesDescription())
-                .deleteQuickNotesIfPresent(data.getQuickNotesDescriptionEdited())
-                .clickAddNotesButton()
-                .typeDescription(data.getQuickNotesDescription())
-                .clickQuickNotesDialogAddButton();
-        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescription()));
-
-        quickNotesPage
-                .clickEditQuickNote(data.getQuickNotesDescription())
-                .typeDescription(data.getQuickNotesDescriptionEdited())
-                .clickQuickNotesDialogUpdateButton();
-        Assert.assertTrue(quickNotesPage.isQuickNoteDisplayed(data.getQuickNotesDescriptionEdited()));
-        quickNotesPage.deleteQuickNote(data.getQuickNotesDescriptionEdited());
+        final int numberOfQuickNotes = VNextBOQuickNotesWebPageSteps.getNotesAmount();
+        VNextBOQuickNotesWebPageSteps.addNewNote(data.getQuickNotesDescription());
+        VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(numberOfQuickNotes + 1);
+        VNextBOQuickNotesWebPageValidations.verifyLastNoteDescription(data.getQuickNotesDescription(), true);
+        VNextBOQuickNotesWebPageSteps.updateNote(data.getQuickNotesDescription(), data.getQuickNotesDescriptionEdited());
+        VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(numberOfQuickNotes + 1);
+        VNextBOQuickNotesWebPageValidations.verifyLastNoteDescription(data.getQuickNotesDescriptionEdited(), true);
+        VNextBOQuickNotesWebPageSteps.deleteNote(data.getQuickNotesDescriptionEdited());
+        VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(numberOfQuickNotes);
+        VNextBOQuickNotesWebPageValidations.verifyNoteIsNotPresentedInTheList(data.getQuickNotesDescriptionEdited());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
