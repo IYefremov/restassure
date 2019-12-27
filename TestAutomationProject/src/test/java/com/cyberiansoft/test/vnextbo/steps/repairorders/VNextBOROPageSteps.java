@@ -21,13 +21,13 @@ public class VNextBOROPageSteps {
 
     public static void openRODetailsPage(String woNumber) {
         VNextBOROPageInteractions.clickWoLink(woNumber);
-        Assert.assertTrue(VNextBORODetailsPageValidations.isRODetailsSectionDisplayed(),
+        Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 
     public static void openRODetailsPage() {
         VNextBOROPageInteractions.clickWoLink();
-        Assert.assertTrue(VNextBORODetailsPageValidations.isRODetailsSectionDisplayed(),
+        Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(),
                 "The RO Details page hasn't been opened");
     }
 

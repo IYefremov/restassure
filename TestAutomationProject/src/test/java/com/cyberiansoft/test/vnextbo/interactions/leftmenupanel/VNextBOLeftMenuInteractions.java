@@ -56,12 +56,16 @@ public class VNextBOLeftMenuInteractions {
 
     public static void expandMainMenu() {
         final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
-        if (!leftMenuPanel.getBody().isDisplayed()) Utils.clickElement(leftMenuPanel.getMenuButton());
+        if (WaitUtilsWebDriver.elementShouldBeVisible(leftMenuPanel.getBody(), false, 10)) {
+            Utils.clickElement(leftMenuPanel.getMenuButton());
+        }
     }
 
     public static void collapseMainMenu() {
         final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
-        if (leftMenuPanel.getBody().isDisplayed()) Utils.clickElement(leftMenuPanel.getMenuButton());
+        if (WaitUtilsWebDriver.elementShouldBeVisible(leftMenuPanel.getBody(), false, 10)) {
+            Utils.clickElement(leftMenuPanel.getMenuButton());
+        }
     }
 
     private static void clickMainMenuItem(String mainMenuItemName) {

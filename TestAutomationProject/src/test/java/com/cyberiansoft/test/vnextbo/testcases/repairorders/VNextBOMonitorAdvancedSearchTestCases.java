@@ -15,6 +15,7 @@ import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInte
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROAdvancedSearchDialogValidations;
@@ -1104,19 +1105,30 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-        VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
+        final String defaultSearchFilterText = VNextBOROPageInteractions.getSearchFilterText();
 
+        Assert.assertTrue(defaultSearchFilterText.contains(TimeFrameValues.TIMEFRAME_30_DAYS.getName()),
+                "The search filter doesn't contain the timeFrame " + TimeFrameValues.TIMEFRAME_30_DAYS.getName());
+        Assert.assertTrue(defaultSearchFilterText.contains(OrderMonitorRepairStatuses.IN_PROGRESS_ALL.getValue()),
+                "The search filter doesn't contain the repair status "
+                        + OrderMonitorRepairStatuses.IN_PROGRESS_ALL.getValue());
+
+        VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_90_DAYS.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
                 OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
+        String searchFilterText = VNextBOROPageInteractions.getSearchFilterText();
+        Assert.assertTrue(searchFilterText.contains(TimeFrameValues.TIMEFRAME_90_DAYS.getName()),
+                "The search filter doesn't contain the timeFrame " + TimeFrameValues.TIMEFRAME_90_DAYS.getName());
+        Assert.assertTrue(searchFilterText.contains(OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue()),
+                "The search filter doesn't contain the repair status "
+                        + OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+
         VNextBOROPageSteps.openRODetailsPage();
-        VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
-
-        VNextBOROPageInteractions.movePointerToSearchResultsField();
-        final String searchFilterText = VNextBOROPageInteractions.getSearchFilterText();
-
+        VNextBORODetailsPageSteps.openRoPageByClickingBreadCrumbRo();
+        searchFilterText = VNextBOROPageInteractions.getSearchFilterText();
         Assert.assertTrue(searchFilterText.contains(TimeFrameValues.TIMEFRAME_90_DAYS.getName()),
                 "The search filter doesn't contain the timeFrame " + TimeFrameValues.TIMEFRAME_90_DAYS.getName());
         Assert.assertTrue(searchFilterText.contains(OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue()),

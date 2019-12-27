@@ -25,17 +25,17 @@ public class VNextBOROPageInteractions {
     }
 
     public static void clickWoLink(String woNumber) {
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         Utils.clickElement(By.xpath("//a[@class='order-no']/strong[text()='" + woNumber + "']/.."));
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static WebElement clickWoLink() {
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         final WebElement woElement = new VNextBOROWebPage().getRandomOrderNumber();
         if (woElement != null) {
             Utils.clickElement(woElement);
-            WaitUtilsWebDriver.waitForLoading();
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
         } else {
             Assert.fail("The work orders list is empty");
         }
@@ -375,16 +375,13 @@ public class VNextBOROPageInteractions {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static void clickWorkOrderOtherPhaseMenu(String orderNumber) {
-        WebElement woTableRow = new VNextBOROWebPage().getTableRowWithWorkOrder(orderNumber);
-        woTableRow.findElement(By.xpath(".//i[@data-bind='click: phaseMenuClicked']")).click();
+    public static void clickWorkOrderCurrentPhaseMenu(String orderNumber) {
+        Utils.clickElement(new VNextBOROWebPage().getPhaseMenuArrow(orderNumber));
     }
 
     public static void completeWorkOrderServiceStatus(String orderNumber, String serviceName) {
-        clickWorkOrderOtherPhaseMenu(orderNumber);
-        WebElement woTableRow = new VNextBOROWebPage().getTableRowWithWorkOrder(orderNumber);
-        List<WebElement> services = woTableRow.findElements(
-                By.xpath(".//*[@data-bind='click: changeServiceStatus']"));
+        clickWorkOrderCurrentPhaseMenu(orderNumber);
+        List<WebElement> services = new VNextBOROWebPage().getChangePhaseStatusOptions(orderNumber);
         for (WebElement srv : services)
             if (srv.getText().trim().contains(serviceName)) {
                 srv.click();
@@ -392,6 +389,15 @@ public class VNextBOROPageInteractions {
             }
 
         WaitUtilsWebDriver.waitForLoading();
+    }
+
+    public static void completeCurrentPhase(String orderNumber) {
+        clickWorkOrderCurrentPhaseMenu(orderNumber);
+        final WebElement completeCurrentPhaseOption = new VNextBOROWebPage().getCompleteCurrentPhaseOption(orderNumber);
+        if (WaitUtilsWebDriver.elementShouldBeVisible(completeCurrentPhaseOption, true)) {
+            Utils.clickElement(completeCurrentPhaseOption);
+        }
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static String getCompletedWorkOrderValue(String orderNumber) {

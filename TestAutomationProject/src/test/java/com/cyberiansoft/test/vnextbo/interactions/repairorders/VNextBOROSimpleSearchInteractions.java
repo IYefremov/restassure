@@ -9,6 +9,7 @@ public class VNextBOROSimpleSearchInteractions {
 
     public static void setRepairOrdersSearchText(String repairOrderText) {
         final VNextBOROWebPage repairOrdersPage = new VNextBOROWebPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitForElementNotToBeStale(repairOrdersPage.getRepairOrdersSearchTextField(), 3);
         WaitUtilsWebDriver.elementShouldBeVisible(repairOrdersPage.getRepairOrdersSearchTextField(), true);
         Utils.clearAndType(repairOrdersPage.getRepairOrdersSearchTextField(), repairOrderText);
@@ -16,18 +17,20 @@ public class VNextBOROSimpleSearchInteractions {
     }
 
     public static void waitForLoading() {
-        WaitUtilsWebDriver.waitForVisibilityIgnoringException(new VNextBOROWebPage().getAppProgressSpinner(), 3);
-        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(new VNextBOROWebPage().getAppProgressSpinner(), 3);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getAppProgressSpinner(), true, 3);
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getAppProgressSpinner(), false, 10);
         WaitUtilsWebDriver.waitABit(1000);
     }
 
     public static void clickSearchIcon() {
         Utils.clickElement(new VNextBOROWebPage().getSearchIcon());
-        waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void clickEnterToSearch() {
         Utils.getActions().sendKeys(new VNextBOROWebPage().getSearchInput(), Keys.ENTER).build().perform();
-        waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }
