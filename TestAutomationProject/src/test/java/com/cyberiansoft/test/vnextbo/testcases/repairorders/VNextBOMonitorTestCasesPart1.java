@@ -4,14 +4,19 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.enums.TimeFrameValues;
+import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOPrivacyPolicyDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOTermsAndConditionsDialogSteps;
@@ -263,4 +268,31 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 		Assert.assertTrue(VNextBOROPageValidations.isNoteForWorkOrderDisplayed(data.getOrderNumber(), false),
 				"The note for work order has not been closed after clicking the 'X' icon");
 	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion(String rowID, String description, JSONObject testData) {
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+
+		VNextBOROSimpleSearchSteps.search(data.getOrderNumber());
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getOrderNumber(), true),
+                "The work order is not displayed after search by clicking the 'Search' icon");
+        VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
+
+        Utils.openNewTab(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+        VNextBOLoginSteps.userLogin(userName, userPassword);
+        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOROSimpleSearchSteps.search(data.getOrderNumber());
+        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getOrderNumber(), true),
+                "The work order is not displayed after search by clicking the 'Search' icon");
+        VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBORODetailsPageValidations.verifyServiceIsDisplayedForCollapsedPhase(data.getService(), data.getPhase());
+        VNextBORODetailsPageSteps.setServiceStatusForService(data.getService(),
+                OrderMonitorServiceStatuses.ACTIVE.getValue());
+        VNextBORODetailsPageSteps.openRoPageByClickingBreadCrumbRo();
+        VNextBOROPageInteractions.completeCurrentPhase(data.getOrderNumber());
+    }
 }

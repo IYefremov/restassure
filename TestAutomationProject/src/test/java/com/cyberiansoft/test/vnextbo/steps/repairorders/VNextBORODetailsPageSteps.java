@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
-import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCompleteCurrentPhaseDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROResolveProblemDialog;
@@ -31,17 +30,16 @@ public class VNextBORODetailsPageSteps {
     }
 
     public static void setServiceStatusForServiceByServiceId(String serviceId, String status) {
-        System.out.println(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId));
         if (VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId).equals("Problem")) {
             VNextBORODetailsPageInteractions.clickServiceStatusBox(serviceId);
-            if (Utils.isElementDisplayed(new VNextBOROResolveProblemDialog().getResolveProblemButton(), 5)) {
+            if (WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROResolveProblemDialog().getResolveProblemButton(), true, 3)) {
                 VNextBOROProblemsInteractions.clickResolveButton();
             }
             VNextBORODetailsPageInteractions.selectServiceStatus(status);
         } else {
             VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
         }
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void setServiceStatusForMultipleServicesByServiceId(List<String> serviceIds, String status) {
@@ -147,5 +145,12 @@ public class VNextBORODetailsPageSteps {
         }
         Assert.assertTrue(VNextBORODetailsPageValidations.isProblemIconNotDisplayedForService(serviceId),
                 "The Problem icon is displayed for service after resolving the problem");
+    }
+
+    public static void openRoPageByClickingBreadCrumbRo() {
+        VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
+        Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionNotDisplayed(),
+                "The RO page has been displayed after clicking the breadcrumb 'Repair Orders'.");
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

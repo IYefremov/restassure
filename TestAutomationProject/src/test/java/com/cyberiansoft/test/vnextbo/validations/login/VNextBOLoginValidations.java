@@ -1,27 +1,32 @@
 package com.cyberiansoft.test.vnextbo.validations.login;
 
-import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 
 public class VNextBOLoginValidations {
     
     public static boolean isLoginFormDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getLoginForm());
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOLoginScreenWebPage().getLoginForm(), true, 10);
     }
 
     public static boolean isEmailFieldDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getEmailField());
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOLoginScreenWebPage().getEmailField(), true, 5);
     }
 
     public static boolean isPasswordFieldDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getPasswordField());
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOLoginScreenWebPage().getPasswordField(), true, 5);
     }
 
     public static boolean isLoginButtonDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getLoginButton());
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOLoginScreenWebPage().getLoginButton(), true, 5);
     }
 
     public static boolean isForgotPasswordLinkDisplayed() {
-        return Utils.isElementDisplayed(new VNextBOLoginScreenWebPage().getForgotPasswordLink());
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOLoginScreenWebPage().getForgotPasswordLink(), true, 5);
     }
 }

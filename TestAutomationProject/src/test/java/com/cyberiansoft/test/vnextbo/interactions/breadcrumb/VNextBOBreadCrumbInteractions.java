@@ -12,7 +12,7 @@ public class VNextBOBreadCrumbInteractions {
 
     public static void clickFirstBreadCrumbLink() {
         Utils.clickElement(new VNextBOBreadCrumbPanel().getBreadCrumbsLink());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static String getLastBreadCrumbText() {

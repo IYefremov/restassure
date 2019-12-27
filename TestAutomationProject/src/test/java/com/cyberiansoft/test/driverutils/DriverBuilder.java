@@ -94,6 +94,7 @@ public class DriverBuilder {
                 options.addArguments("--disable-dev-shm-usage");
                 options.addArguments("--disable-browser-side-navigation");
                 options.addArguments("--disable-gpu");
+                options.setPageLoadStrategy(PageLoadStrategy.EAGER);
                 try {
                     webDriver.set(new ChromeDriver(options));
                 } catch (SessionNotCreatedException ignored) {

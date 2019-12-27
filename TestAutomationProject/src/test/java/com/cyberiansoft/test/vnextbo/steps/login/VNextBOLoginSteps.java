@@ -7,7 +7,6 @@ import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOLoginSteps {
 
@@ -17,8 +16,8 @@ public class VNextBOLoginSteps {
             VNextBOLoginInteractions.setEmailField(username);
             VNextBOLoginInteractions.setPasswordField(userPsw);
             Utils.clickElement(loginButton);
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.invisibilityOf(loginButton));
-            WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNexBOLeftMenuPanel().getMenuButton()));
+            WaitUtilsWebDriver.elementShouldBeVisible(loginButton, false);
+            WaitUtilsWebDriver.elementShouldBeVisible(new VNexBOLeftMenuPanel().getMenuButton(), true);
             WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
             WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         }

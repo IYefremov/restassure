@@ -61,8 +61,12 @@ public class VNextBORODetailsPageValidations {
         }
     }
 
-    public static boolean isRODetailsSectionDisplayed() {
-        return Utils.isElementDisplayed(new VNextBORODetailsPage().getRoDetailsSection(), 5);
+    public static boolean isRoDetailsSectionDisplayed() {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getRoDetailsSection(), true, 5);
+    }
+
+    public static boolean isRoDetailsSectionNotDisplayed() {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getRoDetailsSection(), false, 7);
     }
 
     public static void verifyServiceOrTaskDescriptionsContainText(String text) {
@@ -182,10 +186,6 @@ public class VNextBORODetailsPageValidations {
         for (String serviceId : serviceIds) {
             verifyStatusHasBeenSetForService(serviceId, status);
         }
-    }
-
-    public static boolean isRoDetailsSectionDisplayed() {
-        return Utils.isElementDisplayed(new VNextBORODetailsPage().getRoDetailsSection());
     }
 
     public static boolean isImageOnHoldStatusDisplayed() {
