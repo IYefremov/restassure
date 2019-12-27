@@ -13,7 +13,6 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 import static org.awaitility.Awaitility.await;
 
@@ -65,14 +64,21 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitForSpinnerToDisappear() {
-        try {
-            getWebDriverWait(4).until(ExpectedConditions.visibilityOf(VNextBOBaseWebPage.spinner));
-            WebElement spinner = DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[contains(@class, 'k-loading-image')]"));
-            getWait().until(ExpectedConditions.invisibilityOf(spinner));
-        } catch (Exception ex) {
-
+//        try {
+//            getWebDriverWait(4).until(ExpectedConditions.visibilityOf(VNextBOBaseWebPage.spinner));
+//            WebElement spinner = DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[contains(@class, 'k-loading-image')]"));
+//            getWait().until(ExpectedConditions.invisibilityOf(spinner));
+//        } catch (Exception ex) {
+//
+//        }
+        if (elementShouldBeVisible(VNextBOBaseWebPage.spinner, true, 4)) {
+            getWait().until((ExpectedCondition<Boolean>) driver -> !Utils.isElementDisplayed(VNextBOBaseWebPage.spinner));
         }
+    }
 
+    public static void waitForPageToBeLoaded() {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        waitForSpinnerToDisappear();
     }
 
     public static WebElement waitForVisibility(WebElement element) {
@@ -295,8 +301,8 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitUntilPageIsLoadedWithJs() {
-        new WebDriverWait(DriverBuilder.getInstance().getDriver(), 5).until(
-                webDriver -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        getWait().until(webDriver ->
+                ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
     }
 
     public static void waitForNumberOfElementsToBe(By by, int elementsNumber) {

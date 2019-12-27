@@ -8,7 +8,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -73,42 +72,49 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		waitABit(4000);
 	}
 
+    public void clickSuperUserLink() {
+        openSubmenu(superusertab, "Super User");
+    }
+
 	public void clickOperationsLink() {
-		waitABit(5000);
-        Utils.clickElement(operationstab);
+        openSubmenu(operationstab, "Operations");
 	}
 
-	public void clickHomeLink() {
+    public void clickMonitorLink() {
+        openSubmenu(monitortab, "Monitor");
+    }
+
+    public void clickCompanyLink() {
+        openSubmenu(companytab, "Company");
+    }
+
+    public void clickMiscellaneousLink() {
+        openSubmenu(miscellaneoustab, "Miscellanneous");
+    }
+
+    public void clickReportsLink() {
+        openSubmenu(reportstab, "Reports");
+    }
+
+    public void clickTimesheetsLink() {
+        openSubmenu(timesheetstab, "TimeSheets");
+    }
+
+
+    public void clickHomeLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(hometab)).click();
 	}
-
-	public void clickCompanyLink() {
-	    Utils.clickElement(companytab);
-	}
-
-	public void clickMonitorLink() {
-		Utils.clickElement(monitortab);
-	}
-
-	public void clickSuperUserLink() {
-		Utils.clickElement(superusertab);
-	}
-
-	public void clickMiscellaneousLink() {
-		new Actions(driver).moveToElement(miscellaneoustab).click().build().perform();
-	}
-
-	public void clickReportsLink() {
-        Utils.clickElement(reportstab);
-	}
-
 	public void refresh() {
 	    Utils.acceptAlertIfPresent();
 		driver.navigate().refresh();
 	}
 
-	public void clickTimesheetsLink() {
-        Utils.clickElement(timesheetstab);
-	}
+    private void openSubmenu(WebElement subMenu, String title) {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        Utils.clickElement(subMenu);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.titleContains(title));
+        WaitUtilsWebDriver.waitABit(1000);
+    }
 
 }
