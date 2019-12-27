@@ -184,8 +184,10 @@ public class ServiceRequestsListVerifications {
     public static boolean verifyDescriptionIconsAreVisible() {
         verifyServiceRequestInfoFrameIsOn();
         final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
-        boolean documentShown = WaitUtilsWebDriver.waitForAttributeToContain(srListPage.getDescriptionDocuments().findElement(By.tagName("i")), "style", "display : none;");
-        boolean answerShown = WaitUtilsWebDriver.waitForAttributeToContain(srListPage.getDescriptionAnswers().findElement(By.tagName("i")), "style", "display : none;");
+        boolean documentShown = WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(
+                srListPage.getDescriptionDocuments().findElement(By.tagName("i")), "style", "display : none;");
+        boolean answerShown = WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(
+                srListPage.getDescriptionAnswers().findElement(By.tagName("i")), "style", "display : none;");
 
         return documentShown || answerShown;
     }

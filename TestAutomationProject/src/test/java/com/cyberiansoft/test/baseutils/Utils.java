@@ -28,8 +28,8 @@ public class Utils {
     
     public static void clickElement(WebElement element) {
         try {
-            WaitUtilsWebDriver.waitForElementNotToBeStale(element, 3);
-            WaitUtilsWebDriver.elementShouldBeClickable(element, true, 7);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(element, 8);
+            WaitUtilsWebDriver.elementShouldBeClickable(element, true, 8);
             element.click();
         } catch (Exception ignored) {
             WaitUtilsWebDriver.waitABit(500);
@@ -156,10 +156,9 @@ public class Utils {
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
-        final Actions actions = getActions();
         getMatchingOptionInListBox(listBox, selection)
                 .ifPresent((option) -> {
-                    actions.moveToElement(option).build().perform();
+                    moveToElement(option);
                     Utils.clickElement(option);
                 });
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
@@ -229,7 +228,11 @@ public class Utils {
     }
 
     public static boolean isElementDisplayed(WebElement element) {
-        return element.isDisplayed();
+        try {
+            return element.isDisplayed();
+        } catch (Exception ignored) {
+            return false;
+        }
     }
 
     @Deprecated
@@ -388,6 +391,20 @@ public class Utils {
         driver.switchTo().window(mainWindow);
     }
 
+    public static void openNewTab(String url) {
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("window.open();");
+        final Set<String> windowHandles = driver.getWindowHandles();
+        final String newTab = windowHandles
+                .stream()
+                .reduce((prev, next) -> next)
+                .orElseThrow(() -> new RuntimeException("The tab hasn't been opened"));
+        driver.switchTo().window(newTab);
+        WebDriverUtils.webdriverGotoWebPage(url);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+    }
+
     public static void executeJsForAddOnSettings() {
         ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("localStorage.setItem('addons_selfSubscribedFeatures', JSON.stringify([{\"featureID\":17,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Labor Times\",\"reconProFeatureName\":\"LaborHoursByEmployeeReport\",\"pricePerMonth\":1,\"isEnabled\":true,\"requestToEnable\":true,\"requestDate\":\"2018-08-29T00:37:05.983\"},{\"featureID\":41,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Basic Services ($$, %%, Discounts, Taxes)\",\"reconProFeatureName\":\"BasicParts\",\"pricePerMonth\":0.99,\"isEnabled\":true,\"requestToEnable\":true,\"requestDate\":\"2018-08-29T00:40:25.92\"},{\"featureID\":37,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Question Forms\",\"reconProFeatureName\":\"AccessClinetInfo\",\"pricePerMonth\":99999999.22,\"isEnabled\":true,\"requestToEnable\":true,\"requestDate\":\"2018-08-29T03:39:25.673\"},{\"featureID\":38,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Configurable email templates for inspections/estimates and invoices +1234566 test long name long name\",\"reconProFeatureName\":\"WorkOrders\",\"pricePerMonth\":1.55,\"isEnabled\":true,\"requestToEnable\":true,\"requestDate\":\"2018-08-30T08:31:18.337\"},{\"featureID\":80,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"QuickBooks Online Accounting System (Additional) test test\",\"reconProFeatureName\":\"QuickBooksAccounts\",\"pricePerMonth\":25,\"isEnabled\":true,\"requestToEnable\":null,\"requestDate\":null},{\"featureID\":271,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Basic Parts\",\"reconProFeatureName\":\"BasicParts\",\"pricePerMonth\":10,\"isEnabled\":true,\"requestToEnable\":true,\"requestDate\":\"2018-08-29T00:37:12.797\"},{\"featureID\":273,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Labor services\",\"reconProFeatureName\":\"LaborPriceType\",\"pricePerMonth\":10,\"isEnabled\":true,\"requestToEnable\":true,\"requestDate\":\"2018-08-29T00:40:02.247\"},{\"featureID\":272,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Inspection Supplements\",\"reconProFeatureName\":\"Supplements\",\"pricePerMonth\":10,\"isEnabled\":true,\"requestToEnable\":null,\"requestDate\":null},{\"featureID\":297,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Splat Screens\",\"reconProFeatureName\":\"SplatScreen\",\"pricePerMonth\":15,\"isEnabled\":true,\"requestToEnable\":null,\"requestDate\":null},{\"featureID\":388,\"applicationID\":\"2d21363b-3ed8-4ee1-b357-aa9ce95ce70d\",\"featureName\":\"Parts Management - Basic\",\"reconProFeatureName\":\"Parts Management - Basic\",\"pricePerMonth\":0,\"isEnabled\":true,\"requestToEnable\":true,\"requestDate\":\"2018-08-29T00:36:59.123\"}]))");
     }
@@ -442,6 +459,7 @@ public class Utils {
 
     public static String getText(WebElement element) {
         try {
+            WaitUtilsWebDriver.waitForElementNotToBeStale(element);
             return WaitUtilsWebDriver.waitForVisibility(element).getText();
         } catch (Exception e) {
             return "";
