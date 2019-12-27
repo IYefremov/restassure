@@ -17,7 +17,19 @@ public class VNextBOLoginSteps {
             VNextBOLoginInteractions.setPasswordField(userPsw);
             Utils.clickElement(loginButton);
             WaitUtilsWebDriver.elementShouldBeVisible(loginButton, false);
+            WaitUtilsWebDriver.waitForSpinnerToDisappear();
             WaitUtilsWebDriver.elementShouldBeVisible(new VNexBOLeftMenuPanel().getMenuButton(), true);
+            WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+            WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        }
+    }
+
+    public static  void userLoginWithInvalidUserData(String username, String userPsw) {
+        if (VNextBOLoginValidations.isLoginFormDisplayed()) {
+            WebElement loginButton = new VNextBOLoginScreenWebPage().getLoginButton();
+            VNextBOLoginInteractions.setEmailField(username);
+            VNextBOLoginInteractions.setPasswordField(userPsw);
+            Utils.clickElement(loginButton);
             WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
             WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         }

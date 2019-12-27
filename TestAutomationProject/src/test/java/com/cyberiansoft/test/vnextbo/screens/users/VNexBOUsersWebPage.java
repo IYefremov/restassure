@@ -23,35 +23,8 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tfoot//button[contains(@data-bind, 'nextPage')]")
     public WebElement nextPageBtn;
 
-    @FindBy(xpath = "//tfoot//button[contains(@data-bind, 'previousPage')]")
-    public WebElement previousPageBtn;
-
-    @FindBy(xpath = "(//button[@class='pager__item' and contains(@data-bind, 'click: pager.firstPage')])[1]")
-    public WebElement firstPageBtn;
-
-    @FindBy(xpath = "(//button[@class='pager__item' and contains(@data-bind, 'click: pager.lastPage')])[1]")
-    public WebElement lastPageBtn;
-
-    @FindBy(xpath = "(//span[@class='k-input'])[1]")
-    public WebElement topItemsPerPageField;
-
-    @FindBy(xpath = "(//span[@class='k-input'])[2]")
-    public WebElement bottomItemsPerPageField;
-
-    @FindBy(xpath = "(//button[@class='pager__item active'])[1]")
-    public WebElement activePageTopPagingElement;
-
-    @FindBy(xpath = "(//button[@class='pager__item active'])[2]")
-    public WebElement activePageBottomPagingElement;
-
     @FindBy(xpath = "//div[@id='users-search']//i[@class='caret dropdown-absolute']")
     public WebElement searchFieldAdvancedSearchCaret;
-
-    @FindBy(xpath = "//section[@class='view']//*[@data-bind='text: filterInfoString']")
-    public WebElement filterInfoText;
-
-    @FindBy(xpath = "//section[@class='view']//i[@class='custom-search__icon-cancel icon-cancel-circle']")
-    public WebElement clearSearchIcon;
 
     @FindBy(xpath = "//section[@class='view']//i[@class='icon-search']")
     public WebElement searchIcon;
@@ -70,16 +43,6 @@ public class VNexBOUsersWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//span[@title='Edit']")
     public WebElement editUserButton;
-
-    public WebElement specificPageButton(int pageNumber) {
-        return driver.findElement(By.xpath("(//button[@class='pager__item' and @data-page-index='" +
-                (pageNumber - 1) + "'])[1]"));
-    }
-
-    public WebElement itemsPerPageOption(String itemsPerPage) {
-        return driver.findElement(By.xpath("(//ul[@class='k-list k-reset']/li[text()='" +
-                itemsPerPage + " items per page'])[1]"));
-    }
 
     public WebElement tableRowByText(String searchText) {
         return driver.findElement(By.xpath("//td[contains(text(), '" + searchText + "')]/ancestor::tr"));

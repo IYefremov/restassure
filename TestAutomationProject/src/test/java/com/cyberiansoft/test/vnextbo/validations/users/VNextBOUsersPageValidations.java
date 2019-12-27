@@ -38,7 +38,7 @@ public class VNextBOUsersPageValidations extends VNextBOBaseWebPageValidations {
 
     public static boolean verifyRedTriangleWarningIconIsNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage) {
 
-        return Utils.isElementNotDisplayed(vNexBOUsersWebPage.redTriangleWarningIcon);
+        return Utils.isElementDisplayed(vNexBOUsersWebPage.redTriangleWarningIcon);
     }
 
     public static void verifyReSendButtonIsDisplayed() {
@@ -50,7 +50,7 @@ public class VNextBOUsersPageValidations extends VNextBOBaseWebPageValidations {
 
     public static boolean verifyReSendButtonIsNotDisplayed(VNexBOUsersWebPage vNexBOUsersWebPage) {
 
-        return Utils.isElementNotDisplayed(vNexBOUsersWebPage.reSendButton);
+        return Utils.isElementDisplayed(vNexBOUsersWebPage.reSendButton);
     }
 
     public static boolean verifyUserIsPresentOnCurrentPageByText(String searchText) {
@@ -73,7 +73,7 @@ public class VNextBOUsersPageValidations extends VNextBOBaseWebPageValidations {
                 nextPage = false;
             } else if (!verifyUserIsPresentOnCurrentPageByText(searchText)) {
                 Utils.clickWithJS(vNexBOUsersWebPage.nextPageBtn);
-                WaitUtilsWebDriver.waitForLoading();
+                WaitUtilsWebDriver.waitForSpinnerToDisappear();
             } else {
                 found = true;
                 break;

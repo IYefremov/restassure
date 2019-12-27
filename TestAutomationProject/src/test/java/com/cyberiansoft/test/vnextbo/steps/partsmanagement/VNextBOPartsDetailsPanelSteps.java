@@ -61,7 +61,6 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
         Utils.clickElement(detailsPanel.getPartStatusField().get(partNumber));
         Utils.selectOptionInDropDown(detailsPanel.getPartStatusDropDown(), detailsPanel.getPartStatusListBoxOptions(), status, true);
-        WaitUtilsWebDriver.waitForLoading();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
@@ -71,7 +70,6 @@ public class VNextBOPartsDetailsPanelSteps {
         Utils.clickElement(detailsPanel.getPartPriceField().get(partNumber));
         Utils.clearAndType(detailsPanel.getPartPriceField().get(partNumber), price);
         Utils.clickElement(detailsPanel.getPartQuantityField().get(partNumber));
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void setQuantityForPartByPartNumberInList(int partNumber, String quantity) {
@@ -88,7 +86,6 @@ public class VNextBOPartsDetailsPanelSteps {
         clickDuplicateActionButtonForPartByNumberInList(partNumber);
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickYesButton();
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void deletePartByNumberInList(int partNumber) {
@@ -97,15 +94,12 @@ public class VNextBOPartsDetailsPanelSteps {
         clickDeleteActionButtonForPartByNumberInList(partNumber);
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickYesButton();
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void expandLaborBlockForPartByNumberInList(int partNumber) {
 
         Utils.clickWithJS(new VNextBOPartsDetailsPanel().getLaborsExpander().get(partNumber));
-        WaitUtilsWebDriver.waitForLoading();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static int getLaborsAmountForPartByNumberInList(int partNumber) {
@@ -123,7 +117,6 @@ public class VNextBOPartsDetailsPanelSteps {
 
         clickDeleteLaborButtonForPartByNumberInListAndServiceName(partNumber, laborServiceName);
         VNextBOModalDialogSteps.clickYesButton();
-        WaitUtilsWebDriver.waitForLoading();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
@@ -132,12 +125,10 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
         Utils.clickElement(detailsPanel.getStatusesCheckbox());
         Utils.selectOptionInDropDownWithJs(detailsPanel.getStatusesCheckboxDropDown(), detailsPanel.statusCheckBoxDropDownItem(status));
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     public static void clickStatusesCheckBox() {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().getStatusesCheckbox());
-        WaitUtilsWebDriver.waitForLoading();
     }
 }

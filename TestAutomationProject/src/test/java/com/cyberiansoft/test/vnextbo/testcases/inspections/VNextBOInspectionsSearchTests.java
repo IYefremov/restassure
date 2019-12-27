@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.inspections;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInspectionSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -60,7 +61,6 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getInspectionsSearchTD();
         VNextBOLeftMenuInteractions.selectInspectionsMenu();
-        VNextBOInspectionsPageSteps.waitUntilInspectionsPageIsOpened();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
@@ -157,7 +157,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyUserCanEditSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
 
-        WaitUtilsWebDriver.waitABit(5000);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(editedValuesForSearch);
         VNextBOInspectionsAdvancedSearchValidations.verifyAllAdvancedSearchFormFields(editedValuesForSearch);
     }
@@ -219,6 +219,8 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsAdvancedSearchSteps.clickDeleteButton();
         VNextBOModalDialogSteps.clickYesButton();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOInspectionAdvancedSearchForm);
+        Utils.refreshPage();
+        VNextBOLeftMenuInteractions.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         Assert.assertFalse(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists("AutomationSearchTest2"),
                 "Saved search has been displayed in the list");

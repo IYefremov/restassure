@@ -27,6 +27,7 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
     public static void clickEditAdvancedSearchIcon() {
 
         Utils.clickElement(new VNextBOInspectionsWebPage().editAdvancedSearchIcon);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }

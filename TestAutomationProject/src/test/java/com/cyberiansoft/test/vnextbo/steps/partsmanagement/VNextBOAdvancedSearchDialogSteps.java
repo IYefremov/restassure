@@ -4,13 +4,15 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAdvancedSearchDialog;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOAdvancedSearchDialogSteps {
 
     public static void closeAdvancedSearchForm() {
-
-        Utils.clickElement(new VNextBOAdvancedSearchDialog().getCloseButton());
-        WaitUtilsWebDriver.waitForLoading();
+        WebElement closeButton = new VNextBOAdvancedSearchDialog().getCloseButton();
+        Utils.clickElement(closeButton);
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(closeButton));
     }
 
     public static void setCustomerField(String customer) {
@@ -126,7 +128,7 @@ public class VNextBOAdvancedSearchDialogSteps {
     public static void clickSearchButton() {
 
         Utils.clickElement(new VNextBOAdvancedSearchDialog().getSearchButton());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clearAllFields() {
@@ -137,12 +139,13 @@ public class VNextBOAdvancedSearchDialogSteps {
     public static void saveSearch() {
 
         Utils.clickElement(new VNextBOAdvancedSearchDialog().getSaveButton());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickDeleteButton() {
 
         Utils.clickElement(new VNextBOAdvancedSearchDialog().getDeleteButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void setAllFields(VNextBOPartsManagementSearchData searchData) {

@@ -2,7 +2,12 @@ package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddLaborPartsDialog;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.nio.file.WatchEvent;
 
 public class VNextBOAddLaborPartsDialogSteps {
 
@@ -10,10 +15,10 @@ public class VNextBOAddLaborPartsDialogSteps {
 
         VNextBOAddLaborPartsDialog laborPartsDialog = new VNextBOAddLaborPartsDialog();
         Utils.clearAndType(laborPartsDialog.getSelectLaborServiceField(), laborServiceName);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         Utils.selectOptionInDropDownWithJs(laborPartsDialog.getLaborServicesDropDown(),
                 laborPartsDialog.serviceDropDownOption(laborServiceName));
-        WaitUtilsWebDriver.waitForLoading();
     }
 
     private static void clickAddLaborButton() {
@@ -24,32 +29,32 @@ public class VNextBOAddLaborPartsDialogSteps {
     public static void populateLaborServiceField(String laborServiceName) {
 
         Utils.clearAndType(new VNextBOAddLaborPartsDialog().getSelectLaborServiceField(), laborServiceName);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void addLaborServiceToPart(String laborServiceName) {
 
         setLaborServiceField(laborServiceName);
         clickAddLaborButton();
-        WaitUtilsWebDriver.waitForLoading();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void closeDialogWithXIcon() {
-
-        Utils.clickElement(new VNextBOAddLaborPartsDialog().getXIconCloseButton());
-        WaitUtilsWebDriver.waitForLoading();
+        WebElement xIconCloseButton = new VNextBOAddLaborPartsDialog().getXIconCloseButton();
+        Utils.clickElement(xIconCloseButton);
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(xIconCloseButton));
     }
 
     public static void closeDialogWithCancelButton() {
-
-        Utils.clickElement(new VNextBOAddLaborPartsDialog().getCancelAddingLaborButton());
-        WaitUtilsWebDriver.waitForLoading();
+        WebElement cancelButton = new VNextBOAddLaborPartsDialog().getCancelAddingLaborButton();
+        Utils.clickElement(cancelButton);
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(cancelButton));
     }
 
     public static void clearLaborServiceField() {
-
-        Utils.clickElement(new VNextBOAddLaborPartsDialog().getClearServiceFieldIcon());
-        WaitUtilsWebDriver.waitForLoading();
+        WebElement clearServiceFieldIcon = new VNextBOAddLaborPartsDialog().getClearServiceFieldIcon();
+        Utils.clickElement(clearServiceFieldIcon);
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(clearServiceFieldIcon));
     }
 }

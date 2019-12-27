@@ -94,7 +94,7 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         RegularServicesScreenSteps.selectService(workOrderData.getServiceData().getServiceName());
-        RegularServiceDetailsScreenSteps.slectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
+        RegularServiceDetailsScreenSteps.selectServiceVehiclePart(workOrderData.getServiceData().getVehiclePart());
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.clickTechniciansIcon();
         Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(workOrderData.getServiceData().getServiceDefaultTechnician().getTechnicianFullName()));
@@ -293,7 +293,7 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
 
         servicesScreen.selectServicePanel(moneyServicePanel.getDamageGroupName());
         RegularServicesScreenSteps.openCustomServiceDetails(moneyServicePanel.getMoneyService().getServiceName());
-        RegularServiceDetailsScreenSteps.slectServiceVehiclePart(moneyServicePanel.getMoneyService().getVehiclePart());
+        RegularServiceDetailsScreenSteps.selectServiceVehiclePart(moneyServicePanel.getMoneyService().getVehiclePart());
         selectedServiceDetailsScreen.clickTechniciansIcon();
         Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(moneyServicePanel.getServiceDefaultTechnician().getTechnicianFullName()));
         selectedServiceDetailsScreen.clickCancel();

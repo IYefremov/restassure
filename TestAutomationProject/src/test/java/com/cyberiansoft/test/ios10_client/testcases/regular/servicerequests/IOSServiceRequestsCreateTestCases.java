@@ -219,8 +219,7 @@ public class IOSServiceRequestsCreateTestCases extends IOSRegularBaseTestCase {
         Assert.assertTrue(selectedServicesScreen.isServiceIsSelectedWithServiceValues(workOrderData.getBundleService().getBundleServiceName(), PricesCalculations.getPriceRepresentation(workOrderData.getBundleService().getBundleServiceAmount())));
 
         RegularSelectedServicesSteps.openSelectedServiceDetails(workOrderData.getBundleService().getBundleServiceName());
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
+        RegularSelectedBundleServiceScreenSteps.changeAmountOfBundleService(workOrderData.getBundleService().getBundleServiceAmount());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
         selectedServicesScreen.waitSelectedServicesScreenLoaded();
 

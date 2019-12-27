@@ -102,9 +102,8 @@ public class IOSDraftModeInspectionsTestCases extends IOSRegularBaseTestCase {
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreen servicesScreen = new RegularServicesScreen();
         servicesScreen.selectService(inspectionData.getBundleService().getBundleServiceName());
-        RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
-        selectedServiceDetailsScreen.changeAmountOfBundleService(inspectionData.getBundleService().getBundleServiceAmount());
-        selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularSelectedBundleServiceScreenSteps.changeAmountOfBundleService(inspectionData.getBundleService().getBundleServiceAmount());
+        RegularServiceDetailsScreenSteps.saveServiceDetails();
         for (ServiceData serviceData : inspectionData.getServicesList()) {
             RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
         }

@@ -137,7 +137,7 @@ public class Utils {
 
     public static void refreshPage() {
         DriverBuilder.getInstance().getDriver().navigate().refresh();
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void reduceZoom() {

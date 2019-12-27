@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -149,7 +148,6 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
     public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openIntercomMessenger();
-        WaitUtilsWebDriver.waitForLoading();
         VNextBOPartsManagementWebPageValidations.verifyIntercomMessengerIsOpened();
         VNextBOPartsManagementWebPageSteps.closeIntercom();
     }
