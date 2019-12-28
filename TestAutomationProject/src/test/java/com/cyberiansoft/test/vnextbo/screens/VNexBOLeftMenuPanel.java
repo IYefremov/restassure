@@ -7,6 +7,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.quicknotes.VNextBOQuickNotesWebPage;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
 import lombok.Getter;
 import org.openqa.selenium.By;
