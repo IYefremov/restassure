@@ -2,9 +2,6 @@ package com.cyberiansoft.test.vnextbo.steps.users;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
-import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsManagementWebPage;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOAddNewUserDialog;
 import com.cyberiansoft.test.vnextbo.screens.users.VNexBOUsersWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;

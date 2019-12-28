@@ -10,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import javax.rmi.CORBA.Util;
 import java.util.concurrent.TimeUnit;
 
 public class VNextBOUserProfileDialog extends BaseWebPage {

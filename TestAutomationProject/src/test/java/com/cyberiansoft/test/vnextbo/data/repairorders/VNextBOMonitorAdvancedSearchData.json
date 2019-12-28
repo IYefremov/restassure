@@ -650,7 +650,6 @@
       "repairStatus": "In Progress - On Hold",
       "daysInProcess": "<",
       "daysInPhase": "<=",
-      "flag": "Red",
       "searchName": "MySavedSearch"
     }
   ],
@@ -682,10 +681,6 @@
       "locations": [
         "Best Location Automation",
         "1111 Automation"
-      ],
-      "flags": [
-        "White",
-        "Yellow"
       ],
       "searchName": "MySavedSearch"
     }

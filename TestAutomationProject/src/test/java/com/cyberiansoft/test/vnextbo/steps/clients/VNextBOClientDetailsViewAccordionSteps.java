@@ -8,7 +8,6 @@ import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AccountInfoData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.AddressData;
 import com.cyberiansoft.test.dataclasses.vNextBO.clientData.EmailOptionsData;
 import com.cyberiansoft.test.vnextbo.interactions.clients.*;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientsDetailsViewAccordion;
 import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientDetailsValidations;
 import org.openqa.selenium.WebElement;

@@ -173,10 +173,10 @@ public class Utils {
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
         if (draggable) {
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 2);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
             final WebElement webElement = listBox
                     .stream()
-                    .filter(option -> option.getText().equals(selection))
+                    .filter(option -> Utils.getText(option).equals(selection))
                     .findAny()
                     .orElseThrow(() -> new NoSuchElementException("The option " + selection + " hasn't been found"));
             Utils.clickElement(webElement);
@@ -188,7 +188,7 @@ public class Utils {
     private static Optional<WebElement> getMatchingOptionInListBox(List<WebElement> listBox, String selection) {
         return listBox
                 .stream()
-                .filter((option) -> WaitUtilsWebDriver.waitForElementNotToBeStale(option).getText().equals(selection))
+                .filter((option) -> Utils.getText(option).equals(selection))
                 .findFirst();
     }
 

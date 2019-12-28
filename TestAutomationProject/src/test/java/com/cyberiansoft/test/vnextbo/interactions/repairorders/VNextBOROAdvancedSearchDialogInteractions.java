@@ -2,10 +2,8 @@ package com.cyberiansoft.test.vnextbo.interactions.repairorders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.baseutils.WebDriverUtils;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROAdvancedSearchDialog;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.Arrays;
 import java.util.List;
@@ -287,33 +285,39 @@ public class VNextBOROAdvancedSearchDialogInteractions {
     }
 
     private static void selectPhase(String phase) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getPhaseDropDown(),
-                new VNextBOROAdvancedSearchDialog().getPhaseListBoxOptions(), phase);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getPhaseDropDown(),
+                advancedSearchDialog.getPhaseListBoxOptions(), phase);
     }
 
     private static void selectDepartment(String phase) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getDepartmentDropDown(),
-                new VNextBOROAdvancedSearchDialog().getDepartmentListBoxOptions(), phase);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getDepartmentDropDown(),
+                advancedSearchDialog.getDepartmentListBoxOptions(), phase);
     }
 
     private static void selectWoType(String woType) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getWoTypeDropDown(),
-                new VNextBOROAdvancedSearchDialog().getWoTypeListBoxOptions(), woType);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getWoTypeDropDown(),
+                advancedSearchDialog.getWoTypeListBoxOptions(), woType);
     }
 
     private static void selectDaysInPhase(String daysInPhase) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getDaysInPhaseDropDown(),
-                new VNextBOROAdvancedSearchDialog().getDaysInPhaseListBoxOptions(), daysInPhase);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getDaysInPhaseDropDown(),
+                advancedSearchDialog.getDaysInPhaseListBoxOptions(), daysInPhase);
     }
 
     private static void selectFlag(String flag) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getFlagDropDown(),
-                new VNextBOROAdvancedSearchDialog().getFlagsListBoxOptions(), flag, true);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getFlagDropDown(),
+                advancedSearchDialog.getFlagsListBoxOptions(), flag, true);
     }
 
     private static void selectSortBy(String sortBy) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getSortByDropDown(),
-                new VNextBOROAdvancedSearchDialog().getSortByListBoxOptions(), sortBy, true);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getSortByDropDown(),
+                advancedSearchDialog.getSortByListBoxOptions(), sortBy, true);
     }
 
     public static void clickAdvancedSearchCloseButton() {
@@ -321,18 +325,21 @@ public class VNextBOROAdvancedSearchDialogInteractions {
     }
 
     private static void selectDaysInProcess(String daysInProcess) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getDaysInProcessDropDown(),
-                new VNextBOROAdvancedSearchDialog().getDaysInProcessListBoxOptions(), daysInProcess);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getDaysInProcessDropDown(),
+                advancedSearchDialog.getDaysInProcessListBoxOptions(), daysInProcess);
     }
 
     private static void selectTimeFrame(String timeFrame) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getTimeFrameDropDown(),
-                new VNextBOROAdvancedSearchDialog().getTimeFrameListBoxOptions(), timeFrame, true);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getTimeFrameDropDown(),
+                advancedSearchDialog.getTimeFrameListBoxOptions(), timeFrame, true);
     }
 
     private static void selectRepairStatus(String repairStatus) {
-        Utils.selectOptionInDropDown(new VNextBOROAdvancedSearchDialog().getRepairStatusDropDown(),
-                new VNextBOROAdvancedSearchDialog().getRepairStatusListBoxOptions(), repairStatus);
+        final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
+        Utils.selectOptionInDropDown(advancedSearchDialog.getRepairStatusDropDown(),
+                advancedSearchDialog.getRepairStatusListBoxOptions(), repairStatus);
     }
 
     public static String getRepairStatusOption() {
@@ -341,20 +348,16 @@ public class VNextBOROAdvancedSearchDialogInteractions {
 
     public static List<String> getAdvancedSearchDialogElementsValues() {
         final VNextBOROAdvancedSearchDialog advancedSearchDialog = new VNextBOROAdvancedSearchDialog();
-        final WebElement customerSelection = advancedSearchDialog.getCustomerSelection();
-        final String text = Utils.getText(customerSelection);
-        try {
-            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver
-                    -> !text.equals(customerSelection.getText()));
-        } catch (Exception ignored) {}
-        return Arrays.asList(customerSelection.getText(),
-                advancedSearchDialog.getEmployeeSelection().getText(),
-                advancedSearchDialog.getPhaseSelection().getText(),
-                advancedSearchDialog.getTimeFrameSelection().getText(),
-                advancedSearchDialog.getDepartmentSelection().getText(),
-                advancedSearchDialog.getRepairStatusSelection().getText(),
-                advancedSearchDialog.getDaysInProcessSelection().getText(),
-                advancedSearchDialog.getDaysInPhaseSelection().getText(),
-                advancedSearchDialog.getFlagSelection().getText());
+        final List<WebElement> advSearchElements = Arrays.asList(
+                advancedSearchDialog.getCustomerSelection(),
+                advancedSearchDialog.getEmployeeSelection(),
+                advancedSearchDialog.getPhaseSelection(),
+                advancedSearchDialog.getTimeFrameSelection(),
+                advancedSearchDialog.getDepartmentSelection(),
+                advancedSearchDialog.getRepairStatusSelection(),
+                advancedSearchDialog.getDaysInProcessSelection(),
+                advancedSearchDialog.getDaysInPhaseSelection(),
+                advancedSearchDialog.getFlagSelection());
+        return Utils.getText(advSearchElements);
     }
 }

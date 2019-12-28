@@ -4,9 +4,9 @@ import lombok.Getter;
 
 @Getter
 public enum MainMenuItems {
-    MONITOR("Monitor"),
     OPERATIONS("Operations"),
     SETTINGS("Settings"),
+    MONITOR("Monitor"),
     QUICK_BOOKS_INTEGRATION("QuickBooks Integration"),
     ADD_ONS("Add-ons");
 

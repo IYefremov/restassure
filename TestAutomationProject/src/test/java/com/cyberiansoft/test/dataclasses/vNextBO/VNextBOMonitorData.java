@@ -250,9 +250,6 @@ public class VNextBOMonitorData  {
     @JsonProperty("serviceParts")
     private String[] serviceParts;
 
-    @JsonProperty("flags")
-    private String[] flags;
-
     @JsonProperty("locations")
     private String[] locations;
 

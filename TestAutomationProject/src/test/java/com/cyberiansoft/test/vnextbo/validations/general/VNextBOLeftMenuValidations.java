@@ -33,6 +33,5 @@ public class VNextBOLeftMenuValidations {
         } catch (Exception ex) {
             return false;
         }
-
     }
 }

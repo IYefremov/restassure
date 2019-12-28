@@ -1,11 +1,8 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementSearchData;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAdvancedSearchDialog;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 public class VNextBOAdvancedSearchDialogValidations {

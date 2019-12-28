@@ -204,6 +204,15 @@ public class VNextBOROPageValidations {
         return Utils.isElementDisplayed(new VNextBOROWebPage().getTable(), 5);
     }
 
+    public static void verifyOrdersAreDisplayed() {
+        if (!VNextBOROPageValidations.isTableDisplayed()) {
+            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true),
+                    "The text notification is not displayed");
+        } else {
+            Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
+        }
+    }
+
     public static boolean isTextNoRecordsDisplayed(boolean expected) {
         return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROWebPage().getNoRecordsFound(), expected, 3);
     }

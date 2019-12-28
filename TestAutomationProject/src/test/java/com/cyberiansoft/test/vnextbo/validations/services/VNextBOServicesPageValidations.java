@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnextbo.validations.services;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.services.VNextBOServiceData;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.services.VNextBOServicesWebPage;
 import com.cyberiansoft.test.vnextbo.steps.services.VNextBOServicesWebPageSteps;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;

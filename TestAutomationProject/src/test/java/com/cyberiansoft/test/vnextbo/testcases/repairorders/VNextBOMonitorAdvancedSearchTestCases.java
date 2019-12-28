@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.OrderMonitorFlags;
 import com.cyberiansoft.test.enums.OrderMonitorRepairStatuses;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
@@ -196,11 +197,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
-        } else {
-            Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
-        }
+        VNextBOROPageValidations.verifyOrdersAreDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -229,11 +226,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
-        } else {
-            Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
-        }
+        VNextBOROPageValidations.verifyOrdersAreDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -246,11 +239,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
-        } else {
-            Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
-        }
+        VNextBOROPageValidations.verifyOrdersAreDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -263,11 +252,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
-        } else {
-            Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
-        }
+        VNextBOROPageValidations.verifyOrdersAreDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -280,11 +265,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
-        } else {
-            Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
-        }
+        VNextBOROPageValidations.verifyOrdersAreDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -297,11 +278,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
-        } else {
-            Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
-        }
+        VNextBOROPageValidations.verifyOrdersAreDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -314,11 +291,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
-        if (!VNextBOROPageValidations.isTableDisplayed()) {
-            Assert.assertTrue(VNextBOROPageValidations.isTextNoRecordsDisplayed(true), "The text notification is not displayed");
-        } else {
-            Assert.assertTrue(VNextBOROPageInteractions.getNumOfOrdersOnPage() > 0, "The orders are not displayed");
-        }
+        VNextBOROPageValidations.verifyOrdersAreDisplayed();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -619,21 +592,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
-        VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
-        VNextBOROAdvancedSearchDialogInteractions.setEmployee(data.getEmployee());
-        VNextBOROAdvancedSearchDialogInteractions.setPhase(data.getPhase());
-        VNextBOROAdvancedSearchDialogInteractions.setDepartment(data.getDepartment());
-        VNextBOROAdvancedSearchDialogInteractions.setWoType(data.getWoType());
-        VNextBOROAdvancedSearchDialogInteractions.setWoNum(data.getWoNum());
-        VNextBOROAdvancedSearchDialogInteractions.setRoNum(data.getRoNum());
-        VNextBOROAdvancedSearchDialogInteractions.setStockNum(data.getStockNum());
-        VNextBOROAdvancedSearchDialogInteractions.setVinNum(data.getVinNum());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_30_DAYS.getName());
-        VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
-        VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
-        VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
-        VNextBOROAdvancedSearchDialogInteractions.setSearchName(data.getSearchName());
+        VNextBOROAdvancedSearchDialogSteps.setAdvancedSearchDialogData(data, TimeFrameValues.TIMEFRAME_30_DAYS, OrderMonitorFlags.RED);
         VNextBOROAdvancedSearchDialogInteractions.clickSearchButton();
     }
 
@@ -661,7 +620,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         final String searchName = data.getSearchName() + RandomStringUtils.randomAlphanumeric(3);
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlags()[0]);
+        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.WHITE.getFlag());
         VNextBOROAdvancedSearchDialogInteractions.setSearchName(searchName);
         VNextBOROAdvancedSearchDialogInteractions.clickSaveButton();
 
@@ -672,15 +631,15 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocations()[0]);
         VNextBOROPageSteps.setSavedSearchOption(searchName);
         VNextBOROPageInteractions.clickEditIconForSavedSearch();
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlags()[1]);
+        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.YELLOW.getFlag());
         VNextBOROAdvancedSearchDialogInteractions.clickSaveButton();
 
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
 
         VNextBOROPageInteractions.clickEditIconForSavedSearch();
-        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getFlagSelected(), data.getFlags()[1],
-                "The flag hasn't been selected");
+        Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getFlagSelected(),
+                OrderMonitorFlags.YELLOW.getFlag(), "The flag hasn't been selected");
         VNextBOROAdvancedSearchDialogInteractions.clickDeleteButton();
         VNextBOConfirmationDialogInteractions.clickConfirmButton();
     }
@@ -729,21 +688,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
-        VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
-        VNextBOROAdvancedSearchDialogInteractions.setEmployee(data.getEmployee());
-        VNextBOROAdvancedSearchDialogInteractions.setPhase(data.getPhase());
-        VNextBOROAdvancedSearchDialogInteractions.setDepartment(data.getDepartment());
-        VNextBOROAdvancedSearchDialogInteractions.setWoType(data.getWoType());
-        VNextBOROAdvancedSearchDialogInteractions.setWoNum(data.getWoNum());
-        VNextBOROAdvancedSearchDialogInteractions.setRoNum(data.getRoNum());
-        VNextBOROAdvancedSearchDialogInteractions.setStockNum(data.getStockNum());
-        VNextBOROAdvancedSearchDialogInteractions.setVinNum(data.getVinNum());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTMONTH.getName());
-        VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
-        VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
-        VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
-        VNextBOROAdvancedSearchDialogInteractions.setSearchName(data.getSearchName());
+        VNextBOROAdvancedSearchDialogSteps.setAdvancedSearchDialogData(data, TimeFrameValues.TIMEFRAME_LASTMONTH, OrderMonitorFlags.RED);
 
         System.out.println("Before clear");
         VNextBOROAdvancedSearchDialogInteractions.getAdvancedSearchDialogElementsValues().forEach(System.out::println);
@@ -758,7 +703,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         System.out.println("After clear");
         VNextBOROAdvancedSearchDialogInteractions.getAdvancedSearchDialogElementsValues().forEach(System.out::println);
         System.out.println("\nData after clear");
-        data.getAdvancedSearchDialogElements().forEach(System.out::println);
+        data.getAdvancedSearchDialogDefaultTextList().forEach(System.out::println);
         Assert.assertTrue(VNextBOROAdvancedSearchDialogInteractions
                 .getAdvancedSearchDialogElementsValues()
                 .containsAll(data.getAdvancedSearchDialogDefaultTextList()), "The data hasn't been cleared");
