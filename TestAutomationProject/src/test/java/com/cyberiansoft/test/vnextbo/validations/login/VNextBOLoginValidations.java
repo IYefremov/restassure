@@ -7,7 +7,7 @@ public class VNextBOLoginValidations {
     
     public static boolean isLoginFormDisplayed() {
         return WaitUtilsWebDriver.elementShouldBeVisible(
-                new VNextBOLoginScreenWebPage().getLoginForm(), true, 10);
+                new VNextBOLoginScreenWebPage().getLoginForm(), true, 20);
     }
 
     public static boolean isEmailFieldDisplayed() {
