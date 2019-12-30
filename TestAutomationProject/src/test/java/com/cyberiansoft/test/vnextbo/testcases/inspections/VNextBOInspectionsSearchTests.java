@@ -167,6 +167,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         vNextBOInspectionAdvancedSearchForm = new VNextBOInspectionAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.clickSaveButton();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOInspectionsPageValidations.verifyEditAdvancedSearchIconIsDisplayed();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOInspectionAdvancedSearchForm);
         VNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
