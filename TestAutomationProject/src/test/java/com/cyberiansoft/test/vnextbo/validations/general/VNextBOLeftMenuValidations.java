@@ -3,7 +3,10 @@ package com.cyberiansoft.test.vnextbo.validations.general;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.util.Objects;
 
 public class VNextBOLeftMenuValidations {
 
@@ -33,5 +36,12 @@ public class VNextBOLeftMenuValidations {
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    public static boolean isMainMenuItemCollapsed(String mainMenuItemName) {
+        final WebElement mainMenu = new VNexBOLeftMenuPanel().mainMenuItemByName(mainMenuItemName);
+        WaitUtilsWebDriver.elementShouldBeVisible(mainMenu, true, 4);
+        final String attribute = mainMenu.getAttribute("aria-expanded");
+        return Objects.isNull(attribute) || attribute.equals("false");
     }
 }

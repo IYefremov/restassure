@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
+import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
 
 public class VNextBOLeftMenuInteractions {
 
@@ -80,8 +81,10 @@ public class VNextBOLeftMenuInteractions {
 
     private static void selectMenuItem(String mainMenuItemName, String subMenuItemName) {
         expandMainMenu();
-        clickMainMenuItem(mainMenuItemName);
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        if (VNextBOLeftMenuValidations.isMainMenuItemCollapsed(mainMenuItemName)) {
+            clickMainMenuItem(mainMenuItemName);
+            WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        }
         clickSubMenuItem(subMenuItemName);
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
