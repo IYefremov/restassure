@@ -14,7 +14,8 @@ import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPane
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOActiveDevicesTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBODevicesAdvancedSearchValidations;
 import org.json.simple.JSONObject;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class VNextBODeviceManagementSearchTests extends BaseTestCase {
 

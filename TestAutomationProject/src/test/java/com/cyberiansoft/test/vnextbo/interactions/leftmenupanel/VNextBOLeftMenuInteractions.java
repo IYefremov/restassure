@@ -80,10 +80,8 @@ public class VNextBOLeftMenuInteractions {
 
     private static void selectMenuItem(String mainMenuItemName, String subMenuItemName) {
         expandMainMenu();
-        if (VNextBOInspectionsPageSteps.isMainMenuItemCollapsed(mainMenuItemName)) {
-            clickMainMenuItem(mainMenuItemName);
-            WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
-        }
+        clickMainMenuItem(mainMenuItemName);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         clickSubMenuItem(subMenuItemName);
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();

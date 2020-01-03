@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import org.openqa.selenium.WebElement;
@@ -10,7 +9,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
 
@@ -245,12 +243,5 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOInspectionsWebPage inspectionsWebPage = new VNextBOInspectionsWebPage();
         WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(inspectionsWebPage.getInspectionsList()));
         WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(inspectionsWebPage.getInspectionDetailsPanel()));
-    }
-
-    public static boolean isMainMenuItemCollapsed(String mainMenuItemName) {
-        final WebElement mainMenu = new VNexBOLeftMenuPanel().mainMenuItemByName(mainMenuItemName);
-        WaitUtilsWebDriver.elementShouldBeVisible(mainMenu, true, 4);
-        final String attribute = mainMenu.getAttribute("aria-expanded");
-        return Objects.isNull(attribute) || attribute.equals("false");
     }
 }
