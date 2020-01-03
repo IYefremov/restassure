@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.services.VNextBOServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
+import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.services.VNextBOServiceDialogSteps;
@@ -39,6 +40,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getServicesMoneyAndPercentageTD();
         VNextBOLeftMenuInteractions.selectServicesMenu();
+        Utils.refreshPage();
     }
 
     @AfterClass
