@@ -7,11 +7,11 @@ public enum OrderMonitorFlags {
 
     WHITE("White"),
     RED("Important"),
-    ORANGE("Low Priority"),
+    ORANGE("Low priority"),
     YELLOW("Yellow"),
     GREEN("Green"),
     BLUE("Blue"),
-    Violet("Test");
+    VIOLET("Test");
 
     private String flag;
 

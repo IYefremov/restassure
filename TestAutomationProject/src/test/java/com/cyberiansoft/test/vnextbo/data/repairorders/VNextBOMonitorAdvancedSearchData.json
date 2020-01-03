@@ -174,8 +174,7 @@
         }
       ],
       "location": "Rozstalnoy_location",
-      "customer": "Bratan",
-      "timeFrame": "Year To Date"
+      "customer": "Bratan"
     }
   ],
 
@@ -188,8 +187,7 @@
           "testCaseID": "91463"
         }
       ],
-      "location": "Best Location Automation",
-      "flag": "Red"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -202,8 +200,7 @@
           "testCaseID": "91464"
         }
       ],
-      "location": "Best Location Automation",
-      "flag": "Orange"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -249,17 +246,16 @@
     }
   ],
 
-  "verifyUserCanSearchByPurpleFlag": [
+  "verifyUserCanSearchByVioletFlag": [
     {
-      "rowID": "verifyUserCanSearchByPurpleFlag.01",
+      "rowID": "verifyUserCanSearchByVioletFlag.01",
       "description": "Test Case 83958:User can search by \"Flag\" (purple)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91468"
         }
       ],
-      "location": "Best Location Automation",
-      "flag": "Purple"
+      "location": "Best Location Automation"
     }
   ],
 
@@ -622,7 +618,6 @@
         }
       ],
       "location": "Best Location Automation",
-      "flag": "White",
       "searchName": "MySavedSearch"
     }
   ],

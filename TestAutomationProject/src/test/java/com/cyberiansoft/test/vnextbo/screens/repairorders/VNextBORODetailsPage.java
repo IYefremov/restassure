@@ -383,12 +383,20 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     }
 
     public WebElement getPhaseStatusBox(String phaseStatusBox) {
-	    return driver.findElement(By.xpath("//div[@data-name='" + phaseStatusBox +
-                "']//div[contains(@class, 'clmn_5')]//span[contains(@class, 'group-status-dropdown')]"));
+	    try {
+            return driver.findElement(By.xpath("//div[@data-name='" + phaseStatusBox +
+                    "']//div[contains(@class, 'clmn_5')]//span[contains(@class, 'group-status-dropdown')]"));
+        } catch (Exception ignored) {
+	        return null;
+        }
     }
 
     public WebElement getPhaseStatusBoxValue(String phaseStatusBox) {
-	    return getPhaseStatusBox(phaseStatusBox).findElement(By.xpath(".//span[contains(@class, 'k-input')]"));
+	    if (getPhaseStatusBox(phaseStatusBox) != null) {
+            return getPhaseStatusBox(phaseStatusBox).findElement(By.xpath(".//span[contains(@class, 'k-input')]"));
+        } else {
+	        return null;
+        }
     }
 
     public WebElement getActionsTriggerForPhase(String phase) {

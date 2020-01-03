@@ -60,7 +60,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogInteractions.typeEmployeeName(data.getEmployee());
 
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isEmployeeDisplayed(data.getEmployee()));
@@ -79,7 +79,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setPhase(data.getPhase());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
@@ -94,7 +94,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setDepartment(data.getDepartment());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
@@ -109,7 +109,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setWoType(data.getWoType());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
@@ -124,7 +124,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setWoNum(data.getWoNum());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
@@ -139,7 +139,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setRoNum(data.getRoNum());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
@@ -154,7 +154,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setStockNum(data.getStockNum());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
@@ -169,7 +169,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setVinNum(data.getVinNum());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
@@ -210,7 +210,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogInteractions.typeCustomerName(data.getCustomer());
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isCustomerDisplayed(data.getCustomer()));
         VNextBOROAdvancedSearchDialogInteractions.selectCustomerNameFromBoxList(data.getCustomer());
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getCustomer(), true),
                 "The work order hasn't been displayed");
@@ -223,7 +223,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
+        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.RED.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAreDisplayed();
@@ -236,7 +236,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
+        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.ORANGE.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAreDisplayed();
@@ -282,13 +282,13 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchByPurpleFlag(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanSearchByVioletFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
+        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.VIOLET.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAreDisplayed();
@@ -439,7 +439,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         LocalDateTime toDate = LocalDateTime.now(ZoneId.of("US/Pacific")).minusMonths(1);
         LocalDateTime fromDate = toDate.minusDays(2);
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(data.getTimeFrame());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM.getName());
         VNextBOROAdvancedSearchDialogInteractions.clickFromDateButton();
         VNextBOCalendarWidgetDialogInteractions.selectFromDate(fromDate.format(format));
         VNextBOROAdvancedSearchDialogInteractions.clickToDateButton();
@@ -652,7 +652,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         final String searchName = data.getSearchName() + RandomStringUtils.randomAlphanumeric(3);
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
+        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.WHITE.getFlag());
         VNextBOROAdvancedSearchDialogInteractions.setSearchName(searchName);
         VNextBOROAdvancedSearchDialogInteractions.clickSaveButton();
 
@@ -663,7 +663,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROPageSteps.setSavedSearchOption(searchName);
         VNextBOROPageInteractions.clickAdvancedSearchCaret();
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
+        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.WHITE.getFlag());
         VNextBOROAdvancedSearchDialogInteractions.setSearchName(searchName);
         VNextBOROAdvancedSearchDialogInteractions.clickClearButton();
     }
@@ -791,7 +791,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
-                data.getPhase(), data.getPhaseStatus(), TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+                data.getPhase(), data.getPhaseStatus(), TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
 
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
@@ -808,7 +808,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
-                data.getPhase(), data.getPhaseStatus(), TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+                data.getPhase(), data.getPhaseStatus(), TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
 
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
@@ -917,7 +917,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
         VNextBOROAdvancedSearchDialogInteractions.setSortBy(data.getSortByOptions()[0]);
         VNextBOROAdvancedSearchDialogSteps.search();

@@ -508,7 +508,7 @@ public class ServiceRequestsListVerifications {
         if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")).size() != 0)
             return false;
 
-        return driver.findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")).size() == 0;
+        return driver.findElements(By.xpath("//div[contains(@style, 'background-color:VIOLET;height:5px;')]")).size() == 0;
     }
 
     public static boolean checkLifeCycleDate() {
@@ -556,7 +556,7 @@ public class ServiceRequestsListVerifications {
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")));
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                    By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")));
+                    By.xpath("//div[contains(@style, 'background-color:VIOLET;height:5px;')]")));
 
             if (DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]"))
                     .size() != 5
@@ -567,7 +567,7 @@ public class ServiceRequestsListVerifications {
                     .size() != 5
                     && DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]"))
                     .size() != 5
-                    && DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]"))
+                    && DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:VIOLET;height:5px;')]"))
                     .size() != 5) {
                 return false;
             }

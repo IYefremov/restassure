@@ -25,19 +25,19 @@ public class VNextBOCalendarWidgetDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='advSearch_toDate_dateview']//a[@class='k-link k-nav-prev']")
     private WebElement toDateCalendarPreviousMonthArrow;
 
+    public VNextBOCalendarWidgetDialog() {
+        super(DriverBuilder.getInstance().getDriver());
+        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+    }
+
     public WebElement fromDateCalendarSpecificDateButton(String specificDate) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@id='advSearch_fromDate_dateview']//td/a[@data-value='" + specificDate + "']"));
+        return driver.findElement(By.xpath("//div[@id='advSearch_fromDate_dateview']//td/a[@data-value='" + specificDate + "']"));
     }
 
     public WebElement toDateCalendarSpecificDateButton(String specificDate) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@id='advSearch_toDate_dateview']//td/a[@data-value='" + specificDate + "']"));
-    }
-
-    public VNextBOCalendarWidgetDialog() {
-        super(DriverBuilder.getInstance().getDriver());
-        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+        return driver.findElement(By.xpath("//div[@id='advSearch_toDate_dateview']//td/a[@data-value='" + specificDate + "']"));
     }
 
     public List<WebElement> getDate(String date) {
