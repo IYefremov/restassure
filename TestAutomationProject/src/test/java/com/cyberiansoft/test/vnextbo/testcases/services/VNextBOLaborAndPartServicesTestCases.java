@@ -110,10 +110,10 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
 
         VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(editedLaborServiceBaseData.getServiceName());
         VNextBOServicesWebPageSteps.restoreServiceByName(editedLaborServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedLaborServiceBaseData.getServiceName());
         VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(editedLaborServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
@@ -124,7 +124,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.addBasePartService(partServiceBaseData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(partServiceBaseData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(partServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
@@ -135,7 +135,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.addPartServiceWithAllData(partServiceWithAllData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(partServiceWithAllData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(partServiceWithAllData);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
@@ -147,7 +147,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.editPartServiceWithAllData(partServiceWithAllData.getServiceName(), editedPartServiceBaseData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(editedPartServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
@@ -155,10 +155,10 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
         VNextBOServicesWebPageSteps.deleteServiceByName(editedPartServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(editedPartServiceBaseData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(editedPartServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
@@ -166,10 +166,10 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
 
         VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(editedPartServiceBaseData.getServiceName());
         VNextBOServicesWebPageSteps.restoreServiceByName(editedPartServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(editedPartServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
@@ -178,7 +178,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedLaborServiceBaseData.getServiceName());
         VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(editedLaborServiceBaseData.getServiceName(), "13");
         VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(editedLaborServiceBaseData.getServiceName(), "13");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Utils.refreshPage();
     }
 
@@ -188,6 +188,6 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
         VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(editedPartServiceBaseData.getServiceName(), "14");
         VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(editedPartServiceBaseData.getServiceName(), "14");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }

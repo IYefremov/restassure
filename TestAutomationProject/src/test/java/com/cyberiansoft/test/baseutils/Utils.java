@@ -25,11 +25,11 @@ public class Utils {
         }
         return actions;
     }
-    
+
     public static void clickElement(WebElement element) {
         try {
-            WaitUtilsWebDriver.waitForElementNotToBeStale(element, 8);
-            WaitUtilsWebDriver.elementShouldBeClickable(element, true, 8);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(element, 3);
+            WaitUtilsWebDriver.elementShouldBeClickable(element, true, 3);
             element.click();
         } catch (Exception ignored) {
             WaitUtilsWebDriver.waitABit(500);
@@ -228,11 +228,7 @@ public class Utils {
     }
 
     public static boolean isElementDisplayed(WebElement element) {
-        try {
-            return element.isDisplayed();
-        } catch (Exception ignored) {
-            return false;
-        }
+        return element.isDisplayed();
     }
 
     @Deprecated

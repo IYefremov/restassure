@@ -2,8 +2,10 @@ package com.cyberiansoft.test.vnextbo.validations.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.Map;
@@ -11,12 +13,12 @@ import java.util.Map;
 public class VNextBOInspectionsAdvancedSearchValidations {
 
     public static void verifyAdvancedSearchFormIsDisplayed() {
+        WaitUtilsWebDriver.getWebDriverWait(3).until(ExpectedConditions.visibilityOf(new VNextBOInspectionAdvancedSearchForm().advancedSearchFormContent));
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionAdvancedSearchForm().advancedSearchFormContent),
                 "Advanced search form hasn't been displayed\"");
     }
 
     public static void verifyAdvancedSearchFormIsNotDisplayed(VNextBOInspectionAdvancedSearchForm advancedSearchForm) {
-
         Assert.assertFalse(Utils.isElementDisplayed(advancedSearchForm.advancedSearchFormContent),
                 "Advanced search form hasn't been closed");
     }
