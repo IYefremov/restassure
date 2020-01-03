@@ -78,9 +78,9 @@
   ],
 
 
-  "testEditDuplicateByVINandRO": [
+  "testEditDuplicateByVINAndRO": [
     {
-      "rowID": "testEditDuplicateByVINandRO.01",
+      "rowID": "testEditDuplicateByVINAndRO.01",
       "description": "Test Case 75813:Operation - Inspection: Edit - Duplicate by RO and VIN",
       "inspectionNum1": "E-010-00064",
       "inspectionNum2": "E-010-00065",

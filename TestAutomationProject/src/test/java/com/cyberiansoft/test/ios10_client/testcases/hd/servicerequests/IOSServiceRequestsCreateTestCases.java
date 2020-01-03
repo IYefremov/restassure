@@ -132,7 +132,7 @@ public class IOSServiceRequestsCreateTestCases extends IOSHDBaseTestCase {
         serviceRequestsListInteractions.makeSearchPanelVisible();
 
         final ServiceRequestsListVerifications serviceRequestsListVerifications = new ServiceRequestsListVerifications();
-        serviceRequestsListVerifications.verifySearchFieldsAreVisible();
+        ServiceRequestsListVerifications.verifySearchFieldsAreVisible();
 
         serviceRequestsListInteractions.selectSearchTeam(teamName);
         serviceRequestsListInteractions.selectSearchTechnician("Employee Simple 20%");
@@ -141,14 +141,14 @@ public class IOSServiceRequestsCreateTestCases extends IOSHDBaseTestCase {
         serviceRequestsListInteractions.setSearchToDate(CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
         serviceRequestsListInteractions.setSearchFreeText(newserviceRequestNumber);
         serviceRequestsListInteractions.clickFindButton();
-        serviceRequestsListVerifications.verifySearchResultsByServiceName(serviceName);
+        ServiceRequestsListVerifications.isServiceNamePresentInFirstSR(serviceName);
         serviceRequestsListInteractions.selectFirstServiceRequestFromList();
         Assert.assertEquals(serviceRequestsListInteractions.getVINValueForSelectedServiceRequest(), serviceRequestData.getVihicleInfo().getVINNumber());
         Assert.assertEquals(serviceRequestsListInteractions.getCustomerValueForSelectedServiceRequest(), serviceName);
         Assert.assertEquals(serviceRequestsListInteractions.getEmployeeValueForSelectedServiceRequest(), "Employee Simple 20% (Default team)");
-        Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Bundle1_Disc_Ex $150.00 (1.00)"));
-        Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Quest_Req_Serv $10.00 (1.00)"));
-        Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Wheel $70.00 (3.00)"));
+        Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Bundle1_Disc_Ex $150.00 (1.00)"));
+        Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Quest_Req_Serv $10.00 (1.00)"));
+        Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Wheel $70.00 (3.00)"));
         DriverBuilder.getInstance().getDriver().quit();
 
         //Create inspection

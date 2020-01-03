@@ -209,10 +209,10 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.setSearchFreeText(data.getTextSearchParameter());
 		serviceRequestsListInteractions.setServiceRequestType(data.getServiceType());
 		serviceRequestsListInteractions.clickFindButton();
-		ServiceRequestsListVerifications.verifySearchResultsByServiceName(data.getTextSearchParameter());
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceNamePresentInFirstSR(data.getTextSearchParameter()));
 
 		serviceRequestsListInteractions.selectAddServiceRequestsComboboxValue(data.getServiceTypeVit());
-		serviceRequestsListInteractions.clickAddServiceRequestButtonAndSave();
+		serviceRequestsListInteractions.clickAddServiceRequestButtonWithoutSaving();
 		serviceRequestsListInteractions.clickGeneralInfoEditButton();
 		serviceRequestsListInteractions.setServiceRequestGeneralInfo(data.getTeamName(), data.getAssignedTo(), data.getPOnum(), data.getROnum());
 		serviceRequestsListInteractions.clickDoneButton();
@@ -236,10 +236,11 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		serviceRequestsListInteractions.saveNewServiceRequest();
 
 		serviceRequestsListInteractions.makeSearchPanelVisible();
-		serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
-		serviceRequestsListInteractions.setServiceRequestType(data.getServiceTypeVit());
+        serviceRequestsListInteractions.selectSearchTeam(data.getTeamName());
+        serviceRequestsListInteractions.setServiceRequestType(data.getServiceTypeVit());
+        serviceRequestsListInteractions.setSearchFreeText(data.getNewServiceRequest());
 		serviceRequestsListInteractions.clickFindButton();
-		Assert.assertTrue(ServiceRequestsListVerifications.verifySearchResultsByServiceName(data.getNewServiceRequest()));
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceNamePresentInFirstSR(data.getNewServiceRequest()));
 		Assert.assertTrue(ServiceRequestsListVerifications.verifySearchResultsByModelIN(data.getMake(), data.getModel(), data.getYear(), data.getVIN()));
 
 		serviceRequestsListInteractions.acceptFirstServiceRequestFromList();

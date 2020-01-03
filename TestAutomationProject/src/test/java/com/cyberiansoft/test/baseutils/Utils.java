@@ -185,7 +185,7 @@ public class Utils {
         }
     }
 
-    private static Optional<WebElement> getMatchingOptionInListBox(List<WebElement> listBox, String selection) {
+    public static Optional<WebElement> getMatchingOptionInListBox(List<WebElement> listBox, String selection) {
         return listBox
                 .stream()
                 .filter((option) -> WaitUtilsWebDriver.waitForElementNotToBeStale(option).getText().equals(selection))
@@ -328,19 +328,12 @@ public class Utils {
     }
 
     public static String getInputFieldValue(WebElement inputField) {
-        try {
-            WaitUtilsWebDriver.waitForVisibility(inputField);
-            return inputField.getAttribute("value");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
+        return getInputFieldValue(inputField, 15);
     }
 
     public static String getInputFieldValue(WebElement inputField, int timeOut) {
         try {
-            WaitUtilsWebDriver.waitForVisibility(inputField, timeOut);
-            return inputField.getAttribute("value");
+            return WaitUtilsWebDriver.waitForVisibility(inputField, timeOut).getAttribute("value");
         } catch (Exception e) {
             e.printStackTrace();
             return "";

@@ -13,7 +13,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class BackOfficeHeaderPanel extends BaseWebPage {
-	@FindBy(id = "ctl00_ctl00_LoginStatus_LoginStatus1")
+
+    @FindBy(id = "ctl00_ctl00_LoginStatus_LoginStatus1")
 	private WebElement logoutlink;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Home']")
@@ -113,8 +114,13 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         Utils.clickElement(subMenu);
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
-        WaitUtilsWebDriver.getWait().until(ExpectedConditions.titleContains(title));
+        try {
+            WaitUtilsWebDriver.waitUntilTitleContains(title);
+        } catch (Exception e) {
+            Utils.clickElement(subMenu);
+            WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+            WaitUtilsWebDriver.waitUntilTitleContains(title);
+        }
         WaitUtilsWebDriver.waitABit(1000);
     }
-
 }

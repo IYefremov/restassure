@@ -189,7 +189,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationphasestab.selectNewRepairLocationPhaseCheckOutType(data.getRepairLocationPhaseCheckoutType());
 		repairlocationphasestab.setNewRepairLocationPhaseApproxTransitionTime(data.getApproxTransTime());
 		repairlocationphasestab.setNewRepairLocationPhaseApproxRepairTime(data.getApproxRepairTime());
-		repairlocationphasestab.selectDoNotTrackIndividualServiceStatuses();
+		repairlocationphasestab.selectWorkStatusTracking(data.getWorkStatusTracking());
 		repairlocationphasestab.selectStartServiceRequired();
 		repairlocationphasestab.selectQCRequired();
 		repairlocationphasestab.clickNewRepairLocationPhaseOKButton();
@@ -200,7 +200,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		Assert.assertEquals(data.getRepairLocationPhaseCheckoutType(), repairlocationphasestab.getNewRepairLocationPhaseCheckOutType());
 		Assert.assertEquals(data.getApproxTransTime(), repairlocationphasestab.getNewRepairLocationPhaseApproxTransitionTime());
 		Assert.assertEquals(data.getApproxRepairTime(), repairlocationphasestab.getNewRepairLocationPhaseApproxRepairTime());
-		Assert.assertTrue(repairlocationphasestab.isDoNotTrackIndividualServiceStatusesSelected());
+		Assert.assertEquals(data.getWorkStatusTracking(), repairlocationphasestab.getWorkStatusTrackingSelected());
 		Assert.assertTrue(repairlocationphasestab.isStartServiceRequiredSelected());
 		Assert.assertTrue(repairlocationphasestab.isQCRequiredSelected());
 
@@ -210,7 +210,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		repairlocationphasestab.selectNewRepairLocationPhaseCheckOutType(data.getRepairLocationPhaseCheckoutTypeNew());
 		repairlocationphasestab.setNewRepairLocationPhaseApproxTransitionTime(data.getApproxTransTimeNew());
 		repairlocationphasestab.setNewRepairLocationPhaseApproxRepairTime(data.getApproxRepairTimeNew());
-		repairlocationphasestab.unselectDoNotTrackIndividualServiceStatuses();
+        repairlocationphasestab.selectWorkStatusTracking(data.getWorkStatusTrackingNew());
 		repairlocationphasestab.unselectStartServiceRequired();
 		repairlocationphasestab.unselectQCRequired();
 		repairlocationphasestab.clickNewRepairLocationPhaseOKButton();
@@ -221,7 +221,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 		Assert.assertEquals(data.getRepairLocationPhaseCheckoutTypeNew(), repairlocationphasestab.getNewRepairLocationPhaseCheckOutType());
 		Assert.assertEquals(data.getApproxTransTimeNew(), repairlocationphasestab.getNewRepairLocationPhaseApproxTransitionTime());
 		Assert.assertEquals(data.getApproxRepairTimeNew(), repairlocationphasestab.getNewRepairLocationPhaseApproxRepairTime());
-		Assert.assertFalse(repairlocationphasestab.isDoNotTrackIndividualServiceStatusesSelected());
+        Assert.assertNotEquals(data.getWorkStatusTracking(), repairlocationphasestab.getWorkStatusTrackingSelected());
 		Assert.assertFalse(repairlocationphasestab.isStartServiceRequiredSelected());
 		Assert.assertFalse(repairlocationphasestab.isQCRequiredSelected());
 		repairlocationphasestab.clickNewRepairLocationPhaseCancelButton();
@@ -412,13 +412,18 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 
 		RepairLocationUserSettingsTabWebPage repairlocationusersettingstab = new RepairLocationUserSettingsTabWebPage(webdriver);
 		repairlocationspage.clickRepairLocationUserSettingsLink(data.getRepairLocationName());
-		Assert.assertEquals(data.getCheckboxesAmount(), repairlocationusersettingstab.getAllUserSettingsCheckboxes().size());
+        System.out.println(data.getCheckboxesAmount());
+        System.out.println(repairlocationusersettingstab.getAllUserSettingsCheckboxes().size());
+        final int defaultUncheckedUserSettings = repairlocationusersettingstab.getUncheckedUserSettingsCheckboxes().size();
+        Assert.assertEquals(data.getCheckboxesAmount(), repairlocationusersettingstab.getAllUserSettingsCheckboxes().size());
 		repairlocationusersettingstab.checkAllUserSettingsCheckboxes();
 		repairlocationusersettingstab.closeNewTab(mainWindowHandle);
 
 		repairlocationusersettingstab = new RepairLocationUserSettingsTabWebPage(webdriver);
 		repairlocationspage.clickRepairLocationUserSettingsLink(data.getRepairLocationName());
-		repairlocationusersettingstab.verifyAllUserSettingsCheckboxesUnchecked();
+		Assert.assertEquals(defaultUncheckedUserSettings,
+                repairlocationusersettingstab.getUncheckedUserSettingsCheckboxes().size(),
+                "The default number of unchecked checkboxes is not correct");
 		repairlocationusersettingstab.checkAllUserSettingsCheckboxes().clickUpdateSettingButton();
 		repairlocationusersettingstab.closeNewTab(mainWindowHandle);
 

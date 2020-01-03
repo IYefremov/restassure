@@ -362,4 +362,8 @@ public class WaitUtilsWebDriver {
             }
         }
     }
+
+    public static void waitUntilTitleContains(String title) {
+        getWait().until(ExpectedConditions.titleContains(title));
+    }
 }

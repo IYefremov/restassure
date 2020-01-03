@@ -346,11 +346,11 @@ public class VendorsTeamsWebPage extends WebPageWithPagination {
 	}
 
 	public String getAuditLogVendorsTeamsTableLine1Text() {
-		return auditLogTableLine1.findElement(By.xpath("./td[last()]")).getText();
+		return auditLogTableLine1.findElement(By.xpath("./td[3]")).getText();
 	}
 
 	public String getAuditLogVendorsTeamsTableLine2Text() {
-		return auditLogTableLine2.findElement(By.xpath("./td[last()]")).getText();
+		return auditLogTableLine2.findElement(By.xpath("./td[3]")).getText();
 	}
 
 	public Set<String> clickGuestsLinkForVendorTeam(String vendorteam) {

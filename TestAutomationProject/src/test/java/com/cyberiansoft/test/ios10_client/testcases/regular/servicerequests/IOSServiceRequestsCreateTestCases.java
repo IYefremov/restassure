@@ -135,7 +135,7 @@ public class IOSServiceRequestsCreateTestCases extends IOSRegularBaseTestCase {
 
         serviceRequestsListInteractions.setSearchFreeText(serviceRequestNumber);
         serviceRequestsListInteractions.clickFindButton();
-        serviceRequestsListVerifications.verifySearchResultsByServiceName(serviceName);
+        serviceRequestsListVerifications.isServiceNamePresentInFirstSR(serviceName);
         serviceRequestsListInteractions.selectFirstServiceRequestFromList();
         Assert.assertEquals(serviceRequestsListInteractions.getVINValueForSelectedServiceRequest(), serviceRequestData.getVihicleInfo().getVINNumber());
         Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("Bundle1_Disc_Ex $150.00 (1.00)"));
