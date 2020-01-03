@@ -14,6 +14,7 @@ public class VNextBOServicesPageValidations extends VNextBOBaseWebPageValidation
 
     public static void verifyMoneyServiceRecordDataAreCorrect(VNextBOServiceData serviceData) {
 
+        WaitUtilsWebDriver.waitABit(2000);
         Assert.assertTrue(VNextBOServicesWebPageSteps.getServiceRecordSpecificColumnValue(serviceData.getServiceName(), "Type").contains(serviceData.getServiceType()),
                 "Type hasn't been correct");
         Assert.assertEquals(VNextBOServicesWebPageSteps.getServiceRecordSpecificColumnValue(serviceData.getServiceName(), "Name"),

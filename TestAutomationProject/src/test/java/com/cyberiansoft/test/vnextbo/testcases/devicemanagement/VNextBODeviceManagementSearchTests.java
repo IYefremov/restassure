@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.vnextbo.testcases.devicemanagement;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement.VNextBODeviceManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBOActiveDevicesTabSteps;
 import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBODeviceManagementSteps;
@@ -19,7 +21,8 @@ public class VNextBODeviceManagementSearchTests extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getDeviceManagementSearchTD();
-        com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
+        VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
 

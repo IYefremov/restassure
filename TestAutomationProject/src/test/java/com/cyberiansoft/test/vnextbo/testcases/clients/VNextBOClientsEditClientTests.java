@@ -248,7 +248,7 @@ public class VNextBOClientsEditClientTests extends BaseTestCase {
         VNextBOClientsPageSteps.openClientsDetailsPage(baseRetailClient.getEmployee().getEmployeeFirstName());
         VNextBOClientDetailsViewAccordionSteps.setAllClientsData(retailClientData, false);
         VNextBOClientDetailsViewAccordionSteps.clickOkButton();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(retailClientData.getEmployee().getEmployeeFirstName());
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: " + retailClientData.getEmployee().getEmployeeFirstName());
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", retailClientData.getEmployee().getEmployeeFirstName());
