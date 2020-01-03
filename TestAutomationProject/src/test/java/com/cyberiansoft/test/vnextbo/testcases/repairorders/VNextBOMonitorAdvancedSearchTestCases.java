@@ -666,8 +666,6 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
                 "The advanced search dialog is not closed");
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
-
         VNextBOROPageSteps.setSavedSearchOption(searchName);
         VNextBOROPageInteractions.clickAdvancedSearchCaret();
         VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.WHITE.getFlag());
