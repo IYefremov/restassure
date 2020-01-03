@@ -41,7 +41,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Utils.refreshPage();
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
 	public void verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -65,7 +65,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The service has been added after closing the 'New Service Dialog' with X button");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
 	public void verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -88,7 +88,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The service has been added after closing the 'New Service Dialog' with X button");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
 	public void verifyUserCanChangeFlagOfRoToWhite(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -103,7 +103,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
 	public void verifyUserCanChangeFlagOfRoToRed(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -118,7 +118,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
 	public void verifyUserCanChangeFlagOfRoToOrange(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -133,7 +133,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
 	public void verifyUserCanChangeFlagOfRoToYellow(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -148,7 +148,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
 	public void verifyUserCanChangeFlagOfRoToGreen(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -163,7 +163,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
 	public void verifyUserCanChangeFlagOfRoToBlue(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -178,7 +178,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
 	public void verifyUserCanChangeFlagOfRoToPurple(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -193,7 +193,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertFalse(VNextBORODetailsPageValidations.isFlagsDropDownOpened(), "The flags drop down hasn't been closed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
 	public void verifyUserCanSeeServicesOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -217,7 +217,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The services table header values have not been displayed properly");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
 	public void verifyUserCanChangeVendorPriceOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -246,7 +246,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		System.out.println("Vendor price: " + VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId));
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
 	public void verifyUserCanChangeVendorTechnicianOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -268,7 +268,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
         VNextBORODetailsPageInteractions.setTechnician(serviceId, data.getTechnician());
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
 	public void verifyUserCanCreateNoteOfServiceOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -296,7 +296,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The services notes list number is not updated");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
 	public void verifyUserCanChangeTargetDateOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -318,7 +318,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
         VNextBORODetailsPageInteractions.setTechnician(serviceId, data.getTechnician());
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 14)
 	public void verifyUserCanSeeMoreInformationOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -341,7 +341,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The More Information fields haven't been fully displayed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 15)
 	public void verifyUserCanTypeAndNotSaveNoteOfRoService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -379,7 +379,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The services notes list number has been updated, although the 'X' button was clicked");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 16)
 	public void verifyUserCanChangeStatusOfRoServiceToActive(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -415,7 +415,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The Current Phase is not displayed properly");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 17)
 	public void verifyUserCanChangeStatusOfRoServiceToCompleted(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -451,7 +451,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The helper info dialog isn't displayed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 18)
 	public void verifyUserCanChangeStatusOfRoServiceToAudited(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -491,7 +491,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The helper info dialog isn't displayed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 19)
 	public void verifyUserCanChangeStatusOfRoServiceToRefused(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -527,7 +527,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The helper info dialog isn't displayed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 20)
 	public void verifyUserCanChangeStatusOfRoServiceToRework(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -559,7 +559,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 				"The helper info dialog isn't displayed");
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 21)
 	public void verifyUserCanChangeStatusOfRoServiceToSkipped(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 

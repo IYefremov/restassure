@@ -17,10 +17,12 @@ public class VNextBODeviceManagementSteps extends VNextBOBaseWebPageSteps {
     public static void openActiveDevicesTab() {
 
         Utils.clickElement(new VNextBODeviceManagementWebPage().getActiveDevicesTab());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void openPendingRegistrationDevicesTab() {
 
         Utils.clickElement(new VNextBODeviceManagementWebPage().getPendingRegistrationTab());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 }

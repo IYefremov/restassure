@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
-
+/*
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPartsManagementOrderDetailsTD();
@@ -64,4 +64,5 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
     public void verifyUserCanChangeStatusOfThePart(String rowID, String description, JSONObject testData) {
 
     }
+ */
 }

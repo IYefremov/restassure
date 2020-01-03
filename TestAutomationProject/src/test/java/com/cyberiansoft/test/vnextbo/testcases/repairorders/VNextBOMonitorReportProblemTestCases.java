@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -20,6 +21,7 @@ import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPa
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -32,7 +34,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorReportProblemTD();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
     public void verifyUserCanReportAndResolveProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -49,7 +51,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanInsertReasonDescriptionWhileReportingProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -61,7 +63,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyPhaseStatusIsSetToTheInitialAfterResolvingTheProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -80,7 +82,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
                 data.getPhase(), OrderMonitorServiceStatuses.REWORK.getValue());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyTheUserCannotReportProblemForCompletedPhase(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -96,7 +98,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageValidations.verifyActionsMenuIconIsHiddenForPhase(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyTheProblemIconIsShownForTheOrderOnTheROPage(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -121,7 +123,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
     public void verifyTheUserCanViewTheOrderProblemFromTheROAndDetailsPage(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -145,7 +147,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
     public void verifyTheUserCanReportAndResolveProblemOnTheServiceLevel(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -165,7 +167,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setResolveProblemForService(serviceId);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
     public void verifyTheUserCanViewTheServicesFromROPageAndSystemExpandsThePhase(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -189,7 +191,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
                 "The Problem icon is not displayed for service after reporting the problem");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyTheUserCannotReportProblemForTheCompletedService(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -216,7 +218,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
                 "The Problem option is available in the services options list");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnThePhaseLevel(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -233,7 +235,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void verifyUserCanOpenCompleteCurrentPhasePopupWindowWithAllProblemServices(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -270,7 +272,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
                 "The service " + service + " hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserCanCompleteCurrentPhaseWithProblemServices(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -302,7 +304,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOCompleteCurrentPhaseDialogInteractions.clickResolveButtonForService(service);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
     public void verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -327,7 +329,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
                 serviceId, OrderMonitorServiceStatuses.PROBLEM.getValue());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
     public void verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 

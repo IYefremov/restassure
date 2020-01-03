@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.clients;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -174,6 +175,7 @@ public class VNextBOClientsSearchTests extends BaseTestCase {
 
         VNextBOClientsPageSteps.searchClientByType("Wholesale");
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Client Type: Wholesale");
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOClientsPageSteps.getColumnValuesFromColumnWithCheckBoxes("Wholesale");
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Wholesale", true);
         VNextBOSearchPanelSteps.clearSearchFilter();

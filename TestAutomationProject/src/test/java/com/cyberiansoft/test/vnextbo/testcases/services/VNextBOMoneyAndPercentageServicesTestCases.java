@@ -39,6 +39,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getServicesMoneyAndPercentageTD();
         VNextBOLeftMenuInteractions.selectServicesMenu();
+        Utils.refreshPage();
     }
 
     @AfterClass

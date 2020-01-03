@@ -45,7 +45,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
 	}
 
     //todo blocker, needs update
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 55)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanSeeChangesOfPhasesInLogInfo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -85,7 +85,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         Assert.assertTrue(!phasesLastRecord.isEmpty(), "The last phase record hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 56)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanChangeQuantityForService(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -115,7 +115,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                 "The service total price hasn't been recalculated after changing the service quantity");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 57)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyUserCanEnterNegativeNumberForServiceQuantity(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -153,7 +153,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                 "The service quantity hasn't been changed to 0");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 58)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyUserCannotEnterTextForServiceQuantity(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -180,7 +180,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                         "into the service quantity input field");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 59)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
     public void verifyUserCanChangePriceForService(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -210,7 +210,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                 "The service total price hasn't been recalculated after changing the service price");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 60)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
     public void verifyUserCanEnterNegativeNumberForServicePrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -242,7 +242,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                         "after setting the negative number for the service price");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 61)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
     public void verifyUserCannotEnterTextForServicePrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -268,7 +268,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                         "into the service price input field");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 62)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyUserCanSeePhaseOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -297,7 +297,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                 "The phase actions trigger hasn't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 63)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
     public void verifyUserCanSeeStartedPrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -333,7 +333,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
 //        Assert.assertEquals(sum, Double.valueOf(calculatedPrice), "The sum hasn't been calculated properly"); todo is bug??? uncomment
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 64)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
     public void verifyUserCanSeeStartedVendorPrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -369,7 +369,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
 //        Assert.assertEquals(sum, Double.valueOf(calculatedVendorPrice), "The sum hasn't been calculated properly");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 65)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
     public void verifyUserCanChangeTechnicianOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -405,7 +405,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         VNextBOChangeTechniciansDialogSteps.setOptionsAndClickOkButtonForTechniciansDialog(data.getVendor1(), data.getTechnician1());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 66)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
     public void verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -435,7 +435,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                 "The vendor options number has been changed for repair orders with the 'Active' status");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 67)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
     public void verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -465,7 +465,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                 "The vendor options number has been changed for repair orders with the 'Active' status");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 68)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 14)
     public void verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -493,7 +493,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         VNextBORODetailsPageSteps.setServiceStatusForService(data.getServices()[0], data.getServiceStatuses()[1]);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 69)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 15)
     public void verifyUserCanSearchBySavedSearchForm(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -521,7 +521,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         Assert.assertEquals(VNextBOROAdvancedSearchDialogInteractions.getSearchNameInputFieldValue(), searchValues.getSearchName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 70)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 16)
     public void verifyUserCannotEditSavedSearch(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -586,7 +586,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
 //        VNextBORODetailsPageValidations.verifyPhaseStatuses(data.getServiceStatuses());
 //    }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 72)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 17)
     public void verifyUserCanSeeInvoiceOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -596,7 +596,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         VNextBOROPageValidations.verifyInvoiceWindowIsOpened();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 72)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 18)
     public void verifyUserCanSeeArbitrationDate(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -606,7 +606,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
                 "The arbitration date han't been displayed");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 72)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 19)
     public void verifyUserCanUsePaginationFilter(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 

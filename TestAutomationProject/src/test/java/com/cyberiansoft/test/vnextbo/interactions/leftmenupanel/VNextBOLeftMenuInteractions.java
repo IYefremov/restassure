@@ -47,6 +47,7 @@ public class VNextBOLeftMenuInteractions {
 
     public static void selectDeviceManagementMenu() {
         selectMenuItem(MainMenuItems.SETTINGS.getMenu(), "Device Management");
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void selectRepairOrdersMenu() {

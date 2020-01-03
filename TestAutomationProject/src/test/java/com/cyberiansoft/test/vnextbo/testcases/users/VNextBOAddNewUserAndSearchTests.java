@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.users;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.enums.ErrorMessages;
@@ -70,6 +71,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         Assert.assertTrue(resetPasswordUrl.contains("confirm?invitation"), "User hasn't got link to complete registration");
         nada.deleteAllMessages();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        Utils.refreshPage();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
