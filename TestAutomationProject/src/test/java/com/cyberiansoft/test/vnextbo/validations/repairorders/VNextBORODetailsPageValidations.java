@@ -8,7 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class VNextBORODetailsPageValidations {
 
@@ -129,21 +128,16 @@ public class VNextBORODetailsPageValidations {
     }
 
     public static void verifyPhaseStatusOrPartPhaseStatusIsDisplayed(String phase, String status, String[] phaseStatuses) {
-        try {
-            if (!Utils.getText(new VNextBORODetailsPage().getPhaseStatusBoxValue(phase)).equals(status)) {
-                verifyPartPhaseStatusIsCorrect(phaseStatuses);
-            }
-        } catch (Exception e) {
+        if (!Utils.getText(new VNextBORODetailsPage().getPhaseStatusBoxValue(phase)).equals(status)) {
             verifyPartPhaseStatusIsCorrect(phaseStatuses);
         }
     }
 
     private static void verifyPartPhaseStatusIsCorrect(String[] phaseStatuses) {
         final List<WebElement> partsPhaseStatusDropDowns = new VNextBORODetailsPage().getPartsPhaseStatusDropDowns();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(
-                partsPhaseStatusDropDowns);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(partsPhaseStatusDropDowns);
         if (!partsPhaseStatusDropDowns.isEmpty()) {
-            final List<String> statuses = partsPhaseStatusDropDowns.stream().map(Utils::getText).collect(Collectors.toList());
+            final List<String> statuses = Utils.getText(partsPhaseStatusDropDowns);
             final boolean matching = statuses.stream().allMatch(partStatus -> partStatus.equals(phaseStatuses[0])
                     || partStatus.equals(phaseStatuses[1])
                     || partStatus.equals(phaseStatuses[2])

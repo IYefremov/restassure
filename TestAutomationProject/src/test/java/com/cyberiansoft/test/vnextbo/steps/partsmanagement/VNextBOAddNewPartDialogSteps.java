@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddNewPartDialog;
 
 import java.util.List;

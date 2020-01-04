@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnextbo.validations.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import org.openqa.selenium.support.ui.ExpectedConditions;

@@ -101,8 +101,9 @@ public class VNextBOROPageInteractions {
     }
 
     public static void selectSavedSearchDropDownOption(String option) {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOROWebPage().getSavedSearchDropDownOptions());
-        new VNextBOROWebPage().getSavedSearchDropDownOptions()
+        final List<WebElement> savedSearchDropDownOptions = new VNextBOROWebPage().getSavedSearchDropDownOptions();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(savedSearchDropDownOptions);
+        savedSearchDropDownOptions
                 .stream()
                 .filter(o -> o.getText().equals(option))
                 .findFirst()

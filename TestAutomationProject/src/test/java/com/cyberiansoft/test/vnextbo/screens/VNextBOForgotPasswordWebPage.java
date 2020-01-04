@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
-import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -21,7 +20,6 @@ import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPa
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

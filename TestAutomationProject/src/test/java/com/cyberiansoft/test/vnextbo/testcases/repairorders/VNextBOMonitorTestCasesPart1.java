@@ -140,7 +140,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 
 		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
-        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderPreviousPageButtonClickable(),

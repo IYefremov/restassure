@@ -1,14 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementOrderDetailsData;
-import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
-import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import org.json.simple.JSONObject;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
 
 public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
 /*

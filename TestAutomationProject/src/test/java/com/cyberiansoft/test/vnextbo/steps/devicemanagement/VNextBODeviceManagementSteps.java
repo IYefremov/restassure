@@ -5,7 +5,6 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBODeviceManagementWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
-import org.openqa.selenium.WebElement;
 
 public class VNextBODeviceManagementSteps extends VNextBOBaseWebPageSteps {
 

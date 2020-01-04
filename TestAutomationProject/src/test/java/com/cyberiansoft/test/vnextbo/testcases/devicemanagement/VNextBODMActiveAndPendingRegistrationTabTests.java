@@ -17,7 +17,8 @@ import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOAuditLo
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOPendingRegistrationsTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import org.json.simple.JSONObject;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase {
 

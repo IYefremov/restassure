@@ -7,7 +7,6 @@ import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOLeftMenuInteractions {
 
@@ -71,8 +70,8 @@ public class VNextBOLeftMenuInteractions {
 
     private static void clickMainMenuItem(String mainMenuItemName) {
         Utils.clickElement(new VNexBOLeftMenuPanel().mainMenuItemByName(mainMenuItemName));
-        WaitUtilsWebDriver.getWebDriverWait(4).until(ExpectedConditions.attributeToBe(
-                new VNexBOLeftMenuPanel().mainMenuItemByName(mainMenuItemName), "aria-expanded", "true"));
+        WaitUtilsWebDriver.waitForAttributeToBe(new VNexBOLeftMenuPanel().mainMenuItemByName(mainMenuItemName),
+                    "aria-expanded", "true", 4);
     }
 
     private static void clickSubMenuItem(String subMenuItemName) {
