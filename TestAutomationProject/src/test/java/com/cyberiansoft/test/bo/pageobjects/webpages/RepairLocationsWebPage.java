@@ -3,6 +3,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.dataclasses.bo.BOMonitorReportsData;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -76,21 +77,21 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
         WaitUtilsWebDriver.waitABit(2000);
 	}
 
-	public void addNewRepairLocation(String repairlocationname, String approxrepairtime, String workingday, String starttime, String finishtime, boolean phaseenforcement) {
+	public void addNewRepairLocation(BOMonitorReportsData data, boolean phaseenforcement) {
 		NewRepairLocationDialogWebPage newrepairlocdialog = new NewRepairLocationDialogWebPage(this.driver);
 		clickAddRepairLocationButton();
-		newrepairlocdialog.setNewRepairLocationName(repairlocationname);
-		newrepairlocdialog.setNewRepairLocationApproxRepairTime(approxrepairtime);
-		newrepairlocdialog.setNewRepairLocationWorkingHours(workingday, starttime, finishtime);
+		newrepairlocdialog.setNewRepairLocationName(data.getRepairLocationName());
+		newrepairlocdialog.setNewRepairLocationApproxRepairTime(data.getApproxRepairTime());
+		newrepairlocdialog.setNewRepairLocationWorkingHours(data.getWorkingDay(), data.getStartTime(), data.getFinishTime());
 		if (phaseenforcement)
 			newrepairlocdialog.selectPhaseEnforcementOption();
 		newrepairlocdialog.clickOKButton();
 	}
 
-	public void addPhaseForRepairLocation(String repairlocationname, String phasename, String phasetype, String transitiontime, String repairtime, boolean trackindividualstatuses) {
+	public void addPhaseForRepairLocation(BOMonitorReportsData data, String phasename, String phasetype, String transitiontime, String repairtime, boolean trackindividualstatuses) {
 		final String mainWindowHandle = driver.getWindowHandle();
 		RepairLocationPhasesTabWebPage repairlocationphasestab = new RepairLocationPhasesTabWebPage(this.driver);
-		clickRepairLocationPhasesLink(repairlocationname);
+		clickRepairLocationPhasesLink(data.getRepairLocationName());
 		repairlocationphasestab.clickAddPhasesButton();
 		repairlocationphasestab.setNewRepairLocationPhaseName(phasename);
 		repairlocationphasestab.selectNewRepairLocationPhaseType(phasetype);
@@ -98,7 +99,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 		repairlocationphasestab.setNewRepairLocationPhaseApproxRepairTime(repairtime);
 
 		if (trackindividualstatuses)
-			repairlocationphasestab.selectDoNotTrackIndividualServiceStatuses();
+			repairlocationphasestab.selectWorkStatusTracking(data.getWorkStatusTracking());
 		repairlocationphasestab.clickNewRepairLocationPhaseOKButton();
 		closeNewTab(mainWindowHandle);
 	}

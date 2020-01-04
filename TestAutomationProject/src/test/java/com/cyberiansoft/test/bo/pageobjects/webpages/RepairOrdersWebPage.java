@@ -1,7 +1,11 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.*;
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -195,18 +199,16 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 		Assert.assertTrue(repairorderstable.getWrappedElement().findElement(By.xpath(".//tr/th[12]")).isDisplayed());
 	}
 
-	public WebElement getTableRowWithRepairOrder(String wo) {
+	private WebElement getTableRowWithRepairOrder(String wo) {
 		List<WebElement> rows = getRepairOrdersTableRows();
 		for (WebElement row : rows) {
 			try {
-//                if (row.findElement(By.xpath(".//td[3]/a")).getText().equals(wo)) {
-				if (row.findElement(By.xpath(".//td[" + repairorderstable
-						.getTableColumnIndex("Order /\nType") + "]/a"))
-						.getText()
+				if (Utils.getText(row.findElement(By.xpath(".//td[" + repairorderstable
+						.getTableColumnIndex("Order /\nType") + "]/a")))
 						.equals(wo)) {
 					return row;
 				}
-			} catch (NoSuchElementException | StaleElementReferenceException e) {
+			} catch (NoSuchElementException e) {
 				Assert.fail("The table row with given repair order doesn't exist!");
 			}
 		}

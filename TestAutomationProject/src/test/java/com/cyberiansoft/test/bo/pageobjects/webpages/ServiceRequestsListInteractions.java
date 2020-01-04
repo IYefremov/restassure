@@ -495,29 +495,18 @@ public class ServiceRequestsListInteractions {
 		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(srListPage.getAcceptGeneralInfoBTN())).click();
 	}
 
-	public void retryingFindClick(By by, By byInner, String startDate) {
-		int attempts = 0;
-		while (attempts < 10) {
-
-			try {
-				waitForLoading();
-				WaitUtilsWebDriver.waitABit(1500);
-				WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(DriverBuilder.getInstance().getDriver().findElements(By.className("rsWrap")));
+	public void findClick(By by, By byInner, String startDate) {
+        waitForLoading();
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(driver.findElements(By.className("rsWrap")));
 
                 WaitUtilsWebDriver.getWait()
-						.until(ExpectedConditions.elementToBeClickable(DriverBuilder.getInstance().getDriver().findElement(by)))
+						.until(ExpectedConditions.elementToBeClickable(driver.findElement(by)))
 						.findElements(byInner)
 						.stream().map(w -> w.findElement(By.tagName("a")))
-						.filter(t -> t.getText().split(" ")[1].equals(startDate.split("/")[1]))
-						.findFirst()
-						.get()
-						.click();
-				break;
-			} catch (StaleElementReferenceException e) {
-				WaitUtilsWebDriver.waitABit(500);
-			}
-			attempts++;
-		}
+						.filter(t -> Utils.getText(t).split(" ")[1].equals(startDate.split("/")[1]))
+                        .findFirst()
+                        .ifPresent(Utils::clickElement);
 	}
 
 	public int checkSchedulerByDateWeek(String startDate, boolean isDateShifted) {
@@ -532,14 +521,14 @@ public class ServiceRequestsListInteractions {
 		if (!isDateShifted) {
 			retryingFindClick(By.className("rsFullTime"));
 			waitForLoading();
-			retryingFindClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
+			findClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
 		} else {
 			retryingFindClick(By.className("rsNextDay"));
 			waitForLoading();
 			WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
 			retryingFindClick(By.className("rsFullTime"));
 			waitForLoading();
-			retryingFindClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
+			findClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
 		}
 
 		waitForLoading();

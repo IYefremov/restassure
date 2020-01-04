@@ -103,14 +103,10 @@ public abstract class BaseWebPage {
 	public void waitForNewTab() {
 	    try {
             wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-        } catch (TimeoutException e) {
-	        waitABit(5000);
-        }
-		waitABit(5000);
+        } catch (TimeoutException ignored) {}
+		waitABit(2000);
 		wait.until((ExpectedCondition<Boolean>) d -> d.getWindowHandles().size() > 1);
 	}
-
-    // Bot actions
 
 	/* Wait For */
 	public void waitABit(int milliseconds) {
@@ -233,7 +229,7 @@ public abstract class BaseWebPage {
     public void waitForLoading(){
         waitForLoadingToBegin();
         try {
-            await().atMost(80, TimeUnit.SECONDS)
+            await().atMost(15, TimeUnit.SECONDS)
                     .ignoreExceptions()
                     .pollInterval(500, TimeUnit.MILLISECONDS)
                     .until(this::waitForLoadingToStop);

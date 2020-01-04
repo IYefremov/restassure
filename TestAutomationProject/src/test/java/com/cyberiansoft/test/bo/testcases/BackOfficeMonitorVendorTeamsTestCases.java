@@ -9,7 +9,6 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -204,12 +203,6 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		vendorsTeamsPage.clickActiveTab();
 		vendorsTeamsPage.clickAuditLogButtonForVendorTeam(data.getVendorTeam());
 		List<WebElement> auditLogTableRows = vendorsTeamsPage.getVendorsTeamsAuditLogTableRows();
-//		for (int i = 0; i < auditLogsMessages.length; i++) {
-//			int columnIndex = i + 1;
-//			Assert.assertEquals(data.getAuditLogsMessageRestored(),  vendorsTeamsPage
-//                    .getAuditLogVendorsTeamsTable()
-//                    .findElement(By.xpath(".//tbody/tr[" + columnIndex + "]/td[3]")).getText());
-//		}
 		Assert.assertEquals(data.getAuditLogsMessageRestored(), vendorsTeamsPage.getAuditLogVendorsTeamsTableLine1Text());
 		Assert.assertEquals(data.getAuditLogsMessageDeleted(), vendorsTeamsPage.getAuditLogVendorsTeamsTableLine2Text());
 		vendorsTeamsPage.closeNewTab(mainWindowHandle);

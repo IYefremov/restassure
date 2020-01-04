@@ -255,21 +255,20 @@ public class NewTestCases extends BaseTestCase {
 		operationsWebPage.clickNewServiceRequestList();
 		serviceRequestsListInteractions.makeSearchPanelVisible();
 
-        final ServiceRequestsListVerifications serviceRequestsListVerifications = new ServiceRequestsListVerifications();
-        serviceRequestsListVerifications.verifySearchFieldsAreVisible();
+        ServiceRequestsListVerifications.verifySearchFieldsAreVisible();
 		
 		serviceRequestsListInteractions.selectSearchTeam(teamname);
 		serviceRequestsListInteractions.selectSearchTechnician("Test User");
 		serviceRequestsListInteractions.setSearchFreeText(srtowo);
 		serviceRequestsListInteractions.clickFindButton();
-        serviceRequestsListVerifications.verifySearchResultsByServiceName(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
+        ServiceRequestsListVerifications.isServiceNamePresentInFirstSR(iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		serviceRequestsListInteractions.selectFirstServiceRequestFromList();
 		Assert.assertEquals(serviceRequestsListInteractions.getVINValueForSelectedServiceRequest(), "WERTYU123");
 		Assert.assertEquals(serviceRequestsListInteractions.getCustomerValueForSelectedServiceRequest(), iOSInternalProjectConstants.ZAZ_MOTORS_CUSTOMER);
 		Assert.assertEquals(serviceRequestsListInteractions.getEmployeeValueForSelectedServiceRequest(), "Test User (Default team)");
-		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_S4_Bundle $350.00 (1.00)"));
-		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_Money_Vehicle $200.00 (1.00)"));
-		Assert.assertTrue(serviceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("3/4\" - Penny Size $18.00 (3.00)"));
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_S4_Bundle $350.00 (1.00)"));
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("SR_Money_Vehicle $200.00 (1.00)"));
+		Assert.assertTrue(ServiceRequestsListVerifications.isServiceIsPresentForForSelectedServiceRequest("3/4\" - Penny Size $18.00 (3.00)"));
 		DriverBuilder.getInstance().getDriver().quit();
 	}
 	

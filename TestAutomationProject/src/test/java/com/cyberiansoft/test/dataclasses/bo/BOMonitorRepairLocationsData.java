@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.dataclasses.bo;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 import org.apache.commons.lang3.RandomStringUtils;
 
+@Getter
 public class BOMonitorRepairLocationsData {
 
     @JsonProperty("locationName")
@@ -71,6 +73,9 @@ public class BOMonitorRepairLocationsData {
     @JsonProperty("repairLocationPhaseCheckoutType")
     private String repairLocationPhaseCheckoutType;
 
+    @JsonProperty("workStatusTracking")
+    private String workStatusTracking;
+
     @JsonProperty("approxTransTime")
     private String approxTransTime;
 
@@ -85,6 +90,9 @@ public class BOMonitorRepairLocationsData {
 
     @JsonProperty("repairLocationPhaseTypeNew")
     private String repairLocationPhaseTypeNew;
+
+    @JsonProperty("workStatusTrackingNew")
+    private String workStatusTrackingNew;
 
     @JsonProperty("repairLocationPhaseCheckoutTypeNew")
     private String repairLocationPhaseCheckoutTypeNew;
@@ -134,179 +142,7 @@ public class BOMonitorRepairLocationsData {
     @JsonProperty("phase")
     private String phase;
 
-    public String getLocationName() {
-        return locationName;
-    }
-
-    public String getLocationStatus() {
-        return locationStatus;
-    }
-
-    public String getRepairLocationName() {
-        return repairLocationName;
-    }
-
-    public String getRepairLocationStatus() {
-        return repairLocationStatus;
-    }
-
-    public String getRepairLocationApproxRepairTime() {
-        return repairLocationApproxRepairTime;
-    }
-
-    public String getRepairLocationWorkDay1() {
-        return repairLocationWorkDay1;
-    }
-
-    public String getRepairLocationStartTime1() {
-        return repairLocationStartTime1;
-    }
-
-    public String getRepairLocationEndTime1() {
-        return repairLocationEndTime1;
-    }
-
-    public String getRepairLocationWorkDay2() {
-        return repairLocationWorkDay2;
-    }
-
-    public String getRepairLocationStartTime2() {
-        return repairLocationStartTime2;
-    }
-
-    public String getRepairLocationEndTime2() {
-        return repairLocationEndTime2;
-    }
-
-    public String getRepairLocationTimeZone() {
-        return repairLocationTimeZone;
-    }
-
-    public String getVendorTeam() {
-        return vendorTeam;
-    }
-
-    public String getRepairLocationDepartmentDefault() {
-        return repairLocationDepartmentDefault;
-    }
-
-    public String getRepairLocationDepartment() {
-        return repairLocationDepartment;
-    }
-
-    public String getRepairLocationDepartmentDescription() {
-        return repairLocationDepartmentDescription;
-    }
-
-    public String getRepairLocationDepartmentNew() {
-        return repairLocationDepartmentNew;
-    }
-
-    public String getRepairLocationDepartmentDescriptionNew() {
-        return repairLocationDepartmentDescriptionNew;
-    }
-
-    public String getRepairLocationPhase() {
-        return repairLocationPhase;
-    }
-
-    public String getRepairLocationPhaseDescription() {
-        return repairLocationPhaseDescription;
-    }
-
-    public String getRepairLocationPhaseType() {
-        return repairLocationPhaseType;
-    }
-
-    public String getRepairLocationPhaseCheckoutType() {
-        return repairLocationPhaseCheckoutType;
-    }
-
-    public String getApproxTransTime() {
-        return approxTransTime;
-    }
-
-    public String getApproxRepairTime() {
-        return approxRepairTime;
-    }
-
-    public String getRepairLocationPhaseNew() {
-        return repairLocationPhaseNew;
-    }
-
-    public String getRepairLocationPhaseDescriptionNew() {
-        return repairLocationPhaseDescriptionNew;
-    }
-
-    public String getRepairLocationPhaseTypeNew() {
-        return repairLocationPhaseTypeNew;
-    }
-
-    public String getRepairLocationPhaseCheckoutTypeNew() {
-        return repairLocationPhaseCheckoutTypeNew;
-    }
-
-    public String getApproxTransTimeNew() {
-        return approxTransTimeNew;
-    }
-
-    public String getApproxRepairTimeNew() {
-        return approxRepairTimeNew;
-    }
-
-    public String getRepairLocationClient() {
-        return repairLocationClient;
-    }
-
-    public String getWoType() {
-        return woType;
-    }
-
-    public String getPhaseClosed() {
-        return phaseClosed;
-    }
-
-    public String getPhaseClosedType() {
-        return phaseClosedType;
-    }
-
-    public String getPhaseStarted() {
-        return phaseStarted;
-    }
-
-    public String getPhaseStartedType() {
-        return phaseStartedType;
-    }
-
-    public String getTeam() {
-        return team;
-    }
-
-    public String getManager() {
-        return manager;
-    }
-
-    public int getCheckboxesAmount() {
-        return checkboxesAmount;
-    }
-
-    public String getTeamName() {
-        return teamName;
-    }
-
-    public String getTeamDefaultLocation() {
-        return teamDefaultLocation;
-    }
-
-    public String getRepairLocationStatusNotActive() {
-        return repairLocationStatusNotActive;
-    }
-
     public String getRandomLocationName() {
         return "test-" + RandomStringUtils.randomAlphanumeric(7);
-    }
-
-    public String getPhase() {
-        return phase;
     }
 }

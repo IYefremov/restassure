@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -38,6 +39,12 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	
 	@FindBy(id = "ctl00_Content_ctl01_ctl01_Card_comboCheckOutTypes_DropDown")
 	private DropDown newphasecheckouttypedd;
+
+	@FindBy(id = "ctl00_Content_ctl01_ctl01_Card_comboWorkStatusTracking_Input")
+	private ComboBox workStatusTrackingCombobox;
+
+	@FindBy(id = "ctl00_Content_ctl01_ctl01_Card_comboWorkStatusTracking_DropDown")
+	private DropDown workStatusTrackingDropDown;
 
 	@FindBy(xpath = "//div[@id='ctl00_Content_ctl01_ctl01_Card_comboCheckOutTypes']/table[@class='rcbDisabled']")
 	private WebElement checkoutOptionDisabled;
@@ -196,16 +203,16 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 		return this;
 	}
 	
-	public void selectDoNotTrackIndividualServiceStatuses() {
-		checkboxSelect(donottrackindstatuseschkbox);
+	public void selectWorkStatusTracking(String workStatus) {
+        selectComboboxValue(workStatusTrackingCombobox, workStatusTrackingDropDown, workStatus);
 	}
 	
 	public void unselectDoNotTrackIndividualServiceStatuses() {
 		checkboxUnselect(donottrackindstatuseschkbox);
 	}
 	
-	public boolean isDoNotTrackIndividualServiceStatusesSelected() {
-		return isCheckboxChecked(donottrackindstatuseschkbox);
+	public String getWorkStatusTrackingSelected() {
+	    return Utils.getInputFieldValue(workStatusTrackingCombobox.getWrappedElement());
 	}
 	
 	public void selectStartServiceRequired() {

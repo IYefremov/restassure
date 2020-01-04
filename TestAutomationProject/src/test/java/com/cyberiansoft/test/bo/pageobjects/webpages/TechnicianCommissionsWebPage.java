@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
@@ -91,6 +92,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 	}
 
 	public void verifyInvoicesTableColumnsAreVisible() {
+        WaitUtilsWebDriver.waitForElementNotToBeStale(techniciancommissionstable.getWrappedElement());
 		wait.until(ExpectedConditions.visibilityOf(techniciancommissionstable.getWrappedElement()));
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("chkAllInvoices")));
 		Assert.assertTrue(techniciancommissionstable.tableColumnExists("Vendor Name"));

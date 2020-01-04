@@ -58,11 +58,11 @@ public class ServiceRequestsListVerifications {
         return new ServiceRequestsListWebPage().getFirstSRFromList().findElements(By.xpath(".//div[@class='" + insuranceCompany + "  ']")).size() > 0;
     }
 
-    public static boolean verifySearchResultsByServiceName(String servicename) {
+    public static boolean isServiceNamePresentInFirstSR(String serviceName) {
         final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
         WaitUtilsWebDriver.waitForVisibility(srListPage.getServiceRequestsList());
         return srListPage.getFirstSRFromList()
-                .findElements(By.xpath(".//div[@class='name' and contains(text(), '" + servicename + "')]")).size() > 0;
+                .findElements(By.xpath(".//div[@class='name' and contains(text(), '" + serviceName + "')]")).size() > 0;
     }
 
     public static boolean verifySearchResultsByModelIN(String _make, String _model, String _year, String vin) {
@@ -194,10 +194,9 @@ public class ServiceRequestsListVerifications {
 
     public static boolean isServiceRequestDocumentIconVisible() {
         verifyServiceRequestInfoFrameIsOn();
-        return WaitUtilsWebDriver.getWait().until(ExpectedConditions
-                .not(ExpectedConditions
-                        .attributeToBe(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[contains(@class, 'description-reason')]"))
-                                .findElement(By.tagName("i")), "style", "display : none;")));
+        return WaitUtilsWebDriver.getWait().until(ExpectedConditions.not(ExpectedConditions.attributeToBe(
+                DriverBuilder.getInstance().getDriver().findElement(By.xpath("//b[text()='Documents']/../parent::i")),
+                "style", "display : none;")));
     }
 
     public static boolean checkElementsInDocument() {

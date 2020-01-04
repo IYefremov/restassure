@@ -131,7 +131,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	@FindBy(xpath = "//a[contains(text(), 'by VIN')]")
 	private WebElement duplicateByVIN;
 
-	@FindBy(xpath = "//a[contains(text(), 'by VIN and RO#')]")
+	@FindBy(xpath = "//a[contains(text(), 'by VIN / RO#')]")
 	private WebElement duplicateByVINandRO;
 
 	@FindBy(xpath = "//input[contains(@id, 'filterer_dpFrom_dateInput') and contains (@type, 'text')]")
@@ -283,7 +283,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		waitForNewTab();
 	}
 
-	public void clickDuplicateByVINandROLink() {
+	public void clickDuplicateByVINAndROLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(duplicateByVINandRO)).click();
 		waitForNewTab();
 	}
@@ -651,7 +651,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 				driver.switchTo().window(activeHandle);
 			}
 		}
-		waitForLoading();
+//		waitForLoading();
 	}
 
 	public String getFirstInspectionNumber() {
