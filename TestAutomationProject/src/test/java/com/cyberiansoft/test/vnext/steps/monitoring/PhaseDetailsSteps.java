@@ -6,4 +6,8 @@ public class PhaseDetailsSteps {
     public static void selectProblem(String problem) {
         PhaseDetailsScreenInteractions.openProblem(problem);
     }
+
+    public static void completePhase() {
+        PhaseDetailsScreenInteractions.completePhase();
+    }
 }

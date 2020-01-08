@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,13 +11,13 @@ import java.util.List;
 @Getter
 public class PriceMatrixListPage {
 
-    @FindBy(xpath = "//div[@data-page='info']")
+    @FindBy(xpath = "//div[@data-page='parts']")
     private WebElement rootElement;
 
-    @FindBy(xpath = "//div[@data-autotests-id='matrices-list']//li")
+    @FindBy(xpath = "//div[@data-autotests-id='matrices-list']//li | //div[@data-autotests-id='matrix-parts-list']/*")
     private List<WebElement> elements;
 
     public PriceMatrixListPage() {
-        PageFactory.initElements(new AppiumFieldDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);
+        PageFactory.initElements(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), this);
     }
 }

@@ -12,6 +12,9 @@
       "workOrderType": "Kramar_auto",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
@@ -28,6 +31,9 @@
       "workOrderType": "Kramar_auto",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
@@ -46,6 +52,9 @@
         "vinNumber": "7777777777777",
         "vehicleMake": "Aston Martin",
         "vehicleModel": "DB7"
+      },
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
@@ -64,6 +73,9 @@
         "vinNumber": "7777777777777",
         "vehicleMake": "Aston Martin",
         "vehicleModel": "DB7"
+      },
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
@@ -82,6 +94,9 @@
         "vinNumber": "7777777777777",
         "vehicleMake": "Aston Martin",
         "vehicleModel": "DB7"
+      },
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ]

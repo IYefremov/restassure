@@ -6,29 +6,47 @@ import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class GeneralQuestion implements IWebElement {
     @Getter
     protected WebElement rootElement;
-    private String questionNameLocator = ".//*[@class='question-answer-title']";
+    private String questionNameLocator = ".//div[@class='question-item-header-text']";
     private String answerLocator = ".//*[@class='question-answer-bar-title']";
-    private String clearButtonLocator = ".//*[@action='clean-question']";
+    private String selectedAnswerLocator = ".//div[@class='question-item-selected-answer']";
+    private String selectedAnswersLocation = ".//div[contains(@class,'multi-select-answers')]/div[contains(@class,'selected-answer')]";
+    private String clearButtonLocator = ".//*[@class='selected-answer-clear']";
+    private String saveMultiAnswerQuestion = ".//div[contains(@class,'pply-multi-select-answers')]";
 
     public GeneralQuestion(WebElement rootElement) {
         this.rootElement = rootElement;
     }
 
     public String getQuestionName() {
-        return rootElement.findElements(By.xpath(questionNameLocator)).stream().filter(WebElement::isDisplayed)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Active question tile not found"))
-                .getText();
+        return rootElement.findElement(By.xpath(questionNameLocator)).getText();
     }
 
-    public WebElement getAnswerElement() {
-        return rootElement.findElements(By.xpath(answerLocator))
+    public WebElement getAnswerElement(String text) {
+        return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElements(By.xpath(answerLocator))
+                .stream()
+                .filter(WebElement::isDisplayed)
+                .filter(element -> element.getText().contains(text))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Answer not found")));
+    }
+
+    public WebElement getSelectedAnswer() {
+        return rootElement.findElements(By.xpath(selectedAnswerLocator))
                 .stream().filter(WebElement::isDisplayed)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Answer not found"));
+    }
+
+    public List<WebElement> getSelectedAnswers() {
+        return rootElement.findElements(By.xpath(selectedAnswersLocation))
+                .stream().filter(WebElement::isDisplayed)
+                .collect(Collectors.toList());
     }
 
     public void clearQuestion() {
@@ -36,5 +54,9 @@ public class GeneralQuestion implements IWebElement {
                 .stream().filter(WebElement::isDisplayed)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Active clear button not found")));
+    }
+
+    public WebElement getSaveButton() {
+        return rootElement.findElement(By.xpath(saveMultiAnswerQuestion));
     }
 }

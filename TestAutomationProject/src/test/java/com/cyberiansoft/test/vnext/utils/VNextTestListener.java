@@ -1,10 +1,9 @@
 package com.cyberiansoft.test.vnext.utils;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import org.openqa.selenium.WebDriver;
 import org.testng.*;
 
@@ -19,7 +18,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	@Override
 	public void onTestFailure(ITestResult result) {
 		String filename = "";
-		AppiumDriver<MobileElement> appiumdriver = DriverBuilder.getInstance().getAppiumDriver();
+        WebDriver appiumdriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
 		WebDriver webdriver = DriverBuilder.getInstance().getDriver();
 	    if (appiumdriver != null) {
 	    	//filename = AppiumUtils.createScreenshot("reportvnext/" + ExtentReportFactory.reporttime + "/", "failed" + getTestMethodName(result));
@@ -54,7 +53,7 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	
 	@Override
 	public void onTestSkipped (ITestResult result) {
-		AppiumDriver<MobileElement> driver = DriverBuilder.getInstance().getAppiumDriver();
+        WebDriver driver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
 	    if (driver != null) {
 	    	//AppiumUtils.createScreenshot("reportvnext/" + ExtentReportFactory.reporttime + "/", "skipped" + getTestMethodName(result));
 	    }

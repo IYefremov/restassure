@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
@@ -35,9 +35,9 @@ public class InspectionSteps {
     }
 
     public static String createR360Inspection(AppCustomer customer, InspectionData inspectionData) {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         inspectionsScreen.clickAddInspectionButton();
-        VNextCustomersScreen vNextCustomersScreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextCustomersScreen vNextCustomersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         vNextCustomersScreen.selectCustomer(customer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
@@ -45,20 +45,20 @@ public class InspectionSteps {
         final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
         if (inspectionData.getInsuranceCompanyData() != null) {
             vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
-            VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+            VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
             claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         }
         vehicleInfoScreen.clickSaveInspectionMenuButton();
-        new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         return inspectionNumber;
     }
 
     public static void archiveInspection(String inspectionNumber) {
-        VNextInspectionsScreen inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionsScreen inspectionsscreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsscreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.archiveInspection();
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 30);
-        wait.until(ExpectedConditions.invisibilityOf(DriverBuilder.getInstance().getAppiumDriver().
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 30);
+        wait.until(ExpectedConditions.invisibilityOf(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().
                 findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']"))));
     }
 
@@ -79,6 +79,7 @@ public class InspectionSteps {
 
     public static String saveInspection() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        WaitUtils.elementShouldBeVisible(baseWizardScreen.getInspectionnumber(), true);
         WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
         String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveInspectionViaMenu();

@@ -24,6 +24,12 @@ public class SelectedServicesScreenSteps {
         servicesScreen.openServiceDetails(serviceName);
     }
 
+    public static void openLaborServiceDetails(String serviceName) {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.switchToSelectedServicesView();
+        servicesScreen.openLaborServiceDetails(serviceName);
+    }
+
     public static void switchToSelectedService() {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         servicesScreen.switchToSelectedServicesView();

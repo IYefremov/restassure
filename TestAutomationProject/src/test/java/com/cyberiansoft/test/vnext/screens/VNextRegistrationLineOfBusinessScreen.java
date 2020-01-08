@@ -1,11 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.UnhandledAlertException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -22,10 +20,10 @@ public class VNextRegistrationLineOfBusinessScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//li[@data-name='businessType']/label/input")
 	private WebElement businesstypefld;
-	
-	public VNextRegistrationLineOfBusinessScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextRegistrationLineOfBusinessScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("business-type-view")));
 		BaseUtils.waitABit(1000);

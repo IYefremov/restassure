@@ -100,6 +100,12 @@
     {
       "rowID": " .01",
       "description": "TFSID: ",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91813",
+          "testCaseTitle": "Verify validation for required questions going forward/back from question section (for \"Traffic-light\" and \"Logical\" question types)"
+        }
+      ],
       "questionScreenData": {
         "questionsData": [
           {
@@ -143,13 +149,6 @@
           {
             "questionName": "Test",
             "questionAnswer": "Future Attention Needed"
-          },
-          {
-            "questionName": "No need to setup",
-            "questionAnswer": "Please select answer",
-            "questionAnswers": [
-              "Answer 1"
-            ]
           }
         ]
       }
@@ -171,11 +170,11 @@
       "questionScreenData": {
         "questionsData": [
           {
-            "questionName": "question2",
+            "questionName": "test 1234",
             "questionAnswers": [
-              "answer2"
+              "Yes"
             ],
-            "questionAnswer": "answer2"
+            "questionAnswer": "Yes"
           }
         ]
       }

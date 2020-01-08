@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnext.testcases.r360free.inspections;
 
 import com.cyberiansoft.test.bo.pageobjects.webpages.*;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
@@ -28,7 +28,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate VIN field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateVINFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -87,7 +87,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Make field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateMakeFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 
 		WebDriver
@@ -148,7 +148,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Model field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateModelFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 
 		WebDriver
@@ -211,7 +211,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Color field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateColorFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 
 		WebDriver
@@ -272,7 +272,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Year field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateYearFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 
 		WebDriver
@@ -332,7 +332,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Stock # field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateStockNumberFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 
 		WebDriver
@@ -392,7 +392,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate RO # field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateRONumberFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 
 		WebDriver
@@ -452,7 +452,7 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Mileage field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateMileageFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
 
 		WebDriver

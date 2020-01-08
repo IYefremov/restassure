@@ -1,11 +1,10 @@
 package com.cyberiansoft.test.vnext.testcases.r360free.registrationandnavigation;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
@@ -23,6 +22,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -46,14 +46,14 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
         final String inspNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         inspectionsscreen.clickOnInspectionByInspNumber(inspNumber);
-        AppiumUtils.clickHardwareBackButton();
-        new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        AppiumUtils.clickHardwareBackButton();
-        new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        ScreenNavigationSteps.pressBackButton();
+        new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        ScreenNavigationSteps.pressBackButton();
+        new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -62,7 +62,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
         VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
         customersscreen.selectCustomer(testcustomer);
@@ -72,14 +72,14 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
 
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         for (ServiceData service : inspectionData.getServicesList())
             inspservicesscreen.selectService(service.getServiceName());
         inspservicesscreen.clickScreenBackButton();
-        VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         ;
         claiminfoscreen.clickScreenForwardButton();
-        inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspservicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
             Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
@@ -92,19 +92,19 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.clickMenuButton();
-        AppiumUtils.clickHardwareBackButton();
+        ScreenNavigationSteps.pressBackButton();
         vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         vehicleInfoScreen.clickScreenTitleCaption();
-        AppiumUtils.clickHardwareBackButton();
+        ScreenNavigationSteps.pressBackButton();
         vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
-        claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        claiminfoscreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         claiminfoscreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claiminfoscreen.changeScreen(ScreenType.SERVICES);
-        inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspservicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
             Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
@@ -123,14 +123,14 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         final String notesText = "Test Notes";
         final String userMail = "anastasiia.naumenko@cyberiansoft.com";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
         final String inspNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
 
         VNextInspectionsMenuScreen inspmenuscreen = inspectionsscreen.clickOnInspectionByInspNumber(inspNumber);
         VNextViewScreen viewscreen = inspmenuscreen.clickViewInspectionMenuItem();
         viewscreen.clickScreenBackButton();
-        inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsscreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         VNextVehicleInfoScreen vehicleInfoScreen = inspectionsscreen.clickOpenInspectionToEdit(inspNumber);
         final String VIN = VehicleInfoScreenInteractions.getDataFieldValue(VehicleDataField.VIN);
@@ -138,28 +138,28 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         VehicleInfoScreenInteractions.setYear(inspectionData.getVehicleInfo().getVehicleYear());
         VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.VIN, VIN);
         vehicleInfoScreen.clickCancelMenuItem();
-        VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         String msg = informationdlg.clickInformationDialogNoButtonAndGetMessage();
         Assert.assertEquals(msg, VNextAlertMessages.CANCEL_EDITING_INSPECTION_ALERT);
         vehicleInfoScreen.clickScreenForwardButton();
-        VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextClaimInfoScreen claiminfoscreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         claiminfoscreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claiminfoscreen.clickScreenForwardButton();
 
-        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
 
-        inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsscreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         VNextEmailScreen emailscreen = inspectionsscreen.clickOnInspectionToEmail(inspNumber);
         if (!emailscreen.getToEmailFieldValue().equals(userMail))
             emailscreen.sentToEmailAddress(userMail);
 
         emailscreen.clickSendEmailsButton();
-        informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         msg = informationdlg.clickInformationDialogOKButtonAndGetMessage();
         Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGE_HAS_BEEEN_ADDDED_TO_THE_QUEUE);
-        inspectionsscreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsscreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertTrue(inspectionsscreen.isEmailSentIconPresentForInspection(inspNumber));
         inspectionsscreen.clickBackButton();
     }

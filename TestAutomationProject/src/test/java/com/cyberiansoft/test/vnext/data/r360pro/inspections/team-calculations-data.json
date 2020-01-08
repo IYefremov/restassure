@@ -113,7 +113,7 @@
         "serviceName": "Aluminum Panel",
         "servicePrice": "25"
       },
-      "inspPrice": "$24,998,725,001.25"
+      "inspPrice": "$24998725001.25"
     }
   ],
   "testVerifyCorrectTotalIsShownAfterEditingMoneyServiceQTYInMyInspection": [
@@ -306,7 +306,7 @@
           }
         ]
       },
-      "inspPrice": "$1,531.25"
+      "inspPrice": "$1531.25"
     }
   ],
   "testVerifyCorrectTotalIsShownForMyInspectionWithPanelsProgressiveMatrix": [
@@ -349,7 +349,7 @@
           }
         ]
       },
-      "inspPrice": "$2,287.50"
+      "inspPrice": "$2287.50"
     }
   ],
   "testVerifyTotalIsCorrectWhenAddingSeveralMoneyServicesOnVisualsScreen": [
@@ -378,7 +378,7 @@
           "serviceQuantity": "6"
         }
       ],
-      "inspPrice": "$4,099.54"
+      "inspPrice": "$4099.54"
     }
   ],
   "testVerifyTotalIsCorrectWhenAddingMoneyAndPercentageServicesOnVisualsScreen": [
@@ -403,7 +403,7 @@
       "percentageService": {
         "serviceName": "APercent_QualityControl"
       },
-      "inspPrice": "$2,798.98"
+      "inspPrice": "$2798.98"
     }
   ],
   "testCreateInspectionWithNegativePrice": [

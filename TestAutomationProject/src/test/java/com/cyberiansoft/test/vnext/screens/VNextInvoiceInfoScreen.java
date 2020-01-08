@@ -7,11 +7,9 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -22,8 +20,8 @@ import java.util.List;
 
 @Getter
 public class VNextInvoiceInfoScreen extends VNextBaseScreen {
-	
-	@FindBy(xpath="//div[@data-page='info']")
+
+	@FindBy(xpath = "//div[@data-page='info']")
 	private WebElement rootElement;
 	
 	@FindBy(xpath="//input[@name='Invoices.PONo']")
@@ -52,10 +50,10 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='invoce-info-container']")
 	private WebElement invoiceinfopanel;
-	
-	public VNextInvoiceInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextInvoiceInfoScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(appiumdriver, this);
 		WaitUtils.elementShouldBeVisible(getRootElement(),true);
 	}
 	
@@ -127,10 +125,12 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 	
 	public String getInvoiceTotalAmount() {
+		WaitUtils.waitUntilElementIsClickable(invoicetotalamont);
 		return invoicetotalamont.getText().trim();
 	}
 	
 	public boolean isWorkOrderSelectedForInvoice(String wonumber) {
+		WaitUtils.elementShouldBeVisible(getRootElement(),true);
 		return invoiceinfopanel.findElements(By.xpath(".//div[text()='" + wonumber + "']")).size() > 0;
 	}
 	
@@ -186,7 +186,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 			if (woCell != null)
 				tap(woCell.findElement(By.xpath(".//*[@action='delete-order']")));
 			else
-				Assert.fail("Can;t find work order: " + woNumber);
+				Assert.fail("Can't find work order: " + woNumber);
 		}
 	}
 

@@ -1,9 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,9 +16,9 @@ public class VNextGroupServicesScreen extends VnextBaseServicesScreen {
     @FindBy(xpath="//div[@data-page='services-list']")
     private WebElement servicesscreen;
 
-    public VNextGroupServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextGroupServicesScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 
     }
 

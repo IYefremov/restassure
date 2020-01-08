@@ -1,9 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.panelandparts;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,9 +16,9 @@ public class VNextLaborServicePanelsList extends VNextBasePanelPartsList {
     @FindBy(xpath="//*[@data-autotests-id='panels-list']")
     private WebElement panelslist;
 
-    public VNextLaborServicePanelsList(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextLaborServicePanelsList(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='panels']")));
     }

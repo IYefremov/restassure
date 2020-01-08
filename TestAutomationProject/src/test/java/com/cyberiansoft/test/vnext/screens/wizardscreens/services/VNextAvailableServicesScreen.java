@@ -4,11 +4,9 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -44,13 +42,13 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     private List<WebElement> servicesListItems;
 
 
-    public VNextAvailableServicesScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextAvailableServicesScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextAvailableServicesScreen() {
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
@@ -58,8 +56,8 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         return new VNextServiceDetailsScreen(appiumdriver);
     }
 
-    public void openServiceDetails(String servicename) {
-        tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
+    public void openServiceDetails(String serviceName) {
+        tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + serviceName + "']")));
     }
 
     public void openLaborServiceDetails(String servicename) {
@@ -112,10 +110,6 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
 
-    public void selectPartService(String serviceName) {
-        getServiceListItem(serviceName).click();
-    }
-
     public int getServiceAmountSelectedValue(String serviceName) {
         int amaount = 0;
         WebElement servicerow = getServiceListItem(serviceName);
@@ -143,18 +137,6 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     public void selectServices(List<ServiceData> serviceslist) {
         for (ServiceData servicename : serviceslist)
             selectService(servicename.getServiceName());
-    }
-
-    public void selectAllServices() {
-        int count = 50;
-        int selected = 0;
-        List<WebElement> servicerows = getAllServicesListItems();
-        for (WebElement servicerow : servicerows) {
-            tap(servicerow.findElement(By.xpath(".//*[@action='select-item']")));
-            selected++;
-            if (selected > count)
-                break;
-        }
     }
 
     public String getTotalPriceValue() {

@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.webelements.TechnicialListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
@@ -33,6 +33,6 @@ public class VNextTechnicianScreen extends VNextBaseScreen {
     private WebElement defaultButton;
 
     public VNextTechnicianScreen() {
-        PageFactory.initElements(new FiledDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 }

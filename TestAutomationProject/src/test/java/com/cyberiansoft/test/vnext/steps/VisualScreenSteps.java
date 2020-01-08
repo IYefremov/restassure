@@ -46,7 +46,7 @@ public class VisualScreenSteps {
 
     public static void addServiceToPicture() {
         VNextVisualScreen visualScreen = new VNextVisualScreen();
-        visualScreen.clickCarImage();
+        visualScreen.clickCarImageOnRandom();
     }
 
     public static void verifyNumberOfAddedDamages(int numberOfExpectedDamages) {

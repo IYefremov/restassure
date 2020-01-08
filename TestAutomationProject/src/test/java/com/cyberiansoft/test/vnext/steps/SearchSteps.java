@@ -8,6 +8,8 @@ import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SearchSteps {
 
@@ -30,6 +32,7 @@ public class SearchSteps {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         WaitUtils.elementShouldBeVisible(commonFilterScreen.getSearchButton(), true);
         WaitUtils.click(commonFilterScreen.getSearchButton());
+        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(commonFilterScreen.getSearchButton()));
     }
 
     public static void searchByTextAndStatus(String text, RepairOrderStatus status) {
@@ -37,13 +40,14 @@ public class SearchSteps {
         fillTextSearch(text);
         selectStatus(status);
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
     public static void searchByText(String text) {
         openSearchFilters();
         fillTextSearch(text);
         search();
-        BaseUtils.waitABit(3000);
     }
 
     public static void searchByFlag(RepairOrderFlag repairOrderFlag) {
@@ -52,6 +56,8 @@ public class SearchSteps {
         openSearchFilters();
         commonFilterScreen.getFlag().selectOption(repairOrderFlag.name());
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
     public static void searchByPriority(OrderPriority high) {
@@ -60,6 +66,8 @@ public class SearchSteps {
         openSearchFilters();
         commonFilterScreen.getPriority().selectOption(high.getValue());
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
     public static void searchByDepartment(String departmentName) {
@@ -68,6 +76,8 @@ public class SearchSteps {
         openSearchFilters();
         commonFilterScreen.getDepartment().selectOption(departmentName);
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
     public static void searchByPhase(String phaseName) {
@@ -76,6 +86,8 @@ public class SearchSteps {
         openSearchFilters();
         commonFilterScreen.getPhase().selectOption(phaseName);
         search();
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
     public static void clearAllFilters() {

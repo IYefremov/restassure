@@ -28,6 +28,15 @@ public class PhasesScreen extends MonitorScreen {
     @FindBy(xpath = "//*[@action='parts']")
     private WebElement partsScreenButton;
 
+    @FindBy(xpath = "//*[@class='navbar-panel  main-navbar']/.//*[@class='client-mode']")
+    private WebElement workOrderNumber;
+
+    @FindBy(xpath = "//*[@class='vin-number']")
+    private WebElement phasesVINNumber;
+
+    @FindBy(xpath = "//*[@class='stock-number']")
+    private WebElement phasesStockNumber;
+
     @FindBy(xpath = "//*[@action='quick-actions']")
     private WebElement phasesMenuButton;
 

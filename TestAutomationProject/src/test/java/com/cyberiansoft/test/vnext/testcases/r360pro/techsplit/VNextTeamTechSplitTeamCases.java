@@ -12,7 +12,7 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.TechScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class VNextTeamTechSplitTeamCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamTechSplitTeamCases extends BaseTestClass {
     private String inspectionId = "";
     private String workOrderId = "";
 

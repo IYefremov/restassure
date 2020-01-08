@@ -19,7 +19,7 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(xpath = "//span[@data-automation-id=\"search-clear\"]")
     private WebElement clearSearchInputButton;
 
-    @FindBy(xpath = "//div[contains(@class,\"searchlist-filters-clear\")]")
+    @FindBy(xpath = "//div[contains(@class,'searchlist-filters-clear')]")
     private WebElement clearFilter;
 
     @FindBy(id = "filter_department")

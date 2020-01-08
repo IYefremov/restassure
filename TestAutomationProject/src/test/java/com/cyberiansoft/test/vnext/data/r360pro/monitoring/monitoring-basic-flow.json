@@ -521,7 +521,7 @@
         }
       ],
       "service": {
-        "serviceName": "Bent Wheel",
+        "serviceName": "A new demo service",
         "problemReason": "SOME_PROBLEM"
       },
       "monitoring": {

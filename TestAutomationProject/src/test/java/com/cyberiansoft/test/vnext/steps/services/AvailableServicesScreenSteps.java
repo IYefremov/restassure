@@ -26,7 +26,16 @@ public class AvailableServicesScreenSteps {
     }
 
     public static void selectService(ServiceData serviceData) {
-        AvailableServicesScreenSteps.selectService(serviceData.getServiceName());
+        selectService(serviceData.getServiceName());
+    }
+
+    public static void selectServiceAndSetData(ServiceData serviceData) {
+        openServiceDetails(serviceData.getServiceName());
+        if (serviceData.getServicePrice() != null)
+            ServiceDetailsScreenSteps.changeServicePrice(serviceData.getServicePrice());
+        if (serviceData.getServiceQuantity() != null) {
+            ServiceDetailsScreenSteps.changeServiceQuantity(serviceData.getServiceQuantity());
+        }
     }
 
     public static void openServiceDetails(String serviceName) {

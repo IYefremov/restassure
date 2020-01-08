@@ -5,7 +5,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.UUID;
 
-public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
     private String inspectionId = "";
 

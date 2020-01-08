@@ -10,7 +10,7 @@ public class QuestionFormValidations {
         QuestionScreen questionScreen = new QuestionScreen();
         WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(
-                    questionScreen.getGeneralQuestionByText(questionName).getAnswerElement().getText(),
+                    questionScreen.getAnsweredQuestionByText(questionName).getSelectedAnswer().getText(),
                     expectedAnswer
             );
             return true;
@@ -31,4 +31,5 @@ public class QuestionFormValidations {
             return true;
         });
     }
+
 }

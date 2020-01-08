@@ -8,4 +8,9 @@ public class PhaseDetailsScreenInteractions {
         PhaseEditScreen phaseEditScreen = new PhaseEditScreen();
         WaitUtils.click(phaseEditScreen.getPhaseElement(problem));
     }
+
+    public static void completePhase() {
+        PhaseEditScreen phaseEditScreen = new PhaseEditScreen();
+        WaitUtils.click(phaseEditScreen.getCompleteCurrentPhaseButton());
+    }
 }

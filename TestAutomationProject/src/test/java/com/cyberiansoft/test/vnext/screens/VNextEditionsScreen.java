@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,9 +16,9 @@ public class VNextEditionsScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@data-autotests-id='editions-list']")
     private WebElement editionslist;
 
-    public VNextEditionsScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextEditionsScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextEnvironmentSelectionScreen selectEdition(String editionName) {
