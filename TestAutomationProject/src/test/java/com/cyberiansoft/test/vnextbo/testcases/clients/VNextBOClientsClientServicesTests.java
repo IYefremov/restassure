@@ -18,6 +18,7 @@ import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPane
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -41,7 +42,16 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @AfterClass
+    public void archiveTestClient() {
+
+        VNextBOClientServicesPageSteps.clickClientServicesBackButton();
+        VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
+        VNextBOClientsPageSteps.archiveClient(baseWholesaleClient.getEmployee().getCompanyName());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSeeServicesDetailsAndSelectServicePackage(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelValidations.verifySearchFieldIsDisplayed();
@@ -50,19 +60,18 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientServicesPageValidations.verifyAllColumnsAreDisplayed();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanGoToPreviousPage(String rowID, String description, JSONObject testData) {
 
         VNextBOClientServicesPageSteps.clickClientServicesBackButton();
         VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded();
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
-    public void verifyUserCanSearchServices(String rowID, String description, JSONObject testData) {
-
         VNextBOClientDetailsViewAccordionSteps.clickServicesTab("true");
         VNextBOClientServicesPageSteps.setServicePackage(servicePackageName);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchServices(String rowID, String description, JSONObject testData) {
+
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
         VNextBOClientServicesPageValidations.verifySearchResultIsCorrectForColumnWithText("Service", "AMoneyFlatFee_VacuumCleaner");
@@ -73,7 +82,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientServicesPageValidations.verifyServicesTableIsDisplayed();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSwitchBetweenPages(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
@@ -92,9 +101,10 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");
+        VNextBOPageSwitcherSteps.clickHeaderFirstPageButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanUsePageFilter(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.changeItemsPerPage("20");
@@ -105,9 +115,10 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("50");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOClientServicesPageValidations.verifyCorrectRecordsAmountIsDisplayed(50);
+        VNextBOPageSwitcherSteps.changeItemsPerPage("10");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeRequiredOfClientServices(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
@@ -117,37 +128,37 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientServicesPageValidations.verifyFirstLineRequiredDropDownFieldContainsCorrectValue("No");
         VNextBOClientServicesPageSteps.changeFirstLineRequiredFieldValue("(use default)");
         VNextBOClientServicesPageValidations.verifyFirstLineRequiredDropDownFieldContainsCorrectValue("(use default)");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeRequiredToYes(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageSteps.changeFirstLineRequiredFieldValue("Yes");
         VNextBOClientServicesPageValidations.verifyFirstLineRequiredDropDownFieldContainsCorrectValue("Yes");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeRequiredToNo(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageSteps.changeFirstLineRequiredFieldValue("No");
         VNextBOClientServicesPageValidations.verifyFirstLineRequiredDropDownFieldContainsCorrectValue("No");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeRequiredToUseDefault(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         VNextBOClientServicesPageSteps.changeFirstLineRequiredFieldValue("(use default)");
         VNextBOClientServicesPageValidations.verifyFirstLineRequiredDropDownFieldContainsCorrectValue("(use default)");
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeRequiredOfClientServicesAndSaveIt(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
@@ -160,7 +171,7 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeTechnicianEffectiveDateEffectivePriceOfClientServices(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
@@ -172,5 +183,6 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientServicesPageSteps.changeFirstLineTechnicianFieldValue("Custom Technician");
         VNextBOClientServicesPageValidations.verifyFirstLineTechnicianDropDownFieldContainsCorrectValue("Custom Technician");
         VNextBOClientServicesPageSteps.changeFirstLineTechnicianFieldValue("(None)");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }

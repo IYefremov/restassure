@@ -30,7 +30,7 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectClientsMenu();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillClientInfoFields(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -49,7 +49,7 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillAccountInfoFields(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -70,7 +70,7 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillAddressFields(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -88,7 +88,7 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillEmailOptionsFields(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -107,7 +107,7 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillPreferencesFields(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -126,7 +126,7 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillMiscellaneousFields(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -145,7 +145,7 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillAllFieldsForRetailClient(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData retailClientData = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -156,7 +156,7 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientDetailsViewAccordionSteps.clickCancelButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelAddingRetailClient(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData retailClientData = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -168,10 +168,10 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(retailClientData.getEmployee().getEmployeeFirstName());
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: " + retailClientData.getEmployee().getEmployeeFirstName());
         VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelAddingWholesaleClient(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData wholesaleClientData = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -183,10 +183,10 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(wholesaleClientData.getEmployee().getCompanyName());
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: " + wholesaleClientData.getEmployee().getCompanyName());
         VNextBOClientsPageValidations.verifyClientsNotFoundMessageIsDisplayed();
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddNewWholesaleClient(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData wholesaleClientData = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -200,10 +200,12 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Wholesale", true);
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Single WO type", true);
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("PO#req.", true);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOClientsPageSteps.archiveClient(wholesaleClientData.getEmployee().getCompanyName());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddNewRetailClient(String rowID, String description, JSONObject testData) {
 
         VNextBOClientsData retailClientData = JSonDataParser.getTestDataFromJson(testData, VNextBOClientsData.class);
@@ -217,6 +219,8 @@ public class VNextBOClientsAddNewClientTests extends BaseTestCase {
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Wholesale", false);
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("Single WO type", true);
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithCheckboxes("PO#req.", true);
-        VNextBOSearchPanelSteps.clearSearchFilter();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOClientsPageSteps.archiveClient(retailClientData.getEmployee().getEmployeeFirstName());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }
