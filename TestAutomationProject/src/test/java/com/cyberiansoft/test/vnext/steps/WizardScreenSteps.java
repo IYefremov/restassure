@@ -36,4 +36,9 @@ public class WizardScreenSteps {
     public static void saveAction() {
         ListSelectPageInteractions.saveListPage();
     }
+
+    public static void selectWizardScreen(ScreenType screenType) {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.selectScreen(screenType);
+    }
 }

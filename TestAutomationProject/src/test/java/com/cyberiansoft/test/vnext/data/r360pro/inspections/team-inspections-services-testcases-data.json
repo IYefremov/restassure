@@ -22,29 +22,6 @@
       ]
     }
   ],
-  "testAddSeveralServicesFromAllListOnVisualsScreen": [
-    {
-      "rowID": "testAddSeveralServicesFromAllListOnVisualsScreen.01",
-      "description": "Test Case 47438:vNext - Add several services from 'All' list on Visuals screen",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "90452",
-          "testCaseTitle": "vNext - Add several services from 'All' list on Visuals screen"
-        }
-      ],
-      "vihicleInfo": {
-        "vinNumber": "1FMCU0DG4BK830800"
-      },
-      "damagesData": [
-        {
-          "damageGroupName": "PDR"
-        },
-        {
-          "damageGroupName": "Wheel Repair"
-        }
-      ]
-    }
-  ],
   "testAddSeveralServicesOnVisualsScreenSwitchingBetweenDefaultAndAllMode": [
     {
       "rowID": "testAddSeveralServicesOnVisualsScreenSwitchingBetweenDefaultAndAllMode.01",
@@ -110,7 +87,7 @@
         "damageGroupName": "Wheel Repair",
         "moneyService": {
           "serviceName": "Wheel repair",
-          "servicePrice": "$99.99"
+          "servicePrice": "$439.99"
         }
       },
       "inspPrice": "$0.00"

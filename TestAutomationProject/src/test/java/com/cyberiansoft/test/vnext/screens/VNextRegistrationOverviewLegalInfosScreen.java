@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -40,10 +38,10 @@ public class VNextRegistrationOverviewLegalInfosScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[text()='Pay now!']")
 	private WebElement paynowbtn;
-	
-	public VNextRegistrationOverviewLegalInfosScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextRegistrationOverviewLegalInfosScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 		try {
 			WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 			wait.until(ExpectedConditions.visibilityOf(registrationoverviewlegalinfoscreen));

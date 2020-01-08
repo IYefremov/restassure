@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.workqueue;
+package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
@@ -18,7 +18,7 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamMonitoringCalculations extends BaseTestClass {
     private String inspectionId = "";
     private String workOrderId = "";
 
@@ -67,10 +67,13 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         RepairOrderDto repairOrderDto = workOrderData.getMonitoring().getRepairOrderData();
         ServiceData serviceData = workOrderData.getServiceData();
 
-        HomeScreenSteps.openWorkQueue();
+        HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.clearAllFilters();
+        SearchSteps.searchByText(workOrderId);
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
         MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToParts();
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
@@ -78,6 +81,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.RECEIVED);
+        EditOrderSteps.waitPhasesScreenLoaded();
         ScreenNavigationSteps.pressBackButton();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
     }
@@ -91,6 +95,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         ServiceData serviceData = workOrderData.getServiceData();
 
         MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
@@ -110,6 +115,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestCaseTeamEditionRegi
         ServiceData serviceData = workOrderData.getServiceData();
 
         MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);

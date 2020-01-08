@@ -5,11 +5,14 @@ import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
+import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
@@ -43,7 +46,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> workOrders = new ArrayList<>();
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -51,21 +54,21 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+            //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
-		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (String woNumber : workOrders) {
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (String woNumber : workOrders) {
 			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(woNumber));
 		}
@@ -87,17 +90,17 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> workOrders = new ArrayList<>();
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			if (!customersscreen.isCustomerExists(workOrderData.getWorlOrderRetailCustomer())) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(workOrderData.getWorlOrderRetailCustomer());
-				customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+                customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			}
 		}
 		customersscreen.clickBackButton();
-		homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -105,22 +108,22 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+            //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
-		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (String woNumber : workOrders) {
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		customersscreen.selectCustomer(testCaseData.getWorkOrdersData().get(0).getWorlOrderRetailCustomer());
-		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(0)));
 		Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(1)));
 		Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(2)));
@@ -143,17 +146,17 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		final int wosToCreate = 2;
 		Map<String, List<String>> workOrdersMap = new HashMap<>();
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			if (!customersscreen.isCustomerExists(workOrderData.getWorlOrderRetailCustomer())) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(workOrderData.getWorlOrderRetailCustomer());
-				customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+                customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			}
 		}
 		customersscreen.clickBackButton();
-		homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			for (int i = 0; i < wosToCreate; i++) {
@@ -162,26 +165,26 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 				VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
                 HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 				VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-				//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+                //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 				//vehicleVINHistoryScreen.clickBackButton();
 				workOrdersMap.computeIfAbsent(workOrderData.getWorlOrderRetailCustomer().getFullName(), k -> new ArrayList<>()).add(vehicleInfoScreen.getNewInspectionNumber());
 				vehicleInfoScreen.saveWorkOrderViaMenu();
 			}
 		}
 
-		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			for (int j = 0; j < wosToCreate; j++) {
 				workordersscreen.selectWorkOrder(workOrdersMap.get(workOrderData.getWorlOrderRetailCustomer().getFullName()).get(j));
 			}
 		}
 		workordersscreen.clickCreateInvoiceIcon();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
 		BaseUtils.waitABit(20000);
-		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		customersscreen.selectCustomer(testCaseData.getWorkOrdersData().get(0).getWorlOrderRetailCustomer());
-		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int j = 0; j < wosToCreate; j++) {
 			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrdersMap.get(
 					testCaseData.getWorkOrdersData().get(0).getWorlOrderRetailCustomer().getFullName()).get(j)));
@@ -211,17 +214,17 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> workOrders = new ArrayList<>();
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			if (!customersscreen.isCustomerExists(workOrderData.getWorlOrderRetailCustomer())) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(workOrderData.getWorlOrderRetailCustomer());
-				customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+                customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			}
 		}
 		customersscreen.clickBackButton();
-		homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -229,46 +232,46 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+            //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
-		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (String woNumber : workOrders) {
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		customersscreen.selectCustomer(testCaseData.getWorkOrdersData().get(0).getWorlOrderRetailCustomer());
-		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(0)));
 		Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(1)));
 		Assert.assertFalse(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(2)));
 		invoiceinfoscren.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
 		invoiceinfoscren.clickInvoiceInfoBackButton();
-		VNextInformationDialog informationdialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationdialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertEquals(informationdialog.clickInformationDialogNoButtonAndGetMessage(),
 				VNextAlertMessages.CANCEL_CREATING_INVOICE);
-		invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        invoiceinfoscren = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		invoiceinfoscren.clickInvoiceInfoBackButton();
-		informationdialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        informationdialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
 		Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
 				VNextAlertMessages.CANCEL_CREATING_INVOICE);
-		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (String woNumber : workOrders)
 			workordersscreen.selectWorkOrder(woNumber);
 
 		workordersscreen.clickCreateInvoiceIcon();
-		informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		customersscreen.clickScreenBackButton();
-		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		workordersscreen.clickBackButton();
 	}
 
@@ -279,7 +282,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> workOrders = new ArrayList<>();
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -287,11 +290,11 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+            //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+            VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			servicesscreen.switchToAvalableServicesView();
 			servicesscreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
@@ -303,9 +306,9 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (String woNumber : workOrders) {
 			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(woNumber));
 		}
@@ -323,17 +326,17 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		ArrayList<String> workOrders = new ArrayList<>();
 
 
-		VNextHomeScreen homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			if (!customersscreen.isCustomerExists(workOrderData.getWorlOrderRetailCustomer())) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(workOrderData.getWorlOrderRetailCustomer());
-				customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+                customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			}
 		}
 		customersscreen.clickBackButton();
-		homescreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			customersscreen = workordersscreen.clickAddWorkOrderButton();
@@ -341,27 +344,27 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-			//VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(DriverBuilder.getInstance().getAppiumDriver());
+            //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
 			vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+            VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			servicesscreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
 			selectservicesscreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
 			workordersscreen = vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
-		workordersscreen = new VNextWorkOrdersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (String woNumber : workOrders) {
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-		customersscreen = new VNextCustomersScreen(DriverBuilder.getInstance().getAppiumDriver());
+        customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		customersscreen.selectCustomer(testCaseData.getWorkOrdersData().get(1).getWorlOrderRetailCustomer());
-		VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInvoiceInfoScreen invoiceinfoscren = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 1; i < testCaseData.getWorkOrdersData().size(); i++) {
 			Assert.assertTrue(invoiceinfoscren.isWorkOrderSelectedForInvoice(workOrders.get(i)));
 		}

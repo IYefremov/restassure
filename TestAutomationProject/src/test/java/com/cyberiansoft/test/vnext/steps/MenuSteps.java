@@ -11,7 +11,7 @@ public class MenuSteps {
     public static void selectMenuItem(MenuItems menuItem) {
         BaseUtils.waitABit(2000);
         GeneralMenuScreen repairOrderMenuScreen = new GeneralMenuScreen();
-        WaitUtils.getGeneralFluentWait().until(driver -> repairOrderMenuScreen.getMenuItems().size() > 0);
+        WaitUtils.elementShouldBeVisible(repairOrderMenuScreen.getRootElement(), true);
         WaitUtils.getGeneralFluentWait().until(driver -> {
             repairOrderMenuScreen.selectMenuItem(menuItem);
             return true;

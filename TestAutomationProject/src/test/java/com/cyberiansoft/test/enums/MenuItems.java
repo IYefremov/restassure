@@ -4,6 +4,13 @@ import lombok.Getter;
 
 public enum MenuItems {
     EDIT("Edit"),
+    SAVE("Save Inspection"),
+    CANCEL("Cancel Inspection"),
+    EMAIL("Email Inspection"),
+    APPROVE("Approve"),
+    VIEW("View"),
+    ARCHIVE("Archive"),
+    CHANGE_CUSTOMER("Change Customer"),
     ASSIGN_TECH("Assign Tech"),
     START("Start"),
     STOP("Stop"),
@@ -16,7 +23,15 @@ public enum MenuItems {
     FOCUS_MODE_ON("TURN OFF\nFocus mode"),
     FOCUS_MODE_OFF("TURN ON\nFocus mode"),
     TIME_REPORT("Time Report"),
+    PAY("Pay"),
+    PAY_CREDIT_CARD("Pay Credit Card"),
+    PAY_CASH_CHECK("Pay Cash/Check"),
+    PAY_PO_RO("Pay PO/RO"),
+    SUPPLEMENT("Supplement"),
+    VIEW_SUPPLEMENT("View Supplement"),
+    ADD_SUPPLEMENT("Add Supplement"),
     RESET_START_DATE("Reset Start Date");
+
 
     @Getter
     private String menuItemDataName;

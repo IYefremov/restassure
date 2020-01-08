@@ -89,4 +89,12 @@ public class VNextBOInvoicesPageValidations {
                             "The invoice " + inv + " is not displayed after being unvoided"));
         }
     }
+
+    public static void verifySelectedInvoiceNotes(String expectedNotesText) {
+        Assert.assertEquals(VNextBOInvoicesPageInteractions.getSelectedInvoiceNote(), expectedNotesText);
+    }
+
+    public static void verifySelectedInvoiceCustomerName(String expectedCustomerName) {
+        Assert.assertEquals(VNextBOInvoicesPageInteractions.getSelectedInvoiceCustomerName(), expectedCustomerName);
+    }
 }

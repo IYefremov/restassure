@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.webelements;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
 import org.openqa.selenium.By;
@@ -41,7 +41,7 @@ public class TechnicialListElement implements IWebElement {
 
     public void setPercentageAmount(String percentageAmount) {
         rootElement.findElement(By.xpath(amountLocator)).click();
-        VNextCustomKeyboard keyboard = new VNextCustomKeyboard(DriverBuilder.getInstance().getAppiumDriver());
+        VNextCustomKeyboard keyboard = new VNextCustomKeyboard(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         keyboard.clickKeyboardBackspaceButton();
         keyboard.clickKeyboardBackspaceButton();
         keyboard.clickKeyboardBackspaceButton();

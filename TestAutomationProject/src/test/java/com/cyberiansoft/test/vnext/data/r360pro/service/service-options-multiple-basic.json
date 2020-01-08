@@ -405,16 +405,20 @@
       "questionScreenData": {
         "questionsData": [
           {
-            "questionName": "Generate \"Money\" services?"
+            "questionName": "Generate \"Money\" services?",
+            "questionAnswer": "Yes"
           },
           {
-            "questionName": "Generate \"Labor\" services?"
+            "questionName": "Generate \"Labor\" services?",
+            "questionAnswer": "Yes"
           },
           {
-            "questionName": "Generate \"Matrix\" services?"
+            "questionName": "Generate \"Matrix\" services?",
+            "questionAnswer": "Yes"
           },
           {
-            "questionName": "Generate \"Part\" services?"
+            "questionName": "Generate \"Part\" services?",
+            "questionAnswer": "Yes"
           }
         ]
       }

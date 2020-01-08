@@ -1,16 +1,10 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -44,11 +38,14 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(xpath = "//*[@action='save']")
 	private WebElement savebtn;
 
-	public VNextVehiclePartInfoPage(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextVehiclePartInfoPage(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(vehiclepartinfoscreen));
+	}
+
+	public VNextVehiclePartInfoPage() {
 	}
 
 	public void selectVehiclePartSize(String vehiclepartsize) {
@@ -77,7 +74,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 			tap(WaitUtils.waitUntilElementIsClickable(addservs.findElement(By.xpath(".//*[@action='select-item']"))));
 			WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
 			if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
-				VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(appiumdriver);
+                VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 				serviceDetailsScreen.clickServiceDetailsDoneButton();
 			}
 		} else

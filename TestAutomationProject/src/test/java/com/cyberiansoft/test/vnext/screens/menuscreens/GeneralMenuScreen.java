@@ -11,6 +11,9 @@ import java.util.List;
 
 @Getter
 public class GeneralMenuScreen extends VNextBaseScreen {
+    @FindBy(xpath = "//div[@class='actions-menu-layout opened']")
+    private WebElement rootElement;
+
     @FindBy(xpath = "//*[contains(@class,'action-tile')]")
     private List<WebElement> menuItems;
 

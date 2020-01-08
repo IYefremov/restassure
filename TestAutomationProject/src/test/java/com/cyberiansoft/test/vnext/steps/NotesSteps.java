@@ -39,8 +39,7 @@ public class NotesSteps {
     public static void addPhotoFromCamera() {
         VNextNotesScreen notesScreen = new VNextNotesScreen();
         WaitUtils.elementShouldBeVisible(notesScreen.getTakePictureButton(), true);
-        notesScreen.getTakePictureButton().click();
-        GeneralSteps.takeCameraPicture();
+        WaitUtils.click(notesScreen.getTakePictureButton());
     }
 
     public static void verifyPicturesPresent() {

@@ -8,6 +8,7 @@ import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.monitoring.InfoScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.order.edit.PhaseElement;
 import org.testng.Assert;
 
 public class EditOrderSteps {
@@ -30,8 +31,8 @@ public class EditOrderSteps {
     }
 
     public static void openPhaseMenu(OrderPhaseDto phaseDto) {
-        PhaseScreenInteractions.openPhaseElementMenu(
-                PhaseScreenInteractions.getPhaseElement(phaseDto.getPhaseName()));
+        PhaseElement phaseElement = PhaseScreenInteractions.getPhaseElement(phaseDto.getPhaseName());
+        PhaseScreenInteractions.openPhaseElementMenu(phaseElement);
     }
 
     public static void openServiceMenu(ServiceData serviceData) {
@@ -48,5 +49,11 @@ public class EditOrderSteps {
         PhasesScreen phasesScreen = new PhasesScreen();
         WaitUtils.elementShouldBeVisible(phasesScreen.getPartsScreenButton(), true);
         phasesScreen.getPartsScreenButton().click();
+    }
+
+    public static void waitPhasesScreenLoaded() {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
+        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
     }
 }

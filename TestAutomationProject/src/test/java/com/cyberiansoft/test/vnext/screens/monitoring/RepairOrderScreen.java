@@ -24,6 +24,9 @@ public class RepairOrderScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@class=\"searchlist-filters\"]")
     private ActiveFiltersLabel activeFilterslabel;
 
+    @FindBy(xpath = "//*[@data-autotests-id=\"repair-orders-list\"]")
+    private WebElement repairOrderList;
+
     @FindBy(xpath = "//*[@data-autotests-id=\"repair-orders-list\"]/div")
     private List<RepairOrderListElement> repairOrderListElements;
 
@@ -42,10 +45,11 @@ public class RepairOrderScreen extends MonitorScreen {
 
     public RepairOrderListElement getRepairOrderElement(String orderId) {
         BaseUtils.waitABit(2000);
+        WaitUtils.waitUntilElementIsClickable(rootElement);
         return repairOrderListElements
                 .stream()
                 .filter((repairOrder) -> {
-                    repairOrder.expand();
+                    //repairOrder.expand();
                     return orderId.equals(repairOrder.getRepairOrderId());
                 })
                 .findFirst()

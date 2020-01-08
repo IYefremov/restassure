@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
@@ -9,12 +10,11 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -44,6 +44,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//*[@action='work-queue']")
     private WebElement workQueue;
+
+    @FindBy(xpath = "//*[@action='monitor-update-work']")
+    private WebElement monitorUpdateWork;
 
     @FindBy(xpath = "//*[@action='navigate-to-monitor']")
     private WebElement monitor;
@@ -75,14 +78,10 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='new_inspection']")
     private WebElement newinspectionbtn;
 
-    public VNextHomeScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextHomeScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
         WaitUtils.elementShouldBeVisible(getRootElement(),true);
-        if (checkHelpPopupPresence())
-            if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
-                tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-        }
     }
 
     public VNextHomeScreen() {
@@ -102,7 +101,12 @@ public class VNextHomeScreen extends VNextBaseScreen {
 
     @Step
     public VNextInspectionsScreen clickInspectionsMenuItem() {
-        tap(inspectionslist);
+        WebDriver webDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+            executor.executeScript("arguments[0].click();", inspectionslist);
+            return true;
+        });
         return new VNextInspectionsScreen(appiumdriver);
     }
 
@@ -120,9 +124,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
     }
 
     public VNextStatusScreen clickStatusMenuItem() {
-        if (!statuslist.isDisplayed())
-            tap(morelist);
-        tap(statuslist);
+        WebDriver webDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) webDriver;
+        executor.executeScript("arguments[0].click();", statuslist);
         return new VNextStatusScreen(appiumdriver);
     }
 
@@ -137,12 +141,12 @@ public class VNextHomeScreen extends VNextBaseScreen {
     }
 
     public boolean isQueueMessageVisible() {
-        return appiumdriver.findElementByXPath("//*[@action='messager-send']").isDisplayed();
+        return WaitUtils.isElementPresent(By.xpath("//*[@action='messager-send']"));
     }
 
     public void waitUntilQueueMessageInvisible() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 240);
-        wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElementByXPath("//*[@action='messager-send']")));
+        wait.until(ExpectedConditions.invisibilityOf(appiumdriver.findElement(By.xpath("//*[@action='messager-send']"))));
     }
 
     public VNextLoginScreen clickLogoutButton() {

@@ -6,11 +6,9 @@ import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -32,9 +30,9 @@ public class VNextWorkOrdersMenuScreen extends VNextBasicMenuScreen {
     @FindBy(xpath = "//*[@data-name='invoice']")
     private WebElement createinvoicemenuitem;
 
-    public VNextWorkOrdersMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextWorkOrdersMenuScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextChangeCustomerScreen clickChangeCustomerMenuItem() {

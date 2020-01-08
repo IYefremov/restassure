@@ -4,6 +4,8 @@ import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.ServiceDetailsInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
+import com.cyberiansoft.test.vnext.steps.NotesSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 import java.util.List;
@@ -16,6 +18,13 @@ public class ServiceDetailsScreenSteps {
         WaitUtils.elementShouldBeVisible(serviceDetailsScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(serviceDetailsScreen.getRootElement());
         serviceDetailsScreen.setServiceAmountValue(newServicePrice);
+    }
+
+    public static void changeServiceQuantity(String newServiceQuantity) {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        WaitUtils.elementShouldBeVisible(serviceDetailsScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(serviceDetailsScreen.getRootElement());
+        serviceDetailsScreen.setServiceQuantityValue(newServiceQuantity);
     }
 
     public static void closeServiceDetailsScreen() {
@@ -64,5 +73,12 @@ public class ServiceDetailsScreenSteps {
 
     public static void openQuestionForm(String questionFormFieldName) {
         ServiceDetailsInteractions.openQuestionForm(questionFormFieldName);
+    }
+
+    public static void setServiceTextNotes(String textNote) {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        serviceDetailsScreen.clickServiceNotesOption();
+        NotesSteps.setNoteText(textNote);
+        ScreenNavigationSteps.pressBackButton();
     }
 }

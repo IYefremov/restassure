@@ -11,7 +11,7 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.QuestionServiceListSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import com.cyberiansoft.test.vnext.validations.QuestionServiceListValidations;
 import com.cyberiansoft.test.vnext.validations.VisualScreenValidations;
@@ -19,7 +19,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class SingleSelectionServiceTests extends BaseTestCaseTeamEditionRegistration {
+public class SingleSelectionServiceTests extends BaseTestClass {
     @BeforeClass(description = "Team Monitoring Basic Flow Test")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getServiceMultipleOptionDataPath();
@@ -207,11 +207,13 @@ public class SingleSelectionServiceTests extends BaseTestCaseTeamEditionRegistra
         VisualScreenSteps.addServiceToPicture();
         VisualScreenSteps.addServiceToPicture();
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
+        VisualScreenSteps.clearAllMarks();
 
         VisualScreenSteps.selectMoneyServiceDamage(laborServiceDamageDate);
         VisualScreenSteps.addServiceToPicture();
         VisualScreenSteps.addServiceToPicture();
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
+        VisualScreenSteps.clearAllMarks();
 
         VisualScreenSteps.selectPartServiceDamage(partServiceDamageDate);
         VisualScreenSteps.addServiceToPicture();
@@ -241,6 +243,8 @@ public class SingleSelectionServiceTests extends BaseTestCaseTeamEditionRegistra
         VisualScreenSteps.addServiceToPicture();
         VisualScreenSteps.selectPartServiceDamage(partServiceDamageDate);
         VisualScreenSteps.addServiceToPicture();
+        PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
+        PartServiceSteps.confirmPartInfo();
         String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionToEdit(inspectionId);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
@@ -376,14 +380,10 @@ public class SingleSelectionServiceTests extends BaseTestCaseTeamEditionRegistra
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
 
-        QuestionFormSteps.answerGeneralSlideQuestion(generateMoneyService);
-        QuestionFormSteps.answerGeneralSlideQuestion(generateLaborService);
-        QuestionFormSteps.answerGeneralSlideQuestion(generateLaborService);
-        QuestionFormSteps.answerGeneralSlideQuestion(generateMatrixService);
-        QuestionFormSteps.answerGeneralSlideQuestion(generateMatrixService);
-        QuestionFormSteps.answerGeneralSlideQuestion(generatePartService);
-        QuestionFormSteps.answerGeneralSlideQuestion(generatePartService);
-
+        QuestionFormSteps.answerGeneralQuestion(generateMoneyService);
+        QuestionFormSteps.answerGeneralQuestion(generateLaborService);
+        QuestionFormSteps.answerGeneralQuestion(generateMatrixService);
+        QuestionFormSteps.answerGeneralQuestion(generatePartService);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES, 1);
 
         QuestionServiceListSteps.switchToNeedToSetupServiceView();

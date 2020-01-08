@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.JavascriptExecutor;
 
 public class HomeScreenSteps {
     public static void openCreateMyInspection() {
@@ -37,6 +39,11 @@ public class HomeScreenSteps {
         WaitUtils.click(homeScreen.getWorkQueue());
     }
 
+    public static void openUpdateWork() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        WaitUtils.click(homeScreen.getMonitorUpdateWork());
+    }
+
     public static void logOut() {
         VNextBaseScreen vNextBaseScreen = new VNextBaseScreen();
         WaitUtils.click(vNextBaseScreen.getLogoutButton());
@@ -44,6 +51,9 @@ public class HomeScreenSteps {
 
     public static void openMonitor() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
+
+        JavascriptExecutor je = (JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        je.executeScript("arguments[0].scrollIntoView(true);", homeScreen.getMonitor());
         WaitUtils.click(homeScreen.getMonitor());
     }
 }

@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ServiceListItem;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
@@ -30,7 +30,7 @@ public class MatrixServiceDetailsScreen extends VNextBaseScreen {
     private List<ServiceListItem> serviceListItems;
 
     public MatrixServiceDetailsScreen() {
-        PageFactory.initElements(new FiledDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
     public ServiceListItem getServiceListItem(String itemName) {

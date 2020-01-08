@@ -1,8 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -16,10 +14,10 @@ public class VNextSettingsScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@action='back']")
 	private WebElement backbtn;
-	
-	public VNextSettingsScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextSettingsScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(manualsendradio));
 	}

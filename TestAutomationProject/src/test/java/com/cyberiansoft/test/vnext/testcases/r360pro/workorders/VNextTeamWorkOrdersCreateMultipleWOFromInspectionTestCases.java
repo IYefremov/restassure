@@ -8,10 +8,11 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -20,7 +21,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends BaseTestClass {
 
     @BeforeClass(description="Team Work Orders Create Multiple WO From Inspection Test Cases")
     public void beforeClass() {
@@ -60,6 +61,9 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void userCanCreateWoFromApprovedInspection(String rowID,
                                                          String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         String inspectionNumber = InspectionSteps.saveInspection();
@@ -70,6 +74,9 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         InspectionMenuSteps.createWorkOrderMenuItemShouldBeVisible(true);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR);
+        VehicleInfoScreenInteractions.waitPageLoaded();
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData().getServiceName());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
         WorkOrderSteps.workOrderShouldBePresent(workOrderId);
         ScreenNavigationSteps.pressBackButton();

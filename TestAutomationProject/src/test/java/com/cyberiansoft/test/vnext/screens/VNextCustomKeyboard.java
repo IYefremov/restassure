@@ -1,43 +1,50 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.List;
+
 public class VNextCustomKeyboard extends VNextBaseScreen {
 
-    @FindBy(xpath = "//*[@data-autotests-id='keypad'][3]")
+	@FindBy(xpath = "//*[@data-autotests-id='keypad']")
 	private WebElement keyboard;
-	
-	public VNextCustomKeyboard(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextCustomKeyboard(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(keyboard));
 	}
+
+	private WebElement getActiveKeyboard() {
+		List<WebElement> keyboards = appiumdriver.findElements(By.xpath("//*[@data-autotests-id='keypad']"));
+
+		return appiumdriver.findElement(By.xpath("//*[@data-autotests-id='keypad'][" + keyboards.size() + "]"));
+	}
 	
 	public void clickKeyboardBackspaceButton() {
-		tap(keyboard.findElement(By.xpath(".//span[contains(@class, 'picker-keypad-delete')]")));		
+		tap(getActiveKeyboard().findElement(By.xpath(".//span[contains(@class, 'picker-keypad-delete')]")));
 	}
 	
 	public void clickKeyboardButton(char button) {
-		tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='" + button + "']")));
+    	tap(getActiveKeyboard().findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='" + button + "']")));
 	}
 	
 	public void clickKeyboardDoneButton() {
-		tap(keyboard.findElement(By.xpath(".//*[@class='link close-picker']")));
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='keypad'][3]"));
+    	WaitUtils.waitUntilElementIsClickable(getActiveKeyboard().findElement(By.xpath(".//*[@class='link close-picker']")));
+		tap(getActiveKeyboard().findElement(By.xpath(".//*[@class='link close-picker']")));
+		//WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='keypad'][3]"));
 	}
 	
 	public void clickKeyboardMinusButton() {
-		tap(keyboard.findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='-/+']")));
+		tap(getActiveKeyboard().findElement(By.xpath("./div[@class='picker-modal-inner picker-keypad-buttons']/span/span[text()='-/+']")));
 	}
 	
 	public void typeValue(String newvalue) {

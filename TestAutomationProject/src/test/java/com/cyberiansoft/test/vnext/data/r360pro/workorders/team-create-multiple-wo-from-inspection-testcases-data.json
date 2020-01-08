@@ -41,7 +41,11 @@
           "testCaseID": "91934",
           "testCaseTitle": "Verify user can create WO from approved Inspection."
         }
-      ]
+      ],
+      "moneyService":
+        {
+          "serviceName": "Battery Installation"
+        }
     }
   ]
 }

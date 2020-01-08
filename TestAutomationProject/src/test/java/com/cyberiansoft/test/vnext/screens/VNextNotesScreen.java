@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -41,12 +42,11 @@ public class VNextNotesScreen extends VNextBaseScreen {
     }
 
     public void setNoteText(String noteText) {
-        clearNoteButton.click();
         noteEditField.sendKeys(noteText);
     }
 
     public void switchToQuickNotes() {
-        switchToQuickNotes.click();
+        WaitUtils.click(switchToQuickNotes);
     }
 }
 

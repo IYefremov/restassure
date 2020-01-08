@@ -12,6 +12,8 @@ public class Monitoring {
     private String location;
     @JsonProperty("repairOrderData")
     private RepairOrderDto repairOrderData;
+    @JsonProperty("stockNumber")
+    private String stockNumber;
     @JsonProperty("orderPhaseDto")
     private OrderPhaseDto orderPhaseDto;
     @JsonProperty("orderInfoDto")

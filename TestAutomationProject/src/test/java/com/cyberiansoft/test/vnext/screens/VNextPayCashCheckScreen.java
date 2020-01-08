@@ -3,10 +3,8 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,9 +28,9 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     @FindBy(xpath="//*[@action='pay']")
     private WebElement paybtn;
 
-    public VNextPayCashCheckScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextPayCashCheckScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public void setPaymentCheckNumber(String checkNumber) {
@@ -47,6 +45,8 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     }
 
     public void setAmauntValue(String amauntValue) {
+        WaitUtils.waitUntilElementIsClickable(paymentAmountfld);
+        BaseUtils.waitABit(1000);
         tap(paymentAmountfld);
         VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
         String defAmaunt = paymentAmountfld.getAttribute("value");
@@ -56,11 +56,13 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     public String getAmauntValue() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 90);
         wait.until(ExpectedConditions.visibilityOf(paymentAmountfld));
-        BaseUtils.waitABit(500);
+        BaseUtils.waitABit(1000);
         return paymentAmountfld.getAttribute("value");
     }
 
     public void clearAmauntValue() {
+        WaitUtils.waitUntilElementIsClickable(paymentAmountfld);
+        BaseUtils.waitABit(1000);
         tap(paymentAmountfld);
         VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
         keyboard.clearFieldValue(paymentAmountfld.getAttribute("value"));
@@ -68,10 +70,13 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     }
 
     public void clickPayButton() {
+        WaitUtils.elementShouldBeVisible(paymentAmountfld, true);
+        BaseUtils.waitABit(3000);
         tap(paybtn);
     }
 
     public VNextInvoicesScreen payInvoice() {
+        WaitUtils.waitUntilElementIsClickable(paymentAmountfld);
         BaseUtils.waitABit(1000);
         tap(paybtn);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);

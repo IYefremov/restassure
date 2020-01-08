@@ -30,6 +30,7 @@ public class MonitorSteps {
         repairOrderScreen.openChangeLocationPage();
         WaitUtils.elementShouldBeVisible(selectLocationScreen.getRootElement(), true);
         WaitUtils.getGeneralFluentWait().until((webdriver) -> selectLocationScreen.getLocationList().size() > 0);
+        BaseUtils.waitABit(1000);
         selectLocationScreen.selectLocationByText(locationPartialName);
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
@@ -37,6 +38,7 @@ public class MonitorSteps {
     public static void verifyRepairOrderValues(String repairOrderId, RepairOrderDto expectedRoValues) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRepairOrderList(), true);
         Assert.assertEquals(repairOrderScreen.getRepairOrderElement(repairOrderId).getRepairOrderDto(),
                 expectedRoValues);
     }
@@ -64,16 +66,9 @@ public class MonitorSteps {
     }
 
     public static void editOrder(String workOrderId) {
-        HomeScreenSteps.openWorkQueue();
+        HomeScreenSteps.openMonitor();
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
-        //MenuSteps.selectMenuItem(MenuItems.EDIT);
-    }
-
-    public static void verifyRepairOrderListIsEmpty() {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getNothingFoundLable(), true);
-        WaitUtils.getGeneralFluentWait().until(driver -> repairOrderScreen.getRepairOrderListElements().isEmpty());
     }
 
     public static void toggleFocusMode(MenuItems focusMode) {
