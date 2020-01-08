@@ -29,7 +29,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenDeviceManagementPageWithFullSetOfElements(String rowID, String description, JSONObject testData) {
 
         VNextBOActiveDevicesTabValidations.verifyDevicesTableIsDisplayed();
@@ -43,7 +43,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("10");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectXItemsPerPage(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.changeItemsPerPage("20");
@@ -64,7 +64,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOActiveDevicesTabValidations.verifyCorrectRecordsAmountIsDisplayed(10);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanNavigateBetweenPagesOfActiveDevicesTab(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
@@ -86,7 +86,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickFooterFirstPageButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndCloseTermsAndConditionsOkButton(String rowID, String description, JSONObject testData) {
 
         VNextBODeviceManagementSteps.clickTermsAndConditionsLink();
@@ -100,7 +100,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndCloseTermsAndConditionsXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBODeviceManagementSteps.clickTermsAndConditionsLink();
@@ -114,7 +114,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndClosePrivacyPolicyOkButton(String rowID, String description, JSONObject testData) {
 
         VNextBODeviceManagementSteps.clickPrivacyPolicyLink();
@@ -128,7 +128,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndClosePrivacyPolicyXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBODeviceManagementSteps.clickPrivacyPolicyLink();
@@ -142,7 +142,7 @@ public class VNextBODeviceManagementGeneralTests extends BaseTestCase {
         VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
 
         VNextBODeviceManagementSteps.openIntercomMessenger();

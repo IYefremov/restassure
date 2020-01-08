@@ -166,7 +166,6 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("100");
         VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(100);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
-
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -185,6 +184,5 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("100");
         VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(100);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
-
     }
 }
