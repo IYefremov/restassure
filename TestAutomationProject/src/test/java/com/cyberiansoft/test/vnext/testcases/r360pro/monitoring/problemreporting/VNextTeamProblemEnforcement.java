@@ -68,7 +68,7 @@ public class VNextTeamProblemEnforcement extends BaseTestClass {
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         serviceDto.setServiceStatus(ServiceStatus.COMPLETED);
         PhaseScreenValidations.validateServiceStatus(serviceDto);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -93,7 +93,7 @@ public class VNextTeamProblemEnforcement extends BaseTestClass {
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         phaseDto.setStatus(PhaseName.COMPLETED);
         PhaseScreenValidations.validatePhaseStatus(phaseDto);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -123,7 +123,7 @@ public class VNextTeamProblemEnforcement extends BaseTestClass {
         phaseDto.setStatus(PhaseName.COMPLETED);
         PhaseScreenValidations.validatePhaseStatus(phaseDto);
         PhaseScreenValidations.validateServiceStatus(serviceDto);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 }

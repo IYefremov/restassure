@@ -87,7 +87,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
-        workOrdersScreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
+        workOrdersScreen.changeCustomerForWorkOrderViaSearch(woNumber, testcustomer2);
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         workOrdersScreen.clickBackButton();
     }
@@ -139,7 +139,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderAsDraft();
-        workOrdersScreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
+        workOrdersScreen.changeCustomerForWorkOrderViaSearch(woNumber, testcustomer2);
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         BaseUtils.waitABit(1000*30);
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
@@ -257,7 +257,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
-        workOrdersScreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
+        workOrdersScreen.changeCustomerForWorkOrderViaSearch(woNumber, testcustomer2);
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
         VNextInvoiceTypesList invoiceTypesScreen = workOrdersMenuScreen.clickCreateInvoiceMenuItem();
@@ -291,7 +291,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
-        workOrdersScreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
+        workOrdersScreen.changeCustomerForWorkOrderViaSearch(woNumber, testcustomer2);
         workOrdersScreen.clickBackButton();
         BaseUtils.waitABit(30*1000);
         homeScreen.clickWorkOrdersMenuItem();
@@ -323,7 +323,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
-        workOrdersScreen.changeCustomerForWorkOrder(woNumber, testcustomer2);
+        workOrdersScreen.changeCustomerForWorkOrderViaSearch(woNumber, testcustomer2);
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(woNumber), testcustomer2.getFullName());
         workOrdersScreen.clickBackButton();
     }

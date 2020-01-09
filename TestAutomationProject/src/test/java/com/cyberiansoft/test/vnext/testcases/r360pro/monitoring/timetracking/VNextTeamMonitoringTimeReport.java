@@ -68,7 +68,7 @@ public class VNextTeamMonitoringTimeReport extends BaseTestClass {
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(true);
         ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -97,7 +97,7 @@ public class VNextTeamMonitoringTimeReport extends BaseTestClass {
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(true);
         ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 }
