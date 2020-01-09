@@ -28,6 +28,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsAdvancedSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -411,15 +412,16 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
         insppage.selectInspectionInTheList(inspnumber);
-        VNextBOInspectionsPageSteps.clickClearFilterIcon();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
-        VNextBOInspectionsPageSteps.searchInspectionByText(inspnumber);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(inspnumber);
         insppage.selectInspectionInTheList(inspnumber);
-        VNextBOInspectionsPageSteps.clickClearFilterIcon();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
 
         webdriver.quit();
     }
 }
+

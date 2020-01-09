@@ -2,13 +2,17 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInspectionsDetailsData;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
 
@@ -17,16 +21,18 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(new VNextBOInspectionsWebPage().getApproveInspectionIcon());
     }
 
-    public static void clickClearFilterIcon() {
-
-        Utils.clickElement(new VNextBOInspectionsWebPage().clearFilterBtn);
-    }
-
     public static void clickEditAdvancedSearchIcon() {
 
         Utils.clickElement(new VNextBOInspectionsWebPage().editAdvancedSearchIcon);
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+    }
+
+    public static void saveAdvancedSearch(Map<String, String> valuesForSearch) {
+
+        openAdvancedSearchForm();
+        VNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(valuesForSearch);
+        VNextBOInspectionsAdvancedSearchSteps.clickSaveButton();
     }
 
     public static void clickExpandAdvancedSearchPanel() {
@@ -42,6 +48,8 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
     public static void clickArchiveIcon() {
 
         Utils.clickElement(new VNextBOInspectionsWebPage().archiveIcon);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickUnArchiveIcon() {
@@ -92,6 +100,8 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
     public static void selectArchiveReason(String reason) {
 
         Utils.clickWithJS(new VNextBOInspectionsWebPage().archivingReasonByName(reason));
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void openAdvancedSearchForm() {
@@ -99,13 +109,6 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage();
         Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchCaret);
         Utils.clickElement(inspectionsPage.searchFieldAdvancedSearchIconGear);
-    }
-
-    public static void searchInspectionByText(String searchText) {
-
-        VNextBOInspectionsWebPage inspectionsPage = new VNextBOInspectionsWebPage();
-        inspectionsPage.setSearchFieldValue(searchText);
-        inspectionsPage.clickSearchFilterButton();
     }
 
     public static List<String> getNamesOfAllInspectionsInTheList() {
@@ -243,5 +246,22 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         VNextBOInspectionsWebPage inspectionsWebPage = new VNextBOInspectionsWebPage();
         WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(inspectionsWebPage.getInspectionsList()));
         WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(inspectionsWebPage.getInspectionDetailsPanel()));
+    }
+
+    public static void archiveInspection(VNextBOInspectionsDetailsData inspectionData, String archiveReason) {
+
+
+        searchInspectionByCustomTimeFrameAndNumber(inspectionData.getInspectionId(), inspectionData.getFromDate(), inspectionData.getToDate());
+        clickArchiveIcon();
+        selectArchiveReason("Reason: Test");
+        VNextBOModalDialogSteps.clickYesButton();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+    }
+
+    public static void unArchiveInspection() {
+
+        clickUnArchiveIcon();
+        VNextBOModalDialogSteps.clickYesButton();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 }
