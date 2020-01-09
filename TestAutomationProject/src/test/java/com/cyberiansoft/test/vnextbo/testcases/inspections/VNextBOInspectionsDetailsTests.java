@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionMaximizedImageDialog;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionNoteDialog;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionMaximizedImageDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionNoteDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
@@ -38,6 +39,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOInspectionMaximizedImageDialogValidations.verifyInspectionZoomedImageIsDisplayed();
         VNextBOInspectionMaximizedImageDialogSteps.closeInspectionMaximizedImageDialog();
         VNextBOInspectionMaximizedImageDialogValidations.verifyInspectionZoomedImageIsClosed(vNextBOInspectionMaximizedImageDialog);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -51,6 +53,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOInspectionNoteDialogValidations.verifyInspectionNoteTextIsDisplayed();
         VNextBOInspectionNoteDialogSteps.closeInspectionNote();
         VNextBOInspectionNoteDialogValidations.verifyNoteDialogIsClosed(vNextBOInspectionNoteDialog);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -61,6 +64,7 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOInspectionsPageValidations.verifyPrintSupplementButtonIsDisplayed();
         VNextBOInspectionsPageSteps.clickPrintSupplementButton();
         VNextBOInspectionsPageValidations.verifyPrintWindowIsOpened();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -71,5 +75,6 @@ public class VNextBOInspectionsDetailsTests extends BaseTestCase {
         VNextBOInspectionsPageValidations.verifyPrintInspectionButtonIsDisplayed();
         VNextBOInspectionsPageSteps.clickPrintInspectionButton();
         VNextBOInspectionsPageValidations.verifyPrintWindowIsOpened();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }

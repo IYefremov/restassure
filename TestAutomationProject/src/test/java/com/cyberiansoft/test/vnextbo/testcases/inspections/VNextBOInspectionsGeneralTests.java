@@ -116,5 +116,6 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
         Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getAllAdvancedSearchFieldsLabels(),
                 expectedAdvancedSearchFields);
         VNextBOInspectionsAdvancedSearchValidations.verifySearchButtonIsDisplayed();
+        VNextBOInspectionsAdvancedSearchSteps.clickCloseButton();
     }
 }
