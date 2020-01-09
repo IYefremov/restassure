@@ -1,13 +1,12 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -53,9 +52,9 @@ public class VNextLoginScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@data-autotests-id='search-cancel']")
     private WebElement cancelsearchbtn;
 
-    public VNextLoginScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextLoginScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='employees']")));
         WaitUtils.elementShouldBeVisible(appiumdriver.findElement(By.xpath("//div[@data-page='employees']")), true);
@@ -83,13 +82,11 @@ public class VNextLoginScreen extends VNextBaseScreen {
     }
 
     public void setUserLoginPassword(String userpsw) {
-        WaitUtils.click(By.xpath("//input[@type='password']"));
-        //appiumdriver.getKeyboard().sendKeys(userpsw);
-        setValue(passwordfld, userpsw);
+        ControlUtils.setValue(passwordfld, userpsw);
     }
 
     public boolean isUserLoginPasswordDialogVisible() {
-        return elementExists("//input[@type='password']");
+        return WaitUtils.isElementPresent(By.xpath("//input[@type='password']"));
     }
 
     public void selectEmployee(String username) {

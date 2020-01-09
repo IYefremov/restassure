@@ -375,6 +375,9 @@
         "workOrderType": "O_Kramar",
         "vihicleInfo": {
           "vinNumber": "7777777777777"
+        },
+        "service": {
+          "serviceName": "Battery Installation"
         }
       },
       "invoiceData": {

@@ -11,6 +11,9 @@
       ],
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
@@ -26,6 +29,9 @@
       ],
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "moneyService": {
+        "serviceName": "Battery Installation"
       },
       "insuranceCompany": {
         "insuranceCompanyName": "Miami Beach Insurance",
@@ -46,6 +52,9 @@
       ],
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
@@ -125,6 +134,9 @@
       ],
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],
@@ -155,6 +167,9 @@
       ],
       "vihicleInfo": {
         "vinNumber": "7777777777777"
+      },
+      "service": {
+        "serviceName": "Battery Installation"
       }
     }
   ],

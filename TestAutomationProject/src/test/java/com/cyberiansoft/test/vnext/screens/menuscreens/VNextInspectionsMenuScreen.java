@@ -10,10 +10,8 @@ import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -54,9 +52,9 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
     @FindBy(xpath = "//div[@class='close-popup close-actions']")
     private WebElement closebtn;
 
-    public VNextInspectionsMenuScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextInspectionsMenuScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextInspectionsMenuScreen() {
@@ -139,14 +137,6 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 
     public boolean isAddSupplementInspectionMenuItemPresent() {
         return WaitUtils.isElementPresent(addsupplementbtn);
-    }
-
-    public boolean isChangeCustomerMenuPresent() {
-        return changecustomerbtn.isDisplayed();
-    }
-
-    public boolean isEditInspectionMenuButtonExists() {
-        return editinspectionbtn.isDisplayed();
     }
 
     public VNextInspectionsScreen clickCloseInspectionMenuButton() {

@@ -2,14 +2,14 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -66,16 +66,21 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	////////////States
 	@FindBy(xpath="//div[@data-page='states']")
 	private WebElement statespage;
-	
-	public VNextNewCustomerScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextNewCustomerScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 		BaseUtils.waitABit(1000);
 	}
+
+	public VNextNewCustomerScreen() {
+	}
 	
 	public void createNewCustomer(RetailCustomer retailCustomer) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 		if (retailCustomer.getFirstName() != null )
 			setCustomerFirstName(retailCustomer.getFirstName());
 		if (retailCustomer.getLastName() != null )
@@ -186,6 +191,9 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	
 	public void setCustomerZIP(String customerzip) {
 		if (customerzip.length() > 0) {
+			WaitUtils.waitUntilElementIsClickable(zipfld);
+			Actions move = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+			move.moveToElement(zipfld).perform();
 			zipfld.clear();
 			zipfld.sendKeys(customerzip);
 		}
@@ -224,6 +232,7 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 			wait = new WebDriverWait(appiumdriver, 10);
 			wait.until(ExpectedConditions.visibilityOf(firstnamefld));
 		}
+		BaseUtils.waitABit(1000);
 	}
 	
 	public String getCustomerState() {

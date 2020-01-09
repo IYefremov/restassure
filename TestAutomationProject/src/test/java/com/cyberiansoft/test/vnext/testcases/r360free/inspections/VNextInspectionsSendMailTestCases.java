@@ -1,10 +1,9 @@
 package com.cyberiansoft.test.vnext.testcases.r360free.inspections;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
@@ -54,8 +53,8 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 																				  String description, JSONObject testData) throws Exception {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
-		
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
 		if (!customersScreen.isCustomerExists(testcustomer)) {
@@ -74,7 +73,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		NadaEMailService nadaEMailService = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 		emailScreen.sendEmail();
-		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionsScreen.clickBackButton();
 
 		final String inspectionReportFileName = inspectionNumber + ".pdf";
@@ -99,8 +98,8 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 															   String description, JSONObject testData) throws Exception {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
-		
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
 		if (!customersScreen.isCustomerExists(testcustomer)) {
@@ -113,28 +112,28 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		ScreenNavigationSteps.pressBackButton();
-		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		selectedServicesScreen.openSelectedMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
-		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
 			VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
 			vehiclepartinfoscreen.clickScreenBackButton();
-			vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+            vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		}
 		ScreenNavigationSteps.pressBackButton();
-		selectedServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        selectedServicesScreen = new VNextSelectedServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
 		NadaEMailService nadaEMailService = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 		emailScreen.sendEmail();
-		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionsScreen.clickBackButton();
 
 		final String inspectionReportFileName = inspectionNumber + ".pdf";
@@ -162,8 +161,8 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 																		 String description, JSONObject testData) throws Exception {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		InspectionData inspectionData = testCaseData.getInspectionData();
-		
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
 		if (!customersScreen.isCustomerExists(testcustomer)) {
@@ -176,28 +175,28 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		ScreenNavigationSteps.pressBackButton();
-		availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextSelectedServicesScreen selectavailableServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		selectavailableServicesScreen.openSelectedMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
-		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
 			vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
-			AppiumUtils.clickHardwareBackButton();
+            ScreenNavigationSteps.pressBackButton();
 
 		}
-		AppiumUtils.clickHardwareBackButton();
-		selectavailableServicesScreen = new VNextSelectedServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        ScreenNavigationSteps.pressBackButton();
+        selectavailableServicesScreen = new VNextSelectedServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionsScreen = selectavailableServicesScreen.saveInspectionViaMenu();
 		
 		VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
 		NadaEMailService nadaEMailService = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 		emailScreen.sendEmail();
-		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionsScreen.clickBackButton();
 
 		final String inspectionReportFileName = inspectionNumber + ".pdf";
@@ -231,8 +230,8 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		final String[] moneyservicesquantities = { "0.01", "0.99" };
 		final String[] moneyservicesamounts = { "$0.10", "$0.98" };
 		final String total = "$1.08";
-		
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
 		if (!customersScreen.isCustomerExists(testcustomer)) {
@@ -245,7 +244,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinnumber);
 		final String inspectionNumber = GeneralWizardInteractions.getObjectNumber();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		availableServicesScreen.selectServices(moneyservices);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (int i = 0; i < moneyservices.length; i++) {
@@ -259,7 +258,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 		NadaEMailService nadaEMailService = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 		emailScreen.sendEmail();
-		inspectionsScreen = new VNextInspectionsScreen(DriverBuilder.getInstance().getAppiumDriver());
+        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionsScreen.clickBackButton();
 
 		final String inspectionReportFileName = inspectionNumber + ".pdf";

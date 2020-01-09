@@ -42,7 +42,8 @@
         }
       ],
       "service": {
-        "serviceName": "Labor AM"
+        "serviceName": "Labor AM",
+        "serviceStatus": "STARTED"
       }
     }
   ],

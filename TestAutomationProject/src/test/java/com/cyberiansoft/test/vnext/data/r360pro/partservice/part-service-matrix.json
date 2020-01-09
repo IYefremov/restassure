@@ -3,6 +3,12 @@
     {
       "rowID": "userCanCreateInspectionWithPartsMatrixService.01",
       "description": "86706",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98824",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",
@@ -98,6 +104,12 @@
     {
       "rowID": "userCanSelectAndLinkMultipleLaborServicesToPartService.01",
       "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91851",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",
@@ -128,6 +140,12 @@
     {
       "rowID": ".01",
       "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91852",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",

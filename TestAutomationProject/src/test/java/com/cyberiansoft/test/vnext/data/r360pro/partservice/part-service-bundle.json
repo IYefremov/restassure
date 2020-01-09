@@ -3,6 +3,12 @@
     {
       "rowID": "userCanSelectAndLinkMultiplePartsServicesToLaborService.01",
       "description": "rozstalnoy_enable_labor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91850",
+          "testCaseTitle": "User can select and link multiple parts services to a Labor service (for Bundle)"
+        }
+      ],
       "bundleService": {
         "bundleServiceName": "rozstalnoy_enable_bundle",
         "laborService": {
@@ -25,6 +31,12 @@
     {
       "rowID": "userCanSelectAndLinkMultipleLaborServicesToPartService.01",
       "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91849",
+          "testCaseTitle": "User can select and link multiple labor services to a Part service (for Bundle)"
+        }
+      ],
       "bundleService": {
         "bundleServiceName": "rozstalnoy_enable_bundle",
         "partService": [

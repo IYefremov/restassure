@@ -178,4 +178,16 @@ public class VNextProTestCasesDataPaths {
     public String getAutoAssignTech() {
         return props.getProperty("monitoring.autoassign.tech");
     }
+
+    public String getVehicleOwnerSupportTestCasesDataPath() {
+        return props.getProperty("wo.owner.support");
+    }
+
+    public String getWholesailCustomersTestCasesDataPath() {
+        return props.getProperty("wholesale.customers");
+    }
+
+    public String getViewInspectionTestCasesDataPath() {
+        return props.getProperty("inspections.view");
+    }
 }

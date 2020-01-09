@@ -11,7 +11,7 @@ import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import com.cyberiansoft.test.vnext.validations.ServiceDetailsValidations;
 import org.json.simple.JSONObject;
@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class BasicVehiclePartsTests extends BaseTestCaseTeamEditionRegistration {
+public class BasicVehiclePartsTests extends BaseTestClass {
     @BeforeClass(description = "Team Monitoring Basic Flow Test")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getVehiclePartsCasesDataPath();

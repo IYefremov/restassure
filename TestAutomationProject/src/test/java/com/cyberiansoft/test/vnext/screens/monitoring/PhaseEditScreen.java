@@ -1,11 +1,13 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
+@Getter
 public class PhaseEditScreen extends MonitorScreen {
 
     @FindBy(xpath = "//*[@data-page='complete-phase']")

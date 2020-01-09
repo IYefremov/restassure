@@ -13,6 +13,5 @@ public class BundleServiceSteps {
 
     public static void setBundlePrice(String bundlePrice) {
         BundleServiceScreenInteractrions.setBundlePrice(bundlePrice);
-
     }
 }

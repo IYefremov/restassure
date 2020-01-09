@@ -45,4 +45,16 @@ public class PhaseScreenValidations {
         BaseUtils.waitABit(2000);
         Assert.assertEquals(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()).getTechnician(), serviceData.getServiceDefaultTechnician().getTechnicianFullName());
     }
+
+    public static void validatePhaseWorkOrderID(String expectedWorkOrderId) {
+        Assert.assertEquals(PhaseScreenInteractions.getPhasesWorkOrderId(), expectedWorkOrderId);
+    }
+
+    public static void validatePhaseVINNumber(String expectedVIN) {
+        Assert.assertEquals(PhaseScreenInteractions.getPhasesVINNumber(), expectedVIN);
+    }
+
+    public static void validatePhaseStockNumber(String expectedStockNumber) {
+        Assert.assertEquals(PhaseScreenInteractions.getPhasesStockNumber(), expectedStockNumber);
+    }
 }

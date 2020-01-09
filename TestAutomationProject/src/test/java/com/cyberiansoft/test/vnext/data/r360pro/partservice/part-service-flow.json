@@ -131,5 +131,59 @@
         }
       ]
     }
+  ],
+  "userCanSelectAndLinkMultipleLaborServicesToPartServiceForServicesWizardStep": [
+    {
+      "rowID": "userCanSelectAndLinkMultipleLaborServicesToPartServiceForServicesWizardStep.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91847",
+          "testCaseTitle": "User can select and link multiple labor services to a Part service (for Services wizard step)"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "serviceName": "roz_part_brake",
+          "partPosition": "N/A",
+          "laborServiceDataList": [
+            {
+              "serviceName": "rozstalnoy_disable_labor"
+            },
+            {
+              "serviceName": "rozstalnoy_enable_labor"
+            },
+            {
+              "serviceName": "roz_labor+part_service"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "userCanSelectAndLinkMultiplePartsServicesToLaborServiceForServicesWizardStep": [
+    {
+      "rowID": "userCanSelectAndLinkMultiplePartsServicesToLaborServiceForServicesWizardStep.01",
+      "description": "rozstalnoy_enable_labor",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91848",
+          "testCaseTitle": "User can select and link multiple parts services to a Labor service (for Services wizard step)"
+        }
+      ],
+      "laborService": {
+        "serviceName": "rozstalnoy_enable_labor",
+        "partServiceDataList": [
+          {
+            "serviceName": "roz_part_brake",
+            "partPosition": "N/A"
+          },
+          {
+            "serviceName": "roz_part_full_cat",
+            "partPosition": "Main"
+          }
+        ]
+      }
+    }
   ]
 }

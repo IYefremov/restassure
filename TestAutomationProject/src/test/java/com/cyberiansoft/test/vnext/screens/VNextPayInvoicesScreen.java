@@ -1,13 +1,13 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -39,12 +39,13 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     @FindBy(xpath="//input[@value='Pay']")
     private WebElement paybtn;
 
-    public VNextPayInvoicesScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextPayInvoicesScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
         BaseUtils.waitABit(3000);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(payscreen));
+        BaseUtils.waitABit(2000);
         wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//iframe[@class='invoice-pay-iframe']")));
 
@@ -54,8 +55,8 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     public void setCardNumber(String cardNumber) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='Number']")));
-        cardnumberfld.clear();
-        cardnumberfld.sendKeys(cardNumber);
+        ((JavascriptExecutor) appiumdriver).executeScript("arguments[0].setAttribute('value', arguments[1])", cardnumberfld, cardNumber);
+        //appiumdriver.switchTo().defaultContent();
     }
 
     public void setCVC(String cvcValue) {
@@ -64,26 +65,41 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     }
 
     public void selectExpirationMonth(String expMonth) {
-        tap(expirationmonthcmb);
+        ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                .executeScript("arguments[0].click();", expirationmonthcmb);
+
         WebElement parent = (WebElement) ((JavascriptExecutor) appiumdriver)
                 .executeScript(
                         "return arguments[0].parentNode;", expirationmonthcmb);
-        tap(parent.findElement(By.xpath(".//li/a/span[text()='" + expMonth + "']")));
+        ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                .executeScript("arguments[0].click();", parent.findElement(By.xpath(".//li/a/span[text()='" + expMonth + "']")));
+        ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                .executeScript("arguments[0].click();", expirationmonthcmb);
+        BaseUtils.waitABit(1000);
     }
 
     public void selectExpirationYear(String expYear) {
-        tap(expirationyearcmb);
+        ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                .executeScript("arguments[0].click();", expirationyearcmb);
         WebElement parent = (WebElement) ((JavascriptExecutor) appiumdriver)
                 .executeScript(
                         "return arguments[0].parentNode;", expirationyearcmb);
-        tap(parent.findElement(By.xpath(".//li/a/span[text()='" + expYear + "']")));
+        BaseUtils.waitABit(1000);
+        ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                .executeScript("arguments[0].click();", parent.findElement(By.xpath(".//li/a/span[text()='" + expYear + "']")));
+        ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                .executeScript("arguments[0].click();", expirationyearcmb);
+        BaseUtils.waitABit(1000);
     }
 
     public void clickPayButton() {
+        WebDriver driver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@value='Pay']")));
-        tap(paybtn);
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", paybtn);
         appiumdriver.switchTo().defaultContent();
+        BaseUtils.waitABit(1000);
     }
 
     public boolean isCardNumberRequiredErrorDisplayed() {
@@ -111,5 +127,13 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
         appiumdriver.switchTo().defaultContent();
         clickScreenBackButton();
         return new VNextInvoicesScreen(appiumdriver);
+    }
+
+    public String clickInformationDialogOKButtonAndGetMessage() {
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        String msg = informationDialog.getInformationDialogMessage();
+        ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                .executeScript("arguments[0].click();", appiumdriver.findElement(By.xpath(".//span[text()='OK']")));
+        return msg;
     }
 }

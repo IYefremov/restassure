@@ -3,14 +3,12 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,24 +28,27 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@action='back-office']")
 	private WebElement gotoBObtn;
-	
-	public VNextStatusScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextStatusScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(updatemaindbbtn));
 	}
 	
 	public VNextHomeScreen updateMainDB() {
 		clickUpdateAppdata();
+		BaseUtils.waitABit(2000);
 		try {
-			WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 30);
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Start sync']"))).click();
+            WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 30);
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Start sync']")));
+			wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 10);
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Start sync']"))).click();
 		} catch (TimeoutException e) {
 			//do nothing
 		}
 		BaseUtils.waitABit(10000);
-		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 800);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 800);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='" +
 				VNextAlertMessages.DATA_HAS_BEEN_DOWNLOADED_SECCESSFULY + "']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
@@ -70,7 +71,7 @@ public class VNextStatusScreen extends VNextBaseScreen {
 	public VNextHomeScreen updateMainDB(Employee employee) {
 		clickUpdateAppdata();
 		BaseUtils.waitABit(10000);
-		WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 800);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 800);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='" +
 				VNextAlertMessages.DATA_HAS_BEEN_DOWNLOADED_SECCESSFULY + "']")));
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);

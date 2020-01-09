@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.webelements;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
 import lombok.Getter;
@@ -20,7 +20,7 @@ public class ListPicker implements IWebElement {
     public void selectOption(String elementName) {
         WaitUtils.click(rootElement);
         WaitUtils.getGeneralFluentWait().until((webdriver) -> webdriver.findElements(By.xpath(elementsLocator)).size() > 0);
-        DriverBuilder.getInstance().getAppiumDriver().findElements(By.xpath(elementsLocator))
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath(elementsLocator))
                 .stream()
                 .filter(element -> element.getText().toLowerCase().contains(elementName.toLowerCase()))
                 .findFirst()

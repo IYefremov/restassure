@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -10,6 +12,7 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderType
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
 import org.openqa.selenium.By;
@@ -17,7 +20,7 @@ import org.testng.Assert;
 
 public class WorkOrderSteps {
 
-    public static String createSimpleWorkOrder(AppCustomer customer, WorkOrderTypes workOrderType) {
+    public static String createSimpleWorkOrder(AppCustomer customer, WorkOrderTypes workOrderType, WorkOrderData workOrderData) {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         homeScreen.clickWorkOrdersMenuItem();
@@ -25,6 +28,9 @@ public class WorkOrderSteps {
         CustomersSreenSteps.selectCustomer(customer);
         createWorkOrder(workOrderType);
         VehicleInfoScreenSteps.setVIN("7777777777777");
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
         return saveWorkOrder();
     }
 
@@ -51,7 +57,7 @@ public class WorkOrderSteps {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderId);
         workOrdersMenuScreen.clickDeleteWorkOrderMenuButton();
-        VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationDialog.clickInformationDialogDeleteButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + workOrderId + "']"));
     }

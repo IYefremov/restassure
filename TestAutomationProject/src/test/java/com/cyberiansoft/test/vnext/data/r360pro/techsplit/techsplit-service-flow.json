@@ -3,6 +3,12 @@
     {
       "rowID": "serviceLevelTechSplitValidation.01",
       "description": "88079 88080",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91968",
+          "testCaseTitle": "Verify Automatically calculate service level tech split based on WO level split creating WO for 1 Technician"
+        }
+      ],
       "technicianList": [
         {
           "employeeFirstName": "Test",
@@ -22,6 +28,12 @@
     {
       "rowID": "amountOfServiceRecalculatedBetweenTechniciansWhenUserChangeServicePrice.01",
       "description": "88086",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91971",
+          "testCaseTitle": "Amount of the service is recalculated automatically between technicians when user change price of the service"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "100",
         "Employee Employee": "100"
@@ -35,6 +47,12 @@
     {
       "rowID": "amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased.01",
       "description": "88522",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91973",
+          "testCaseTitle": "Amount of the service is recalculated automatically between technicians when user change Quantity of the service (Evenly)"
+        }
+      ],
       "technicianSplitData": {
         "Test Test": "200",
         "Employee Employee": "200"
@@ -61,6 +79,12 @@
     {
       "rowID": "userCanResetSplitToDefault.01",
       "description": "88524",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91975",
+          "testCaseTitle": "User can reset tech split of the service to default tech split WO settings"
+        }
+      ],
       "technicianList": [
         {
           "employeeFirstName": "1111",

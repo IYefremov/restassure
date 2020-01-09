@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -15,6 +15,6 @@ public class VNextHelpingScreen {
     private final By okButtonLocator = By.xpath("//div[@class='help-button' and text()='OK, got it']");
 
     public VNextHelpingScreen() {
-        PageFactory.initElements(DriverBuilder.getInstance().getAppiumDriver(), this);
+        PageFactory.initElements(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), this);
     }
 }

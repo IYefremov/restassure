@@ -4,10 +4,8 @@ import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -31,9 +29,9 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseScreen {
     @FindBy(xpath="//*[@action='save']")
     private WebElement savebtn;
 
-    public VNextLaborServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextLaborServiceDetailsScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='details']")));
         wait = new WebDriverWait(appiumdriver, 15);
