@@ -82,7 +82,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.RECEIVED);
         EditOrderSteps.waitPhasesScreenLoaded();
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
     }
 
@@ -102,7 +102,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.SKIPPED);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
     }
 
@@ -120,7 +120,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         EditOrderSteps.openServiceMenu(serviceData);
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.REFUSED);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
         ScreenNavigationSteps.pressBackButton();
     }

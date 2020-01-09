@@ -97,7 +97,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnPhase(phaseDto, false);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 }

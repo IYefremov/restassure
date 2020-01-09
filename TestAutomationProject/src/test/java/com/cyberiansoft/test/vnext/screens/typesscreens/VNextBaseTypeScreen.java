@@ -116,6 +116,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
             clickCancelSearchButton();
         }
         if (searchbtn.findElement(By.xpath(".//span[contains(@class, 'icon-has-query')]")).isDisplayed()) {
+            BaseUtils.waitABit(500);
             tap(searchbtn);
             if (searchfld.getAttribute("value").length() > 1) {
                 tap(clearsearchicon);

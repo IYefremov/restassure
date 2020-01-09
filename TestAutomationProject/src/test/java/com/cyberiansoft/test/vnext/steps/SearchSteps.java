@@ -96,10 +96,15 @@ public class SearchSteps {
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
-    public static void openSearchFilters() {
+    public static void openSearchMenu() {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.waitUntilElementIsClickable(repairOrderScreen.getSearchButton());
         repairOrderScreen.openSearchMenu();
+    }
+
+    public static void openSearchFilters() {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        openSearchMenu();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getCommonFiltersToggle(), true);
         repairOrderScreen.openCommonFilters();
     }

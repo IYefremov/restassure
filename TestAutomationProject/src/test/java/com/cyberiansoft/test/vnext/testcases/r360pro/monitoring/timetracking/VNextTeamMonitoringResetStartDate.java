@@ -62,7 +62,7 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestClass {
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
         PhaseScreenValidations.validateServiceStatus(serviceDto, ServiceStatus.ACTIVE);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -86,7 +86,7 @@ public class VNextTeamMonitoringResetStartDate extends BaseTestClass {
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.serviceShouldHaveStartDate(serviceDto, false);
         PhaseScreenValidations.validateServiceStatus(serviceDto, ServiceStatus.ACTIVE);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 }
