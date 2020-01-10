@@ -13,4 +13,10 @@ public class MatrixServiceDetailsScreenInteractions {
         MatrixServiceDetailsScreen matrixServiceDetailsScreen = new MatrixServiceDetailsScreen();
         WaitUtils.click(matrixServiceDetailsScreen.getSelectedButton());
     }
+
+    public static void setPrice(String priceValue) {
+        MatrixServiceDetailsScreen matrixServiceDetailsScreen = new MatrixServiceDetailsScreen();
+        matrixServiceDetailsScreen.getPriceField().clear();
+        matrixServiceDetailsScreen.getPriceField().sendKeys(priceValue);
+    }
 }

@@ -18,6 +18,7 @@ import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.MatrixServiceDetailsValidations;
 import com.cyberiansoft.test.vnext.validations.PartInfoScreenValidations;
+import com.cyberiansoft.test.vnext.validations.ServiceDetailsValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -161,6 +162,55 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         MatrixServiceDetailsValidations.validateServiceSelected(laborServiceInsideMatrix.getServiceName());
         ScreenNavigationSteps.pressBackButton();
         WizardScreenSteps.saveAction();
+        inspectionId = InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanAddPartsServicesAndSelectCategorySubcategoryPartNamePartPositionAndEdit(String rowID,
+                                                String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
+        MatrixServiceData basicPartsServiceMatrixService = matrixServiceData.get(0);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
+        MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
+        basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(MatrixServiceSteps::selectPartServiceInsideMatrixService);
+        MatrixServiceSteps.switchToSelectedServices();
+       // basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(serviceData -> MatrixServiceDetailsValidations.validateServiceSelected(serviceData.getServiceName()));
+        //MatrixServiceDetailsValidations.validateMatrixServiceDetails(basicPartsServiceMatrixService);
+        ScreenNavigationSteps.pressBackButton();
+        MatrixServiceSteps.acceptDetailsScreen();
+        SelectedServicesScreenSteps.openLaborServiceDetails(basicPartsServiceMatrixService.getMatrixServiceName());
+        SelectedServicesScreenSteps.openMatrixServiceVehiclePartDetails(basicPartsServiceMatrixService.getVehiclePartData());
+        MatrixServiceSteps.switchToSelectedServices();
+        final PartServiceData partServiceData = basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().get(0);
+        MatrixServiceSteps.openServiceDetailsInsideMatrixService(partServiceData.getServiceName());
+        ServiceDetailsScreenSteps.changeServicePrice(partServiceData.getServicePrice());
+        ServiceDetailsScreenSteps.changeServiceQuantity(partServiceData.getServiceQuantity());
+        ServiceDetailsScreenSteps.setServiceTextNotes("text note");
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        ScreenNavigationSteps.pressBackButton();
+        MatrixServiceSteps.acceptDetailsScreen();
+
+        inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        SelectedServicesScreenSteps.openLaborServiceDetails(basicPartsServiceMatrixService.getMatrixServiceName());
+        SelectedServicesScreenSteps.openMatrixServiceVehiclePartDetails(basicPartsServiceMatrixService.getVehiclePartData());
+        MatrixServiceSteps.switchToSelectedServices();
+        MatrixServiceSteps.openServiceDetailsInsideMatrixService(partServiceData.getServiceName());
+        ServiceDetailsValidations.verifyServicePrice(partServiceData.getServicePrice());
+        ServiceDetailsValidations.verifyServiceQuantity(partServiceData.getServiceQuantity());
+        ServiceDetailsValidations.verifyServiceNotesValue("text note");
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        ScreenNavigationSteps.pressBackButton();
+        MatrixServiceSteps.acceptDetailsScreen();
+
         inspectionId = InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }

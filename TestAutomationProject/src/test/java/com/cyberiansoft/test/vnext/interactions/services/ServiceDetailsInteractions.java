@@ -44,6 +44,16 @@ public class ServiceDetailsInteractions {
         return serviceDetailsScreen.getServiceDetailsPrice().getAttribute("value");
     }
 
+    public static String getQuantity() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        return serviceDetailsScreen.getServiceDetailsQuantity().getAttribute("value");
+    }
+
+    public static String getNotes() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        return serviceDetailsScreen.getServiceDetailsNotes().getText();
+    }
+
     public static void openQuestionForm(String questionFormFieldName) {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         serviceDetailsScreen.getQuestionSections()
