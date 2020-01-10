@@ -1,7 +1,7 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="Cyberiansoft VNext client tests" verbose="10" configfailurepolicy="continue">
     <listeners>
-        <!--<listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>-->
+        <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
     </listeners>
     <parameter name="bo.url" value="https://reconpro.qc.cyberianconcepts.com"  />
     <parameter name="lic.name" value="OKramar_android2"  />
