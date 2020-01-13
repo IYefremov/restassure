@@ -12,6 +12,8 @@ import java.util.List;
 public class PartServiceData {
     @JsonProperty("serviceName")
     private String serviceName;
+    @JsonProperty("serviceQuantity")
+    private String serviceQuantity;
     @JsonProperty("category")
     private String category;
     @JsonProperty("subCategory")

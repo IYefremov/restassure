@@ -14,6 +14,20 @@ public class ServiceDetailsValidations {
         });
     }
 
+    public static void verifyServiceQuantity(String expectedQuantity) {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Assert.assertEquals(ServiceDetailsInteractions.getQuantity(), expectedQuantity);
+            return true;
+        });
+    }
+
+    public static void verifyServiceNotesValue(String expectedNotesText) {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Assert.assertEquals(ServiceDetailsInteractions.getNotes(), expectedNotesText);
+            return true;
+        });
+    }
+
     public static void servicePartShouldBe(VehiclePartData vehiclePart) {
         WaitUtils.getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(ServiceDetailsInteractions.getVehiclePartValue(), vehiclePart.getVehiclePartName());

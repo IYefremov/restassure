@@ -83,7 +83,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
     }
 
     public void clickInformationDialogArchiveButton() {
-        tap(modaldlg.findElement(By.xpath(".//span[text()='Archive']")));
+        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(By.xpath(".//span[text()='Archive']"))).click();
     }
 
     public void clickInformationDialogDontArchiveButton() {

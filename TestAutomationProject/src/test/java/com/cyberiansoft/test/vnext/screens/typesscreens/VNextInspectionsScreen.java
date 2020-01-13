@@ -168,6 +168,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
         if (!WaitUtils.isElementPresent(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")))
             clearSearchField();
+        WaitUtils.waitUntilElementIsClickable(inspectionslist);
         WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 60);
         wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")));
         try {

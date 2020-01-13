@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -53,8 +54,9 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     }
 
     public void setCardNumber(String cardNumber) {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='Number']")));
+        WaitUtils.waitUntilElementIsClickable(cardnumberfld);
+        //WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='Number']")));
         ((JavascriptExecutor) appiumdriver).executeScript("arguments[0].setAttribute('value', arguments[1])", cardnumberfld, cardNumber);
         //appiumdriver.switchTo().defaultContent();
     }

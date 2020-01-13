@@ -74,7 +74,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestClass {
         ProblemReportingSteps.resolveProblem();
         phaseDto.setStatus(PhaseName.ACTIVE);
         PhaseScreenValidations.validatePhaseStatus(phaseDto);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -108,7 +108,7 @@ public class VNextTeamMonitoringProblemReporting extends BaseTestClass {
         ProblemReportingSteps.resolveProblem();
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
         PhaseScreenValidations.validateServiceStatus(serviceDto);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 

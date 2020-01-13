@@ -176,18 +176,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     }
 
-    public VNextWorkOrdersScreen changeCustomerForWorkOrder(String workOrderNumber, AppCustomer newCustomer) {
-        WaitUtils.elementShouldBeVisible(workorderslist, true);
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-        VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
-        changeCustomerScreen.selectCustomer(newCustomer);
-        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-        informationDialog.clickInformationDialogYesButton();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
-        return this;
-    }
-
-    public VNextWorkOrdersScreen changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
+    public void changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
         VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
         changeCustomerScreen.switchToRetailMode();
@@ -196,10 +185,9 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
-        return this;
     }
 
-    public VNextWorkOrdersScreen changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
+    public void changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
         VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
         changeCustomerScreen.switchToWholesaleMode();
@@ -207,7 +195,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
-        return this;
     }
 
     public void searchWorkOrderByFreeText(String searchtext) {

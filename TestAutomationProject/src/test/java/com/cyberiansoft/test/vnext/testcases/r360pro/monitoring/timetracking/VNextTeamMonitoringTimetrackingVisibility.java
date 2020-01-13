@@ -60,7 +60,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, true);
         MenuSteps.closeMenu();
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
         HomeScreenSteps.logOut();
         GeneralSteps.logIn(employee);
@@ -84,7 +84,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
         HomeScreenSteps.logOut();
         GeneralSteps.logIn(locationManagerEmployee);
@@ -96,7 +96,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, true);
         MenuSteps.closeMenu();
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
         HomeScreenSteps.logOut();
         GeneralSteps.logIn(employee);
@@ -132,7 +132,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.closeMenu();
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 

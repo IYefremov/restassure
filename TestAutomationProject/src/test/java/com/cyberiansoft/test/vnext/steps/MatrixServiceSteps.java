@@ -82,4 +82,8 @@ public class MatrixServiceSteps {
     public static void openServiceDetailsInsideMatrixService(String serviceName) {
         MatrixServiceDetailsScreenInteractions.selectService(serviceName);
     }
+
+    public static void setMatrixServiceVehiclePartPrice(String priceValue) {
+        MatrixServiceDetailsScreenInteractions.setPrice(priceValue);
+    }
 }

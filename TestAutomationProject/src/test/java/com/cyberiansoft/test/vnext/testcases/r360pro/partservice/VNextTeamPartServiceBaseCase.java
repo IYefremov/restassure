@@ -52,7 +52,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.closeServiceDetailsScreen();
         inspectionId = InspectionSteps.saveInspection();
-        SearchSteps.textSearch(inspectionId);
+        //SearchSteps.textSearch(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -81,7 +81,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         PartServiceSteps.selectPartService(basicPartService);
         PartServiceSteps.acceptDetailsScreen();
         inspectionId = InspectionSteps.saveInspection();
-        SearchSteps.searchByText(inspectionId);
+        //SearchSteps.searchByText(inspectionId);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
