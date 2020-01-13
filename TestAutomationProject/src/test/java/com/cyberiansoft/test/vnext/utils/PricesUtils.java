@@ -14,4 +14,8 @@ public class PricesUtils {
         Double price = getServicePriceValue(servicePriceValue);
         return price.equals(Double.valueOf(0));
     }
+
+    public static String getFormattedServicePriceValue(float servicePrice) {
+        return "$" + String.format("%.2f", servicePrice);
+    }
 }

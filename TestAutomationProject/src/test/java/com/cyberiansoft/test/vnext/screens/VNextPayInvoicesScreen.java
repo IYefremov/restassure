@@ -96,8 +96,7 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
 
     public void clickPayButton() {
         WebDriver driver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@value='Pay']")));
+        WaitUtils.waitUntilElementIsClickable(paybtn);
         JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", paybtn);
         appiumdriver.switchTo().defaultContent();
