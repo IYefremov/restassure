@@ -44,7 +44,6 @@ public class VNextWholesaleCustomersTestCases extends BaseTestClass {
 		Assert.assertTrue(customersscreen.isNothingFoundCaptionDisplayed());
 		customersscreen.clickCancelSearchButton();
 		customersscreen.clickBackButton();
-        homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

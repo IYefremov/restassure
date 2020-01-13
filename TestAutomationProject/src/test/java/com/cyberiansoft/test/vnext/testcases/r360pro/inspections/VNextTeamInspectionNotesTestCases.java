@@ -27,6 +27,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR);
         inspectionId = InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -37,6 +38,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         final String quickNoteText1 = "Warranty expired";
         final String quickNoteText2 = "Test Quick Note 1";
 
+        HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
@@ -50,6 +52,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -58,6 +61,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         final String myInspectionNote = UUID.randomUUID().toString();
         final String teamInspectionNote = UUID.randomUUID().toString();
 
+        HomeScreenSteps.openInspections();
         InspectionSteps.switchToMyInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
@@ -77,6 +81,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.verifyNoteIsPresent(teamInspectionNote);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
 
@@ -85,6 +90,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
                                             String description, JSONObject testData) {
         final String noteText = UUID.randomUUID().toString();
 
+        HomeScreenSteps.openInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -97,6 +103,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.verifyPicturesPresent();
         NotesSteps.deleteAllPictures();
         NotesSteps.verifyNoPicturesPresent();
+        ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }

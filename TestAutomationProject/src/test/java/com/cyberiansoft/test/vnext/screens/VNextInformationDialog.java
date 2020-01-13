@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
@@ -83,13 +84,16 @@ public class VNextInformationDialog extends VNextBaseScreen {
     }
 
     public void clickInformationDialogArchiveButton() {
-        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(By.xpath(".//span[text()='Archive']"))).click();
+        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(By.xpath("//span[text()='Archive']"))).click();
     }
 
     public void clickInformationDialogDontArchiveButton() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']"))));
-        tap(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']")));
+        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(By.xpath("//span[text()='Archive']")));
+        BaseUtils.waitABit(500);
+        appiumdriver.findElement(By.xpath("//div[@class='modal-buttons']/span[@class='modal-button ']")).click();
+        //WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        //wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']"))));
+       // tap(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']")));
     }
 
     public void clickInformationDialogDeleteButton() {
