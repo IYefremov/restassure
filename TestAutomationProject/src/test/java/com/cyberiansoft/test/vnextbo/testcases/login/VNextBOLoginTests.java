@@ -11,11 +11,12 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOFooterPanelInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.homepage.VNextBOHomeWebPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -117,7 +118,7 @@ public class VNextBOLoginTests extends BaseTestCase {
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
         VNextBOLoginSteps.userLogin(data.getLogin(), data.getPassword());
         VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
-        Assert.assertTrue(vNextBOHomeWebPage.isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
+        VNextBOHomeWebPageValidations.verifySupportForBOButtonIsDisplayed();
         VNextBOHeaderPanelSteps.logout();
     }
 
@@ -135,6 +136,6 @@ public class VNextBOLoginTests extends BaseTestCase {
         VNextBOLoginInteractions.waitUntilPageIsLoaded();
         VNextBOLoginSteps.userLogin(userName, userPassword);
         VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
-        Assert.assertTrue(vNextBOHomeWebPage.isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
+        VNextBOHomeWebPageValidations.verifySupportForBOButtonIsDisplayed();
     }
 }

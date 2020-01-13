@@ -31,7 +31,7 @@ import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.*;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.openqa.selenium.By;

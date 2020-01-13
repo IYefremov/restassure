@@ -5,7 +5,6 @@ import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.utils.TestListenerAllure;
 import com.mashape.unirest.http.exceptions.UnirestException;

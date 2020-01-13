@@ -14,7 +14,7 @@ import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbIn
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCalendarWidgetDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
@@ -51,7 +51,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSelectCustomer(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.typeCustomerName(data.getCustomer());
@@ -63,7 +63,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByEmployee(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -81,7 +81,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByPhase(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -96,7 +96,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDepartment(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -111,7 +111,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByWoType(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -126,7 +126,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByWoNumber(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -141,7 +141,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRoNumber(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -156,7 +156,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByStockNumber(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -171,7 +171,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByVinNumber(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -186,7 +186,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInPhaseLess(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
@@ -198,7 +198,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByWhiteFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
@@ -211,7 +211,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByCustomer(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.typeCustomerName(data.getCustomer());
@@ -227,7 +227,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRedFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.RED.getFlag());
@@ -240,7 +240,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByOrangeFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.ORANGE.getFlag());
@@ -253,7 +253,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByYellowFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
@@ -266,7 +266,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByGreenFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
@@ -279,7 +279,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByBlueFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setFlag(data.getFlag());
@@ -292,7 +292,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByVioletFlag(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.VIOLET.getFlag());
@@ -305,7 +305,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInPhaseLessOrEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
@@ -317,7 +317,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInPhaseEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
@@ -329,7 +329,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInPhaseMoreOrEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
@@ -341,7 +341,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInPhaseMore(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
@@ -353,7 +353,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInPhaseBetween(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInPhase(data.getDaysInPhase());
@@ -366,7 +366,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInProcessLess(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
@@ -378,7 +378,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInProcessLessOrEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
@@ -390,7 +390,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInProcessEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
@@ -402,7 +402,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInProcessMoreOrEqual(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
@@ -414,7 +414,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInProcessMore(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
@@ -426,7 +426,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByDaysInProcessBetween(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setDaysInProcess(data.getDaysInProcess());
@@ -439,7 +439,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByCustomTimeFrame(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy/M/d");
@@ -458,7 +458,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByLast90DaysTimeFrame(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_90_DAYS.getName());
@@ -474,7 +474,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusInProgressRework(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -486,7 +486,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusInProgressActive(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -497,7 +497,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusInProgressQueued(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -508,7 +508,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusInProgressOnHold(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -519,7 +519,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusInProgressNotOnHold(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -530,7 +530,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusInProgressQAReady(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -541,7 +541,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusCompletedQAReady(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -552,7 +552,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusCompletedNotBilled(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -563,7 +563,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusCompletedOnSite(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -574,7 +574,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusCompletedAll(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -585,7 +585,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByRepairStatusInProgressAll(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(data.getRepairStatus());
@@ -596,7 +596,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanFillInAdvancedSearchWindow(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.setAdvancedSearchDialogData(data, TimeFrameValues.TIMEFRAME_30_DAYS, OrderMonitorFlags.RED);
@@ -607,7 +607,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSaveAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         final String searchName = data.getSearchName() + RandomStringUtils.randomAlphanumeric(3);
@@ -623,7 +623,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanEditSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocations()[0]);
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocations()[0]);
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         final String searchName = data.getSearchName() + RandomStringUtils.randomAlphanumeric(3);
@@ -655,7 +655,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanUseStoredAdvancedSearch(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         final String searchName = data.getSearchName() + RandomStringUtils.randomAlphanumeric(3);
@@ -677,7 +677,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanCloseAdvancedSearchWindow(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.clickAdvancedSearchCloseButton();
@@ -690,7 +690,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanClearAllFieldsInAdvancedSearchWindow(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.setAdvancedSearchDialogData(data, TimeFrameValues.TIMEFRAME_LASTMONTH, OrderMonitorFlags.RED);
@@ -718,7 +718,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserSeesSearchMaskWithAllEnteredInfo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
@@ -758,7 +758,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByCurrentPhaseStatus(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
@@ -774,7 +774,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByActivePhaseStatus(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
@@ -792,7 +792,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByNotCompletedPhaseStatus(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
@@ -809,7 +809,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByCompletedPhaseStatus(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
@@ -826,7 +826,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByHasProblemsOption(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
@@ -842,7 +842,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchBySortByRoNumOption(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setSortBy(data.getSortByOptions()[0]);
@@ -865,7 +865,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchBySortByPriorityOldestToNewestOption(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
@@ -892,7 +892,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchBySortByPriorityNewestToOldest(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
@@ -919,7 +919,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchBySortByArbitrationDateOption(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
@@ -942,7 +942,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByTimeFrameLast30Days(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_30_DAYS.getName());
@@ -958,7 +958,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByTimeFrameWeekToDate(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_WEEKTODATE.getName());
@@ -974,7 +974,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByTimeFrameLastWeek(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTWEEK.getName());
@@ -990,7 +990,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByTimeFrameToday(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_TODAY.getName());
@@ -1006,7 +1006,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByTimeFrameMonthToDate(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_MONTHTODATE.getName());
@@ -1022,7 +1022,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByTimeFrameYearToDate(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
@@ -1038,7 +1038,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSearchByTimeFrameLastYear(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
@@ -1054,7 +1054,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     public void verifyUserCanSeeDefaultSearchSettings(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         final String defaultSearchFilterText = VNextBOROPageInteractions.getSearchFilterText();
 
         Assert.assertTrue(defaultSearchFilterText.contains(TimeFrameValues.TIMEFRAME_30_DAYS.getName()),

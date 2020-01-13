@@ -7,7 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOAddNewUserDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersPageValidations;

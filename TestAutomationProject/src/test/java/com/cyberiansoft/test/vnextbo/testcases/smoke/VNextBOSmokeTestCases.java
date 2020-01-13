@@ -14,7 +14,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOCompanyInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.quicknotes.VNextBOQuickNotesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
-import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
@@ -35,6 +35,7 @@ import com.cyberiansoft.test.vnextbo.validations.clients.VNextBOClientsPageValid
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOActiveDevicesTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBOPendingRegistrationsTabValidations;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
+import com.cyberiansoft.test.vnextbo.validations.homepage.VNextBOHomeWebPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAddNewPartDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsOrdersListPanelValidations;
@@ -318,7 +319,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void verifyUserCanChangeVendorPrice(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
 //        roPageVerifications.verifyAdvancedSearchDialogIsDisplayed();
@@ -339,7 +340,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void verifyUserCanSeeAndCreateNotes(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBORONotesPageSteps.openNoteDialog(data.getOrderNumber());
         Assert.assertTrue(VNextBONotesPageValidations.isRoEditNotesModalDialogDisplayed(),
@@ -356,7 +357,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void verifyUserCanCheckInRO(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(),
@@ -370,7 +371,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void verifyUserCanReportProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
@@ -385,24 +386,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
 
         Assert.assertTrue(VNextBOLeftMenuValidations.isMenuButtonDisplayed(), "The Menu button hasn't been displayed");
-        Assert.assertTrue(homePage.isLogoDisplayed(), "The logo hasn't been displayed");
-        Assert.assertTrue(homePage.isUserEmailDisplayed(), "The email hasn't been displayed");
-        Assert.assertTrue(homePage.isLogoutButtonDisplayed(), "The logout button hasn't been displayed");
-        Assert.assertTrue(homePage.isHelpButtonDisplayed(), "The help button hasn't been displayed");
-        Assert.assertTrue(homePage.isAccessClientPortalLinkDisplayed(),
-                "The access client portal link hasn't been displayed");
-        Assert.assertTrue(homePage.isAccessReconProBOLinkDisplayed(),
-                "The access ReconPro BO link hasn't been displayed");
-        Assert.assertTrue(homePage.isSupportForBOButtonDisplayed(),
-                "The support for BO button hasn't been displayed");
-        Assert.assertTrue(homePage.isSupportForMobileAppButtonDisplayed(),
-                "The support for Mobile App button hasn't been displayed");
-        Assert.assertTrue(homePage.isTermsAndConditionsLinkDisplayed(),
-                "The Terms And Conditions Link hasn't been displayed");
-        Assert.assertTrue(homePage.isPrivacyPolicyLinkDisplayed(),
-                "The Privacy Policy Link hasn't been displayed");
-        Assert.assertTrue(homePage.isIntercomDisplayed(),
-                "The Intercom Link hasn't been displayed");
+        VNextBOHomeWebPageValidations.verifyAllHomePageElements();
 
         VNextBOLeftMenuInteractions.expandMainMenu();
         Assert.assertTrue(VNextBOLeftMenuValidations.isMainMenuExpanded(), "The main menu hasn't been expanded");

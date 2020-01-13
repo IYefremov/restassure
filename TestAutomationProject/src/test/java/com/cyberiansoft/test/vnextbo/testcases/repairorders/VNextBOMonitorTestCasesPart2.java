@@ -9,7 +9,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOAddNewServiceMonitorDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.*;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOAddNewServiceMonitorDialogValidations;
@@ -38,7 +38,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanTypeAndNotSaveNotesWithXIcon(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
@@ -49,7 +49,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanTypeAndNotSaveNotesWithClose(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageInteractions.revealNoteForWorkOrder(data.getOrderNumber());
@@ -60,7 +60,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanOpenRoDetails(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
@@ -72,7 +72,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangeStockOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
@@ -87,7 +87,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangeRoNumOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -101,7 +101,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToNew(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -116,7 +116,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToOnHold(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -133,7 +133,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToApproved(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
@@ -146,7 +146,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCannotChangeStatusOfRoToDraft(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -160,7 +160,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToClosedWithNoneReason(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROPageSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps
@@ -177,7 +177,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangePriorityOfRoToLow(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -197,7 +197,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangePriorityOfRoToNormal(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -219,7 +219,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanAddNewService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -259,7 +259,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanChangePriorityOfRoToHigh(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -279,7 +279,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanAddNewMoneyService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -317,7 +317,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanAddNewLaborService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());
@@ -354,7 +354,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 	public void verifyUserCanAddNewPartService(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 		VNextBOROPageInteractions.clickWoLink(data.getOrderNumber());

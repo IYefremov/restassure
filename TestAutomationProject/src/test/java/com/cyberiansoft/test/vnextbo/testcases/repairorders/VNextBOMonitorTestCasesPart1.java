@@ -11,7 +11,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
@@ -50,7 +50,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanOpenMonitorWithFullSetOfElements(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		Assert.assertTrue(VNextBOROPageValidations.isSavedSearchContainerDisplayed(true),
 				"The search container isn't displayed");
@@ -78,7 +78,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanOpenAndCloseTermsAndConditions(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOTermsAndConditionsDialogSteps.openAndRejectTermsAndConditions();
         VNextBOTermsAndConditionsDialogSteps.openAndAcceptTermsAndConditions();
@@ -88,7 +88,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanOpenAndClosePrivacyPolicy(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
         VNextBOPrivacyPolicyDialogSteps.openAndRejectPrivacyPolicy();
         VNextBOPrivacyPolicyDialogSteps.openAndAcceptPrivacyPolicy();
@@ -98,7 +98,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROPageInteractions.openIntercom();
         VNextBOROPageInteractions.closeIntercom();
@@ -108,7 +108,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanChangeLocation(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getSearchLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getSearchLocation());
 		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSearched(data.getSearchLocation()),
 				"The location is not searched");
         VNextBOROPageInteractions.clickLocationInDropDown(data.getSearchLocation());
@@ -138,7 +138,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanUsePaging(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogSteps.search();
@@ -157,7 +157,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
     public void verifyUserCanFilterRObyDepartments(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROPageInteractions.setDepartmentsTabActive();
         Assert.assertTrue(VNextBOROPageValidations.isDepartmentsTabDisplayed(true));
         Assert.assertEquals(VNextBOROPageInteractions.getAllDepartmentsSum(), VNextBOROPageInteractions
@@ -171,7 +171,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
     public void verifyUserCanFilterRObyPhases(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROPageInteractions.setPhasesTabActive();
         Assert.assertTrue(VNextBOROPageValidations.isPhasesTabDisplayed(true));
         Assert.assertEquals(VNextBOROPageInteractions.getAllPhasesSum(), VNextBOROPageInteractions.getPhasesValuesSum(),
@@ -185,7 +185,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanSelectLocation(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
 	}
 
@@ -193,7 +193,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanSearchWoUsingSearchFilter(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
 		VNextBOROSimpleSearchSteps.search(data.getVinNum());
 
@@ -205,7 +205,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanSeeAndChangeRoDetails(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "The location hasn't been set");
 
 		final String vinNum = data.getVinNum();
@@ -233,7 +233,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCannotChangePoForInvoicedOrders(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation(), true);
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation(), true);
 
 		VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         Assert.assertTrue(VNextBOROPageValidations.isPoNumClickable(false), "The PO# shouldn't be clickable");
@@ -243,7 +243,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanChangeStatusOfRoToCheckInCheckOut(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.search(data.getOrderNumber());
 		Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getOrderNumber(), true));
@@ -255,7 +255,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyUserCanShowOrCloseNotesToTheLeftOfRo(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-		HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+		VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.search(data.getOrderNumber());
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getOrderNumber(), true),
@@ -273,7 +273,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
 	public void verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion(String rowID, String description, JSONObject testData) {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
 
 		VNextBOROSimpleSearchSteps.search(data.getOrderNumber());
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getOrderNumber(), true),
@@ -284,7 +284,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
         final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
         VNextBOLoginSteps.userLogin(userName, userPassword);
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROSimpleSearchSteps.search(data.getOrderNumber());
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(data.getOrderNumber(), true),
                 "The work order is not displayed after search by clicking the 'Search' icon");

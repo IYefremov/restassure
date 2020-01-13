@@ -24,7 +24,6 @@ public class VNextBODeviceManagementSearchTests extends BaseTestCase {
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getDeviceManagementSearchTD();
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
 
