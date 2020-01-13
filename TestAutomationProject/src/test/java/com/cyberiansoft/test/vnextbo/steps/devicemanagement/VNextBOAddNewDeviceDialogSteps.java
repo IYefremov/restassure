@@ -40,11 +40,13 @@ public class VNextBOAddNewDeviceDialogSteps {
                 addNewDeviceDialog.dropDownFieldOption(teamName));
     }
 
-    private static void setLicenseField(String license) {
+    private static String setLicenseField(String license) {
         VNextBOAddNewDeviceDialog addNewDeviceDialog = new VNextBOAddNewDeviceDialog();
         Utils.clickElement(addNewDeviceDialog.getLicenseDropDownField());
+        String firstLicenseNumber = Utils.getText(addNewDeviceDialog.getFirstLicenseDropDownFieldOptions());
         Utils.selectOptionInDropDownWithJs(addNewDeviceDialog.getLicenseDropDownOptionsList(),
-                addNewDeviceDialog.dropDownFieldOption(license));
+                addNewDeviceDialog.getFirstLicenseDropDownFieldOptions());
+        return firstLicenseNumber;
     }
 
     private static void setTimeZoneField(String timeZone) {
@@ -61,16 +63,17 @@ public class VNextBOAddNewDeviceDialogSteps {
                 addNewDeviceDialog.dropDownFieldOption(technicianName));
     }
 
-    public static void setAllAddNewDeviceFields(VNextBODeviceManagementData deviceManagementData) {
+    public static String setAllAddNewDeviceFields(VNextBODeviceManagementData deviceManagementData) {
 
         setExpiresInHoursField(deviceManagementData.getHours());
         setExpiresInMinutesField(deviceManagementData.getMinutes());
         setTeamField(deviceManagementData.getTeam());
         setNickNameField(deviceManagementData.getNickname());
-        setLicenseField(deviceManagementData.getLicenseNumber());
+        String licenseNumber = setLicenseField(deviceManagementData.getLicenseNumber());
         setTimeZoneField(deviceManagementData.getTimeZone());
         setTechnicianField(deviceManagementData.getTechnician());
         setPhoneNumberField(deviceManagementData.getPhoneNumber());
+        return licenseNumber;
     }
 
     public static void setNewDeviceValuesAndSubmit(VNextBODeviceManagementData deviceManagementData) {

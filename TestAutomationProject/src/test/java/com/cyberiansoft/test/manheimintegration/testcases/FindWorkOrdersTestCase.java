@@ -5,14 +5,13 @@ import com.cyberiansoft.test.dataclasses.Monitoring;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.manheimintegration.data.ManheimTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
-import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
@@ -41,7 +40,7 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
         chromeDriver.get("https://manheim-uat.cyberianconcepts.com/");
         VNextBOLoginSteps.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(), VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(monitoringData.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(monitoringData.getLocation());
         VNextBOROSimpleSearchSteps.searchByText(monitoringData.getStockNumber());
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByOrderNumber(workOrderId, true));
 

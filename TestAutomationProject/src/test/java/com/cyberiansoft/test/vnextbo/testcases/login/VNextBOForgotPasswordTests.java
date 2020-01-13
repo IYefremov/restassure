@@ -12,11 +12,12 @@ import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOForgotPasswordWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOResetPasswordPage;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.homepage.VNextBOHomeWebPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -149,7 +150,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         webdriverGotoWebPage(resetPasswordUrl);
 
         VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
-        Assert.assertTrue(vNextBOHomeWebPage.isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
+        VNextBOHomeWebPageValidations.verifySupportForBOButtonIsDisplayed();
         VNextBOHeaderPanelSteps.logout();
         VNextBOLoginInteractions.clickForgotPasswordLink();
     }

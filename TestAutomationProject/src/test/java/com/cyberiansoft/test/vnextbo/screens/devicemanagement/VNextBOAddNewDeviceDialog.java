@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 @Getter
 public class VNextBOAddNewDeviceDialog extends VNextBOBaseWebPage {
 
@@ -69,6 +71,9 @@ public class VNextBOAddNewDeviceDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='active-license-popup']//button[@aria-label='Close']")
     private WebElement xIconButton;
+
+    @FindBy(xpath = "(//ul[@aria-hidden='false']/li)[1]")
+    private WebElement firstLicenseDropDownFieldOptions;
 
     public WebElement dropDownFieldOption(String optionName) {
 

@@ -2,10 +2,11 @@
   "verifyUserCanSeeHomePage": [
     {
       "rowID": "verifyUserCanSeeHomePage.01",
-      "description": "Test Case 84373:Verify user can see \"Home page\"",
+      "description": "Test Case 91060: Verify user can see \"Home page\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91060"
+          "testCaseID": "91060",
+          "testCaseTitle": "Verify user can see \"Home page\""
         }
       ]
     }
@@ -14,10 +15,11 @@
   "verifyUserCanMaximizeMinimizeMenu": [
     {
       "rowID": "verifyUserCanMaximizeMinimizeMenu.01",
-      "description": "Test Case 84374:User can maximize/minimize the menu",
+      "description": "Test Case 91061: User can maximize/minimize the menu",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91061"
+          "testCaseID": "91061",
+          "testCaseTitle": "User can maximize/minimize the menu"
         }
       ]
     }
@@ -26,10 +28,11 @@
   "verifyUserCanMinimizeMaximizeMenu": [
     {
       "rowID": "verifyUserCanMinimizeMaximizeMenu.01",
-      "description": "Test Case 87848:User can maximize/minimize the menu (wide screen)",
+      "description": "Test Case 91062: User can maximize/minimize the menu (wide screen)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91062"
+          "testCaseID": "91062",
+          "testCaseTitle": "User can maximize/minimize the menu (wide screen)"
         }
       ]
     }
@@ -38,10 +41,11 @@
   "verifyUserCanSeeHomePageAfterClickingOnAMTLogo": [
     {
       "rowID": "verifyUserCanSeeHomePageAfterClickingOnAMTLogo.01",
-      "description": "Test Case 84375:User can see Home page clicking on AMT logo",
+      "description": "Test Case 91063: User can see Home page clicking on AMT logo",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91063"
+          "testCaseID": "91063",
+          "testCaseTitle": "User can see Home page clicking on AMT logo"
         }
       ]
     }
@@ -50,10 +54,11 @@
   "verifyUserCanSeeEditWindowOfHisProfile": [
     {
       "rowID": "verifyUserCanSeeEditWindowOfHisProfile.01",
-      "description": "Test Case 84378:User can see window of edit of his profile",
+      "description": "Test Case 91064: User can see window of edit of his profile",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91064"
+          "testCaseID": "91064",
+          "testCaseTitle": "User can see window of edit of his profile"
         }
       ]
     }
@@ -62,10 +67,11 @@
   "verifyUserCanLogoutFromHisProfile": [
     {
       "rowID": "verifyUserCanLogoutFromHisProfile.01",
-      "description": "Test Case 84379:User can logout from his profile",
+      "description": "Test Case 91065: User can logout from his profile",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91065"
+          "testCaseID": "91065",
+          "testCaseTitle": "User can logout from his profile"
         }
       ]
     }
@@ -74,118 +80,141 @@
   "verifyUserCanOpenHelpPage": [
     {
       "rowID": "verifyUserCanOpenHelpPage.01",
-      "description": "Test Case 84380:User can open \"Help\" page",
+      "description": "Test Case 91066: User can open \"Help\" page",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91066"
+          "testCaseID": "91066",
+          "testCaseTitle": "User can open \"Help\" page"
         }
-      ],
-      "url": "api.cyberianconcepts.com/HelpNote"
+      ]
     }
   ],
 
   "verifyUserCanOpenLearnPage": [
     {
       "rowID": "verifyUserCanOpenLearnPage.01",
-      "description": "Test Case 84381:User can open \"Learn\" page",
+      "description": "Test Case 91067: User can open \"Learn\" page",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91067"
+          "testCaseID": "91067",
+          "testCaseTitle": "User can open \"Learn\" page"
         }
-      ],
-      "url": "college.amt360.net"
+      ]
     }
   ],
 
   "verifyUserCanClickOnAccessClientPortalLink": [
     {
       "rowID": "verifyUserCanClickOnAccessClientPortalLink.01",
-      "description": "Test Case 84382:User can click on \"Access Client Portal\"",
+      "description": "Test Case 91068: User can click on \"Access Client Portal\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91068"
+          "testCaseID": "91068",
+          "testCaseTitle": "User can click on \"Access Client Portal\""
         }
-      ],
-      "url": "ibs.cyberianconcepts.com/Billing"
+      ]
     }
   ],
 
   "verifyUserCanClickOnAccessReconProBOLink": [
     {
       "rowID": "verifyUserCanClickOnAccessReconProBOLink.01",
-      "description": "Test Case 84383:User can click on \"Access ReconPro BackOffice\"",
+      "description": "Test Case 91069: User can click on \"Access ReconPro BackOffice\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91069"
+          "testCaseID": "91069",
+          "testCaseTitle": "Verify user can see \"Home page\""
         }
-      ],
-      "url": "test.cyberianconcepts.com/Home.aspx"
+      ]
     }
   ],
 
   "verifyUserCanOpenSupportForBOPage": [
     {
       "rowID": "verifyUserCanOpenSupportForBOPage.01",
-      "description": "Test Case 84384:User can open \"Support for Back Office\"",
+      "description": "Test Case 91070: User can open \"Support for Back Office\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91070"
+          "testCaseID": "91070",
+          "testCaseTitle": "User can open \"Support for Back Office\""
         }
-      ],
-      "url": "repair360-reconmonitor-back-office"
+      ]
     }
   ],
 
   "verifyUserCanOpenSupportForMobileAppPage": [
     {
       "rowID": "verifyUserCanOpenSupportForMobileAppPage.01",
-      "description": "Test Case 84385:User can open \"Support for Mobile App\"",
+      "description": "Test Case 91071: User can open \"Support for Mobile App\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91071"
+          "testCaseID": "91071",
+          "testCaseTitle": "User can open \"Support for Mobile App\""
         }
-      ],
-      "url": "repair360-mobile-app"
+      ]
     }
   ],
 
   "verifyUserCanOpenAndCloseIntercom": [
     {
       "rowID": "verifyUserCanOpenAndCloseIntercom.01",
-      "description": "Test Case 84386:User can open and close \"Intercom\"",
+      "description": "Test Case 91072: User can open and close \"Intercom\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91072"
+          "testCaseID": "91072",
+          "testCaseTitle": "User can open and close \"Intercom\""
         }
       ]
     }
   ],
 
-  "verifyUserCanOpenAndCloseTermsAndConditionsOnHomePage": [
+  "verifyUserCanOpenAndCloseTermsAndConditionsOkButton": [
     {
-      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsOnHomePage.01",
-      "description": "Test Case 84390:Verify user can open and close \"Terms&Conditions\" (OK). Test Case 84391:Verify user can open and close \"Terms&Conditions\" (X-icon)",
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsOkButton.01",
+      "description": "Test Case 91090: Verify user can open and close \"Terms&Conditions\" (OK)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91090"
-        },
-        {
-          "testCaseID": "91091"
+          "testCaseID": "91090",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (OK)"
         }
       ]
     }
   ],
 
-  "verifyUserCanOpenAndClosePrivacyPolicyOnHomePage": [
+  "verifyUserCanOpenAndCloseTermsAndConditionsXIcon": [
     {
-      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyOnHomePage.01",
-      "description": "Test Case 84392:Verify user can open and close \"Privacy Policy\" (OK). Test Case 84393:Verify user can open and close \"Privacy Policy\" (X-icon)",
+      "rowID": "verifyUserCanOpenAndCloseTermsAndConditionsXIcon.01",
+      "description": "Test Case 91091: Verify user can open and close \"Terms&Conditions\" (X-icon)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91092"
-        },
+          "testCaseID": "91091",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\" (X-icon)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanOpenAndClosePrivacyPolicyOkButton": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyOkButton.01",
+      "description": "Test Case 91092: Verify user can open and close \"Privacy Policy\" (OK)",
+      "targetProcessTestCaseData": [
         {
-          "testCaseID": "91093"
+          "testCaseID": "91092",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (OK)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanOpenAndClosePrivacyPolicyXIcon": [
+    {
+      "rowID": "verifyUserCanOpenAndClosePrivacyPolicyXIcon.01",
+      "description": "Test Case 91093: Verify user can open and close \"Privacy Policy\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91093",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\" (X-icon)"
         }
       ]
     }

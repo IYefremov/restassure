@@ -9,16 +9,20 @@ import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOUserProfileDialog;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOUserProfileDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOPageSwitcherValidations;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOUserProfileDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
+import com.cyberiansoft.test.vnextbo.validations.homepage.VNextBOHomeWebPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersPageValidations;
 import org.json.simple.JSONObject;
@@ -96,14 +100,14 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         Assert.assertTrue(VNextBOLeftMenuValidations.isMainMenuExpanded(), "Main menu hasn't been opened");
         VNextBOLeftMenuInteractions.collapseMainMenu();
-        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuCollapsed(), "Main menu hasn't been closed");
+        Assert.assertFalse(VNextBOLeftMenuValidations.isMainMenuExpanded(), "Main menu hasn't been closed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
     public void verifyUserCanReturnToHomePageByClickingLogo(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickLogo();
-        Assert.assertTrue(new VNextBOHomeWebPage().isSupportForBOButtonDisplayed(), "Home page hasn't been displayed");
+        VNextBOHomeWebPageValidations.verifySupportForBOButtonIsDisplayed();
         VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
@@ -111,10 +115,9 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
     public void verifyUserCanOpenUserProfile(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.openUserProfile();
-        VNextBOUserProfileDialog vNextBOProfileDialog = new VNextBOUserProfileDialog(webdriver);
-        Assert.assertTrue(vNextBOProfileDialog.isUserProfileDialogDisplayed(), "User profile dialog hasn't been displayed");
-        vNextBOProfileDialog.closeDialog();
-        Assert.assertTrue(vNextBOProfileDialog.isUserProfileDialogClosed(), "User profile dialog hasn't been closed");
+        VNextBOUserProfileDialogValidations.verifyAllDialogElementsAreDisplayed();
+        VNextBOUserProfileDialogSteps.closeDialog();
+        VNextBOUserProfileDialogValidations.verifyUserProfileDialogIsDisplayed(false);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
@@ -126,17 +129,15 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         Utils.refreshPage();
         VNextBOLoginSteps.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(),
                 VNextBOConfigInfo.getInstance().getVNextBOPassword());
+        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
     public void verifyUserCanUseHelp(String rowID, String description, JSONObject testData) {
 
-        VNextBOUsersPageSteps.openHelpPage();
-        VNextBOUsersPageValidations.verifyHelpPageIsOpened();
+        final String actualHelpPageUrl = VNextBOHomeWebPageSteps.openHelpPage();
+        VNextBOHomeWebPageValidations.verifyHelpPageIsOpened(actualHelpPageUrl);
         Utils.refreshPage();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)

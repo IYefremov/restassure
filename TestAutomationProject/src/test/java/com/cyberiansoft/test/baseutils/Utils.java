@@ -150,7 +150,7 @@ public class Utils {
 
     public static void goToPreviousPage() {
         DriverBuilder.getInstance().getDriver().navigate().back();
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {

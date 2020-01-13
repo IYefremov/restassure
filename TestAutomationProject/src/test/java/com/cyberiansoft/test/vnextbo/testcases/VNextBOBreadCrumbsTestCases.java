@@ -9,7 +9,7 @@ import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbIn
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBORODetailsPage;
-import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
@@ -38,7 +38,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanSeeBreadCrumb(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
     }
 
@@ -46,7 +46,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanSeeWoInBreadCrumb(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
@@ -69,7 +69,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanChangeLocationOnDetailsPage(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 
@@ -96,7 +96,7 @@ public class VNextBOBreadCrumbsTestCases extends BaseTestCase {
     public void verifyUserCanReturnToMainPageOfWo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         Assert.assertTrue(VNextBOBreadCrumbValidations.isBreadCrumbClickable(), "The breadCrumb is not clickable");
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
 

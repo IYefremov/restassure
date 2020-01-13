@@ -26,7 +26,6 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getDeviceManagementActiveAndPendingRegistrationTabsTD();
         VNextBOLeftMenuInteractions.selectDeviceManagementMenu();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBODeviceManagementSteps.openActiveDevicesTab();
     }
 
@@ -41,7 +40,8 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
 
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBODeviceManagementSteps.clickAddNewDeviceButton();
-        VNextBOAddNewDeviceDialogSteps.setAllAddNewDeviceFields(deviceData);
+        String licenseNumber = VNextBOAddNewDeviceDialogSteps.setAllAddNewDeviceFields(deviceData);
+        deviceData.setLicenseNumber(licenseNumber);
         VNextBOAddNewDeviceDialogSteps.cancelAddingNewDeviceCancelButton();
         VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         if (VNextBOPendingRegistrationTabSteps.checkWhetherDevicesNotFoundMessageIsDisplayed())
@@ -54,7 +54,8 @@ public class VNextBODMActiveAndPendingRegistrationTabTests extends BaseTestCase 
 
         VNextBODeviceManagementData deviceData = JSonDataParser.getTestDataFromJson(testData, VNextBODeviceManagementData.class);
         VNextBODeviceManagementSteps.clickAddNewDeviceButton();
-        VNextBOAddNewDeviceDialogSteps.setAllAddNewDeviceFields(deviceData);
+        String licenseNumber = VNextBOAddNewDeviceDialogSteps.setAllAddNewDeviceFields(deviceData);
+        deviceData.setLicenseNumber(licenseNumber);
         VNextBOAddNewDeviceDialogSteps.cancelAddingNewDeviceXIcon();
         VNextBODeviceManagementSteps.openPendingRegistrationDevicesTab();
         if (VNextBOPendingRegistrationTabSteps.checkWhetherDevicesNotFoundMessageIsDisplayed())

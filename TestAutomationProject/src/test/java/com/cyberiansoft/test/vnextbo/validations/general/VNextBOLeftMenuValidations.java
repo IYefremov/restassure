@@ -2,7 +2,9 @@ package com.cyberiansoft.test.vnextbo.validations.general;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -11,31 +13,19 @@ import java.util.Objects;
 public class VNextBOLeftMenuValidations {
 
     public static boolean isMenuButtonDisplayed() {
-        return Utils.isElementDisplayed(new VNexBOLeftMenuPanel().getMenuButton(), 10);
+        return Utils.isElementDisplayed(new VNexBOLeftMenuPanel().getMenuButton());
     }
 
     public static boolean isSettingsMenuTabDisplayed() {
-        return Utils.isElementDisplayed(new VNexBOLeftMenuPanel().getSettingsMenuTab(), 10);
-    }
-
-    public static boolean isSettingsMenuTabAbsent() {
-        return Utils.isElementNotDisplayed(new VNexBOLeftMenuPanel().getSettingsMenuTab(), 5);
-    }
-
-    public static boolean isMainMenuExpanded() {
-        final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.visibilityOf(leftMenuPanel.getBody()));
-        return Utils.isElementDisplayed(leftMenuPanel.getBody());
-    }
-
-    public static boolean isMainMenuCollapsed() {
-        final VNexBOLeftMenuPanel leftMenuPanel = new VNexBOLeftMenuPanel();
         try {
-            WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(leftMenuPanel.getBody()));
-            return Utils.isElementDisplayed(leftMenuPanel.getBody());
+            return Utils.isElementDisplayed(new VNexBOLeftMenuPanel().getSettingsMenuTab());
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    public static boolean isMainMenuExpanded() {
+        return new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver()).getBodyElement().getAttribute("class").contains("left-menu--open");
     }
 
     public static boolean isMainMenuItemCollapsed(String mainMenuItemName) {

@@ -1,9 +1,12 @@
 package com.cyberiansoft.test.vnextbo.steps;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOUserProfileDialog;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOBaseWebPageSteps {
 
@@ -11,18 +14,39 @@ public class VNextBOBaseWebPageSteps {
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.logoBox);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void openUserProfile()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.userInfoBlock);
+        WaitUtilsWebDriver.getWebDriverWait(3).until(ExpectedConditions.visibilityOf(new VNextBOUserProfileDialog().getXButton()));
     }
 
-    public static void openHelpPage()
+    public static String openHelpPage()
     {
+        final String mainWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
+        Utils.clickElement(new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver()).getHelpButton());
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForNewTab();
+        Utils.getNewTab(mainWindow);
+        final String actualHelpPageUrl = Utils.getUrl();
+        Utils.closeNewTab(mainWindow);
+        return actualHelpPageUrl;
+    }
+
+    public static String openLearnPage()
+    {
+        final String mainWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
-        Utils.clickElement(baseWebPage.helpButton);
+        Utils.moveToElement(baseWebPage.getHelpButton());
+        Utils.clickElement(baseWebPage.getHelpLearnButton());
+        WaitUtilsWebDriver.waitForNewTab();
+        Utils.getNewTab(mainWindow);
+        final String actualLearnPageUrl = Utils.getUrl();
+        Utils.closeNewTab(mainWindow);
+        return actualLearnPageUrl;
     }
 
     public static void clickTermsAndConditionsLink()

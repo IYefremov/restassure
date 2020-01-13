@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.steps;
+package com.cyberiansoft.test.vnextbo.steps.commonobjects;
 
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOHeaderPanelInteractions;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOHeaderPanelValidations;

@@ -17,6 +17,9 @@ public class VNextBOBaseWebPage {
     @FindBy(id = "app-progress-spinner")
     public static WebElement loadingProcess;
 
+    @FindBy(xpath = "//body[contains(@class, 'body')]")
+    public WebElement bodyElement;
+
     @FindBy(xpath = "//a[@class='logo customLogo']")
     public WebElement logoBox;
 
@@ -31,6 +34,9 @@ public class VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='helpMenu']")
     public WebElement helpButton;
+
+    @FindBy(xpath = "//a[contains(@data-bind, 'help.lmsUrl') and contains(text(), 'Learn')]")
+    private WebElement helpLearnButton;
 
     @FindBy(xpath = "//div[@class='footer__left']")
     public WebElement copyRightLabel;
