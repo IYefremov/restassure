@@ -1,19 +1,16 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
+import com.cyberiansoft.test.vnext.interactions.PriceMatrixScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
-
-import java.util.List;
 
 public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	
@@ -22,37 +19,23 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 
 	@FindBy(xpath="//*[@data-autotests-id='matrix-parts-list']")
 	private WebElement matrixpartslist;
-	
-	public VNextVehiclePartsScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextVehiclePartsScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(vehiclepartsscreen));
-		if (appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']").isDisplayed()) {
-			tap(appiumdriver.findElementByXPath("//div[@class='help-button' and text()='OK, got it']"));
-		}
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+	}
+
+	public VNextVehiclePartsScreen() {
 	}
 	
-	public VNextVehiclePartInfoPage selectVehiclePart(String vehiclepartname) {
-		WebElement vpcell = getVehiclePartCell(vehiclepartname);
-		if (vpcell != null)
-			tap(vpcell.findElement(By.xpath(".//input[@type='checkbox']")));
-		else
-			Assert.fail("Can't find Vehicle Part: " + vehiclepartname);
+	public VNextVehiclePartInfoPage selectVehiclePart(String vehiclePartName) {
+    	WaitUtils.waitUntilElementIsClickable(vehiclepartsscreen);
+		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+		PriceMatrixScreenInteractions.selectItem(vehiclePartName);
 		return new VNextVehiclePartInfoPage(appiumdriver);
-		
-	}
-	
-	public WebElement getVehiclePartCell(String vehiclepartname) {
-		WebElement vpcell = null;
-		List<WebElement> vehicleparts = matrixpartslist.findElements(By.xpath("./*[@action='select-item']"));
-		for (WebElement vehiclepartcell : vehicleparts) {
-			if (vehiclepartcell.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().equals(vehiclepartname)) {
-				vpcell = vehiclepartcell;
-				break;
-			}
-		}
-		return vpcell;
 	}
 	
 	public String getVehiclePartsScrenPriceValue() {

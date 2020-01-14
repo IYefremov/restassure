@@ -1,38 +1,30 @@
 package com.cyberiansoft.test.vnext.steps.questionform;
 
 import com.cyberiansoft.test.dataclasses.QuestionsData;
-import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.QuestionScreenInteractions;
 
 public class QuestionFormSteps {
-    public static void answerGeneralSlideQuestion(String questionName) {
-        QuestionScreenInteractions.clickQuestionAnswerBox(questionName);
-    }
 
     public static void answerGeneralSlideQuestion(QuestionsData questionData) {
-        QuestionScreenInteractions.clickQuestionAnswerBox(questionData.getQuestionName());
+        QuestionScreenInteractions.clickQuestionAnswer(questionData.getQuestionName(), questionData.getQuestionAnswer());
     }
 
-    public static void clearQuestion(String questionName) {
-        QuestionScreenInteractions.clearQuestion(questionName);
+    public static void answerGeneralQuestion(QuestionsData questionData) {
+        QuestionScreenInteractions.clickQuestionAnswer(questionData.getQuestionName(), questionData.getQuestionAnswer());
     }
 
-    public static void clearQuestion(QuestionsData questionData) {
-        QuestionFormSteps.clearQuestion(questionData.getQuestionName());
-    }
 
     public static void answerGeneralPredefinedQuestion(QuestionsData questionData, Boolean isMultiSelect) {
-
-        QuestionScreenInteractions.clickQuestionAnswerBox(questionData.getQuestionName());
         if (isMultiSelect) {
-            questionData.getQuestionAnswers().forEach(ListSelectPageInteractions::selectItem);
-            ListSelectPageInteractions.saveListPage();
+            questionData.getQuestionAnswers().forEach(answer ->
+                    QuestionScreenInteractions.clickQuestionAnswer(questionData.getQuestionName(), answer)
+            );
+            QuestionScreenInteractions.saveMulitAnswerQuestion(questionData.getQuestionName());
         } else
-            ListSelectPageInteractions.selectItem(questionData.getQuestionAnswers().get(0));
+            QuestionScreenInteractions.clickQuestionAnswer(questionData.getQuestionName(), questionData.getQuestionAnswer());
     }
 
     public static void answerGeneralTextQuestion(QuestionsData textQuestion) {
-        QuestionScreenInteractions.clickQuestionAnswerBox(textQuestion.getQuestionName());
         QuestionScreenInteractions.fillQuestionTextBox(textQuestion.getQuestionName(), textQuestion.getQuestionAnswer());
     }
 }

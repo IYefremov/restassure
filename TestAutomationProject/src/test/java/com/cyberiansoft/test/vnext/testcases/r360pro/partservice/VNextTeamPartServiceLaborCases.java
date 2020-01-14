@@ -12,7 +12,7 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class VNextTeamPartServiceLaborCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamPartServiceLaborCases extends BaseTestClass {
     private String inspectionId = "";
 
     @BeforeClass(description = "Team Monitoring labor tests")

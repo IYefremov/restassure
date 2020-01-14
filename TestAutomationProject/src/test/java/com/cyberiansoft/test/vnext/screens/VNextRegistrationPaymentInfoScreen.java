@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -54,10 +52,10 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//input[contains(@data-bind, 'selectedStateText')]")
 	private WebElement statefld;
-	
-	public VNextRegistrationPaymentInfoScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextRegistrationPaymentInfoScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(usernamefld));
 	}
@@ -71,15 +69,11 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void setUserPaymentInfoName(String userpaymentname) {
-		tap(usernamefld);
-		appiumdriver.getKeyboard().sendKeys(userpaymentname);
-		appiumdriver.hideKeyboard();
+        usernamefld.sendKeys(userpaymentname);
 	}
 	
 	public void setUserPaymentCardNumber(String usercardnumber) {
-		tap(cardnumberfld);
-		appiumdriver.getKeyboard().sendKeys(usercardnumber);
-		//appiumdriver.hideKeyboard();
+        cardnumberfld.sendKeys(usercardnumber);
 	}
 	
 	public void setUserPaymentExpirationDate(String expmonth, String expyear) {
@@ -90,9 +84,7 @@ public class VNextRegistrationPaymentInfoScreen extends VNextBaseScreen {
 	}
 	
 	public void setUserPaymentSecurityCode(String securitycode) {
-		tap(securitycodefld);
-		appiumdriver.getKeyboard().sendKeys(securitycode);
-		appiumdriver.hideKeyboard();
+        securitycodefld.sendKeys(securitycode);
 	}
 	
 	public void clickUseRegistrationAddress() {

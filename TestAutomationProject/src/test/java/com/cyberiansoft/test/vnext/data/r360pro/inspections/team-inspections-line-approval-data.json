@@ -156,10 +156,12 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Aluminum Panel"
+          "serviceName": "Aluminum Panel",
+          "serviceStatus": "Declined"
         },
         {
-          "serviceName": "Anastasia Labor Avarage Data"
+          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceStatus": "Declined"
         }
       ]
     }
@@ -640,23 +642,8 @@
         {
           "inspType": "O_Kramar3",
           "retailCustomer": {
-            "firstName": "RetailCustomer2",
-            "lastName": "RetailLast2"
-          },
-          "vihicleInfo": {
-            "vinNumber": "7777777777777"
-          },
-          "services": [
-            {
-              "serviceName": "Labor"
-            }
-          ]
-        },
-        {
-          "inspType": "O_Kramar3",
-          "retailCustomer": {
-            "firstName": "RetailCustomer2",
-            "lastName": "RetailLast2"
+            "firstName": "O_Kramar3",
+            "lastName": "O_Kramar3"
           },
           "vihicleInfo": {
             "vinNumber": "7777777777777"

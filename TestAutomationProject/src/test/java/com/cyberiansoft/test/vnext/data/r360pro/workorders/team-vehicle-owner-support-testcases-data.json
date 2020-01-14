@@ -1,0 +1,93 @@
+{
+
+  "testVerifyUserCanCreateNewCustomerWhenSelectRetailOwner_Inspection": [
+    {
+      "rowID": "testVerifyUserCanCreateNewCustomerWhenSelectRetailOwner_Inspection.01",
+      "description": "Test Case 78390:Verify user can create new customer when select retail owner (Inspection)'",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91943",
+          "testCaseTitle": "Verify user can create new customer when select retail owner (Inspection)'"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ],
+  "testVerifyUserCanSelectCreatedRetailCustomerWhenAssignOwner": [
+    {
+      "rowID": "testVerifyUserCanSelectCreatedRetailCustomerWhenAssignOwner.01",
+      "description": "Test Case 78391:Verify user can select created retail customer when assign owner",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91944",
+          "testCaseTitle": "Verify user can select created retail customer when assign owner"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ],
+  "testVerifyUserCanChangeRetailOwnerToWholesale": [
+    {
+      "rowID": "testVerifyUserCanChangeRetailOwnerToWholesale.01",
+      "description": "Test Case 78392:Verify user can change retail owner to wholesale",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91945",
+          "testCaseTitle": "Verify user can change retail owner to wholesale"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ],
+  "testVerifyUserCanChangeWholesaleOwnerToRetail": [
+    {
+      "rowID": "testVerifyUserCanChangeWholesaleOwnerToRetail.01",
+      "description": "Test Case 78393:Verify user can change wholesale owner to retail",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91946",
+          "testCaseTitle": "Verify user can change wholesale owner to retail"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ],
+  "testVerifyAssignedOwnerForInspectionDisplaysAsSelectedWhenUserCreateWOFromThisInspection": [
+    {
+      "rowID": "testVerifyAssignedOwnerForInspectionDisplaysAsSelectedWhenUserCreateWOFromThisInspection.01",
+      "description": "Test Case 78394:Verify assigned owner for Inspection displays as selected when user create WO from this Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91947",
+          "testCaseTitle": "Verify assigned owner for Inspection displays as selected when user create WO from this Inspection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ],
+  "testVerifyUserCanChangeOwnerWhenCreateWOFromInspection": [
+    {
+      "rowID": "testVerifyUserCanChangeOwnerWhenCreateWOFromInspection.01",
+      "description": "Test Case 78395:Verify user can change owner when create WO from Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91948",
+          "testCaseTitle": "Verify user can change owner when create WO from Inspection"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ]
+}

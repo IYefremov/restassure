@@ -5,7 +5,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
-import com.cyberiansoft.test.vnextbo.steps.VNextBOHeaderPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
@@ -44,6 +44,6 @@ public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
 	public void verifySettingsTabIsNotShown(String rowID, String description, JSONObject testData) {
 		VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
 		VNextBOLoginSteps.userLogin(data.getLogin(), data.getPassword());
-		Assert.assertTrue(VNextBOLeftMenuValidations.isSettingsMenuTabAbsent(), "Settings tab is displayed");
+		Assert.assertFalse(VNextBOLeftMenuValidations.isSettingsMenuTabDisplayed(), "Settings tab is displayed");
 	}
 }

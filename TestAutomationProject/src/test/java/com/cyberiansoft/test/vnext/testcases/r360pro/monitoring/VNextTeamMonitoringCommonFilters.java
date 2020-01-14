@@ -17,14 +17,13 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
-import com.cyberiansoft.test.vnext.validations.GeneralValidations;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     private String inspectionId = "";
     private String workOrderId = "";
 
@@ -51,27 +50,6 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestCaseTeamEditionReg
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.clearAllFilters();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserSeesWarningMessageIfChosenLocationIsEmpty(String rowID,
-                                                                    String description, JSONObject testData) {
-        MonitorSteps.changeLocation("Another Location");
-        MonitorSteps.verifyRepairOrderListIsEmpty();
-        MonitorSteps.changeLocation("automationMonitoring");
-        ScreenNavigationSteps.pressBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanUseSearchFilter(String rowID,
-                                             String description, JSONObject testData) {
-        SearchSteps.openSearchFilters();
-        SearchSteps.fillTextSearch("NON_EXISTING_REPAIR_ORDER");
-        SearchSteps.search();
-        GeneralValidations.errorDialogShouldBePresent(true, "Sorry, there are no repair orders by the current criteria.");
-        GeneralSteps.closeErrorDialog();
-        SearchSteps.searchByText("");
-        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

@@ -1,9 +1,8 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEmployeeSearch;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -26,8 +25,8 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 		final String thirdSearchCriteria = "arro";
 		final ArrayList<String> thirdSearchCriteriaEmployees = new ArrayList<String>(
 				Arrays.asList("Arron Morris"));
-		
-		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		loginscreen.searchEmployee(firstSearchCriteria);
 		Assert.assertEquals(firstSearchCriteriaEmployees.size(), loginscreen.getNumberOfEmployeesInTheList());
 		for (String employeeName : firstSearchCriteriaEmployees)
@@ -50,10 +49,10 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 		
 		final String firstSearchCriteria = "$%-Symbols";
 		final ArrayList<String> firstSearchCriteriaEmployees = new ArrayList<String>(
-				Arrays.asList("Special +&* $%-Symbols")); 
-	
-		
-		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+				Arrays.asList("Special +&* $%-Symbols"));
+
+
+		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		loginscreen.searchEmployee(firstSearchCriteria);
 		Assert.assertEquals(firstSearchCriteriaEmployees.size(), loginscreen.getNumberOfEmployeesInTheList());
 		for (String employeeName : firstSearchCriteriaEmployees)
@@ -66,10 +65,10 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 		
 		final String[] searchCriterias = { "ross", "ROSS", "rOsS", "rosS" };
 		final ArrayList<String> searchCriteriaEmployees = new ArrayList<String>(
-				Arrays.asList("Merrill Ross")); 
+				Arrays.asList("Merrill Ross"));
 
-		
-		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (String searchCriteria : searchCriterias) {
 			loginscreen.searchEmployee(searchCriteria);
 			Assert.assertEquals(searchCriteriaEmployees.size(), loginscreen.getNumberOfEmployeesInTheList());
@@ -83,8 +82,8 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 	public void testNothingFoundPlaceholderShouldBeDisplayedIfNoEmployeeFound() {
 		
 		final String searchCriteria = "no exist";
-		
-		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+
+		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		loginscreen.searchEmployee(searchCriteria);
 		Assert.assertTrue(loginscreen.isNothingFoundTextDisplayed());
 	}
@@ -97,9 +96,9 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 		
 		final String searchCriteria = "ross";
 		final String searchCriteriaEmployee = "Merrill Ross"; 
-		final String employeePass = "1234"; 
-	
-		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+		final String employeePass = "1234";
+
+		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		loginscreen.searchEmployee(searchCriteria);
 		loginscreen.incorrectUserLogin(searchCriteriaEmployee, employeePass);		
 	}
@@ -111,9 +110,9 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 	public void testVerifyCancelButtonClosesSearch() {
 		
 		final String searchCriteria = "ross";
-		final String searchCriteriaEmployee = "Merrill Ross"; 
+		final String searchCriteriaEmployee = "Merrill Ross";
 
-		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		loginscreen.searchEmployee(searchCriteria);
 		loginscreen.selectEmployee(searchCriteriaEmployee);	
 		Assert.assertTrue(loginscreen.isUserLoginPasswordDialogVisible());
@@ -122,7 +121,7 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 		
 		loginscreen.selectEmployee(searchCriteriaEmployee);	
 		Assert.assertTrue(loginscreen.isUserLoginPasswordDialogVisible());
-		AppiumUtils.clickHardwareBackButton();
+        ScreenNavigationSteps.pressBackButton();
 		Assert.assertFalse(loginscreen.isUserLoginPasswordDialogVisible());
 	}
 	
@@ -133,7 +132,7 @@ public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch
 		final String firstSearchCriteria = "ar";
 		final String secondSearchCriteria = "arr";
 
-		VNextLoginScreen loginscreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		loginscreen.searchEmployee(firstSearchCriteria);
 		Assert.assertTrue(loginscreen.isEmployeeListSorted());
 	

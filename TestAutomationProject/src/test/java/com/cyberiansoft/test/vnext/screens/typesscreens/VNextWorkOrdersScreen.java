@@ -2,21 +2,20 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -44,13 +43,13 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[@data-autotests-id='work orders-list']/div")
     private List<WorkOrderListElement> workOrdersList;
 
-    public VNextWorkOrdersScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextWorkOrdersScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextWorkOrdersScreen() {
-        PageFactory.initElements(new FiledDecorator(DriverBuilder.getInstance().getAppiumDriver()), this);
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
     public WorkOrderListElement getWorkOrderElement(String workOrderId) {
@@ -63,12 +62,12 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     public VNextCustomersScreen clickAddWorkOrderButton() {
         clickAddButton();
-        return new VNextCustomersScreen(appiumdriver);
+        return new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public VNextWorkOrderTypesList clickAddWorkOrdernWithPreselectedCustomerButton() {
         clickAddButton();
-        return new VNextWorkOrderTypesList(appiumdriver);
+        return new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public String getFirstWorkOrderNumber() {
@@ -77,10 +76,10 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     public VNextWorkOrdersMenuScreen clickOnWorkOrderByNumber(String wonumber) {
         if (isTeamViewActive()) {
-            if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']"))
+            if (!WaitUtils.isElementPresent(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")))
                 searchWorkOrderByFreeText(wonumber);
         } else {
-            if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")) ;
+            if (!WaitUtils.isElementPresent(By.xpath(("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']"))))
             clearSearchField();
         }
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
@@ -177,18 +176,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     }
 
-    public VNextWorkOrdersScreen changeCustomerForWorkOrder(String workOrderNumber, AppCustomer newCustomer) {
-        WaitUtils.elementShouldBeVisible(workorderslist, true);
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-        VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
-        changeCustomerScreen.selectCustomer(newCustomer);
-        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-        informationDialog.clickInformationDialogYesButton();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
-        return this;
-    }
-
-    public VNextWorkOrdersScreen changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
+    public void changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
         VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
         changeCustomerScreen.switchToRetailMode();
@@ -197,10 +185,9 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
-        return this;
     }
 
-    public VNextWorkOrdersScreen changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
+    public void changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
         VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
         changeCustomerScreen.switchToWholesaleMode();
@@ -208,11 +195,10 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
-        return this;
     }
 
     public void searchWorkOrderByFreeText(String searchtext) {
-        searchByFreeText(searchtext);
+        SearchSteps.searchByText(searchtext);
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
     }
 

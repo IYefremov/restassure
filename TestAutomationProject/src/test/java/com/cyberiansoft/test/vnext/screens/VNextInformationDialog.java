@@ -1,11 +1,11 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -23,9 +23,9 @@ public class VNextInformationDialog extends VNextBaseScreen {
     @FindBy(xpath = "//div[@class='modal-text']")
     private WebElement modaldlgmsg;
 
-    public VNextInformationDialog(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextInformationDialog(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextInformationDialog() {
@@ -37,12 +37,25 @@ public class VNextInformationDialog extends VNextBaseScreen {
     }
 
     public void clickInformationDialogOKButton() {
-        appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        //appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='OK']")));
         wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='OK']"))));
         tap(modaldlg.findElement(By.xpath(".//span[text()='OK']")));
+    }
+
+    public void clickInformationDialogOKButtonUsingJs() {
+        //appiumdriver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='OK']")));
+        wait = new WebDriverWait(appiumdriver, 10);
+        wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//span[text()='OK']"))));
+
+        WebDriver driver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        executor.executeScript("arguments[0].click();", modaldlg.findElement(By.xpath(".//span[text()='OK']")));
+        appiumdriver.switchTo().defaultContent();
     }
 
     public void clickInformationDialogYesButton() {
@@ -71,13 +84,16 @@ public class VNextInformationDialog extends VNextBaseScreen {
     }
 
     public void clickInformationDialogArchiveButton() {
-        tap(modaldlg.findElement(By.xpath(".//span[text()='Archive']")));
+        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(By.xpath("//span[text()='Archive']"))).click();
     }
 
     public void clickInformationDialogDontArchiveButton() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']"))));
-        tap(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']")));
+        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(By.xpath("//span[text()='Archive']")));
+        BaseUtils.waitABit(500);
+        appiumdriver.findElement(By.xpath("//div[@class='modal-buttons']/span[@class='modal-button ']")).click();
+        //WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        //wait.until(ExpectedConditions.visibilityOf(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']"))));
+       // tap(modaldlg.findElement(By.xpath(".//div[@class='modal-buttons']/span[@class='modal-button ']")));
     }
 
     public void clickInformationDialogDeleteButton() {
@@ -98,6 +114,12 @@ public class VNextInformationDialog extends VNextBaseScreen {
     public String clickInformationDialogOKButtonAndGetMessage() {
         String msg = getInformationDialogMessage();
         clickInformationDialogOKButton();
+        return msg;
+    }
+
+    public String clickInformationDialogOKButtonAndGetMessageUsingJs() {
+        String msg = getInformationDialogMessage();
+        clickInformationDialogOKButtonUsingJs();
         return msg;
     }
 
@@ -157,7 +179,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
 
     public void clickFinalButton() {
         //BaseUtils.waitABit(2000);
-        WaitUtils.elementShouldBeVisible(modaldlg, true);
+        WaitUtils.waitUntilElementIsClickable(modaldlg);
         WaitUtils.click(modaldlg.findElement(By.xpath(".//span[text()='Final']")));
     }
 

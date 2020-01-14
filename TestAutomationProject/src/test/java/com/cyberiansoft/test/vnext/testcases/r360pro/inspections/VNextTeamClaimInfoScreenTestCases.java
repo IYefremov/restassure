@@ -1,10 +1,9 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -15,14 +14,17 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTyp
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.InspectionSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamClaimInfoScreenTestCases extends BaseTestClass {
 
 	@BeforeClass(description="Team Claim Info Test Cases")
 	public void beforeClass() {
@@ -35,18 +37,18 @@ public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRe
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
 		customersScreen.switchToWholesaleMode();
 		customersScreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
-		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertTrue(claimInfoScreen.isInsuranceCompanyFieldVisible());
 		Assert.assertTrue(claimInfoScreen.isClaimNumberFieldVisible());
 		Assert.assertTrue(claimInfoScreen.isPolicyNumberFieldVisible());
@@ -62,22 +64,23 @@ public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRe
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
 		customersScreen.switchToWholesaleMode();
 		customersScreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		vehicleInfoScreen.clickScreenTitleCaption();
 		Assert.assertFalse(vehicleInfoScreen.isScreenPresentInChangeScreenPopoverList(ScreenType.CLAIM.name()));
-		AppiumUtils.clickHardwareBackButton();
+		WizardScreenSteps.selectWizardScreen(ScreenType.VEHICLE_INFO);
 
-		inspectionsScreen = vehicleInfoScreen.cancelInspection();
-		inspectionsScreen.clickBackButton();
+
+		InspectionSteps.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -86,18 +89,18 @@ public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRe
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
 		customersScreen.switchToWholesaleMode();
 		customersScreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
-		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertTrue(claimInfoScreen.isInsuranceCompanyFieldVisible());
 		Assert.assertTrue(claimInfoScreen.isClaimNumberFieldVisible());
 		Assert.assertTrue(claimInfoScreen.isPolicyNumberFieldVisible());
@@ -113,22 +116,23 @@ public class VNextTeamClaimInfoScreenTestCases extends BaseTestCaseTeamEditionRe
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 		VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
 		customersScreen.switchToWholesaleMode();
 		customersScreen.selectCustomer(testwholesailcustomer);
-		VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(DriverBuilder.getInstance().getAppiumDriver());
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR2);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
 		vehicleInfoScreen.clickScreenTitleCaption();
 		Assert.assertFalse(vehicleInfoScreen.isScreenPresentInChangeScreenPopoverList("Claim"));
-		AppiumUtils.clickHardwareBackButton();
+		WizardScreenSteps.selectWizardScreen(ScreenType.VEHICLE_INFO);
 
-		inspectionsScreen = vehicleInfoScreen.cancelInspection();
-		inspectionsScreen.clickBackButton();
+
+		InspectionSteps.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 }

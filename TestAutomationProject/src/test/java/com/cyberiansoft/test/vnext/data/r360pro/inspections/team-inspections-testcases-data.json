@@ -77,6 +77,12 @@
           "vinNumber": "7777777777777"
         }
       },
+      "workOrderData": {
+        "moneyService":
+          {
+            "serviceName": "Labor AM"
+          }
+      },
       "invoiceData": {
         "poNumber": "12345"
       }
@@ -283,21 +289,6 @@
       "description": "Verify it is not possible to edit Team Inspection with device on Fly-mode",
       "vihicleInfo": {
         "vinNumber": "7777777777777"
-      }
-    }
-  ],
-  "testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices": [
-    {
-      "rowID": "testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices.01",
-      "description": "Verify user can edit team Work Order (add and remove services)",
-      "vihicleInfo": {
-        "vinNumber": "7777777777777"
-      },
-      "moneyService": {
-        "serviceName": "Battery Installation"
-      },
-      "percentageService": {
-        "serviceName": "Bundle Discount"
       }
     }
   ],

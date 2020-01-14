@@ -1,11 +1,11 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.screens.VNextPayCashCheckScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPayInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPayPOROScreen;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
+import com.cyberiansoft.test.vnext.validations.MenuValidations;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -26,9 +26,9 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
     @FindBy(xpath = "//*[@data-name='payPOROChildren']")
     private WebElement invoicepayporomenubtn;
 
-    public VNextPayMenu(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextPayMenu(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextPayInvoicesScreen clickPayCreditCardMenuItem() {
@@ -36,19 +36,12 @@ public class VNextPayMenu extends VNextBasicMenuScreen {
         return new VNextPayInvoicesScreen(appiumdriver);
     }
 
-    public boolean isInvoicePayPOROMenuItemExists() {
-        return invoicepayporomenubtn.isDisplayed();
-    }
 
     public VNextPayCashCheckScreen clickPayCachCheckMenuItem() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.visibilityOf(paycheckbtn));
         clickMenuItem(paycheckbtn);
         return new VNextPayCashCheckScreen(appiumdriver);
-    }
-
-    public boolean isInvoicePayCashCheckMenuItemExists() {
-        return paycheckbtn.isDisplayed();
     }
 
     public VNextPayPOROScreen clickPayPOROMenuItem() {

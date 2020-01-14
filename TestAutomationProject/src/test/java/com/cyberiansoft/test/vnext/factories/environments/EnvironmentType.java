@@ -6,6 +6,7 @@ public enum EnvironmentType {
     INTEGRATION("Integration"),
     AUTOTESTS("AutoTests"),
     DEVELOPMENT("Development"),
+    AZURE_MANHEIM_UAT("Azure Manheim UAT"),
     QC1("QC1");
 
     private final String environmentType;

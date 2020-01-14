@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.clients;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -53,6 +54,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedOkButton(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickTermsAndConditionsLink();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
@@ -67,6 +69,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickTermsAndConditionsLink();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
@@ -81,6 +84,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosedOkButton(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickPrivacyPolicyLink();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
@@ -95,6 +99,7 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosedXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickPrivacyPolicyLink();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
@@ -166,7 +171,6 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("100");
         VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(100);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
-
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -185,6 +189,5 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("100");
         VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(100);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
-
     }
 }

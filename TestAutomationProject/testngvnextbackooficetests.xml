@@ -19,7 +19,7 @@
     </test>
     <test name="Home Page Tests">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePage"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePageTestCases"/>
         </classes>
     </test>
     <test name="Home Page Access Rights Tests">

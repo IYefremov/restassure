@@ -11,9 +11,9 @@ import com.cyberiansoft.test.core.MobilePlatform;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.driverutils.AppiumInicializator;
 import com.cyberiansoft.test.driverutils.AppiumServiceManager;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
-import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextToolsInfo;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
@@ -116,7 +116,7 @@ public class VNextBaseTestCase {
             VNextAppUtils.restartApp();
         }
 
-        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getAppiumDriver(), 340);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 340);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
         VNextInformationDialog informationdlg = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
         informationdlg.clickInformationDialogOKButton();

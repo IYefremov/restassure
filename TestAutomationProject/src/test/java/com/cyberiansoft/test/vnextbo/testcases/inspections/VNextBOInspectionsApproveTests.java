@@ -22,7 +22,7 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectInspectionsMenu();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelApprovingWithNoButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
@@ -36,7 +36,7 @@ public class VNextBOInspectionsApproveTests extends BaseTestCase {
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmationDialog);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelApprovingWithCloseButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickInspectionApproveButton();

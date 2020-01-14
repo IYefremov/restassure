@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnext.webelements;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import lombok.Getter;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -18,6 +18,6 @@ public class ErrorDialog {
     private WebElement okButton;
 
     public ErrorDialog() {
-        PageFactory.initElements(DriverBuilder.getInstance().getAppiumDriver(), this);
+        PageFactory.initElements(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), this);
     }
 }

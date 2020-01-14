@@ -24,7 +24,7 @@
       "minutes": "22",
       "hours": "1",
       "nickname": "Autotest_90771",
-      "licenseNumber": "0002-0410",
+      "licenseNumber": "0002-0420",
       "team": "01_TimeRep_team",
       "timeZone": "(UTC-10:00) Hawaii",
       "technician": "Alex Maximov",
@@ -44,7 +44,7 @@
       "minutes": "22",
       "hours": "1",
       "nickname": "Autotest_90772",
-      "licenseNumber": "0002-0410",
+      "licenseNumber": "0002-0420",
       "team": "01_TimeRep_team",
       "timeZone": "(UTC-10:00) Hawaii",
       "technician": "Alex Maximov",
@@ -130,7 +130,7 @@
       "minutes": "22",
       "hours": "1",
       "nickname": "Autotest_90769",
-      "licenseNumber": "0002-0410",
+      "licenseNumber": "0002-0420",
       "team": "01_TimeRep_team",
       "timeZone": "(UTC-10:00) Hawaii",
       "technician": "Alex Maximov",
@@ -146,7 +146,15 @@
           "testCaseID": "90804",
           "testCaseTitle": "User can see \"Pending Registrations\" Devices"
         }
-      ]
+      ],
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest_90804",
+      "licenseNumber": "0002-0420",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
     }
   ],
   "verifyUserCanChangePhoneNumberOfPendingRegistrationDevice": [
@@ -159,8 +167,14 @@
           "testCaseTitle": "User can change phone number of Pending registration device"
         }
       ],
-      "nickname": "Autotest_90769",
-      "phoneNumber": "+380952222222"
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest_90808",
+      "licenseNumber": "0002-0420",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
     }
   ],
   "verifyUserCanCancelDeletionPendingRegistrationDeviceCancelButton": [
@@ -173,7 +187,14 @@
           "testCaseTitle": "User can cancel deletion Device from the \"Pending Registrations\" list (Cancel)"
         }
       ],
-      "nickname": "Autotest_90769"
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest_90807",
+      "licenseNumber": "0002-0420",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
     }
   ],
   "verifyUserCanCancelDeletionPendingRegistrationDeviceXIcon": [
@@ -186,7 +207,14 @@
           "testCaseTitle": "User can cancel deletion Device from the \"Pending Registrations\" list (X-icon)"
         }
       ],
-      "nickname": "Autotest_90769"
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest_90806",
+      "licenseNumber": "0002-0420",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
     }
   ],
   "verifyUserCanDeleteDeviceFromPendingRegistrationsList": [
@@ -199,7 +227,14 @@
           "testCaseTitle": "User can delete Device from the \"Pending Registrations\" list"
         }
       ],
-      "nickname": "Autotest_90769"
+      "minutes": "22",
+      "hours": "1",
+      "nickname": "Autotest_90805",
+      "licenseNumber": "0002-0420",
+      "team": "01_TimeRep_team",
+      "timeZone": "(UTC-10:00) Hawaii",
+      "technician": "Alex Maximov",
+      "phoneNumber": "+380951111111"
     }
   ]
 }

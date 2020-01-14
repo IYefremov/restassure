@@ -3,9 +3,9 @@ package com.cyberiansoft.test.vnext.testcases.r360free;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
-import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;;
+import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
@@ -14,6 +14,8 @@ import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import org.testng.annotations.BeforeTest;
 
 import java.io.File;
+
+;
 
 public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTestCase {
 
@@ -37,9 +39,9 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
 			VNextAppUtils.resetApp();
 			registerDevice();
 
-			VNextLoginScreen loginScreen = new VNextLoginScreen(DriverBuilder.getInstance().getAppiumDriver());
+            VNextLoginScreen loginScreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 		}
-		new VNextHomeScreen(DriverBuilder.getInstance().getAppiumDriver());
+        new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 	}
 }

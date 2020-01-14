@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnext.steps.services;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
+import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 
@@ -24,8 +26,18 @@ public class SelectedServicesScreenSteps {
         servicesScreen.openServiceDetails(serviceName);
     }
 
+    public static void openLaborServiceDetails(String serviceName) {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.switchToSelectedServicesView();
+        servicesScreen.openLaborServiceDetails(serviceName);
+    }
+
     public static void switchToSelectedService() {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         servicesScreen.switchToSelectedServicesView();
+    }
+
+    public static void openMatrixServiceVehiclePartDetails(VehiclePartData vehiclePartData) {
+        ListSelectPageInteractions.selectItem(vehiclePartData.getVehiclePartName());
     }
 }

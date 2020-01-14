@@ -1,17 +1,14 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
-import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
-import com.cyberiansoft.test.vnext.utils.AppContexts;
+import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -44,9 +41,9 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='add']")
     private WebElement addbtn;
 
-    public VNextBaseTypeScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextBaseTypeScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextBaseTypeScreen() {
@@ -58,7 +55,9 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         List<WebElement> listCells = typesList.findElements(By.xpath(".//*[contains(@class, 'entity-item accordion-item')]"));
 
         WebElement tableCell = listCells.stream().
-                filter(elemnt -> elemnt.findElement(By.xpath(".//*[@action='select']/div[@class='checkbox-item-title']"))
+                filter(
+                        elemnt ->
+                                elemnt.findElement(By.xpath(".//*[@action='select']/div[@class='checkbox-item-title']"))
                         .getText().trim().equals(cellValue))
                 .findFirst().orElse(null);
         if (tableCell == null)
@@ -82,20 +81,19 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     }
 
     protected void switchToMyView() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(myviewtab));
-        tap(myviewtab);
-        wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='button active' and @action='my']")));
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Actions actions = new Actions(appiumdriver);
+            actions.moveToElement(myviewtab, 30, 0).click().perform();
+            BaseUtils.waitABit(3000);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class,'button active') and @action='my']")));
+            return true;
+        });
     }
 
     protected boolean isMyViewActive() {
         return myviewtab.getAttribute("class").contains("active");
-    }
-
-    public void searchByFreeText(String searchtext) {
-        clickSearchButton();
-        setSearchText(searchtext);
     }
 
     public void clickSearchButton() {
@@ -103,21 +101,12 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     }
 
     private void setSearchText(String searchtext) {
-        tap(searchfld);
-        searchfld.clear();
-        searchfld.sendKeys(searchtext);
-        //appiumdriver.getKeyboard().sendKeys(searchtext);
-        //appiumdriver.hideKeyboard();
-        AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-        ((AndroidDriver<MobileElement>) appiumdriver).pressKeyCode(66);
-        AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-        BaseUtils.waitABit(1000);
+        ControlUtils.setValue(searchfld, searchtext);
         clickCancelSearchButton();
     }
 
     public void clickCancelSearchButton() {
-        BaseUtils.waitABit(1000);
-        tap(cancelsearchbtn);
+        WaitUtils.click(cancelsearchbtn);
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
     }
 
@@ -127,6 +116,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
             clickCancelSearchButton();
         }
         if (searchbtn.findElement(By.xpath(".//span[contains(@class, 'icon-has-query')]")).isDisplayed()) {
+            BaseUtils.waitABit(500);
             tap(searchbtn);
             if (searchfld.getAttribute("value").length() > 1) {
                 tap(clearsearchicon);

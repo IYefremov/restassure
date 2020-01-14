@@ -5,7 +5,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.UUID;
 
-public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
     private String inspectionId = "";
 
@@ -27,6 +27,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR);
         inspectionId = InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -37,6 +38,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         final String quickNoteText1 = "Warranty expired";
         final String quickNoteText2 = "Test Quick Note 1";
 
+        HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
@@ -50,6 +52,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -58,6 +61,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         final String myInspectionNote = UUID.randomUUID().toString();
         final String teamInspectionNote = UUID.randomUUID().toString();
 
+        HomeScreenSteps.openInspections();
         InspectionSteps.switchToMyInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
@@ -77,6 +81,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         NotesSteps.verifyNoteIsPresent(teamInspectionNote);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
 
@@ -85,6 +90,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
                                             String description, JSONObject testData) {
         final String noteText = UUID.randomUUID().toString();
 
+        HomeScreenSteps.openInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
@@ -97,6 +103,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestCaseTeamEditionRe
         NotesSteps.verifyPicturesPresent();
         NotesSteps.deleteAllPictures();
         NotesSteps.verifyNoPicturesPresent();
+        ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }

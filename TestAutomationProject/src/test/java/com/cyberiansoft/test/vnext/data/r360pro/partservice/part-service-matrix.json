@@ -3,6 +3,12 @@
     {
       "rowID": "userCanCreateInspectionWithPartsMatrixService.01",
       "description": "86706",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98824",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",
@@ -98,6 +104,12 @@
     {
       "rowID": "userCanSelectAndLinkMultipleLaborServicesToPartService.01",
       "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91851",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",
@@ -128,6 +140,12 @@
     {
       "rowID": ".01",
       "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91852",
+          "testCaseTitle": "User Can Create Inspection With Parts Matrix Service"
+        }
+      ],
       "matrixServiceDataList": [
         {
           "matrixServiceName": "rozstalnoy_enable_matrix",
@@ -148,6 +166,43 @@
                 }
               ]
             }
+          }
+        }
+      ]
+    }
+  ],
+  "userCanAddPartsServicesAndSelectCategorySubcategoryPartNamePartPositionAndEdit": [
+    {
+      "rowID": "userCanAddPartsServicesAndSelectCategorySubcategoryPartNamePartPositionAndEdit.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91831",
+          "testCaseTitle": "User can add Parts services and select category > sub-category > part name > part position and edit part's details (price, quantity, notes, etc.) (from Price Matrix)"
+        }
+      ],
+      "matrixServiceDataList": [
+        {
+          "matrixServiceName": "rozstalnoy_enable_matrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Rozstalnoy_vehicle",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "LIGHT",
+            "partServicesList": [
+              {
+                "serviceName": "rozstalnoy_enable_parts",
+                "servicePrice": "199.99",
+                "serviceQuantity": "0.99",
+                "category": "Brake",
+                "subCategory": "Control Cables",
+                "partName": {
+                  "partNameList": [
+                    "Parking Brake Cable Lever"
+                  ],
+                  "isMultiSelect": true
+                }
+              }
+            ]
           }
         }
       ]

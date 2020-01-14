@@ -12,12 +12,12 @@ import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.steps.VisualScreenSteps;
 import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
-import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestCaseTeamEditionRegistration;
+import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextTeamInspectionsServicesTestCases extends BaseTestCaseTeamEditionRegistration {
+public class VNextTeamInspectionsServicesTestCases extends BaseTestClass {
 
     @BeforeClass(description="Team Inspections Services Test Cases")
     public void beforeClass() {

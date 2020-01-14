@@ -6,11 +6,11 @@ import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextCustomersMenuScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -49,7 +49,7 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
     @FindBy(xpath = "//div[@class='notice-plate']")
     private WebElement presetcustomerpanel;
 
-    public VNextBaseCustomersScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextBaseCustomersScreen(WebDriver appiumdriver) {
         super(appiumdriver);
     }
 
@@ -57,7 +57,7 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
     }
 
     public void selectCustomer(AppCustomer customer) {
-        if (elementExists("//*[@action='select-retail']"))
+        if (WaitUtils.isElementPresent(By.xpath("//*[@action='select-retail']")))
             if (customer.isWholesale()) {
                 if (wholesalecustomertab.isDisplayed())
                     switchToWholesaleMode();
@@ -65,7 +65,7 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
                 if (retailcustomertab.isDisplayed())
                     switchToRetailMode();
             }
-        if (elementExists("//*[@data-automation-id='search-icon']")) {
+        if (WaitUtils.isElementPresent(By.xpath("//*[@data-automation-id='search-icon']"))) {
             searchCustomerByName(customer.getFullName());
         }
         if (customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
@@ -93,11 +93,6 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
         BaseUtils.waitABit(1000);
     }
 
-
-    public boolean isAddCustomerButtonExists() {
-        return elementExists("//*[@action='add']");
-    }
-
     public boolean isCustomerExists(AppCustomer customer) {
         searchCustomerByName(customer.getFullName());
         return customerslist.findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;
@@ -112,7 +107,11 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
     public void switchToRetailMode() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
         wait.until(ExpectedConditions.visibilityOf(retailcustomertab));
-        tap(retailcustomertab);
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Actions actions = new Actions(appiumdriver);
+            actions.moveToElement(retailcustomertab, 30, 0).click().perform();
+            return true;
+        });
     }
 
     public void switchToWholesaleMode() {

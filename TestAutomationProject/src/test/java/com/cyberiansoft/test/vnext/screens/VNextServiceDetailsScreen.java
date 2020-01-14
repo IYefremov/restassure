@@ -1,14 +1,13 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -54,15 +53,21 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@data-name='Amount']")
     private WebElement serviceDetailsPrice;
 
+	@FindBy(xpath = "//*[@data-name='QuantityFloat']")
+	private WebElement serviceDetailsQuantity;
+
+	@FindBy(id = "serviceDetailsNotes")
+	private WebElement serviceDetailsNotes;
+
     @FindBy(xpath = "//div[@class='services-part-info-title']")
     private WebElement partServiceInfoTitle;
 
 	@FindBy(xpath = "//input[@name='question-section']")
 	private List<WebElement> questionSections;
-	
-	public VNextServiceDetailsScreen(AppiumDriver<MobileElement> appiumdriver) {
+
+    public VNextServiceDetailsScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
-		PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+		PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(rootElement));
 	}
@@ -75,13 +80,9 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 		return new VNextNotesScreen();
 	}
 	
-	public void clickServiceDetailsBackButton() {
-		clickScreenBackButton();
-	}
-	
 	public void clickServiceDetailsDoneButton() {
 		tap(servicedtailsapplybtn);
-		if (elementExists("//div[@class='modal-text']")) {
+        if (WaitUtils.isElementPresent(By.xpath("//div[@class='modal-text']"))) {
 			VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 			informationDialog.clickInformationDialogNoButton();
 		}
@@ -96,7 +97,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
 		Assert.assertTrue(msg.contains(VNextAlertMessages.ARE_YOU_SURE_REMOVE_THIS_ITEM));
-		return new VNextAvailableServicesScreen(appiumdriver) ;
+        return new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 	}
 	
 	public void setServiceAmountValue(String amount) {

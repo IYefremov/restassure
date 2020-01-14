@@ -2,26 +2,30 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Getter
 public class VNextInspectionsScreen extends VNextBaseTypeScreen {
@@ -46,12 +50,13 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     final public static int MAX_NUMBER_OF_INPECTIONS = 50;
 
-    public VNextInspectionsScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextInspectionsScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextInspectionsScreen() {
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextCustomersScreen clickAddInspectionButton() {
@@ -61,7 +66,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public VNextInspectionTypesList clickAddInspectionWithPreselectedCustomerButton() {
         clickAddButton();
-        return new VNextInspectionTypesList(appiumdriver);
+        return new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public boolean isAddInspectionButtonVisible() {
@@ -70,7 +75,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public VNextHomeScreen clickBackButton() {
         clickScreenBackButton();
-        return new VNextHomeScreen(appiumdriver);
+        return new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public String getFirstInspectionNumber() {
@@ -91,10 +96,11 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public List<String> getAllInspectionsCustomers() {
+        waitForInspectionsListIsVisibile();
         List<String> inspsCustomers = new ArrayList<>();
-        List<WebElement> inspections = getInspectionsList();
+        List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//*[@action='select' and @class='entity-item-title']"));
         for (WebElement inspCell : inspections) {
-            inspsCustomers.add(getInspectionCustomerValue(inspCell));
+            inspsCustomers.add(inspCell.getText());
         }
         return inspsCustomers;
     }
@@ -110,7 +116,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public String getInspectionStatusValue(String inspectionNumber) {
         WaitUtils.elementShouldBeVisible(rootElement,true);
-        if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']"))
+        if (!WaitUtils.isElementPresent(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")))
             clearSearchField();
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")));
@@ -160,18 +166,18 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public VNextInspectionsMenuScreen clickOnInspectionByInspNumber(String inspectionNumber) {
         WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
-        if (!elementExists("//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']"))
+        if (!WaitUtils.isElementPresent(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")))
             clearSearchField();
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+        WaitUtils.waitUntilElementIsClickable(inspectionslist);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 60);
         wait.until(ExpectedConditions.presenceOfNestedElementLocatedBy(inspectionslist, By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")));
         try {
-            wait = new WebDriverWait(appiumdriver, 60);
+            wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 60);
             wait.until(ExpectedConditions.elementToBeClickable(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")))).click();
         } catch (WebDriverException e) {
             BaseUtils.waitABit(500);
-            tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")));
+            WaitUtils.waitUntilElementIsClickable(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']"))).click();
         }
-        //tap(inspectionslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + inspectionNumber + "']")));
         return new VNextInspectionsMenuScreen(appiumdriver);
     }
 
@@ -231,6 +237,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public boolean isTeamInspectionsViewActive() {
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
         WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
         return isTeamViewActive();
     }
@@ -244,7 +251,10 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public void searchInpectionByFreeText(String searchtext) {
-        searchByFreeText(searchtext);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+        wait.until(ExpectedConditions.visibilityOf(inspectionsScreen));
+        SearchSteps.searchByText(searchtext);
+
     }
 
     public void selectInspection(String inspectionNumber) {
@@ -275,17 +285,16 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         return new VNextApproveInspectionsScreen(appiumdriver);
     }
 
-    public VNextInspectionsScreen changeCustomerForInspection(String inspectionNumber, AppCustomer newCustomer) {
+    public void changeCustomerForInspection(String inspectionNumber, AppCustomer newCustomer) {
         VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
         VNextCustomersScreen customersScreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
         customersScreen.selectCustomer(newCustomer);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Inspection customer...']"));
-        return this;
     }
 
-    public VNextInspectionsScreen changeCustomerForWorkOrderViaSearch(String inspectionNumber, AppCustomer newCustomer) {
+    public void changeCustomerForWorkOrderViaSearch(String inspectionNumber, AppCustomer newCustomer) {
         VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
         VNextCustomersScreen customersScreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
         customersScreen.switchToRetailMode();
@@ -294,16 +303,21 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Inspection customer...']"));
-        return this;
     }
 
-    public VNextInspectionsScreen changeCustomerToWholesailForInspection(String inspectionNumber, AppCustomer newWholesailCustomer) {
+    public void changeCustomerToWholesailForInspection(String inspectionNumber, AppCustomer newWholesailCustomer) {
         VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
         VNextCustomersScreen customersScreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
         customersScreen.switchToWholesaleMode();
         customersScreen.selectCustomer(newWholesailCustomer);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
-        return this;
+    }
+
+    public void waitNotificationMessageDissapears() {
+        WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
+        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
+                ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
+        ));
     }
 }

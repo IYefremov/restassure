@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypeData;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypeData;
@@ -12,12 +13,9 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextTypeScreenContext;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -61,9 +59,9 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@data-autotests-id='search-cancel']")
     private WebElement cancelSearchBtn;
 
-    public VNextBaseWizardScreen(AppiumDriver<MobileElement> appiumdriver) {
+    public VNextBaseWizardScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(new AppiumFieldDecorator(appiumdriver), this);
+        PageFactory.initElements(appiumdriver, this);
     }
 
     public VNextBaseWizardScreen() {
@@ -73,14 +71,14 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         clickCancelMenuItem();
         VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
         String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-        return new VNextInspectionsScreen(appiumdriver);
+        return new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public VNextWorkOrdersScreen cancelWorkOrder() {
         clickCancelMenuItem();
         VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
         String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-        return new VNextWorkOrdersScreen(appiumdriver);
+        return new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public void clickCancelMenuItem() {
@@ -97,7 +95,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         clickSaveInspectionMenuButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickDraftButton();
-        return new VNextInspectionsScreen(appiumdriver);
+        return new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public VNextInspectionsScreen saveInspectionViaMenu() {
@@ -105,7 +103,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         if (inspectionType != null)
             if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
                 clcikSaveViaMenuAsFinal();
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(appiumdriver);
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
         return inspectionsScreen;
     }
@@ -115,7 +113,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         if (workOrderType != null)
             if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
                 clcikSaveViaMenuAsFinal();
-        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen(appiumdriver);
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
         workOrdersScreen.clearSearchField();
         return workOrdersScreen;
@@ -125,23 +123,16 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         clickSaveWorkOrderMenuButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickDraftButton();
-        return new VNextWorkOrdersScreen(appiumdriver);
+        return new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public void clickMenuButton() {
         tap(menubtn);
-
-        BaseUtils.waitABit(1000);
-        if (elementExists("//*[@action='more_actions']"))
-            try {
-                menubtn.click();
-            } catch (WebDriverException e) {
-
-            }
     }
 
     public void clickSaveInspectionMenuButton() {
         clickMenuButton();
+        WaitUtils.waitUntilElementIsClickable(saveinspectionmenu);
         tap(saveinspectionmenu);
     }
 
@@ -168,6 +159,8 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     }
 
     public boolean isSaveButtonVisible() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+        wait.until(ExpectedConditions.visibilityOf(saveworkordermenu));
         return saveinspectionmenu.isDisplayed();
     }
 

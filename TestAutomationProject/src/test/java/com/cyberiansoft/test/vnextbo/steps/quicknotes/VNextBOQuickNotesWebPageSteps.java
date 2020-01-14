@@ -16,7 +16,7 @@ public class VNextBOQuickNotesWebPageSteps {
     public static void clickAddNoteButton() {
 
         Utils.clickElement(new VNextBOQuickNotesWebPage().getAddQuickNotesButton());
-        WaitUtilsWebDriver.getWebDriverWait(3).until(ExpectedConditions.visibilityOf(new VNextBONewNotesDialog().getCloseButton()));
+        WaitUtilsWebDriver.getWebDriverWait(3).until(ExpectedConditions.elementToBeClickable(new VNextBONewNotesDialog().getAddButton()));
     }
 
     public static void clickEditNoteButtonForNoteByDescription(String noteDescription) {
