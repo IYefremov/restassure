@@ -67,9 +67,9 @@ public class VNextBORODetailsPageInteractions {
     }
 
     private static void selectStatus(String status) {
-        final List<WebElement> statusListBoxOptions = new VNextBORODetailsPage().getStatusDropDownContainer()
-                .findElements(By.xpath("//ul[@data-role='staticlist']/li"));
-        Utils.selectOptionInDropDown(statusListBoxOptions.get(0), statusListBoxOptions, status);
+        final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
+        Utils.selectOptionInDropDown(
+                detailsPage.getStatusDropDownContainer(), detailsPage.getPhaseStatusListBoxOptions(), status);
     }
 
     private static void selectPhaseStatus(String status) {
@@ -124,22 +124,17 @@ public class VNextBORODetailsPageInteractions {
         }
     }
 
-    public static void expandServicesTable() {
+    public static void expandPhasesTable() {
         final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
         Utils.clickElement(detailsPage.getServicesExpandArrow());
-        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(detailsPage.getServicesExpandArrow());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(detailsPage.getServicesExpandArrow(), 3);
     }
 
-    public static void expandServicesTable(String service) {
-        final WebElement element = DriverBuilder
-                .getInstance()
-                .getDriver()
-                .findElement(By.xpath("//div[@data-name='" + service + "']//i[@class='switchTable icon-arrow-down5']"));
-        if (Utils.isElementDisplayed(element)) {
-            Utils.clickElement(element);
-            WaitUtilsWebDriver.waitForInvisibilityIgnoringException(element, 5);
-            WaitUtilsWebDriver.waitForLoading();
+    public static void expandPhasesTable(String phase) {
+        final WebElement arrow = new VNextBORODetailsPage().getPhaseButton(phase);
+        if (Utils.isElementDisplayed(arrow)) {
+            Utils.clickElement(arrow);
+            WaitUtilsWebDriver.waitForInvisibilityIgnoringException(arrow, 3);
         }
     }
 
@@ -175,8 +170,7 @@ public class VNextBORODetailsPageInteractions {
 
     public static void clickServiceStatusBox(String serviceId) {
         final WebElement service = new VNextBORODetailsPage().getServiceStatusBoxByServiceId(serviceId);
-        Utils.moveToElement(service);
-        Utils.clickElement(service);
+        Utils.clickWithActions(service);
     }
 
     public static void selectServiceStatus(String status) {
@@ -185,7 +179,9 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static String getServiceStatusValue(String serviceId) {
-        return Utils.getText(new VNextBORODetailsPage().getServiceStatusByServiceId(serviceId));
+        final WebElement serviceStatus = new VNextBORODetailsPage().getServiceStatusByServiceId(serviceId);
+        WaitUtilsWebDriver.waitForElementNotToBeStale(serviceStatus);
+        return serviceStatus.getText();
     }
 
     public static String waitForServiceStatusToBeChanged(String serviceId, String service) {
@@ -308,7 +304,6 @@ public class VNextBORODetailsPageInteractions {
     }
 
     private static void setOption(WebElement option) {
-        WaitUtilsWebDriver.waitForElementNotToBeStale(option);
         Utils.clickElement(option);
         WaitUtilsWebDriver.waitForInvisibilityIgnoringException(new VNextBORODetailsPage().getPhaseActionsDropDown(), 5);
     }
@@ -451,15 +446,14 @@ public class VNextBORODetailsPageInteractions {
     }
 
     private static void clickVendorBox(String serviceId) {
-        WaitUtilsWebDriver.waitForLoading();
         WebElement element = new VNextBORODetailsPage().getVendorBox(serviceId);
-        Utils.moveToElement(element);
-        Utils.clickElement(element);
+        Utils.clickWithActions(element);
     }
 
     private static void selectVendor(String vendor) {
-        Utils.selectOptionInDropDown(new VNextBORODetailsPage().getListBoxOptions().get(0),
-                new VNextBORODetailsPage().getListBoxOptions(), vendor);
+        final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
+        Utils.selectOptionInDropDownWithJs(detailsPage.getListBoxOptions().get(0),
+                detailsPage.getListBoxOptions(), vendor);
     }
 
     public static void setTechnician(String serviceId, String technician) {
@@ -467,16 +461,24 @@ public class VNextBORODetailsPageInteractions {
         selectTechnician(technician);
     }
 
+    public static String setTechnician(String serviceId) {
+        clickTechnicianBox(serviceId);
+        return selectTechnician();
+    }
+
     private static void clickTechnicianBox(String serviceId) {
-        WaitUtilsWebDriver.waitForLoading();
         WebElement element = new VNextBORODetailsPage().getTechnicianBox(serviceId);
-        Utils.moveToElement(element);
-        Utils.clickElement(element);
+        Utils.clickWithActions(element);
     }
 
     private static void selectTechnician(String technician) {
-        Utils.selectOptionInDropDown(new VNextBORODetailsPage().getListBoxOptions().get(0),
+        Utils.selectOptionInDropDownWithJs(new VNextBORODetailsPage().getListBoxOptions().get(0),
                 new VNextBORODetailsPage().getListBoxOptions(), technician);
+    }
+
+    private static String selectTechnician() {
+        return Utils.selectOptionInDropDown(new VNextBORODetailsPage().getListBoxOptions().get(0),
+                new VNextBORODetailsPage().getListBoxOptions());
     }
 
     public static void setPriority(String priority) {
@@ -629,10 +631,18 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static List<String> getPartsOrderedFromTableValuesData() {
-        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(
-                new VNextBORODetailsPage().getPartsOrderedFromTableValues())
+        return Utils.getText(new VNextBORODetailsPage().getPartsOrderedFromTableValues());
+    }
+
+    public static List<String> getPhasesServicesId(String phase) {
+        return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBORODetailsPage()
+                .getPhaseServicesList(phase), 2)
                 .stream()
-                .map(WebElement::getText)
+                .map(e -> e.getAttribute("data-order-service-id"))
                 .collect(Collectors.toList());
+    }
+
+    public static List<String> getPhasesServicesStatusesId(String phase) {
+        return Utils.getText(new VNextBORODetailsPage().getPhaseServicesStatusesList(phase));
     }
 }

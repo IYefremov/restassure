@@ -1,8 +1,7 @@
-package com.cyberiansoft.test.dataclasses.vNextBO;
+package com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import org.apache.commons.lang3.RandomStringUtils;
 
 @Getter
 public class VNextBODeviceManagementData {

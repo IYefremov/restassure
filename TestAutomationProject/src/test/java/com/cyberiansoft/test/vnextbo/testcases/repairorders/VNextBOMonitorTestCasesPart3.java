@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
@@ -59,7 +59,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
         VNextBOAddNewServiceMonitorDialogSteps
                 .setAddNewServiceMonitorFieldsForAllOrMoneyPriceTypesWithXButton(data, serviceDescription);
 
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		Assert.assertEquals(serviceId, "",
 				"The service has been added after closing the 'New Service Dialog' with X button");
@@ -82,7 +82,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
         VNextBOAddNewServiceMonitorDialogSteps
                 .setAddNewServiceMonitorFieldsForAllOrMoneyPriceTypesWithCancelButton(data, serviceDescription);
 
-		VNextBORODetailsPageInteractions.expandServicesTable();
+		VNextBORODetailsPageInteractions.expandPhasesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		Assert.assertEquals(serviceId, "",
 				"The service has been added after closing the 'New Service Dialog' with X button");
@@ -228,7 +228,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
 		Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
@@ -257,7 +257,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -279,7 +279,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -307,7 +307,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -352,7 +352,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -390,7 +390,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -426,7 +426,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -462,7 +462,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -502,7 +502,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -538,7 +538,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
@@ -570,7 +570,7 @@ public class VNextBOMonitorTestCasesPart3 extends BaseTestCase {
 		Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionDisplayed(), "The RO details section hasn't been displayed");
 
 		VNextBORODetailsPageInteractions.setStatus(data.getStatus());
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 
 		final String service = data.getService();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);

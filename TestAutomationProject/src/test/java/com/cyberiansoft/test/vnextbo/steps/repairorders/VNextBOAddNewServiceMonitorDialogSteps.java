@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOAddNewServiceMonitorDialogInteractions;
 
 public class VNextBOAddNewServiceMonitorDialogSteps {

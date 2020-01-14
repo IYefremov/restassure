@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.validations.repairorders;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
@@ -25,7 +25,7 @@ import java.util.List;
 public class VNextBOROPageValidations {
 
     public static void verifyAnotherTechnicianIsDisplayed(String woNumber, String prevTechnician) {
-        Assert.assertNotEquals(VNextBOROPageInteractions.getTechniciansValueForWO(woNumber), prevTechnician,
+        Assert.assertNotEquals(VNextBOROPageInteractions.getTechnicianValueForWO(woNumber), prevTechnician,
                 "The technician hasn't been changed");
     }
 

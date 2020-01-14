@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases.devicemanagement;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBODeviceManagementData;
+import com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement.VNextBODeviceManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;

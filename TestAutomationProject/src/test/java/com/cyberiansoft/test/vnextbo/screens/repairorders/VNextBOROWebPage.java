@@ -256,6 +256,9 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     @FindBy(id = "app-progress-spinner")
     private WebElement appProgressSpinner;
 
+    @FindBy(xpath = "//table[@id='roTable']//th[text()='VIN# / Stock# / RO# / PO# / Invoice']")
+    private WebElement stockVinROPOInvoicesTableHeader;
+
     public VNextBOROWebPage() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
@@ -282,7 +285,7 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
         return WaitUtilsWebDriver.waitForVisibility(tableBody);
     }
 
-    public WebElement getTechniciansFieldForWO(String woNumber) {
+    public WebElement getTechnicianFieldForWO(String woNumber) {
         return tableBody.findElement(By.xpath("//strong[text()=\"" + woNumber
                 + "\"]/../../../parent::tr//div[contains(@data-bind, \"changeTechnicians\")]"));
     }
@@ -292,17 +295,20 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
                 + order + "']/../../i[@class='icon-problem-indicator']"));
     }
 
-    public List<WebElement> getChangePhaseStatusOptions(String orderNumber) {
-        WebElement woTableRow = new VNextBOROWebPage().getTableRowWithWorkOrder(orderNumber);
-        return woTableRow.findElements(By.xpath(".//*[@data-bind='click: changeServiceStatus']"));
+    public WebElement getPhaseMenu(String orderNumber) {
+        return getTableRowWithWorkOrder(orderNumber).findElement(
+                By.xpath(".//i[contains(@data-bind, 'phaseMenuClicked') and @class='truncated']"));
     }
 
-    public WebElement getCompleteCurrentPhaseOption(String orderNumber) {
-        WebElement woTableRow = new VNextBOROWebPage().getTableRowWithWorkOrder(orderNumber);
-        return woTableRow.findElement(By.xpath(".//div[contains(@data-bind, 'completeActivePhase')]"));
+    public WebElement getStockNumInputField(String orderNumber) {
+        return getTableRowWithWorkOrder(orderNumber).findElement(By.xpath(".//input[@title='Stock #']"));
     }
 
-    public WebElement getPhaseMenuArrow(String orderNumber) {
-        return getTableRowWithWorkOrder(orderNumber).findElement(By.xpath(".//i[@data-bind='click: phaseMenuClicked']"));
+    public WebElement getRONumInputField(String orderNumber) {
+        return getTableRowWithWorkOrder(orderNumber).findElement(By.xpath(".//input[@title='RO #']"));
+    }
+
+    public WebElement getPONumInputField(String orderNumber) {
+        return getTableRowWithWorkOrder(orderNumber).findElement(By.xpath(".//input[@title='PO #']"));
     }
 }

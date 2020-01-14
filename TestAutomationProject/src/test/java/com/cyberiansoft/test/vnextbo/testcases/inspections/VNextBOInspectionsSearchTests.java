@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOInspectionSearchData;
+import com.cyberiansoft.test.dataclasses.vNextBO.inspections.VNextBOInspectionSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;

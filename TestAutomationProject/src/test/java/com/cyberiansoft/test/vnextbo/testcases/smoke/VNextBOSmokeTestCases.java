@@ -1,10 +1,13 @@
 package com.cyberiansoft.test.vnextbo.testcases.smoke;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.dataclasses.vNextBO.*;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBONewSmokeData;
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOQuickNotesData;
+import com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement.VNextBODeviceManagementData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOAccountInfoBlockInteractions;
@@ -12,7 +15,6 @@ import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOEmailOptionsBlo
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOCompanyInfoWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
-import com.cyberiansoft.test.vnextbo.screens.quicknotes.VNextBOQuickNotesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
@@ -57,7 +59,6 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     private VNextBOCompanyInfoWebPage companyInfoWebPage;
     private VNextBOHomeWebPage homePage;
     private VNextBOInspectionsWebPage inspectionsWebPage;
-    private VNextBOQuickNotesWebPage quickNotesPage;
 
     @BeforeClass
     public void settingUp() {
@@ -70,7 +71,6 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         companyInfoWebPage = PageFactory.initElements(webdriver, VNextBOCompanyInfoWebPage.class);
         homePage = PageFactory.initElements(webdriver, VNextBOHomeWebPage.class);
         inspectionsWebPage = PageFactory.initElements(webdriver, VNextBOInspectionsWebPage.class);
-        quickNotesPage = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOQuickNotesWebPage.class);
     }
 
     @AfterMethod
