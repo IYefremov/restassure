@@ -26,16 +26,17 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectQuickNotesMenu();
     }
     
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddQuickNotes(String rowID, String description, JSONObject testData) {
 
         int initialNotesAmount = VNextBOQuickNotesWebPageSteps.getNotesAmount();
         VNextBOQuickNotesWebPageSteps.addNewNote(newNoteDescription);
         VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(initialNotesAmount + 1);
         VNextBOQuickNotesWebPageValidations.verifyLastNoteDescription(newNoteDescription, true);
+        VNextBOQuickNotesWebPageSteps.deleteNote(newNoteDescription);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyQuickNoteIsNotAddedAfterReject(String rowID, String description, JSONObject testData) {
 
         int initialNotesAmount = VNextBOQuickNotesWebPageSteps.getNotesAmount();
@@ -43,7 +44,7 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
         VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(initialNotesAmount);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCannotAddEmptyQuickNotes(String rowID, String description, JSONObject testData) {
 
         VNextBOQuickNotesWebPageSteps.clickAddNoteButton();
@@ -53,54 +54,63 @@ public class VNextBOQuickNotesTestCases extends BaseTestCase {
         Utils.refreshPage();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCannotSaveUpdating(String rowID, String description, JSONObject testData) {
 
+        VNextBOQuickNotesWebPageSteps.addNewNote(newNoteDescription);
         int initialNotesAmount = VNextBOQuickNotesWebPageSteps.getNotesAmount();
         VNextBOQuickNotesWebPageSteps.clickEditNoteButtonForNoteByDescription(newNoteDescription);
         VNextBONewNotesDialogSteps.populateDescriptionField(editedNoteDescription);
         VNextBONewNotesDialogSteps.closeDialog();
         VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(initialNotesAmount);
         VNextBOQuickNotesWebPageValidations.verifyNoteIsNotPresentedInTheList(editedNoteDescription);
+        VNextBOQuickNotesWebPageSteps.deleteNote(newNoteDescription);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCannotSaveEmptyUpdatedQuickNote(String rowID, String description, JSONObject testData) {
 
+        VNextBOQuickNotesWebPageSteps.addNewNote(newNoteDescription);
         VNextBOQuickNotesWebPageSteps.clickEditNoteButtonForNoteByDescription(newNoteDescription);
         VNextBONewNotesDialogSteps.populateDescriptionField("");
         VNextBONewNotesDialogSteps.clickUpdateButton();
         VNextBONewNotesDialogValidations.verifyErrorMessageIsDisplayedAndCorrect();
         Utils.refreshPage();
+        VNextBOQuickNotesWebPageSteps.deleteNote(newNoteDescription);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanEditQuickNotes(String rowID, String description, JSONObject testData) {
 
+        VNextBOQuickNotesWebPageSteps.addNewNote(newNoteDescription);
         int initialNotesAmount = VNextBOQuickNotesWebPageSteps.getNotesAmount();
         VNextBOQuickNotesWebPageSteps.updateNote(newNoteDescription, editedNoteDescription);
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(initialNotesAmount);
         VNextBOQuickNotesWebPageValidations.verifyLastNoteDescription(editedNoteDescription, true);
         VNextBOQuickNotesWebPageValidations.verifyNoteIsNotPresentedInTheList(newNoteDescription);
+        VNextBOQuickNotesWebPageSteps.deleteNote(editedNoteDescription);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanMoveNotation(String rowID, String description, JSONObject testData) {
 
+        VNextBOQuickNotesWebPageSteps.addNewNote(newNoteDescription);
         int initialNotesAmount = VNextBOQuickNotesWebPageSteps.getNotesAmount();
         VNextBOQuickNotesWebPageSteps.moveNoteFromTheLastToTheFirstPositionInTheList();
         VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(initialNotesAmount);
-        VNextBOQuickNotesWebPageValidations.verifyNoteIsPresentedInTheList(editedNoteDescription);
-        VNextBOQuickNotesWebPageValidations.verifyLastNoteDescription(editedNoteDescription, false);
+        VNextBOQuickNotesWebPageValidations.verifyNoteIsPresentedInTheList(newNoteDescription);
+        VNextBOQuickNotesWebPageValidations.verifyLastNoteDescription(newNoteDescription, false);
+        VNextBOQuickNotesWebPageSteps.deleteNote(newNoteDescription);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDeleteQuickNotes(String rowID, String description, JSONObject testData) {
 
+        VNextBOQuickNotesWebPageSteps.addNewNote(newNoteDescription);
         int initialNotesAmount = VNextBOQuickNotesWebPageSteps.getNotesAmount();
-        VNextBOQuickNotesWebPageSteps.deleteNote(editedNoteDescription);
+        VNextBOQuickNotesWebPageSteps.deleteNote(newNoteDescription);
         VNextBOQuickNotesWebPageValidations.verifyNotesAmountIsCorrect(initialNotesAmount - 1);
-        VNextBOQuickNotesWebPageValidations.verifyNoteIsNotPresentedInTheList(editedNoteDescription);
+        VNextBOQuickNotesWebPageValidations.verifyNoteIsNotPresentedInTheList(newNoteDescription);
     }
 }

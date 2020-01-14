@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.services.VNextBOServiceData;
 import com.cyberiansoft.test.vnextbo.screens.services.VNextBOServiceDialog;
 import com.cyberiansoft.test.vnextbo.screens.services.VNextBOServicesWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -75,8 +76,10 @@ public class VNextBOServicesWebPageSteps extends VNextBOBaseWebPageSteps {
 
     public static void deleteServiceByName(String serviceName) {
 
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceName);
         clickDeleteButtonForService(serviceName);
         VNextBOModalDialogSteps.clickOkButton();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
     public static void restoreServiceByName(String serviceName) {

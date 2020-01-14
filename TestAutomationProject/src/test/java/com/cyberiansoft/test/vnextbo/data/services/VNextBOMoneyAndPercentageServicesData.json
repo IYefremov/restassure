@@ -45,11 +45,11 @@
           "testCaseTitle": "vNext: Edit money service"
         }
       ],
-      "serviceName": "Edited Test Money Service 90569",
-      "serviceType": "Autre",
-      "serviceDescription": "Edited test money service",
+      "serviceName": "Test Money Service 90569",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
       "servicePriceType": "Money",
-      "servicePrice": "35.01"
+      "servicePrice": "5.00"
     }
   ],
 
@@ -63,11 +63,11 @@
           "testCaseTitle": "vNext: Edit percentage service"
         }
       ],
-      "serviceName": "Edited Test Percentage Service 90570",
-      "serviceType": "Body Shop",
-      "serviceDescription": "Edited test percentage service",
+      "serviceName": "Test Percentage Service 90568",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test percentage service",
       "servicePriceType": "Percentage",
-      "servicePrice": "99.999"
+      "servicePrice": "5.000"
     }
   ],
 
@@ -80,7 +80,12 @@
           "testCaseID": "90571",
           "testCaseTitle": "vNext: Remove money service"
         }
-      ]
+      ],
+      "serviceName": "Test Money Service 90571",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00"
     }
   ],
 
@@ -93,7 +98,12 @@
           "testCaseID": "90573",
           "testCaseTitle": "vNext: Remove percentage service"
         }
-      ]
+      ],
+      "serviceName": "Test Percentage Service 90573",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test percentage service",
+      "servicePriceType": "Percentage",
+      "servicePrice": "5.000"
     }
   ],
 
@@ -106,7 +116,12 @@
           "testCaseID": "90572",
           "testCaseTitle": "vNext: Resume removed money service"
         }
-      ]
+      ],
+      "serviceName": "Test Money Service 90572",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00"
     }
   ],
 
@@ -119,7 +134,12 @@
           "testCaseID": "90574",
           "testCaseTitle": "vNext: Resume removed percentage service"
         }
-      ]
+      ],
+      "serviceName": "Test Percentage Service 90574",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test percentage service",
+      "servicePriceType": "Percentage",
+      "servicePrice": "5.000"
     }
   ],
 
@@ -132,7 +152,12 @@
           "testCaseID": "90575",
           "testCaseTitle": "vNext: verify error messages on Create-Edit service dialog"
         }
-      ]
+      ],
+      "serviceName": "Test Money Service 90575",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00"
     }
   ],
 
@@ -187,11 +212,12 @@
         }
       ],
       "serviceName": "Test Service 91577",
-      "serviceType": "Detail",
-      "serviceDescription": "test service with none clarification",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test service with optional clarification",
       "servicePriceType": "Money",
       "servicePrice": "5.00",
-      "serviceClarification": "None"
+      "serviceClarification": "Optional",
+      "serviceClarificationPrefix": "roof"
     }
   ],
 
@@ -204,7 +230,12 @@
           "testCaseID": "91571",
           "testCaseTitle": "Verify user can change sequence number for \"Money\" service order"
         }
-      ]
+      ],
+      "serviceName": "Test Money Service 91571",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test money service",
+      "servicePriceType": "Money",
+      "servicePrice": "5.00"
     }
   ],
 
@@ -217,7 +248,12 @@
           "testCaseID": "91572",
           "testCaseTitle": "Verify user can change sequence number for \"Percentage\" service order"
         }
-      ]
+      ],
+      "serviceName": "Test Percentage Service 91572",
+      "serviceType": "Dent Repair",
+      "serviceDescription": "test percentage service",
+      "servicePriceType": "Percentage",
+      "servicePrice": "5.000"
     }
   ]
 }

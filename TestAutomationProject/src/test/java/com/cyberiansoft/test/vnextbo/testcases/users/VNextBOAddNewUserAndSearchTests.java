@@ -36,7 +36,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyNewUserCantBeAddedWithoutRequiredFields(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
@@ -74,7 +74,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         Utils.refreshPage();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyRegistrationMailCanBeResend(String rowID, String description, JSONObject testData) throws Exception {
 
         NadaEMailService nada = new NadaEMailService();
@@ -90,7 +90,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         nada.deleteAllMessages();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyNewUserCantBeAddedWithRegisteredEmail(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
@@ -103,7 +103,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOAddNewUserDialogSteps.closeDialog();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseAddNewUserDialog(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
@@ -112,7 +112,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOAddNewUserDialogValidations.verifyDialogIsClosed(vNexBOAddNewUserDialog);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseAdvancedSearchForm(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -122,7 +122,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByEmail(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -141,7 +141,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByPhone(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.searchUserByPhone(newUserPhone);
@@ -151,7 +151,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanClearAdvancedSearchFilter(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
@@ -161,7 +161,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByName(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(newUserFirstName);
@@ -171,7 +171,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanClearSearchByNameFilter(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(newUserFirstName);
@@ -181,7 +181,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserSeesMessageWhenSearchResultIsNegative(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("abracadabra");
@@ -189,7 +189,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanEditCreatedUserData(String rowID, String description, JSONObject testData) throws Exception {
 
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
