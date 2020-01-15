@@ -9,8 +9,8 @@ public class VNextBOROSimpleSearchSteps {
     public static void searchByText(String searchText) {
         VNextBOROSimpleSearchInteractions.setRepairOrdersSearchText(searchText);
         VNextBOROSimpleSearchInteractions.clickSearchIcon();
-        Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(searchText, true),
-                "The work order is not displayed after search by clicking the 'Search' icon");
+        //Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(searchText, true),
+        //        "The work order is not displayed after search by clicking the 'Search' icon");
     }
 
     public static void searchWithEnter(String searchText) {
