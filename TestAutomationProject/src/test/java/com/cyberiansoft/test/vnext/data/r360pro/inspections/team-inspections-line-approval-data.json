@@ -19,7 +19,7 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Aluminum Panel",
+          "serviceName": "Labor Motor",
           "serviceStatus": "Declined"
         },
         {
@@ -49,8 +49,7 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Aluminum Panel",
-          "serviceStatus": "Declined"
+          "serviceName": "Aluminum Panel"
         },
         {
           "serviceName": "Anastasia Labor Avarage Data",
@@ -58,7 +57,7 @@
         }
       ],
       "inspPrice": "$14.86",
-      "inspApprovedPrice": "$9.00"
+      "inspApprovedPrice": "$11.25"
     }
   ],
   "testVerifyUserCanDeclineAllServiceIfLineApprovalEqualsON": [
@@ -213,7 +212,7 @@
           "serviceStatus": "Approved"
         },
         {
-          "serviceName": "Aluminum Panel",
+          "serviceName": "Labor Motor",
           "serviceStatus": "Declined"
         },
         {
@@ -221,7 +220,7 @@
           "serviceStatus": "Skipped"
         }
       ],
-      "inspPrice": "$14.86",
+      "inspPrice": "$165.89",
       "inspApprovedPrice": "$9.00"
     }
   ],
@@ -348,11 +347,13 @@
           "services": [
             {
               "serviceName": "Battery Installation",
-              "servicePrice": "1"
+              "servicePrice": "1",
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Labor",
-              "servicePrice": "5"
+              "servicePrice": "5",
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Aluminum Panel",
@@ -368,11 +369,13 @@
           "services": [
             {
               "serviceName": "Battery Installation",
-              "servicePrice": "15"
+              "servicePrice": "15",
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Labor",
-              "servicePrice": "20"
+              "servicePrice": "20",
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Aluminum Panel",
@@ -460,14 +463,13 @@
             },
             {
               "serviceName": "Labor",
-              "serviceStatus": "Approved"
+              "serviceStatus": "Declined"
             },
             {
-              "serviceName": "Aluminum Panel",
-              "serviceStatus": "Declined"
+              "serviceName": "Aluminum Panel"
             }
           ],
-          "inspApprovedPrice": "$52.29"
+          "inspApprovedPrice": "$11.25"
         },
         {
           "inspType": "O_Kramar3",
@@ -483,15 +485,14 @@
             {
               "serviceName": "Labor",
               "servicePrice": "20",
-              "serviceStatus": "Declined"
+              "serviceStatus": "Approved"
             },
             {
               "serviceName": "Aluminum Panel",
-              "servicePrice": "50",
-              "serviceStatus": "Approved"
+              "servicePrice": "50"
             }
           ],
-          "inspApprovedPrice": "$0.00"
+          "inspApprovedPrice": "$99.90"
         }
       ]
     }
@@ -570,18 +571,17 @@
           "services": [
             {
               "serviceName": "Battery Installation",
-              "serviceStatus": "Approved"
+              "serviceStatus": "Declined"
             },
             {
               "serviceName": "Labor",
               "serviceStatus": "Approved"
             },
             {
-              "serviceName": "Aluminum Panel",
-              "serviceStatus": "Declined"
+              "serviceName": "Aluminum Panel"
             }
           ],
-          "inspApprovedPrice": "$52.29",
+          "inspApprovedPrice": "$54.11",
           "inspectionStatus": "Approved"
         },
         {
@@ -602,8 +602,7 @@
             },
             {
               "serviceName": "Aluminum Panel",
-              "servicePrice": "50",
-              "serviceStatus": "Declined"
+              "servicePrice": "50"
             }
           ],
           "inspApprovedPrice": "$0.00",
