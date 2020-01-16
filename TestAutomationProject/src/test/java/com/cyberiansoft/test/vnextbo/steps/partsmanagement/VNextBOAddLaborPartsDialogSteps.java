@@ -34,7 +34,7 @@ public class VNextBOAddLaborPartsDialogSteps {
 
         setLaborServiceField(laborServiceName);
         clickAddLaborButton();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void closeDialogWithXIcon() {

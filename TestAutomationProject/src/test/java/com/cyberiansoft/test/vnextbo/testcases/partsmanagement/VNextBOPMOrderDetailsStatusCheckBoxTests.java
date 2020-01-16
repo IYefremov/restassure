@@ -22,13 +22,13 @@ public class VNextBOPMOrderDetailsStatusCheckBoxTests extends BaseTestCase {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsStatusCheckBoxTD();
         com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
+        VNextBOBreadCrumbInteractions.setLocation("automationMonitoring");
         VNextBOPartsManagementWebPageSteps.waitUntilPartsManagementPageIsLoaded();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-000-152414");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-444-00531");
         VNextBOPartsManagementWebPageSteps.waitUntilPartsManagementPageIsLoaded();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSeeOnlyStatusesBelongingToThePertsInRO(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
@@ -37,7 +37,7 @@ public class VNextBOPMOrderDetailsStatusCheckBoxTests extends BaseTestCase {
         VNextBOPartsDetailsPanelSteps.clickStatusesCheckBox();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectPartsByStatus(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementOrderDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);

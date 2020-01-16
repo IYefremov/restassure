@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAdvancedSearchDialog;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -165,5 +166,12 @@ public class VNextBOAdvancedSearchDialogSteps {
         setToField(searchData.getToDate());
         setOrderedFromField(searchData.getOrderedFrom());
         setSearchName(searchData.getSearchName());
+    }
+
+    public static void deleteSavedSearch() {
+
+        clickDeleteButton();
+        VNextBOModalDialogSteps.clickYesButton();
+        Utils.refreshPage();
     }
 }

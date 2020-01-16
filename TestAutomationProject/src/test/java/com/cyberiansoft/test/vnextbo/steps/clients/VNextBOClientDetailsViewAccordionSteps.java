@@ -73,14 +73,12 @@ public class VNextBOClientDetailsViewAccordionSteps {
     public static void clickCancelButton() {
         WebElement cancelButton = new VNextBOClientsDetailsViewAccordion().getCancelButton();
         Utils.clickElement(cancelButton);
-        WaitUtilsWebDriver.waitForInvisibility(cancelButton, 2);
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickOkButton() {
         WebElement okButton = new VNextBOClientsDetailsViewAccordion().getOkButton();
         Utils.clickElement(okButton);
-        WaitUtilsWebDriver.waitForInvisibility(okButton, 4);
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 

@@ -2,10 +2,14 @@ package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddLaborPartsDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 
@@ -49,19 +53,21 @@ public class VNextBOPartsDetailsPanelSteps {
     public static void clickAddLaborButtonForPartByNumberInList(int partNumber) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().getAddLaborButton().get(partNumber));
+        WaitUtilsWebDriver.getWebDriverWait(2).until(ExpectedConditions.visibilityOf(new VNextBOAddLaborPartsDialog().getAddLaborButton()));
     }
 
     public static void clickDeleteLaborButtonForPartByNumberInListAndServiceName(int partNumber, String laborServiceName) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().deleteLaborButton(partNumber, laborServiceName));
+        WaitUtilsWebDriver.getWebDriverWait(2).until(ExpectedConditions.visibilityOf(new VNextBOModalDialog().getYesButton()));
     }
 
     public static void setStatusForPartByPartNumberInList(int partNumber, String status) {
 
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
         Utils.clickElement(detailsPanel.getPartStatusField().get(partNumber));
-        Utils.selectOptionInDropDown(detailsPanel.getPartStatusDropDown(), detailsPanel.getPartStatusListBoxOptions(), status, true);
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        Utils.selectOptionInDropDownWithJsScroll(detailsPanel.getPartStatusDropDown(), detailsPanel.getPartStatusListBoxOptions(), status);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void setPriceForPartByPartNumberInList(int partNumber, String price) {
