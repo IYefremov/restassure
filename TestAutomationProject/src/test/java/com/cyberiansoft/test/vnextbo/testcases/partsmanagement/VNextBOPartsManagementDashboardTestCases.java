@@ -32,7 +32,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenOperationsPartsManagementWithFullSetOfElements(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
@@ -47,14 +47,14 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageValidations.verifyCompletedBoxIsDisplayed();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSeePartsDetailsOfDifferentROs(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsOrdersListPanelSteps.openPartOrderDetailsByNumberInList(3);
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectOrdersWithPastDuePartsParts(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.clickPastDuePartsButton();
@@ -66,7 +66,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageSteps.clickPastDuePartsButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectOrdersWithInProgressParts(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.clickInProgressButton();
@@ -78,7 +78,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageSteps.clickInProgressButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectOrdersWithCompletedParts(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.clickCompletedButton();
@@ -89,7 +89,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageSteps.clickCompletedButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectOrdersWithPartDuePartsAndInProgressParts(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.clickPastDuePartsButton();
@@ -103,7 +103,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageSteps.clickInProgressButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectOrdersWithPartDuePartsAndCompletedParts(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.clickPastDuePartsButton();
@@ -117,7 +117,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageSteps.clickCompletedButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectOrdersWithInProgressAndCompletedParts(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.clickInProgressButton();
@@ -131,7 +131,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageSteps.clickCompletedButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSelectOrdersWithPastDuePartsInProgressAndCompletedParts(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.clickPastDuePartsButton();
@@ -142,9 +142,12 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageValidations.verifyCompletedBoxIsHighlighted();
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
         VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
+        VNextBOPartsManagementWebPageSteps.clickPastDuePartsButton();
+        VNextBOPartsManagementWebPageSteps.clickInProgressButton();
+        VNextBOPartsManagementWebPageSteps.clickCompletedButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openIntercomMessenger();
@@ -152,7 +155,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOPartsManagementWebPageSteps.closeIntercom();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndCloseTermsAndConditions(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.clickTermsAndConditionsLink();
@@ -166,7 +169,7 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenAndClosePrivacyPolicy(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.clickPrivacyPolicyLink();
