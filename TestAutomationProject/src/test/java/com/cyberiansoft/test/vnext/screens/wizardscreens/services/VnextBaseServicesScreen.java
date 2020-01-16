@@ -39,6 +39,7 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     }
 
     public VNextAvailableServicesScreen switchToAvalableServicesView() {
+        WaitUtils.waitUntilElementIsClickable(servicesscreen.findElement(By.xpath(".//*[contains(@class,'services-list') and @data-view-mode]")));
         WaitUtils.getGeneralFluentWait().until(driver -> {
             tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
             return true;
