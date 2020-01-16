@@ -3,6 +3,7 @@ package com.cyberiansoft.test.targetprocessintegration.model;
 import com.cyberiansoft.test.targetprocessintegration.config.TargetProcessConfig;
 import com.cyberiansoft.test.targetprocessintegration.dto.TestCaseRunDTO;
 import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunDTO;
+import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunsDTO;
 import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mashape.unirest.http.Unirest;
@@ -13,6 +14,7 @@ import org.jtwig.JtwigTemplate;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class TPIntegrationService {
@@ -21,9 +23,11 @@ public class TPIntegrationService {
     private static final String ACCESS_TOKEN_ROUTE_PARAM = "access-token";
     private static final String TESTCASE_RUN_ID_ROUTE_PARAM = "testcaserun-id";
     private static final String TESTCASE_ID_ROUTE_PARAM = "testcase-id";
+    private static final String TESTPLAN_ID_ROUTE_PARAM = "testplan-id";
     private static final String TARGET_PROCESS_API_URL = "https://cyb.tpondemand.com/api/v1/";
     private static final String TARGET_PROCESS_CREATE_TESTPLAN_RUN_PARAM = TARGET_PROCESS_API_URL + "TestPlanRuns?resultFormat=json&resultInclude=[Id,TestCaseRuns[Id,TestCase],TestPlanRuns[Id]]&access_token={access-token}";
     private static final String TARGET_PROCESS_GET_TESTPLAN_RUN__INFO_PARAM = TARGET_PROCESS_API_URL + "TestPlanRuns/{testcaserun-id}?resultFormat=json&resultInclude=[Id,TestCaseRuns[Id,TestCase],TestPlanRuns[Id]]&access_token={access-token}";
+    private static final String TARGET_PROCESS_GET_TESTPLAN_RUN__STATUS_PARAM = TARGET_PROCESS_API_URL + "TestPlanRuns/?include=[TestCaseRuns[Status,Comment,TestCase]]&where=(TestPlan.Id%20eq%20{testplan-id})&format=json&access_token={access-token}";
     private static final String TARGET_PROCESS_SET_TESTCASE_STATUS_PARAM = TARGET_PROCESS_API_URL + "TestCaseRuns/{testcaserun-id}?access_token={access-token}";
     private static final String TARGET_PROCESS_SET_TESTCASE_AUTOMATED_FIELD = TARGET_PROCESS_API_URL + "TestCases/{testcase-id}?access_token={access-token}";
 
@@ -123,5 +127,19 @@ public class TPIntegrationService {
         JtwigTemplate template = JtwigTemplate.fileTemplate(new File("src/test/java/com/cyberiansoft/test/targetprocessintegration/templates/set-test-case-automated-field.json"));
         JtwigModel model = JtwigModel.newModel();
         return template.render(model);
+    }
+
+    public TestPlanRunsDTO getTestPlanRunStatuses(String testplan_Id) throws UnirestException, IOException {
+        Unirest.setTimeouts(10000000, 10000000);
+        String msgs = Unirest.get(TARGET_PROCESS_GET_TESTPLAN_RUN__STATUS_PARAM)
+                .routeParam(TESTPLAN_ID_ROUTE_PARAM, testplan_Id)
+                .routeParam(ACCESS_TOKEN_ROUTE_PARAM, "Mzc6bzRIZXc0VW1acktsNlVNeDYwUVNDUnVod2hsY250b1ljVXBZTTZOUUdsTT0=")
+                .header("accept", POST_REQUEST_CONTENT_TYPE)
+                .header("Content-Type", POST_REQUEST_CONTENT_TYPE)
+                .asJson()
+                .getBody()
+                .getObject()
+                .toString();
+        return MAPPER.readValue(msgs, TestPlanRunsDTO.class);
     }
 }
