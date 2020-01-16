@@ -27,7 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VNextTeamMonitoringCalculations extends BaseTestClass {
-    private String inspectionId = "";
     private String workOrderId = "";
 
     @BeforeClass(description = "Team Monitoring Basic Flow Test")
@@ -36,7 +35,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
-        inspectionId = InspectionSteps.saveInspection();
+        final String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.approveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
@@ -61,11 +60,11 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void partServiceShouldNotAffectROCompleteness(String rowID,
+    public void verifyThatSkippedRefusedAndPartsServicesAreNotInvolvedToTheCompletePercentageCalculation(String rowID,
                                                          String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         RepairOrderDto repairOrderDto = workOrderData.getMonitoring().getRepairOrderData();
-        ServiceData serviceData = workOrderData.getServiceData();
+        ServiceData serviceData = workOrderData.getServicesList().get(0);
 
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
@@ -84,16 +83,8 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         EditOrderSteps.waitPhasesScreenLoaded();
         WizardScreenSteps.saveAction();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
-    }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "partServiceShouldNotAffectROCompleteness")
-    public void skippedServicesShouldNotAffectCalculation(String rowID,
-                                                          String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        RepairOrderDto repairOrderDto = workOrderData.getMonitoring().getRepairOrderData();
-        ServiceData serviceData = workOrderData.getServiceData();
-
+        serviceData = workOrderData.getServicesList().get(1);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceData);
@@ -104,15 +95,6 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         MenuSteps.selectStatus(ServiceStatus.SKIPPED);
         WizardScreenSteps.saveAction();
         MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "skippedServicesShouldNotAffectCalculation")
-    public void refusedServicesShouldNotAffectCalculation(String rowID,
-                                                          String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        RepairOrderDto repairOrderDto = workOrderData.getMonitoring().getRepairOrderData();
-        ServiceData serviceData = workOrderData.getServiceData();
 
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);

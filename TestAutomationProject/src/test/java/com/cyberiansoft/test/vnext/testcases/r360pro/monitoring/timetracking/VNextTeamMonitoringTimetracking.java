@@ -23,15 +23,17 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class VNextTeamMonitoringTimetracking extends BaseTestClass {
-    private String inspectionId = "";
     private String workOrderId = "";
 
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+    @BeforeClass(description = "Team Monitoring Time Tracking")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
+    }
+
+    public void createWorkOrder() {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
-        inspectionId = InspectionSteps.saveInspection();
+        final String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.approveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
@@ -44,11 +46,12 @@ public class VNextTeamMonitoringTimetracking extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCanStartTimeTrackingOnService(String rowID,
+    public void userCanStartAndStopServiceTime(String rowID,
                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         ServiceData serviceDto = workOrderData.getServiceData();
 
+        createWorkOrder();
         MonitorSteps.editOrder(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceDto);
@@ -57,14 +60,6 @@ public class VNextTeamMonitoringTimetracking extends BaseTestClass {
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
         PhaseScreenValidations.validateServiceStatus(serviceDto);
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnSerivce(serviceDto, true);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "userCanStartTimeTrackingOnService")
-    public void userCanStopTimeTrackingOnService(String rowID,
-                                                 String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData serviceDto = workOrderData.getServiceData();
 
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
@@ -72,26 +67,23 @@ public class VNextTeamMonitoringTimetracking extends BaseTestClass {
         serviceDto.setServiceStatus(ServiceStatus.STARTED);
         PhaseScreenValidations.validateServiceStatus(serviceDto);
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnSerivce(serviceDto, false);
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,dependsOnMethods = "userCanStopTimeTrackingOnService")
-    public void userCanStartTimeTrackingOnPhase(String rowID,
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanStartAndStopPhaseTime(String rowID,
                                                 String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
+        createWorkOrder();
+        MonitorSteps.editOrder(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnPhase(phaseDto, true);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "userCanStartTimeTrackingOnPhase")
-    public void userCanStopTimeTrackingOnPhase(String rowID,
-                                               String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
