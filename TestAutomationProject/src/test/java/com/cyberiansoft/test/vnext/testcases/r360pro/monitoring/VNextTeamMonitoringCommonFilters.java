@@ -24,7 +24,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
-    private String inspectionId = "";
     private String workOrderId = "";
 
     @BeforeClass(description = "Team Monitoring Basic Flow Test")
@@ -33,7 +32,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
-        inspectionId = InspectionSteps.saveInspection();
+        final String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.approveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);

@@ -28,7 +28,7 @@ public class MonitoringRoActionMenuPhaseAndService extends BaseTestClass {
     String workOrderId;
     String inspectionId;
 
-    @BeforeClass(description = "Tech split base test cases")
+    @BeforeClass(description = "Monitoring Ro Action Menu Phase And Service")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringRoActionMenu();
         HomeScreenSteps.openCreateMyInspection();
