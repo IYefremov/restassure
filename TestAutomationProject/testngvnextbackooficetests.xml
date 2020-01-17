@@ -162,6 +162,11 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorAdvancedSearchTestCases"/>
         </classes>
     </test>
+    <test name="Monitor New Advanced Search Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorAdvancedSearchTestCasesNew"/>
+        </classes>
+    </test>
     <test name="Monitor Report Problem Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorReportProblemTestCases"/>

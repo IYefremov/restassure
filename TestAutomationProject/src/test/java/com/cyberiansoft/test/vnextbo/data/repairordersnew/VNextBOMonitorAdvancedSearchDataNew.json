@@ -1,0 +1,144 @@
+{
+  "verifyUserCanSelectCustomer": [
+    {
+      "rowID": "verifyUserCanSelectCustomer.01",
+      "description": "Test Case 91422: User can select \"Customer\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91422",
+          "testCaseTitle": "User can select \"Customer\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanCloseAdvancedSearchWindow": [
+    {
+      "rowID": "verifyUserCanCloseAdvancedSearchWindow.01",
+      "description": "Test Case 91439: Verify user can close \"Advanced\" search window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91439",
+          "testCaseTitle": "Verify user can close \"Advanced\" search window"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByCustomer": [
+    {
+      "rowID": "verifyUserCanSearchByCustomer.01",
+      "description": "Test Case 91440: Verify user can search by \"Customer\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91440",
+          "testCaseTitle": "Verify user can search by \"Customer\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByEmployee": [
+    {
+      "rowID": "verifyUserCanSearchByEmployee.01",
+      "description": "Test Case 91423: User can search by \"Employee\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91423",
+          "testCaseTitle": "User can search by \"Employee\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByPhase": [
+    {
+      "rowID": "verifyUserCanSearchByPhase.01",
+      "description": "Test Case 91424: User can search by \"Phase\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91424",
+          "testCaseTitle": "User can search by \"Phase\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByDepartment": [
+    {
+      "rowID": "verifyUserCanSearchByDepartment.01",
+      "description": "Test Case 91425: User can search by \"Department\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91425",
+          "testCaseTitle": "User can search by \"Department\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByWoType": [
+    {
+      "rowID": "verifyUserCanSearchByWoType.01",
+      "description": "Test Case 91426: User can search by \"WO Type\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91426",
+          "testCaseTitle": "User can search by \"WO Type\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByWoNumber": [
+    {
+      "rowID": "verifyUserCanSearchByWoNumber.01",
+      "description": "Test Case 91427: User can search by \"WO#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91427",
+          "testCaseTitle": "User can search by \"WO#\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByRoNumber": [
+    {
+      "rowID": "verifyUserCanSearchByRoNumber.01",
+      "description": "Test Case 91428: User can search by \"RO#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91428",
+          "testCaseTitle": "User can search by \"RO#\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByStockNumber": [
+    {
+      "rowID": "verifyUserCanSearchByStockNumber.01",
+      "description": "Test Case 91429: User can search by \"Stock#\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91429",
+          "testCaseTitle": "User can search by \"Stock#\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByVinNumber": [
+    {
+      "rowID": "verifyUserCanSearchByVinNumber.01",
+      "description": "Test Case 91430: User can search by \"VIN\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91430",
+          "testCaseTitle": "User can search by \"VIN\""
+        }
+      ]
+    }
+  ]
+}
