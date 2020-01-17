@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementData;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsManagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;

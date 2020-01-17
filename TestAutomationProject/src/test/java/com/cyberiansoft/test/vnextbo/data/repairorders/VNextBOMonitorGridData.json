@@ -1,0 +1,31 @@
+{
+  "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase": [
+    {
+      "rowID": "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase.01",
+      "description": "Test Case 91010: User can see and change Technicians of the current phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91376"
+        }
+      ],
+      "monitorData": {
+        "location": "Rozstalnoy_location",
+        "orderNumber": "O-000-152649",
+        "vendor": "Test Team",
+        "status": "Approved",
+        "serviceTabs": [
+          "Rozstalnoy",
+          "Rozstalnoy2"
+        ],
+        "serviceStatuses": [
+          "Completed",
+          "Active"
+        ],
+        "services": [
+          "rozstalnoy_enable_money",
+          "roz_dis_part_money"
+        ]
+      }
+    }
+  ]
+}

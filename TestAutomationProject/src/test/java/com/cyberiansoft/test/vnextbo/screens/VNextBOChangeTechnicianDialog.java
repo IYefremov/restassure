@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import lombok.Getter;
@@ -37,16 +36,28 @@ public class VNextBOChangeTechnicianDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='order_VendorTechnician_ModalTemplate']//button[@data-automation-id='modalCloseButton']")
     private WebElement changeTechnicianXButton;
 
+    @FindBy(xpath = "//div[text()='Select vendor...']/..")
+    private WebElement vendorDropDown;
+
+    @FindBy(xpath = "//div[text()='Select technician...']/..")
+    private WebElement technicianDropDown;
+
     @FindBy(xpath = "//div[@id='orderServices_PhaseVendorTechnician_ModalTemplate']//span[contains(@class, 'dropdown k-header')]")
     private List<WebElement> changeOrderServiceTechnicianListBoxes;
 
-    @FindBy(xpath = "//div[@id='order_VendorTechnician_ModalTemplate']//span[contains(@class, 'dropdown k-header')]")
-    private List<WebElement> changeTechnicianListBoxes;
+    @FindBy(xpath = "//div[@id='order_VendorTechnician_ModalTemplate']//input[contains(@data-bind, 'selectedTechnician')]/..")
+    private WebElement technicianListBox;
 
-    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
+    @FindBy(xpath = "//div[contains(@id, 'VendorTechnician')]//input[contains(@data-bind, 'selectedTechnician')]/..//span[@aria-label='select']")
+    private WebElement technicianArrow;
+
+    @FindBy(xpath = "//div[@id='order_VendorTechnician_ModalTemplate']//input[contains(@data-bind, 'selectedVendor')]/..")
+    private WebElement vendorListBox;
+
+    @FindBy(xpath = "//div[text()='Select vendor...']/..//li")
     private List<WebElement> vendorListBoxOptions;
 
-    @FindBy(xpath = "//div[@class='k-animation-container']//ul[@data-role='staticlist']/li")
+    @FindBy(xpath = "//div[text()='Select technician...']/..//li")
     private List<WebElement> technicianListBoxOptions;
 
     @FindBy(xpath = "//div[@id='orderServices_PhaseVendorTechnician_ModalTemplate']//span[contains(@class, 'dropdown k-header')]//span[@class='k-input']")
@@ -55,9 +66,5 @@ public class VNextBOChangeTechnicianDialog extends VNextBOBaseWebPage {
     public VNextBOChangeTechnicianDialog() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
-    }
-
-    public boolean isChangeTechnicianDialogDisplayed() {
-        return Utils.isElementDisplayed(changeOrderServicesTechnicianDialog);
     }
 }

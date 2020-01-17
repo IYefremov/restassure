@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
@@ -40,7 +40,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         VNextBORODetailsPageInteractions.setPhaseStatus(data.getPhase(), OrderMonitorServiceStatuses.ACTIVE.getValue());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
@@ -153,12 +153,12 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
         final String status = OrderMonitorServiceStatuses.ACTIVE.getValue();
-        VNextBORODetailsPageSteps.setServiceStatusForServiceByServiceId(serviceId, status);
+        VNextBORODetailsPageSteps.setServiceStatusByServiceId(serviceId, status);
         VNextBOROProblemsInteractions.clickResolveButton();
         VNextBORODetailsPageValidations.verifyStatusHasBeenSetForService(serviceId, status);
         VNextBORODetailsPageSteps.setReportProblemForService(serviceId, data.getProblemReason(), data.getProblemDescription());
@@ -173,7 +173,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
@@ -197,11 +197,11 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         final String serviceId = VNextBORODetailsPageInteractions.getServiceId(data.getService());
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
-//        VNextBORODetailsPageSteps.setServiceStatusForServiceByServiceId(serviceId, data.getServiceStatuses()[0]);
-        VNextBORODetailsPageSteps.setServiceStatusForServiceByServiceId(
+//        VNextBORODetailsPageSteps.setServiceStatusByServiceId(serviceId, data.getServiceStatuses()[0]);
+        VNextBORODetailsPageSteps.setServiceStatusByServiceId(
                 serviceId, OrderMonitorServiceStatuses.COMPLETED.getValue());
         VNextBORODetailsPageValidations.verifyStatusHasBeenSetForService(
                 serviceId, OrderMonitorServiceStatuses.COMPLETED.getValue());
@@ -224,7 +224,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         VNextBORODetailsPageInteractions.setPhaseStatus(data.getPhase(), OrderMonitorServiceStatuses.ACTIVE.getValue());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
@@ -241,18 +241,18 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         final String service = data.getService();
         final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
         final String status = OrderMonitorServiceStatuses.ACTIVE.getValue();
-        VNextBORODetailsPageSteps.setServiceStatusForServiceByServiceId(serviceId, status);
+        VNextBORODetailsPageSteps.setServiceStatusByServiceId(serviceId, status);
         VNextBOROProblemsInteractions.clickResolveButton();
         VNextBORODetailsPageValidations.verifyStatusHasBeenSetForService(serviceId, status);
         VNextBORODetailsPageSteps.setReportProblemForService(serviceId, data.getProblemReason(), data.getProblemDescription());
 
-        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhase(data.getPhase());
+        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhaseWithProblem(data.getPhase());
         Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isServiceNameGridDisplayed(),
                 "The service name grid hasn't been displayed");
         Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isProblemReasonGridDisplayed(),
@@ -278,18 +278,18 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         final String service = data.getService();
         final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
         final String status = OrderMonitorServiceStatuses.ACTIVE.getValue();
-        VNextBORODetailsPageSteps.setServiceStatusForServiceByServiceId(serviceId, status);
+        VNextBORODetailsPageSteps.setServiceStatusByServiceId(serviceId, status);
         VNextBOROProblemsInteractions.clickResolveButton();
         VNextBORODetailsPageValidations.verifyStatusHasBeenSetForService(serviceId, status);
         VNextBORODetailsPageSteps.setReportProblemForService(serviceId, data.getProblemReason(), data.getProblemDescription());
 
-        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhase(data.getPhase());
+        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhaseWithProblem(data.getPhase());
         Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isServiceNameGridDisplayed(),
                 "The service name grid hasn't been displayed");
 
@@ -310,18 +310,18 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         final String service = data.getService();
         final String serviceId = VNextBORODetailsPageInteractions.getServiceId(service);
         Assert.assertNotEquals(serviceId, "", "The service hasn't been displayed");
 
         final String activeStatus = OrderMonitorServiceStatuses.ACTIVE.getValue();
-        VNextBORODetailsPageSteps.setServiceStatusForServiceByServiceId(serviceId, activeStatus);
+        VNextBORODetailsPageSteps.setServiceStatusByServiceId(serviceId, activeStatus);
         VNextBOROProblemsInteractions.clickResolveButton();
         VNextBORODetailsPageValidations.verifyStatusHasBeenSetForService(serviceId, activeStatus);
         VNextBORODetailsPageSteps.setReportProblemForService(serviceId, data.getProblemReason(), data.getProblemDescription());
 
-        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhase(data.getPhase());
+        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhaseWithProblem(data.getPhase());
         VNextBOCompleteCurrentPhaseDialogInteractions.cancelCompletingCurrentPhase();
         VNextBORODetailsPageValidations.verifyStatusHasBeenSetForService(
                 serviceId, OrderMonitorServiceStatuses.PROBLEM.getValue());
@@ -335,7 +335,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        VNextBORODetailsPageInteractions.expandServicesTable(data.getPhase());
+        VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         final String service = data.getService();
         final List<String> allServicesId = VNextBORODetailsPageInteractions.getAllServicesId(service);
         Assert.assertTrue(!allServicesId.isEmpty(), "The service hasn't been displayed");
@@ -346,7 +346,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageSteps.setReportProblemForMultipleServices(
                 allServicesId, data.getProblemReason(), data.getProblemDescription());
 
-        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhase(data.getPhase());
+        VNextBORODetailsPageSteps.setCompleteCurrentPhaseForPhaseWithProblem(data.getPhase());
         VNextBOCompleteCurrentPhaseDialogInteractions.resolveServices(service, service);
 
         VNextBOCompleteCurrentPhaseDialogInteractions.cancelCompletingCurrentPhase();

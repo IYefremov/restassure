@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
@@ -11,13 +11,10 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.*;
 import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOPrivacyPolicyDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOTermsAndConditionsDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
@@ -293,6 +290,6 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
         VNextBORODetailsPageSteps.setServiceStatusForService(data.getService(),
                 OrderMonitorServiceStatuses.ACTIVE.getValue());
         VNextBORODetailsPageSteps.openRoPageByClickingBreadCrumbRo();
-        VNextBOROPageInteractions.completeCurrentPhase(data.getOrderNumber());
+        VNextBOCurrentPhasePanelSteps.completeCurrentPhase(data.getOrderNumber());
     }
 }

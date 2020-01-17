@@ -5,7 +5,6 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;

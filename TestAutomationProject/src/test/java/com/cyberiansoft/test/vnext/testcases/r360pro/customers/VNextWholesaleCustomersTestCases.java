@@ -14,7 +14,6 @@ import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;

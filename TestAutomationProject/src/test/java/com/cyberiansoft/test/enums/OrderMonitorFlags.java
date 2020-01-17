@@ -11,7 +11,7 @@ public enum OrderMonitorFlags {
     YELLOW("Yellow"),
     GREEN("Green"),
     BLUE("Blue"),
-    VIOLET("Test");
+    PURPLE("Test");
 
     private String flag;
 

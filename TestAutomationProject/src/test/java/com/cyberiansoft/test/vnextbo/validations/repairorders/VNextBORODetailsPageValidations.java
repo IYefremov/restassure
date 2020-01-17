@@ -12,7 +12,7 @@ import java.util.List;
 public class VNextBORODetailsPageValidations {
 
     public static String verifyServiceIsDisplayedForCollapsedPhase(String service, String phase) {
-        VNextBORODetailsPageInteractions.expandServicesTable(phase);
+        VNextBORODetailsPageInteractions.expandPhasesTable(phase);
         return verifyServiceIsDisplayedForExpandedPhase(service);
     }
 
@@ -171,7 +171,6 @@ public class VNextBORODetailsPageValidations {
     }
 
     public static void verifyStatusHasBeenSetForService(String serviceId, String status) {
-        WaitUtilsWebDriver.waitForLoading();
         Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId), status,
                 "The status hasn't been set for service");
     }

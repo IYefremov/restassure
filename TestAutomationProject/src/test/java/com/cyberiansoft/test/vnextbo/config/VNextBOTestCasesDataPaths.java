@@ -34,6 +34,14 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.monitor.advanced.search.td");
     }
 
+    public String getMonitorGridTD() {
+        return properties.getProperty("vnextbo.monitor.grid.td");
+    }
+
+    public String getMonitorBasicTD() {
+        return properties.getProperty("vnextbo.monitor.basic.td");
+    }
+
     public String getMonitorReportProblemTD() {
         return properties.getProperty("vnextbo.monitor.report.problem.td");
     }

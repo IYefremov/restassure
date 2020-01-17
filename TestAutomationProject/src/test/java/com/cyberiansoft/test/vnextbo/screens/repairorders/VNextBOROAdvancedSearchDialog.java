@@ -173,7 +173,7 @@ public class VNextBOROAdvancedSearchDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']//span[@class='k-input']")
     private WebElement flagDisplayed;
 
-    @FindBy(xpath = "//button[@class='btn-black pull-right']")
+    @FindBy(xpath = "//div[@class='advSearch']//button[contains(text(), 'Search')]")
     private WebElement searchButton;
 
     @FindBy(xpath = "//div[@class='advSearch']//button[contains(text(), 'Save')]")

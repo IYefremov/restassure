@@ -5,7 +5,6 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOClientInfoBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;

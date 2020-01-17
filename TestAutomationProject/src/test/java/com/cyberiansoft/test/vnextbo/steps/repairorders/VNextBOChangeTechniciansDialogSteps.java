@@ -1,13 +1,13 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOChangeTechniciansDialogInteractions;
-import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOChangeTechniciansDialogVerifications;
+import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOChangeTechniciansDialogValidations;
 
 public class VNextBOChangeTechniciansDialogSteps {
 
     public static void setOptionsForTechniciansDialog(String vendor, String technician) {
-        VNextBOChangeTechniciansDialogVerifications.verifyVendorIsSet(vendor);
-        VNextBOChangeTechniciansDialogVerifications.verifyTechnicianIsSet(technician);
+        VNextBOChangeTechniciansDialogValidations.verifyVendorIsSet(vendor);
+        VNextBOChangeTechniciansDialogValidations.verifyTechnicianIsSet(technician);
     }
 
     public static void setOptionsAndClickOkButtonForTechniciansDialog(String vendor, String technician) {

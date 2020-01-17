@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.partservice;
 
-import com.cyberiansoft.test.dataclasses.BundleServiceData;
 import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
@@ -11,7 +10,6 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.interactions.services.BundleServiceScreenInteractrions;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;

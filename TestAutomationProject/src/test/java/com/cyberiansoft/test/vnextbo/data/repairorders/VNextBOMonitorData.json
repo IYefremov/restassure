@@ -1534,5 +1534,118 @@
         "hundred": "100"
       }
     }
+  ],
+
+  "verifyUserCanChangeMoreThanOneDifferentTechniciansLinkedToOnePhase": [
+    {
+      "rowID": "verifyUserCanChangeMoreThanOneDifferentTechniciansLinkedToOnePhase.01",
+      "description": "Test Case 91011: User can change more than 1 different technicians linked to 1 phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91377"
+        }
+      ],
+      "orderNumber": "O-000-152650",
+      "vendor": "Test Team",
+      "status": "Approved",
+      "serviceTabs": [
+        "Rozstalnoy",
+        "Rozstalnoy2"
+      ],
+      "services": [
+        "roz_dis_part_money",
+        "roz_en_part_money"
+      ]
+    }
+  ],
+
+  "verifyUserCanStartCompleteServicesAndPhasesFromMainROsPage": [
+    {
+      "rowID": "verifyUserCanStartCompleteServicesAndPhasesFromMainROsPage.01",
+      "description": "Test Case 91029: User can start/complete services and phases from the main RO's page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91379"
+        }
+      ],
+      "orderNumber": "O-368-00007",
+      "phase": "Rozstalnoy2",
+      "services": [
+        "roz_dis_part_money",
+        "roz_en_part_money"
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeFieldsOfStockROPONumsAndInvoiceColumns": [
+    {
+      "rowID": "verifyUserCanChangeFieldsOfStockROPONumsAndInvoiceColumns.01",
+      "description": "Test Case 82628: User can change fields of \"Stock# / RO# / PO# / Invoice\" column",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91385"
+        }
+      ],
+      "orderNumber": "O-351-00042"
+    }
+  ],
+
+  "verifyUserCanChangeTargetDateOfRO": [
+    {
+      "rowID": "verifyUserCanChangeTargetDateOfRO.01",
+      "description": "Test Case 82656: User can change \"Target Date\" of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91389"
+        }
+      ],
+      "orderNumber": "O-351-00042"
+    }
+  ],
+
+  "verifyUserCanPrioritizeRO": [
+    {
+      "rowID": "verifyUserCanPrioritizeRO.01",
+      "description": "Test Case 82683: User can prioritize Repair Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91393"
+        }
+      ],
+      "location": "1111 Automation",
+      "orderNumber": "O-000-152073",
+      "searchValues": {
+        "searchNames": [
+          "Auto-test O-000-152073 Pls, do not change",
+          "Auto-test. Pls, do not change"
+        ]
+      },
+      "pages": {
+        "hundred": "100"
+      }
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRO": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRO.01",
+      "description": "Test Case 82689: User can prioritize Repair Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91395"
+        }
+      ],
+      "location": "1111 Automation",
+      "orderNumber": "O-000-152073",
+      "searchValues": {
+        "searchNames": [
+          "Auto-test O-000-152073 Pls, do not change",
+          "Auto-test. Pls, do not change"
+        ]
+      },
+      "pages": {
+        "hundred": "100"
+      }
+    }
   ]
 }

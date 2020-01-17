@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementSearchData;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsManagement.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAdvancedSearchDialog;
 import org.testng.Assert;
 

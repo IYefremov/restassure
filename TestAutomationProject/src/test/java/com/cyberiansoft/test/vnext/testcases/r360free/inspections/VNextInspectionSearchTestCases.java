@@ -25,7 +25,6 @@ import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;

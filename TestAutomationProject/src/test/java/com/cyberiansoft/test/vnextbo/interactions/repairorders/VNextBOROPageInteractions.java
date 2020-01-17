@@ -6,13 +6,16 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOEditNotesDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOOtherPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,11 +24,11 @@ import java.util.stream.Stream;
 public class VNextBOROPageInteractions {
 
     public static void clickTechniciansFieldForWO(String woNumber) {
-        Utils.clickElement(new VNextBOROWebPage().getTechniciansFieldForWO(woNumber));
+        Utils.clickElement(new VNextBOROWebPage().getTechnicianFieldForWO(woNumber));
     }
 
     public static void clickWoLink(String woNumber) {
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+//        WaitUtilsWebDriver.waitForPageToBeLoaded();
         Utils.clickElement(By.xpath("//a[@class='order-no']/strong[text()='" + woNumber + "']/.."));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
@@ -108,7 +111,8 @@ public class VNextBOROPageInteractions {
                 .filter(o -> o.getText().equals(option))
                 .findFirst()
                 .ifPresent(Utils::clickWithActions);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static String getOrderNoteText() {
@@ -301,11 +305,7 @@ public class VNextBOROPageInteractions {
     }
 
     public static List<String> getOrdersCurrentPhaseList() {
-        final List<WebElement> ordersCurrentPhaseList = new VNextBOROWebPage().getOrdersCurrentPhaseList();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersCurrentPhaseList);
-        return ordersCurrentPhaseList.stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
+        return Utils.getText(new VNextBOROWebPage().getOrdersCurrentPhaseList());
     }
 
     public static void setPhasesTabActive() {
@@ -345,9 +345,8 @@ public class VNextBOROPageInteractions {
     }
 
     public static void clickCancelSearchIcon() {
-        WaitUtilsWebDriver.waitForLoading();
         Utils.clickElement(new VNextBOROWebPage().getCancelSearchIcon());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static String getWorkOrderActivePhaseValue(String orderNumber) {
@@ -377,28 +376,15 @@ public class VNextBOROPageInteractions {
     }
 
     public static void clickWorkOrderCurrentPhaseMenu(String orderNumber) {
-        Utils.clickElement(new VNextBOROWebPage().getPhaseMenuArrow(orderNumber));
-    }
-
-    public static void completeWorkOrderServiceStatus(String orderNumber, String serviceName) {
-        clickWorkOrderCurrentPhaseMenu(orderNumber);
-        List<WebElement> services = new VNextBOROWebPage().getChangePhaseStatusOptions(orderNumber);
-        for (WebElement srv : services)
-            if (srv.getText().trim().contains(serviceName)) {
-                srv.click();
-                break;
-            }
-
-        WaitUtilsWebDriver.waitForLoading();
-    }
-
-    public static void completeCurrentPhase(String orderNumber) {
-        clickWorkOrderCurrentPhaseMenu(orderNumber);
-        final WebElement completeCurrentPhaseOption = new VNextBOROWebPage().getCompleteCurrentPhaseOption(orderNumber);
-        if (WaitUtilsWebDriver.elementShouldBeVisible(completeCurrentPhaseOption, true)) {
-            Utils.clickElement(completeCurrentPhaseOption);
+        final WebElement phaseMenu = new VNextBOROWebPage().getPhaseMenu(orderNumber);
+        try {
+            Utils.clickElement(phaseMenu);
+        } catch (Exception e) {
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
+            WaitUtilsWebDriver.waitForElementNotToBeStale(phaseMenu);
+            WaitUtilsWebDriver.waitABit(2000);
+            Utils.clickElement(phaseMenu);
         }
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static String getCompletedWorkOrderValue(String orderNumber) {
@@ -415,13 +401,14 @@ public class VNextBOROPageInteractions {
         WaitUtilsWebDriver.waitForNewTab();
     }
 
-    public static void openOtherDropDownMenu(String wo) {
-        final VNextBOROWebPage repairOrdersPage = new VNextBOROWebPage();
-        WebElement roTableRow = repairOrdersPage.getTableRowWithWorkOrder(wo);
-        final WebElement icon = roTableRow
-                .findElement(By.xpath("//td[@class='grid__actions']//i[contains(@class, 'icon-arrow')]"));
-        Utils.clickElement(icon);
-        WaitUtilsWebDriver.waitForVisibility(repairOrdersPage.getOtherDropDown());
+    public static void openOtherDropDownMenu(String orderNumber) {
+        final WebElement tableRowWithWorkOrder = new VNextBOROWebPage().getTableRowWithWorkOrder(orderNumber);
+        if (VNextBOOtherPanelValidations.isOtherPanelClosed(orderNumber)) {
+            WaitUtilsWebDriver.waitABit(1000);
+            Utils.clickElement(tableRowWithWorkOrder.findElement(
+                    By.xpath("//td[@class='grid__actions']//i[contains(@class, 'icon-arrow')]")));
+            VNextBOOtherPanelInteractions.waitForOtherPanelToBeOpened(orderNumber);
+        }
     }
 
     public static void openWorkOrderDetailsPage(String wo) {
@@ -434,8 +421,20 @@ public class VNextBOROPageInteractions {
         WaitUtilsWebDriver.waitForInvisibility(new VNextBOROWebPage().getLocationExpanded());
     }
 
-    public static String getTechniciansValueForWO(String woNumber) {
-        return Utils.getText(new VNextBOROWebPage().getTechniciansFieldForWO(woNumber));
+    public static String getTechnicianValueForWO(String woNumber) {
+        return Utils.getText(new VNextBOROWebPage().getTechnicianFieldForWO(woNumber));
+    }
+
+    public static List<String> getMultipleTechniciansValuesForWO(String orderNumber) {
+        return Arrays.asList(VNextBOROPageInteractions.getTechnicianValueForWO(orderNumber).split(", "));
+    }
+
+    public static void waitForTechnicianToBeUpdated(String orderNumber, String prevTechnician) {
+        WaitUtilsWebDriver.getWebDriverWait(10).until((ExpectedCondition<Boolean>) driver -> {
+            final String technicianValue = VNextBOROPageInteractions.getTechnicianValueForWO(orderNumber);
+            return !(technicianValue.equals(prevTechnician) && technicianValue.isEmpty());
+        });
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     public static List<String> getArbitrationDatesList() {
@@ -523,5 +522,53 @@ public class VNextBOROPageInteractions {
         final List<WebElement> ordersNumber = new VNextBOROWebPage().getWoNumbersList();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersNumber, 5);
         return ordersNumber.size();
+    }
+
+    public static void setStockNum(String orderNumber, String value) {
+        Utils.clearAndType(new VNextBOROWebPage().getStockNumInputField(orderNumber), value);
+        Utils.clickElement(new VNextBOROWebPage().getStockVinROPOInvoicesTableHeader());
+    }
+
+    public static void setRONum(String orderNumber, String value) {
+        Utils.clearAndType(new VNextBOROWebPage().getRONumInputField(orderNumber), value);
+        Utils.clickElement(new VNextBOROWebPage().getStockVinROPOInvoicesTableHeader());
+    }
+
+    public static void setPONum(String orderNumber, String value) {
+        Utils.clearAndType(new VNextBOROWebPage().getPONumInputField(orderNumber), value);
+        Utils.clickElement(new VNextBOROWebPage().getStockVinROPOInvoicesTableHeader());
+    }
+
+    public static String getStockNum(String orderNumber) {
+        return Utils.getInputFieldValue(new VNextBOROWebPage().getStockNumInputField(orderNumber));
+    }
+
+    public static String getRONum(String orderNumber) {
+        return Utils.getInputFieldValue(new VNextBOROWebPage().getRONumInputField(orderNumber));
+    }
+
+    public static String getPONum(String orderNumber) {
+        return Utils.getInputFieldValue(new VNextBOROWebPage().getPONumInputField(orderNumber));
+    }
+
+    public static List<String> getOrderNamesValuesList() {
+        return Utils.getText(new VNextBOROWebPage().getOrderNamesList());
+    }
+
+    public static List<String> getHighPriorityOrdersListOnPage() {
+        return Utils.getText(new VNextBOROWebPage().getHighPriorityOrdersList());
+    }
+
+    public static List<String> getMidPriorityOrdersListOnPage() {
+        return Utils.getText(new VNextBOROWebPage().getMidPriorityOrdersList());
+    }
+
+    public static List<String> getLowPriorityOrdersListOnPage() {
+        return Utils.getText(new VNextBOROWebPage().getLowPriorityOrdersList());
+    }
+
+    public static String getFirstOrderBackgroundColor() {
+        return WaitUtilsWebDriver.waitForVisibility(new VNextBOROWebPage().getOrdersList().get(0), 5)
+                .getAttribute("class");
     }
 }

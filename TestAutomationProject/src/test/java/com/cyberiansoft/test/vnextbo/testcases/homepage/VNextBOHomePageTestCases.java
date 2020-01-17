@@ -2,43 +2,26 @@ package com.cyberiansoft.test.vnextbo.testcases.homepage;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOHomePageData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
-import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOUserProfileDialog;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.devicemanagement.VNextBODeviceManagementSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOUserProfileDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
-import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOPrivacyPolicyDialogSteps;
-import com.cyberiansoft.test.vnextbo.steps.termsconditionspolicy.VNextBOTermsAndConditionsDialogSteps;
-import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.validations.devicemanagement.VNextBODeviceManagementPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOUserProfileDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
 import com.cyberiansoft.test.vnextbo.validations.homepage.VNextBOHomeWebPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
-import com.cyberiansoft.test.vnextbo.validations.users.VNextBOUsersPageValidations;
 import org.json.simple.JSONObject;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOHomePageTestCases extends BaseTestCase {
 

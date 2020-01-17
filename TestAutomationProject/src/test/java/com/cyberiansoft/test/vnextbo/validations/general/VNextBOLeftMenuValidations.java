@@ -6,7 +6,6 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.Objects;
 

@@ -39,7 +39,7 @@ public class VNextBOROAdvancedSearchDialogInteractions {
 
     public static void clickSearchButton() {
         Utils.clickElement(new VNextBOROAdvancedSearchDialog().getSearchButton());
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void closeAdvancedSearchDialog() {
