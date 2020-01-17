@@ -66,7 +66,7 @@ public class VNextBOPartsDetailsPanelSteps {
 
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
         Utils.clickElement(detailsPanel.getPartStatusField().get(partNumber));
-        Utils.selectOptionInDropDownWithJsScroll(detailsPanel.getPartStatusDropDown(), detailsPanel.getPartStatusListBoxOptions(), status);
+        Utils.selectOptionInDropDownWithJsScroll(status);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 

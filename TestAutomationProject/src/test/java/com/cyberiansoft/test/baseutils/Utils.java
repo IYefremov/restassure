@@ -192,7 +192,7 @@ public class Utils {
                 .findFirst();
     }
 
-    public static void selectOptionInDropDownWithJsScroll(WebElement dropDown, List<WebElement> listBox, String optionName) {
+    public static void selectOptionInDropDownWithJsScroll(String optionName) {
 
         JavascriptExecutor javascriptExecutor = ((JavascriptExecutor) DriverBuilder.getInstance().getDriver());
         javascriptExecutor.executeScript("document.querySelector('div[aria-hidden=\"false\"] div.k-list-scroller').scrollTop+=-1000");

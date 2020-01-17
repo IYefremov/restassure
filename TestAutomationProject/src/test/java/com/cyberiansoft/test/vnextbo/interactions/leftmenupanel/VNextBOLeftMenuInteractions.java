@@ -58,6 +58,7 @@ public class VNextBOLeftMenuInteractions {
 
     public static void selectRepairOrdersMenu() {
         selectMenuItem(MainMenuItems.MONITOR.getMenu(), "Repair Orders");
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void expandMainMenu() {
