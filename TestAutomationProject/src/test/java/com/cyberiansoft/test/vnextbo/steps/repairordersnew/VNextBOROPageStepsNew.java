@@ -1,14 +1,19 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class VNextBOROPageStepsNew {
+
+    static String fromDate = LocalDate.now().minusYears(2).format(DateTimeFormatter.ofPattern("M/d/yyyy"));
+    static String toDate = LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("M/d/yyyy"));
 
     public static void searchOrdersByCustomer(String customer) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setCustomerField(customer);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
@@ -16,7 +21,7 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setEmployeeField(employee);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
@@ -24,7 +29,7 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setPhaseField(phase);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
@@ -32,7 +37,7 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setDepartmentField(department);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
@@ -40,7 +45,7 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setWoTypeField(woType);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
@@ -48,7 +53,7 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setWoNumberField(woNumber);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
@@ -56,7 +61,7 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setRoNumberField(roNumber);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
@@ -64,7 +69,7 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setStockNumberField(stockNumber);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
@@ -72,7 +77,7 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setVinNumberField(vinNumber);
-        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame("1/1/2018", "1/1/2028");
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 }
