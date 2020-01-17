@@ -403,6 +403,7 @@ public class VNextBOROPageInteractions {
     public static void openOtherDropDownMenu(String orderNumber) {
         final WebElement tableRowWithWorkOrder = new VNextBOROWebPage().getTableRowWithWorkOrder(orderNumber);
         if (VNextBOOtherPanelValidations.isOtherPanelClosed(orderNumber)) {
+            WaitUtilsWebDriver.waitABit(1000);
             Utils.clickElement(tableRowWithWorkOrder.findElement(
                     By.xpath("//td[@class='grid__actions']//i[contains(@class, 'icon-arrow')]")));
             VNextBOOtherPanelInteractions.waitForOtherPanelToBeOpened(orderNumber);
