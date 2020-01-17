@@ -15,14 +15,15 @@ import java.util.regex.Pattern;
 @Getter
 public class RepairOrderListElement implements IWebElement {
     private WebElement rootElement;
-    String expandButtonLocator = ".//div[@class=\"status-item-content-toggle\"]";
-    private String repairOrderIdLocator = ".//div[contains(@class,'status-item-content-subtitle')]";
-    private String statusValue = "//div[@class='status-item-chart']";
+    //String expandButtonLocator = ".//div[@class=\"status-item-content-toggle\"]";
+    String expandButtonLocator = ".//*[@action=\"toggle_item\"]";
+    private String repairOrderIdLocator = ".//div[contains(@class,'order-num')]";
+    private String statusValue = "//div[contains(@class,'ro-item-progress')]";
     private String stockValue = "//span[@class='content-subtitle-name' and contains(text(), 'Stock')]/..";
-    private String phaseTextLocator = "//div[@class='status-item-content-row']/div[@class='status-item-content-subtitle']";
-    private String vinTextLocator = "//span[@class='content-subtitle-name']/..";
+    private String phaseTextLocator = "//div[contains(@class,'active-phase')]";
+    private String vinTextLocator = "//div[contains(@class,'right-vin')]";
     private String statusesListLocator = "//*[@action=\"change-flag\"]";
-    private String repairOrderLocator = ".//div[contains(@class,'status-item-status-box')]";
+    private String repairOrderLocator = ".//div[contains(@class,'ro-item accordion-item')]";
 
     public RepairOrderListElement(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -34,7 +35,7 @@ public class RepairOrderListElement implements IWebElement {
             rootElement.findElement(By.xpath(expandButtonLocator)).click();
             BaseUtils.waitABit(500);
         }
-        return rootElement.findElement(By.xpath(".//div[@class='status-item' and @action='select']")).
+        return rootElement.findElement(By.xpath(".//div[@class='accordion-item-content']")).
                 findElement(By.xpath(repairOrderIdLocator)).getText();
     }
 
