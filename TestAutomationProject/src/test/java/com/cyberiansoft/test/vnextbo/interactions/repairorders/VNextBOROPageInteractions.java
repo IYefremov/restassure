@@ -112,6 +112,7 @@ public class VNextBOROPageInteractions {
                 .findFirst()
                 .ifPresent(Utils::clickWithActions);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static String getOrderNoteText() {
