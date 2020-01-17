@@ -7,20 +7,22 @@ import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorGridData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.OrderMonitorRepairStatuses;
-import com.cyberiansoft.test.enums.OrderMonitorStatuses;
-import com.cyberiansoft.test.enums.TimeFrameValues;
+import com.cyberiansoft.test.enums.*;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCurrentPhasePanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.steps.HomePageSteps;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOOtherPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCurrentPhasePanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOOtherPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import org.json.simple.JSONObject;
@@ -32,16 +34,19 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.EnumSet;
 import java.util.List;
 
 public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
 
+    private VNextBOMonitorBasicData startData;
+
     @BeforeClass
     public void settingUp() throws IOException {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
-        VNextBOMonitorBasicData data = JSonDataParser.getTestDataFromJson(
+        startData = JSonDataParser.getTestDataFromJson(
                 new File(VNextBOTestCasesDataPaths.getInstance().getMonitorBasicTD()), VNextBOMonitorBasicData.class);
-        HomePageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(startData.getLocation());
     }
 
     @AfterMethod
@@ -49,12 +54,12 @@ public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
         Utils.refreshPage();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase(String rowID, String description, JSONObject testData) {
         VNextBOMonitorGridData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorGridData.class);
         final VNextBOMonitorData monitorData = data.getMonitorData();
         System.out.println(monitorData);
-        HomePageSteps.openRepairOrdersMenuWithLocation(monitorData.getLocation());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(monitorData.getLocation());
         final String orderNumber = monitorData.getOrderNumber();
         final String vendor = monitorData.getVendor();
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
@@ -88,6 +93,7 @@ public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
     public void verifyUserCanChangeMoreThanOneDifferentTechniciansLinkedToOnePhase(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
+        VNextBOBreadCrumbInteractions.setLocation(startData.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
         final String orderNumber = data.getOrderNumber();
         final String phaseOne = data.getServiceTabs()[0];
@@ -108,7 +114,7 @@ public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
         Utils.goToPreviousPage();
         VNextBOROPageInteractions.waitForTechnicianToBeUpdated(orderNumber, prevTechnician);
         Assert.assertTrue(WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
-                VNextBOROPageInteractions.getMultipleTechniciansValuesForWO(orderNumber).containsAll(techniciansSet)),
+                        VNextBOROPageInteractions.getMultipleTechniciansValuesForWO(orderNumber).containsAll(techniciansSet)),
                 "The technician's name is not displayed");
         prevTechnician = VNextBOROPageInteractions.getTechnicianValueForWO(orderNumber);
 
@@ -132,7 +138,7 @@ public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
         VNextBOROPageInteractions.waitForTechnicianToBeUpdated(orderNumber, prevTechnician);
 
         Assert.assertTrue(WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
-                VNextBOROPageInteractions.getMultipleTechniciansValuesForWO(orderNumber).containsAll(updatedTechniciansSet)),
+                        VNextBOROPageInteractions.getMultipleTechniciansValuesForWO(orderNumber).containsAll(updatedTechniciansSet)),
                 "The technician's name is not displayed");
     }
 
@@ -140,6 +146,7 @@ public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
     public void verifyUserCanChangeFieldsOfStockROPONumsAndInvoiceColumns(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
+        VNextBOBreadCrumbInteractions.setLocation(startData.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
         final String orderNumber = data.getOrderNumber();
 
@@ -167,6 +174,7 @@ public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
     public void verifyUserCanStartCompleteServicesAndPhasesFromMainROsPage(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
+        VNextBOBreadCrumbInteractions.setLocation(startData.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
         final String orderNumber = data.getOrderNumber();
 
@@ -177,12 +185,102 @@ public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(orderNumber, true),
                 "The work order is not displayed after search by clicking the 'Search' icon");
 
-        VNextBOCurrentPhasePanelValidations.verifyOrderIsNotCompleted(orderNumber, data.getPhase());
-        VNextBOROPageInteractions.clickWorkOrderCurrentPhaseMenu(orderNumber);
-        //todo uncomment after clarifying the preconditions for starting the current phase
-//        VNextBOCurrentPhasePanelValidations.verifyOrderCanBeStarted(orderNumber);
-//        Assert.assertTrue(VNextBOCurrentPhasePanelValidations.areStartServicesIconsDisplayedForWO(orderNumber),
-//                "The start services icons are not displayed for order " + orderNumber);
-//        VNextBOCurrentPhasePanelInteractions.startPhaseServices(orderNumber);
+        VNextBOROPageSteps.openRODetailsPage(orderNumber);
+        final List<String> allServicesId = VNextBORODetailsPageSteps.getAllPhaseServicesId(data.getPhase());
+        VNextBORODetailsPageSteps.setServiceStatusForMultipleServicesByServiceId(
+                allServicesId, OrderMonitorServiceStatuses.ACTIVE.getValue());
+        VNextBORODetailsPageSteps.resetServiceStartDate(allServicesId);
+        VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
+        WaitUtilsWebDriver.waitABit(2000);
+
+        VNextBOROPageSteps.openCurrentPhasePanel(orderNumber);
+        final List<String> servicesList = VNextBOCurrentPhasePanelInteractions.getServices();
+        final int prev = VNextBOCurrentPhasePanelInteractions.getDisplayedStartedServicesIconsNumber(orderNumber);
+        final int next = VNextBOCurrentPhasePanelInteractions.getDisplayedCompletedServicesIconsNumber(orderNumber);
+        final String service = VNextBOCurrentPhasePanelInteractions.clickRandomPhaseStatusOption(orderNumber);
+        Assert.assertTrue(VNextBOCurrentPhasePanelValidations.isCurrentPhasePanelOpened(),
+                "The current phase panel has been closed after clicking the phase status");
+        Assert.assertEquals(servicesList.size(), VNextBOCurrentPhasePanelInteractions.getServices().size(),
+                "The services list number has changed");
+        Assert.assertTrue(VNextBOCurrentPhasePanelInteractions.getStartedServicesValues(orderNumber).contains(service),
+                "The service is not displayed as started");
+        Assert.assertEquals(prev - 1, VNextBOCurrentPhasePanelInteractions.getDisplayedStartedServicesIconsNumber(orderNumber),
+                "The started services icons number hasn't been changed");
+        Assert.assertEquals(next + 1, VNextBOCurrentPhasePanelInteractions.getDisplayedCompletedServicesIconsNumber(orderNumber),
+                "The completed services icons number hasn't been changed");
+        VNextBOROPageSteps.closeCurrentPhaseOption(orderNumber);
+        VNextBOROPageSteps.openCurrentPhasePanel(orderNumber);
+//            Assert.assertEquals(servicesList.size() - 1, VNextBOCurrentPhasePanelInteractions.getServices().size(),
+//                    "The services list number has not been changed after reopening the current phase panel");
+
+        Assert.assertTrue(VNextBOCurrentPhasePanelValidations.areStartServicesIconsDisplayedForWO(orderNumber),
+                "The start services icons are not displayed for order " + orderNumber);
+        VNextBOCurrentPhasePanelInteractions.clickStartPhaseServices(orderNumber);
+        Assert.assertTrue(VNextBOCurrentPhasePanelValidations.isCurrentPhasePanelClosed(),
+                "The current phase panel hasn't been closed after starting the phase services");
+
+        VNextBOROPageSteps.openCurrentPhasePanel(orderNumber);
+        Assert.assertTrue(VNextBOCurrentPhasePanelValidations.areCompleteServicesIconsDisplayedForWO(orderNumber),
+                "The complete services icons are not displayed for order " + orderNumber);
+        VNextBOCurrentPhasePanelInteractions.clickCompleteCurrentPhaseOption(orderNumber);
+        Assert.assertTrue(VNextBOCurrentPhasePanelValidations.isCurrentPhasePanelClosed(),
+                "The current phase panel hasn't been closed after completing the phase services");
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanPrioritizeRO(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        final String orderNumber = data.getOrderNumber();
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
+        VNextBOOtherPanelSteps.setHighPriority(orderNumber);
+        VNextBOROPageInteractions.clickCancelSearchIcon();
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
+        Assert.assertTrue(VNextBOROPageInteractions.getHighPriorityOrdersListOnPage().contains(orderNumber),
+                "The order " + orderNumber + " doesn't have the highest priority");
+        Assert.assertTrue(VNextBOROPageValidations.isArrowUpDisplayed(orderNumber, true),
+                "The red icon is not displayed for the order");
+
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
+        VNextBOOtherPanelSteps.setLowPriority(orderNumber);
+        VNextBOROPageInteractions.clickCancelSearchIcon();
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
+        VNextBOPageSwitcherSteps.changeItemsPerPage(data.getPages().getHundred());
+        Assert.assertTrue(VNextBOROPageInteractions.getLowPriorityOrdersListOnPage().contains(orderNumber),
+                "The order " + orderNumber + " doesn't have the lowest priority");
+        Assert.assertTrue(VNextBOROPageValidations.isArrowDownDisplayed(orderNumber, true),
+                "The green icon is not displayed for the order");
+
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
+        VNextBOOtherPanelSteps.setMidPriority(orderNumber);
+        VNextBOROPageInteractions.clickCancelSearchIcon();
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[1]);
+        Assert.assertTrue(VNextBOROPageInteractions.getMidPriorityOrdersListOnPage().contains(orderNumber),
+                "The order " + orderNumber + " doesn't have the mid priority");
+        Assert.assertTrue(VNextBOROPageValidations.isArrowUpDisplayed(orderNumber, false),
+                "The red icon is displayed for the order with the mid priority");
+        Assert.assertTrue(VNextBOROPageValidations.isArrowDownDisplayed(orderNumber, false),
+                "The green icon is displayed for the order with the mid priority");
+    }
+
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeFlagOfRO(String rowID, String description, JSONObject testData) {
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+
+        final String orderNumber = data.getOrderNumber();
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOROPageSteps.setSavedSearchOption(data.getSearchValues().getSearchNames()[0]);
+
+        EnumSet.allOf(OrderMonitorFlags.class).forEach(flag -> {
+            VNextBOOtherPanelSteps.setFlag(orderNumber, flag.getFlag());
+            Assert.assertTrue(VNextBOOtherPanelValidations.isOtherPanelClosed(orderNumber),
+                    "The 'Other' panel hasn't been closed");
+            Assert.assertEquals(VNextBOROPageInteractions.getFirstOrderBackgroundColor(), flag.name().toLowerCase(),
+                    "The background color of the order hasn't been changed");
+        });
     }
 }

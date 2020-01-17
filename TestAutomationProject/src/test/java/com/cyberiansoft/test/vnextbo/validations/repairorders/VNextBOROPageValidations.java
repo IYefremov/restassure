@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOPageSwitcherValidations;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
@@ -65,6 +66,7 @@ public class VNextBOROPageValidations {
     }
 
     private static boolean isWorkOrderDisplayed(String text, boolean expected) {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         return WaitUtilsWebDriver.elementShouldBeVisible(
                 By.xpath("//strong[contains(text(), \"" + text + "\")]"), expected, 10);
     }
@@ -165,8 +167,12 @@ public class VNextBOROPageValidations {
     }
 
     private static boolean isArrowDisplayed(String wo, String arrow, boolean expected) {
-        return WaitUtilsWebDriver.elementShouldBeVisible(By.xpath("//strong[text()='" +
-                wo + "']/../../.." + arrow), expected, 5);
+        try {
+            return WaitUtilsWebDriver.elementShouldBeVisible(By.xpath("//strong[text()='" +
+                    wo + "']/../../.." + arrow), expected, 4);
+        } catch (NoSuchElementException ignored) {
+            return !expected;
+        }
     }
 
     public static boolean isRepairOrderPresentInTable(String orderNumber) {

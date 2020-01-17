@@ -30,12 +30,13 @@ public class VNextBORODetailsPageSteps {
     }
 
     public static void setServiceStatusByServiceId(String serviceId, String status) {
-        if (VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId).equals("Problem")) {
+        final String serviceStatusValue = VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId);
+        if (serviceStatusValue.equals("Problem")) {
             VNextBORODetailsPageInteractions.clickServiceStatusBox(serviceId);
             VNextBOROProblemsInteractions.resolveProblem();
             VNextBORODetailsPageInteractions.selectServiceStatus(status);
             WaitUtilsWebDriver.waitForPageToBeLoaded();
-        } else if (!VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId).equals(status)) {
+        } else if (!(serviceStatusValue.isEmpty() || serviceStatusValue.equals(status))) {
             VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
             WaitUtilsWebDriver.waitForPageToBeLoaded();
         }
@@ -113,6 +114,7 @@ public class VNextBORODetailsPageSteps {
         } else {
             VNextBORODetailsPageInteractions.closeActionsDropDownForPhase();
         }
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void handleReportProblemDialog(String problem, String description) {
@@ -172,5 +174,14 @@ public class VNextBORODetailsPageSteps {
                 .stream()
                 .map(VNextBORODetailsPageInteractions::setTechnician)
                 .collect(Collectors.toList());
+    }
+
+    public static void resetServiceStartDate(String serviceId) {
+        VNextBORODetailsPageInteractions.clickActionsIcon(serviceId);
+        VNextBORODetailsPageInteractions.clickResetStartDate(serviceId);
+    }
+
+    public static void resetServiceStartDate(List<String> allServicesId) {
+        allServicesId.forEach(VNextBORODetailsPageSteps::resetServiceStartDate);
     }
 }

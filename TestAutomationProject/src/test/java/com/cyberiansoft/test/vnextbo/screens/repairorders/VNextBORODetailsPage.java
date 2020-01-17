@@ -315,6 +315,16 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
                         serviceId + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]"));
     }
 
+    public WebElement getResetStartDateButton(String serviceId) {
+        return driver.findElement(
+                By.xpath("//div[@data-id='" + serviceId + "' and contains(text(), 'Reset Start date')]"));
+    }
+
+    public WebElement getStartServiceButton(String serviceId) {
+        return driver.findElement(
+                By.xpath("//button[@data-id='" + serviceId + "' and contains(@data-bind, 'serviceStart')]"));
+    }
+
     public By getInfoDialog(String serviceId, String status) {
 	    return By.xpath("//div[@data-order-service-id='" + serviceId
                         + "']//i[@class='help']/span[text()='" + status + "']");

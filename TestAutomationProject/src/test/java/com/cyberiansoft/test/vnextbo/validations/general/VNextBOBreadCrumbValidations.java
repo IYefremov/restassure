@@ -23,6 +23,10 @@ public class VNextBOBreadCrumbValidations {
         return Utils.isTextDisplayed(new VNextBOBreadCrumbPanel().getLocationName(), location);
     }
 
+    public static boolean isLocationSet(String location, int timeOut) {
+        return Utils.isTextDisplayed(new VNextBOBreadCrumbPanel().getLocationName(), location, timeOut);
+    }
+
     public static boolean isLocationSelected(String location) {
         try {
             WaitUtilsWebDriver.getWait()

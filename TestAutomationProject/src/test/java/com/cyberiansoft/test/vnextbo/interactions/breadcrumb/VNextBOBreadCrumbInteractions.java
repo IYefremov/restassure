@@ -24,10 +24,13 @@ public class VNextBOBreadCrumbInteractions {
     }
 
     public static void setLocation(String location) {
-        if (VNextBOBreadCrumbValidations.isLocationCollapsed()) {
-            Utils.clickElement(new VNextBOBreadCrumbPanel().getLocationName());
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        if (!VNextBOBreadCrumbValidations.isLocationSet(location, 1)) {
+            if (VNextBOBreadCrumbValidations.isLocationCollapsed()) {
+                Utils.clickElement(new VNextBOBreadCrumbPanel().getLocationName());
+            }
+            selectLocation(location);
         }
-        selectLocation(location);
     }
 
     public static void setLocation(String location, boolean isSetWithEnter) {
@@ -41,6 +44,7 @@ public class VNextBOBreadCrumbInteractions {
     }
 
     private static void selectLocation(String location) {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         final VNextBOBreadCrumbPanel breadCrumbPanel = new VNextBOBreadCrumbPanel();
         Utils.selectOptionInDropDown(breadCrumbPanel.getLocationsDropDown(),
                 breadCrumbPanel.getLocationsList(), location, true);

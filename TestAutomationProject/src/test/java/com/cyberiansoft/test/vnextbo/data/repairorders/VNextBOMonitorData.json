@@ -1588,5 +1588,64 @@
       ],
       "orderNumber": "O-351-00042"
     }
+  ],
+
+  "verifyUserCanChangeTargetDateOfRO": [
+    {
+      "rowID": "verifyUserCanChangeTargetDateOfRO.01",
+      "description": "Test Case 82656: User can change \"Target Date\" of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91389"
+        }
+      ],
+      "orderNumber": "O-351-00042"
+    }
+  ],
+
+  "verifyUserCanPrioritizeRO": [
+    {
+      "rowID": "verifyUserCanPrioritizeRO.01",
+      "description": "Test Case 82683: User can prioritize Repair Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91393"
+        }
+      ],
+      "location": "1111 Automation",
+      "orderNumber": "O-000-152073",
+      "searchValues": {
+        "searchNames": [
+          "Auto-test O-000-152073 Pls, do not change",
+          "Auto-test. Pls, do not change"
+        ]
+      },
+      "pages": {
+        "hundred": "100"
+      }
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRO": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRO.01",
+      "description": "Test Case 82689: User can prioritize Repair Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91395"
+        }
+      ],
+      "location": "1111 Automation",
+      "orderNumber": "O-000-152073",
+      "searchValues": {
+        "searchNames": [
+          "Auto-test O-000-152073 Pls, do not change",
+          "Auto-test. Pls, do not change"
+        ]
+      },
+      "pages": {
+        "hundred": "100"
+      }
+    }
   ]
 }

@@ -12,6 +12,6 @@ public class VNextBOCurrentPhasePanelSteps {
 
     public static void completeCurrentPhase(String orderNumber) {
         VNextBOROPageInteractions.clickWorkOrderCurrentPhaseMenu(orderNumber);
-        VNextBOCurrentPhasePanelInteractions.completeCurrentPhase(orderNumber);
+        VNextBOCurrentPhasePanelInteractions.clickCompleteCurrentPhaseOption(orderNumber);
     }
 }

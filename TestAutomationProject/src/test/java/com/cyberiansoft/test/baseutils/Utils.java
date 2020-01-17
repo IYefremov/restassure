@@ -444,6 +444,16 @@ public class Utils {
         }
     }
 
+    public static boolean isTextDisplayed(WebElement element, String text, int timeOut) {
+        try {
+            WaitUtilsWebDriver.elementShouldBeVisible(element, true, 5);
+            WaitUtilsWebDriver.waitForTextToBePresentInElement(element, text, timeOut);
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
     public static void closeNewTab(String mainWindowHandle) {
         final WebDriver driver = DriverBuilder.getInstance().getDriver();
         driver.close();
@@ -489,7 +499,9 @@ public class Utils {
 
     public static String getText(By by) {
         try {
-            return WaitUtilsWebDriver.waitForVisibility(DriverBuilder.getInstance().getDriver().findElement(by)).getText();
+            final WebElement element = DriverBuilder.getInstance().getDriver().findElement(by);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(element);
+            return WaitUtilsWebDriver.waitForVisibility(element).getText();
         } catch (Exception e) {
             return "";
         }
@@ -499,6 +511,7 @@ public class Utils {
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(list);
         return list
                 .stream()
+                .map(WaitUtilsWebDriver::waitForElementNotToBeStale)
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
@@ -507,6 +520,7 @@ public class Utils {
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(list);
         return list
                 .stream()
+                .map(WaitUtilsWebDriver::waitForElementNotToBeStale)
                 .map(e -> e.getAttribute("value"))
                 .collect(Collectors.toList());
     }

@@ -337,8 +337,19 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static void clickActionsIcon(String serviceId) {
-        WaitUtilsWebDriver.waitABit(1500);
+        WaitUtilsWebDriver.waitABit(500);
         Utils.clickWithJS(new VNextBORODetailsPage().getActionIconForServiceId(serviceId));
+    }
+
+    public static void clickResetStartDate(String serviceId) {
+        final VNextBORODetailsPage detailsPage = new VNextBORODetailsPage();
+        final boolean visible = WaitUtilsWebDriver.elementShouldBeVisible(
+                detailsPage.getResetStartDateButton(serviceId), true, 3);
+        if (visible) {
+            Utils.clickElement(detailsPage.getResetStartDateButton(serviceId));
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
+            WaitUtilsWebDriver.waitForVisibility(detailsPage.getStartServiceButton(serviceId));
+        }
     }
 
     public static List<String> getPhaseStatusValues() {

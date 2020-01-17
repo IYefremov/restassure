@@ -169,6 +169,9 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@id='tableBody' and @data-template='rowTemplate']/tr")
     private List<WebElement> ordersDisplayedOnPage;
 
+    @FindBy(xpath = "//tbody[@id='tableBody']/tr//strong[contains(@data-bind, 'orderNo')]")
+    private List<WebElement> orderNamesList;
+
     @FindBy(xpath = "//table[@id='roTable']")
     private WebElement table;
 
@@ -195,9 +198,6 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//input[@title='PO #']")
     private WebElement poNumTitle;
-
-    @FindBy(xpath = "//div[contains(@data-bind, 'menuVisible')]")
-    private WebElement otherDropDown;
 
     @FindBy(xpath = "//i[@class='icon-arrow-down']")
     private WebElement arrowDown;
@@ -249,6 +249,18 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'green')]/../..//b[contains(@data-bind, 'targetDateF')]")
     private List<WebElement> lowPriorityOrdersTargetDatesList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'red')]/following-sibling::div//strong[contains(@data-bind, 'orderNo')]")
+    private List<WebElement> highPriorityOrdersList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'none')]/following-sibling::div//strong[contains(@data-bind, 'orderNo')]")
+    private List<WebElement> midPriorityOrdersList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'green')]/following-sibling::div//strong[contains(@data-bind, 'orderNo')]")
+    private List<WebElement> lowPriorityOrdersList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//tr[@data-id]")
+    private List<WebElement> ordersList;
 
     @FindBy(xpath = "//span[contains(@data-bind, 'search.info')]")
     private WebElement searchFilterText;
