@@ -1,13 +1,24 @@
 {
-  "userCanAssignMultipleTechniciansToOrder": [
+  "userCanAssignFullAmountOfWOFor1TechnicianEvenlyTeam": [
     {
-      "rowID": "userCanAssignMultipleTechniciansToOrder.01",
-      "description": "TFSID:87874 87875",
+      "rowID": "userCanAssignFullAmountOfWOFor1TechnicianEvenlyTeam.01",
+      "description": "",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91952",
           "testCaseTitle": "User can assign full amount of WO for 1 Technician evenly (Team)"
-        },
+        }
+      ],
+      "technicianSplitData": {
+        "Employee Employee": "100"
+      }
+    }
+  ],
+  "userCanSeparateAmountOfWOFor3TechniciansEvenlyTeam": [
+    {
+      "rowID": "userCanSeparateAmountOfWOFor3TechniciansEvenlyTeam.01",
+      "description": "",
+      "targetProcessTestCaseData": [
         {
           "testCaseID": "91953",
           "testCaseTitle": "User can separate amount of WO for 3 Technicians evenly (Team)"
@@ -22,7 +33,12 @@
           "employeeFirstName": "1111",
           "employeeLastName": "2222"
         }
-      ]
+      ],
+      "technicianSplitData": {
+        "Employee Employee": "33.34",
+        "Test Test": "33.33",
+        "1111 2222": "33.33"
+      }
     }
   ],
   "userCanChangeTechAmountViaEdit": [
