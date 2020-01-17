@@ -1,5 +1,6 @@
-package com.cyberiansoft.test.dataclasses.vNextBO;
+package com.cyberiansoft.test.dataclasses.vNextBO.repairorders;
 
+import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOROAdvancedSearchValues;
 import com.cyberiansoft.test.dataclasses.vNextBO.general.VNextBOPageSwitcherValues;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Getter
-public class VNextBOMonitorData  {
+public class VNextBOMonitorData {
 
     @JsonProperty("location")
     private String location;
@@ -305,5 +306,17 @@ public class VNextBOMonitorData  {
 
     public String getProblemDescription() {
         return "autotest-" + RandomStringUtils.randomAlphanumeric(5);
+    }
+
+    public String getRandomStockNum() {
+        return "stock-" + RandomStringUtils.randomAlphanumeric(5);
+    }
+
+    public String getRandomRONum() {
+        return "ro-" + RandomStringUtils.randomAlphanumeric(5);
+    }
+
+    public String getRandomPONum() {
+        return "po-" + RandomStringUtils.randomAlphanumeric(5);
     }
 }

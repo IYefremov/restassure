@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.OrderMonitorFlags;
@@ -14,8 +14,8 @@ import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbIn
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCalendarWidgetDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOPageSwitcherSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
@@ -295,7 +295,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
-        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.VIOLET.getFlag());
+        VNextBOROAdvancedSearchDialogInteractions.setFlag(OrderMonitorFlags.PURPLE.getFlag());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAreDisplayed();
@@ -600,7 +600,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
 
         VNextBOROAdvancedSearchDialogSteps.setAdvancedSearchDialogData(data, TimeFrameValues.TIMEFRAME_30_DAYS, OrderMonitorFlags.RED);
-        VNextBOROAdvancedSearchDialogInteractions.clickSearchButton();
+        VNextBOROAdvancedSearchDialogSteps.search();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 43)
@@ -763,10 +763,6 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
                 data.getPhase(), data.getPhaseStatus(), TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
-
-        Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
-
         VNextBOROPageValidations.verifyOrdersAfterSearchByPhase(data.getPhase());
     }
 
@@ -779,10 +775,6 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
                 data.getPhase(), data.getPhaseStatus(), TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
-
-        Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
-
         VNextBOROPageInteractions.clickWoLink();
         VNextBORODetailsPageValidations.verifyPhaseStatusOrPartPhaseStatusIsDisplayed(
                 data.getPhase(), data.getPhaseStatus(), data.getServiceStatuses());
@@ -797,10 +789,6 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
                 data.getPhase(), data.getPhaseStatus(), TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
-
-        Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
-
         VNextBOROPageInteractions.clickWoLink();
         VNextBORODetailsPageValidations.verifyPhaseStatus(data.getPhase(), data.getServiceStatuses());
     }
@@ -814,10 +802,6 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogSteps.searchByActivePhase(
                 data.getPhase(), data.getPhaseStatus(), TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
-
-        Assert.assertTrue(VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogNotDisplayed(),
-                "The advanced search dialog is not closed");
-
         VNextBOROPageInteractions.clickWoLink();
         VNextBORODetailsPageValidations.verifyPhaseStatus(data.getPhase(), data.getServiceStatuses());
     }

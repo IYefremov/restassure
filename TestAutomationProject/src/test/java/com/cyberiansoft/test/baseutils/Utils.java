@@ -137,7 +137,7 @@ public class Utils {
 
     public static void refreshPage() {
         DriverBuilder.getInstance().getDriver().navigate().refresh();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void reduceZoom() {
@@ -150,7 +150,8 @@ public class Utils {
 
     public static void goToPreviousPage() {
         DriverBuilder.getInstance().getDriver().navigate().back();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
@@ -161,6 +162,13 @@ public class Utils {
                     moveToElement(option);
                     Utils.clickElement(option);
                 });
+        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
+    }
+
+    public static void selectOptionInDropDownWithJs(WebElement dropDown, List<WebElement> listBox, String selection) {
+        waitForDropDownToBeOpened(dropDown);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
+        getMatchingOptionInListBox(listBox, selection).ifPresent(Utils::clickWithJS);
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }
 
@@ -226,11 +234,27 @@ public class Utils {
     public static String selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox) {
         final int minOptionNumber = 1;
         waitForDropDownToBeOpened(dropDown);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
         final int random = RandomUtils.nextInt(minOptionNumber, listBox.size());
-        String selectedText = listBox.get(random).getText();
+        String selectedText = Utils.getText(listBox.get(random));
+        getMatchingOptionInListBox(listBox, selectedText)
+                .ifPresent((option) -> {
+                    moveToElement(option);
+                    Utils.clickElement(option);
+                });
+        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
+        return selectedText;
+    }
+
+    public static String selectOptionInDropDownWithJs(WebElement dropDown, List<WebElement> listBox) {
+        final int minOptionNumber = 1;
+        waitForDropDownToBeOpened(dropDown);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
+        final int random = RandomUtils.nextInt(minOptionNumber, listBox.size());
+        String selectedText = Utils.getText(listBox.get(random));
+        getMatchingOptionInListBox(listBox, selectedText).ifPresent(Utils::clickWithJS);
+        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
         System.out.println("random value: " + random + "\n" + "selected option: " + selectedText);
-        selectOptionInDropDown(dropDown, listBox, selectedText, true);
         return selectedText;
     }
 
@@ -285,7 +309,6 @@ public class Utils {
             WaitUtilsWebDriver.waitForVisibilityOfAllOptions(elements);
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -428,6 +451,16 @@ public class Utils {
         }
     }
 
+    public static boolean isTextDisplayed(WebElement element, String text, int timeOut) {
+        try {
+            WaitUtilsWebDriver.elementShouldBeVisible(element, true, 5);
+            WaitUtilsWebDriver.waitForTextToBePresentInElement(element, text, timeOut);
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
     public static void closeNewTab(String mainWindowHandle) {
         final WebDriver driver = DriverBuilder.getInstance().getDriver();
         driver.close();
@@ -462,9 +495,20 @@ public class Utils {
         }
     }
 
+    public static String getText(WebElement element, int timeout) {
+        try {
+            WaitUtilsWebDriver.waitForElementNotToBeStale(element);
+            return WaitUtilsWebDriver.waitForVisibility(element, timeout).getText();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static String getText(By by) {
         try {
-            return WaitUtilsWebDriver.waitForVisibility(DriverBuilder.getInstance().getDriver().findElement(by)).getText();
+            final WebElement element = DriverBuilder.getInstance().getDriver().findElement(by);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(element);
+            return WaitUtilsWebDriver.waitForVisibility(element).getText();
         } catch (Exception e) {
             return "";
         }
@@ -474,6 +518,7 @@ public class Utils {
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(list);
         return list
                 .stream()
+                .map(WaitUtilsWebDriver::waitForElementNotToBeStale)
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
@@ -482,6 +527,7 @@ public class Utils {
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(list);
         return list
                 .stream()
+                .map(WaitUtilsWebDriver::waitForElementNotToBeStale)
                 .map(e -> e.getAttribute("value"))
                 .collect(Collectors.toList());
     }

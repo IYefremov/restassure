@@ -1,10 +1,8 @@
 package com.cyberiansoft.test.vnext.screens.menuscreens;
 
-import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.screens.VNextPayCashCheckScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPayInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextPayPOROScreen;
-import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;

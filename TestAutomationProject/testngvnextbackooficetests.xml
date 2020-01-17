@@ -197,4 +197,9 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart4"/>
         </classes>
     </test>
+    <test name="Monitor Grid Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorGridDataTestCases"/>
+        </classes>
+    </test>
 </suite>

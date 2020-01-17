@@ -42,12 +42,12 @@ public class VNextBOChangeTechniciansDialogInteractions {
     }
 
     private static void clickVendorBox() {
-        Utils.clickElement(new VNextBOChangeTechnicianDialog().getChangeTechnicianListBoxes().get(0));
+        Utils.clickElement(new VNextBOChangeTechnicianDialog().getVendorListBox());
     }
 
     private static void selectVendor(String vendor) {
         final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog();
-        Utils.selectOptionInDropDown(changeTechnicianDialog.getVendorListBoxOptions().get(0),
+        Utils.selectOptionInDropDown(changeTechnicianDialog.getVendorDropDown(),
                 changeTechnicianDialog.getVendorListBoxOptions(), vendor);
     }
 
@@ -62,18 +62,18 @@ public class VNextBOChangeTechniciansDialogInteractions {
     }
 
     private static void clickTechnicianBox() {
-        Utils.clickElement(new VNextBOChangeTechnicianDialog().getChangeTechnicianListBoxes().get(1));
+        Utils.clickElement(new VNextBOChangeTechnicianDialog().getTechnicianArrow());
     }
 
     private static void selectTechnician(String technician) {
         final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog();
-        Utils.selectOptionInDropDown(changeTechnicianDialog.getTechnicianListBoxOptions().get(0),
+        Utils.selectOptionInDropDown(changeTechnicianDialog.getTechnicianDropDown(),
                 changeTechnicianDialog.getTechnicianListBoxOptions(), technician);
     }
 
     private static String selectTechnician() {
         final VNextBOChangeTechnicianDialog changeTechnicianDialog = new VNextBOChangeTechnicianDialog();
-        return Utils.selectOptionInDropDown(changeTechnicianDialog.getTechnicianListBoxOptions().get(0),
+        return Utils.selectOptionInDropDownWithJs(changeTechnicianDialog.getTechnicianDropDown(),
                 changeTechnicianDialog.getTechnicianListBoxOptions());
     }
 
@@ -111,6 +111,6 @@ public class VNextBOChangeTechniciansDialogInteractions {
 
     private static void clickChangeTechnicianButton(WebElement button) {
         Utils.clickElement(button);
-        WaitUtilsWebDriver.waitForLoading();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

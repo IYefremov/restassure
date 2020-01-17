@@ -4,47 +4,47 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
-import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROResolveProblemDialog;
 import com.cyberiansoft.test.vnextbo.validations.VNextBONotesPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCurrentPhaseDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VNextBORODetailsPageSteps {
 
     public static void openServicesTableForStatus(String status, String service) {
         VNextBORODetailsPageInteractions.setStatus(status);
-        VNextBORODetailsPageInteractions.expandServicesTable(service);
+        VNextBORODetailsPageInteractions.expandPhasesTable(service);
     }
 
     public static void openServicesTableForStatus(String status) {
         VNextBORODetailsPageInteractions.setStatus(status);
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
     }
 
     public static void setServiceStatusForService(String phase, String status) {
         final String serviceId = VNextBORODetailsPageInteractions.getServiceId(phase);
-        setServiceStatusForServiceByServiceId(serviceId, status);
+        setServiceStatusByServiceId(serviceId, status);
     }
 
-    public static void setServiceStatusForServiceByServiceId(String serviceId, String status) {
-        if (VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId).equals("Problem")) {
+    public static void setServiceStatusByServiceId(String serviceId, String status) {
+        final String serviceStatusValue = VNextBORODetailsPageInteractions.getServiceStatusValue(serviceId);
+        if (serviceStatusValue.equals("Problem")) {
             VNextBORODetailsPageInteractions.clickServiceStatusBox(serviceId);
-            if (WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOROResolveProblemDialog().getResolveProblemButton(), true, 3)) {
-                VNextBOROProblemsInteractions.clickResolveButton();
-            }
+            VNextBOROProblemsInteractions.resolveProblem();
             VNextBORODetailsPageInteractions.selectServiceStatus(status);
-        } else {
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
+        } else if (!(serviceStatusValue.isEmpty() || serviceStatusValue.equals(status))) {
             VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
         }
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void setServiceStatusForMultipleServicesByServiceId(List<String> serviceIds, String status) {
         for (String serviceId : serviceIds) {
-            setServiceStatusForServiceByServiceId(serviceId, status);
+            setServiceStatusByServiceId(serviceId, status);
             VNextBOROProblemsInteractions.clickResolveButton();
         }
     }
@@ -98,13 +98,23 @@ public class VNextBORODetailsPageSteps {
                 "The Problem icon is displayed for phase after resolving the problem");
     }
 
-    public static void setCompleteCurrentPhaseForPhase(String phase) {
+    public static void setCompleteCurrentPhaseForPhaseWithProblem(String phase) {
         VNextBORODetailsPageInteractions.openActionsDropDownForPhase(phase);
         if (VNextBORODetailsPageValidations.isCompleteCurrentPhaseDisplayedForPhase(phase)) {
             VNextBORODetailsPageInteractions.clickCompleteCurrentPhaseForPhase(phase);
         }
         Assert.assertTrue(VNextBOCompleteCurrentPhaseDialogValidations.isCompleteCurrentPhaseDialogDisplayed(),
                 "The Complete Current phase dialog hasn't been opened");
+    }
+
+    public static void setCompleteCurrentPhase(String phase) {
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase(phase);
+        if (VNextBORODetailsPageValidations.isCompleteCurrentPhaseDisplayedForPhase(phase)) {
+            VNextBORODetailsPageInteractions.clickCompleteCurrentPhaseForPhase(phase);
+        } else {
+            VNextBORODetailsPageInteractions.closeActionsDropDownForPhase();
+        }
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void handleReportProblemDialog(String problem, String description) {
@@ -152,5 +162,26 @@ public class VNextBORODetailsPageSteps {
         Assert.assertTrue(VNextBORODetailsPageValidations.isRoDetailsSectionNotDisplayed(),
                 "The RO page has been displayed after clicking the breadcrumb 'Repair Orders'.");
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static List<String> getAllPhaseServicesId(String phase) {
+        VNextBORODetailsPageInteractions.expandPhasesTable(phase);
+        return VNextBORODetailsPageInteractions.getPhasesServicesId(phase);
+    }
+
+    public static List<String> setTechniciansForAllPhaseServices(String phase) {
+        return getAllPhaseServicesId(phase)
+                .stream()
+                .map(VNextBORODetailsPageInteractions::setTechnician)
+                .collect(Collectors.toList());
+    }
+
+    public static void resetServiceStartDate(String serviceId) {
+        VNextBORODetailsPageInteractions.clickActionsIcon(serviceId);
+        VNextBORODetailsPageInteractions.clickResetStartDate(serviceId);
+    }
+
+    public static void resetServiceStartDate(List<String> allServicesId) {
+        allServicesId.forEach(VNextBORODetailsPageSteps::resetServiceStartDate);
     }
 }

@@ -154,6 +154,9 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@aria-hidden='false']//span[@data-automation-label='reconmonitor-details-service-status-item']/../../..")
 	private WebElement serviceStatusDropDown;
 
+	@FindBy(xpath = "//ul[@id='reconmonitor-details-status_listbox']//span")
+	private List<WebElement> phaseStatusListBoxOptions;
+
 	@FindBy(xpath = "//div[@aria-hidden='false']//span[@data-automation-label='reconmonitor-details-service-status-item']")
 	private List<WebElement> serviceStatusListBoxOptions;
 
@@ -174,11 +177,6 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//ul[@class='k-list k-reset' and @aria-hidden='false']/li")
 	private List<WebElement> listBoxOptions;
-
-	@FindBy(xpath = "//ul[@aria-hidden='false']//span")
-	private List<WebElement> phaseStatusListBoxOptions;
-
-
 
 	@FindBy(xpath = "//tr[@class='serviceRow']//span[contains(@class, 'service-status')]//span[@class='k-input']")
 	private List<WebElement> partsPhaseStatusDropDowns;
@@ -250,6 +248,18 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	    return getDropDownContainer().findElements(By.xpath("//ul[@data-role='staticlist']/li"));
     }
 
+	public List<WebElement> getPhaseServicesList(String phase) {
+	    return driver.findElements(By.xpath("//div[@data-name='" + phase +
+                "']/..//div[@data-order-service-id and contains(@class, 'serviceRow')]"));
+    }
+
+	public List<WebElement> getPhaseServicesStatusesList(String phase) {
+	    return getPhaseServicesList(phase)
+                .stream()
+                .map(e -> e.findElement(By.xpath(".//div[@class='clmn_5']//span[contains(@class, 'k-input')]")))
+                .collect(Collectors.toList());
+    }
+
 	public WebElement getElementInServicesTable(String serviceId, String xpath) {
 		return driver.findElement(By.xpath("//div[@class='serviceRow' and @data-order-service-id='"
 				+ serviceId + "']" + xpath));
@@ -276,8 +286,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
             List<WebElement> servicesByNames = new ArrayList<>();
 
             WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(elements);
-            final List<String> collect = elements.stream().map(WebElement::getText).map(String::trim)
-                    .collect(Collectors.toList());
+            final List<String> collect = Utils.getText(elements).stream().map(String::trim).collect(Collectors.toList());
 
             for (int i = 0; i < collect.size(); i++) {
                 if (collect.get(i).equals(service)) {
@@ -304,6 +313,16 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
         return driver.findElement(By
                 .xpath("//div[@class='serviceRow' and @data-order-service-id='" +
                         serviceId + "']//div[@class='clmn_7']/div[contains(@class, 'order-service-menu')]"));
+    }
+
+    public WebElement getResetStartDateButton(String serviceId) {
+        return driver.findElement(
+                By.xpath("//div[@data-id='" + serviceId + "' and contains(text(), 'Reset Start date')]"));
+    }
+
+    public WebElement getStartServiceButton(String serviceId) {
+        return driver.findElement(
+                By.xpath("//button[@data-id='" + serviceId + "' and contains(@data-bind, 'serviceStart')]"));
     }
 
     public By getInfoDialog(String serviceId, String status) {
@@ -421,5 +440,9 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     public WebElement getServiceStatusBoxByServiceId(String serviceId) {
 	    return driver.findElement(By.xpath("//div[@data-order-service-id='" + serviceId
                         + "']//div[contains(@data-bind, 'orderServiceStatusName')]/../span[@title]"));
+    }
+
+    public WebElement getPhaseButton(String phase) {
+	    return driver.findElement(By.xpath("//div[@data-name='" + phase + "']//i[@class='switchTable icon-arrow-down5']"));
     }
 }

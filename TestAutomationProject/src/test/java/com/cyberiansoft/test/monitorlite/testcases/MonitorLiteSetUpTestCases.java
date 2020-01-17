@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsP
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOLoginScreenWebPage;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOCurrentPhasePanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
@@ -166,7 +167,7 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         Assert.assertEquals(VNextBOROPageInteractions.getWorkOrderActivePhaseValue(srWONumber), woActivePhaseStatus);
         VNextBOROPageInteractions.clickStartRoForWorkOrder(srWONumber);
         for (int i = 0; i < services.length; i++) {
-            VNextBOROPageInteractions.completeWorkOrderServiceStatus(srWONumber, services[i]);
+            VNextBOCurrentPhasePanelSteps.completeWorkOrderServiceStatus(srWONumber, services[i]);
             if (i == 0)
                 Assert.assertEquals(VNextBOROPageInteractions.getCompletedWorkOrderValue(srWONumber), woHalfCopleteValue);
         }

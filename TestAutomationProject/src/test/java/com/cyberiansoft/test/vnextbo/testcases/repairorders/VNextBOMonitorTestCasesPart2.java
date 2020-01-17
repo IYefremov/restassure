@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases.repairorders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
@@ -233,7 +233,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
                 .setAddNewServiceMonitorFieldsForAllOrMoneyPriceTypesWithSubmit(data, serviceDescription);
         Utils.refreshPage();
 
-		VNextBORODetailsPageInteractions.expandServicesTable();
+		VNextBORODetailsPageInteractions.expandPhasesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		if (serviceId.isEmpty()) {
 			Assert.assertTrue(VNextBORODetailsPageValidations.isServiceNotificationToBeAddedLaterDisplayed(),
@@ -292,7 +292,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 		final String serviceDescription = data.getServiceDescription() + RandomStringUtils.randomAlphanumeric(3);
         VNextBOAddNewServiceMonitorDialogSteps.setAddNewServiceMonitorFieldsForAllOrMoneyPriceTypesWithSubmit(data, serviceDescription);
 
-		VNextBORODetailsPageInteractions.expandServicesTable();
+		VNextBORODetailsPageInteractions.expandPhasesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		if (serviceId.isEmpty()) {
 			Assert.assertTrue(VNextBORODetailsPageValidations.isServiceNotificationToBeAddedLaterDisplayed(),
@@ -330,7 +330,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 
         VNextBOAddNewServiceMonitorDialogSteps.setAddNewLaborServiceMonitorValues(data, serviceDescription);
 
-        VNextBORODetailsPageInteractions.expandServicesTable();
+        VNextBORODetailsPageInteractions.expandPhasesTable();
 		final String serviceId = VNextBORODetailsPageInteractions.getServiceId(serviceDescription);
 		if (serviceId.isEmpty()) {
 			Assert.assertTrue(VNextBORODetailsPageValidations.isServiceNotificationToBeAddedLaterDisplayed(),

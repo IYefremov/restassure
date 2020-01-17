@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOMonitorData;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.enums.OrderMonitorFlags;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
@@ -12,10 +12,11 @@ import org.testng.Assert;
 public class VNextBOROAdvancedSearchDialogSteps {
 
     public static void searchByActivePhase(String phase, String phaseStatus, String timeFrame) {
+        openAdvancedSearchDialog();
         VNextBOROAdvancedSearchDialogInteractions.setPhase(phase);
         VNextBOROAdvancedSearchDialogInteractions.setPhaseStatus(phaseStatus);
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(timeFrame);
-        VNextBOROAdvancedSearchDialogInteractions.clickSearchButton();
+        search();
     }
 
     public static void openAdvancedSearchDialog() {
@@ -38,6 +39,7 @@ public class VNextBOROAdvancedSearchDialogSteps {
     }
 
     public static void setAdvancedSearchDialogData(VNextBOMonitorData data, TimeFrameValues timeFrameValue, OrderMonitorFlags flag) {
+        openAdvancedSearchDialog();
         VNextBOROAdvancedSearchDialogInteractions.setCustomer(data.getCustomer());
         VNextBOROAdvancedSearchDialogInteractions.setEmployee(data.getEmployee());
         VNextBOROAdvancedSearchDialogInteractions.setPhase(data.getPhase());

@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOPartsManagementOrderDetailsData;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsManagement.VNextBOPartsManagementOrderDetailsData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;

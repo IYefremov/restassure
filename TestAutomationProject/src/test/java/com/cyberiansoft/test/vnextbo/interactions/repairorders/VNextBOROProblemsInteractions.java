@@ -38,4 +38,13 @@ public class VNextBOROProblemsInteractions {
             WaitUtilsWebDriver.waitABit(2500);
         }
     }
+
+    public static void resolveProblem() {
+        final VNextBOROResolveProblemDialog resolveProblemDialog = new VNextBOROResolveProblemDialog();
+        if (WaitUtilsWebDriver.elementShouldBeVisible(resolveProblemDialog.getResolveProblemButton(), true, 3)) {
+            Utils.clickElement(resolveProblemDialog.getResolveProblemButton());
+            WaitUtilsWebDriver.waitForInvisibility(resolveProblemDialog.getResolveProblemDialog(), 5);
+            WaitUtilsWebDriver.waitABit(2500);
+        }
+    }
 }

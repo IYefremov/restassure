@@ -8,7 +8,6 @@ import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SearchSteps {

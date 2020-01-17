@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.dataclasses.vNextBO;
+package com.cyberiansoft.test.dataclasses.vNextBO.inspections;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

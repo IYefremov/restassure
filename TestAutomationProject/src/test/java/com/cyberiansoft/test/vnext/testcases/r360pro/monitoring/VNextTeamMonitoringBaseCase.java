@@ -59,7 +59,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         EditOrderSteps.switchToInfo();
         expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         EditOrderSteps.verifyOrderInfo(expectedOrderInfo);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 }

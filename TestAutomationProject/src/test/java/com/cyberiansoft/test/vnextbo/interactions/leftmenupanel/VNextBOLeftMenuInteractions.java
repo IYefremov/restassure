@@ -9,9 +9,6 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriverBuilder;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOLeftMenuInteractions {
 
