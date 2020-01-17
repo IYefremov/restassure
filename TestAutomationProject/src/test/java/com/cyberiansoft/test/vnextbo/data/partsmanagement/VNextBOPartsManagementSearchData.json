@@ -386,7 +386,22 @@
           "testCaseID": "91131",
           "testCaseTitle": "User can click Delete but not deleted saved \"Advances Search\" clicking the \"X-icon\""
         }
-      ]
+      ],
+      "customer": "Mike boll",
+      "phase": "Third",
+      "woType": "_no_sharing",
+      "repairStatus": "In Progress - Active",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "etaFromDate": "05/30/2019",
+      "etaToDate": "06/01/2019",
+      "vinNum": "32434234234234",
+      "partNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "fromDate": "05/01/2019",
+      "toDate": "06/01/2019",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "Test91131"
     }
   ],
 
@@ -399,7 +414,22 @@
           "testCaseID": "91132",
           "testCaseTitle": "User can click Delete but not deleted saved \"Advances Search\" clicking \"No\""
         }
-      ]
+      ],
+      "customer": "Mike boll",
+      "phase": "Third",
+      "woType": "_no_sharing",
+      "repairStatus": "In Progress - Active",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "etaFromDate": "05/30/2019",
+      "etaToDate": "06/01/2019",
+      "vinNum": "32434234234234",
+      "partNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "fromDate": "05/01/2019",
+      "toDate": "06/01/2019",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "Test91132"
     }
   ],
 
@@ -412,7 +442,22 @@
           "testCaseID": "91133",
           "testCaseTitle": "User can Delete saved \"Advances Search\""
         }
-      ]
+      ],
+      "customer": "Mike boll",
+      "phase": "Third",
+      "woType": "_no_sharing",
+      "repairStatus": "In Progress - Active",
+      "woNum": "O-000-152292",
+      "stockNum": "eeqwe",
+      "etaFromDate": "05/30/2019",
+      "etaToDate": "06/01/2019",
+      "vinNum": "32434234234234",
+      "partNum": "sdsfdsfsd",
+      "notes": "aaaaaaaaa",
+      "fromDate": "05/01/2019",
+      "toDate": "06/01/2019",
+      "orderedFrom": "01_TimeRep_team",
+      "searchName": "Test91133"
     }
   ],
 

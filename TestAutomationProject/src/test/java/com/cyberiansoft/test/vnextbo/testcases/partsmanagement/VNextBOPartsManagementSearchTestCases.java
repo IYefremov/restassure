@@ -26,42 +26,45 @@ import java.text.ParseException;
 
 public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
 
-    VNextBOPartsManagementSearchData searchDataForEdit;
-    VNextBOPartsManagementSearchData editedSearchData;
+    private VNextBOPartsManagementSearchData baseSearchData;
+    private static final String BAS_DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/partsmanagement/VNextBOPartsManagementBaseData.json";
 
     @BeforeClass
-    public void settingUp() {
+    public void settingUp() throws Exception {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPartsManagementSearchTD();
+        baseSearchData = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(BAS_DATA_FILE), VNextBOPartsManagementSearchData.class);
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
-
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROUsingSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("123");
         VNextBOPartsOrdersListPanelValidations.verifyOrdersAreDisplayed();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Text: 123");
         VNextBOSearchPanelValidations.verifyXIconIsDisplayed(true);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDeleteSearchOptions(String rowID, String description, JSONObject testData) {
 
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("123");
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelValidations.verifyXIconIsDisplayed(false);
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanUseAdvancedSearchForROSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
         VNextBOAdvancedSearchDialogValidations.verifyAdvancedSearchIsDisplayedWithAllElements();
+        VNextBOAdvancedSearchDialogSteps.closeAdvancedSearchForm();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseAdvancedSearchFormByClickingXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -69,7 +72,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogValidations.verifyAdvancedSearchFormIsDisplayed(false);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseAdvancedSearchFormByClickingOutside(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -77,7 +80,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogValidations.verifyAdvancedSearchFormIsDisplayed(false);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByCustomerUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -88,7 +91,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByPhaseUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -99,7 +102,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByWONumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -110,7 +113,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByWOTypeUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -121,7 +124,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByStockNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -132,7 +135,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByETAFromUsingAdvancedSearch(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -143,7 +146,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByETAToUsingAdvancedSearch(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -154,7 +157,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByVINNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -165,7 +168,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 13)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByOEMNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -176,7 +179,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 14)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByNotesUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -187,7 +190,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 15)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByOrderedFromUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -198,7 +201,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 16)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByFromOptionUsingAdvancedSearch(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -209,7 +212,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 17)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByToOptionUsingAdvancedSearch(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -220,7 +223,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 18)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByCorePrice(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -231,7 +234,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 19)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByLaborCredit(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -242,7 +245,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 20)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByCoreStatus(String rowID, String description, JSONObject testData) throws ParseException {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
@@ -254,25 +257,28 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 21)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillAllFieldsOfAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
         VNextBOAdvancedSearchDialogSteps.setAllFields(data);
         VNextBOAdvancedSearchDialogValidations.verifyAdvancedSearchFieldsHaveCorrectData(data);
+        VNextBOAdvancedSearchDialogSteps.closeAdvancedSearchForm();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 22)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanClearAllEnteredFieldsOfAdvancedSearchDialog(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+        VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
+        VNextBOAdvancedSearchDialogSteps.setAllFields(baseSearchData);
         VNextBOAdvancedSearchDialogSteps.clearAllFields();
         VNextBOAdvancedSearchDialogValidations.verifyAdvancedSearchFieldsHaveCorrectData(data);
         VNextBOAdvancedSearchDialogSteps.closeAdvancedSearchForm();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 23)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROUsingOptionsOfAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
@@ -283,74 +289,100 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 24)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSaveAllOptionsOfAdvancedSearchDialog(String rowID, String description, JSONObject testData) {
 
-        searchDataForEdit = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
-        VNextBOAdvancedSearchDialogSteps.setAllFields(searchDataForEdit);
+        VNextBOAdvancedSearchDialogSteps.setAllFields(data);
         VNextBOAdvancedSearchDialogSteps.saveSearch();
         VNextBOPartsOrdersListPanelValidations.verifyOrdersListEmptyStateIsCorrect();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(searchDataForEdit.getSearchName(), true);
+        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(data.getSearchName(), true);
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch(data.getSearchName());
+        VNextBOAdvancedSearchDialogSteps.deleteSavedSearch();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 25)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeValuesOfTheSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
 
-        editedSearchData = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
-        VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch(searchDataForEdit.getSearchName());
-        VNextBOAdvancedSearchDialogSteps.setAllFields(editedSearchData);
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+        VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
+        VNextBOAdvancedSearchDialogSteps.setAllFields(baseSearchData);
+        VNextBOAdvancedSearchDialogSteps.saveSearch();
+        VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch(baseSearchData.getSearchName());
+        VNextBOAdvancedSearchDialogSteps.setAllFields(data);
         VNextBOAdvancedSearchDialogSteps.saveSearch();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Utils.refreshPage();
         VNextBOPartsManagementWebPageSteps.waitUntilPartsManagementPageIsLoaded();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(editedSearchData.getSearchName(), true);
-        VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch(editedSearchData.getSearchName());
-        VNextBOAdvancedSearchDialogValidations.verifyAdvancedSearchFieldsHaveCorrectData(editedSearchData);
+        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(data.getSearchName(), true);
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch(data.getSearchName());
+        VNextBOAdvancedSearchDialogValidations.verifyAdvancedSearchFieldsHaveCorrectData(data);
+        VNextBOAdvancedSearchDialogSteps.deleteSavedSearch();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 26)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelSavedSearchDeletingWithXIcon(String rowID, String description, JSONObject testData) {
 
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+        VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
+        VNextBOAdvancedSearchDialogSteps.setAllFields(data);
+        VNextBOAdvancedSearchDialogSteps.saveSearch();
         VNextBOAdvancedSearchDialogSteps.clickDeleteButton();
         VNextBOModalDialogSteps.clickCloseButton();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(editedSearchData.getSearchName(), true);
+        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(data.getSearchName(), true);
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch(data.getSearchName());
+        VNextBOAdvancedSearchDialogSteps.deleteSavedSearch();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 27)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelSavedSearchDeletingWithNoButton(String rowID, String description, JSONObject testData) {
 
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+        VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
+        VNextBOAdvancedSearchDialogSteps.setAllFields(data);
+        VNextBOAdvancedSearchDialogSteps.saveSearch();
         VNextBOAdvancedSearchDialogSteps.clickDeleteButton();
         VNextBOModalDialogSteps.clickCloseButton();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(editedSearchData.getSearchName(), true);
+        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(data.getSearchName(), true);
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch(data.getSearchName());
+        VNextBOAdvancedSearchDialogSteps.deleteSavedSearch();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 28)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDeleteSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
 
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+        VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
+        VNextBOAdvancedSearchDialogSteps.setAllFields(data);
+        VNextBOAdvancedSearchDialogSteps.saveSearch();
         VNextBOAdvancedSearchDialogSteps.clickDeleteButton();
         VNextBOModalDialogSteps.clickYesButton();
         Utils.refreshPage();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
-        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(editedSearchData.getSearchName(), false);
+        VNextBOPartsManagementWebPageValidations.verifySavedSearchIsPresentedInTheList(data.getSearchName(), false);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 29)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROUsingSavedOptionsOfAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
-        VNextBOAdvancedSearchDialogSteps.setWONumberField("O-000-149577");
+        VNextBOAdvancedSearchDialogSteps.setWONumberField("O-444-00531");
         VNextBOAdvancedSearchDialogSteps.setSearchName("Test91129");
         VNextBOAdvancedSearchDialogSteps.saveSearch();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch("Test91129");
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
-        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect("O-000-149577");
+        VNextBOPartsOrdersListPanelValidations.verifyWoNumbersAreCorrect("O-444-00531");
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOPartsManagementWebPageSteps.openSavedAdvancedSearch("Test91129");

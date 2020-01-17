@@ -96,6 +96,10 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
 
+    public void selectServiceGroup(String groupName) {
+        allserviceslist.findElement(By.xpath(".//*[@action='select-group']/*[ contains(text(), '"+ groupName + "')]")).click();
+    }
+
     public void selectSingleService(String serviceName) {
         WebElement servicerow = getServiceListItem(serviceName);
         if (servicerow != null) {

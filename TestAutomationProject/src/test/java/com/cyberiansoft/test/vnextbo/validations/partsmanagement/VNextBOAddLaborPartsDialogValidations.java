@@ -10,7 +10,7 @@ public class VNextBOAddLaborPartsDialogValidations {
 
         if (dialogDisplayed) Assert.assertTrue(Utils.isElementDisplayed(new VNextBOAddLaborPartsDialog().getDialogContent()),
                 "Dialog hasn't been displayed");
-        else Assert.assertTrue(Utils.isElementNotDisplayed(new VNextBOAddLaborPartsDialog().getDialogContent()),
+        else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOAddLaborPartsDialog().getDialogContent()),
                 "Dialog hasn't been displayed");
     }
 

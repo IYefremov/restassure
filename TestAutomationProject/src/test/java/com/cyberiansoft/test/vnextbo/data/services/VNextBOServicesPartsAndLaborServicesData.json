@@ -62,20 +62,20 @@
   "verifyUserCanEditLaborPriceService": [
     {
       "rowID": "verifyUserCanEditLaborPriceService.01",
-      "description": "Test Case 79143:Verify user can edit \"Labor\" price service",
+      "description": "Test Case 91570: Verify user can edit \"Labor\" price service",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91570",
-          "testCaseTitle": "vNext: add money service"
+          "testCaseTitle": "Verify user can edit \"Labor\" price service"
         }
       ],
-      "serviceName": "Edited Labor service 91570",
-      "serviceType": "Autre",
-      "serviceDescription": "Edited Test description",
+      "serviceName": "Labor service 91570",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
       "servicePriceType": "Labor",
-      "serviceLaborRate": "6.00",
-      "serviceDefaultLaborTime": "7.0",
-      "serviceUseSelectedLaborTimes": "false"
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
     }
   ],
 
@@ -88,7 +88,14 @@
           "testCaseID": "91565",
           "testCaseTitle": "Verify user can delete \"Labor\" price service"
         }
-      ]
+      ],
+      "serviceName": "Labor service 91565",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
     }
   ],
 
@@ -101,7 +108,14 @@
           "testCaseID": "91566",
           "testCaseTitle": "Verify user can restore deleted \"Labor\" price service"
         }
-      ]
+      ],
+      "serviceName": "Labor service 91566",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
     }
   ],
 
@@ -153,25 +167,32 @@
         }
       ],
       "serviceName": "Part service 91569",
-      "serviceType": "Body Shop",
-      "serviceDescription": "Edited Test description",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
       "servicePriceType": "Part",
-      "serviceCategory": "Brake",
-      "serviceSubCategory": "Assortments",
-      "servicePartName": "Brake Fitting Assortment"
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
     }
   ],
 
   "verifyUserCanDeletePartPriceService": [
     {
       "rowID": "verifyUserCanDeletePartPriceService.01",
-      "description": "Test Case 91568: Verify user can delete \"Part\" price service",
+      "description": "Test Case 91567: Verify user can delete \"Part\" price service",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91568",
+          "testCaseID": "91567",
           "testCaseTitle": "Verify user can delete \"Part\" price service"
         }
-      ]
+      ],
+      "serviceName": "Part service 91567",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part",
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
     }
   ],
 
@@ -184,11 +205,16 @@
           "testCaseID": "91568",
           "testCaseTitle": "Verify user can restore deleted \"Part\" price service"
         }
-      ]
+      ],
+      "serviceName": "Part service 91568",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part",
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
     }
   ],
-
-
 
   "verifyUserCanChangeSequenceNumberForLaborServiceOrder": [
     {
@@ -199,7 +225,14 @@
           "testCaseID": "91573",
           "testCaseTitle": "Verify user can change sequence number for \"Labor\" service order"
         }
-      ]
+      ],
+      "serviceName": "Labor service 91573",
+      "serviceType": "Detail",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Labor",
+      "serviceLaborRate": "78.00",
+      "serviceDefaultLaborTime": "12.0",
+      "serviceUseSelectedLaborTimes": "true"
     }
   ],
 
@@ -212,7 +245,14 @@
           "testCaseID": "91574",
           "testCaseTitle": "Verify user can change sequence number for \"Part\" service order"
         }
-      ]
+      ],
+      "serviceName": "Part service 91574",
+      "serviceType": "Autre",
+      "serviceDescription": "Test description",
+      "servicePriceType": "Part",
+      "serviceCategory": "Body",
+      "serviceSubCategory": "Bumper",
+      "servicePartName": "Air Dam"
     }
   ]
 }

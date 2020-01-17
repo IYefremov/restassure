@@ -22,6 +22,7 @@ import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.validations.ApproveValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -114,12 +115,13 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 		inspectionsMenuScreen.clickApproveInspectionMenuItem();
 		VNextApproveServicesScreen approveServicesScreen = new VNextApproveServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (ServiceData service : services) {
-			approveServicesScreen.setServiceStatus(service.getServiceName(), service.getServiceStatus());
+			if (service.getServiceStatus() != null)
+				approveServicesScreen.setServiceStatus(service.getServiceName(), service.getServiceStatus());
 		}
 		approveServicesScreen.clickSaveButton();
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
+		ApproveValidations.verifyApprovePriceValue(inspectionData.getInspectionApprovedPrice());
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
@@ -161,9 +163,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 		VNextDeclineReasonScreen declineReasonsScreen = new VNextDeclineReasonScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		declineReasonsScreen.selectDeclineReason(inspectionData.getDeclineReason());
 
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatuses.DECLINED.getInspectionStatusValue());
 		ScreenNavigationSteps.pressBackButton();
@@ -194,10 +195,9 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		inspectionsMenuScreen.clickApproveInspectionMenuItem();
 
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(approveScreen.getApprovePriceValue(), inspectionData.getInspectionApprovedPrice());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
+		ApproveValidations.verifyApprovePriceValue(inspectionData.getInspectionApprovedPrice());
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
 		Assert.assertEquals(inspectionsScreen.getInspectionApprovedPriceValue(inspectionNumber), inspectionData.getInspectionApprovedPrice());
@@ -272,14 +272,11 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 		inspectionsMenuScreen.clickApproveInspectionMenuItem();
 		VNextApproveServicesScreen approveServicesScreen = new VNextApproveServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		approveServicesScreen.clickDeclineAllButton();
-		for (ServiceData service : services)
-			if (service.getServiceStatus() != null)
-				approveServicesScreen.setServiceStatus(service.getServiceName(), service.getServiceStatus());
+		approveServicesScreen.setServiceStatus(inspectionData.getServicesList().get(0).getServiceName(), inspectionData.getServicesList().get(0).getServiceStatus());
 		approveServicesScreen.clickSaveButton();
 
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -319,9 +316,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 		}
 
 		approveServicesScreen.clickSaveButton();
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
@@ -388,9 +384,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 				inspectionData.getInspectionPrice());
 		approveServicesScreen.clickApproveAllButton();
 		approveServicesScreen.clickSaveButton();
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatuses.APPROVED.getInspectionStatusValue());
@@ -482,7 +477,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 			VNextApproveServicesScreen approveServicesScreen = approveInspectionsScreen.openApproveServicesScreenForInspection(inspectionData.getInspectionNumber());
 			List<ServiceData> services = inspectionData.getServicesList();
 			for (ServiceData service : services)
-				Assert.assertTrue(approveServicesScreen.isServicePresentInTheList(service.getServiceName()));
+				if (service.getServiceStatus() != null)
+					Assert.assertTrue(approveServicesScreen.isServicePresentInTheList(service.getServiceName()));
 			approveInspectionsScreen = approveServicesScreen.clickBackButton();
 		}
 		inspectionsScreen = approveInspectionsScreen.clickBackButton();
@@ -545,6 +541,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
+		final String approveTotal = "$111.15";
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
@@ -583,18 +580,18 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 			List<ServiceData> services = inspectionData.getServicesList();
 
 			for (ServiceData service : services) {
-				approveServicesScreen.setServiceStatus(service.getServiceName(), service.getServiceStatus());
+				if (service.getServiceStatus() != null)
+					approveServicesScreen.setServiceStatus(service.getServiceName(), service.getServiceStatus());
 			}
 			approveServicesScreen.clickSaveButton();
 			approveInspectionsScreen = new VNextApproveInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			Assert.assertEquals(approveInspectionsScreen.getInspectionApprovedAmaunt(inspectionData.getInspectionNumber()), inspectionData.getInspectionApprovedPrice());
 		}
 		approveInspectionsScreen.clickSaveutton();
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
+		ApproveValidations.verifyApprovePriceValue(approveTotal);
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 
-		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		WaitUtils.elementShouldBeVisible(inspectionsScreen.getRootElement(), true);
 		inspectionsScreen.clickBackButton();
 	}
@@ -646,9 +643,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 			}
 		}
 		approveInspectionsScreen.clickSaveutton();
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (InspectionData inspectionData: inspectionsData) {
 			Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionData.getInspectionNumber()), inspectionData.getInspectionStatus().getStatus());
@@ -699,7 +695,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 			List<ServiceData> services = inspectionData.getServicesList();
 
 			for (ServiceData service : services) {
-				approveServicesScreen.setServiceStatus(service.getServiceName(), service.getServiceStatus());
+				if (service.getServiceStatus() != null)
+					approveServicesScreen.setServiceStatus(service.getServiceName(), service.getServiceStatus());
 			}
 			approveServicesScreen.clickSaveButton();
 			if (inspectionData.getDeclineReason() != null) {
@@ -711,11 +708,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 				Assert.assertEquals(approveInspectionsScreen.getInspectionApprovedAmaunt(inspectionData.getInspectionNumber()), inspectionData.getInspectionApprovedPrice());
 		}
 		approveInspectionsScreen.clickSaveutton();
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
-
-		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
 		inspectionsScreen.clickBackButton();
 	}
 

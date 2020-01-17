@@ -49,6 +49,7 @@ public class VNextBOLeftMenuInteractions {
 
     public static void selectDeviceManagementMenu() {
         selectMenuItem(MainMenuItems.SETTINGS.getMenu(), "Device Management");
+        Utils.refreshPage();
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 

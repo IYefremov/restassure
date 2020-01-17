@@ -54,7 +54,7 @@ public class VNextBOHomeWebPageValidations extends VNextBOBaseWebPageValidations
 
     public static void verifyReconProBoPageIsOpened(String actualReconProBoPageUrl) {
 
-        Assert.assertTrue(actualReconProBoPageUrl.contains("reconpro-a.dev.cyberianconcepts.com/Home.aspx"), "Recon Pro Back Office page hasn't been opened");
+        Assert.assertTrue(actualReconProBoPageUrl.contains(".cyberianconcepts.com/Home.aspx"), "Recon Pro Back Office page hasn't been opened");
     }
 
     public static void verifySupportForBoPageIsOpened(String actualSupportForBoPageUrl) {

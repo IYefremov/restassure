@@ -200,14 +200,21 @@ public class Utils {
                 .findFirst();
     }
 
-    private static void scrollListBoxDownWhileElementIsNotDisplayed(WebElement dropDown, List<WebElement> listBox, WebElement option) {
-        for (int i = 0; i < listBox.size(); i++) {
-            if (Utils.isElementNotDisplayed(option, 5)) {
-                dropDown.sendKeys(Keys.ARROW_DOWN);
-            } else {
-                break;
+    public static void selectOptionInDropDownWithJsScroll(WebElement dropDown, List<WebElement> listBox, String optionName) {
+
+        JavascriptExecutor javascriptExecutor = ((JavascriptExecutor) DriverBuilder.getInstance().getDriver());
+        javascriptExecutor.executeScript("document.querySelector('div[aria-hidden=\"false\"] div.k-list-scroller').scrollTop+=-1000");
+        boolean isOptionDisplayed = false;
+        int scrollingNumber = 0;
+        do {
+            try {
+                isOptionDisplayed = Utils.isElementDisplayed(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]")));
+            } catch (Exception ex) {
+                javascriptExecutor.executeScript("document.querySelector('div[aria-hidden=\"false\"] div.k-list-scroller').scrollTop+=100");
+                scrollingNumber++;
             }
-        }
+        } while ((!isOptionDisplayed) || (scrollingNumber == 3));
+        Utils.clickWithJS((DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]"))));
     }
 
     public static String getNewTab(String mainWindow) {

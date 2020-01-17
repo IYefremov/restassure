@@ -4,7 +4,7 @@
     {
       "rowID": "userCanFindWorkOrdersonBOAndDevice.01",
       "description": "",
-      "monitorData" :
+      "monitoring" :
         {
           "location" : "Manheim Pennsylvania",
           "stockNumber" : "8629009",

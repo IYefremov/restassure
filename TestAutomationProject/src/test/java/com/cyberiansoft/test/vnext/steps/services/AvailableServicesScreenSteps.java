@@ -25,6 +25,11 @@ public class AvailableServicesScreenSteps {
         servicesScreen.selectSingleService(serviceName);
     }
 
+    public static void selectServiceGroup(String groupName) {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.selectServiceGroup(groupName);
+    }
+
     public static void selectService(ServiceData serviceData) {
         selectService(serviceData.getServiceName());
     }

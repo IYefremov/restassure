@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.testcases.services;
 
-import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.services.VNextBOServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -14,17 +13,10 @@ import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.services.VNextBOServicesPageValidations;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
-
-    private VNextBOServiceData laborServiceBaseData;
-    private VNextBOServiceData partServiceBaseData;
-    private VNextBOServiceData partServiceWithAllData;
-    private VNextBOServiceData editedLaborServiceBaseData;
-    private VNextBOServiceData editedPartServiceBaseData;
 
     @BeforeClass
     public void settingUp() {
@@ -33,44 +25,29 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectServicesMenu();
     }
 
-    @AfterClass
-    public void removeServices() {
-
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedLaborServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.deleteServiceByName(editedLaborServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(partServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.deleteServiceByName(partServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.deleteServiceByName(editedPartServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddLaborPriceService(String rowID, String description, JSONObject testData) {
 
-        laborServiceBaseData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
-        laborServiceBaseData.setServiceName(RandomStringUtils.randomAlphabetic(5) + laborServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.addLaborService(laborServiceBaseData);
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(laborServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(laborServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addLaborService(serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddLaborPriceServiceWithUseLaborTimes(String rowID, String description, JSONObject testData) {
 
-        laborServiceBaseData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
-        laborServiceBaseData.setServiceName(RandomStringUtils.randomAlphabetic(5) + laborServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.addLaborService(laborServiceBaseData);
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(laborServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(laborServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addLaborService(serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCannotAddLaborServiceWithClickedRejectIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
@@ -81,113 +58,146 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanEditLaborPriceService(String rowID, String description, JSONObject testData) {
 
-        editedLaborServiceBaseData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
-        editedLaborServiceBaseData.setServiceName(RandomStringUtils.randomAlphabetic(5) + editedLaborServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(laborServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.editLaborService(laborServiceBaseData.getServiceName(), editedLaborServiceBaseData);
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        String baseServiceName = serviceData.getServiceName();
+        VNextBOServicesWebPageSteps.addLaborService(serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + "Edited Labor service 91570");
+        serviceData.setServiceType("Autre");
+        serviceData.setServiceDescription("Edited Test description");
+        serviceData.setServicePriceType("Labor");
+        serviceData.setServiceLaborRate("6.00");
+        serviceData.setServiceDefaultLaborTime("7.0");
+        serviceData.setServiceUseSelectedLaborTimes("false");
+        VNextBOServicesWebPageSteps.editLaborService(baseServiceName, serviceData);
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedLaborServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(editedLaborServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDeleteLaborPriceService(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedLaborServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.deleteServiceByName(editedLaborServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(editedLaborServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(editedLaborServiceBaseData);
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addLaborService(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
+        VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanRestoreDeletedLaborPriceService(String rowID, String description, JSONObject testData) {
 
-        VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(editedLaborServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.restoreServiceByName(editedLaborServiceBaseData.getServiceName());
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addLaborService(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
+        VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.restoreServiceByName(serviceData.getServiceName());
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedLaborServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(editedLaborServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddPartPriceService(String rowID, String description, JSONObject testData) {
 
-        partServiceBaseData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
-        partServiceBaseData.setServiceName(RandomStringUtils.randomAlphabetic(5) + partServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.addBasePartService(partServiceBaseData);
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(partServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(partServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addBasePartService(serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddPartPriceServiceWithCategorySubcategoryAndPartName(String rowID, String description, JSONObject testData) {
 
-        partServiceWithAllData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
-        partServiceWithAllData.setServiceName(RandomStringUtils.randomAlphabetic(5) + partServiceWithAllData.getServiceName());
-        VNextBOServicesWebPageSteps.addPartServiceWithAllData(partServiceWithAllData);
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(partServiceWithAllData.getServiceName());
-        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(partServiceWithAllData);
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addPartServiceWithAllData(serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanEditPartPriceService(String rowID, String description, JSONObject testData) {
 
-        editedPartServiceBaseData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
-        editedPartServiceBaseData.setServiceName(RandomStringUtils.randomAlphabetic(5) + editedPartServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(partServiceWithAllData.getServiceName());
-        VNextBOServicesWebPageSteps.editPartServiceWithAllData(partServiceWithAllData.getServiceName(), editedPartServiceBaseData);
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(editedPartServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        String baseServiceName = serviceData.getServiceName();
+        VNextBOServicesWebPageSteps.addPartServiceWithAllData(serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + "Edited Part service 91569");
+        serviceData.setServiceType("Body Shop");
+        serviceData.setServiceDescription("Edited Test description");
+        serviceData.setServicePriceType("Part");
+        serviceData.setServiceCategory("Brake");
+        serviceData.setServiceSubCategory("Assortments");
+        serviceData.setServicePartName("Brake Fitting Assortment");
+        VNextBOServicesWebPageSteps.editPartServiceWithAllData(baseServiceName, serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDeletePartPriceService(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.deleteServiceByName(editedPartServiceBaseData.getServiceName());
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(editedPartServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(editedPartServiceBaseData);
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addPartServiceWithAllData(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
+        VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanRestoreDeletedPartPriceService(String rowID, String description, JSONObject testData) {
 
-        VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(editedPartServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.restoreServiceByName(editedPartServiceBaseData.getServiceName());
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addPartServiceWithAllData(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
+        VNextBOServicesAdvancedSearchSteps.searchArchivedServiceByName(serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.restoreServiceByName(serviceData.getServiceName());
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
-        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(editedPartServiceBaseData);
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeSequenceNumberForLaborServiceOrder(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedLaborServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(editedLaborServiceBaseData.getServiceName(), "13");
-        VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(editedLaborServiceBaseData.getServiceName(), "13");
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        Utils.refreshPage();
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addLaborService(serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(serviceData.getServiceName(), "13");
+        VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(serviceData.getServiceName(), "13");
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeSequenceNumberForPartServiceOrder(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(editedPartServiceBaseData.getServiceName());
-        VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(editedPartServiceBaseData.getServiceName(), "14");
-        VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(editedPartServiceBaseData.getServiceName(), "14");
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
+        serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.addPartServiceWithAllData(serviceData);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
+        VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(serviceData.getServiceName(), "14");
+        VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(serviceData.getServiceName(), "14");
+        VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 }

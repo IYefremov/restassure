@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.testcases.users;
 
-import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.enums.ErrorMessages;
@@ -28,7 +27,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     String newUserEmail = "usersearchtest6.mail.cyberiansoft@getnada.com";
     String newUserFirstName = "userSearchTestFirstName6";
     String newUserLastName = "userSearchTestLastName6";
-    String newUserPhone = "161616166";
+    String newUserPhone = "1161616168";
 
     @BeforeClass
     public void settingUp() {
@@ -36,7 +35,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOLeftMenuInteractions.selectUsersMenu();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyNewUserCantBeAddedWithoutRequiredFields(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
@@ -55,7 +54,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOUsersPageSteps.clickAddNewUserButton();
         VNexBOAddNewUserDialog vNexBOAddNewUserDialog = new VNexBOAddNewUserDialog();
         VNextBOAddNewUserDialogSteps.createNewUser(newUserFirstName, newUserLastName,
-                newUserEmail,newUserPhone, true);
+                newUserEmail, newUserPhone, true);
         VNextBOAddNewUserDialogValidations.verifyDialogIsClosed(vNexBOAddNewUserDialog);
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "New user hasn't been found");
@@ -63,6 +62,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         Assert.assertTrue(VNextBOUsersPageValidations.verifyRedTriangleWarningIconIsDisplayed(),
                 "Red triangle warning icon hasn't been displayed.");
         VNextBOUsersPageValidations.verifyReSendButtonIsDisplayed();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("REGISTRATION");
@@ -70,17 +70,16 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         String resetPasswordUrl = nada.getUrlsFromMessage(mailMessage, "click here", "http", "\">").get(0);
         Assert.assertTrue(resetPasswordUrl.contains("confirm?invitation"), "User hasn't got link to complete registration");
         nada.deleteAllMessages();
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        Utils.refreshPage();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyRegistrationMailCanBeResend(String rowID, String description, JSONObject testData) throws Exception {
 
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(newUserEmail);
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
         VNextBOUsersPageSteps.resendConfirmationEmail();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
                 new NadaEMailService.MailSearchParametersBuilder()
                         .withSubject("REGISTRATION");
@@ -90,7 +89,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         nada.deleteAllMessages();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyNewUserCantBeAddedWithRegisteredEmail(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
@@ -103,7 +102,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOAddNewUserDialogSteps.closeDialog();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseAddNewUserDialog(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickAddNewUserButton();
@@ -112,7 +111,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOAddNewUserDialogValidations.verifyDialogIsClosed(vNexBOAddNewUserDialog);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 5)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseAdvancedSearchForm(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -122,7 +121,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 6)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByEmail(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -141,7 +140,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 7)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByPhone(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.searchUserByPhone(newUserPhone);
@@ -151,7 +150,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanClearAdvancedSearchFilter(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
@@ -161,7 +160,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchByName(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(newUserFirstName);
@@ -171,7 +170,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 10)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanClearSearchByNameFilter(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(newUserFirstName);
@@ -181,7 +180,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 11)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserSeesMessageWhenSearchResultIsNegative(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("abracadabra");
@@ -189,7 +188,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 12)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanEditCreatedUserData(String rowID, String description, JSONObject testData) throws Exception {
 
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
@@ -197,11 +196,11 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
         VNextBOUsersPageSteps.openUserDataForEdit();
         VNextBOAddNewUserDialogValidations.verifyEmailFieldIsDisabled();
         VNextBOAddNewUserDialogSteps.editUserData("userSearchTestFirstName6Edited",
-                "userSearchTestLastName6Edited", "161616167", false);
+                "userSearchTestLastName6Edited", "161616168", false);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("userSearchTestFirstName6Edited userSearchTestLastName6Edited");
         Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "Edited user hasn't been found");
-        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("161616167"));
+        Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText("161616168"));
         Assert.assertFalse(VNextBOUsersPageValidations.verifyRedTriangleWarningIconIsNotDisplayed(vNexBOUsersWebPage),
                 "Red triangle warning icon has been displayed.");
         Assert.assertFalse(VNextBOUsersPageValidations.verifyReSendButtonIsNotDisplayed(vNexBOUsersWebPage),

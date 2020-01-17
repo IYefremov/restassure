@@ -131,7 +131,11 @@
         "Received",
         "RTV Complete",
         "Refused",
-        "Audited"
+        "Audited",
+        "Installed",
+        "Partially Received",
+        "Other",
+        "Quote Requested"
       ]
     }
   ]

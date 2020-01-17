@@ -66,10 +66,14 @@ public class VNextBOHomeWebPageSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(new VNextBOHomeWebPage().getAccessReconProBOLink());
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         //Certification error handling
-        if (DriverBuilder.getInstance().getDriver().findElement(By.xpath("//button[contains(.,'Advanced')]")).isDisplayed()) {
-            Utils.clickElement(By.xpath("//button[contains(.,'Advanced')]"));
-            Utils.clickElement(By.xpath("//a[@id='proceed-link']"));
-            WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        try {
+            if (DriverBuilder.getInstance().getDriver().findElement(By.xpath("//button[contains(.,'Advanced')]")).isDisplayed()) {
+                Utils.clickElement(By.xpath("//button[contains(.,'Advanced')]"));
+                Utils.clickElement(By.xpath("//a[@id='proceed-link']"));
+                WaitUtilsWebDriver.waitForSpinnerToDisappear();
+            }
+        } catch (Exception ex) {
+
         }
         final String reconProBoPageUrl = Utils.getUrl();
         Utils.goToPreviousPage();

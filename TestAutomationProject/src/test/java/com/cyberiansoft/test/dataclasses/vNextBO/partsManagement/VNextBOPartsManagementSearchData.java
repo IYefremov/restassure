@@ -3,8 +3,10 @@ package com.cyberiansoft.test.dataclasses.vNextBO.partsManagement;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOBaseData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class VNextBOPartsManagementSearchData extends VNextBOBaseData {
 
     @JsonProperty("customer")
