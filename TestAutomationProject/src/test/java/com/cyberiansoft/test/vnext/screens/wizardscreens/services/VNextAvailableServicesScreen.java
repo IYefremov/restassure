@@ -82,7 +82,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
                 //WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
             } catch (WebDriverException e) {
                 WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
-                WaitUtils.click(servicerow.findElement(By.xpath(".//*[@action='select-item']")));
+                WaitUtils.click(servicerow.findElement(By.xpath(".//*[@action='add-service']")));
             }
 
             WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));

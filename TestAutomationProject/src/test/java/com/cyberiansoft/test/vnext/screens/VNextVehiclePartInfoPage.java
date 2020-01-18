@@ -71,7 +71,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		String servicePrice = "";
 		if (addservs != null) {
 			servicePrice = addservs.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
-			tap(WaitUtils.waitUntilElementIsClickable(addservs.findElement(By.xpath(".//*[@action='select-item']"))));
+			tap(WaitUtils.waitUntilElementIsClickable(addservs.findElement(By.xpath(".//*[@action='add-service']"))));
 			WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
 			if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
                 VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -96,7 +96,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	}
 
 	private List<WebElement> getAvailableServicesList() {
-		return additionalavailableserviceslist.findElements(By.xpath(".//*[@action='open-details']"));
+		return additionalavailableserviceslist.findElements(By.xpath(".//*[@action='open-available-service-details']"));
 	}
 
 	private String getServiceListItemName(WebElement srvlistitem) {
