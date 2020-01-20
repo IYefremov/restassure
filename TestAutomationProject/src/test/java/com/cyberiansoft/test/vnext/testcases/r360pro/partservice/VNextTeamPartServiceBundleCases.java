@@ -56,7 +56,7 @@ public class VNextTeamPartServiceBundleCases extends BaseTestClass {
             PartServiceSteps.selectPartService(service);
             PartServiceSteps.confirmPartInfo();
         });
-        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
         BundleServiceSteps.setBundlePrice(BundleServiceScreenInteractrions.getBundleServiceSelectedAmount());
 
@@ -99,9 +99,10 @@ public class VNextTeamPartServiceBundleCases extends BaseTestClass {
         AvailableServicesScreenSteps.openServiceDetails(bundleServiceData.getBundleServiceName());
         BundleServiceSteps.openServiceDetails(partServiceInsideBundle.getServiceName());
         PartServiceSteps.selectpartServiceDetails(partServiceInsideBundle);
+        PartServiceSteps.confirmPartInfo();
         PartServiceSteps.addLaborService();
         laborServiceListInsideParts.forEach((service) -> LaborServiceSteps.selectService(service.getServiceName()));
-        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
         BundleServiceSteps.setBundlePrice(BundleServiceScreenInteractrions.getBundleServiceSelectedAmount());
 

@@ -47,6 +47,7 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
         basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(MatrixServiceSteps::selectPartServiceInsideMatrixService);
+        //ServiceDetailsScreenSteps.saveServiceDetails();
         MatrixServiceSteps.switchToSelectedServices();
         basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(serviceData -> MatrixServiceDetailsValidations.validateServiceSelected(serviceData.getServiceName()));
         MatrixServiceDetailsValidations.validateMatrixServiceDetails(basicPartsServiceMatrixService);
@@ -122,9 +123,10 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
         MatrixServiceSteps.openPartServiceDetailsInsideMatrixService(partServiceInsideMatrix);
+        PartServiceSteps.confirmPartInfo();
         PartServiceSteps.addLaborService();
         partServiceInsideMatrix.getLaborServiceDataList().stream().map(LaborServiceData::getServiceName).forEach(LaborServiceSteps::selectService);
-        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
         MatrixServiceSteps.switchToSelectedServices();
         partServiceInsideMatrix.getLaborServiceDataList().stream().map(LaborServiceData::getServiceName).forEach(MatrixServiceDetailsValidations::validateServiceSelected);
@@ -155,8 +157,8 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
             PartServiceSteps.selectPartService(service);
             PartServiceSteps.acceptDetailsScreen();
         }));
-        WizardScreenSteps.saveAction();
-        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         MatrixServiceSteps.switchToSelectedServices();
         partsServicesInsideLaborService.stream().map(PartServiceData::getServiceName).forEach(MatrixServiceDetailsValidations::validateServiceSelected);
         MatrixServiceDetailsValidations.validateServiceSelected(laborServiceInsideMatrix.getServiceName());
@@ -179,9 +181,10 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
         basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(MatrixServiceSteps::selectPartServiceInsideMatrixService);
+        ServiceDetailsScreenSteps.saveServiceDetails();
         MatrixServiceSteps.switchToSelectedServices();
-       // basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(serviceData -> MatrixServiceDetailsValidations.validateServiceSelected(serviceData.getServiceName()));
-        //MatrixServiceDetailsValidations.validateMatrixServiceDetails(basicPartsServiceMatrixService);
+        basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(serviceData -> MatrixServiceDetailsValidations.validateServiceSelected(serviceData.getServiceName()));
+        MatrixServiceDetailsValidations.validateMatrixServiceDetails(basicPartsServiceMatrixService);
         ScreenNavigationSteps.pressBackButton();
         MatrixServiceSteps.acceptDetailsScreen();
         SelectedServicesScreenSteps.openLaborServiceDetails(basicPartsServiceMatrixService.getMatrixServiceName());

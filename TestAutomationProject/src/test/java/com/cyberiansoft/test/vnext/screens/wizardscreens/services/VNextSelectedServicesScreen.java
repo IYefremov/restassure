@@ -87,7 +87,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     public void uselectService(String serviceName) {
         WebElement servicecell = getSelectedServiceCell(serviceName);
         if (servicecell != null) {
-            tap(servicecell.findElement(By.xpath(".//*[@action='unselect-item']")));
+            tap(servicecell.findElement(By.xpath(".//*[@action='delete-service']")));
         } else
             Assert.assertTrue(false, "Can't find service: " + serviceName);
     }
