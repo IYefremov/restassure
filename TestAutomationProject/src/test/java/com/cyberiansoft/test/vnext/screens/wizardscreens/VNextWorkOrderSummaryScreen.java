@@ -24,7 +24,7 @@ public class VNextWorkOrderSummaryScreen extends VNextBaseWizardScreen {
 		super(appiumdriver);
         PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(autoinvoicecreateoption));
+		wait.until(ExpectedConditions.visibilityOf(wosummaryscreen));
 	}
 	
 	/*public void clickCreateInvoiceOption() {
