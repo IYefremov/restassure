@@ -12,6 +12,6 @@ public class VNextBOUserProfileDialogSteps
 
         WebElement closeButton = new VNextBOUserProfileDialog().getXButton();
         Utils.clickElement(closeButton);
-        WaitUtilsWebDriver.getWebDriverWait(3).until(ExpectedConditions.invisibilityOf(closeButton));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

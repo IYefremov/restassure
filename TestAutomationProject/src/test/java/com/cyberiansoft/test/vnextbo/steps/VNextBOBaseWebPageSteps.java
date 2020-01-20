@@ -21,7 +21,7 @@ public class VNextBOBaseWebPageSteps {
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.userInfoBlock);
-        WaitUtilsWebDriver.getWebDriverWait(3).until(ExpectedConditions.visibilityOf(new VNextBOUserProfileDialog().getXButton()));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static String openHelpPage()
@@ -53,12 +53,14 @@ public class VNextBOBaseWebPageSteps {
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.termsAndConditionsLink);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void clickPrivacyPolicyLink()
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.privacyPolicyLink);
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static void openIntercomMessenger()

@@ -39,6 +39,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.addMoneyOrPercentageService(serviceData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyMoneyServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -50,6 +51,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.addMoneyOrPercentageService(serviceData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyPercentageServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -69,6 +71,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.editMoneyOrPercentageService(baseServiceName, serviceData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyMoneyServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -88,6 +91,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.editMoneyOrPercentageService(baseServiceName, serviceData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyPercentageServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -137,6 +141,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyMoneyServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -152,6 +157,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyPercentageServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
@@ -176,6 +182,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServiceDialogSteps.clickSaveButton();
         VNextBOServiceDialogValidations.verifyErrorMessageIsCorrect("Service name is required!");
         VNextBOServiceDialogSteps.closeServiceDialog();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -190,6 +197,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.clickEditButtonForService(serviceData.getServiceName());
         VNextBOServiceDialogValidations.verifyClarificationFields(serviceData);
         VNextBOServiceDialogSteps.closeServiceDialog();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -204,6 +212,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.clickEditButtonForService(serviceData.getServiceName());
         VNextBOServiceDialogValidations.verifyClarificationFields(serviceData);
         VNextBOServiceDialogSteps.closeServiceDialog();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -223,11 +232,13 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         serviceData.setServiceClarification("None");
         serviceData.setServiceClarificationPrefix(null);
         VNextBOServicesWebPageSteps.editMoneyOrPercentageService(baseServiceName, serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyMoneyServiceRecordDataAreCorrect(serviceData);
         VNextBOServicesWebPageSteps.clickEditButtonForService(serviceData.getServiceName());
         VNextBOServiceDialogValidations.verifyClarificationFields(serviceData);
         VNextBOServiceDialogSteps.closeServiceDialog();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -240,6 +251,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(serviceData.getServiceName(), "13");
         VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(serviceData.getServiceName(), "13");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -253,6 +265,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(serviceData.getServiceName(), "14");
         VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(serviceData.getServiceName(), "14");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 }

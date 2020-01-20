@@ -48,7 +48,6 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedOkBtn(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickTermsAndConditionsLink();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
@@ -64,7 +63,6 @@ public class VNextBOInspectionsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedCloseBtn(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsPageSteps.clickTermsAndConditionsLink();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();

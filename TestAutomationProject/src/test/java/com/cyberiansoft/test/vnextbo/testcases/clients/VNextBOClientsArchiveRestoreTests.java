@@ -66,6 +66,7 @@ public class VNextBOClientsArchiveRestoreTests extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(testClientName);
         VNextBOClientsPageValidations.verifySearchResultIsCorrectForColumnWithText("Client", testClientName);
         VNextBOClientsPageValidations.verifyCorrectRecordsAmountIsDisplayed(1);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOClientsPageSteps.restoreClient(testClientName);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOClientsPageSteps.openActiveTab();

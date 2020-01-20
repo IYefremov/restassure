@@ -57,9 +57,7 @@ public class VNextBOPMOrderDetailsPartsDetailsStatusTests extends BaseTestCase {
         VNextBOPartsDetailsPanelSteps.setStatusForPartByPartNumberInList(0, "Refused");
         WaitUtilsWebDriver.waitABit(30000);
         Utils.refreshPage();
-        VNextBOBreadCrumbInteractions.setLocation("Rozstalnoy_location");
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-385-00027");
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-385-00027");
         VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(0, "Refused");
         VNextBOPartsDetailsPanelValidations.verifyPartPriceIsCorrect(0, "$0.00");

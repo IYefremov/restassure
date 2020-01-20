@@ -107,16 +107,17 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
         Utils.clickElement(advancedSearchDialog.getTimeFrameDropDown());
         Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getTimeFrameDropDownList(),
                 advancedSearchDialog.dropDownFieldOption(timeFrame));
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void setFromField(String fromDate) {
 
-        Utils.clearAndType(new VNextBOROAdvancedSearchDialogNew().getFromInputField(), fromDate);
+        Utils.sendKeysWithJS(new VNextBOROAdvancedSearchDialogNew().getFromInputField(), fromDate);
     }
 
     public static void setToField(String toDate) {
 
-        Utils.clearAndType(new VNextBOROAdvancedSearchDialogNew().getToInputField(), toDate);
+        Utils.sendKeysWithJS(new VNextBOROAdvancedSearchDialogNew().getToInputField(), toDate);
     }
 
     public static void setRepairStatusField(String repairStatus) {

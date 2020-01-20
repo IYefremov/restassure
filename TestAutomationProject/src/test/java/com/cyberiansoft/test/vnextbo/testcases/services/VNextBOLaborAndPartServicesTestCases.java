@@ -33,6 +33,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.addLaborService(serviceData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -44,6 +45,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.addLaborService(serviceData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -53,7 +55,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
         serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());
         VNextBOServicesWebPageSteps.setLaborServiceDataAndCancel(serviceData);
-        VNextBOSearchPanelSteps.searchByText(serviceData.getServiceName());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyServicesNotFoundMessageIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
@@ -75,8 +77,10 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         serviceData.setServiceUseSelectedLaborTimes("false");
         VNextBOServicesWebPageSteps.editLaborService(baseServiceName, serviceData);
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -104,6 +108,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyLaborServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -115,6 +120,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.addBasePartService(serviceData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -126,6 +132,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.addPartServiceWithAllData(serviceData);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -145,8 +152,10 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         serviceData.setServiceSubCategory("Assortments");
         serviceData.setServicePartName("Brake Fitting Assortment");
         VNextBOServicesWebPageSteps.editPartServiceWithAllData(baseServiceName, serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -174,6 +183,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesPageValidations.verifyPartServiceRecordDataAreCorrect(serviceData);
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -186,6 +196,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(serviceData.getServiceName(), "13");
         VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(serviceData.getServiceName(), "13");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
@@ -198,6 +209,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(serviceData.getServiceName());
         VNextBOServicesWebPageSteps.changeOrderNumberByServiceName(serviceData.getServiceName(), "14");
         VNextBOServicesPageValidations.verifyServiceOrderNumberIsCorrect(serviceData.getServiceName(), "14");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 }

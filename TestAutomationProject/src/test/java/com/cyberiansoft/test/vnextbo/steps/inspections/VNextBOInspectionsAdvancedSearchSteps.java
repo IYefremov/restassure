@@ -47,6 +47,7 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         advancedSearchForm.deleteSavedSearchButton.click();
         VNextBOModalDialogSteps.clickYesButton();
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     public static String getValueFromTextInputField(String fieldLabel) {
