@@ -142,7 +142,8 @@
     {
       "rowID": "checkMonitorReportsActiveVehiclesByPhaseGeneral.01",
       "description": "Test Case 65433:Monitor: Reports - Active Vehicles by Phase General",
-      "searchLocation": "ALM - Recon Facility"
+      "searchLocation": "ALM - Recon Facility",
+      "searchTimeFrame": "Last 365 Days"
     }
   ],
   

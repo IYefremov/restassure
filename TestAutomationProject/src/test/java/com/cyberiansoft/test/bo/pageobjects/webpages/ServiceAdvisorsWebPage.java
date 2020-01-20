@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
@@ -184,7 +185,7 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 		List<WebElement> rows = getServiceAdvisorsTableRows();
 		return rows.stream().filter(row -> {
 		    WaitUtilsWebDriver.waitABit(500);
-		    return WaitUtilsWebDriver.waitForElementNotToBeStale(row).getText().contains(firstName + " " + lastName);
+		    return Utils.getText(row).contains(firstName + " " + lastName);
         }).findFirst().orElse(null);
 	}
 	

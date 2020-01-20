@@ -515,7 +515,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 	}
 
-	//todo fails with batch run ???
+	//todo fails - obviously because of the bug. Needs clarifications
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void checkOperationInvoiceEditMarkAsPaid(String rowID, String description, JSONObject testData) {
 		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
@@ -547,6 +547,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.setSearchInvoiceNumber(invoiceNumber);
 		invoicesPage.clickFindButton();
 		Assert.assertTrue(invoicesPage.isFirstInvoiceMarkedAsPaid(), "The invoice isn't marked as Paid");
+        invoicesPage.closeSelectDropDown();
 	}
 
 	//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

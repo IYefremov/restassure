@@ -156,7 +156,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 
 		String lastpagenumber = servicesPage.getLastPageNumber();
 		servicesPage.clickGoToLastPage();
-		Assert.assertEquals(lastpagenumber, servicesPage.getGoToPageFieldValue());
+        Assert.assertEquals(lastpagenumber, servicesPage.getPageFieldValue());
 
 		servicesPage.clickGoToFirstPage();
 		Assert.assertEquals(data.getPage1(), servicesPage.getGoToPageFieldValue());
