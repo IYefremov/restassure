@@ -146,7 +146,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     }
 
     public List<WebElement> getServicesListItems() {
-        return getSelectedServicesList().findElements(By.xpath(".//*[contains(@action,'edit')]"));
+        return getSelectedServicesList().findElements(By.xpath(".//*[@action='open-added-service-details']"));
     }
 
     public WebElement getSelectedServicesList() {

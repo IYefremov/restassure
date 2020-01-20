@@ -23,15 +23,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class VNextTeamMonitoringResetStartDate extends BaseTestClass {
-    private String inspectionId = "";
     private String workOrderId = "";
 
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+    @BeforeClass(description = "Team Monitoring Reset Start Date")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringTimeReportDataPath();
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
-        inspectionId = InspectionSteps.saveInspection();
+        final String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.approveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);

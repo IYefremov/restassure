@@ -65,7 +65,8 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
                     .stream().map(TargetProcessTestCaseData::getTestCaseID)
                     .forEach(id -> {
                         try {
-                            tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.PASSED, "Hello from automation :)");
+                            if (testToTestRunMap.containsKey(id))
+                                tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.PASSED, "Hello from automation :)");
                         } catch (UnirestException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
@@ -83,7 +84,8 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
                     .stream().map(TargetProcessTestCaseData::getTestCaseID)
                     .forEach(id -> {
                         try {
-                            tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.FAILED, "Hello from automation :)");
+                            if (testToTestRunMap.containsKey(id))
+                                tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.FAILED, "Hello from automation :)");
                         } catch (UnirestException e) {
                             e.printStackTrace();
                         } catch (IOException e) {
