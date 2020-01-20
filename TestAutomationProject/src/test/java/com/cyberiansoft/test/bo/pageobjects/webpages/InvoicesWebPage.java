@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.*;
@@ -756,19 +757,26 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		jse.executeScript("window.scrollBy(0," + pix + ")", "");
 	}
 
-	public boolean isFirstInvoiceMarkedAsPaid() {
-		try {
-			Actions actions = new Actions(driver);
-			wait.until(ExpectedConditions.elementToBeClickable(selectButton)).click();
+	public void openSelectDropDown() {
+        Utils.moveToElement(selectButton);
+        boolean visible = WaitUtilsWebDriver.elementShouldBeVisible(slideDisplayed, true, 4);
+        if (!visible) {
+            Utils.clickElement(selectButton);
+            visible = WaitUtilsWebDriver.elementShouldBeVisible(slideDisplayed, true, 4);
+        }
+        Assert.assertTrue(visible, "The invoice 'Select' dropDown hasn't been opened");
+    }
 
-			actions.moveToElement(selectButton).click().build().perform();
-//            setAttribute(slideDisplayed, "")
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.linkText("Mark as Unpaid"))).click();
-			actions.moveToElement(selectButton).click().build().perform();
-			return true;
-		} catch (WebDriverException e) {
-			return false;
-		}
+	public void closeSelectDropDown() {
+        if (WaitUtilsWebDriver.elementShouldBeVisible(slideDisplayed, true, 2)) {
+            Utils.clickElement(selectButton);
+        }
+        WaitUtilsWebDriver.elementShouldBeVisible(slideDisplayed, false, 4);
+    }
+
+	public boolean isFirstInvoiceMarkedAsPaid() {
+	    openSelectDropDown();
+        return WaitUtilsWebDriver.elementShouldBeVisible(markAsUnpaidOption, true, 2);
 	}
 
 	public void editVehicleInfo(String editText) {

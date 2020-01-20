@@ -69,19 +69,19 @@ public class Utils {
 
     public static void clearAndType(WebElement element, String name) {
         clear(element);
-        Utils.getActions().sendKeys(element, name).build().perform();
+        getActions().sendKeys(element, name).build().perform();
         WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void clearAndTypeWithJS(WebElement element, String name) {
         sendKeysWithJS(element, "");
-        Utils.sendKeysWithJS(element, name);
+        sendKeysWithJS(element, name);
         WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void sendKeysWithEnter(WebElement element, String name) {
         clear(element);
-        Utils.getActions().sendKeys(element, name).sendKeys(Keys.ENTER).build().perform();
+        getActions().sendKeys(element, name).sendKeys(Keys.ENTER).build().perform();
         WaitUtilsWebDriver.waitABit(500);
     }
 
@@ -90,7 +90,7 @@ public class Utils {
             WaitUtilsWebDriver.elementShouldBeClickable(element, true, 7);
             element.clear();
         } catch (Exception e) {
-            Utils.sendKeysWithJS(element, "");
+            sendKeysWithJS(element, "");
         }
     }
 
@@ -101,8 +101,8 @@ public class Utils {
 
     public static void clearAndTypeUsingKeyboard(WebElement element, String name) {
         scrollToElement(element);
-        Utils.clickElement(element);
-        Utils.getActions()
+        clickElement(element);
+        getActions()
                 .sendKeys(element, Keys.HOME)
                 .sendKeys(element, Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END))
                 .sendKeys(element, Keys.DELETE)
@@ -125,13 +125,14 @@ public class Utils {
     }
 
     public static WebElement moveToElement(WebElement element) {
+        WaitUtilsWebDriver.waitForElementNotToBeStale(element, 2);
         getActions().moveToElement(element).build().perform();
         return element;
     }
 
     public static WebElement moveToElement(By by) {
         final WebElement element = DriverBuilder.getInstance().getDriver().findElement(by);
-        getActions().moveToElement(element).build().perform();
+        moveToElement(element);
         return element;
     }
 
@@ -160,7 +161,7 @@ public class Utils {
         getMatchingOptionInListBox(listBox, selection)
                 .ifPresent((option) -> {
                     moveToElement(option);
-                    Utils.clickElement(option);
+                    clickElement(option);
                 });
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }
@@ -175,7 +176,7 @@ public class Utils {
     public static void selectOptionInDropDownWithJs(WebElement dropDown, WebElement option) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibility(option);
-        Utils.clickWithJS(option);
+        clickWithJS(option);
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }
 
@@ -184,10 +185,10 @@ public class Utils {
             WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
             final WebElement webElement = listBox
                     .stream()
-                    .filter(option -> Utils.getText(option).equals(selection))
+                    .filter(option -> getText(option).equals(selection))
                     .findAny()
                     .orElseThrow(() -> new NoSuchElementException("The option " + selection + " hasn't been found"));
-            Utils.clickElement(webElement);
+            clickElement(webElement);
         } else {
             selectOptionInDropDown(dropDown, listBox, selection);
         }
@@ -196,7 +197,7 @@ public class Utils {
     public static Optional<WebElement> getMatchingOptionInListBox(List<WebElement> listBox, String selection) {
         return listBox
                 .stream()
-                .filter((option) -> Utils.getText(option).equals(selection))
+                .filter((option) -> getText(option).equals(selection))
                 .findFirst();
     }
 
@@ -208,13 +209,13 @@ public class Utils {
         int scrollingNumber = 0;
         do {
             try {
-                isOptionDisplayed = Utils.isElementDisplayed(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]")));
+                isOptionDisplayed = isElementDisplayed(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]")));
             } catch (Exception ex) {
                 javascriptExecutor.executeScript("document.querySelector('div[aria-hidden=\"false\"] div.k-list-scroller').scrollTop+=100");
                 scrollingNumber++;
             }
         } while ((!isOptionDisplayed) || (scrollingNumber == 3));
-        Utils.clickWithJS((DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]"))));
+        clickWithJS((DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]"))));
     }
 
     public static String getNewTab(String mainWindow) {
@@ -236,11 +237,12 @@ public class Utils {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
         final int random = RandomUtils.nextInt(minOptionNumber, listBox.size());
-        String selectedText = Utils.getText(listBox.get(random));
+        String selectedText = getText(listBox.get(random));
         getMatchingOptionInListBox(listBox, selectedText)
                 .ifPresent((option) -> {
+                    WaitUtilsWebDriver.waitForElementNotToBeStale(option, 3);
                     moveToElement(option);
-                    Utils.clickElement(option);
+                    clickElement(option);
                 });
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
         return selectedText;
@@ -251,7 +253,7 @@ public class Utils {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
         final int random = RandomUtils.nextInt(minOptionNumber, listBox.size());
-        String selectedText = Utils.getText(listBox.get(random));
+        String selectedText = getText(listBox.get(random));
         getMatchingOptionInListBox(listBox, selectedText).ifPresent(Utils::clickWithJS);
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
         System.out.println("random value: " + random + "\n" + "selected option: " + selectedText);

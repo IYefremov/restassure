@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -67,11 +68,11 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public String getGoToPageFieldValue() {
-		return gotopagefld.getAttribute("value");
+		return Utils.getInputFieldValue(gotopagefld);
 	}
 
 	public String getPageFieldValue() {
-		return getGoToPageFieldValue().replace(",", "");
+		return getGoToPageFieldValue().replaceAll(",", "");
 	}
 
 	public void setPageSize(String pageSize) {
@@ -91,8 +92,7 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public void clickGoToLastPage() {
-		wait.until(ExpectedConditions.elementToBeClickable(gotolastpage));
-		gotolastpage.click();
+        Utils.clickElement(gotolastpage);
 		waitForLoading();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By
 				.xpath("//a[@class='rgCurrentPage']/span[text()='" + getLastPageNumber() + "']")));
@@ -103,7 +103,7 @@ public class WebPageWithPagination extends BaseWebPage {
 			JavascriptExecutor executor = (JavascriptExecutor) driver;
 			executor.executeScript("arguments[0].click();", gotolastpage);
 		} else {
-			gotolastpage.click();
+		    Utils.clickElement(gotolastpage);
 		}
 		try {
 			wait.until(ExpectedConditions.visibilityOf(updateProcess));
