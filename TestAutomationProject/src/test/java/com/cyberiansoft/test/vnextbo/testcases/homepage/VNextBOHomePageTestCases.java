@@ -72,7 +72,6 @@ public class VNextBOHomePageTestCases extends BaseTestCase {
         VNextBOUserProfileDialogValidations.verifyAllDialogElementsAreDisplayed();
         VNextBOUserProfileDialogSteps.closeDialog();
         VNextBOUserProfileDialogValidations.verifyUserProfileDialogIsDisplayed(false);
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

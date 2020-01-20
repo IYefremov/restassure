@@ -54,7 +54,6 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedOkButton(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickTermsAndConditionsLink();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
@@ -69,7 +68,6 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyTermsAndConditionsCanBeOpenedAndClosedXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickTermsAndConditionsLink();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
@@ -84,7 +82,6 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosedOkButton(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickPrivacyPolicyLink();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyOkButtonIsDisplayed();
@@ -99,7 +96,6 @@ public class VNextBOClientsGeneralTests extends BaseTestCase {
     public void verifyPrivacyPolicyCanBeOpenedAndClosedXIcon(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.clickPrivacyPolicyLink();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
         VNextBOModalDialog vNextBOTermsAndConditionsDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();

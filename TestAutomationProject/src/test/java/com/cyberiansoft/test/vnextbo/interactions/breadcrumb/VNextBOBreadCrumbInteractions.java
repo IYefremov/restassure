@@ -31,6 +31,7 @@ public class VNextBOBreadCrumbInteractions {
             }
             selectLocation(location);
         }
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void setLocation(String location, boolean isSetWithEnter) {
