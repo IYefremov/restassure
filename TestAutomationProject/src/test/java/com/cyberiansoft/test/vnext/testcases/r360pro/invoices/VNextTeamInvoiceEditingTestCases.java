@@ -66,7 +66,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         invoicesScreen.clickBackButton();
     }
@@ -118,13 +118,13 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         invoiceInfoScreen.changeInvoiceDayValue(date);
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
 
         Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), testCaseData.getInvoiceData().getNewPoNumber());
         date = date.minusDays(1);
@@ -133,7 +133,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         Assert.assertEquals(invoiceInfoScreen.getInvoicePONumberValue(), testCaseData.getInvoiceData().getNewPoNumber());
         Assert.assertEquals(invoiceInfoScreen.getInvoiceDateValue(), date.format(dateFormatlong));
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         invoicesScreen.clickBackButton();
     }
 
@@ -179,12 +179,12 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), testCaseData.getInvoiceData().getNewPoNumber());
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         invoicesScreen.clickBackButton();
@@ -208,7 +208,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
@@ -238,7 +238,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         Assert.assertFalse(invoiceMenuScreen.isApproveInvoiceMenuItemExists());
@@ -263,7 +263,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
@@ -298,13 +298,13 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         invoicesScreen.switchToTeamInvoicesView();
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), testCaseData.getInvoiceData().getNewPoNumber());
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         invoicesScreen.switchToMyInvoicesView();
@@ -331,7 +331,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
@@ -359,7 +359,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
@@ -393,13 +393,13 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         List<String> workOrdersToAdd = workOrders.subList(1, workOrders.size());
         invoiceInfoScreen.addWorkOrdersToInvoice(workOrdersToAdd);
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         for (String woNumber : workOrders)
@@ -434,13 +434,13 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         final List<String> workOrdersToAdd = workOrders.subList(1, workOrders.size());
         invoiceInfoScreen.addWorkOrdersToInvoice(workOrdersToAdd);
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceInfoScreen = invoiceMenuScreen.clickEditInvoiceMenuItem();
         for (String woNumber : workOrders)
@@ -450,7 +450,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOU_CANNOT_DEATTACH_THE_LAST_WORK_ORDER_FROM_INVOICE);
-        invoicesScreen = invoiceInfoScreen.saveInvoiceAsDraft();
+        invoiceInfoScreen.saveInvoiceAsDraft();
         invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 
         invoiceMenuScreen.clickVoidInvoiceMenuItem();
