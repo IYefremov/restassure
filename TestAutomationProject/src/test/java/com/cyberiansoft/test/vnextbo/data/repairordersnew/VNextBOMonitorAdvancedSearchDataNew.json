@@ -140,5 +140,273 @@
         }
       ]
     }
+  ],
+
+  "verifyUserCanSearchByHasProblemsFlag": [
+    {
+      "rowID": "verifyUserCanSearchByHasProblemsFlag.01",
+      "description": "Test Case 91475: User can search by \"Has problems\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91475",
+          "testCaseTitle": "User can search by \"Has problems\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByRepairStatus": [
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.01",
+      "description": "Test Case 91432: User can search by \"Repair Status\"(In Progress - All)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91432",
+          "testCaseTitle": "User can search by \"Repair Status\"(In Progress - All)"
+        }
+      ],
+      "repairStatus": "In Progress - All"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.02",
+      "description": "Test Case 91442: User can search by \"Repair Status\"(In Progress - Active)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91442",
+          "testCaseTitle": "User can search by \"Repair Status\"(In Progress - Active)"
+        }
+      ],
+      "repairStatus": "In Progress - Active"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.03",
+      "description": "Test Case 91443: User can search by \"Repair Status\"(In Progress - Queued)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91443",
+          "testCaseTitle": "User can search by \"Repair Status\"(In Progress - Queued)"
+        }
+      ],
+      "repairStatus": "In Progress - Queued"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.04",
+      "description": "Test Case 91444: User can search by \"Repair Status\"(In Progress - Rework)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91444",
+          "testCaseTitle": "User can search by \"Repair Status\"(In Progress - Rework)"
+        }
+      ],
+      "repairStatus": "In Progress - Rework"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.05",
+      "description": "Test Case 91445: User can search by \"Repair Status\"(In Progress - On Hold)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91445",
+          "testCaseTitle": "User can search by \"Repair Status\"(In Progress - On Hold)"
+        }
+      ],
+      "repairStatus": "In Progress - On Hold"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.06",
+      "description": "Test Case 91446: User can search by \"Repair Status\"(In Progress - Not On Hold)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91446",
+          "testCaseTitle": "User can search by \"Repair Status\"(In Progress - Not On Hold)"
+        }
+      ],
+      "repairStatus": "In Progress - Not On Hold"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.07",
+      "description": "Test Case 91447: User can search by \"Repair Status\"(In Progress - QA Ready)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91447",
+          "testCaseTitle": "User can search by \"Repair Status\"(In Progress - QA Ready)"
+        }
+      ],
+      "repairStatus": "In Progress - QA Ready"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.08",
+      "description": "Test Case 91448: User can search by \"Repair Status\"( Completed - QA Ready)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91448",
+          "testCaseTitle": "User can search by \"Repair Status\"( Completed - QA Ready)"
+        }
+      ],
+      "repairStatus": "Completed - QA Ready"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.09",
+      "description": "Test Case 91449: User can search by \"Repair Status\"(Completed - Not Billed)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91449",
+          "testCaseTitle": "User can search by \"Repair Status\"(Completed - Not Billed)"
+        }
+      ],
+      "repairStatus": "Completed - Not Billed"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.10",
+      "description": "Test Case 91450: User can search by \"Repair Status\"(Completed - On Site)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91450",
+          "testCaseTitle": "User can search by \"Repair Status\"(Completed - On Site)"
+        }
+      ],
+      "repairStatus": "Completed - On Site"
+    },
+    {
+      "rowID": "verifyUserCanSearchByRepairStatus.11",
+      "description": "Test Case 91451: User can search by \"Repair Status\"(Completed - All)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91451",
+          "testCaseTitle": "User can search by \"Repair Status\"(Completed - All) (Automated)"
+        }
+      ],
+      "repairStatus": "Completed - All"
+    }
+  ],
+
+  "verifyUserCanSearchByPhaseStatus": [
+    {
+      "rowID": "verifyUserCanSearchByPhaseStatus.01",
+      "description": "Test Case 91471: User can search by Phase Status -> Current",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91471",
+          "testCaseTitle": "User can search by Phase Status -> Current"
+        }
+      ],
+      "phase": "PDR Station",
+      "phaseStatus": "Current"
+    },
+    {
+      "rowID": "verifyUserCanSearchByPhaseStatus.02",
+      "description": "Test Case 91472: User can search by Phase Status -> Active",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91472",
+          "testCaseTitle": "User can search by Phase Status -> Active"
+        }
+      ],
+      "phase": "PDR Station",
+      "phaseStatus": "Active"
+    },
+    {
+      "rowID": "verifyUserCanSearchByPhaseStatus.03",
+      "description": "Test Case 91473: User can search by Phase Status -> Not Completed",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91473",
+          "testCaseTitle": "User can search by Phase Status -> Not Completed"
+        }
+      ],
+      "phase": "PDR Station",
+      "phaseStatus": "Not Completed"
+    },
+    {
+      "rowID": "verifyUserCanSearchByPhaseStatus.04",
+      "description": "Test Case 91474: User can search by Phase Status -> Completed",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91474",
+          "testCaseTitle": "User can search by Phase Status -> Completed"
+        }
+      ],
+      "phase": "PDR Station",
+      "phaseStatus": "Completed"
+    }
+  ],
+
+  "verifyUserCanSearchByFlag": [
+    {
+      "rowID": "verifyUserCanSearchByFlag.01",
+      "description": "Test Case 91434: User can search by \"Flag\" (white)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91434",
+          "testCaseTitle": "User can search by \"Flag\" (white)"
+        }
+      ],
+      "flag": "White"
+    },
+    {
+      "rowID": "verifyUserCanSearchByFlag.02",
+      "description": "Test Case 91463: User can search by \"Flag\" (red)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91463",
+          "testCaseTitle": "User can search by \"Flag\" (red)"
+        }
+      ],
+      "flag": "Important"
+    },
+    {
+      "rowID": "verifyUserCanSearchByFlag.03",
+      "description": "Test Case 91464: User can search by \"Flag\" (orange)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91464",
+          "testCaseTitle": "User can search by \"Flag\" (orange)"
+        }
+      ],
+      "flag": "Low priority"
+    },
+    {
+      "rowID": "verifyUserCanSearchByFlag.04",
+      "description": "Test Case 91465: User can search by \"Flag\" (yellow)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91465",
+          "testCaseTitle": "User can search by \"Flag\" (yellow)"
+        }
+      ],
+      "flag": "Yellow"
+    },
+    {
+      "rowID": "verifyUserCanSearchByFlag.05",
+      "description": "Test Case 91466: User can search by \"Flag\" (green)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91466",
+          "testCaseTitle": "User can search by \"Flag\" (green)"
+        }
+      ],
+      "flag": "Green"
+    },
+    {
+      "rowID": "verifyUserCanSearchByFlag.06",
+      "description": "Test Case 91467: User can search by \"Flag\" (blue)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91467",
+          "testCaseTitle": "User can search by \"Flag\" (blue)"
+        }
+      ],
+      "flag": "Blue"
+    },
+    {
+      "rowID": "verifyUserCanSearchByFlag.07",
+      "description": "Test Case 91468: User can search by \"Flag\" (purple)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91468",
+          "testCaseTitle": "User can search by \"Flag\" (purple)"
+        }
+      ],
+      "flag": "Test"
+    }
   ]
 }

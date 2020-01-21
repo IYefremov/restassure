@@ -142,6 +142,11 @@ public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
         return driver.findElement(By.xpath("//ul[@aria-hidden='false']/li[text()=\"" + optionName + "\"]"));
     }
 
+    public WebElement flagDropDownFieldOption(String flag) {
+
+        return driver.findElement(By.xpath("//ul[@aria-hidden='false']//span[text()=\"" + flag + "\"]"));
+    }
+
     public VNextBOROAdvancedSearchDialogNew() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

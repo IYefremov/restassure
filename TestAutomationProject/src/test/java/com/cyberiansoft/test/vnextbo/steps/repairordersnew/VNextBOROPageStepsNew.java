@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -79,5 +81,43 @@ public class VNextBOROPageStepsNew {
         VNextBOROAdvancedSearchDialogStepsNew.setVinNumberField(vinNumber);
         VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void searchOrdersByRepairStatus(String repairStatus) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField(repairStatus);
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void searchOrdersByPhaseStatus(String phase, String phaseStatus) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setPhaseField(phase);
+        VNextBOROAdvancedSearchDialogStepsNew.setPhaseStatusField(phaseStatus);
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void searchOrdersByFlag(String flag) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setFlagField(flag);
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void searchOrdersWithHasProblemsFlag() {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.clickHasProblemCheckBox();
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static boolean checkIfNoRecordsFoundMessageIsDisplayed() {
+
+        return Utils.isElementDisplayed(new VNextBOROWebPageNew().getNoRecordsFoundMessage());
     }
 }

@@ -2,6 +2,8 @@ package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
+import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
+import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -17,15 +19,20 @@ public class VNextBOROWebPageValidationsNew {
     public static void verifyEmployeesAreCorrectInTheTable(String expectedEmployee) {
 
         for (WebElement technician: new VNextBOROWebPageNew().getOrdersTechniciansList()) {
-            Assert.assertTrue(Utils.getText(technician).contains(expectedEmployee), "Employee hasn't been correct");
+            Assert.assertTrue(Utils.getText(technician).contains(expectedEmployee),
+                    "Employee " + Utils.getText(technician) + "hasn't been correct");
         }
     }
 
     public static void verifyPhasesAreCorrectInTheTable(String expectedPhase) {
 
-        for (WebElement phase: new VNextBOROWebPageNew().getOrdersPhasesList()) {
-            Assert.assertEquals(Utils.getText(phase), expectedPhase, "Phase hasn't been correct");
-        }
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed())
+            Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",
+                    "No records found message hasn't been displayed or has been incorrect");
+        else
+            for (WebElement phase: new VNextBOROWebPageNew().getOrdersPhasesList()) {
+                Assert.assertEquals(Utils.getText(phase), expectedPhase, "Phase hasn't been correct");
+                }
     }
 
     public static void verifyDepartmentsAreCorrectInTheTable(String expectedDepartment) {
@@ -68,5 +75,25 @@ public class VNextBOROWebPageValidationsNew {
         for (WebElement vinNumber: new VNextBOROWebPageNew().getVinNumbersList()) {
             Assert.assertEquals(Utils.getText(vinNumber), expectedVinNumber, "VIN number hasn't been correct");
         }
+    }
+
+    public static void verifyOrderTableContainsRecords() {
+
+        Assert.assertTrue(new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size() > 0, "Orders have not been displayed");
+    }
+
+    public static void verifyOrdersTableAfterSearch() {
+
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed())
+            Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",
+                    "No records found message hasn't been displayed or has been incorrect");
+        else
+            verifyOrderTableContainsRecords();
+    }
+
+    public static void verifyProblemIndicatorIsDisplayedForEachRecord() {
+
+        Assert.assertEquals(new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size(), new VNextBOROWebPageNew().getProblemIndicatorsList().size(),
+                "Not all orders has had Problems indicator");
     }
 }
