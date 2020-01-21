@@ -9,7 +9,7 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
     public static void clickSearchButton() {
 
         Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getSearchButton());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void setHasThisTextField(String text) {
@@ -141,7 +141,7 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
         VNextBOROAdvancedSearchDialogNew advancedSearchDialog = new VNextBOROAdvancedSearchDialogNew();
         Utils.clickElement(advancedSearchDialog.getFlagDropDown());
         Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getFlagDropDownList(),
-                advancedSearchDialog.dropDownFieldOption(flag));
+                advancedSearchDialog.flagDropDownFieldOption(flag));
     }
 
     public static void setSortByField(String sortBy) {

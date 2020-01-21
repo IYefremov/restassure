@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -8,6 +10,7 @@ import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROAdvancedSearchDialogStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROAdvancedSearchDialogValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
 import org.json.simple.JSONObject;
@@ -18,7 +21,7 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
-        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorAdvancedSearchTD();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorAdvancedSearchNewTD();
         VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
     }
@@ -108,6 +111,42 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
 
         VNextBOROPageStepsNew.searchOrdersByVinNumber("1ESFCVGDE34ES2589");
         VNextBOROWebPageValidationsNew.verifyVinNumbersAreCorrectInTheTable("1ESFCVGDE34ES2589");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByRepairStatus(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.searchOrdersByRepairStatus(data.getRepairStatus());
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Repair Status: " + data.getRepairStatus());
+        VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByPhaseStatus(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.searchOrdersByPhaseStatus(data.getPhase(), data.getPhaseStatus());
+        VNextBOROWebPageValidationsNew.verifyPhasesAreCorrectInTheTable(data.getPhase());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByFlag(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.searchOrdersByFlag(data.getFlag());
+        VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByHasProblemsFlag(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersWithHasProblemsFlag();
+        VNextBOROWebPageValidationsNew.verifyProblemIndicatorIsDisplayedForEachRecord();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }

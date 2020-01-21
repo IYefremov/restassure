@@ -16,6 +16,12 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='reconmonitor-orders']/table")
     private WebElement repairOrdersTable;
 
+    @FindBy(xpath = "//div[@id='reconmonitor-orders']//p[@class='search-results text-red']")
+    private WebElement noRecordsFoundMessage;
+
+    @FindBy(xpath = "//div[@id='reconmonitor-orders']/table/tbody/tr")
+    private List<WebElement> repairOrdersTableRowsList;
+
     @FindBy(xpath = "//strong[@data-bind='text: clientName']")
     private List<WebElement> ordersCustomersList;
 
@@ -42,6 +48,9 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//td[@class='stockRo']/p/strong")
     private List<WebElement> vinNumbersList;
+
+    @FindBy(xpath = "//i[@class='icon-problem-indicator']")
+    private List<WebElement> problemIndicatorsList;
 
     public VNextBOROWebPageNew() {
         super(DriverBuilder.getInstance().getDriver());
