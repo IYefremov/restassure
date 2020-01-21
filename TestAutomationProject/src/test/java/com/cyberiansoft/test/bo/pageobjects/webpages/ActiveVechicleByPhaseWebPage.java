@@ -1,5 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import org.openqa.selenium.By;
@@ -33,6 +35,12 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	@FindBy(xpath = "//div[@id='VisibleReportContentctl00_ctl00_Content_Main_report_ctl09']")
 	private WebElement reportContent;
+
+	@FindBy(id = "ctl00_ctl00_Content_Main_ctl01_filterer_ddlTimeframe_DropDown")
+	private WebElement timeFrameDropDown;
+
+	@FindBy(xpath = "//div[@id='ctl00_ctl00_Content_Main_ctl01_filterer_ddlTimeframe_DropDown']//li")
+	private List<WebElement> timeFrameListBox;
 
 	// @FindBy(xpath = "//a[text()='Subscriptions']")
 	@FindBy(linkText = "Subscriptions")
@@ -208,13 +216,13 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
     }
 
 	public int countLocationsInResultTable() {
-		wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.id("ctl00_ctl00_Content_Main_report_fixedTable"))));
+        WaitUtilsWebDriver.elementShouldBeVisible(By.id("ctl00_ctl00_Content_Main_report_fixedTable"), true);
 		return driver.findElements(By.xpath("//span[contains(text(), 'Location')]")).size();
 	}
 
 	public boolean checkTimeFrameFilter() {
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(timeFrameField)).click();
+            Utils.clickElement(timeFrameField);
 			return listWithItems.findElements(By.tagName("li")).stream()
 					.allMatch(e -> e.getText().equals("Last 30 Days") || e.getText().equals("Last 90 Days")
 							|| e.getText().equals("Last 180 Days") || e.getText().equals("Last 365 Days")
@@ -224,6 +232,11 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		    e.printStackTrace();
 			return false;
 		}
+	}
+
+	public void setTimeFrameFilter(String timeFrame) {
+            Utils.clickElement(timeFrameField);
+            Utils.selectOptionInDropDown(timeFrameDropDown, timeFrameListBox, timeFrame);
 	}
 
 	public boolean checkGrid() {

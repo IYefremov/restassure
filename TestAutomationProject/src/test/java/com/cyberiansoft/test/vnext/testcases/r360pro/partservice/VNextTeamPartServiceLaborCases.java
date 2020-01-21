@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import org.json.simple.JSONObject;
@@ -47,7 +48,7 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
                 .map(LaborServiceData::getServiceName)
                 .collect(Collectors.toList())
                 .forEach(LaborServiceSteps::selectService);
-        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
         SelectedServicesScreenSteps.switchToSelectedService();
         ListServicesValidations.verifyServiceSelected(basicPartService.getServiceName());
@@ -78,8 +79,9 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
                     SearchSteps.textSearch(service.getServiceName());
                     PartServiceSteps.selectPartService(service);
                     PartServiceSteps.acceptDetailsScreen();
+                    ServiceDetailsScreenSteps.saveServiceDetails();
                 });
-        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
         SelectedServicesScreenSteps.switchToSelectedService();
         ListServicesValidations.verifyServiceSelected(laborServiceData.getServiceName());
@@ -116,10 +118,9 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
                         PartServiceSteps.selectPartService(service);
                         PartServiceSteps.acceptDetailsScreen();
                     });
-            WizardScreenSteps.saveAction();
+            ScreenNavigationSteps.pressBackButton();
             PartServiceSteps.confirmPartInfo();
         });
-
         SelectedServicesScreenSteps.switchToSelectedService();
         SelectedServicesScreenSteps.unselectService(laborServiceToRemoveWithPartService.getServiceName());
         GeneralSteps.confirmDialog();
@@ -155,10 +156,9 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
             PartServiceSteps.addLaborService();
             partServiceData.getLaborServiceDataList()
                     .forEach(service -> LaborServiceSteps.selectService(service.getServiceName()));
-            WizardScreenSteps.saveAction();
+            ScreenNavigationSteps.pressBackButton();
             PartServiceSteps.confirmPartInfo();
         });
-
         SelectedServicesScreenSteps.switchToSelectedService();
         SelectedServicesScreenSteps.unselectService(partServiceToRemoveWithLaborService.getServiceName());
         GeneralSteps.confirmDialog();

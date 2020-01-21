@@ -38,7 +38,7 @@ public class BackOfficeCompanyClientsTestCases extends BaseTestCase {
 
 		String lastPageNumber = clientsPage.getLastPageNumber();
 		clientsPage.clickGoToLastPage();
-		Assert.assertEquals(lastPageNumber, clientsPage.getGoToPageFieldValue().replace(",", ""));
+		Assert.assertEquals(lastPageNumber, clientsPage.getPageFieldValue());
 
 		clientsPage.clickGoToFirstPage();
 		Assert.assertEquals("1", clientsPage.getGoToPageFieldValue());

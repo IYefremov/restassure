@@ -21,15 +21,13 @@ import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValueW
 public class ServiceRequestsListInteractions {
 
     private ServiceRequestsListWebPage srListPage;
-    private ServiceRequestsListVerifications srListVerifications;
 
 	public ServiceRequestsListInteractions() {
 		srListPage = new ServiceRequestsListWebPage();
-		srListVerifications = new ServiceRequestsListVerifications();
 	}
 
 	public void makeSearchPanelVisible() {
-        if (!srListVerifications.isSearchPanelExpanded()) {
+        if (!ServiceRequestsListVerifications.isSearchPanelExpanded()) {
             Utils.clickElement(srListPage.getSearchButton());
         }
 	}
@@ -62,6 +60,7 @@ public class ServiceRequestsListInteractions {
 	public void clickAddServiceRequestButtonAndSave() {
         clickAddSRButton();
 		DriverBuilder.getInstance().getDriver().switchTo().frame(srListPage.getEditServiceRequestPanelFrame());
+		WaitUtilsWebDriver.elementShouldBeVisible(srListPage.getSaveServiceRequestButton(), true, 2);
 		Utils.clickElement(srListPage.getSaveServiceRequestButton());
 		waitForSRLoading();
 		WaitUtilsWebDriver.waitABit(2000);
@@ -580,11 +579,15 @@ public class ServiceRequestsListInteractions {
 		}
 	}
 
-	public int getMaximumTechniciansListSize() {
-		for (int i = 0; i < 7; i++) {
+	public int addMaximumTechnicians() {
+        int size = 0;
+        for (int i = 0; i < 8; i++) {
             addTechnician();
+            if (WaitUtilsWebDriver.waitForVisibilityOfAllOptions(srListPage.getTechniciansList(), 2).size() == 5) {
+                size = 5;
+                break;
+            }
 		}
-        final int size = WaitUtilsWebDriver.waitForVisibilityOfAllOptions(srListPage.getTechniciansList(), 5).size();
 		DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
 		return size;
 	}
@@ -668,7 +671,7 @@ public class ServiceRequestsListInteractions {
     public void goToDocumentLinkFromLC() {
 		WaitUtilsWebDriver.waitABit(1000);
 		DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
-		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(text(), 'Link to R-')]"))).click();
+		Utils.clickElement(By.xpath("//a[contains(text(), 'Link to R-')]"));
 		waitForLoading();
 	}
 
@@ -684,7 +687,9 @@ public class ServiceRequestsListInteractions {
 
     public void goToWOFromLifeCycle() {
         waitForLoading();
-        Utils.clickElement(By.xpath("//a[contains(text(), 'Link to')]"));
+        final By linkTo = By.xpath("//a[contains(text(), 'Link to')]");
+        WaitUtilsWebDriver.waitForVisibility(linkTo);
+        Utils.clickElement(linkTo);
         waitForSRLoading();
         waitForLoading();
     }

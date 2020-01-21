@@ -116,10 +116,11 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         PartServiceSteps.selectCategory(basicPartService.getCategory());
         PartServiceSteps.selectSubCategory(basicPartService.getSubCategory());
         PartServiceSteps.acceptDetailsScreen();
-        GeneralValidations.errorDialogShouldBePresent(true, "Please select at least one part.");
+        GeneralValidations.errorDialogShouldBePresent(true, "Please select at least one Part");
         GeneralSteps.closeErrorDialog();
         PartServiceSteps.selectPartName(basicPartService.getPartName());
         PartServiceSteps.confirmPartInfo();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -142,13 +143,14 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.PART_NAME);
         PartInfoScreenValidations.fieldShouldBeReadonly(false, PartInfoScreenField.PART_POSITION);
         PartServiceSteps.confirmPartInfo();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSelectAndLinkMultipleLaborServicesToPartServiceForServicesWizardStep(String rowID,
-                                              String description, JSONObject testData) {
+                                                                                            String description, JSONObject testData) {
 
         final String partValue = "Assortments > Brake Fitting Assortment > N/A";
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -161,10 +163,10 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         SearchSteps.textSearch(basicPartService.getServiceName());
         AvailableServicesScreenSteps.openServiceDetails(basicPartService.getServiceName());
         PartServiceSteps.selectPartPosition(basicPartService.getPartPosition());
-
+        PartServiceSteps.confirmPartInfo();
         PartServiceSteps.addLaborService();
         basicPartService.getLaborServiceDataList().stream().map(LaborServiceData::getServiceName).forEach(LaborServiceSteps::selectService);
-        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
         MatrixServiceSteps.switchToSelectedServices();
         basicPartService.getLaborServiceDataList().stream().map(LaborServiceData::getServiceName).forEach(MatrixServiceDetailsValidations::validateServiceSelected);
@@ -188,7 +190,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSelectAndLinkMultiplePartsServicesToLaborServiceForServicesWizardStep(String rowID,
-                                                                        String description, JSONObject testData) {
+                                                                                             String description, JSONObject testData) {
 
         List<String> serviceParts = new ArrayList<>();
         serviceParts.add("Assortments > Brake Fitting Assortment > N/A");
@@ -209,7 +211,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
             PartServiceSteps.selectPartService(service);
             PartServiceSteps.confirmPartInfo();
         });
-        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
 
         BundleServiceSteps.switchToSelectedServices();

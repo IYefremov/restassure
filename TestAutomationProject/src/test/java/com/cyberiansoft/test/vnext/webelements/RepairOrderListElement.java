@@ -23,7 +23,7 @@ public class RepairOrderListElement implements IWebElement {
     private String phaseTextLocator = "//div[contains(@class,'active-phase')]";
     private String vinTextLocator = "//div[contains(@class,'right-vin')]";
     private String statusesListLocator = "//*[@action=\"change-flag\"]";
-    private String repairOrderLocator = ".//div[contains(@class,'ro-item accordion-item')]";
+    private String repairOrderLocator = ".//*[@action='select']";
 
     public RepairOrderListElement(WebElement rootElement) {
         this.rootElement = rootElement;

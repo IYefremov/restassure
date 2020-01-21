@@ -75,7 +75,6 @@ public class BackOfficeOperationsTestCases extends BaseTestCase {
 		techCommissionPage.verifySearchResults(data.getInvoiceNumber());
 	}
 
-	//todo edge
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testOperationWorkOrdersSearch(String rowID, String description, JSONObject testData) {
 

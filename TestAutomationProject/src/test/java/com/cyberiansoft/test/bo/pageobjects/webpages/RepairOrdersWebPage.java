@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -200,7 +201,8 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	}
 
 	private WebElement getTableRowWithRepairOrder(String wo) {
-		List<WebElement> rows = getRepairOrdersTableRows();
+        final List<WebElement> rows = getRepairOrdersTableRows();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(rows);
 		for (WebElement row : rows) {
 			try {
 				if (Utils.getText(row.findElement(By.xpath(".//td[" + repairorderstable

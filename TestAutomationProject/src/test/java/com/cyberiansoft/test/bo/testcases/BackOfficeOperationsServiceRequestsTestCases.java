@@ -862,7 +862,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
         serviceRequestsWebPage.goToMonthInScheduler();
         serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
         Assert.assertTrue(ServiceRequestsListVerifications.checkTechniciansFromScheduler());
-		Assert.assertEquals(serviceRequestsWebPage.getMaximumTechniciansListSize(), 5,
+		Assert.assertEquals(serviceRequestsWebPage.addMaximumTechnicians(), 5,
                 "The maximum technicians list size is not 5");
 		serviceRequestsWebPage.clickArrowTechniciansLink();
 		Assert.assertTrue(ServiceRequestsListVerifications.check5TechniciansFromScheduler());
@@ -923,7 +923,7 @@ public class BackOfficeOperationsServiceRequestsTestCases extends BaseTestCase {
 		serviceRequestsWebPage.goToMonthInScheduler();
         serviceRequestsWebPage.clickTechniciansSchedulerDropDown();
         Assert.assertTrue(ServiceRequestsListVerifications.checkTechniciansFromScheduler());
-		Assert.assertEquals(5, serviceRequestsWebPage.getMaximumTechniciansListSize(),
+		Assert.assertEquals(5, serviceRequestsWebPage.addMaximumTechnicians(),
                 "The maximum technicians list size is not 5");
 		serviceRequestsWebPage.clickArrowTechniciansLink();
 		Assert.assertTrue(ServiceRequestsListVerifications.check5TechniciansFromScheduler());
