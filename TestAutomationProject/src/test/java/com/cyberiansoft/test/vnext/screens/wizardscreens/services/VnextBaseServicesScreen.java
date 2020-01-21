@@ -38,7 +38,7 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     public VnextBaseServicesScreen() {
     }
 
-    public VNextAvailableServicesScreen switchToAvalableServicesView() {
+    public void switchToAvalableServicesView() {
         WaitUtils.waitUntilElementIsClickable(servicesscreen.findElement(By.xpath(".//*[contains(@class,'services-list') and @data-view-mode]")));
         WaitUtils.getGeneralFluentWait().until(driver -> {
             tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
@@ -48,7 +48,6 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
         wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class,'services-list') and @data-view-mode='available']")));
-        return new VNextAvailableServicesScreen();
     }
 
     public VNextSelectedServicesScreen switchToSelectedServicesView() {

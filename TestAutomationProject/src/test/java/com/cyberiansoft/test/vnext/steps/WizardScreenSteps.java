@@ -17,7 +17,7 @@ public class WizardScreenSteps {
         );
         WaitUtils.elementShouldBeVisible(baseWizardScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(baseWizardScreen.getRootElement());
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
     }
 
     public static void navigateToWizardScreen(ScreenType screenType, Integer index) {
