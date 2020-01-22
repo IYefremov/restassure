@@ -71,8 +71,10 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     public void selectService(String serviceName) {
         WebElement servicerow = getServiceListItem(serviceName);
         String servicePrice =  servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
-        servicerow.findElement(By.xpath(".//*[@action='add-service']")).click();
-
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            getServiceListItem(serviceName).findElement(By.xpath(".//*[@action='add-service']")).click();
+            return true;
+        });
         if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
             VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
             serviceDetailsScreen.clickServiceDetailsDoneButton();
@@ -91,7 +93,10 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     }
 
     public void selectSingleService(String serviceName) {
-        getServiceListItem(serviceName).findElement(By.xpath(".//*[@action='add-service']")).click();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            getServiceListItem(serviceName).findElement(By.xpath(".//*[@action='add-service']")).click();
+            return true;
+        });
         WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
                 ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
         ));
