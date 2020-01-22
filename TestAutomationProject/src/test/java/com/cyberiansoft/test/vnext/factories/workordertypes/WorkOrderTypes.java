@@ -8,6 +8,7 @@ public enum WorkOrderTypes {
     KRAMAR_AUTO2("Kramar_auto2"),
     O_KRAMAR_INVOICE("O_Kramar_Invoice"),
     O_KRAMAR_CREATE_INVOICE("O_Kramar_Create_Invoice"),
+    O_KRAMAR_NO_DRAFT("O_Kramar_No_Draft"),
     O_KRAMAR_3_SERVICE_GROUPING("O_Kramar 3 Service grouping"),
     ALL_AUTO_PHASES("All_auto_Phases"),
     AUTOMATION_MONITORING("automationMonitoring");
