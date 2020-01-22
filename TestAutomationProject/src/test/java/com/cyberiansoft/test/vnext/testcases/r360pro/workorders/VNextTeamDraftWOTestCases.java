@@ -113,7 +113,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
         customersScreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
@@ -142,7 +142,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
         customersScreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
@@ -186,7 +186,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_INVOICE);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
@@ -223,7 +223,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
         customersScreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -254,7 +254,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR2);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_NO_DRAFT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -289,7 +289,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
         customersScreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
