@@ -5,6 +5,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class VNextBOROPageStepsNew {
 
@@ -112,6 +113,22 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.clickHasProblemCheckBox();
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void searchOrdersDaysInProcess(String condition, String daysFromValue, Optional<String> daysToValue) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setDaysInProcess(condition, daysFromValue, daysToValue);
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void searchOrdersDaysInPhase(String condition, String daysFromValue, Optional<String> daysToValue) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setDaysInPhase(condition, daysFromValue, daysToValue);
         VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }

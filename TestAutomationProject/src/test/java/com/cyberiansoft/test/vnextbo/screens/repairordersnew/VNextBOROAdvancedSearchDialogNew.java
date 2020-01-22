@@ -114,10 +114,28 @@ public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
     private WebElement repairStatusDropDownList;
 
     @FindBy(xpath = "//span[@aria-owns='orderDaysInPhaseDropdown_listbox']//span[@class='k-input']")
-    private WebElement daysInProcessDropDown;
+    private WebElement daysInPhaseDropDown;
 
     @FindBy(xpath = "//ul[@id='orderDaysInPhaseDropdown_listbox']")
+    private WebElement daysInPhaseDropDownList;
+
+    @FindBy(xpath = "//span[@aria-owns='orderDaysInProcessDropdown_listbox']//span[@class='k-input']")
+    private WebElement daysInProcessDropDown;
+
+    @FindBy(xpath = "//ul[@id='orderDaysInProcessDropdown_listbox']")
     private WebElement daysInProcessDropDownList;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'daysInProcessFrom')]")
+    private WebElement daysInProcessFromValue;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'daysInProcessTo')]")
+    private WebElement daysInProcessToValue;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'daysInPhaseFrom')]")
+    private WebElement daysInPhaseFromValue;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'daysInPhaseTo')]")
+    private WebElement daysInPhaseToValue;
 
     @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']//span[@class='k-input']")
     private WebElement flagDropDown;

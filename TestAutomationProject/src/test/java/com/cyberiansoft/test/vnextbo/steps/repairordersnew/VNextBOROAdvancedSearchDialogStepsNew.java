@@ -4,6 +4,8 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROAdvancedSearchDialogNew;
 
+import java.util.Optional;
+
 public class VNextBOROAdvancedSearchDialogStepsNew {
 
     public static void clickSearchButton() {
@@ -128,12 +130,24 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
                 advancedSearchDialog.dropDownFieldOption(repairStatus));
     }
 
-    public static void setDaysInProgressField(String daysInProgress) {
+    public static void setDaysInPhase(String daysInPhaseCondition, String daysFromValue, Optional<String> daysToValue) {
+
+        VNextBOROAdvancedSearchDialogNew advancedSearchDialog = new VNextBOROAdvancedSearchDialogNew();
+        Utils.clickElement(advancedSearchDialog.getDaysInPhaseDropDown());
+        Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getDaysInPhaseDropDownList(),
+                advancedSearchDialog.dropDownFieldOption(daysInPhaseCondition));
+        Utils.sendKeysWithJS(advancedSearchDialog.getDaysInPhaseFromValue(), daysFromValue);
+        if (daysToValue != null) Utils.sendKeysWithJS(advancedSearchDialog.getDaysInPhaseToValue(), String.valueOf(daysToValue));
+    }
+
+    public static void setDaysInProcess(String daysInProcessCondition, String daysFromValue, Optional<String> daysToValue) {
 
         VNextBOROAdvancedSearchDialogNew advancedSearchDialog = new VNextBOROAdvancedSearchDialogNew();
         Utils.clickElement(advancedSearchDialog.getDaysInProcessDropDown());
         Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getDaysInProcessDropDownList(),
-                advancedSearchDialog.dropDownFieldOption(daysInProgress));
+                advancedSearchDialog.dropDownFieldOption(daysInProcessCondition));
+        Utils.sendKeysWithJS(advancedSearchDialog.getDaysInProcessFromValue(), daysFromValue);
+        if (daysToValue != null) Utils.sendKeysWithJS(advancedSearchDialog.getDaysInProcessToValue(), String.valueOf(daysToValue));
     }
 
     public static void setFlagField(String flag) {
