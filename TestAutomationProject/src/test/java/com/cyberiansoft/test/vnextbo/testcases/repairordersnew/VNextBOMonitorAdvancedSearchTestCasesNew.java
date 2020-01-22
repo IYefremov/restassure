@@ -149,4 +149,22 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
         VNextBOROWebPageValidationsNew.verifyProblemIndicatorIsDisplayedForEachRecord();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByDaysInProcess(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.searchOrdersDaysInProcess(data.getDaysInProcess(), data.getDaysNumStart(), java.util.Optional.ofNullable(data.getDaysNum()));
+        VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByDaysInPhase(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.searchOrdersDaysInPhase(data.getDaysInProcess(), data.getDaysNumStart(), java.util.Optional.ofNullable(data.getDaysNum()));
+        VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
 }

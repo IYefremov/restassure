@@ -408,5 +408,144 @@
       ],
       "flag": "Test"
     }
+  ],
+
+  "verifyUserCanSearchByDaysInProcess": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcess.01",
+      "description": "Test Case 91452: User can search by \"Days in Process\" (\"<\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91452",
+          "testCaseTitle": "User can search by \"Days in Process\" (\"<\")"
+        }
+      ],
+      "daysInProcess": "<",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcess.02",
+      "description": "Test Case 91453: User can search by \"Days in Process\" (\"<=\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91453",
+          "testCaseTitle": "User can search by \"Days in Process\" (\"<=\")"
+        }
+      ],
+      "daysInProcess": "<=",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcess.03",
+      "description": "Test Case 91454: User can search by \"Days in Process\" (\"=\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91454",
+          "testCaseTitle": "User can search by \"Days in Process\" (\"=\")"
+        }
+      ],
+      "daysInProcess": "=",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcess.04",
+      "description": "Test Case 91455: User can search by \"Days in Process\" (\">=\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91455",
+          "testCaseTitle": "User can search by \"Days in Process\" (\">=\")"
+        }
+      ],
+      "daysInProcess": ">=",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcess.05",
+      "description": "Test Case 91456: User can search by \"Days in Process\" (\">\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91456",
+          "testCaseTitle": "User can search by \"Days in Process\" (\">\")"
+        }
+      ],
+      "daysInProcess": ">",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInProcess.06",
+      "description": "Test Case 91457: User can search by \"Days in Process\" (\"Between\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91457",
+          "testCaseTitle": "User can search by \"Days in Process\" (\"Between\")"
+        }
+      ],
+      "daysInProcess": "Between",
+      "daysNumStart": "10",
+      "daysNum": "25"
+    }
+  ],
+
+  "verifyUserCanSearchByDaysInPhase": [
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhase.01",
+      "description": "Test Case 91458: User can search by \"Days in Phase\" (\"<=\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91458",
+          "testCaseTitle": "User can search by \"Days in Phase\" (\"<=\")"
+        }
+      ],
+      "daysInProcess": "<=",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhase.02",
+      "description": "Test Case 91459: User can search by \"Days in Phase\" (\"=\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91459",
+          "testCaseTitle": "User can search by \"Days in Phase\" (\"=\")"
+        }
+      ],
+      "daysInProcess": "=",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhase.03",
+      "description": "Test Case 91460: User can search by \"Days in Phase\" (\">=\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91460",
+          "testCaseTitle": "User can search by \"Days in Phase\" (\">=\")"
+        }
+      ],
+      "daysInProcess": ">=",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhase.04",
+      "description": "Test Case 91461: User can search by \"Days in Phase\" (\">\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91461",
+          "testCaseTitle": "User can search by \"Days in Phase\" (\">\")"
+        }
+      ],
+      "daysInProcess": ">",
+      "daysNumStart": "25"
+    },
+    {
+      "rowID": "verifyUserCanSearchByDaysInPhase.05",
+      "description": "Test Case 91462: User can search by \"Days in Phase\" (\"Between\")",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91462",
+          "testCaseTitle": "User can search by \"Days in Phase\" (\"Between\")"
+        }
+      ],
+      "daysInProcess": "Between",
+      "daysNumStart": "25"
+    }
   ]
 }
