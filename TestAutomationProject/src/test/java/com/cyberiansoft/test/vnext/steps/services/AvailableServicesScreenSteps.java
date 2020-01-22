@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 public class AvailableServicesScreenSteps {
 
     public static void selectServices(List<ServiceData> serviceDataList) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.switchToAvalableServicesView();
         serviceDataList.stream().map(ServiceData::getServiceName).collect(Collectors.toList()).forEach(AvailableServicesScreenSteps::selectService);
     }
 

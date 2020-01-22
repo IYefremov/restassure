@@ -1,13 +1,13 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -68,32 +68,24 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         tap(savebtn);
     }
 
-    public List<WebElement> getAllServicesListItems() {
-        return allserviceslist.findElements(By.xpath(".//div[contains(@class, 'checked-accordion-item')]"));
-    }
-
     public void selectService(String serviceName) {
         WebElement servicerow = getServiceListItem(serviceName);
-        String servicePrice = "";
-        if (servicerow != null) {
-            try {
-                servicePrice = servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
-                tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//*[@action='select-item']"))));
-                //WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
-            } catch (WebDriverException e) {
-                WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
-                WaitUtils.click(servicerow.findElement(By.xpath(".//*[@action='add-service']")));
-            }
-
-            WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
-            if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
-                VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
-                serviceDetailsScreen.clickServiceDetailsDoneButton();
-            }
-            new VNextAvailableServicesScreen(appiumdriver);
-
-        } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+        String servicePrice =  servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            getServiceListItem(serviceName).findElement(By.xpath(".//*[@action='add-service']")).click();
+            return true;
+        });
+        if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
+            VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+            serviceDetailsScreen.clickServiceDetailsDoneButton();
+            WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
+                    ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
+            ));
+        } else {
+            WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
+                    ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
+            ));
+        }
     }
 
     public void selectServiceGroup(String groupName) {
@@ -101,17 +93,13 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     }
 
     public void selectSingleService(String serviceName) {
-        WebElement servicerow = getServiceListItem(serviceName);
-        if (servicerow != null) {
-            try {
-                tap(WaitUtils.waitUntilElementIsClickable(servicerow.findElement(By.xpath(".//*[@action='select-item']"))));
-                //WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
-            } catch (WebDriverException e) {
-                WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
-                WaitUtils.click(servicerow.findElement(By.xpath(".//*[@action='add-service']")));
-            }
-        } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            getServiceListItem(serviceName).findElement(By.xpath(".//*[@action='add-service']")).click();
+            return true;
+        });
+        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
+                ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
+        ));
     }
 
     public int getServiceAmountSelectedValue(String serviceName) {
