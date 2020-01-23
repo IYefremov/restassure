@@ -122,7 +122,7 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
 
     public void searchCustomerByName(String customername) {
         typeSearchParameters(customername);
-
+        cancelsearchbtn.click();
     }
 
     public void clickSearchButton() {

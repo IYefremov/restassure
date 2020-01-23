@@ -88,20 +88,16 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	}
 	
 	public void clickSendEmailsButton() {
-		tap(sendbtn);
-		BaseUtils.waitABit(3000);
-		try {
-			tap(sendbtn);
-		} catch (WebDriverException e) {
-			//do nothing
-		}
+		WaitUtils.getGeneralFluentWait().until(driver -> {
+			sendbtn.click();
+			return true;
+		});
 	}
 	
 	public String sendEmail() {
 		clickSendEmailsButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		return informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		
 	}
 
 }

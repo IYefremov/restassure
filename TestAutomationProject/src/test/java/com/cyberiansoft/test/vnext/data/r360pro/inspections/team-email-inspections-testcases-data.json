@@ -1,0 +1,71 @@
+{
+  "userCanSendEmailInspectionsWithDifferentCustomers": [
+    {
+      "rowID": "userCanSendEmailInspectionsWithDifferentCustomers.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91774",
+          "testCaseTitle": "User can send Email Inspections with different Customers"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "userCanSendEmailInspectionsWithTheSameCustomer": [
+    {
+      "rowID": "userCanSendEmailInspectionsWithTheSameCustomer.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91773",
+          "testCaseTitle": "User can send Email Inspections with the same Customer"
+        }
+      ],
+      "inspectionsData": [
+        {
+          "vihicleInfo": {
+            "vinNumber": "WDBFA67E1SFA946591"
+          }
+        },
+        {
+          "vihicleInfo": {
+            "vinNumber": "WDBFA67E1SFA946591"
+          }
+        }
+      ]
+    }
+  ],
+  "userCantSendEmailWithoutFilledTOField": [
+    {
+      "rowID": "userCanSendEmailInspectionsWithDifferentCustomers.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98308",
+          "testCaseTitle": "User can't send Email without filled 'TO' field"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "userCantSendEmailsToIncorrectMailboxes": [
+    {
+      "rowID": "userCantSendEmailsToIncorrectMailboxes.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91762",
+          "testCaseTitle": "User can't send Emails to incorrect Mailboxes"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ]
+}

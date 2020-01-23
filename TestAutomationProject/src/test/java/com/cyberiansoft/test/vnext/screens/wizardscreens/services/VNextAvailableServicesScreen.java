@@ -78,9 +78,6 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
             VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
             serviceDetailsScreen.clickServiceDetailsDoneButton();
-            WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
-                    ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
-            ));
         } else {
             WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
                     ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))

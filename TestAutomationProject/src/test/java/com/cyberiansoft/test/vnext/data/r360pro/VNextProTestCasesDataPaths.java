@@ -190,4 +190,8 @@ public class VNextProTestCasesDataPaths {
     public String getViewInspectionTestCasesDataPath() {
         return props.getProperty("inspections.view");
     }
+
+    public String getEmailInspectionsTestCasesDataPath() {
+        return props.getProperty("inspections.email");
+    }
 }

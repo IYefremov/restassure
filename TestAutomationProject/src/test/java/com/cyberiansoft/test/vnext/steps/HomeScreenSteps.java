@@ -56,4 +56,9 @@ public class HomeScreenSteps {
         je.executeScript("arguments[0].scrollIntoView(true);", homeScreen.getMonitor());
         WaitUtils.click(homeScreen.getMonitor());
     }
+
+    public static void openCustomers() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        homeScreen.clickCustomersMenuItem();
+    }
 }
