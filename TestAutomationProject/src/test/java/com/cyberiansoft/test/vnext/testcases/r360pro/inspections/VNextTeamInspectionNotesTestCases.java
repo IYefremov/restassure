@@ -105,6 +105,5 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.verifyNoPicturesPresent();
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
     }
 }
