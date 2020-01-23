@@ -922,7 +922,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 arbitrationDatesList), "The orders with arbitration dates are not displayed before the orders without them");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 58)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 58)
     public void verifyUserCanSearchByTimeFrameLast30Days(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -938,7 +938,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 CustomDateProvider.getLastThirtyDaysStartDate());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 59)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 59)
     public void verifyUserCanSearchByTimeFrameWeekToDate(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -954,7 +954,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 CustomDateProvider.getWeekToDateStartDate());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 60)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 60)
     public void verifyUserCanSearchByTimeFrameLastWeek(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -970,7 +970,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 CustomDateProvider.getLastWeekStartDate());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 61)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 61)
     public void verifyUserCanSearchByTimeFrameToday(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -986,7 +986,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 CustomDateProvider.getCurrentDateLocalized());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 62)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 62)
     public void verifyUserCanSearchByTimeFrameMonthToDate(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1002,7 +1002,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 CustomDateProvider.getLastMonthStartDate(), CustomDateProvider.getMonthStartDate());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 63)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 63)
     public void verifyUserCanSearchByTimeFrameYearToDate(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1018,7 +1018,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 CustomDateProvider.getYearToDateStartDate());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 64)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 64)
     public void verifyUserCanSearchByTimeFrameLastYear(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 

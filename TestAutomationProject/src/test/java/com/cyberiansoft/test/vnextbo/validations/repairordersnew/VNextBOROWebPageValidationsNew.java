@@ -1,11 +1,17 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.enums.DateUtils;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class VNextBOROWebPageValidationsNew {
 
@@ -95,5 +101,74 @@ public class VNextBOROWebPageValidationsNew {
 
         Assert.assertEquals(new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size(), new VNextBOROWebPageNew().getProblemIndicatorsList().size(),
                 "Not all orders has had Problems indicator");
+    }
+
+    public static void verifyOrdersAfterSearchByTimeFrame(LocalDate dateBeforeCurrentDate) {
+
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed())
+            Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",
+                    "No records found message hasn't been displayed or has been incorrect");
+        else {
+            verifyTargetDateForOrders(dateBeforeCurrentDate, VNextBOROPageInteractions.getHighPriorityDates());
+            verifyTargetDateForOrders(dateBeforeCurrentDate, VNextBOROPageInteractions.getNormalPriorityDates());
+            verifyTargetDateForOrders(dateBeforeCurrentDate, VNextBOROPageInteractions.getLowPriorityDates());
+        }
+    }
+
+    private static void verifyTargetDateForOrders(LocalDate dateBeforeCurrentDate, List<String> ordersDatesList) {
+
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
+        for (int i = 1; i < ordersDatesList.size(); i++) {
+
+            final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
+            final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
+            verifyOrderNextTargetDateIsAfterDateStarted(dateBeforeCurrentDate, next);
+            if (previous.isEqual(next)) continue;
+            verifyOrderTargetDateIsWithinBoundaries(previous, next);
+        }
+    }
+
+    private static void verifyTargetDateForOrders(LocalDate dateStarted, LocalDate dateFinished, List<String> ordersDatesList) {
+
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat());
+        for (int i = 1; i < ordersDatesList.size(); i++) {
+
+            final LocalDate previous = LocalDate.parse(ordersDatesList.get(i - 1), formatter);
+            final LocalDate next = LocalDate.parse(ordersDatesList.get(i), formatter);
+            verifyOrderNextTargetDateIsAfterDateStarted(dateStarted, next);
+            if (previous.isEqual(next)) continue;
+            verifyOrderTargetDateIsWithinBoundaries(previous, next, dateFinished);
+        }
+    }
+
+    private static void verifyOrderNextTargetDateIsAfterDateStarted(LocalDate dateStarted, LocalDate next) {
+
+        Assert.assertTrue(next.isAfter(dateStarted),
+                "The order target date is not within the given date boundaries");
+    }
+
+    private static void verifyOrderTargetDateIsWithinBoundaries(LocalDate previous, LocalDate next, LocalDate dateFinished) {
+
+        if (previous.isBefore(next) || next.isAfter(dateFinished)) {
+            Assert.fail("The order target date is not within the given date boundaries");
+        }
+    }
+
+    private static void verifyOrderTargetDateIsWithinBoundaries(LocalDate previous, LocalDate next) {
+        if (previous.isBefore(next)) {
+            Assert.fail("The order target date is not within the given date boundaries");
+        }
+    }
+
+    public static void verifyOrdersAfterSearchByTimeFrame(LocalDate dateStarted, LocalDate dateFinished) {
+
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed())
+            Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",
+                    "No records found message hasn't been displayed or has been incorrect");
+        else {
+            verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getHighPriorityDates());
+            verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getNormalPriorityDates());
+            verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getLowPriorityDates());
+        }
     }
 }

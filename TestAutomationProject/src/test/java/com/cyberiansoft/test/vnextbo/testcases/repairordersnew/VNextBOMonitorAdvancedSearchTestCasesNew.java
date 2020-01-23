@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -165,6 +166,81 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBOROPageStepsNew.searchOrdersDaysInPhase(data.getDaysInProcess(), data.getDaysNumStart(), java.util.Optional.ofNullable(data.getDaysNum()));
         VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByCustomTimeFrame(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByCustomTimeFrame();
+        VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByTimeFrameLast30Days(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByTimeFrame("Last 30 days");
+        VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(CustomDateProvider.getLastThirtyDaysStartDate());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByTimeFrameWeekToDate(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByTimeFrame("Week To Date");
+        VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(CustomDateProvider.getWeekToDateStartDate());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByTimeFrameLastWeek(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByTimeFrame("Last Week");
+        VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(CustomDateProvider.getLastWeekStartDate());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByTimeFrameToday(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByTimeFrame("Today");
+        VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(CustomDateProvider.getCurrentDateLocalized());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByTimeFrameMonthToDate(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByTimeFrame("Month to Date");
+        VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(
+                CustomDateProvider.getLastMonthStartDate(), CustomDateProvider.getMonthStartDate());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByTimeFrameYearToDate(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByTimeFrame("Year To Date");
+        VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(CustomDateProvider.getYearToDateStartDate());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByTimeFrameLastYear(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByTimeFrame("Last Year");
+        VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(
+                CustomDateProvider.getYearToDateStartDate(), CustomDateProvider.getYearStartDate());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchByLast90DaysTimeFrame(String rowID, String description, JSONObject testData) {
+
+        VNextBOROPageStepsNew.searchOrdersByTimeFrame("Last 90 days");
+        VNextBOROWebPageValidationsNew.verifyOrdersAfterSearchByTimeFrame(
+                CustomDateProvider.getThreeMonthsBeforeCurrentDate());
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }
