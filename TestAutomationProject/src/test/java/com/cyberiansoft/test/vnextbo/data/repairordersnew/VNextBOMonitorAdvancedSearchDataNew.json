@@ -547,5 +547,122 @@
       "daysInProcess": "Between",
       "daysNumStart": "25"
     }
+  ],
+
+  "verifyUserCanSearchByCustomTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByCustomTimeFrame.01",
+      "description": "Test Case 91441: User can search by \"Timeframe\" (Custom)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91441",
+          "testCaseTitle": "User can search by \"Timeframe\" (Custom)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByLast90DaysTimeFrame": [
+    {
+      "rowID": "verifyUserCanSearchByLast90DaysTimeFrame.01",
+      "description": "Test Case 91431: User can search by \"Timeframe\" (Last 90 days)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91431",
+          "testCaseTitle": "User can search by \"Timeframe\" (Last 90 days)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameLast30Days": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameLast30Days.01",
+      "description": "Test Case 98986: User can search by \"Timeframe\" (Last 30 days)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98986",
+          "testCaseTitle": "User can search by \"Timeframe\" (Last 30 days)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameWeekToDate": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameWeekToDate.01",
+      "description": "Test Case 98988: User can search by \"Timeframe\" (Week To Date)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98988",
+          "testCaseTitle": " User can search by \"Timeframe\" (Week To Date)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameLastWeek": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameLastWeek.01",
+      "description": "Test Case 98989: User can search by \"Timeframe\" (Last Week)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98989",
+          "testCaseTitle": "User can search by \"Timeframe\" (Last Week)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameToday": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameToday.01",
+      "description": "Test Case 98987: User can search by \"Timeframe\" (Today)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98987",
+          "testCaseTitle": "User can search by \"Timeframe\" (Today)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameMonthToDate": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameMonthToDate.01",
+      "description": "Test Case 98990: User can search by \"Timeframe\" (Month to Date)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98990",
+          "testCaseTitle": "User can search by \"Timeframe\" (Month to Date)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameYearToDate": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameYearToDate.01",
+      "description": "Test Case 98992: User can search by \"Timeframe\" (Year To Date)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98992",
+          "testCaseTitle": "User can search by \"Timeframe\" (Year To Date)"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanSearchByTimeFrameLastYear": [
+    {
+      "rowID": "verifyUserCanSearchByTimeFrameLastYear.01",
+      "description": "Test Case 98993: User can search by \"Timeframe\" (Last Year)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98993",
+          "testCaseTitle": "User can search by \"Timeframe\" (Last Year)"
+        }
+      ]
+    }
   ]
 }

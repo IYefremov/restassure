@@ -133,6 +133,20 @@ public class VNextBOROPageStepsNew {
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
+    public static void searchOrdersByTimeFrame(String timeFrame) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setTimeFrameField(timeFrame);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void searchOrdersByCustomTimeFrame() {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
     public static boolean checkIfNoRecordsFoundMessageIsDisplayed() {
 
         return Utils.isElementDisplayed(new VNextBOROWebPageNew().getNoRecordsFoundMessage());
