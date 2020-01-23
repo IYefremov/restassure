@@ -1308,7 +1308,6 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
 
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoicesScreen.clickBackButton();
     }
 

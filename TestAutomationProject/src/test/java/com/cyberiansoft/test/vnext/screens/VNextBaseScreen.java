@@ -74,7 +74,11 @@ public class VNextBaseScreen {
         String backButtonLocator = "//*[@action=\"back\"]";
         WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath(backButtonLocator)));
         WaitUtils.waitUntilElementIsClickable(By.xpath(backButtonLocator));
-        WaitUtils.click(By.xpath(backButtonLocator));
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            appiumdriver.findElement(By.xpath(backButtonLocator)).click();
+            return true;
+        });
+        //WaitUtils.click(By.xpath(backButtonLocator));
     }
 
     public void clickScreenForwardButton() {

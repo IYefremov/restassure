@@ -37,7 +37,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	}
 
 	public void waitInvoicesScreenLoad(){
-		WaitUtils.elementShouldBeVisible(rootElement, true);
+		WaitUtils.elementShouldBeVisible(invoiceslist, true);
 	}
 	
 	public String getInvoicePriceValue(String invoicenumber) {

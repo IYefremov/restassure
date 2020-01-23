@@ -50,7 +50,7 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
         TestPlanRunsDTO testPlanRunsDTO = tpIntegrationService.getTestPlanRunStatuses("107123");
         int firstRunNumbers = testPlanRunsDTO.getItems().size();
 
-        boolean runTCs = false;
+        boolean runTCs = true;
         for (int i = 0; i <= 20; i++) {
             if (!runTCs) {
                 testPlanRunsDTO = tpIntegrationService.getTestPlanRunStatuses("107123");
