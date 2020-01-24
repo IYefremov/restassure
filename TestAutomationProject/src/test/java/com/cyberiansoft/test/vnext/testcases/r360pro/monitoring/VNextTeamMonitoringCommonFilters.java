@@ -72,7 +72,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();
         EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
-        ScreenNavigationSteps.pressBackButton();
+        WizardScreenSteps.saveAction();
         SearchSteps.clearAllFilters();
         SearchSteps.searchByPriority(OrderPriority.HIGH);
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
