@@ -152,22 +152,17 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	}
 
 	private List<WebElement> getServicesListItems() {
-		return getSelectedServicesList().findElements(By.xpath(".//*[@action='edit-item']"));
+		return getSelectedServicesList().findElements(By.xpath(".//*[@action='open-added-service-details']"));
 	}
 
-	private WebElement getSelectedServiceCell(String servicename) {
-		WebElement serviceListItem = null;
-		List<WebElement> services = getServicesListItems();
-		for (WebElement srv : services)
-			if (getServiceListItemName(srv).equals(servicename)) {
-				serviceListItem = srv;
-				break;
-			}
-		return serviceListItem;
+	private WebElement getSelectedServiceCell(String serviceName) {
+		return getServicesListItems().stream().filter(element -> element.
+				findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim().
+				equals(serviceName)).findFirst()
+				.orElseThrow(() -> new RuntimeException("Answer not found"));
 	}
 
 	public void expandSelectedServiceDetails(String serviceName) {
-		WebElement servicecell = getSelectedServiceCell(serviceName);
-		tap(servicecell);
+		tap(getSelectedServiceCell(serviceName));
 	}
 }
