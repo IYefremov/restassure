@@ -10,4 +10,12 @@ public class InspectionsValidations {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionID), inspectionStatus.getStatus());
     }
+
+    public static void verifyInspectionHasMailIcon(String inspectionID, boolean hasIcon) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        if (hasIcon)
+            Assert.assertTrue(inspectionsScreen.isEmailSentIconPresentForInspection(inspectionID));
+        else
+            Assert.assertFalse(inspectionsScreen.isEmailSentIconPresentForInspection(inspectionID));
+    }
 }

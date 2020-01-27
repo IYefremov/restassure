@@ -79,7 +79,6 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
                     SearchSteps.textSearch(service.getServiceName());
                     PartServiceSteps.selectPartService(service);
                     PartServiceSteps.acceptDetailsScreen();
-                    ServiceDetailsScreenSteps.saveServiceDetails();
                 });
         ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();

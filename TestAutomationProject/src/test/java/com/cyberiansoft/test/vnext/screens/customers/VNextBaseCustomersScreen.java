@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextCustomersMenuScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -17,13 +18,14 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
+@Getter
 public class VNextBaseCustomersScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//span[@class='client-mode']")
     private WebElement clientmode;
 
     @FindBy(xpath = "//*[@data-autotests-id='customers-list']")
-    private WebElement customerslist;
+    private WebElement customersList;
 
     @FindBy(xpath = "//*[@action='select-customer']")
     private WebElement firstcustomer;
@@ -68,34 +70,34 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
         if (WaitUtils.isElementPresent(By.xpath("//*[@data-automation-id='search-icon']"))) {
             searchCustomerByName(customer.getFullName());
         }
-        if (customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
-            WebElement elem = customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));
+        if (customersList.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
+            WebElement elem = customersList.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));
             JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
             je.executeScript("arguments[0].scrollIntoView(true);", elem);
             //waitABit(1000);
-            tap(customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
+            tap(customersList.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
         } else {
-            List<WebElement> ctmrs = customerslist.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name']"));
+            List<WebElement> ctmrs = customersList.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name']"));
             WebElement elem = ctmrs.get(ctmrs.size() - 1);
             JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
             je.executeScript("arguments[0].scrollIntoView(true);", elem);
             //waitABit(1000);
-            tap(customerslist.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
+            tap(customersList.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
             //waitABit(1000);
         }
     }
 
     public void selectCustomerByCompanyName(String customercompany) {
-        WebElement elem = customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]"));
+        WebElement elem = customersList.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]"));
         JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
         je.executeScript("arguments[0].scrollIntoView(true);", elem);
-        tap(customerslist.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]")));
+        tap(customersList.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]")));
         BaseUtils.waitABit(1000);
     }
 
     public boolean isCustomerExists(AppCustomer customer) {
         searchCustomerByName(customer.getFullName());
-        return customerslist.findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;
+        return customersList.findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;
     }
 
     public void clickBackButton() {
