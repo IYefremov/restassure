@@ -29,8 +29,9 @@ public class VNextBOModalDialogSteps {
 
     public static void clickYesButton() {
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getYesButton(), 4);
         Utils.clickElement(modalDialog.getYesButton());
-        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getYesButton(), 2);
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getYesButton(), 4);
     }
 
     public static void clickNoButton() {

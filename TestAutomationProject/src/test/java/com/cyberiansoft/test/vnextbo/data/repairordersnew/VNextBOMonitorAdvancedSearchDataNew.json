@@ -664,5 +664,227 @@
         }
       ]
     }
+  ],
+
+  "verifyUserCanFillInAllAdvancedSearchFields": [
+    {
+      "rowID": "verifyUserCanFillInAllAdvancedSearchFields.01",
+      "description": "Test Case 91436: Verify user can fill in all fields in the \"Advanced Search\" window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91436",
+          "testCaseTitle": "Verify user can fill in all fields in the \"Advanced Search\" window"
+        }
+      ],
+      "customer": "Alex1 Zakaulov1",
+      "hasThisText": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First",
+      "phaseStatus": "Active",
+      "task": "First task",
+      "taskStatus": "Active",
+      "department": "Default",
+      "woType": "01ZalexWO_tp",
+      "woNum": "O-000-149566",
+      "roNum": "RO#ForAuto",
+      "stockNum": "StockForAuto",
+      "vinNum": "asdfasd",
+      "timeFrame": "Last 90 days",
+      "repairStatus": "In Progress - On Hold",
+      "daysInProcess": "<",
+      "daysInPhase": "<=",
+      "daysNumStart": "25",
+      "flag": "White",
+      "sortBy": "Priority, Oldest to Newest",
+      "searchName": "AutotestSearch91436"
+    }
+  ],
+
+  "verifyUserCanSaveAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSaveAdvancedSearch.01",
+      "description": "Test Case 91437: Verify user can save \"Advanced search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91437",
+          "testCaseTitle": "Verify user can save \"Advanced search\""
+        }
+      ],
+      "flag": "White",
+      "searchName": "AutotestSearch91437"
+    }
+  ],
+
+  "verifyUserCanUseStoredAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanUseStoredAdvancedSearch.01",
+      "description": "Test Case 91435: Verify user can use stored \"Advanced Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91435",
+          "testCaseTitle": "Verify user can use stored \"Advanced Search\""
+        }
+      ],
+      "flag": "White",
+      "searchName": "AutotestSearch91435"
+    }
+  ],
+
+  "verifyUserCanEditSavedAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanEditSavedAdvancedSearch.01",
+      "description": "Test Case 91438: Verify user can edit saved \"Advanced\" search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91438",
+          "testCaseTitle": "Verify user can edit saved \"Advanced\" search"
+        }
+      ],
+      "flag": "White",
+      "searchName": "AutotestSearch91438"
+    }
+  ],
+
+  "verifyUserCanClearAllAdvancedSearchFields": [
+    {
+      "rowID": "verifyUserCanClearAllAdvancedSearchFields.01",
+      "description": "Test Case 91438: Verify user can clear all fields in the \"Advanced Search\" window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91438",
+          "testCaseTitle": "Verify user can clear all fields in the \"Advanced Search\" window"
+        }
+      ],
+      "customer": "",
+      "hasThisText": "",
+      "employee": "",
+      "phase": "All",
+      "phaseStatus": "",
+      "task": "All",
+      "taskStatus": "All",
+      "department": "All",
+      "woType": "All",
+      "woNum": "",
+      "roNum": "",
+      "stockNum": "",
+      "vinNum": "",
+      "timeFrame": "Last 30 days",
+      "repairStatus": "In Progress - All",
+      "daysInProcess": "All",
+      "daysInPhase": "All",
+      "flag": "All",
+      "sortBy": "Priority, Newest to Oldest",
+      "searchName": ""
+    }
+  ],
+
+  "verifyUserCanSeeSearchMaskWithAllEnteredInfo": [
+    {
+      "rowID": "verifyUserCanSeeSearchMaskWithAllEnteredInfo.01",
+      "description": "Test Case 91470: Verify user sees \"search\" mask with all entered info",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91470",
+          "testCaseTitle": "Verify user sees \"search\" mask with all entered info"
+        }
+      ],
+      "customer": "Alex1 Zakaulov1",
+      "hasThisText": "Alex1 Zakaulov1",
+      "employee": "Criss Lai",
+      "phase": "First",
+      "phaseStatus": "Active",
+      "task": "First task",
+      "taskStatus": "Active",
+      "department": "Default",
+      "woType": "01ZalexWO_tp",
+      "woNum": "O-000-149566",
+      "roNum": "RO#ForAuto",
+      "stockNum": "StockForAuto",
+      "vinNum": "asdfasd",
+      "timeFrame": "Last 90 days",
+      "repairStatus": "In Progress - On Hold",
+      "daysInProcess": "<",
+      "daysInPhase": "<=",
+      "daysNumStart": "25",
+      "flag": "White",
+      "sortBy": "Priority, Oldest to Newest",
+      "searchName": "AutotestSearch91470"
+    }
+  ],
+
+  "verifyUserCanSearchBySortByRoNewestToOldest": [
+    {
+      "rowID": "verifyUserCanSearchBySortByRoNewestToOldest.01",
+      "description": "Test Case 91476: User can search by \"Sort by → #RO, Newest to Oldest\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91476",
+          "testCaseTitle": "User can search by \"Sort by → #RO, Newest to Oldest\""
+        }
+      ],
+      "sortBy": "RO#, Newest to Oldest"
+    }
+  ],
+
+  "verifyUserCanSearchBySortByRoOldestToNewest": [
+    {
+      "rowID": "verifyUserCanSearchBySortByRoOldestToNewest.01",
+      "description": "Test Case 91477: User can search by \"Sort by → #RO, Oldest to Newest\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91477",
+          "testCaseTitle": "User can search by \"Sort by → #RO, Oldest to Newest\""
+        }
+      ],
+      "sortBy": "RO#, Oldest to Newest"
+    }
+  ],
+
+  "verifyUserCanSearchBySortByArbitrationDateOption": [
+    {
+      "rowID": "verifyUserCanSearchBySortByArbitrationDateOption.01",
+      "description": "Test Case 90642: User can search by \"Sort by → Arbitration Date, Priority\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91478"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "repairStatus": "All",
+      "sortByOptions": [
+        "Arbitration Date, Priority"
+      ],
+      "pages": {
+        "hundred": "100"
+      }
+    }
+  ],
+
+  "verifyUserCanSearchBySortByPriorityOldestToNewest": [
+    {
+      "rowID": "verifyUserCanSearchBySortByPriorityOldestToNewest.01",
+      "description": "Test Case 92848: User can search by → \"Priority, Oldest to Newest\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92848",
+          "testCaseTitle": "User can search by → \"Priority, Oldest to Newest\""
+        }
+      ],
+      "sortBy": "Priority, Oldest to Newest"
+    }
+  ],
+
+  "verifyUserCanSearchBySortByPriorityNewestToOldest": [
+    {
+      "rowID": "verifyUserCanSearchBySortByPriorityNewestToOldest.01",
+      "description": "Test Case 92849: User can search by → \"Priority, Newest to Oldest\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92849",
+          "testCaseTitle": "User can search by → \"Priority, Newest to Oldest\""
+        }
+      ],
+      "sortBy": "Priority, Newest to Oldest"
+    }
   ]
 }

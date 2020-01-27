@@ -5,13 +5,17 @@ import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
-import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VNextBOROWebPageValidationsNew {
 
@@ -103,6 +107,58 @@ public class VNextBOROWebPageValidationsNew {
                 "Not all orders has had Problems indicator");
     }
 
+    public static void verifySortingByStartDateIsCorrect(List<WebElement> actualStartDatesElementsList, List<Date> expectedStartDatesList) throws ParseException {
+
+        List<Date> actualStartDatesList = new ArrayList<>();
+        for (WebElement element : actualStartDatesElementsList) {
+            Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
+            actualStartDatesList.add(parse);
+        }
+        Assert.assertEquals(actualStartDatesList, expectedStartDatesList, "Orders have been sorted incorrectly");
+    }
+
+    public static void verifyOrdersAreSortedByPriorityAndStartDateFromOldestToNewest() throws ParseException {
+
+        List<WebElement> highPriorityDates = new VNextBOROWebPageNew().getHighPriorityOrdersStartDatesList();
+        if (highPriorityDates.size() > 0) {
+            verifySortingByStartDateIsCorrect(new VNextBOROWebPageNew().getHighPriorityOrdersStartDatesList(),
+                    VNextBOROPageStepsNew.getAscSortedStartDatesListValues(highPriorityDates));
+        }
+
+        List<WebElement> normalPriorityDates = new VNextBOROWebPageNew().getNormalPriorityOrdersStartDatesList();
+        if (normalPriorityDates.size() > 0) {
+            verifySortingByStartDateIsCorrect(new VNextBOROWebPageNew().getNormalPriorityOrdersStartDatesList(),
+                    VNextBOROPageStepsNew.getAscSortedStartDatesListValues(normalPriorityDates));
+        }
+
+        List<WebElement> lowPriorityDates = new VNextBOROWebPageNew().getLowPriorityOrdersStartDatesList();
+        if (highPriorityDates.size() > 0) {
+            verifySortingByStartDateIsCorrect(new VNextBOROWebPageNew().getLowPriorityOrdersStartDatesList(),
+                    VNextBOROPageStepsNew.getAscSortedStartDatesListValues(lowPriorityDates));
+        }
+    }
+
+    public static void verifyOrdersAreSortedByPriorityAndStartDateFromNewestToOldest() throws ParseException {
+
+        List<WebElement> highPriorityDates = new VNextBOROWebPageNew().getHighPriorityOrdersStartDatesList();
+        if (highPriorityDates.size() > 0) {
+            verifySortingByStartDateIsCorrect(new VNextBOROWebPageNew().getHighPriorityOrdersStartDatesList(),
+                    VNextBOROPageStepsNew.getDescSortedStartDatesListValues(highPriorityDates));
+        }
+
+        List<WebElement> normalPriorityDates = new VNextBOROWebPageNew().getNormalPriorityOrdersStartDatesList();
+        if (normalPriorityDates.size() > 0) {
+            verifySortingByStartDateIsCorrect(new VNextBOROWebPageNew().getNormalPriorityOrdersStartDatesList(),
+                    VNextBOROPageStepsNew.getDescSortedStartDatesListValues(normalPriorityDates));
+        }
+
+        List<WebElement> lowPriorityDates = new VNextBOROWebPageNew().getLowPriorityOrdersStartDatesList();
+        if (highPriorityDates.size() > 0) {
+            verifySortingByStartDateIsCorrect(new VNextBOROWebPageNew().getLowPriorityOrdersStartDatesList(),
+                    VNextBOROPageStepsNew.getDescSortedStartDatesListValues(lowPriorityDates));
+        }
+    }
+
     public static void verifyOrdersAfterSearchByTimeFrame(LocalDate dateBeforeCurrentDate) {
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed())
@@ -170,5 +226,19 @@ public class VNextBOROWebPageValidationsNew {
             verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getNormalPriorityDates());
             verifyTargetDateForOrders(dateStarted, dateFinished, VNextBOROPageInteractions.getLowPriorityDates());
         }
+    }
+
+    public static void verifySavedSearchDropDownFieldContainsCorrectValue(String expectedValue) {
+
+        Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getSavedSearchDropDownField()), expectedValue,
+                "Saved search field has contained incorrect value");
+    }
+
+    public static void verifySavedSearchDropDownListContainsSavedSearch(String searchName) {
+
+        List<String> savedSearchesList = new VNextBOROWebPageNew().getSavedSearchDropDownList().stream().
+                map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertTrue(savedSearchesList.contains(searchName),
+                "Saved search hasn't been presented in the saved searches list");
     }
 }

@@ -65,10 +65,10 @@ public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//ul[@id='orderTaskDropdown_listbox']")
     private WebElement taskDropDownList;
 
-    @FindBy(xpath = "//span[@aria-owns='orderTaskDropdown_listbox']//span[@class='k-input']")
+    @FindBy(xpath = "//span[@aria-owns='orderTaskStatusDropdown_listbox']//span[@class='k-input']")
     private WebElement taskStatusDropDown;
 
-    @FindBy(xpath = "//ul[@id='orderTaskDropdown_listbox']")
+    @FindBy(xpath = "//ul[@id='orderTaskStatusDropdown_listbox']")
     private WebElement taskStatusDropDownList;
 
     @FindBy(xpath = "//span[@aria-owns='orderDepartmentDropdown_listbox']//span[@class='k-input']")
@@ -152,7 +152,7 @@ public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[@id='repairOrders-search-hasProblem']")
     private WebElement hasProblemCheckBox;
 
-    @FindBy(xpath = "//input[@id='repairOrders-search-hasProblem']")
+    @FindBy(xpath = "//input[@id='orderSearchNameInput']")
     private WebElement searchNameInputField;
 
     public WebElement dropDownFieldOption(String optionName) {
