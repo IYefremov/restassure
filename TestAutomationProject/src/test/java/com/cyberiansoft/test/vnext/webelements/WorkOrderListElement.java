@@ -9,7 +9,7 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class WorkOrderListElement implements IWebElement {
     private WebElement rootElement;
-    private String idFieldLocator = ".//div[@class='checkbox-item']/div[2]/div[1]";
+    private String idFieldLocator = ".//div[@data-menu='popup']/div[1]";
 
     public WorkOrderListElement(WebElement rootElement) {
         this.rootElement = rootElement;

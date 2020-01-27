@@ -164,7 +164,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     public void switchToTeamWorkordersView() {
         switchToTeamView();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Downloading data']"));
     }
 
     public boolean isTeamWorkordersViewActive() {
