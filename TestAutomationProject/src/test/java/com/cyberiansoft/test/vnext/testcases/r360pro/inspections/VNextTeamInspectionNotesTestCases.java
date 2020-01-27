@@ -52,7 +52,6 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -103,7 +102,6 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.verifyPicturesPresent();
         NotesSteps.deleteAllPictures();
         NotesSteps.verifyNoPicturesPresent();
-        ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }
