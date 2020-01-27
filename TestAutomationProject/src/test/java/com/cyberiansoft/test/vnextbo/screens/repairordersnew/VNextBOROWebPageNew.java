@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,6 +19,15 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='reconmonitor-orders']//p[@class='search-results text-red']")
     private WebElement noRecordsFoundMessage;
+
+    @FindBy(xpath = "//div[@data-bind='text: savedSearch.value.search.name']")
+    private WebElement savedSearchDropDownField;
+
+    @FindBy(xpath = "//span[@data-bind='click: savedSearch.click, visible: savedSearch.isEditable']")
+    private WebElement editSavedSearchPencilIcon;
+
+    @FindBy(xpath = "//span[@class='savedSearch']")
+    private List<WebElement> savedSearchDropDownList;
 
     @FindBy(xpath = "//div[@id='reconmonitor-orders']/table/tbody/tr")
     private List<WebElement> repairOrdersTableRowsList;
@@ -51,6 +61,23 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//i[@class='icon-problem-indicator']")
     private List<WebElement> problemIndicatorsList;
+
+    @FindBy(xpath = "//b[contains(@data-bind,'text: orderDateF')]")
+    private List<WebElement> startDatesList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'red')]/ancestor::tr//b[contains(@data-bind, 'orderDateF')]")
+    private List<WebElement> highPriorityOrdersStartDatesList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'none')]/ancestor::tr//b[contains(@data-bind, 'orderDateF')]")
+    private List<WebElement> normalPriorityOrdersStartDatesList;
+
+    @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'green')]/ancestor::tr//b[contains(@data-bind, 'orderDateF')]")
+    private List<WebElement> lowPriorityOrdersStartDatesList;
+
+    public WebElement savedSearchOptionByName(String searchName) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@class='savedSearch' and text()='" + searchName + "']"));
+    }
 
     public VNextBOROWebPageNew() {
         super(DriverBuilder.getInstance().getDriver());

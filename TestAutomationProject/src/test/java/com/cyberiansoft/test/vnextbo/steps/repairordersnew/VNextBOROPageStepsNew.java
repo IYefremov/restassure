@@ -1,11 +1,19 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
+import org.openqa.selenium.WebElement;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class VNextBOROPageStepsNew {
 
@@ -147,8 +155,75 @@ public class VNextBOROPageStepsNew {
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
+    public static void searchOrdersByCustomTimeFrameWithSorting(String sortBy) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setSortByField(sortBy);
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
     public static boolean checkIfNoRecordsFoundMessageIsDisplayed() {
 
         return Utils.isElementDisplayed(new VNextBOROWebPageNew().getNoRecordsFoundMessage());
+    }
+
+    public static void setAllAdvancedSearchFields(VNextBOMonitorData data) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setAllFields(data);
+    }
+
+    public static void searchByAllAdvancedSearchFields(VNextBOMonitorData data) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setAllFields(data);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void openSavedSearchesList() {
+
+        Utils.clickElement(new VNextBOROWebPageNew().getSavedSearchDropDownField());
+    }
+
+    public static void searchBySavedAdvancedSearch(String searchName) {
+
+        VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
+        openSavedSearchesList();
+        VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName);
+        Utils.clickElement(repairOrdersPage.savedSearchOptionByName(searchName));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void openSavedAdvancedSearch(String searchName) {
+
+        VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
+        openSavedSearchesList();
+        VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName);
+        Utils.clickElement(repairOrdersPage.savedSearchOptionByName(searchName));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        Utils.clickElement(repairOrdersPage.getEditSavedSearchPencilIcon());
+    }
+
+    public static List<Date> getDescSortedStartDatesListValues(List<WebElement> startDatesWebElementsList) throws ParseException {
+
+        List<Date> notSortedDates = new ArrayList<>();
+        for (WebElement element : startDatesWebElementsList) {
+            Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
+            notSortedDates.add(parse);
+        }
+        return notSortedDates.stream()
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+    }
+
+    public static List<Date> getAscSortedStartDatesListValues(List<WebElement> startDatesWebElementsList) throws ParseException{
+
+        List<Date> notSortedDates = new ArrayList<>();
+        for (WebElement element : startDatesWebElementsList) {
+            Date parse = new SimpleDateFormat("MM/dd/yyyy").parse(element.getText());
+            notSortedDates.add(parse);
+        }
+        return notSortedDates.stream().sorted().collect(Collectors.toList());
     }
 }

@@ -50,6 +50,9 @@ public class VNextBOMonitorData {
     @JsonProperty("customer")
     private String customer;
 
+    @JsonProperty("hasThisText")
+    private String hasThisText;
+
     @JsonProperty("employee")
     private String employee;
 
@@ -124,6 +127,12 @@ public class VNextBOMonitorData {
 
     @JsonProperty("sortBy")
     private String sortBy;
+
+    @JsonProperty("task")
+    private String task;
+
+    @JsonProperty("taskStatus")
+    private String taskStatus;
 
     @JsonProperty("searchName")
     private String searchName;
