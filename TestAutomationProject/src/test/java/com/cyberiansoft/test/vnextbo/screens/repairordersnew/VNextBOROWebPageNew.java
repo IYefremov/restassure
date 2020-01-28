@@ -74,6 +74,9 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@id='tableBody']//div[contains(@class, 'priority-icon') and contains(@style, 'green')]/ancestor::tr//b[contains(@data-bind, 'orderDateF')]")
     private List<WebElement> lowPriorityOrdersStartDatesList;
 
+    @FindBy(xpath = "//tr[@data-id]//strong[contains(@data-bind, 'arbitrationDateDisplay')]")
+    private List<WebElement> arbitrationDatesList;
+
     public WebElement savedSearchOptionByName(String searchName) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@class='savedSearch' and text()='" + searchName + "']"));

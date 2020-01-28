@@ -899,7 +899,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
     }
 
     //todo bug - the orders are not sorted properly. Needs clarifications/fixes from V. Dubinenko
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 57)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 57)
     public void verifyUserCanSearchBySortByArbitrationDateOption(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -1034,7 +1034,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
                 CustomDateProvider.getYearToDateStartDate(), CustomDateProvider.getYearStartDate());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 65)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 65)
     public void verifyUserCanSeeDefaultSearchSettings(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 

@@ -226,4 +226,9 @@ public class VNextBOROPageStepsNew {
         }
         return notSortedDates.stream().sorted().collect(Collectors.toList());
     }
+
+    public static List<String> getArbitrationDatesList() {
+
+        return Utils.getText(new VNextBOROWebPageNew().getArbitrationDatesList());
+    }
 }
