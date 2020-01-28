@@ -37,7 +37,8 @@ public class PartServiceSteps {
     }
 
     public static void selectCategory(String category) {
-        ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.CATEGORY.getValue());
+        //ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.CATEGORY.getValue());
+        ListSelectPageInteractions.waitForList("category-list");
         ListSelectPageInteractions.selectItem(category);
     }
 
