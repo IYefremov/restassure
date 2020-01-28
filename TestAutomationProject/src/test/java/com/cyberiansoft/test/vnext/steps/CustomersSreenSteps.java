@@ -22,4 +22,14 @@ public class CustomersSreenSteps {
         VNextNewCustomerScreen nextNewCustomerScreen = new VNextNewCustomerScreen();
         nextNewCustomerScreen.createNewCustomer(retailCustomer);
     }
+
+    public static void switchToRetailMode() {
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+        customersScreen.switchToRetailMode();
+    }
+
+    public static void switchToWholesaleMode() {
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+        customersScreen.switchToWholesaleMode();
+    }
 }

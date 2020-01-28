@@ -180,6 +180,9 @@
       "vihicleInfo": {
         "vinNumber": "7777777777777"
       },
+      "service" : {
+        "serviceName": "Labor Motor"
+      },
       "moneyService": {
         "serviceName": "Battery Installation"
       },

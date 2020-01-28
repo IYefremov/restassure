@@ -65,8 +65,9 @@ public class WorkOrderSteps {
     public static void openMenu(String workOrderId) {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         WaitUtils.getGeneralFluentWait().until((webdriver) -> workOrdersScreen.getWorkOrdersList().size() > 0);
+        WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
         WorkOrderListElement workOrder = workOrdersScreen.getWorkOrderElement(workOrderId);
-        WaitUtils.elementShouldBeVisible(workOrder.getRootElement(), true);
+
         workOrder.openMenu();
     }
 }
