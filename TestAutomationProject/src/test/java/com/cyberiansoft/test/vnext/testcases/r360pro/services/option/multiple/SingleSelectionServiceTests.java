@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.QuestionServiceListSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import com.cyberiansoft.test.vnext.validations.QuestionServiceListValidations;
@@ -38,24 +39,24 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_WITHOUT_QUESTIONS);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(moneyService);
-        AvailableServicesScreenSteps.selectService(moneyService);
+        AvailableServicesScreenSteps.clickAddServiceButton(moneyService.getServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
         AvailableServicesScreenSteps.selectService(laborService);
-        AvailableServicesScreenSteps.selectService(laborService);
+        AvailableServicesScreenSteps.clickAddServiceButton(laborService.getServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
         SearchSteps.textSearch(partService.getServiceName());
         PartServiceSteps.selectPartService(partService);
         PartServiceSteps.confirmPartInfo();
-        AvailableServicesScreenSteps.selectService(partService.getServiceName());
+        AvailableServicesScreenSteps.clickAddServiceButton(partService.getServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
         SearchSteps.textSearch(matrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(matrixService);
         ScreenNavigationSteps.pressBackButton();
         MatrixServiceSteps.acceptDetailsScreen();
-        AvailableServicesScreenSteps.selectService(matrixService.getMatrixServiceName());
+        AvailableServicesScreenSteps.clickAddServiceButton(matrixService.getMatrixServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
         ListServicesValidations.validateAvailableServiceCount(matrixService.getMatrixServiceName(), 1);
 
@@ -88,16 +89,16 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         InspectionSteps.openInspectionToEdit(inspectionId);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
-        AvailableServicesScreenSteps.selectService(moneyService);
+        AvailableServicesScreenSteps.clickAddServiceButton(moneyService.getServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
-        AvailableServicesScreenSteps.selectService(laborService);
+        AvailableServicesScreenSteps.clickAddServiceButton(laborService.getServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
-        AvailableServicesScreenSteps.selectService(partService.getServiceName());
+        AvailableServicesScreenSteps.clickAddServiceButton(partService.getServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
-        AvailableServicesScreenSteps.selectService(matrixService.getMatrixServiceName());
+        AvailableServicesScreenSteps.clickAddServiceButton(matrixService.getMatrixServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
         ListServicesValidations.validateAvailableServiceCount(matrixService.getMatrixServiceName(), 1);
 
@@ -219,6 +220,7 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         VisualScreenSteps.addServiceToPicture();
         PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenSteps.addServiceToPicture();
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
@@ -245,6 +247,7 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         VisualScreenSteps.addServiceToPicture();
         PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionToEdit(inspectionId);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
@@ -292,9 +295,11 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         VisualScreenSteps.addServiceToPicture();
         PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenSteps.addServiceToPicture();
         PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(2);
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -328,6 +333,7 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         VisualScreenSteps.addServiceToPicture();
         PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(1);
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
