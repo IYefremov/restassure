@@ -12,22 +12,28 @@ public class VNextBOModalDialogSteps {
     }
 
     public static String getDialogInformationMessage() {
+
         return Utils.getText(new VNextBOModalDialog().dialogInformationMessage());
     }
 
     public static void clickOkButton() {
+
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getConfirmOKButton(), 4);
         Utils.clickElement(modalDialog.getConfirmOKButton());
-        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getConfirmOKButton(), 6);
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getConfirmOKButton(), 4);
     }
 
     public static void clickCloseButton() {
+
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getCloseButton(), 4);
         Utils.clickElement(modalDialog.getCloseButton());
-        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCloseButton(), 2);
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCloseButton(), 4);
     }
 
     public static void clickYesButton() {
+
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
         WaitUtilsWebDriver.waitForVisibility(modalDialog.getYesButton(), 4);
         Utils.clickElement(modalDialog.getYesButton());
@@ -35,14 +41,18 @@ public class VNextBOModalDialogSteps {
     }
 
     public static void clickNoButton() {
+
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getNoButton(), 4);
         Utils.clickElement(modalDialog.getNoButton());
-        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getNoButton(), 2);
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getNoButton(), 4);
     }
 
     public static void clickCancelButton() {
+
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForVisibility(modalDialog.getCancelButton(), 4);
         Utils.clickElement(modalDialog.getCancelButton());
-        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCancelButton(), 2);
+        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getCancelButton(), 4);
     }
 }

@@ -886,5 +886,36 @@
       ],
       "sortBy": "Priority, Newest to Oldest"
     }
+  ],
+
+  "verifyUserCanSearchBySortByArbitrationDatePriority": [
+    {
+      "rowID": "verifyUserCanSearchBySortByArbitrationDatePriority.01",
+      "description": "Test Case 91478: User can search by \"Sort by â†’ Arbitration Date, Priority\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91478",
+          "testCaseTitle": "User can search by \"Sort by â†’ Arbitration Date, Priority\""
+        }
+      ],
+      "sortBy": "Arbitration Date, Priority",
+      "repairStatus": "All",
+      "timeFrame": "Year To Date"
+    }
+  ],
+
+  "verifyUserCanSeeDefaultSearchSettings": [
+    {
+      "rowID": "verifyUserCanSeeDefaultSearchSettings.01",
+      "description": "Test Case 91487: User can see default search settings",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91487",
+          "testCaseTitle": "User can see default search settings"
+        }
+      ],
+      "timeFrame": "Last 90 days",
+      "repairStatus": "In Progress - Active"
+    }
   ]
 }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
@@ -240,5 +241,27 @@ public class VNextBOROWebPageValidationsNew {
                 map(WebElement::getText).collect(Collectors.toList());
         Assert.assertTrue(savedSearchesList.contains(searchName),
                 "Saved search hasn't been presented in the saved searches list");
+    }
+
+    public static void verifyFirstOrderArbitrationDateIsMoreThanCurrentDate() {
+
+        final LocalDate currentDate = CustomDateProvider.getCurrentDateLocalized();
+        final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getFormat());
+        Assert.assertTrue(currentDate.isBefore(LocalDate.parse(VNextBOROPageStepsNew.getArbitrationDatesList().get(0), dateFormat)),
+                "The arbitration date of the first order is not after the current date");
+    }
+
+    public static void verifyOrdersWithArbitrationDatesAreDisplayedBeforeOtherOrders() {
+
+        boolean foundFirstEmptyOrder = false;
+        for (String order : VNextBOROPageStepsNew.getArbitrationDatesList()) {
+            if (foundFirstEmptyOrder && !order.isEmpty()) {
+                Assert.fail("The orders with arbitration dates are not displayed before the orders without them");
+            }
+            if (!foundFirstEmptyOrder && order.isEmpty()) {
+                foundFirstEmptyOrder = true;
+            }
+        }
+        Assert.assertTrue(foundFirstEmptyOrder, "The orders with arbitration dates are not displayed before the orders without them");
     }
 }

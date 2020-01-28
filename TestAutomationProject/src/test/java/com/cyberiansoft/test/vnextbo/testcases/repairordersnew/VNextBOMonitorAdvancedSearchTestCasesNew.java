@@ -406,4 +406,34 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOPageSwitcherSteps.clickHeaderFirstPageButton();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeDefaultSearchSettings(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Repair Status: In Progress - All; Timeframe: Last 30 days");
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField(data.getRepairStatus());
+        VNextBOROAdvancedSearchDialogStepsNew.setTimeFrameField(data.getTimeFrame());
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Repair Status: " + data.getRepairStatus() + "; Timeframe: " + data.getTimeFrame());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    //Comment from previous test - //todo bug - the orders are not sorted properly. Needs clarifications/fixes from V. Dubinenko
+    //test should be refactored, disabled for now
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchBySortByArbitrationDatePriority(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField(data.getRepairStatus());
+        VNextBOROAdvancedSearchDialogStepsNew.setTimeFrameField(data.getTimeFrame());
+        VNextBOROAdvancedSearchDialogStepsNew.setSortByField(data.getSortBy());
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+        VNextBOPageSwitcherSteps.changeItemsPerPage("100");
+        VNextBOROWebPageValidationsNew.verifyFirstOrderArbitrationDateIsMoreThanCurrentDate();
+        VNextBOROWebPageValidationsNew.verifyOrdersWithArbitrationDatesAreDisplayedBeforeOtherOrders();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
 }
