@@ -9,21 +9,37 @@ import org.openqa.selenium.By;
 public class PartInfoScreenValidations {
     public static void validatePartInfo(PartServiceData expectedPartServiceData) {
         if (expectedPartServiceData.getCategory() != null)
-            WaitUtils.assertEquals(expectedPartServiceData.getCategory(),
-                    PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.CATEGORY).findElement(By.xpath(".//input")).getAttribute("value"));
+            validateCategoryValue(expectedPartServiceData.getCategory());
         if (expectedPartServiceData.getSubCategory() != null)
-            WaitUtils.assertEquals(expectedPartServiceData.getSubCategory(),
-                    PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.SUB_CATEGORY).findElement(By.xpath(".//input")).getAttribute("value"));
+            validateSubCategoryValue(expectedPartServiceData.getSubCategory());
         if (expectedPartServiceData.getPartName() != null)
-            WaitUtils.assertEquals(expectedPartServiceData.getPartName().getPartNameList().get(0),
-                    PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.PART_NAME).findElement(By.xpath(".//input")).getAttribute("value"));
+            validatePartNameValue(expectedPartServiceData.getPartName().getPartNameList().get(0));
         if (expectedPartServiceData.getPartPosition() != null)
-            WaitUtils.assertEquals(expectedPartServiceData.getPartPosition(),
-                    PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.PART_POSITION).findElement(By.xpath(".//input")).getAttribute("value"));
+            validatePartPositionValue(expectedPartServiceData.getPartPosition());
     }
 
     public static void fieldShouldBeReadonly(boolean shouldBeReadonly, PartInfoScreenField partInfoField) {
         WaitUtils.assertEquals(PartInfoScreenInteractions.getPartInfoScreenField(partInfoField).getAttribute("action") == null,
                 shouldBeReadonly);
+    }
+
+    public static void validateCategoryValue(String expectedCategory) {
+        WaitUtils.assertEquals(expectedCategory,
+                PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.CATEGORY).findElement(By.xpath(".//input")).getAttribute("value"));
+    }
+
+    public static void validateSubCategoryValue(String expectedSubCategory) {
+        WaitUtils.assertEquals(expectedSubCategory,
+                PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.SUB_CATEGORY).findElement(By.xpath(".//input")).getAttribute("value"));
+    }
+
+    public static void validatePartNameValue(String expectedPartName) {
+        WaitUtils.assertEquals(expectedPartName,
+                PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.PART_NAME).findElement(By.xpath(".//input")).getAttribute("value"));
+    }
+
+    public static void validatePartPositionValue(String expectedPartPosition) {
+        WaitUtils.assertEquals(expectedPartPosition,
+                PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.PART_POSITION).findElement(By.xpath(".//input")).getAttribute("value"));
     }
 }
