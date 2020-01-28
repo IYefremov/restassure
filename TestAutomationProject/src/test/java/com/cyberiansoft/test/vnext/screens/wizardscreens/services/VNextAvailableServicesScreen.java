@@ -99,6 +99,13 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         ));
     }
 
+    public void clickAddServiceButton(String serviceName) {
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            getServiceListItem(serviceName).findElement(By.xpath(".//*[@action='add-service']")).click();
+            return true;
+        });
+    }
+
     public int getServiceAmountSelectedValue(String serviceName) {
         int amaount = 0;
         WebElement servicerow = getServiceListItem(serviceName);
