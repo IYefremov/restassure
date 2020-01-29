@@ -155,7 +155,7 @@
       "description": "Test Case 78447:Verify user see PO/RO payment method if PO/RO method = ON",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92046\n",
+          "testCaseID": "92046",
           "testCaseTitle": "Verify user see PO/RO payment method if PO/RO method = ON."
         }
       ],

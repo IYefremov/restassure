@@ -27,13 +27,13 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCantAddSingleServiceMultipleTimesCreatingWO(String rowID,
+    public void userCantAddSingleServiceMultipleTimesCreatingInspection(String rowID,
                                                                 String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData moneyService = workOrderData.getServicesList().get(0);
-        ServiceData laborService = workOrderData.getServicesList().get(1);
-        PartServiceData partService = workOrderData.getPartServiceDataList().get(0);
-        MatrixServiceData matrixService = workOrderData.getMatrixServiceData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        ServiceData moneyService = inspectionData.getServicesList().get(0);
+        ServiceData laborService = inspectionData.getServicesList().get(1);
+        PartServiceData partService = inspectionData.getPartServiceDataList().get(0);
+        MatrixServiceData matrixService = inspectionData.getMatrixServiceData();
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_WITHOUT_QUESTIONS);
@@ -65,13 +65,13 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCantAddSingleServiceMultipleTimesEditingWO(String rowID,
+    public void userCantAddSingleServiceMultipleTimesEditingInspection(String rowID,
                                                                String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData moneyService = workOrderData.getServicesList().get(0);
-        ServiceData laborService = workOrderData.getServicesList().get(1);
-        PartServiceData partService = workOrderData.getPartServiceDataList().get(0);
-        MatrixServiceData matrixService = workOrderData.getMatrixServiceData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        ServiceData moneyService = inspectionData.getServicesList().get(0);
+        ServiceData laborService = inspectionData.getServicesList().get(1);
+        PartServiceData partService = inspectionData.getPartServiceDataList().get(0);
+        MatrixServiceData matrixService = inspectionData.getMatrixServiceData();
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_WITHOUT_QUESTIONS);
@@ -107,13 +107,13 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCANAddSingleServiceMultipleTimesCreatingWO(String rowID,
+    public void userCANAddSingleServiceMultipleTimesCreatingInspection(String rowID,
                                                                String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData moneyService = workOrderData.getServicesList().get(0);
-        ServiceData laborService = workOrderData.getServicesList().get(1);
-        PartServiceData partService = workOrderData.getPartServiceDataList().get(0);
-        MatrixServiceData matrixService = workOrderData.getMatrixServiceData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        ServiceData moneyService = inspectionData.getServicesList().get(0);
+        ServiceData laborService = inspectionData.getServicesList().get(1);
+        PartServiceData partService = inspectionData.getPartServiceDataList().get(0);
+        MatrixServiceData matrixService = inspectionData.getMatrixServiceData();
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_WITHOUT_QUESTIONS);
@@ -148,13 +148,13 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCANAddSingleServiceMultipleTimesEditingWO(String rowID,
+    public void userCANAddSingleServiceMultipleTimesEditingInspection(String rowID,
                                                               String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData moneyService = workOrderData.getServicesList().get(0);
-        ServiceData laborService = workOrderData.getServicesList().get(1);
-        PartServiceData partService = workOrderData.getPartServiceDataList().get(0);
-        MatrixServiceData matrixService = workOrderData.getMatrixServiceData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        ServiceData moneyService = inspectionData.getServicesList().get(0);
+        ServiceData laborService = inspectionData.getServicesList().get(1);
+        PartServiceData partService = inspectionData.getPartServiceDataList().get(0);
+        MatrixServiceData matrixService = inspectionData.getMatrixServiceData();
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_WITHOUT_QUESTIONS);
@@ -194,12 +194,12 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm(String rowID,
+    public void userCantAddSingleServiceMultipleTimesCreatingInspectionFromVisualForm(String rowID,
                                                                               String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        DamageData moneyServiceDamageData = workOrderData.getDamagesData().get(0);
-        DamageData laborServiceDamageDate = workOrderData.getDamagesData().get(1);
-        DamageData partServiceDamageDate = workOrderData.getDamagesData().get(2);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        DamageData moneyServiceDamageData = inspectionData.getDamagesData().get(0);
+        DamageData laborServiceDamageDate = inspectionData.getDamagesData().get(1);
+        DamageData partServiceDamageDate = inspectionData.getDamagesData().get(2);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
@@ -229,12 +229,12 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCantAddSingleServiceMultipleTimesEditingWOFromVisualForm(String rowID,
+    public void userCantAddSingleServiceMultipleTimesEditingInspectionFromVisualForm(String rowID,
                                                                              String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        DamageData moneyServiceDamageData = workOrderData.getDamagesData().get(0);
-        DamageData laborServiceDamageDate = workOrderData.getDamagesData().get(1);
-        DamageData partServiceDamageDate = workOrderData.getDamagesData().get(2);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        DamageData moneyServiceDamageData = inspectionData.getDamagesData().get(0);
+        DamageData laborServiceDamageDate = inspectionData.getDamagesData().get(1);
+        DamageData partServiceDamageDate = inspectionData.getDamagesData().get(2);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
@@ -269,12 +269,12 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCANAddSingleServiceMultipleTimesCreatingWOFromVisualForm(String rowID,
+    public void userCANAddSingleServiceMultipleTimesCreatingInspectionFromVisualForm(String rowID,
                                                                              String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        DamageData moneyServiceDamageData = workOrderData.getDamagesData().get(0);
-        DamageData laborServiceDamageDate = workOrderData.getDamagesData().get(1);
-        DamageData partServiceDamageDate = workOrderData.getDamagesData().get(2);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        DamageData moneyServiceDamageData = inspectionData.getDamagesData().get(0);
+        DamageData laborServiceDamageDate = inspectionData.getDamagesData().get(1);
+        DamageData partServiceDamageDate = inspectionData.getDamagesData().get(2);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
@@ -306,12 +306,12 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCANAddSingleServiceMultipleTimesEditingWOFromVisualForm(String rowID,
+    public void userCANAddSingleServiceMultipleTimesEditingInspectionFromVisualForm(String rowID,
                                                                             String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        DamageData moneyServiceDamageData = workOrderData.getDamagesData().get(0);
-        DamageData laborServiceDamageDate = workOrderData.getDamagesData().get(1);
-        DamageData partServiceDamageDate = workOrderData.getDamagesData().get(2);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        DamageData moneyServiceDamageData = inspectionData.getDamagesData().get(0);
+        DamageData laborServiceDamageDate = inspectionData.getDamagesData().get(1);
+        DamageData partServiceDamageDate = inspectionData.getDamagesData().get(2);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
@@ -342,20 +342,20 @@ public class SingleSelectionServiceTests extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanAddServicesUsingQuestionForm(String rowID,
                                                     String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData singleMoneyService = workOrderData.getServicesList().get(0);
-        ServiceData singleLaborService = workOrderData.getServicesList().get(1);
-        ServiceData multipleMoneyService = workOrderData.getServicesList().get(2);
-        ServiceData multipleLaborService = workOrderData.getServicesList().get(3);
-        PartServiceData singlePartService = workOrderData.getPartServiceDataList().get(0);
-        PartServiceData multiplePartService = workOrderData.getPartServiceDataList().get(1);
-        MatrixServiceData singleMatrixService = workOrderData.getMatrixServiceDataList().get(0);
-        MatrixServiceData multipleMatrixService = workOrderData.getMatrixServiceDataList().get(1);
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        ServiceData singleMoneyService = inspectionData.getServicesList().get(0);
+        ServiceData singleLaborService = inspectionData.getServicesList().get(1);
+        ServiceData multipleMoneyService = inspectionData.getServicesList().get(2);
+        ServiceData multipleLaborService = inspectionData.getServicesList().get(3);
+        PartServiceData singlePartService = inspectionData.getPartServiceDataList().get(0);
+        PartServiceData multiplePartService = inspectionData.getPartServiceDataList().get(1);
+        MatrixServiceData singleMatrixService = inspectionData.getMatrixServiceDataList().get(0);
+        MatrixServiceData multipleMatrixService = inspectionData.getMatrixServiceDataList().get(1);
 
-        QuestionsData generateMoneyService = workOrderData.getQuestionScreenData().getQuestionsData().get(0);
-        QuestionsData generateLaborService = workOrderData.getQuestionScreenData().getQuestionsData().get(1);
-        QuestionsData generateMatrixService = workOrderData.getQuestionScreenData().getQuestionsData().get(2);
-        QuestionsData generatePartService = workOrderData.getQuestionScreenData().getQuestionsData().get(3);
+        QuestionsData generateMoneyService = inspectionData.getQuestionScreenData().getQuestionsData().get(0);
+        QuestionsData generateLaborService = inspectionData.getQuestionScreenData().getQuestionsData().get(1);
+        QuestionsData generateMatrixService = inspectionData.getQuestionScreenData().getQuestionsData().get(2);
+        QuestionsData generatePartService = inspectionData.getQuestionScreenData().getQuestionsData().get(3);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);

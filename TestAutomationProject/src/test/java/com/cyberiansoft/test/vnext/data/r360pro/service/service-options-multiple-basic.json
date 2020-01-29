@@ -1,7 +1,7 @@
 {
-  "userCantAddSingleServiceMultipleTimesCreatingWO": [
+  "userCantAddSingleServiceMultipleTimesCreatingInspection": [
     {
-      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWO.01",
+      "rowID": "userCantAddSingleServiceMultipleTimesCreatingInspection.01",
       "description": "89495",
       "targetProcessTestCaseData": [
         {
@@ -41,9 +41,9 @@
       }
     }
   ],
-  "userCantAddSingleServiceMultipleTimesEditingWO": [
+  "userCantAddSingleServiceMultipleTimesEditingInspection": [
     {
-      "rowID": "userCantAddSingleServiceMultipleTimesEditingWO.01",
+      "rowID": "userCantAddSingleServiceMultipleTimesEditingInspection.01",
       "description": "89527",
       "targetProcessTestCaseData": [
         {
@@ -83,9 +83,9 @@
       }
     }
   ],
-  "userCANAddSingleServiceMultipleTimesCreatingWO": [
+  "userCANAddSingleServiceMultipleTimesCreatingInspection": [
     {
-      "rowID": "userCANAddSingleServiceMultipleTimesCreatingWO.01",
+      "rowID": "userCANAddSingleServiceMultipleTimesCreatingInspection.01",
       "description": "89529",
       "targetProcessTestCaseData": [
         {
@@ -126,13 +126,13 @@
       }
     }
   ],
-  "userCANAddSingleServiceMultipleTimesEditingWO": [
+  "userCANAddSingleServiceMultipleTimesEditingInspection": [
     {
-      "rowID": "userCANAddSingleServiceMultipleTimesEditingWO.01",
+      "rowID": "userCANAddSingleServiceMultipleTimesEditingInspection.01",
       "description": "89529",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91859",
+          "testCaseID": "91861",
           "testCaseTitle": "User can add services with enabled option Multiple twice or more into Inspection (money, labor, part, price matrix) manually on services creating Inspection"
         }
       ],
@@ -169,9 +169,9 @@
       }
     }
   ],
-  "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm": [
+  "userCantAddSingleServiceMultipleTimesCreatingInspectionFromVisualForm": [
     {
-      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
+      "rowID": "userCantAddSingleServiceMultipleTimesCreatingInspectionFromVisualForm.01",
       "description": "89533",
       "targetProcessTestCaseData": [
         {
@@ -210,13 +210,13 @@
       ]
     }
   ],
-  "userCantAddSingleServiceMultipleTimesEditingWOFromVisualForm": [
+  "userCantAddSingleServiceMultipleTimesEditingInspectionFromVisualForm": [
     {
-      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
+      "rowID": "userCantAddSingleServiceMultipleTimesEditingInspectionFromVisualForm.01",
       "description": "89533",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91863",
+          "testCaseID": "91865",
           "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part) manually on visual form creating Inspection"
         }
       ],
@@ -251,13 +251,13 @@
       ]
     }
   ],
-  "userCANAddSingleServiceMultipleTimesCreatingWOFromVisualForm": [
+  "userCANAddSingleServiceMultipleTimesCreatingInspectionFromVisualForm": [
     {
-      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
+      "rowID": "userCANAddSingleServiceMultipleTimesCreatingInspectionFromVisualForm.01",
       "description": "89533",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91863",
+          "testCaseID": "91867",
           "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part) manually on visual form creating Inspection"
         }
       ],
@@ -292,13 +292,13 @@
       ]
     }
   ],
-  "userCANAddSingleServiceMultipleTimesEditingWOFromVisualForm": [
+  "userCANAddSingleServiceMultipleTimesEditingInspectionFromVisualForm": [
     {
-      "rowID": "userCantAddSingleServiceMultipleTimesCreatingWOFromVisualForm.01",
+      "rowID": "userCANAddSingleServiceMultipleTimesEditingInspectionFromVisualForm.01",
       "description": "89533",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91863",
+          "testCaseID": "91869",
           "testCaseTitle": "User can't add services with disabled option Multiple twice or more into Inspection (money, labor, part) manually on visual form creating Inspection"
         }
       ],

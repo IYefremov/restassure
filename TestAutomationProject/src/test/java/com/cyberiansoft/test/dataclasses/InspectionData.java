@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.dataclasses;
 
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
@@ -133,6 +134,14 @@ public class InspectionData {
     @Getter
     @JsonProperty("servicesScreens")
     List<ServicesScreenData> servicesScreens;
+
+    @Getter
+    @JsonProperty("partServiceDataList")
+    private List<PartServiceData> partServiceDataList;
+
+    @Getter
+    @JsonProperty("matrixServiceDataList")
+    List<com.cyberiansoft.test.dataclasses.MatrixServiceData> matrixServiceDataList;
 
     @Getter
     @JsonProperty("isDraft")

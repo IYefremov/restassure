@@ -70,7 +70,7 @@ public class VehicleInfoScreenSteps {
                 }).collect(Collectors.toList()));
     }
 
-    public static void selectTechniciansPercentage(Map<String, String> techniciansPercentageList) {
+    public static void setTechniciansPercentage(Map<String, String> techniciansPercentageList) {
         VehicleInfoScreenInteractions.openTechnicianList();
         TechnicianScreenInteractions.selectCustomOption();
         techniciansPercentageList.forEach(TechnicianScreenInteractions::setTechnicianPercentage);
