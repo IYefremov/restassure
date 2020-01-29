@@ -5,7 +5,9 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
+import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
+import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -18,73 +20,107 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class VNextBOROWebPageValidationsNew {
+public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidations {
 
     public static void verifyCustomersAreCorrectInTheTable(String expectedCustomer) {
 
-        for (WebElement customer: new VNextBOROWebPageNew().getOrdersCustomersList()) {
-            Assert.assertEquals(Utils.getText(customer), expectedCustomer, "Customer hasn't been correct");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement customer: new VNextBOROWebPageNew().getOrdersCustomersList()) {
+                Assert.assertEquals(Utils.getText(customer), expectedCustomer, "Customer hasn't been correct");
+            }
+        }
+    }
+
+    public static void verifySearchResultByService(String expectedServiceName) {
+
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+            VNextBORODetailsStepsNew.expandAllServiceRows();
+            VNextBORODetailsValidationsNew.verifyServiceOrTaskDescriptionsContainText(expectedServiceName);
+            Utils.goToPreviousPage();
         }
     }
 
     public static void verifyEmployeesAreCorrectInTheTable(String expectedEmployee) {
 
-        for (WebElement technician: new VNextBOROWebPageNew().getOrdersTechniciansList()) {
-            Assert.assertTrue(Utils.getText(technician).contains(expectedEmployee),
-                    "Employee " + Utils.getText(technician) + "hasn't been correct");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement technician: new VNextBOROWebPageNew().getOrdersTechniciansList()) {
+                Assert.assertTrue(Utils.getText(technician).contains(expectedEmployee),
+                        "Employee " + Utils.getText(technician) + "hasn't been correct");
+            }
         }
     }
 
     public static void verifyPhasesAreCorrectInTheTable(String expectedPhase) {
 
-        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed())
-            Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",
-                    "No records found message hasn't been displayed or has been incorrect");
-        else
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
             for (WebElement phase: new VNextBOROWebPageNew().getOrdersPhasesList()) {
                 Assert.assertEquals(Utils.getText(phase), expectedPhase, "Phase hasn't been correct");
-                }
+            }
+        }
     }
 
     public static void verifyDepartmentsAreCorrectInTheTable(String expectedDepartment) {
 
-        for (WebElement department: new VNextBOROWebPageNew().getOrdersDepartmentsList()) {
-            Assert.assertEquals(Utils.getText(department), expectedDepartment, "Department hasn't been correct");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement department: new VNextBOROWebPageNew().getOrdersDepartmentsList()) {
+                Assert.assertEquals(Utils.getText(department), expectedDepartment, "Department hasn't been correct");
+            }
         }
     }
 
     public static void verifyWoTypesAreCorrectInTheTable(String expectedWoType) {
 
-        for (WebElement woType: new VNextBOROWebPageNew().getWoTypesList()) {
-            Assert.assertEquals(Utils.getText(woType), expectedWoType, "WO type hasn't been correct");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement woType: new VNextBOROWebPageNew().getWoTypesList()) {
+                Assert.assertEquals(Utils.getText(woType), expectedWoType, "WO type hasn't been correct");
+            }
         }
     }
 
     public static void verifyWoNumbersAreCorrectInTheTable(String expectedWoNumber) {
 
-        for (WebElement woNumber: new VNextBOROWebPageNew().getWoNumbersList()) {
-            Assert.assertEquals(Utils.getText(woNumber), expectedWoNumber, "WO number hasn't been correct");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement woNumber: new VNextBOROWebPageNew().getWoNumbersList()) {
+                Assert.assertEquals(Utils.getText(woNumber), expectedWoNumber, "WO number hasn't been correct");
+            }
         }
     }
 
     public static void verifyRoNumbersAreCorrectInTheTable(String expectedRoNumber) {
 
-        for (WebElement roNumber: new VNextBOROWebPageNew().getRoNumbersList()) {
-            Assert.assertEquals(Utils.getInputFieldValue(roNumber), expectedRoNumber, "RO number hasn't been correct");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement roNumber: new VNextBOROWebPageNew().getRoNumbersList()) {
+                Assert.assertEquals(Utils.getInputFieldValue(roNumber), expectedRoNumber, "RO number hasn't been correct");
+            }
         }
     }
 
     public static void verifyStockNumbersAreCorrectInTheTable(String expectedStockNumber) {
 
-        for (WebElement stockNumber: new VNextBOROWebPageNew().getStockNumbersList()) {
-            Assert.assertEquals(Utils.getInputFieldValue(stockNumber), expectedStockNumber, "Stock number hasn't been correct");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement stockNumber: new VNextBOROWebPageNew().getStockNumbersList()) {
+                Assert.assertEquals(Utils.getInputFieldValue(stockNumber), expectedStockNumber, "Stock number hasn't been correct");
+            }
         }
     }
 
     public static void verifyVinNumbersAreCorrectInTheTable(String expectedVinNumber) {
 
-        for (WebElement vinNumber: new VNextBOROWebPageNew().getVinNumbersList()) {
-            Assert.assertEquals(Utils.getText(vinNumber), expectedVinNumber, "VIN number hasn't been correct");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement vinNumber: new VNextBOROWebPageNew().getVinNumbersList()) {
+                Assert.assertEquals(Utils.getText(vinNumber), expectedVinNumber, "VIN number hasn't been correct");
+            }
         }
     }
 
@@ -95,17 +131,23 @@ public class VNextBOROWebPageValidationsNew {
 
     public static void verifyOrdersTableAfterSearch() {
 
-        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed())
-            Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",
-                    "No records found message hasn't been displayed or has been incorrect");
-        else
-            verifyOrderTableContainsRecords();
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else verifyOrderTableContainsRecords();
     }
 
     public static void verifyProblemIndicatorIsDisplayedForEachRecord() {
 
-        Assert.assertEquals(new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size(), new VNextBOROWebPageNew().getProblemIndicatorsList().size(),
-                "Not all orders has had Problems indicator");
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            Assert.assertEquals(new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size(), new VNextBOROWebPageNew().getProblemIndicatorsList().size(),
+                    "Not all orders has had Problems indicator");
+        }
+    }
+
+    public static void verifyNotFoundMessageIsCorrect() {
+
+        Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",
+                    "No records found message hasn't been displayed or has been incorrect");
     }
 
     public static void verifySortingByStartDateIsCorrect(List<WebElement> actualStartDatesElementsList, List<Date> expectedStartDatesList) throws ParseException {
