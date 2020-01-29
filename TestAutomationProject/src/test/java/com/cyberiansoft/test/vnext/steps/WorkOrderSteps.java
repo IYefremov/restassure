@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
@@ -65,9 +66,15 @@ public class WorkOrderSteps {
     public static void openMenu(String workOrderId) {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         WaitUtils.getGeneralFluentWait().until((webdriver) -> workOrdersScreen.getWorkOrdersList().size() > 0);
-        WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(workOrdersScreen.getRootElement());
         WorkOrderListElement workOrder = workOrdersScreen.getWorkOrderElement(workOrderId);
-
         workOrder.openMenu();
+    }
+
+    public static void cancelWorkOrder() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickCancelMenuItem();
+        VNextInformationDialog informationDialog = new VNextInformationDialog();
+        informationDialog.clickInformationDialogYesButton();
     }
 }

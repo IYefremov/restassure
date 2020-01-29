@@ -41,28 +41,37 @@ public class EmailSteps {
 
     public static void clickAddMoreCCEmailsButton() {
         VNextEmailScreen emailScreen = new VNextEmailScreen();
-        emailScreen.getCcEmailPanel().findElement(emailScreen.getAddMoreBtn()).click();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    emailScreen.getCcEmailPanel().findElement(emailScreen.getAddMoreBtn()).click();
+                    return true;
+                });
     }
 
     public static void setSecondToCCMailAddressField(String emailAddress) {
         clickAddMoreCCEmailsButton();
         VNextEmailScreen emailScreen = new VNextEmailScreen();
         WaitUtils.getGeneralFluentWait()
-        .until(driver -> {
-            emailScreen.getCcEmailPanel().findElements(emailScreen.getToEmailXpath()).get(1).clear();
-            return true;
-        });
+                .until(driver -> {
+                    emailScreen.getCcEmailPanel().findElements(emailScreen.getToEmailXpath()).get(1).clear();
+                    return true;
+                });
         emailScreen.getCcEmailPanel().findElements(emailScreen.getToEmailXpath()).get(1).sendKeys(emailAddress);
     }
 
     public static void clickRemoveEmailAddressButton() {
         VNextEmailScreen emailScreen = new VNextEmailScreen();
+        emailScreen.getCcEmailPanel().findElement(emailScreen.getAddMoreBtn()).click();
         emailScreen.getToEmailPanel().findElement(emailScreen.getRemoveMailBtn()).click();
     }
 
     public static void clickRemoveCCEmailAddressButton() {
         VNextEmailScreen emailScreen = new VNextEmailScreen();
-        emailScreen.getCcEmailPanel().findElement(emailScreen.getRemoveMailBtn()).click();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    emailScreen.getCcEmailPanel().findElement(emailScreen.getRemoveMailBtn()).click();
+                    return true;
+                });
     }
 
     public static void clickRemoveBCCEmailAddressButton() {
