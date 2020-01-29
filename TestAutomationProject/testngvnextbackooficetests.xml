@@ -169,7 +169,7 @@
     </test>
     <test name="Monitor Simple Search Tests">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorSimpleSearchTestCases"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorSimpleSearchTestCasesNew"/>
         </classes>
     </test>
     <test name="Monitor Tests Part 1">

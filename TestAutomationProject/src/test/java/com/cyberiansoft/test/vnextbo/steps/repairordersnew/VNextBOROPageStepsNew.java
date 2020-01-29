@@ -231,4 +231,10 @@ public class VNextBOROPageStepsNew {
 
         return Utils.getText(new VNextBOROWebPageNew().getArbitrationDatesList());
     }
+
+    public static void openOrderDetailsByNumberInList(int rowNumber) {
+
+        Utils.clickElement(new VNextBOROWebPageNew().getWoNumbersList().get(rowNumber));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
 }
