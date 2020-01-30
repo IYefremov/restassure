@@ -173,6 +173,18 @@ public class VNextInformationDialog extends VNextBaseScreen {
         tap(modaldlg.findElement(By.xpath(".//span[text()='Start sync']")));
     }
 
+    public String clickInformationDialogStartButton() {
+        String msg = getInformationDialogMessage();
+        tap(modaldlg.findElement(By.xpath(".//span[text()='Start']")));
+        return msg;
+    }
+
+    public String clickInformationDialogStopButton() {
+        String msg = getInformationDialogMessage();
+        tap(modaldlg.findElement(By.xpath(".//span[text()='Stop']")));
+        return msg;
+    }
+
     public void clickDraftButton() {
         tap(modaldlg.findElement(By.xpath(".//span[ text()='Draft']")));
     }
