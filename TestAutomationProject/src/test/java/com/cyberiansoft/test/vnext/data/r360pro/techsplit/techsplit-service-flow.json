@@ -123,7 +123,8 @@
       },
       "service": {
         "serviceName": "Expenses_money (AM)",
-        "servicePrice": "100"
+        "servicePrice": "100",
+        "serviceQuantity": "2"
       }
     }
   ]

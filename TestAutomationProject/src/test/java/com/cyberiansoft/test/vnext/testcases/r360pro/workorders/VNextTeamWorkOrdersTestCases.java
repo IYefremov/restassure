@@ -84,7 +84,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         customersScreen.switchToRetailMode();
         customersScreen.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO2);
+        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());

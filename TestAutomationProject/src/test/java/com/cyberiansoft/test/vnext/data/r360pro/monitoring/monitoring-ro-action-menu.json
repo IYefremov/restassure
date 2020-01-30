@@ -88,23 +88,48 @@
       ],
       "services": [
         {
-          "serviceName": "Labor AM"
-        },
-        {
           "serviceName": "Expenses_money (AM)",
-          "serviceStatus": "STARTED"
+          "serviceStatus": "COMPLETED"
         }
-      ]
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel"
+        }
+      }
     }
   ],
   "verifyUserCanCompletePhaseOnRoActionScreen": [
     {
-      "rowID": "01",
+      "rowID": "verifyUserCanCompletePhaseOnRoActionScreen.01",
       "description": "",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "93746",
-          "testCaseTitle": "Verify user can Start the Phase on RO action screen."
+          "testCaseID": "79331",
+          "testCaseTitle": "Verify user can complete Phase on RO action screen."
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Expenses_money (AM)",
+          "serviceStatus": "COMPLETED"
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel"
+        }
+      }
+    }
+  ],
+  "verifyUserCanStartThePhaseOnPhasesList": [
+    {
+      "rowID": "verifyUserCanStartThePhaseOnPhasesList.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "79329",
+          "testCaseTitle": "Verify user can Start the Phase on Phases list."
         }
       ],
       "services": [
