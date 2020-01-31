@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.PhaseDetailsSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.ProblemReportingSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.InformationDialogValidations;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -124,6 +125,8 @@ public class VNextTeamProblemEnforcement extends BaseTestClass {
         PhaseScreenValidations.validatePhaseStatus(phaseDto);
         PhaseScreenValidations.validateServiceStatus(serviceDto);
         WizardScreenSteps.saveAction();
+        InformationDialogValidations.clickOKAndVerifyMessage("Sorry, there are no repair orders by the current criteria.");
+        SearchSteps.clearAllFilters();
         ScreenNavigationSteps.pressBackButton();
     }
 }

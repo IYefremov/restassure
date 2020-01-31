@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
@@ -104,7 +105,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 	public WebElement getTableRowWithActiveService(String servicename) {
 		List<WebElement> employeestablerows = getServicesTableRows();
 		for (WebElement employeestablerow : employeestablerows) {
-			if (employeestablerow.findElement(By.xpath(".//td[7]")).getText().equals(servicename)) {
+			if (Utils.getText(employeestablerow.findElement(By.xpath(".//td[7]"))).equals(servicename)) {
 				return employeestablerow;
 			}
 		}
@@ -212,7 +213,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 	}
 
 	public boolean activeServiceExists(String servicename) {
-		wait.until(ExpectedConditions.visibilityOf(servicestable.getWrappedElement()));
+        WaitUtilsWebDriver.elementShouldBeVisible(servicestable.getWrappedElement(), true);
 		try {
 			return servicestable.getWrappedElement()
 					.findElements(By.xpath(".//tr/td[text()='" + servicename + "']")).size() > 0;

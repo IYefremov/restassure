@@ -268,11 +268,12 @@ public class BasicQuestionFormTests extends BaseTestClass {
         LaborServiceSteps.addPartService();
         PartServiceSteps.switchToSelectedView();
         PartServiceListValidations.validateNoServicePresent();
-        PartServiceSteps.confirmPartInfo();
+        ScreenNavigationSteps.pressBackButton();
         LaborServiceSteps.confirmServiceDetails();
         QuestionServiceListSteps.switchToNeedToSetupServiceView();
         QuestionServiceListSteps.openServiceDetails(firstExpectedNeedToSetupService.getServiceName());
         PartServiceSteps.selectpartServiceDetails(partServiceData);
+        PartServiceSteps.confirmPartInfo();
         PartServiceSteps.confirmPartInfo();
         QuestionServiceListSteps.switchToSelectedServiceView();
         QuestionServiceListValidations.validateServicePresent(expectedSelectedService.getServiceName());

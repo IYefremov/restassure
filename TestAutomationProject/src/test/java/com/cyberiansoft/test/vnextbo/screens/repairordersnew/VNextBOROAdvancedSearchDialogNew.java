@@ -9,8 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
-
 @Getter
 public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
 
@@ -65,10 +63,10 @@ public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//ul[@id='orderTaskDropdown_listbox']")
     private WebElement taskDropDownList;
 
-    @FindBy(xpath = "//span[@aria-owns='orderTaskDropdown_listbox']//span[@class='k-input']")
+    @FindBy(xpath = "//span[@aria-owns='orderTaskStatusDropdown_listbox']//span[@class='k-input']")
     private WebElement taskStatusDropDown;
 
-    @FindBy(xpath = "//ul[@id='orderTaskDropdown_listbox']")
+    @FindBy(xpath = "//ul[@id='orderTaskStatusDropdown_listbox']")
     private WebElement taskStatusDropDownList;
 
     @FindBy(xpath = "//span[@aria-owns='orderDepartmentDropdown_listbox']//span[@class='k-input']")
@@ -114,10 +112,28 @@ public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
     private WebElement repairStatusDropDownList;
 
     @FindBy(xpath = "//span[@aria-owns='orderDaysInPhaseDropdown_listbox']//span[@class='k-input']")
-    private WebElement daysInProcessDropDown;
+    private WebElement daysInPhaseDropDown;
 
     @FindBy(xpath = "//ul[@id='orderDaysInPhaseDropdown_listbox']")
+    private WebElement daysInPhaseDropDownList;
+
+    @FindBy(xpath = "//span[@aria-owns='orderDaysInProcessDropdown_listbox']//span[@class='k-input']")
+    private WebElement daysInProcessDropDown;
+
+    @FindBy(xpath = "//ul[@id='orderDaysInProcessDropdown_listbox']")
     private WebElement daysInProcessDropDownList;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'daysInProcessFrom')]")
+    private WebElement daysInProcessFromValue;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'daysInProcessTo')]")
+    private WebElement daysInProcessToValue;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'daysInPhaseFrom')]")
+    private WebElement daysInPhaseFromValue;
+
+    @FindBy(xpath = "//input[contains(@data-bind, 'daysInPhaseTo')]")
+    private WebElement daysInPhaseToValue;
 
     @FindBy(xpath = "//span[@aria-owns='orderFlagDropdown_listbox']//span[@class='k-input']")
     private WebElement flagDropDown;
@@ -134,12 +150,17 @@ public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[@id='repairOrders-search-hasProblem']")
     private WebElement hasProblemCheckBox;
 
-    @FindBy(xpath = "//input[@id='repairOrders-search-hasProblem']")
+    @FindBy(xpath = "//input[@id='orderSearchNameInput']")
     private WebElement searchNameInputField;
 
     public WebElement dropDownFieldOption(String optionName) {
 
         return driver.findElement(By.xpath("//ul[@aria-hidden='false']/li[text()=\"" + optionName + "\"]"));
+    }
+
+    public WebElement flagDropDownFieldOption(String flag) {
+
+        return driver.findElement(By.xpath("//ul[@aria-hidden='false']//span[text()=\"" + flag + "\"]"));
     }
 
     public VNextBOROAdvancedSearchDialogNew() {

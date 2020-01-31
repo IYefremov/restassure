@@ -147,7 +147,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(0)));
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(1)));
 
-		availableServicesScreen = availableServicesScreen.switchToAvalableServicesView();
+		availableServicesScreen.switchToAvalableServicesView();
 		availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(2));
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
@@ -193,7 +193,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (int i = 0; i < firstPartNumber; i++)
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(i)));
-		availableServicesScreen = availableServicesScreen.switchToAvalableServicesView();
+		availableServicesScreen.switchToAvalableServicesView();
 		for (int i = firstPartNumber; i < inspectionData.getServicesList().size(); i++)
 			availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(i));
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -480,7 +480,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 
 		for (ServiceData service : inspectionData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
-		availableServicesScreen = selectedServicesScreen.switchToAvalableServicesView();
+		selectedServicesScreen.switchToAvalableServicesView();
 		availableServicesScreen.selectServices(inspectionData.getServicesList());
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
@@ -534,7 +534,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		selectedServicesScreen.uselectService(inspectionData.getServicesList().get(0).getServiceName());
 
-		availableServicesScreen = selectedServicesScreen.switchToAvalableServicesView();
+		selectedServicesScreen.switchToAvalableServicesView();
 		availableServicesScreen.selectServices(inspectionData.getMoneyServicesList());
 		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 

@@ -118,4 +118,14 @@ public class InspectionSteps {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.switchToMyInspectionsView();
     }
+
+    public static void selectInspection(String inspectionId) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.selectInspection(inspectionId);
+    }
+
+    public static void clickEmailButton() {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.getMultiselectInspectionEmailBtn().click();
+    }
 }

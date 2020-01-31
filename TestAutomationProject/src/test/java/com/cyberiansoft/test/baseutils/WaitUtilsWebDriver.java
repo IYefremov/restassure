@@ -73,6 +73,7 @@ public class WaitUtilsWebDriver {
 
     public static void waitForPageToBeLoaded() {
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         waitForSpinnerToDisappear();
     }
 

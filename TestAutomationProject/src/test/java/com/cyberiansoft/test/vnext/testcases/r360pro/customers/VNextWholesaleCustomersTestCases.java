@@ -41,7 +41,6 @@ public class VNextWholesaleCustomersTestCases extends BaseTestClass {
 		Assert.assertFalse(customersscreen.isAddCustomerButtonDisplayed());
 		customersscreen.searchCustomerByName(wholesalecustomerNonExists);
 		Assert.assertTrue(customersscreen.isNothingFoundCaptionDisplayed());
-		customersscreen.clickCancelSearchButton();
 		customersscreen.clickBackButton();
 	}
 

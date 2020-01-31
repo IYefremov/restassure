@@ -88,10 +88,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		inspectionsMenuScreen.clickApproveInspectionMenuItem();
 		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
+		ApproveSteps.drawSignature();
 		Assert.assertTrue(approveScreen.isClearButtonVisible());
-		approveScreen.saveApprovedInspection();
-		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		ApproveSteps.saveApprove();
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.APPROVED);
 		inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
 		inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();

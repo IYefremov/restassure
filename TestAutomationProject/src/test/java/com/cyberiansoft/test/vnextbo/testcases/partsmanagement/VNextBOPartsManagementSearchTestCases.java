@@ -27,12 +27,12 @@ import java.text.ParseException;
 public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
 
     private VNextBOPartsManagementSearchData baseSearchData;
-    private static final String BAS_DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/partsmanagement/VNextBOPartsManagementBaseData.json";
+    private static final String BASE_DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/partsmanagement/VNextBOPartsManagementBaseData.json";
 
     @BeforeClass
     public void settingUp() throws Exception {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPartsManagementSearchTD();
-        baseSearchData = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(BAS_DATA_FILE), VNextBOPartsManagementSearchData.class);
+        baseSearchData = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(BASE_DATA_FILE), VNextBOPartsManagementSearchData.class);
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
     }

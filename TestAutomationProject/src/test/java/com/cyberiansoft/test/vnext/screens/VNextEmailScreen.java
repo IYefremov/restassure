@@ -2,35 +2,37 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+@Getter
 public class VNextEmailScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@data-name='to']")
-	private WebElement toemailpanel;
+	private WebElement toEmailPanel;
 	
 	@FindBy(xpath="//div[@data-name='cc']")
-	private WebElement ccemailpanel;
+	private WebElement ccEmailPanel;
 	
 	@FindBy(xpath="//div[@data-name='bcc']")
-	private WebElement bccemailpanel;
+	private WebElement bccEmailPanel;
 	
 	@FindBy(xpath="//*[@action='send']")
 	private WebElement sendbtn;
 	
 	@FindBy(xpath="//div[@data-page='email']")
 	private WebElement emailscreen;
-	
-	final String toemailxpath = ".//input[@name='address-field']";
-	final String addmorebtn = ".//*[@action='add']";
-	final String removemailbtn = ".//*[@action='remove']";
+
+
+	final By toEmailXpath = By.xpath(".//input[@name='address-field']");
+	final By addMoreBtn = By.xpath(".//*[@action='add']");
+	final By removeMailBtn = By.xpath(".//*[@action='remove']");
 
     public VNextEmailScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
@@ -45,63 +47,57 @@ public class VNextEmailScreen extends VNextBaseScreen {
 	}
 	
 	public void clickToEmailAddressRemoveButton() {
-		if (toemailpanel.findElement(By.xpath(removemailbtn)).isDisplayed())
-			tap(toemailpanel.findElement(By.xpath(removemailbtn)));
+		if (toEmailPanel.findElement(removeMailBtn).isDisplayed())
+			tap(toEmailPanel.findElement(removeMailBtn));
 		BaseUtils.waitABit(1000);
 	}
 	
 	public void sentToEmailAddress(String emailaddress) {
 		WaitUtils.elementShouldBeVisible(emailscreen, true);
 		clickToEmailAddressRemoveButton();
-		toemailpanel.findElement(By.xpath(toemailxpath)).clear();
-		toemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(emailaddress);
+		toEmailPanel.findElement(toEmailXpath).clear();
+		toEmailPanel.findElement(toEmailXpath).sendKeys(emailaddress);
 	}
 	
 	public void sentToCCEmailAddress(String ccemailaddress) {
-		if (ccemailpanel.findElement(By.xpath(removemailbtn)).isDisplayed())
-			tap(ccemailpanel.findElement(By.xpath(removemailbtn)));
+		if (ccEmailPanel.findElement(removeMailBtn).isDisplayed())
+			tap(ccEmailPanel.findElement(removeMailBtn));
 		BaseUtils.waitABit(1000);
-		ccemailpanel.findElement(By.xpath(toemailxpath)).clear();
-		ccemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(ccemailaddress);
+		ccEmailPanel.findElement(toEmailXpath).clear();
+		ccEmailPanel.findElement(toEmailXpath).sendKeys(ccemailaddress);
 	}
 	
 	public void sentToBCCEmailAddress(String bccemailaddress) {
-		if (bccemailpanel.findElement(By.xpath(removemailbtn)).isDisplayed())
-			tap(bccemailpanel.findElement(By.xpath(removemailbtn)));
+		if (bccEmailPanel.findElement(removeMailBtn).isDisplayed())
+			tap(bccEmailPanel.findElement(removeMailBtn));
 		BaseUtils.waitABit(1000);
-		bccemailpanel.findElement(By.xpath(toemailxpath)).clear();
-		bccemailpanel.findElement(By.xpath(toemailxpath)).sendKeys(bccemailaddress);
-	}
-	
-	public void addToEmailAddress(String emailaddress) {
-		clickAddMoreToEmailsButton();
-		toemailpanel.findElements(By.xpath(toemailxpath)).get(1).clear();
-		toemailpanel.findElements(By.xpath(toemailxpath)).get(1).sendKeys(emailaddress);
+		bccEmailPanel.findElement(toEmailXpath).clear();
+		bccEmailPanel.findElement(toEmailXpath).sendKeys(bccemailaddress);
 	}
 	
 	public String getToEmailFieldValue() {
-		return toemailpanel.findElement(By.xpath(toemailxpath)).getAttribute("value");
+		return toEmailPanel.findElement(toEmailXpath).getAttribute("value");
 	}
-	
-	public void clickAddMoreToEmailsButton() {
-		tap(toemailpanel.findElement(By.xpath(addmorebtn)));
+
+	public String getCCEmailFieldValue() {
+		return ccEmailPanel.findElement(toEmailXpath).getAttribute("value");
+	}
+
+	public String getBCCEmailFieldValue() {
+		return bccEmailPanel.findElement(toEmailXpath).getAttribute("value");
 	}
 	
 	public void clickSendEmailsButton() {
-		tap(sendbtn);
-		BaseUtils.waitABit(3000);
-		try {
-			tap(sendbtn);
-		} catch (WebDriverException e) {
-			//do nothing
-		}
+		WaitUtils.getGeneralFluentWait().until(driver -> {
+			sendbtn.click();
+			return true;
+		});
 	}
 	
 	public String sendEmail() {
 		clickSendEmailsButton();
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		return informationdlg.clickInformationDialogOKButtonAndGetMessage();
-		
 	}
 
 }

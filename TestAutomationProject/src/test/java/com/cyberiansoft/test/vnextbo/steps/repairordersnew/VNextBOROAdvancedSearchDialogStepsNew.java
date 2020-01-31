@@ -2,14 +2,38 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROAdvancedSearchDialogNew;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+
+import java.util.Optional;
 
 public class VNextBOROAdvancedSearchDialogStepsNew {
 
     public static void clickSearchButton() {
 
         Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getSearchButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void saveSearch() {
+
+        Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getSaveButton());
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+    }
+
+    public static void clearAllEnteredValues() {
+
+        Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getClearButton());
+    }
+
+    public static void deleteSavedSearch() {
+
+        Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getDeleteButton());
+        VNextBOModalDialogSteps.clickYesButton();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void setHasThisTextField(String text) {
@@ -128,12 +152,28 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
                 advancedSearchDialog.dropDownFieldOption(repairStatus));
     }
 
-    public static void setDaysInProgressField(String daysInProgress) {
+    public static void setDaysInPhase(String daysInPhaseCondition, String daysFromValue, Optional<String> daysToValue) {
+
+        VNextBOROAdvancedSearchDialogNew advancedSearchDialog = new VNextBOROAdvancedSearchDialogNew();
+        Utils.clickElement(advancedSearchDialog.getDaysInPhaseDropDown());
+        Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getDaysInPhaseDropDownList(),
+                advancedSearchDialog.dropDownFieldOption(daysInPhaseCondition));
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.clearAndType(advancedSearchDialog.getDaysInPhaseFromValue(), daysFromValue);
+        WaitUtilsWebDriver.waitABit(1000);
+        if (daysToValue != null) Utils.sendKeysWithJS(advancedSearchDialog.getDaysInPhaseToValue(), String.valueOf(daysToValue));
+    }
+
+    public static void setDaysInProcess(String daysInProcessCondition, String daysFromValue, Optional<String> daysToValue) {
 
         VNextBOROAdvancedSearchDialogNew advancedSearchDialog = new VNextBOROAdvancedSearchDialogNew();
         Utils.clickElement(advancedSearchDialog.getDaysInProcessDropDown());
         Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getDaysInProcessDropDownList(),
-                advancedSearchDialog.dropDownFieldOption(daysInProgress));
+                advancedSearchDialog.dropDownFieldOption(daysInProcessCondition));
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.clearAndType(advancedSearchDialog.getDaysInProcessFromValue(), daysFromValue);
+        WaitUtilsWebDriver.waitABit(1000);
+        if (daysToValue != null) Utils.sendKeysWithJS(advancedSearchDialog.getDaysInProcessToValue(), String.valueOf(daysToValue));
     }
 
     public static void setFlagField(String flag) {
@@ -141,7 +181,7 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
         VNextBOROAdvancedSearchDialogNew advancedSearchDialog = new VNextBOROAdvancedSearchDialogNew();
         Utils.clickElement(advancedSearchDialog.getFlagDropDown());
         Utils.selectOptionInDropDownWithJs(advancedSearchDialog.getFlagDropDownList(),
-                advancedSearchDialog.dropDownFieldOption(flag));
+                advancedSearchDialog.flagDropDownFieldOption(flag));
     }
 
     public static void setSortByField(String sortBy) {
@@ -172,5 +212,30 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
         setTimeFrameField("Custom");
         setFromField(fromDate);
         setToField(toDate);
+    }
+
+    public static void setAllFields(VNextBOMonitorData data) {
+
+        setHasThisTextField(data.getHasThisText());
+        setCustomerField(data.getCustomer());
+        setEmployeeField(data.getEmployee());
+        setPhaseField(data.getPhase());
+        setPhaseStatusField(data.getPhaseStatus());
+        setTaskField(data.getTask());
+        setTaskStatusField(data.getTaskStatus());
+        setDepartmentField(data.getDepartment());
+        setWoTypeField(data.getWoType());
+        setWoNumberField(data.getWoNum());
+        setRoNumberField(data.getRoNum());
+        setStockNumberField(data.getStockNum());
+        setVinNumberField(data.getVinNum());
+        setTimeFrameField(data.getTimeFrame());
+        setRepairStatusField(data.getRepairStatus());
+        setDaysInProcess(data.getDaysInProcess(), data.getDaysNumStart(), java.util.Optional.ofNullable(data.getDaysNum()));
+        setDaysInPhase(data.getDaysInPhase(), data.getDaysNumStart(), java.util.Optional.ofNullable(data.getDaysNum()));
+        setFlagField(data.getFlag());
+        setSortByField(data.getSortBy());
+        clickHasProblemCheckBox();
+        setSearchNameField(data.getSearchName());
     }
 }

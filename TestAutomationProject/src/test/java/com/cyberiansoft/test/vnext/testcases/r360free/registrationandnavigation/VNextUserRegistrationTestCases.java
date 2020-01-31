@@ -745,7 +745,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
             inspservicesscreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
             VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
             Assert.assertTrue(selectedServicesScreen.isPriceMatrixValuePresentForSelectedServicesByName(matrixservice, availablepricematrixes[i]));
-            inspservicesscreen = selectedServicesScreen.switchToAvalableServicesView();
+            selectedServicesScreen.switchToAvalableServicesView();
         }
         inspectionsscreen = inspservicesscreen.cancelInspection();
         inspectionsscreen.clickBackButton();

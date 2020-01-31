@@ -41,7 +41,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath = "//*[@action='part-info']")
 	private WebElement partServiceDetailButton;
 
-	@FindBy(xpath = "//*[@action='labor-services']")
+	@FindBy(xpath = "//*[@action='add-labor-service']")
     private WebElement laborServicesButton;
 
 	@FindBy(xpath = "//*[@action='add-part-service']")

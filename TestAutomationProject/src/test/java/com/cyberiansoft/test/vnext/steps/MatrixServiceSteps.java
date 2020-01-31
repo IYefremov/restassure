@@ -10,6 +10,7 @@ import com.cyberiansoft.test.vnext.interactions.PriceMatrixScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.MatrixServiceDetailsScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.MatrixServicePdrScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 
 public class MatrixServiceSteps {
     public static void selectMatrixService(MatrixServiceData matrixServiceData) {
@@ -60,6 +61,7 @@ public class MatrixServiceSteps {
     public static void selectPartServiceInsideMatrixService(PartServiceData vehiclePartData) {
         MatrixServiceSteps.openPartServiceDetailsInsideMatrixService(vehiclePartData);
         PartServiceSteps.acceptDetailsScreen();
+        ServiceDetailsScreenSteps.saveServiceDetails();
     }
 
     public static void openPartServiceDetailsInsideMatrixService(PartServiceData partServiceData) {

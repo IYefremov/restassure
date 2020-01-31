@@ -455,6 +455,7 @@ public class ServiceRequestsListVerifications {
         LocalDateTime dateToCheck = LocalDateTime.now(ZoneId.of("US/Pacific"));
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DateUtils.THE_SHORTEST_DATE_FORMAT.getFormat());
         String dateSTR = dateToCheck.format(formatter);
+        WaitUtilsWebDriver.waitABit(1000);
         Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(By.xpath(srState), true));
         Assert.assertTrue(WaitUtilsWebDriver
                 .elementShouldBeVisible(By.xpath("//div[contains(text(), '" + dateSTR + "')]"), true));
@@ -507,7 +508,7 @@ public class ServiceRequestsListVerifications {
         if (driver.findElements(By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")).size() != 0)
             return false;
 
-        return driver.findElements(By.xpath("//div[contains(@style, 'background-color:VIOLET;height:5px;')]")).size() == 0;
+        return driver.findElements(By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")).size() == 0;
     }
 
     public static boolean checkLifeCycleDate() {
@@ -555,7 +556,7 @@ public class ServiceRequestsListVerifications {
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
                     By.xpath("//div[contains(@style, 'background-color:Red;height:5px;')]")));
             wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
-                    By.xpath("//div[contains(@style, 'background-color:VIOLET;height:5px;')]")));
+                    By.xpath("//div[contains(@style, 'background-color:Violet;height:5px;')]")));
 
             if (DriverBuilder.getInstance().getDriver().findElements(By.xpath("//div[contains(@style, 'background-color:Yellow;height:5px;')]"))
                     .size() != 5
@@ -572,6 +573,7 @@ public class ServiceRequestsListVerifications {
             }
 
         } catch (TimeoutException e) {
+            e.printStackTrace();
             return false;
         }
         return true;

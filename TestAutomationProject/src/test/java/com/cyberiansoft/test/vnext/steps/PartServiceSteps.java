@@ -9,12 +9,15 @@ import com.cyberiansoft.test.vnext.interactions.PartInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.LaborServiceScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.PartInfoScreen;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class PartServiceSteps {
     public static void selectPartService(PartServiceData partServiceData) {
         AvailableServicesScreenSteps.openServiceDetails(partServiceData.getServiceName());
         PartServiceSteps.selectpartServiceDetails(partServiceData);
+        ServiceDetailsScreenSteps.saveServiceDetails();
+
     }
 
     public static void changeCategory(PartServiceData partServiceData) {
@@ -34,7 +37,8 @@ public class PartServiceSteps {
     }
 
     public static void selectCategory(String category) {
-        ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.CATEGORY.getValue());
+        //ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.CATEGORY.getValue());
+        ListSelectPageInteractions.waitForList("category-list");
         ListSelectPageInteractions.selectItem(category);
     }
 

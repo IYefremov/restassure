@@ -2,7 +2,7 @@
   "serviceLevelTechSplitValidation": [
     {
       "rowID": "serviceLevelTechSplitValidation.01",
-      "description": "88079 88080",
+      "description": "",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91968",
@@ -27,11 +27,17 @@
   "amountOfServiceRecalculatedBetweenTechniciansWhenUserChangeServicePrice": [
     {
       "rowID": "amountOfServiceRecalculatedBetweenTechniciansWhenUserChangeServicePrice.01",
-      "description": "88086",
+      "description": "",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91971",
           "testCaseTitle": "Amount of the service is recalculated automatically between technicians when user change price of the service"
+        }
+      ],
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
         }
       ],
       "technicianSplitData": {
@@ -43,9 +49,36 @@
       }
     }
   ],
-  "amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased": [
+  "amountOfServiceIsRecalculatedAutomaticallyBetweenTechniciansWhenUserChangeQuantityOfTheServiceCustom": [
     {
-      "rowID": "amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased.01",
+      "rowID": "amountOfServiceIsRecalculatedAutomaticallyBetweenTechniciansWhenUserChangeQuantityOfTheServiceCustom.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91974",
+          "testCaseTitle": "Amount of the service is recalculated automatically between technicians when user change Quantity of the service (Custom)"
+        }
+      ],
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
+        }
+      ],
+      "technicianSplitData": {
+        "Test Test": "30",
+        "Employee Employee": "70"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)",
+        "servicePrice": "100",
+        "serviceQuantity": "2"
+      }
+    }
+  ],
+  "amountOfServiceIsRecalculatedAutomaticallyBetweenTechniciansWhenUserChangeQuantityOfTheServiceEvenly": [
+    {
+      "rowID": "amountOfServiceIsRecalculatedAutomaticallyBetweenTechniciansWhenUserChangeQuantityOfTheServiceEvenly.01",
       "description": "88522",
       "targetProcessTestCaseData": [
         {
@@ -53,22 +86,15 @@
           "testCaseTitle": "Amount of the service is recalculated automatically between technicians when user change Quantity of the service (Evenly)"
         }
       ],
+      "technicianList": [
+        {
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
+        }
+      ],
       "technicianSplitData": {
-        "Test Test": "200",
-        "Employee Employee": "200"
-      },
-      "service": {
-        "serviceName": "Expenses_money (AM)"
-      }
-    }
-  ],
-  "amountOfServiceIsRecalculatedWhenQuantityOfServiceDecreased": [
-    {
-      "rowID": "amountOfServiceIsRecalculatedWhenQuantityOfServiceIncreased.01",
-      "description": "88522",
-      "technicianSplitData": {
-        "Test Test": "100",
-        "Employee Employee": "100"
+        "Test Test": "500",
+        "Employee Employee": "500"
       },
       "service": {
         "serviceName": "Expenses_money (AM)"
@@ -87,19 +113,18 @@
       ],
       "technicianList": [
         {
-          "employeeFirstName": "1111",
-          "employeeLastName": "2222"
-        },
-        {
-          "employeeFirstName": "Sasha",
-          "employeeLastName": "AP"
+          "employeeFirstName": "Test",
+          "employeeLastName": "Test"
         }
       ],
       "technicianSplitData": {
-        "Employee Employee": "200"
+        "Test Test": "30",
+        "Employee Employee": "70"
       },
       "service": {
-        "serviceName": "Expenses_money (AM)"
+        "serviceName": "Expenses_money (AM)",
+        "servicePrice": "100",
+        "serviceQuantity": "2"
       }
     }
   ]

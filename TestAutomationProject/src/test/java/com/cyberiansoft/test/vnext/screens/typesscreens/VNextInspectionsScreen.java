@@ -41,6 +41,9 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[@action='multiselect-actions-archive']")
     private WebElement multiselectinsparchivebtn;
 
+    @FindBy(xpath = "//*[@action='multiselect-actions-email-inspection']")
+    private WebElement multiselectInspectionEmailBtn;
+
     @FindBy(xpath = "//*[contains(@class,'searchlist-nothing-found')]")
     private WebElement nothingFounfPanel;
 
@@ -254,15 +257,15 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public void selectInspection(String inspectionNumber) {
-        WebElement workordercell = getInspectionCell(inspectionNumber);
-        if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
-            tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
+        WebElement inspcell = getInspectionCell(inspectionNumber);
+        if (inspcell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
+            tap(inspcell.findElement(By.xpath(".//input[@type='checkbox']")));
     }
 
     public void unselectInspection(String inspectionNumber) {
-        WebElement workordercell = getInspectionCell(inspectionNumber);
-        if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
-            tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
+        WebElement inspcell = getInspectionCell(inspectionNumber);
+        if (inspcell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
+            tap(inspcell.findElement(By.xpath(".//input[@type='checkbox']")));
     }
 
     public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButton() {
