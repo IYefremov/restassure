@@ -77,9 +77,22 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tr[@data-id]//strong[contains(@data-bind, 'arbitrationDateDisplay')]")
     private List<WebElement> arbitrationDatesList;
 
+    @FindBy(xpath = "//div[contains(@data-bind,'click: orderSeeProblems')]")
+    private WebElement viewProblemsActionButton;
+
     public WebElement savedSearchOptionByName(String searchName) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@class='savedSearch' and text()='" + searchName + "']"));
+    }
+
+    public WebElement actionsButtonByOrderNumber(String orderNumber) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//strong[text()='" + orderNumber + "']/ancestor::tr//i[@class='icon-list menu-trigger']"));
+    }
+
+    public WebElement problemIndicatorByOrderNumber(String orderNumber) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//strong[text()='" + orderNumber + "']/ancestor::td//i[@class='icon-problem-indicator']"));
     }
 
     public VNextBOROWebPageNew() {

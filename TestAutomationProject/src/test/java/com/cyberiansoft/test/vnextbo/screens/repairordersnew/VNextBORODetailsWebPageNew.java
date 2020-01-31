@@ -4,6 +4,7 @@ import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -18,6 +19,32 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']")
     private List<WebElement> serviceExpanderList;
+
+    @FindBy(xpath = "//div[@class='add-notes-item report-problem' and not(contains(@style,'display: none'))]")
+    private WebElement reportProblemActionButton;
+
+    @FindBy(xpath = "//div[@class='add-notes-item resolve-problem' and not(contains(@style,'display: none'))]")
+    private WebElement resolveProblemActionButton;
+
+    public WebElement actionsMenuButtonByPhase(String phase) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//i[@class='icon-list menu-trigger']"));
+    }
+
+    public WebElement problemIndicatorByPhase(String phase) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//i[@class='icon-problem-indicator']"));
+    }
+
+    public WebElement phaseStatusDropDownByPhase(String phase) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//span[contains(@class,'group-status-dropdown')]//span[@class='k-input']"));
+    }
+
+    public WebElement phaseStatusDropDownOption(String optionName) {
+
+        return driver.findElement(By.xpath("//ul[@aria-hidden='false']//span[text()=\"" + optionName + "\"]"));
+    }
 
     public VNextBORODetailsWebPageNew() {
 

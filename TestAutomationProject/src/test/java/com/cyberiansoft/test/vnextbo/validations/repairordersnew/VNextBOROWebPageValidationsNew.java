@@ -144,6 +144,12 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         }
     }
 
+    public static void verifyProblemIndicatorIsDisplayedForOrder(String orderNumber) {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().problemIndicatorByOrderNumber(orderNumber)),
+                "Problems indicator hasn't been displayed for the order " + orderNumber);
+    }
+
     public static void verifyNotFoundMessageIsCorrect() {
 
         Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",

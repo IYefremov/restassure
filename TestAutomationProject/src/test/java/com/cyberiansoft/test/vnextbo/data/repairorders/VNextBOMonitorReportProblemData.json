@@ -1,54 +1,65 @@
 {
-  "verifyUserCanReportAndResolveProblemOnPhaseLevel": [
+  "verifyUserCanReportProblemOnPhaseLevel": [
     {
-      "rowID": "verifyUserCanReportAndResolveProblemOnPhaseLevel.01",
-      "description": "Test Case 88119: Verify user can report problem on the phase level (select reason from the list). Test Case 88121:Verify user can resolve the problem (Phase level)",
+      "rowID": "verifyUserCanReportProblemOnPhaseLevel.01",
+      "description": "Test Case 91236: Verify user can report problem on the phase level (select reason from the list)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91236"
-        },
-        {
-          "testCaseID": "91237"
+          "testCaseID": "91236",
+          "testCaseTitle": "Verify user can report problem on the phase level (select reason from the list)"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
       "problemReason": "No part"
     }
   ],
 
-  "verifyUserCanInsertReasonDescriptionWhileReportingProblemOnPhaseLevel": [
+  "verifyUserCanResolveProblem": [
     {
-      "rowID": "verifyUserCanInsertReasonDescriptionWhileReportingProblemOnPhaseLevel.01",
-      "description": "Test Case 88122: Verify user can report problem on the phase level (enter the reason description)",
+      "rowID": "verifyUserCanResolveProblem.01",
+      "description": "Test Case 91237: Verify user can resolve the problem (Phase level)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91238"
+          "testCaseID": "91237",
+          "testCaseTitle": "Verify user can resolve the problem (Phase level)"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
-      "phase": "Detail Station"
+      "phase": "Detail Station",
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyUserCanReportProblemWithReasonDescriptionOnPhaseLevel": [
+    {
+      "rowID": "verifyUserCanReportProblemWithReasonDescriptionOnPhaseLevel.01",
+      "description": "Test Case 91238: Verify user can report problem on the phase level (enter the reason description)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91238",
+          "testCaseTitle": "Verify user can report problem on the phase level (enter the reason description)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station",
+      "problemReason": "No part",
+      "problemDesc": "Autotest 91238"
     }
   ],
 
   "verifyPhaseStatusIsSetToTheInitialAfterResolvingTheProblemOnPhaseLevel": [
     {
       "rowID": "verifyPhaseStatusIsSetToTheInitialAfterResolvingTheProblemOnPhaseLevel.01",
-      "description": "Test Case 88123: Verify the phase status is set to the initial after resolving the problem (phase level)",
+      "description": "Test Case 91239: Verify the phase status is set to the initial after resolving the problem (phase level)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91239"
+          "testCaseID": "91239",
+          "testCaseTitle": "Verify the phase status is set to the initial after resolving the problem (phase level)"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
-      "serviceStatuses": [
-        "Rework",
-        "Problem"
-        ],
       "problemReason": "No part"
     }
   ],
@@ -56,13 +67,13 @@
   "verifyTheUserCannotReportProblemForCompletedPhase": [
     {
       "rowID": "verifyTheUserCannotReportProblemForCompletedPhase.01",
-      "description": "Test Case 88126: Verify user can't report the problem for completed phase",
+      "description": "Test Case 91240: Verify user can't report the problem for completed phase",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91240"
+          "testCaseID": "91240",
+          "testCaseTitle": "Verify user can't report the problem for completed phase"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
       "problemReason": "No part"
@@ -72,13 +83,13 @@
   "verifyTheProblemIconIsShownForTheOrderOnTheROPage": [
     {
       "rowID": "verifyTheProblemIconIsShownForTheOrderOnTheROPage.01",
-      "description": "Test Case 88129: Verify the problem icon is shown for the order on the \"Repair Order\" page",
+      "description": "Test Case 91241: Verify the problem icon is shown for the order on the \"Repair Order\" page",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91241"
+          "testCaseID": "91241",
+          "testCaseTitle": "Verify the problem icon is shown for the order on the \"Repair Order\" page"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
       "problemReason": "No part"
@@ -88,35 +99,63 @@
   "verifyTheUserCanViewTheOrderProblemFromTheROAndDetailsPage": [
     {
       "rowID": "verifyTheUserCanViewTheOrderProblemFromTheROAndDetailsPage.01",
-      "description": "Test Case 88133: Verify user can view the order problem from the \"Repair Order\" and details page",
+      "description": "Test Case 91242: Verify user can view the order problem from the \"Repair Order\" and details page",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91242"
+          "testCaseID": "91242",
+          "testCaseTitle": "Verify user can view the order problem from the \"Repair Order\" and details page"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
       "problemReason": "No part"
     }
   ],
 
-  "verifyTheUserCanReportAndResolveProblemOnTheServiceLevel": [
+  "verifyTheUserCanReportProblemOnServiceLevelSelectReasonFromList": [
     {
-      "rowID": "verifyTheUserCanReportAndResolveProblemOnTheServiceLevel.01",
-      "description": "Test Case 88136: Verify user can report problem on the service level (select reason from the list). Test Case 88137: Verify user can resolve the problem (Service level). Test Case 88141: Verify user can report problem on the service level (enter the reason description)",
+      "rowID": "verifyTheUserCanReportProblemOnServiceLevelSelectReasonFromList.01",
+      "description": "Test Case 91243: Verify user can report problem on the service level (select reason from the list)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91243"
-        },
-        {
-          "testCaseID": "91244"
-        },
-        {
-          "testCaseID": "91245"
+          "testCaseID": "91243",
+          "testCaseTitle": "Verify user can report problem on the service level (select reason from the list)"
         }
       ],
-      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheUserCanResolveTheProblemServiceLevel": [
+    {
+      "rowID": "verifyTheUserCanResolveTheProblemServiceLevel.01",
+      "description": "Test Case 91244: Verify user can resolve the problem (Service level)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91244",
+          "testCaseTitle": "Verify user can resolve the problem (Service level)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyTheUserCanReportProblemOnTheServiceLevelEnterTheLevelDescription": [
+    {
+      "rowID": "verifyTheUserCanReportProblemOnTheServiceLevelEnterTheLevelDescription.01",
+      "description": "Test Case 91245: Verify user can report problem on the service level (enter the reason description)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91245",
+          "testCaseTitle": "Verify user can report problem on the service level (enter the reason description)"
+        }
+      ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
@@ -127,13 +166,13 @@
   "verifyTheUserCanViewTheServicesFromROPageAndSystemExpandsThePhase": [
     {
       "rowID": "verifyTheUserCanViewTheServicesFromROPageAndSystemExpandsThePhase.01",
-      "description": "Test Case 88151: Verify user can view the problem services from the \"Repair Order\" page and system expands the phase",
+      "description": "Test Case 91246: Verify user can view the problem services from the \"Repair Order\" page and system expands the phase",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91246"
+          "testCaseID": "91246",
+          "testCaseTitle": "Verify user can view the problem services from the \"Repair Order\" page and system expands the phase"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
@@ -147,13 +186,13 @@
   "verifyTheUserCannotReportProblemForTheCompletedService": [
     {
       "rowID": "verifyTheUserCannotReportProblemForTheCompletedService.01",
-      "description": "Test Case 88154: Verify user can't report problem for the \"Completed\" service",
+      "description": "Test Case 91247: Verify user can't report problem for the \"Completed\" service",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91247"
+          "testCaseID": "91247",
+          "testCaseTitle": "Verify user can't report problem for the \"Completed\" service"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
@@ -169,13 +208,30 @@
   "verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnThePhaseLevel": [
     {
       "rowID": "verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnThePhaseLevel.01",
-      "description": "Test Case 88155: Verify user can change the service's attributes after reporting the problem (phase level)",
+      "description": "Test Case 91248: Verify user can change the service's attributes after reporting the problem (phase level)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91248"
+          "testCaseID": "91248",
+          "testCaseTitle": "Verify user can change the service's attributes after reporting the problem (phase level)"
         }
       ],
-      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "problemReason": "No part"
+    }
+  ],
+
+  "verifyUserCanReportTheProblemForThePartService": [
+    {
+      "rowID": "verifyUserCanReportTheProblemForThePartService.01",
+      "description": "Test Case 91251: Verify user can report the problem for the part service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91251",
+          "testCaseTitle": "Verify user can report the problem for the part service"
+        }
+      ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
@@ -186,15 +242,13 @@
   "verifyUserCanOpenCompleteCurrentPhasePopupWindowWithAllProblemServices": [
     {
       "rowID": "verifyUserCanOpenCompleteCurrentPhasePopupWindowWithAllProblemServices.01",
-      "description": "Test Case 88942: Verify user can report the problem for the part service. Test Case 88945: Verify the user can open the \"Complete Current Phase\" pop-up window and all the problem services are presented",
+      "description": "Test Case 91252: Verify the user can open the \"Complete Current Phase\" pop-up window and all the problem services are presented",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91251"
-        },        {
-          "testCaseID": "91252"
+          "testCaseID": "91252",
+          "testCaseTitle": "Verify the user can open the \"Complete Current Phase\" pop-up window and all the problem services are presented"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
@@ -205,13 +259,13 @@
   "verifyUserCanCompleteCurrentPhaseWithProblemServices": [
     {
       "rowID": "verifyUserCanCompleteCurrentPhaseWithProblemServices.01",
-      "description": "Test Case 88948: Verify user can complete the current phase with the problem services",
+      "description": "Test Case 91253: Verify user can complete the current phase with the problem services",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91253"
+          "testCaseID": "91253",
+          "testCaseTitle": "Verify user can complete the current phase with the problem services"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
@@ -222,13 +276,13 @@
   "verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving": [
     {
       "rowID": "verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving.01",
-      "description": "Test Case 88950: Verify user can close the \"Complete current phase\" pop-up window without problem resolving",
+      "description": "Test Case 91255: Verify user can close the \"Complete current phase\" pop-up window without problem resolving",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91255"
+          "testCaseID": "91255",
+          "testCaseTitle": "Verify user can close the \"Complete current phase\" pop-up window without problem resolving"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
@@ -239,13 +293,13 @@
   "verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase": [
     {
       "rowID": "verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase.01",
-      "description": "Test Case 88951: Verify user can resolve problem using \"Complete current phase\" pop-up window without completing current phase",
+      "description": "Test Case 91256: Verify user can resolve problem using \"Complete current phase\" pop-up window without completing current phase",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91256"
+          "testCaseID": "91256",
+          "testCaseTitle": "Verify user can resolve problem using \"Complete current phase\" pop-up window without completing current phase"
         }
       ],
-      "location": "Best Location Automation",
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
