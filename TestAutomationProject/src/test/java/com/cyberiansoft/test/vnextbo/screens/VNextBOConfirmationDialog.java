@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.screens;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -17,12 +18,6 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	
 	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div[contains(@data-bind, 'html: html,')]")
 	private WebElement confirmDialogMessage;
-	
-	@FindBy(xpath = "//button[@data-automation-id='modalCancelButton']")
-	private WebElement noButton;
-	
-	@FindBy(xpath = "//button[@data-automation-id='modalConfirmButton']")
-	private WebElement yesButton;
 
 	@FindBy(xpath = "//button[text()='No']")
 	private WebElement invoiceNoButton;
@@ -35,6 +30,14 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 
 	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div")
 	private List<WebElement> dialogMessagesList;
+
+	public WebElement getNoButton() {
+	    return confirmDialog.findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']"));
+    }
+
+	public WebElement getYesButton() {
+	    return confirmDialog.findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']"));
+    }
 	
 	public VNextBOConfirmationDialog() {
 		super(DriverBuilder.getInstance().getDriver());

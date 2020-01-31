@@ -138,6 +138,7 @@ public class Utils {
     public static void refreshPage() {
         DriverBuilder.getInstance().getDriver().navigate().refresh();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     public static void reduceZoom() {
@@ -545,5 +546,9 @@ public class Utils {
 
     public static boolean elementContainsText(WebElement element, String text) {
         return WaitUtilsWebDriver.waitForVisibility(element, 3).getText().contains(text);
+    }
+
+    public static int getRandomNumber(int startInclusive, int endExclusive) {
+        return RandomUtils.nextInt(startInclusive, endExclusive);
     }
 }

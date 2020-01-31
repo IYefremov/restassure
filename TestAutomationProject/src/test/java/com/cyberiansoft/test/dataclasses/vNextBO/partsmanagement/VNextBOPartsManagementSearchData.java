@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.dataclasses.vNextBO.partsManagement;
+package com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOBaseData;
 import com.fasterxml.jackson.annotation.JsonProperty;

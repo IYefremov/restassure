@@ -4,17 +4,14 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-
-import java.util.List;
-import java.util.Objects;
 
 public class VNextBOConfirmationDialogInteractions {
 
-    public static void clickNoButton() {
-        clickModalDialogButton(new VNextBOConfirmationDialog().getConfirmDialog()
-                .findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']")));
+    private static VNextBOConfirmationDialog confirmationDialog;
+
+    static {
+        confirmationDialog = new VNextBOConfirmationDialog();
     }
 
     public static void clickInvoiceNoButton() {
@@ -22,9 +19,8 @@ public class VNextBOConfirmationDialogInteractions {
     }
 
     public static void clickYesButton() {
-        clickModalDialogButton(new VNextBOConfirmationDialog().getConfirmDialog()
-                .findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']")));
-        WaitUtilsWebDriver.waitForLoading();
+        clickModalDialogButton(confirmationDialog.getYesButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void clickInvoiceYesButton() {
@@ -32,43 +28,24 @@ public class VNextBOConfirmationDialogInteractions {
     }
 
     public static void clickConfirmButton() {
-        clickModalDialogButton(new VNextBOConfirmationDialog().getConfirmButton());
-        WaitUtilsWebDriver.waitForLoading();
+        clickModalDialogButton(confirmationDialog.getConfirmButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void clickInvoiceCloseButton() {
-        clickModalDialogButton(new VNextBOConfirmationDialog().getCloseButton());
+        clickModalDialogButton(confirmationDialog.getCloseButton());
         WaitUtilsWebDriver.waitABit(2000);
     }
 
     private static void clickModalDialogButton(WebElement button) {
         Utils.clickElement(button);
-        try {
-            WaitUtilsWebDriver.waitForInvisibility(By.id("dialogModal"));
-        } catch (TimeoutException e) {
-            Utils.clickWithJS(button);
-        }
+        WaitUtilsWebDriver.elementShouldBeVisible(By.id("dialogModal"), false, 5);
     }
 
-    private static String getConfirmationDialogMessage() {
-        final List<WebElement> dialogMessagesList = new VNextBOConfirmationDialog().getDialogMessagesList();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(dialogMessagesList, 7);
-        for (WebElement message : dialogMessagesList)
-            if (!message.getText().equals("")) {
-                return message.getText();
-            }
-        return null;
-    }
-
-    public static String clickYesAndGetConfirmationDialogMessage() {
-        final String msg = Objects.requireNonNull(getConfirmationDialogMessage());
-        clickYesButton();
-        return msg;
-    }
-
-    public static String clickNoAndGetConfirmationDialogMessage() {
-        final String msg = Objects.requireNonNull(getConfirmationDialogMessage());
-        clickNoButton();
-        return msg;
+    public static String getConfirmationDialogMessage() {
+        final VNextBOConfirmationDialog dialog = confirmationDialog;
+        WaitUtilsWebDriver.elementShouldBeVisible(dialog.getConfirmDialog(), true, 3);
+        return Utils.getText(dialog.getDialogMessagesList())
+                .stream().filter(message -> !message.isEmpty()).findFirst().orElse("");
     }
 }

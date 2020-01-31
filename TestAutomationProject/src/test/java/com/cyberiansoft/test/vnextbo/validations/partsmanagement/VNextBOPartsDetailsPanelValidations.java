@@ -2,9 +2,11 @@ package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
@@ -19,39 +21,45 @@ import java.util.stream.Collectors;
 
 public class VNextBOPartsDetailsPanelValidations {
 
+    private static VNextBOPartsDetailsPanel partsDetailsPanel;
+
+    static {
+        partsDetailsPanel = new VNextBOPartsDetailsPanel();
+    }
+
     public static void verifyDetailsPanelIsDisplayed() {
-        WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNextBOPartsDetailsPanel().getPartsDetailsTable()));
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getPartsDetailsTable()),
+        WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(partsDetailsPanel.getPartsDetailsTable()));
+        Assert.assertTrue(Utils.isElementDisplayed(partsDetailsPanel.getPartsDetailsTable()),
                 "Parts details panel hasn't been displayed");
     }
 
     public static void verifyPartStatusIsCorrect(int partNumber, String expectedStatus) {
 
-        Assert.assertEquals(Utils.getText(new VNextBOPartsDetailsPanel().getPartStatusField().get(partNumber)), expectedStatus,
+        Assert.assertEquals(Utils.getText(partsDetailsPanel.getPartStatusFields().get(partNumber)), expectedStatus,
                 "Status hasn't been correct");
     }
 
     public static void verifyPartPriceIsCorrect(int partNumber, String expectedPrice) {
 
-        Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartPriceField().get(partNumber)), expectedPrice,
+        Assert.assertEquals(Utils.getInputFieldValue(partsDetailsPanel.getPartPriceField().get(partNumber)), expectedPrice,
                 "Price hasn't been correct");
     }
 
     public static void verifyPartQuantityIsCorrect(int partNumber, String expectedQuantity) {
 
-        Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartQuantityField().get(partNumber)), expectedQuantity,
+        Assert.assertEquals(Utils.getInputFieldValue(partsDetailsPanel.getPartQuantityField().get(partNumber)), expectedQuantity,
                 "Price hasn't been correct");
     }
 
     public static void verifyPartNumberIsCorrect(int partNumberInList, String expectedPartNumber) {
 
-        Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartNumberField().get(partNumberInList)), expectedPartNumber,
+        Assert.assertEquals(Utils.getInputFieldValue(partsDetailsPanel.getPartNumberField().get(partNumberInList)), expectedPartNumber,
                 "Part# hasn't been correct");
     }
 
     public static void verifyActionsMenuIsDisplayed(int partNumber) {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getActionsDropDownMenu().get(partNumber)),
+        Assert.assertTrue(Utils.isElementDisplayed(partsDetailsPanel.getActionsDropDownMenu().get(partNumber)),
                 "Actions menu hasn't been displayed");
     }
 
@@ -63,15 +71,15 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyLaborBlockIsDisplayed(int partNumber, boolean shouldBeMaximized) {
 
-        if (shouldBeMaximized) Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getPartLaborsBlock().get(partNumber)),
+        if (shouldBeMaximized) Assert.assertTrue(Utils.isElementDisplayed(partsDetailsPanel.getPartLaborsBlock().get(partNumber)),
                 "Labor block hasn't been maximized");
-        else Assert.assertTrue(Utils.isElementNotDisplayed(new VNextBOPartsDetailsPanel().getPartLaborsBlock().get(partNumber)),
+        else Assert.assertTrue(Utils.isElementNotDisplayed(partsDetailsPanel.getPartLaborsBlock().get(partNumber)),
                 "Labor block hasn't been minimized");
     }
 
     public static void verifyAddLaborButtonIsDisplayed(int partNumber) {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getAddLaborButton().get(partNumber)),
+        Assert.assertTrue(Utils.isElementDisplayed(partsDetailsPanel.getAddLaborButton().get(partNumber)),
                 "Parts details panel hasn't been displayed");
     }
 
@@ -83,7 +91,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyPartContainsLaborByPartNumberAndLaborServiceName(int partNumber, String laborService) {
 
-        Assert.assertTrue(new VNextBOPartsDetailsPanel().laborsNamesListForPartByNumberInList(0).
+        Assert.assertTrue(partsDetailsPanel.laborsNamesListForPartByNumberInList(0).
                 stream().map(WebElement::getText).collect(Collectors.toList()).contains(laborService), "Part hasn't contained labor service");
     }
 
@@ -91,7 +99,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date currentDate = new Date();
-        String actualEtaDate = Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartEtaField().get(partNumber));
+        String actualEtaDate = Utils.getInputFieldValue(partsDetailsPanel.getPartEtaField().get(partNumber));
         if (orderPhase.equals("Past Due Parts"))
             Assert.assertTrue(dateFormat.parse(actualEtaDate).before(currentDate), "Part order's ETA date hasn't been correct");
         if (orderPhase.equals("In Progress"))
@@ -102,7 +110,7 @@ public class VNextBOPartsDetailsPanelValidations {
     public static void verifyEtaDateIsCorrectAfterSearch(String expectedEtaDate, String etaSearchField) throws ParseException {
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        String actualEtaDate = Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartEtaField().get(0));
+        String actualEtaDate = Utils.getInputFieldValue(partsDetailsPanel.getPartEtaField().get(0));
         if (etaSearchField.equals("ETA From"))
         Assert.assertTrue(dateFormat.parse(actualEtaDate).after(dateFormat.parse(expectedEtaDate)) ||
                 dateFormat.parse(actualEtaDate).equals(dateFormat.parse(expectedEtaDate)), "ETA hasn't been correct");
@@ -112,7 +120,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyAtLeastOnePartHasCorePriceMoreThanZero() {
 
-        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        VNextBOPartsDetailsPanel detailsPanel = partsDetailsPanel;
         List<Boolean> corePriceMoreThanZeroFlagsList = new ArrayList<>();
         for (WebElement orderCorePrice : detailsPanel.getPartCorePriceField()) {
             corePriceMoreThanZeroFlagsList.add(Utils.getInputFieldValue(orderCorePrice).equals("0.00"));
@@ -122,7 +130,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyAtLeastOnePartHasLaborCreditMoreThanZero() {
 
-        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        VNextBOPartsDetailsPanel detailsPanel = partsDetailsPanel;
         List<Boolean> laborCreditMoreThanZeroFlagsList = new ArrayList<>();
         for (WebElement laborCredit : detailsPanel.getPartLaborCreditField()) {
             laborCreditMoreThanZeroFlagsList.add(Utils.getInputFieldValue(laborCredit).equals("0.00"));
@@ -132,7 +140,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyAtLeastOnePartHasCorrectCoreStatus(String expectedCoreStatus) {
 
-        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        VNextBOPartsDetailsPanel detailsPanel = partsDetailsPanel;
         List<Boolean> laborCoreStatusIsCorrectFlagsList = new ArrayList<>();
         for (WebElement coreStatus : detailsPanel.getPartCoreStatusField()) {
             laborCoreStatusIsCorrectFlagsList.add(Utils.getText(coreStatus).contains(expectedCoreStatus));
@@ -143,7 +151,7 @@ public class VNextBOPartsDetailsPanelValidations {
     public static void verifyPartsCheckBoxesAreActivatedByPartStatus(String status, boolean shouldBeActivated) {
 
         List<WebElement> checkBoxes = new ArrayList<>();
-        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        VNextBOPartsDetailsPanel detailsPanel = partsDetailsPanel;
         if (status.equals("All")) checkBoxes = detailsPanel.getPartCheckbox();
         else checkBoxes = detailsPanel.partCheckBoxesByPartStatus(status);
         if (shouldBeActivated) {
@@ -160,21 +168,47 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyDeleteSelectedPartsButtonIsDisplayed(boolean shouldBeDisplayed) {
 
-        if (shouldBeDisplayed) Assert.assertTrue(Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getDeleteSelectedPartsButton()),
+        if (shouldBeDisplayed) Assert.assertTrue(Utils.isElementDisplayed(partsDetailsPanel.getDeleteSelectedPartsButton()),
                 "Delete button hasn't been displayed");
-        else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getDeleteSelectedPartsButton()),
+        else Assert.assertFalse(Utils.isElementDisplayed(partsDetailsPanel.getDeleteSelectedPartsButton()),
                 "Delete button has been displayed");
     }
 
     public static void verifyStatusesListIsCorrect(List<String> expectedStatusesList) {
 
         List<String> actualPartsStatuses = new ArrayList<>();
-        for (WebElement partStatusWebElement : new VNextBOPartsDetailsPanel().getPartsStatusesList()) {
+        for (WebElement partStatusWebElement : partsDetailsPanel.getHeaderPartsStatusesList()) {
             actualPartsStatuses.add(Utils.getText(partStatusWebElement));
         }
         Collections.sort(actualPartsStatuses);
         Collections.sort(expectedStatusesList);
 
         Assert.assertEquals(actualPartsStatuses, expectedStatusesList, "Statuses list hasn't been correct");
+    }
+
+    public static void verifyPartStatusesDoNotContainRestrictedStatus(String restrictedStatus) {
+        Assert.assertTrue(!VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().contains(restrictedStatus),
+                "The status " + restrictedStatus + " is displayed for the opened part");
+    }
+
+    public static boolean isPartStatusPresent(String status) {
+        try {
+            return WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
+                    VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().contains(status));
+        } catch (Exception e) {
+            WaitUtilsWebDriver.waitABit(1000);
+            return VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().contains(status);
+        }
+    }
+
+    public static void verifyPoNumbersAreFilledForStatus(String status) {
+        WaitUtilsWebDriver.waitABit(500);
+        final List<String> poValues = Utils.getTextByValue(partsDetailsPanel.getPoInputFieldsByStatus(status));
+        System.out.println(poValues);
+        Assert.assertFalse(poValues.contains(""), "The PO number is not entered");
+    }
+
+    public static boolean isShoppingCartButtonDisplayed(boolean displayed) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(partsDetailsPanel.getShoppingCartButton(), displayed, 10);
     }
 }

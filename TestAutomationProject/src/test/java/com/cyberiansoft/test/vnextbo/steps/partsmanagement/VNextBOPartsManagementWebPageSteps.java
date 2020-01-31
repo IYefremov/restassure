@@ -46,8 +46,8 @@ public class VNextBOPartsManagementWebPageSteps extends VNextBOBaseWebPageSteps 
     }
 
     public static void waitUntilPartsManagementPageIsLoaded() {
-        WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNextBOPartsManagementWebPage().getPartsOrdersList()));
-        WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(new VNextBOPartsDetailsPanel().getPartsDetailsTable()));
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsManagementWebPage().getPartsOrdersList(), true, 5);
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getPartsDetailsTable(), true, 5);
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
