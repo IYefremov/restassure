@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -87,8 +88,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         Utils.goToPreviousPage();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
-/*
-    //TODO fails
+
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyTheUserCannotReportProblemForCompletedPhase(String rowID, String description, JSONObject testData) {
 
@@ -96,12 +96,12 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Completed");
-        VNextBORODetailsValidationsNew.verifyActionsButtonIsNotDisplayed(data.getPhase());//????????
+        VNextBORODetailsValidationsNew.verifyActionsButtonIsNotDisplayed(data.getPhase());
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Active");
         Utils.goToPreviousPage();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
-*/
+
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyTheProblemIconIsShownForTheOrderOnTheROPage(String rowID, String description, JSONObject testData) {
 
@@ -111,7 +111,8 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Active");
         VNextBORODetailsStepsNew.reportProblemOnPhaseLevelWithoutDescription(data.getPhase(), data.getProblemReason());
         Utils.goToPreviousPage();
-        VNextBOROWebPageValidationsNew.verifyProblemIndicatorIsDisplayedForEachRecord();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOROWebPageValidationsNew.verifyProblemIndicatorIsDisplayedForOrder(data.getOrderNumber());
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
         VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
         Utils.goToPreviousPage();

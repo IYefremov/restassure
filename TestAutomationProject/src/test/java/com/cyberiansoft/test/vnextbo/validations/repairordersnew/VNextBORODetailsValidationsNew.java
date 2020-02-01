@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
+import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
 
 public class VNextBORODetailsValidationsNew {
@@ -31,7 +32,13 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyActionsButtonIsNotDisplayed(String phase) {
 
-        Assert.assertFalse(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().actionsMenuButtonByPhase(phase)),
-                "Actions button has been displayed");
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        boolean buttonIsDisplayed = false;
+        try {
+            buttonIsDisplayed = Utils.isElementDisplayed(detailsWebPageNew.actionsMenuButtonByPhase(phase));
+            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
+        } catch (NoSuchElementException ex) {
+            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
+        }
     }
 }

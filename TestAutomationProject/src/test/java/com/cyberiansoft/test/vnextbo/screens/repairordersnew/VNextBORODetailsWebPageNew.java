@@ -20,15 +20,15 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']")
     private List<WebElement> serviceExpanderList;
 
-    @FindBy(xpath = "//div[@class='add-notes-item report-problem' and not(contains(@style,'display: none'))]")
+    @FindBy(xpath = "//div[contains(@data-bind,'phaseReportProblemMenu') and not(contains(@style,'display: none'))]")
     private WebElement reportProblemActionButton;
 
-    @FindBy(xpath = "//div[@class='add-notes-item resolve-problem' and not(contains(@style,'display: none'))]")
+    @FindBy(xpath = "//div[contains(@data-bind,'resolveProblemMenu') and not(contains(@style,'display: none'))]")
     private WebElement resolveProblemActionButton;
 
     public WebElement actionsMenuButtonByPhase(String phase) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//i[@class='icon-list menu-trigger']"));
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[not(contains(@style,'display: none;'))]/i[@class='icon-list menu-trigger']"));
     }
 
     public WebElement problemIndicatorByPhase(String phase) {

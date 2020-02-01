@@ -7,11 +7,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOROResolveProblemDialogStepsNew {
 
-    public static void resolveProblemWithoutDescription() {
+    public static void resolveProblem() {
 
         VNextBOROResolveProblemDialogNew resolveProblemDialog = new VNextBOROResolveProblemDialogNew();
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(resolveProblemDialog.getResolveButton()));
-        Utils.clickWithJS(resolveProblemDialog.getResolveButton());
+        WaitUtilsWebDriver.waitABit(2000);
+        Utils.clickElement(resolveProblemDialog.getResolveButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

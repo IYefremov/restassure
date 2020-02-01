@@ -4,11 +4,8 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class VNextBORODetailsStepsNew {
@@ -33,35 +30,25 @@ public class VNextBORODetailsStepsNew {
     public static void reportProblemOnPhaseLevelWithoutDescription(String phase, String problemReason) {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitABit(2000);
-        Utils.clickWithJS(detailsWebPageNew.actionsMenuButtonByPhase(phase));
-        WaitUtilsWebDriver.waitABit(1000);
-        Utils.clickWithJS(detailsWebPageNew.getReportProblemActionButton());
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonByPhase(phase));
+        Utils.clickElement(detailsWebPageNew.getReportProblemActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithoutDescription(problemReason);
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void reportProblemOnPhaseLevelWithDescription(String phase, String problemReason, String problemDescription) {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitABit(2000);
-        Utils.clickWithJS(detailsWebPageNew.actionsMenuButtonByPhase(phase));
-        Utils.clickWithJS(detailsWebPageNew.getReportProblemActionButton());
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonByPhase(phase));
+        Utils.clickElement(detailsWebPageNew.getReportProblemActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithDescription(problemReason, problemDescription);
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void resolveProblemOnPhaseLevel(String phase) {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitABit(2000);
-        Utils.clickWithJS(detailsWebPageNew.actionsMenuButtonByPhase(phase));
-        Utils.clickWithJS(detailsWebPageNew.getResolveProblemActionButton());
-        VNextBOROResolveProblemDialogStepsNew.resolveProblemWithoutDescription();
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonByPhase(phase));
+        Utils.clickElement(detailsWebPageNew.getResolveProblemActionButton());
+        VNextBOROResolveProblemDialogStepsNew.resolveProblem();
     }
 
     public static void setPhaseStatusIfNeeded(String phase, String expectedStatus) {
@@ -71,7 +58,8 @@ public class VNextBORODetailsStepsNew {
         }
         if (!Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase)).equals(expectedStatus)) {
             Utils.clickElement(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase));
-            Utils.clickElement(new VNextBORODetailsWebPageNew().phaseStatusDropDownOption(expectedStatus));
+            Utils.clickWithJS(new VNextBORODetailsWebPageNew().phaseStatusDropDownOption(expectedStatus));
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
         }
     }
 }

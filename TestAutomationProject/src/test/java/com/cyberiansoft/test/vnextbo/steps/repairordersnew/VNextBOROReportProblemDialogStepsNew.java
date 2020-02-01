@@ -13,22 +13,21 @@ public class VNextBOROReportProblemDialogStepsNew {
     public static void reportProblemWithoutDescription(String problemReason) {
 
         VNextBOROReportProblemDialogNew reportProblemDialog = new VNextBOROReportProblemDialogNew();
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(reportProblemDialog.getProblemReasonDropDown()));
-        Select reportProblemSelect = new Select(reportProblemDialog.getProblemReasonDropDown());
-        reportProblemSelect.selectByVisibleText(problemReason);
-        WaitUtilsWebDriver.waitABit(2000);
-        Utils.clickWithJS(reportProblemDialog.getAddButton());
+        WaitUtilsWebDriver.waitABit(3000);
+        new Select(reportProblemDialog.getProblemReasonDropDown()).selectByVisibleText(problemReason);
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.clickWithActions(reportProblemDialog.getAddButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void reportProblemWithDescription(String problemReason, String problemDescription) {
 
         VNextBOROReportProblemDialogNew reportProblemDialog = new VNextBOROReportProblemDialogNew();
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(reportProblemDialog.getProblemReasonDropDown()));
-        Select reportProblemSelect = new Select(reportProblemDialog.getProblemReasonDropDown());
-        reportProblemSelect.selectByVisibleText(problemReason);
+        WaitUtilsWebDriver.waitABit(3000);
+        new Select(reportProblemDialog.getProblemReasonDropDown()).selectByVisibleText(problemReason);
+        WaitUtilsWebDriver.waitABit(1000);
         Utils.clearAndType(reportProblemDialog.getProblemReasonDescription(), String.valueOf(problemDescription));
-        Utils.clickWithJS(reportProblemDialog.getAddButton());
+        Utils.clickWithActions(reportProblemDialog.getAddButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }
