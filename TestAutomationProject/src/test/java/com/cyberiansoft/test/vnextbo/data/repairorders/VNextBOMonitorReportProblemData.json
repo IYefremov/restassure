@@ -146,9 +146,9 @@
     }
   ],
 
-  "verifyTheUserCanReportProblemOnTheServiceLevelEnterTheLevelDescription": [
+  "verifyTheUserCanReportProblemOnTheServiceLevelWithProblemDescription": [
     {
-      "rowID": "verifyTheUserCanReportProblemOnTheServiceLevelEnterTheLevelDescription.01",
+      "rowID": "verifyTheUserCanReportProblemOnTheServiceLevelWithProblemDescription.01",
       "description": "Test Case 91245: Verify user can report problem on the service level (enter the reason description)",
       "targetProcessTestCaseData": [
         {
@@ -159,13 +159,14 @@
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
       "service": "AMoneyVehicleFF_Washing",
-      "problemReason": "No part"
+      "problemReason": "No part",
+      "problemDesc": "Autotest 91245"
     }
   ],
 
-  "verifyTheUserCanViewTheServicesFromROPageAndSystemExpandsThePhase": [
+  "verifyTheUserCanViewTheServiceProblemFromROPageAndSystemExpandsThePhase": [
     {
-      "rowID": "verifyTheUserCanViewTheServicesFromROPageAndSystemExpandsThePhase.01",
+      "rowID": "verifyTheUserCanViewTheServiceProblemFromROPageAndSystemExpandsThePhase.01",
       "description": "Test Case 91246: Verify user can view the problem services from the \"Repair Order\" page and system expands the phase",
       "targetProcessTestCaseData": [
         {
@@ -195,12 +196,7 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "AMoneyVehicleFF_Washing",
-      "serviceStatuses": [
-        "Active",
-        "Completed",
-        "Problem"
-      ],
+      "service": "Car-Washing",
       "problemReason": "No part"
     }
   ],

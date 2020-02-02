@@ -37,7 +37,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
             VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-            VNextBORODetailsStepsNew.expandAllServiceRows();
+            VNextBORODetailsStepsNew.expandAllPhases();
             VNextBORODetailsValidationsNew.verifyServiceOrTaskDescriptionsContainText(expectedServiceName);
             Utils.goToPreviousPage();
         }

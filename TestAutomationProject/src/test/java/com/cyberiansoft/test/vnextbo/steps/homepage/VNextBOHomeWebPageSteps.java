@@ -29,7 +29,7 @@ public class VNextBOHomeWebPageSteps extends VNextBOBaseWebPageSteps {
 
         final String mainWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
         Utils.clickElement(new VNextBOHomeWebPage().getAccessClientPortalLink());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitForNewTab();
         Utils.getNewTab(mainWindow);
         final String clientPortalPageUrl = Utils.getUrl();
@@ -41,7 +41,7 @@ public class VNextBOHomeWebPageSteps extends VNextBOBaseWebPageSteps {
 
         final String mainWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
         Utils.clickElement(new VNextBOHomeWebPage().getSupportForBOButton());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitForNewTab();
         Utils.getNewTab(mainWindow);
         final String supportForBoPageUrl = Utils.getUrl();
@@ -53,7 +53,7 @@ public class VNextBOHomeWebPageSteps extends VNextBOBaseWebPageSteps {
 
         final String mainWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
         Utils.clickElement(new VNextBOHomeWebPage().getSupportForMobileAppButton());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitForNewTab();
         Utils.getNewTab(mainWindow);
         final String supportForMobileAppPageUrl = Utils.getUrl();
@@ -64,11 +64,11 @@ public class VNextBOHomeWebPageSteps extends VNextBOBaseWebPageSteps {
     public static String openAccessReconProBOWindow() {
 
         Utils.clickElement(new VNextBOHomeWebPage().getAccessReconProBOLink());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         //Certification error handling
         try {
-            if (DriverBuilder.getInstance().getDriver().findElement(By.xpath("//button[contains(.,'Advanced')]")).isDisplayed()) {
-                Utils.clickElement(By.xpath("//button[contains(.,'Advanced')]"));
+            if (DriverBuilder.getInstance().getDriver().findElement(By.xpath("//button[@id='details-button']")).isDisplayed()) {
+                Utils.clickElement(By.xpath("//button[@id='details-button']"));
                 Utils.clickElement(By.xpath("//a[@id='proceed-link']"));
                 WaitUtilsWebDriver.waitForSpinnerToDisappear();
             }

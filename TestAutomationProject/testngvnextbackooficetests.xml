@@ -164,7 +164,7 @@
     </test>
     <test name="Monitor Report Problem Tests">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorReportProblemTestCases"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorReportProblemTestCasesNew"/>
         </classes>
     </test>
     <test name="Monitor Simple Search Tests">

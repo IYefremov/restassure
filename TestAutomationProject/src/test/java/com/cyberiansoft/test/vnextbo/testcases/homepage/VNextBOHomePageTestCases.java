@@ -29,7 +29,7 @@ public class VNextBOHomePageTestCases extends BaseTestCase {
     public void settingUp() {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getHomePageTD();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -78,7 +78,7 @@ public class VNextBOHomePageTestCases extends BaseTestCase {
     public void verifyUserCanLogoutFromHisProfile(String rowID, String description, JSONObject testData) {
 
         VNextBOHeaderPanelSteps.logout();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         Assert.assertTrue(VNextBOLoginValidations.isLoginFormDisplayed(), "Login page hasn't been closed");
         Utils.refreshPage();
         VNextBOLoginSteps.userLogin(VNextBOConfigInfo.getInstance().getVNextBONadaMail(),
