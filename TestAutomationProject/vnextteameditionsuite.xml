@@ -41,6 +41,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimetrackingVisibility"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringResetStartDate"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking.VNextTeamMonitoringTimeReport"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.AutoAssignTechCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitBaseCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitTeamCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.techsplit.VNextTeamTechSplitServiceCases"/>
@@ -50,6 +51,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceBundleCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.questionforms.BasicQuestionFormTests"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.services.option.multiple.SingleSelectionServiceTests"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.vehicleparts.BasicVehiclePartsTests"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhase"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhaseAndService"/>
         </classes>

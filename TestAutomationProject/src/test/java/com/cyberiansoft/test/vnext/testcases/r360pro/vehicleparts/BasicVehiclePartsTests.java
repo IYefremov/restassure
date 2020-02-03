@@ -38,6 +38,7 @@ public class BasicVehiclePartsTests extends BaseTestClass {
         AvailableServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
         ServiceDetailsScreenSteps.selectVehiclePart(serviceData.getVehiclePart());
         ServiceDetailsScreenSteps.saveServiceDetails();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         SelectedServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
         ServiceDetailsValidations.servicePartShouldBe(serviceData.getVehiclePart());
         ScreenNavigationSteps.pressBackButton();
