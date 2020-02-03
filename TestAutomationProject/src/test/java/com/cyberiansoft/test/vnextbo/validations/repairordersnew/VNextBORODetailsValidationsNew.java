@@ -65,4 +65,10 @@ public class VNextBORODetailsValidationsNew {
             Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
         }
     }
+
+    public static void verifyPhaseTotalPriceHasBeenChanged(String phase, String initialPrice) {
+
+        Assert.assertFalse(Utils.getText(new VNextBORODetailsWebPageNew().phaseTotalPrice(phase)).equals(initialPrice),
+                "Total price hasn't changed for the phase: " + phase);
+    }
 }

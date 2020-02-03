@@ -26,6 +26,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind,'resolveProblemMenu') and not(contains(@style,'display: none'))]")
     private WebElement resolveProblemForPhaseActionButton;
 
+    @FindBy(xpath = "//div[contains(@data-bind,'completePhase') and not(contains(@style,'display: none'))]")
+    private WebElement completeCurrentPhaseActionButton;
+
     @FindBy(xpath = "//div[@class='drop checkout']//div[contains(@data-bind,'reportProblemMenu') and not(contains(@style,'display: none'))]")
     private WebElement reportProblemForServiceActionButton;
 
@@ -60,6 +63,46 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     public WebElement problemIndicatorByService(String service) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='clmn_2']//i[@class='icon-problem-indicator' and not(contains(@style,'display: none;'))])[1]"));
+    }
+
+    public WebElement serviceNameWebElement(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='clmn_2'])[1]"));
+    }
+
+    public WebElement serviceQtyInputField(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//input[contains(@data-bind,'canEditQuantity')])[1]"));
+    }
+
+    public WebElement serviceQtyDisplayedText(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@data-bind,'canEditQuantity')])[1]"));
+    }
+
+    public WebElement servicePriceInputField(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//input[contains(@data-bind,'canEditPrice')])[1]"));
+    }
+
+    public WebElement servicePriceDisplayedText(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@data-bind,'canEditPrice')])[1]"));
+    }
+
+    public WebElement serviceVendorPriceInputField(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//input[contains(@data-bind,'isVendorPriceEditable')])[1]"));
+    }
+
+    public WebElement serviceVendorPriceDisplayedText(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@data-bind,'isVendorPriceEditable')])[1]"));
+    }
+
+    public WebElement phaseTotalPrice(String phase) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//span[contains(@data-bind,'vendorPriceTotalF')]"));
     }
 
     public WebElement phaseStatusDropDownByPhase(String phase) {

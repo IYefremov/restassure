@@ -8,9 +8,11 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROCompleteCurrentPhaseDialogStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROCompleteCurrentPhaseDialogValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
 import org.json.simple.JSONObject;
@@ -171,6 +173,92 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Completed");
         VNextBORODetailsValidationsNew.verifyReportProblemActionButtonIsNotDisplayedForCompletedService(data.getService());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnThePhaseLevel(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Active");
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceQuantity(data.getService(), "0");
+        VNextBORODetailsStepsNew.setServicePrice(data.getService(), "0");
+        VNextBORODetailsStepsNew.setServiceVendorPrice(data.getService(), "0");
+        VNextBORODetailsStepsNew.reportProblemOnPhaseLevelWithoutDescription(data.getPhase(), data.getProblemReason());
+        String initialTotalPrice = VNextBORODetailsStepsNew.getPhaseTotalPrice(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceQuantity(data.getService(), data.getServiceQuantity());
+        VNextBORODetailsStepsNew.setServicePrice(data.getService(), data.getServicePrice());
+        VNextBORODetailsStepsNew.setServiceVendorPrice(data.getService(), data.getServiceVendorPrice());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBORODetailsValidationsNew.verifyPhaseTotalPriceHasBeenChanged(data.getPhase(), initialTotalPrice);
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnTheServiceLevel(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+        VNextBORODetailsStepsNew.setServiceQuantity(data.getService(), "0");
+        VNextBORODetailsStepsNew.setServicePrice(data.getService(), "0");
+        VNextBORODetailsStepsNew.setServiceVendorPrice(data.getService(), "0");
+        VNextBORODetailsStepsNew.reportProblemForServiceWithoutDescription(data.getService(), data.getProblemReason());
+        String initialTotalPrice = VNextBORODetailsStepsNew.getPhaseTotalPrice(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceQuantity(data.getService(), data.getServiceQuantity());
+        VNextBORODetailsStepsNew.setServicePrice(data.getService(), data.getServicePrice());
+        VNextBORODetailsStepsNew.setServiceVendorPrice(data.getService(), data.getServiceVendorPrice());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBORODetailsValidationsNew.verifyPhaseTotalPriceHasBeenChanged(data.getPhase(), initialTotalPrice);
+        VNextBORODetailsStepsNew.resolveProblemForService(data.getService());
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanOpenCompleteCurrentPhasePopupWindowWithAllProblemServices(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+        VNextBORODetailsStepsNew.reportProblemForServiceWithoutDescription(data.getService(), data.getProblemReason());
+        VNextBORODetailsStepsNew.openCompleteCurrentPhaseDialog(data.getPhase());
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyCancelButtonIsDisplayed();
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyColumnsTitlesAreCorrect();
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyCompleteCurrentPhaseButtonIsDisplayed();
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyServiceIsPresentedInTheTable(data.getService());
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyResolveButtonIsDisplayedForService(data.getService());
+        VNextBOROCompleteCurrentPhaseDialogStepsNew.closeDialogWithCancelButton();
+        VNextBORODetailsStepsNew.resolveProblemForService(data.getService());
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCompleteCurrentPhaseButtonIsDisabledIfServiceHasProblemStatus(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+        VNextBORODetailsStepsNew.reportProblemForServiceWithoutDescription(data.getService(), data.getProblemReason());
+        VNextBORODetailsStepsNew.openCompleteCurrentPhaseDialog(data.getPhase());
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyCompleteCurrentPhaseButtonIsClickable(false);
+        VNextBOROCompleteCurrentPhaseDialogStepsNew.closeDialogWithCancelButton();
+        VNextBORODetailsStepsNew.resolveProblemForService(data.getService());
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCloseCompleteCurrentPhasePopupWindowWithoutProblemResolving(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+        VNextBORODetailsStepsNew.reportProblemForServiceWithoutDescription(data.getService(), data.getProblemReason());
+        VNextBORODetailsStepsNew.openCompleteCurrentPhaseDialog(data.getPhase());
+        VNextBOROCompleteCurrentPhaseDialogStepsNew.closeDialogWithCancelButton();
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyDialogIsDisplayed(false);
+        VNextBORODetailsStepsNew.resolveProblemForService(data.getService());
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 }

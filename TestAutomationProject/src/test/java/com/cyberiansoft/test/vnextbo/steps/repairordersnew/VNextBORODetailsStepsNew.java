@@ -2,8 +2,11 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROCompleteCurrentPhaseDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,6 +58,14 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.getReportProblemForServiceActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithoutDescription(problemReason);
         WaitUtilsWebDriver.waitABit(3000);
+    }
+
+    public static void openCompleteCurrentPhaseDialog(String phase) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+        Utils.clickElement(detailsWebPageNew.getCompleteCurrentPhaseActionButton());
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.visibilityOf(new VNextBOROCompleteCurrentPhaseDialogNew().getCompleteCurrentPhaseDialog()));
     }
 
     public static void reportProblemOnPhaseLevelWithDescription(String phase, String problemReason, String problemDescription) {
@@ -116,5 +127,37 @@ public class VNextBORODetailsStepsNew {
             WaitUtilsWebDriver.waitForPageToBeLoaded();
             WaitUtilsWebDriver.waitABit(3000);
         }
+    }
+
+    public static void setServiceQuantity(String service, String quantity) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.serviceQtyInputField(service));
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.clearAndType(detailsWebPageNew.serviceQtyInputField(service), quantity);
+        Utils.clickElement(detailsWebPageNew.serviceNameWebElement(service));
+    }
+
+    public static void setServicePrice(String service, String price) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.servicePriceInputField(service));
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.clearAndType(detailsWebPageNew.servicePriceInputField(service), price);
+        Utils.clickElement(detailsWebPageNew.serviceNameWebElement(service));
+    }
+
+    public static void setServiceVendorPrice(String service, String vendorPrice) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.serviceVendorPriceInputField(service));
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.sendKeysWithJS(detailsWebPageNew.serviceVendorPriceInputField(service), vendorPrice);
+        Utils.clickElement(detailsWebPageNew.serviceNameWebElement(service));
+    }
+
+    public static String getPhaseTotalPrice(String phase) {
+
+        return Utils.getText(new VNextBORODetailsWebPageNew().phaseTotalPrice(phase));
     }
 }
