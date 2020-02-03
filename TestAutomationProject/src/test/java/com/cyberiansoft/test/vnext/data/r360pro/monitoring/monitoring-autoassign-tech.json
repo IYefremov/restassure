@@ -1,7 +1,7 @@
 {
-  "autoAssignTechToService": [
+  "autoAssignTechToAMoneyService": [
     {
-      "rowID": "01",
+      "rowID": "autoAssignTechToAMoneyService.01",
       "description": "",
       "targetProcessTestCaseData": [
         {
@@ -25,9 +25,11 @@
           }
         }
       ]
-    },
+    }
+  ],
+  "autoAssignTechToALaborService": [
     {
-      "rowID": "02",
+      "rowID": "autoAssignTechToALaborService.01",
       "description": "",
       "targetProcessTestCaseData": [
         {
@@ -51,9 +53,11 @@
           }
         }
       ]
-    },
+    }
+  ],
+  "autoAssignTechToBundleServices": [
     {
-      "rowID": "03",
+      "rowID": "autoAssignTechToBundleServices.01",
       "description": "",
       "targetProcessTestCaseData": [
         {
@@ -79,7 +83,7 @@
       ]
     },
     {
-      "rowID": "04",
+      "rowID": "autoAssignTechToBundleServices.02",
       "description": "",
       "targetProcessTestCaseData": [
         {

@@ -44,7 +44,8 @@
       "questionScreenData": {
         "questionsData": [
           {
-            "questionName": "Generate \"Money\" services?"
+            "questionName": "Generate \"Money\" services?",
+            "questionAnswer": "Yes"
           }
         ]
       }

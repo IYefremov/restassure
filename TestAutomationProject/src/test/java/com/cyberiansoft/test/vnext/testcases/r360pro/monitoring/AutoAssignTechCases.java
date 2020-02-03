@@ -15,6 +15,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.BundleServiceSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import org.json.simple.JSONObject;
@@ -24,13 +25,13 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class AutoAssignTechCases extends BaseTestClass {
-    String workOrderId;
-    String inspectionId;
+    //String workOrderId;
+    //String inspectionId;
 
     @BeforeClass
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getAutoAssignTech();
-        HomeScreenSteps.openCreateMyInspection();
+        /*HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
@@ -39,7 +40,8 @@ public class AutoAssignTechCases extends BaseTestClass {
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        AvailableServicesScreenSteps.selectService("rozstalnoy_enable_bundle");
+        SearchSteps.textSearch("rozstalnoy_enable_bundle");
+        AvailableServicesScreenSteps.clickAddServiceButton("rozstalnoy_enable_bundle");
         BundleServiceSteps.setBundlePrice("1450");
         BundleServiceSteps.openServiceDetails("rozstalnoy_disable_labor");
         WizardScreenSteps.saveAction();
@@ -50,16 +52,29 @@ public class AutoAssignTechCases extends BaseTestClass {
         WizardScreenSteps.saveAction();
         AvailableServicesScreenSteps.selectService("Labor AM");
         workOrderId = WorkOrderSteps.saveWorkOrder();
-        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();*/
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void autoAssignTechToService(String rowID,
+   // @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void autoAssignTechToAMoneyService(String rowID,
                                         String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         List<ServiceData> serviceDataList = workOrderData.getServicesList();
         ServiceData serviceWithNonDefaultTechnician = serviceDataList.get(0);
         ServiceData serviceWithLoggedInTechnician = serviceDataList.get(1);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectService(serviceWithNonDefaultTechnician);
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
         SearchSteps.searchByText(workOrderId);
@@ -93,7 +108,131 @@ public class AutoAssignTechCases extends BaseTestClass {
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
 
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
+    }
+
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void autoAssignTechToALaborService(String rowID,
+                                              String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<ServiceData> serviceDataList = workOrderData.getServicesList();
+        ServiceData serviceWithNonDefaultTechnician = serviceDataList.get(0);
+        ServiceData serviceWithLoggedInTechnician = serviceDataList.get(1);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.openServiceDetails(serviceWithNonDefaultTechnician);
+        WizardScreenSteps.saveAction();
+        SelectedServicesScreenSteps.switchToSelectedService();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.searchByText(workOrderId);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
+        MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
+        GeneralListSteps.selectListItem(serviceWithNonDefaultTechnician.getServiceDefaultTechnician().getTechnicianFullName());
+        PhaseScreenValidations.validateServiceTechnician(serviceWithNonDefaultTechnician);
+
+        EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
+        MenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        GeneralSteps.confirmDialog();
+
+        MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
+        PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
+
+        EditOrderSteps.openServiceMenu(serviceWithLoggedInTechnician);
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
+        MenuSteps.selectStatus(ServiceStatus.ACTIVE);
+        PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
+        EditOrderSteps.openServiceMenu(serviceWithLoggedInTechnician);
+        MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
+        GeneralListSteps.selectListItem(serviceWithNonDefaultTechnician.getServiceDefaultTechnician().getTechnicianFullName());
+
+        EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
+        MenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        GeneralSteps.confirmDialog();
+        PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
+
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void autoAssignTechToBundleServices(String rowID,
+                                        String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<ServiceData> serviceDataList = workOrderData.getServicesList();
+        ServiceData serviceWithNonDefaultTechnician = serviceDataList.get(0);
+        ServiceData serviceWithLoggedInTechnician = serviceDataList.get(1);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        SearchSteps.textSearch("rozstalnoy_enable_bundle");
+        AvailableServicesScreenSteps.clickAddServiceButton("rozstalnoy_enable_bundle");
+        BundleServiceSteps.setBundlePrice("1450");
+        BundleServiceSteps.openServiceDetails("rozstalnoy_disable_labor");
+        WizardScreenSteps.saveAction();
+        BundleServiceSteps.openServiceDetails("rozstalnoy_disable_money");
+        WizardScreenSteps.saveAction();
+        WizardScreenSteps.saveAction();
+        SelectedServicesScreenSteps.switchToSelectedService();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.searchByText(workOrderId);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
+        MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
+        GeneralListSteps.selectListItem(serviceWithNonDefaultTechnician.getServiceDefaultTechnician().getTechnicianFullName());
+        PhaseScreenValidations.validateServiceTechnician(serviceWithNonDefaultTechnician);
+
+        EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
+        EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
+        MenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        GeneralSteps.confirmDialog();
+
+        MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
+        PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
+
+        EditOrderSteps.openServiceMenu(serviceWithLoggedInTechnician);
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
+        MenuSteps.selectStatus(ServiceStatus.ACTIVE);
+        PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
+        EditOrderSteps.openServiceMenu(serviceWithLoggedInTechnician);
+        MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
+        GeneralListSteps.selectListItem(serviceWithNonDefaultTechnician.getServiceDefaultTechnician().getTechnicianFullName());
+
+        EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
+        MenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        GeneralSteps.confirmDialog();
+        PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
+
+        WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }
 }
