@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 
 public class VNextBOROPageStepsNew {
 
-    static String fromDate = LocalDate.now().minusYears(2).format(DateTimeFormatter.ofPattern("M/d/yyyy"));
+    static String fromDate = LocalDate.now().minusYears(8).format(DateTimeFormatter.ofPattern("M/d/yyyy"));
     static String toDate = LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("M/d/yyyy"));
 
     public static void searchOrdersByCustomer(String customer) {
@@ -96,6 +97,14 @@ public class VNextBOROPageStepsNew {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField(repairStatus);
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+    }
+
+    public static void searchOrdersByOrderNumber(String orderNumber) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogStepsNew.setHasThisTextField(orderNumber);
         VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
@@ -234,7 +243,18 @@ public class VNextBOROPageStepsNew {
 
     public static void openOrderDetailsByNumberInList(int rowNumber) {
 
-        Utils.clickElement(new VNextBOROWebPageNew().getWoNumbersList().get(rowNumber));
+        VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(repairOrdersPage.getWoNumbersList().get(rowNumber));
+        Utils.clickElement(repairOrdersPage.getWoNumbersList().get(rowNumber));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void viewOrdersProblemsByOrderNumber(String orderNumber) {
+
+        VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        Utils.clickElement(repairOrdersPage.actionsButtonByOrderNumber(orderNumber));
+        Utils.clickElement(repairOrdersPage.getViewProblemsActionButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

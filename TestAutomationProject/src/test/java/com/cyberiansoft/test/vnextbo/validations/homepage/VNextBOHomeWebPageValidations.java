@@ -59,11 +59,13 @@ public class VNextBOHomeWebPageValidations extends VNextBOBaseWebPageValidations
 
     public static void verifySupportForBoPageIsOpened(String actualSupportForBoPageUrl) {
 
-        Assert.assertTrue(actualSupportForBoPageUrl.contains("repair360-reconmonitor-back-office"), "Support for Back Office page hasn't been opened");
+        Assert.assertTrue(actualSupportForBoPageUrl.contains("intercom.help") &&
+                actualSupportForBoPageUrl.contains("reconpro-reconmonitor-back-office"), "Support for Back Office page hasn't been opened");
     }
 
     public static void verifySupportForMobileAppPageIsOpened(String actualSupportForMobileAppPageUrl) {
 
-        Assert.assertTrue(actualSupportForMobileAppPageUrl.contains("repair360-mobile-app"), "Support for Mobile App page hasn't been opened");
+        Assert.assertTrue(actualSupportForMobileAppPageUrl.contains("intercom.help") &&
+                actualSupportForMobileAppPageUrl.contains("reconpro-mobile-app"), "Support for Mobile App page hasn't been opened");
     }
 }

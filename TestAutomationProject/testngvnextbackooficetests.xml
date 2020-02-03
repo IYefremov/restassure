@@ -164,7 +164,7 @@
     </test>
     <test name="Monitor Report Problem Tests">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorReportProblemTestCases"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorReportProblemTestCasesNew"/>
         </classes>
     </test>
     <test name="Monitor Simple Search Tests">
@@ -172,7 +172,7 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorSimpleSearchTestCasesNew"/>
         </classes>
     </test>
-    <test name="Monitor Tests Part 1">
+<!--    <test name="Monitor Tests Part 1">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart1"/>
         </classes>
@@ -191,7 +191,7 @@
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart4"/>
         </classes>
-    </test>
+    </test>-->
     <test name="Monitor Grid Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorGridDataTestCases"/>

@@ -37,7 +37,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
             VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-            VNextBORODetailsStepsNew.expandAllServiceRows();
+            VNextBORODetailsStepsNew.expandAllPhases();
             VNextBORODetailsValidationsNew.verifyServiceOrTaskDescriptionsContainText(expectedServiceName);
             Utils.goToPreviousPage();
         }
@@ -142,6 +142,12 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
             Assert.assertEquals(new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size(), new VNextBOROWebPageNew().getProblemIndicatorsList().size(),
                     "Not all orders has had Problems indicator");
         }
+    }
+
+    public static void verifyProblemIndicatorIsDisplayedForOrder(String orderNumber) {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().problemIndicatorByOrderNumber(orderNumber)),
+                "Problems indicator hasn't been displayed for the order " + orderNumber);
     }
 
     public static void verifyNotFoundMessageIsCorrect() {
