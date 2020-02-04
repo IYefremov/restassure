@@ -110,6 +110,11 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//span[contains(@class,'group-status-dropdown')]//span[@class='k-input']"));
     }
 
+    public WebElement phaseStatusTextByPhase(String phase) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[contains(@data-bind, 'statusText')]"));
+    }
+
     public WebElement serviceStatusDropDownByService(String service) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@class,'service-status-dropdown')]//span[@class='k-input'])[1]"));

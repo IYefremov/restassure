@@ -29,12 +29,17 @@ public class VNextBORODetailsValidationsNew {
                 "Problem indicator hasn't been displayed for the service '" + service + "'.");
     }
 
-    public static void verifyPhaseStatusIsCorrect(String phase, String status) {
+    public static void verifyPhaseStatusInDropdownFieldIsCorrect(String phase, String status) {
 
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase)), status,
                 "Status hasn't been correct for the '" + phase + "'.");
     }
 
+    public static void verifyPhaseTextStatusIsCorrect(String phase, String status) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusTextByPhase(phase)), status,
+                "Status hasn't been correct for the '" + phase + "'.");
+    }
     public static void verifyServiceStatusIsCorrect(String service, String status) {
 
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceStatusDropDownByService(service)), status,

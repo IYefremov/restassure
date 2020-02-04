@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROCompleteCurr
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOToasterNotificationValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROCompleteCurrentPhaseDialogValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
@@ -38,7 +39,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Active");
         VNextBORODetailsStepsNew.reportProblemOnPhaseLevelWithoutDescription(data.getPhase(), data.getProblemReason());
         VNextBORODetailsValidationsNew.verifyProblemIndicatorIsDisplayedForPhase(data.getPhase());
-        VNextBORODetailsValidationsNew.verifyPhaseStatusIsCorrect(data.getPhase(), "Problem");
+        VNextBORODetailsValidationsNew.verifyPhaseStatusInDropdownFieldIsCorrect(data.getPhase(), "Problem");
         VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
     }
 
@@ -49,7 +50,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Active");
         VNextBORODetailsStepsNew.reportProblemOnPhaseLevelWithoutDescription(data.getPhase(), data.getProblemReason());
         VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
-        VNextBORODetailsValidationsNew.verifyPhaseStatusIsCorrect(data.getPhase(), "Active");
+        VNextBORODetailsValidationsNew.verifyPhaseStatusInDropdownFieldIsCorrect(data.getPhase(), "Active");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -59,7 +60,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Active");
         VNextBORODetailsStepsNew.reportProblemOnPhaseLevelWithDescription(data.getPhase(), data.getProblemReason(), data.getProblemDesc());
         VNextBORODetailsValidationsNew.verifyProblemIndicatorIsDisplayedForPhase(data.getPhase());
-        VNextBORODetailsValidationsNew.verifyPhaseStatusIsCorrect(data.getPhase(), "Problem");
+        VNextBORODetailsValidationsNew.verifyPhaseStatusInDropdownFieldIsCorrect(data.getPhase(), "Problem");
         VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
     }
 
@@ -70,9 +71,9 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Rework");
         VNextBORODetailsStepsNew.reportProblemOnPhaseLevelWithoutDescription(data.getPhase(), data.getProblemReason());
         VNextBORODetailsValidationsNew.verifyProblemIndicatorIsDisplayedForPhase(data.getPhase());
-        VNextBORODetailsValidationsNew.verifyPhaseStatusIsCorrect(data.getPhase(), "Problem");
+        VNextBORODetailsValidationsNew.verifyPhaseStatusInDropdownFieldIsCorrect(data.getPhase(), "Problem");
         VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
-        VNextBORODetailsValidationsNew.verifyPhaseStatusIsCorrect(data.getPhase(), "Rework");
+        VNextBORODetailsValidationsNew.verifyPhaseStatusInDropdownFieldIsCorrect(data.getPhase(), "Rework");
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Active");
     }
 
@@ -106,7 +107,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.reportProblemOnPhaseLevelWithoutDescription(data.getPhase(), data.getProblemReason());
         Utils.goToPreviousPage();
         VNextBOROPageStepsNew.viewOrdersProblemsByOrderNumber(data.getOrderNumber());
-        VNextBORODetailsValidationsNew.verifyPhaseStatusIsCorrect(data.getPhase(), "Problem");
+        VNextBORODetailsValidationsNew.verifyPhaseStatusInDropdownFieldIsCorrect(data.getPhase(), "Problem");
         VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
     }
 
@@ -259,6 +260,42 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBOROCompleteCurrentPhaseDialogStepsNew.closeDialogWithCancelButton();
         VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyDialogIsDisplayed(false);
         VNextBORODetailsStepsNew.resolveProblemForService(data.getService());
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+        VNextBORODetailsStepsNew.reportProblemForServiceWithoutDescription(data.getService(), data.getProblemReason());
+        VNextBORODetailsStepsNew.openCompleteCurrentPhaseDialog(data.getPhase());
+        VNextBOROCompleteCurrentPhaseDialogStepsNew.resolveProblemForService(data.getService());
+        VNextBOToasterNotificationValidations.verifyMessageTextIsCorrect("Success. Problem resolved.");
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyResolvedIconIsDisplayedForService(data.getService());
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyCompleteCurrentPhaseButtonIsClickable(true);
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyResolveButtonIsClickableForService(data.getService(), false);
+        VNextBOROCompleteCurrentPhaseDialogStepsNew.closeDialogWithCancelButton();
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyDialogIsDisplayed(false);
+        VNextBORODetailsValidationsNew.verifyServiceStatusIsCorrect(data.getService(), "Active");
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCompleteCurrentPhaseWithProblemServices(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+        VNextBORODetailsStepsNew.reportProblemForServiceWithoutDescription(data.getService(), data.getProblemReason());
+        VNextBORODetailsStepsNew.openCompleteCurrentPhaseDialog(data.getPhase());
+        VNextBOROCompleteCurrentPhaseDialogStepsNew.resolveProblemForService(data.getService());
+        VNextBOROCompleteCurrentPhaseDialogStepsNew.completeCurrentPhase();
+        VNextBOROCompleteCurrentPhaseDialogValidationsNew.verifyDialogIsDisplayed(false);
+        VNextBORODetailsValidationsNew.verifyServiceStatusIsCorrect(data.getService(), "Completed");
+        VNextBORODetailsValidationsNew.verifyPhaseTextStatusIsCorrect(data.getPhase(), "Completed");
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 }

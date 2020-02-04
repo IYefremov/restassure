@@ -67,6 +67,22 @@ public class VNextBOROCompleteCurrentPhaseDialogValidationsNew {
     public static void verifyResolveButtonIsDisplayedForService(String service) {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROCompleteCurrentPhaseDialogNew().resolveButtonByServiceName(service)),
-                "Resolve button hasn't been displaye for the service " + service);
+                "Resolve button hasn't been displayed for the service " + service);
+    }
+
+    public static void verifyResolveButtonIsClickableForService(String service, boolean shouldBeClickable) {
+
+        if (shouldBeClickable)
+            Assert.assertTrue(Utils.isElementClickable(new VNextBOROCompleteCurrentPhaseDialogNew().resolveButtonByServiceName(service)),
+                    "Resolve button hasn't been clickable for the service " + service);
+        else
+            Assert.assertFalse(Utils.isElementClickable(new VNextBOROCompleteCurrentPhaseDialogNew().resolveButtonByServiceName(service)),
+                    "Resolve button has been clickable for the service " + service);
+    }
+
+    public static void verifyResolvedIconIsDisplayedForService(String service) {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROCompleteCurrentPhaseDialogNew().resolvedIconByServiceName(service)),
+                "Resolved icon hasn't been displayed for the service " + service);
     }
 }

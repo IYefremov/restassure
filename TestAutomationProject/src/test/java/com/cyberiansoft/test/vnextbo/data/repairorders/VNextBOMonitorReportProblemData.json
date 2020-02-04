@@ -328,23 +328,6 @@
     }
   ],
 
-  "verifyUserCanCompleteCurrentPhaseWithProblemServices": [
-    {
-      "rowID": "verifyUserCanCompleteCurrentPhaseWithProblemServices.01",
-      "description": "Test Case 91253: Verify user can complete the current phase with the problem services",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91253",
-          "testCaseTitle": "Verify user can complete the current phase with the problem services"
-        }
-      ],
-      "orderNumber": "O-000-147163",
-      "phase": "PDR Station",
-      "service": "AMoneyVehicleFF_Washing",
-      "problemReason": "No part"
-    }
-  ],
-
   "verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase": [
     {
       "rowID": "verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase.01",
@@ -353,6 +336,23 @@
         {
           "testCaseID": "91256",
           "testCaseTitle": "Verify user can resolve problem using \"Complete current phase\" pop-up window without completing current phase"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "problemReason": "No part"
+    }
+  ],
+  
+  "verifyUserCanCompleteCurrentPhaseWithProblemServices": [
+    {
+      "rowID": "verifyUserCanCompleteCurrentPhaseWithProblemServices.01",
+      "description": "Test Case 91253: Verify user can complete the current phase with the problem services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91253",
+          "testCaseTitle": "Verify user can complete the current phase with the problem services"
         }
       ],
       "orderNumber": "O-000-147163",

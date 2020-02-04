@@ -204,14 +204,14 @@ public class Utils {
     public static void selectOptionInDropDownWithJsScroll(String optionName) {
 
         JavascriptExecutor javascriptExecutor = ((JavascriptExecutor) DriverBuilder.getInstance().getDriver());
-        javascriptExecutor.executeScript("document.querySelector('div[aria-hidden='false'] div.k-list-scroller').scrollTop+=-1000");
+        javascriptExecutor.executeScript("document.querySelector(\"div[aria-hidden='false'] div.k-list-scroller\").scrollTop+=-1000");
         boolean isOptionDisplayed = false;
         int scrollingNumber = 0;
         do {
             try {
                 isOptionDisplayed = isElementDisplayed(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]")));
             } catch (Exception ex) {
-                javascriptExecutor.executeScript("document.querySelector('div[aria-hidden='false'] div.k-list-scroller').scrollTop+=100");
+                javascriptExecutor.executeScript("document.querySelector(\"div[aria-hidden='false'] div.k-list-scroller\").scrollTop+=100");
                 scrollingNumber++;
             }
         } while ((!isOptionDisplayed) || (scrollingNumber == 3));

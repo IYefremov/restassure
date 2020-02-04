@@ -40,6 +40,11 @@ public class VNextBOROCompleteCurrentPhaseDialogNew extends VNextBOBaseWebPage {
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//td[contains(text(),'" + service + "')]/ancestor::tr//button[contains(@data-bind, 'click: problemList.resolveAction')]"));
     }
 
+    public WebElement resolvedIconByServiceName(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//td[contains(text(),'" + service + "')]/ancestor::tr//i[@data-bind='visible: isResolved']"));
+    }
+
     public VNextBOROCompleteCurrentPhaseDialogNew() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
