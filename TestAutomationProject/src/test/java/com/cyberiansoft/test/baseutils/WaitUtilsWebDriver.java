@@ -230,7 +230,11 @@ public class WaitUtilsWebDriver {
     }
 
     public static boolean waitForAttributeToContain(WebElement element, String attribute, String value, int timeout) {
-        return getWebDriverWait(timeout).until(ExpectedConditions.attributeContains(element, attribute, value));
+        try {
+            return getWebDriverWait(timeout).until(ExpectedConditions.attributeContains(element, attribute, value));
+        } catch (TimeoutException ignored) {
+            return false;
+        }
     }
 
     public static boolean waitForAttributeNotToContain(WebElement element, String attribute, String value, int timeout) {

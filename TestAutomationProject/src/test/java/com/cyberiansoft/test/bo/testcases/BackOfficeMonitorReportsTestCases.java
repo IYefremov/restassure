@@ -85,7 +85,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
 
-		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
+		repairorderspage.verifyRepairOrderIsDisplayed(wonumber, data.getSearchLocation());
 
 		monitorpage = new MonitorWebPage(webdriver);
 		backOfficeHeader.clickMonitorLink();
@@ -170,7 +170,7 @@ public class BackOfficeMonitorReportsTestCases extends BaseTestCase {
 		repairorderspage.selectSearchLocation(data.getSearchLocation());
 		repairorderspage.setSearchWoNumber(wonumber);
 		repairorderspage.clickFindButton();
-		Assert.assertTrue(repairorderspage.isRepairOrderPresentInTable(wonumber));
+		repairorderspage.verifyRepairOrderIsDisplayed(wonumber, data.getSearchLocation());
 
 		monitorpage = new MonitorWebPage(webdriver);
 		backOfficeHeader.clickMonitorLink();

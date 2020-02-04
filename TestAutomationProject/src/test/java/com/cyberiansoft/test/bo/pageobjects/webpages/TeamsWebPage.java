@@ -93,8 +93,11 @@ public class TeamsWebPage extends WebPageWithPagination {
 		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
 		Assert.assertTrue(teamstable.tableColumnExists("Guests"));
 		Assert.assertTrue(teamstable.tableColumnExists("Managers"));
-		Assert.assertTrue(teamstable.tableColumnExists("Tax Rates"));
+		Assert.assertTrue(teamstable.tableColumnExists("Service Prices"));
 		Assert.assertTrue(teamstable.tableColumnExists("Team"));
+		Assert.assertTrue(teamstable.tableColumnExists("Type"));
+		Assert.assertTrue(teamstable.tableColumnExists("Service Assign"));
+		Assert.assertTrue(teamstable.tableColumnExists("Location"));
 		Assert.assertTrue(teamstable.tableColumnExists("Area"));
 		Assert.assertTrue(teamstable.tableColumnExists("Timesheet type"));
 		Assert.assertTrue(teamstable.tableColumnExists("Time Zone"));

@@ -102,7 +102,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 	}
 
 	public boolean searchPanelIsExpanded() {
-		return searchtab.getAttribute("class").contains("open");
+		return WaitUtilsWebDriver.waitForAttributeToContain(searchtab, "class", "open", 1);
 	}
 
 	public boolean searchPanelIsVisible() {
@@ -219,13 +219,16 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 
 	public boolean isRepairOrderPresentInTable(String wo) {
 		waitForLoading();
-		boolean present = false;
-		WebElement row = getTableRowWithRepairOrder(wo);
-		if (row != null) {
-			present = true;
-		}
-		return present;
-	}
+        return getTableRowWithRepairOrder(wo) != null;
+    }
+
+	public void verifyRepairOrderIsDisplayed(String wo, String location) {
+        if (!isRepairOrderPresentInTable(wo)) {
+            selectSearchLocation(location);
+            clickFindButton();
+        }
+        Assert.assertTrue(isRepairOrderPresentInTable(wo));
+    }
 
 	public void clickOnWorkOrderLinkInTable(String wo) {
 		WebElement row = getTableRowWithRepairOrder(wo);

@@ -515,7 +515,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		invoicesPage.changeInvoiceStatus(invoiceNumber, data.getNewStatus());
 	}
 
-	//todo fails - obviously because of the bug. Needs clarifications
+	//todo fails - bug# 107707
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void checkOperationInvoiceEditMarkAsPaid(String rowID, String description, JSONObject testData) {
 		BOOperationsInvoiceData data = JSonDataParser.getTestDataFromJson(testData, BOOperationsInvoiceData.class);
