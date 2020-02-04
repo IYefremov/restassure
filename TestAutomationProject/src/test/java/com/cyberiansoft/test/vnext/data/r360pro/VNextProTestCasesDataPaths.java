@@ -194,4 +194,8 @@ public class VNextProTestCasesDataPaths {
     public String getEmailInspectionsTestCasesDataPath() {
         return props.getProperty("inspections.email");
     }
+
+    public String getMonitoringSearchFiltersDataPath() {
+        return props.getProperty("monitoring.search.filters");
+    }
 }

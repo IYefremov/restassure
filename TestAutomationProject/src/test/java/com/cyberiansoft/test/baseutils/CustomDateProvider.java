@@ -38,7 +38,7 @@ public class CustomDateProvider {
         return getFormattedLocalizedDate(getCurrentDate(), format);
     }
 
-    private static String getFormattedLocalizedDate(LocalDate date, DateUtils format) {
+    public static String getFormattedLocalizedDate(LocalDate date, DateUtils format) {
         return date.format(DateTimeFormatter.ofPattern(format.getFormat(), Locale.US));
     }
 

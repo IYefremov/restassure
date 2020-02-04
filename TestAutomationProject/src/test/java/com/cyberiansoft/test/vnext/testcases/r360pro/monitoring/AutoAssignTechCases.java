@@ -25,39 +25,15 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class AutoAssignTechCases extends BaseTestClass {
-    //String workOrderId;
-    //String inspectionId;
 
     @BeforeClass
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getAutoAssignTech();
-        /*HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
-        inspectionId = InspectionSteps.saveInspection();
-        InspectionSteps.openInspectionMenu(inspectionId);
-        InspectionMenuSteps.approveInspection();
-        InspectionSteps.openInspectionMenu(inspectionId);
-        InspectionMenuSteps.selectCreateWorkOrder();
-        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
-        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SearchSteps.textSearch("rozstalnoy_enable_bundle");
-        AvailableServicesScreenSteps.clickAddServiceButton("rozstalnoy_enable_bundle");
-        BundleServiceSteps.setBundlePrice("1450");
-        BundleServiceSteps.openServiceDetails("rozstalnoy_disable_labor");
-        WizardScreenSteps.saveAction();
-        BundleServiceSteps.openServiceDetails("rozstalnoy_disable_money");
-        WizardScreenSteps.saveAction();
-        WizardScreenSteps.saveAction();
-        AvailableServicesScreenSteps.openServiceDetails("Paint");
-        WizardScreenSteps.saveAction();
-        AvailableServicesScreenSteps.selectService("Labor AM");
-        workOrderId = WorkOrderSteps.saveWorkOrder();
-        ScreenNavigationSteps.pressBackButton();*/
     }
 
-   // @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void autoAssignTechToAMoneyService(String rowID,
-                                        String description, JSONObject testData) {
+                                              String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         List<ServiceData> serviceDataList = workOrderData.getServicesList();
         ServiceData serviceWithNonDefaultTechnician = serviceDataList.get(0);
@@ -112,7 +88,7 @@ public class AutoAssignTechCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void autoAssignTechToALaborService(String rowID,
                                               String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -173,7 +149,7 @@ public class AutoAssignTechCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void autoAssignTechToBundleServices(String rowID,
-                                        String description, JSONObject testData) {
+                                               String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         List<ServiceData> serviceDataList = workOrderData.getServicesList();
         ServiceData serviceWithNonDefaultTechnician = serviceDataList.get(0);

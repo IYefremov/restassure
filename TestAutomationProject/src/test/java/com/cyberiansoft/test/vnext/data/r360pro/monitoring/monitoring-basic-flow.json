@@ -403,5 +403,53 @@
         }
       }
     }
+  ],
+  "userCanReturnToCommonFilterPageFromStatusPage": [
+    {
+      "rowID": "userCanReturnToCommonFilterPageFromStatusPage.01",
+      "description": "TFSID: 85738, 85739",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92303",
+          "testCaseTitle": "Verify user can open 'Status'"
+        },
+        {
+          "testCaseID": "92306",
+          "testCaseTitle": "Verify user can return to 'Common filter' page from 'Status' page"
+        },
+        {
+          "testCaseID": "92294",
+          "testCaseTitle": "Verify user can open 'Department'"
+        },
+        {
+          "testCaseID": "92298",
+          "testCaseTitle": "Verify user can return to 'Common filter' page from 'Department' page"
+        },
+        {
+          "testCaseID": "92307",
+          "testCaseTitle": "Verify user can open 'Flag'"
+        },
+        {
+          "testCaseID": "92310",
+          "testCaseTitle": "Verify user can return to 'Common filter' page from 'Flag' page"
+        },
+        {
+          "testCaseID": "92299",
+          "testCaseTitle": "Verify user can open 'Phase'"
+        },
+        {
+          "testCaseID": "92302",
+          "testCaseTitle": "Verify user can return to 'Common filter' page from 'Phase' page"
+        },
+        {
+          "testCaseID": "92311",
+          "testCaseTitle": "Verify user can open 'Priority'"
+        },
+        {
+          "testCaseID": "92314",
+          "testCaseTitle": "Verify user can return to 'Common filter' page from 'Priority' page"
+        }
+      ]
+    }
   ]
 }

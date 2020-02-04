@@ -1,0 +1,32 @@
+{
+
+  "verifyUserCanClearCommonFilters": [
+    {
+      "rowID": "verifyUserCanClearCommonFilters.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92250",
+          "testCaseTitle": "Verify user can enter to 'Monitor'"
+        },
+        {
+          "testCaseID": "92283",
+          "testCaseTitle": "Verify user can reach to 'Search' input field"
+        },
+        {
+          "testCaseID": "92289",
+          "testCaseTitle": "Verify user can open 'Common filters'"
+        },
+        {
+          "testCaseID": "92292",
+          "testCaseTitle": "Verify user can fill in 'From' and 'To' input fields"
+        },
+        {
+          "testCaseID": "92293",
+          "testCaseTitle": "Verify user can clear 'Common filters'"
+        }
+      ]
+    }
+  ]
+
+}

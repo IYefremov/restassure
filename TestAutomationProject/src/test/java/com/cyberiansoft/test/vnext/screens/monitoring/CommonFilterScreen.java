@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.DatePicker;
 import com.cyberiansoft.test.vnext.webelements.ListPicker;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -21,6 +22,15 @@ public class CommonFilterScreen extends MonitorScreen {
 
     @FindBy(xpath = "//div[contains(@class,'searchlist-filters-clear')]")
     private WebElement clearFilter;
+
+    @FindBy(id = "filter_timeframe")
+    private ListPicker timeframe;
+
+    @FindBy(id = "filter_dateFrom")
+    private DatePicker dateFrom;
+
+    @FindBy(id = "filter_dateTo")
+    private DatePicker dateTo;
 
     @FindBy(id = "filter_department")
     private ListPicker department;
