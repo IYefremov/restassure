@@ -29,12 +29,17 @@ public class VNextBORODetailsValidationsNew {
                 "Problem indicator hasn't been displayed for the service '" + service + "'.");
     }
 
-    public static void verifyPhaseStatusIsCorrect(String phase, String status) {
+    public static void verifyPhaseStatusInDropdownFieldIsCorrect(String phase, String status) {
 
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase)), status,
                 "Status hasn't been correct for the '" + phase + "'.");
     }
 
+    public static void verifyPhaseTextStatusIsCorrect(String phase, String status) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusTextByPhase(phase)), status,
+                "Status hasn't been correct for the '" + phase + "'.");
+    }
     public static void verifyServiceStatusIsCorrect(String service, String status) {
 
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceStatusDropDownByService(service)), status,
@@ -43,13 +48,10 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyActionsButtonIsNotDisplayedForPhase(String phase) {
 
-        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
-        boolean buttonIsDisplayed = false;
         try {
-            buttonIsDisplayed = Utils.isElementDisplayed(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
+            Assert.assertFalse(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().actionsMenuButtonForPhase(phase)),
+                    "Actions button has been displayed");
         } catch (NoSuchElementException ex) {
-            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
         }
     }
 
@@ -57,12 +59,16 @@ public class VNextBORODetailsValidationsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
-        boolean buttonIsDisplayed = false;
         try {
-            buttonIsDisplayed = Utils.isElementDisplayed(detailsWebPageNew.getReportProblemForServiceActionButton());
-            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
+            Assert.assertFalse(Utils.isElementDisplayed(detailsWebPageNew.getReportProblemForServiceActionButton()),
+                    "Actions button has been displayed");
         } catch (NoSuchElementException ex) {
-            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
         }
+    }
+
+    public static void verifyPhaseTotalPriceHasBeenChanged(String phase, String initialPrice) {
+
+        Assert.assertFalse(Utils.getText(new VNextBORODetailsWebPageNew().phaseTotalPrice(phase)).equals(initialPrice),
+                "Total price hasn't changed for the phase: " + phase);
     }
 }

@@ -108,7 +108,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOUsersPageSteps.clickLogo();
         VNextBOHomeWebPageValidations.verifySupportForBOButtonIsDisplayed();
-        VNextBOLeftMenuInteractions.selectUsersMenu();
+        VNextBOLeftMenuInteractions.clickSubMenuItem("Users");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -137,7 +137,6 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         final String actualHelpPageUrl = VNextBOHomeWebPageSteps.openHelpPage();
         VNextBOHomeWebPageValidations.verifyHelpPageIsOpened(actualHelpPageUrl);
-        Utils.refreshPage();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 9)
@@ -169,7 +168,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
 
         VNextBOPageSwitcherSteps.openPageByNumber(4);
         VNextBOUsersPageSteps.clickLogo();
-        VNextBOLeftMenuInteractions.selectUsersMenu();
+        VNextBOLeftMenuInteractions.clickSubMenuItem("Users");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("4");
         VNextBOPageSwitcherSteps.clickHeaderFirstPageButton();
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
@@ -190,7 +189,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.changeItemsPerPage("50");
         VNextBOPageSwitcherSteps.openPageByNumber(2);
         VNextBOUsersPageSteps.clickLogo();
-        VNextBOLeftMenuInteractions.selectUsersMenu();
+        VNextBOLeftMenuInteractions.clickSubMenuItem("Users");
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("2");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("50");
         VNextBOPageSwitcherSteps.changeItemsPerPage("10");

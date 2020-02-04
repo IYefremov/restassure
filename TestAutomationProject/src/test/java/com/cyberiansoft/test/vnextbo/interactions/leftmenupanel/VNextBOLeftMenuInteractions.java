@@ -78,7 +78,7 @@ public class VNextBOLeftMenuInteractions {
                     "aria-expanded", "true", 4);
     }
 
-    private static void clickSubMenuItem(String subMenuItemName) {
+    public static void clickSubMenuItem(String subMenuItemName) {
         Utils.clickElement(new VNexBOLeftMenuPanel().subMenuItemByName(subMenuItemName));
     }
 

@@ -200,6 +200,9 @@ public class VNextBOMonitorData {
     @JsonProperty("servicePrice")
     private String servicePrice;
 
+    @JsonProperty("serviceVendorPrice")
+    private String serviceVendorPrice;
+
     @JsonProperty("serviceQuantity")
     private String serviceQuantity;
 

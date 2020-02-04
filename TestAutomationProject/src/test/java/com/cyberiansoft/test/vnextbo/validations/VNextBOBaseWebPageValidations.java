@@ -79,7 +79,8 @@ public class VNextBOBaseWebPageValidations {
 
     public static void verifyHelpPageIsOpened(String actualHelpPageUrl) {
 
-        Assert.assertTrue(actualHelpPageUrl.contains("api.cyberianconcepts.com/HelpNote"), "The \"Help\" page hasn't been opened");
+        Assert.assertTrue(actualHelpPageUrl.contains("intercom.help") && actualHelpPageUrl.contains("reconpro-reconmonitor-back-office"),
+                "The \"Help\" page hasn't been opened");
     }
 
     public static void verifyLearnPageIsOpened(String actualLearnPageUrl) {

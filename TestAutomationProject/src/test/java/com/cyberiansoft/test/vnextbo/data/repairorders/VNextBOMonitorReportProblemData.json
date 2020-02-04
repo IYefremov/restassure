@@ -218,20 +218,43 @@
     }
   ],
 
-  "verifyUserCanReportTheProblemForThePartService": [
+  "verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnThePhaseLevel": [
     {
-      "rowID": "verifyUserCanReportTheProblemForThePartService.01",
-      "description": "Test Case 91251: Verify user can report the problem for the part service",
+      "rowID": "verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnThePhaseLevel.01",
+      "description": "Test Case 91248: Verify user can change the service's attributes after reporting the problem (phase level)",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91251",
-          "testCaseTitle": "Verify user can report the problem for the part service"
+          "testCaseID": "91248",
+          "testCaseTitle": "Verify user can change the service's attributes after reporting the problem (phase level)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "Detail Station",
+      "service": "AMoneyFlatFee_VacuumCleaner",
+      "problemReason": "No part",
+      "serviceQuantity": "1",
+      "servicePrice": "10",
+      "serviceVendorPrice": "100"
+    }
+  ],
+
+  "verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnTheServiceLevel": [
+    {
+      "rowID": "verifyTheUserCanChangeServicesAttributesAfterReportingTheProblemOnTheServiceLevel.01",
+      "description": "Test Case 91249: Verify user can change the service's attributes after reporting the problem (service level)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91249",
+          "testCaseTitle": "Verify user can change the service's attributes after reporting the problem (service level)"
         }
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "AMoneyVehicleFF_Washing",
-      "problemReason": "No part"
+      "service": "Car-Washing",
+      "problemReason": "No part",
+      "serviceQuantity": "1",
+      "servicePrice": "10",
+      "serviceVendorPrice": "100"
     }
   ],
 
@@ -252,14 +275,14 @@
     }
   ],
 
-  "verifyUserCanCompleteCurrentPhaseWithProblemServices": [
+  "verifyUserCompleteCurrentPhaseButtonIsDisabledIfServiceHasProblemStatus": [
     {
-      "rowID": "verifyUserCanCompleteCurrentPhaseWithProblemServices.01",
-      "description": "Test Case 91253: Verify user can complete the current phase with the problem services",
+      "rowID": "verifyUserCompleteCurrentPhaseButtonIsDisabledIfServiceHasProblemStatus.01",
+      "description": "Test Case 91254: Verify the \"Complete current phase\" button is blocked is services are in \"problem\" status",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91253",
-          "testCaseTitle": "Verify user can complete the current phase with the problem services"
+          "testCaseID": "91254",
+          "testCaseTitle": "Verify the \"Complete current phase\" button is blocked is services are in \"problem\" status"
         }
       ],
       "orderNumber": "O-000-147163",
@@ -286,6 +309,25 @@
     }
   ],
 
+
+
+  "verifyUserCanReportProblemForThePartService": [
+    {
+      "rowID": "verifyUserCanReportProblemForThePartService.01",
+      "description": "Test Case 91251: Verify user can report the problem for the part service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91251",
+          "testCaseTitle": "Verify user can report the problem for the part service"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "problemReason": "No part"
+    }
+  ],
+
   "verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase": [
     {
       "rowID": "verifyUserCanResolveProblemUsingCompleteCurrentPhaseWithoutCompletingCurrentPhase.01",
@@ -294,6 +336,23 @@
         {
           "testCaseID": "91256",
           "testCaseTitle": "Verify user can resolve problem using \"Complete current phase\" pop-up window without completing current phase"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "AMoneyVehicleFF_Washing",
+      "problemReason": "No part"
+    }
+  ],
+  
+  "verifyUserCanCompleteCurrentPhaseWithProblemServices": [
+    {
+      "rowID": "verifyUserCanCompleteCurrentPhaseWithProblemServices.01",
+      "description": "Test Case 91253: Verify user can complete the current phase with the problem services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91253",
+          "testCaseTitle": "Verify user can complete the current phase with the problem services"
         }
       ],
       "orderNumber": "O-000-147163",

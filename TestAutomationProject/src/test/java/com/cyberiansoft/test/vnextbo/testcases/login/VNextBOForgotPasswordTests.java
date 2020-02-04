@@ -40,7 +40,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaTestMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-
         VNextBOLoginInteractions.clickForgotPasswordLink();
         forgotPasswordPage = new VNextBOForgotPasswordWebPage();
     }
@@ -89,7 +88,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
         VNextBOLoginInteractions.clickForgotPasswordLink();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyUserCanResetPassword(String rowID, String description, JSONObject testData) throws Exception {
 
         NadaEMailService nada = new NadaEMailService();
