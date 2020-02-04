@@ -2,10 +2,8 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsApprovalWebPage;
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
 import java.util.Arrays;

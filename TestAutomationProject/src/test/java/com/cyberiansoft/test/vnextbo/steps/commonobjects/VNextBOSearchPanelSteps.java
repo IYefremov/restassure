@@ -36,6 +36,7 @@ public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
         Utils.clearAndType(searchPanel.getSearchInputField(), searchText);
         Utils.clickElement(searchPanel.getSearchLoupeIcon());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     public static void searchByTextWithEnterButton(String searchText) {

@@ -90,6 +90,10 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.parts.management.order.details.parts.details.status.td");
     }
 
+    public String getPMGenericPartProviderFunctionalityTD() {
+        return properties.getProperty("vnextbo.parts.management.generic.part.provider.functionality.td");
+    }
+
     public String getPMOrderDetailsPartsDetailsLaborTD() {
         return properties.getProperty("vnextbo.parts.management.order.details.parts.details.labor.td");
     }

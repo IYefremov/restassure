@@ -2,18 +2,44 @@ package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
+import com.cyberiansoft.test.enums.PartStatuses;
+import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddLaborPartsDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
-import org.openqa.selenium.By;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAddNewPartDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogValidations;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class VNextBOPartsDetailsPanelSteps {
+
+    public static void addNewPart(VNextBOPartsData data) {
+        WaitUtilsWebDriver.waitABit(1000);
+        VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
+        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(true);
+        VNextBOAddNewPartDialogSteps.setServiceField(data.getService());
+        VNextBOAddNewPartDialogValidations.verifyServiceFieldIsCorrect(data.getService());
+        VNextBOAddNewPartDialogSteps.setDescription(data.getDescription());
+        VNextBOAddNewPartDialogSteps.setCategory(data.getCategory());
+        VNextBOAddNewPartDialogSteps.setSubCategory(data.getSubcategory());
+        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogSteps.getSelectedPartsCounter());
+        VNextBOAddNewPartDialogSteps.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
+        VNextBOAddNewPartDialogValidations.verifySelectedPartsCounterValueIsCorrect(String.valueOf(partsCounterValueBefore + data.getPartItems().length));
+        VNextBOAddNewPartDialogSteps.clickSubmitButton();
+        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
+    }
 
     public static void clickAddNewPartButton() {
 
@@ -65,7 +91,7 @@ public class VNextBOPartsDetailsPanelSteps {
     public static void setStatusForPartByPartNumberInList(int partNumber, String status) {
 
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
-        Utils.clickElement(detailsPanel.getPartStatusField().get(partNumber));
+        Utils.clickElement(detailsPanel.getPartStatusFields().get(partNumber));
         Utils.selectOptionInDropDownWithJsScroll(status);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
@@ -133,8 +159,64 @@ public class VNextBOPartsDetailsPanelSteps {
         Utils.selectOptionInDropDownWithJs(detailsPanel.getStatusesCheckboxDropDown(), detailsPanel.statusCheckBoxDropDownItem(status));
     }
 
-    public static void clickStatusesCheckBox() {
+    public static void updatePartsList(String woNum) {
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(4000); //wait for part to be created
+        Utils.refreshPage();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+    }
 
-        Utils.clickElement(new VNextBOPartsDetailsPanel().getStatusesCheckbox());
+    public static void updatePartsList(String woNum, boolean condition) {
+        if (condition) {
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
+            WaitUtilsWebDriver.waitABit(5000); //wait for parts to be created
+            Utils.refreshPage();
+            VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+        }
+    }
+
+    public static void addPartIfOpenStatusIsNotPresent(VNextBOPartsData data, String woNum) {
+        final String status = PartStatuses.OPEN.getStatus();
+        if (!VNextBOPartsDetailsPanelValidations.isPartStatusPresent(status)) {
+            addNewPart(data);
+            updatePartsList(woNum);
+        }
+
+        Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartStatusPresent(status),
+                "The part is not displayed with " + status + " status");
+    }
+
+    public static void addPartIfOpenStatusIsNotPresent(VNextBOPartsData data, String woNum, int expectedNumber) {
+        final String status = PartStatuses.OPEN.getStatus();
+        final int partsNumber = expectedNumber - VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(status);
+        for (int i = 0; i < partsNumber; i++) {
+            WaitUtilsWebDriver.waitABit(1000);
+            addNewPart(data);
+        }
+
+        updatePartsList(woNum, partsNumber > 0);
+        Assert.assertTrue(VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(status) >= expectedNumber,
+                "The parts number is not with " + status + " status is not >= " + expectedNumber);
+    }
+
+    public static void clickGetQuotesPartButton() {
+        VNextBOPartsDetailsPanelInteractions.clickGetQuotesPartButton();
+        Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
+                "The Parts Providers modal dialog hasn't been opened");
+    }
+
+    public static void deleteServicesByStatus(String status) {
+        VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
+        final WebElement selectedStatus = VNextBOPartsDetailsPanelInteractions.getSelectedStatus(status);
+        if (selectedStatus != null) {
+            VNextBOPartsDetailsPanelInteractions.selectStatusToDelete(selectedStatus);
+            VNextBOPartsDetailsPanelInteractions.clickDeleteButton();
+            Assert.assertTrue(VNextBOConfirmationDialogInteractions.getConfirmationDialogMessage().contains(
+                    VNextBOAlertMessages.VERIFY_PARTS_TO_BE_DELETED), "The message hasn't been displayed");
+            VNextBOConfirmationDialogInteractions.clickYesButton();
+        } else {
+            VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
+            VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckBoxToBeOpened(false);
+        }
     }
 }

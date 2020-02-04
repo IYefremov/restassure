@@ -1,0 +1,100 @@
+{
+  "verifyUserCanStartPartsQuoteActivityOnlyForOrdersWithOpenServiceStatus": [
+    {
+      "rowID": "verifyUserCanStartPartsQuoteActivityOnlyForOrdersWithOpenServiceStatus.01",
+      "description": "Verify user can start parts quote activity only for orders with open service' status",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "100028",
+          "testCaseTitle": "Verify user can start parts quote activity only for orders with open service' status"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-368-00014"
+      },
+      "provider": "Generic Part Provider - Test Team"
+    }
+  ],
+  "verifyAllOpenStatusServicesAreDisplayedOnQuotePageWithCorrectQuantity": [
+    {
+      "rowID": "verifyAllOpenStatusServicesAreDisplayedOnQuotePageWithCorrectQuantity.01",
+      "description": "Verify all open status services are presented on the quote page with correct quantity.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "100038",
+          "testCaseTitle": "Verify all open status services are presented on the quote page with correct quantity."
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "partData": {
+        "service": "IvPartTest_OptionClarif",
+        "description": "Auto-test",
+        "category": "Accessories and Fluids",
+        "subcategory": "Books",
+        "partItems": [
+          "Catalog",
+          "Enthusiast Book"
+        ]
+      },
+      "provider": "Generic Part Provider - Test Team"
+    }
+  ],
+  "checkGenericPartProvider": [
+    {
+      "rowID": "checkGenericPartProvider.01",
+      "description": "Generic Part Provider end-to-end scenario",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "100037",
+          "testCaseTitle": "Generic Part Provider end-to-end scenario"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "partData": {
+        "service": "IvPartTest_OptionClarif",
+        "description": "Auto-test",
+        "category": "Accessories and Fluids",
+        "subcategory": "Books",
+        "partItems": [
+          "Catalog",
+          "Enthusiast Book"
+        ]
+      },
+      "provider": "Generic Part Provider - Test Team"
+    }
+  ],
+  "verifyUserCanImportCorePriceFromPunchoutWebStore": [
+    {
+      "rowID": "verifyUserCanImportCorePriceFromPunchoutWebStore.01",
+      "description": "Verify user can Import Core Price from Punchout Web Store",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92553",
+          "testCaseTitle": "Verify user can Import Core Price from Punchout Web Store"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-007-00005"
+      },
+      "partData": {
+        "service": "Oksi Part service - Category",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Adhesives",
+        "partItems": [
+          "Back Glass Adhesive Kit"
+        ],
+        "partName": "ProPower Ultra / Battery"
+      },
+      "provider": "AutoZone"
+    }
+  ]
+}
