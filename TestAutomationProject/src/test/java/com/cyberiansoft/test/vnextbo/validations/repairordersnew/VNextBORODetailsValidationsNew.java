@@ -48,13 +48,10 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyActionsButtonIsNotDisplayedForPhase(String phase) {
 
-        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
-        boolean buttonIsDisplayed = false;
         try {
-            buttonIsDisplayed = Utils.isElementDisplayed(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
+            Assert.assertFalse(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().actionsMenuButtonForPhase(phase)),
+                    "Actions button has been displayed");
         } catch (NoSuchElementException ex) {
-            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
         }
     }
 
@@ -62,12 +59,10 @@ public class VNextBORODetailsValidationsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
-        boolean buttonIsDisplayed = false;
         try {
-            buttonIsDisplayed = Utils.isElementDisplayed(detailsWebPageNew.getReportProblemForServiceActionButton());
-            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
+            Assert.assertFalse(Utils.isElementDisplayed(detailsWebPageNew.getReportProblemForServiceActionButton()),
+                    "Actions button has been displayed");
         } catch (NoSuchElementException ex) {
-            Assert.assertFalse(buttonIsDisplayed, "Actions button has been displayed");
         }
     }
 
