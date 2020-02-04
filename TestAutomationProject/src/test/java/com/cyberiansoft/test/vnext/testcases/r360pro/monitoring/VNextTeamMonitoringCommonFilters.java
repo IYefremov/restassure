@@ -26,7 +26,7 @@ import org.testng.annotations.Test;
 public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     private String workOrderId = "";
 
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+    @BeforeClass(description = "Team Monitoring Common Filters")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
 
@@ -98,5 +98,28 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         SearchSteps.searchByPhase(expectedOrderInfo.getPhaseName());
         MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanReturnToCommonFilterPageFromStatusPage(String rowID,
+                                     String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
+        SearchSteps.openSearchFilters();
+        SearchSteps.clickStatusFilter();
+        ScreenNavigationSteps.pressBackButton();
+        SearchSteps.clickDepartmentFilter();
+        ScreenNavigationSteps.pressBackButton();
+        SearchSteps.clickPhaseFilter();
+        ScreenNavigationSteps.pressBackButton();
+        SearchSteps.clickFlagFilter();
+        ScreenNavigationSteps.pressBackButton();
+        SearchSteps.clickPriorityFilter();
+        ScreenNavigationSteps.pressBackButton();
+
+        SearchSteps.fillTextSearch(workOrderId);
+        SearchSteps.search();
+        ScreenNavigationSteps.pressBackButton();
+
     }
 }

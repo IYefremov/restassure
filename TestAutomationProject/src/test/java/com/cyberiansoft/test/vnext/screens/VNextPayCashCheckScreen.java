@@ -87,6 +87,7 @@ public class VNextPayCashCheckScreen extends VNextBaseScreen {
     public void clickScreenBackButton() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='payment']")));
+        WaitUtils.waitUntilElementIsClickable(paybtn);
         super.clickScreenBackButton();
     }
 

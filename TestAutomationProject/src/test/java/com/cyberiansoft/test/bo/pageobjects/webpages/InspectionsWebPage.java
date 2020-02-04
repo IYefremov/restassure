@@ -508,22 +508,12 @@ public class InspectionsWebPage extends WebPageWithFilter {
 	}
 
 	public void verifyVINIsPresentForInspection(String inspnumber, String VIN) {
-		clickInspectionLink(inspnumber);
-		waitForNewTab();
-		// driver.findElement(By.xpath("//button[contains(text(),'Approve')]"));
-		Set<String> handles = driver.getWindowHandles();
-		Iterator<String> it = handles.iterator();
-		// iterate through your windows
-		while (it.hasNext()) {
-			String parent = it.next();
-			String newwin = it.next();
-			driver.switchTo().window(newwin);
-			waitABit(5000);
-			Assert.assertTrue(driver.findElement(By.xpath("//td[@id='vinBlock']")).getText().contains(VIN));
-			driver.close();
-			driver.switchTo().window(parent);
-		}
-
+		WebElement row = getTableRowWithInspection(inspnumber);
+		Actions move = new Actions(driver);
+		move.moveToElement(row.findElement(By.xpath(".//span[contains(@id, 'lblVin')]"))).perform();
+		Assert.assertTrue(driver.findElement(
+				By.xpath("//div[contains(@id, 'RadToolTipWrapper')]/table/tbody/tr[2]/td[2]")).getText()
+				.contains(VIN));
 	}
 
 	public String getInspectionAmountApproved(String inspnumber) {

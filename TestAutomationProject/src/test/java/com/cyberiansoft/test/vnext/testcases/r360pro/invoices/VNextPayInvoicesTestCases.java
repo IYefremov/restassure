@@ -24,6 +24,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
@@ -619,7 +620,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
+        servicesScreen.openServiceDetailsScreen(testCaseData.getWorkOrderData().getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.changeServicePrice("0");
+        ServiceDetailsScreenSteps.saveServiceDetails();
         vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
         VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
@@ -630,7 +633,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
         VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         MenuValidations.menuItemShouldBeVisible(MenuItems.PAY, false);
         MenuSteps.closeMenu();
         invoicesScreen.clickBackButton();
@@ -789,7 +792,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
 
         payCashCheckScreen.clickScreenBackButton();
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        invoicesScreen.waitInvoicesScreenLoad();
         invoicesScreen.clickBackButton();
     }
 

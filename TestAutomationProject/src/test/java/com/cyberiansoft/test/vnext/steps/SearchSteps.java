@@ -8,6 +8,7 @@ import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SearchSteps {
@@ -25,6 +26,36 @@ public class SearchSteps {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement());
         commonFilterScreen.getStatus().selectOption(status.getStatusString());
+    }
+
+    public static void clickStatusFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getStatus().getElementsLocator())).size() > 0);
+    }
+
+    public static void clickDepartmentFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getDepartment().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getDepartment().getElementsLocator())).size() > 0);
+    }
+
+    public static void clickPhaseFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getPhase().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getPhase().getElementsLocator())).size() > 0);
+    }
+
+    public static void clickFlagFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getFlag().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getFlag().getElementsLocator())).size() > 0);
+    }
+
+    public static void clickPriorityFilter() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getPriority().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getPriority().getElementsLocator())).size() > 0);
     }
 
     public static void search() {
@@ -112,5 +143,10 @@ public class SearchSteps {
         GeneralWizardInteractions.openSearchFilter();
         GeneralWizardInteractions.setSearchText(serviceName);
         GeneralWizardInteractions.closeSearchFilter();
+    }
+
+    public static void clearFilters() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getClearFilter().click();
     }
 }
