@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class BasicVehiclePartsTests extends BaseTestClass {
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+    @BeforeClass(description = "Basic Vehicle Parts Tests")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getVehiclePartsCasesDataPath();
     }

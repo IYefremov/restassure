@@ -30,31 +30,51 @@ public class SearchSteps {
 
     public static void clickStatusFilter() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getStatus().getRootElement().click();
+                    return true;
+                });
         WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getStatus().getElementsLocator())).size() > 0);
     }
 
     public static void clickDepartmentFilter() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getDepartment().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getDepartment().getRootElement().click();
+                    return true;
+                });
         WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getDepartment().getElementsLocator())).size() > 0);
     }
 
     public static void clickPhaseFilter() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getPhase().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getPhase().getRootElement().click();
+                    return true;
+                });
         WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getPhase().getElementsLocator())).size() > 0);
     }
 
     public static void clickFlagFilter() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getFlag().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getFlag().getRootElement().click();
+                    return true;
+                });
         WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getFlag().getElementsLocator())).size() > 0);
     }
 
     public static void clickPriorityFilter() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getPriority().getRootElement()).click();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    commonFilterScreen.getPriority().getRootElement().click();
+                    return true;
+                });
         WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getPriority().getElementsLocator())).size() > 0);
     }
 

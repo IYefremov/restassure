@@ -66,7 +66,12 @@ public class EmailSteps {
                     emailScreen.getCcEmailPanel().findElement(emailScreen.getAddMoreBtn()).click();
                     return true;
                 });
-        emailScreen.getToEmailPanel().findElement(emailScreen.getRemoveMailBtn()).click();
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    emailScreen.getToEmailPanel().findElement(emailScreen.getRemoveMailBtn()).click();
+                    return true;
+                });
+
     }
 
     public static void clickRemoveCCEmailAddressButton() {

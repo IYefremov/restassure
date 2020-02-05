@@ -347,7 +347,6 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
         basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(MatrixServiceSteps::selectPartServiceInsideMatrixService);
-        ServiceDetailsScreenSteps.saveServiceDetails();
         MatrixServiceSteps.switchToSelectedServices();
         basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(serviceData -> MatrixServiceDetailsValidations.validateServiceSelected(serviceData.getServiceName()));
         MatrixServiceDetailsValidations.validateMatrixServiceDetails(basicPartsServiceMatrixService);
