@@ -1,9 +1,27 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
+import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import com.cyberiansoft.test.enums.TimeFrameValues;
+import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
+import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
+import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBORODetailsPartsBlockValidations;
+import org.json.simple.JSONObject;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 
 public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
-/*
+
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPartsManagementOrderDetailsTD();
@@ -11,50 +29,25 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox(String rowID, String description, JSONObject testData) {
+    public void verifyTheSameStatusesAreDisplayedOnRODetailsAndPMPages(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        VNextBOPartsManagementOrderDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementOrderDetailsData.class);
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        final VNextBOPartsData partData = data.getPartData();
+        final VNextBOPartsManagementSearchData searchData = data.getSearchData();
+//
+//        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(searchData.getWoNum());
+//        VNextBOPartsDetailsPanelSteps.deleteServicesByName(partData.getPartName());
+//        VNextBOPartsDetailsPanelSteps.addPartIfOpenStatusIsNotPresent(partData, searchData.getWoNum());
 
-    }
+//        final String pmWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanAddAndDeleteLabor(String rowID, String description, JSONObject testData) {
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanTypeLaborServiceNameAddingLabor(String rowID, String description, JSONObject testData) {
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanCancelAddingLabor(String rowID, String description, JSONObject testData) {
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanMaximizeMinimizeThePartTab(String rowID, String description, JSONObject testData) {
+        Utils.openNewTab(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+        VNextBOROAdvancedSearchDialogSteps.searchByWoAndTimeFrame(searchData.getWoNum(), TimeFrameValues.TIMEFRAME_CUSTOM);
+        VNextBOROPageSteps.openRODetailsPage(searchData.getWoNum());
+        final String roWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
+        VNextBORODetailsPartsBlockValidations.verifyServicePartsFieldsAreNotClickable(partData.getPartName());
 
     }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangeOEM(String rowID, String description, JSONObject testData) {
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangePartsInputFields(String rowID, String description, JSONObject testData) {
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangeETA(String rowID, String description, JSONObject testData) {
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangeStatusOfThePart(String rowID, String description, JSONObject testData) {
-
-    }
- */
 }

@@ -11,7 +11,6 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
@@ -169,18 +168,11 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[contains(@data-bind, 'partActionsVisible')]")
 	private List<WebElement> partsActions;
 
-	@FindBy(xpath = "//div[@id='reconmonitordetails-parts']//b")
-	private List<WebElement> partsNames;
-
-	@FindBy(xpath = "//div[@id='reconmonitordetails-parts']//td[@class='grid__centered'][4]/div")
-	private List<WebElement> partsOrderedFromTableValues;
-
 	@FindBy(xpath = "//ul[@class='k-list k-reset' and @aria-hidden='false']/li")
 	private List<WebElement> listBoxOptions;
 
 	@FindBy(xpath = "//tr[@class='serviceRow']//span[contains(@class, 'service-status')]//span[@class='k-input']")
 	private List<WebElement> partsPhaseStatusDropDowns;
-
 
 	public VNextBORODetailsPage() {
 		super(DriverBuilder.getInstance().getDriver());
@@ -333,37 +325,6 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
     public By getServiceCompletedDate(String serviceId) {
 	    return By.xpath("//div[@data-order-service-id='" + serviceId + "']//div[@class='clmn_6']//span[text()][2]");
     }
-
-	private WebElement getPartActionElement(int index) {
-		try {
-			final WebElement partAction = partsActions.get(index);
-			System.out.println("element");
-			System.out.println(partsActions.get(index));
-			Utils.clickElement(partAction);
-			return WaitUtilsWebDriver.waitForVisibility(partAction.findElement(By.xpath("./div[@class='drop checkout']")));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-
-	public WebElement clickPartActionsIconForPart(String part) {
-		try {
-			WaitUtilsWebDriver.waitForVisibilityOfAllOptions(partsNames, 10);
-		} catch (Exception e) {
-			Assert.fail("The Parts section is empty", e);
-		}
-		try {
-			final List<String> partsList = partsNames
-					.stream()
-					.map(WebElement::getText)
-					.collect(Collectors.toList());
-			return getPartActionElement(partsList.indexOf(part));
-		} catch (Exception e) {
-			Assert.fail("The Part hasn't been displayed");
-		}
-		return null;
-	}
 
 	public WebElement getPhaseActionsTrigger(String phase) {
 	    return WaitUtilsWebDriver.waitForElementNotToBeStale(By.xpath("//div[@data-name='" + phase

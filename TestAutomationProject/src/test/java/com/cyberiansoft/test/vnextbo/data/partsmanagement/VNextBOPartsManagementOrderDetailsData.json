@@ -15,7 +15,6 @@
       "woNum": "O-000-152414"
     }
   ],
-
   "verifyUserCanAddAndDeleteLabor": [
     {
       "rowID": "verifyUserCanAddAndDeleteLabor.01",
@@ -39,7 +38,6 @@
       "labor": "Labor AM"
     }
   ],
-
   "verifyUserCanTypeLaborServiceNameAddingLabor": [
     {
       "rowID": "verifyUserCanTypeLaborServiceNameAddingLabor.01",
@@ -58,7 +56,6 @@
       "labor": "Not Multi Labor (optional clarification)"
     }
   ],
-
   "verifyUserCanCancelAddingLabor": [
     {
       "rowID": "verifyUserCanCancelAddingLabor.01",
@@ -76,7 +73,6 @@
       "labor": "Labor AM"
     }
   ],
-
   "verifyUserCanMaximizeMinimizeThePartTab": [
     {
       "rowID": "verifyUserCanMaximizeMinimizeThePartTab.01",
@@ -91,7 +87,6 @@
       "labor": "Labor AM"
     }
   ],
-
   "verifyUserCanChangeOEM": [
     {
       "rowID": "verifyUserCanChangeOEM.01",
@@ -106,7 +101,6 @@
       "oemNum": "24234"
     }
   ],
-
   "verifyUserCanChangePartsInputFields": [
     {
       "rowID": "verifyUserCanChangePartsInputFields.01",
@@ -126,7 +120,6 @@
       "woNum": "O-000-152414"
     }
   ],
-
   "verifyUserCanChangeETA": [
     {
       "rowID": "verifyUserCanChangeETA.01",
@@ -140,7 +133,6 @@
       "woNum": "O-000-152414"
     }
   ],
-
   "verifyUserCanChangeStatusOfThePart": [
     {
       "rowID": "verifyUserCanChangeStatusOfThePart.01",
@@ -191,6 +183,31 @@
         "Refused",
         "Audited"
       ]
+    }
+  ],
+  "verifyTheSameStatusesAreDisplayedOnRODetailsAndPMPages": [
+    {
+      "rowID": "verifyTheSameStatusesAreDisplayedOnRODetailsAndPMPages.01",
+      "description": "Show the same statuses at ROD and Parts Management page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "107622"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147524"
+      },
+      "partData": {
+        "service": "IvPartTest_OptionClarif",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Adhesives",
+        "partItems": [
+          "Windshield Adhesive Kit"
+        ],
+        "partName": "Opt_prefix Windshield Adhesive Kit"
+      }
     }
   ]
 }

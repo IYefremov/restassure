@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -78,8 +79,7 @@ public class VNextBOPartsDetailsPanelInteractions {
 
     public static void clickDeleteButton() {
         final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
-        final boolean displayed = WaitUtilsWebDriver.elementShouldBeVisible(
-                partsDetailsPanel.getDeleteSelectedPartsButton(), true, 2);
+        final boolean displayed = VNextBOPartsDetailsPanelValidations.isDeleteSelectedPartsButtonDisplayed(true);
         if (displayed) {
             Utils.clickElement(partsDetailsPanel.getDeleteSelectedPartsButton());
             WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOConfirmationDialog().getConfirmDialog(), true, 3);
@@ -89,5 +89,15 @@ public class VNextBOPartsDetailsPanelInteractions {
     public static void clickShoppingCartButton() {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getShoppingCartButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void selectCheckboxesForServicesByName(String name) {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        final List<String> partNames = Utils.getText(partsDetailsPanel.getPartNames());
+        for (int i = 0; i < partNames.size(); i++) {
+            if (partNames.get(i).equals(name)) {
+                Utils.clickElement(partsDetailsPanel.getPartCheckboxesList().get(i));
+            }
+        }
     }
 }

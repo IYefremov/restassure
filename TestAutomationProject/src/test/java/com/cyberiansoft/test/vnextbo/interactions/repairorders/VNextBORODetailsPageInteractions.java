@@ -641,10 +641,6 @@ public class VNextBORODetailsPageInteractions {
         WaitUtilsWebDriver.waitForLoading();
     }
 
-    public static List<String> getPartsOrderedFromTableValuesData() {
-        return Utils.getText(new VNextBORODetailsPage().getPartsOrderedFromTableValues());
-    }
-
     public static List<String> getPhasesServicesId(String phase) {
         return WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBORODetailsPage()
                 .getPhaseServicesList(phase), 2)

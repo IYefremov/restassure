@@ -57,7 +57,7 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private List<WebElement> partDetails;
 
     @FindBy(xpath = "//div[@id='part-entity-details']//input[contains(@data-bind, 'canDelete')]")
-    private List<WebElement> partCheckbox;
+    private List<WebElement> partCheckboxesList;
 
     @FindBy(xpath = "//div[@id='partsTable']//div[contains(@data-bind, 'isExpanded')]")
     private List<WebElement> partLaborsBlock;

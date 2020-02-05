@@ -46,10 +46,10 @@ public class WaitUtilsWebDriver {
         return getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(15));
     }
 
-    public static FluentWait<WebDriver> getFluentWait(Duration pollingMillis, Duration timeoutSeconds) {
+    public static FluentWait<WebDriver> getFluentWait(Duration pollingMillis, Duration timeout) {
         return new FluentWait<>(DriverBuilder.getInstance().getDriver())
                 .pollingEvery(pollingMillis)
-                .withTimeout(timeoutSeconds)
+                .withTimeout(timeout)
                 .ignoring(WebDriverException.class);
     }
 
@@ -356,6 +356,30 @@ public class WaitUtilsWebDriver {
         } else {
             try {
                 wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(element)));
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        }
+    }
+
+    public static boolean elementShouldBeClickable(List<WebElement> elements, boolean condition) {
+        return elementShouldBeClickable(elements, condition, 5);
+    }
+
+    public static boolean elementShouldBeClickable(List<WebElement> elements, boolean condition, int timeOut) {
+        final FluentWait<WebDriver> wait = getFluentWait(Duration.ofMillis(100), Duration.ofMillis(500));
+        waitForVisibilityOfAllOptionsIgnoringException(elements, timeOut);
+        if (condition) {
+            try {
+                elements.forEach(e -> wait.until(ExpectedConditions.elementToBeClickable(e)));
+                return true;
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            try {
+                elements.forEach(e -> wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(e))));
                 return true;
             } catch (Exception e) {
                 return false;

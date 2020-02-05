@@ -210,13 +210,24 @@ public class VNextBOPartsDetailsPanelSteps {
         final WebElement selectedStatus = VNextBOPartsDetailsPanelInteractions.getSelectedStatus(status);
         if (selectedStatus != null) {
             VNextBOPartsDetailsPanelInteractions.selectStatusToDelete(selectedStatus);
-            VNextBOPartsDetailsPanelInteractions.clickDeleteButton();
-            Assert.assertTrue(VNextBOConfirmationDialogInteractions.getConfirmationDialogMessage().contains(
-                    VNextBOAlertMessages.VERIFY_PARTS_TO_BE_DELETED), "The message hasn't been displayed");
-            VNextBOConfirmationDialogInteractions.clickYesButton();
+            deleteServices();
         } else {
             VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
             VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckBoxToBeOpened(false);
         }
+    }
+
+    public static void deleteServicesByName(String name) {
+        VNextBOPartsDetailsPanelInteractions.selectCheckboxesForServicesByName(name);
+        if (VNextBOPartsDetailsPanelValidations.isDeleteSelectedPartsButtonDisplayed(true)) {
+            deleteServices();
+        }
+    }
+
+    public static void deleteServices() {
+        VNextBOPartsDetailsPanelInteractions.clickDeleteButton();
+        Assert.assertTrue(VNextBOConfirmationDialogInteractions.getConfirmationDialogMessage().contains(
+                VNextBOAlertMessages.VERIFY_PARTS_TO_BE_DELETED), "The message hasn't been displayed");
+        VNextBOConfirmationDialogInteractions.clickYesButton();
     }
 }

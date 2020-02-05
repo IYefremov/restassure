@@ -148,7 +148,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
         List<WebElement> checkBoxes = new ArrayList<>();
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
-        if (status.equals("All")) checkBoxes = detailsPanel.getPartCheckbox();
+        if (status.equals("All")) checkBoxes = detailsPanel.getPartCheckboxesList();
         else checkBoxes = detailsPanel.partCheckBoxesByPartStatus(status);
         if (shouldBeActivated) {
             for (WebElement partCheckBox : checkBoxes) {
@@ -169,6 +169,11 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Delete button hasn't been displayed");
         else Assert.assertFalse(Utils.isElementDisplayed(partsDetailsPanel.getDeleteSelectedPartsButton()),
                 "Delete button has been displayed");
+    }
+
+    public static boolean isDeleteSelectedPartsButtonDisplayed(boolean shouldBeDisplayed) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOPartsDetailsPanel().getDeleteSelectedPartsButton(), shouldBeDisplayed, 2);
     }
 
     public static void verifyStatusesListIsCorrect(List<String> expectedStatusesList) {
