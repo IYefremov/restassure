@@ -80,7 +80,6 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.verifyNoteIsPresent(teamInspectionNote);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
     }
 
 

@@ -82,15 +82,16 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
             tap(carimage);
     }
 
+    //todo: rewrite method not to use elements size()
     public void clickCarImageOnRandom() {
         WebElement elem = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//img[@class='car-image']"));
         Actions act = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        //int x = new Random().nextInt(elem.getSize().getWidth() / 2) - new Random().nextInt(elem.getSize().getWidth() / 2);
+        //int y = new Random().nextInt(elem.getSize().getHeight() / 2) - new Random().nextInt(elem.getSize().getHeight() / 2);
 
-        int x = new Random().nextInt(elem.getSize().getWidth() / 2) - new Random().nextInt(elem.getSize().getWidth() / 2);
-        int y = new Random().nextInt(elem.getSize().getHeight() / 2) - new Random().nextInt(elem.getSize().getHeight() / 2);
-
-        act.moveToElement(elem).moveByOffset(x, y).click().perform();
-
+        int addedDamages = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//*[@class='car-marker']")).size()+1;
+        act.moveToElement(elem).moveByOffset(-elem.getSize().getWidth()/2+addedDamages*20, 0).click().perform();
+        //act.moveToElement(elem).moveByOffset(x, y).click().perform();
     }
 
     public void clickCarImageSecondTime() {
