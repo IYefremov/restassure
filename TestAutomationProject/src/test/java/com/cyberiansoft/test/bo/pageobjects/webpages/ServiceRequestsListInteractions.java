@@ -548,10 +548,10 @@ public class ServiceRequestsListInteractions {
 
 	public int checkSchedulerByDateMonth(String date) {
 		DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
-		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
-		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderMonth"))).click();
-		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@title, '" + date + "')]"))).click();
-		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
+		Utils.clickElement(By.id("lbViewChangeScheduler"));
+		Utils.clickElement(By.className("rsHeaderMonth"));
+        Utils.clickElement(By.xpath("//a[contains(@title, '" + date + "')]"));
+        Utils.clickElement(By.className("rsFullTime"));
 		return WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.className("rsNonWorkHour")))
 				.findElements(By.xpath("//div[contains(@class, 'rsApt appointmentClassDefault')]")).size();
 	}
@@ -559,7 +559,7 @@ public class ServiceRequestsListInteractions {
 	public void goToMonthInScheduler() {
 		DriverBuilder.getInstance().getDriver().switchTo().defaultContent();
 		waitForLoading();
-		WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.id("lbViewChangeScheduler"))).click();
+		Utils.clickElement(By.id("lbViewChangeScheduler"));
 		waitForLoading();
 		retryingFindClick(By.className("rsHeaderMonth"));
 		// WaitUtilsWebDriver.getWait().ignoring(StaleElementReferenceException.class).until(ExpectedConditions.elementToBeClickable(By.className("rsHeaderMonth"))).click();
@@ -594,6 +594,7 @@ public class ServiceRequestsListInteractions {
 
     private void addTechnician() {
         Utils.clickElement(srListPage.getTechniciansSchedulerArrow());
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(srListPage.getTechniciansDropDown(), 1);
         Utils.selectOptionInDropDown(srListPage.getTechniciansDropDown(), srListPage.getTechniciansListBox());
         Utils.clickElement(srListPage.getTechniciansSchedulerAddButton());
     }

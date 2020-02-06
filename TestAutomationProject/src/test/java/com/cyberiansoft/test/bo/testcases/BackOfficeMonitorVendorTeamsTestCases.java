@@ -118,7 +118,7 @@ public class BackOfficeMonitorVendorTeamsTestCases extends BaseTestCase {
 		vendorsteamspage.clickEditVendorTeam(data.getVendorTeamEdited());
 		Assert.assertEquals(data.getVendorTeamEdited(), newvendordialog.getNewVendorTeamName());
 		Assert.assertEquals(data.getTimeZoneEdited(), newvendordialog.getNewVendorTeamTimezone());
-		Assert.assertEquals(data.getVendorTimeSheetTypeEdited(), newvendordialog.getNewVendorTeamTimesheetType());
+        Assert.assertEquals(data.getVendorTimeSheetTypeEdited(), newvendordialog.getNewVendorTeamTimesheetType());
 		Assert.assertEquals(data.getVendorTypeEdited(), newvendordialog.getNewVendorTeamType());
 		Assert.assertEquals(data.getVendorCompany(), newvendordialog.getNewVendorCompany());
 
