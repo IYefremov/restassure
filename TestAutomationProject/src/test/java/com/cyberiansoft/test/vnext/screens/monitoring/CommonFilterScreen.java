@@ -23,6 +23,9 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(xpath = "//div[contains(@class,'searchlist-filters-clear')]")
     private WebElement clearFilter;
 
+    @FindBy(xpath = "//*[@data-autotests-id=\"search-cancel\"]")
+    private WebElement cancelSearchInputButton;
+
     @FindBy(id = "filter_timeframe")
     private ListPicker timeframe;
 

@@ -211,6 +211,23 @@
       }
     }
   ],
+  "userCanSearchByStatus": [
+    {
+      "rowID": "userCanSearchByStatus.01",
+      "description": "TFSID:",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92304",
+          "testCaseTitle": "Verify user can search by \"Status\""
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel"
+        }
+      }
+    }
+  ],
   "verifyThatSkippedRefusedAndPartsServicesAreNotInvolvedToTheCompletePercentageCalculation": [
     {
       "rowID": "verifyThatSkippedRefusedAndPartsServicesAreNotInvolvedToTheCompletePercentageCalculation.01",

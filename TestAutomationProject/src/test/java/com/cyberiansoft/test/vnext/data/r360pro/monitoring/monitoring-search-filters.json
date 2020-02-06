@@ -27,6 +27,41 @@
         }
       ]
     }
+  ],
+  "verifyUserSearchByFromAndTo": [
+    {
+      "rowID": "verifyUserSearchByFromAndTo.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92295",
+          "testCaseTitle": "Verify user can search by \"From\" and \"To\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseCommonFiltersPopDownWindow": [
+    {
+      "rowID": "verifyUserCanCloseCommonFiltersPopDownWindow.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92290",
+          "testCaseTitle": "Verify user can close \"Common filters\" pop-dawn window"
+        }
+      ]
+    }
+  ],
+  "userCanFindTheNecessaryPriority": [
+    {
+      "rowID": "userCanFindTheNecessaryPriority.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92313",
+          "testCaseTitle": "Verify the user can find the necessary priority"
+        }
+      ]
+    }
   ]
-
 }

@@ -36,6 +36,9 @@ public class RepairOrderScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@class=\"searchlist-common-filters-toggle\"]")
     private WebElement commonFiltersToggle;
 
+    @FindBy(xpath = "//div[@class=\"searchlist-common-filters-container\"]")
+    private WebElement searchFiltersPanel;
+
     @FindBy(xpath = "//div[@class=\"searchlist-nothing-found\"]")
     private WebElement nothingFoundLable;
 

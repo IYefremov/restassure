@@ -19,6 +19,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.MonitorValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -70,7 +71,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.clearAllFilters();
         SearchSteps.searchByText(workOrderId);
-        MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
+        MonitorValidations.verifyRepairOrderValues(workOrderId, repairOrderDto);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToParts();
@@ -82,7 +83,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         MenuSteps.selectStatus(ServiceStatus.RECEIVED);
         EditOrderSteps.waitPhasesScreenLoaded();
         WizardScreenSteps.saveAction();
-        MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
+        MonitorValidations.verifyRepairOrderValues(workOrderId, repairOrderDto);
 
         serviceData = workOrderData.getServicesList().get(1);
         MonitorSteps.openItem(workOrderId);
@@ -94,7 +95,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.SKIPPED);
         WizardScreenSteps.saveAction();
-        MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
+        MonitorValidations.verifyRepairOrderValues(workOrderId, repairOrderDto);
 
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -103,7 +104,7 @@ public class VNextTeamMonitoringCalculations extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
         MenuSteps.selectStatus(ServiceStatus.REFUSED);
         WizardScreenSteps.saveAction();
-        MonitorSteps.verifyRepairOrderValues(workOrderId, repairOrderDto);
+        MonitorValidations.verifyRepairOrderValues(workOrderId, repairOrderDto);
         ScreenNavigationSteps.pressBackButton();
     }
 }
