@@ -5,17 +5,11 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.stores.VNextBOAutoZ
 
 public class VNextBOAutoZoneLoginPageInteractions {
 
-    private static VNextBOAutoZoneLoginPage autoZoneLoginPage;
-
-    static {
-        autoZoneLoginPage = new VNextBOAutoZoneLoginPage();
-    }
-
     public static void clickFirstLocationTableRow() {
-        Utils.clickElement(autoZoneLoginPage.getFirstLocationTableRow());
+        Utils.clickElement(new VNextBOAutoZoneLoginPage().getFirstLocationTableRow());
     }
 
     public static void clickLoginButton() {
-        Utils.clickElement(autoZoneLoginPage.getLoginButton());
+        Utils.clickElement(new VNextBOAutoZoneLoginPage().getLoginButton());
     }
 }

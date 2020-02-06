@@ -11,32 +11,26 @@ import java.util.List;
 
 public class VNextBOPartsProvidersRequestFormDialogInteractions {
 
-    private static VNextBOPartsProvidersRequestFormDialog requestFormDialog;
-
-    static {
-        requestFormDialog = new VNextBOPartsProvidersRequestFormDialog();
-    }
-
     public static void waitForRequestFormDialogToBeOpened() {
-        WaitUtilsWebDriver.elementShouldBeVisible(requestFormDialog.getRequestFormDialog(), true, 5);
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsProvidersRequestFormDialog().getRequestFormDialog(), true, 5);
     }
 
     public static String getRequestFormDialogMessage() {
-        return Utils.getText(requestFormDialog.getRequestFormDialogMessage());
+        return Utils.getText(new VNextBOPartsProvidersRequestFormDialog().getRequestFormDialogMessage());
     }
 
     public static String getTitle() {
-        return Utils.getText(requestFormDialog.getTitle());
+        return Utils.getText(new VNextBOPartsProvidersRequestFormDialog().getTitle());
     }
 
     public static void clickRequestQuoteButton() {
-        Utils.clickElement(requestFormDialog.getRequestQuoteButton());
+        Utils.clickElement(new VNextBOPartsProvidersRequestFormDialog().getRequestQuoteButton());
         Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
                 "The Parts Providers modal dialog hasn't been displayed");
     }
 
     public static void clickCancelButton() {
-        Utils.clickElement(requestFormDialog.getCancelButton());
+        Utils.clickElement(new VNextBOPartsProvidersRequestFormDialog().getCancelButton());
         Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
                 "The Parts Providers modal dialog hasn't been displayed");
     }
@@ -46,15 +40,15 @@ public class VNextBOPartsProvidersRequestFormDialogInteractions {
     }
 
     public static List<String> getPartNamesList() {
-        return Utils.getText(requestFormDialog.getPartNames());
+        return Utils.getText(new VNextBOPartsProvidersRequestFormDialog().getPartNames());
     }
 
     public static Integer getPartQuantityByOrder(int order) {
-        return Integer.parseInt(Utils.getText(requestFormDialog.getPartQuantityFields().get(order)));
+        return Integer.parseInt(Utils.getText(new VNextBOPartsProvidersRequestFormDialog().getPartQuantityFields().get(order)));
     }
 
     public static void clickPartCheckbox(int order) {
-        Utils.clickElement(requestFormDialog.getPartCheckboxes().get(order));
+        Utils.clickElement(new VNextBOPartsProvidersRequestFormDialog().getPartCheckboxes().get(order));
     }
 
     public static void clickFirstPartCheckboxes(int partsNumber) {

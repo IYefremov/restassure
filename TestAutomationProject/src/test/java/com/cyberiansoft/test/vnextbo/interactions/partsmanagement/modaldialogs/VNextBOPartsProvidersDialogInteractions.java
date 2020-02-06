@@ -6,29 +6,23 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextB
 
 public class VNextBOPartsProvidersDialogInteractions {
 
-    private static VNextBOPartsProvidersDialog partsProvidersDialog;
-
-    static {
-        partsProvidersDialog = new VNextBOPartsProvidersDialog();
-    }
-
     public static void waitForPartsProvidersModalDialogToBeOpened() {
         WaitUtilsWebDriver.elementShouldBeVisible(
-                partsProvidersDialog.getPartsProvidersModal(), true, 5);
+                new VNextBOPartsProvidersDialog().getPartsProvidersModal(), true, 5);
     }
 
     public static void waitForPartsProvidersModalDialogToBeClosed() {
         WaitUtilsWebDriver.elementShouldBeVisible(
-                partsProvidersDialog.getPartsProvidersModal(), false, 5);
+                new VNextBOPartsProvidersDialog().getPartsProvidersModal(), false, 5);
     }
 
     public static void clickGetNewQuoteButton(String provider) {
-        Utils.clickElement(partsProvidersDialog.getGetNewQuoteButtonByProviderName(provider));
+        Utils.clickElement(new VNextBOPartsProvidersDialog().getGetNewQuoteButtonByProviderName(provider));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOPartsProvidersRequestFormDialogInteractions.waitForRequestFormDialogToBeOpened();
     }
 
     public static void clickCloseButton() {
-        Utils.clickElement(partsProvidersDialog.getCloseButton());
+        Utils.clickElement(new VNextBOPartsProvidersDialog().getCloseButton());
     }
 }

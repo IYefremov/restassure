@@ -5,13 +5,8 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsOrdersL
 
 public class VNextBOPartsOrdersListPanelInteractions {
 
-    private static VNextBOPartsOrdersListPanel ordersListPanel;
-
-    static {
-        ordersListPanel = new VNextBOPartsOrdersListPanel();
-    }
-
     public static String getFirstOrderVinNumber() {
-        return Utils.getText(ordersListPanel.getVinNumbersListOptions().get(0)).replace("VIN: ", "");
+        return Utils.getText(new VNextBOPartsOrdersListPanel().getVinNumbersListOptions().get(0))
+                .replace("VIN: ", "");
     }
 }
