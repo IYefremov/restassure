@@ -7,14 +7,8 @@ import org.testng.Assert;
 
 public class VNextBOShoppingCartDialogValidations {
 
-    private static VNextBOShoppingCartDialog shoppingCartDialog;
-
-    static {
-        shoppingCartDialog = new VNextBOShoppingCartDialog();
-    }
-
     public static boolean isShoppingCartDialogDisplayed(boolean displayed) {
-        return WaitUtilsWebDriver.elementShouldBeVisible(shoppingCartDialog.getShoppingCartDialog(), displayed, 10);
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOShoppingCartDialog().getShoppingCartDialog(), displayed, 10);
     }
 
     public static void verifyPriceAndCorePriceByPartName(String partName, String price, String corePrice) {

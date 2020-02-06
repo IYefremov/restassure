@@ -6,19 +6,15 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextB
 
 public class VNextBOPartsProvidersRequestFormDialogValidations {
 
-    private static VNextBOPartsProvidersRequestFormDialog partsProvidersDialog;
-
-    static {
-        partsProvidersDialog = new VNextBOPartsProvidersRequestFormDialog();
-    }
-
     public static boolean isRequestFormDialogOpened() {
-        return Utils.isElementWithAttributeContainingValueDisplayed(partsProvidersDialog.getRequestFormDialog(),
+        return Utils.isElementWithAttributeContainingValueDisplayed(new VNextBOPartsProvidersRequestFormDialog()
+                        .getRequestFormDialog(),
                 "style", "display: block;", 5);
     }
 
     public static boolean isRequestQuoteButtonDisabled() {
-        return Utils.isElementWithAttributeContainingValueDisplayed(partsProvidersDialog.getRequestQuoteButton(),
+        return Utils.isElementWithAttributeContainingValueDisplayed(new VNextBOPartsProvidersRequestFormDialog()
+                        .getRequestQuoteButton(),
                 "disabled", "true", 5);
     }
 

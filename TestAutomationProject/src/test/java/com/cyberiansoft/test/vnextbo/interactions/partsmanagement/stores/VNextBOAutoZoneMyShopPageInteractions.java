@@ -7,18 +7,12 @@ import org.openqa.selenium.WebElement;
 
 public class VNextBOAutoZoneMyShopPageInteractions {
 
-    private static VNextBOAutoZoneMyShopPage myShopPage;
-
-    static {
-        myShopPage = new VNextBOAutoZoneMyShopPage();
-    }
-
     public static void clickBatteriesCablesCheckbox() {
-        Utils.clickElement(myShopPage.getBatteriesCablesCheckbox());
+        Utils.clickElement(new VNextBOAutoZoneMyShopPage().getBatteriesCablesCheckbox());
     }
 
     public static void clickLookupPartsButton() {
-        final WebElement lookupPartsButton = myShopPage.getLookupPartsButton();
+        final WebElement lookupPartsButton = new VNextBOAutoZoneMyShopPage().getLookupPartsButton();
         WaitUtilsWebDriver.elementShouldBeClickable(lookupPartsButton, true, 3);
         Utils.clickElement(lookupPartsButton);
     }

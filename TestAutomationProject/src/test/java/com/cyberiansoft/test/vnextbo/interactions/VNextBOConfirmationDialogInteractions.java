@@ -8,18 +8,12 @@ import org.openqa.selenium.WebElement;
 
 public class VNextBOConfirmationDialogInteractions {
 
-    private static VNextBOConfirmationDialog confirmationDialog;
-
-    static {
-        confirmationDialog = new VNextBOConfirmationDialog();
-    }
-
     public static void clickInvoiceNoButton() {
         clickModalDialogButton(new VNextBOConfirmationDialog().getInvoiceNoButton());
     }
 
     public static void clickYesButton() {
-        clickModalDialogButton(confirmationDialog.getYesButton());
+        clickModalDialogButton(new VNextBOConfirmationDialog().getYesButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
@@ -28,12 +22,12 @@ public class VNextBOConfirmationDialogInteractions {
     }
 
     public static void clickConfirmButton() {
-        clickModalDialogButton(confirmationDialog.getConfirmButton());
+        clickModalDialogButton(new VNextBOConfirmationDialog().getConfirmButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void clickInvoiceCloseButton() {
-        clickModalDialogButton(confirmationDialog.getCloseButton());
+        clickModalDialogButton(new VNextBOConfirmationDialog().getCloseButton());
         WaitUtilsWebDriver.waitABit(2000);
     }
 
@@ -43,7 +37,7 @@ public class VNextBOConfirmationDialogInteractions {
     }
 
     public static String getConfirmationDialogMessage() {
-        final VNextBOConfirmationDialog dialog = confirmationDialog;
+        final VNextBOConfirmationDialog dialog = new VNextBOConfirmationDialog();
         WaitUtilsWebDriver.elementShouldBeVisible(dialog.getConfirmDialog(), true, 3);
         return Utils.getText(dialog.getDialogMessagesList())
                 .stream().filter(message -> !message.isEmpty()).findFirst().orElse("");

@@ -14,14 +14,8 @@ import java.util.List;
 
 public class VNextBOPartsDetailsPanelInteractions {
 
-    private static VNextBOPartsDetailsPanel partsDetailsPanel;
-
-    static {
-        partsDetailsPanel = new VNextBOPartsDetailsPanel();
-    }
-
     public static List<String> getPartStatusFieldsValues() {
-        return Utils.getText(partsDetailsPanel.getPartStatusFields());
+        return Utils.getText(new VNextBOPartsDetailsPanel().getPartStatusFields());
     }
 
     public static int getPartsNumberWithStatus(String status) {
@@ -29,12 +23,12 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static void clickGetQuotesPartButton() {
-        Utils.clickElement(partsDetailsPanel.getGetQuotesButton());
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getGetQuotesButton());
         VNextBOPartsProvidersDialogInteractions.waitForPartsProvidersModalDialogToBeOpened();
     }
 
     public static void setPoByStatusIfEmpty(String status) {
-        partsDetailsPanel.getPoInputFieldsByStatus(status).forEach(po -> {
+        new VNextBOPartsDetailsPanel().getPoInputFieldsByStatus(status).forEach(po -> {
             if (Utils.getInputFieldValue(po, 2).isEmpty()) {
                 Utils.sendKeysWithEnter(po, "auto-test-" + RandomStringUtils.randomNumeric(4));
                 Utils.clickElement(po.findElement(By.xpath(".//../..//div[text()='PO#']")));
@@ -43,11 +37,11 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static List<String> getPartNamesByStatus(String status) {
-        return Utils.getText(partsDetailsPanel.getPartNamesByStatus(status));
+        return Utils.getText(new VNextBOPartsDetailsPanel().getPartNamesByStatus(status));
     }
 
     public static List<String> getPartIdsByStatus(String status) {
-        final List<WebElement> partsList = partsDetailsPanel.getPartsList();
+        final List<WebElement> partsList = new VNextBOPartsDetailsPanel().getPartsList();
         final List<String> partIds = new ArrayList<>();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(partsList, 5);
 
@@ -66,12 +60,12 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static void waitForStatusesCheckBoxToBeOpened(boolean opened) {
-        WaitUtilsWebDriver.elementShouldBeVisible(partsDetailsPanel.getHeaderDropDown(), opened, 2);
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getHeaderDropDown(), opened, 2);
     }
 
     public static WebElement getSelectedStatus(String status) {
         waitForStatusesCheckBoxToBeOpened(true);
-        return partsDetailsPanel.getDeleteStatusesList()
+        return new VNextBOPartsDetailsPanel().getDeleteStatusesList()
                 .stream()
                 .filter(s -> Utils.getText(s).contains(status))
                 .findFirst()
@@ -83,6 +77,7 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static void clickDeleteButton() {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
         final boolean displayed = WaitUtilsWebDriver.elementShouldBeVisible(
                 partsDetailsPanel.getDeleteSelectedPartsButton(), true, 2);
         if (displayed) {
@@ -92,7 +87,7 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static void clickShoppingCartButton() {
-        Utils.clickElement(partsDetailsPanel.getShoppingCartButton());
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getShoppingCartButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

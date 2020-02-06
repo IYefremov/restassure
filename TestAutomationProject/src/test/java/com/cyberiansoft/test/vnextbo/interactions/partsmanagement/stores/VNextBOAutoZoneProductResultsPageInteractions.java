@@ -7,30 +7,24 @@ import org.openqa.selenium.WebElement;
 
 public class VNextBOAutoZoneProductResultsPageInteractions {
 
-    private static VNextBOAutoZoneProductResultsPage productResultsPage;
-
-    static {
-        productResultsPage = new VNextBOAutoZoneProductResultsPage();
-    }
-
     public static String getCorePriceValue() {
-        final WebElement corePrice = productResultsPage.getCorePrice();
+        final WebElement corePrice = new VNextBOAutoZoneProductResultsPage().getCorePrice();
         WaitUtilsWebDriver.elementShouldBeVisible(corePrice, true, 10);
         return Utils.getText(corePrice).trim().replace("$", "").replace("Core\n", "");
     }
 
     public static String getPriceValue() {
-        final WebElement price = productResultsPage.getPrice();
+        final WebElement price = new VNextBOAutoZoneProductResultsPage().getPrice();
         WaitUtilsWebDriver.elementShouldBeVisible(price, true, 10);
         return Utils.getText(price).trim().replace("$", "");
     }
 
     public static void clickAddToQuoteButton() {
-        Utils.clickElement(productResultsPage.getAddToQuoteButton());
+        Utils.clickElement(new VNextBOAutoZoneProductResultsPage().getAddToQuoteButton());
     }
 
     public static void clickViewQuoteButton() {
-        final WebElement viewQuoteButton = productResultsPage.getViewQuoteButton();
+        final WebElement viewQuoteButton = new VNextBOAutoZoneProductResultsPage().getViewQuoteButton();
         WaitUtilsWebDriver.elementShouldBeVisible(viewQuoteButton, true, 10);
         Utils.clickElement(viewQuoteButton);
     }

@@ -5,17 +5,11 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.stores.VNextBOAutoZ
 
 public class VNextBOAutoZoneQuoteDetailsPageInteractions {
 
-    private static VNextBOAutoZoneQuoteDetailsPage quoteDetailsPage;
-
-    static {
-        quoteDetailsPage = new VNextBOAutoZoneQuoteDetailsPage();
-    }
-
     public static String getTotalPriceValue() {
-        return Utils.getText(quoteDetailsPage.getTotalPrice()).trim().replace("$", "");
+        return Utils.getText(new VNextBOAutoZoneQuoteDetailsPage().getTotalPrice()).trim().replace("$", "");
     }
 
     public static void clickTransferCartButton() {
-        Utils.clickElement(quoteDetailsPage.getTransferCartButton());
+        Utils.clickElement(new VNextBOAutoZoneQuoteDetailsPage().getTransferCartButton());
     }
 }
