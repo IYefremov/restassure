@@ -5,6 +5,7 @@ import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -110,14 +111,19 @@ public class SearchSteps {
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
-    public static void searchByPriority(OrderPriority high) {
+    public static void searchByPriority(OrderPriority orderPriority) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
 
         openSearchFilters();
-        commonFilterScreen.getPriority().selectOption(high.getValue());
+        commonFilterScreen.getPriority().selectOption(orderPriority.getValue());
         search();
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
+
+    public static void selectPriority(OrderPriority orderPriority) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getPriority().selectListElement(orderPriority.getValue());
     }
 
     public static void searchByDepartment(String departmentName) {
@@ -156,6 +162,11 @@ public class SearchSteps {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         openSearchMenu();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getCommonFiltersToggle(), true);
+        clickCommonFiltersToggle();
+    }
+
+    public static void clickCommonFiltersToggle() {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         repairOrderScreen.openCommonFilters();
     }
 
@@ -168,5 +179,10 @@ public class SearchSteps {
     public static void clearFilters() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         commonFilterScreen.getClearFilter().click();
+    }
+
+    public static void cancelSearch() {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getCancelSearchInputButton().click();
     }
 }

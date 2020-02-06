@@ -20,6 +20,10 @@ public class ListPicker implements IWebElement {
     public void selectOption(String elementName) {
         WaitUtils.click(rootElement);
         WaitUtils.getGeneralFluentWait().until((webdriver) -> webdriver.findElements(By.xpath(elementsLocator)).size() > 0);
+        selectListElement(elementName);
+    }
+
+    public void selectListElement(String elementName) {
         ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath(elementsLocator))
                 .stream()
                 .filter(element -> element.getText().toLowerCase().contains(elementName.toLowerCase()))
@@ -27,5 +31,9 @@ public class ListPicker implements IWebElement {
                 .orElseThrow(() ->
                         new RuntimeException("element not found in list " + elementName))
                 .click();
+    }
+
+    public int getListElementsNumber() {
+        return ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath(elementsLocator)).size();
     }
 }

@@ -27,7 +27,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
     private String inspectionId = "";
     private String workOrderId = "";
 
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+    @BeforeClass(description = "Team Monitoring Base Case")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
         HomeScreenSteps.openCreateMyInspection();

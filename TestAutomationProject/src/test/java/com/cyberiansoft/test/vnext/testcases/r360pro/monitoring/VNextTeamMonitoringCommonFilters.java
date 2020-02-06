@@ -18,6 +18,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.MonitorValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
@@ -57,10 +58,10 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.setRepairOrderFlag(workOrderId, RepairOrderFlag.GREEN);
         SearchSteps.searchByFlag(RepairOrderFlag.GREEN);
-        MonitorSteps.verifyOrderFlag(workOrderId, RepairOrderFlag.GREEN);
+        MonitorValidations.verifyOrderFlag(workOrderId, RepairOrderFlag.GREEN);
         MonitorSteps.setRepairOrderFlag(workOrderId, RepairOrderFlag.YELLOW);
         SearchSteps.searchByFlag(RepairOrderFlag.YELLOW);
-        MonitorSteps.verifyOrderFlag(workOrderId, RepairOrderFlag.YELLOW);
+        MonitorValidations.verifyOrderFlag(workOrderId, RepairOrderFlag.YELLOW);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -75,7 +76,22 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         WizardScreenSteps.saveAction();
         SearchSteps.clearAllFilters();
         SearchSteps.searchByPriority(OrderPriority.HIGH);
-        MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanFindTheNecessaryPriority(String rowID,
+                                         String description, JSONObject testData) {
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        EditOrderSteps.switchToInfo();
+        EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
+        WizardScreenSteps.saveAction();
+        SearchSteps.clearAllFilters();
+        SearchSteps.searchByPriority(OrderPriority.HIGH);
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -84,7 +100,7 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
                                           String description, JSONObject testData) {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         SearchSteps.searchByDepartment("Default");
-        MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -96,7 +112,18 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
 
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         SearchSteps.searchByPhase(expectedOrderInfo.getPhaseName());
-        MonitorSteps.verifyRepairOrderPresentInList(workOrderId);
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanSearchByStatus(String rowID,
+                                     String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderPhaseDto expectedOrderInfo = workOrderData.getMonitoring().getOrderPhaseDto();
+
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.IN_PROGRESS_ACTIVE);
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
     }
 

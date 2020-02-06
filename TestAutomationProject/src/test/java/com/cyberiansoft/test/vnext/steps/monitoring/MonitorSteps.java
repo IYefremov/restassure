@@ -16,11 +16,6 @@ import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
 import org.testng.Assert;
 
 public class MonitorSteps {
-    public static void verifyRepairOrderPresentInList(String repairOrderId) {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
-        Assert.assertNotNull(repairOrderScreen.getRepairOrderElement(repairOrderId));
-    }
 
     public static void changeLocation(String locationPartialName) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
@@ -33,14 +28,6 @@ public class MonitorSteps {
         BaseUtils.waitABit(1000);
         selectLocationScreen.selectLocationByText(locationPartialName);
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
-    }
-
-    public static void verifyRepairOrderValues(String repairOrderId, RepairOrderDto expectedRoValues) {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRepairOrderList(), true);
-        Assert.assertEquals(repairOrderScreen.getRepairOrderElement(repairOrderId).getRepairOrderDto(),
-                expectedRoValues);
     }
 
     public static void openItem(String workOrderId) {
@@ -56,13 +43,6 @@ public class MonitorSteps {
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
         WaitUtils.getGeneralFluentWait().until((webdriver) -> repairOrderScreen.getRepairOrderListElements().size() > 0);
         repairOrderScreen.getRepairOrderElement(workOrderId).selectStatus(flag);
-    }
-
-    public static void verifyOrderFlag(String workOrderId, RepairOrderFlag repairOrderFlag) {
-        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
-        Assert.assertEquals(
-                repairOrderScreen.getRepairOrderElement(workOrderId).getRepairOrderFlag(),
-                repairOrderFlag);
     }
 
     public static void editOrder(String workOrderId) {
