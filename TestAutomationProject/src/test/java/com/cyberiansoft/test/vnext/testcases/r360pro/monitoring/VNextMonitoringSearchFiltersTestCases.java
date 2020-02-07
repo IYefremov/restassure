@@ -2,11 +2,16 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
+import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.DateUtils;
+import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -112,6 +117,64 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
         MonitorSearchValidations.validatePriorityListElementNumber(1);
         SearchSteps.selectPriority(OrderPriority.NORMAL);
         MonitorSearchValidations.validatePriorityValue(OrderPriority.NORMAL);
+        SearchSteps.fillTextSearch(workOrderId);
+        SearchSteps.search();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanFindTheNecessaryStatus(String rowID,
+                                                String description, JSONObject testData) {
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.openSearchFilters();
+        SearchSteps.clickStatusFilter();
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(RepairOrderStatus.IN_PROGRESS_ACTIVE.getStatusString());
+        MonitorSearchValidations.validatePriorityListElementNumber(1);
+        SearchSteps.selectStatus(RepairOrderStatus.IN_PROGRESS_ACTIVE);
+        MonitorSearchValidations.validateStatusValue(RepairOrderStatus.IN_PROGRESS_ACTIVE);
+        SearchSteps.fillTextSearch(workOrderId);
+        SearchSteps.search();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanFindTheNecessaryPhase(String rowID,
+                                              String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderPhaseDto expectedOrderInfo = workOrderData.getMonitoring().getOrderPhaseDto();
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.openSearchFilters();
+        SearchSteps.clickPhaseFilter();
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(expectedOrderInfo.getPhaseName());
+        MonitorSearchValidations.validatePriorityListElementNumber(1);
+        SearchSteps.selectPhase(expectedOrderInfo.getPhaseName());
+        MonitorSearchValidations.validatePhaseValue(expectedOrderInfo.getPhaseName());
+        SearchSteps.fillTextSearch(workOrderId);
+        SearchSteps.search();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanFindTheNecessaryDepartment(String rowID,
+                                             String description, JSONObject testData) {
+
+        final String departmentName = "Default";
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.openSearchFilters();
+        SearchSteps.clickDepartmentFilter();
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(departmentName);
+        SearchSteps.selectDepartment(departmentName);
+        MonitorSearchValidations.validateDepartmentValue(departmentName);
+        SearchSteps.fillTextSearch(workOrderId);
         SearchSteps.search();
         ScreenNavigationSteps.pressBackButton();
     }
