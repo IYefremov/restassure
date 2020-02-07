@@ -4,8 +4,10 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
+import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
+import org.apache.velocity.test.VelocityServletTest;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -16,7 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class VNextBOROPageStepsNew {
+public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
     static String fromDate = LocalDate.now().minusYears(8).format(DateTimeFormatter.ofPattern("M/d/yyyy"));
     static String toDate = LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("M/d/yyyy"));
@@ -255,6 +257,111 @@ public class VNextBOROPageStepsNew {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         Utils.clickElement(repairOrdersPage.actionsButtonByOrderNumber(orderNumber));
         Utils.clickElement(repairOrdersPage.getViewProblemsActionButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void switchToFilterTab(String tabName) {
+        if (tabName.equals("Phases"))
+            Utils.clickElement(new VNextBOROWebPageNew().getPhasesSwitcherTab());
+        else if (tabName.equals("Departments"))
+            Utils.clickElement(new VNextBOROWebPageNew().getDepartmentsSwitcherTab());
+    }
+
+    public static void filterOrdersByDepartment(String department) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickElement(ordersPage.getDepartmentsDropdown());
+        VNextBOROWebPageValidationsNew.verifyDepartmentsAllAmountsIsCorrect();
+        Utils.clickWithJS(ordersPage.departmentFilterDropDownOption(department));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void filterOrdersByPhase(String phase) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickElement(ordersPage.getPhasesDropdown());
+        VNextBOROWebPageValidationsNew.verifyPhasesAllAmountsIsCorrect();
+        Utils.clickWithJS(ordersPage.phaseFilterDropDownOption(phase));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void changeDepartmentForFirstOrder(String department) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(ordersPage.getOrdersDepartmentsList().get(0)));
+        Utils.clickElement(ordersPage.getOrdersDepartmentsList().get(0));
+        Utils.clickWithJS(ordersPage.orderDepartmentDropDownOption(department));
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.textToBePresentInElement(ordersPage.getOrdersDepartmentsList().get(0), department));
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+    }
+
+    public static void openDepartmentsDropDown() {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickWithActions(ordersPage.getDepartmentsDropdown());
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughDepartmentsList(), 2);
+        if (ordersPage.getOrdersAmountThroughDepartmentsList().size() == 0) {
+            Utils.clickWithActions(ordersPage.getDepartmentsDropdown());
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughDepartmentsList(), 2);
+        }
+    }
+
+    public static int getOrdersAmountForDepartment(String department) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        int ordersAmount = 0;
+        openDepartmentsDropDown();
+        if (!Utils.getText(ordersPage.ordersAmountForDepartment(department)).trim().equals(""))
+            ordersAmount = Integer.parseInt(Utils.getText(ordersPage.ordersAmountForDepartment(department)).trim());
+        switchToFilterTab("Departments");
+        return ordersAmount;
+    }
+
+    public static int getOrdersAmountForPhaseFromTable(String phase) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        int ordersAmount = 0;
+        if (!Utils.getText(ordersPage.ordersAmountForPhaseInTable(phase)).trim().equals(""))
+            ordersAmount = Integer.parseInt(Utils.getText(ordersPage.ordersAmountForPhaseInTable(phase)).trim());
+        return ordersAmount;
+    }
+
+    public static void checkInOrder(String orderNumber) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
+        VNextBOROWebPageValidationsNew.verifyCheckInCheckOutActionButtons(false);
+        Utils.clickElement(ordersPage.getCheckInActionButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void checkOutOrder(String orderNumber) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
+        VNextBOROWebPageValidationsNew.verifyCheckInCheckOutActionButtons(true);
+        Utils.clickElement(ordersPage.getCheckOutActionButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void hideDisplayOrderNote(boolean displayNote) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickElement(ordersPage.getOrderNoteIcon());
+        if (displayNote) {
+            WaitUtilsWebDriver.waitForVisibility(ordersPage.getOrderNoteText());
+            VNextBOROWebPageValidationsNew.verifyNotePopUpIsDisplayed(true);
+        }
+        else {
+            WaitUtilsWebDriver.waitForInvisibility(ordersPage.getOrderNoteText());
+            VNextBOROWebPageValidationsNew.verifyNotePopUpIsDisplayed(false);
+        }
+    }
+
+    public static void completeCurrentPhaseForFirstOrder() {
+
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+        Utils.clickElement(new VNextBOROWebPageNew().getCompleteCurrentPhaseActionButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

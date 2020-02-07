@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
@@ -16,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -127,6 +129,12 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
     public static void verifyOrderTableContainsRecords() {
 
         Assert.assertTrue(new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size() > 0, "Orders have not been displayed");
+    }
+
+    public static void verifyCorrectRecordsAmountIsDisplayed(int expectedRecordsNumber) {
+
+        Assert.assertEquals(new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size(), expectedRecordsNumber,
+                "Orders table has contained incorrect orders amount.");
     }
 
     public static void verifyOrdersTableAfterSearch() {
@@ -277,6 +285,36 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         }
     }
 
+    public static void verifySavedSearchDropDownFieldIdDisplayed() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getSavedSearchDropDownField()),
+                "Saved search field hasn't been displayed");
+    }
+
+    public static void verifyDepartmentsTabIsDisplayed() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getDepartmentsSwitcherTab()),
+                "Departments switcher tab hasn't been displayed");
+    }
+
+    public static void verifyPhasesTabIsDisplayed() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getPhasesSwitcherTab()),
+                "Phases switcher tab hasn't been displayed");
+    }
+
+    public static void verifyDepartmentDropdownIsDisplayed() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getDepartmentsDropdown()),
+                "Departments dropdown hasn't been displayed");
+    }
+
+    public static void verifyPhasesDropdownIsDisplayed() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getPhasesDropdown()),
+                "Phases dropdown hasn't been displayed");
+    }
+
     public static void verifySavedSearchDropDownFieldContainsCorrectValue(String expectedValue) {
 
         Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getSavedSearchDropDownField()), expectedValue,
@@ -311,5 +349,86 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
             }
         }
         Assert.assertTrue(foundFirstEmptyOrder, "The orders with arbitration dates are not displayed before the orders without them");
+    }
+
+    public static void verifyOrdersTableContainsCorrectColumns() {
+
+        List<String> correctTitlesList = Arrays.asList("Order / Type / Department","Customer / Vehicle","VIN# / Stock# / RO# / PO# / Invoice",
+        "Order Amount\nVendor Amount", "Start Date / Target Date", "Technicians", "Current Phase / Days in Phase", "Completed (%)", "Other");
+        List<String> columnsTitles = new VNextBOROWebPageNew().getRepairOrdersTableColumnsTitles().stream().
+                map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertEquals(columnsTitles, correctTitlesList, "Repair orders table has contained incorrect columns");
+    }
+
+    public static void verifyDepartmentsAllAmountsIsCorrect() {
+
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(new VNextBOROWebPageNew().getOrdersAmountThroughDepartmentsList(), 2);
+        List<String> ordersAmountsList = new VNextBOROWebPageNew().getOrdersAmountThroughDepartmentsList().stream().
+                map(WebElement::getText).collect(Collectors.toList());
+        int ordersCalculatedAmount = 0;
+        for (int i = 1; i < ordersAmountsList.size(); i++) {
+            if (!ordersAmountsList.get(i).trim().equals(""))
+                ordersCalculatedAmount += Integer.parseInt(ordersAmountsList.get(i).trim());
+        }
+        Assert.assertEquals(Integer.parseInt(ordersAmountsList.get(0).trim()), ordersCalculatedAmount,
+                "\"ALL\" category contains incorrect orders number");
+    }
+
+    public static void verifyPhasesAllAmountsIsCorrect() {
+
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(new VNextBOROWebPageNew().getOrdersAmountThroughPhasesList(), 2);
+        List<String> ordersAmountsList = new VNextBOROWebPageNew().getOrdersAmountThroughPhasesList().stream().
+                map(WebElement::getText).collect(Collectors.toList());
+        int ordersCalculatedAmount = 0;
+        for (int i = 1; i < ordersAmountsList.size(); i++) {
+            if (!ordersAmountsList.get(i).trim().equals(""))
+                ordersCalculatedAmount += Integer.parseInt(ordersAmountsList.get(i).trim());
+        }
+        Assert.assertEquals(Integer.parseInt(ordersAmountsList.get(0).trim()), ordersCalculatedAmount,
+                "\"ALL\" category contains incorrect orders number");
+    }
+
+    public static void verifyOrdersAmountForDepartmentIsCorrect(String department, int expectedNumber) {
+
+        VNextBOROPageStepsNew.openDepartmentsDropDown();
+        Assert.assertEquals(VNextBOROPageStepsNew.getOrdersAmountForDepartment(department), expectedNumber,
+                "Department " + department + " has contained incorrect orders number in the departments filter dropdown");
+        VNextBOROPageStepsNew.switchToFilterTab("Departments");
+    }
+
+    public static void verifyOrdersAmountForPhaseInTableIsCorrect(String phase, int expectedNumber) {
+
+        Assert.assertEquals(VNextBOROPageStepsNew.getOrdersAmountForPhaseFromTable(phase), expectedNumber,
+                "Phase " + phase + " has contained incorrect orders number in the departments filter dropdown");
+    }
+
+    public static void verifyPoNumberFieldIsNotClickableForFirstOrder() {
+
+        Assert.assertFalse(Utils.isElementClickable(new VNextBOROWebPageNew().getPoNumbersList().get(0)),
+                "PO# has been clickable for the order");
+    }
+
+    public static void verifyCheckInCheckOutActionButtons(boolean checkedIn) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        if (checkedIn) {
+            Assert.assertTrue(Utils.isElementDisplayed(ordersPage.getCheckOutActionButton()), "\"Check Out\" action button hasn't been displayed");
+            Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getCheckInActionButton()), "\"Check In\" action button has been displayed");
+        } else {
+            Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getCheckOutActionButton()), "\"Check Out\" action button has been displayed");
+            Assert.assertTrue(Utils.isElementDisplayed(ordersPage.getCheckInActionButton()), "\"Check In\" action button hasn't been displayed");
+        }
+    }
+
+    public static void verifyNotePopUpIsDisplayed(boolean shouldBeDisplayed) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        if (shouldBeDisplayed) {
+            Assert.assertTrue(Utils.isElementDisplayed(ordersPage.getOrderNoteText()), "Order note text hasn't been displayed");
+            Assert.assertTrue(Utils.isElementDisplayed(ordersPage.getOrderNoteXIcon()), "Order note x-icon hasn't been displayed");
+        } else {
+            Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getOrderNoteText()), "Order note text hasn't been hidden");
+            Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getOrderNoteXIcon()), "Order note x-icon hasn't been hidden");
+        }
     }
 }

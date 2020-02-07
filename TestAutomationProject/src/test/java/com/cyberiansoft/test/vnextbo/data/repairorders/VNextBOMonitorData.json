@@ -2,78 +2,67 @@
   "verifyUserCanOpenMonitorWithFullSetOfElements": [
     {
       "rowID": "verifyUserCanOpenMonitorWithFullSetOfElements.01",
-      "description": "Test Case 81749:Verify user can open \"Monitor\" with full set of elements",
+      "description": "Test Case 81749: Verify user can open \"Monitor\" with full set of elements",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91218"
+          "testCaseID": "91218",
+          "testCaseTitle": "Verify user can open \"Monitor\" with full set of elements"
         }
-      ],
-      "location": "Best Location Automation",
-      "titles": [
-        "Order / Type / Department",
-        "Customer / Vehicle",
-        "VIN# / Stock# / RO# / PO# / Invoice",
-        "Start Date / Target Date",
-        "Technicians",
-        "Current Phase / Days in Phase",
-        "Completed (%)",
-        "Other"
-      ],
-      "titlesRepeater": [
-        "Order Amount",
-        "Vendor Amount"
-      ],
-      "copyright": "© Copyright",
-      "AMT": "AutoMobile Technologies, Inc."
+      ]
     }
   ],
 
   "verifyUserCanOpenAndCloseTermsAndConditions": [
     {
       "rowID": "verifyUserCanOpenAndCloseTermsAndConditions.01",
-      "description": "Test Case 81751:Verify user can open and close \"Terms&Conditions\"",
+      "description": "Test Case 91492: Verify user can open and close \"Terms&Conditions\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91492"
+          "testCaseID": "91492",
+          "testCaseTitle": "Verify user can open and close \"Terms&Conditions\""
         }
-      ],
-      "location": "Best Location Automation"
+      ]
     }
   ],
 
   "verifyUserCanOpenAndClosePrivacyPolicy": [
     {
       "rowID": "verifyUserCanOpenAndClosePrivacyPolicy.01",
-      "description": "Test Case 81752:Verify user can open and close \"Privacy Policy\"",
+      "description": "Test Case 91493: Verify user can open and close \"Privacy Policy\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91493"
+          "testCaseID": "91493",
+          "testCaseTitle": "Verify user can open and close \"Privacy Policy\""
         }
-      ],
-      "location": "Best Location Automation"
+      ]
     }
   ],
 
   "verifyUserCanOpenAndCloseIntercom": [
     {
       "rowID": "verifyUserCanOpenAndCloseIntercom.01",
-      "description": "Test Case 81753:Verify user can open and close \"Intercom\"",
+      "description": "Test Case 91495: Verify user can open and close \"Intercom\"",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91495"
+          "testCaseID": "91495",
+          "testCaseTitle": "Verify user can open and close \"Intercom\""
         }
-      ],
-      "location": "Best Location Automation"
+      ]
     }
   ],
 
   "verifyUserCanChangeLocation": [
     {
       "rowID": "verifyUserCanChangeLocation.01",
-      "description": "Test Case 81899:Verify user can change \"location\"",
+      "description": "Test Case 91419: Verify user can change \"location\". Test Case 91381: User can select location",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91419"
+          "testCaseID": "91419",
+          "testCaseTitle": "Verify user can change \"location\""
+        },
+        {
+          "testCaseID": "91381",
+          "testCaseTitle": "User can select location"
         }
       ],
       "searchLocation": "1111 Automation",
@@ -84,44 +73,53 @@
   "verifyUserCanChangeLocationUsingSearch": [
     {
       "rowID": "verifyUserCanChangeLocationUsingSearch.01",
-      "description": "Test Case 81901:Verify user can change location by using \"search\" field",
+      "description": "Test Case 91420: Verify user can change location by using \"search\" field",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91420"
+          "testCaseID": "91420",
+          "testCaseTitle": "Verify user can change location by using \"search\" field"
         }
       ],
-      "searchLocation": "Anastasia",
-      "location": "Anastasia_Location"
+      "searchLocation": "1111 Automation",
+      "location": "Best Location Automation"
     }
   ],
 
   "verifyUserCanUsePaging": [
     {
       "rowID": "verifyUserCanUsePaging.01",
-      "description": "Test Case 81902:Verify user can use paging",
+      "description": "Test Case 91490: Verify user can use paging",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91490"
+          "testCaseID": "91490",
+          "testCaseTitle": "Verify user can use paging"
         }
-      ],
-      "location": "Best Location Automation"
+      ]
+    }
+  ],
+
+  "verifyUserCanUsePaginationFilter": [
+    {
+      "rowID": "verifyUserCanUsePaginationFilter.01",
+      "description": "Test Case 98316: User can use pagination filter",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98316",
+          "testCaseTitle": "User can use pagination filter"
+        }
+      ]
     }
   ],
 
   "verifyUserCanFilterRObyDepartments": [
     {
       "rowID": "verifyUserCanFilterRObyDepartments.01",
-      "description": "Test Case 82624:User can filter RO by Departments",
+      "description": "Test Case 91414: User can filter RO by Departments",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91414"
+          "testCaseID": "91414",
+          "testCaseTitle": "User can filter RO by Departments"
         }
-      ],
-      "location": "1111 Automation",
-      "departments": [
-        "All",
-        "Default",
-        "dep_"
       ]
     }
   ],
@@ -129,65 +127,85 @@
   "verifyUserCanFilterRObyPhases": [
     {
       "rowID": "verifyUserCanFilterRObyPhases.01",
-      "description": "Test Case 82625:User can filter RO by Phases",
+      "description": "Test Case 91415: User can filter RO by Phases",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91415"
+          "testCaseID": "91415",
+          "testCaseTitle": "User can filter RO by Phases"
         }
-      ],
-      "location": "1111 Automation",
-      "phases": [
-        "All",
-        "Started",
-        "Completed",
-        "QC"
       ]
-    }
-  ],
-
-  "verifyUserCanSelectLocation": [
-    {
-      "rowID": "verifyUserCanSelectLocation.01",
-      "description": "Test Case 82657:User can select location",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91381"
-        }
-      ],
-      "location": "1111 Automation"
-    }
-  ],
-
-  "verifyUserCanSearchWoUsingSearchFilter": [
-    {
-      "rowID": "verifyUserCanSearchWoUsingSearchFilter.01",
-      "description": "Test Case 82659:User can search WO using search filter",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91382"
-        }
-      ],
-      "location": "1111 Automation",
-      "vinNum": "O-000-152073"
     }
   ],
 
   "verifyUserCanSeeAndChangeRoDetails": [
     {
       "rowID": "verifyUserCanSeeAndChangeRoDetails.01",
-      "description": "Test Case 82627:User can see and change RO details",
+      "description": "Test Case 91383: User can see and change RO details",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91383"
+          "testCaseID": "91383",
+          "testCaseTitle": "User can see and change RO details"
         }
       ],
-      "location": "1111 Automation",
-      "vinNum": "O-000-152073",
-      "title": "Order / Type / Department",
-      "woType": "WO_Monitor_new",
-      "departments": [
-        "Default"
-      ]
+      "orderNumber": "O-000-147163",
+      "woType": "01ZalexWO_tp"
+    }
+  ],
+
+  "verifyUserCannotChangePoForInvoicedOrders": [
+    {
+      "rowID": "verifyUserCannotChangePoForInvoicedOrders.01",
+      "description": "Test Case 91387: Verify user can't change \"PO#\" for invoiced orders",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91387",
+          "testCaseTitle": "Verify user can't change \"PO#\" for invoiced orders"
+        }
+      ],
+      "orderNumber": "O-062-00197"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoToCheckInCheckOut": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoToCheckInCheckOut.01",
+      "description": "Test Case 91391: User can change status of RO to Check In/ Check Out",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91391",
+          "testCaseTitle": "User can change status of RO to Check In/ Check Out"
+        }
+      ],
+      "orderNumber": "O-000-147159"
+    }
+  ],
+
+  "verifyUserCanShowOrCloseNotesToTheLeftOfRo": [
+    {
+      "rowID": "verifyUserCanShowOrCloseNotesToTheLeftOfRo.01",
+      "description": "Test Case 91409: User can show or close Notes to the left of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91409",
+          "testCaseTitle": "User can show or close Notes to the left of RO"
+        }
+      ],
+      "orderNumber": "O-000-147159"
+    }
+  ],
+
+  "verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion": [
+    {
+      "rowID": "verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion.01",
+      "description": "Test Case 91416: Verify that \"Phases\" update w/o refresh after its completion",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91416",
+          "testCaseTitle": "UVerify that \"Phases\" update w/o refresh after its completion"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "service": "Car-Washing"
     }
   ],
 
@@ -208,20 +226,6 @@
         "Default",
         "dep_"
       ]
-    }
-  ],
-
-  "verifyUserCannotChangePoForInvoicedOrders": [
-    {
-      "rowID": "verifyUserCannotChangePoForInvoicedOrders.01",
-      "description": "Test Case 84986:Verify user can't change \"PO#\" for invoiced orders",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91387"
-        }
-      ],
-      "location": "Best Location Automation",
-      "orderNumber": "O-062-00197"
     }
   ],
 
@@ -267,50 +271,6 @@
       "location": "Rozstalnoy_location",
       "orderNumber": "O-000-152744",
       "arbitrationDate": "10/1/2019"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoToCheckInCheckOut": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoToCheckInCheckOut.01",
-      "description": "Test Case 82691:User can change status of RO to Check In/ Check Out",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91391"
-        }
-      ],
-      "location": "Best Location Automation",
-      "orderNumber": "O-000-147159"
-    }
-  ],
-
-  "verifyUserCanShowOrCloseNotesToTheLeftOfRo": [
-    {
-      "rowID": "verifyUserCanShowOrCloseNotesToTheLeftOfRo.01",
-      "description": "Test Case 83258:User can show or close Notes to the left of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91409"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073"
-    }
-  ],
-
-  "verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion": [
-    {
-      "rowID": "verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion.01",
-      "description": "Test Case 91018:Verify that \"Phases\" update w/o refresh after its completion",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91416"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152661",
-      "phase": "Started",
-      "service": "Oil Change & Tire Rotation"
     }
   ],
 
@@ -1514,25 +1474,6 @@
         "Refused",
         "Skipped"
       ]
-    }
-  ],
-
-  "verifyUserCanUsePaginationFilter": [
-    {
-      "rowID": "verifyUserCanUsePaginationFilter.01",
-      "description": "User can use pagination filter",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "98316"
-        }
-      ],
-      "location": "Rozstalnoy_location",
-      "pages": {
-        "ten": "10",
-        "twenty": "20",
-        "fifty": "50",
-        "hundred": "100"
-      }
     }
   ],
 
