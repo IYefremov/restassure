@@ -228,6 +228,12 @@ public class Utils {
         return "";
     }
 
+    public static void switchToWindow(String windowHandle) {
+
+        DriverBuilder.getInstance().getDriver().switchTo().window(windowHandle);
+
+    }
+
     public static String getParentTab() {
         return DriverBuilder.getInstance().getDriver().getWindowHandle();
     }

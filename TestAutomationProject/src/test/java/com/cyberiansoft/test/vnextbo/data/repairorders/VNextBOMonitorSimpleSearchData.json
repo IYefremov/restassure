@@ -16,11 +16,15 @@
   "verifyUserCanSearchByOrderNum": [
     {
       "rowID": "verifyUserCanSearchByOrderNum.01",
-      "description": "Test Case 91481: User can search by OrderNum",
+      "description": "Test Case 91481: User can search by OrderNum. Test Case 91382: User can search WO using search filter",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91481",
           "testCaseTitle": "User can search by OrderNum"
+        },
+        {
+          "testCaseID": "91382",
+          "testCaseTitle": "User can search WO using search filter"
         }
       ],
       "orderNumber": "O-361-00004"

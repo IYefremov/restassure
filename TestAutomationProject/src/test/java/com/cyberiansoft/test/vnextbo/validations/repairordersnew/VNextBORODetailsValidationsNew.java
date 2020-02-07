@@ -17,6 +17,12 @@ public class VNextBORODetailsValidationsNew {
         Assert.assertTrue(present, "The order contains neither the service nor the task '" + text + "'.");
     }
 
+    public static void verifyOrderDetailsSectionIsDisplayed() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().getOrderDetailsSection()),
+                "Order details section hasn't been displayed");
+    }
+
     public static void verifyProblemIndicatorIsDisplayedForPhase(String phase) {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().problemIndicatorByPhase(phase)),

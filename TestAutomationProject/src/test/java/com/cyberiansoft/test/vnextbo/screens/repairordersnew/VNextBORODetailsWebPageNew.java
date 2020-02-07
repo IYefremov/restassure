@@ -14,6 +14,9 @@ import java.util.List;
 @Getter
 public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
+    @FindBy(xpath = "//section[@id='reconmonitordetails-view']")
+    private WebElement orderDetailsSection;
+
     @FindBy(xpath = "//div[@id='orderServices']//div[@data-item-id]/div[@class='clmn_2']/div[1]")
     private List<WebElement> serviceAndTaskDescriptionsList;
 
