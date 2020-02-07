@@ -104,5 +104,17 @@
         }
       ]
     }
+  ],
+  "userCanFindTheNecessaryFlag": [
+    {
+      "rowID": "userCanFindTheNecessaryFlag.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92309",
+          "testCaseTitle": "Verify the user can find the necessary flag"
+        }
+      ]
+    }
   ]
 }
