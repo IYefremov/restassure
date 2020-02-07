@@ -142,6 +142,11 @@ public class SearchSteps {
         commonFilterScreen.getDepartment().selectListElement(departmentName);
     }
 
+    public static void selectFlag(RepairOrderFlag repairOrderFlag) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getFlag().selectListElement(repairOrderFlag.name());
+    }
+
     public static void searchByPhase(String phaseName) {
         openSearchFilters();
         selectPhase(phaseName);

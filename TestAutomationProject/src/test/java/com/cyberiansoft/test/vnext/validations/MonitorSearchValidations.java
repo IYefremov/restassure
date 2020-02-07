@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.validations;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.enums.OrderPriority;
+import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
@@ -64,5 +65,11 @@ public class MonitorSearchValidations {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         Assert.assertEquals(commonFilterScreen.getDepartment().getRootElement().getAttribute("value"),
                 departmentName);
+    }
+
+    public static void validateFlagValue(RepairOrderFlag repairOrderFlag) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        Assert.assertEquals(commonFilterScreen.getFlag().getRootElement().getAttribute("value").toLowerCase(),
+                repairOrderFlag.name().toLowerCase());
     }
 }

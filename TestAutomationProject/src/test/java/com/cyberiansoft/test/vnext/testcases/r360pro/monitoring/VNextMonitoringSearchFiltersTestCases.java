@@ -6,11 +6,11 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.DateUtils;
-import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
+import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -33,7 +33,7 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
 
     private String workOrderId = "";
 
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+    @BeforeClass(description = "Team Monitoring Search Filters Test Cases")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringSearchFiltersDataPath();
         HomeScreenSteps.openCreateMyInspection();
@@ -174,6 +174,27 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
         SearchSteps.fillTextSearch(departmentName);
         SearchSteps.selectDepartment(departmentName);
         MonitorSearchValidations.validateDepartmentValue(departmentName);
+        SearchSteps.fillTextSearch(workOrderId);
+        SearchSteps.search();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanFindTheNecessaryFlag(String rowID,
+                                                  String description, JSONObject testData) {
+
+        //final String flagName = "Green";
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.setRepairOrderFlag(workOrderId, RepairOrderFlag.GREEN);
+
+        SearchSteps.openSearchFilters();
+        SearchSteps.clickFlagFilter();
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(RepairOrderFlag.GREEN.name());
+        SearchSteps.selectFlag(RepairOrderFlag.GREEN);
+        MonitorSearchValidations.validateFlagValue(RepairOrderFlag.GREEN);
         SearchSteps.fillTextSearch(workOrderId);
         SearchSteps.search();
         ScreenNavigationSteps.pressBackButton();
