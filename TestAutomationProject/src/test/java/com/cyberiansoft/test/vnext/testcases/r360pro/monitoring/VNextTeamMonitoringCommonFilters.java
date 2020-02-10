@@ -104,8 +104,6 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSearchByStatus(String rowID,
                                      String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.IN_PROGRESS_ACTIVE);
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
