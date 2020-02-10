@@ -148,8 +148,9 @@ public class SearchSteps {
     }
 
     public static void searchByPhase(String phaseName) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         openSearchFilters();
-        selectPhase(phaseName);
+        commonFilterScreen.getPhase().selectOption(phaseName);
         search();
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
