@@ -494,7 +494,7 @@ public class VNextBOROPageValidations {
         WaitUtilsWebDriver.waitForNewTab();
         Assert.assertEquals(DriverBuilder.getInstance().getDriver().getWindowHandles().size(), 2,
                 "The invoice hasn't been opened");
-        Utils.closeNewWindow(mainWindow);
+        Utils.closeAllNewWindowsExceptParentTab(mainWindow);
     }
 
     public static void verifyPhasesForWideScreen(List<Integer> phasesValues, VNextBOMonitorData data) {

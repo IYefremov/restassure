@@ -405,7 +405,7 @@ public class Utils {
         }
     }
 
-    public static void closeNewWindow(String mainWindow) {
+    public static void closeAllNewWindowsExceptParentTab(String mainWindow) {
         final WebDriver driver = DriverBuilder.getInstance().getDriver();
         final Set<String> windowHandles = driver.getWindowHandles();
         for (String window : windowHandles) {

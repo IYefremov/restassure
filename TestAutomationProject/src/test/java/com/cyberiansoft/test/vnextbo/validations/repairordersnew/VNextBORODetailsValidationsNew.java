@@ -23,6 +23,12 @@ public class VNextBORODetailsValidationsNew {
                 "Order details section hasn't been displayed");
     }
 
+    public static void verifyOrderStatusIsCorrect(String expectedStatus) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().getOrderStatusDropDown()), expectedStatus,
+                "Order status hasn't been correct");
+    }
+
     public static void verifyProblemIndicatorIsDisplayedForPhase(String phase) {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().problemIndicatorByPhase(phase)),
@@ -76,5 +82,35 @@ public class VNextBORODetailsValidationsNew {
 
         Assert.assertFalse(Utils.getText(new VNextBORODetailsWebPageNew().phaseTotalPrice(phase)).equals(initialPrice),
                 "Total price hasn't changed for the phase: " + phase);
+    }
+
+    public static void verifyOrderPriorityIsCorrect(String priority) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().getPriorityDropDown()), priority,
+                "Priority hasn't been correct");
+    }
+
+    public static void verifyServiceIsDisplayed(String serviceDescription) {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription)),
+                "Service with description " + serviceDescription + "hasn't been added");
+    }
+
+    public static void verifyServicePriceIsCorrect(String service, String expectedPrice) {
+
+        Assert.assertEquals(Utils.getInputFieldValue(new VNextBORODetailsWebPageNew().servicePriceInputField(service)), expectedPrice,
+                "Service price hasn't been correct");
+    }
+
+    public static void verifyServiceQuantityIsCorrect(String service, String expectedQuantity) {
+
+        Assert.assertEquals(Utils.getInputFieldValue(new VNextBORODetailsWebPageNew().serviceQtyInputField(service)), expectedQuantity,
+                "Service quantity hasn't been correct");
+    }
+
+    public static void verifyPartServicesAmountIsCorrect(int expectedNumber) {
+
+        Assert.assertEquals(new VNextBORODetailsWebPageNew().getPartServicesNamesList().size(), expectedNumber,
+                "Part services amount hasn't been correct");
     }
 }

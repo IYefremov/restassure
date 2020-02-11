@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOROAdvancedSearchValues;
 import com.cyberiansoft.test.dataclasses.vNextBO.general.VNextBOPageSwitcherValues;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import lombok.Setter;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Arrays;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Setter
 @Getter
 public class VNextBOMonitorData {
 
@@ -262,6 +264,9 @@ public class VNextBOMonitorData {
 
     @JsonProperty("servicesTableFields")
     private String[] servicesTableFields;
+
+    @JsonProperty("servicePart")
+    private String servicePart;
 
     @JsonProperty("serviceParts")
     private String[] serviceParts;
