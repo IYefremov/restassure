@@ -174,6 +174,8 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
         SearchSteps.fillTextSearch(departmentName);
         SearchSteps.selectDepartment(departmentName);
         MonitorSearchValidations.validateDepartmentValue(departmentName);
+        SearchSteps.clickPriorityFilter();
+        SearchSteps.selectPriority(OrderPriority.ALL);
         SearchSteps.fillTextSearch(workOrderId);
         SearchSteps.search();
         ScreenNavigationSteps.pressBackButton();
