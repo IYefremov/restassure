@@ -6,6 +6,8 @@ import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Monitoring {
     @JsonProperty("location")
@@ -16,6 +18,8 @@ public class Monitoring {
     private String stockNumber;
     @JsonProperty("orderPhaseDto")
     private OrderPhaseDto orderPhaseDto;
+    @JsonProperty("orderPhasesDto")
+    private List<OrderPhaseDto> orderPhasesDto;
     @JsonProperty("orderInfoDto")
     private OrderInfoDto orderInfoDto;
 }

@@ -5,6 +5,8 @@ import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.order.edit.PhaseElement;
 import com.cyberiansoft.test.vnext.webelements.order.edit.ServiceElement;
+import io.appium.java_client.MobileBy;
+import org.openqa.selenium.By;
 
 public class PhaseScreenInteractions {
     public static PhaseElement getPhaseElement(String phaseName) {
@@ -30,6 +32,19 @@ public class PhaseScreenInteractions {
                         serviceElement.getName().equals(phaseName))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Service element not found " + phaseName)));
+    }
+
+    public static void printServices() {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
+        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
+        BaseUtils.waitABit(2000);
+       phasesScreen.getServiceElementsList().stream().forEach(
+                serviceElement -> {
+                    System.out.println("++++" + serviceElement.getRootElement().findElement(By.xpath(".//div[@class='icon-item-entity-name']")).getText());
+                }
+        );
+       System.out.println("=====================================");
     }
 
     public static void openServiceElementMenu(ServiceElement phaseElement) {
