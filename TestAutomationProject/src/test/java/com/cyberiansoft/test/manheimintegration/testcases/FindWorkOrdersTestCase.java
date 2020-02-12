@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.manheimintegration.testcases;
 
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.manheimintegration.data.ManheimTestCasesDataPaths;
 import com.cyberiansoft.test.targetprocessintegration.dto.TestCaseRunDTO;
 import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunDTO;
@@ -16,12 +18,16 @@ import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.PhaseDetailsSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.simple.JSONObject;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -75,34 +81,31 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
         for (WorkOrderData workOrderData : workOrdersData) {
             Monitoring monitoringData = workOrderData.getMonitoring();
             String stockNumber = monitoringData.getStockNumber();
-            /*WebDriver chromeDriver = WebdriverInicializator.getInstance().initWebDriver(BrowserType.CHROME);
+            WebDriver chromeDriver = WebdriverInicializator.getInstance().initWebDriver(BrowserType.CHROME);
             chromeDriver.get("https://manheim-uat.cyberianconcepts.com/");
             VNextBOLoginSteps.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(), VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
 
             VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(monitoringData.getLocation());
-            VNextBOROSimpleSearchSteps.searchByText(stockNumber);
-            VNextBOROSimpleSearchSteps.searchByText(monitoringData.getStockNumber());
-            Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByRoNumber(stockNumber, true));
-
-            chromeDriver.quit();*/
+            VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
+            VNextBOROAdvancedSearchDialogInteractions.setStockNum(stockNumber);
+            VNextBOROAdvancedSearchDialogInteractions.setRepairStatus("All");
+            VNextBOROAdvancedSearchDialogSteps.search();
+            VNextBOROPageValidations.validateWorkOrderDisplayedByStockNumber(stockNumber, true);
+            final String workOrderId = VNextBOROPageInteractions.getWorkOrderNumberByStockNumber(stockNumber);
+            chromeDriver.quit();
 
             HomeScreenSteps.openUpdateWork();
             UpdateWorkSteps.searchRepairOrder(stockNumber);
-            //PhaseScreenValidations.validatePhaseWorkOrderID(workOrderId);
-           // PhaseScreenValidations.validatePhaseVINNumber(monitoringData.getRepairOrderData().getVin());
+            PhaseScreenValidations.validatePhaseWorkOrderID(workOrderId);
             PhaseScreenValidations.validatePhaseStockNumber(stockNumber);
-            PhaseScreenInteractions.printServices();
-
             monitoringData.getOrderPhasesDto().forEach(phaseDto -> {
                 PhaseScreenValidations.validatePhaseStatus(phaseDto);
                 phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
-                    System.out.println("++++++" + monitorServiceDTO.getMonitorService().getServiceName());
                     PhaseScreenValidations.validateServiceStatus(monitorServiceDTO.getMonitorService(), ServiceStatus.getStatus(monitorServiceDTO.getMonitorServiceStatus()));
                 });
             });
 
             WizardScreenSteps.saveAction();
-            //NavigationSteps.navigateBackScreen();
         }
     }
                 //}

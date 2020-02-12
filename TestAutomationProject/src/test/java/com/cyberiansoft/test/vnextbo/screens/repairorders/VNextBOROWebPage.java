@@ -283,14 +283,19 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
     }
 
     public WebElement getTableRowWithWorkOrder(String orderNumber) {
-        WebElement woTableRow = null;
-        List<WebElement> woTableRows = getRepairOrdersTableBody().findElements(By.xpath("./tr"));
-        for (WebElement row : woTableRows)
-            if (row.findElement(By.xpath(".//*[@class='order-no']/strong")).getText().trim().equals(orderNumber)) {
-                woTableRow = row;
-                break;
-            }
-        return woTableRow;
+        return getRepairOrdersTableBody().findElements(By.xpath("./tr"))
+                .stream().filter((tableRow) ->
+                        tableRow.findElement(By.xpath(".//*[@class='order-no']/strong")).getText().trim().equals(orderNumber))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Can't find row with WorkOrderID " + orderNumber));
+    }
+
+    public WebElement getTableRowWithWorkOrderByStockNumber(String stockNumber) {
+        return getRepairOrdersTableBody().findElements(By.xpath("./tr"))
+                .stream().filter((tableRow) ->
+                        tableRow.findElement(By.xpath(".//input[@title='Stock #']")).getAttribute("value").trim().equals(stockNumber))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Can't find row with Work Order with Stock number " + stockNumber));
     }
 
     public WebElement getRepairOrdersTableBody() {

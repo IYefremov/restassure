@@ -62,7 +62,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
                 });
         Utils.openTab(pmWindow);
         VNextBOPartsDetailsPanelSteps.deleteServicesByStatus(PartStatuses.AUDITED.getStatus());
-        Utils.closeNewWindow(pmWindow);
+        Utils.closeAllNewWindowsExceptParentTab(pmWindow);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -116,7 +116,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOROPageSteps.openRODetailsPage(woNum);
         final String partNumUpdatedValue = VNextBORODetailsPartsBlockInteractions.getPartNumberValueByPartName(partName);
         Assert.assertEquals(partNumUpdatedValue, "", "The part number has not been cleared");
-        Utils.closeNewWindow(pmWindow);
+        Utils.closeAllNewWindowsExceptParentTab(pmWindow);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
