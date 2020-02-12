@@ -48,8 +48,6 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
         VNextBOPartsDetailsPanelSteps.deleteServicesByName(partName);
         VNextBOPartsDetailsPanelSteps.addPart(data.getPartData(), woNum);
-        Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartStatusPresent(openStatus),
-                "The part is not displayed with " + openStatus + " status");
         VNextBOLeftMenuSteps.openRepairOrdersMenuInNewTab();
         final String roWindow = Utils.getParentTab();
         VNextBOROAdvancedSearchDialogSteps.searchByWoAndTimeFrame(woNum, TimeFrameValues.TIMEFRAME_CUSTOM);
