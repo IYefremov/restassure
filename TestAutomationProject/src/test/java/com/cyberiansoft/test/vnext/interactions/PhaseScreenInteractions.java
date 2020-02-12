@@ -34,19 +34,6 @@ public class PhaseScreenInteractions {
                 .orElseThrow(() -> new RuntimeException("Service element not found " + phaseName)));
     }
 
-    public static void printServices() {
-        PhasesScreen phasesScreen = new PhasesScreen();
-        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
-        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
-        BaseUtils.waitABit(2000);
-       phasesScreen.getServiceElementsList().stream().forEach(
-                serviceElement -> {
-                    System.out.println("++++" + serviceElement.getRootElement().findElement(By.xpath(".//div[@class='icon-item-entity-name']")).getText());
-                }
-        );
-       System.out.println("=====================================");
-    }
-
     public static void openServiceElementMenu(ServiceElement phaseElement) {
         WaitUtils.click(phaseElement.getRootElement());
     }
