@@ -92,7 +92,9 @@
         "partItems": [
           "Back Glass Adhesive Kit"
         ],
-        "partName": "ProPower Ultra / Battery"
+        "partNames": [
+          "ProPower Ultra / Battery"
+        ]
       },
       "provider": "AutoZone"
     }

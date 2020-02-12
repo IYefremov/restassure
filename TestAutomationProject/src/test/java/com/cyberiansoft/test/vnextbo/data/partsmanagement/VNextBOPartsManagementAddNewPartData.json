@@ -1,0 +1,31 @@
+{
+  "verifyUserCanAddMoreThanOneNewPart": [
+    {
+      "rowID": "verifyUserCanAddMoreThanOneNewPart.01",
+      "description": "User can add more than 1 new part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91195"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      },
+      "partData": {
+        "service": "IvPartTest_OptionClarif",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Adhesives",
+        "partItems": [
+          "Windshield Adhesive Kit",
+          "Back Glass Adhesive Kit"
+        ],
+        "partNames": [
+          "Opt_prefix Windshield Adhesive Kit",
+          "Opt_prefix Back Glass Adhesive Kit"
+        ]
+      }
+    }
+  ]
+}

@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnextbo.screens;
 
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import lombok.Getter;

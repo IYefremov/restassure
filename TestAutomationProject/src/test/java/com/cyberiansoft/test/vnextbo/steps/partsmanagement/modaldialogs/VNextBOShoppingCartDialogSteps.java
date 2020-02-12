@@ -13,9 +13,9 @@ public class VNextBOShoppingCartDialogSteps {
         VNextBOPartsDetailsPanelInteractions.clickShoppingCartButton();
         Assert.assertTrue(VNextBOShoppingCartDialogValidations.isShoppingCartDialogDisplayed(true),
                 "The shopping cart dialog hasn't been opened");
-        VNextBOShoppingCartDialogValidations.verifyPriceAndCorePriceByPartName(partData.getPartName(), price, corePrice);
+        VNextBOShoppingCartDialogValidations.verifyPriceAndCorePriceByPartName(partData.getPartNames()[0], price, corePrice);
 
-        VNextBOShoppingCartDialogInteractions.selectPartByPartService("AutoZone", partData.getPartName());
+        VNextBOShoppingCartDialogInteractions.selectPartByPartService("AutoZone", partData.getPartNames()[0]);
         VNextBOShoppingCartDialogInteractions.clickOrderButton();
         VNextBOConfirmationDialogInteractions.clickYesButton();
     }

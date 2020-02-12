@@ -206,8 +206,83 @@
         "partItems": [
           "Windshield Adhesive Kit"
         ],
-        "partName": "Opt_prefix Windshield Adhesive Kit"
+        "partNames": [
+          "Opt_prefix Windshield Adhesive Kit"
+        ]
       }
+    }
+  ],
+  "verifyThePONumberFieldIsDisplayedAndEditableOnThePMPage": [
+    {
+      "rowID": "verifyThePONumberFieldIsDisplayedAndEditableOnThePMPage.01",
+      "description": "Verify the \"PO#\" field is presented and editable on the \"Parts Management\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "105752"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-236-00019"
+      }
+    }
+  ],
+  "verifyUserCanChangeProviderOfThePart": [
+    {
+      "rowID": "verifyUserCanChangeProviderOfThePart.01",
+      "description": "Test case 83855: User can see Part's details of RO. Test case 83974: User can change Provider of the Part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91173"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-168-00026"
+      },
+      "provider": "Test Team"
+    }
+  ],
+  "verifyUserCanChangePartForSpecifiedParts": [
+    {
+      "rowID": "verifyUserCanChangePartForSpecifiedParts.01",
+      "description": "User can change \"#Part\" for the specified parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93088"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-236-00009"
+      },
+      "partData": {
+        "partNames": [
+          "Part: Bumper"
+        ]
+      },
+      "partNumber": "04711-SNH-A90ZZ"
+    }
+  ],
+  "verifyUserCanChangeLaborCredit": [
+    {
+      "rowID": "verifyUserCanChangeLaborCredit.01",
+      "description": "User can change Labor Credit",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93077"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-236-00009"
+      },
+      "partData": {
+        "partNames": [
+          "Part: Bumper"
+        ]
+      },
+      "partNumber": "04711-SNH-A90ZZ"
     }
   ]
 }

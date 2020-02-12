@@ -176,9 +176,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitForVisibilityIgnoringException(WebElement element) {
-        try {
-            waitForVisibility(element);
-        } catch (Exception ignored) {}
+        waitForVisibilityIgnoringException(element, 15);
     }
 
     public static void waitForVisibilityIgnoringException(WebElement element, int timeoutSeconds) {
@@ -218,7 +216,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static boolean waitForAttributeToBe(WebElement element, String attribute, String value) {
-        return getWait().until(ExpectedConditions.attributeToBe(element, attribute, value));
+        return waitForAttributeToBe(element, attribute, value, 5);
     }
 
     public static boolean waitForAttributeToBe(WebElement element, String attribute, String value, int timeout) {

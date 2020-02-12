@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsDat
 import com.cyberiansoft.test.enums.PartStatuses;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddLaborPartsDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
@@ -26,6 +27,15 @@ import java.util.List;
 public class VNextBOPartsDetailsPanelSteps {
 
     public static void addNewPart(VNextBOPartsData data) {
+        setAddNewPartBasicDefinitions(data);
+        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
+        VNextBOAddNewPartDialogSteps.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
+        VNextBOAddNewPartDialogValidations.verifySelectedPartsCounterValueIsCorrect(String.valueOf(partsCounterValueBefore + data.getPartItems().length));
+        VNextBOAddNewPartDialogInteractions.clickSubmitButton();
+        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
+    }
+
+    public static void setAddNewPartBasicDefinitions(VNextBOPartsData data) {
         WaitUtilsWebDriver.waitABit(1000);
         VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
         VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(true);
@@ -34,11 +44,6 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOAddNewPartDialogSteps.setDescription(data.getDescription());
         VNextBOAddNewPartDialogSteps.setCategory(data.getCategory());
         VNextBOAddNewPartDialogSteps.setSubCategory(data.getSubcategory());
-        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogSteps.getSelectedPartsCounter());
-        VNextBOAddNewPartDialogSteps.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
-        VNextBOAddNewPartDialogValidations.verifySelectedPartsCounterValueIsCorrect(String.valueOf(partsCounterValueBefore + data.getPartItems().length));
-        VNextBOAddNewPartDialogSteps.clickSubmitButton();
-        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
     }
 
     public static void clickAddNewPartButton() {
@@ -48,7 +53,7 @@ public class VNextBOPartsDetailsPanelSteps {
 
     public static int getPartNumberInTheListByServiceName(String serviceName) {
 
-        List<WebElement> servicesNamesList = new VNextBOPartsDetailsPanel().getServiceName();
+        List<WebElement> servicesNamesList = new VNextBOPartsDetailsPanel().getPartNames();
         int serviceNumber = 0;
         for (WebElement serviceNameLabel : servicesNamesList) {
             if (Utils.getText(serviceNameLabel).equals(serviceName)) serviceNumber = servicesNamesList.indexOf(serviceNameLabel) + 1;
@@ -90,10 +95,18 @@ public class VNextBOPartsDetailsPanelSteps {
 
     public static void setStatusForPartByPartNumberInList(int partNumber, String status) {
 
-        VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
-        Utils.clickElement(detailsPanel.getPartStatusFields().get(partNumber));
-        Utils.selectOptionInDropDownWithJsScroll(status);
+        VNextBOPartsDetailsPanelInteractions.setStatusForPartByPartNumber(partNumber, status);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void setStatusForPartByPartName(String partName, String status) {
+        final int partNumber = VNextBOPartsDetailsPanelInteractions.getPartNumberByPartName(partName);
+        VNextBOPartsDetailsPanelInteractions.setStatusForPartByPartNumber(partNumber, status);
+    }
+
+    public static void openPMPageAndSetStatusForPart(String pmWindow, String partName, String status) {
+        Utils.openTab(pmWindow);
+        VNextBOPartsDetailsPanelSteps.setStatusForPartByPartName(partName, status);
     }
 
     public static void setPriceForPartByPartNumberInList(int partNumber, String price) {
@@ -163,6 +176,7 @@ public class VNextBOPartsDetailsPanelSteps {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitABit(4000); //wait for part to be created
         Utils.refreshPage();
+        WaitUtilsWebDriver.waitABit(1000);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
     }
 
@@ -173,6 +187,15 @@ public class VNextBOPartsDetailsPanelSteps {
             Utils.refreshPage();
             VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
         }
+    }
+
+    public static void addPart(VNextBOPartsData data, String woNum) {
+        final String status = PartStatuses.OPEN.getStatus();
+        addNewPart(data);
+        updatePartsList(woNum);
+
+        Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartStatusPresent(status),
+                "The part is not displayed with " + status + " status");
     }
 
     public static void addPartIfOpenStatusIsNotPresent(VNextBOPartsData data, String woNum) {
@@ -217,8 +240,8 @@ public class VNextBOPartsDetailsPanelSteps {
         }
     }
 
-    public static void deleteServicesByName(String name) {
-        VNextBOPartsDetailsPanelInteractions.selectCheckboxesForServicesByName(name);
+    public static void deleteServicesByName(String ...names) {
+        VNextBOPartsDetailsPanelInteractions.selectCheckboxesForServicesByName(names);
         if (VNextBOPartsDetailsPanelValidations.isDeleteSelectedPartsButtonDisplayed(true)) {
             deleteServices();
         }

@@ -74,6 +74,10 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.parts.management.order.details.td");
     }
 
+    public String getPartsManagementAddNewPartTD() {
+        return properties.getProperty("vnextbo.parts.management.add.new.part.td");
+    }
+
     public String getPartsManagementSearchTD() {
         return properties.getProperty("vnextbo.parts.management.search.td");
     }

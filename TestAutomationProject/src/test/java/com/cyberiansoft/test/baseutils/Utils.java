@@ -156,6 +156,11 @@ public class Utils {
     }
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection) {
+        selectOption(dropDown, listBox, selection);
+        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
+    }
+
+    public static void selectOption(WebElement dropDown, List<WebElement> listBox, String selection) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
         getMatchingOptionInListBox(listBox, selection)
@@ -163,7 +168,6 @@ public class Utils {
                     moveToElement(option);
                     clickElement(option);
                 });
-        WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }
 
     public static void selectOptionInDropDownWithJs(WebElement dropDown, List<WebElement> listBox, String selection) {
@@ -226,6 +230,15 @@ public class Utils {
             }
         }
         return "";
+    }
+
+    public static void openTab(String window) {
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        driver.getWindowHandles()
+                .stream()
+                .map(handle -> handle.equals(window))
+                .findFirst()
+                .ifPresent(e -> driver.switchTo().window(window));
     }
 
     public static String getParentTab() {

@@ -13,10 +13,7 @@ import org.testng.Assert;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class VNextBOPartsDetailsPanelValidations {
@@ -213,5 +210,23 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static boolean isShoppingCartButtonDisplayed(boolean displayed) {
         return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getShoppingCartButton(), displayed, 10);
+    }
+
+    public static void verifyProviderIsSet(int index, String provider) {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        try {
+            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
+                    Utils.getText(partsDetailsPanel.getPartProviderInputField().get(index)).equals(provider));
+        } catch (Exception ignored) {}
+        Assert.assertEquals(provider, Utils.getText(partsDetailsPanel.getPartProviderInputField().get(index)));
+    }
+
+    public static boolean isPartDisplayed(String partName) {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        return Utils.getText(partsDetailsPanel.getPartNames()).stream().anyMatch(name -> name.contains(partName));
+    }
+
+    public static void verifyPartIsDisplayed(String partName) {
+        Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartDisplayed(partName), "The part is not displayed");
     }
 }

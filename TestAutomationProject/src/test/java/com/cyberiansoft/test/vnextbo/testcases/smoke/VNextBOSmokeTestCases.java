@@ -13,8 +13,8 @@ import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbIn
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOAccountInfoBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.clients.VNextBOEmailOptionsBlockInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOCompanyInfoWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
@@ -58,7 +58,6 @@ import java.util.Arrays;
 public class VNextBOSmokeTestCases extends BaseTestCase {
 
     private VNextBOCompanyInfoWebPage companyInfoWebPage;
-    private VNextBOHomeWebPage homePage;
     private VNextBOInspectionsWebPage inspectionsWebPage;
 
     @BeforeClass
@@ -70,7 +69,6 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void BackOfficeLogin() {
 
         companyInfoWebPage = PageFactory.initElements(webdriver, VNextBOCompanyInfoWebPage.class);
-        homePage = PageFactory.initElements(webdriver, VNextBOHomeWebPage.class);
         inspectionsWebPage = PageFactory.initElements(webdriver, VNextBOInspectionsWebPage.class);
     }
 
@@ -96,11 +94,10 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOAddNewPartDialogSteps.setDescription(data.getServiceDescription());
         VNextBOAddNewPartDialogSteps.setCategory(data.getServiceCategory());
         VNextBOAddNewPartDialogSteps.setSubCategory(data.getServiceSubcategory());
-        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogSteps.getSelectedPartsCounter());
+        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
         VNextBOAddNewPartDialogSteps.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
         VNextBOAddNewPartDialogValidations.verifySelectedPartsCounterValueIsCorrect(String.valueOf(partsCounterValueBefore + data.getPartItems().length));
-        VNextBOAddNewPartDialogSteps.clickSubmitButton();
-        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
+        VNextBOAddNewPartDialogSteps.submit();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)

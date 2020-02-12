@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddNewPartDialog;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAddNewPartDialogValidations;
 
 import java.util.List;
 
@@ -36,11 +38,6 @@ public class VNextBOAddNewPartDialogSteps {
                 addNewPartDialog.dropDownFieldOption(subCategoryName));
     }
 
-    public static String getSelectedPartsCounter() {
-
-        return Utils.getText(new VNextBOAddNewPartDialog().getSelectedPartsCounter());
-    }
-
     public static void selectPartsFromPartsList(List<String> partsList) {
 
         VNextBOAddNewPartDialog addNewPartDialog = new VNextBOAddNewPartDialog();
@@ -50,8 +47,8 @@ public class VNextBOAddNewPartDialogSteps {
         }
     }
 
-    public static void clickSubmitButton() {
-
-        Utils.clickElement(new VNextBOAddNewPartDialog().getSubmitButton());
+    public static void submit() {
+        VNextBOAddNewPartDialogInteractions.clickSubmitButton();
+        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
     }
 }

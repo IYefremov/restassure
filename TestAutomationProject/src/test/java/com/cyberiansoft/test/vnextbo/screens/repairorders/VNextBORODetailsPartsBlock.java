@@ -42,6 +42,12 @@ public class VNextBORODetailsPartsBlock extends VNextBOBaseWebPage {
         return parts;
     }
 
+    public List<WebElement> getPartNumber(List<WebElement> parts) {
+        return parts.stream().map(part -> part
+                .findElement(By.xpath(".//div[contains(@data-bind, 'oemPartNumber')]")))
+                .collect(Collectors.toList());
+    }
+
     public List<WebElement> getQuantity(List<WebElement> parts) {
         return parts.stream().map(part -> part
                 .findElement(By.xpath(".//td[contains(@class, 'grid__number')]")))
