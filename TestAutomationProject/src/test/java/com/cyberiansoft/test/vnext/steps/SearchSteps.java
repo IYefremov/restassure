@@ -25,8 +25,7 @@ public class SearchSteps {
 
     public static void selectStatus(RepairOrderStatus status) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement());
-        commonFilterScreen.getStatus().selectOption(status.getStatusString());
+        commonFilterScreen.getStatus().selectListElement(status.getStatusString());
     }
 
     public static void clickStatusFilter() {
@@ -87,9 +86,11 @@ public class SearchSteps {
     }
 
     public static void searchByTextAndStatus(String text, RepairOrderStatus status) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         openSearchFilters();
         fillTextSearch(text);
-        selectStatus(status);
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement());
+        commonFilterScreen.getStatus().selectOption(status.getStatusString());
         search();
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
@@ -136,14 +137,28 @@ public class SearchSteps {
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
+    public static void selectDepartment(String departmentName) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getDepartment().selectListElement(departmentName);
+    }
+
+    public static void selectFlag(RepairOrderFlag repairOrderFlag) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getFlag().selectListElement(repairOrderFlag.name());
+    }
+
     public static void searchByPhase(String phaseName) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-
         openSearchFilters();
         commonFilterScreen.getPhase().selectOption(phaseName);
         search();
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
+
+    public static void selectPhase(String phaseName) {
+        CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
+        commonFilterScreen.getPhase().selectListElement(phaseName);
     }
 
     public static void clearAllFilters() {

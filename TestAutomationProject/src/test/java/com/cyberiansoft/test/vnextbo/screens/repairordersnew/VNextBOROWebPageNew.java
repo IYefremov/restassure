@@ -17,6 +17,9 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='reconmonitor-orders']/table")
     private WebElement repairOrdersTable;
 
+    @FindBy(xpath = "//tr[contains(@data-bind,'orders.result')]/th")
+    private List<WebElement> repairOrdersTableColumnsTitles;
+
     @FindBy(xpath = "//div[@id='reconmonitor-orders']//p[@class='search-results text-red']")
     private WebElement noRecordsFoundMessage;
 
@@ -59,6 +62,9 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//td[@class='stockRo']/p/strong")
     private List<WebElement> vinNumbersList;
 
+    @FindBy(xpath = "//input[contains(@data-bind, 'value: poNo')]")
+    private List<WebElement> poNumbersList;
+
     @FindBy(xpath = "//i[@class='icon-problem-indicator']")
     private List<WebElement> problemIndicatorsList;
 
@@ -80,6 +86,48 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind,'click: orderSeeProblems')]")
     private WebElement viewProblemsActionButton;
 
+    @FindBy(xpath = "//div[contains(@data-bind,'click: phaseCheckIn')]")
+    private WebElement checkInActionButton;
+
+    @FindBy(xpath = "//div[contains(@data-bind,'click: phaseCheckOut')]")
+    private WebElement checkOutActionButton;
+
+    @FindBy(xpath = "//div[contains(@data-bind,'click: completeActivePhase')]")
+    private WebElement completeCurrentPhaseActionButton;
+
+    @FindBy(xpath = "//li[@id='departmentsdropTab']/a")
+    private WebElement departmentsSwitcherTab;
+
+    @FindBy(xpath = "//li[@id='phasesdropTab']/a")
+    private WebElement phasesSwitcherTab;
+
+    @FindBy(xpath = "//div[@id='departmentTabNoWideScreen1']//span[@class='k-input']")
+    private WebElement departmentsDropdown;
+
+    @FindBy(xpath = "//div[@id='departmentTabNoWideScreen2']//span[@class='k-input']")
+    private WebElement phasesDropdown;
+
+    @FindBy(xpath = "//ul[@id='departmentsdrop_listbox' and @aria-hidden='false']/li/span[@class='pull-left']")
+    private List<WebElement> departmentsList;
+
+    @FindBy(xpath = "//ul[@id='departmentsdrop_listbox' and @aria-hidden='false']/li/span[@class='pull-right']")
+    private List<WebElement> ordersAmountThroughDepartmentsList;
+
+    @FindBy(xpath = "//ul[@id='phasedrop_listbox' and @aria-hidden='false']/li/span[@class='pull-left']")
+    private List<WebElement> phasesList;
+
+    @FindBy(xpath = "//ul[@id='phasesdrop_listbox' and @aria-hidden='false']/li/span[@class='pull-right']")
+    private List<WebElement> ordersAmountThroughPhasesList;
+
+    @FindBy(xpath = "//div[@data-bind='visible: orderDescriptionDisplay']")
+    private WebElement orderNoteIcon;
+
+    @FindBy(xpath = "//span[contains(@data-bind, 'text: orderDescriptionMini')]")
+    private WebElement orderNoteText;
+
+    @FindBy(xpath = "//a[@data-bind='click: onDescriptionClicked']")
+    private WebElement orderNoteXIcon;
+
     public WebElement savedSearchOptionByName(String searchName) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@class='savedSearch' and text()='" + searchName + "']"));
@@ -93,6 +141,31 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     public WebElement problemIndicatorByOrderNumber(String orderNumber) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//strong[text()='" + orderNumber + "']/ancestor::td//i[@class='icon-problem-indicator']"));
+    }
+
+    public WebElement departmentFilterDropDownOption(String optionText) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//ul[@id='departmentsdrop_listbox' and @aria-hidden='false']/li/span[text()='" + optionText + "']"));
+    }
+
+    public WebElement phaseFilterDropDownOption(String optionText) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//ul[@id='phasesdrop_listbox' and @aria-hidden='false']/li/span[text()='" + optionText + "']"));
+    }
+
+    public WebElement orderDepartmentDropDownOption(String department) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//label[@data-bind='text: departmentName' and text()='" + department + "']"));
+    }
+
+    public WebElement ordersAmountForDepartment(String department) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//ul[@id='departmentsdrop_listbox' and @aria-hidden='false']//span[text()='" + department + "']/ancestor::li/span[@class='pull-right']"));
+    }
+
+    public WebElement ordersAmountForPhaseInTable(String phase) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@id='departmentTabwideScreen2']//span[text()='" + phase + "']/ancestor::div/span[@class='pull-right']"));
     }
 
     public VNextBOROWebPageNew() {

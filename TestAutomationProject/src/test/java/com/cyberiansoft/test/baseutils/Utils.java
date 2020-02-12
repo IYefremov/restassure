@@ -241,6 +241,11 @@ public class Utils {
                 .ifPresent(e -> driver.switchTo().window(window));
     }
 
+    public static void switchToWindow(String windowHandle) {
+
+        DriverBuilder.getInstance().getDriver().switchTo().window(windowHandle);
+    }
+
     public static String getParentTab() {
         return DriverBuilder.getInstance().getDriver().getWindowHandle();
     }

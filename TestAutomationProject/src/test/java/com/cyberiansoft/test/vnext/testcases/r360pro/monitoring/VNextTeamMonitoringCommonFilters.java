@@ -81,21 +81,6 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCanFindTheNecessaryPriority(String rowID,
-                                         String description, JSONObject testData) {
-        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSteps.openItem(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
-        EditOrderSteps.switchToInfo();
-        EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
-        WizardScreenSteps.saveAction();
-        SearchSteps.clearAllFilters();
-        SearchSteps.searchByPriority(OrderPriority.HIGH);
-        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
-        ScreenNavigationSteps.pressBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSearchByDepartment(String rowID,
                                           String description, JSONObject testData) {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
@@ -119,9 +104,6 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSearchByStatus(String rowID,
                                      String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderPhaseDto expectedOrderInfo = workOrderData.getMonitoring().getOrderPhaseDto();
-
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.IN_PROGRESS_ACTIVE);
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
@@ -130,7 +112,6 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanReturnToCommonFilterPageFromStatusPage(String rowID,
                                      String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         SearchSteps.openSearchFilters();
         SearchSteps.clickStatusFilter();

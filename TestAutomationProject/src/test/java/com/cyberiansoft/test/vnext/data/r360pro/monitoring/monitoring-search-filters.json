@@ -63,5 +63,58 @@
         }
       ]
     }
+  ],
+  "userCanFindTheNecessaryStatus": [
+    {
+      "rowID": "userCanFindTheNecessaryStatus.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92305",
+          "testCaseTitle": "Verify the user can find the necessary status"
+        }
+      ]
+    }
+  ],
+  "userCanFindTheNecessaryPhase": [
+    {
+      "rowID": "userCanFindTheNecessaryPhase.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92301",
+          "testCaseTitle": "Verify the user can find the necessary phase"
+        }
+      ],
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "AutomationPhaseLevel"
+        }
+      }
+    }
+  ],
+  "userCanFindTheNecessaryDepartment": [
+    {
+      "rowID": "userCanFindTheNecessaryDepartment.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92297",
+          "testCaseTitle": "Verify the user can find the necessary department"
+        }
+      ]
+    }
+  ],
+  "userCanFindTheNecessaryFlag": [
+    {
+      "rowID": "userCanFindTheNecessaryFlag.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92309",
+          "testCaseTitle": "Verify the user can find the necessary flag"
+        }
+      ]
+    }
   ]
 }
