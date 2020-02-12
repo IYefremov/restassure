@@ -157,6 +157,11 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsLaborTests"/>
         </classes>
     </test>
+    <test name="Parts Management Generic Part Provider Functionality Tests">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementGenericPartProviderFunctionalityTestCases"/>
+        </classes>
+    </test>
     <test name="Monitor Advanced Search Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorAdvancedSearchTestCasesNew"/>

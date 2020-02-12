@@ -13,10 +13,7 @@ import org.testng.Assert;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class VNextBOPartsDetailsPanelValidations {
@@ -148,7 +145,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
         List<WebElement> checkBoxes = new ArrayList<>();
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
-        if (status.equals("All")) checkBoxes = detailsPanel.getPartCheckbox();
+        if (status.equals("All")) checkBoxes = detailsPanel.getPartCheckboxesList();
         else checkBoxes = detailsPanel.partCheckBoxesByPartStatus(status);
         if (shouldBeActivated) {
             for (WebElement partCheckBox : checkBoxes) {
@@ -169,6 +166,11 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Delete button hasn't been displayed");
         else Assert.assertFalse(Utils.isElementDisplayed(partsDetailsPanel.getDeleteSelectedPartsButton()),
                 "Delete button has been displayed");
+    }
+
+    public static boolean isDeleteSelectedPartsButtonDisplayed(boolean shouldBeDisplayed) {
+        return WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOPartsDetailsPanel().getDeleteSelectedPartsButton(), shouldBeDisplayed, 2);
     }
 
     public static void verifyStatusesListIsCorrect(List<String> expectedStatusesList) {
@@ -208,5 +210,23 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static boolean isShoppingCartButtonDisplayed(boolean displayed) {
         return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getShoppingCartButton(), displayed, 10);
+    }
+
+    public static void verifyProviderIsSet(int index, String provider) {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        try {
+            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
+                    Utils.getText(partsDetailsPanel.getPartProviderInputField().get(index)).equals(provider));
+        } catch (Exception ignored) {}
+        Assert.assertEquals(provider, Utils.getText(partsDetailsPanel.getPartProviderInputField().get(index)));
+    }
+
+    public static boolean isPartDisplayed(String partName) {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        return Utils.getText(partsDetailsPanel.getPartNames()).stream().anyMatch(name -> name.contains(partName));
+    }
+
+    public static void verifyPartIsDisplayed(String partName) {
+        Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartDisplayed(partName), "The part is not displayed");
     }
 }

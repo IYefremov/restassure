@@ -19,6 +19,13 @@ public class VNextBOROAdvancedSearchDialogSteps {
         search();
     }
 
+    public static void searchByWoAndTimeFrame(String order, TimeFrameValues timeFrameValue) {
+        openAdvancedSearchDialog();
+        VNextBOROAdvancedSearchDialogInteractions.setWoNum(order);
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(timeFrameValue.getName());
+        search();
+    }
+
     public static void openAdvancedSearchDialog() {
         if (!VNextBOROAdvancedSearchDialogValidations.isAdvancedSearchDialogDisplayed(1)) {
             VNextBOROPageInteractions.clickAdvancedSearchCaret();

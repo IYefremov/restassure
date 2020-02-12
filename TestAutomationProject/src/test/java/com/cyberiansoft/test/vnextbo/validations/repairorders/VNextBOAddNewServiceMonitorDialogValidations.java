@@ -16,7 +16,8 @@ public class VNextBOAddNewServiceMonitorDialogValidations {
     public static boolean isPartDescriptionDisplayed(String description) {
         Utils.refreshPage();
         final List<WebElement> partDescriptions = new VNextBOAddNewServiceMonitorDialog().getPartDescriptions();
-        return WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(partDescriptions)
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(partDescriptions);
+        return partDescriptions
                 .stream()
                 .anyMatch(e -> {
                     final String option = e.getText().replaceFirst(".+(, )", "");

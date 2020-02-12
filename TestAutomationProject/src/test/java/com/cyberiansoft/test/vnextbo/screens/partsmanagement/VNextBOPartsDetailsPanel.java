@@ -44,9 +44,6 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[contains(@data-bind, 'addLaborServices')]")
     private List<WebElement> addLaborButton;
 
-    @FindBy(xpath = "//div[@data-bind='text: serviceName']")
-    private List<WebElement> serviceName;
-
     @FindBy(xpath = "//button[contains(@data-bind, 'deleteLaborService')]")
     private List<WebElement> deleteLaborButton;
 
@@ -57,7 +54,19 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private List<WebElement> partDetails;
 
     @FindBy(xpath = "//div[@id='part-entity-details']//input[contains(@data-bind, 'canDelete')]")
-    private List<WebElement> partCheckbox;
+    private List<WebElement> partCheckboxesList;
+
+    @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Labor credit']")
+    private List<WebElement> laborCreditInputFieldsList;
+
+    @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='PO#']")
+    private List<WebElement> poInputFieldsList;
+
+    @FindBy(xpath = "//div[@id='part-entity-details']//div[text()='Provider']/..//span[contains(@class, 'k-select')]")
+    private WebElement providerFieldArrow;
+
+    @FindBy(xpath = "//span[contains(@class,'service-provider-dropdown')]//span[@class='k-input']")
+    private List<WebElement> partProviderInputField;
 
     @FindBy(xpath = "//div[@id='partsTable']//div[contains(@data-bind, 'isExpanded')]")
     private List<WebElement> partLaborsBlock;
@@ -86,14 +95,14 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind, 'serviceName')]")
     private List<WebElement> partNames;
 
-    @FindBy(xpath = "//div[@class='k-animation-container']/div[contains(@class, 'k-list-container')]")
-    private WebElement partStatusDropDown;
+    @FindBy(xpath = "//input[contains(@class, 'service-oem-number-combobox') and @role='combobox']")
+    private List<WebElement> partNumberInputFields;
 
-    @FindBy(xpath = "//div[@class='k-animation-container']/div[contains(@class, 'k-list-container')]//li")
-    private List<WebElement> partStatusListBoxOptions;
+    @FindBy(xpath = "//div[@class='k-animation-container' and @aria-hidden='false']/div[contains(@class, 'k-list-container')]")
+    private WebElement partDropDown;
 
-    @FindBy(xpath = "//span[contains(@class,'service-provider-dropdown')]//span[@class='k-input']")
-    private List<WebElement> partProviderField;
+    @FindBy(xpath = "//div[@class='k-animation-container' and @aria-hidden='false']/div[contains(@class, 'k-list-container')]//li")
+    private List<WebElement> partListBoxOptions;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'estimatedTimeArrival')]")
     private List<WebElement> partEtaField;
@@ -176,5 +185,13 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
 
     public List<WebElement> getDeleteStatusesList() {
         return headerDropDown.findElements(By.xpath(".//div[contains(@class, 'parts-check-all-status')]"));
+    }
+
+    public WebElement getPartInputField(int order) {
+        return partNumberInputFields.get(order);
+    }
+
+    public WebElement getPartInputFieldClearIcon(WebElement partService) {
+        return partService.findElement(By.xpath(".//following-sibling::span[@title='clear']"));
     }
 }

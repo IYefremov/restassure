@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 @Getter
 public class VNextBOAddNewPartDialog extends VNextBOBaseWebPage {
 
@@ -52,13 +54,16 @@ public class VNextBOAddNewPartDialog extends VNextBOBaseWebPage {
     private WebElement partsListFilterField;
 
     @FindBy(xpath = "//button[@data-bind='click: part.selectAll, enabled: part.hasAvailableParts']")
-    private WebElement selectPartButton;
+    private WebElement selectAllPartsButton;
 
     @FindBy(xpath = "//button[@data-bind='click: part.unSelectAll, enabled: part.hasSelectedParts']")
-    private WebElement unSelectPartButton;
+    private WebElement unSelectAllPartsButton;
 
     @FindBy(xpath = "//div[@data-bind='visible: part.part.isEnabled']//span[@class='badge']")
     private WebElement selectedPartsCounter;
+
+    @FindBy(xpath = "//div[contains(@data-bind, 'onLaborPartSelectionChange')]")
+    private List<WebElement> partsList;
 
     public WebElement dropDownFieldOption(String optionName) {
 

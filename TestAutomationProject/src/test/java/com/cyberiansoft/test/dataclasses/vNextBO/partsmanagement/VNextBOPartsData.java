@@ -18,8 +18,8 @@ public class VNextBOPartsData {
     @JsonProperty("subcategory")
     private String subcategory;
 
-    @JsonProperty("partName")
-    private String partName;
+    @JsonProperty("partNames")
+    private String[] partNames;
 
     @JsonProperty("partItems")
     private String[] partItems;
