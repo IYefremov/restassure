@@ -2,8 +2,10 @@ package com.cyberiansoft.test.vnextbo.interactions.repairorders;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 
 public class VNextBOROSimpleSearchInteractions {
 
@@ -30,7 +32,7 @@ public class VNextBOROSimpleSearchInteractions {
     }
 
     public static void clickEnterToSearch() {
-        Utils.getActions().sendKeys(new VNextBOROWebPage().getSearchInput(), Keys.ENTER).build().perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(new VNextBOROWebPage().getSearchInput(), Keys.ENTER).build().perform();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }
