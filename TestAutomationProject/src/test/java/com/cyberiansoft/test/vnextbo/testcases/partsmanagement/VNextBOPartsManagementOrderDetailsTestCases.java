@@ -42,7 +42,6 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         final String pmWindow = Utils.getParentTab();
         final String woNum = data.getSearchData().getWoNum();
         final String partName = data.getPartData().getPartNames()[0];
-        final String openStatus = PartStatuses.OPEN.getStatus();
 
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
