@@ -128,6 +128,12 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//a[@data-bind='click: onDescriptionClicked']")
     private WebElement orderNoteXIcon;
 
+    @FindBy(xpath = "//div[contains(@class,'priority-icon') and @style='background: green;']/i[@class='icon-arrow-down']")
+    private WebElement lowPriorityIcon;
+
+    @FindBy(xpath = "//div[contains(@class,'priority-icon') and @style='background: red;']/i[@class='icon-arrow-up']")
+    private WebElement highPriorityIcon;
+
     public WebElement savedSearchOptionByName(String searchName) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@class='savedSearch' and text()='" + searchName + "']"));

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.testcases.homepage;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -21,15 +22,26 @@ import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class VNextBOHomePageTestCases extends BaseTestCase {
+
+    private String parentTabHandle;
 
     @BeforeClass
     public void settingUp() {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getHomePageTD();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        parentTabHandle = Utils.getParentTab();
+    }
+
+    @BeforeMethod
+    public void switchToParentTab() {
+
+        if (DriverBuilder.getInstance().getDriver().getWindowHandles().size() > 1)
+            Utils.closeAllNewWindowsExceptParentTab(parentTabHandle);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

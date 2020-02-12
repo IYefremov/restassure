@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -429,6 +430,33 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         } else {
             Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getOrderNoteText()), "Order note text hasn't been hidden");
             Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getOrderNoteXIcon()), "Order note x-icon hasn't been hidden");
+        }
+    }
+
+    public static void verifyNoteTextIsCorrectForFirstOrder(String noteText, boolean equal) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        if (equal) Assert.assertEquals(Utils.getText(ordersPage.getOrderNoteText()), noteText, "Note's text hasn't been correct");
+        else Assert.assertFalse(Utils.getText(ordersPage.getOrderNoteText()).equals(noteText), "Note's text hasn't been correct");
+    }
+
+    public static void verifyPriorityIsCorrectForFirstOrder(String expectedPriority) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        switch(expectedPriority) {
+            case "Low":
+                Assert.assertTrue(Utils.isElementDisplayed(ordersPage.getLowPriorityIcon()), "Low priority icon hasn't been displayed");
+                break;
+            case "High":
+                Assert.assertTrue(Utils.isElementDisplayed(ordersPage.getHighPriorityIcon()), "High priority icon hasn't been displayed");
+                break;
+            case "Normal":
+                try {
+                    Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getLowPriorityIcon()), "Low priority icon has been displayed");
+                    Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getHighPriorityIcon()), "High priority icon has been displayed");
+                } catch (NoSuchElementException ex) {}
+
+                break;
         }
     }
 }

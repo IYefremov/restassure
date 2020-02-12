@@ -140,11 +140,15 @@
   "verifyUserCanSeeAndChangeRoDetails": [
     {
       "rowID": "verifyUserCanSeeAndChangeRoDetails.01",
-      "description": "Test Case 91383: User can see and change RO details",
+      "description": "Test Case 91383: User can see and change RO details. Test Case 91234: Repair Order details",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91383",
           "testCaseTitle": "User can see and change RO details"
+        },
+        {
+          "testCaseID": "91234",
+          "testCaseTitle": "Repair Order details"
         }
       ],
       "orderNumber": "O-000-147163",
@@ -208,6 +212,256 @@
       "service": "Car-Washing"
     }
   ],
+
+  "verifyUserCanTypeAndNotSaveNotesWithXIcon": [
+    {
+      "rowID": "verifyUserCanTypeAndNotSaveNotesWithXIcon.01",
+      "description": "Test Case 91411: User can type and not save notes (X-icon) (Left of RO)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91411",
+          "testCaseTitle": "User can type and not save notes (X-icon) (Left of RO)"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanTypeAndNotSaveNotesWithClose": [
+    {
+      "rowID": "verifyUserCanTypeAndNotSaveNotesWithClose.01",
+      "description": "Test Case 91412: User can type and not save notes (Close) (Left of RO)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91412",
+          "testCaseTitle": "User can type and not save notes (Close) (Left of RO)"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanChangeStockOfRo": [
+    {
+      "rowID": "verifyUserCanChangeStockOfRo.01",
+      "description": "Test Case 91337: User can change \"Stock#\" of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91337",
+          "testCaseTitle": "User can change \"Stock#\" of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanChangeRoNumOfRo": [
+    {
+      "rowID": "verifyUserCanChangeRoNumOfRo.01",
+      "description": "Test Case 91334: User can change \"RO#\" of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91334",
+          "testCaseTitle": "User can change \"RO#\" of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRo": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRo.01",
+      "description": "Test Case 91340: User can change Status of RO to \"New\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91340",
+          "testCaseTitle": "User can change Status of RO to \"New\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "status": "New"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfRo.02",
+      "description": "Test Case 91342: User can change Status of RO to \"On Hold\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91342",
+          "testCaseTitle": "User can change Status of RO to \"On Hold\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "status": "On Hold"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfRo.03",
+      "description": "Test Case 91344: User can change Status of RO to \"Approved\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91344",
+          "testCaseTitle": "User can change Status of RO to \"Approved\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "status": "Approved"
+    }
+  ],
+
+  "verifyUserCannotChangeStatusOfRoToDraft": [
+    {
+      "rowID": "verifyUserCannotChangeStatusOfRoToDraft.01",
+      "description": "Test Case 91346: User can change Status of RO to \"Draft\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91346",
+          "testCaseTitle": "User can change Status of RO to \"Draft\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "status": "Draft"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoToClosedWithCompletedReason": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoToClosedWithCompletedReason.01",
+      "description": "Test Case 91348: User can change Status of RO to \"Closed\" with \"Completed\" reason",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91348",
+          "testCaseTitle": "User can change Status of RO to \"Closed\" with \"Completed\" reason"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "status": "Closed",
+      "problemReason": "(None)",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "phaseStatus": "Active"
+    }
+  ],
+
+  "verifyUserCanChangePriorityOfRo": [
+    {
+      "rowID": "verifyUserCanChangePriorityOfRo.01",
+      "description": "Test Case 91358: User can change Priority of RO to \"Low\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91358",
+          "testCaseTitle": "User can change Priority of RO to \"Low\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priority": "Low"
+    },
+    {
+      "rowID": "verifyUserCanChangePriorityOfRo.02",
+      "description": "Test Case 91360: User can change Priority of RO to \"Normal\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91360",
+          "testCaseTitle": "User can change Priority of RO to \"Normal\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priority": "Normal"
+    },
+    {
+      "rowID": "verifyUserCanChangePriorityOfRo.03",
+      "description": "Test Case 91362: User can change Priority of RO to \"High\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91362",
+          "testCaseTitle": "User can change Priority of RO to \"High\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priority": "High"
+    }
+  ],
+
+  "verifyUserCanAddNewService": [
+    {
+      "rowID": "verifyUserCanAddNewService.01",
+      "description": "Test Case 91365: User can add new service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91365",
+          "testCaseTitle": "User can add new service"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priceType": "All",
+      "phase": "Detail Station",
+      "service": "AMoneyFlatFee_VacuumCleaner",
+      "serviceDescription": "autotest",
+      "servicePrice": "$90.00",
+      "serviceQuantity": "7.000"
+    }
+  ],
+
+  "verifyUserCanAddNewMoneyService": [
+    {
+      "rowID": "verifyUserCanAddNewMoneyService.01",
+      "description": "Test Case 91366: User can add new service (Money)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91366",
+          "testCaseTitle": "User can add new service (Money)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priceType": "Money",
+      "phase": "Detail Station",
+      "service": "AMoneyFlatFee_VacuumCleaner",
+      "serviceDescription": "autotest",
+      "servicePrice": "$999.99",
+      "serviceQuantity": "0.001"
+    }
+  ],
+
+  "verifyUserCanAddNewLaborService": [
+    {
+      "rowID": "verifyUserCanAddNewLaborService.01",
+      "description": "Test Case 91367: User can add new service (Labor)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91367",
+          "testCaseTitle": "User can add new service (Labor)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priceType": "Labor",
+      "phase": "PDR Station",
+      "service": "IvTestLabor_None",
+      "serviceDescription": "autotest",
+      "serviceLaborRate": "$564.01",
+      "serviceLaborTime": "3.5"
+    }
+  ],
+
+  "verifyUserCanAddNewPartService": [
+    {
+      "rowID": "verifyUserCanAddNewPartService.01",
+      "description": "Test Case 91368: User can add new service (Part)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91368",
+          "testCaseTitle": "User can add new service (Part)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priceType": "Part",
+      "service": "New part service",
+      "serviceDescription": "autotest",
+      "serviceCategory": "Body",
+      "serviceSubcategory": "Bumper",
+      "servicePart": "Air Dam"
+    }
+  ],
+
+
 
   "verifyUserCanSearchByRepairStatus": [
     {
@@ -274,288 +528,7 @@
     }
   ],
 
-  "verifyUserCanTypeAndNotSaveNotesWithXIcon": [
-    {
-      "rowID": "verifyUserCanTypeAndNotSaveNotesWithXIcon.01",
-      "description": "Test Case 83261:User can type and not save notes (X-icon) (Left of RO)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91411"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073"
-    }
-  ],
 
-  "verifyUserCanTypeAndNotSaveNotesWithClose": [
-    {
-      "rowID": "verifyUserCanTypeAndNotSaveNotesWithClose.01",
-      "description": "Test Case 83262:User can type and not save notes (Close) (Left of RO)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91412"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073"
-    }
-  ],
-
-  "verifyUserCanOpenRoDetails": [
-    {
-      "rowID": "verifyUserCanOpenRoDetails.01",
-      "description": "Test Case 82726:Repair Order details",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91234"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073"
-    }
-  ],
-
-  "verifyUserCanChangeStockOfRo": [
-    {
-      "rowID": "verifyUserCanChangeStockOfRo.01",
-      "description": "Test Case 82882:User can change \"Stock#\" of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91337"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "stockNumbers": [
-        "Test",
-        "autotest"
-      ]
-    }
-  ],
-
-  "verifyUserCanChangeRoNumOfRo": [
-    {
-      "rowID": "verifyUserCanChangeRoNumOfRo.01",
-      "description": "Test Case 82885:User can change \"RO#\" of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91334"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "roNumbers": [
-        "auto",
-        "++__"
-      ]
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoToNew": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoToNew.01",
-      "description": "Test Case 82858:User can change Status of RO to \"New\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91340"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "New"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoToOnHold": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoToOnHold.01",
-      "description": "Test Case 82861:User can change Status of RO to \"On Hold\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91342"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "On Hold"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoToApproved": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoToApproved.01",
-      "description": "Test Case 82863:User can change Status of RO to \"Approved\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91344"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Approved"
-    }
-  ],
-
-  "verifyUserCannotChangeStatusOfRoToDraft": [
-    {
-      "rowID": "verifyUserCannotChangeStatusOfRoToDraft.01",
-      "description": "Test Case 82865:User can change Status of RO to \"Draft\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91346"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Draft"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoToClosedWithNoneReason": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoToClosedWithNoneReason.01",
-      "description": "Test Case 85902:User can change Status of RO to \"Closed\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91347"
-        }
-      ],
-      "location": "Best Location Automation",
-      "timeFrame": "Last Year",
-      "status": "Closed",
-      "problemReason": "(None)",
-      "phase": "PDR Station",
-      "phaseStatus": "Active"
-    }
-  ],
-
-  "verifyUserCanChangePriorityOfRoToLow": [
-    {
-      "rowID": "verifyUserCanChangePriorityOfRoToLow.01",
-      "description": "Test Case 82771:User can change Priority of RO to \"Low\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91358"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priority": "Low"
-    }
-  ],
-
-  "verifyUserCanChangePriorityOfRoToNormal": [
-    {
-      "rowID": "verifyUserCanChangePriorityOfRoToNormal.01",
-      "description": "Test Case 82775:User can change Priority of RO to \"Normal\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91360"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priority": "Normal"
-    }
-  ],
-
-  "verifyUserCanChangePriorityOfRoToHigh": [
-    {
-      "rowID": "verifyUserCanChangePriorityOfRoToHigh.01",
-      "description": "Test Case 82777:User can change Priority of RO to \"High\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91362"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priority": "High"
-    }
-  ],
-
-  "verifyUserCanAddNewService": [
-    {
-      "rowID": "verifyUserCanAddNewService.01",
-      "description": "Test Case 82732:User can add new service",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91365"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priceType": "All",
-      "service": "Test service zayats",
-      "serviceDetails": "roof",
-      "serviceDescription": "autotest",
-      "servicePrice": "90",
-      "serviceQuantity": "1"
-    }
-  ],
-
-  "verifyUserCanAddNewMoneyService": [
-    {
-      "rowID": "verifyUserCanAddNewMoneyService.01",
-      "description": "Test Case 86118:User can add new service (Money)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91366"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priceType": "Money",
-      "service": "Test service zayats",
-      "serviceDetails": "roof",
-      "serviceDescription": "autotest",
-      "servicePrice": "100",
-      "serviceQuantity": "1"
-    }
-  ],
-
-  "verifyUserCanAddNewLaborService": [
-    {
-      "rowID": "verifyUserCanAddNewLaborService.01",
-      "description": "Test Case 86121:User can add new service (Labor)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91367"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priceType": "Labor",
-      "service": "Test service with questions (without prefix)",
-      "serviceDescription": "testtt",
-      "serviceDetails": "details",
-      "serviceLaborRate": "$110.00",
-      "serviceLaborTime": "2"
-    }
-  ],
-
-  "verifyUserCanAddNewPartService": [
-    {
-      "rowID": "verifyUserCanAddNewPartService.01",
-      "description": "Test Case 86122:User can add new service (Part)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91368"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priceType": "Part",
-      "service": "Oksi Part service - Category",
-      "serviceDescription": "TestPart",
-      "serviceCategory": "Body",
-      "serviceParts": [
-        "Air Dam",
-        "Air Dam Clip"
-      ]
-    }
-  ],
 
   "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon": [
     {

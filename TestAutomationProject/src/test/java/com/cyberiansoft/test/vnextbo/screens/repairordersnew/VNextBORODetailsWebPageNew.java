@@ -32,11 +32,29 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind,'completePhase') and not(contains(@style,'display: none'))]")
     private WebElement completeCurrentPhaseActionButton;
 
+    @FindBy(xpath = "//div[contains(@data-bind,'phaseStart') and not(contains(@style,'display: none'))]")
+    private WebElement startServicesActionButton;
+
     @FindBy(xpath = "//div[@class='drop checkout']//div[contains(@data-bind,'reportProblemMenu') and not(contains(@style,'display: none'))]")
     private WebElement reportProblemForServiceActionButton;
 
     @FindBy(xpath = "//div[@class='drop checkout']//div[contains(@data-bind,'resolveProblemMenu') and not(contains(@style,'display: none'))]")
     private WebElement resolveProblemForServiceActionButton;
+
+    @FindBy(xpath = "//span[@aria-owns='reconmonitor-details-status_listbox']//span[@class='k-input']")
+    private WebElement orderStatusDropDown;
+
+    @FindBy(xpath = "//button[@title='Reopen RO']")
+    private WebElement reopenOrderButton;
+
+    @FindBy(xpath = "//div[contains(@data-bind, 'PriorityToolbar')]//span[@class='k-input']")
+    private WebElement priorityDropDown;
+
+    @FindBy(xpath = "//button[@id='reconmonitordetails-view-add-order-button']")
+    private WebElement addServiceButton;
+
+    @FindBy(xpath = "//tbody[@data-template='repair-order-part-list-item-template']//b")
+    private List<WebElement> partServicesNamesList;
 
     public WebElement actionsMenuButtonForPhase(String phase) {
 
@@ -46,6 +64,16 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     public WebElement actionsMenuButtonForService(String service) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//i[@class='icon-list menu-trigger'])[1]"));
+    }
+
+    public WebElement startServiceButtonForService(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//button[contains(@data-bind, 'serviceStart')])[1]"));
+    }
+
+    public WebElement serviceDescription(String serviceDescription) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='clmn_2']//div[contains(.,'" + serviceDescription + "')]"));
     }
 
     public WebElement expandPhaseButton(String phase) {
@@ -123,7 +151,7 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@class,'service-status-dropdown')]//span[@class='k-input'])[1]"));
     }
 
-    public WebElement statusDropDownOption(String optionName) {
+    public WebElement dropDownOption(String optionName) {
 
         return driver.findElement(By.xpath("//ul[@aria-hidden='false']//span[text()='" + optionName + "']"));
     }

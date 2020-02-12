@@ -32,18 +32,19 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 
 	private String parentTabHandle;
 
-	@BeforeMethod
-	public void switchToParentTab() {
-
-		if (parentTabHandle != null) Utils.switchToWindow(parentTabHandle);
-	}
-
 	@BeforeClass
 	public void settingUp() {
 
 		JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
 		VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
 		VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
+	}
+
+	@BeforeMethod
+	public void switchToParentTab() {
+
+		if (DriverBuilder.getInstance().getDriver().getWindowHandles().size() > 1)
+			Utils.closeAllNewWindowsExceptParentTab(parentTabHandle);
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

@@ -172,26 +172,26 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorSimpleSearchTestCasesNew"/>
         </classes>
     </test>
-<!--    <test name="Monitor Tests Part 1">
+    <test name="Monitor Tests Part 1">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart1"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart1New"/>
         </classes>
     </test>
     <test name="Monitor Tests Part 2">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart2"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart2New"/>
         </classes>
     </test>
-    <test name="Monitor Tests Part 3">
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart3"/>
-        </classes>
-    </test>
-    <test name="Monitor Tests Part 4">
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart4"/>
-        </classes>
-    </test>-->
+    <!--    <test name="Monitor Tests Part 3">
+            <classes>
+                <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart3"/>
+            </classes>
+        </test>
+        <test name="Monitor Tests Part 4">
+            <classes>
+                <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart4"/>
+            </classes>
+        </test>-->
     <test name="Monitor Grid Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorGridDataTestCases"/>

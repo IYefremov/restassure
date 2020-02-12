@@ -364,4 +364,31 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         Utils.clickElement(new VNextBOROWebPageNew().getCompleteCurrentPhaseActionButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
+
+    public static void openFirstOrderNotes() {
+
+        Utils.clickElement(new VNextBOROWebPageNew().getOrderNoteText());
+    }
+
+    public static void addNoteForFirstNoteAndNotSaveWItXIcon(String noteText) {
+
+        openFirstOrderNotes();
+        VNextBONotesDialogStepsNew.addNoteAndNotSaveXIcon(noteText);
+    }
+
+    public static void changeStockNumberForFirstOrder(String newStockNumber) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickElement(ordersPage.getStockNumbersList().get(0));
+        Utils.clearAndType(ordersPage.getStockNumbersList().get(0), newStockNumber);
+        Utils.clickElement(ordersPage.getDepartmentsSwitcherTab());
+    }
+
+    public static void changeRoNumberForFirstOrder(String newRoNumber) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickElement(ordersPage.getRoNumbersList().get(0));
+        Utils.clearAndType(ordersPage.getRoNumbersList().get(0), newRoNumber);
+        Utils.clickElement(ordersPage.getDepartmentsSwitcherTab());
+    }
 }
