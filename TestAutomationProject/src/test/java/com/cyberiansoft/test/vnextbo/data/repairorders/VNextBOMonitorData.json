@@ -595,9 +595,9 @@
     }
   ],
 
-  "verifyUserCanChangeStatusOfRoServiceToActive": [
+  "verifyUserCanChangeStatusOfRoService": [
     {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToActive.01",
+      "rowID": "verifyUserCanChangeStatusOfRoService.01",
       "description": "Test Case 91287: User can change Status of RO to \"Active\"",
       "targetProcessTestCaseData": [
         {
@@ -613,12 +613,9 @@
         "Active"
       ],
       "serviceStartedDate": "02/11/2020"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToCompleted": [
+    },
     {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToCompleted.01",
+      "rowID": "verifyUserCanChangeStatusOfRoService.02",
       "description": "Test Case 91288: User can change Status of RO to \"Complete\"",
       "targetProcessTestCaseData": [
         {
@@ -634,12 +631,9 @@
         "Completed"
       ],
       "serviceStartedDate": "02/11/2020"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToAudited": [
+    },
     {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToAudited.01",
+      "rowID": "verifyUserCanChangeStatusOfRoService.03",
       "description": "Test Case 91289: User can change Status of RO to \"Audited\"",
       "targetProcessTestCaseData": [
         {
@@ -655,12 +649,9 @@
         "Audited"
       ],
       "serviceStartedDate": "02/11/2020"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToRework": [
+    },
     {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToRework.01",
+      "rowID": "verifyUserCanChangeStatusOfRoService.04",
       "description": "Test Case 91291: User can change Status of RO to \"Rework\"",
       "targetProcessTestCaseData": [
         {
@@ -676,12 +667,9 @@
         "Rework"
       ],
       "serviceStartedDate": "02/11/2020"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToRefused": [
+    },
     {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToRefused.01",
+      "rowID": "verifyUserCanChangeStatusOfRoService.05",
       "description": "Test Case 91290: User can change Status of RO to \"Refused\"",
       "targetProcessTestCaseData": [
         {
@@ -697,12 +685,9 @@
         "Refused"
       ],
       "serviceStartedDate": "02/11/2020"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToSkipped": [
+    },
     {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToSkipped.01",
+      "rowID": "verifyUserCanChangeStatusOfRoService.06",
       "description": "Test Case 91292: User can change Status of RO to \"Skipped\"",
       "targetProcessTestCaseData": [
         {
@@ -718,6 +703,122 @@
         "Skipped"
       ],
       "serviceStartedDate": "02/11/2020"
+    }
+  ],
+
+  "verifyUserCanSeeServicesOfRo": [
+    {
+      "rowID": "verifyUserCanSeeServicesOfRo.01",
+      "description": "Test Case 91282: User can see Services of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91282",
+          "testCaseTitle": "User can see Services of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestaiinBFZ"
+    }
+  ],
+
+  "verifyUserCanChangeVendorPriceOfRo": [
+    {
+      "rowID": "verifyUserCanChangeVendorPriceOfRo.01",
+      "description": "Test Case 91283: User can change Vendor Price of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91283",
+          "testCaseTitle": "User can change Vendor Price of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestaiinBFZ",
+      "serviceVendorPrices": [
+        "$100.00",
+        "$0.00"
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeVendorTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeVendorTechnicianOfRo.01",
+      "description": "Test Case 91284: User can change Vendor/Technician of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91284",
+          "testCaseTitle": "User can change Vendor/Technician of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestaiinBFZ",
+      "vendor": "01_TimeRep_team",
+      "technician": "Alex Zak"
+    }
+  ],
+
+  "verifyUserCanCreateNoteOfServiceOfRo": [
+    {
+      "rowID": "verifyUserCanCreateNoteOfServiceOfRo.01",
+      "description": "Test Case 91285: User can create Note of the Service of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91285",
+          "testCaseTitle": "User can create Note of the Service of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestaiinBFZ",
+      "notesMessage": "Autotest 91285"
+    }
+  ],
+
+  "verifyUserCanChangeTargetDateOfRo": [
+    {
+      "rowID": "verifyUserCanChangeTargetDateOfRo.01",
+      "description": "Test Case 91310: User can change Target Date of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91310",
+          "testCaseTitle": "User can change Target Date of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanSeeMoreInformationOfRo": [
+    {
+      "rowID": "verifyUserCanSeeMoreInformationOfRo.01",
+      "description": "Test Case 91307: User can see More Information of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91307",
+          "testCaseTitle": "User can see More Information of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanTypeAndNotSaveNoteOfRoService": [
+    {
+      "rowID": "verifyUserCanTypeAndNotSaveNoteOfRoService.01",
+      "description": "Test Case 91286: User can type and not save Note of the Service of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91286",
+          "testCaseTitle": "User can type and not save Note of the Service of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestaiinBFZ",
+      "notesMessage": "Autotest 91286"
     }
   ],
 
@@ -827,157 +928,6 @@
         "Services",
         "Parts"
       ]
-    }
-  ],
-
-  "verifyUserCanSeeServicesOfRo": [
-    {
-      "rowID": "verifyUserCanSeeServicesOfRo.01",
-      "description": "Test Case 82955:User can see Services of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91282"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "servicesTableFields": [
-        "Service",
-        "Qty",
-        "Price",
-        "Vendor Price",
-        "Vendor / Technician",
-        "Status",
-        "Started / Completed",
-        "Actions"
-      ]
-    }
-  ],
-
-  "verifyUserCanChangeVendorPriceOfRo": [
-    {
-      "rowID": "verifyUserCanChangeVendorPriceOfRo.01",
-      "description": "Test Case 82967:User can change Vendor Price of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91283"
-        }
-      ],
-      "location": "Rozstalnoy_location",
-      "status": "Approved",
-      "orderNumber": "O-000-152510",
-      "service": "  Test Bundle Service",
-      "serviceVendorPrices": [
-        "0",
-        "100"
-        ]
-    }
-  ],
-
-  "verifyUserCanChangeVendorTechnicianOfRo": [
-    {
-      "rowID": "verifyUserCanChangeVendorTechnicianOfRo.01",
-      "description": "Test Case 82968:User can change Vendor/Technician of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91284"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ]
-    }
-  ],
-
-  "verifyUserCanCreateNoteOfServiceOfRo": [
-    {
-      "rowID": "verifyUserCanCreateNoteOfServiceOfRo.01",
-      "description": "Test Case 82970:User can create Note of the Service of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91285"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "notesMessage": "Autotest"
-    }
-  ],
-
-  "verifyUserCanChangeTargetDateOfRo": [
-    {
-      "rowID": "verifyUserCanChangeTargetDateOfRo.01",
-      "description": "Test Case 82926:User can change Target Date of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91310"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ]
-    }
-  ],
-
-  "verifyUserCanSeeMoreInformationOfRo": [
-    {
-      "rowID": "verifyUserCanSeeMoreInformationOfRo.01",
-      "description": "Test Case 82949:User can see More Information of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91307"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "informationFields": [
-        "Mileage:",
-        "Plate:",
-        "Type:",
-        "Completed (Repair) Time:",
-        "Delivered:",
-        "Created:"
-      ]
-    }
-  ],
-
-  "verifyUserCanTypeAndNotSaveNoteOfRoService": [
-    {
-      "rowID": "verifyUserCanTypeAndNotSaveNoteOfRoService.01",
-      "description": "Test Case 82973:User can type and not save Note of the Service of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91286"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsLaborService_Motor_est_work_time (lab time)",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ],
-      "notesMessage": "Autotest"
     }
   ],
 

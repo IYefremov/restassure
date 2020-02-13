@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBONotesDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROCompleteCurrentPhaseDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
@@ -152,9 +153,26 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.serviceVendorPriceInputField(service));
-        WaitUtilsWebDriver.waitABit(1000);
-        Utils.sendKeysWithJS(detailsWebPageNew.serviceVendorPriceInputField(service), vendorPrice);
+        WaitUtilsWebDriver.waitABit(2000);
+        Utils.clearAndType(detailsWebPageNew.serviceVendorPriceInputField(service), vendorPrice);
+        WaitUtilsWebDriver.waitABit(2000);
         Utils.clickElement(detailsWebPageNew.serviceNameWebElement(service));
+    }
+
+    public static void setServiceVendor(String service, String vendorPrice) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.serviceVendorDropDown(service));
+        Utils.clickWithJS(detailsWebPageNew.dropDownOption(vendorPrice));
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(detailsWebPageNew.serviceVendorDropDown(service), vendorPrice);
+    }
+
+    public static void setServiceTechnician(String service, String technician) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.serviceTechnicianDropDown(service));
+        Utils.clickWithJS(detailsWebPageNew.dropDownOption(technician));
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(detailsWebPageNew.serviceTechnicianDropDown(service), technician);
     }
 
     public static String getPhaseTotalPrice(String phase) {
@@ -258,5 +276,20 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsPage.getFlagIcon());
         Utils.clickElement(detailsPage.flagColorIconByFlagTitle(flagTitle));
         WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.attributeContains(detailsPage.getFlagIcon(), "style", flagColor));
+    }
+
+    public static void openNotesForService(String service) {
+
+        VNextBORODetailsWebPageNew detailsPage = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsPage.actionsMenuButtonForService(service));
+        Utils.clickElement(detailsPage.getNotesActionButton());
+        WaitUtilsWebDriver.waitForVisibility(new VNextBONotesDialogNew().getNotesDialog());
+    }
+
+    public static void addNoteForService(String service, String noteText, boolean saveNote) {
+
+        openNotesForService(service);
+        if (saveNote) VNextBONotesDialogStepsNew.addNote(noteText, true);
+        else VNextBONotesDialogStepsNew.addNote(noteText, false);
     }
 }

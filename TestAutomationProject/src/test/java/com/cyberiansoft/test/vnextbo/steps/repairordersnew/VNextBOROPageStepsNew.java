@@ -373,7 +373,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void addNoteForFirstNoteAndNotSaveWItXIcon(String noteText) {
 
         openFirstOrderNotes();
-        VNextBONotesDialogStepsNew.addNoteAndNotSaveXIcon(noteText);
+        VNextBONotesDialogStepsNew.addNote(noteText, false);
     }
 
     public static void changeStockNumberForFirstOrder(String newStockNumber) {

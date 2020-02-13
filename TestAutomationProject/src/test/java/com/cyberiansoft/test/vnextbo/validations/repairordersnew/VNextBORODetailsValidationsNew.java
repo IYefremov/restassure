@@ -1,10 +1,17 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class VNextBORODetailsValidationsNew {
 
@@ -15,6 +22,26 @@ public class VNextBORODetailsValidationsNew {
                 .anyMatch(string -> string.contains(text));
 
         Assert.assertTrue(present, "The order contains neither the service nor the task '" + text + "'.");
+    }
+
+    public static void verifyServiceTableContainsCorrectColumns() {
+
+        List<String> expectedColumnsList = Arrays.asList("Service", "Qty", "Price", "Vendor Price", "Vendor / Technician",
+                "Status", "Started / Completed", "Actions");
+        List<String> actualColumnsList = new VNextBORODetailsWebPageNew().getServicesTableColumnsTitles().stream().
+                map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertEquals(expectedColumnsList, actualColumnsList, "Not all columns have been displayed");
+    }
+
+    public static void verifyMoreInfoSectionContainsCorrectFields() {
+
+        VNextBORODetailsWebPageNew detailsPage = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsPage.getMoreInfoSection());
+        List<String> expectedFieldsList = Arrays.asList("Mileage:", "Plate:", "Type:", "Completed (Repair) Time:",
+                "Delivered:", "Created:");
+        List<String> actualFieldsList = detailsPage.getMoreInfoFields().stream().map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertEquals(expectedFieldsList, actualFieldsList, "Not all fields have been displayed");
+        Utils.clickElement(detailsPage.getMoreInfoSection());
     }
 
     public static void verifyOrderDetailsSectionIsDisplayed() {
@@ -107,6 +134,12 @@ public class VNextBORODetailsValidationsNew {
                 "Service price hasn't been correct");
     }
 
+    public static void verifyServiceVendorPriceIsCorrect(String service, String expectedPrice) {
+
+        Assert.assertEquals(Utils.getInputFieldValue(new VNextBORODetailsWebPageNew().serviceVendorPriceInputField(service)), expectedPrice,
+                "Service vendor price hasn't been correct");
+    }
+
     public static void verifyServiceQuantityIsCorrect(String service, String expectedQuantity) {
 
         Assert.assertEquals(Utils.getInputFieldValue(new VNextBORODetailsWebPageNew().serviceQtyInputField(service)), expectedQuantity,
@@ -135,6 +168,18 @@ public class VNextBORODetailsValidationsNew {
 
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceCompletedDate(service)), expectedCompletedDate,
                 "Service completed date hasn't been correct");
+    }
+
+    public static void verifyServiceVendorIsCorrect(String service, String expectedVendor) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceVendorDropDown(service)), expectedVendor,
+                "Vendor hasn't been correct");
+    }
+
+    public static void verifyServiceTechnicianIsCorrect(String service, String expectedTechnician) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceTechnicianDropDown(service)), expectedTechnician,
+                "Technician hasn't been correct");
     }
 
     public static void verifyServiceHelpInfoIsCorrect(String service, String expectedHelpInfo) {
