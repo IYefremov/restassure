@@ -109,8 +109,8 @@ public class IOSInspectionsNotesTestCases extends IOSRegularBaseTestCase {
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
 
-        visualInteriorScreen.waitVisualScreenLoaded(ScreenNamesConstants.FUTURE_SPORT_CAR);
         RegularNavigationSteps.navigateToVehicleInfoScreen();
+
         vehicleScreen.clickNotesButton();
         RegularNotesScreen notesScreen = new RegularNotesScreen();
         notesScreen.setNotes(inspectionnotes);

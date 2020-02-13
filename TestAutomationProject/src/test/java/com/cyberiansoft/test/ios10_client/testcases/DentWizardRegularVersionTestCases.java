@@ -58,7 +58,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         RegularSettingsScreen settingsScreen = new RegularSettingsScreen();
         settingsScreen.setShowAvailableSelectedServicesOn();
         settingsScreen.setInsvoicesCustomLayoutOff();
-        homescreen = settingsScreen.clickHomeButton();
+        settingsScreen.clickHomeButton();
     }
 
     @BeforeMethod

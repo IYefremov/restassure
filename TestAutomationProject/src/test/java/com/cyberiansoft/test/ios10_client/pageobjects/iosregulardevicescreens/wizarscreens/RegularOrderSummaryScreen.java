@@ -53,6 +53,8 @@ public class RegularOrderSummaryScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void selectEmployee(String employee) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(employee)));
 		appiumdriver.findElementByName(employee).click();
 	}
 	

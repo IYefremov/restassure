@@ -53,8 +53,9 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 		inspectiontable.findElement(MobileBy.AccessibilityId(inspnumber)).click();
 	}
 	
-	public void selectInspectionForEdit(String inspnumber) {
-		clickOnInspection(inspnumber);
+	public void selectInspectionForEdit(String inspectionID) {
+		waitTeamInspectionsScreenLoaded();
+		clickOnInspection(inspectionID);
 		clickEditInspectionButton();
 	}
 	
@@ -63,7 +64,8 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	}
 	
 	public boolean isInspectionIsApproveButtonExists(String inspectionID) {
-		return inspectiontable.findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_76")).size() > 0;
+		waitTeamInspectionsScreenLoaded();
+		return inspectiontable.findElement(MobileBy.AccessibilityId(inspectionID)).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_76")).size() > 0;
 	}
 	
 	public boolean isDraftIconPresentForInspection(String inspectionID) {
@@ -105,6 +107,7 @@ public class RegularTeamInspectionsScreen extends RegularBaseTypeScreenWithTabs 
 	}
 	
 	public void selectInspectionForApprove(String inspnumber) {
+		waitTeamInspectionsScreenLoaded();
 		clickOnInspection(inspnumber);
 		clickApproveInspectionButton();
 	}

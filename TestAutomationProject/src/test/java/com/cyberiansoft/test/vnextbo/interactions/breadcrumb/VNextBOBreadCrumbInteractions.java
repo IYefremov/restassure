@@ -2,10 +2,12 @@ package com.cyberiansoft.test.vnextbo.interactions.breadcrumb;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBreadCrumbPanel;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
 public class VNextBOBreadCrumbInteractions {
@@ -37,7 +39,7 @@ public class VNextBOBreadCrumbInteractions {
     public static void setLocation(String location, boolean isSetWithEnter) {
         if (isSetWithEnter) {
             VNextBOBreadCrumbValidations.isLocationSearched(location);
-            Utils.getActions().sendKeys(Keys.ENTER);
+            new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(Keys.ENTER);
             setLocation(location);
         } else {
             setLocation(location);

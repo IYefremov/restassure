@@ -168,6 +168,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public String getTechnician() {
+		waitVehicleScreenLoaded();
 		return vehicleinfotbl.findElement(MobileBy.AccessibilityId("Tech")).findElement(MobileBy.className("XCUIElementTypeTextField")).getText();
 	}
 
@@ -270,6 +271,7 @@ public class RegularVehicleScreen extends RegularBaseWizardScreen {
 	}
 	
 	public void setPO(String po) {
+		waitVehicleScreenLoaded();
 		vehicleinfotbl.findElement(MobileBy.iOSNsPredicateString("name = 'PO#' and type = 'XCUIElementTypeCell'"))
 				.findElementByClassName("XCUIElementTypeTextField").sendKeys(po + "\n");
 	}

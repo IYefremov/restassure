@@ -289,6 +289,7 @@ public class IOSCreateInspectionsTestCases extends IOSRegularBaseTestCase {
         RegularServicesScreenSteps.selectServiceWithServiceData(inspectionData.getServiceData());
         RegularInspectionsSteps.saveInspection();
         RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();

@@ -2,10 +2,12 @@ package com.cyberiansoft.test.vnextbo.steps.commonobjects;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOSearchPanel;
 import com.cyberiansoft.test.vnextbo.screens.repairorders.VNextBOROWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 
 public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
 
@@ -44,7 +46,7 @@ public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
         VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
         WaitUtilsWebDriver.waitForElementToBeClickable(searchPanel.getSearchInputField());
         Utils.clearAndType(searchPanel.getSearchInputField(), searchText);
-        Utils.getActions().sendKeys(searchPanel.getSearchInputField(), Keys.ENTER).build().perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(searchPanel.getSearchInputField(), Keys.ENTER).build().perform();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
