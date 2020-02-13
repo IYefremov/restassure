@@ -90,10 +90,15 @@ public class VNextBORODetailsValidationsNew {
                 "Priority hasn't been correct");
     }
 
-    public static void verifyServiceIsDisplayed(String serviceDescription) {
+    public static void verifyServiceIsDisplayed(String serviceDescription, boolean shouldBeDisplayed) {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription)),
+        if (shouldBeDisplayed)
+            Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription)),
                 "Service with description " + serviceDescription + "hasn't been added");
+        else try {
+            Assert.assertFalse(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription)),
+                    "Service with description " + serviceDescription + "has been added");
+        } catch (NoSuchElementException ex) {}
     }
 
     public static void verifyServicePriceIsCorrect(String service, String expectedPrice) {
@@ -112,5 +117,33 @@ public class VNextBORODetailsValidationsNew {
 
         Assert.assertEquals(new VNextBORODetailsWebPageNew().getPartServicesNamesList().size(), expectedNumber,
                 "Part services amount hasn't been correct");
+    }
+
+    public static void verifyFlagIsCorrect(String flagColor) {
+
+        Assert.assertTrue(new VNextBORODetailsWebPageNew().getFlagIcon().getAttribute("style").contains(flagColor),
+                "Flag hasn't been correct");
+    }
+
+    public static void verifyServiceStartedDateIsCorrect(String service, String expectedStartDate) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceStartedDate(service)), expectedStartDate,
+                "Service started date hasn't been correct");
+    }
+
+    public static void verifyServiceCompletedDateIsCorrect(String service, String expectedCompletedDate) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceCompletedDate(service)), expectedCompletedDate,
+                "Service completed date hasn't been correct");
+    }
+
+    public static void verifyServiceHelpInfoIsCorrect(String service, String expectedHelpInfo) {
+
+        VNextBORODetailsWebPageNew detailsPage = new VNextBORODetailsWebPageNew();
+        Utils.hoverElement(detailsPage.serviceHelpIcon(service));
+        Assert.assertTrue(Utils.isElementDisplayed(detailsPage.serviceHelpIconHelpInfo(service)),
+                "Service help info pop-up hasn't been displayed");
+        Assert.assertEquals(Utils.getText(detailsPage.serviceHelpIconHelpInfo(service)), expectedHelpInfo,
+                "Service completed date hasn't been correct");
     }
 }

@@ -139,7 +139,7 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
 		VNextBORODetailsStepsNew.addService(data);
 		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
-		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription());
+		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription(), true);
 		VNextBORODetailsValidationsNew.verifyServicePriceIsCorrect(data.getServiceDescription(), data.getServicePrice());
 		VNextBORODetailsValidationsNew.verifyServiceQuantityIsCorrect(data.getServiceDescription(), data.getServiceQuantity());
 		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
@@ -156,7 +156,7 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
 		VNextBORODetailsStepsNew.addService(data);
 		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
-		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription());
+		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription(), true);
 		VNextBORODetailsValidationsNew.verifyServicePriceIsCorrect(data.getServiceDescription(), data.getServicePrice());
 		VNextBORODetailsValidationsNew.verifyServiceQuantityIsCorrect(data.getServiceDescription(), data.getServiceQuantity());
 		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
@@ -173,7 +173,7 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
 		VNextBORODetailsStepsNew.addLaborService(data);
 		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
-		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription());
+		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription(), true);
 		VNextBORODetailsValidationsNew.verifyServicePriceIsCorrect(data.getServiceDescription(), data.getServiceLaborRate());
 		VNextBORODetailsValidationsNew.verifyServiceQuantityIsCorrect(data.getServiceDescription(), data.getServiceLaborTime() + "0 hr");
 		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());

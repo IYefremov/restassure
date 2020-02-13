@@ -221,6 +221,18 @@ public class VNextBORODetailsStepsNew {
         Utils.refreshPage();
     }
 
+    public static void addServiceWithoutSaveXIcon(VNextBOMonitorData serviceData) {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        VNextBOAddNewServiceDialogSteps.populateServiceDataAndClickXIcon(serviceData);
+    }
+
+    public static void addServiceWithoutSaveCancelButton(VNextBOMonitorData serviceData) {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        VNextBOAddNewServiceDialogSteps.populateServiceDataAndClickCancelButton(serviceData);
+    }
+
     public static void addLaborService(VNextBOMonitorData serviceData) {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
@@ -238,5 +250,13 @@ public class VNextBORODetailsStepsNew {
     public static int getPartServicesAmount() {
 
         return new VNextBORODetailsWebPageNew().getPartServicesNamesList().size();
+    }
+
+    public static void changeFlag(String flagTitle, String flagColor) {
+
+        VNextBORODetailsWebPageNew detailsPage = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsPage.getFlagIcon());
+        Utils.clickElement(detailsPage.flagColorIconByFlagTitle(flagTitle));
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.attributeContains(detailsPage.getFlagIcon(), "style", flagColor));
     }
 }

@@ -60,6 +60,12 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@data-automation-id='service-instance-form-submit']")
     private WebElement submitButton;
 
+    @FindBy(xpath = "//div[@id='service-instance-form']//button[@class='close']")
+    private WebElement closeXIconButton;
+
+    @FindBy(xpath = "//button[@data-automation-id='service-instance-form-cancel']")
+    private WebElement cancelButton;
+
     public WebElement priceTypeDropDownOption(String optionName) {
 
         return driver.findElement(By.xpath("//ul[@id='service-type-instance-form-price-type_listbox']//div[text()='" + optionName + "']"));

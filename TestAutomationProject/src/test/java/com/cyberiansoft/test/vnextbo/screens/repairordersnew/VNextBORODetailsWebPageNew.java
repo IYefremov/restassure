@@ -53,6 +53,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@id='reconmonitordetails-view-add-order-button']")
     private WebElement addServiceButton;
 
+    @FindBy(xpath = "//div[@title='Flag']/i[@class='icon-flag']")
+    private WebElement flagIcon;
+
     @FindBy(xpath = "//tbody[@data-template='repair-order-part-list-item-template']//b")
     private List<WebElement> partServicesNamesList;
 
@@ -151,9 +154,34 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@class,'service-status-dropdown')]//span[@class='k-input'])[1]"));
     }
 
+    public WebElement serviceStartedDate(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//p[@data-bind='invisible: showStart']/span[1]"));
+    }
+
+    public WebElement serviceCompletedDate(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//p[@data-bind='invisible: showStart']/span[3]"));
+    }
+
+    public WebElement serviceHelpIcon(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//i[@class='help']"));
+    }
+
+    public WebElement serviceHelpIconHelpInfo(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[@class='helpInfo']"));
+    }
+
     public WebElement dropDownOption(String optionName) {
 
         return driver.findElement(By.xpath("//ul[@aria-hidden='false']//span[text()='" + optionName + "']"));
+    }
+
+    public WebElement flagColorIconByFlagTitle(String title) {
+
+        return driver.findElement(By.xpath("//div[@data-template='reconmonitordetails-flagsContent']/span[@title='" + title + "']"));
     }
 
     public VNextBORODetailsWebPageNew() {
