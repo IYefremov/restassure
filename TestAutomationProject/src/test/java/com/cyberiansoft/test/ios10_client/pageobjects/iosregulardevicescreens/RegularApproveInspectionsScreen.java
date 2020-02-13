@@ -192,13 +192,9 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 		//appiumdriver.findElement(MobileBy.IosUIAutomation(".tableViews()[0].cells()['" + inspservice + "'].buttons()['skip little off']")).click();
 	}
 	
-	public void selectInspectionServiceToSkipByIndex(String inspservice, int inspnumber) {
-		((IOSElement) appiumdriver.findElements(By.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + inspservice + "']/XCUIElementTypeButton[@name='skip little off']")).get(inspnumber)).click();
-	}
-	
 	public void selectInspection(String inspnumber) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		WebElement approvetable = wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveInspectionsView")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveInspectionsView")));
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspnumber))).click();
 	}
@@ -224,6 +220,8 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 	
 	public WebElement getTableCell(String cellname) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveAll")));
 		return appiumdriver.findElement(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@label='" + cellname + "']/.."));
 	}
 
@@ -246,6 +244,8 @@ public class RegularApproveInspectionsScreen extends iOSRegularBaseScreen {
 	}
 
 	public boolean isServiceApproved(String serviceName) {
+		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ApproveAll")));
 		return !appiumdriver.findElementByAccessibilityId(serviceName).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeButton' and name contains 'approve little'"))
 				.getAttribute("name").contains("off");
 	}

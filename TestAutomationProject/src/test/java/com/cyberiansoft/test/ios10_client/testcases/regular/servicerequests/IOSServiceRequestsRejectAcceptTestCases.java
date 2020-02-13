@@ -56,7 +56,7 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
 
         //Create first SR
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
-        RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
+        RegularServiceRequestsScreen serviceRequestScreen = new RegularServiceRequestsScreen();
         RegularServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ONLY_ACC_ESTIMATE);
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
@@ -66,9 +66,9 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         vehicleScreen.clickSave();
         AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
 
-        String serviceRequestNumber1 = serviceRequestSscreen.getFirstServiceRequestNumber();
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber1);
-        serviceRequestSscreen.selectRejectAction();
+        String serviceRequestNumber1 = serviceRequestScreen.getFirstServiceRequestNumber();
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber1);
+        serviceRequestScreen.selectRejectAction();
         Helpers.acceptAlert();
         //Create second SR
         RegularServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_TYPE_WO_AUTO_CREATE);
@@ -76,13 +76,13 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
         RegularServiceRequestSteps.saveServiceRequest();
 
-        String serviceRequestNumber2 = serviceRequestSscreen.getFirstServiceRequestNumber();
-        Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber2), ServiceRequestStatus.SCHEDULED.getValue());
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber2);
-        serviceRequestSscreen.selectRejectAction();
+        String serviceRequestNumber2 = serviceRequestScreen.getFirstServiceRequestNumber();
+        Assert.assertEquals(serviceRequestScreen.getServiceRequestStatus(serviceRequestNumber2), ServiceRequestStatus.SCHEDULED.getValue());
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber2);
+        serviceRequestScreen.selectRejectAction();
         Helpers.acceptAlert();
 
-        serviceRequestSscreen.clickHomeButton();
+        serviceRequestScreen.clickHomeButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -98,7 +98,7 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O02TEST__CUSTOMER);
 
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
-        RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
+        RegularServiceRequestsScreen serviceRequestScreen = new RegularServiceRequestsScreen();
         RegularServiceRequestSteps.startCreatingServicerequest(ServiceRequestTypes.SR_ALL_PHASES);
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setVIN(serviceRequestData.getVihicleInfo().getVINNumber());
@@ -108,18 +108,18 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
         vehicleScreen.clickSave();
         AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.ALERT_CREATE_APPOINTMENT);
-        String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
-        Assert.assertEquals(serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.ON_HOLD.getValue());
+        String serviceRequestNumber = serviceRequestScreen.getFirstServiceRequestNumber();
+        Assert.assertEquals(serviceRequestScreen.getServiceRequestStatus(serviceRequestNumber), ServiceRequestStatus.ON_HOLD.getValue());
 
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertTrue(serviceRequestSscreen.isRejectActionExists());
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        Assert.assertTrue(serviceRequestScreen.isRejectActionExists());
         RegularMenuItemsScreenSteps.clickMenuItem(ReconProMenuItems.CREATE_INPECTION);
         RegularInspectionTypesSteps.selectInspectionType(InspectionsTypes.INSP_DRAFT_MODE);
         vehicleScreen.waitVehicleScreenLoaded();
         String inspectnumber = vehicleScreen.getInspectionNumber();
         RegularInspectionsSteps.saveInspectionAsFinal();
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        serviceRequestSscreen.selectDetailsRequestAction();
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        serviceRequestScreen.selectDetailsRequestAction();
         RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
         RegularTeamInspectionsScreen teamInspectionsScreen = new RegularTeamInspectionsScreen();
         Assert.assertTrue(teamInspectionsScreen.isInspectionExists(inspectnumber));
@@ -142,8 +142,8 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         boolean onhold = false;
         for (int i = 0; i < 7; i++) {
             RegularHomeScreenSteps.navigateToServiceRequestScreen();
-            if (!serviceRequestSscreen.getServiceRequestStatus(serviceRequestNumber).equals(ServiceRequestStatus.ON_HOLD.getValue())) {
-                serviceRequestSscreen.clickHomeButton();
+            if (!serviceRequestScreen.getServiceRequestStatus(serviceRequestNumber).equals(ServiceRequestStatus.ON_HOLD.getValue())) {
+                serviceRequestScreen.clickHomeButton();
                 Helpers.waitABit(30 * 1000);
             } else {
 
@@ -153,10 +153,10 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         }
 
         Assert.assertTrue(onhold);
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        serviceRequestSscreen.selectRejectAction();
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        serviceRequestScreen.selectRejectAction();
         Helpers.acceptAlert();
-        serviceRequestSscreen.clickHomeButton();
+        serviceRequestScreen.clickHomeButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -196,11 +196,11 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
-        RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
-        String serviceRequestNumber = serviceRequestSscreen.getFirstServiceRequestNumber();
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertFalse(serviceRequestSscreen.isRejectActionExists());
-        serviceRequestSscreen.selectCancelAction();
+        RegularServiceRequestsScreen serviceRequestScreen = new RegularServiceRequestsScreen();
+        String serviceRequestNumber = serviceRequestScreen.getFirstServiceRequestNumber();
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        Assert.assertFalse(serviceRequestScreen.isRejectActionExists());
+        serviceRequestScreen.selectCancelAction();
         RegularNavigationSteps.navigateBackScreen();
     }
 
@@ -244,11 +244,11 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
 
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
-        RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertFalse(serviceRequestSscreen.isRejectActionExists());
-        serviceRequestSscreen.selectCancelAction();
-        serviceRequestSscreen.clickHomeButton();
+        RegularServiceRequestsScreen serviceRequestScreen = new RegularServiceRequestsScreen();
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        Assert.assertFalse(serviceRequestScreen.isRejectActionExists());
+        serviceRequestScreen.selectCancelAction();
+        serviceRequestScreen.clickHomeButton();
 
         webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
         WebDriverUtils.webdriverGotoWebPage(deviceofficeurl);
@@ -282,14 +282,14 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         RegularMainScreenSteps.updateMainDataBase();
         RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertFalse(serviceRequestSscreen.isRejectActionExists());
-        serviceRequestSscreen.selectEditServiceRequestAction();
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        Assert.assertFalse(serviceRequestScreen.isRejectActionExists());
+        serviceRequestScreen.selectEditServiceRequestAction();
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         Assert.assertTrue(vehicleScreen.getTechnician().isEmpty());
         vehicleScreen.selectNextScreen(WizardScreenTypes.SERVICES);
         RegularServiceRequestSteps.saveServiceRequest();
-        serviceRequestSscreen.clickHomeButton();
+        serviceRequestScreen.clickHomeButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -334,20 +334,20 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
-        RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
-        Assert.assertTrue(serviceRequestSscreen.isServiceRequestProposed(serviceRequestNumber));
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertTrue(serviceRequestSscreen.isAcceptActionExists());
-        Assert.assertTrue(serviceRequestSscreen.isDeclineActionExists());
-        serviceRequestSscreen.selectAcceptAction();
+        RegularServiceRequestsScreen serviceRequestScreen = new RegularServiceRequestsScreen();
+        Assert.assertTrue(serviceRequestScreen.isServiceRequestProposed(serviceRequestNumber));
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        Assert.assertTrue(serviceRequestScreen.isAcceptActionExists());
+        Assert.assertTrue(serviceRequestScreen.isDeclineActionExists());
+        serviceRequestScreen.selectAcceptAction();
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.ALERT_ACCEPT_SERVICEREQUEST);
 
-        Assert.assertTrue(serviceRequestSscreen.isServiceRequestOnHold(serviceRequestNumber));
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertFalse(serviceRequestSscreen.isAcceptActionExists());
-        Assert.assertFalse(serviceRequestSscreen.isDeclineActionExists());
-        serviceRequestSscreen.clickCancel();
-        serviceRequestSscreen.clickHomeButton();
+        Assert.assertTrue(serviceRequestScreen.isServiceRequestOnHold(serviceRequestNumber));
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        Assert.assertFalse(serviceRequestScreen.isAcceptActionExists());
+        Assert.assertFalse(serviceRequestScreen.isDeclineActionExists());
+        serviceRequestScreen.clickCancel();
+        serviceRequestScreen.clickHomeButton();
 
     }
 
@@ -392,20 +392,20 @@ public class IOSServiceRequestsRejectAcceptTestCases extends IOSRegularBaseTestC
         customersScreen.selectCustomerWithoutEditing(iOSInternalProjectConstants.O03TEST__CUSTOMER);
 
         RegularHomeScreenSteps.navigateToServiceRequestScreen();
-        RegularServiceRequestsScreen serviceRequestSscreen = new RegularServiceRequestsScreen();
-        Assert.assertTrue(serviceRequestSscreen.isServiceRequestProposed(serviceRequestNumber));
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        serviceRequestSscreen.selectEditServiceRequestAction();
+        RegularServiceRequestsScreen serviceRequestScreen = new RegularServiceRequestsScreen();
+        Assert.assertTrue(serviceRequestScreen.isServiceRequestProposed(serviceRequestNumber));
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        serviceRequestScreen.selectEditServiceRequestAction();
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setTech(serviceRequestData.getVihicleInfo().getDefaultTechnician().getTechnicianFullName());
         RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(serviceRequestData.getQuestionScreenData());
         RegularServiceRequestSteps.saveServiceRequest();
-        serviceRequestSscreen.selectServiceRequest(serviceRequestNumber);
-        Assert.assertTrue(serviceRequestSscreen.isAcceptActionExists());
-        Assert.assertTrue(serviceRequestSscreen.isDeclineActionExists());
-        serviceRequestSscreen.clickCancel();
+        serviceRequestScreen.selectServiceRequest(serviceRequestNumber);
+        Assert.assertTrue(serviceRequestScreen.isAcceptActionExists());
+        Assert.assertTrue(serviceRequestScreen.isDeclineActionExists());
+        serviceRequestScreen.clickCancel();
 
-        serviceRequestSscreen.clickHomeButton();
+        serviceRequestScreen.clickHomeButton();
 
     }
 

@@ -56,6 +56,7 @@ public class IOSWorkOrdersCalculationsTestCases extends IOSRegularBaseTestCase {
         RegularWorkOrdersSteps.saveWorkOrder();
 
         RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList()) {
             RegularServicesScreenSteps.openCustomServiceDetails(serviceData.getServiceName());

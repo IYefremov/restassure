@@ -13,7 +13,6 @@ import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -76,6 +75,9 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 15);
 
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MonitorOrderServicesList")));
+		wait = new WebDriverWait(appiumdriver, 15);
+
+		wait.until(appiumdriver -> monitorserviceslist.findElementsByAccessibilityId(panelName).size() > 0);
 		swipeToElement(monitorserviceslist.findElement(MobileBy.AccessibilityId(panelName)));
 		monitorserviceslist.findElementByAccessibilityId(panelName).click();
 	}
@@ -85,9 +87,10 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		if (serviceData.getVehiclePart() != null) {
 			panelName = panelName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
 		}
-		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
-
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 30);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MonitorOrderServicesList")));
+		wait = new WebDriverWait(appiumdriver, 45);
+		wait.until(ExpectedConditions.elementToBeClickable(monitorserviceslist));
 		swipeToElement(monitorserviceslist.findElement(MobileBy.AccessibilityId(panelName)));
 		monitorserviceslist.findElementByAccessibilityId(panelName).click();
 	}
@@ -259,7 +262,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 
 		public RegularTeamWorkOrdersScreen clickBackButton() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Back")));
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId("Back")));
 		backbtn.click();
 		return new RegularTeamWorkOrdersScreen();
 	}
@@ -284,11 +287,14 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public boolean isStartPhaseButtonExists() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(monitorserviceslist));
 		return appiumdriver.
 				findElementsByAccessibilityId("btnStartReset").size() > 0;
 	}
 
 	public boolean isStartOrderButtonExists() {
+		waitOrderMonitorScreenLoaded();
 		return appiumdriver.findElementsByAccessibilityId("Start").size() > 0;
 	}
 
@@ -311,6 +317,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void clickStartOrderButton() {
+		waitOrderMonitorScreenLoaded();
 		appiumdriver.findElementByAccessibilityId("Start").click();
 	}
 
@@ -342,9 +349,11 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public void changeStatusForWorkOrder(String newWOSTatus, String reason) {
+		waitOrderMonitorScreenLoaded();
 		MobileElement toolbar = (MobileElement) appiumdriver.findElementByAccessibilityId("Toolbar");
 		toolbar.findElementsByClassName("XCUIElementTypeButton").get(2).click();
-		IOSElement pickerwhl = (IOSElement) appiumdriver.findElementByClassName("XCUIElementTypePickerWheel");
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		IOSElement pickerwhl = (IOSElement) wait.until(ExpectedConditions.elementToBeClickable(MobileBy.className("XCUIElementTypePickerWheel")));
 		pickerwhl.setValue(newWOSTatus);
 		MobileElement pickerToolbar = (MobileElement) appiumdriver.findElementByAccessibilityId("StringPickerVC_Status");
 		IOSElement donebtn = (IOSElement) pickerToolbar.findElementByAccessibilityId("Done");
@@ -352,12 +361,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		new TouchAction(appiumdriver).tap(tapOptions().withElement(element(donebtn))).perform();
 
 		appiumdriver.findElementByAccessibilityId(reason).click();
-	}
-
-	public String getMonitorServiceAmauntValue(String serviceName) {
-		return monitorserviceslist
-				.findElement(MobileBy.AccessibilityId(serviceName))
-				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label").replaceAll("\n", " ");
+		int i = 2;
 	}
 
 	public String getMonitorServiceAmauntValue(ServiceData serviceData) {
@@ -365,6 +369,8 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 		if (serviceData.getVehiclePart() != null) {
 			serviceName = serviceName + " (" + serviceData.getVehiclePart().getVehiclePartName() + ")";
 		}
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("lblServiceAmount")));
 		return monitorserviceslist
 				.findElement(MobileBy.AccessibilityId(serviceName))
 				.findElement(MobileBy.AccessibilityId("lblServiceAmount")).getAttribute("label").replaceAll("\n", " ");

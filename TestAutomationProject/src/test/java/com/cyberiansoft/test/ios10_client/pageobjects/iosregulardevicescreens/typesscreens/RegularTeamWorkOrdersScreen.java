@@ -91,7 +91,7 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void clickCreateInvoiceIconForWO(String workOrderNumber)  {
 		teamOrdersTable.findElement(MobileBy.AccessibilityId(workOrderNumber))
-				.findElement(MobileBy.className("XCUIElementTypeOther")).click();
+				.findElement(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_79")).click();
 	}
 	
 	public void clickiCreateInvoiceButton()  {
@@ -124,12 +124,14 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void selectWorkOrderForApprove(String workOrderID) {
-		teamOrdersTable.findElementByAccessibilityId(workOrderID).findElementByClassName("XCUIElementTypeOther").click();
+		teamOrdersTable.findElementByAccessibilityId(workOrderID).findElement(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeOther' and name CONTAINS 'EntityInfoButton'")).click();
 	}
 	
 	public void approveWorkOrder(String workOrderID, String employee, String pwd) {
 		selectWorkOrderForApprove(workOrderID);
 		selectEmployeeAndTypePassword(employee, pwd);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = 'Summary'"))).click();
 		approvebtn.click();
 	}
 	
@@ -186,6 +188,7 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public boolean isWorkOrderExists(String workOrderID) {
+		waitTeamWorkOrdersScreenLoaded();
 		return teamOrdersTable.findElements(MobileBy.AccessibilityId(workOrderID)).size() > 0;
 	}
 	

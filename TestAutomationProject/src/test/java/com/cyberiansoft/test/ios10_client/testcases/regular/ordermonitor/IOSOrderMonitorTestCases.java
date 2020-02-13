@@ -17,6 +17,7 @@ import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.NavigationSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularHomeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectedServiceDetailsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
@@ -265,6 +266,8 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
         selectedServiceDetailsScreen.selecTechnician(firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
         selectedServiceDetailsScreen.saveSelectedServiceDetails();
+        RegularOrderMonitorServiceDetailsScreen monitorServiceDetailsScreen = new RegularOrderMonitorServiceDetailsScreen();
+        monitorServiceDetailsScreen.clickServiceDetailsDoneButton();
         orderMonitorScreen.selectPanel(firstMonitorServiceData.getMonitorService());
         Assert.assertEquals(orderMonitorScreen.getServiceTechnicianValue(), firstMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
         orderMonitorScreen.clickServiceDetailsDoneButton();
@@ -278,7 +281,7 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         orderMonitorScreen.clickTech();
         selectedServiceDetailsScreen.selecTechnician(secondMonitorServiceData.getMonitorService().getServiceDefaultTechnician().getTechnicianFullName());
         selectedServiceDetailsScreen.saveSelectedServiceDetails();
-
+        monitorServiceDetailsScreen.clickServiceDetailsDoneButton();
         orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
         orderMonitorScreen.clickStartService();
         orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
@@ -287,8 +290,9 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         orderMonitorScreen.selectPanel(secondMonitorServiceData.getMonitorService());
         orderMonitorScreen.clickTech();
         orderMonitorScreen.clickServiceDetailsDoneButton();
-
+        orderMonitorScreen.waitOrderMonitorScreenLoaded();
         RegularNavigationSteps.navigateBackScreen();
+        RegularTeamWorkOrdersSteps.waitTeamWorkOrdersScreenLoaded();
         RegularNavigationSteps.navigateBackScreen();
         RegularHomeScreenSteps.logoutUser();
         RegularMainScreenSteps.userLogin(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);

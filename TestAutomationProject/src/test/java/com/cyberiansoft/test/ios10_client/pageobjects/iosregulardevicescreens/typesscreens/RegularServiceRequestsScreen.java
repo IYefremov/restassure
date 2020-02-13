@@ -8,19 +8,19 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequ
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.IWorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.*;
 
 public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
@@ -109,9 +109,8 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 
 	public WebElement waitForServiceRequestScreenLoad() {
-		return WaitUtils.waitUntilElementIsClickable(serviceRequestsTable);
-		//FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
-		//wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable")));
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		return wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable")));
 	}
 
 	public void clickRefreshButton()  {
@@ -288,13 +287,23 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 	}
 	
 	public boolean isServiceRequestProposed(String serviceRequestNumber) {
-		return serviceRequestsTable.findElements(By.xpath("//XCUIElementTypeCell[@name='" + serviceRequestNumber
-				+ "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_109')]")).size() > 0;
+		waitForServiceRequestScreenLoad();
+		WebElement srCell = new FluentWait<AppiumDriver>(appiumdriver)
+				.withTimeout(Duration.ofSeconds(45))
+				.pollingEvery(Duration.ofMillis(500))
+				.ignoring(ElementClickInterceptedException.class)
+				.ignoring(WebDriverException.class)
+				.ignoring(AssertionError.class)
+				.ignoring(StaleElementReferenceException.class)
+				.ignoring(RuntimeException.class).until(ExpectedConditions.elementToBeClickable(serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber)));
+		//return serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber)
+		return srCell.findElements(MobileBy.iOSNsPredicateString("name CONTAINS 'ButtonImageId_109'")).size() > 0;
 	}
 	
 	public boolean isServiceRequestOnHold(String serviceRequestNumber) {
-		return serviceRequestsTable.findElements(By.xpath("//XCUIElementTypeCell[@name='" + serviceRequestNumber
-				+ "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_90')]")).size() > 0;
+		waitForServiceRequestScreenLoad();
+		return serviceRequestsTable.findElementByAccessibilityId(serviceRequestNumber)
+				.findElements(MobileBy.iOSNsPredicateString("name CONTAINS 'ButtonImageId_90'")).size() > 0;
 	}
 
 	public boolean isInspectionIconPresentForServiceRequest(String serviceRequestNumber) {

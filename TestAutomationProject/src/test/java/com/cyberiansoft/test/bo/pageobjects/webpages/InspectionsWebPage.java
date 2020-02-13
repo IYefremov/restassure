@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.bo.webelements.*;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.enums.DateUtils;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -499,6 +500,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			driver.switchTo().window(newwin);
 			BaseUtils.waitABit(2000);
 
+			WaitUtils.waitUntilElementIsClickable(driver.findElement(By.xpath("//tr[@class='custom-total-row']/td[2]/div")));
 			WebElement totalrow = driver.findElements(By.xpath("//tr[@class='custom-total-row']/td[2]/div")).get(driver.findElements(By.xpath("//tr[@class='custom-total-row']/td[2]/div")).size() - 2);
 			totalapproved = totalrow.getText();
 			driver.close();

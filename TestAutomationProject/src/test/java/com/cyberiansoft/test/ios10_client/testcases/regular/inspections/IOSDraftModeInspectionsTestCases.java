@@ -74,6 +74,7 @@ public class IOSDraftModeInspectionsTestCases extends IOSRegularBaseTestCase {
         RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
         RegularTeamInspectionsScreen teamInspectionsScreen = new RegularTeamInspectionsScreen();
         teamInspectionsScreen.selectInspectionForEdit(inspectionNumber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularInspectionsSteps.saveInspectionAsFinal();
         Assert.assertTrue(teamInspectionsScreen.isInspectionIsApproveButtonExists(inspectionNumber));
         RegularNavigationSteps.navigateBackScreen();
@@ -128,6 +129,7 @@ public class IOSDraftModeInspectionsTestCases extends IOSRegularBaseTestCase {
         approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
         approveInspectionsScreen.clickDoneButton();
         RegularMyInspectionsSteps.selectInspectionForCopy(inspectionNumberber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToScreen(ScreenNamesConstants.TEST_PACK_FOR_CALC);
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
