@@ -121,6 +121,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 	
 	public String getInvoiceNumber() {
+    	System.out.println("++++++++++++++++++" + invoicenumberfld.getText().trim());
 		return invoicenumberfld.getText().trim();
 	}
 	

@@ -40,6 +40,15 @@ public class PhasesScreen extends MonitorScreen {
     @FindBy(xpath = "//*[@action='quick-actions']")
     private WebElement phasesMenuButton;
 
+    @FindBy(xpath = "//*[@data-action-name='startServices']")
+    private WebElement startServicesButton;
+
+    @FindBy(xpath = "//*[@data-action-name='stopServices']")
+    private WebElement stopServicesButton;
+
+    @FindBy(xpath = "//*[@data-action-name='completeServices']")
+    private WebElement completeServicesButton;
+
     public PhasesScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }
