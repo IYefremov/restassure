@@ -125,7 +125,6 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
 
-	//fails for now
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanChangeVendorTechnicianOfRo(String rowID, String description, JSONObject testData) {
 
@@ -188,13 +187,4 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		Utils.goToPreviousPage();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
-/*
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanChangeTargetDateOfRo(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-	}
-
-*/
 }

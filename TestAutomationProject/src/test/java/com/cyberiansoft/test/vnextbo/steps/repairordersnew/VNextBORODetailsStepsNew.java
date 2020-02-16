@@ -35,7 +35,7 @@ public class VNextBORODetailsStepsNew {
     public static void expandPhaseByName(String phase) {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().expandPhaseButton(phase));
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitABit(2000);
     }
 
     public static void collapsePhaseByName(String phase) {
@@ -120,12 +120,14 @@ public class VNextBORODetailsStepsNew {
 
     public static void setServiceStatusIfNeeded(String service, String expectedStatus) {
 
-        if (Utils.getText(new VNextBORODetailsWebPageNew().serviceStatusDropDownByService(service)).equals("Problem")) {
+        VNextBORODetailsWebPageNew detailsWebPage = new VNextBORODetailsWebPageNew();
+        WaitUtilsWebDriver.waitABit(3000);
+        if (Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals("Problem")) {
             resolveProblemForService(service);
         }
-        if (!Utils.getText(new VNextBORODetailsWebPageNew().serviceStatusDropDownByService(service)).equals(expectedStatus)) {
-            Utils.clickElement(new VNextBORODetailsWebPageNew().serviceStatusDropDownByService(service));
-            Utils.clickWithJS(new VNextBORODetailsWebPageNew().dropDownOption(expectedStatus));
+        if (!Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals(expectedStatus)) {
+            Utils.clickElement(detailsWebPage.serviceStatusDropDownByService(service));
+            Utils.clickWithJS(detailsWebPage.dropDownOption(expectedStatus));
             WaitUtilsWebDriver.waitForPageToBeLoaded();
             WaitUtilsWebDriver.waitABit(3000);
         }
@@ -135,8 +137,7 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.serviceQtyInputField(service));
-        WaitUtilsWebDriver.waitABit(1000);
-        Utils.clearAndType(detailsWebPageNew.serviceQtyInputField(service), quantity);
+        Utils.clearAndTypeUsingKeyboard(detailsWebPageNew.serviceQtyInputField(service), quantity);
         Utils.clickElement(detailsWebPageNew.serviceNameWebElement(service));
     }
 
@@ -144,8 +145,7 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.servicePriceInputField(service));
-        WaitUtilsWebDriver.waitABit(1000);
-        Utils.clearAndType(detailsWebPageNew.servicePriceInputField(service), price);
+        Utils.clearAndTypeUsingKeyboard(detailsWebPageNew.servicePriceInputField(service), price);
         Utils.clickElement(detailsWebPageNew.serviceNameWebElement(service));
     }
 
@@ -153,9 +153,8 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.serviceVendorPriceInputField(service));
-        WaitUtilsWebDriver.waitABit(2000);
-        Utils.clearAndType(detailsWebPageNew.serviceVendorPriceInputField(service), vendorPrice);
-        WaitUtilsWebDriver.waitABit(2000);
+        Utils.clearAndTypeUsingKeyboard(detailsWebPageNew.serviceVendorPriceInputField(service), vendorPrice);
+        WaitUtilsWebDriver.waitABit(1000);
         Utils.clickElement(detailsWebPageNew.serviceNameWebElement(service));
     }
 
@@ -171,6 +170,7 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.serviceTechnicianDropDown(service));
+        WaitUtilsWebDriver.waitABit(5000);
         Utils.clickWithJS(detailsWebPageNew.dropDownOption(technician));
         WaitUtilsWebDriver.waitForTextToBePresentInElement(detailsWebPageNew.serviceTechnicianDropDown(service), technician);
     }
@@ -184,6 +184,7 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.getOrderStatusDropDown());
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(detailsWebPageNew.dropDownOption(newStatus)));
         Utils.clickWithJS(detailsWebPageNew.dropDownOption(newStatus));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }

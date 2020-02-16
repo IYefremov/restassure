@@ -607,12 +607,12 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "serviceStatuses": [
         "Completed",
         "Active"
       ],
-      "serviceStartedDate": "02/11/2020"
+      "serviceStartedDate": "02/15/2020"
     },
     {
       "rowID": "verifyUserCanChangeStatusOfRoService.02",
@@ -625,12 +625,12 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "serviceStatuses": [
         "Active",
         "Completed"
       ],
-      "serviceStartedDate": "02/11/2020"
+      "serviceStartedDate": "02/15/2020"
     },
     {
       "rowID": "verifyUserCanChangeStatusOfRoService.03",
@@ -643,12 +643,12 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "serviceStatuses": [
         "Active",
         "Audited"
       ],
-      "serviceStartedDate": "02/11/2020"
+      "serviceStartedDate": "02/15/2020"
     },
     {
       "rowID": "verifyUserCanChangeStatusOfRoService.04",
@@ -661,30 +661,12 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "serviceStatuses": [
         "Active",
         "Rework"
       ],
-      "serviceStartedDate": "02/11/2020"
-    },
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoService.05",
-      "description": "Test Case 91290: User can change Status of RO to \"Refused\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91290",
-          "testCaseTitle": "User can change Status of RO to \"Refused\""
-        }
-      ],
-      "orderNumber": "O-000-147163",
-      "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
-      "serviceStatuses": [
-        "Active",
-        "Refused"
-      ],
-      "serviceStartedDate": "02/11/2020"
+      "serviceStartedDate": "02/15/2020"
     },
     {
       "rowID": "verifyUserCanChangeStatusOfRoService.06",
@@ -697,12 +679,12 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "serviceStatuses": [
         "Active",
         "Skipped"
       ],
-      "serviceStartedDate": "02/11/2020"
+      "serviceStartedDate": "02/15/2020"
     }
   ],
 
@@ -718,7 +700,7 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ"
+      "service": "autotestcgoDbvR"
     }
   ],
 
@@ -734,7 +716,7 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "serviceVendorPrices": [
         "$100.00",
         "$0.00"
@@ -754,7 +736,7 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "vendor": "01_TimeRep_team",
       "technician": "Alex Zak"
     }
@@ -772,22 +754,8 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "notesMessage": "Autotest 91285"
-    }
-  ],
-
-  "verifyUserCanChangeTargetDateOfRo": [
-    {
-      "rowID": "verifyUserCanChangeTargetDateOfRo.01",
-      "description": "Test Case 91310: User can change Target Date of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91310",
-          "testCaseTitle": "User can change Target Date of RO"
-        }
-      ],
-      "orderNumber": "O-000-147163"
     }
   ],
 
@@ -817,7 +785,7 @@
       ],
       "orderNumber": "O-000-147163",
       "phase": "PDR Station",
-      "service": "autotestaiinBFZ",
+      "service": "autotestcgoDbvR",
       "notesMessage": "Autotest 91286"
     }
   ],

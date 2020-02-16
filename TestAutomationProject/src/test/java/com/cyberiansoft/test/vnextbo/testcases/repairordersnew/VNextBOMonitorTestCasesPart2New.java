@@ -96,7 +96,7 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
 	public void verifyUserCanChangeStatusOfRoToClosedWithCompletedReason(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
