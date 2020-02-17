@@ -92,28 +92,8 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 		informationdlg.clickInformationDialogOKButton();
 	}
 
-	public VNextPayMenu clickPayInvoiceMenuItem() {
-		clickMenuItem(invoicepaymenubtn);
-        return new VNextPayMenu(appiumdriver);
-	}
-
 	public boolean isPayInvoiceMenuItemExists() {
 		return  WaitUtils.isElementPresent(invoicepaymenubtn);
-	}
-
-	public VNextPayInvoicesScreen clickPayCreditCardMenuItem() {
-		VNextPayMenu payMenu = clickPayInvoiceMenuItem();
-		return payMenu.clickPayCreditCardMenuItem();
-	}
-
-	public VNextPayCashCheckScreen clickPayCachCheckMenuItem() {
-		VNextPayMenu payMenu = clickPayInvoiceMenuItem();
-		return payMenu.clickPayCachCheckMenuItem();
-	}
-
-	public VNextPayPOROScreen clickPayPOROMenuItem() {
-		VNextPayMenu payMenu = clickPayInvoiceMenuItem();
-		return payMenu.clickPayPOROMenuItem();
 	}
 
 	public boolean isInvoiceChangePONumberMenuItemExists() {
@@ -126,7 +106,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 	
 	public VNextInvoicesScreen clickCloseInvoiceMenuButton() {
 		clickCloseMenuButton();
-		return new VNextInvoicesScreen(appiumdriver);
+		return new VNextInvoicesScreen();
 	}
 
 	public VNextInvoiceInfoScreen clickEditInvoiceMenuItem() {

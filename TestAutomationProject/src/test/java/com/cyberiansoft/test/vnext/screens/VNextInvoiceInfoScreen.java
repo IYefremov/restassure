@@ -29,21 +29,12 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 
 	@FindBy(xpath="//input[@name='Invoices.InvoiceDate']")
 	private WebElement invoicedate;
-	
-	@FindBy(xpath="//*[@action='more_actions']")
-	private WebElement menubtn;
-	
-	@FindBy(xpath="//*[@action='save']")
-	private WebElement savebtn;
 
 	@FindBy(xpath="//*[@action='add-order']")
 	private WebElement addorderbtn;
 
 	@FindBy(xpath="//*[@action='create-invoice']/i")
 	private WebElement createinvoicemenu;
-	
-	@FindBy(xpath="//div[@class='estimation-number']")
-	private WebElement invoicenumberfld;
 	
 	@FindBy(id="total")
 	private WebElement invoicetotalamont;
@@ -72,55 +63,9 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		return invoicedate.getAttribute("value");
 	}
 	
-	public VNextInvoiceInfoScreen addTextNoteToInvoice(String notetext) {
-		clickMenuButton();
-		VNextNotesScreen notesscreen = clickNotesMenuItem();
-		notesscreen.setNoteText(notetext);
-		ScreenNavigationSteps.pressBackButton();
-		return this;
-	}
-
-	public void cancelInvoice() {
-		clickMenuButton();
-		VNextInvoiceMenuScreen invoiceMenuScreen = new VNextInvoiceMenuScreen(appiumdriver);
-		invoiceMenuScreen.clickCancelInvoiceMenuItem();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-		informationDialog.clickInformationDialogYesButton();
-	}
-	
-	public void clickMenuButton() {
-		tap(menubtn);
-	}
-	
 	public VNextNotesScreen clickNotesMenuItem() {
         VNextInvoiceMenuScreen invoiceMenuScreen = new VNextInvoiceMenuScreen(appiumdriver);
         return invoiceMenuScreen.clickInvoiceNotesMenuItem();
-	}
-	
-	public VNextInvoicesScreen saveInvoice() {
-		clickSaveInvoiceButton();
-		return new VNextInvoicesScreen(appiumdriver);
-	}
-
-	public void saveInvoiceAsDraft() {
-		clickSaveInvoiceButton();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-		informationDialog.clickDraftButton();
-	}
-
-	public VNextInvoicesScreen saveInvoiceAsFinal() {
-		clickSaveInvoiceButton();
-		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-		informationDialog.clickFinalButton();
-		return new VNextInvoicesScreen(appiumdriver);
-	}
-	
-	public void clickSaveInvoiceButton() {
-		tap(savebtn);
-	}
-	
-	public String getInvoiceNumber() {
-		return invoicenumberfld.getText().trim();
 	}
 	
 	public String getInvoiceTotalAmount() {

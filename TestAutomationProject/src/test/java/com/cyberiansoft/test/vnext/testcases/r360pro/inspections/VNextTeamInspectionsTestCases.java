@@ -110,8 +110,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 
 		VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-		final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-		VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoice();
+		final String invoiceNumber = InvoiceSteps.saveInvoice();
+		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
 		invoicesScreen.switchToMyInvoicesView();
 		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
 

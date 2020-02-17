@@ -113,7 +113,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
     public VNextInvoicesScreen clickInvoicesMenuItem() {
         tap(invoiceslist);
         BaseUtils.waitABit(2000);
-        return new VNextInvoicesScreen(appiumdriver);
+        return new VNextInvoicesScreen();
     }
 
     public VNextSettingsScreen clickSettingsMenuItem() {
