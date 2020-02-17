@@ -1601,6 +1601,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
             selectedServiceBundleScreen.selectBundle(serviceData.getServiceName());
             RegularServiceDetailsScreenSteps.setServicePriceValue(serviceData.getServicePrice());
             RegularServiceDetailsScreenSteps.selectServiceVehiclePart(serviceData.getVehiclePart());
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
         }
 
         RegularSelectedBundleServiceScreenSteps.changeAmountOfBundleService(bundleServiceData.getBundleServiceAmount());

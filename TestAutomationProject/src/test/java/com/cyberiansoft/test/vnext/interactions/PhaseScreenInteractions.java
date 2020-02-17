@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.interactions;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.order.edit.PhaseElement;
@@ -22,33 +23,21 @@ public class PhaseScreenInteractions {
                 .orElseThrow(() -> new RuntimeException("Phase element not found " + phaseName)));
     }
 
-    public static ServiceElement getServiceElements(String phaseName) {
+    public static ServiceElement getServiceElements(String serviceName) {
         PhasesScreen phasesScreen = new PhasesScreen();
         WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
         WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(phasesScreen.getRootElement());
         BaseUtils.waitABit(2000);
         return WaitUtils.getGeneralFluentWait().until(driver -> phasesScreen.getServiceElementsList().stream()
                 .filter((serviceElement) ->
-                        serviceElement.getName().equals(phaseName))
+                        serviceElement.getName().contains(serviceName))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Service element not found " + phaseName)));
+                .orElseThrow(() -> new RuntimeException("Service element not found " + serviceName)));
     }
 
-    public static void printServices() {
-        PhasesScreen phasesScreen = new PhasesScreen();
-        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
-        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
-        BaseUtils.waitABit(2000);
-       phasesScreen.getServiceElementsList().stream().forEach(
-                serviceElement -> {
-                    System.out.println("++++" + serviceElement.getRootElement().findElement(By.xpath(".//div[@class='icon-item-entity-name']")).getText());
-                }
-        );
-       System.out.println("=====================================");
-    }
-
-    public static void openServiceElementMenu(ServiceElement phaseElement) {
-        WaitUtils.click(phaseElement.getRootElement());
+    public static void openServiceElementMenu(ServiceElement serviceElement) {
+        WaitUtils.click(serviceElement.getRootElement());
     }
 
     public static void openPhaseElementMenu(PhaseElement phaseElement) {
@@ -74,4 +63,28 @@ public class PhaseScreenInteractions {
         WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
         return phasesScreen.getPhasesStockNumber().getText().trim();
     }
+
+    public static void selectService(ServiceData serviceData) {
+        ServiceElement serviceElement = getServiceElements(serviceData.getServiceName());
+        serviceElement.getRootElement().findElement(By.xpath(serviceElement.getCheckElementLocator())).click();
+    }
+
+    public static void clickStartServices() {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.elementShouldBeVisible(phasesScreen.getStartServicesButton(), true);
+        phasesScreen.getStartServicesButton().click();
+    }
+
+    public static void clickStopServices() {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.elementShouldBeVisible(phasesScreen.getStopServicesButton(), true);
+        phasesScreen.getStopServicesButton().click();
+    }
+
+    public static void clickCompleteServices() {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.elementShouldBeVisible(phasesScreen.getCompleteServicesButton(), true);
+        phasesScreen.getCompleteServicesButton().click();
+    }
+
 }

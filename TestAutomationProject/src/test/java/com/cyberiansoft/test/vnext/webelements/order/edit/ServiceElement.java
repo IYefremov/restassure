@@ -15,6 +15,7 @@ public class ServiceElement implements IWebElement {
     private String clockIconLocator = ".//*[@class='icon-svg ']";
     private String startDateLocator = ".//div[contains(@class,'icon-item-content-title')][2]";
     private String technicianLocator = ".//div[@data-phase-tech]";
+    private String checkElementLocator = ".//*[@action='check-item']";
 
     public ServiceElement(WebElement rootElement) {
         this.rootElement = rootElement;

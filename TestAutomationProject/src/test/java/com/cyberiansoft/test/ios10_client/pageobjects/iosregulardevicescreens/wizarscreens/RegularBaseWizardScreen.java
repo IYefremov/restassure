@@ -10,7 +10,6 @@ import io.appium.java_client.ios.IOSElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
 
 public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBaseWizardScreen {
 
@@ -34,6 +33,7 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void selectNextScreen(WizardScreenTypes wizardScreenType) {
+
         selectNextScreen(wizardScreenType.getDefaultScreenTypeName());
     }
 
@@ -52,7 +52,10 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void clickChangeScreen() {
-        WaitUtils.waitUntilElementIsClickable(appiumdriver.findElement(MobileBy.AccessibilityId("WizardStepsButton"))).click();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            appiumdriver.findElement(MobileBy.AccessibilityId("WizardStepsButton")).click();
+            return true;
+        });
     }
 
     public void clickCancelWizard() {
@@ -76,6 +79,9 @@ public class RegularBaseWizardScreen extends iOSRegularBaseScreen implements IBa
     }
 
     public void clickNotesButton() {
-        appiumdriver.findElement(MobileBy.AccessibilityId("Compose")).click();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            appiumdriver.findElement(MobileBy.AccessibilityId("Compose")).click();
+            return true;
+        });
     }
 }

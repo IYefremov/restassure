@@ -53,7 +53,6 @@ public class RegularMainScreen extends iOSBaseScreen {
 	}
 
 	public void clickUpdateVINDatabase() {
-		Helpers.waitUntilCheckLicenseDialogDisappears();
 		updatevin.click();
 	}
 

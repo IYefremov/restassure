@@ -125,6 +125,20 @@ public class VNextBOROPageValidations {
         return isWorkOrderDisplayed(roNumber, expected);
     }
 
+    public static void validateWorkOrderDisplayedByStockNumber(String stockNumber, boolean expected) {
+        VNextBOROWebPage boroWebPage = new VNextBOROWebPage();
+        if (expected)
+            Assert.assertTrue(boroWebPage.getRepairOrdersTableBody().findElements(By.xpath("./tr"))
+                    .stream().filter((tableRow) ->
+                            tableRow.findElement(By.xpath(".//input[@title='Stock #']")).getAttribute("value").trim().equals(stockNumber))
+                    .findFirst().isPresent());
+        else
+            Assert.assertFalse(boroWebPage.getRepairOrdersTableBody().findElements(By.xpath("./tr"))
+                    .stream().filter((tableRow) ->
+                            tableRow.findElement(By.xpath(".//input[@title='Stock #']")).getAttribute("value").trim().equals(stockNumber))
+                    .findFirst().isPresent());
+    }
+
     public static boolean isWorkOrderDisplayedByFirstName(String firstName, boolean expected) {
         return isWorkOrderDisplayedByPartialText(firstName, expected);
     }
@@ -478,7 +492,8 @@ public class VNextBOROPageValidations {
         final int ordersOnPage = VNextBOROPageInteractions.getOrdersNumberOnPage();
         try {
             WaitUtilsWebDriver.getWait().until((ExpectedCondition<Boolean>) driver -> ordersOnPage <= expectedMaxNumber);
-        } catch (Exception ignored) {}
+        } catch (Exception ignored) {
+        }
 
         if (ordersOnPage < expectedMaxNumber) {
             Assert.assertTrue(true, "The number of orders on page " + ordersOnPage

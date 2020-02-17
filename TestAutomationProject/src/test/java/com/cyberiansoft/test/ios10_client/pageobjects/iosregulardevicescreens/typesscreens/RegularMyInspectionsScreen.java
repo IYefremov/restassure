@@ -86,7 +86,7 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void waitMyInspectionsScreenLoaded() {
-		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 30);
+		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 45);
 		wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(MobileBy.AccessibilityId("InspectionsTable")));
 	}
 
@@ -227,13 +227,13 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void selectInspectionForAction(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
-		inspectionsTable.findElementByAccessibilityId(inspectionNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
-	}
+		inspectionsTable.findElementByAccessibilityId(inspectionNumber).findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'EntityInfoButtonUnchecked'")).click();
+}
 
 	public boolean isInspectionIsApproved(String inspectionNumber) {
 		waitMyInspectionsScreenLoaded();
 		return inspectionsTable.findElement(MobileBy.
-				AccessibilityId(inspectionNumber)).findElement(MobileBy.className("XCUIElementTypeOther")).getAttribute("name").equals("EntityInfoButtonUnchecked");
+				AccessibilityId(inspectionNumber)).findElement(MobileBy.iOSNsPredicateString("name CONTAINS 'EntityInfoButtonUnchecked'")).getAttribute("name").equals("EntityInfoButtonUnchecked");
 	}
 	
 	public boolean isNotesIconPresentForInspection(String inspectionNumber) {

@@ -128,6 +128,7 @@ public class IOSDraftModeInspectionsTestCases extends IOSRegularBaseTestCase {
         approveInspectionsScreen.clickSingnAndDrawApprovalSignature();
         approveInspectionsScreen.clickDoneButton();
         RegularMyInspectionsSteps.selectInspectionForCopy(inspectionNumberber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         RegularNavigationSteps.navigateToScreen(ScreenNamesConstants.TEST_PACK_FOR_CALC);
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();

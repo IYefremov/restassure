@@ -9,6 +9,7 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -159,9 +160,10 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
         return selectedservicestable.findElementsByClassName("XCUIElementTypeTable").size();
     }
 
-    public boolean isServiceWithSubSrviceSelected(String serviceName, String serviceSubsrviceName) {
-        return selectedservicestable.findElementByAccessibilityId(serviceName).
-                findElements(MobileBy.AccessibilityId(serviceSubsrviceName)).size() > 0;
+    public boolean isServiceWithSubServiceSelected(String serviceName, String serviceSubServiceName) {
+        long cnt = selectedservicestable.findElementsByAccessibilityId(serviceName).stream().filter(element -> element.findElements(MobileBy.AccessibilityId(serviceSubServiceName)).size()>0)
+                .count();
+         return cnt > 0;
     }
 
     public boolean isServiceApproved(String serviceName) {

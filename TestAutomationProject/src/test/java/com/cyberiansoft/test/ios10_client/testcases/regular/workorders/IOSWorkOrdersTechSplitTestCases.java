@@ -68,7 +68,7 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
         RegularServicesScreenSteps.switchToSelectedServices();
         RegularSelectedServicesScreen selectedServicesScreen = new RegularSelectedServicesScreen();
         for (ServiceData serviceData : workOrderData.getDamageData().getMoneyServices())
-            Assert.assertTrue(selectedServicesScreen.isServiceWithSubSrviceSelected(workOrderData.getDamageData().getDamageGroupName(),
+            Assert.assertTrue(selectedServicesScreen.isServiceWithSubServiceSelected(workOrderData.getDamageData().getDamageGroupName(),
                     serviceData.getServiceName()));
         RegularWorkOrdersSteps.saveWorkOrder();
         RegularNavigationSteps.navigateBackScreen();

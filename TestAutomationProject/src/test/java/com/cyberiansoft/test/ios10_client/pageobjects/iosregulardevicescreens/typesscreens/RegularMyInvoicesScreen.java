@@ -104,10 +104,9 @@ public class RegularMyInvoicesScreen extends RegularBaseTypeScreenWithTabs {
 		
 		appiumdriver.findElementByAccessibilityId(invoiceNumber).click();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypeScrollView")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("type = 'XCUIElementTypeNavigationBar' and name = '" + invoiceNumber + "'")));
 		boolean approved = appiumdriver.findElementsByAccessibilityId("Approve").size() > 0;
 		clickCancel();
-		new RegularMyInvoicesScreen();
 		return approved;		
 	}
 	

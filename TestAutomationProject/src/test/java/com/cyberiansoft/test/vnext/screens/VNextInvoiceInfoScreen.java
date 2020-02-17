@@ -106,16 +106,13 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		clickSaveInvoiceButton();
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickDraftButton();
-		BaseUtils.waitABit(30000);
 	}
 
 	public VNextInvoicesScreen saveInvoiceAsFinal() {
 		clickSaveInvoiceButton();
 		VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
 		informationDialog.clickFinalButton();
-		BaseUtils.waitABit(30000);
 		return new VNextInvoicesScreen(appiumdriver);
-
 	}
 	
 	public void clickSaveInvoiceButton() {
@@ -142,7 +139,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 
 	public void changeInvoiceDayValue(LocalDate date) {
 		tap(invoicedate);
-		//appiumdriver.hideKeyboard();
 		setInvoiceSelectedDateValue(date);
 		closeInvoiceSelectDatePicker();
  	}

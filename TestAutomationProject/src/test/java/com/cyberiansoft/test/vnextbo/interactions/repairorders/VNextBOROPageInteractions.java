@@ -571,4 +571,9 @@ public class VNextBOROPageInteractions {
         return WaitUtilsWebDriver.waitForVisibility(new VNextBOROWebPage().getOrdersList().get(0), 5)
                 .getAttribute("class");
     }
+
+    public static String getWorkOrderNumberByStockNumber(String workOrderStockNumber) {
+        return new VNextBOROWebPage().getTableRowWithWorkOrderByStockNumber(workOrderStockNumber)
+                .findElement(By.xpath(".//a[@class='order-no']")).getText().trim();
+    }
 }

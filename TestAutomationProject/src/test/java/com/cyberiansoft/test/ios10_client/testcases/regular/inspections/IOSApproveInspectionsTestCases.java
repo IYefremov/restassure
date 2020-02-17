@@ -200,6 +200,7 @@ public class IOSApproveInspectionsTestCases extends IOSRegularBaseTestCase {
         approveInspectionsScreen.clickCancelButton();
         approveInspectionsScreen.clickCancelButton();
         RegularMyInspectionsSteps.selectInspectionForEdit(inspectionNumber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         PriceMatrixScreenData priceMatrixScreenData = inspectionData.getPriceMatrixScreensData().get(0);
         RegularNavigationSteps.navigateToScreen(priceMatrixScreenData.getMatrixScreenName());
         RegularPriceMatrixScreen priceMatrixScreen = new RegularPriceMatrixScreen();

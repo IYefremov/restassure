@@ -4,6 +4,7 @@ import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularBaseTypeScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.ITypeScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
@@ -116,7 +117,9 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	}
 
 	public void addTeamWorkOrder(String workOrderId)  {
+		waitInvoiceInfoScreenLoaded();
 		appiumdriver.findElementByAccessibilityId("Insert").click();
+		WaitUtils.waitUntilElementIsClickable(appiumdriver.findElementByAccessibilityId("TeamInvoiceOrdersView"));
 		appiumdriver.findElementByAccessibilityId("TeamInvoiceOrdersView").findElement(MobileBy.AccessibilityId(workOrderId))
 				.findElement(MobileBy.AccessibilityId("unselected")).click();
 		appiumdriver.findElementByAccessibilityId("Done").click();
