@@ -106,6 +106,8 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void searchOrdersByOrderNumber(String orderNumber) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         VNextBOROAdvancedSearchDialogStepsNew.setHasThisTextField(orderNumber);
         VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
@@ -246,6 +248,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void openOrderDetailsByNumberInList(int rowNumber) {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
+        WaitUtilsWebDriver.waitForVisibility(repairOrdersPage.getWoNumbersList().get(rowNumber));
         WaitUtilsWebDriver.waitForElementNotToBeStale(repairOrdersPage.getWoNumbersList().get(rowNumber));
         Utils.clickElement(repairOrdersPage.getWoNumbersList().get(rowNumber));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -373,7 +376,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void addNoteForFirstNoteAndNotSaveWItXIcon(String noteText) {
 
         openFirstOrderNotes();
-        VNextBONotesDialogStepsNew.addNoteAndNotSaveXIcon(noteText);
+        VNextBONotesDialogStepsNew.addNote(noteText, false);
     }
 
     public static void changeStockNumberForFirstOrder(String newStockNumber) {

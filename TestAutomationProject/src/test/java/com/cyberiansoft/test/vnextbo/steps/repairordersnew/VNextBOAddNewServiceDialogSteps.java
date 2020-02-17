@@ -71,6 +71,18 @@ public class VNextBOAddNewServiceDialogSteps {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
+    private static void closeDialogWithXIcon() {
+
+        Utils.clickElement(new VNextBOAddNewServiceDialog().getCloseXIconButton());
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+    }
+
+    private static void cancelServiceAdding() {
+
+        Utils.clickElement(new VNextBOAddNewServiceDialog().getCancelButton());
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+    }
+
     private static void setCategory(String category) {
 
         VNextBOAddNewServiceDialog addNewServiceDialog = new VNextBOAddNewServiceDialog();
@@ -107,6 +119,22 @@ public class VNextBOAddNewServiceDialogSteps {
         setQuantity(serviceData.getServiceQuantity());
         VNextBOAddNewServiceDialogValidations.verifyAllFieldsAreSetCorrectly(serviceData);
         submitService();
+    }
+
+    public static void populateServiceDataAndClickXIcon(VNextBOMonitorData serviceData) {
+
+        allServicesTypesSteps(serviceData);
+        setPrice(serviceData.getServicePrice());
+        setQuantity(serviceData.getServiceQuantity());
+        closeDialogWithXIcon();
+    }
+
+    public static void populateServiceDataAndClickCancelButton(VNextBOMonitorData serviceData) {
+
+        allServicesTypesSteps(serviceData);
+        setPrice(serviceData.getServicePrice());
+        setQuantity(serviceData.getServiceQuantity());
+        cancelServiceAdding();
     }
 
     public static void addLaborService(VNextBOMonitorData serviceData) {

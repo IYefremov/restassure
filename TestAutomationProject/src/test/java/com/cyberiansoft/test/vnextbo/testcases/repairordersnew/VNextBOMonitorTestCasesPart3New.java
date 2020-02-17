@@ -15,13 +15,15 @@ import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBONotesDialogValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
-import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 
 	@BeforeClass
 	public void settingUp() {
@@ -31,166 +33,157 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
 	}
 
-
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanTypeAndNotSaveNotesWithXIcon(String rowID, String description, JSONObject testData) {
+	public void verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-        VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-        VNextBOROPageStepsNew.addNoteForFirstNoteAndNotSaveWItXIcon("91411");
-		VNextBOROWebPageValidationsNew.verifyNoteTextIsCorrectForFirstOrder("91411", false);
-		VNextBOROPageStepsNew.openFirstOrderNotes();
-		VNextBONotesDialogValidationsNew.verifyNoteInTheNotesList("91411", false);
+		data.setServiceDescription(data.getServiceDescription() + RandomStringUtils.randomAlphabetic(7));
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.addServiceWithoutSaveXIcon(data);
+		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription(), false);
+		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		data.setServiceDescription(data.getServiceDescription() + RandomStringUtils.randomAlphabetic(7));
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.addServiceWithoutSaveCancelButton(data);
+		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription(), false);
+		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanChangeFlagOfRo(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.changeFlag(data.getFlag(),data.getFlagColor());
+		VNextBORODetailsValidationsNew.verifyFlagIsCorrect(data.getFlagColor());
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanChangeStatusOfRoService(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
+		WaitUtilsWebDriver.waitForPageToBeLoaded();
+		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
+		VNextBORODetailsValidationsNew.verifyServiceStartedDateIsCorrect(data.getService(), data.getServiceStartedDate());
+		if (data.getServiceStatuses()[1].equals("Active") || data.getServiceStatuses()[1].equals("Rework"))
+		    VNextBORODetailsValidationsNew.verifyServiceCompletedDateIsCorrect(data.getService(), "");
+		else VNextBORODetailsValidationsNew.verifyServiceCompletedDateIsCorrect(data.getService(), LocalDate.now().format(DateTimeFormatter.ofPattern("MM/dd/yyyy")));
+		VNextBORODetailsValidationsNew.verifyServiceHelpInfoIsCorrect(data.getService(), data.getServiceStatuses()[1]);
+		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanSeeServicesOfRo(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+		VNextBORODetailsValidationsNew.verifyServiceTableContainsCorrectColumns();
+		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getService(), true);
+		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanChangeVendorPriceOfRo(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+		VNextBORODetailsStepsNew.setServiceVendorPrice(data.getService(), data.getServiceVendorPrices()[0]);
+		VNextBORODetailsValidationsNew.verifyServiceVendorPriceIsCorrect(data.getService(), data.getServiceVendorPrices()[0]);
+		VNextBORODetailsStepsNew.setServiceVendorPrice(data.getService(), data.getServiceVendorPrices()[1]);
+		VNextBORODetailsValidationsNew.verifyServiceVendorPriceIsCorrect(data.getService(), data.getServiceVendorPrices()[1]);
+		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanChangeVendorTechnicianOfRo(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+		VNextBORODetailsStepsNew.setServiceVendor(data.getService(), data.getVendor());
+		VNextBORODetailsStepsNew.setServiceTechnician(data.getService(), data.getTechnician());
+		VNextBORODetailsValidationsNew.verifyServiceVendorIsCorrect(data.getService(), data.getVendor());
+		VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getService(), data.getTechnician());
+		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanTypeAndNotSaveNoteOfRoService(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		data.setNotesMessage(data.getNotesMessage() + RandomStringUtils.randomAlphabetic(7));
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+		VNextBORODetailsStepsNew.addNoteForService(data.getService(), data.getNotesMessage(), false);
+		VNextBORODetailsStepsNew.openNotesForService(data.getService());
+		VNextBONotesDialogValidationsNew.verifyNoteInTheNotesList(data.getNotesMessage(), false);
 		VNextBONotesDialogStepsNew.closeDialogWithXIcon();
-		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanChangeStockOfRo(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		String newStockNumber = RandomStringUtils.randomAlphabetic(10);
-		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.changeStockNumberForFirstOrder(newStockNumber);
-		VNextBOROWebPageValidationsNew.verifyStockNumbersAreCorrectInTheTable(newStockNumber);
-		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanChangeRoNumOfRo(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		String newRoNumber = RandomStringUtils.randomAlphabetic(10);
-		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.changeRoNumberForFirstOrder(newRoNumber);
-		VNextBOROWebPageValidationsNew.verifyRoNumbersAreCorrectInTheTable(newRoNumber);
-		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanChangeStatusOfRo(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-		VNextBORODetailsStepsNew.reopenOrderIfNeeded();
-		VNextBORODetailsStepsNew.changeOrderStatus(data.getStatus());
-		VNextBORODetailsValidationsNew.verifyOrderStatusIsCorrect(data.getStatus());
-		Utils.goToPreviousPage();
-		WaitUtilsWebDriver.waitForPageToBeLoaded();
-		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCannotChangeStatusOfRoToDraft(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-		VNextBORODetailsStepsNew.reopenOrderIfNeeded();
-		String initialOrderStatus = VNextBORODetailsStepsNew.getOrderStatus();
-		VNextBORODetailsStepsNew.changeOrderStatus(data.getStatus());
-		VNextBORODetailsValidationsNew.verifyOrderStatusIsCorrect(initialOrderStatus);
-		Utils.goToPreviousPage();
-		WaitUtilsWebDriver.waitForPageToBeLoaded();
-		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
-	public void verifyUserCanChangeStatusOfRoToClosedWithCompletedReason(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-		VNextBORODetailsStepsNew.reopenOrderIfNeeded();
-		VNextBORODetailsStepsNew.closeOrderWithCompletedReason();
-		VNextBORODetailsValidationsNew.verifyOrderStatusIsCorrect(data.getStatus());
-		VNextBORODetailsValidationsNew.verifyPhaseTextStatusIsCorrect(data.getPhase(), "Completed");
-		VNextBORODetailsStepsNew.reopenOrderIfNeeded();
-		VNextBORODetailsValidationsNew.verifyOrderStatusIsCorrect("Approved");
-		VNextBORODetailsValidationsNew.verifyPhaseTextStatusIsCorrect(data.getPhase(), data.getPhaseStatus());
-		VNextBORODetailsStepsNew.startServiceByServiceName(data.getPhase(), data.getService());
-		VNextBORODetailsStepsNew.startServicesForPhase("Detail Station");
-		Utils.goToPreviousPage();
-		WaitUtilsWebDriver.waitForPageToBeLoaded();
-		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanChangePriorityOfRo(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-		VNextBORODetailsStepsNew.changePriority(data.getPriority());
-		VNextBORODetailsValidationsNew.verifyOrderPriorityIsCorrect(data.getPriority());
-		Utils.goToPreviousPage();
-		WaitUtilsWebDriver.waitForPageToBeLoaded();
-		VNextBOROWebPageValidationsNew.verifyPriorityIsCorrectForFirstOrder(data.getPriority());
-		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanAddNewService(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		data.setServiceDescription(data.getServiceDescription() + RandomStringUtils.randomAlphabetic(7));
-		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-		VNextBORODetailsStepsNew.addService(data);
-		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
-		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription(), true);
-		VNextBORODetailsValidationsNew.verifyServicePriceIsCorrect(data.getServiceDescription(), data.getServicePrice());
-		VNextBORODetailsValidationsNew.verifyServiceQuantityIsCorrect(data.getServiceDescription(), data.getServiceQuantity());
 		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
 		Utils.goToPreviousPage();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanAddNewMoneyService(String rowID, String description, JSONObject testData) {
+	public void verifyUserCanCreateNoteOfServiceOfRo(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		data.setServiceDescription(data.getServiceDescription() + RandomStringUtils.randomAlphabetic(7));
+		data.setNotesMessage(data.getNotesMessage() + RandomStringUtils.randomAlphabetic(7));
 		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-		VNextBORODetailsStepsNew.addService(data);
 		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
-		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription(), true);
-		VNextBORODetailsValidationsNew.verifyServicePriceIsCorrect(data.getServiceDescription(), data.getServicePrice());
-		VNextBORODetailsValidationsNew.verifyServiceQuantityIsCorrect(data.getServiceDescription(), data.getServiceQuantity());
+		VNextBORODetailsStepsNew.addNoteForService(data.getService(), data.getNotesMessage(), true);
+		VNextBORODetailsStepsNew.openNotesForService(data.getService());
+		VNextBONotesDialogValidationsNew.verifyNoteInTheNotesList(data.getNotesMessage(), true);
+		VNextBONotesDialogStepsNew.closeDialogWithXIcon();
 		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
 		Utils.goToPreviousPage();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanAddNewLaborService(String rowID, String description, JSONObject testData) {
+	public void verifyUserCanSeeMoreInformationOfRo(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		data.setServiceDescription(data.getServiceDescription() + RandomStringUtils.randomAlphabetic(7));
+		data.setNotesMessage(data.getNotesMessage() + RandomStringUtils.randomAlphabetic(7));
 		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-		VNextBORODetailsStepsNew.addLaborService(data);
-		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
-		VNextBORODetailsValidationsNew.verifyServiceIsDisplayed(data.getServiceDescription(), true);
-		VNextBORODetailsValidationsNew.verifyServicePriceIsCorrect(data.getServiceDescription(), data.getServiceLaborRate());
-		VNextBORODetailsValidationsNew.verifyServiceQuantityIsCorrect(data.getServiceDescription(), data.getServiceLaborTime() + "0 hr");
-		VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
-		Utils.goToPreviousPage();
-		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanAddNewPartService(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		data.setServiceDescription(data.getServiceDescription() + RandomStringUtils.randomAlphabetic(7));
-		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-		int	initialPartServicesNumber = VNextBORODetailsStepsNew.getPartServicesAmount();
-		VNextBORODetailsStepsNew.addPartService(data);
-		VNextBORODetailsValidationsNew.verifyPartServicesAmountIsCorrect(initialPartServicesNumber + 1);
+		VNextBORODetailsValidationsNew.verifyMoreInfoSectionContainsCorrectFields();
 		Utils.goToPreviousPage();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}

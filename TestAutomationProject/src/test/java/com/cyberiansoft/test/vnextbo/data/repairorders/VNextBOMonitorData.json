@@ -461,7 +461,334 @@
     }
   ],
 
+  "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon": [
+    {
+      "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon.01",
+      "description": "Test Case 91370: User can select details of \"Add new Service\" and not add it (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91370",
+          "testCaseTitle": "User can select details of \"Add new Service\" and not add it (X-icon)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priceType": "All",
+      "phase": "Detail Station",
+      "service": "AMoneyFlatFee_VacuumCleaner",
+      "serviceDescription": "autotest",
+      "servicePrice": "$90.00",
+      "serviceQuantity": "7.000"
+    }
+  ],
 
+  "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton": [
+    {
+      "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton.01",
+      "description": "Test Case 91372: User can select details of \"Add new Service\" and not add it (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91372",
+          "testCaseTitle": "User can select details of \"Add new Service\" and not add it (Cancel)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "priceType": "All",
+      "phase": "Detail Station",
+      "service": "AMoneyFlatFee_VacuumCleaner",
+      "serviceDescription": "autotest",
+      "servicePrice": "$90.00",
+      "serviceQuantity": "7.000"
+    }
+  ],
+
+  "verifyUserCanChangeFlagOfRo": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRoToWhite.01",
+      "description": "Test Case 91313: User can change a Flag of RO to white",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91313",
+          "testCaseTitle": "User can change a Flag of RO to white"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "flag": "White",
+      "flagColor": "white"
+    },
+    {
+      "rowID": "verifyUserCanChangeFlagOfRo.02",
+      "description": "Test Case 91315: User can change a Flag of RO to red",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91315",
+          "testCaseTitle": "User can change a Flag of RO to red"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "flag": "Important",
+      "flagColor": "red"
+    },
+    {
+      "rowID": "verifyUserCanChangeFlagOfRo.03",
+      "description": "Test Case 91317: User can change a Flag of RO to orange",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91317",
+          "testCaseTitle": "User can change a Flag of RO to orange"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "flag": "Low priority",
+      "flagColor": "orange"
+    },
+    {
+      "rowID": "verifyUserCanChangeFlagOfRo.04",
+      "description": "Test Case 91319: User can change a Flag of RO to yellow",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91319",
+          "testCaseTitle": "User can change a Flag of RO to yellow"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "flag": "Yellow",
+      "flagColor": "yellow"
+    },
+    {
+      "rowID": "verifyUserCanChangeFlagOfRo.05",
+      "description": "Test Case 91321: User can change a Flag of RO to green",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91321",
+          "testCaseTitle": "User can change a Flag of RO to green"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "flag": "Green",
+      "flagColor": "green"
+    },
+    {
+      "rowID": "verifyUserCanChangeFlagOfRo.06",
+      "description": "Test Case 91323: User can change a Flag of RO to blue",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91323",
+          "testCaseTitle": "User can change a Flag of RO to blue"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "flag": "Blue",
+      "flagColor": "blue"
+    },
+    {
+      "rowID": "verifyUserCanChangeFlagOfRo.07",
+      "description": "Test Case 91325: User can change a Flag of RO to purple",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91325",
+          "testCaseTitle": "User can change a Flag of RO to purple"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "flag": "Test",
+      "flagColor": "purple"
+    }
+  ],
+
+  "verifyUserCanChangeStatusOfRoService": [
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoService.01",
+      "description": "Test Case 91287: User can change Status of RO to \"Active\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91287",
+          "testCaseTitle": "User can change a Flag of RO to purple"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "serviceStatuses": [
+        "Completed",
+        "Active"
+      ],
+      "serviceStartedDate": "02/15/2020"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoService.02",
+      "description": "Test Case 91288: User can change Status of RO to \"Complete\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91288",
+          "testCaseTitle": "User can change Status of RO to \"Complete\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ],
+      "serviceStartedDate": "02/15/2020"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoService.03",
+      "description": "Test Case 91289: User can change Status of RO to \"Audited\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91289",
+          "testCaseTitle": "User can change Status of RO to \"Audited\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "serviceStatuses": [
+        "Active",
+        "Audited"
+      ],
+      "serviceStartedDate": "02/15/2020"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoService.04",
+      "description": "Test Case 91291: User can change Status of RO to \"Rework\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91291",
+          "testCaseTitle": "User can change Status of RO to \"Rework\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "serviceStatuses": [
+        "Active",
+        "Rework"
+      ],
+      "serviceStartedDate": "02/15/2020"
+    },
+    {
+      "rowID": "verifyUserCanChangeStatusOfRoService.06",
+      "description": "Test Case 91292: User can change Status of RO to \"Skipped\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91292",
+          "testCaseTitle": "User can change Status of RO to \"Skipped\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "serviceStatuses": [
+        "Active",
+        "Skipped"
+      ],
+      "serviceStartedDate": "02/15/2020"
+    }
+  ],
+
+  "verifyUserCanSeeServicesOfRo": [
+    {
+      "rowID": "verifyUserCanSeeServicesOfRo.01",
+      "description": "Test Case 91282: User can see Services of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91282",
+          "testCaseTitle": "User can see Services of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR"
+    }
+  ],
+
+  "verifyUserCanChangeVendorPriceOfRo": [
+    {
+      "rowID": "verifyUserCanChangeVendorPriceOfRo.01",
+      "description": "Test Case 91283: User can change Vendor Price of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91283",
+          "testCaseTitle": "User can change Vendor Price of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "serviceVendorPrices": [
+        "$100.00",
+        "$0.00"
+      ]
+    }
+  ],
+
+  "verifyUserCanChangeVendorTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeVendorTechnicianOfRo.01",
+      "description": "Test Case 91284: User can change Vendor/Technician of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91284",
+          "testCaseTitle": "User can change Vendor/Technician of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "vendor": "01_TimeRep_team",
+      "technician": "Alex Zak"
+    }
+  ],
+
+  "verifyUserCanCreateNoteOfServiceOfRo": [
+    {
+      "rowID": "verifyUserCanCreateNoteOfServiceOfRo.01",
+      "description": "Test Case 91285: User can create Note of the Service of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91285",
+          "testCaseTitle": "User can create Note of the Service of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "notesMessage": "Autotest 91285"
+    }
+  ],
+
+  "verifyUserCanSeeMoreInformationOfRo": [
+    {
+      "rowID": "verifyUserCanSeeMoreInformationOfRo.01",
+      "description": "Test Case 91307: User can see More Information of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91307",
+          "testCaseTitle": "User can see More Information of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanTypeAndNotSaveNoteOfRoService": [
+    {
+      "rowID": "verifyUserCanTypeAndNotSaveNoteOfRoService.01",
+      "description": "Test Case 91286: User can type and not save Note of the Service of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91286",
+          "testCaseTitle": "User can type and not save Note of the Service of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "autotestcgoDbvR",
+      "notesMessage": "Autotest 91286"
+    }
+  ],
 
   "verifyUserCanSearchByRepairStatus": [
     {
@@ -528,151 +855,6 @@
     }
   ],
 
-
-
-  "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon": [
-    {
-      "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon.01",
-      "description": "Test Case 82744:User can select details of \"Add new Service\" and not add it (X-icon)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91370"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priceType": "All",
-      "service": "Test service zayats",
-      "serviceDescription": "autotest",
-      "servicePrice": "100",
-      "serviceQuantity": "1"
-    }
-  ],
-
-  "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton": [
-    {
-      "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton.01",
-      "description": "Test Case 82759:User can select details of \"Add new Service\" and not add it (Cancel)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91372"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "priceType": "All",
-      "service": "Test service zayats",
-      "serviceDescription": "autotest",
-      "servicePrice": "90",
-      "serviceQuantity": "1"
-    }
-  ],
-
-  "verifyUserCanChangeFlagOfRoToWhite": [
-    {
-      "rowID": "verifyUserCanChangeFlagOfRoToWhite.01",
-      "description": "Test Case 82908:User can change a Flag of RO to white",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91313"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "flag": "White"
-    }
-  ],
-
-  "verifyUserCanChangeFlagOfRoToRed": [
-    {
-      "rowID": "verifyUserCanChangeFlagOfRoToRed.01",
-      "description": "Test Case 82910:User can change a Flag of RO to red",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91315"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "flag": "Important"
-    }
-  ],
-
-  "verifyUserCanChangeFlagOfRoToOrange": [
-    {
-      "rowID": "verifyUserCanChangeFlagOfRoToOrange.01",
-      "description": "Test Case 82912:User can change a Flag of RO to orange",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91317"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "flag": "Low priority"
-    }
-  ],
-
-  "verifyUserCanChangeFlagOfRoToYellow": [
-    {
-      "rowID": "verifyUserCanChangeFlagOfRoToYellow.01",
-      "description": "Test Case 82914:User can change a Flag of RO to yellow",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91319"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "flag": "Yellow"
-    }
-  ],
-
-  "verifyUserCanChangeFlagOfRoToGreen": [
-    {
-      "rowID": "verifyUserCanChangeFlagOfRoToGreen.01",
-      "description": "Test Case 82916:User can change a Flag of RO to green",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91321"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "flag": "Green"
-    }
-  ],
-
-  "verifyUserCanChangeFlagOfRoToBlue": [
-    {
-      "rowID": "verifyUserCanChangeFlagOfRoToBlue.01",
-      "description": "Test Case 82918:User can change a Flag of RO to blue",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91323"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "flag": "Blue"
-    }
-  ],
-
-  "verifyUserCanChangeFlagOfRoToPurple": [
-    {
-      "rowID": "verifyUserCanChangeFlagOfRoToPurple.01",
-      "description": "Test Case 82920:User can change a Flag of RO to purple",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91325"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "flag": "Test"
-    }
-  ],
-
   "verifyUserCanSeeChangesOfServicesActivityInLogInfo": [
     {
       "rowID": "verifyUserCanSeeChangesOfServicesActivityInLogInfo.01",
@@ -714,296 +896,6 @@
         "Services",
         "Parts"
       ]
-    }
-  ],
-
-  "verifyUserCanSeeServicesOfRo": [
-    {
-      "rowID": "verifyUserCanSeeServicesOfRo.01",
-      "description": "Test Case 82955:User can see Services of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91282"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "servicesTableFields": [
-        "Service",
-        "Qty",
-        "Price",
-        "Vendor Price",
-        "Vendor / Technician",
-        "Status",
-        "Started / Completed",
-        "Actions"
-      ]
-    }
-  ],
-
-  "verifyUserCanChangeVendorPriceOfRo": [
-    {
-      "rowID": "verifyUserCanChangeVendorPriceOfRo.01",
-      "description": "Test Case 82967:User can change Vendor Price of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91283"
-        }
-      ],
-      "location": "Rozstalnoy_location",
-      "status": "Approved",
-      "orderNumber": "O-000-152510",
-      "service": "  Test Bundle Service",
-      "serviceVendorPrices": [
-        "0",
-        "100"
-        ]
-    }
-  ],
-
-  "verifyUserCanChangeVendorTechnicianOfRo": [
-    {
-      "rowID": "verifyUserCanChangeVendorTechnicianOfRo.01",
-      "description": "Test Case 82968:User can change Vendor/Technician of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91284"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ]
-    }
-  ],
-
-  "verifyUserCanCreateNoteOfServiceOfRo": [
-    {
-      "rowID": "verifyUserCanCreateNoteOfServiceOfRo.01",
-      "description": "Test Case 82970:User can create Note of the Service of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91285"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "notesMessage": "Autotest"
-    }
-  ],
-
-  "verifyUserCanChangeTargetDateOfRo": [
-    {
-      "rowID": "verifyUserCanChangeTargetDateOfRo.01",
-      "description": "Test Case 82926:User can change Target Date of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91310"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ]
-    }
-  ],
-
-  "verifyUserCanSeeMoreInformationOfRo": [
-    {
-      "rowID": "verifyUserCanSeeMoreInformationOfRo.01",
-      "description": "Test Case 82949:User can see More Information of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91307"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "informationFields": [
-        "Mileage:",
-        "Plate:",
-        "Type:",
-        "Completed (Repair) Time:",
-        "Delivered:",
-        "Created:"
-      ]
-    }
-  ],
-
-  "verifyUserCanTypeAndNotSaveNoteOfRoService": [
-    {
-      "rowID": "verifyUserCanTypeAndNotSaveNoteOfRoService.01",
-      "description": "Test Case 82973:User can type and not save Note of the Service of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91286"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsLaborService_Motor_est_work_time (lab time)",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ],
-      "notesMessage": "Autotest"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToActive": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToActive.01",
-      "description": "Test Case 82971:User can change Status of RO to \"Active\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91287"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "servicePhase": "Started",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ],
-      "serviceStartedDate": "04/20/2018"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToCompleted": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToCompleted.01",
-      "description": "Test Case 82969:User can change Status of RO to \"Complete\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91288"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ],
-      "serviceStartedDate": "04/20/2018"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToAudited": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToAudited.01",
-      "description": "Test Case 83619:User can change Status of RO to \"Audited\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91289"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Audited"
-      ],
-      "serviceStartedDate": "04/20/2018"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToRework": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToRework.01",
-      "description": "Test Case 83636:User can change Status of RO to \"Rework\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91291"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Rework"
-      ],
-      "serviceStartedDate": "04/20/2018"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToRefused": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToRefused.01",
-      "description": "Test Case 83635:User can change Status of RO to \"Refused\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91290"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Refused"
-      ],
-      "serviceStartedDate": "04/20/2018"
-    }
-  ],
-
-  "verifyUserCanChangeStatusOfRoServiceToSkipped": [
-    {
-      "rowID": "verifyUserCanChangeStatusOfRoServiceToSkipped.01",
-      "description": "Test Case 83637:User can change Status of RO to \"Skipped\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91292"
-        }
-      ],
-      "location": "1111 Automation",
-      "status": "Approved",
-      "orderNumber": "O-000-152073",
-      "service": "zayatsPriceMatrixService",
-      "vendor": "ALM Vendor",
-      "technician": "Jhon Jnonson",
-      "serviceStatuses": [
-        "Active",
-        "Skipped"
-      ],
-      "serviceStartedDate": "04/20/2018"
     }
   ],
 
