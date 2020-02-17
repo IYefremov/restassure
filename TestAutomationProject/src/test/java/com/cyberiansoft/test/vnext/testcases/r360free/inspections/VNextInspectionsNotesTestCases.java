@@ -327,9 +327,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.clickSaveInspectionMenuButton();
-        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        InspectionSteps.saveInspection();
 
         inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
