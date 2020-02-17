@@ -17,6 +17,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//section[@id='reconmonitordetails-view']")
     private WebElement orderDetailsSection;
 
+    @FindBy(xpath = "//div[@data-name!='']//div[@class='clmn_2']")
+    private List<WebElement> phasesList;
+
     @FindBy(xpath = "//div[@id='orderServices']//div[@data-item-id]/div[@class='clmn_2']/div[1]")
     private List<WebElement> serviceAndTaskDescriptionsList;
 
@@ -71,24 +74,49 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@data-template='repair-order-part-list-item-template']//b")
     private List<WebElement> partServicesNamesList;
 
+    public WebElement phaseRow(String phase) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']"));
+    }
+
     public WebElement actionsMenuButtonForPhase(String phase) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[not(contains(@style,'display: none;'))]/i[@class='icon-list menu-trigger']"));
+        return phaseRow(phase).findElement(By.xpath(".//div[not(contains(@style,'display: none;'))]/i[@class='icon-list menu-trigger']"));
     }
 
     public WebElement expandPhaseButton(String phase) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']"));
+        return phaseRow(phase).findElement(By.xpath(".//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']"));
     }
 
     public WebElement collapsePhaseButton(String phase) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[@class='clmn_1']/*[@class='switchTable icon-arrow-up5']"));
+        return phaseRow(phase).findElement(By.xpath(".//div[@class='clmn_1']/*[@class='switchTable icon-arrow-up5']"));
     }
 
     public WebElement problemIndicatorByPhase(String phase) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//i[@class='icon-problem-indicator']"));
+        return phaseRow(phase).findElement(By.xpath(".//i[@class='icon-problem-indicator']"));
+    }
+
+    public WebElement phaseTotalPrice(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//span[contains(@data-bind,'vendorPriceTotalF')]"));
+    }
+
+    public WebElement phaseStatusDropDownByPhase(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//span[contains(@class,'group-status-dropdown')]//span[@class='k-input']"));
+    }
+
+    public WebElement phaseStatusTextByPhase(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//div[contains(@data-bind, 'statusText')]"));
+    }
+
+    public WebElement changeTechnicianForPhase(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//div[contains(@data-bind,'showChangeTechnician')]"));
     }
 
     public WebElement serviceRowByName(String service) {
@@ -134,21 +162,6 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     public WebElement serviceVendorPriceInputField(String service) {
 
         return serviceRowByName(service).findElement(By.xpath(".//input[contains(@data-bind,'isVendorPriceEditable')]"));
-    }
-
-    public WebElement phaseTotalPrice(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//span[contains(@data-bind,'vendorPriceTotalF')]"));
-    }
-
-    public WebElement phaseStatusDropDownByPhase(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//span[contains(@class,'group-status-dropdown')]//span[@class='k-input']"));
-    }
-
-    public WebElement phaseStatusTextByPhase(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[contains(@data-bind, 'statusText')]"));
     }
 
     public WebElement serviceStatusDropDownByService(String service) {

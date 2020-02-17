@@ -24,6 +24,13 @@ public class VNextBORODetailsValidationsNew {
         Assert.assertTrue(present, "The order contains neither the service nor the task '" + text + "'.");
     }
 
+    public static void verifyPhaseIsDisplayed(String phase) {
+
+        List<String> displayedPhases = new VNextBORODetailsWebPageNew().getPhasesList().stream().
+                map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertTrue(displayedPhases.contains(phase), "Phase hasn't been displayed");
+    }
+
     public static void verifyServiceTableContainsCorrectColumns() {
 
         List<String> expectedColumnsList = Arrays.asList("Service", "Qty", "Price", "Vendor Price", "Vendor / Technician",

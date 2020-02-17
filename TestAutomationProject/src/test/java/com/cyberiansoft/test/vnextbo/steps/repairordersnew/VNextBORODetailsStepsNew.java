@@ -3,10 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
-import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBONotesDialogNew;
-import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROCompleteCurrentPhaseDialogNew;
-import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
-import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.*;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -292,5 +289,11 @@ public class VNextBORODetailsStepsNew {
         openNotesForService(service);
         if (saveNote) VNextBONotesDialogStepsNew.addNote(noteText, true);
         else VNextBONotesDialogStepsNew.addNote(noteText, false);
+    }
+
+    public static void openChangeTechnicianDialogForPhase(String phase) {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().changeTechnicianForPhase(phase));
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(new VNextBOChangeTechnicianDialogNew().getDialogContent()));
     }
 }

@@ -790,6 +790,237 @@
     }
   ],
 
+  "verifyUserCanChangeQuantityForService": [
+    {
+      "rowID": "verifyUserCanChangeQuantityForService.01",
+      "description": "Test Case 91293: Verify user can change quantity for service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91293",
+          "testCaseTitle": "Verify user can change quantity for service"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "serviceQuantity": "125.000"
+    }
+  ],
+
+  "verifyUserCanEnterNegativeNumberForServiceQuantity": [
+    {
+      "rowID": "verifyUserCanEnterNegativeNumberForServiceQuantity.01",
+      "description": "Test Case 91294: Verify user can't enter a negative number for service quantity",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91294",
+          "testCaseTitle": "Verify user can't enter a negative number for service quantity"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "serviceQuantity": "-2.000"
+    }
+  ],
+
+  "verifyUserCannotEnterTextForServiceQuantity": [
+    {
+      "rowID": "verifyUserCannotEnterTextForServiceQuantity.01",
+      "description": "Test Case 91295: Verify user can't enter text for service quantity",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91295",
+          "testCaseTitle": "Verify user can't enter text for service quantity"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "serviceQuantity": "10.000"
+    }
+  ],
+
+  "verifyUserCanChangePriceForService": [
+    {
+      "rowID": "verifyUserCanChangePriceForService.01",
+      "description": "Test Case 91296: Verify user can change price for service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91296",
+          "testCaseTitle": "Verify user can change price for service"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "servicePrice": "45.00"
+    }
+  ],
+
+  "verifyUserCanEnterNegativeNumberForServicePrice": [
+    {
+      "rowID": "verifyUserCanEnterNegativeNumberForServicePrice.01",
+      "description": "Test Case 91297: Verify user can enter a negative number for service price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91297",
+          "testCaseTitle": "Verify user can enter a negative number for service price"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "servicePrice": "45.00"
+    }
+  ],
+
+  "verifyUserCannotEnterTextForServicePrice": [
+    {
+      "rowID": "verifyUserCannotEnterTextForServicePrice.01",
+      "description": "Test Case 91298: Verify user can't enter a text for service price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91298",
+          "testCaseTitle": "Verify user can't enter a text for service price"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "servicePrice": "d"
+    }
+  ],
+
+  "verifyUserCanSeePhaseOfRo": [
+    {
+      "rowID": "verifyUserCanSeePhaseOfRo.01",
+      "description": "Test Case 91273: User can see Phase of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91273",
+          "testCaseTitle": "User can see Phase of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station"
+    }
+  ],
+
+  "verifyUserCanChangeTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeTechnicianOfRo.01",
+      "description": "Test Case 91276: User can change Technician of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91276",
+          "testCaseTitle": "User can change Technician of RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "vendor": "01_TimeRep_team",
+      "technician": "Aleksandr Filimonov",
+      "technician1": "Alex Zak"
+    }
+  ],
+
+  "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo.01",
+      "description": "Test Case 91277: User can change and not save Technician of RO (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91277",
+          "testCaseTitle": "User can change and not save Technician of RO (X-icon)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "vendor": "01_TimeRep_team",
+      "technician": "Aleksandr Filimonov",
+      "technician1": "Alex Zak"    }
+  ],
+
+  "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo": [
+    {
+      "rowID": "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo.01",
+      "description": "Test Case 91278: User can change and not save Technician of RO (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91278",
+          "testCaseTitle": "User can change and not save Technician of RO (Cancel)"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "vendor": "01_TimeRep_team",
+      "technician": "Aleksandr Filimonov",
+      "technician1": "Alex Zak"
+    }
+  ],
+
+
+
+
+  "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase": [
+    {
+      "rowID": "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase.01",
+      "description": "Test Case 91010:User can see and change Technicians of the current phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91376"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "orderNumber": "O-000-152649",
+      "status": "Approved",
+      "vendor": "Test Team",
+      "serviceTabs": [
+        "Rozstalnoy",
+        "Rozstalnoy2"
+      ],
+      "serviceStatuses": [
+        "Completed",
+        "Active"
+      ],
+      "services": [
+        "rozstalnoy_enable_money",
+        "roz_dis_part_money"
+      ]
+    }
+  ],
+
+  "verifyUserCanSeeChangesOfPhasesInLogInfo": [
+    {
+      "rowID": "verifyUserCanSeeChangesOfPhasesInLogInfo.01",
+      "description": "Test Case 91327: User can see changes of Phases in Log Info",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91327",
+          "testCaseTitle": "User can see changes of Phases in Log Info"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "status": "Approved",
+      "priceType": "All",
+      "service": "Labor_base_vehicle_data_all",
+      "serviceStatuses": [
+        "Active",
+        "Completed"
+      ],
+      "auditLogTabs": [
+        "ALL",
+        "Phases and Departments",
+        "Services",
+        "Parts"
+      ]
+    }
+  ],
+
   "verifyUserCanSearchByRepairStatus": [
     {
       "rowID": "verifyUserCanSearchByRepairStatus.01",
@@ -899,161 +1130,6 @@
     }
   ],
 
-  "verifyUserCanSeeChangesOfPhasesInLogInfo": [
-    {
-      "rowID": "verifyUserCanSeeChangesOfPhasesInLogInfo.01",
-      "description": "Test Case 82897:User can see changes of Phases in Log Info",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91327"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "Labor_base_vehicle_data_all",
-      "serviceStatuses": [
-        "Active",
-        "Completed"
-      ],
-      "auditLogTabs": [
-        "ALL",
-        "Phases and Departments",
-        "Services",
-        "Parts"
-      ]
-    }
-  ],
-
-  "verifyUserCanChangeQuantityForService": [
-    {
-      "rowID": "verifyUserCanChangeQuantityForService.01",
-      "description": "Test Case 84990:Verify user can change quantity for service",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91293"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-168-00242",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "b Body Shop (Test Part)",
-      "serviceQuantity": "125"
-    }
-  ],
-
-  "verifyUserCanEnterNegativeNumberForServiceQuantity": [
-    {
-      "rowID": "verifyUserCanEnterNegativeNumberForServiceQuantity.01",
-      "description": "Test Case 84992:Verify user can't enter a negative number for service quantity",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91294"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-168-00242",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "b Body Shop (Test Part)"
-    }
-  ],
-
-  "verifyUserCannotEnterTextForServiceQuantity": [
-    {
-      "rowID": "verifyUserCannotEnterTextForServiceQuantity.01",
-      "description": "Test Case 84993:Verify user can't enter text for service quantity",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91295"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-168-00242",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "b Body Shop (Test Part)",
-      "serviceQuantity": "d"
-    }
-  ],
-
-  "verifyUserCanChangePriceForService": [
-    {
-      "rowID": "verifyUserCanChangePriceForService.01",
-      "description": "Test Case 84994:Verify user can change price for service",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91296"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "Air Filter Element",
-      "servicePrice": "45"
-    }
-  ],
-
-  "verifyUserCanEnterNegativeNumberForServicePrice": [
-    {
-      "rowID": "verifyUserCanEnterNegativeNumberForServicePrice.01",
-      "description": "Test Case 84995:Verify user can enter a negative number for service price",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91297"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152449",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "A brand new demo service"
-    }
-  ],
-
-  "verifyUserCannotEnterTextForServicePrice": [
-    {
-      "rowID": "verifyUserCannotEnterTextForServicePrice.01",
-      "description": "Test Case 84996:Verify user can't enter a text for service price",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91298"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "Air Filter Element",
-      "servicePrice": "d"
-    }
-  ],
-
-  "verifyUserCanSeePhaseOfRo": [
-    {
-      "rowID": "verifyUserCanSeePhaseOfRo.01",
-      "description": "Test Case 82960:User can see Phase of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91273"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "Air Filter Element",
-      "servicePhaseHeaders": [
-        "Started",
-        "Change Technician",
-        "Active"
-      ]
-    }
-  ],
-
   "verifyUserCanSeeStartedPrice": [
     {
       "rowID": "verifyUserCanSeeStartedPrice.01",
@@ -1151,93 +1227,6 @@
       ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073"
-    }
-  ],
-
-  "verifyUserCanChangeTechnicianOfRo": [
-    {
-      "rowID": "verifyUserCanChangeTechnicianOfRo.01",
-      "description": "Test Case 82976:User can change Technician of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91276"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "Air Filter Element",
-      "vendor": "Default team",
-      "technician": "Andy Maclean",
-      "vendor1": "zayats test team",
-      "technician1": "OKSI HOUSE - All role"
-    }
-  ],
-
-  "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo": [
-    {
-      "rowID": "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo.01",
-      "description": "Test Case 83089:User can change and not save Technician of RO (X-icon)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91277"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "Air Filter Element",
-      "vendor": "Default team",
-      "technician": "Andy Maclean"
-    }
-  ],
-
-  "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo": [
-    {
-      "rowID": "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo.01",
-      "description": "Test Case 83090:User can change and not save Technician of RO (Cancel)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91278"
-        }
-      ],
-      "location": "1111 Automation",
-      "orderNumber": "O-000-152073",
-      "status": "Approved",
-      "priceType": "All",
-      "service": "Air Filter Element",
-      "vendor": "Default team",
-      "technician": "Andy Maclean"
-    }
-  ],
-
-  "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase": [
-    {
-      "rowID": "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase.01",
-      "description": "Test Case 91010:User can see and change Technicians of the current phase",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91376"
-        }
-      ],
-      "location": "Rozstalnoy_location",
-      "orderNumber": "O-000-152649",
-      "status": "Approved",
-      "vendor": "Test Team",
-      "serviceTabs": [
-        "Rozstalnoy",
-        "Rozstalnoy2"
-      ],
-      "serviceStatuses": [
-        "Completed",
-        "Active"
-      ],
-      "services": [
-        "rozstalnoy_enable_money",
-        "roz_dis_part_money"
-      ]
     }
   ],
 
