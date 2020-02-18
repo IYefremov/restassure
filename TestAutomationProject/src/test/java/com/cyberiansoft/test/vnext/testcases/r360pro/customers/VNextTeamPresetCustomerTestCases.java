@@ -167,9 +167,8 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         VehicleInfoScreenSteps.openTechnicianMenu();
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
 
-        final String SERVICE_NAME = "Battery";
+        final String SERVICE_NAME = "Battery Installation";
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        AvailableServicesScreenSteps.selectService(SERVICE_NAME);
         AvailableServicesScreenSteps.clickAddServiceButton(SERVICE_NAME);
 
         vehicleInfoScreen.saveWorkOrderViaMenu();
