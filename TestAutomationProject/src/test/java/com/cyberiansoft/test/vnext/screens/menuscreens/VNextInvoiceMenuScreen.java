@@ -92,10 +92,6 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 		informationdlg.clickInformationDialogOKButton();
 	}
 
-	public boolean isPayInvoiceMenuItemExists() {
-		return  WaitUtils.isElementPresent(invoicepaymenubtn);
-	}
-
 	public boolean isInvoiceChangePONumberMenuItemExists() {
 		return WaitUtils.isElementPresent(invoicechangeponumbtn);
 	}
@@ -109,12 +105,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 		return new VNextInvoicesScreen();
 	}
 
-	public VNextInvoiceInfoScreen clickEditInvoiceMenuItem() {
+	public void clickEditInvoiceMenuItem() {
 		clickMenuItem(editinvoicebtn);
-		return new VNextInvoiceInfoScreen(appiumdriver);
-	}
-
-	public boolean isInvoicePayPOROMenuItemExists() {
-		return WaitUtils.isElementPresent(invoicepayporomenubtn);
 	}
 }
