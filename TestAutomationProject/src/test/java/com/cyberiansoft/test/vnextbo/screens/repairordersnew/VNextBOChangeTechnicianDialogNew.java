@@ -14,16 +14,13 @@ import java.util.List;
 @Getter
 public class VNextBOChangeTechnicianDialogNew extends VNextBOBaseWebPage {
 
-    @FindBy(xpath = "//div[@id='orderServices_PhaseVendorTechnician_ModalTemplate']//div[contains(@class,'modal-content')]")
-    private WebElement dialogContent;
-
-    @FindBy(xpath = "//div[@id='orderServices_PhaseVendorTechnician_ModalTemplate']//button[@class='close']")
+    @FindBy(xpath = "//div[contains(@id,'VendorTechnician_ModalTemplate') and contains(@style, 'display: block')]//button[@class='close']")
     private WebElement closeDialogXIcon;
 
-    @FindBy(xpath = "//div[@id='orderServices_PhaseVendorTechnician_ModalTemplate']//button[@data-automation-id='modalConfirmButton']")
+    @FindBy(xpath = "//div[contains(@id,'VendorTechnician_ModalTemplate') and contains(@style, 'display: block')]//button[@data-automation-id='modalConfirmButton']")
     private WebElement okButton;
 
-    @FindBy(xpath = "//div[@id='orderServices_PhaseVendorTechnician_ModalTemplate']//button[@data-automation-id='modalCancelButton']")
+    @FindBy(xpath = "//div[contains(@id,'VendorTechnician_ModalTemplate') and contains(@style, 'display: block')]//button[@data-automation-id='modalCancelButton']")
     private WebElement cancelButton;
 
     @FindBy(xpath = "//input[contains(@data-bind,'onVendorChange')]/ancestor::span//span[@class='k-input']")

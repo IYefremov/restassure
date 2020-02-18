@@ -2,7 +2,7 @@
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
     </listeners>
-    <test name="Invoice Details Tests">
+<!--    <test name="Invoice Details Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>
         </classes>
@@ -176,7 +176,7 @@
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorSimpleSearchTestCasesNew"/>
         </classes>
-    </test>
+    </test>-->
     <test name="Monitor Tests Part 1">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart1New"/>
@@ -196,10 +196,10 @@
             <classes>
                 <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart4"/>
             </classes>
-        </test>-->
+        </test>
     <test name="Monitor Grid Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorGridDataTestCases"/>
         </classes>
-    </test>
+    </test>-->
 </suite>

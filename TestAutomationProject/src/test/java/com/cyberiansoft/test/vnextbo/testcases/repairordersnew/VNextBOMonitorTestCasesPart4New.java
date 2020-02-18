@@ -1,16 +1,22 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOChangeTechnicianDialogStepsNew;
+import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROAdvancedSearchDialogStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROAdvancedSearchDialogValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
+import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -151,16 +157,62 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getService(), data.getTechnician());
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
-/*
-//todo blocker, needs update
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSeeChangesOfPhasesInLogInfo(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase(String rowID, String description, JSONObject testData) {
+
+	    VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getServices()[0], data.getServiceStatuses()[1]);
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getServices()[1], data.getServiceStatuses()[1]);
+        VNextBORODetailsStepsNew.openChangeTechnicianDialogForPhase(data.getPhase());
+        VNextBOChangeTechnicianDialogStepsNew.changeTechnicianAndSave(data.getVendor(), data.getTechnician());
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+        Utils.goToPreviousPage();
+        WaitUtilsWebDriver.waitABit(3000);
+        VNextBOROPageStepsNew.openChangeTechnicianDialogForFirstOrder();
+        VNextBOChangeTechnicianDialogStepsNew.changeTechnicianAndSave(data.getVendor(), data.getTechnician1());
+        VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable(data.getTechnician1());
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getServices()[0], data.getTechnician1());
+        VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getServices()[1], data.getTechnician1());
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchBySavedSearchForm(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        Utils.goToPreviousPage();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOROPageStepsNew.searchBySavedAdvancedSearch(data.getSearchName());
+        VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOROAdvancedSearchDialogValidationsNew.verifyAllFieldsContainCorrectValues(data, true);
+        VNextBOROAdvancedSearchDialogStepsNew.closeDialog();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCannotEditSavedSearch(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        Utils.goToPreviousPage();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOROPageStepsNew.searchBySavedAdvancedSearch("111");
+        VNextBOROWebPageValidationsNew.verifySavedSearchEditPencilIconIsDisplayed(true);
+        VNextBOROPageStepsNew.searchBySavedAdvancedSearch(data.getSearchName());
+        VNextBOROWebPageValidationsNew.verifySavedSearchEditPencilIconIsDisplayed(false);
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+    }
+/*
+    //todo blocker, needs update
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeChangesOfPhasesInLogInfo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
     }
@@ -178,38 +230,6 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchBySavedSearchForm(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCannotEditSavedSearch(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-    }
-
-//    TODO the TC blocker - the locations are not loaded for the given
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyTechnicianUserCanFindOrdersUsingSavedSearchMyCompletedWork(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-    }
-
-    //todo continue after the blocker is resolved
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyTechnicianUserCanFindOrdersUsingSavedSearchMyWorkQueue(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanResolveProblemOnPhaseLevel(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSeeInvoiceOfRo(String rowID, String description, JSONObject testData) {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
@@ -220,11 +240,5 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 
     }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanUsePaginationFilter(String rowID, String description, JSONObject testData) {
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-	}
  */
 }

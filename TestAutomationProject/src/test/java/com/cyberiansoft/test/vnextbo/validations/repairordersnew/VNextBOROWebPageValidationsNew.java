@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROAdvancedSearchDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
@@ -63,6 +64,16 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         else {
             for (WebElement phase: new VNextBOROWebPageNew().getOrdersPhasesList()) {
                 Assert.assertEquals(Utils.getText(phase), expectedPhase, "Phase hasn't been correct");
+            }
+        }
+    }
+
+    public static void verifyTechniciansAreCorrectInTheTable(String expectedTechnician) {
+
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement technician: new VNextBOROWebPageNew().getOrdersTechniciansList()) {
+                Assert.assertTrue(Utils.getText(technician).contains(expectedTechnician), "Technician hasn't been correct");
             }
         }
     }
@@ -458,5 +469,13 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
                 break;
         }
+    }
+
+    public static void verifySavedSearchEditPencilIconIsDisplayed(boolean shouldBeDisplayed) {
+
+        if (shouldBeDisplayed) Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getEditSavedSearchPencilIcon()),
+                "Edit search pencil icon hasn't been displayed");
+        else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().getEditSavedSearchPencilIcon()),
+                "Edit search pencil icon has been displayed");
     }
 }

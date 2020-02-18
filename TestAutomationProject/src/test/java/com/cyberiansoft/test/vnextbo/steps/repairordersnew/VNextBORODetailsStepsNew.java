@@ -294,6 +294,6 @@ public class VNextBORODetailsStepsNew {
     public static void openChangeTechnicianDialogForPhase(String phase) {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().changeTechnicianForPhase(phase));
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(new VNextBOChangeTechnicianDialogNew().getDialogContent()));
+        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(new VNextBOChangeTechnicianDialogNew().getCancelButton()));
     }
 }

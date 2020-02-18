@@ -29,6 +29,7 @@ public class VNextBOChangeTechnicianDialogStepsNew {
         setVendor(vendor);
         setTechnician(technician);
         Utils.clickElement(new VNextBOChangeTechnicianDialogNew().getCloseDialogXIcon());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void changeTechnicianAndNotSaveCancelButton(String vendor, String technician) {
@@ -36,6 +37,7 @@ public class VNextBOChangeTechnicianDialogStepsNew {
         setVendor(vendor);
         setTechnician(technician);
         Utils.clickElement(new VNextBOChangeTechnicianDialogNew().getCancelButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void changeTechnicianAndSave(String vendor, String technician) {
@@ -44,6 +46,6 @@ public class VNextBOChangeTechnicianDialogStepsNew {
         setTechnician(technician);
         Utils.clickElement(new VNextBOChangeTechnicianDialogNew().getOkButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        //WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitABit(3000);
     }
 }

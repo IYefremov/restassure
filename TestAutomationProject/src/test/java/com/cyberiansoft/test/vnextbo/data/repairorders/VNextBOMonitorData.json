@@ -963,34 +963,102 @@
     }
   ],
 
-
-
-
   "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase": [
     {
       "rowID": "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase.01",
-      "description": "Test Case 91010:User can see and change Technicians of the current phase",
+      "description": "Test Case 91376: User can see and change Technicians of the current phase",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "91376"
+          "testCaseID": "91376",
+          "testCaseTitle": "User can see and change Technicians of the current phase"
         }
       ],
-      "location": "Rozstalnoy_location",
-      "orderNumber": "O-000-152649",
-      "status": "Approved",
-      "vendor": "Test Team",
-      "serviceTabs": [
-        "Rozstalnoy",
-        "Rozstalnoy2"
-      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "vendor": "01_TimeRep_team",
+      "technician": "Aleksandr Filimonov",
+      "technician1": "Alex Zak",
       "serviceStatuses": [
         "Completed",
         "Active"
       ],
       "services": [
-        "rozstalnoy_enable_money",
-        "roz_dis_part_money"
+        "note 2 serv level",
+        "Car-Washing"
       ]
+    }
+  ],
+
+  "verifyUserCanSearchBySavedSearchForm": [
+    {
+      "rowID": "verifyUserCanSearchBySavedSearchForm.01",
+      "description": "Test Case 91225: User can search by the saved search form \"My Location - Active Work\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91225",
+          "testCaseTitle": "User can search by the saved search form \"My Location - Active Work\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "customer": "",
+      "hasThisText": "",
+      "employee": "",
+      "phase": "All",
+      "phaseStatus": "",
+      "task": "All",
+      "taskStatus": "All",
+      "department": "All",
+      "woType": "All",
+      "woNum": "",
+      "roNum": "",
+      "stockNum": "",
+      "vinNum": "",
+      "timeFrame": "Last 30 days",
+      "repairStatus": "In Progress - All",
+      "daysInProcess": "All",
+      "daysInPhase": "All",
+      "flag": "All",
+      "sortBy": "Priority, Newest to Oldest",
+      "searchName": "My Location - Active Work"
+    }
+  ],
+
+  "verifyUserCannotEditSavedSearch": [
+    {
+      "rowID": "verifyUserCannotEditSavedSearch.01",
+      "description": "Test Case 91226: User can't edit \"Saved\" → \"My Location - Active Work\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91226",
+          "testCaseTitle": "User can't edit \"Saved\" → \"My Location - Active Work\""
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "searchName": "My Location - Active Work"
+    }
+  ],
+
+
+
+
+
+
+
+
+
+  "verifyUserCanSeeInvoiceOfRo": [
+    {
+      "rowID": "verifyUserCanSeeInvoiceOfRo.01",
+      "description": "Test Case 91386: User can see Invoice of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91386",
+          "testCaseTitle": "User can see Invoice of RO"
+        }
+      ],
+      "location": "New_zayats_location",
+      "orderNumber": "O-000-152441",
+      "invoiceNumber": "I-000-00997"
     }
   ],
 
@@ -1038,36 +1106,6 @@
         "Default",
         "dep_"
       ]
-    }
-  ],
-
-  "verifyUserCanResolveProblemOnPhaseLevel": [
-    {
-      "rowID": "verifyUserCanResolveProblemOnPhaseLevel.01",
-      "description": "Test Case 83641:User can see Invoice of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91386"
-        }
-      ],
-      "location": "New_zayats_location",
-      "orderNumber": "O-000-152441",
-      "invoiceNumber": "I-000-00997"
-    }
-  ],
-
-  "verifyUserCanSeeInvoiceOfRo": [
-    {
-      "rowID": "verifyUserCanSeeInvoiceOfRo.01",
-      "description": "Test Case 83641:User can see Invoice of RO",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91386"
-        }
-      ],
-      "location": "New_zayats_location",
-      "orderNumber": "O-000-152441",
-      "invoiceNumber": "I-000-00997"
     }
   ],
 
@@ -1227,57 +1265,6 @@
       ],
       "location": "1111 Automation",
       "orderNumber": "O-000-152073"
-    }
-  ],
-
-  "verifyUserCanSearchBySavedSearchForm": [
-    {
-      "rowID": "verifyUserCanSearchBySavedSearchForm.01",
-      "description": "Test Case 87743:User can search by the saved search form \"My Location - Active Work\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91225"
-        }
-      ],
-      "location": "zayats location",
-      "searchValues": {
-        "customer": "",
-        "employee": "",
-        "phase": "All",
-        "phaseStatus": "Current",
-        "department": "All",
-        "woType": "All",
-        "woNum": "",
-        "roNum": "",
-        "stockNum": "",
-        "vinNum": "",
-        "timeFrame": "Last 30 days",
-        "repairStatus": "In Progress - All",
-        "daysInProcess": "All",
-        "daysInPhase": "All",
-        "flag": "All",
-        "sortBy": "Priority, Newest to Oldest",
-        "searchName": "My Location - Active Work"
-      }
-    }
-  ],
-
-  "verifyUserCannotEditSavedSearch": [
-    {
-      "rowID": "verifyUserCannotEditSavedSearch.01",
-      "description": "Test Case 87744:User can't edit \"Saved\" → \"My Location - Active Work\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91226"
-        }
-      ],
-      "location": "zayats location",
-      "searchValues": {
-        "searchNames": [
-          "111",
-          "My Location - Active Work"
-        ]
-      }
     }
   ],
 
