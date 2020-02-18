@@ -25,6 +25,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.steps.InvoiceInfoSteps;
 import com.cyberiansoft.test.vnext.steps.InvoiceSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
@@ -264,8 +265,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
         VNextInvoiceTypesList invoiceTypesScreen = workOrdersMenuScreen.clickCreateInvoiceMenuItem();
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceinfoscreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceinfoscreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
         VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         Assert.assertEquals(invoicesScreen.getInvoiceCustomerValue(invoiceNumber), testcustomer2.getFullName());
@@ -292,7 +292,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
-        workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+        vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersScreen.changeCustomerForWorkOrderViaSearch(woNumber, testcustomer2);
         workOrdersScreen.clickBackButton();
         BaseUtils.waitABit(30*1000);

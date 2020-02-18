@@ -41,4 +41,9 @@ public class WizardScreenSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         baseWizardScreen.selectScreen(screenType);
     }
+
+    public static void clickCancelMenuItem() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickCancelMenuItem();
+    }
 }

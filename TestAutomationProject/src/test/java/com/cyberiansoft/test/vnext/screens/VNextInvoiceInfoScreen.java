@@ -1,12 +1,14 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -25,10 +27,10 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	private WebElement rootElement;
 	
 	@FindBy(xpath="//input[@name='Invoices.PONo']")
-	private WebElement invoicepo;
+	private WebElement invoicePO;
 
 	@FindBy(xpath="//input[@name='Invoices.InvoiceDate']")
-	private WebElement invoicedate;
+	private WebElement invoiceDate;
 
 	@FindBy(xpath="//*[@action='add-order']")
 	private WebElement addorderbtn;
@@ -37,53 +39,23 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	private WebElement createinvoicemenu;
 	
 	@FindBy(id="total")
-	private WebElement invoicetotalamont;
+	private WebElement invoiceTotalAmont;
 	
 	@FindBy(xpath="//div[@class='invoce-info-container']")
-	private WebElement invoiceinfopanel;
+	private WebElement invoiceInfoPanel;
 
     public VNextInvoiceInfoScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(appiumdriver, this);
 		WaitUtils.elementShouldBeVisible(getRootElement(),true);
 	}
-	
-	public void setInvoicePONumber(String ponumber) {
-		WaitUtils.click(invoicepo);
-		invoicepo.clear();
-		invoicepo.sendKeys(ponumber);
-		BaseUtils.waitABit(500);
-	}
 
-	public String getInvoicePONumberValue() {
-		return invoicepo.getAttribute("value");
-	}
-
-	public String getInvoiceDateValue() {
-		return invoicedate.getAttribute("value");
-	}
-	
-	public VNextNotesScreen clickNotesMenuItem() {
-        VNextInvoiceMenuScreen invoiceMenuScreen = new VNextInvoiceMenuScreen(appiumdriver);
-        return invoiceMenuScreen.clickInvoiceNotesMenuItem();
-	}
-	
-	public String getInvoiceTotalAmount() {
-		WaitUtils.waitUntilElementIsClickable(invoicetotalamont);
-		return invoicetotalamont.getText().trim();
-	}
-	
-	public boolean isWorkOrderSelectedForInvoice(String wonumber) {
-		WaitUtils.elementShouldBeVisible(getRootElement(),true);
-		return invoiceinfopanel.findElements(By.xpath(".//div[text()='" + wonumber + "']")).size() > 0;
-	}
-	
-	public void clickInvoiceInfoBackButton() {
-		clickScreenBackButton();
+	public VNextInvoiceInfoScreen() {
+		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
 	}
 
 	public void changeInvoiceDayValue(LocalDate date) {
-		tap(invoicedate);
+		tap(invoiceDate);
 		setInvoiceSelectedDateValue(date);
 		closeInvoiceSelectDatePicker();
  	}
@@ -94,11 +66,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 
 	private WebElement getDatePickerWheelDateColumn() {
 		return getDatePickerWheel().findElement(By.xpath(".//div[@class='picker-modal-inner picker-items']/div[2]"));
-	}
-
-	public int getInvoiceSelectedDateValue() {
-		WebElement pickerwheeldatecolumn = getDatePickerWheelDateColumn();
-		return Integer.valueOf(pickerwheeldatecolumn.findElement(By.xpath(".//div[@class='picker-item picker-selected']")).getAttribute("data-picker-value"));
 	}
 
 	public void setInvoiceSelectedDateValue(LocalDate date) {
@@ -145,14 +112,12 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 
 	private List<WebElement> getListOfInvoiceWorkOrders() {
-		return invoiceinfopanel.findElements(By.xpath(".//*[@action='edit-order']"));
+		return invoiceInfoPanel.findElements(By.xpath(".//*[@action='edit-order']"));
 	}
 
-	public VNextVehicleInfoScreen clickOnWorkOrder(String workOrderNumber) {
+	public void clickOnWorkOrder(String workOrderNumber) {
 		tap(appiumdriver.
 				findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + workOrderNumber + "']")));
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        return vehicleInfoScreen;
 	}
 }

@@ -22,4 +22,10 @@ public class InformationDialogValidations {
         String msg = informationDialog.clickInformationDialogStopButton();
         Assert.assertEquals(msg, expectedMessage);
     }
+
+    public static void clickYesAndVerifyMessage(String expectedMessage) {
+        VNextInformationDialog informationDialog = new VNextInformationDialog();
+        String msg = informationDialog.clickInformationDialogYesButtonAndGetMessage();
+        Assert.assertEquals(msg, expectedMessage);
+    }
 }
