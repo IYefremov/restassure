@@ -21,9 +21,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.steps.MenuSteps;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -65,16 +63,15 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         BaseUtils.waitABit(3000);
         payInvoicesScreen.clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -83,8 +80,8 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertTrue(payInvoicesScreen.isExpirationMonthRequiredErrorDisplayed());
         Assert.assertTrue(payInvoicesScreen.isExpirationYearRequiredErrorDisplayed());
         Assert.assertTrue(payInvoicesScreen.isCVCRequiredErrorDisplayed());
-        invoicesScreen = payInvoicesScreen.clickBackButton();
-        invoicesScreen.clickBackButton();
+        payInvoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -107,29 +104,27 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
         payInvoicesScreen.setCVC(testCaseData.getInvoiceData().getCreditCardData().getCVC());
         payInvoicesScreen.clickPayButton();
 
-
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_CARD_WAS_DECLINED);
 
-        invoicesScreen = payInvoicesScreen.clickBackButton();
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -152,17 +147,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
@@ -172,8 +166,8 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_CARDs_SECURITY_CODE_IS_INCORRECT);
 
-        invoicesScreen = payInvoicesScreen.clickBackButton();
-        invoicesScreen.clickBackButton();
+        payInvoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -196,17 +190,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getIncorrectCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
@@ -215,14 +208,12 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
 
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_CARDs_SECURITY_CODE_IS_INCORRECT);
-        payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getCardNumber());
         payInvoicesScreen.clickPayButton();
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
 
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -245,17 +236,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
@@ -264,8 +254,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
 
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
-        invoicesScreen.waitInvoicesScreenLoad();
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -288,20 +277,18 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickPayInvoiceMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        VNextInvoiceMenuScreen invoiceMenuScreen = new VNextInvoiceMenuScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        MenuSteps.selectMenuItem(MenuItems.PAY);
         MenuValidations.menuItemShouldBeVisible(MenuItems.PAY_PO_RO, true);
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesScreen.clickBackButton();
+        MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -324,17 +311,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
@@ -344,11 +330,10 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
 
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        Assert.assertTrue(invoiceMenuScreen.isInvoicePayPOROMenuItemExists());
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesScreen.clickBackButton();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.PAY_PO_RO, true);
+        MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -373,26 +358,24 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.setAmauntValue(payAmount);
         payCashCheckScreen.payInvoice();
 
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickPayInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
         MenuValidations.menuItemShouldBeVisible(MenuItems.PAY_PO_RO, true);
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesScreen.clickBackButton();
+        MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -415,21 +398,19 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayPOROScreen poroScreen = invoiceMenuScreen.clickPayPOROMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_PO_RO);
+        VNextPayPOROScreen poroScreen = new VNextPayPOROScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(poroScreen.getPaymentPOROValue(), testCaseData.getInvoiceData().getPoNumber());
-        poroScreen.clickScreenBackButton();
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -453,26 +434,23 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayPOROScreen payPOROScreen = invoiceMenuScreen.clickPayPOROMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_PO_RO);
+        VNextPayPOROScreen payPOROScreen = new VNextPayPOROScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payPOROScreen.setPaymentPOROValue(payPOROValue);
         payPOROScreen.clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.PORO_FIELDIS_REQUIRED);
-        payPOROScreen.clickScreenBackButton();
-
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -495,20 +473,19 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayPOROScreen payPOROScreen = invoiceMenuScreen.clickPayPOROMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_PO_RO);
+        VNextPayPOROScreen payPOROScreen = new VNextPayPOROScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payPOROScreen.setPaymentPOROValue(testCaseData.getInvoiceData().getPoNumber());
-        invoicesScreen = payPOROScreen.payForInvoice();
-        invoicesScreen.clickBackButton();
+        payPOROScreen.payForInvoice();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -531,29 +508,28 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayPOROScreen payPOROScreen = invoiceMenuScreen.clickPayPOROMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_PO_RO);
+        VNextPayPOROScreen payPOROScreen = new VNextPayPOROScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payPOROScreen.setPaymentPOROValue(testCaseData.getInvoiceData().getPoNumber());
-        payPOROScreen.clickScreenBackButton();
+        payPOROScreen.clickPayButton();
 
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         Assert.assertFalse(invoicesScreen.isInvoiceHasPaymentIcon(invoiceNumber));
         Assert.assertFalse(invoicesScreen.isInvoiceHasNotesIcon(invoiceNumber));
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickPayInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
         MenuValidations.menuItemShouldBeVisible(MenuItems.PAY_PO_RO, true);
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
+        MenuSteps.closeMenu();
 
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -577,29 +553,27 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayPOROScreen payPOROScreen = invoiceMenuScreen.clickPayPOROMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_PO_RO);
+        VNextPayPOROScreen payPOROScreen = new VNextPayPOROScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payPOROScreen.setPaymentPOROValue(testCaseData.getInvoiceData().getPoNumber());
         payPOROScreen.payForInvoice();
 
         //???Assert.assertTrue(invoicesScreen.isInvoiceHasPaymentIcon(invoiceNumber));
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        InvoiceSteps.openMenu(invoiceNumber);
+        VNextInvoiceMenuScreen invoiceMenuScreen = new VNextInvoiceMenuScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextChangeInvoicePONumberDialog changeInvoicePONumberDialog = invoiceMenuScreen.clickInvoiceChangePONumberMenuItem();
         Assert.assertEquals(changeInvoicePONumberDialog.getInvoicePreviousPONumber(), testCaseData.getInvoiceData().getPoNumber());
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationDialog.clickInformationDialogDontSaveButton();
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -624,19 +598,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ServiceDetailsScreenSteps.changeServicePrice("0");
         ServiceDetailsScreenSteps.saveServiceDetails();
         vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
         MenuValidations.menuItemShouldBeVisible(MenuItems.PAY, false);
         MenuSteps.closeMenu();
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -659,21 +630,18 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickPayInvoiceMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
         MenuValidations.menuItemShouldBeVisible(MenuItems.PAY_CASH_CHECK, true);
 
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesScreen.clickBackButton();
+        MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -696,24 +664,22 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.payInvoice();
 
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        Assert.assertFalse(invoiceMenuScreen.isPayInvoiceMenuItemExists());
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesScreen.clickBackButton();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.PAY, false);
+        MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -737,26 +703,24 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.setAmauntValue(payAmount);
         payCashCheckScreen.payInvoice();
 
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickPayInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
         MenuValidations.menuItemShouldBeVisible(MenuItems.PAY_CASH_CHECK, true);
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesScreen.clickBackButton();
+        MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -779,21 +743,19 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         payCashCheckScreen.clickScreenBackButton();
-        invoicesScreen.waitInvoicesScreenLoad();
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
 
@@ -817,25 +779,23 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.clearAmauntValue();
 
         payCashCheckScreen.clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.AMOUNT_MAST_BE_GREATER_THEN_ZERO);
         payCashCheckScreen.clickScreenBackButton();
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -859,17 +819,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.setPaymentCheckNumber(paymentCheckNumber);
         payCashCheckScreen.clickPayButton();
 
@@ -901,17 +860,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.clickPayButton();
 
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -920,7 +878,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
 
         ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
+
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -947,17 +905,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.setAmauntValue(payAmount);
         payCashCheckScreen.setPaymentCheckNumber(paymentCheckNumber);
         payCashCheckScreen.setPaymentNotes(paymentNotes);
@@ -967,15 +924,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
 
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         Assert.assertFalse(invoicesScreen.isInvoiceHasPaymentIcon(invoiceNumber));
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
         Assert.assertEquals(payCashCheckScreen.getAmauntValue(), paymentTotal);
         payCashCheckScreen.payInvoice();
         Assert.assertTrue(invoicesScreen.isInvoiceHasPaymentIcon(invoiceNumber));
 
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1001,25 +959,26 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.setAmauntValue(payAmount);
         payCashCheckScreen.setPaymentCheckNumber(paymentCheckNumber);
         payCashCheckScreen.setPaymentNotes(paymentNotes);
         payCashCheckScreen.payInvoice();
 
 
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
@@ -1028,11 +987,10 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
 
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
-
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         Assert.assertTrue(invoicesScreen.isInvoiceHasPaymentIcon(invoiceNumber));
 
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1059,31 +1017,30 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.setAmauntValue(payAmount);
         payCashCheckScreen.setPaymentCheckNumber(paymentCheckNumber);
         payCashCheckScreen.setPaymentNotes(paymentNotes);
         payCashCheckScreen.payInvoice();
 
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayPOROScreen poroScreen = invoiceMenuScreen.clickPayPOROMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_PO_RO);
+        VNextPayPOROScreen poroScreen = new VNextPayPOROScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         poroScreen.setPaymentPOROValue(paymentPOROValue);
         poroScreen.payForInvoice();
-
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         Assert.assertTrue(invoicesScreen.isInvoiceHasPaymentIcon(invoiceNumber));
-
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1109,17 +1066,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayCashCheckScreen payCashCheckScreen = invoiceMenuScreen.clickPayCachCheckMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CASH_CHECK);
+        VNextPayCashCheckScreen payCashCheckScreen = new VNextPayCashCheckScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payCashCheckScreen.setAmauntValue(payAmount);
         payCashCheckScreen.setPaymentCheckNumber(paymentCheckNumber);
         payCashCheckScreen.setPaymentNotes(paymentNotes);
@@ -1129,9 +1085,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.AMOUNT_MAST_BE_GREATER_THEN_ZERO);
         payCashCheckScreen.clickScreenBackButton();
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1154,16 +1108,15 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         BaseUtils.waitABit(3000);
         payInvoicesScreen.clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -1172,8 +1125,8 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertTrue(payInvoicesScreen.isExpirationMonthRequiredErrorDisplayed());
         Assert.assertTrue(payInvoicesScreen.isExpirationYearRequiredErrorDisplayed());
         Assert.assertTrue(payInvoicesScreen.isCVCRequiredErrorDisplayed());
-        invoicesScreen = payInvoicesScreen.clickBackButton();
-        invoicesScreen.clickBackButton();
+        payInvoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1196,16 +1149,13 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
         MenuSteps.selectMenuItem(MenuItems.PAY);
         MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
         VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -1218,8 +1168,8 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_CARD_WAS_DECLINED);
 
-        invoicesScreen = payInvoicesScreen.clickBackButton();
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1242,17 +1192,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
@@ -1262,8 +1211,8 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_CARDs_SECURITY_CODE_IS_INCORRECT);
 
-        invoicesScreen = payInvoicesScreen.clickBackButton();
-        invoicesScreen.clickBackButton();
+        payInvoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1286,17 +1235,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getIncorrectCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
@@ -1310,8 +1258,8 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         payInvoicesScreen.clickPayButton();
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
-
-        invoicesScreen.clickBackButton();
+        payInvoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -1334,17 +1282,16 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         servicesScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderSummaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
-        VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        VNextInvoicesScreen invoicesScreen = invoiceInfoScreen.saveInvoiceAsFinal();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextPayInvoicesScreen payInvoicesScreen = invoiceMenuScreen.clickPayCreditCardMenuItem();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.PAY);
+        MenuSteps.selectMenuItem(MenuItems.PAY_CREDIT_CARD);
+        VNextPayInvoicesScreen payInvoicesScreen = new VNextPayInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         payInvoicesScreen.setCardNumber(testCaseData.getInvoiceData().getCreditCardData().getCardNumber());
         payInvoicesScreen.selectExpirationMonth(testCaseData.getInvoiceData().getCreditCardData().getExpirationMonth());
         payInvoicesScreen.selectExpirationYear(testCaseData.getInvoiceData().getCreditCardData().getExpirationYear());
@@ -1353,8 +1300,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
 
         Assert.assertEquals(payInvoicesScreen.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
-
-        invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

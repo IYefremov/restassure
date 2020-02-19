@@ -35,7 +35,7 @@ public class VNextChangeInvoicePONumberDialog extends VNextBaseScreen {
 		} catch (NoSuchElementException e) {
 			//
 		}
-		return new VNextInvoicesScreen(appiumdriver);
+		return new VNextInvoicesScreen();
 	}
 
 	

@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -550,8 +551,10 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public String getPrintPreviewTotalListValue() {
+
 		WebElement parentrow = driver.findElement(
 				By.xpath("//table/tbody/tr/td/div/table/tbody/tr/td[text()='TOTAL:']/../../../../../.."));
+		WaitUtils.elementShouldBeVisible(parentrow, true);
 		BaseUtils.waitABit(500);
 		return parentrow.findElement(By.xpath("./td[2]/div")).getText();
 	}
@@ -586,6 +589,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public WebElement getTechInfoServicesTable() {
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//table/tbody/tr[2]/td/div[text()='SERVICES']/../../../..")));
 		return driver.findElement(By.xpath("//table/tbody/tr[2]/td/div[text()='SERVICES']/../../../.."));
 	}
 
@@ -600,8 +604,11 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	public int getTechInfoServicesTableColumnIndex(String columnname) {
 		int iterator = 0;
 		int icolumn = -1;
-		List<WebElement> columns = getTechInfoServicesTable().findElements(By.xpath("./tbody/tr[4]/td"));
+		WebElement table = getTechInfoServicesTable();
+		WaitUtils.elementShouldBeVisible(table, true);
+		List<WebElement> columns = table.findElements(By.xpath("./tbody/tr[4]/td/div"));
 		for (WebElement column : columns) {
+			System.out.println("++" + column.getText());
 			++iterator;
 			if (column.getText().contains(columnname)) {
 				icolumn = iterator;

@@ -13,12 +13,20 @@ public class VNextBONotesDialogStepsNew {
         WaitUtilsWebDriver.waitForInvisibility(notesDialog.getNotesDialog());
     }
 
-    public static void addNoteAndNotSaveXIcon(String noteText) {
+    public static void saveNote() {
+
+        VNextBONotesDialogNew notesDialog = new VNextBONotesDialogNew();
+        Utils.clickElement(notesDialog.getNoteSaveButton());
+        closeDialogWithXIcon();
+    }
+
+    public static void addNote(String noteText, boolean saveNote) {
 
         VNextBONotesDialogNew notesDialog = new VNextBONotesDialogNew();
         WaitUtilsWebDriver.waitForVisibility(notesDialog.getNotesDialog());
         Utils.clickElement(notesDialog.getAddNewNoteButton());
         Utils.clearAndType(notesDialog.getNoteTextArea(), noteText);
-        closeDialogWithXIcon();
+        if (saveNote) saveNote();
+        else closeDialogWithXIcon();
     }
 }

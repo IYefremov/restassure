@@ -55,6 +55,6 @@ public class VNextPayPOROScreen extends VNextBaseScreen {
         clickPayButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogOKButtonAndGetMessage();
-        return new VNextInvoicesScreen(appiumdriver);
+        return new VNextInvoicesScreen();
     }
 }

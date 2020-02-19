@@ -465,6 +465,7 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
 
         RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(workOrderData.getQuestionScreenData());
         RegularWorkOrdersSteps.saveWorkOrder();
+        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
         RegularNavigationSteps.navigateBackScreen();
     }
 
@@ -564,6 +565,7 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
         RegularMyWorkOrdersScreen myWorkOrdersScreen = new RegularMyWorkOrdersScreen();
         String workOrderNumber = myWorkOrdersScreen.getFirstWorkOrderNumberValue();
         RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrderNumber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         vehicleScreen.clickChangeScreen();
         vehicleScreen.clickCancel();
         AlertsValidations.cancelAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_EDIT);
@@ -571,6 +573,7 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
         AlertsValidations.acceptAlertAndValidateAlertMessage(AlertsCaptions.STOP_WORKORDER_EDIT);
 
         RegularMyWorkOrdersSteps.openWorkOrderDetails(workOrderNumber);
+        RegularVehicleInfoScreenSteps.waitVehicleScreenLoaded();
         vehicleScreen.clickChangeScreen();
         vehicleScreen.clickCancel();
         RegularNavigationSteps.navigateBackScreen();

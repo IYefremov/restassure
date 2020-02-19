@@ -17,15 +17,6 @@ import static com.cyberiansoft.test.baseutils.WaitUtilsWebDriver.waitForDropDown
 
 public class Utils {
 
-    private static Actions actions = null;
-
-    public static Actions getActions() {
-        if (actions == null) {
-            return new Actions(DriverBuilder.getInstance().getDriver());
-        }
-        return actions;
-    }
-
     public static void clickElement(WebElement element) {
         try {
             WaitUtilsWebDriver.waitForElementNotToBeStale(element, 3);
@@ -52,7 +43,7 @@ public class Utils {
     public static void clickWithActions(WebElement element) {
         try {
             moveToElement(element);
-            getActions()
+            new Actions(DriverBuilder.getInstance().getDriver())
                     .click()
                     .build()
                     .perform();
@@ -69,7 +60,7 @@ public class Utils {
 
     public static void clearAndType(WebElement element, String name) {
         clear(element);
-        getActions().sendKeys(element, name).build().perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(element, name).build().perform();
         WaitUtilsWebDriver.waitABit(500);
     }
 
@@ -81,7 +72,7 @@ public class Utils {
 
     public static void sendKeysWithEnter(WebElement element, String name) {
         clear(element);
-        getActions().sendKeys(element, name).sendKeys(Keys.ENTER).build().perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(element, name).sendKeys(Keys.ENTER).build().perform();
         WaitUtilsWebDriver.waitABit(500);
     }
 
@@ -102,7 +93,7 @@ public class Utils {
     public static void clearAndTypeUsingKeyboard(WebElement element, String name) {
         scrollToElement(element);
         clickElement(element);
-        getActions()
+        new Actions(DriverBuilder.getInstance().getDriver())
                 .sendKeys(element, Keys.HOME)
                 .sendKeys(element, Keys.chord(Keys.CONTROL, Keys.SHIFT, Keys.END))
                 .sendKeys(element, Keys.DELETE)
@@ -126,7 +117,7 @@ public class Utils {
 
     public static WebElement moveToElement(WebElement element) {
         WaitUtilsWebDriver.waitForElementNotToBeStale(element, 2);
-        getActions().moveToElement(element).build().perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).moveToElement(element).build().perform();
         return element;
     }
 
@@ -142,11 +133,11 @@ public class Utils {
     }
 
     public static void reduceZoom() {
-        getActions().sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT)).perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(Keys.chord(Keys.CONTROL, Keys.SUBTRACT)).perform();
     }
 
     public static void increaseZoom() {
-        getActions().sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD)).perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(Keys.chord(Keys.CONTROL, Keys.ADD)).perform();
     }
 
     public static void goToPreviousPage() {
@@ -390,7 +381,7 @@ public class Utils {
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
         for (WebElement selected : listBox) {
             if (selected.getText().equals(data)) {
-                getActions().moveToElement(selected)
+                new Actions(DriverBuilder.getInstance().getDriver()).moveToElement(selected)
                         .click()
                         .build()
                         .perform();
@@ -569,5 +560,11 @@ public class Utils {
 
     public static int getRandomNumber(int startInclusive, int endExclusive) {
         return RandomUtils.nextInt(startInclusive, endExclusive);
+    }
+
+    public static void hoverElement(WebElement element) {
+
+        Actions action = new Actions(DriverBuilder.getInstance().getDriver());
+        action.moveToElement(element).perform();
     }
 }

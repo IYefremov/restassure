@@ -113,6 +113,8 @@ public class RegularQuestionsScreen extends RegularBaseWizardScreen {
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(question)));
 		appiumdriver.findElementByName(answer).click();
 		RegularSelectedServiceDetailsScreen serviceDetailsScreen = new RegularSelectedServiceDetailsScreen();
+		wait = new WebDriverWait(appiumdriver,10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("Questions")));
 		appiumdriver.findElementByName("Questions").click();
 		serviceDetailsScreen.answerQuestion2(question2answer);
 		serviceDetailsScreen.saveSelectedServiceDetails();

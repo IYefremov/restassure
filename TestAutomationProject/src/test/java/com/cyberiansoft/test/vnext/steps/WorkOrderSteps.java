@@ -48,6 +48,12 @@ public class WorkOrderSteps {
         return workOrderNumber;
     }
 
+    public static void trySaveWorkOrder() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
+        baseWizardScreen.clickWizardMenuSaveButton();
+    }
+
     public static void workOrderShouldBePresent(String workOrderId) {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         workOrdersScreen.switchToMyWorkordersView();

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularTechRevenueScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
@@ -53,6 +54,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 	
 	public void clickFilterButton() {
+		waitMyWorkOrdersScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.iOSNsPredicateString("name CONTAINS 'filter'")));
 		if (appiumdriver.findElementsByAccessibilityId("filter").size() < 1)
@@ -78,7 +80,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrderForApprove(String workOrderID) {
 		waitMyWorkOrdersScreenLoaded();
-		mywotable.findElement(MobileBy.AccessibilityId(workOrderID)).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+		mywotable.findElement(MobileBy.AccessibilityId(workOrderID)).findElement(MobileBy.AccessibilityId("EntityInfoButtonUnchecked, ButtonImageId_78")).click();
 		
 	}
 	
@@ -169,13 +171,15 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 		public boolean isWorkOrderPresent(String workOrderNumber) {
 		waitMyWorkOrdersScreenLoaded();
-		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(mywotable));
+		//FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
+		//wait.until(ExpectedConditions.elementToBeClickable(mywotable));
 		return appiumdriver.findElements(MobileBy.AccessibilityId(workOrderNumber)).size() > 0;	
 	}
 
 	public void clickInvoiceIcon() {
-		appiumdriver.findElementByAccessibilityId("invoice new").click();
+		BaseUtils.waitABit(1000);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("invoice new"))).click();
 	}
 
 	public void selectJob(String jobName) {

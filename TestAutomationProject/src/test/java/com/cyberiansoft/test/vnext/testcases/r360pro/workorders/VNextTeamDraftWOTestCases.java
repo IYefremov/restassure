@@ -22,13 +22,11 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesL
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.steps.MenuSteps;
-import com.cyberiansoft.test.vnext.steps.SearchSteps;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
-import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -92,7 +90,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
-        vehicleInfoScreen.clickSaveWorkOrderMenuButton();
+        InspectionSteps.trySaveInspection();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         final String msg = informationDialog.clickInformationDialogOKButtonAndGetMessage();
         Assert.assertEquals(msg, VNextAlertMessages.VIN_REQUIRED_MSG);
@@ -121,14 +119,13 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen summaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        summaryScreen.clickCreateInvoiceOptionAndSaveWO();
+        WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
-        invoiceInfoScreen.cancelInvoice();
-        workOrdersScreen.clickBackButton();
+        InvoiceSteps.cancelInvoice();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -157,21 +154,19 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
 
         invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
-        final String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
-        invoiceInfoScreen.saveInvoiceAsDraft();
+        InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+        final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
 
-        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceMenuScreen.clickEditInvoiceMenuItem();
         invoiceInfoScreen.clickOnWorkOrder(woNumber);
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
-        availableServicesScreen.clickSaveWorkOrderMenuButton();
-        invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceInfoScreen.saveInvoiceAsFinal();
-        invoicesScreen.clickBackButton();
+        InspectionSteps.trySaveInspection();
+        InvoiceSteps.saveInvoiceAsFinal();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -195,8 +190,8 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
         vehicleInfoScreen.changeScreen(ScreenType.WORKORDER_SUMMARY);
-        VNextWorkOrderSummaryScreen summaryScreen = new VNextWorkOrderSummaryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrdersScreen = summaryScreen.saveWorkOrderAsDraft();
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.saveWorkOrderAsDraft();
         Assert.assertEquals(workOrdersScreen.getWorkOrderStatusValue(woNumber),
                 WorkOrderStatuses.DRAFT.getWorkOrderStatusValue());
 
@@ -296,7 +291,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
-        vehicleInfoScreen.clickSaveWorkOrderMenuButton();
+        InspectionSteps.trySaveInspection();
         vehicleInfoScreen.clcikSaveViaMenuAsFinal();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),

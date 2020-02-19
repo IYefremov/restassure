@@ -130,6 +130,9 @@ public class VNextBOMonitorData {
     @JsonProperty("flag")
     private String flag;
 
+    @JsonProperty("flagColor")
+    private String flagColor;
+
     @JsonProperty("sortBy")
     private String sortBy;
 

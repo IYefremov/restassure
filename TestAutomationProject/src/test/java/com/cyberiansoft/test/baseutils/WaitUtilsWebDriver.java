@@ -4,6 +4,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import org.awaitility.core.ConditionTimeoutException;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -207,7 +208,7 @@ public class WaitUtilsWebDriver {
             waitForAttributeToBe(list, "aria-hidden", "true");
         } catch (Exception e) {
             try {
-                Utils.getActions().moveToElement(list).sendKeys(Keys.ENTER).build().perform();
+                new Actions(DriverBuilder.getInstance().getDriver()).moveToElement(list).sendKeys(Keys.ENTER).build().perform();
                 waitForAttributeToBe(list, "aria-hidden", "true");
             } catch (Exception ignored) {
                 waitABit(1000);
