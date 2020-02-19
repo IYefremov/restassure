@@ -277,7 +277,7 @@ public class VNextBOMonitorTestCasesPart1 extends BaseTestCase {
                 "The work order is not displayed after search by clicking the 'Search' icon");
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
 
-        Utils.openNewTab(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        Utils.openNewTab(BaseTestCase.getBackOfficeURL());
         final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
         final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
         VNextBOLoginSteps.userLogin(userName, userPassword);

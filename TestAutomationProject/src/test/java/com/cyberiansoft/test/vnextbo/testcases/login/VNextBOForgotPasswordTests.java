@@ -37,7 +37,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     @BeforeClass
     public void login() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginForgotPasswordTD();
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaTestMail();
         userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
         VNextBOLoginInteractions.clickForgotPasswordLink();

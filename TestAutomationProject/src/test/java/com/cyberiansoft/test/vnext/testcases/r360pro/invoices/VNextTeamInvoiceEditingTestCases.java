@@ -104,7 +104,6 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
 
         final String workOrderNumber = createWorkOrder(testCaseData.getWorkOrderData());
         VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-
         VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
         VNextWorkOrdersScreen workOrdersScreen = invoicesScreen.clickAddInvoiceButton();
         workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
@@ -129,7 +128,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoScreenValidations.validateInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         InvoiceInfoScreenValidations.validateInvoiceDate(date.format(dateFormatlong));
         InvoiceSteps.saveInvoiceAsDraft();
-        invoicesScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

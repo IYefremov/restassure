@@ -8,6 +8,13 @@
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
             <class name="com.cyberiansoft.test.manheimintegration.testcases.FindWorkOrdersTestCase">
+                <methods>
+                    <include name="userCanFindWorkOrdersOnBOAndDevice" />
+                    <include name="userCanCompletePhasesDevice" />
+                    <include name="userCanResolveProblemOnServiceLevelOnDevice" />
+                    <include name="userCanResolveProblemOnServiceLevelOnBackOffice" />
+                    <include name="userCanStartStopCompleteServices" />
+                </methods>
             </class>
         </classes>
     </test>

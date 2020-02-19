@@ -878,7 +878,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
                 VNextAlertMessages.YOUR_PAYMENT_HAS_BEEN_SUCCESSFULLY_COMPLETED);
 
         ScreenNavigationSteps.pressBackButton();
-        ScreenNavigationSteps.pressBackButton();
+
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
