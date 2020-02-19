@@ -136,6 +136,7 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
     }
 
     public void typeSearchParameters(String searchtxt) {
+        BaseUtils.waitABit(1000);
         if (appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")).isDisplayed())
             tap(appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")));
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

@@ -10,15 +10,15 @@ import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 public class CustomerServiceSteps {
 
     // Step for creation customer if not Exist
-    public static void createCustomerIfNotExistAndSetAsDefault(VNextCustomersScreen customersscreen, RetailCustomer retailCustomer){
-
-        customersscreen.switchToRetailMode();
-        if (!customersscreen.isCustomerExists(retailCustomer)) {
-            VNextNewCustomerScreen newCustomerScreen = customersscreen.clickAddCustomerButton();
+    public static void createCustomerIfNotExistAndSetAsDefault(RetailCustomer retailCustomer){
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        customersScreen.switchToRetailMode();
+        if (!customersScreen.isCustomerExists(retailCustomer)) {
+            VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
             newCustomerScreen.createNewCustomer(retailCustomer);
-            customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+            customersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         }
-        customersscreen.setCustomerAsDefault(retailCustomer);
-        WaitUtilsWebDriver.waitForTextToBePresentInElement(customersscreen.getPresetcustomerpanel(), retailCustomer.getFullName());
+        customersScreen.setCustomerAsDefault(retailCustomer);
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(customersScreen.getPresetcustomerpanel(), retailCustomer.getFullName());
     }
 }
