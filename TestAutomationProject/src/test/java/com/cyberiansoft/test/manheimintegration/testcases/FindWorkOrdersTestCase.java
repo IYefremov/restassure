@@ -52,7 +52,7 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
         JSONDataProvider.dataFile = ManheimTestCasesDataPaths.getInstance().getFindWorkOrdersTestCasesDataPath();
     }
 
-    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanFindWorkOrdersOnBOAndDevice(String rowID,
                                                    String description, JSONObject testData) throws IOException, UnirestException {
 
@@ -92,7 +92,6 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
         for (WorkOrderData workOrderData : workOrdersData) {
             Monitoring monitoringData = workOrderData.getMonitoring();
             String stockNumber = monitoringData.getStockNumber();
-            System.out.println("===" + stockNumber);
             WebDriver chromeDriver = WebdriverInicializator.getInstance().initWebDriver(BrowserType.CHROME);
             chromeDriver.get("https://manheim-uat.cyberianconcepts.com/");
             VNextBOLoginSteps.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(), VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
@@ -125,7 +124,7 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
       //  }
     //}
 
-    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanCompletePhasesDevice(String rowID,
                                                    String description, JSONObject testData) throws IOException, UnirestException {
 
@@ -150,7 +149,7 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
         WizardScreenSteps.saveAction();
     }
 
-    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanResolveProblemOnServiceLevelOnDevice(String rowID,
                                                     String description, JSONObject testData) {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -174,7 +173,7 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
         WizardScreenSteps.saveAction();
     }
 
-    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanResolveProblemOnServiceLevelOnBackOffice(String rowID,
                                                             String description, JSONObject testData) {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);

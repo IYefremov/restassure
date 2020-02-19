@@ -24,7 +24,7 @@ public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
 	public void login() {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getHomePageAccessRightsTD();
-		webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+		webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
 	}
 
 	@AfterMethod
