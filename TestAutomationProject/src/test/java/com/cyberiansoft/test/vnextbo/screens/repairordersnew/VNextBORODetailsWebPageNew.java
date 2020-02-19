@@ -74,6 +74,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@data-template='repair-order-part-list-item-template']//b")
     private List<WebElement> partServicesNamesList;
 
+    @FindBy(xpath = "//button[@data-bind='click: showLogWindow']")
+    private WebElement logInfoButton;
+
     public WebElement phaseRow(String phase) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']"));

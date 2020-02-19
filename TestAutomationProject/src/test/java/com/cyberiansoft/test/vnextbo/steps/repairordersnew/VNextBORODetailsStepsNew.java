@@ -296,4 +296,10 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(new VNextBORODetailsWebPageNew().changeTechnicianForPhase(phase));
         WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(new VNextBOChangeTechnicianDialogNew().getCancelButton()));
     }
+
+    public static void openLogInfo() {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getLogInfoButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
 }

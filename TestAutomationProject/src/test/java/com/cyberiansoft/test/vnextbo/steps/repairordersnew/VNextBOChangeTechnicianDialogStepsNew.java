@@ -46,6 +46,6 @@ public class VNextBOChangeTechnicianDialogStepsNew {
         setTechnician(technician);
         Utils.clickElement(new VNextBOChangeTechnicianDialogNew().getOkButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitABit(5000);
     }
 }
