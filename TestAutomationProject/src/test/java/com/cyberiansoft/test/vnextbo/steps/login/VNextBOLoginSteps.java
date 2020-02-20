@@ -27,8 +27,8 @@ public class VNextBOLoginSteps {
             VNextBOLoginInteractions.setEmailField(username);
             VNextBOLoginInteractions.setPasswordField(userPsw);
             Utils.clickElement(loginButton);
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
             WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
-            WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         }
     }
 

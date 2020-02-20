@@ -140,7 +140,7 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBOROPageStepsNew.searchOrdersByPhaseStatus(data.getPhase(), data.getPhaseStatus());
-        VNextBOROWebPageValidationsNew.verifyPhasesAreCorrectInTheTable(data.getPhase());
+        VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
