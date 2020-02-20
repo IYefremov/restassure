@@ -83,6 +83,9 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tr[@data-id]//strong[contains(@data-bind, 'arbitrationDateDisplay')]")
     private List<WebElement> arbitrationDatesList;
 
+    @FindBy(xpath = "//a[@class='stockRo__invoiceNo']")
+    private List<WebElement> invoiceNumbersList;
+
     @FindBy(xpath = "//div[contains(@data-bind,'click: orderSeeProblems')]")
     private WebElement viewProblemsActionButton;
 

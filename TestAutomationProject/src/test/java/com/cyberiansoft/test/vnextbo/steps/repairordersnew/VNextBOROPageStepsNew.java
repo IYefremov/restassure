@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOChangeTechnicianDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
@@ -393,5 +394,11 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         Utils.clickElement(ordersPage.getRoNumbersList().get(0));
         Utils.clearAndType(ordersPage.getRoNumbersList().get(0), newRoNumber);
         Utils.clickElement(ordersPage.getDepartmentsSwitcherTab());
+    }
+
+    public static void openChangeTechnicianDialogForFirstOrder() {
+
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersTechniciansList().get(0));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

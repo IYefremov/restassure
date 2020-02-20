@@ -3,12 +3,15 @@ package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROAdvancedSearchDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -63,6 +66,16 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         else {
             for (WebElement phase: new VNextBOROWebPageNew().getOrdersPhasesList()) {
                 Assert.assertEquals(Utils.getText(phase), expectedPhase, "Phase hasn't been correct");
+            }
+        }
+    }
+
+    public static void verifyTechniciansAreCorrectInTheTable(String expectedTechnician) {
+
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement technician: new VNextBOROWebPageNew().getOrdersTechniciansList()) {
+                Assert.assertTrue(Utils.getText(technician).contains(expectedTechnician), "Technician hasn't been correct");
             }
         }
     }
@@ -330,6 +343,27 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
                 "Saved search hasn't been presented in the saved searches list");
     }
 
+    public static void verifyFirstOrderInvoiceNumberIsCorrect(String expectedInvoiceNumber) {
+
+        final String mainWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Assert.assertEquals(Utils.getText(ordersPage.getInvoiceNumbersList().get(0)), expectedInvoiceNumber,
+                "The invoice number of the first order hasn't been correct");
+        Utils.clickElement(ordersPage.getInvoiceNumbersList().get(0));
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForNewTab();
+        String invoiceWindowHandle = Utils.getNewTab(mainWindow);
+
+        Assert.assertFalse(invoiceWindowHandle.equals(mainWindow), "The invoice window hasn't been opened");
+        Utils.closeNewTab(mainWindow);
+    }
+
+    public static void verifyFirstOrderArbitrationDate(String expectedArbitrationDate) {
+
+        Assert.assertEquals(VNextBOROPageStepsNew.getArbitrationDatesList().get(0), expectedArbitrationDate,
+                "The arbitration date of the first order is not correct");
+    }
+
     public static void verifyFirstOrderArbitrationDateIsMoreThanCurrentDate() {
 
         final LocalDate currentDate = CustomDateProvider.getCurrentDateLocalized();
@@ -458,5 +492,13 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
                 break;
         }
+    }
+
+    public static void verifySavedSearchEditPencilIconIsDisplayed(boolean shouldBeDisplayed) {
+
+        if (shouldBeDisplayed) Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getEditSavedSearchPencilIcon()),
+                "Edit search pencil icon hasn't been displayed");
+        else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().getEditSavedSearchPencilIcon()),
+                "Edit search pencil icon has been displayed");
     }
 }
