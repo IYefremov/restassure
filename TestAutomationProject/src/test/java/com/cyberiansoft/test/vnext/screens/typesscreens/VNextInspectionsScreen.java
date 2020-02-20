@@ -60,12 +60,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public VNextCustomersScreen clickAddInspectionButton() {
         clickAddButton();
-        return new VNextCustomersScreen(appiumdriver);
-    }
-
-    public VNextInspectionTypesList clickAddInspectionWithPreselectedCustomerButton() {
-        clickAddButton();
-        return new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        return new VNextCustomersScreen();
     }
 
     public boolean isAddInspectionButtonVisible() {

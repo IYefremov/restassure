@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
@@ -31,5 +32,17 @@ public class CustomersSreenSteps {
     public static void switchToWholesaleMode() {
         VNextCustomersScreen customersScreen = new VNextCustomersScreen();
         customersScreen.switchToWholesaleMode();
+    }
+
+    public static void resetPresetCustomer() {
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+        customersScreen.resetPresetCustomer();
+    }
+
+    public static void setCustomerAsDefault(AppCustomer appCustomer) {
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+        customersScreen.setCustomerAsDefault(appCustomer);
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(customersScreen.getPresetcustomerpanel(), appCustomer.getFullName());
+
     }
 }

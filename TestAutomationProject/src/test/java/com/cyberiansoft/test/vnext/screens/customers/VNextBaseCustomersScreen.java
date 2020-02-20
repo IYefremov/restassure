@@ -58,6 +58,8 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
     public VNextBaseCustomersScreen() {
     }
 
+
+    //todo: rewrite!!!
     public void selectCustomer(AppCustomer customer) {
         if (WaitUtils.isElementPresent(By.xpath("//*[@action='select-retail']")))
             if (customer.isWholesale()) {

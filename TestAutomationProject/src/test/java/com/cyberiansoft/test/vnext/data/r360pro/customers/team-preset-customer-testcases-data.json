@@ -40,16 +40,6 @@
     }
   ],
 
-  "testVerifyUserCanCreateWOWithPresetCustomer": [
-    {
-      "rowID": "testVerifyUserCanCreateWOWithPresetCustomer.01",
-      "description": "Test Case 82207:Verify user can create WO with preset customer.",
-      "workOrderType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
-      }
-    }
-  ],
-
   "testVerifyUserCanCancelPresetCustomer": [
     {
       "rowID": "testVerifyUserCanCancelPresetCustomer.01",
@@ -144,8 +134,10 @@
           "testCaseTitle": "Verify user can create WO with preset customer."
         }
       ],
-      "inspType": "O_Kramar",
       "vihicleInfo": {"vinNumber": "7777777777777"
+      },
+      "moneyService": {
+        "serviceName": "Battery Installation"
       }
     }
   ],

@@ -8,6 +8,7 @@
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamPresetCustomerTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionNotesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextApproveTeamInspectionsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamClaimInfoScreenTestCases"/>

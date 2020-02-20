@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.CustomersSreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.qameta.allure.Step;
 import lombok.Getter;
@@ -154,10 +155,11 @@ public class VNextHomeScreen extends VNextBaseScreen {
         return new VNextLoginScreen(appiumdriver);
     }
 
+    //todo: make it as Step
     public VNextVehicleInfoScreen openCreateWOWizard(AppCustomer testcustomer) {
         VNextWorkOrdersScreen workordersscreen = clickWorkOrdersMenuItem();
-        VNextCustomersScreen customersscreen = workordersscreen.clickAddWorkOrderButton();
-        customersscreen.selectCustomer(testcustomer);
+        workordersscreen.clickAddWorkOrderButton();
+        CustomersSreenSteps.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         return vehicleInfoScreen;

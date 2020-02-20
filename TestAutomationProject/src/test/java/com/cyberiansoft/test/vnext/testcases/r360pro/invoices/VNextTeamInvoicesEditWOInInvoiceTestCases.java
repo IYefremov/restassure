@@ -50,18 +50,12 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-        VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
-        final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WorkOrderSteps.clickAddWorkOrderButton();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
-        workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
+        final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
 
         workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesList = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -73,7 +67,7 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
         VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
         invoiceMenuScreen.clickEditInvoiceMenuItem();
         invoiceInfoScreen.clickOnWorkOrder(workOrderNumber);
-        vehicleInfoScreen.clickCancelMenuItem();
+        WizardScreenSteps.clickCancelMenuItem();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         String message = informationDialog.clickInformationDialogYesButtonAndGetMessage();
         Assert.assertEquals(message, VNextAlertMessages.CANCEL_ETING_WORK_ORDER);
@@ -90,18 +84,12 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
 
         VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-        VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
-        final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WorkOrderSteps.clickAddWorkOrderButton();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
-        workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
+        final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
 
         workOrdersScreen.clickCreateInvoiceFromWorkOrder(workOrderNumber);
         VNextInvoiceTypesList invoiceTypesList = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -114,7 +102,7 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
         invoiceMenuScreen.clickEditInvoiceMenuItem();
         InvoiceInfoScreenValidations.validateInvoiceTotal(testCaseData.getWorkOrderData().getWorkOrderPrice());
         invoiceInfoScreen.clickOnWorkOrder(workOrderNumber);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         WorkOrderSteps.trySaveWorkOrder();
@@ -122,8 +110,7 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
         invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         InvoiceInfoScreenValidations.validateInvoiceTotal(testCaseData.getInvoiceData().getInvoiceTotal());
         invoiceInfoScreen.clickOnWorkOrder(workOrderNumber);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-        availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertTrue(selectedServicesScreen.isServiceSelected(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName()));
         Assert.assertTrue(selectedServicesScreen.isServiceSelected(testCaseData.getWorkOrderData().getServiceData().getServiceName()));

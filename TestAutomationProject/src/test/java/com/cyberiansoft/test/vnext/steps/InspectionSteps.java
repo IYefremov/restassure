@@ -29,6 +29,10 @@ public class InspectionSteps {
 
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes, InspectionData inspectionData) {
         CustomersSreenSteps.selectCustomer(customer);
+        createInspection(inspectionTypes, inspectionData);
+    }
+
+    public static void createInspection(InspectionTypes inspectionTypes, InspectionData inspectionData) {
         InspectionSteps.selectInspectionType(inspectionTypes);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());

@@ -46,4 +46,9 @@ public class WizardScreenSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         baseWizardScreen.clickCancelMenuItem();
     }
+
+    public static void clcikSaveViaMenuAsFinal() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clcikSaveViaMenuAsFinal();
+    }
 }
