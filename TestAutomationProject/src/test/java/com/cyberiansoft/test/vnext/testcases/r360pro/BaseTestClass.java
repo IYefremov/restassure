@@ -30,7 +30,7 @@ public class BaseTestClass {
 
     protected static RetailCustomer testcustomer;
     protected static WholesailCustomer testwholesailcustomer;
-    protected static String deviceOfficeUrl = "https://bratishka30_settings-qc4.qc.cyberianconcepts.com";
+    protected static String deviceOfficeUrl = "https://reconpro.qc.cyberianconcepts.com";
     @Getter
     protected static Employee employee;
 
