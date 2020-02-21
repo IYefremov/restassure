@@ -15,6 +15,12 @@ public class HomeScreenSteps {
         inspectionsScreen.clickAddInspectionButton();
     }
 
+    public static void openCreateMyWorkOrder() {
+        HomeScreenSteps.openWorkOrders();
+        WorkOrderSteps.switchToMyWorkOrdersView();
+        WorkOrderSteps.clickAddWorkOrderButton();
+    }
+
     public static void openCreateTeamInspection() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         HomeScreenSteps.openInspections();
@@ -24,13 +30,13 @@ public class HomeScreenSteps {
 
     public static void openInspections() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
-        WaitUtils.elementShouldBeVisible(homeScreen.getStatuslist(), true);
+        WaitUtils.elementShouldBeVisible(homeScreen.getStatusList(), true);
         homeScreen.clickInspectionsMenuItem();
     }
 
     public static void openWorkOrders() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
-        WaitUtils.elementShouldBeVisible(homeScreen.getStatuslist(), true);
+        WaitUtils.elementShouldBeVisible(homeScreen.getStatusList(), true);
         homeScreen.clickWorkOrdersMenuItem();
     }
 

@@ -1,38 +1,24 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.customers;
 
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.CustomersScreenValidation;
 import com.cyberiansoft.test.vnext.validations.HomeScreenValidation;
 import com.cyberiansoft.test.vnext.validations.InspectionsScreenValidation;
+import com.cyberiansoft.test.vnext.validations.WorkOrdersScreenValidations;
 import com.cyberiansoft.test.vnextbo.steps.users.CustomerServiceSteps;
 import org.json.simple.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -45,7 +31,6 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
     RetailCustomer retailCustomer2 = new RetailCustomer("Preset2", "RetailCustomer2");
 
     RetailCustomer defaultRetailCustomer = new RetailCustomer("Retail", "");
-
     WholesailCustomer defaultWholesailCustomer = new WholesailCustomer("Wholesale", "Wholesale", "Wholesale");
 
     @BeforeClass(description="Team Preset Customer Test Cases")
@@ -58,10 +43,9 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
                                                                                                  String description, JSONObject testData) {
 
         HomeScreenSteps.openCustomers();
-        VNextCustomersScreen customerScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
 
-        customerScreen.switchToWholesaleMode();
+        CustomersSreenSteps.switchToWholesaleMode();
         CustomersScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
@@ -73,7 +57,6 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
                                                       String description, JSONObject testData) {
 
         HomeScreenSteps.openCustomers();
-        VNextCustomersScreen customerScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
 
         CustomersScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
@@ -81,7 +64,7 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         HomeScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
         HomeScreenSteps.openCustomers();
         CustomersScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
-        customerScreen.resetPresetCustomer();
+        CustomersSreenSteps.resetPresetCustomer();
         CustomersScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName().trim());
@@ -114,25 +97,18 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         HomeScreenSteps.openCustomers();
-
         CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
 
         CustomersScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
 
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextInspectionTypesList inspectionTypesList = inspectionsScreen.clickAddInspectionWithPreselectedCustomerButton();
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.saveInspectionViaMenu();
-        InspectionsScreenValidation.validateInspectionCustomerValueByInspectionNumber(inspNumber, retailCustomer1.getFullName());
-        inspectionsScreen.clickBackButton();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionsScreenValidation.validateInspectionCustomerValueByInspectionNumber(inspectionId, retailCustomer1.getFullName());
+        ScreenNavigationSteps.pressBackButton();
 
     }
 
@@ -143,7 +119,6 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         HomeScreenSteps.openCustomers();
 
         CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
@@ -152,22 +127,16 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
 
-        VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-        VNextWorkOrderTypesList workOrderTypesList = workOrdersScreen.clickAddWorkOrdernWithPreselectedCustomerButton();
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR, workOrderData);
         VehicleInfoScreenSteps.openTechnicianMenu();
-        final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
 
-        final String SERVICE_NAME = "Battery Installation";
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        AvailableServicesScreenSteps.clickAddServiceButton(SERVICE_NAME);
+        AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
 
-        vehicleInfoScreen.saveWorkOrderViaMenu();
-        Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(workOrderNumber), retailCustomer1.getFullName());
-        workOrdersScreen.clickBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(workOrderId, retailCustomer1);
+        ScreenNavigationSteps.pressBackButton();
     }
 
 
@@ -186,12 +155,9 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanPresetWholesaleCustomer(String rowID,
                                                          String description, JSONObject testData) {
-        VNextCustomersScreen customerScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         HomeScreenSteps.openCustomers();
-        customerScreen.switchToWholesaleMode();
-        customerScreen.setCustomerAsDefault(testwholesailcustomer);
-        WaitUtilsWebDriver.waitForTextToBePresentInElement(customerScreen.getPresetcustomerpanel(), testwholesailcustomer.getFullName());
-
+        CustomersSreenSteps.switchToWholesaleMode();
+        CustomersSreenSteps.setCustomerAsDefault(testwholesailcustomer);
         CustomersScreenValidation.validateDefaultCustomerValue(testwholesailcustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(testwholesailcustomer.getFullName());
@@ -205,29 +171,21 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         WholesailCustomer defaultWholesailCustomer = new WholesailCustomer();
         defaultWholesailCustomer.setCompanyName("Wholesale");
         HomeScreenSteps.openCustomers();
-        VNextCustomersScreen customerScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
-        customerScreen.switchToRetailMode();
-        if (!customerScreen.isCustomerExists(retailCustomer1)) {
-            VNextNewCustomerScreen newCustomerScreen = customerScreen.clickAddCustomerButton();
-            newCustomerScreen.createNewCustomer(retailCustomer1);
-            customerScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        }
-        customerScreen.setCustomerAsDefault(retailCustomer1);
-        WaitUtilsWebDriver.waitForTextToBePresentInElement(customerScreen.getPresetcustomerpanel(), retailCustomer1.getFullName());
-
+        CustomersSreenSteps.switchToRetailMode();
+        CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
         CustomersScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
         HomeScreenSteps.openCustomers();
 
-        customerScreen.switchToWholesaleMode();
+        CustomersSreenSteps.switchToWholesaleMode();
         CustomersScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
 
         HomeScreenSteps.openCustomers();
-        customerScreen.switchToRetailMode();
+        CustomersSreenSteps.switchToRetailMode();
         CustomersScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName().trim());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName());

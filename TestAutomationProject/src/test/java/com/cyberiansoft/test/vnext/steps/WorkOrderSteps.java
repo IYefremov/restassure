@@ -1,11 +1,11 @@
 package com.cyberiansoft.test.vnext.steps;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
@@ -41,10 +41,28 @@ public class WorkOrderSteps {
         WaitUtils.elementShouldBeVisible(new VNextVehicleInfoScreen().getRootElement(), true);
     }
 
+    public static void createWorkOrder(WorkOrderTypes workOrderType, WorkOrderData workOrderData) {
+        createWorkOrder(workOrderType);
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
+    }
+
+    public static void createWorkOrder(AppCustomer appCustomer, WorkOrderTypes workOrderType, WorkOrderData workOrderData) {
+        CustomersSreenSteps.selectCustomer(appCustomer);
+        createWorkOrder(workOrderType, workOrderData);
+    }
+
     public static String saveWorkOrder() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String workOrderNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveWorkOrderViaMenu();
+        return workOrderNumber;
+    }
+
+    public static String saveWorkOrderAsDraft() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        String workOrderNumber = baseWizardScreen.getNewInspectionNumber();
+        baseWizardScreen.saveWorkOrderAsDraft();
         return workOrderNumber;
     }
 
@@ -82,5 +100,15 @@ public class WorkOrderSteps {
         baseWizardScreen.clickCancelMenuItem();
         VNextInformationDialog informationDialog = new VNextInformationDialog();
         informationDialog.clickInformationDialogYesButton();
+    }
+
+    public static void switchToMyWorkOrdersView() {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        workOrdersScreen.switchToMyWorkordersView();
+    }
+
+    public static void clickAddWorkOrderButton() {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        workOrdersScreen.clickAddWorkOrderButton();
     }
 }
