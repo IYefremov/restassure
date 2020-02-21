@@ -54,6 +54,12 @@ public class InspectionSteps {
         return InspectionSteps.saveInspection();
     }
 
+    public static void createInspection(AppCustomer customer, InspectionData inspectionData) {
+        CustomersSreenSteps.selectCustomer(customer);
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
+    }
+
     public static void archiveInspection(String inspectionNumber) {
         VNextInspectionsScreen inspectionsscreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsscreen.clickOnInspectionByInspNumber(inspectionNumber);
@@ -84,6 +90,15 @@ public class InspectionSteps {
         WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
         String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveInspectionViaMenu();
+        return inspectionNumber;
+    }
+
+    public static String saveInspectionAsDraft() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        WaitUtils.elementShouldBeVisible(baseWizardScreen.getInspectionnumber(), true);
+        WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
+        String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
+        baseWizardScreen.saveInspectionAsDraft();
         return inspectionNumber;
     }
 

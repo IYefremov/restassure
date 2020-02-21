@@ -10,10 +10,9 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
@@ -32,16 +31,15 @@ public class VNextWholesaleCustomersTestCases extends BaseTestClass {
 	public void testVerifyUserCantCreateWholesaleCustomersOnTheDevice(String rowID,
 																			 String description, JSONObject testData) {
 
-		final String wholesalecustomerNonExists = "XXXXXXXXXXXX";
+		final String wholesaleCustomerNonExists = "XXXXXXXXXXXX";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-
-		VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
-		customersscreen.switchToWholesaleMode();
-		Assert.assertFalse(customersscreen.isAddCustomerButtonDisplayed());
-		customersscreen.searchCustomerByName(wholesalecustomerNonExists);
-		Assert.assertTrue(customersscreen.isNothingFoundCaptionDisplayed());
-		customersscreen.clickBackButton();
+        HomeScreenSteps.openCustomers();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.switchToWholesaleMode();
+		Assert.assertFalse(customersScreen.isAddCustomerButtonDisplayed());
+		customersScreen.searchCustomerByName(wholesaleCustomerNonExists);
+		Assert.assertTrue(customersScreen.isNothingFoundCaptionDisplayed());
+		customersScreen.clickBackButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -50,13 +48,12 @@ public class VNextWholesaleCustomersTestCases extends BaseTestClass {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextInspectionsScreen inspectionscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionscreen.clickAddInspectionButton();
-		customersscreen.switchToWholesaleMode();
-		customersscreen.selectCustomer(testwholesailcustomer);
-        VNextInspectionTypesList insptypeslist = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		insptypeslist.selectInspectionType(InspectionTypes.O_KRAMAR);
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.switchToWholesaleMode();
+		customersScreen.selectCustomer(testwholesailcustomer);
+        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVehicleInfo().getVINNumber());
 		GeneralWizardInteractions.saveViaMenu();

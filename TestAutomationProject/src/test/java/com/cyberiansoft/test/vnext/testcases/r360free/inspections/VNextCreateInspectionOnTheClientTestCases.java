@@ -24,7 +24,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
@@ -50,16 +50,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
         availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
@@ -78,7 +71,8 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
         selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
-        inspectionsScreen = availableServicesScreen.saveInspectionViaMenu();
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
         VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
         NadaEMailService nadaEMailService = new NadaEMailService();
@@ -126,16 +120,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        
-        final  String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.VISUAL);
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
         VNextVisualScreen visualScreen = new VNextVisualScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         visualScreen.clickAddServiceButton();
         visualScreen.clickDefaultDamageType(inspectionData.getMoneyServiceData().getServiceName());
@@ -162,9 +149,10 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixServiceData.getMatrixServiceName()));
 
-        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-        homeScreen = inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
 
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -187,20 +175,12 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
-        newCustomerScreen.createNewCustomer(inspectionData.getInspectionRetailCustomer());
-
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-
-        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-        inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -209,20 +189,20 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
         VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
         newCustomerScreen.createNewCustomer(inspectionData.getInspectionRetailCustomer());
 
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
 
-        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-        inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
 
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -241,15 +221,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        String inspnumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
@@ -262,20 +236,19 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
             for (String serviceName : additionalServices)
                 vehiclePartInfoScreen.selectVehiclePartAdditionalService(serviceName);
             vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-            vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         }
-        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+        vehiclePartsScreen.clickVehiclePartsSaveButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixServiceData.getMatrixServiceName()));
 
-        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspnumber), inspectionData.getInspectionPrice());
-        VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspnumber);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
+        VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
         NadaEMailService nadaEMailService = new NadaEMailService();
         emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 
-        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

@@ -6,6 +6,7 @@ public enum InspectionStatus {
     ARCHIVED("Archived"),
     NEW("New"),
     DECLINED("Declined"),
+    DRAFT("Draft"),
     SKIPPED("Skipped");;
 
     private final String status;

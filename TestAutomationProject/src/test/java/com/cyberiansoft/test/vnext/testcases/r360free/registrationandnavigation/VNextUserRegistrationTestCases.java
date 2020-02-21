@@ -18,11 +18,12 @@ import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
+import com.cyberiansoft.test.vnext.steps.InspectionSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
@@ -52,6 +53,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
+
+//todo: This suite should be removed!
 public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
 
@@ -661,8 +664,6 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
         verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
 
         BaseUtils.waitABit(2000);
         ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
@@ -696,9 +697,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), newuserlastname);
         Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), newusercompanyname);
         Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-        //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
         registrationoverviewscreen.clickDoneButton();
-        //registrationoverviewscreen.waitABit(10000);
         VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
                 new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         registrationoverviewlegalinfoscreen.agreetermsAndconditions();
@@ -713,42 +712,38 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
         VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-
-        VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-        VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-        newcustomerscreen.setCustomerFirstName(firstname);
-        newcustomerscreen.setCustomerLastName(lastname);
-        newcustomerscreen.setCustomerEmail(customeremail);
-        newcustomerscreen.setCustomerAddress(customeraddress);
-        newcustomerscreen.setCustomerCity(customercity);
-        newcustomerscreen.setCustomerZIP(customerzip);
-        newcustomerscreen.clickSaveCustomerButton();
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+        HomeScreenSteps.openCreateMyInspection();
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+        VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+        newCustomerScreen.setCustomerFirstName(firstname);
+        newCustomerScreen.setCustomerLastName(lastname);
+        newCustomerScreen.setCustomerEmail(customeremail);
+        newCustomerScreen.setCustomerAddress(customeraddress);
+        newCustomerScreen.setCustomerCity(customercity);
+        newCustomerScreen.setCustomerZIP(customerzip);
+        newCustomerScreen.clickSaveCustomerButton();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, testVIN);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimscren = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        claimscren.selectInsuranceCompany("Test Insurance Company");
+        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        claimInfoScreen.selectInsuranceCompany("Test Insurance Company");
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         for (int i = 0; i < availablepricematrixes.length; i++) {
             MatrixServiceData matrixServiceData = new MatrixServiceData();
             AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
             VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-            VNextVehiclePartInfoPage vehiclepartinfoscreen = vehiclePartsScreen.selectVehiclePart(vehiclepartname);
-            vehiclepartinfoscreen.selectVehiclePartSize(vehiclepartsize);
-            vehiclepartinfoscreen.selectVehiclePartSeverity(vehiclepartseverities[i]);
-            vehiclepartinfoscreen.clickSaveVehiclePartInfo();
-            vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-            inspservicesscreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
-            VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+            VNextVehiclePartInfoPage vehiclePartInfoPage = vehiclePartsScreen.selectVehiclePart(vehiclepartname);
+            vehiclePartInfoPage.selectVehiclePartSize(vehiclepartsize);
+            vehiclePartInfoPage.selectVehiclePartSeverity(vehiclepartseverities[i]);
+            vehiclePartInfoPage.clickSaveVehiclePartInfo();
+            vehiclePartsScreen.clickVehiclePartsSaveButton();
+            VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
             Assert.assertTrue(selectedServicesScreen.isPriceMatrixValuePresentForSelectedServicesByName(matrixservice, availablepricematrixes[i]));
             selectedServicesScreen.switchToAvalableServicesView();
         }
-        inspectionsscreen = inspservicesscreen.cancelInspection();
-        inspectionsscreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(testName = "Test Case 63612:Verify user can create Repair Free Edition, "
@@ -842,25 +837,25 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
 
         //todo: Test Case 63613:Verify Repair 360 Free Edition user can select only one matrix type not valid anymore
 		/*VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-		newcustomerscreen.setCustomerFirstName(firstname);
-		newcustomerscreen.setCustomerLastName(lastname);
-		newcustomerscreen.setCustomerEmail(customeremail);
-		newcustomerscreen.setCustomerAddress(customeraddress);
-		newcustomerscreen.setCustomerCity(customercity);
-		newcustomerscreen.setCustomerZIP(customerzip);
-		newcustomerscreen.clickSaveCustomerButton();
+		VNextCustomersScreen customersScreen = inspectionsscreen.clickAddInspectionButton();
+		VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+		newCustomerScreen.setCustomerFirstName(firstname);
+		newCustomerScreen.setCustomerLastName(lastname);
+		newCustomerScreen.setCustomerEmail(customeremail);
+		newCustomerScreen.setCustomerAddress(customeraddress);
+		newCustomerScreen.setCustomerCity(customercity);
+		newCustomerScreen.setCustomerZIP(customerzip);
+		newCustomerScreen.clickSaveCustomerButton();
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		GeneralSteps.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenInteractions.setVin(testVIN);
 		vehicleinfoscreen.swipeScreenLeft();
-		VNextClaimInfoScreen claimscren = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		claimscren.selectInsuranceCompany("Test Insurance Company");		
+		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		claimInfoScreen.selectInsuranceCompany("Test Insurance Company");		
 		vehicleinfoscreen.swipeScreensLeft(2);			
-		VNextAvailableServicesScreen inspservicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		inspservicesscreen.selectMatrixService(matrixservice);
-		VNextSelectedServicesScreen selectedServicesScreen = inspservicesscreen.switchToSelectedServicesView();
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		availableServicesScreen.selectMatrixService(matrixservice);
+		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixservice), availablepricematrix);
 
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixservice));

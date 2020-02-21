@@ -58,9 +58,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         PageFactory.initElements(appiumdriver, this);
     }
 
-    public VNextCustomersScreen clickAddInspectionButton() {
+    public void clickAddInspectionButton() {
         clickAddButton();
-        return new VNextCustomersScreen();
     }
 
     public boolean isAddInspectionButtonVisible() {

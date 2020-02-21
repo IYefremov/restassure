@@ -107,6 +107,11 @@ public class WorkOrderSteps {
         workOrdersScreen.switchToMyWorkordersView();
     }
 
+    public static void switchToTeamWorkOrdersView() {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        workOrdersScreen.switchToTeamWorkordersView();
+    }
+
     public static void clickAddWorkOrderButton() {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         workOrdersScreen.clickAddWorkOrderButton();

@@ -10,4 +10,12 @@ public class WorkOrdersScreenValidations {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(workOrderId), appCustomer.getFullName());
     }
+
+    public static void validateWorkOrderExists(String workOrderId, boolean exists) {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        if (exists)
+            Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderId));
+        else
+            Assert.assertFalse(workOrdersScreen.isWorkOrderExists(workOrderId));
+    }
 }
