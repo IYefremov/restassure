@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.interactions.partsmanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
+import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import io.appium.java_client.functions.ExpectedCondition;
@@ -81,7 +81,7 @@ public class VNextBOPartsDetailsPanelInteractions {
     public static void setProvider(String provider) {
         final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
         Utils.clickElement(partsDetailsPanel.getProviderFieldArrow());
-        Utils.selectOption(partsDetailsPanel.getPartDropDown(), partsDetailsPanel.getPartListBoxOptions(), provider);
+        Utils.selectOption(partsDetailsPanel.getPartDropDown(), partsDetailsPanel.getPartsListBoxOptions(), provider);
     }
 
     public static List<String> getPartNamesByStatus(String status) {
@@ -138,11 +138,15 @@ public class VNextBOPartsDetailsPanelInteractions {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
-    public static void selectCheckboxesForServicesByName(String ...names) {
+    public static void selectCheckboxesForServicesByName(String... names) {
         final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
         final List<WebElement> partCheckboxesList = partsDetailsPanel.getPartCheckboxesList();
         if (partCheckboxesList.size() > 1) {
-            Arrays.asList(names).forEach(name -> Utils.clickElement(partCheckboxesList.get(getPartNumberByPartName(name))));
+            Arrays.asList(names).forEach(name -> {
+                for (int i = 0; i < getPartNumbersByPartName(name).size(); i++) {
+                    Utils.clickElement(partCheckboxesList.get(getPartNumbersByPartName(name).get(i)));
+                }
+            });
         }
     }
 
@@ -155,6 +159,24 @@ public class VNextBOPartsDetailsPanelInteractions {
             }
         }
         return 0;
+    }
+
+    public static List<Integer> getPartNumbersByPartName(String partName) {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        final List<String> partNames = Utils.getText(partsDetailsPanel.getPartNames());
+        final ArrayList<Integer> partNumbers = new ArrayList<>();
+        for (int i = 0; i < partNames.size(); i++) {
+            if (partNames.get(i).contains(partName)) {
+                partNumbers.add(i);
+            }
+        }
+        return partNumbers;
+    }
+
+    public static String getPartNameByIndex(int index) {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOPartsDetailsPanel().getPartNames(), 5);
+        final List<WebElement> partNames = new VNextBOPartsDetailsPanel().getPartNames();
+        return partNames.size() != 0 ? Utils.getText(partNames.get(index)) : null;
     }
 
     public static void setPartNumber(int order, String partNumber) {
@@ -177,5 +199,21 @@ public class VNextBOPartsDetailsPanelInteractions {
     public static void setStatusForPartByPartNumber(int partNumber, String status) {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getPartStatusFields().get(partNumber));
         Utils.selectOptionInDropDownWithJsScroll(status);
+    }
+
+    public static void clickActionsButtonForPartByNumberInList(int partNumber) {
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getActionsButton().get(partNumber));
+    }
+
+    public static void clickDuplicateActionButtonForPartByNumberInList(int partNumber) {
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getDuplicateActionButton().get(partNumber));
+    }
+
+    public static void clickDeleteActionButtonForPartByNumberInList(int partNumber) {
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getDeleteActionButton().get(partNumber));
+    }
+
+    public static void clickDocumentsActionButtonForPartByNumberInList(int partNumber) {
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getDocumentsActionButton().get(partNumber));
     }
 }

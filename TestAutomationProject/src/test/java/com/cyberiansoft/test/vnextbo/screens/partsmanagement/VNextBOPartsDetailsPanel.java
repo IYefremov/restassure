@@ -102,7 +102,7 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private WebElement partDropDown;
 
     @FindBy(xpath = "//div[@class='k-animation-container' and @aria-hidden='false']/div[contains(@class, 'k-list-container')]//li")
-    private List<WebElement> partListBoxOptions;
+    private List<WebElement> partsListBoxOptions;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'estimatedTimeArrival')]")
     private List<WebElement> partEtaField;

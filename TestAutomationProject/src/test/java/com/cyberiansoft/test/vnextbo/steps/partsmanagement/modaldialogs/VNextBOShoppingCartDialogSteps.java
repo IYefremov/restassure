@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOShoppingCartDialogInteractions;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOShoppingCartDialogValidations;

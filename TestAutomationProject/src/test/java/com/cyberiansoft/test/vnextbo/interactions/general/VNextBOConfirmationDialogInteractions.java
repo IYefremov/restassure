@@ -1,8 +1,8 @@
-package com.cyberiansoft.test.vnextbo.interactions;
+package com.cyberiansoft.test.vnextbo.interactions.general;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOConfirmationDialog;
+import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOConfirmationDialog;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -14,6 +14,11 @@ public class VNextBOConfirmationDialogInteractions {
 
     public static void clickYesButton() {
         clickModalDialogButton(new VNextBOConfirmationDialog().getYesButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void clickNoButton() {
+        clickModalDialogButton(new VNextBOConfirmationDialog().getNoButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
@@ -31,7 +36,11 @@ public class VNextBOConfirmationDialogInteractions {
         WaitUtilsWebDriver.waitABit(2000);
     }
 
-    private static void clickModalDialogButton(WebElement button) {
+    public static void closeDialogWithXIcon() {
+        clickModalDialogButton(new VNextBOConfirmationDialog().getCloseButton());
+    }
+
+    public static void clickModalDialogButton(WebElement button) {
         Utils.clickElement(button);
         WaitUtilsWebDriver.elementShouldBeVisible(By.id("dialogModal"), false, 5);
     }

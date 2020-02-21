@@ -38,4 +38,11 @@ public class VNextBOAddNewPartDialogValidations {
         } catch (Exception ignored) {}
         Assert.assertEquals(size, expectedPartsSize, "The parts list size isn't correct");
     }
+
+    public static void verifyAllPartsListOptionsContainText(String text) {
+        final boolean door = VNextBOAddNewPartDialogInteractions.getDisplayedPartsListOptionsNames()
+                .stream()
+                .anyMatch(part -> !part.contains(text));
+        Assert.assertFalse(door, "The parts list options don't contain the filtering word " + text);
+    }
 }

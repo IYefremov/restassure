@@ -29,4 +29,7 @@ public class VNextBOPartsManagementData extends VNextBOBaseData {
 
     @JsonProperty("partData")
     private VNextBOPartsData partData;
+
+    @JsonProperty("documentData")
+    private VNextBODocumentData documentData;
 }

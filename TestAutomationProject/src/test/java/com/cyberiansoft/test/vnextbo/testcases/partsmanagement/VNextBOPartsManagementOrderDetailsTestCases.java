@@ -31,7 +31,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
-        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPartsManagementOrderDetailsTD();
+        JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsTD();
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
     }
 
@@ -46,7 +46,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
         VNextBOPartsDetailsPanelSteps.deleteServicesByName(partName);
-        VNextBOPartsDetailsPanelSteps.addPart(data.getPartData(), woNum);
+        VNextBOPartsDetailsPanelSteps.addPartWithPartsListUpdate(data.getPartData(), woNum);
         VNextBOLeftMenuSteps.openRepairOrdersMenuInNewTab();
         final String roWindow = Utils.getParentTab();
         VNextBOROAdvancedSearchDialogSteps.searchByWoAndTimeFrame(woNum, TimeFrameValues.TIMEFRAME_CUSTOM);

@@ -57,6 +57,10 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyPartsAmountIsCorrect(int expectedPartsAmount) {
 
+        try {
+            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
+                    VNextBOPartsDetailsPanelSteps.getPartsListSize() == expectedPartsAmount);
+        } catch (Exception ignored) {}
         Assert.assertEquals(VNextBOPartsDetailsPanelSteps.getPartsListSize(), expectedPartsAmount,
                 "Parts amount hasn't been correct");
     }
@@ -222,11 +226,20 @@ public class VNextBOPartsDetailsPanelValidations {
     }
 
     public static boolean isPartDisplayed(String partName) {
-        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
-        return Utils.getText(partsDetailsPanel.getPartNames()).stream().anyMatch(name -> name.contains(partName));
+        final List<String> partNames = Utils.getText(new VNextBOPartsDetailsPanel().getPartNames());
+        return partNames.stream().anyMatch(part -> part.contains(partName));
     }
 
-    public static void verifyPartIsDisplayed(String partName) {
-        Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartDisplayed(partName), "The part is not displayed");
+    public static void verifyPartIsDisplayed(String partName, boolean displayed) {
+        if (displayed) {
+            Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartDisplayed(partName), "The part is not displayed");
+        } else {
+            Assert.assertFalse(VNextBOPartsDetailsPanelValidations.isPartDisplayed(partName), "The part is displayed");
+        }
+    }
+
+    public static void verifyPartIsDisplayed(String... partNames) {
+        Arrays.asList(partNames).forEach(part -> Assert.assertTrue(
+                VNextBOPartsDetailsPanelValidations.isPartDisplayed(part), "The part is not displayed"));
     }
 }
