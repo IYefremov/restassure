@@ -124,7 +124,7 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     public VNextInvoicesScreen clickBackButton() {
         appiumdriver.switchTo().defaultContent();
         clickScreenBackButton();
-        return new VNextInvoicesScreen(appiumdriver);
+        return new VNextInvoicesScreen();
     }
 
     public String clickInformationDialogOKButtonAndGetMessage() {

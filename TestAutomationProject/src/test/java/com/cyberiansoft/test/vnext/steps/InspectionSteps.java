@@ -29,6 +29,10 @@ public class InspectionSteps {
 
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes, InspectionData inspectionData) {
         CustomersSreenSteps.selectCustomer(customer);
+        createInspection(inspectionTypes, inspectionData);
+    }
+
+    public static void createInspection(InspectionTypes inspectionTypes, InspectionData inspectionData) {
         InspectionSteps.selectInspectionType(inspectionTypes);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
@@ -42,15 +46,12 @@ public class InspectionSteps {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
         if (inspectionData.getInsuranceCompanyData() != null) {
             vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
             VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
             claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         }
-        vehicleInfoScreen.clickSaveInspectionMenuButton();
-        new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        return inspectionNumber;
+        return InspectionSteps.saveInspection();
     }
 
     public static void archiveInspection(String inspectionNumber) {
@@ -89,7 +90,7 @@ public class InspectionSteps {
     public static void trySaveInspection() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
-        baseWizardScreen.clickSaveInspectionMenuButton();
+        baseWizardScreen.clickWizardMenuSaveButton();
     }
 
     public static void cancelInspection() {

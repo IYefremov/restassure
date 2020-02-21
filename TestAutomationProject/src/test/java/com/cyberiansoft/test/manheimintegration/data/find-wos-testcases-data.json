@@ -7,7 +7,7 @@
         {
           "monitoring": {
             "location": "Manheim Pennsylvania",
-            "stockNumber": "8666252",
+            "stockNumber": "8668722",
             "repairOrderData": {
               "phaseName": "PARTS",
               "vin": "SS228962",
@@ -176,7 +176,7 @@
         {
           "monitoring": {
             "location": "Manheim Pennsylvania",
-            "stockNumber": "8662421",
+            "stockNumber": "8668723",
             "repairOrderData": {
               "phaseName": "PARTS",
               "vin": "SS228962",
@@ -321,7 +321,7 @@
         {
           "monitoring": {
             "location": "Manheim Pennsylvania",
-            "stockNumber": "8662423",
+            "stockNumber": "8668724",
             "repairOrderData": {
               "phaseName": "PARTS",
               "vin": "SS228962",
@@ -490,7 +490,7 @@
         {
           "monitoring": {
             "location": "Manheim Pennsylvania",
-            "stockNumber": "8662424",
+            "stockNumber": "8668725",
             "repairOrderData": {
               "phaseName": "PARTS",
               "vin": "SS228962",
@@ -666,7 +666,7 @@
       "workOrderData": {
         "monitoring": {
           "location": "Manheim Pennsylvania",
-          "stockNumber": "8662420",
+          "stockNumber": "8668722",
           "repairOrderData": {
             "phaseName": "PARTS",
             "vin": "SS228962",
@@ -739,7 +739,7 @@
       "workOrderData": {
         "monitoring": {
           "location": "Manheim Pennsylvania",
-          "stockNumber": "8662424"
+          "stockNumber": "8668724"
         },
         "service": {
           "serviceName": "Replace - Air Suspension",
@@ -755,7 +755,7 @@
       "workOrderData": {
         "monitoring": {
           "location": "Manheim Pennsylvania",
-          "stockNumber": "8662424",
+          "stockNumber": "8668724",
           "orderPhaseDto": {
             "phaseName": "Mechaical Repair",
             "phaseServices": [
@@ -779,7 +779,7 @@
       "workOrderData": {
         "monitoring": {
           "location": "Manheim Pennsylvania",
-          "stockNumber": "8662423",
+          "stockNumber": "8668725",
           "repairOrderData": {
             "phaseName": "PARTS",
             "vin": "SS228962",

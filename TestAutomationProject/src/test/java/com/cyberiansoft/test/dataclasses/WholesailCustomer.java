@@ -20,6 +20,12 @@ public class WholesailCustomer implements AppCustomer {
 
 	}
 
+	public WholesailCustomer(String firstName, String lastName, String companyName) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.companyName = companyName;
+	}
+
 	@Override
 	public String getMailAddress() {
 		return mailAddress;

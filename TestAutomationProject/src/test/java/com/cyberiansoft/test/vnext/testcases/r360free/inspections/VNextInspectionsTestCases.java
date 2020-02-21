@@ -75,8 +75,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
         vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectServices(inspectionData.getServicesList());
-        availableServicesScreen.clickSaveInspectionMenuButton();
-        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        InspectionSteps.saveInspection();
         inspectionsScreen.clickBackButton();
     }
 
@@ -94,7 +93,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         String msg = informationDialog.clickInformationDialogNoButtonAndGetMessage();
         Assert.assertEquals(msg, VNextAlertMessages.CANCEL_CREATING_INSPECTION_ALERT);
-        vehicleInfoScreen.clickSaveInspectionMenuButton();
+        InspectionSteps.trySaveInspection();
 
         informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         msg = informationDialog.clickInformationDialogOKButtonAndGetMessage();
@@ -164,9 +163,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         String msg = informationDialog.clickInformationDialogNoButtonAndGetMessage();
         Assert.assertEquals(msg, VNextAlertMessages.ARE_YOU_SURE_STOP_CREATING_INSPECTION);
-        vehicleInfoScreen.clickSaveInspectionMenuButton();
-
-        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        InspectionSteps.saveInspection();
         Assert.assertEquals(inspectionsScreen.getFirstInspectionNumber(), inspectionNumber);
         inspectionsScreen.clickBackButton();
     }

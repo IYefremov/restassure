@@ -148,7 +148,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
         selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
-        selectedServicesScreen.clickSaveInspectionMenuButton();
+        InspectionSteps.trySaveInspection();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.TOTAL_AMOUNT_OF_INSPECTION_CANT_BE_LESS_THAN_0);
         inspectionsScreen = availableServicesScreen.cancelInspection();
@@ -182,7 +182,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
         selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
-        selectedServicesScreen.clickSaveInspectionMenuButton();
+        InspectionSteps.trySaveInspection();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.TOTAL_AMOUNT_OF_INSPECTION_EXCEEDS_THE_MAXIMUM_ALLOWED);
         inspectionsScreen = availableServicesScreen.cancelInspection();

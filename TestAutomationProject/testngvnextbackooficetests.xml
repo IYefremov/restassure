@@ -187,19 +187,19 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart2New"/>
         </classes>
     </test>
-    <!--    <test name="Monitor Tests Part 3">
-            <classes>
-                <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart3"/>
-            </classes>
-        </test>
-        <test name="Monitor Tests Part 4">
-            <classes>
-                <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorTestCasesPart4"/>
-            </classes>
-        </test>-->
+    <test name="Monitor Tests Part 3">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart3New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 4">
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart4New"/>
+        </classes>
+    </test>
     <test name="Monitor Grid Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorGridDataTestCases"/>
         </classes>
-    </test>
+    </test>-->
 </suite>

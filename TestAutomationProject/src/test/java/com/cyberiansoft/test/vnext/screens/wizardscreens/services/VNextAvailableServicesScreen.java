@@ -64,10 +64,6 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         tap(addedserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
     }
 
-    public void clickSaveButton() {
-        tap(savebtn);
-    }
-
     public void selectService(String serviceName) {
         WebElement servicerow = getServiceListItem(serviceName);
         String servicePrice =  servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();

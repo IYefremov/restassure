@@ -561,4 +561,10 @@ public class Utils {
     public static int getRandomNumber(int startInclusive, int endExclusive) {
         return RandomUtils.nextInt(startInclusive, endExclusive);
     }
+
+    public static void hoverElement(WebElement element) {
+
+        Actions action = new Actions(DriverBuilder.getInstance().getDriver());
+        action.moveToElement(element).perform();
+    }
 }

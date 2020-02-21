@@ -39,13 +39,13 @@ public class VNextBOLoginTests extends BaseTestCase {
         browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
         DriverBuilder.getInstance().setDriver(browserType);
         webdriver = DriverBuilder.getInstance().getDriver();
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginTD();
     }
 
     @BeforeMethod
     public void setUp() {
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 0)

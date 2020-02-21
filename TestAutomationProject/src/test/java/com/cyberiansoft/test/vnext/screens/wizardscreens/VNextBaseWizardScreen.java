@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypeData;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypeData;
@@ -9,9 +10,12 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
+import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextTypeScreenContext;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -42,10 +46,10 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     private WebElement cancelinspectionmenu;
 
     @FindBy(xpath = "//div[@data-name='save']")
-    private WebElement saveinspectionmenu;
+    private WebElement savemenu;
 
-    @FindBy(xpath = "//*[@data-name='save']")
-    private WebElement saveworkordermenu;
+    @FindBy(xpath = "//*[@action='save']")
+    private WebElement savebtn;
 
     @FindBy(xpath = "//div[@data-name='notes']")
     private WebElement inspectionnotesmenu;
@@ -92,14 +96,14 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     }
 
     public VNextInspectionsScreen saveInspectionAsDraft() {
-        clickSaveInspectionMenuButton();
+        clickWizardMenuSaveButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickDraftButton();
         return new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public VNextInspectionsScreen saveInspectionViaMenu() {
-        clickSaveInspectionMenuButton();
+        clickWizardMenuSaveButton();
         if (inspectionType != null)
             if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
                 clcikSaveViaMenuAsFinal();
@@ -109,7 +113,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     }
 
     public VNextWorkOrdersScreen saveWorkOrderViaMenu() {
-        clickSaveWorkOrderMenuButton();
+        clickWizardMenuSaveButton();
         if (workOrderType != null)
             if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
                 clcikSaveViaMenuAsFinal();
@@ -120,7 +124,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     }
 
     public VNextWorkOrdersScreen saveWorkOrderAsDraft() {
-        clickSaveWorkOrderMenuButton();
+        clickWizardMenuSaveButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickDraftButton();
         return new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -130,18 +134,14 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         tap(menubtn);
     }
 
-    public void clickSaveInspectionMenuButton() {
+    public void clickWizardMenuSaveButton() {
         clickMenuButton();
-        WaitUtils.waitUntilElementIsClickable(saveinspectionmenu);
-        tap(saveinspectionmenu);
+        clickSaveMenuButton();
     }
 
-    public void clickSaveWorkOrderMenuButton() {
-        clickMenuButton();
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.visibilityOf(saveworkordermenu));
-        BaseUtils.waitABit(1500);
-        tap(saveworkordermenu);
+    public void clickSaveMenuButton() {
+        WaitUtils.waitUntilElementIsClickable(savemenu);
+        tap(savemenu);
     }
 
     public String getNewInspectionNumber() {
@@ -160,8 +160,8 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 
     public boolean isSaveButtonVisible() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.visibilityOf(saveworkordermenu));
-        return saveinspectionmenu.isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(savemenu));
+        return savemenu.isDisplayed();
     }
 
     public boolean isCancelButtonVisible() {
@@ -170,6 +170,31 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 
     public boolean isNotesButtonVisible() {
         return inspectionnotesmenu.isDisplayed();
+    }
+
+    public void clickSaveButton() {
+        WaitUtils.waitUntilElementIsClickable(savebtn);
+        tap(savebtn);
+    }
+
+    public void saveInvoiceAsDraft() {
+        clickSaveButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickDraftButton();
+    }
+
+    public void saveInvoiceAsFinal() {
+        clickSaveButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickFinalButton();
+    }
+
+    public void cancelWizard() {
+        clickMenuButton();
+        VNextInvoiceMenuScreen invoiceMenuScreen = new VNextInvoiceMenuScreen(appiumdriver);
+        invoiceMenuScreen.clickCancelInvoiceMenuItem();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickInformationDialogYesButton();
     }
 
 }

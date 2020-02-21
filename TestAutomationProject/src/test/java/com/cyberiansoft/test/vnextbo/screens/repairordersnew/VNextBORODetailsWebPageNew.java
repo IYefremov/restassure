@@ -17,8 +17,14 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//section[@id='reconmonitordetails-view']")
     private WebElement orderDetailsSection;
 
+    @FindBy(xpath = "//div[@data-name!='']//div[@class='clmn_2']")
+    private List<WebElement> phasesList;
+
     @FindBy(xpath = "//div[@id='orderServices']//div[@data-item-id]/div[@class='clmn_2']/div[1]")
     private List<WebElement> serviceAndTaskDescriptionsList;
+
+    @FindBy(xpath = "//div[@class='serviceRow theader clearfix']/div[text() != '']")
+    private List<WebElement> servicesTableColumnsTitles;
 
     @FindBy(xpath = "//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']")
     private List<WebElement> phaseExpanderList;
@@ -31,6 +37,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[contains(@data-bind,'completePhase') and not(contains(@style,'display: none'))]")
     private WebElement completeCurrentPhaseActionButton;
+
+    @FindBy(xpath = "//div[@class='drop checkout']//div[contains(@data-bind,'serviceNotes') and not(contains(@style,'display: none'))]")
+    private WebElement notesActionButton;
 
     @FindBy(xpath = "//div[contains(@data-bind,'phaseStart') and not(contains(@style,'display: none'))]")
     private WebElement startServicesActionButton;
@@ -53,22 +62,79 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@id='reconmonitordetails-view-add-order-button']")
     private WebElement addServiceButton;
 
+    @FindBy(xpath = "//div[@title='Flag']/i[@class='icon-flag']")
+    private WebElement flagIcon;
+
+    @FindBy(xpath = "//div[@class='row moreInfo-content']//span[@data-bind='text: panelText']")
+    private WebElement moreInfoSection;
+
+    @FindBy(xpath = "//div[@class='row order-info-content']//p/span[text()!='']")
+    private List<WebElement> moreInfoFields;
+
     @FindBy(xpath = "//tbody[@data-template='repair-order-part-list-item-template']//b")
     private List<WebElement> partServicesNamesList;
 
+    @FindBy(xpath = "//button[@data-bind='click: showLogWindow']")
+    private WebElement logInfoButton;
+
+    public WebElement phaseRow(String phase) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']"));
+    }
+
     public WebElement actionsMenuButtonForPhase(String phase) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[not(contains(@style,'display: none;'))]/i[@class='icon-list menu-trigger']"));
+        return phaseRow(phase).findElement(By.xpath(".//div[not(contains(@style,'display: none;'))]/i[@class='icon-list menu-trigger']"));
+    }
+
+    public WebElement expandPhaseButton(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']"));
+    }
+
+    public WebElement collapsePhaseButton(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//div[@class='clmn_1']/*[@class='switchTable icon-arrow-up5']"));
+    }
+
+    public WebElement problemIndicatorByPhase(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//i[@class='icon-problem-indicator']"));
+    }
+
+    public WebElement phaseTotalPrice(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//span[contains(@data-bind,'vendorPriceTotalF')]"));
+    }
+
+    public WebElement phaseStatusDropDownByPhase(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//span[contains(@class,'group-status-dropdown')]//span[@class='k-input']"));
+    }
+
+    public WebElement phaseStatusTextByPhase(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//div[contains(@data-bind, 'statusText')]"));
+    }
+
+    public WebElement changeTechnicianForPhase(String phase) {
+
+        return phaseRow(phase).findElement(By.xpath(".//div[contains(@data-bind,'showChangeTechnician')]"));
+    }
+
+    public WebElement serviceRowByName(String service) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow'])[1]"));
     }
 
     public WebElement actionsMenuButtonForService(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//i[@class='icon-list menu-trigger'])[1]"));
+        return serviceRowByName(service).findElement(By.xpath(".//i[@class='icon-list menu-trigger']"));
     }
 
     public WebElement startServiceButtonForService(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//button[contains(@data-bind, 'serviceStart')])[1]"));
+        return serviceRowByName(service).findElement(By.xpath(".//button[contains(@data-bind, 'serviceStart')]"));
     }
 
     public WebElement serviceDescription(String serviceDescription) {
@@ -76,24 +142,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@class='clmn_2']//div[contains(.,'" + serviceDescription + "')]"));
     }
 
-    public WebElement expandPhaseButton(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']"));
-    }
-
-    public WebElement collapsePhaseButton(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[@class='clmn_1']/*[@class='switchTable icon-arrow-up5']"));
-    }
-
-    public WebElement problemIndicatorByPhase(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//i[@class='icon-problem-indicator']"));
-    }
-
     public WebElement problemIndicatorByService(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='clmn_2']//i[@class='icon-problem-indicator' and not(contains(@style,'display: none;'))])[1]"));
+        return serviceRowByName(service).findElement(By.xpath(".//i[@class='icon-problem-indicator' and not(contains(@style,'display: none;'))]"));
     }
 
     public WebElement serviceNameWebElement(String service) {
@@ -103,57 +154,62 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     public WebElement serviceQtyInputField(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//input[contains(@data-bind,'canEditQuantity')])[1]"));
-    }
-
-    public WebElement serviceQtyDisplayedText(String service) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@data-bind,'canEditQuantity')])[1]"));
+        return serviceRowByName(service).findElement(By.xpath(".//input[contains(@data-bind,'canEditQuantity')]"));
     }
 
     public WebElement servicePriceInputField(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//input[contains(@data-bind,'canEditPrice')])[1]"));
-    }
-
-    public WebElement servicePriceDisplayedText(String service) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@data-bind,'canEditPrice')])[1]"));
+        return serviceRowByName(service).findElement(By.xpath(".//input[contains(@data-bind,'canEditPrice')]"));
     }
 
     public WebElement serviceVendorPriceInputField(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//input[contains(@data-bind,'isVendorPriceEditable')])[1]"));
-    }
-
-    public WebElement serviceVendorPriceDisplayedText(String service) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@data-bind,'isVendorPriceEditable')])[1]"));
-    }
-
-    public WebElement phaseTotalPrice(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//span[contains(@data-bind,'vendorPriceTotalF')]"));
-    }
-
-    public WebElement phaseStatusDropDownByPhase(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//span[contains(@class,'group-status-dropdown')]//span[@class='k-input']"));
-    }
-
-    public WebElement phaseStatusTextByPhase(String phase) {
-
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']//div[contains(@data-bind, 'statusText')]"));
+        return serviceRowByName(service).findElement(By.xpath(".//input[contains(@data-bind,'isVendorPriceEditable')]"));
     }
 
     public WebElement serviceStatusDropDownByService(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow']//span[contains(@class,'service-status-dropdown')]//span[@class='k-input'])[1]"));
+        return serviceRowByName(service).findElement(By.xpath(".//span[contains(@class,'service-status-dropdown')]//span[@class='k-input']"));
+    }
+
+    public WebElement serviceStartedDate(String service) {
+
+        return serviceRowByName(service).findElement(By.xpath(".//p[@data-bind='invisible: showStart']/span[1]"));
+    }
+
+    public WebElement serviceCompletedDate(String service) {
+
+        return serviceRowByName(service).findElement(By.xpath(".//p[@data-bind='invisible: showStart']/span[3]"));
+    }
+
+    public WebElement serviceHelpIcon(String service) {
+
+        return serviceRowByName(service).findElement(By.xpath(".//i[@class='help']"));
+    }
+
+    public WebElement serviceHelpIconHelpInfo(String service) {
+
+        return serviceRowByName(service).findElement(By.xpath(".//span[@class='helpInfo']"));
+    }
+
+    public WebElement serviceVendorDropDown(String service) {
+
+        return serviceRowByName(service).findElement(By.xpath("(.//div[@class='clmn_4']//span[@class='k-input'])[1]"));
+    }
+
+    public WebElement serviceTechnicianDropDown(String service) {
+
+        return serviceRowByName(service).findElement(By.xpath("(.//div[@class='clmn_4']//span[@class='k-input'])[2]"));
     }
 
     public WebElement dropDownOption(String optionName) {
 
         return driver.findElement(By.xpath("//ul[@aria-hidden='false']//span[text()='" + optionName + "']"));
+    }
+
+    public WebElement flagColorIconByFlagTitle(String title) {
+
+        return driver.findElement(By.xpath("//div[@data-template='reconmonitordetails-flagsContent']/span[@title='" + title + "']"));
     }
 
     public VNextBORODetailsWebPageNew() {

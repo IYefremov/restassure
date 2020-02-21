@@ -17,6 +17,7 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTyp
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -199,7 +200,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestClass {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         final String inspNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.clickSaveWorkOrderMenuButton();
+        InspectionSteps.trySaveInspection();
         vehicleInfoScreen.clcikSaveViaMenuAsFinal();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),

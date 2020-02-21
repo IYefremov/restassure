@@ -16,7 +16,9 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
+import com.cyberiansoft.test.vnext.steps.CustomersSreenSteps;
 import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
@@ -39,8 +41,8 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-		VNextCustomersScreen customersScreen = workOrdersScreen.clickAddWorkOrderButton();
-		customersScreen.selectCustomer(testcustomer);
+		WorkOrderSteps.clickAddWorkOrderButton();
+		CustomersSreenSteps.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());

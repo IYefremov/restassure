@@ -60,14 +60,8 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         return workOrdersList;
     }
 
-    public VNextCustomersScreen clickAddWorkOrderButton() {
+    public void clickAddWorkOrderButton() {
         clickAddButton();
-        return new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-    }
-
-    public VNextWorkOrderTypesList clickAddWorkOrdernWithPreselectedCustomerButton() {
-        clickAddButton();
-        return new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public String getFirstWorkOrderNumber() {
@@ -173,7 +167,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     public void switchToMyWorkordersView() {
         switchToMyView();
-
     }
 
     public void changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOChangeTechnicianDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
@@ -106,6 +107,8 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void searchOrdersByOrderNumber(String orderNumber) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         VNextBOROAdvancedSearchDialogStepsNew.setHasThisTextField(orderNumber);
         VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
@@ -246,6 +249,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void openOrderDetailsByNumberInList(int rowNumber) {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
+        WaitUtilsWebDriver.waitForVisibility(repairOrdersPage.getWoNumbersList().get(rowNumber));
         WaitUtilsWebDriver.waitForElementNotToBeStale(repairOrdersPage.getWoNumbersList().get(rowNumber));
         Utils.clickElement(repairOrdersPage.getWoNumbersList().get(rowNumber));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -373,7 +377,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void addNoteForFirstNoteAndNotSaveWItXIcon(String noteText) {
 
         openFirstOrderNotes();
-        VNextBONotesDialogStepsNew.addNoteAndNotSaveXIcon(noteText);
+        VNextBONotesDialogStepsNew.addNote(noteText, false);
     }
 
     public static void changeStockNumberForFirstOrder(String newStockNumber) {
@@ -390,5 +394,11 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         Utils.clickElement(ordersPage.getRoNumbersList().get(0));
         Utils.clearAndType(ordersPage.getRoNumbersList().get(0), newRoNumber);
         Utils.clickElement(ordersPage.getDepartmentsSwitcherTab());
+    }
+
+    public static void openChangeTechnicianDialogForFirstOrder() {
+
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersTechniciansList().get(0));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }
