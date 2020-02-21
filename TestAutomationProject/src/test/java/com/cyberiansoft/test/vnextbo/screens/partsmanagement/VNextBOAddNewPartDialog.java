@@ -65,23 +65,34 @@ public class VNextBOAddNewPartDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind, 'onLaborPartSelectionChange')]")
     private List<WebElement> partsList;
 
+    @FindBy(xpath = "//div[@data-automation-id='service-instance-form-labor-parts-list']")
+    private WebElement partsListOptionsBlock;
+
+    public VNextBOAddNewPartDialog() {
+        super(DriverBuilder.getInstance().getDriver());
+        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+    }
+
     public WebElement dropDownFieldOption(String optionName) {
 
         return driver.findElement(By.xpath("//ul[@aria-hidden='false']/li[contains(text(),'" + optionName + "')]"));
     }
 
-    public WebElement partsListRecordByText(String text) {
+    public List<WebElement> dropDownFieldHighlightedOptions(String optionName) {
+        return driver.findElements(By.xpath("//ul[@aria-hidden='false']/li[contains(text(),'" + optionName + "') and contains(@class, 'focused')]"));
+    }
 
-        return driver.findElement(By.xpath("//div[@data-automation-id='service-instance-form-labor-parts-list']//div[contains(text(),'" + text +"')]"));
+    public WebElement partsListOptionByText(String text) {
+
+        return partsListOptionsBlock.findElement(By.xpath(".//div[contains(text(),'" + text +"')]"));
+    }
+
+    public List<WebElement> getDisplayedPartsListOptions() {
+        return partsListOptionsBlock.findElements(By.xpath(".//div[contains(@class, 'checklist__item') and not(contains(@style, 'display: none'))]//div[contains(@class, 'item__text')]"));
     }
 
     public WebElement selectedPartsListRecordByText(String text) {
 
         return driver.findElement(By.xpath("//div[@data-automation-id='service-instance-form-selected-labor-parts-list']//label[not(contains(@style, 'display: none'))]/div[contains(text(),'" + text + "')]"));
-    }
-
-    public VNextBOAddNewPartDialog() {
-        super(DriverBuilder.getInstance().getDriver());
-        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 }

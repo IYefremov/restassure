@@ -1,0 +1,84 @@
+{
+  "verifyUserCanDeleteThePart": [
+    {
+      "rowID": "verifyUserCanDeleteThePart.01",
+      "description": "Test Case 84007:User can Delete the Part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91183"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      },
+      "partData": {
+        "service": "IvPartTest_RequitedFilled",
+        "description": "Auto-test",
+        "category": "Engine",
+        "subcategory": "Control Modules",
+        "partItems": [
+          "Engine Control Module Clip"
+        ]
+      }
+    }
+  ],
+  "verifyUserCanAddNewDocumentAndDeleteIt": [
+    {
+      "rowID": "verifyUserCanAddNewDocumentCreditMemoAndDeleteIt.01",
+      "description": "User can add New Document (Credit Memo) and delete it",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92859"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152735"
+      },
+      "partData": {
+        "service": "roz_part_brake",
+        "description": "Auto-test",
+        "category": "Brake",
+        "subcategory": "Assortments",
+        "partItems": [
+          "Brake Fitting Assortment"
+        ]
+      },
+      "documentData": {
+        "type": "Credit Memo",
+        "number": "5",
+        "notes": "auto-test",
+        "amount": "8"
+      }
+    },
+    {
+      "rowID": "verifyUserCanAddNewDocumentVendorInvoiceAndDeleteIt.01",
+      "description": "User can add New Document (Vendor Invoice) and delete it",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92856"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152735"
+      },
+      "partData": {
+        "service": "roz_part_brake",
+        "description": "Auto-test",
+        "category": "Brake",
+        "subcategory": "Assortments",
+        "partItems": [
+          "Brake Fitting Assortment"
+        ]
+      },
+      "documentData": {
+        "type": "Vendor Invoice",
+        "number": "3",
+        "notes": "auto-test",
+        "amount": "12"
+      }
+    }
+  ]
+}

@@ -64,15 +64,15 @@ public class Utils {
         WaitUtilsWebDriver.waitABit(500);
     }
 
-    public static void clearAndTypeWithJS(WebElement element, String name) {
+    public static void clearAndTypeWithJS(WebElement element, String value) {
         sendKeysWithJS(element, "");
-        sendKeysWithJS(element, name);
+        sendKeysWithJS(element, value);
         WaitUtilsWebDriver.waitABit(500);
     }
 
-    public static void sendKeysWithEnter(WebElement element, String name) {
+    public static void sendKeysWithEnter(WebElement element, String value) {
         clear(element);
-        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(element, name).sendKeys(Keys.ENTER).build().perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(element, value).sendKeys(Keys.ENTER).build().perform();
         WaitUtilsWebDriver.waitABit(500);
     }
 

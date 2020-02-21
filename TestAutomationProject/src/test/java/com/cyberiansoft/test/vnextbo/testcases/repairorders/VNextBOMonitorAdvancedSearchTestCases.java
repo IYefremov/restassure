@@ -9,7 +9,7 @@ import com.cyberiansoft.test.enums.OrderMonitorFlags;
 import com.cyberiansoft.test.enums.OrderMonitorRepairStatuses;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCalendarWidgetDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;

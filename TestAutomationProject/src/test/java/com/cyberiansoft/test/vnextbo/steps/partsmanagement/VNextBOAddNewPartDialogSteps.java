@@ -42,13 +42,18 @@ public class VNextBOAddNewPartDialogSteps {
 
         VNextBOAddNewPartDialog addNewPartDialog = new VNextBOAddNewPartDialog();
         for (String part : partsList) {
-            Utils.clearAndType(addNewPartDialog.getPartsListFilterField(), part);
-            Utils.clickElement(addNewPartDialog.partsListRecordByText(part));
+            VNextBOAddNewPartDialogInteractions.setPartName(part);
+            Utils.clickElement(addNewPartDialog.partsListOptionByText(part));
         }
     }
 
     public static void submit() {
         VNextBOAddNewPartDialogInteractions.clickSubmitButton();
+        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
+    }
+
+    public static void cancel() {
+        VNextBOAddNewPartDialogInteractions.clickCancelButton();
         VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
     }
 }

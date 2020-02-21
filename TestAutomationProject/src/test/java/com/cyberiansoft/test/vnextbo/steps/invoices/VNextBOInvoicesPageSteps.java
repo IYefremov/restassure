@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.invoices;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOOperationsInvoicesData;
-import com.cyberiansoft.test.vnextbo.interactions.VNextBOConfirmationDialogInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
 import com.cyberiansoft.test.vnextbo.validations.invoices.VNextBOInvoicesPageValidations;
 
