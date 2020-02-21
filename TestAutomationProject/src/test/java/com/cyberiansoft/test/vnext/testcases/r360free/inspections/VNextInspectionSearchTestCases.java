@@ -10,20 +10,15 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
+import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionAdvancedSearchForm;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
@@ -40,7 +35,7 @@ import org.testng.annotations.Test;
 
 public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
-    private String inspnumber = "";
+    private String inspectionNumber = "";
     private String archivedinspnumber = "";
     private final String VIN = "3N1AB7AP3HY327077";
     private final String stock = "123";
@@ -54,22 +49,16 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
 
-        inspnumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claimInfoScreen.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
         claimInfoScreen.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
         claimInfoScreen.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
         availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
@@ -81,15 +70,14 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         vehiclePartInfoScreen.selectVehiclePartSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
         vehiclePartInfoScreen.selectVehiclePartAdditionalService(matrixServiceData.getVehiclePartData().getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-        vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+        vehiclePartsScreen.clickVehiclePartsSaveButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
         selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
-        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspnumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
-        inspectionsScreen.clickBackButton();
+        inspectionNumber = InspectionSteps.saveInspection();
+        InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
+        ScreenNavigationSteps.pressBackButton();
 
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -101,7 +89,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByCustomer(testcustomer.getFullName());
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspectionData.getInspectionPrice());
         webdriver.quit();
     }
@@ -113,22 +101,16 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersScreen = inspectionsScreen.clickAddInspectionButton();
-        customersScreen.selectCustomer(testcustomer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, inspectionData);
 
-        archivedinspnumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claimInfoScreen.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
         claimInfoScreen.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
         claimInfoScreen.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
         availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
@@ -140,17 +122,15 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         vehiclePartInfoScreen.selectVehiclePartSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
         vehiclePartInfoScreen.selectVehiclePartAdditionalService(matrixServiceData.getVehiclePartData().getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-        vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+         vehiclePartsScreen.clickVehiclePartsSaveButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
         selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
-        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(archivedinspnumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
+        archivedinspnumber = InspectionSteps.saveInspection();
+        InspectionsValidations.verifyInspectionTotalPrice(archivedinspnumber, PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
         InspectionSteps.archiveInspection(archivedinspnumber);
-
-        inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(testName = "Test Case 64864:R360: verify searching inspection by All Status on BO",
@@ -211,7 +191,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByStatus("Approved");
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
@@ -232,7 +212,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByStockNumber(stock);
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
@@ -253,7 +233,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByPONumber(po);
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
@@ -274,7 +254,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsWebPage insppage = leftmenu.selectInspectionsMenu();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByVIN(VIN);
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
@@ -302,9 +282,9 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionAdvancedSearchForm advancedserchdialog = new VNextBOInspectionAdvancedSearchForm();
-        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspnumber);
+        VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Inspection#", inspectionNumber);
         VNextBOInspectionsAdvancedSearchSteps.setAdvancedSearchFilterNameAndSave(filterName);
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
@@ -336,7 +316,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("Search Name", filterNameEdited);
         VNextBOInspectionsAdvancedSearchSteps.saveAdvancedSearchFilter();
 
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         Assert.assertEquals(insppage.getSelectedInspectionTotalAmountValue(), inspTotalPrice);
         webdriver.quit();
     }
@@ -410,12 +390,12 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchSteps.setAdvSearchTextField("VIN", VIN);
         VNextBOInspectionsAdvancedSearchSteps.clickSearchButton();
-        insppage.selectInspectionInTheList(inspnumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(inspnumber);
-        insppage.selectInspectionInTheList(inspnumber);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(inspectionNumber);
+        insppage.selectInspectionInTheList(inspectionNumber);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSearchFieldValue(), "");
         Assert.assertEquals(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(), defaultTimeFrameValue);

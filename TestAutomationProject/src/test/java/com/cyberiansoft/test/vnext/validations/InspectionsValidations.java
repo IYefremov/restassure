@@ -18,4 +18,22 @@ public class InspectionsValidations {
         else
             Assert.assertFalse(inspectionsScreen.isEmailSentIconPresentForInspection(inspectionID));
     }
+
+    public static void verifyInspectionExists(String inspectionID, boolean exists) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        if (exists)
+            Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionID));
+        else
+            Assert.assertFalse(inspectionsScreen.isInspectionExists(inspectionID));
+    }
+
+    public static void verifyInspectionTotalPrice(String inspectionID, String expectedPrice) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionID), expectedPrice);
+    }
+
+    public static void verifyInspectionApprovedPrice(String inspectionID, String expectedPrice) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        Assert.assertEquals(inspectionsScreen.getInspectionApprovedPriceValue(inspectionID), expectedPrice);
+    }
 }

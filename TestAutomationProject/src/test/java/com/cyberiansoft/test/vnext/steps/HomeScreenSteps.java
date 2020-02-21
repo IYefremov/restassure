@@ -15,6 +15,7 @@ public class HomeScreenSteps {
         inspectionsScreen.clickAddInspectionButton();
     }
 
+
     public static void openCreateMyWorkOrder() {
         HomeScreenSteps.openWorkOrders();
         WorkOrderSteps.switchToMyWorkOrdersView();

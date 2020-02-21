@@ -34,9 +34,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
-        for (DamageData damageData : inspectionData.getDamagesData()) {
-            VisualScreenSteps.addDamage(damageData);
-        }
+        inspectionData.getDamagesData().forEach(damageData -> VisualScreenSteps.addDamage(damageData));
         VisualScreenSteps.verifyNumberOfAddedDamages(inspectionData.getDamagesData().size());
         final String inspectionNumber = InspectionSteps.saveInspection();
 

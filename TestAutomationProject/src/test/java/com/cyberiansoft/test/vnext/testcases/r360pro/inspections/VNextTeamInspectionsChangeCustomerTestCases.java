@@ -8,17 +8,13 @@ import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -28,8 +24,8 @@ import org.testng.annotations.Test;
 
 public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
-    final RetailCustomer testcustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
-    final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
+    final RetailCustomer testCustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
+    final RetailCustomer testCustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
 
     @BeforeClass(description = "Work Orders Change Customer Test Cases")
@@ -38,14 +34,14 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextCustomersScreen customersscreen = homescreen.clickCustomersMenuItem();
         customersscreen.switchToRetailMode();
-        if (!customersscreen.isCustomerExists(testcustomer1)) {
+        if (!customersscreen.isCustomerExists(testCustomer1)) {
             VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-            newcustomerscreen.createNewCustomer(testcustomer1);
+            newcustomerscreen.createNewCustomer(testCustomer1);
             customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         }
-        if (!customersscreen.isCustomerExists(testcustomer2)) {
+        if (!customersscreen.isCustomerExists(testCustomer2)) {
             VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
-            newcustomerscreen.createNewCustomer(testcustomer2);
+            newcustomerscreen.createNewCustomer(testCustomer2);
             customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         }
         customersscreen.clickBackButton();
@@ -61,20 +57,13 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer1);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testcustomer2);
-        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
-        inspectionsScreen.clickBackButton();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -83,19 +72,12 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer1);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testcustomer2);
-        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
 
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
         inspectionsMenuScreen.clickEditInspectionMenuItem();
@@ -103,10 +85,9 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableservicesscreen.selectService(inspectionData.getServiceData().getServiceName());
         availableservicesscreen.saveInspectionViaMenu();
-        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-
-        inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -115,23 +96,16 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
-        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer1);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        customersscreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
-        Assert.assertFalse(customersscreen.isAddCustomerButtonDisplayed());
-        customersscreen.clickBackButton();
-        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionsScreen.clickBackButton();
+        inspectionsMenuScreen.clickChangeCustomerMenuItem();
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+        Assert.assertFalse(customersScreen.isAddCustomerButtonDisplayed());
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -140,25 +114,17 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer1);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.changeCustomerToWholesailForInspection(inspectionNumber, testwholesailcustomer);
         inspectionsScreen.switchToTeamInspectionsView();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testwholesailcustomer.getFullName());
         inspectionsScreen.switchToMyInspectionsView();
 
-        inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -167,21 +133,13 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer1);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
-        inspectionsScreen.changeCustomerForWorkOrderViaSearch(inspectionNumber, testcustomer2);
-        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
-        inspectionsScreen.clickBackButton();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.changeCustomerForWorkOrderViaSearch(inspectionNumber, testCustomer2);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -190,24 +148,16 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homescreen.clickInspectionsMenuItem();
-        inspectionsScreen.switchToMyInspectionsView();
-        VNextCustomersScreen customersscreen = inspectionsScreen.clickAddInspectionButton();
-        customersscreen.selectCustomer(testcustomer1);
-        VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
-        final String inspectionNumber = vehicleInfoScreen.getNewInspectionNumber();
-        inspectionsScreen = vehicleInfoScreen.saveInspectionViaMenu();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testcustomer2);
-        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         inspectionsScreen.switchToTeamInspectionsView();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
-        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testcustomer2.getFullName());
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         inspectionsScreen.switchToMyInspectionsView();
-        inspectionsScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }
