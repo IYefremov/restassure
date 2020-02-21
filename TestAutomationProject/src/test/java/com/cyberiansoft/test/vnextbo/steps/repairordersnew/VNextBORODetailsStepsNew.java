@@ -32,7 +32,7 @@ public class VNextBORODetailsStepsNew {
     public static void expandPhaseByName(String phase) {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().expandPhaseButton(phase));
-        WaitUtilsWebDriver.waitABit(2000);
+        WaitUtilsWebDriver.waitABit(5000);
     }
 
     public static void collapsePhaseByName(String phase) {
@@ -56,7 +56,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
         Utils.clickElement(detailsWebPageNew.getReportProblemForServiceActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithoutDescription(problemReason);
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitABit(5000);
     }
 
     public static void openCompleteCurrentPhaseDialog(String phase) {
@@ -73,7 +73,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
         Utils.clickElement(detailsWebPageNew.getReportProblemForPhaseActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithDescription(problemReason, problemDescription);
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void reportProblemForServiceWithDescription(String service, String problemReason, String problemDescription) {
@@ -82,7 +82,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
         Utils.clickElement(detailsWebPageNew.getReportProblemForServiceActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithDescription(problemReason, problemDescription);
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void resolveProblemOnPhaseLevel(String phase) {
@@ -91,7 +91,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
         Utils.clickElement(detailsWebPageNew.getResolveProblemForPhaseActionButton());
         VNextBOROResolveProblemDialogStepsNew.resolveProblem();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void resolveProblemForService(String service) {
@@ -100,7 +100,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
         Utils.clickElement(detailsWebPageNew.getResolveProblemForServiceActionButton());
         VNextBOROResolveProblemDialogStepsNew.resolveProblem();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void setPhaseStatusIfNeeded(String phase, String expectedStatus) {

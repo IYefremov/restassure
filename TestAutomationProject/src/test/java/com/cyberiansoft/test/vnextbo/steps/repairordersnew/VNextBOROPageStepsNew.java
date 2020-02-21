@@ -112,6 +112,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROAdvancedSearchDialogStepsNew.setHasThisTextField(orderNumber);
         VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
+        WaitUtilsWebDriver.waitABit(2000);
     }
 
     public static void searchOrdersByPhaseStatus(String phase, String phaseStatus) {
