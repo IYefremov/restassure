@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.steps.ApproveSteps;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
+import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
@@ -84,10 +85,10 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestClass {
 		ApproveSteps.saveApprove();
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.APPROVED);
-		inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
+		InspectionSteps.openInspectionMenu(inspectionNumber);
 		WaitUtils.elementShouldBeVisible(inspectionsMenuScreen.getApproveinspectionbtn(), false);
 		Assert.assertTrue(inspectionsMenuScreen.isCreateWorkOrderMenuPresent());
-		inspectionsMenuScreen.clickCloseInspectionMenuButton();
+		MenuSteps.closeMenu();
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionsScreen.clickBackButton();
 	}

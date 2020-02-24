@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.steps;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
@@ -15,10 +16,10 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.InspectionListElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
@@ -61,17 +62,18 @@ public class InspectionSteps {
     }
 
     public static void archiveInspection(String inspectionNumber) {
-        VNextInspectionsScreen inspectionsscreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsscreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.archiveInspection();
-        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 30);
-        wait.until(ExpectedConditions.invisibilityOf(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().
-                findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + inspectionNumber + "']"))));
+        openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.ARCHIVE);
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        informationdlg.clickInformationDialogArchiveButton();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.waitNotificationMessageDissapears();
     }
 
     public static void openInspectionMenu(String inspectionId) {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.clickOnInspectionByInspNumber(inspectionId);
+        InspectionListElement inspectionListElement = inspectionsScreen.getInspectionElement(inspectionId);
+        inspectionListElement.openMenu();
     }
 
     public static void openInspectionToEdit(String inspectionId) {
@@ -118,11 +120,6 @@ public class InspectionSteps {
     public static void navigateHomeScreen() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.clickBackButton();
-    }
-
-    public static void verifyInspectionTotalPrice(String inspectionId, String expectedPrice) {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionId), expectedPrice);
     }
 
     public static void switchToTeamInspections() {

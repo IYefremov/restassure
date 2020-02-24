@@ -1,7 +1,10 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
+import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
+import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -13,6 +16,7 @@ public class InvoiceSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String invoiceNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveInvoiceAsFinal();
+        BaseUtils.waitABit(30000);
         return invoiceNumber;
     }
 
@@ -44,10 +48,31 @@ public class InvoiceSteps {
     }
 
     public static void openMenu(String invoiceId) {
+        waitInvoicesScreenLoaded();
         VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
-        WaitUtils.getGeneralFluentWait().until((webdriver) -> invoicesScreen.getInvoicesList().size() > 0);
-        WaitUtils.waitUntilElementIsClickable(invoicesScreen.getRootElement());
         InvoiceListElement invoiceListElement = invoicesScreen.getInvoiceElement(invoiceId);
         invoiceListElement.openMenu();
     }
+
+    public static void createInvoice(InvoiceTypes invoiceType) {
+        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList();
+        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+    }
+
+    public static void switchToTeamInvoicesView() {
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+        invoicesScreen.switchToTeamInvoicesView();
+    }
+
+    public static void switchToMyInvoicesView() {
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+        invoicesScreen.switchToMyInvoicesView();
+    }
+
+    public static void waitInvoicesScreenLoaded() {
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> invoicesScreen.getInvoicesList().size() > 0);
+        WaitUtils.waitUntilElementIsClickable(invoicesScreen.getRootElement());
+    }
+
 }

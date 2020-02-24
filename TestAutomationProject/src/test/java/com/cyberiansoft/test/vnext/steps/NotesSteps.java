@@ -13,8 +13,19 @@ public class NotesSteps {
     public static void setNoteText(String noteText) {
         VNextNotesScreen notesScreen = new VNextNotesScreen();
         WaitUtils.elementShouldBeVisible(notesScreen.getRootElement(), true);
-        notesScreen.setNoteText(noteText);
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            notesScreen.setNoteText(noteText);
+            return true;
+        });
         BaseUtils.waitABit(2000);
+    }
+
+    public static void tapNoteTextAndClear() {
+        VNextNotesScreen notesScreen = new VNextNotesScreen();
+        WaitUtils.elementShouldBeVisible(notesScreen.getRootElement(), true);
+        notesScreen.getNoteEditField().click();
+        BaseUtils.waitABit(500);
+        notesScreen.getClearNoteButton().click();
     }
 
     public static void verifyNoteIsPresent(String noteText) {
@@ -98,5 +109,27 @@ public class NotesSteps {
         VNextRepairOrderNoteScreen noteScreen = new VNextRepairOrderNoteScreen();
         WaitUtils.elementShouldBeVisible(noteScreen.getRootElement(), true);
         noteScreen.getCommentTest().sendKeys(noteText);
+    }
+
+    public static String addQuickNotesByCount(int count) {
+        StringBuilder note = new StringBuilder();
+        String result = "";
+        final String quickNoteText = "Test Quick Note 1";
+        for (int i = 1; i <= count; i++) {
+            NotesSteps.addQuickNote(quickNoteText);
+            note.append("\n");
+            note.append(quickNoteText) ;
+        }
+        return result;
+    }
+
+    public static String addQuickNotesFromListByCount(int count) {
+        VNextNotesScreen noteScreen = new VNextNotesScreen();
+        StringBuilder stringBuilder = new StringBuilder();
+        noteScreen.getQuickNotesList().stream().limit(count).forEach(element ->  {
+            NotesSteps.addQuickNote(element.getText());
+            stringBuilder.append(element.getText()).append("\n");
+        });
+        return stringBuilder.toString();
     }
 }
