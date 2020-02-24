@@ -6,10 +6,11 @@ import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.InspectionListElement;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -47,15 +48,18 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[contains(@class,'searchlist-nothing-found')]")
     private WebElement nothingFounfPanel;
 
+    @FindBy(xpath = "//*[@data-autotests-id='inspections-list']/div")
+    private List<InspectionListElement> inspectionsList;
+
     final public static int MAX_NUMBER_OF_INPECTIONS = 50;
 
     public VNextInspectionsScreen(WebDriver appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
+        super(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
     public VNextInspectionsScreen() {
-        PageFactory.initElements(appiumdriver, this);
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
     public void clickAddInspectionButton() {
@@ -79,6 +83,12 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         return inspCell.findElement(By.xpath(".//*[@action='select']/*[@class='checkbox-item-title']")).getText();
     }
 
+    public InspectionListElement getInspectionElement(String inspectionId) {
+        WaitUtils.waitUntilElementIsClickable(inspectionslist);
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> inspectionsList.size() > 0);
+        return inspectionsList.stream().filter(listElement -> listElement.getId().equals(inspectionId)).findFirst().orElseThrow(() -> new RuntimeException("Inspection not found " + inspectionId));
+    }
+
     public String getInspectionCustomerValue(String inspectionNumber) {
         WebElement inspCell = getInspectionCell(inspectionNumber);
         return inspCell.findElement(By.xpath(".//*[@action='select' and @class='entity-item-title']")).getText();
@@ -100,10 +110,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public List<String> getAllInspectionsNumbers() {
         List<String> inspsNumbers = new ArrayList<>();
-        List<WebElement> inspections = getInspectionsList();
-        for (WebElement inspCell : inspections) {
-            inspsNumbers.add(getInspectionNumberValue(inspCell));
-        }
+        inspectionsList.forEach(inspCell -> inspsNumbers.add(inspCell.getId()));
         return inspsNumbers;
     }
 
@@ -190,16 +197,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         return InspectionsMenuScreen.clickNotesInspectionMenuItem();
     }
 
-    private List<WebElement> getInspectionsList() {
-        return inspectionslist.findElements(By.xpath("./div[@class='entity-item accordion-item']"));
-    }
-
     public int getNumberOfInspectionsInList() {
-        return getInspectionsList().size();
-    }
-
-    public int getNumberOfInspectionsOnTheScreen() {
-        return getInspectionsList().size();
+        return inspectionsList.size();
     }
 
     public boolean waitUntilInspectionDisappears(String inspectionNumber) {
@@ -246,6 +245,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     public void searchInpectionByFreeText(String searchtext) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(inspectionsScreen));
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> inspectionsList.size() > 0);
         SearchSteps.searchByText(searchtext);
 
     }

@@ -191,11 +191,11 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         inspectionsScreen.switchToTeamInspectionsView();
         VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatus());
         WaitUtils.elementShouldBeVisible(inspectionMenuScreen.getCreatewoinspectionbtn(), false);
-        inspectionMenuScreen.clickCloseInspectionMenuButton();
+        MenuSteps.closeMenu();
 
         inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatus());
         Assert.assertTrue(inspectionMenuScreen.isCreateWorkOrderMenuPresent());
-        inspectionMenuScreen.clickCloseInspectionMenuButton();
+        MenuSteps.closeMenu();
         inspectionsScreen.switchToMyInspectionsView();
         ScreenNavigationSteps.pressBackButton();
     }

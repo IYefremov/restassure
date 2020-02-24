@@ -53,8 +53,11 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     }
 
     public void setCardNumber(String cardNumber) {
-        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='Number']")));
+
+        //WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='Number']")));
         //WaitUtils.waitUntilElementIsClickable(cardnumberfld);
+        appiumdriver.switchTo().defaultContent();
+        appiumdriver.switchTo().frame(payframe);
         ((JavascriptExecutor) appiumdriver).executeScript("arguments[0].setAttribute('value', arguments[1])", cardnumberfld, cardNumber);
     }
 
@@ -92,9 +95,8 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
     }
 
     public void clickPayButton() {
-        WebDriver driver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         WaitUtils.waitUntilElementIsClickable(paybtn);
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        JavascriptExecutor executor = (JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         executor.executeScript("arguments[0].click();", paybtn);
         appiumdriver.switchTo().defaultContent();
         BaseUtils.waitABit(1000);

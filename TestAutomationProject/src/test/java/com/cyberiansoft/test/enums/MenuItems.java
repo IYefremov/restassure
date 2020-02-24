@@ -31,6 +31,7 @@ public enum MenuItems {
     VIEW_SUPPLEMENT("View Supplement"),
     ADD_SUPPLEMENT("Add Supplement"),
     CREATE_WORK_ORDER("Create Work Order"),
+    CHANGE_PO("Change PO#"),
     RESET_START_DATE("Reset Start Date");
 
 

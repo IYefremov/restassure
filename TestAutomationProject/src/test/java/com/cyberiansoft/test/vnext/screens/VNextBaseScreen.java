@@ -78,7 +78,6 @@ public class VNextBaseScreen {
             appiumdriver.findElement(By.xpath(backButtonLocator)).click();
             return true;
         });
-        //WaitUtils.click(By.xpath(backButtonLocator));
     }
 
     public void clickScreenForwardButton() {

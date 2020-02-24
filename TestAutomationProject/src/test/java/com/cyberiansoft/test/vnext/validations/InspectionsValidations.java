@@ -19,6 +19,14 @@ public class InspectionsValidations {
             Assert.assertFalse(inspectionsScreen.isEmailSentIconPresentForInspection(inspectionID));
     }
 
+    public static void verifyInspectionHasNotesIcon(String inspectionID, boolean hasIcon) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        if (hasIcon)
+            Assert.assertTrue(inspectionsScreen.isNotesIconPresentForInspection(inspectionID));
+        else
+            Assert.assertFalse(inspectionsScreen.isNotesIconPresentForInspection(inspectionID));
+    }
+
     public static void verifyInspectionExists(String inspectionID, boolean exists) {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         if (exists)

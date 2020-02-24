@@ -192,20 +192,20 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
 		inspectionsScreen.searchInpectionByFreeText(testwholesailcustomer.getFullName());
-		Assert.assertTrue(inspectionsScreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
+		Assert.assertTrue(inspectionsScreen.getNumberOfInspectionsInList() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		List<String> inspsCustomers = inspectionsScreen.getAllInspectionsCustomers();
 		for (String inspCustomers : inspsCustomers) {
 			Assert.assertTrue(inspCustomers.contains(testwholesailcustomer.getFullName()));
 		}
 		final String inspSubNumber = inspectionNumber.substring(6, inspectionNumber.length());
 		inspectionsScreen.searchInpectionByFreeText(inspSubNumber);
-		Assert.assertTrue(inspectionsScreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
+		Assert.assertTrue(inspectionsScreen.getNumberOfInspectionsInList() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		List<String> inspsNumbers = inspectionsScreen.getAllInspectionsNumbers();
 		for (String inspectionNumbers : inspsNumbers) {
 			Assert.assertTrue(inspectionNumbers.contains(inspSubNumber));
 		}
 
-		Assert.assertTrue(inspectionsScreen.getNumberOfInspectionsOnTheScreen() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
+		Assert.assertTrue(inspectionsScreen.getNumberOfInspectionsInList() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		ScreenNavigationSteps.pressBackButton();
 	}
 

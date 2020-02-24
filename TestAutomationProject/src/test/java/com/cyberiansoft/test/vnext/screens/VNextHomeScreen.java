@@ -97,7 +97,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
     public VNextWorkOrdersScreen clickWorkOrdersMenuItem() {
         WaitUtils.elementShouldBeVisible(workOrdersList,true);
         tap(workOrdersList);
-        return new VNextWorkOrdersScreen(appiumdriver);
+        return new VNextWorkOrdersScreen();
     }
 
     @Step
