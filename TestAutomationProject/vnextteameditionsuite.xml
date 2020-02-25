@@ -3,7 +3,6 @@
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
     </listeners>
-    <parameter name="bo.url" value="https://reconpro.qc.cyberianconcepts.com"  />
     <parameter name="lic.name" value="OKramar_android2"  />
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>

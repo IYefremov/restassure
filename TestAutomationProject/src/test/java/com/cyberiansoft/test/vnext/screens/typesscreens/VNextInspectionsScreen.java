@@ -245,7 +245,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     public void searchInpectionByFreeText(String searchtext) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(inspectionsScreen));
-        WaitUtils.getGeneralFluentWait().until((webdriver) -> inspectionsList.size() > 0);
+        WaitUtils.waitUntilElementIsClickable(inspectionsScreen.findElement(By.xpath(".//*[@class='page-content']")));
         SearchSteps.searchByText(searchtext);
 
     }

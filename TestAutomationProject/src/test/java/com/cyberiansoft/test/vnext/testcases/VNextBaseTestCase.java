@@ -51,13 +51,13 @@ public class VNextBaseTestCase {
 
     @BeforeSuite
     public void initializeSuite() {
-        deviceOfficeUrl = VNextTeamRegistrationInfo.getInstance()
-                .getBackOfficeUrlFromEnvType(EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType()));
+
         browsertype = BaseUtils.getBrowserType(VNextToolsInfo.getInstance().getDefaultBrowser());
         mobilePlatform = BaseUtils.getMobilePlatform(VNextToolsInfo.getInstance().getDefaultPlatform());
         buildproduction = VNextEnvironmentInfo.getInstance().getBuildProductionAttribute().equals("true");
-        envType = EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType());
-
+        envType = EnvironmentType.QC;
+        deviceOfficeUrl = VNextTeamRegistrationInfo.getInstance()
+                .getBackOfficeUrlFromEnvType(envType);
         AppiumServiceManager.startAppium();
         DriverBuilder.getInstance().setDriver(browsertype);
         setupMobileDevice(mobilePlatform);
