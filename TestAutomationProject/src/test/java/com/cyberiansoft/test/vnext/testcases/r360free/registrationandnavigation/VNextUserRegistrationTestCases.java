@@ -78,7 +78,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
     @BeforeMethod(description = "Setting up new suite")
     public void resetApk() throws IOException, UnirestException {
 
-        EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType());
+        EnvironmentType envType = EnvironmentType.QC;
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(userregmail);
         nada.deleteAllMessages();
@@ -88,7 +88,6 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         VNextEditionsScreen editionsScreen = new VNextEditionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextEnvironmentSelectionScreen environmentSelectionScreen = editionsScreen.selectEdition("Repair360");
         environmentSelectionScreen.selectEnvironment(envType);
-        //BaseUtils.waitABit(15*1000);
         AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
         AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
     }

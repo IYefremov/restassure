@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
@@ -12,6 +13,8 @@ public class HomeScreenSteps {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         HomeScreenSteps.openInspections();
         inspectionsScreen.switchToMyInspectionsView();
+        if (!GeneralWizardInteractions.isSearchFilterEmpty())
+            SearchSteps.searchByText("");
         inspectionsScreen.clickAddInspectionButton();
     }
 

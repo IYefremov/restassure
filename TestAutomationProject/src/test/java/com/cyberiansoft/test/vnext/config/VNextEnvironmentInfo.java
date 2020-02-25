@@ -31,12 +31,48 @@ public class VNextEnvironmentInfo {
         return _instance;
     }
 
-    public String getEnvironmentType() {
-        return props.getProperty("environment.type");
-    }
-
     public String getBuildProductionAttribute() {
         return props.getProperty("build.production");
+    }
+
+    public String getDevelopmentEnvString() {
+        return props.getProperty("vnext.dev.line");
+    }
+
+    public String getIntegrationEnvString() {
+        return props.getProperty("vnext.qc.line");
+    }
+
+    public String getQC1EnvString() {
+        return props.getProperty("vnext.qc1.line");
+    }
+
+    public String getQC4EnvString() {
+        return props.getProperty("vnext.qc4.line");
+    }
+
+    public String getManheimUATEnvString() {
+        return props.getProperty("vnext.manheim.uat.line");
+    }
+
+    public String getDevelopmentBackOfficeURL() {
+        return props.getProperty("vnext.dev.bo");
+    }
+
+    public String getIntegrationBackOfficeURL() {
+        return props.getProperty("vnext.qc.bo");
+    }
+
+    public String getQC1BackOfficeURL() {
+        return props.getProperty("vnext.qc1.bo");
+    }
+
+    public String getQC4BackOfficeURL() {
+        return props.getProperty("vnext.qc4.bo");
+    }
+
+    public String getManheimUATBackOfficeURL() {
+        return props.getProperty("vnext.manheim.uat.bo");
     }
 
     public String getReportFolderPath() {

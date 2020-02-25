@@ -21,7 +21,7 @@ public class VNextWebServicesUtils {
 
 	private static String getApiWebURL() {
 		String apiURL="";
-		EnvironmentType envType = EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType());
+		EnvironmentType envType = EnvironmentType.QC;
 
 		if (envType.equals(EnvironmentType.DEVELOPMENT))
 			apiURL = VNextFreeRegistrationInfo.getInstance().getAPIStagingURL();

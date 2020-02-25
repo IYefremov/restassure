@@ -197,4 +197,8 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         informationDialog.clickInformationDialogYesButton();
     }
 
+    public boolean isSearchFilterEmpty() {
+        return searchIcon.findElement(By.xpath(".//*[contains(@class, 'icon-empty-query')]")).isDisplayed();
+    }
+
 }

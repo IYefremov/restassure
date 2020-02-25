@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
+import com.cyberiansoft.test.vnext.utils.VNextClientEnvironmentUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -24,7 +25,7 @@ public class VNextEnvironmentSelectionScreen extends VNextBaseScreen {
 
     public void selectEnvironment(EnvironmentType environmentType) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-env-name='" + environmentType.getEnvironmentTypeName() + "']")));
-        tap(envlist.findElement(By.xpath(".//div[@data-env-name='" + environmentType.getEnvironmentTypeName() + "']")));
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-env-name='" + VNextClientEnvironmentUtils.getEnvironmentString(environmentType) + "']")));
+        tap(envlist.findElement(By.xpath(".//div[@data-env-name='" + VNextClientEnvironmentUtils.getEnvironmentString(environmentType) + "']")));
     }
 }

@@ -14,6 +14,7 @@ import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.listeners.TestServiceListener;
 import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.utils.VNextClientEnvironmentUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.Getter;
@@ -30,7 +31,8 @@ public class BaseTestClass {
 
     protected static RetailCustomer testcustomer;
     protected static WholesailCustomer testwholesailcustomer;
-    protected static String deviceOfficeUrl = "https://reconpro.qc.cyberianconcepts.com";
+    protected static String deviceOfficeUrl;
+    protected static EnvironmentType environmentType;
     @Getter
     protected static Employee employee;
 
@@ -51,12 +53,18 @@ public class BaseTestClass {
         employee.setEmployeeFirstName("Employee");
         employee.setEmployeeLastName("Employee");
         employee.setEmployeePassword("12345");
+
+        Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
+        if (testEnv.isPresent())
+            environmentType = EnvironmentType.getEnvironmentType(testEnv.get());
+        else
+            environmentType = EnvironmentType.QC;
+        deviceOfficeUrl = VNextClientEnvironmentUtils.getBackOfficeURL(environmentType);
     }
 
     @BeforeSuite
-    @Parameters({"bo.url", "lic.name"})
-    public void beforeSuite(String boURL, String licenseName) {
-        deviceOfficeUrl = boURL;
+    @Parameters({"lic.name"})
+    public void beforeSuite(String licenseName) {
 
         Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         //Optional<String> testCaseIdFromMaven = Optional.ofNullable("97261");
@@ -90,7 +98,7 @@ public class BaseTestClass {
 
             //GeneralSteps.skipGuide();
             editionsScreen.selectEdition("ReconPro Starter");
-            environmentSelectionScreen.selectEnvironment(EnvironmentType.getEnvironmentType(VNextEnvironmentInfo.getInstance().getEnvironmentType()));
+            environmentSelectionScreen.selectEnvironment(environmentType);
             verificationScreen.setDeviceRegistrationCode(regCode);
             verificationScreen.clickVerifyButton();
             downloadDataScreen.waitUntilDatabasesDownloaded();

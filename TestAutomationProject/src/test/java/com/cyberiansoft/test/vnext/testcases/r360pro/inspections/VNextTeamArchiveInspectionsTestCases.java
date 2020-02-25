@@ -52,7 +52,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testVerifyUserCantArchiveTeamInspection(String rowID,
+    public void testVerifyUserCanArchiveTeamInspection(String rowID,
                                                         String description, JSONObject testData) {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
@@ -63,7 +63,7 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestClass {
         InspectionSteps.switchToTeamInspections();
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuValidations.menuItemShouldBeVisible(MenuItems.APPROVE, true);
-        MenuValidations.menuItemShouldBeVisible(MenuItems.ARCHIVE, false);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.ARCHIVE, true);
         MenuSteps.closeMenu();
         InspectionSteps.switchToMyInspections();
         ScreenNavigationSteps.pressBackButton();

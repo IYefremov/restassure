@@ -4,9 +4,10 @@ import java.util.stream.Stream;
 
 public enum EnvironmentType {
     INTEGRATION("Integration"),
-    AUTOTESTS("AutoTests"),
+    QC("QC"),
     DEVELOPMENT("Development"),
-    AZURE_MANHEIM_UAT("Azure Manheim UAT"),
+    UAT("UAT"),
+    MANHEIM_UAT("Manheim UAT"),
     QC1("QC1"),
     QC4("QC4");
 
