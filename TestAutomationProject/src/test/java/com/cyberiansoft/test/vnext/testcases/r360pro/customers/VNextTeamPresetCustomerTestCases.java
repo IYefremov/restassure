@@ -45,7 +45,7 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         HomeScreenSteps.openCustomers();
         CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
 
-        CustomersSreenSteps.switchToWholesaleMode();
+        CustomersScreenSteps.switchToWholesaleMode();
         CustomersScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
@@ -64,7 +64,7 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         HomeScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
         HomeScreenSteps.openCustomers();
         CustomersScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
-        CustomersSreenSteps.resetPresetCustomer();
+        CustomersScreenSteps.resetPresetCustomer();
         CustomersScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName().trim());
@@ -156,8 +156,8 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
     public void testVerifyUserCanPresetWholesaleCustomer(String rowID,
                                                          String description, JSONObject testData) {
         HomeScreenSteps.openCustomers();
-        CustomersSreenSteps.switchToWholesaleMode();
-        CustomersSreenSteps.setCustomerAsDefault(testwholesailcustomer);
+        CustomersScreenSteps.switchToWholesaleMode();
+        CustomersScreenSteps.setCustomerAsDefault(testwholesailcustomer);
         CustomersScreenValidation.validateDefaultCustomerValue(testwholesailcustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(testwholesailcustomer.getFullName());
@@ -172,20 +172,20 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         defaultWholesailCustomer.setCompanyName("Wholesale");
         HomeScreenSteps.openCustomers();
 
-        CustomersSreenSteps.switchToRetailMode();
+        CustomersScreenSteps.switchToRetailMode();
         CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
         CustomersScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
         HomeScreenSteps.openCustomers();
 
-        CustomersSreenSteps.switchToWholesaleMode();
+        CustomersScreenSteps.switchToWholesaleMode();
         CustomersScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
 
         HomeScreenSteps.openCustomers();
-        CustomersSreenSteps.switchToRetailMode();
+        CustomersScreenSteps.switchToRetailMode();
         CustomersScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName().trim());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName());

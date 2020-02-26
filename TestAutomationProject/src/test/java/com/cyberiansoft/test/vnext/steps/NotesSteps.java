@@ -31,7 +31,7 @@ public class NotesSteps {
     public static void verifyNoteIsPresent(String noteText) {
         VNextNotesScreen noteScreen = new VNextNotesScreen();
         WaitUtils.elementShouldBeVisible(noteScreen.getRootElement(), true);
-        WaitUtils.elementShouldBeVisible(noteScreen.getNoteEditField(), true);
+        WaitUtils.waitUntilElementIsClickable(noteScreen.getNoteEditField());
         WaitUtils.getGeneralFluentWait().until(webDriver -> {
             Assert.assertTrue(noteScreen.getNoteEditField().getAttribute("value").contains(noteText));
             return true;

@@ -36,10 +36,10 @@ public class VNextEmailInspectionsTestCases extends BaseTestClass {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getEmailInspectionsTestCasesDataPath();
 
         HomeScreenSteps.openCustomers();
-        CustomersSreenSteps.switchToRetailMode();
+        CustomersScreenSteps.switchToRetailMode();
         retailCustomerList.stream().forEach(retailCustomer -> {
             if (!CustomersInteractions.isCustomerExists(retailCustomer))
-                CustomersSreenSteps.createNewRetailCustomer(retailCustomer);
+                CustomersScreenSteps.createNewRetailCustomer(retailCustomer);
         });
         ScreenNavigationSteps.pressBackButton();
     }
@@ -58,7 +58,7 @@ public class VNextEmailInspectionsTestCases extends BaseTestClass {
         HomeScreenSteps.openInspections();
         inspectionsList.stream().forEach(InspectionSteps::selectInspection);
         InspectionSteps.clickEmailButton();
-        CustomersSreenSteps.selectCustomer(retailCustomerList.get(0));
+        CustomersScreenSteps.selectCustomer(retailCustomerList.get(0));
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
         ScreenNavigationSteps.pressBackButton();

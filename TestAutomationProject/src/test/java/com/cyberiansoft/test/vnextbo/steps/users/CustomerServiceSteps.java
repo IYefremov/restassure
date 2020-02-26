@@ -16,9 +16,8 @@ public class CustomerServiceSteps {
         if (!customersScreen.isCustomerExists(retailCustomer)) {
             VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
             newCustomerScreen.createNewCustomer(retailCustomer);
-            customersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         }
         customersScreen.setCustomerAsDefault(retailCustomer);
-        WaitUtilsWebDriver.waitForTextToBePresentInElement(customersScreen.getPresetcustomerpanel(), retailCustomer.getFullName());
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(customersScreen.getPresetCustomerPanel(), retailCustomer.getFullName());
     }
 }

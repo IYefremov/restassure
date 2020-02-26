@@ -23,13 +23,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
-        CustomersSreenSteps.selectCustomer(customer);
+        CustomersScreenSteps.selectCustomer(customer);
         InspectionSteps.selectInspectionType(inspectionTypes);
         VehicleInfoScreenSteps.setVIN("777777");
     }
 
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes, InspectionData inspectionData) {
-        CustomersSreenSteps.selectCustomer(customer);
+        CustomersScreenSteps.selectCustomer(customer);
         createInspection(inspectionTypes, inspectionData);
     }
 
@@ -56,7 +56,7 @@ public class InspectionSteps {
     }
 
     public static void createInspection(AppCustomer customer, InspectionData inspectionData) {
-        CustomersSreenSteps.selectCustomer(customer);
+        CustomersScreenSteps.selectCustomer(customer);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
     }

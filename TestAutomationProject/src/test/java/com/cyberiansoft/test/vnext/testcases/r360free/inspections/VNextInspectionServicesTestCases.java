@@ -223,7 +223,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		final String redRGBColor = "rgba(239, 83, 78, 1)";
 
 		HomeScreenSteps.openCreateMyInspection();
-		CustomersSreenSteps.selectCustomer(testcustomer);
+		CustomersScreenSteps.selectCustomer(testcustomer);
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vinNumber);
 		VehicleInfoScreenValidations.vinValidationMessageShouldExist(true);
@@ -302,7 +302,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
 		HomeScreenSteps.openCreateMyInspection();
-		CustomersSreenSteps.selectCustomer(testcustomer);
+		CustomersScreenSteps.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		vehicleInfoScreen.clickCancelMenuItem();

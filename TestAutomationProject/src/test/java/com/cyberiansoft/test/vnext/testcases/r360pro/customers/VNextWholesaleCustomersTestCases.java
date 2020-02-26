@@ -14,6 +14,7 @@ import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -37,9 +38,10 @@ public class VNextWholesaleCustomersTestCases extends BaseTestClass {
 		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
 		customersScreen.switchToWholesaleMode();
 		Assert.assertFalse(customersScreen.isAddCustomerButtonDisplayed());
-		customersScreen.searchCustomerByName(wholesaleCustomerNonExists);
+		SearchSteps.openSearchMenu();
+		SearchSteps.fillTextSearch(wholesaleCustomerNonExists);
 		Assert.assertTrue(customersScreen.isNothingFoundCaptionDisplayed());
-		customersScreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
