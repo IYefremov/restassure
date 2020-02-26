@@ -49,7 +49,7 @@ public class VNextBOHomeWebPageValidations extends VNextBOBaseWebPageValidations
 
     public static void verifyClientPortalPageIsOpened(String actualClientPortalPageUrl) {
 
-        Assert.assertTrue(actualClientPortalPageUrl.contains("ibs.cyberianconcepts.com/Billing"), "Client Portal page hasn't been opened");
+        Assert.assertTrue(actualClientPortalPageUrl.contains(".cyberianconcepts.com/Billing"), "Client Portal page hasn't been opened");
     }
 
     public static void verifyReconProBoPageIsOpened(String actualReconProBoPageUrl) {

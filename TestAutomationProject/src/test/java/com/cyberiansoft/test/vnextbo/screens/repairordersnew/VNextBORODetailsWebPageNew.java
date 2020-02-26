@@ -26,6 +26,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@class='serviceRow theader clearfix']/div[text() != '']")
     private List<WebElement> servicesTableColumnsTitles;
 
+    @FindBy(xpath = "//div[@id='reconmonitordetails-parts']//th")
+    private List<WebElement> partsTableColumnsTitles;
+
     @FindBy(xpath = "//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']")
     private List<WebElement> phaseExpanderList;
 
@@ -37,6 +40,12 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[contains(@data-bind,'completePhase') and not(contains(@style,'display: none'))]")
     private WebElement completeCurrentPhaseActionButton;
+
+    @FindBy(xpath = "//div[@class='drop checkout']/div[contains(@data-bind,'phaseCheckIn') and not(contains(@style,'display: none'))]")
+    private WebElement checkInActionButton;
+
+    @FindBy(xpath = "//div[@class='drop checkout']/div[contains(@data-bind,'phaseCheckOut') and not(contains(@style,'display: none'))]")
+    private WebElement checkOutActionButton;
 
     @FindBy(xpath = "//div[@class='drop checkout']//div[contains(@data-bind,'serviceNotes') and not(contains(@style,'display: none'))]")
     private WebElement notesActionButton;
@@ -145,6 +154,11 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     public WebElement problemIndicatorByService(String service) {
 
         return serviceRowByName(service).findElement(By.xpath(".//i[@class='icon-problem-indicator' and not(contains(@style,'display: none;'))]"));
+    }
+
+    public WebElement serviceIcon(String service) {
+
+        return serviceRowByName(service).findElement(By.xpath(".//i[@class='help']/i"));
     }
 
     public WebElement serviceNameWebElement(String service) {

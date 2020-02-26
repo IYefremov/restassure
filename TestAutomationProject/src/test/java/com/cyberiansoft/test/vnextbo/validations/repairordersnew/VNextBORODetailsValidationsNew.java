@@ -198,4 +198,35 @@ public class VNextBORODetailsValidationsNew {
         Assert.assertEquals(Utils.getText(detailsPage.serviceHelpIconHelpInfo(service)), expectedHelpInfo,
                 "Service completed date hasn't been correct");
     }
+
+    public static void verifyPhaseIsCheckedInCheckedOut(String phase, boolean shouldBeCheckedIn) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+        if (shouldBeCheckedIn) Assert.assertTrue(Utils.isElementDisplayed(detailsWebPageNew.getCheckOutActionButton()),
+                "Check Out option hasn't been displayed");
+        else Assert.assertTrue(Utils.isElementDisplayed(detailsWebPageNew.getCheckInActionButton()),
+                "Check In option hasn't been displayed");
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+    }
+
+    public static void verifyPartsTableIsDisplayed() {
+
+        List<String> expectedColumnsList = Arrays.asList("", "Work description", "Part #", "Hours", "Qty", "Part Price",
+                "Vendor Price", "Ordered From", "Status", "Phase", "Ordered Date", "Received", "Actions");
+        List<String> actualColumnsList = new VNextBORODetailsWebPageNew().getPartsTableColumnsTitles().stream().
+                map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertEquals(expectedColumnsList, actualColumnsList, "Not all columns have been displayed");
+    }
+
+    public static void verifyPartsServicesAreDisplayed() {
+
+        Assert.assertTrue(new VNextBORODetailsWebPageNew().getPartServicesNamesList().size() > 0, "Part services haven't been displayed");
+    }
+
+    public static void verifyServiceIconIsCorrect(String service, String expectedServiceIcon) {
+
+        Assert.assertEquals(new VNextBORODetailsWebPageNew().serviceIcon(service).getAttribute("class"), expectedServiceIcon,
+                "Service icon hasn't been correct");
+    }
 }

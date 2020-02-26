@@ -33,7 +33,7 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+/*	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
@@ -147,5 +147,30 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 		data.setNotesMessage(data.getNotesMessage() + RandomStringUtils.randomAlphabetic(7));
 		VNextBORODetailsValidationsNew.verifyMoreInfoSectionContainsCorrectFields();
+	}*/
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanCheckInRO(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBORODetailsStepsNew.checkInPhase(data.getPhase());
+		VNextBORODetailsValidationsNew.verifyPhaseIsCheckedInCheckedOut(data.getPhase(), true);
+		VNextBORODetailsStepsNew.checkOutPhase(data.getPhase());
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanCheckOutRO(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBORODetailsStepsNew.checkInPhase(data.getPhase());
+		VNextBORODetailsStepsNew.checkOutPhase(data.getPhase());
+		VNextBORODetailsValidationsNew.verifyPhaseIsCheckedInCheckedOut(data.getPhase(), false);
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanSeePartsOfRO(String rowID, String description, JSONObject testData) {
+
+		VNextBORODetailsValidationsNew.verifyPartsTableIsDisplayed();
+		VNextBORODetailsValidationsNew.verifyPartsServicesAreDisplayed();
 	}
 }

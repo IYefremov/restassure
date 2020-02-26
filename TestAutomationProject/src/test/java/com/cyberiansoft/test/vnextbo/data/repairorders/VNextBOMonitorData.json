@@ -1088,5 +1088,68 @@
         "Active"
       ]
     }
+  ],
+
+  "verifyUserCanCheckInRO": [
+    {
+      "rowID": "verifyUserCanCheckInRO.01",
+      "description": "Test Case 91258: User can Chek - In RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91258",
+          "testCaseTitle": "User can Chek - In RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station"
+    }
+  ],
+
+  "verifyUserCanCheckOutRO": [
+    {
+      "rowID": "verifyUserCanCheckOutRO.01",
+      "description": "Test Case 91259: User can Chek - Out RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91259",
+          "testCaseTitle": "User can Chek - Out RO"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station"
+    }
+  ],
+
+  "verifyUserCanSeePartsOfRO": [
+    {
+      "rowID": "verifyUserCanCheckOutRO.01",
+      "description": "Test Case 91261: User can see Parts of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91261",
+          "testCaseTitle": "User can see Parts of RO"
+        }
+      ]
+    }
+  ],
+
+  "verifyStartedServiceIconDiffersFromNotStarted": [
+    {
+      "rowID": "verifyStartedServiceIconDiffersFromNotStarted.01",
+      "description": "Test Case 91300: Verify that icon of the started services is different as not started",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91300",
+          "testCaseTitle": "Verify that icon of the started services is different as not started"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "PDR Station",
+      "service": "Car-Washing",
+      "serviceStatuses": [
+        "Active",
+        "Rework"
+      ]
+    }
   ]
 }

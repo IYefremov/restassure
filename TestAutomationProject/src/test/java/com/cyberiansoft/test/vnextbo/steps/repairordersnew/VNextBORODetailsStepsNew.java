@@ -103,6 +103,22 @@ public class VNextBORODetailsStepsNew {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
+    public static void checkInPhase(String phase) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+        Utils.clickElement(detailsWebPageNew.getCheckInActionButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void checkOutPhase(String phase) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+        Utils.clickElement(detailsWebPageNew.getCheckOutActionButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
     public static void setPhaseStatusIfNeeded(String phase, String expectedStatus) {
 
         if (Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase)).equals("Problem")) {
