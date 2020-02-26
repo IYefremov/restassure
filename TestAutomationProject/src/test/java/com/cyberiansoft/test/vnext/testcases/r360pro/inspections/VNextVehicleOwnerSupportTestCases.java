@@ -38,9 +38,8 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestClass {
         if (!customersScreen.isCustomerExists(testcustomer2)) {
             VNextNewCustomerScreen newcustomerscreen = customersScreen.clickAddCustomerButton();
             newcustomerscreen.createNewCustomer(testcustomer2);
-            customersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         }
-        customersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

@@ -44,7 +44,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
             newcustomerscreen.createNewCustomer(testCustomer2);
             customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         }
-        customersscreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @AfterClass()

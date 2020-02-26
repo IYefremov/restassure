@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InspectionListElement;
@@ -271,13 +272,6 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         tap(multiselectinsparchivebtn);
     }
 
-    public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButtonAndSelectCustomer(AppCustomer customer) {
-        tap(multiselectinspapprovebtn);
-        VNextCustomersScreen customersScreen = new VNextCustomersScreen(appiumdriver);
-        customersScreen.selectCustomer(customer);
-        return new VNextApproveInspectionsScreen(appiumdriver);
-    }
-
     public void changeCustomerForInspection(String inspectionNumber, AppCustomer newCustomer) {
         VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
         VNextCustomersScreen customersScreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
@@ -289,10 +283,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public void changeCustomerForWorkOrderViaSearch(String inspectionNumber, AppCustomer newCustomer) {
         VNextInspectionsMenuScreen inspectionsMenuScreen = clickOnInspectionByInspNumber(inspectionNumber);
-        VNextCustomersScreen customersScreen = inspectionsMenuScreen.clickChangeCustomerMenuItem();
-        customersScreen.switchToRetailMode();
-        customersScreen.searchCustomerByName(newCustomer.getFullName());
-        customersScreen.selectCustomer(newCustomer);
+        CustomersScreenSteps.selectCustomer(newCustomer);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Inspection customer...']"));

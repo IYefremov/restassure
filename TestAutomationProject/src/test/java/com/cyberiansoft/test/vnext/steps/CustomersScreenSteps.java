@@ -3,10 +3,11 @@ package com.cyberiansoft.test.vnext.steps;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 
-public class CustomersSreenSteps {
+public class CustomersScreenSteps {
 
     public static void selectCustomer(AppCustomer customer) {
         VNextCustomersScreen customersScreen = new VNextCustomersScreen();
@@ -42,7 +43,11 @@ public class CustomersSreenSteps {
     public static void setCustomerAsDefault(AppCustomer appCustomer) {
         VNextCustomersScreen customersScreen = new VNextCustomersScreen();
         customersScreen.setCustomerAsDefault(appCustomer);
-        WaitUtilsWebDriver.waitForTextToBePresentInElement(customersScreen.getPresetcustomerpanel(), appCustomer.getFullName());
+        WaitUtilsWebDriver.waitForTextToBePresentInElement(customersScreen.getPresetCustomerPanel(), appCustomer.getFullName());
+    }
 
+    public static void openCustomerForEdit(AppCustomer appCustomer) {
+        selectCustomer(appCustomer);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
     }
 }

@@ -75,7 +75,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
         HomeScreenSteps.openCreateMyInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.clickAddInspectionButton();
-        CustomersSreenSteps.selectCustomer(testcustomer);
+        CustomersScreenSteps.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         vehicleInfoScreen.clickCancelMenuItem();
@@ -173,7 +173,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
         HomeScreenSteps.openCreateMyInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.clickAddInspectionButton();
-        CustomersSreenSteps.clickAddCustomerButton();
+        CustomersScreenSteps.clickAddCustomerButton();
         VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
         newCustomerScreen.setCustomerFirstName(inspCustomer.getFirstName());
         newCustomerScreen.setCustomerLastName(inspCustomer.getLastName());

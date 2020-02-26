@@ -2,10 +2,12 @@ package com.cyberiansoft.test.vnext.screens.customers;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextCustomersMenuScreen;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.CustomersListElement;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -13,6 +15,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -26,6 +29,9 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//*[@data-autotests-id='customers-list']")
     private WebElement customersList;
+
+    @FindBy(xpath = "//*[@data-autotests-id='customers-list']/div")
+    private List<CustomersListElement> customersListArray;
 
     @FindBy(xpath = "//*[@action='select-customer']")
     private WebElement firstcustomer;
@@ -55,38 +61,17 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
         super(appiumdriver);
     }
 
-    public VNextBaseCustomersScreen() {
-    }
-
-
-    //todo: rewrite!!!
     public void selectCustomer(AppCustomer customer) {
-        if (WaitUtils.isElementPresent(By.xpath("//*[@action='select-retail']")))
-            if (customer.isWholesale()) {
-                if (wholesalecustomertab.isDisplayed())
-                    switchToWholesaleMode();
-            } else {
-                if (retailcustomertab.isDisplayed())
-                    switchToRetailMode();
-            }
-        if (WaitUtils.isElementPresent(By.xpath("//*[@data-automation-id='search-icon']"))) {
-            searchCustomerByName(customer.getFullName());
-        }
-        if (customersList.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")).size() > 0) {
-            WebElement elem = customersList.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']"));
-            JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-            je.executeScript("arguments[0].scrollIntoView(true);", elem);
-            //waitABit(1000);
-            tap(customersList.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
+
+        WaitUtils.waitUntilElementIsClickable(customersList);
+        if (customer.isWholesale()) {
+            switchToRetailMode();
         } else {
-            List<WebElement> ctmrs = customersList.findElements(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name']"));
-            WebElement elem = ctmrs.get(ctmrs.size() - 1);
-            JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-            je.executeScript("arguments[0].scrollIntoView(true);", elem);
-            //waitABit(1000);
-            tap(customersList.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
-            //waitABit(1000);
+            switchToWholesaleMode();
         }
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(customer.getFullName());
+        tap(customersList.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
     }
 
     public void selectCustomerByCompanyName(String customercompany) {
@@ -133,10 +118,6 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
         tap(searchbtn);
     }
 
-    public void clickCancelSearchButton() {
-        tap(cancelsearchbtn);
-    }
-
     public void typeSearchParameters(String searchtxt) {
         BaseUtils.waitABit(1000);
         if (appiumdriver.findElement(By.xpath("//*[@data-automation-id='search-icon']")).isDisplayed())
@@ -151,30 +132,5 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
         //tap(searchfld);
         searchfld.sendKeys(searchtxt);
         BaseUtils.waitABit(1000);
-    }
-
-
-    public VNextNewCustomerScreen openCustomerForEdit(AppCustomer customer) {
-        selectCustomer(customer);
-        VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(appiumdriver);
-        return customersMenuScreen.clickEditCustomerMenuItem();
-    }
-
-    public VNextCustomersScreen setCustomerAsDefault(AppCustomer customer) {
-        selectCustomer(customer);
-        VNextCustomersMenuScreen customersMenuScreen = new VNextCustomersMenuScreen(appiumdriver);
-        return customersMenuScreen.clickSetCustomerAsDefault();
-    }
-
-    public String getDefaultCustomerValue() {
-        return clientmode.getText();
-    }
-
-    public String getPresetCustomerPanelValue() {
-        return presetcustomerpanel.findElement(By.xpath(".//div[@class='notice-plate-info-name']")).getText();
-    }
-
-    public void resetPresetCustomer() {
-        presetcustomerpanel.findElement(By.xpath(".//div[@class='notice-plate-remove']")).click();
     }
 }

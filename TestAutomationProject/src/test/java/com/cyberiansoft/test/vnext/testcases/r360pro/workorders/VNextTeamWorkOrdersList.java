@@ -53,7 +53,7 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
         workOrdersScreen.switchToMyWorkordersView();
         WorkOrderSteps.clickAddWorkOrderButton();
-        CustomersSreenSteps.selectCustomer(testcustomer);
+        CustomersScreenSteps.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
@@ -82,7 +82,7 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
         workOrdersScreen.switchToMyWorkordersView();
         WorkOrderSteps.clickAddWorkOrderButton();
-        CustomersSreenSteps.selectCustomer(testcustomer);
+        CustomersScreenSteps.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
@@ -113,7 +113,7 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
         workOrdersScreen.switchToMyWorkordersView();
         WorkOrderSteps.clickAddWorkOrderButton();
-        CustomersSreenSteps.selectCustomer(testcustomer);
+        CustomersScreenSteps.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();

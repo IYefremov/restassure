@@ -8,7 +8,6 @@ public class CustomersInteractions {
 
     public static boolean isCustomerExists(AppCustomer customer) {
         VNextCustomersScreen customersScreen = new VNextCustomersScreen();
-        customersScreen.searchCustomerByName(customer.getFullName());
-        return customersScreen.getCustomersList().findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;
+        return customersScreen.isCustomerExists(customer);
     }
 }
