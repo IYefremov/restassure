@@ -182,4 +182,15 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         VNextBOModalDialogSteps.clickOkButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyCurrentLocationIsVisibleAfterLocationDropDownIsClicked(String rowID, String description, JSONObject testData) {
+
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOBreadCrumbInteractions.openLocationDropDown();
+        Assert.assertEquals(VNextBOBreadCrumbInteractions.getActiveLocationValue(), data.getLocation(),
+                "The selected location hasn't been displayed");
+        VNextBOBreadCrumbInteractions.closeLocationDropDown();
+    }
 }

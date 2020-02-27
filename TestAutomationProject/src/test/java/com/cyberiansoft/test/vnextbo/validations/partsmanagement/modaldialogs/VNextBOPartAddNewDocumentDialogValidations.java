@@ -11,4 +11,9 @@ public class VNextBOPartAddNewDocumentDialogValidations {
                 new VNextBOPartAddNewDocumentDialog().getAddNewDocumentDialog(), opened);
         Assert.assertTrue(visible, "The 'Add New Document' dialog hasn't been opened/closed");
     }
+
+    public static boolean isWarningMessageDisplayed() {
+        return WaitUtilsWebDriver.waitForAttributeToContain(
+                new VNextBOPartAddNewDocumentDialog().getWarningMessage(), "class", "invalid", 3);
+    }
 }

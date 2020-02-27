@@ -37,7 +37,7 @@
         "woNum": "O-000-152735"
       },
       "partData": {
-        "service": "roz_part_brake",
+        "service": "roz_part_full_cat",
         "description": "Auto-test",
         "category": "Brake",
         "subcategory": "Assortments",
@@ -46,10 +46,7 @@
         ]
       },
       "documentData": {
-        "type": "Credit Memo",
-        "number": "5",
-        "notes": "auto-test",
-        "amount": "8"
+        "type": "Credit Memo"
       }
     },
     {
@@ -65,7 +62,7 @@
         "woNum": "O-000-152735"
       },
       "partData": {
-        "service": "roz_part_brake",
+        "service": "roz_part_full_cat",
         "description": "Auto-test",
         "category": "Brake",
         "subcategory": "Assortments",
@@ -75,9 +72,109 @@
       },
       "documentData": {
         "type": "Vendor Invoice",
-        "number": "3",
-        "notes": "auto-test",
-        "amount": "12"
+        "attachment": "/resources/sunrise.png"
+      }
+    }
+  ],
+  "verifyUserCanNotAddNewDocumentWithoutRequiredFieldsAndCancelDeletion": [
+    {
+      "rowID": "verifyUserCanNotAddNewDocumentWithoutRequiredFieldsAndCancelDeletion.01",
+      "description": "User can't add New Document without required fields + cancel deletion",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92862"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152735"
+      },
+      "partData": {
+        "service": "roz_part_full_cat",
+        "description": "Auto-test",
+        "category": "Brake",
+        "subcategory": "Assortments",
+        "partItems": [
+          "Brake Fitting Assortment"
+        ]
+      },
+      "documentData": {
+        "type": "Credit Memo"
+      }
+    }
+  ],
+  "verifyUserCanDuplicateThePart": [
+    {
+      "rowID": "verifyUserCanDuplicateThePart.01",
+      "description": "Test case 84003: User can Duplicate the Part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91179"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152787"
+      }
+    }
+  ],
+  "verifyUserCanCancelDuplicatingThePartWithXIcon": [
+    {
+      "rowID": "verifyUserCanCancelDuplicatingThePartWithXIcon.01",
+      "description": "Test Case 84005: User can cancel Duplicating of the Part (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91180"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152787"
+      }
+    }
+  ],
+  "verifyUserCanCancelDuplicatingThePartWithCancelButton": [
+    {
+      "rowID": "verifyUserCanCancelDuplicatingThePartWithCancelButton.01",
+      "description": "Test Case 84006: User can cancel Duplicating of the Part (Cancel)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91181"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152787"
+      }
+    }
+  ],
+  "verifyUserCanAddNotes": [
+    {
+      "rowID": "verifyUserCanAddNotes.01",
+      "description": "Test case 84001: User can Add \"Notes\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91176"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152787"
+      }
+    }
+  ],
+  "verifyUserCanTypeButNotSaveNote": [
+    {
+      "rowID": "verifyUserCanTypeButNotSaveNote.01",
+      "description": "Test case 84002: User can type but not save \"Note\" (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91177"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152787"
       }
     }
   ]

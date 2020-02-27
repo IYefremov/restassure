@@ -118,7 +118,6 @@ public class DriverBuilder {
 
                 capabilities.setCapability(ChromeOptions.CAPABILITY, selenoidChromeOptions);
                 webcap = capabilities;
-                System.out.println(System.getProperty("azure.url"));
                 RemoteWebDriver driver = new RemoteWebDriver(
                         URI.create(VNextBOConfigInfo.getInstance().getAzureURL()).toURL(),
                         capabilities

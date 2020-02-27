@@ -47,7 +47,7 @@ public class VNextBOConfirmationDialogInteractions {
 
     public static String getConfirmationDialogMessage() {
         final VNextBOConfirmationDialog dialog = new VNextBOConfirmationDialog();
-        WaitUtilsWebDriver.elementShouldBeVisible(dialog.getConfirmDialog(), true, 3);
+        WaitUtilsWebDriver.elementShouldBeVisible(dialog.getConfirmDialog(), true, 2);
         return Utils.getText(dialog.getDialogMessagesList())
                 .stream().filter(message -> !message.isEmpty()).findFirst().orElse("");
     }

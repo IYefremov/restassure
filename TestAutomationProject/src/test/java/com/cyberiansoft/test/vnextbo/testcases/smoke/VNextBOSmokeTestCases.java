@@ -125,7 +125,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.duplicatePartByNumberInList(0);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsCorrect(numberOfParts + 1);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts + 1);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
@@ -140,7 +140,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartItems()[0]));
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getWoNum());
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsCorrect(numberOfParts - 1);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts - 1);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)

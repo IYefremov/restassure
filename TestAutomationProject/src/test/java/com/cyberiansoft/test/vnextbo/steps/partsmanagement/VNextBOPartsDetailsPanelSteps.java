@@ -17,6 +17,7 @@ import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOConfirmati
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAddNewPartDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPMNotesDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartDocumentsDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogValidations;
 import org.openqa.selenium.WebElement;
@@ -114,10 +115,16 @@ public class VNextBOPartsDetailsPanelSteps {
 
     public static void duplicatePartByNumberInList(int partNumber) {
 
+        openDuplicateDialogByNumberInList(partNumber);
+        VNextBOModalDialogSteps.clickYesButton();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void openDuplicateDialogByNumberInList(int partNumber) {
+
         VNextBOPartsDetailsPanelInteractions.clickActionsButtonForPartByNumberInList(partNumber);
         VNextBOPartsDetailsPanelInteractions.clickDuplicateActionButtonForPartByNumberInList(partNumber);
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
-        VNextBOModalDialogSteps.clickYesButton();
     }
 
     public static void deletePartByNumberInList(int partNumber) {
@@ -133,6 +140,13 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOPartsDetailsPanelInteractions.clickActionsButtonForPartByNumberInList(partNumber);
         VNextBOPartsDetailsPanelInteractions.clickDocumentsActionButtonForPartByNumberInList(partNumber);
         VNextBOPartDocumentsDialogValidations.verifyPartDocumentsDialogIsOpened(true);
+    }
+
+    public static void openNotesDialogByNumberInList(int partNumber) {
+
+        VNextBOPartsDetailsPanelInteractions.clickActionsButtonForPartByNumberInList(partNumber);
+        VNextBOPartsDetailsPanelInteractions.clickNotesActionButtonForPartByNumberInList(partNumber);
+        VNextBOPMNotesDialogValidations.verifyNotesDialogIsOpened(true);
     }
 
     public static void expandLaborBlockForPartByNumberInList(int partNumber) {
@@ -266,5 +280,25 @@ public class VNextBOPartsDetailsPanelSteps {
     public static void clickDeleteServicesAndCancel() {
         clickDeleteServices();
         VNextBOConfirmationDialogInteractions.clickNoButton();
+    }
+
+    public static void clickDuplicatePartsAndCancelWithXIcon(int partNumber) {
+        VNextBOPartsDetailsPanelSteps.openDuplicateDialogByNumberInList(partNumber);
+        VNextBOConfirmationDialogInteractions.closeDialogWithXIcon();
+        Assert.assertTrue(VNextBOConfirmationDialogValidations.isConfirmationDialogOpened(false),
+                "The confirmation dialog hasn't been closed");
+    }
+
+    public static void clickDuplicatePartsAndCancel(int partNumber) {
+        VNextBOPartsDetailsPanelSteps.openDuplicateDialogByNumberInList(partNumber);
+        VNextBOConfirmationDialogInteractions.clickNoButton();
+        Assert.assertTrue(VNextBOConfirmationDialogValidations.isConfirmationDialogOpened(false),
+                "The confirmation dialog hasn't been closed");
+    }
+
+    public static void updatePartsListAfterDuplicating(String woNum, int expectedPartsAmount) {
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount);
+        VNextBOPartsDetailsPanelValidations.verifyDuplicatePartIsAdded(woNum, expectedPartsAmount);
     }
 }

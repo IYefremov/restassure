@@ -5,11 +5,12 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
-import io.appium.java_client.functions.ExpectedCondition;
 import org.apache.commons.lang.RandomStringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -209,11 +210,28 @@ public class VNextBOPartsDetailsPanelInteractions {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getDuplicateActionButton().get(partNumber));
     }
 
+    public static void clickNotesActionButtonForPartByNumberInList(int partNumber) {
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getNotesActionButton().get(partNumber));
+    }
+
     public static void clickDeleteActionButtonForPartByNumberInList(int partNumber) {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getDeleteActionButton().get(partNumber));
     }
 
     public static void clickDocumentsActionButtonForPartByNumberInList(int partNumber) {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getDocumentsActionButton().get(partNumber));
+    }
+
+    public static String getFormattedInputField(WebElement inputField) {
+        return Utils.getInputFieldValue(inputField, 3)
+                .replace("$", "")
+                .replaceAll("[.][0-9]{2}", "");
+    }
+
+    public static void updatePartsAmount(int expectedPartsAmount) {
+        try {
+            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
+                    VNextBOPartsDetailsPanelSteps.getPartsListSize() == expectedPartsAmount);
+        } catch (Exception ignored) {}
     }
 }

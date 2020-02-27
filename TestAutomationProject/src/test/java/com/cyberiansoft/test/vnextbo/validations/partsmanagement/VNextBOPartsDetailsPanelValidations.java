@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -55,14 +56,17 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Actions menu hasn't been displayed");
     }
 
-    public static void verifyPartsAmountIsCorrect(int expectedPartsAmount) {
-
-        try {
-            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
-                    VNextBOPartsDetailsPanelSteps.getPartsListSize() == expectedPartsAmount);
-        } catch (Exception ignored) {}
+    public static void verifyPartsAmountIsUpdated(int expectedPartsAmount) {
+        VNextBOPartsDetailsPanelInteractions.updatePartsAmount(expectedPartsAmount);
         Assert.assertEquals(VNextBOPartsDetailsPanelSteps.getPartsListSize(), expectedPartsAmount,
                 "Parts amount hasn't been correct");
+    }
+
+    public static void verifyDuplicatePartIsAdded(String woNum, int expectedPartsAmount) {
+        if (!isLaborsExtenderVisible(expectedPartsAmount)) {
+            VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+            verifyPartsAmountIsUpdated(expectedPartsAmount);
+        }
     }
 
     public static void verifyLaborBlockIsDisplayed(int partNumber, boolean shouldBeMaximized) {
@@ -241,5 +245,54 @@ public class VNextBOPartsDetailsPanelValidations {
     public static void verifyPartIsDisplayed(String... partNames) {
         Arrays.asList(partNames).forEach(part -> Assert.assertTrue(
                 VNextBOPartsDetailsPanelValidations.isPartDisplayed(part), "The part is not displayed"));
+    }
+
+    public static void verifyLaborsExtenderIsDisplayed(int partNumber) {
+        final boolean visible = isLaborsExtenderVisible(partNumber);
+        Assert.assertTrue(visible, "The labors extender hasn't been displayed");
+    }
+
+    private static boolean isLaborsExtenderVisible(int partNumber) {
+        try {
+            return WaitUtilsWebDriver.elementShouldBeVisible(
+                    new VNextBOPartsDetailsPanel().getLaborsExpander().get(partNumber), true);
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    public static void verifyPartCheckboxIsDisplayed(int partNumber) {
+        final boolean visible = WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOPartsDetailsPanel().getPartCheckboxesList().get(partNumber), true);
+        Assert.assertTrue(visible, "The part checkbox hasn't been displayed");
+    }
+
+    public static void verifyPartVendorPriceValue(int partNumber, String expected) {
+        final String vendorPrice =
+                VNextBOPartsDetailsPanelInteractions.getFormattedInputField(new VNextBOPartsDetailsPanel().getPartVendorPriceField().get(partNumber));
+        Assert.assertEquals(vendorPrice, expected, "The part vendor price is not displayed properly");
+    }
+
+    public static void verifyPartPriceValue(int partNumber, String expected) {
+        final String vendorPrice =
+                VNextBOPartsDetailsPanelInteractions.getFormattedInputField(new VNextBOPartsDetailsPanel().getPartPriceField().get(partNumber));
+        Assert.assertEquals(vendorPrice, expected, "The part price is not displayed properly");
+    }
+
+    public static void verifyPartLaborCreditValue(int partNumber, String expected) {
+        final String vendorPrice =
+                VNextBOPartsDetailsPanelInteractions.getFormattedInputField(new VNextBOPartsDetailsPanel().getPartLaborCreditField().get(partNumber));
+        Assert.assertEquals(vendorPrice, expected, "The part labor credit is not displayed properly");
+    }
+
+    public static void verifyPartQuantityValue(int partNumber, String expected) {
+        final String vendorPrice =
+                VNextBOPartsDetailsPanelInteractions.getFormattedInputField(new VNextBOPartsDetailsPanel().getPartQuantityField().get(partNumber));
+        Assert.assertEquals(vendorPrice, expected, "The part quantity is not displayed properly");
+    }
+
+    public static void verifyPartDefaultValues(int partNumber) {
+        verifyPartVendorPriceValue(partNumber, "0");
+        verifyPartLaborCreditValue(partNumber, "0");
     }
 }
