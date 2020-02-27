@@ -40,7 +40,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         Utils.refreshPage();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDeleteThePart(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
@@ -55,7 +55,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts - 1);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddNewDocumentAndDeleteIt(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
@@ -74,7 +74,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartDocumentsDialogInteractions.closePartDocumentsDialog();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanNotAddNewDocumentWithoutRequiredFieldsAndCancelDeletion(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
@@ -108,7 +108,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartDocumentsDialogInteractions.closePartDocumentsDialog();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDuplicateThePart(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
@@ -126,7 +126,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelDuplicatingThePartWithXIcon(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
@@ -139,7 +139,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelSteps.updatePartsListAfterDuplicating(woNum, numberOfParts);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCancelDuplicatingThePartWithCancelButton(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
@@ -152,7 +152,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelSteps.updatePartsListAfterDuplicating(woNum, numberOfParts);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddNotes(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
@@ -170,7 +170,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPMNotesDialogSteps.closeNoteDialog();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanTypeButNotSaveNote(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
