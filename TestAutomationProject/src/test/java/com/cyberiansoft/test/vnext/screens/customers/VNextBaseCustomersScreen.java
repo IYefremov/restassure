@@ -74,13 +74,6 @@ public class VNextBaseCustomersScreen extends VNextBaseScreen {
         tap(customersList.findElement(By.xpath(".//*[@action='select']/p[@class='list-item-text list-item-name' and text()='" + customer.getFullName() + "']")));
     }
 
-    public void selectCustomerByCompanyName(String customercompany) {
-        WebElement elem = customersList.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]"));
-        JavascriptExecutor je = (JavascriptExecutor) appiumdriver;
-        je.executeScript("arguments[0].scrollIntoView(true);", elem);
-        tap(customersList.findElement(By.xpath(".//p[@class='list-item-text list-item-name' and contains(text(), '" + customercompany + "')]")));
-        BaseUtils.waitABit(1000);
-    }
 
     public boolean isCustomerExists(AppCustomer customer) {
         searchCustomerByName(customer.getFullName());

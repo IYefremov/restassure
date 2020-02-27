@@ -4,9 +4,10 @@ import lombok.Getter;
 
 public enum MenuItems {
     EDIT("Edit"),
-    SAVE("Save Inspection"),
-    CANCEL("Cancel Inspection"),
-    EMAIL("Email Inspection"),
+    DELETE("Delete"),
+    SAVE_INPSECTION("Save Inspection"),
+    CANCEL_INPSECTION("Cancel Inspection"),
+    EMAIL_INPSECTION("Email Inspection"),
     APPROVE("Approve"),
     VIEW("View"),
     ARCHIVE("Archive"),
@@ -32,6 +33,7 @@ public enum MenuItems {
     VIEW_SUPPLEMENT("View Supplement"),
     ADD_SUPPLEMENT("Add Supplement"),
     CREATE_WORK_ORDER("Create Work Order"),
+    CREATE_INVOICE("Create Invoice"),
     CHANGE_PO("Change PO#"),
     RESET_START_DATE("Reset Start Date");
 

@@ -58,7 +58,7 @@ public class VNextEmailInspectionsTestCases extends BaseTestClass {
         HomeScreenSteps.openInspections();
         inspectionsList.stream().forEach(InspectionSteps::selectInspection);
         InspectionSteps.clickEmailButton();
-        CustomersScreenSteps.selectCustomer(retailCustomerList.get(0));
+        SelectCustomerScreenSteps.selectCustomer(retailCustomerList.get(0));
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
         ScreenNavigationSteps.pressBackButton();

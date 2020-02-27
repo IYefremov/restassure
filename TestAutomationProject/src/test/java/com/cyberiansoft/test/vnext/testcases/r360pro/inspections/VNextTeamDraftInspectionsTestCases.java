@@ -9,6 +9,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -132,7 +133,9 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestClass {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
+        CustomersScreenSteps.selectCustomer(testcustomer);
+        InspectionSteps.selectInspectionType(InspectionTypes.O_KRAMAR3);
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         InspectionSteps.trySaveInspection();
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         baseWizardScreen.clcikSaveViaMenuAsFinal();

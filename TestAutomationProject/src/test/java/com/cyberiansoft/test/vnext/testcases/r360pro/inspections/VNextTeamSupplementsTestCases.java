@@ -279,7 +279,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
 
         InspectionSteps.trySaveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        MenuSteps.selectMenuItem(MenuItems.EMAIL);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
 

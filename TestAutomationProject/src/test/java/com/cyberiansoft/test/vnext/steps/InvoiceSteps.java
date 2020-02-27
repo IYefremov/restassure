@@ -24,6 +24,7 @@ public class InvoiceSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String invoiceNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveInvoiceAsDraft();
+        BaseUtils.waitABit(30000);
         return invoiceNumber;
     }
 

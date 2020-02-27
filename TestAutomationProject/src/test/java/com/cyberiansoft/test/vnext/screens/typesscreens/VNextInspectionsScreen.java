@@ -52,7 +52,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     @FindBy(xpath = "//*[@data-autotests-id='inspections-list']/div")
     private List<InspectionListElement> inspectionsList;
 
-    final public static int MAX_NUMBER_OF_INPECTIONS = 50;
+    final public static int MAX_NUMBER_OF_INPECTIONS = 51;
 
     public VNextInspectionsScreen(WebDriver appiumdriver) {
         super(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
