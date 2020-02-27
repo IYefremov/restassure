@@ -3,12 +3,9 @@
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnext.listeners.TestServiceListener"/>
     </listeners>
-    <parameter name="bo.url" value="https://reconpro.qc.cyberianconcepts.com"  />
     <parameter name="lic.name" value="OKramar_android2"  />
     <test name="Tests for VNext client" group-by-instances="true">
         <classes>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamPresetCustomerTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamInspectionNotesTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextApproveTeamInspectionsTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextTeamClaimInfoScreenTestCases"/>
@@ -56,6 +53,8 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.vehicleparts.BasicVehiclePartsTests"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhase"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhaseAndService"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamPresetCustomerTestCases"/>
         </classes>
     </test>
 </suite>

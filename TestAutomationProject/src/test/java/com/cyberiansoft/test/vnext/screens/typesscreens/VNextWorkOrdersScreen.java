@@ -3,12 +3,14 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
+import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
@@ -107,10 +109,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         return workorderslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + woNumber + "']")).size() > 0;
     }
 
-    public int getNumberOfSelectedWorkOrders() {
-        return Integer.parseInt(rootElement.findElement(By.xpath(".//span[@class='selected-items-counter']")).getText());
-    }
-
     public VNextHomeScreen clickBackButton() {
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
         clickScreenBackButton();
@@ -169,17 +167,20 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         switchToMyView();
     }
 
+    //todo: make it as step
     public void changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-        VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
-        changeCustomerScreen.switchToRetailMode();
-        changeCustomerScreen.searchCustomerByName(newCustomer.getFullName());
-        changeCustomerScreen.selectCustomer(newCustomer);
+        workOrdersMenuScreen.clickChangeCustomerMenuItem();
+        CustomersScreenSteps.selectCustomer(newCustomer);
+        //changeCustomerScreen.switchToRetailMode();
+        //changeCustomerScreen.searchCustomerByName(newCustomer.getFullName());
+        //changeCustomerScreen.selectCustomer(newCustomer);
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
     }
 
+    //todo: make it as step (rewrite)
     public void changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
         VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
         VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();

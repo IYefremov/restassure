@@ -9,8 +9,10 @@ import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
+import com.cyberiansoft.test.vnext.steps.InspectionSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.openqa.selenium.WebDriver;
@@ -28,8 +30,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate VIN field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateVINFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextLoginScreen loginScreen = homeScreen.clickLogoutButton();
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
 		webdriver.get(deviceOfficeUrl);
@@ -48,17 +50,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 
-		loginscreen.updateMainDB();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
-		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
+		homeScreen = loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.selectCustomer(testcustomer);
+
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.VIN, false);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		InspectionSteps.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 		backofficeheader.clickCompanyLink();
 
 		insptypepage = new InspectionTypesWebPage(webdriver);
@@ -68,18 +70,16 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		webdriver.quit();
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
+		loginScreen = homeScreen.clickLogoutButton();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
-		vehicleInfoScreen = new VNextVehicleInfoScreen();
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		customersScreen.selectCustomer(testcustomer);
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.VIN, true);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		InspectionSteps.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Parameters({"user.name", "user.psw"})
@@ -87,8 +87,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Make field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateMakeFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextLoginScreen loginScreen = homeScreen.clickLogoutButton();
 
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -108,17 +108,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 
-		loginscreen.updateMainDB();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		homeScreen = loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MAKE, false);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 		backofficeheader.clickCompanyLink();
 
 		insptypepage = new InspectionTypesWebPage(webdriver);
@@ -129,18 +129,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		webdriver.quit();
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
+		loginScreen = homeScreen.clickLogoutButton();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		customersScreen.selectCustomer(testcustomer);
 		vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MAKE, true);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Parameters({"user.name", "user.psw"})
@@ -148,8 +147,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Model field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateModelFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextLoginScreen loginScreen = homeScreen.clickLogoutButton();
 
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -169,18 +168,18 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 
-		loginscreen.updateMainDB();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		homeScreen = loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MODEL, false);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 		backofficeheader.clickCompanyLink();
 
 		insptypepage = new InspectionTypesWebPage(webdriver);
@@ -191,19 +190,18 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		webdriver.quit();
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
+		loginScreen = homeScreen.clickLogoutButton();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		customersScreen.selectCustomer(testcustomer);
 		vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MODEL, true);
 
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Parameters({"user.name", "user.psw"})
@@ -211,8 +209,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Color field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateColorFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextLoginScreen loginScreen = homeScreen.clickLogoutButton();
 
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -232,18 +230,18 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 
-		loginscreen.updateMainDB();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		homeScreen = loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.COLOR, false);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 		backofficeheader.clickCompanyLink();
 
 		insptypepage = new InspectionTypesWebPage(webdriver);
@@ -253,18 +251,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		webdriver.quit();
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
+		loginScreen = homeScreen.clickLogoutButton();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		customersScreen.selectCustomer(testcustomer);
 		vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.COLOR, true);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Parameters({"user.name", "user.psw"})
@@ -272,8 +269,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Year field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateYearFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextLoginScreen loginScreen = homeScreen.clickLogoutButton();
 
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -293,17 +290,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 
-		loginscreen.updateMainDB();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.YEAR, false);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 		backofficeheader.clickCompanyLink();
 
 		insptypepage = new InspectionTypesWebPage(webdriver);
@@ -313,18 +310,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		webdriver.quit();
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
+		homeScreen.clickLogoutButton();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		customersScreen.selectCustomer(testcustomer);
 		vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.YEAR, true);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Parameters({"user.name", "user.psw"})
@@ -332,8 +328,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Stock # field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateStockNumberFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextLoginScreen loginScreen = homeScreen.clickLogoutButton();
 
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -353,17 +349,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 
-		loginscreen.updateMainDB();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.STOCK_NO, false);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 		backofficeheader.clickCompanyLink();
 
 		insptypepage = new InspectionTypesWebPage(webdriver);
@@ -373,18 +369,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		webdriver.quit();
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
+		homeScreen.clickLogoutButton();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		customersScreen.selectCustomer(testcustomer);
 		vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.STOCK_NO, true);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Parameters({"user.name", "user.psw"})
@@ -392,8 +387,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate RO # field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateRONumberFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextLoginScreen loginScreen = homeScreen.clickLogoutButton();
 
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -413,17 +408,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 
-		loginscreen.updateMainDB();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.RO_NO, false);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 		backofficeheader.clickCompanyLink();
 
 		insptypepage = new InspectionTypesWebPage(webdriver);
@@ -433,18 +428,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		webdriver.quit();
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
+		homeScreen.clickLogoutButton();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		customersScreen.selectCustomer(testcustomer);
 		vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.RO_NO, true);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Parameters({"user.name", "user.psw"})
@@ -452,8 +446,8 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 			description = "Validate Mileage field on Vehicle screen reflects 'Visible' ON/OFF")
 	public void testValidateMileageFieldOnVehicleScreenReflectsVisibleONOFF(String deviceuser, String devicepsw) {
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextLoginScreen loginscreen = homescreen.clickLogoutButton();
+        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextLoginScreen loginScreen = homeScreen.clickLogoutButton();
 
 		WebDriver
 				webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
@@ -473,17 +467,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 
-		loginscreen.updateMainDB();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		VNextCustomersScreen customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+		customersScreen.selectCustomer(testcustomer);
 		VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MILAGE, false);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 		backofficeheader.clickCompanyLink();
 
 		insptypepage = new InspectionTypesWebPage(webdriver);
@@ -493,18 +487,17 @@ public class VNextVehicleScreenFieldsReflectingOnBOSettings extends BaseTestCase
 		vehicleinfosettingspage.clickUpdateButton();
 		vehicleinfosettingspage.closeNewTab(mainWindowHandle);
 		webdriver.quit();
-		loginscreen = homescreen.clickLogoutButton();
-		loginscreen.updateMainDB();
+		homeScreen.clickLogoutButton();
+		loginScreen.updateMainDB();
 
-		homescreen = loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
-		inspectionsscreen = homescreen.clickInspectionsMenuItem();
-		customersscreen = inspectionsscreen.clickAddInspectionButton();
-		customersscreen.selectCustomer(testcustomer);
+		loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeeLastName());
+		HomeScreenSteps.openCreateMyInspection();
+		customersScreen.selectCustomer(testcustomer);
 		vehicleInfoScreen = new VNextVehicleInfoScreen();
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenValidations.dataFiledShouldBeVisible(VehicleDataField.MILAGE, true);
-		inspectionsscreen = vehicleInfoScreen.cancelInspection();
-		inspectionsscreen.clickBackButton();
+		vehicleInfoScreen.cancelInspection();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 }

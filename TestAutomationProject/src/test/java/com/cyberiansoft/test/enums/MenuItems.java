@@ -11,6 +11,7 @@ public enum MenuItems {
     VIEW("View"),
     ARCHIVE("Archive"),
     CHANGE_CUSTOMER("Change Customer"),
+    SET_AS_DEFAULT("Set as Default"),
     ASSIGN_TECH("Assign Tech"),
     START("Start"),
     STOP("Stop"),
@@ -30,6 +31,8 @@ public enum MenuItems {
     SUPPLEMENT("Supplement"),
     VIEW_SUPPLEMENT("View Supplement"),
     ADD_SUPPLEMENT("Add Supplement"),
+    CREATE_WORK_ORDER("Create Work Order"),
+    CHANGE_PO("Change PO#"),
     RESET_START_DATE("Reset Start Date");
 
 

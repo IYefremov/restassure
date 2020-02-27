@@ -52,7 +52,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
-			CustomersSreenSteps.selectCustomer(testcustomer);
+			CustomersScreenSteps.selectCustomer(testcustomer);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -97,15 +97,14 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			if (!customersscreen.isCustomerExists(workOrderData.getWorlOrderRetailCustomer())) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(workOrderData.getWorlOrderRetailCustomer());
-                customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			}
 		}
-		customersscreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
         homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
-			CustomersSreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
+			CustomersScreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -152,16 +151,15 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			if (!customersscreen.isCustomerExists(workOrderData.getWorlOrderRetailCustomer())) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(workOrderData.getWorlOrderRetailCustomer());
-                customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			}
 		}
-		customersscreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
         homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			for (int i = 0; i < wosToCreate; i++) {
 				WorkOrderSteps.clickAddWorkOrderButton();
-				CustomersSreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
+				CustomersScreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
 				VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
                 HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 				VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -218,15 +216,14 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			if (!customersscreen.isCustomerExists(workOrderData.getWorlOrderRetailCustomer())) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(workOrderData.getWorlOrderRetailCustomer());
-                customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			}
 		}
-		customersscreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
         homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
-			CustomersSreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
+			CustomersScreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -280,7 +277,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
-			CustomersSreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
+			CustomersScreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -325,15 +322,14 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			if (!customersscreen.isCustomerExists(workOrderData.getWorlOrderRetailCustomer())) {
 				VNextNewCustomerScreen newcustomerscreen = customersscreen.clickAddCustomerButton();
 				newcustomerscreen.createNewCustomer(workOrderData.getWorlOrderRetailCustomer());
-                customersscreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			}
 		}
-		customersscreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
         homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
-			CustomersSreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
+			CustomersScreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
             HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());

@@ -797,5 +797,59 @@
         "poNumber": "12345"
       }
     }
+  ],
+  "testVerifyUserCanAddSeveralQuickNotes": [
+    {
+      "rowID": "testVerifyUserCanAddSeveralQuickNotes.01",
+      "description": "Test Case 92218: Verify user can add several Quick notes.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92218",
+          "testCaseTitle": "Verify user can add several Quick notes."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
+      },
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
+      }
+    }
+  ],
+  "testVerifyMotesDisplaysOnTeamInvoiceListAfterAddingOnMyInvoiceList": [
+    {
+      "rowID": "testVerifyMotesDisplaysOnTeamInvoiceListAfterAddingOnMyInvoiceList.01",
+      "description": "Test Case 92211: Verify Notes displays on Team Invoice list after adding on My Invoice list.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92211",
+          "testCaseTitle": "Verify Notes displays on Team Invoice list after adding on My Invoice list."
+        }
+      ],
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
+      },
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
+      }
+    }
   ]
 }

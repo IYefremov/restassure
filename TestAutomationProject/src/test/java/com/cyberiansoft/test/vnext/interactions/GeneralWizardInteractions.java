@@ -30,4 +30,9 @@ public class GeneralWizardInteractions {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         WaitUtils.click(baseWizardScreen.getCancelSearchBtn());
     }
+
+    public static boolean isSearchFilterEmpty() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        return baseWizardScreen.isSearchFilterEmpty();
+    }
 }

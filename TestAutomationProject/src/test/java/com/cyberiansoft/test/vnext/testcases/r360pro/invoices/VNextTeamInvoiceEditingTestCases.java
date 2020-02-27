@@ -448,7 +448,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
         workOrdersScreen.switchToMyWorkordersView();
         WorkOrderSteps.clickAddWorkOrderButton();
-        CustomersSreenSteps.selectCustomer(testcustomer);
+        CustomersScreenSteps.selectCustomer(testcustomer);
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();

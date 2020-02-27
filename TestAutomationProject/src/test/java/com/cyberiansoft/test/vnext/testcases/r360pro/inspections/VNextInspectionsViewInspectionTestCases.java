@@ -62,7 +62,7 @@ public class VNextInspectionsViewInspectionTestCases extends BaseTestClass {
         final String countryAbbreviation = "US";
 
         HomeScreenSteps.openCreateMyInspection();
-        CustomersSreenSteps.createNewRetailCustomer(retailCustomer);
+        CustomersScreenSteps.createNewRetailCustomer(retailCustomer);
         InspectionSteps.selectInspectionType(InspectionTypes.O_KRAMAR);
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         String inspectionNumber = InspectionSteps.saveInspection();

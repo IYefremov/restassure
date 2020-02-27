@@ -14,6 +14,22 @@
       }
     }
   ],
+  "userCanEditNoteFromTeamInspectionsList": [
+    {
+      "rowID": "userCanEditNoteFromTeamInspectionsList.01",
+      "description": "Test Case 67744: Verify User can edit Notes from Team Inspection list",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92196",
+          "testCaseTitle": "Verify User can edit Notes from Team Inspection list."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+
   "userCanSeeNotesFromMyInspectionsInTeamInspections": [
     {
       "rowID": "userCanSeeNotesFromMyInspectionsInTeamInspections.01",
@@ -29,44 +45,14 @@
       }
     }
   ],
-  "userCanSeeNotesFromTeamInspectionsInMyInspections": [
+  "testVerifyNotesIconDisplaysIfUserAddNotesForInspectionMyTeam": [
     {
-      "rowID": "testVerifyNotesDisplaysOnMyInspectionListAfterAddingOnTeamInspectionList.01",
-      "description": "Test Case 67747:Verify Notes displays on Team Inspection list after adding on My Inspection list, Test Case 67748:Verify Notes icon displays if user add Notes for Inspection My/Team, Test Case 67750:Verify saving text note on tapping 'Back' button",
+      "rowID": "testVerifyNotesIconDisplaysIfUserAddNotesForInspectionMyTeam.01",
+      "description": "Test Case 92200: Verify Notes icon displays if user add Notes for Inspection My/Team",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "92199",
-          "testCaseTitle": "Verify Notes displays on Team Inspection list after adding on My Inspection list."
-        }
-      ],
-      "vihicleInfo": {
-        "vinNumber": "WDBFA67E1SFA946591"
-      }
-    }
-  ],
-  "testVerifyQuickNotesAreAddedAsNewLinesOfText": [
-    {
-      "rowID": "testVerifyQuickNotesAreAddedAsNewLinesOfText.01",
-      "description": "Test Case 67751:Verify quick notes are added as new lines of text",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "92203",
-          "testCaseTitle": "Verify quick notes are added as new lines of text"
-        }
-      ],
-      "vihicleInfo": {
-        "vinNumber": "WDBFA67E1SFA946591"
-      }
-    }
-  ],
-  "testVerifyUserCanAddSeveralQuickNotes": [
-    {
-      "rowID": "testVerifyUserCanAddSeveralQuickNotes.01",
-      "description": "Test Case 67754:Verify user can add several Quick notes",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "92206",
-          "testCaseTitle": "Verify user can add several Quick notes"
+          "testCaseID": "92200",
+          "testCaseTitle": "Verify Notes icon displays if user add Notes for Inspection My/Team."
         }
       ],
       "vihicleInfo": {
@@ -89,6 +75,36 @@
       }
     }
   ],
+  "testVerifySavingTextNoteOnTappingBackButton": [
+    {
+      "rowID": "testVerifySavingTextNoteOnTappingBackButton.01",
+      "description": "Test Case : Verify saving text note on tapping 'Back' button.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92202",
+          "testCaseTitle": "Verify saving text note on tapping 'Back' button."
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "testVerifyQuickNotesAreAddedAsNewLinesOfText": [
+    {
+      "rowID": "testVerifyQuickNotesAreAddedAsNewLinesOfText.01",
+      "description": "Test Case 67751:Verify quick notes are added as new lines of text",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92203",
+          "testCaseTitle": "Verify quick notes are added as new lines of text"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
   "userCanAddAndRemovePictures": [
     {
       "rowID": "userCanAddAndRemovePictures.01",
@@ -101,6 +117,51 @@
       ],
       "vihicleInfo": {
         "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "testVerifyUserCanAddSeveralQuickNotes": [
+    {
+      "rowID": "testVerifyUserCanAddSeveralQuickNotes.01",
+      "description": "Test Case 67754:Verify user can add several Quick notes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92206",
+          "testCaseTitle": "Verify user can add several Quick notes"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      }
+    }
+  ],
+  "testVerifyNotesChangesIsSavedAfterDBUpdate": [
+    {
+      "rowID": "testVerifyNotesChangesIsSavedAfterDBUpdate.01",
+      "description": "Test Case 67746:Verify Notes changes is saved after DB update",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92210",
+          "testCaseTitle": "Verify Notes changes is saved after DB update"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "WDBFA67E1SFA946591"
+      },
+      "workOrderData": {
+        "workOrderType": "O_Kramar",
+        "vihicleInfo": {
+          "vinNumber": "7777777777777"
+        },
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
+      },
+      "invoiceData": {
+        "invoiceType": "O_Kramar",
+        "poNumber": "12345"
       }
     }
   ],

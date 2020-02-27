@@ -26,7 +26,7 @@ public class WorkOrderSteps {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         homeScreen.clickWorkOrdersMenuItem();
         workOrdersScreen.clickAddWorkOrderButton();
-        CustomersSreenSteps.selectCustomer(customer);
+        CustomersScreenSteps.selectCustomer(customer);
         createWorkOrder(workOrderType);
         VehicleInfoScreenSteps.setVIN("7777777777777");
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -48,7 +48,7 @@ public class WorkOrderSteps {
     }
 
     public static void createWorkOrder(AppCustomer appCustomer, WorkOrderTypes workOrderType, WorkOrderData workOrderData) {
-        CustomersSreenSteps.selectCustomer(appCustomer);
+        CustomersScreenSteps.selectCustomer(appCustomer);
         createWorkOrder(workOrderType, workOrderData);
     }
 
@@ -105,6 +105,11 @@ public class WorkOrderSteps {
     public static void switchToMyWorkOrdersView() {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         workOrdersScreen.switchToMyWorkordersView();
+    }
+
+    public static void switchToTeamWorkOrdersView() {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        workOrdersScreen.switchToTeamWorkordersView();
     }
 
     public static void clickAddWorkOrderButton() {

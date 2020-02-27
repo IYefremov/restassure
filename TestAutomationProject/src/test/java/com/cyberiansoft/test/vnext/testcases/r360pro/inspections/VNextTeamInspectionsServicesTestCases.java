@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.steps.VisualScreenSteps;
 import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -34,9 +35,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR2, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
-        for (DamageData damageData : inspectionData.getDamagesData()) {
-            VisualScreenSteps.addDamage(damageData);
-        }
+        inspectionData.getDamagesData().forEach(damageData -> VisualScreenSteps.addDamage(damageData));
         VisualScreenSteps.verifyNumberOfAddedDamages(inspectionData.getDamagesData().size());
         final String inspectionNumber = InspectionSteps.saveInspection();
 
@@ -90,7 +89,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestClass {
         VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyService().getServicePrice());
 
         InspectionSteps.saveInspection();
-        InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
+        InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
         InspectionSteps.navigateHomeScreen();
     }
 
@@ -109,7 +108,7 @@ public class VNextTeamInspectionsServicesTestCases extends BaseTestClass {
                 String.valueOf(BackOfficeUtils.getServicePriceValue(inspectionData.getDamageData().getMoneyService().getServicePrice())));
         VisualScreenSteps.verifyInspectionTotalPrice(inspectionData.getDamageData().getMoneyService().getServicePrice());
         final String inspectionNumber = InspectionSteps.saveInspection();
-        InspectionSteps.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
+        InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getDamageData().getMoneyService().getServicePrice());
 
         InspectionSteps.openInspectionToEdit(inspectionNumber);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);

@@ -7,9 +7,6 @@ import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -65,11 +62,6 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
     }
 
-    public VNextInformationDialog clickEditInspectionMenuItemWithAlert() {
-        clickMenuItem(editinspectionbtn);
-        return new VNextInformationDialog(appiumdriver);
-    }
-
     public VNextEmailScreen clickEmailInspectionMenuItem() {
         clickMenuItem(emailinspectionbtn);
         return new VNextEmailScreen(appiumdriver);
@@ -90,8 +82,8 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
 
     public void archiveInspection() {
         clickArchiveInspectionMenuItem();
-        VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-        informationdlg.clickInformationDialogArchiveButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
+        informationDialog.clickInformationDialogArchiveButton();
     }
 
     public void clickArchiveInspectionMenuItem() {
@@ -102,46 +94,10 @@ public class VNextInspectionsMenuScreen extends VNextBasicMenuScreen {
         clickMenuItem(approveinspectionbtn);
     }
 
-    public boolean isApproveMenuPresent() {
-        return approveinspectionbtn.isDisplayed();
-    }
-
-    public boolean isArchivwMenuPresent() {
-        return archiveinspectionbtn.isDisplayed();
-    }
-
-    public boolean isViewInspectionMenuPresent() {
-        return viewinspectionbtn.isDisplayed();
-    }
-
-    public boolean isNotesMenuPresent() {
-        return notesinspectionbtn.isDisplayed();
-    }
-
-    public boolean isEmailInspectionMenuPresent() {
-        return emailinspectionbtn.isDisplayed();
-    }
-
     public VNextViewScreen clickViewInspectionMenuItem() {
         clickMenuItem(viewinspectionbtn);
         BaseUtils.waitABit(3000);
         return new VNextViewScreen(appiumdriver);
-    }
-
-    public VNextVehicleInfoScreen clickAddSupplementInspectionMenuItem() {
-        clickMenuItem(addsupplementbtn);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        return vehicleInfoScreen;
-    }
-
-    public boolean isAddSupplementInspectionMenuItemPresent() {
-        return WaitUtils.isElementPresent(addsupplementbtn);
-    }
-
-    public VNextInspectionsScreen clickCloseInspectionMenuButton() {
-        clickCloseMenuButton();
-        return new VNextInspectionsScreen(appiumdriver);
     }
 
     public VNextCustomersScreen clickChangeCustomerMenuItem() {

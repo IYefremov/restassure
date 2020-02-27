@@ -62,7 +62,7 @@ public class VNextTeamRegistrationInfo {
             case DEVELOPMENT:
                 return VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingURL();
             case INTEGRATION:
-            case AUTOTESTS:
+            case QC:
                 return VNextTeamRegistrationInfo.getInstance().getBackOfficeIntegrationURL();
             case QC1:
                 return VNextTeamRegistrationInfo.getInstance().getBackOfficeQC1URL();
