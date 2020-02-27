@@ -3,6 +3,7 @@ package com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOBaseData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
+import org.apache.commons.lang.RandomStringUtils;
 
 import java.util.List;
 
@@ -32,4 +33,8 @@ public class VNextBOPartsManagementData extends VNextBOBaseData {
 
     @JsonProperty("documentData")
     private VNextBODocumentData documentData;
+
+    public String getRandomNote() {
+        return "auto-test-" + RandomStringUtils.randomAlphabetic(5);
+    }
 }

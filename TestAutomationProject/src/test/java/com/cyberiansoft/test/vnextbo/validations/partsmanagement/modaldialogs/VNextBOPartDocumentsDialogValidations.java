@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBODocumentData;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOPartDocumentsDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOPartDocumentsDialog;
@@ -51,8 +52,13 @@ public class VNextBOPartDocumentsDialogValidations {
 
     public static void verifyPartDocumentsFields(int order, VNextBODocumentData data) {
         verifyPartDocumentsDialogIsOpened(true);
+        WaitUtilsWebDriver.waitABit(1500);
         verifyType(order, data.getType());
         verifyNumber(order, data.getNumber());
         verifyNotes(order, data.getNotes());
+        verifyDate(order, BackOfficeUtils.getCurrentDate(true));
+        verifyDueDate(order, BackOfficeUtils.getCurrentDate(true));
+        verifyAmount(order, data.getAmount());
+        verifyAttachment(order, "sunrise.png");
     }
 }

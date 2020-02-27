@@ -60,8 +60,7 @@ public class Utils {
 
     public static void clearAndType(WebElement element, String name) {
         clear(element);
-        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(element, name).build().perform();
-        WaitUtilsWebDriver.waitABit(500);
+        sendKeys(element, name);
     }
 
     public static void clearAndTypeWithJS(WebElement element, String value) {
@@ -71,8 +70,18 @@ public class Utils {
     }
 
     public static void sendKeysWithEnter(WebElement element, String value) {
+        clearAndSendKeys(element, value, Keys.ENTER);
+    }
+
+    public static void clearAndSendKeys(WebElement element, String value, Keys keys) {
         clear(element);
-        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(element, value).sendKeys(Keys.ENTER).build().perform();
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(element, value).sendKeys(keys).build().perform();
+        WaitUtilsWebDriver.waitABit(500);
+    }
+
+    public static void sendKeys(WebElement element, String value) {
+        WaitUtilsWebDriver.waitForVisibility(element, 3);
+        new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(element, value).build().perform();
         WaitUtilsWebDriver.waitABit(500);
     }
 

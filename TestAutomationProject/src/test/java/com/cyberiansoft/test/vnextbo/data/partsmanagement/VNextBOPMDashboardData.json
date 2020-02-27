@@ -167,5 +167,19 @@
         }
       ]
     }
+  ],
+
+  "verifyCurrentLocationIsVisibleAfterLocationDropDownIsClicked": [
+    {
+      "rowID": "verifyCurrentLocationIsVisibleAfterLocationDropDownIsClicked.01",
+      "description": "Verify the current location is visible after location drop-down is clicked (\"Parts Management\" page)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "100897",
+          "testCaseTitle": "Verify the current location is visible after location drop-down is clicked (\"Parts Management\" page)"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
   ]
 }

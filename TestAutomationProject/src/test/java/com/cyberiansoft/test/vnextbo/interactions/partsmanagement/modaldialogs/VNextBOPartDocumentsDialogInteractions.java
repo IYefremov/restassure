@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOPartDocumentsDialog;
-import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartAddNewDocumentDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartDocumentsDialogValidations;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
@@ -12,7 +11,6 @@ public class VNextBOPartDocumentsDialogInteractions {
 
     public static void clickAddNewDocumentButton() {
         Utils.clickElement(new VNextBOPartDocumentsDialog().getAddNewDocumentButton());
-        VNextBOPartAddNewDocumentDialogValidations.verifyAddNewDocumentDialogIsOpened(true);
     }
 
     public static String getTypeValue(int order) {

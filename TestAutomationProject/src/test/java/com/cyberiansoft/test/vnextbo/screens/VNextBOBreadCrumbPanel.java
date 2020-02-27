@@ -16,6 +16,9 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//h5[@id='breadcrumb']//div[@class='drop department-drop']")
     private WebElement locationExpanded;
 
+    @FindBy(xpath = "//div[contains(@class, 'menu-item active')]/label")
+    private WebElement activeLocation;
+
     @FindBy(xpath = "//ul[@class='scroll-pane-locations']//label")
     private List<WebElement> locationsList;
 

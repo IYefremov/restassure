@@ -70,8 +70,8 @@ public class BackOfficeUtils {
         return getFormattedLocalizedDate(DateUtils.SHORT_DATE_FORMAT);
 	}
 
-    public static String getCurrentDate(boolean... isLocalized) {
-        if (isLocalized[0]) {
+    public static String getCurrentDate(boolean isLocalized) {
+        if (isLocalized) {
             return getFormattedLocalizedDate(DateUtils.FULL_DATE_FORMAT);
         } else {
             return getCurrentDate().format(DateTimeFormatter.ofPattern(DateUtils.FULL_DATE_FORMAT.getFormat()));

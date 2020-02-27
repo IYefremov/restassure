@@ -28,12 +28,14 @@ public class VNextBOBreadCrumbInteractions {
     public static void setLocation(String location) {
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         if (!VNextBOBreadCrumbValidations.isLocationSet(location, 1)) {
-            if (VNextBOBreadCrumbValidations.isLocationCollapsed()) {
-                Utils.clickElement(new VNextBOBreadCrumbPanel().getLocationName());
-            }
+            openLocationDropDown();
             selectLocation(location);
         }
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void clickLocationName() {
+        Utils.clickElement(new VNextBOBreadCrumbPanel().getLocationName());
     }
 
     public static void setLocation(String location, boolean isSetWithEnter) {
@@ -56,9 +58,20 @@ public class VNextBOBreadCrumbInteractions {
 
     public static void closeLocationDropDown() {
         if (VNextBOBreadCrumbValidations.isLocationExpanded()) {
-            Utils.clickElement(new VNextBOBreadCrumbPanel().getLocationName());
+            clickLocationName();
         }
-        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(new VNextBOBreadCrumbPanel().getLocationExpanded());
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOBreadCrumbPanel().getLocationExpanded(), false);
+    }
+
+    public static void openLocationDropDown() {
+        if (VNextBOBreadCrumbValidations.isLocationCollapsed()) {
+            clickLocationName();
+        }
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOBreadCrumbPanel().getLocationExpanded(), true);
+    }
+
+    public static String getActiveLocationValue() {
+        return Utils.getText(new VNextBOBreadCrumbPanel().getActiveLocation());
     }
 
     public static int clearAndTypeLocation(String searchLocation) {
