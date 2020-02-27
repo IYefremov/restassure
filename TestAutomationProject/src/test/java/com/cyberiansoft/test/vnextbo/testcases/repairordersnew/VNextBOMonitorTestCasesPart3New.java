@@ -33,7 +33,7 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
 	}
 
-/*	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
@@ -147,7 +147,7 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 		data.setNotesMessage(data.getNotesMessage() + RandomStringUtils.randomAlphabetic(7));
 		VNextBORODetailsValidationsNew.verifyMoreInfoSectionContainsCorrectFields();
-	}*/
+	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void verifyUserCanCheckInRO(String rowID, String description, JSONObject testData) {

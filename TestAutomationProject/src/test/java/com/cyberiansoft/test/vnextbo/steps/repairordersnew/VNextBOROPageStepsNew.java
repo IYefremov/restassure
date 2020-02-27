@@ -375,10 +375,16 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         Utils.clickElement(new VNextBOROWebPageNew().getOrderNoteText());
     }
 
-    public static void addNoteForFirstNoteAndNotSaveWItXIcon(String noteText) {
+    public static void addNoteForFirstOrderAndNotSaveWItXIcon(String noteText) {
 
         openFirstOrderNotes();
         VNextBONotesDialogStepsNew.addNote(noteText, false);
+    }
+
+    public static void addNoteForFirstOrder(String noteText) {
+
+        openFirstOrderNotes();
+        VNextBONotesDialogStepsNew.addNote(noteText, true);
     }
 
     public static void changeStockNumberForFirstOrder(String newStockNumber) {
@@ -394,6 +400,14 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         Utils.clickElement(ordersPage.getRoNumbersList().get(0));
         Utils.clearAndType(ordersPage.getRoNumbersList().get(0), newRoNumber);
+        Utils.clickElement(ordersPage.getDepartmentsSwitcherTab());
+    }
+
+    public static void changePoNumberForFirstOrder(String newPoNumber) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickElement(ordersPage.getPoNumbersList().get(0));
+        Utils.clearAndType(ordersPage.getPoNumbersList().get(0), newPoNumber);
         Utils.clickElement(ordersPage.getDepartmentsSwitcherTab());
     }
 

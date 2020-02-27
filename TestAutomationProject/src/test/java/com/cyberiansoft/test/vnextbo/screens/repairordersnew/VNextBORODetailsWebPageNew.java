@@ -62,6 +62,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='reconmonitor-details-status_listbox']//span[@class='k-input']")
     private WebElement orderStatusDropDown;
 
+    @FindBy(xpath = "//div[@class='reason']//span[@class='k-input']")
+    private WebElement orderCloseReason;
+
     @FindBy(xpath = "//button[@title='Reopen RO']")
     private WebElement reopenOrderButton;
 
@@ -82,6 +85,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//tbody[@data-template='repair-order-part-list-item-template']//b")
     private List<WebElement> partServicesNamesList;
+
+    @FindBy(xpath = "//div[@class='linked-items-info__content']//span[@class='pull-left']")
+    private List<WebElement> inspectionsList;
 
     @FindBy(xpath = "//button[@data-bind='click: showLogWindow']")
     private WebElement logInfoButton;

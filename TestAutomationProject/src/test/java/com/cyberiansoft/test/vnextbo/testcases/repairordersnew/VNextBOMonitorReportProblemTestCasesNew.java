@@ -298,11 +298,4 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanReportProblemForThePartService(String rowID, String description, JSONObject testData) {
-
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-
-    }
 }

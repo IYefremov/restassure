@@ -120,6 +120,16 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         }
     }
 
+    public static void verifyPoNumbersAreCorrectInTheTable(String expectedPoNumber) {
+
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement poNumber: new VNextBOROWebPageNew().getPoNumbersList()) {
+                Assert.assertEquals(Utils.getInputFieldValue(poNumber), expectedPoNumber, "PO number hasn't been correct");
+            }
+        }
+    }
+
     public static void verifyStockNumbersAreCorrectInTheTable(String expectedStockNumber) {
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();

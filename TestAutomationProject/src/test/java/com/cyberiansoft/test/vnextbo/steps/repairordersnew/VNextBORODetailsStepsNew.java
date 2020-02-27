@@ -215,10 +215,10 @@ public class VNextBORODetailsStepsNew {
         return (Utils.getText(new VNextBORODetailsWebPageNew().getOrderStatusDropDown()));
     }
 
-    public static void closeOrderWithCompletedReason() {
+    public static void closeOrderWithReason(String reason) {
 
         changeOrderStatus("Closed");
-        VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason();
+        VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason(reason);
     }
 
     public static void startServicesForPhase(String phase) {
@@ -317,5 +317,10 @@ public class VNextBORODetailsStepsNew {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().getLogInfoButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void seeMoreInformationForOrder() {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getMoreInfoSection());
     }
 }

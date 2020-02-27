@@ -274,7 +274,28 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
         VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(data.getService(), "icon-start-ro text-green");
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
-        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect("autotestbYOZGTm", "icon-clock text-green");
+        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect("DonNotTuch", "icon-clock text-green");
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeInspectionsOfRo(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        Utils.goToPreviousPage();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        Utils.refreshPage();
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+        VNextBORODetailsStepsNew.seeMoreInformationForOrder();
+        VNextBORODetailsValidationsNew.verifyInspectionIsDisplayedInMoreInfo("E-444-00197");
+        VNextBORODetailsValidationsNew.verifyInspectionWindowCanBeOpened();
+        Utils.goToPreviousPage();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        Utils.refreshPage();
+        VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
     }
 }
