@@ -40,6 +40,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestClass {
 		Assert.assertFalse(customersScreen.isAddCustomerButtonDisplayed());
 		SearchSteps.openSearchMenu();
 		SearchSteps.fillTextSearch(wholesaleCustomerNonExists);
+		SearchSteps.cancelSearch();
 		Assert.assertTrue(customersScreen.isNothingFoundCaptionDisplayed());
 		ScreenNavigationSteps.pressBackButton();
 	}

@@ -16,7 +16,6 @@ import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
@@ -127,21 +126,21 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
 
         Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
         workOrdersScreen.switchToTeamWorkordersView();
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        WorkOrderSteps.openMenu(woNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
 
         VehicleInfoScreenInteractions.selectMakeAndModel(workOrderData.getVehicleInfoData().getVehicleMake(),
                 workOrderData.getVehicleInfoData().getVehicleModel());
         vehicleInfoScreen.saveWorkOrderViaMenu();
-        workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        WorkOrderSteps.openMenu(woNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
 
         VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
 
         vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersScreen.switchToMyWorkordersView();
-        workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        vehicleInfoScreen = workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        WorkOrderSteps.openMenu(woNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
         vehicleInfoScreen.saveWorkOrderViaMenu();
         workOrdersScreen.clickBackButton();

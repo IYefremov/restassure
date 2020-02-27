@@ -63,7 +63,8 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 
 	public boolean isAddCustomerButtonDisplayed() {
-		return customersScreen.findElements(By.xpath(".//*[@action='add']")).size() > 0;
+    	WaitUtils.waitUntilElementIsClickable(customersList);
+		return ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//*[@action='add']")).size() > 0;
 	}
 
 	public boolean isNothingFoundCaptionDisplayed() {

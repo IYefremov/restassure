@@ -1012,8 +1012,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		for (String invoiceNumber : invoices)
 			invoicesScreen.selectInvoice(invoiceNumber);
 		invoicesScreen.clickOnSelectedInvoicesMailButton();
-		VNextCustomersScreen customersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		customersScreen.selectCustomer(testCustomer2);
+		SelectCustomerScreenSteps.selectCustomer(testCustomer2);
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		NadaEMailService nada = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nada.getEmailId());

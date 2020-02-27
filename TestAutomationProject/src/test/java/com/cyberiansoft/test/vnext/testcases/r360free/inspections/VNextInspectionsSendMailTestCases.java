@@ -59,7 +59,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 
         final String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        MenuSteps.selectMenuItem(MenuItems.EMAIL);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
         ScreenNavigationSteps.pressBackButton();
@@ -105,7 +105,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
         final String inspectionNumber = InspectionSteps.saveInspection();
 
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        MenuSteps.selectMenuItem(MenuItems.EMAIL);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
         ScreenNavigationSteps.pressBackButton();
@@ -156,7 +156,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
         final String inspectionNumber = InspectionSteps.saveInspection();
 
 		InspectionSteps.openInspectionMenu(inspectionNumber);
-		MenuSteps.selectMenuItem(MenuItems.EMAIL);
+		MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
         NadaEMailService nadaEMailService = new NadaEMailService();
 		EmailSteps.sendEmail(nadaEMailService.getEmailId());
 		ScreenNavigationSteps.pressBackButton();

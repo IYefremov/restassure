@@ -158,20 +158,6 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         return appiumdriver.findElement(By.xpath("//*[@id='total']")).getText().trim();
     }
 
-    public boolean isSaveButtonVisible() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.visibilityOf(savemenu));
-        return savemenu.isDisplayed();
-    }
-
-    public boolean isCancelButtonVisible() {
-        return cancelinspectionmenu.isDisplayed();
-    }
-
-    public boolean isNotesButtonVisible() {
-        return inspectionnotesmenu.isDisplayed();
-    }
-
     public void clickSaveButton() {
         WaitUtils.waitUntilElementIsClickable(savebtn);
         tap(savebtn);

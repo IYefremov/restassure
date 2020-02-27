@@ -430,6 +430,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 			VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
 			inspectionsScreen.clickAddInspectionButton();
 			InspectionSteps.createInspection(testcustomer,InspectionTypes.O_KRAMAR3, inspectionData);
+			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
 			inspectionData.getServicesList().forEach(service -> availableServicesScreen.selectService(service.getServiceName()));
