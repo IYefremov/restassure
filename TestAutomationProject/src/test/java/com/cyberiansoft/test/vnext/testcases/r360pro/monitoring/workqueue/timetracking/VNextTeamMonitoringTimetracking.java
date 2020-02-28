@@ -58,8 +58,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnSerivce(serviceDto, true);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "userCanStartTimeTrackingOnService")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanStopTimeTrackingOnService(String rowID,
                                                  String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -73,7 +72,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnSerivce(serviceDto, false);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class,dependsOnMethods = "userCanStopTimeTrackingOnService")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanStartTimeTrackingOnPhase(String rowID,
                                                 String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -85,8 +84,7 @@ public class VNextTeamMonitoringTimetracking extends BaseTestCaseTeamEditionRegi
         PhaseScreenValidations.verifyTimetrachingShoudBeStartedOnPhase(phaseDto, true);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class
-            , dependsOnMethods = "userCanStartTimeTrackingOnPhase")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanStopTimeTrackingOnPhase(String rowID,
                                                String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);

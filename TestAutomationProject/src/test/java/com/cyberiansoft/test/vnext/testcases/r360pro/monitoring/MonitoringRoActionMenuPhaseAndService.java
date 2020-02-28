@@ -66,7 +66,7 @@ public class MonitoringRoActionMenuPhaseAndService extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "verifyUserCanStartServiceFromRoActionMenuForPhaseAndServiceLevel")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCompleteServiceFromRoActionMenuForPhaseAndServiceLevel(String rowID,
                                                                                     String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
