@@ -26,7 +26,6 @@ import org.testng.annotations.Parameters;
 import java.io.IOException;
 import java.util.Optional;
 
-
 public class BaseTestClass {
 
     protected static RetailCustomer testcustomer;

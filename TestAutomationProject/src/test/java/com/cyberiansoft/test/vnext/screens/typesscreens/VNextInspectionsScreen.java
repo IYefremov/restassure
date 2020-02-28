@@ -259,7 +259,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     }
 
     public void waitNotificationMessageDissapears() {
-        WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
+        WaitUtils.waitUntilElementIsClickable(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']")));
         WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
                 ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
         ));

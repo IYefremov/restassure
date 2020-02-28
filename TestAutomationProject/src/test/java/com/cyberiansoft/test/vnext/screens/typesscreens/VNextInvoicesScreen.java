@@ -2,10 +2,8 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InvoiceListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
@@ -127,23 +125,6 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		waitInvoicesScreenLoad();
 		clickScreenBackButton();
 		return new VNextHomeScreen(appiumdriver);
-	}
-
-	//todo: rewrite!!!
-	public VNextInvoiceMenuScreen clickOnInvoiceByInvoiceNumber(String invoiceID) {
-		WaitUtils.elementShouldBeVisible(getRootElement(),true);
-        if (!WaitUtils.isElementPresent(By.xpath("//div[@class='checkbox-item-title' and text()='" + invoiceID + "']")))
-			clearSearchField();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-autotests-id='invoices-list']")));
-		WebElement invoiceCell = getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoiceID + "']"));
-		if (!invoiceCell.isDisplayed()) {
-			Actions actions = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			actions.moveToElement(getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoiceID + "']"))).perform();
-		}
-		BaseUtils.waitABit(500);
-		tap(getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoiceID + "']")));
-		return new VNextInvoiceMenuScreen(appiumdriver);
 	}
 	
 	public VNextWorkOrdersScreen clickAddInvoiceButton() {
