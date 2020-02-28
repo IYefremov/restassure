@@ -5,17 +5,15 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
@@ -27,6 +25,7 @@ import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import com.cyberiansoft.test.vnext.validations.InvoiceInfoScreenValidations;
+import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -114,8 +113,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         invoiceInfoScreen.changeInvoiceDayValue(date);
         InvoiceSteps.saveInvoiceAsDraft();
@@ -123,8 +122,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), testCaseData.getInvoiceData().getNewPoNumber());
         date = date.minusDays(1);
         Assert.assertEquals(invoicesScreen.getInvoiceDateValue(invoiceNumber), date.format(dateFormat));
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoScreenValidations.validateInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         InvoiceInfoScreenValidations.validateInvoiceDate(date.format(dateFormatlong));
         InvoiceSteps.saveInvoiceAsDraft();
@@ -148,10 +147,10 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        Assert.assertFalse(invoiceMenuScreen.isInvoiceEditMenuItemExists());
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
-        invoicesScreen.clickBackButton();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.EDIT, false);
+        MenuSteps.closeMenu();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -171,8 +170,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), testCaseData.getInvoiceData().getNewPoNumber());
@@ -198,8 +197,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         InvoiceSteps.saveInvoiceAsFinal();
         final String invoicePONumber = testCaseData.getInvoiceData().getNewPoNumber();
@@ -226,9 +225,9 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        Assert.assertFalse(invoiceMenuScreen.isApproveInvoiceMenuItemExists());
-        invoiceMenuScreen.clickCloseInvoiceMenuButton();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.APPROVE, false);
+        MenuSteps.closeMenu();
         invoicesScreen.clickBackButton();
     }
 
@@ -249,17 +248,17 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         InvoiceSteps.saveInvoiceAsFinal();
         Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), testCaseData.getInvoiceData().getNewPoNumber());
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
 
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        VNextApproveScreen approveScreen = invoiceMenuScreen.clickApproveInvoiceMenuItem();
-        approveScreen.drawSignature();
-        approveScreen.saveApprovedInspection();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
         invoicesScreen.clickBackButton();
     }
@@ -282,8 +281,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
         invoicesScreen.switchToTeamInvoicesView();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceNumber), testCaseData.getInvoiceData().getNewPoNumber());
@@ -312,8 +311,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceSteps.addTextNoteToInvoice(txtNotes);
         InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
@@ -338,8 +337,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         ScreenNavigationSteps.pressBackButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -370,13 +369,13 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         List<String> workOrdersToAdd = workOrders.subList(1, workOrders.size());
         invoiceInfoScreen.addWorkOrdersToInvoice(workOrdersToAdd);
         InvoiceSteps.saveInvoiceAsDraft();
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         workOrders.forEach(workOrderId -> {
             InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true);
         });
@@ -411,13 +410,13 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.DRAFT);
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         final List<String> workOrdersToAdd = workOrders.subList(1, workOrders.size());
         invoiceInfoScreen.addWorkOrdersToInvoice(workOrdersToAdd);
         InvoiceSteps.saveInvoiceAsDraft();
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         workOrders.forEach(workOrderId -> {
             InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true);
         });
@@ -427,10 +426,8 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.YOU_CANNOT_DEATTACH_THE_LAST_WORK_ORDER_FROM_INVOICE);
         InvoiceSteps.saveInvoiceAsDraft();
-        invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-
-        invoiceMenuScreen.clickVoidInvoiceMenuItem();
-        informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.VOID);
         Assert.assertEquals(informationDialog.clickInformationDialogVoidButtonAndGetMessage(),
                 String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoiceNumber));
         invoicesScreen.waitUntilInvoiceDisappearsFromList(invoiceNumber);

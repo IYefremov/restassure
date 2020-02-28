@@ -8,6 +8,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
@@ -15,11 +16,9 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummaryScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -170,12 +169,11 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
         VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         Assert.assertEquals(invoicesScreen.getInvoicePriceValue(invoiceNumber), workOrderData.getWorkOrderPrice());
-        VNextEmailScreen emailScreen = invoicesScreen.clickOnInvoiceToEmail(invoiceNumber);
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INVOICE);
         NadaEMailService nada = new NadaEMailService();
         nada.setEmailId(nada.getEmailId());
-        emailScreen.sentToEmailAddress(nada.getEmailId());
-
-        emailScreen.sendEmail();
+        EmailSteps.sendEmail(nada.getEmailId());
         ScreenNavigationSteps.pressBackButton();
 
         final String inspectionReportFilenName = invoiceNumber + ".pdf";
@@ -293,7 +291,9 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
         VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         Assert.assertEquals(invoicesScreen.getInvoicePriceValue(invoiceNumber), workOrderData.getWorkOrderPrice());
-        VNextEmailScreen emailScreen = invoicesScreen.clickOnInvoiceToEmail(invoiceNumber);
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INVOICE);
+        VNextEmailScreen emailScreen = new VNextEmailScreen();
         if (!emailScreen.getToEmailFieldValue().equals(VNextFreeRegistrationInfo.getInstance().getR360UserMail()))
             emailScreen.sentToEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
 

@@ -9,7 +9,6 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
@@ -17,9 +16,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InspectionListElement;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
@@ -77,8 +73,8 @@ public class InspectionSteps {
     }
 
     public static void openInspectionToEdit(String inspectionId) {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.clickOpenInspectionToEdit(inspectionId);
+        openInspectionMenu(inspectionId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
     }
 
     public static void selectInspectionType(InspectionTypes inspectionTypes) {

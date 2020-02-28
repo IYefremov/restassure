@@ -146,11 +146,6 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		return new VNextInvoiceMenuScreen(appiumdriver);
 	}
 	
-	public VNextEmailScreen clickOnInvoiceToEmail(String invoiceID) {
-		VNextInvoiceMenuScreen invoicemenulist = clickOnInvoiceByInvoiceNumber(invoiceID);
-		return invoicemenulist.clickEmailInvoiceMenuItem();
-	}
-	
 	public VNextWorkOrdersScreen clickAddInvoiceButton() {
         clickAddButton();
 		VNextWorkOrdersScreen woscreeen = new VNextWorkOrdersScreen(appiumdriver);

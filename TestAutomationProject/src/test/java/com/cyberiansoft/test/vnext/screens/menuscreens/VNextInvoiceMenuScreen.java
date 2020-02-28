@@ -46,27 +46,15 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 		super(appiumdriver);
         PageFactory.initElements(appiumdriver, this);
 	}
-	
-	public VNextEmailScreen clickEmailInvoiceMenuItem() {
-		clickMenuItem(emailinvoicebtn);
-		return new VNextEmailScreen(appiumdriver);
-	}
+
 	
 	public VNextApproveScreen clickApproveInvoiceMenuItem() {
 		clickMenuItem(approveinvoicebtn);
 		return new VNextApproveScreen(appiumdriver);
 	}
 
-	public void clickCancelInvoiceMenuItem() {
-		clickMenuItem(invoicecancelmenubtn);
-	}
-
 	public boolean isApproveInvoiceMenuItemExists() {
 		return  WaitUtils.isElementPresent(approveinvoicebtn);
-	}
-	
-	public void clickVoidInvoiceMenuItem() {
-		clickMenuItem(voidinvoicebtn);
 	}
 	
 	public VNextChangeInvoicePONumberDialog clickInvoiceChangePONumberMenuItem() {
@@ -96,16 +84,7 @@ public class VNextInvoiceMenuScreen extends VNextBasicMenuScreen {
 		return WaitUtils.isElementPresent(invoicechangeponumbtn);
 	}
 
-	public boolean isInvoiceEditMenuItemExists() {
-		return WaitUtils.isElementPresent(editinvoicebtn);
-	}
-	
-	public VNextInvoicesScreen clickCloseInvoiceMenuButton() {
-		clickCloseMenuButton();
-		return new VNextInvoicesScreen();
-	}
-
-	public void clickEditInvoiceMenuItem() {
-		clickMenuItem(editinvoicebtn);
+	public void clickCancelInvoiceMenuItem() {
+		clickMenuItem(invoicecancelmenubtn);
 	}
 }
