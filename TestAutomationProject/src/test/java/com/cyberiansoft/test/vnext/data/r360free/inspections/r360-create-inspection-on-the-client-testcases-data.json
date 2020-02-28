@@ -79,7 +79,7 @@
         "inspPrice": "$0.00"
       }
     }
-  ]
+  ],
 
   "testCreateInspectionWhithCustomerWithFirstNameOnly": [
     {

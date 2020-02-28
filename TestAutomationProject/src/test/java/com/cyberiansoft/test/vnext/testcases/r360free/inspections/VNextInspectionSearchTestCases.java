@@ -15,7 +15,10 @@ import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
+import com.cyberiansoft.test.vnext.steps.InspectionSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
@@ -44,7 +47,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWithPopulatedVehicleInfoForCurrentDay(String rowID,
-                                                                                String description, JSONObject testData) throws Exception {
+                                                                                String description, JSONObject testData){
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -96,7 +99,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay(String rowID,
-                                                                          String description, JSONObject testData) throws Exception {
+                                                                          String description, JSONObject testData)  {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
@@ -134,8 +137,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64864:R360: verify searching inspection by All Status on BO",
-            description = "Verify searching inspection by All Status on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay", "testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by All Status on BO")
     public void testVerifySearchingInspectionByAllStatusOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -155,8 +157,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64871:R360: verify searching inspection by Archived Status on BO",
-            description = "Verify searching inspection by Archived Status on BO",
-            dependsOnMethods = {"testCreateArchivedInspectionWithFullPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by Archived Status on BO")
     public void testVerifySearchingInspectionByArchivedStatusOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -176,8 +177,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64872:R360: verify searching inspection by Approved Status on BO",
-            description = "Verify searching inspection by Approved Status on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by Approved Status on BO")
     public void testVerifySearchingInspectionByApprovedStatusOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -197,8 +197,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64944:R360: verify searching inspection by Stock# on BO",
-            description = "Verify searching inspection by Stock# on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by Stock# on BO")
     public void testVerifySearchingInspectionByStockNumberOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -218,8 +217,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64945:R360: verify searching inspection by PO# on BO",
-            description = "Verify searching inspection by PO# on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by PO# on BO")
     public void testVerifySearchingInspectionByPONumberOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -239,8 +237,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64946:R360: verify searching inspection by VIN on BO",
-            description = "Verify searching inspection by VIN on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify searching inspection by VIN on BO")
     public void testVerifySearchingInspectionByVINOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -260,8 +257,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64947:R360: verify posibility to Save Inspection Search filter on BO",
-            description = "Verify posibility to Save Inspection Search filter on BO",
-            dependsOnMethods = {"testCreateInspectionWithPopulatedVehicleInfoForCurrentDay"})
+            description = "Verify posibility to Save Inspection Search filter on BO")
     public void testVerifyPosibilityToSaveInspectionSearchFilterOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -290,8 +286,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64949:R360: verify posibility to edit saved Inspection Search filter on BO",
-            description = "Verify posibility to edit saved Inspection Search filter on BO",
-            dependsOnMethods = {"testVerifyPosibilityToSaveInspectionSearchFilterOnBO"})
+            description = "Verify posibility to edit saved Inspection Search filter on BO")
     public void testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO() {
 
         final String inspTotalPrice = "$ 267.81";
@@ -322,8 +317,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64956:R360: verify posibility to Clear saved Inspection Search filter on BO",
-            description = "Verify posibility to Clear saved Inspection Search filter on BO",
-            dependsOnMethods = {"testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO"})
+            description = "Verify posibility to Clear saved Inspection Search filter on BO")
     public void testVerifyPosibilityToClearSavedInspectionSearchFilterOnBO() {
 
         final String filterNameEdited = "test12345edited";
@@ -349,8 +343,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64957:R360: verify posibility to Delete saved Inspection Search filter on BO",
-            description = "Verify posibility to Delete saved Inspection Search filter on BO",
-            dependsOnMethods = {"testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO"})
+            description = "Verify posibility to Delete saved Inspection Search filter on BO")
     public void testVerifyPosibilityToDeleteSavedInspectionSearchFilterOnBO() {
 
         final String filterNameEdited = "test12345edited";
@@ -374,8 +367,7 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
     }
 
     @Test(testName = "Test Case 64958:R360: verify posibility to reset Inspection Search filter to default on BO",
-            description = "Verify posibility to reset Inspection Search filter to default on BO",
-            dependsOnMethods = {"testVerifyPosibilityToEditSavedInspectionSearchFilterOnBO"})
+            description = "Verify posibility to reset Inspection Search filter to default on BO")
     public void testVerifyPosibilityToResetInspectionSearchFilterOnBO() {
         WebDriver
                 webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);

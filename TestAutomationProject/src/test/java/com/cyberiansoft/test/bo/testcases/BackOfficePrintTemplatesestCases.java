@@ -324,8 +324,7 @@
 //		//questionsformspage.deleteQuestionSections(questionsectionname);
 //	}
 //
-//	@Test(testName = "Test Case 35459:Create question form", description = "Create question form",
-//			dependsOnMethods = { "testCreateQuestionSection" })
+//	@Test(testName = "Test Case 35459:Create question form", description = "Create question form")
 //	public void testCreateQuestionForm() {
 //
 //		final String questionformname = "AT_print_form";
@@ -344,8 +343,7 @@
 //
 //
 //
-//	@Test(testName = "Test Case 35460:Create inspection type", description = "Create inspection type",
-//			dependsOnMethods = { "testCreateQuestionForm" } )
+//	@Test(testName = "Test Case 35460:Create inspection type", description = "Create inspection type")
 //	public void testCreateInspectionType() {
 //
 //
@@ -399,8 +397,7 @@
 //
 //	}
 //
-//	@Test(testName = "Test Case 35462:Create invoice type", description = "Create invoice type",
-//			dependsOnMethods = { "testCreateQuestionForm" } )
+//	@Test(testName = "Test Case 35462:Create invoice type", description = "Create invoice type")
 //	public void testCreateInvoiceType() {
 //
 //
@@ -445,8 +442,7 @@
 //	}
 //
 //
-//	@Test(testName = "Test Case 35463:Create Work Order type", description = "Create Work Order type",
-//			dependsOnMethods = { "testCreateInvoiceType" } )
+//	@Test(testName = "Test Case 35463:Create Work Order type", description = "Create Work Order type")
 //	public void testCreateWorkOrderType() throws InterruptedException {
 //
 //		final String wotype = "AT_print_WO";
@@ -474,8 +470,7 @@
 //
 //	}
 //
-//	@Test(testName = "Test Case 36046:Test inspection print template with all options selected", description = "Test inspection print template with all options selected",
-//			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
+//	@Test(testName = "Test Case 36046:Test inspection print template with all options selected", description = "Test inspection print template with all options selected")
 //	@Parameters({ "backoffice.url", "setupengineer.name", "setupengineer.psw" })
 //	public void testTestInspectionPrintTemplateWithAllOptionsSelected(String backofficeurl, String userName, String userPassword) throws InterruptedException {
 //
@@ -515,8 +510,7 @@
 //		sendcustomemailtab.closeNewTab(mainWindowHandle);
 //	}
 //
-//	@Test(testName = "Test Case 36047:Test inspection print template with no options selected", description = "Test inspection print template with no options selected",
-//			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
+//	@Test(testName = "Test Case 36047:Test inspection print template with no options selected", description = "Test inspection print template with no options selected")
 //	public void testTestInspectionPrintTemplateWithNoOptionsSelected() throws InterruptedException {
 //
 //		final String ptname = "Default_package_test";
@@ -555,8 +549,7 @@
 //		sendcustomemailtab.closeNewTab(mainWindowHandle);
 //	}
 //
-//	@Test(testName = "Test Case 36048: Test inspection print template several options selected", description = "Test inspection print template several options selected",
-//			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
+//	@Test(testName = "Test Case 36048: Test inspection print template several options selected", description = "Test inspection print template several options selected")
 //	public void testTestInspectionPrintTemplateSeveralOptionsSelected() throws InterruptedException {
 //
 //		final String ptname = "Default_package_test";
@@ -600,8 +593,7 @@
 //		sendcustomemailtab.closeNewTab(mainWindowHandle);
 //	}
 //
-//	@Test(testName = "Test Case 36052:Test invoice print template with all options selected", description = "Test invoice print template with all options selected",
-//			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
+//	@Test(testName = "Test Case 36052:Test invoice print template with all options selected", description = "Test invoice print template with all options selected")
 //	public void testTestInvoicePrintTemplateWithAllOptionsSelected() throws InterruptedException {
 //
 //		final String ptname = "Default_package_test";
@@ -646,8 +638,7 @@
 //		sendcustomemailtab.closeNewTab(mainWindowHandle);
 //	}
 //
-//	@Test(testName = "Test Case 36087:Test invoice print template with no options selected", description = "Test invoice print template with no options selected",
-//			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
+//	@Test(testName = "Test Case 36087:Test invoice print template with no options selected", description = "Test invoice print template with no options selected")
 //	public void testTestInvoicePrintTemplateWithNoOptionsSelected() throws InterruptedException {
 //
 //		final String ptname = "Default_package_test";
@@ -692,8 +683,7 @@
 //		sendcustomemailtab.closeNewTab(mainWindowHandle);
 //	}
 //
-//	@Test(testName = "Test Case 36530:Test invoice print template with several options selected", description = "Test invoice print template with several options selected",
-//			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
+//	@Test(testName = "Test Case 36530:Test invoice print template with several options selected", description = "Test invoice print template with several options selected")
 //	public void testTestInvoicePrintTemplateWithSeveralOptionsSelected() throws InterruptedException {
 //
 //		final String ptname = "Default_package_test";
@@ -743,8 +733,7 @@
 //		sendcustomemailtab.closeNewTab(mainWindowHandle);
 //	}
 //
-//	@Test(testName = "Test Case 36532:Test invoice print template with selected allow edit options", description = "Test invoice print template with selected allow edit options",
-//			dependsOnMethods = { "testCreateInspectionOnMobileDevice", "testCreateinvoiceOnMobileDevice" })
+//	@Test(testName = "Test Case 36532:Test invoice print template with selected allow edit options", description = "Test invoice print template with selected allow edit options")
 //	public void testTestInvoicePrintTemplateWithSelectedAllowEditOptions() throws InterruptedException {
 //
 //		final String ptname = "Default_package_test";
@@ -788,8 +777,7 @@
 //		sendcustomemailtab.closeNewTab(mainWindowHandle);
 //	}
 //
-//	@Test(testName = "Test Case 36044:Create inspection on mobile device", description = "Create inspection on mobile device",
-//			dependsOnMethods = { "testCreateInspectionType" })
+//	@Test(testName = "Test Case 36044:Create inspection on mobile device", description = "Create inspection on mobile device")
 //	@Parameters({ "user.name", "user.psw", "license.name", "ios.bundleid" })
 //	public void testCreateInspectionOnMobileDevice(String userName, String userPassword, String licensename, String bundleid) throws Exception {
 //
@@ -874,8 +862,7 @@
 //
 //	}
 //
-//	@Test(testName = "Test Case 36045:Create invoice on mobile device", description = "Create invoice on mobile device",
-//			dependsOnMethods = { "testCreateInvoiceType", "testCreateInspectionType" })
+//	@Test(testName = "Test Case 36045:Create invoice on mobile device", description = "Create invoice on mobile device")
 //	@Parameters({ "user.name", "user.psw", "license.name", "ios.bundleid" })
 //	public void testCreateinvoiceOnMobileDevice(String userName, String userPassword, String licensename, String bundleid) throws Exception {
 //

@@ -65,7 +65,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         GeneralSteps.logIn(employee);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "nonLocationManagerCannotStartWO")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void anotherLocationManagerCanSeeStartOnStartedService(String rowID,
                                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -109,7 +109,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         GeneralSteps.confirmDialog();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "anotherLocationManagerCanSeeStartOnStartedService")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyStartStopVisibleOnlyInActiveStateServiceLevel(String rowID,
                                                                     String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
@@ -135,7 +135,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, dependsOnMethods = "anotherLocationManagerCanSeeStartOnStartedService")
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyStartStopVisibleOnlyInActiveStatePhaseLevel(String rowID,
                                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
