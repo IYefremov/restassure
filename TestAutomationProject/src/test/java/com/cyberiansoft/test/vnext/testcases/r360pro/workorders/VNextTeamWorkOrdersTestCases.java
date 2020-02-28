@@ -18,7 +18,6 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
@@ -116,8 +115,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
         inspectionsScreen.switchToTeamInspectionsView();
         inspectionsScreen.searchInpectionByFreeText(searchtext);
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionsScreen.getFirstInspectionNumber());
-        inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        InvoiceSteps.openMenu(inspectionsScreen.getFirstInspectionNumber());
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
@@ -153,8 +152,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         InspectionsValidations.verifyInspectionExists(inspectionNumber, true);
 
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        InvoiceSteps.openMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -185,12 +184,12 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 
         inspectionsScreen.switchToTeamInspectionsView();
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatus());
-        WaitUtils.elementShouldBeVisible(inspectionMenuScreen.getCreatewoinspectionbtn(), false);
+        inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatus());
+        MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, false);
         MenuSteps.closeMenu();
 
-        inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatus());
-        Assert.assertTrue(inspectionMenuScreen.isCreateWorkOrderMenuPresent());
+        inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatus());
+        MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, true);
         MenuSteps.closeMenu();
         inspectionsScreen.switchToMyInspectionsView();
         ScreenNavigationSteps.pressBackButton();
@@ -216,15 +215,15 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
 
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickApproveInspectionMenuItem();
+        InvoiceSteps.openMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
         VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         approveScreen.drawSignature();
         approveScreen.clickSaveButton();
         inspectionsScreen.waitForInspectionsListIsVisibile();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
-        inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        InvoiceSteps.openMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
@@ -250,15 +249,14 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
 
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickApproveInspectionMenuItem();
-        VNextApproveScreen approvescreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        approvescreen.drawSignature();
-        approvescreen.clickSaveButton();
-        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        InvoiceSteps.openMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        approveScreen.drawSignature();
+        approveScreen.clickSaveButton();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
-        inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        InvoiceSteps.openMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 
         VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);

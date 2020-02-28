@@ -17,7 +17,6 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.enums.MenuItems;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.HomeScreen;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
@@ -39,7 +38,6 @@ import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import com.cyberiansoft.test.vnext.validations.InvoiceInfoScreenValidations;
-import com.cyberiansoft.test.vnextbo.steps.users.CustomerServiceSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -146,19 +144,19 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
 		final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
 
-		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-		invoiceMenuScreen.clickVoidInvoiceMenuItem();
-		VNextInformationDialog informationdialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(informationdialog.clickInformationDialogDontVoidButtonAndGetMessage(),
+		InvoiceSteps.openMenu(invoiceNumber);
+		MenuSteps.selectMenuItem(MenuItems.VOID);
+		VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		Assert.assertEquals(informationDialog.clickInformationDialogDontVoidButtonAndGetMessage(),
 				String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoiceNumber));
 		Assert.assertTrue(invoicesScreen.isInvoiceExists(invoiceNumber));
-		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-		invoiceMenuScreen.clickVoidInvoiceMenuItem();
-		informationdialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(informationdialog.clickInformationDialogVoidButtonAndGetMessage(),
+		InvoiceSteps.openMenu(invoiceNumber);
+		MenuSteps.selectMenuItem(MenuItems.VOID);
+		informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		Assert.assertEquals(informationDialog.clickInformationDialogVoidButtonAndGetMessage(),
 				String.format(VNextAlertMessages.ARE_YOU_SURE_YOU_WANT_VOID_INVOICE, invoiceNumber));
 		invoicesScreen.waitUntilInvoiceDisappearsFromList(invoiceNumber);
-		homeScreen = invoicesScreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
 		VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
 		statusScreen.updateMainDB();
 		//homeScreen = statusScreen.clickBackButton();
@@ -292,8 +290,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 		Assert.assertFalse(invoiceMenuScreen.isInvoiceChangePONumberMenuItemExists());
-		invoiceMenuScreen.clickCloseInvoiceMenuButton();
-
+		MenuSteps.closeMenu();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -1069,11 +1066,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		VNextApproveScreen approveScreen = invoiceMenuScreen.clickApproveInvoiceMenuItem();
 		approveScreen.drawSignature();
 		approveScreen.saveApprovedInspection();
-		invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
+		invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
 		Assert.assertFalse(invoiceMenuScreen.isApproveInvoiceMenuItemExists());
-		invoiceMenuScreen.clickCloseInvoiceMenuButton();
-		invoicesScreen.waitInvoicesScreenLoad();
-		invoicesScreen.clickBackButton();
+		MenuSteps.closeMenu();
+		InvoiceSteps.waitInvoicesScreenLoaded();
+		ScreenNavigationSteps.pressBackButton();
 
 	}
 

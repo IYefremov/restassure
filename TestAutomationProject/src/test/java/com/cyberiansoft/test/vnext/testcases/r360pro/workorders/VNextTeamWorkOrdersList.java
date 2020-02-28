@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
@@ -157,8 +156,8 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         final String inspectionId = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.searchInpectionByFreeText(inspectionId);
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionId);
-        inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        InvoiceSteps.openMenu(inspectionId);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR2);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -198,8 +197,8 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         final String inspectionId = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.searchInpectionByFreeText(inspectionId);
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionId);
-        inspectionsMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        InvoiceSteps.openMenu(inspectionId);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR2);
         final String workOrderId = WorkOrderSteps.saveWorkOrder();

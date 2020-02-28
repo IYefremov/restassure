@@ -11,7 +11,6 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
@@ -100,8 +99,8 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.clickArchiveInspectionMenuItem();
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.ARCHIVE);
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationDialog.clickInformationDialogDontArchiveButton();
 

@@ -21,7 +21,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;

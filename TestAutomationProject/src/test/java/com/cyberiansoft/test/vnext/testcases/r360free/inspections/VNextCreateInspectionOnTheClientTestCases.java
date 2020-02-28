@@ -12,6 +12,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -74,7 +75,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
-        VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
+        VNextEmailScreen emailScreen = new VNextEmailScreen();
         NadaEMailService nadaEMailService = new NadaEMailService();
         emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 
@@ -245,7 +248,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-        VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
+        VNextEmailScreen emailScreen = new VNextEmailScreen();
         NadaEMailService nadaEMailService = new NadaEMailService();
         emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 
