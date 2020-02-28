@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class VNextSearchEmployeeTestCases extends BaseTestCaseTeamEmployeeSearch {
+public class VNextSearchEmployeeTestCases extends BaseTestClass {
 	
 	@Test(testName= "Test Case 69019:R360 client: verify incremental search for Emloyees list", 
 			description = "Verify incremental search for Emloyees list")

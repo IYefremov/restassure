@@ -9,7 +9,6 @@ import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
-import com.cyberiansoft.test.vnext.testcases.VNextBaseTestCase;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import org.testng.annotations.BeforeTest;
 
