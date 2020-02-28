@@ -1,8 +1,11 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -61,6 +64,12 @@ public class VNextBORODetailsValidationsNew {
 
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().getOrderStatusDropDown()), expectedStatus,
                 "Order status hasn't been correct");
+    }
+
+    public static void verifyOrderCloseReasonIsCorrect(String expectedReason) {
+
+        Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().getOrderCloseReason()), expectedReason,
+                "Order close reason hasn't been correct");
     }
 
     public static void verifyProblemIndicatorIsDisplayedForPhase(String phase) {
@@ -197,5 +206,53 @@ public class VNextBORODetailsValidationsNew {
                 "Service help info pop-up hasn't been displayed");
         Assert.assertEquals(Utils.getText(detailsPage.serviceHelpIconHelpInfo(service)), expectedHelpInfo,
                 "Service completed date hasn't been correct");
+    }
+
+    public static void verifyPhaseIsCheckedInCheckedOut(String phase, boolean shouldBeCheckedIn) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+        if (shouldBeCheckedIn) Assert.assertTrue(Utils.isElementDisplayed(detailsWebPageNew.getCheckOutActionButton()),
+                "Check Out option hasn't been displayed");
+        else Assert.assertTrue(Utils.isElementDisplayed(detailsWebPageNew.getCheckInActionButton()),
+                "Check In option hasn't been displayed");
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+    }
+
+    public static void verifyPartsTableIsDisplayed() {
+
+        List<String> expectedColumnsList = Arrays.asList("", "Work description", "Part #", "Hours", "Qty", "Part Price",
+                "Vendor Price", "Ordered From", "Status", "Phase", "Ordered Date", "Received", "Actions");
+        List<String> actualColumnsList = new VNextBORODetailsWebPageNew().getPartsTableColumnsTitles().stream().
+                map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertEquals(expectedColumnsList, actualColumnsList, "Not all columns have been displayed");
+    }
+
+    public static void verifyPartsServicesAreDisplayed() {
+
+        Assert.assertTrue(new VNextBORODetailsWebPageNew().getPartServicesNamesList().size() > 0, "Part services haven't been displayed");
+    }
+
+    public static void verifyServiceIconIsCorrect(String service, String expectedServiceIcon) {
+
+        Assert.assertEquals(new VNextBORODetailsWebPageNew().serviceIcon(service).getAttribute("class"), expectedServiceIcon,
+                "Service icon hasn't been correct");
+    }
+
+    public static void verifyInspectionIsDisplayedInMoreInfo(String expectedInspection) {
+
+        Assert.assertTrue(new VNextBORODetailsWebPageNew().getInspectionsList().stream().
+                map(WebElement::getText).collect(Collectors.toList()).contains(expectedInspection), "Inspection hasn't been displayed");
+    }
+
+    public static void verifyInspectionWindowCanBeOpened() {
+
+        final String mainWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getInspectionsList().get(0));
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForNewTab();
+        String inspectionWindowHandle = Utils.getNewTab(mainWindow);
+        Assert.assertFalse(inspectionWindowHandle.equals(mainWindow), "The inspection window hasn't been opened");
+        Utils.closeNewTab(mainWindow);
     }
 }

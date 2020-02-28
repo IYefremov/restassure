@@ -73,7 +73,7 @@ public class VNextBOMonitorAdvancedSearchTestCasesNew extends BaseTestCase {
     public void verifyUserCanSearchByPhase(String rowID, String description, JSONObject testData) {
 
         VNextBOROPageStepsNew.searchOrdersByPhase("PDR Station");
-        VNextBOROWebPageValidationsNew.verifyPhasesAreCorrectInTheTable("PDR Station");
+        VNextBOROWebPageValidationsNew.verifyOrdersTableAfterSearch();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
