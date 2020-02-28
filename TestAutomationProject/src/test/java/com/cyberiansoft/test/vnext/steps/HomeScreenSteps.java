@@ -37,12 +37,18 @@ public class HomeScreenSteps {
         WorkOrderSteps.clickAddWorkOrderButton();
     }
 
-
     public static void openInspections() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
         WaitUtils.waitUntilElementIsClickable(homeScreen.getRootElement());
         WaitUtils.elementShouldBeVisible(homeScreen.getStatusList(), true);
         homeScreen.clickInspectionsMenuItem();
+    }
+
+    public static void openInvoices() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        WaitUtils.waitUntilElementIsClickable(homeScreen.getRootElement());
+        WaitUtils.elementShouldBeVisible(homeScreen.getStatusList(), true);
+        homeScreen.clickInvoicesMenuItem();
     }
 
     public static void openWorkOrders() {
