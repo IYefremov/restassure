@@ -298,4 +298,14 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanTurnOnOffPhaseEnforcement(String rowID, String description, JSONObject testData) {
+
+        VNextBORODetailsStepsNew.setPhaseStatusIfNeeded("Detail Station", "Completed");
+        VNextBORODetailsStepsNew.turnOnOffPhaseEnforcement(true);
+        VNextBORODetailsValidationsNew.verifyPhaseTextStatusIsCorrect("First", "Queued");
+        VNextBORODetailsStepsNew.turnOnOffPhaseEnforcement(false);
+        VNextBORODetailsValidationsNew.verifyPhaseTextStatusIsCorrect("First", "Active");
+    }
 }
