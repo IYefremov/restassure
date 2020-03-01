@@ -219,6 +219,7 @@ public class VNextBORODetailsStepsNew {
 
         changeOrderStatus("Closed");
         VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason(reason);
+        WaitUtilsWebDriver.waitABit(4000);
     }
 
     public static void startServicesForPhase(String phase) {

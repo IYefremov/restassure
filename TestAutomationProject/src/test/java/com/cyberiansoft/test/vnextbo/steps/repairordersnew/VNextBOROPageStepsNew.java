@@ -111,6 +111,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         VNextBOROAdvancedSearchDialogStepsNew.setHasThisTextField(orderNumber);
         VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField("All");
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
         WaitUtilsWebDriver.waitABit(2000);
     }

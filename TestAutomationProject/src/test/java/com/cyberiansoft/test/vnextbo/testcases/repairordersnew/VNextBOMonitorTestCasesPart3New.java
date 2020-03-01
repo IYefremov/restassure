@@ -71,6 +71,7 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
 		WaitUtilsWebDriver.waitForPageToBeLoaded();
 		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
+		WaitUtilsWebDriver.waitABit(3000);
 		VNextBORODetailsValidationsNew.verifyServiceStartedDateIsCorrect(data.getService(), data.getServiceStartedDate());
 		if (data.getServiceStatuses()[1].equals("Active") || data.getServiceStatuses()[1].equals("Rework"))
 			VNextBORODetailsValidationsNew.verifyServiceCompletedDateIsCorrect(data.getService(), "");
