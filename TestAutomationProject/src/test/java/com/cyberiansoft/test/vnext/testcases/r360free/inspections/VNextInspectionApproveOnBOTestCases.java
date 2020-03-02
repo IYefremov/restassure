@@ -12,6 +12,7 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
@@ -102,7 +103,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 
 		inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspectionNumber), inspectionData.getInspectionStatus().getStatus());
+		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspectionNumber), InspectionStatus.APPROVED.getStatusString());
 		webdriver.quit();
 	}
 
@@ -163,7 +164,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		
 		inspectionsWebPage = leftMenuPanel.selectInspectionsMenu();
 		inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspectionNumber), inspectionData.getInspectionStatus().getStatus());
+		Assert.assertEquals(inspectionsWebPage.getInspectionStatus(inspectionNumber), InspectionStatus.DECLINED.getStatusString());
 		webdriver.quit();
 	}
 

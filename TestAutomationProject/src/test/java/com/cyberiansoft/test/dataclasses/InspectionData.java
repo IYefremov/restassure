@@ -73,6 +73,7 @@ public class InspectionData {
     @JsonProperty("inspectionNumber")
     String inspectionNumber;
 
+    @Getter
     @JsonProperty("inspectionStatus")
     String inspectionStatus;
 
@@ -242,10 +243,6 @@ public class InspectionData {
     public void setInspectionNumber(String inspNumber) {
 
         this.inspectionNumber = inspNumber;
-    }
-
-    public InspectionStatus getInspectionStatus() {
-        return InspectionStatus.getStatus(inspectionStatus);
     }
 
     public RetailCustomer getInspectionRetailCustomer() {

@@ -31,6 +31,7 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequ
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -1818,7 +1819,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         myInspectionsScreen.waitMyInspectionsScreenLoaded();
         myInspectionsScreen.clickFilterButton();
         myInspectionsScreen.clickStatusFilter();
-        myInspectionsScreen.clickFilterStatus(InspectionStatuses.DECLINED.getInspectionStatusValue());
+        myInspectionsScreen.clickFilterStatus(InspectionStatus.DECLINED);
         myInspectionsScreen.clickBackButton();
         myInspectionsScreen.clickSaveFilterDialogButton();
         Assert.assertEquals(myInspectionsScreen.getInspectionApprovedPriceValue(inspectionNumber), inspectionData.getInspectionApprovedPrice());

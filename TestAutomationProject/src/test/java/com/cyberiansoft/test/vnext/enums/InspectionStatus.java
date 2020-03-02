@@ -4,9 +4,12 @@ import lombok.Getter;
 
 public enum InspectionStatus {
 
-	APPROVED ("Approved"),
-	NEW( "New"),
-	DRAFT("Draft");
+	APPROVED("Approved"),
+	ARCHIVED("Archived"),
+	NEW("New"),
+	DECLINED("Declined"),
+	DRAFT("Draft"),
+	SKIPPED("Skipped");
 
 	@Getter
 	private String statusString;
