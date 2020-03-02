@@ -58,7 +58,7 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
         workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
@@ -67,7 +67,7 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         workOrdersScreen.switchToTeamWorkordersView();
         Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
         workOrdersScreen.switchToMyWorkordersView();
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -87,10 +87,10 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
-        workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+        vehicleInfoScreen.saveWorkOrderViaMenu();
 
         Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
         workOrdersScreen.switchToTeamWorkordersView();
@@ -98,7 +98,7 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         workOrdersScreen.searchWorkOrderByFreeText(testcustomer.getFullName());
         Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
         workOrdersScreen.switchToMyWorkordersView();
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -118,10 +118,10 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
-        workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+        vehicleInfoScreen.saveWorkOrderViaMenu();
 
         Assert.assertTrue(workOrdersScreen.isWorkOrderExists(woNumber));
         workOrdersScreen.switchToTeamWorkordersView();
@@ -141,8 +141,8 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         WorkOrderSteps.openMenu(woNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
-        vehicleInfoScreen.saveWorkOrderViaMenu();
-        workOrdersScreen.clickBackButton();
+        WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

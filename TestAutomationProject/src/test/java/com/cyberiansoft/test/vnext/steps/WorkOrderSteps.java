@@ -116,11 +116,17 @@ public class WorkOrderSteps {
         workOrdersScreen.clickAddWorkOrderButton();
     }
 
-    public static void changeCustomer(String workOrderNumber, AppCustomer newCustomer) {
-        openMenu(workOrderNumber);
+    public static void changeCustomer(String workOrderId, AppCustomer newCustomer) {
+        openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.CHANGE_CUSTOMER);
         CustomersScreenSteps.selectCustomer(newCustomer);
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationDialog.clickInformationDialogYesButton();
+    }
+
+    public static void createInvoiceFromWorkOrder(String workOrderId) {
+        switchToMyWorkOrdersView();
+        WorkOrderSteps.openMenu(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_INVOICE);
     }
 }

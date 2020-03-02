@@ -21,6 +21,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -29,7 +30,6 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
@@ -40,7 +40,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.json.simple.JSONObject;
@@ -82,14 +81,14 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		final String inspectionNumber = InspectionSteps.saveInspection();
 
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.NEW);
+		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.NEW);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.APPROVE);
 		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		ApproveSteps.drawSignature();
 		Assert.assertTrue(approveScreen.isClearButtonVisible());
 		ApproveSteps.saveApprove();
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.APPROVED);
+		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.APPROVED);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -101,14 +100,11 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
 		WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
-		VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR2);
-
-		InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
+		InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR2, testCaseData.getInvoiceData());
 		final String invoiceNumber = InvoiceSteps.saveInvoice();
 		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
-		invoicesScreen.switchToMyInvoicesView();
-		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), VNextInspectionStatuses.NEW);
+		InvoiceSteps.switchToMyInvoicesView();
+		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), InspectionStatus.NEW);
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -359,8 +355,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR);
 		final String inspectionNumber = InspectionSteps.saveInspection();
-		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
+		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.closeMenu();
 		ScreenNavigationSteps.pressBackButton();
 	}

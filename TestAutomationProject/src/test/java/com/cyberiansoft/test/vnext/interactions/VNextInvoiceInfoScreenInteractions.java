@@ -22,6 +22,7 @@ public class VNextInvoiceInfoScreenInteractions {
         return invoiceInfoScreen.getInvoiceTotalAmont().getText().trim();
     }
 
+
     public static boolean isWorkOrderSelectedForInvoice(String workOrderId) {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen();
         WaitUtils.elementShouldBeVisible(invoiceInfoScreen.getRootElement(),true);

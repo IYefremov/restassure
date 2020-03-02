@@ -17,10 +17,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.MenuSteps;
-import com.cyberiansoft.test.vnext.steps.NotesSteps;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -62,7 +59,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -98,7 +95,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(0));
         availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(1));
@@ -134,7 +131,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(0));
         availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(1));
@@ -168,7 +165,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         for (int i = 0; i < notesToAdd; i++) {
@@ -196,7 +193,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -227,7 +224,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -263,7 +260,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -294,7 +291,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(noteTextValid);
@@ -323,7 +320,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(noteTextValid);
@@ -333,7 +330,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.clickInspectionNotesOption();
         NotesSteps.verifyNoteIsPresent(noteTextValid);
@@ -357,7 +354,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(noteTextValid);
@@ -387,7 +384,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(noteTextValid);
@@ -418,7 +415,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(noteTextValid);
@@ -430,7 +427,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.clickInspectionNotesOption();
         NotesSteps.verifyNoteIsPresent(noteTextValid);
         NotesSteps.verifyPicturesPresent();
@@ -455,7 +452,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -471,7 +468,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
 
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.switchToSelectedServicesView();
         selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
         notesScreen.getClearNoteButton().click();
@@ -500,7 +497,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         for (ServiceData serviceAdd : inspectionData.getServicesList())
             availableServicesScreen.selectService(serviceAdd.getServiceName());
@@ -548,7 +545,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
 
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         AvailableServicesScreenSteps.selectMatrixService(inspectionData.getMatrixServiceData());
         VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());

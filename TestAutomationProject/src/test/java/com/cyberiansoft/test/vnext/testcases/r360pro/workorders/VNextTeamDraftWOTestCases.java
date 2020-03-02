@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -79,7 +78,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         Assert.assertEquals(msg, VNextAlertMessages.VIN_REQUIRED_MSG);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WorkOrderSteps.cancelWorkOrder();
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -97,8 +96,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
         WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
-        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+        InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR);
         InvoiceSteps.cancelInvoice();
         ScreenNavigationSteps.pressBackButton();
     }

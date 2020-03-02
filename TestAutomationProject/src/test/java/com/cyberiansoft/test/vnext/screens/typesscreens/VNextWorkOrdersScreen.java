@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -74,20 +73,9 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
             tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
     }
 
-    public boolean isWorkOrderSelected(String workOrderNumber) {
-        WebElement workordercell = getWorkOrderCell(workOrderNumber);
-        return workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked").equals("true");
-    }
-
     public boolean isWorkOrderExists(String workOrderNumber) {
         //clearSearchField();
         return workorderslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + workOrderNumber + "']")).size() > 0;
-    }
-
-    public VNextHomeScreen clickBackButton() {
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
-        clickScreenBackButton();
-        return new VNextHomeScreen(appiumdriver);
     }
 
     public String getWorkOrderPriceValue(String workOrderNumber) {
@@ -110,19 +98,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     public WebElement getWorkOrderCell(String workOrderNumber) {
         return getListCell(workorderslist, workOrderNumber);
-    }
-
-    public void clickCreateInvoiceFromWorkOrder(String workOrderNumber) {
-        WaitUtils.elementShouldBeVisible(workorderslist, true);
-        WebElement workordercell = getWorkOrderCell(workOrderNumber);
-        tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + workOrderNumber + "']")));
-        clickCreateInvoiceMenuItem();
-    }
-
-    public void clickCreateInvoiceMenuItem() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.visibilityOf(createinvoicemenu));
-        tap(createinvoicemenu);
     }
 
     public void clickCreateInvoiceIcon() {
