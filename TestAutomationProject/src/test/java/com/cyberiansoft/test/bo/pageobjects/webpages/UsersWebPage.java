@@ -179,7 +179,7 @@ public class UsersWebPage extends WebPageWithPagination {
     }
 
     public List<String> getActiveUserNames() {
-        List<String> usernames = new ArrayList<String>();
+        List<String> usernames = new ArrayList<>();
         List<WebElement> usernamesact = userstable.getWrappedElement().findElements(By.xpath(".//tbody/tr[contains(@id, 'ctl00_ctl00_Content_Main_gv_ctl00')]/td[4]"));
         for (WebElement useractcell : usernamesact) {
             usernames.add(useractcell.getText());
@@ -188,7 +188,7 @@ public class UsersWebPage extends WebPageWithPagination {
     }
 
     public String verifyUserNamesDuplicatesArchived(List<String> usernamesact) {
-        List<String> usernamesarch = new ArrayList<String>();
+        List<String> usernamesarch = new ArrayList<>();
         List<WebElement> usercolumnsarch = userstable.getWrappedElement().findElements(By.xpath(".//tbody/tr[contains(@id, 'ctl00_ctl00_Content_Main_gvDeleted_ctl00')]/td[2]"));
         for (WebElement useractcell : usercolumnsarch) {
             usernamesarch.add(useractcell.getText());
@@ -202,7 +202,7 @@ public class UsersWebPage extends WebPageWithPagination {
         if (row != null) {
             clickEditTableRow(row);
         } else
-            Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " user");
+            Assert.fail("Can't find " + firstname + " " + lastname + " user");
     }
 
     public void archiveUser(String firstname, String lastname) {
@@ -210,12 +210,11 @@ public class UsersWebPage extends WebPageWithPagination {
         if (row != null) {
             archiveTableRow(row);
         } else
-            Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " user");
+            Assert.fail("Can't find " + firstname + " " + lastname + " user");
     }
 
     public boolean isUserActive(String firstname, String lastname) {
-        boolean exists = userstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
-        return exists;
+        return userstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
     }
 
     public void unarchiveUser(String firstname, String lastname) {
@@ -223,12 +222,11 @@ public class UsersWebPage extends WebPageWithPagination {
         if (row != null) {
             restoreTableRow(row);
         } else
-            Assert.assertTrue(false, "Can't find archived " + firstname + " " + lastname + " user");
+            Assert.fail("Can't find archived " + firstname + " " + lastname + " user");
     }
 
     public boolean isUserArchived(String firstname, String lastname) {
-        boolean exists = archiveduserstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
-        return exists;
+        return archiveduserstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
     }
 
     public String findDuplicateNames(List<String> usernamesact, List<String> usernamesarch) {

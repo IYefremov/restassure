@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROResolveProblemDialogNew;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOROResolveProblemDialogStepsNew {
 

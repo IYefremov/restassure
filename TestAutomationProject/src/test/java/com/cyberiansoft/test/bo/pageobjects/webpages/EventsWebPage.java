@@ -241,7 +241,7 @@ public class EventsWebPage extends BaseWebPage {
 		try {
 			driver.findElement(By.xpath("//td[contains(text(), '" + string + "')]")).click();
 		} catch (Exception e) {
-			Assert.assertTrue(false);
+			Assert.fail();
 		}
 	}
 

@@ -58,8 +58,7 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 	}
 	
 	public boolean isOrderStatusReasonPresent(String orderstatusreason) {
-		boolean exists =  orderstatusreasonstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + orderstatusreason + "']")).size() > 0;
-		return exists;
+        return orderstatusreasonstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + orderstatusreason + "']")).size() > 0;
 	}
 	
 	public void deleteOrderStatusReason(String orderstatusreason) {
@@ -67,7 +66,7 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + orderstatusreason + " order status reason");	
+			Assert.fail("Can't find " + orderstatusreason + " order status reason");
 		}
 	}
 	
@@ -75,8 +74,8 @@ public class MonitorSettingsWebPage  extends BaseWebPage {
 		WebElement row = getTableRowWithOrderStatusReason(orderstatusreason);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + orderstatusreason + " order status reason");
+		} else
+			Assert.fail("Can't find " + orderstatusreason + " order status reason");
 	}
 	
 	public void createNewOrderStatusReason(String orderstatus, String orderstatusreason) {

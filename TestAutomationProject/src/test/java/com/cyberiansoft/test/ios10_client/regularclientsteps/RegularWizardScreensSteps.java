@@ -1,8 +1,6 @@
 package com.cyberiansoft.test.ios10_client.regularclientsteps;
 
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularBaseWizardScreen;
-import org.openqa.selenium.Alert;
 
 public class RegularWizardScreensSteps {
 

@@ -94,7 +94,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOAddNewPartDialogSteps.setDescription(data.getServiceDescription());
         VNextBOAddNewPartDialogSteps.setCategory(data.getServiceCategory());
         VNextBOAddNewPartDialogSteps.setSubCategory(data.getServiceSubcategory());
-        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
+        final int partsCounterValueBefore = Integer.parseInt(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
         VNextBOAddNewPartDialogSteps.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
         VNextBOAddNewPartDialogValidations.verifySelectedPartsCounterValueIsCorrect(String.valueOf(partsCounterValueBefore + data.getPartItems().length));
         VNextBOAddNewPartDialogSteps.submit();

@@ -94,14 +94,13 @@ public class AreasWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithArea(areaname);
 		if (row != null) {
 			areadesc = row.findElement(By.xpath(".//td[3]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + areaname + " area");
+		} else
+			Assert.fail("Can't find " + areaname + " area");
 		return areadesc;
 	}
 	
 	public boolean isAreaExists(String areaname) {
-		boolean exists =  areastable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + areaname + "']")).size() > 0;
-		return exists;
+		return areastable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + areaname + "']")).size() > 0;
 	}
 	
 	public void clickEditArea(String areaname) {
@@ -111,8 +110,8 @@ public class AreasWebPage extends BaseWebPage {
 			wait.until(ExpectedConditions.visibilityOf(updateProcess));
 			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
 			waitForLoading();
-		} else 
-			Assert.assertTrue(false, "Can't find " + areaname + " area");
+		} else
+			Assert.fail("Can't find " + areaname + " area");
 	}
 	
 	public void deleteArea(String areaname) {
@@ -128,7 +127,7 @@ public class AreasWebPage extends BaseWebPage {
 			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
             waitForLoading();
         } else {
-			Assert.assertTrue(false, "Can't find " + areaname + " area");	
+			Assert.fail("Can't find " + areaname + " area");
 		}
 	}
 	
@@ -145,7 +144,7 @@ public class AreasWebPage extends BaseWebPage {
 			wait.until(ExpectedConditions.invisibilityOf(updateProcess));
             waitForLoading();
         } else {
-			Assert.assertTrue(false, "Can't find " + areaname + " area");	
+			Assert.fail("Can't find " + areaname + " area");
 		}
 	}
 }

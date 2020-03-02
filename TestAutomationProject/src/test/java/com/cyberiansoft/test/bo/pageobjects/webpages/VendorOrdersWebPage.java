@@ -181,7 +181,7 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 		if (row != null) {
 			teamvendor = row.findElement(By.xpath(".//td[5]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + orderno + " vendor order");	
+            Assert.fail("Can't find " + orderno + " vendor order");
 		}
 		return teamvendor;
 	}
@@ -192,7 +192,7 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 		if (row != null) {
 			_customer = row.findElement(By.xpath(".//td[6]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + orderno + " vendor order");	
+            Assert.fail("Can't find " + orderno + " vendor order");
 		}
 		return _customer;
 	}
@@ -202,7 +202,7 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 		if (row != null) {
 			row.findElement(By.xpath(".//td[2]/a")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find " + orderno + " vendor order");	
+            Assert.fail("Can't find " + orderno + " vendor order");
 		}
 	}
 	
@@ -232,7 +232,7 @@ public class VendorOrdersWebPage extends WebPageWithFilter {
 		if (row != null) {
 			row.findElement(By.xpath(".//td/a[text()='Services']")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find " + orderno + " vendor order");	
+            Assert.fail("Can't find " + orderno + " vendor order");
 		}
 	}
 	

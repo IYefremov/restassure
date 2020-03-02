@@ -14,8 +14,6 @@ import org.testng.annotations.BeforeTest;
 
 import java.io.File;
 
-;
-
 public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTestCase {
 
 	protected static RetailCustomer testcustomer;

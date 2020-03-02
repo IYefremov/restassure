@@ -7,8 +7,6 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.concurrent.TimeUnit;
-
 public class RegularSettingsScreen extends RegularBaseAppScreen {
 	
 	@iOSXCUITFindBy(xpath = "//XCUIElementTypeSwitch[@name='Show all services']")

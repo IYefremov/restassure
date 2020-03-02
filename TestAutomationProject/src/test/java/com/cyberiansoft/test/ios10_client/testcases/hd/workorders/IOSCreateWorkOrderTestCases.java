@@ -16,10 +16,8 @@ import com.cyberiansoft.test.ios10_client.hdclientsteps.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typespopups.WorkOrderTypesPopup;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyWorkOrdersScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.ServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.InvoiceInfoScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.OrderSummaryScreen;
@@ -359,8 +357,8 @@ public class IOSCreateWorkOrderTestCases extends IOSHDBaseTestCase {
                                                                                              String description, JSONObject testData) {
 
         final String[] VINs = {"2A8GP54L87R279721", "1FMDU32X0PUB50142", "GFFGG"};
-        final String makes[] = {"Chrysler", "Ford", null};
-        final String models[] = {"Town and Country", "Explorer", null};
+        final String[] makes = {"Chrysler", "Ford", null};
+        final String[] models = {"Town and Country", "Explorer", null};
 
         HomeScreen homeScreen = new HomeScreen();
         CustomersScreen customersScreen = homeScreen.clickCustomersButton();

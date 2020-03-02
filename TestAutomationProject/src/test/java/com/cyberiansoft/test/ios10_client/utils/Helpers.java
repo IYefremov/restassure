@@ -16,7 +16,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import static io.appium.java_client.touch.offset.ElementOption.element;
 
@@ -147,8 +146,7 @@ public abstract class Helpers {
 	public static String getAlertText() {
 		waitForAlert();
 		Alert alert = DriverBuilder.getInstance().getAppiumDriver().switchTo().alert();
-		String alertetxt = alert.getText();
-		return alertetxt;
+        return alert.getText();
 	}
 	
 	public static String getAlertTextAndClickEdit() {
@@ -190,7 +188,7 @@ public abstract class Helpers {
 	public static void scroolTo(String scroll) {
 		WebElement row = DriverBuilder.getInstance().getAppiumDriver().findElement(By.name(scroll));
 		JavascriptExecutor js = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
-		HashMap<String, String> swipeObject = new HashMap<String, String>();
+		HashMap<String, String> swipeObject = new HashMap<>();
 		swipeObject.put("element", ((RemoteWebElement) row).getId());
 		js.executeScript("mobile: scroll", swipeObject);
 
@@ -199,7 +197,7 @@ public abstract class Helpers {
 	public static void scroolToByXpath(String xpath) {
 		WebElement row = DriverBuilder.getInstance().getAppiumDriver().findElement(By.xpath(xpath));
 		JavascriptExecutor js = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
-		HashMap<String, String> swipeObject = new HashMap<String, String>();
+		HashMap<String, String> swipeObject = new HashMap<>();
 		swipeObject.put("element", ((RemoteWebElement) row).getId());
 		js.executeScript("mobile: scrollTo", swipeObject);
 
@@ -207,7 +205,7 @@ public abstract class Helpers {
 	
 	public static void scroolToElement(WebElement element) {
 		JavascriptExecutor js = (JavascriptExecutor) DriverBuilder.getInstance().getAppiumDriver();
-		HashMap<String, String> swipeObject = new HashMap<String, String>();
+		HashMap<String, String> swipeObject = new HashMap<>();
 		swipeObject.put("element", ((RemoteWebElement) element).getId());
 		js.executeScript("mobile: scrollTo", swipeObject);
 	}
@@ -221,13 +219,11 @@ public abstract class Helpers {
 	}
 
 	public static boolean elementExists(String xpath) {
-		boolean exists = DriverBuilder.getInstance().getAppiumDriver().findElements(By.xpath(xpath)).size() != 0;
-		return exists;
+        return DriverBuilder.getInstance().getAppiumDriver().findElements(By.xpath(xpath)).size() != 0;
 	}
 	
 	public static boolean elementExists(By locator) {
-		boolean exists = DriverBuilder.getInstance().getAppiumDriver().findElements(locator).size() != 0;
-		return exists;
+        return DriverBuilder.getInstance().getAppiumDriver().findElements(locator).size() != 0;
 
 	}
 
@@ -339,7 +335,7 @@ public abstract class Helpers {
 		//driver.tap(1, x, y, duration);                 
 	}
 
-	public static void setVIN(String vin) throws InterruptedException {
+	public static void setVIN(String vin) {
 
 		//element(MobileBy.xpath("//UIATableCell[@name=\"VIN#\"]/UIATextField"))
 		//		.click();

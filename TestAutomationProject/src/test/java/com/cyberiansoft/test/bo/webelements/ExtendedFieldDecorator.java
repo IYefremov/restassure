@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.bo.webelements;
 
-import java.lang.reflect.Field;
-
+import com.cyberiansoft.test.bo.containers.ContainerFactory;
+import com.cyberiansoft.test.bo.containers.DefaultContainerFactory;
+import com.cyberiansoft.test.bo.containers.IWebContainer;
+import com.cyberiansoft.test.bo.webelements.impl.DefaultElementFactory;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -9,10 +11,7 @@ import org.openqa.selenium.support.pagefactory.DefaultElementLocatorFactory;
 import org.openqa.selenium.support.pagefactory.DefaultFieldDecorator;
 import org.openqa.selenium.support.pagefactory.ElementLocator;
 
-import com.cyberiansoft.test.bo.containers.ContainerFactory;
-import com.cyberiansoft.test.bo.containers.DefaultContainerFactory;
-import com.cyberiansoft.test.bo.containers.IWebContainer;
-import com.cyberiansoft.test.bo.webelements.impl.DefaultElementFactory;
+import java.lang.reflect.Field;
 
 public class ExtendedFieldDecorator extends DefaultFieldDecorator {
     private WebElementFactory elementFactory = new DefaultElementFactory();

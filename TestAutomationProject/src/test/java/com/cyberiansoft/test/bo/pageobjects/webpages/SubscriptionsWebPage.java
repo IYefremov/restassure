@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -7,8 +8,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 
 public class SubscriptionsWebPage extends BaseWebPage {
 
@@ -94,7 +93,7 @@ public class SubscriptionsWebPage extends BaseWebPage {
 					return true;
 			}
 			return false;
-		}).forEach(e -> e.click());
+		}).forEach(WebElement::click);
 		driver.findElement(By.id("ctl00_Content_ctl01_ctl01_Card_ddlStatus_Arrow")).click();
 	}
 	
@@ -114,7 +113,7 @@ public class SubscriptionsWebPage extends BaseWebPage {
 					return true;
 			}
 			return false;
-		}).forEach(e -> e.click());
+		}).forEach(WebElement::click);
 		driver.findElement(By.id("ctl00_Content_ctl01_ctl01_Card_ddlStatus2_Arrow")).click();
 	}
 

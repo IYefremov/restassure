@@ -440,9 +440,8 @@ public class ClientsWebPage extends WebPageWithPagination {
 	}
 
 	public boolean clientExistsInArchivedTable(String clientname) {
-		boolean exists = clientsarchivedtable.getWrappedElement()
+		return clientsarchivedtable.getWrappedElement()
 				.findElements(By.xpath(".//tr/td[text()='" + clientname + "']")).size() > 0;
-		return exists;
 	}
 
 	public void importClients(String fileimport) {

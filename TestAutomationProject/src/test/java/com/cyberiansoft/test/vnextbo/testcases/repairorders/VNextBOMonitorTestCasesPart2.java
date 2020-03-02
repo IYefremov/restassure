@@ -377,7 +377,7 @@ public class VNextBOMonitorTestCasesPart2 extends BaseTestCase {
 			final String selectedAddPartsNumberAfter =
                     VNextBOAddNewServiceMonitorDialogInteractions.getSelectedAddPartsNumber();
 			Assert.assertNotEquals(selectedAddPartsNumberBefore, selectedAddPartsNumberAfter);
-			Assert.assertTrue(Integer.valueOf(selectedAddPartsNumberBefore) < Integer.valueOf(selectedAddPartsNumberAfter));
+			Assert.assertTrue(Integer.parseInt(selectedAddPartsNumberBefore) < Integer.parseInt(selectedAddPartsNumberAfter));
 
             VNextBOAddNewServiceMonitorDialogInteractions.clickSubmitButton();
 			if (!VNextBOAddNewServiceMonitorDialogValidations.isPartDescriptionDisplayed(data.getServiceCategory()

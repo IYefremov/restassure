@@ -7,7 +7,7 @@ public enum InspectionStatus {
     NEW("New"),
     DECLINED("Declined"),
     DRAFT("Draft"),
-    SKIPPED("Skipped");;
+    SKIPPED("Skipped");
 
     private final String status;
 

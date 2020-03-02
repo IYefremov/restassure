@@ -135,9 +135,8 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 	}
 
 	public boolean isServiceRequestTypeExists(String srtype) {
-		boolean exists = servicerequesttypestable.getWrappedElement()
+		return servicerequesttypestable.getWrappedElement()
 				.findElements(By.xpath(".//tr/td[text()='" + srtype + "']")).size() > 0;
-		return exists;
 	}
 
 	public void clickEditServiceRequestType(String srtype) {
@@ -145,7 +144,7 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		if (row != null) {
 			clickEditTableRow(row);
 		} else
-			Assert.assertTrue(false, "Can't find " + srtype + "service request type");
+            Assert.fail("Can't find " + srtype + "service request type");
 	}
 
 	public void deleteServiceRequestType(String srtype) {
@@ -153,7 +152,7 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + srtype + "service request type");
+            Assert.fail("Can't find " + srtype + "service request type");
 		}
 	}
 
@@ -162,7 +161,7 @@ public class ServiceRequestTypesWebPage extends BaseWebPage {
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + srtype + "service request type");
+            Assert.fail("Can't find " + srtype + "service request type");
 		}
 	}
 

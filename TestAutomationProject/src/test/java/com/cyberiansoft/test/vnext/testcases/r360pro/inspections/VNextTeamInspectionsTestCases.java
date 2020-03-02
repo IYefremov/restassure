@@ -8,7 +8,10 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.core.BrowserType;
-import com.cyberiansoft.test.dataclasses.*;
+import com.cyberiansoft.test.dataclasses.DamageData;
+import com.cyberiansoft.test.dataclasses.InspectionData;
+import com.cyberiansoft.test.dataclasses.TestCaseData;
+import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
@@ -194,7 +197,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		for (String inspCustomers : inspsCustomers) {
 			Assert.assertTrue(inspCustomers.contains(testwholesailcustomer.getFullName()));
 		}
-		final String inspSubNumber = inspectionNumber.substring(6, inspectionNumber.length());
+		final String inspSubNumber = inspectionNumber.substring(6);
 		inspectionsScreen.searchInpectionByFreeText(inspSubNumber);
 		Assert.assertTrue(inspectionsScreen.getNumberOfInspectionsInList() <= VNextInspectionsScreen.MAX_NUMBER_OF_INPECTIONS);
 		List<String> inspsNumbers = inspectionsScreen.getAllInspectionsNumbers();

@@ -179,12 +179,8 @@ public class BackOfficeOperationsInspectionsTestCases extends BaseTestCase {
 		Assert.assertEquals(data.getPage1(), inspectionsWebPage.getGoToPageFieldValue());
 
 		inspectionsWebPage.setPageSize(String.valueOf(data.getPageInt50()));
-		Integer lastPageNumberInteger = Integer.valueOf(lastpagenumber);
-		if (lastPageNumberInteger < data.getPageInt50()) {
-			Assert.assertEquals(lastPageNumberInteger, Integer.valueOf(inspectionsWebPage.getInspectionsTableRowCount()));
-		} else {
-			Assert.assertEquals(data.getPageInt50(), inspectionsWebPage.getInspectionsTableRowCount());
-		}
+		int lastPageNumberInteger = Integer.parseInt(lastpagenumber);
+		Assert.assertEquals(Math.min(lastPageNumberInteger, data.getPageInt50()), inspectionsWebPage.getInspectionsTableRowCount());
 
 		inspectionsWebPage.makeSearchPanelVisible();
 		inspectionsWebPage.verifySearchFieldsAreVisible();

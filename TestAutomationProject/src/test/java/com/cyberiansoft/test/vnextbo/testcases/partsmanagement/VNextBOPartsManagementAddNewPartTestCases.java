@@ -47,7 +47,7 @@ public class VNextBOPartsManagementAddNewPartTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
         VNextBOPartsDetailsPanelSteps.setAddNewPartValues(data.getPartData());
 
-        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
+        final int partsCounterValueBefore = Integer.parseInt(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
         final int partsListSizeBefore = VNextBOAddNewPartDialogInteractions.getPartsListSize();
         VNextBOAddNewPartDialogInteractions.clickSelectAllPartsButton();
         VNextBOAddNewPartDialogValidations.verifyPartsListSizeIsCorrect(0);

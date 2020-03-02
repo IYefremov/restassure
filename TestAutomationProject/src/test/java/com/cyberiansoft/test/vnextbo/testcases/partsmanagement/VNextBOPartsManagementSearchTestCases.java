@@ -224,7 +224,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchROByCorePrice(String rowID, String description, JSONObject testData) throws ParseException {
+    public void verifyUserCanSearchROByCorePrice(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
         VNextBOAdvancedSearchDialogSteps.setCorePriceCheckbox();
@@ -235,7 +235,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchROByLaborCredit(String rowID, String description, JSONObject testData) throws ParseException {
+    public void verifyUserCanSearchROByLaborCredit(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
         VNextBOAdvancedSearchDialogSteps.setLaborCreditCheckbox();
@@ -246,7 +246,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchROByCoreStatus(String rowID, String description, JSONObject testData) throws ParseException {
+    public void verifyUserCanSearchROByCoreStatus(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
         VNextBOAdvancedSearchDialogSteps.setLaborCreditCheckbox();

@@ -6,9 +6,6 @@ import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
-import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
-import org.testng.Assert;
 
 public class RegularOrderMonitorScreenSteps {
 

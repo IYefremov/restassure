@@ -203,7 +203,6 @@ public class VehiclePartsWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isVehiclePartExists(String vehiclepart) {
-		boolean exists =  vehiclepartstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + vehiclepart + "']")).size() > 0;
-		return exists;
+		return vehiclepartstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + vehiclepart + "']")).size() > 0;
 	}
 }

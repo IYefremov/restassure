@@ -1,8 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROSimpleSearchInteractions;
-import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
-import org.testng.Assert;
 
 public class VNextBOROSimpleSearchSteps {
 

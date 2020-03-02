@@ -81,7 +81,6 @@ public class VNextBOActiveDevicesTabValidations extends VNextBODeviceManagementW
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOActiveDevicesWebPage().registrationCodeByDeviceName(deviceName)),
                 "Registration code hasn't been displayed");
-        Assert.assertFalse(Utils.getText(new VNextBOActiveDevicesWebPage().registrationCodeByDeviceName(deviceName)).equals(""),
-                "Registration code has been empty");
+        Assert.assertNotEquals(Utils.getText(new VNextBOActiveDevicesWebPage().registrationCodeByDeviceName(deviceName)), "", "Registration code has been empty");
     }
 }

@@ -46,8 +46,8 @@ public class InspectionFactory extends BasePooledObjectFactory<InspectionDTO> {
 
     @Override
     public InspectionDTO create() throws Exception {
-        int inspnumber = Integer.valueOf(getLastInspectionNumber(licenseID, deviceID, appID,
-                employeeID, true, GlobalUtils.getInspectionSymbol() + appLicenseEntity).getLocalNo());
+        int inspnumber = getLastInspectionNumber(licenseID, deviceID, appID,
+                employeeID, true, GlobalUtils.INSPECTION_SYMBOL + appLicenseEntity).getLocalNo();
 
         Gson gson = new Gson();
         JtwigTemplate template = JtwigTemplate.inlineTemplate(gson.toJson(inspectionDTO));
@@ -78,7 +78,7 @@ public class InspectionFactory extends BasePooledObjectFactory<InspectionDTO> {
     @Override
     public PooledObject<InspectionDTO> wrap(InspectionDTO isnp) {
         // TODO Auto-generated method stub
-        return new DefaultPooledObject<InspectionDTO>(isnp);
+        return new DefaultPooledObject<>(isnp);
     }
 
     public InspectionDTO getLastInspectionNumber(String licenceId, String deviceId, String applicationId,

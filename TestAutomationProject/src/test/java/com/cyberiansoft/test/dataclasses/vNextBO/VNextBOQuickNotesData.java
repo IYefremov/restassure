@@ -13,5 +13,5 @@ public class VNextBOQuickNotesData {
     private String quickNotesDescriptionEdited;
 
     @JsonProperty("quickNotesDescriptionList")
-    private String quickNotesDescriptionList[];
+    private String[] quickNotesDescriptionList;
 }

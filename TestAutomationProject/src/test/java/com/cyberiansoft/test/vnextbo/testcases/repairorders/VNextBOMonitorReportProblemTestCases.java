@@ -338,7 +338,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         final String service = data.getService();
         final List<String> allServicesId = VNextBORODetailsPageInteractions.getAllServicesId(service);
-        Assert.assertTrue(!allServicesId.isEmpty(), "The service hasn't been displayed");
+        Assert.assertFalse(allServicesId.isEmpty(), "The service hasn't been displayed");
 
         final String activeStatus = OrderMonitorServiceStatuses.ACTIVE.getValue();
         VNextBORODetailsPageSteps.setServiceStatusForMultipleServicesByServiceId(allServicesId, activeStatus);

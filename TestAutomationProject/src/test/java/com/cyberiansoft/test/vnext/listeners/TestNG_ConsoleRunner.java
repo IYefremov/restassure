@@ -5,7 +5,10 @@ import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -159,7 +162,7 @@ public class TestNG_ConsoleRunner extends TestListenerAdapter {
      * @param line
      */
     public void log(long dateMillis,String line) {
-        System.out.format("%s: %s%n",String.valueOf(new Date(dateMillis)),line);
+        System.out.format("%s: %s%n", new Date(dateMillis),line);
 
         if ( logFile != null ) {
             writeTestngLog(logFile, line);
@@ -186,13 +189,13 @@ public class TestNG_ConsoleRunner extends TestListenerAdapter {
      * @return String
      */
     public String getTestMessage(ITestResult tr) {
-        Boolean found = false;
+        boolean found = false;
 
         if ( tr != null && tr.getThrowable() != null ) {
             found = true;
         }
 
-        if ( found == true ) {
+        if (found) {
             return tr.getThrowable().getMessage() == null ? "" : tr.getThrowable().getMessage();
         }
 
@@ -209,18 +212,18 @@ public class TestNG_ConsoleRunner extends TestListenerAdapter {
      */
     public String getTestParams(ITestResult tr) {
         int iLength = tr.getParameters().length;
-        String message = "";
+        StringBuilder message = new StringBuilder();
 
         try {
             if ( tr.getParameters().length > 0 ) {
-                message = tr.getParameters()[0].toString();
+                message = new StringBuilder(tr.getParameters()[0].toString());
 
                 for ( int iCount = 0; iCount < iLength; iCount++ ) {
                     if ( iCount == 0 ) {
-                        message = tr.getParameters()[0].toString();
+                        message = new StringBuilder(tr.getParameters()[0].toString());
                     }
                     else {
-                        message = message + ", " + tr.getParameters()[iCount].toString();
+                        message.append(", ").append(tr.getParameters()[iCount].toString());
                     }
                 }
             }
@@ -230,7 +233,7 @@ public class TestNG_ConsoleRunner extends TestListenerAdapter {
             // do nothing...
         }
 
-        return message;
+        return message.toString();
     }
 
     /**
@@ -279,7 +282,7 @@ public class TestNG_ConsoleRunner extends TestListenerAdapter {
             BufferedWriter writer = new BufferedWriter(new FileWriter(logFile, true));
 
             if ( line.contains("START") || line.contains("END") ) {
-                writer.append("[" + dateFormat.format(date) + "] " + line);
+                writer.append("[").append(dateFormat.format(date)).append("] ").append(line);
 
             }
 

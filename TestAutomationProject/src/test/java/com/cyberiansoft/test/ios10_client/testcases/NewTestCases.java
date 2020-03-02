@@ -140,8 +140,8 @@ public class NewTestCases extends BaseTestCase {
 		RegularServicesScreenSteps.openCustomServiceDetails("Dye_Panel");
 		RegularSelectedServiceDetailsScreen selectedServiceDetailsScreen = new RegularSelectedServiceDetailsScreen();
 		selectedServiceDetailsScreen.clickVehiclePartsCell();
-		for (int i = 0; i < vehicleparts.length; i++) {
-			selectedServiceDetailsScreen.selectVehiclePart(vehicleparts[i]);
+		for (String vehiclepart : vehicleparts) {
+			selectedServiceDetailsScreen.selectVehiclePart(vehiclepart);
 		}
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();
 		selectedServiceDetailsScreen.saveSelectedServiceDetails();

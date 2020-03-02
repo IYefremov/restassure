@@ -13,7 +13,7 @@ public class MonitorLiteBaseTestCase {
 	
 	@BeforeClass
 	@Parameters({ "selenium.browser", "ios.bundleid" })
-	public void setUp(String browser, String bundleid) throws Exception {
+	public void setUp(String browser, String bundleid) {
 		
 		browsertype = browser;
 		//WebDriverInstansiator.setDriver(browser);
@@ -29,7 +29,7 @@ public class MonitorLiteBaseTestCase {
 	}
 	
 	@AfterClass
-	public void tearDown() throws Exception {
+	public void tearDown() {
 
 		if (webdriver != null)
 			webdriver.quit();

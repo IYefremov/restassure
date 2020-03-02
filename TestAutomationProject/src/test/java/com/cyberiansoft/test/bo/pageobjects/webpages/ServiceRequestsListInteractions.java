@@ -517,20 +517,16 @@ public class ServiceRequestsListInteractions {
 		}
 		waitForLoading();
 
-		if (!isDateShifted) {
-			retryingFindClick(By.className("rsFullTime"));
-			waitForLoading();
-			findClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
-		} else {
-			retryingFindClick(By.className("rsNextDay"));
-			waitForLoading();
-			WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
-			retryingFindClick(By.className("rsFullTime"));
-			waitForLoading();
-			findClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
-		}
+        if (isDateShifted) {
+            retryingFindClick(By.className("rsNextDay"));
+            waitForLoading();
+            WaitUtilsWebDriver.getWait().until(ExpectedConditions.elementToBeClickable(By.className("rsFullTime"))).click();
+        }
+        retryingFindClick(By.className("rsFullTime"));
+        waitForLoading();
+        findClick(By.className("rsHorizontalHeaderTable"), By.tagName("th"), startDate);
 
-		waitForLoading();
+        waitForLoading();
 		return WaitUtilsWebDriver.getWait().until(ExpectedConditions.presenceOfElementLocated(By.className("rsWrap")))
 				.findElements(By.xpath("//div[contains(@class, 'rsApt appointmentClassDefault')]")).size();
 	}

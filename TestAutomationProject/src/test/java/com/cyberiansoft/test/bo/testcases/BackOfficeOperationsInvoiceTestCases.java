@@ -45,7 +45,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		// String initialpagenumber = invoicespage.getLastPageNumber();
 		invoicespage.setPageSize("1");
 		Assert.assertEquals(invoicespage.getInvoicesTableRowCount(), 1);
-		int numberofrows = Integer.valueOf(invoicespage.getLastPageNumber());
+		int numberofrows = Integer.parseInt(invoicespage.getLastPageNumber());
 
 		String lastpagenumber = invoicespage.getLastPageNumber();
 		invoicespage.clickGoToLastPage(browserType.getBrowserTypeString());
@@ -61,10 +61,7 @@ public class BackOfficeOperationsInvoiceTestCases extends BaseTestCase {
 		Assert.assertEquals("1", invoicespage.getGoToPageFieldValue());
 
 		invoicespage.setPageSize("999");
-		if (numberofrows < 500) {
-			Assert.assertEquals(numberofrows, invoicespage.getInvoicesTableRowCount());
-		} else
-			Assert.assertEquals(500, invoicespage.getInvoicesTableRowCount());
+		Assert.assertEquals(Math.min(numberofrows, 500), invoicespage.getInvoicesTableRowCount());
 
 		invoicespage.verifySearchFieldsAreVisible();
 		invoicespage.selectSearchStatus(WebConstants.InvoiceStatuses.INVOICESTATUS_DRAFT);

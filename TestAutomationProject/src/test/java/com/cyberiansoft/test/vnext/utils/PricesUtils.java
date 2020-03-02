@@ -12,7 +12,7 @@ public class PricesUtils {
         if (servicePriceValue.contains("x") || servicePriceValue.contains("Select Price Matrices"))
             return false;
         Double price = getServicePriceValue(servicePriceValue);
-        return price.equals(Double.valueOf(0));
+        return price.equals((double) 0);
     }
 
     public static String getFormattedServicePriceValue(float servicePrice) {

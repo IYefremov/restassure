@@ -116,7 +116,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWhichContainsBreakageServiceWithBigQuantity(String rowID,
-                                                                                  String description, JSONObject testData) throws Exception {
+                                                                                  String description, JSONObject testData) {
         
         final String damageName = "Hail Damage";
         
@@ -165,7 +165,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
         inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(), testcustomer);
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(), testcustomer); //todo  iconvertible types
         Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection(inspectionData.getMoneyServiceData().getServiceName()));
         Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection(matrixServiceData.getMatrixServiceName()));
         Assert.assertTrue(inspectionsWebPage.isImageLegendContainsBreakageIcon(damageName));
@@ -174,7 +174,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWhithFullPopulatedCustomerInfo(String rowID,
-                                                                                String description, JSONObject testData) throws Exception {
+                                                                                String description, JSONObject testData) {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
@@ -188,7 +188,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWhithCustomerWithFirstNameOnly(String rowID,
-                                                                   String description, JSONObject testData) throws Exception {
+                                                                   String description, JSONObject testData) {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
@@ -220,7 +220,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateAndEmailInspectionWithTtwoMatrixPanel(String rowID,
-                                                                   String description, JSONObject testData) throws Exception {
+                                                                   String description, JSONObject testData) {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 

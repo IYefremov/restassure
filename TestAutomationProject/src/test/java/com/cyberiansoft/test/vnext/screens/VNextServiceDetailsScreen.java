@@ -89,8 +89,8 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	}
 	
 	public void clickDeleteServiceIcon() {
-		tap(rootElement.findElement(By.xpath(".//i[@action='remove']")));;
-	}
+		tap(rootElement.findElement(By.xpath(".//i[@action='remove']")));
+    }
 	
 	public VNextAvailableServicesScreen deleteService() {
 		clickDeleteServiceIcon();

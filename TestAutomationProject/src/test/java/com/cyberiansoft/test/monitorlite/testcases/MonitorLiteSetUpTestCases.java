@@ -230,16 +230,16 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
         VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
-        for (int i = 0; i < services.length; i++)
-            Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(services[i]), serviceQueuedStatus);
+        for (String service : services)
+            Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(service), serviceQueuedStatus);
         VNextBORODetailsPageInteractions.clickStartOrderButton();
 
         Assert.assertFalse(VNextBORODetailsPageValidations.isStartOrderButtonVisible());
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woActivePhaseStatusNEW);
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), serviceActiveStatus);
         VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
-        for (int i = 0; i < services.length; i++)
-            Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(services[i]), serviceActiveStatus);
+        for (String service : services)
+            Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(service), serviceActiveStatus);
     }
 
     @Test(testName = "Test Case 68407:Repair Orders: Complete WO on the Order Details",
@@ -300,8 +300,8 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderActivePhaseStatus(), woActivePhaseStatus);
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), serviceQueuedStatus);
         VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
-        for (int i = 0; i < services.length; i++)
-            Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(services[i]), serviceQueuedStatus);
+        for (String service : services)
+            Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(service), serviceQueuedStatus);
         VNextBORODetailsPageInteractions.clickStartOrderButton();
 
         VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
@@ -318,8 +318,8 @@ public class MonitorLiteSetUpTestCases extends MonitorLiteBaseTestCase {
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesPhaseStatus(), woCompletedPhaseStatus);
         Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderCompletedValue(), woCopleteValue);
         VNextBORODetailsPageInteractions.expandRepairOrderServiceDetailsTable();
-        for (int i = 0; i < services.length; i++)
-            Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(services[i]), woCompletedPhaseStatus);
+        for (String service : services)
+            Assert.assertEquals(VNextBORODetailsPageInteractions.getRepairOrderServicesStatus(service), woCompletedPhaseStatus);
     }
 
 }

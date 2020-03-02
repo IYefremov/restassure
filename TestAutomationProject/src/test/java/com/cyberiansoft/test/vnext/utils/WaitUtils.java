@@ -108,7 +108,7 @@ public class WaitUtils {
     //TODO: timeout and polling should be readed from some .prop file
     public static FluentWait<WebDriver> getGeneralFluentWait() {
         return
-                new FluentWait<WebDriver>(ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                new FluentWait<>(ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
                         .withTimeout(Duration.ofSeconds(durationInSeconds))
                         .pollingEvery(Duration.ofMillis(pullingIntervalInMils))
                         .ignoring(ElementClickInterceptedException.class)
@@ -120,7 +120,7 @@ public class WaitUtils {
 
     public static FluentWait<WebDriver> getGeneralFluentWait(int timeout, int pollingEvery) {
         return
-                new FluentWait<WebDriver>(ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
+                new FluentWait<>(ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
                         .withTimeout(Duration.ofSeconds(durationInSeconds))
                         .pollingEvery(Duration.ofMillis(pullingIntervalInMils))
                         .ignoring(ElementClickInterceptedException.class)

@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.regularclientsteps;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularAssignTechniciansScreen;
 import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
-import com.cyberiansoft.test.ios10_client.utils.Helpers;
 
 public class RegularAssignTechniciansSteps {
 

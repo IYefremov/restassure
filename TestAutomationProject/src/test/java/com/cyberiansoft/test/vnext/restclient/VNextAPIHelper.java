@@ -15,12 +15,13 @@ import java.io.IOException;
 
 public class VNextAPIHelper {
 
+    //Todo  always  return  ""
     public static String createInspection(InspectionTypes inspectionType, InspectionDTO inspection,
                                           DeviceDTO device, Employee employee, String appID,
                                           String appLicenseEntity) throws IOException {
 
         int inspnumber = getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, GlobalUtils.getInspectionSymbol() + appLicenseEntity);
+                employee.getEmployeeID(), true, GlobalUtils.INSPECTION_SYMBOL + appLicenseEntity);
         device.setEmployeeId(employee.getEmployeeID());
 
         String estimationId = GlobalUtils.getUUID();
@@ -41,12 +42,13 @@ public class VNextAPIHelper {
         return "";
     }
 
+    //Todo  always  return  ""
     public static String createWorkOrder(WorkOrderTypes workOrderType, WorkOrderDTO workOrder,
                                          DeviceDTO device, Employee employee, String appID,
                                          String appLicenseEntity) throws IOException {
 
         int inspnumber = getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, GlobalUtils.getInspectionSymbol() + appLicenseEntity);
+                employee.getEmployeeID(), true, GlobalUtils.INSPECTION_SYMBOL + appLicenseEntity);
         device.setEmployeeId(employee.getEmployeeID());
 
         String orderId = GlobalUtils.getUUID();
@@ -74,6 +76,6 @@ public class VNextAPIHelper {
         Response<InspectionsListResponse> res = ApiUtils.getAPIService().getLastMyInspection(licenceId,
                 deviceId, applicationId,userId , json, 0, 1, "-1",
                 searchText).execute();
-        return Integer.valueOf(res.body().getResult().get(0).getLocalNo());
+        return res.body().getResult().get(0).getLocalNo();
     }
 }

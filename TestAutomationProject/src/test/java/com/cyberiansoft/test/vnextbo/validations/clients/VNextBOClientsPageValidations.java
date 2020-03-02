@@ -61,7 +61,7 @@ public class VNextBOClientsPageValidations extends VNextBOBaseWebPageValidations
         {
             for (String cellValue : VNextBOClientsPageSteps.getColumnValuesFromColumnWithCheckBoxes(columnTitle)
             ) {
-                Assert.assertEquals(cellValue, null, "Search result hasn't been correct" );
+                Assert.assertNull(cellValue, "Search result hasn't been correct");
             }
         }
 

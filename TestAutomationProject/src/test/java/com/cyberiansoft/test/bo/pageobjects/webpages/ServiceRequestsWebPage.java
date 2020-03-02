@@ -151,7 +151,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 		selectComboboxValue(searchstatuscmb, searchstatusdd, status);
 	}
 	
-	public void selectSearchLabel(String _label) throws InterruptedException  {
+	public void selectSearchLabel(String _label) {
 		selectComboboxValue(searchlabelcmb, searchlabeldd, _label);
 	}
 	
@@ -164,8 +164,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	}
 
 	public void createServiceRequest(String devicefordispatch,
-			String servicerequest, String po, String ro)
-			throws InterruptedException {
+			String servicerequest, String po, String ro) {
 		click(defaultdevicefordispatchcmbbox);
 		driver.findElement(
 				By.xpath("//ul[@class='rcbList']/li[text()='"
@@ -189,8 +188,7 @@ public class ServiceRequestsWebPage extends WebPageWithPagination {
 	}
 
 	public void createServiceRequest1(String devicefordispatch,
-			String po, String ro)
-			throws InterruptedException {
+			String po, String ro) {
 		defaultdevicefordispatchcmbbox.click();
 		driver.findElement(
 				By.xpath("//ul[@class='rcbList']/li[text()='"

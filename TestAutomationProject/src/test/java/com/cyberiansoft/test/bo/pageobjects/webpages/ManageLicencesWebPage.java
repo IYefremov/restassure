@@ -127,8 +127,8 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithLicenceApplication(licenceapp);
 		if (row != null) {
 			licencenum = row.findElement(By.xpath(".//td[4]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + licenceapp + " licence application");
+		} else
+			Assert.fail("Can't find " + licenceapp + " licence application");
 		return licencenum;
 	}
 	
@@ -137,8 +137,8 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithLicenceApplication(licenceapp);
 		if (row != null) {
 			licencetype = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + licenceapp + " licence application");
+		} else
+			Assert.fail("Can't find " + licenceapp + " licence application");
 		return licencetype;
 	}
 	
@@ -152,8 +152,8 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 		WebElement row = getTableRowWithLicenceApplication(licenceapp);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + licenceapp + " licence application");
+		} else
+			Assert.fail("Can't find " + licenceapp + " licence application");
 	}
 	
 	public void deleteLicenceApplication(String licenceapp) {
@@ -161,7 +161,7 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + licenceapp + " licence application");	
+			Assert.fail("Can't find " + licenceapp + " licence application");
 		}
 	}
 	
@@ -170,7 +170,7 @@ public class ManageLicencesWebPage extends WebPageWithPagination {
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + licenceapp + " licence application");	
+			Assert.fail("Can't find " + licenceapp + " licence application");
 		}
 	}
 

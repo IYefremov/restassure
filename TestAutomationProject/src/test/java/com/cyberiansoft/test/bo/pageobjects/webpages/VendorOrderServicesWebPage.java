@@ -125,7 +125,7 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 			row.findElement(By.xpath(".//input[contains(@id, 'comboVendor_Input')]")).click();
 			combovendordd.selectByVisibleText(vendorName);
 		} else
-			Assert.assertTrue(false, "Can't find " + serviceName + " repair order service");
+            Assert.fail("Can't find " + serviceName + " repair order service");
 	}
 
 	public String getRepairOrderServiceTechnician(String serviceName) {
@@ -134,7 +134,7 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 		if (row != null) {
 			tech = row.findElement(By.xpath(".//input[contains(@id, 'comboEmployee_Input')]")).getAttribute("value");
 		} else
-			Assert.assertTrue(false, "Can't find " + serviceName + " repair order service");
+            Assert.fail("Can't find " + serviceName + " repair order service");
 		return tech;
 	}
 
@@ -144,7 +144,7 @@ public class VendorOrderServicesWebPage extends BaseWebPage {
 		if (row != null) {
 			vendorName = row.findElement(By.xpath(".//input[contains(@id, 'comboVendor_Input')]")).getAttribute("value");
 		} else
-			Assert.assertTrue(false, "Can't find " + serviceName + " repair order service");
+            Assert.fail("Can't find " + serviceName + " repair order service");
 		return vendorName;
 	}
 

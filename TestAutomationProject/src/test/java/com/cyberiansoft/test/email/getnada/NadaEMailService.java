@@ -98,7 +98,7 @@ public class NadaEMailService {
     }
 
     private void generateEmailId(){
-        this.emailId = RandomStringUtils.randomAlphanumeric(EMAIL_CHARS_LENGTH).toLowerCase().concat(NADA_EMAIL_DOMAIN);
+        this.emailId = RandomStringUtils.randomAlphanumeric(EMAIL_CHARS_LENGTH).toLowerCase() + NADA_EMAIL_DOMAIN;
     }
 
     public void setEmailId(String nadaEmailAddress){
@@ -215,8 +215,7 @@ public class NadaEMailService {
         List<MailAttachment> attachments = getMessageAttachments(mailSearchParameters);
         if (attachments.size() > 0)
             present = attachments.stream()
-                    .filter(att -> att.getAttachmentFileName().equals(mailSearchParameters.getAttachmentFileName()))
-                    .findFirst().isPresent();
+                    .anyMatch(att -> att.getAttachmentFileName().equals(mailSearchParameters.getAttachmentFileName()));
         return  present;
     }
 
@@ -279,7 +278,7 @@ public class NadaEMailService {
     }
 
     public List<String> getUrlsFromMessage(String message, String linkText, String start, String end) {
-        List<String> allMatches = new ArrayList<String>();
+        List<String> allMatches = new ArrayList<>();
 
         Matcher matcher = Pattern.compile("(<a [^>]+>)" + linkText).matcher(message);
 

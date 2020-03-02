@@ -6,8 +6,6 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import java.util.concurrent.TimeUnit;
-
 public class RegularEnterpriseBeforeDamageScreen extends RegularBaseWizardScreen {
 	
 	final static String enterprisebeforedamagescreencapt = "Enterprise Before Damage";

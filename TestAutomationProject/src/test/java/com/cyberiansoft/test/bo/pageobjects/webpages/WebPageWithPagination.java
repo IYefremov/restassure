@@ -60,7 +60,7 @@ public class WebPageWithPagination extends BaseWebPage {
 		String oftxt = "of ";
 		wait.ignoring(StaleElementReferenceException.class)
 				.until(ExpectedConditions.visibilityOf(pageoflabel));
-		return pageoflabel.getText().substring(oftxt.length(), pageoflabel.getText().length());
+		return pageoflabel.getText().substring(oftxt.length());
 	}
 
 	public String getCurrentlySelectedPageNumber() {
@@ -129,7 +129,7 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public void clickGoToNextPage() {
-		int currentPage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int currentPage = Integer.parseInt(getCurrentlySelectedPageNumber());
 		int nextPage = currentPage + 1;
 		goToNextPage.click();
 		waitForLoading();
@@ -140,7 +140,7 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public void clickGoToPreviousPage() {
-		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int currenpage = Integer.parseInt(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
 		try {

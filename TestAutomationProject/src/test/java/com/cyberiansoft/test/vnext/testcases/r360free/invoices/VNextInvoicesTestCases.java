@@ -197,7 +197,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInvoiceWithSetPO(String rowID,
-                                           String description, JSONObject testData) throws Exception {
+                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();

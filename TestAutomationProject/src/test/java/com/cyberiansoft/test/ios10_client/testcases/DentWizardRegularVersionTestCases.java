@@ -28,7 +28,10 @@ import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspe
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
-import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -618,7 +621,7 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         myInspectionsScreen.clickSaveFilterDialogButton();
 
         Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
-        Assert.assertEquals(myInspectionsScreen.checkFilterIsApplied(), true);
+        Assert.assertTrue(myInspectionsScreen.checkFilterIsApplied(),"FilterIsApplied is not true");
         myInspectionsScreen.clearFilter();
         myInspectionsScreen.clickSaveFilterDialogButton();
         RegularNavigationSteps.navigateBackScreen();

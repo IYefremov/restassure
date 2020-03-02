@@ -15,8 +15,8 @@ public class VNextBOQuickNotesWebPageValidations {
         List<WebElement> notesList = new ArrayList<>(new VNextBOQuickNotesWebPage().getQuickNotesList());
         if (equals) Assert.assertEquals(Utils.getText(notesList.get(notesList.size() - 1)),
                 expectedNoteDescription, "Last note description has contained incorrect value");
-        else Assert.assertFalse(Utils.getText(notesList.get(notesList.size() - 1)).equals(expectedNoteDescription),
-                "Last note description has contained incorrect value");
+        else
+            Assert.assertNotEquals(expectedNoteDescription, Utils.getText(notesList.get(notesList.size() - 1)), "Last note description has contained incorrect value");
     }
 
     public static void verifyNotesAmountIsCorrect(int expectedNotesAmount) {

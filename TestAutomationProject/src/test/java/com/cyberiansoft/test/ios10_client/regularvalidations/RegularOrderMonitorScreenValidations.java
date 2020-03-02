@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
-import com.cyberiansoft.test.dataclasses.*;
+import com.cyberiansoft.test.dataclasses.OrderMonitorData;
+import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.ServiceTechnician;
+import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.enums.OrderMonitorStatuses;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.AssignTechniciansSteps;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
 import org.testng.Assert;
 

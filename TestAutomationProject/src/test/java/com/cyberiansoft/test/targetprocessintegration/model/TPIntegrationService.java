@@ -77,7 +77,7 @@ public class TPIntegrationService {
         return MAPPER.readValue(msgs, TestPlanRunDTO.class);
     }
 
-    public void setTestCaseAutomatedField(String testCaseId) throws UnirestException, IOException {
+    public void setTestCaseAutomatedField(String testCaseId) throws UnirestException {
         Unirest.post(TARGET_PROCESS_SET_TESTCASE_AUTOMATED_FIELD)
                 .routeParam(TESTCASE_ID_ROUTE_PARAM, testCaseId)
                 .routeParam(ACCESS_TOKEN_ROUTE_PARAM, "Mzc6bzRIZXc0VW1acktsNlVNeDYwUVNDUnVod2hsY250b1ljVXBZTTZOUUdsTT0=")
@@ -89,9 +89,7 @@ public class TPIntegrationService {
 
     public Map<String, String> testCaseToTestRunMap(TestPlanRunDTO testPlanRunDTO) {
         Map<String, String> testCaseToTestRunMap = new HashMap<>();
-        testPlanRunDTO.getTestCaseRuns().getItems().forEach(testCaseRunDTO -> {
-            testCaseToTestRunMap.put(String.valueOf(testCaseRunDTO.getTestCase().getId()), String.valueOf(testCaseRunDTO.getId()));
-        });
+        testPlanRunDTO.getTestCaseRuns().getItems().forEach(testCaseRunDTO -> testCaseToTestRunMap.put(String.valueOf(testCaseRunDTO.getTestCase().getId()), String.valueOf(testCaseRunDTO.getId())));
         return testCaseToTestRunMap;
     }
 

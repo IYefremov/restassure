@@ -189,7 +189,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanEditCreatedUserData(String rowID, String description, JSONObject testData) throws Exception {
+    public void verifyUserCanEditCreatedUserData(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.searchUserByEmail(newUserEmail);
         VNexBOUsersWebPage vNexBOUsersWebPage = new VNexBOUsersWebPage();

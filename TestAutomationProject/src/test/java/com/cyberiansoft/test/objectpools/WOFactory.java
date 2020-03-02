@@ -39,7 +39,7 @@ public class WOFactory implements ObjectFactory <WorkOrderDTO> {
     public WorkOrderDTO createNew() throws IOException {
         if (lastWONumber == 0)
             lastWONumber = getLastWorkOrderNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                    employee.getEmployeeID(), true, GlobalUtils.getWorkOrderSymbol() + appLicenseEntity).getLocalNo();
+                    employee.getEmployeeID(), true, GlobalUtils.WORK_ORDER_SYMBOL + appLicenseEntity).getLocalNo();
         device.setEmployeeId(employee.getEmployeeID());
 
         String orderId = GlobalUtils.getUUID();
@@ -61,7 +61,7 @@ public class WOFactory implements ObjectFactory <WorkOrderDTO> {
         System.out.println("===============================" + lastWONumber);
         System.out.println("===============================" + workOrder.getLocalNo());
         WorkOrderDTO newWO =  getLastWorkOrderNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, GlobalUtils.getWorkOrderSymbol() + appLicenseEntity);
+                employee.getEmployeeID(), true, GlobalUtils.WORK_ORDER_SYMBOL + appLicenseEntity);
         newWO.setLocalNo(lastWONumber);
         return newWO;
     }

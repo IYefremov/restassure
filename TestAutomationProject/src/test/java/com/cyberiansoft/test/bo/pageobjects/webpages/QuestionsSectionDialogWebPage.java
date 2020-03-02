@@ -1,11 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,14 +8,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 public class QuestionsSectionDialogWebPage extends BaseWebPage {
 
@@ -161,15 +154,12 @@ public class QuestionsSectionDialogWebPage extends BaseWebPage {
 			row.findElement(By.xpath(".//td[4]/a")).click();
 			wait.until(ExpectedConditions.visibilityOf(backtoquestionslink));
 		} else {
-			Assert.assertTrue(false, "Can't find " + questionname + " question for question section");	
+            Assert.fail("Can't find " + questionname + " question for question section");
 		}
 	}
 	
 	public boolean isQuestionPresentInTable(String questionname) {
-		if (getTableRowWithQuestion(questionname) == null)
-			return false;
-		else
-			return true;	
+		return getTableRowWithQuestion(questionname) != null;
 	}
 	
 	public void clickBackToQuestionsLink() {
@@ -216,15 +206,12 @@ public class QuestionsSectionDialogWebPage extends BaseWebPage {
 			clickEditTableRow(row);
 			wait.until(ExpectedConditions.visibilityOf(backtoquestionslink));
 		} else {
-			Assert.assertTrue(false, "Can't find " + answertype + " answer");	
+            Assert.fail("Can't find " + answertype + " answer");
 		}
 	}
 	
 	public boolean isAnswerPresentInTable(String answertype) {
-		if (getTableRowWithAnswer(answertype) == null)
-			return false;
-		else
-			return true;	
+		return getTableRowWithAnswer(answertype) != null;
 	}
 		
 	public void selectAvailableServiceToAnswer(String servicename) {

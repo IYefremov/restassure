@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typeselectionlists;
 
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
-import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextTypeScreenContext;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;

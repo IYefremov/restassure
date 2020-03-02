@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularVehiclePartScreen;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.SwipeUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -9,13 +8,9 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	
@@ -118,7 +113,7 @@ public class RegularPriceMatrixScreen extends RegularBaseWizardScreen {
 	
 	public String getPriceMatrixVehiclePartSubTotalPrice() {
 		String priceValue = appiumdriver.findElementByClassName("XCUIElementTypeToolbar").findElement(MobileBy.className("XCUIElementTypeStaticText")).getAttribute("value");
-		return priceValue.substring(priceValue.indexOf("$"), priceValue.length());
+		return priceValue.substring(priceValue.indexOf("$"));
 	}
 
 	public String getInspectionSubTotalPrice() {

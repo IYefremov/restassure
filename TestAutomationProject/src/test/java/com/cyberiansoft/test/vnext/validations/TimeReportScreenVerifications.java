@@ -21,6 +21,6 @@ public class TimeReportScreenVerifications {
         if (shouldBePresent)
             Assert.assertNotNull(endDateLable.getText());
         else
-            Assert.assertTrue(endDateLable.getText().equals(""));
+            Assert.assertEquals("", endDateLable.getText());
     }
 }

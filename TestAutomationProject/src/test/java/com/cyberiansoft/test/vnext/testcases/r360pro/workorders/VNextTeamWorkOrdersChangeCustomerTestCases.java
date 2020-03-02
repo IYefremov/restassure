@@ -183,7 +183,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanSelectCustomerUsingSearch(String rowID,
-                                                                      String description, JSONObject testData) throws IOException {
+                                                                      String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -203,7 +203,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyInvoiceCreatedWithChangedCustomer(String rowID,
-                                                           String description, JSONObject testData) throws IOException {
+                                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -230,7 +230,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
     public void testVerifyUserCanChangeCustomerForTeamWO(String rowID,
-                                                            String description, JSONObject testData) throws IOException {
+                                                            String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 

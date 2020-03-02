@@ -163,7 +163,7 @@ public class ActiveDevicesWebPage extends BasePage {
     }
 
 	public String getLicenseEntityName() {
-		final String entitysrart = "&entityName=0002-0";;
+		final String entitysrart = "&entityName=0002-0";
 		String href = driver.findElement(By.xpath("//a[@title='Audit Log']")).getAttribute("href");
 		return  href.substring(href.indexOf(entitysrart) + entitysrart.length() , href.indexOf(entitysrart) + entitysrart.length() + 3);
 	}
@@ -185,6 +185,6 @@ public class ActiveDevicesWebPage extends BasePage {
 	public String getLicenseID() {
 		final String appcontext = driver.findElement(By.xpath("//a[contains(@id, 'ctl00_ctl00_Content_Main_devices_ctl00')]")).getAttribute("href");
 		final String licenseIDStart = "&licenceId=";
-		return appcontext.substring(appcontext.indexOf(licenseIDStart) + licenseIDStart.length(), appcontext.length());
+		return appcontext.substring(appcontext.indexOf(licenseIDStart) + licenseIDStart.length());
 	}
 }

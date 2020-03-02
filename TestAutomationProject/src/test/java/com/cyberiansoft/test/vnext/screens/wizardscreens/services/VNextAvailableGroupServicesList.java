@@ -33,7 +33,7 @@ public class VNextAvailableGroupServicesList extends  VNextBaseGroupServicesScre
             WaitUtils.waitUntilElementInvisible(By.xpath("//div[@data-type='approve']"));
         }
         else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
     }
 
     public WebElement getServiceListItem(String servicename) {

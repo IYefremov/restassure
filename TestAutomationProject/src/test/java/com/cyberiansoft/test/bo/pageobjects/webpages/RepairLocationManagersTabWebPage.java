@@ -1,24 +1,18 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ComboBox;
-import com.cyberiansoft.test.bo.webelements.DropDown;
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 public class RepairLocationManagersTabWebPage extends BaseWebPage {
 	
@@ -73,7 +67,7 @@ public class RepairLocationManagersTabWebPage extends BaseWebPage {
 		try{
 		employeecmb.clearAndType(employee);
 		}catch(Exception e){
-			Assert.assertTrue(false);
+            Assert.fail();
 		}
 		waitABit(1000);
 		employeedd.selectByVisibleText(employee);
@@ -96,8 +90,7 @@ public class RepairLocationManagersTabWebPage extends BaseWebPage {
 	}
 	
 	public boolean isRepairLocationManagerExists(String employee) {
-		boolean exists =  managerstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + employee + "']")).size() > 0;
-		return exists;
+        return managerstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + employee + "']")).size() > 0;
 	}
 	
 	public void deleteRepairLocationManager(String employee) {
@@ -105,7 +98,7 @@ public class RepairLocationManagersTabWebPage extends BaseWebPage {
 		if (row != null) {
 			clickDeleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + employee + " repair location manager");	
+            Assert.fail("Can't find " + employee + " repair location manager");
 		}
 	}
 

@@ -14,13 +14,10 @@ import com.cyberiansoft.test.vnextbo.steps.services.VNextBOServicesWebPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.services.VNextBOServiceDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.services.VNextBOServicesPageValidations;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
-import java.io.IOException;
 
 public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
 
@@ -32,7 +29,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanAddMoneyService(String rowID, String description, JSONObject testData) throws IOException, UnirestException {
+    public void verifyUserCanAddMoneyService(String rowID, String description, JSONObject testData) {
 
         VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
         serviceData.setServiceName(RandomStringUtils.randomAlphabetic(5) + serviceData.getServiceName());

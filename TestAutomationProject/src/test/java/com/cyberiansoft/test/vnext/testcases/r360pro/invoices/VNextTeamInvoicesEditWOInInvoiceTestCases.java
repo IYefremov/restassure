@@ -92,7 +92,7 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
         InvoiceSteps.openMenu(invoiceNumber);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);;
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoScreenValidations.validateInvoiceTotal(testCaseData.getWorkOrderData().getWorkOrderPrice());
         invoiceInfoScreen.clickOnWorkOrder(workOrderNumber);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -139,9 +139,7 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
         VNextSelectWorkOrdersScreen selectWorkOrdersScreen = invoiceInfoScreen.clickAddWorkOrdersButton();
         selectWorkOrdersScreen.selectWorkOrder(workOrders.get(1));
         selectWorkOrdersScreen.clickAddWorkOrders();
-        workOrders.forEach(workOrderId -> {
-            InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true);
-        });
+        workOrders.forEach(workOrderId -> InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true));
 
         WizardScreenSteps.clickCancelMenuItem();
         InformationDialogValidations.clickYesAndVerifyMessage(VNextAlertMessages.CANCEL_ETING_WORK_ORDER);

@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class VNextSearchEmployeeTestCases extends BaseTestClass {
 	
@@ -16,15 +17,15 @@ public class VNextSearchEmployeeTestCases extends BaseTestClass {
 	public void testVerifyIncrementalSearchForEmloyeesList() {
 		
 		final String firstSearchCriteria = "ar";
-		final ArrayList<String> firstSearchCriteriaEmployees = new ArrayList<String>(
+		final ArrayList<String> firstSearchCriteriaEmployees = new ArrayList<>(
 				Arrays.asList("Leo Barton", "Loise Carr Blansh", "Arron Morris", "Perla Wardle")); 
 		final String secondSearchCriteria = "arr";
-		final ArrayList<String> secondSearchCriteriaEmployees = new ArrayList<String>(
+		final ArrayList<String> secondSearchCriteriaEmployees = new ArrayList<>(
 				Arrays.asList("Loise Carr Blansh", "Arron Morris"));
 		
 		final String thirdSearchCriteria = "arro";
-		final ArrayList<String> thirdSearchCriteriaEmployees = new ArrayList<String>(
-				Arrays.asList("Arron Morris"));
+		final ArrayList<String> thirdSearchCriteriaEmployees = new ArrayList<>(
+				Collections.singletonList("Arron Morris"));
 
 		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		loginscreen.searchEmployee(firstSearchCriteria);
@@ -48,8 +49,8 @@ public class VNextSearchEmployeeTestCases extends BaseTestClass {
 	public void testSearchEmployeeWithSpecialSymbols() {
 		
 		final String firstSearchCriteria = "$%-Symbols";
-		final ArrayList<String> firstSearchCriteriaEmployees = new ArrayList<String>(
-				Arrays.asList("Special +&* $%-Symbols"));
+		final ArrayList<String> firstSearchCriteriaEmployees = new ArrayList<>(
+				Collections.singletonList("Special +&* $%-Symbols"));
 
 
 		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -64,8 +65,8 @@ public class VNextSearchEmployeeTestCases extends BaseTestClass {
 	public void testVerifyEmployeeSearchDoesntDependsOnTextRegistr() {
 		
 		final String[] searchCriterias = { "ross", "ROSS", "rOsS", "rosS" };
-		final ArrayList<String> searchCriteriaEmployees = new ArrayList<String>(
-				Arrays.asList("Merrill Ross"));
+		final ArrayList<String> searchCriteriaEmployees = new ArrayList<>(
+				Collections.singletonList("Merrill Ross"));
 
 
 		VNextLoginScreen loginscreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());

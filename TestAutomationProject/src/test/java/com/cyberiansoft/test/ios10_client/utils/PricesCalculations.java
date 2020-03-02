@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.utils;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.bo.utils.BackOfficeUtils;
 
 public class PricesCalculations {
@@ -39,9 +38,7 @@ public class PricesCalculations {
     public static boolean isInteger(String value) {
         try {
             Integer.parseInt(value);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             return false;
         }
         return true;
@@ -50,9 +47,7 @@ public class PricesCalculations {
     public static boolean isDouble(String value) {
         try {
             Double.parseDouble(value);
-        } catch (NumberFormatException e) {
-            return false;
-        } catch (NullPointerException e) {
+        } catch (NumberFormatException | NullPointerException e) {
             return false;
         }
         return true;
