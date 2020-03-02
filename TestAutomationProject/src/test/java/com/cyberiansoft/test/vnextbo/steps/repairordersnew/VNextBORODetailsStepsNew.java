@@ -222,6 +222,7 @@ public class VNextBORODetailsStepsNew {
 
         changeOrderStatus("Closed");
         VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason(reason);
+        WaitUtilsWebDriver.waitABit(4000);
     }
 
     public static void startServicesForPhase(String phase) {
@@ -325,5 +326,28 @@ public class VNextBORODetailsStepsNew {
     public static void seeMoreInformationForOrder() {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().getMoreInfoSection());
+    }
+
+    public static void turnOnOffPhaseEnforcement(boolean turnOn) {
+
+        if (turnOn) Utils.clickElement(new VNextBORODetailsWebPageNew().getPhaseEnforcementOnButton());
+        else Utils.clickElement(new VNextBORODetailsWebPageNew().getPhaseEnforcementOffButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(5000);
+    }
+
+    public static void addNewTask(VNextBOMonitorData taskData, boolean requiredFieldsOnly, boolean saveTask) {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddNewTaskButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        if (requiredFieldsOnly) VNextBOAddNewTaskDialogSteps.addNewTaskWithRequiredFields(taskData);
+        else VNextBOAddNewTaskDialogSteps.addNewTaskWithAllFields(taskData, saveTask);
+    }
+
+    public static void addNewTaskWithPredefinedTechnician(VNextBOMonitorData taskData) {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddNewTaskButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOAddNewTaskDialogSteps.addNewTaskWithPredefinedTechnician(taskData);
     }
 }

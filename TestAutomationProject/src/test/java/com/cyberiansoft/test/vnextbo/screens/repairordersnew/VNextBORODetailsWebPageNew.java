@@ -92,6 +92,15 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@data-bind='click: showLogWindow']")
     private WebElement logInfoButton;
 
+    @FindBy(xpath = "//label[@for='phaseEn-on']")
+    private WebElement phaseEnforcementOnButton;
+
+    @FindBy(xpath = "//label[@for='phaseEn-off']")
+    private WebElement phaseEnforcementOffButton;
+
+    @FindBy(xpath = "//button[@id='reconmonitordetails-view-add-task-button']")
+    private WebElement addNewTaskButton;
+
     public WebElement phaseRow(String phase) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']"));

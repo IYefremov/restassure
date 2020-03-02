@@ -142,6 +142,9 @@ public class VNextBOMonitorData {
     @JsonProperty("taskStatus")
     private String taskStatus;
 
+    @JsonProperty("team")
+    private String team;
+
     @JsonProperty("searchName")
     private String searchName;
 

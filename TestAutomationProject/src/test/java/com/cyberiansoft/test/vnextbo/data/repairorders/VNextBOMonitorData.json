@@ -1116,10 +1116,14 @@
   "verifyUserCanSeeArbitrationDate": [
     {
       "rowID": "verifyUserCanSeeArbitrationDate.01",
-      "description": "Test Case 92577: User can see \"Arbitration Date\"",
+      "description": "Test Case 92577: User can see \"Arbitration Date\". Test Case 92584: User can see \"Arbitration Date\"",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "92577",
+          "testCaseTitle": "User can see \"Arbitration Date\""
+        },
+        {
+          "testCaseID": "92584",
           "testCaseTitle": "User can see \"Arbitration Date\""
         }
       ],
@@ -1240,6 +1244,99 @@
       ],
       "location": "New_zayats_location",
       "orderNumber": "O-000-152460"
+    }
+  ],
+
+  "verifyUserCanTurnOnOffPhaseEnforcement": [
+    {
+      "rowID": "verifyUserCanTurnOnOffPhaseEnforcement.01",
+      "description": "Test Case 91354: User can turn on \"Phase Enforcement\". Test Case 91355: User can turn off \"Phase Enforcement\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91354",
+          "testCaseTitle": "User can turn on \"Phase Enforcement\""
+        },
+        {
+          "testCaseID": "91355",
+          "testCaseTitle": "User can turn off \"Phase Enforcement\""
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanAddANewTaskWithAllFields": [
+    {
+      "rowID": "verifyUserCanAddANewTaskWithAllFields.01",
+      "description": "Test Case 93027: User can add a new task with all filled fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93027",
+          "testCaseTitle": "User can add a new task with all filled fields"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "Third",
+      "task": "New Ivan Task",
+      "team": "Test Team",
+      "technician": "test test",
+      "notesMessage": "93027"
+    }
+  ],
+
+  "verifyUserCanAddANewTaskWithRequiredFields": [
+    {
+      "rowID": "verifyUserCanAddANewTaskWithRequiredFields.01",
+      "description": "Test Case 93031: User can add a new task with filled required fields",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93031",
+          "testCaseTitle": "User can add a new task with filled required fields"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "Third",
+      "task": "New Ivan Task",
+      "team": "Test Team",
+      "technician": "test test",
+      "notesMessage": "93031"
+    }
+  ],
+
+  "verifyUserCanCancelTaskAdding": [
+    {
+      "rowID": "verifyUserCanCancelTaskAdding.01",
+      "description": "Test Case 93032: User can cancel task adding",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93032",
+          "testCaseTitle": "User can cancel task adding"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "Third",
+      "task": "New Ivan Task",
+      "team": "Test Team",
+      "technician": "test test",
+      "notesMessage": "93032"
+    }
+  ],
+
+  "verifyUserCanAddNewTaskWithPredefinedTechnician": [
+    {
+      "rowID": "verifyUserCanAddNewTaskWithPredefinedTechnician.01",
+      "description": "Test Case 99467: Verify user can add new task with predefined technician",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "99467",
+          "testCaseTitle": "Verify user can add new task with predefined technician"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "phase": "Third",
+      "task": "New Ivan Task",
+      "team": "01_TimeRep_team",
+      "technician": "Aleksandr Filimonov",
+      "notesMessage": "99467"
     }
   ]
 }

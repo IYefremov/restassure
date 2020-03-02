@@ -133,10 +133,10 @@ public class VNextBORODetailsValidationsNew {
 
         if (shouldBeDisplayed)
             Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription)),
-                "Service with description " + serviceDescription + "hasn't been added");
+                "Service with description " + serviceDescription + " hasn't been added");
         else try {
             Assert.assertFalse(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription)),
-                    "Service with description " + serviceDescription + "has been added");
+                    "Service with description " + serviceDescription + " has been added");
         } catch (NoSuchElementException ex) {}
     }
 
