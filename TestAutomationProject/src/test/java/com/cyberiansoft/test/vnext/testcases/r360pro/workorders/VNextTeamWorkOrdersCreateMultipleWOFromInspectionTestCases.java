@@ -16,6 +16,7 @@ import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
+import com.cyberiansoft.test.vnext.validations.WorkOrdersScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -56,7 +57,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         SelectedServicesScreenSteps.unselectServices(workOrderData.getInspectionData().getServicesList());
         ListServicesValidations.verifySelectedServices(workOrderData.getServicesList());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
-        WorkOrderSteps.workOrderShouldBePresent(workOrderId);
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderId, true);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -80,7 +81,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData().getServiceName());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
-        WorkOrderSteps.workOrderShouldBePresent(workOrderId);
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderId, true);
         ScreenNavigationSteps.pressBackButton();
     }
 }

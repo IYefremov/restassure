@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.*;
@@ -497,7 +498,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 		VNextApproveInspectionsScreen approveInspectionsScreen = inspectionsScreen.clickMultiselectInspectionsApproveButton();
 
 		for (InspectionData inspectionData: inspectionsData) {
-			if (inspectionData.getInspectionStatus().equals(InspectionStatus.DECLINED)) {
+			if (inspectionData.getInspectionStatus().equals(InspectionStatus.DECLINED.getStatusString())) {
 				VNextDeclineReasonScreen declineReasonScreen = approveInspectionsScreen.clickInspectionDeclineButton(inspectionData.getInspectionNumber());
 				declineReasonScreen.selectDeclineReason(inspectionData.getDeclineReason());
 				approveInspectionsScreen = new VNextApproveInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -508,7 +509,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 		ApproveSteps.drawSignature();
 		ApproveSteps.saveApprove();
 		for (InspectionData inspectionData: inspectionsData) {
-			Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionData.getInspectionNumber()), inspectionData.getInspectionStatus().getStatus());
+			Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionData.getInspectionNumber()), inspectionData.getInspectionStatus());
 		}
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -554,7 +555,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 				declineReasonScreen.selectDeclineReason(inspectionData.getDeclineReason());
 			}
 			approveInspectionsScreen = new VNextApproveInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			if (!inspectionData.getInspectionStatus().equals(InspectionStatus.DECLINED))
+			if (!inspectionData.getInspectionStatus().equals(InspectionStatus.DECLINED.getStatusString()))
 				Assert.assertEquals(approveInspectionsScreen.getInspectionApprovedAmaunt(inspectionData.getInspectionNumber()), inspectionData.getInspectionApprovedPrice());
 		}
 		approveInspectionsScreen.clickSaveutton();

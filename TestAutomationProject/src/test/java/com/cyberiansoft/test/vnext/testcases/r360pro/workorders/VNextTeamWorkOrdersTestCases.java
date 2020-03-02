@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.workorders;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.DamageData;
-import com.cyberiansoft.test.dataclasses.InspectionStatus;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -11,6 +10,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -49,7 +49,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         final String workOrderNumber = WorkOrderSteps.createSimpleWorkOrder(testcustomer, WorkOrderTypes.KRAMAR_AUTO, workOrderData);
-        WorkOrderSteps.workOrderShouldBePresent(workOrderNumber);
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, true);
         WorkOrderSteps.openMenu(workOrderNumber);
         MenuSteps.selectMenuItem(MenuItems.DELETE);
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -170,11 +170,11 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 
         inspectionsScreen.switchToTeamInspectionsView();
-        inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatus());
+        inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatusString());
         MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, false);
         MenuSteps.closeMenu();
 
-        inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatus());
+        inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatusString());
         MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, true);
         MenuSteps.closeMenu();
         inspectionsScreen.switchToMyInspectionsView();

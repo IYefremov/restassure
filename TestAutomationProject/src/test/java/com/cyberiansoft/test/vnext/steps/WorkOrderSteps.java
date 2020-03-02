@@ -7,31 +7,23 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 
 public class WorkOrderSteps {
 
     public static String createSimpleWorkOrder(AppCustomer customer, WorkOrderTypes workOrderType, WorkOrderData workOrderData) {
-        VNextHomeScreen homeScreen = new VNextHomeScreen();
-        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
-        homeScreen.clickWorkOrdersMenuItem();
-        workOrdersScreen.clickAddWorkOrderButton();
-        CustomersScreenSteps.selectCustomer(customer);
-        createWorkOrder(workOrderType);
-        VehicleInfoScreenSteps.setVIN("7777777777777");
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(customer, workOrderType, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
+        AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         return saveWorkOrder();
     }
 
@@ -70,12 +62,6 @@ public class WorkOrderSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
         baseWizardScreen.clickWizardMenuSaveButton();
-    }
-
-    public static void workOrderShouldBePresent(String workOrderId) {
-        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
-        workOrdersScreen.switchToMyWorkordersView();
-        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderId));
     }
 
     public static void deleteWorkOrder(String workOrderId) {

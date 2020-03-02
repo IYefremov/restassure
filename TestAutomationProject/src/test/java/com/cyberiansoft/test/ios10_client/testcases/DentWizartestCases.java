@@ -26,6 +26,7 @@ import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -624,12 +625,12 @@ public class DentWizartestCases extends ReconProDentWizardBaseTestCase {
 		myInspectionsScreen.clickArchiveInspectionButton();
 		myInspectionsScreen.clickFilterButton();
 		myInspectionsScreen.clickStatusFilter();
-		myInspectionsScreen.isFilterStatusSelected(InspectionStatus.NEW.getStatus());
-		myInspectionsScreen.isFilterStatusSelected(InspectionStatus.APPROVED.getStatus());
-		myInspectionsScreen.clickFilterStatus(InspectionStatus.NEW.getStatus());
-		myInspectionsScreen.clickFilterStatus(InspectionStatus.APPROVED.getStatus());
-		myInspectionsScreen.clickFilterStatus(InspectionStatus.ARCHIVED.getStatus());
-		myInspectionsScreen.isFilterStatusSelected(InspectionStatus.ARCHIVED.getStatus());
+		myInspectionsScreen.isFilterStatusSelected(InspectionStatus.NEW);
+		myInspectionsScreen.isFilterStatusSelected(InspectionStatus.APPROVED);
+		myInspectionsScreen.clickFilterStatus(InspectionStatus.NEW);
+		myInspectionsScreen.clickFilterStatus(InspectionStatus.APPROVED);
+		myInspectionsScreen.clickFilterStatus(InspectionStatus.ARCHIVED);
+		myInspectionsScreen.isFilterStatusSelected(InspectionStatus.ARCHIVED);
 		myInspectionsScreen.clickCloseFilterDialogButton();
 		myInspectionsScreen.clickSaveFilterDialogButton();
 

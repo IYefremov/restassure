@@ -1,12 +1,12 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
 import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.InspectionStatus;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;

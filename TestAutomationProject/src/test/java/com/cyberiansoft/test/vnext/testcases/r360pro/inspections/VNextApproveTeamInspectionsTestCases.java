@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
@@ -11,7 +12,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.enums.InspectionStatus;
+import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -37,8 +38,8 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestClass {
 		MenuSteps.selectMenuItem(MenuItems.APPROVE);
 		ApproveSteps.drawSignature();
 		ApproveSteps.saveApprove();
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.APPROVED);
-		inspectionsScreen.clickBackButton();
+		InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
