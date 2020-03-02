@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularServicesScreen;
 import org.testng.Assert;
 

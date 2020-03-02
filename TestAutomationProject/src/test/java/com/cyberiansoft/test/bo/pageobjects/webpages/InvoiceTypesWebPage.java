@@ -87,8 +87,8 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithInvoiceType(invoicetype);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + invoicetype + " invoice type");
+		} else
+			Assert.fail("Can't find " + invoicetype + " invoice type");
 		return PageFactory.initElements(
 				driver, NewInvoiceTypeDialogWebPage.class);
 	}
@@ -97,8 +97,8 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithInvoiceType(invoicetype);
 		if (row != null) {
 			row.findElement(By.xpath(".//a[text()='Clients']")).click();
-		} else 
-			Assert.assertTrue(false, "Can't find " + invoicetype + " invoice type");
+		} else
+			Assert.fail("Can't find " + invoicetype + " invoice type");
 		waitForNewTab();
     	String mainWindowHandle = driver.getWindowHandle();
 		for (String activeHandle : driver.getWindowHandles()) {
@@ -119,7 +119,7 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + invoicetype + " invoice type");	
+			Assert.fail("Can't find " + invoicetype + " invoice type");
 		}
 	}
 	
@@ -128,7 +128,7 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + invoicetype + " invoice type");	
+			Assert.fail("Can't find " + invoicetype + " invoice type");
 		}
 	}
 	
@@ -167,12 +167,12 @@ public class InvoiceTypesWebPage extends BaseWebPage {
 		return null;
 	}
 	
-	public void deleteAssignedClient(String clientname) throws InterruptedException {
+	public void deleteAssignedClient(String clientname) {
 		WebElement row = getTableRowWithAssignedClient(clientname);
 		if (row != null) {
 			clickDeleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + clientname + " client in Assigned Clients table");	
+			Assert.fail("Can't find " + clientname + " client in Assigned Clients table");
 		}
 	}
 

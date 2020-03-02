@@ -11,25 +11,25 @@ public class WizardScreensFactory {
 
     private static final Map<WizardScreenTypes, Supplier<IBaseWizardScreen>> screensMap = new HashMap<>();
 
-    private static  final Supplier<IBaseWizardScreen> invoiceInfoScreenSupplier = () -> new InvoiceInfoScreen();
+    private static  final Supplier<IBaseWizardScreen> invoiceInfoScreenSupplier = InvoiceInfoScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> vehicleScreenSupplier = () -> new VehicleScreen();
+    private static final Supplier<IBaseWizardScreen> vehicleScreenSupplier = VehicleScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> servicesScreenSupplier = () -> new ServicesScreen();
+    private static final Supplier<IBaseWizardScreen> servicesScreenSupplier = ServicesScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> claimScreenSupplier = () -> new ClaimScreen();
+    private static final Supplier<IBaseWizardScreen> claimScreenSupplier = ClaimScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> orderSummaryScreenSupplier = () -> new OrderSummaryScreen();
+    private static final Supplier<IBaseWizardScreen> orderSummaryScreenSupplier = OrderSummaryScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> questionsScreenSupplier = () -> new QuestionsScreen();
+    private static final Supplier<IBaseWizardScreen> questionsScreenSupplier = QuestionsScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> questionAnswerScreenSupplier = () -> new QuestionAnswerScreen();
+    private static final Supplier<IBaseWizardScreen> questionAnswerScreenSupplier = QuestionAnswerScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> enterpriseBeforeDamageScreenAnswerScreenSupplier = () -> new EnterpriseBeforeDamageScreen();
+    private static final Supplier<IBaseWizardScreen> enterpriseBeforeDamageScreenAnswerScreenSupplier = EnterpriseBeforeDamageScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> priceMatrixScreenScreenAnswerScreenSupplier = () -> new PriceMatrixScreen();
+    private static final Supplier<IBaseWizardScreen> priceMatrixScreenScreenAnswerScreenSupplier = PriceMatrixScreen::new;
 
-    private static final Supplier<IBaseWizardScreen> visualScreenScreenAnswerScreenSupplier = () -> new VisualInteriorScreen();
+    private static final Supplier<IBaseWizardScreen> visualScreenScreenAnswerScreenSupplier = VisualInteriorScreen::new;
 
     static {
         screensMap.put(WizardScreenTypes.INVOICE_INFO, invoiceInfoScreenSupplier);

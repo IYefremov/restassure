@@ -9,20 +9,14 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.manheimintegration.data.ManheimTestCasesDataPaths;
-import com.cyberiansoft.test.targetprocessintegration.dto.TestCaseRunDTO;
-import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunDTO;
-import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunsDTO;
-import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
-import com.cyberiansoft.test.vnext.steps.monitoring.PhaseDetailsSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.PhaseScreenSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.ProblemReportingSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -31,18 +25,15 @@ import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInte
 import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
-import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROSimpleSearchSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
-import com.mashape.unirest.http.exceptions.UnirestException;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 public class FindWorkOrdersTestCase extends BaseTestClass {
@@ -54,7 +45,7 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanFindWorkOrdersOnBOAndDevice(String rowID,
-                                                   String description, JSONObject testData) throws IOException, UnirestException {
+                                                   String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         List<WorkOrderData> workOrdersData = testCaseData.getWorkOrdersData();
@@ -126,7 +117,7 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanCompletePhasesDevice(String rowID,
-                                                   String description, JSONObject testData) throws IOException, UnirestException {
+                                                   String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -136,16 +127,12 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
 
         HomeScreenSteps.openUpdateWork();
         UpdateWorkSteps.searchRepairOrder(stockNumber);
-        monitoringData.getOrderPhasesDto().forEach(phaseDTO -> {
-            phaseDTO.getPhaseServices().forEach(service -> {
-                PhaseScreenSteps.startService(service.getMonitorService());
-                PhaseScreenSteps.completeService(service.getMonitorService());
-            });
-        });
+        monitoringData.getOrderPhasesDto().forEach(phaseDTO -> phaseDTO.getPhaseServices().forEach(service -> {
+            PhaseScreenSteps.startService(service.getMonitorService());
+            PhaseScreenSteps.completeService(service.getMonitorService());
+        }));
 
-        monitoringData.getOrderPhasesDto().forEach(phaseDTO -> {
-            PhaseScreenValidations.validatePhaseStatus(phaseDTO);
-        });
+        monitoringData.getOrderPhasesDto().forEach(PhaseScreenValidations::validatePhaseStatus);
         WizardScreenSteps.saveAction();
     }
 
@@ -220,37 +207,29 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
 
         HomeScreenSteps.openUpdateWork();
         UpdateWorkSteps.searchRepairOrder(workOrderData.getMonitoring().getStockNumber());
-        monitoringData.getOrderPhasesDto().forEach(phaseDto -> {
-            phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
-                if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
-                    PhaseScreenInteractions.selectService(monitorServiceDTO.getMonitorService());
-            });
-        });
+        monitoringData.getOrderPhasesDto().forEach(phaseDto -> phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
+            if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
+                PhaseScreenInteractions.selectService(monitorServiceDTO.getMonitorService());
+        }));
         PhaseScreenSteps.startServices();
         //Wait 1 minute
         BaseUtils.waitABit(60*1000);
-        monitoringData.getOrderPhasesDto().forEach(phaseDto -> {
-            phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
-                if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
-                    PhaseScreenInteractions.selectService(monitorServiceDTO.getMonitorService());
-            });
-        });
+        monitoringData.getOrderPhasesDto().forEach(phaseDto -> phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
+            if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
+                PhaseScreenInteractions.selectService(monitorServiceDTO.getMonitorService());
+        }));
         PhaseScreenSteps.stopServices();
         //Wait 1 minute
         BaseUtils.waitABit(60*1000);
-        monitoringData.getOrderPhasesDto().forEach(phaseDto -> {
-            phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
-                if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
-                    PhaseScreenInteractions.selectService(monitorServiceDTO.getMonitorService());
-            });
-        });
+        monitoringData.getOrderPhasesDto().forEach(phaseDto -> phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
+            if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
+                PhaseScreenInteractions.selectService(monitorServiceDTO.getMonitorService());
+        }));
         PhaseScreenSteps.completeServices();
-        monitoringData.getOrderPhasesDto().forEach(phaseDto -> {
-            phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
-                if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
-                    PhaseScreenValidations.validateServiceStatus(monitorServiceDTO.getMonitorService(), ServiceStatus.COMPLETED);
-            });
-        });
+        monitoringData.getOrderPhasesDto().forEach(phaseDto -> phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
+            if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
+                PhaseScreenValidations.validateServiceStatus(monitorServiceDTO.getMonitorService(), ServiceStatus.COMPLETED);
+        }));
         WizardScreenSteps.saveAction();
     }
 }

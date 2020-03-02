@@ -361,8 +361,8 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
                                                                                              String description, JSONObject testData) {
 
         final String[] VINs = {"2A8GP54L87R279721", "1FMDU32X0PUB50142", "GFFGG"};
-        final String makes[] = {"Chrysler", "Ford", ""};
-        final String models[] = {"Town and Country", "Explorer", ""};
+        final String[] makes = {"Chrysler", "Ford", ""};
+        final String[] models = {"Town and Country", "Explorer", ""};
 
 
         RegularHomeScreen homeScreen = new RegularHomeScreen();

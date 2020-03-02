@@ -157,8 +157,8 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	
 	public void verifySearchResults(String[] wonumbers) {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//tr/td/div[text()='" + wonumbers[0] + "']")));
-		for (int i =0; i< wonumbers.length; i++) {
-			Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + wonumbers[i] + "']")).isDisplayed());
+		for (String wonumber : wonumbers) {
+			Assert.assertTrue(driver.findElement(By.xpath("//tr/td/div[text()='" + wonumber + "']")).isDisplayed());
 		}
 	}
 	
@@ -168,7 +168,7 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	
 	public boolean searchWorkOrderInTable(String wonumber) {
 		boolean found = false;
-		for (int i = 1; i <= Integer.valueOf(getLastPageNumber()); i++) {
+		for (int i = 1; i <= Integer.parseInt(getLastPageNumber()); i++) {
 			if (!isWONumberDisplayedInTable(wonumber)) {
 				clickGoToNextPage();
 			} else {
@@ -193,14 +193,14 @@ public class RepairLocationTimeTrackingWebPage extends BaseWebPage {
 	}
 	
 	public void clickGoToNextPage()  {
-		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int currenpage = Integer.parseInt(getCurrentlySelectedPageNumber());
 		int nextpage = currenpage + 1;
 		click(gotonextpage);		
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Page " + nextpage + " of ')]")));
 	}
 	
 	public void clickGoToPreviousPage() {
-		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int currenpage = Integer.parseInt(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		click(gotopreviouspage);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), 'Page " + previouspage + " of ')]")));

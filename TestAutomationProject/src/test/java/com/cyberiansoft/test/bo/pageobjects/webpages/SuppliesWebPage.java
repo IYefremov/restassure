@@ -92,8 +92,7 @@ public class SuppliesWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isSupplyExists(String supplyname) {
-		boolean exists =  suppliestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + supplyname + "']")).size() > 0;
-		return exists;
+		return suppliestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + supplyname + "']")).size() > 0;
 	}
 
 }

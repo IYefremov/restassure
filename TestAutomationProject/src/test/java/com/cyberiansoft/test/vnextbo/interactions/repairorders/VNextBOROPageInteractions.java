@@ -196,8 +196,8 @@ public class VNextBOROPageInteractions {
                     .stream()
                     .map((value) -> WaitUtilsWebDriver.waitForElementNotToBeStale(value, 3)
                             .getText()
-                            .equals("") ? 0 : Integer.valueOf(value.getText()))
-                    .reduce((val1, val2) -> val1 + val2)
+                            .equals("") ? 0 : Integer.parseInt(value.getText()))
+                    .reduce(Integer::sum)
                     .get()
                     .toString();
         }
@@ -232,21 +232,21 @@ public class VNextBOROPageInteractions {
     public static List<Integer> getDepartmentsValues() {
         return Utils.getText(new VNextBOROWebPage().getAllDepartmentsWideScreenValues())
                 .stream()
-                .map(e -> e.equals("") ? 0 : Integer.valueOf(e))
+                .map(e -> e.equals("") ? 0 : Integer.parseInt(e))
                 .collect(Collectors.toList());
     }
 
     public static List<Integer> getPhasesValues() {
         return Utils.getText(new VNextBOROWebPage().getAllPhasesWideScreenValues())
                 .stream()
-                .map(e -> e.equals("") ? 0 : Integer.valueOf(e))
+                .map(e -> e.equals("") ? 0 : Integer.parseInt(e))
                 .collect(Collectors.toList());
     }
 
     private static int handleWideTabValues(int order, List<WebElement> allPhasesWideScreenValues) {
         final String value = VNextBOROPageInteractions.getValue(allPhasesWideScreenValues, order);
         assert value != null;
-        return value.equals("") || value.equals("0") ? 0 : Integer.valueOf(value);
+        return value.equals("") || value.equals("0") ? 0 : Integer.parseInt(value);
     }
 
     public static void clickDepartmentForWideScreen(String department) {

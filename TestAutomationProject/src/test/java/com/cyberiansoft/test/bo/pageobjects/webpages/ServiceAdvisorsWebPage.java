@@ -201,32 +201,31 @@ public class ServiceAdvisorsWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean serviceAdvisorExists(String firstname, String lastname) {
-		boolean exists =  serviceadvisorstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
-		return exists;
+        return serviceadvisorstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + firstname + " " + lastname + "']")).size() > 0;
 	}
 	
 	public void clickEditServiceAdvisor(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");
+		} else
+            Assert.fail("Can't find " + firstname + " " + lastname + " service advisor");
 	}
 	
 	public void deleteServiceAdvisor(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			deleteTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");		
+		} else
+            Assert.fail("Can't find " + firstname + " " + lastname + " service advisor");
 	}
 	
 	public void deleteServiceAdvisorAndCancelDeleting(String firstname, String lastname) {
 		WebElement row = getTableRowWithServiceAdvisor(firstname, lastname);
 		if (row != null) {
 			cancelDeletingTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + firstname + " " + lastname + " service advisor");		
+		} else
+            Assert.fail("Can't find " + firstname + " " + lastname + " service advisor");
 	}
 	
 	public void createNewServiceAdvisor(String email, String firstname, String lastname, String clientname, String role) {

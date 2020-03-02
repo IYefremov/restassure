@@ -21,7 +21,7 @@ public class BasicResponse {
     @JsonProperty("ErrorDescription")
     private String ErrorDescription;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new HashMap<>();
 
     @JsonProperty("Result")
     public Boolean getResult() {

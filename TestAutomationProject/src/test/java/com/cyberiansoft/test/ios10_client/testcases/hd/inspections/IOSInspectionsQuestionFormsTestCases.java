@@ -35,7 +35,6 @@ public class IOSInspectionsQuestionFormsTestCases extends IOSHDBaseTestCase {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
-        ;
 
         HomeScreen homeScreen = new HomeScreen();
         SettingsScreen settingsScreen = homeScreen.clickSettingsButton();

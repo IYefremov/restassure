@@ -217,6 +217,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 		return true;
 	}
 
+	//Todo  always  return  true
 	public boolean checkSortAbility() {
 		wait.until(ExpectedConditions
 				.presenceOfElementLocated(By.id("VisibleReportContentctl00_ctl00_Content_Main_report_ctl09")));
@@ -232,7 +233,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 			}
 		}
 
-		List<String> results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
+		List<String> results = allNames.stream().map(WebElement::getText).collect(Collectors.toList());
 		if (results.size() == 0) {
 			return true;
 		}
@@ -257,7 +258,7 @@ public class TechnicianCommissionsWebPage extends WebPageWithPagination {
 					break;
 				}
 			}
-			results = allNames.stream().map(e -> e.getText()).collect(Collectors.toList());
+			results = allNames.stream().map(WebElement::getText).collect(Collectors.toList());
 
 			firstResultAfterSort = results.get(0);
 			lastResultAfterSort = results.get(results.size() - 1);

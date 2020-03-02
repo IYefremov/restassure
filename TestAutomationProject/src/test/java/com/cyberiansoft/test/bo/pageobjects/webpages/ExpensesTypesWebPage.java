@@ -98,8 +98,7 @@ public class ExpensesTypesWebPage extends WebPageWithPagination {
 	}
 	
 	public boolean isExpenseTypeExists(String expensetype) {
-		boolean exists =  expensestypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + expensetype + "']")).size() > 0;
-		return exists;
+		return expensestypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + expensetype + "']")).size() > 0;
 	}
 
 }

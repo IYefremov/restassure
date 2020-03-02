@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.objectpools;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
 public class BoundedPool < T > extends AbstractPool < T > {

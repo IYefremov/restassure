@@ -20,7 +20,6 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	
@@ -325,8 +324,7 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 	}
 	
 	public boolean isQuestionFormCellExists() {
-		boolean exists =  appiumdriver.findElements(MobileBy.AccessibilityId("Questions")).size() > 0;
-		return exists;
+		return appiumdriver.findElements(MobileBy.AccessibilityId("Questions")).size() > 0;
 	}
 	
 	public String getServiceDetailsPriceValue() {

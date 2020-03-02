@@ -6,7 +6,6 @@ import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.Getter;
 import lombok.Setter;
@@ -76,9 +75,7 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
                         .forEach(id -> {
                             try {
                                 tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.FAILED, "Hello from automation :)");
-                            } catch (UnirestException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
+                            } catch (UnirestException | IOException e) {
                                 e.printStackTrace();
                             }
                         });
@@ -105,9 +102,7 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
                         .forEach(id -> {
                             try {
                                 tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.PASSED, "Hello from automation :)");
-                            } catch (UnirestException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
+                            } catch (UnirestException | IOException e) {
                                 e.printStackTrace();
                             }
                         });
@@ -155,10 +150,6 @@ public class TestListenerAllure extends TestListenerAdapter implements IInvokedM
                     try {
                         tpIntegrationService.setTestCaseAutomatedField(targetProcessTestCaseData.getTestCaseID());
                     } catch (UnirestException e) {
-                        e.printStackTrace();
-                    } catch (UnrecognizedPropertyException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }

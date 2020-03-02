@@ -159,8 +159,8 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	}
 
 	public void clickCreateInvoiceIconForWOs(String[] wos) {
-		for (int i = 0; i < wos.length; i++) {
-			clickCreateInvoiceIconForWO(wos[i]);
+		for (String wo : wos) {
+			clickCreateInvoiceIconForWO(wo);
 		}
 	}
 	

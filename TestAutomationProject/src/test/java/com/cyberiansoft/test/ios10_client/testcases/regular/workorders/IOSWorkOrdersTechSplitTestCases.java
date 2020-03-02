@@ -358,12 +358,11 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
             if (serviceData.getServiceDefaultTechnician() != null) {
                 RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
                 RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(serviceData.getServiceDefaultTechnician());
-                RegularServiceDetailsScreenSteps.saveServiceDetails();
             } else {
                 RegularServiceDetailsScreenSteps.clickServiceTechniciansIcon();
                 RegularServiceDetailsScreenValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getNewTechnician());
-                RegularServiceDetailsScreenSteps.saveServiceDetails();
             }
+            RegularServiceDetailsScreenSteps.saveServiceDetails();
             RegularServiceDetailsScreenSteps.saveServiceDetails();
         }
 

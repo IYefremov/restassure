@@ -70,7 +70,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	}
 	
 	public void verifyTableDateRangeForAllTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {
-		int pagenum =  Integer.valueOf(getLastPageNumber());
+		int pagenum =  Integer.parseInt(getLastPageNumber());
 		for (int i = 1; i <= pagenum; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells);
@@ -80,7 +80,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	}
 	
 	public void verifyTableDateRangeForAllTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname, DateTimeFormatter dateFormat) {		
-		int pagenum =  Integer.valueOf(getLastPageNumber());	
+		int pagenum =  Integer.parseInt(getLastPageNumber());
 		for (int i = 1; i <= pagenum; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells, dateFormat);
@@ -90,7 +90,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	}
 	
 	public void verifyTableDateRangeForFirstAndLastTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname) {
-		int pagenum =  Integer.valueOf(getLastPageNumber());
+		int pagenum =  Integer.parseInt(getLastPageNumber());
 		for (int i = 1; i <= 3; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells);
@@ -101,7 +101,7 @@ public class WebPageWithFilter extends WebPageWithPagination {
 	}
 	
 	public void verifyTableDateRangeForFirstAndLastTablePages(LocalDate startrange, LocalDate endrange, WebTable table, String datecolumnname, DateTimeFormatter dateFormat) {
-		int pagenum =  Integer.valueOf(getLastPageNumber());
+		int pagenum =  Integer.parseInt(getLastPageNumber());
 		for (int i = 1; i <= 3; i++) {
 			List<WebElement> datecells = table.getTableColumnCells(datecolumnname);
 			verifyTableDateRangeForCurrentTablePage(startrange, endrange, datecells, dateFormat);

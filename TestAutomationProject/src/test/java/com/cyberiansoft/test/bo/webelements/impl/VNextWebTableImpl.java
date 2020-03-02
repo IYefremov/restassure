@@ -1,11 +1,10 @@
 package com.cyberiansoft.test.bo.webelements.impl;
 
-import java.util.List;
-
+import com.cyberiansoft.test.bo.webelements.VNextWebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.cyberiansoft.test.bo.webelements.VNextWebTable;
+import java.util.List;
 
 public class VNextWebTableImpl extends AbstractWebElement implements VNextWebTable {
 	

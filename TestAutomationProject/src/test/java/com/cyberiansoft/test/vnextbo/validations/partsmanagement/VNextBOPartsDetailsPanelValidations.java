@@ -146,7 +146,7 @@ public class VNextBOPartsDetailsPanelValidations {
         for (WebElement coreStatus : detailsPanel.getPartCoreStatusField()) {
             laborCoreStatusIsCorrectFlagsList.add(Utils.getText(coreStatus).contains(expectedCoreStatus));
         }
-        Assert.assertTrue(!laborCoreStatusIsCorrectFlagsList.contains(false), "There hasn't been part with correct core status");
+        Assert.assertFalse(laborCoreStatusIsCorrectFlagsList.contains(false), "There hasn't been part with correct core status");
     }
 
     public static void verifyPartsCheckBoxesAreActivatedByPartStatus(String status, boolean shouldBeActivated) {
@@ -162,7 +162,7 @@ public class VNextBOPartsDetailsPanelValidations {
         }
         else {
             for (WebElement partCheckBox : checkBoxes) {
-                Assert.assertEquals(partCheckBox.getAttribute("checked"), null, "Not all checkboxes were deactivated for parts with status ");
+                Assert.assertNull(partCheckBox.getAttribute("checked"), "Not all checkboxes were deactivated for parts with status ");
             }
         }
     }
@@ -195,8 +195,7 @@ public class VNextBOPartsDetailsPanelValidations {
     }
 
     public static void verifyPartStatusesDoNotContainRestrictedStatus(String restrictedStatus) {
-        Assert.assertTrue(!VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().contains(restrictedStatus),
-                "The status " + restrictedStatus + " is displayed for the opened part");
+        Assert.assertFalse(VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().contains(restrictedStatus), "The status " + restrictedStatus + " is displayed for the opened part");
     }
 
     public static boolean isPartStatusPresent(String status) {

@@ -2,9 +2,7 @@ package com.cyberiansoft.test.ios10_client.hdclientsteps;
 
 import com.cyberiansoft.test.dataclasses.QuestionScreenData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.BaseWizardScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.QuestionsScreen;
-import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 
 import java.util.List;
 

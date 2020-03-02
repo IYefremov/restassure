@@ -89,9 +89,7 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 	}
 
 	public boolean checkTimeFrameField(String string) {
-		if (!timeFrameField.getAttribute("value").equals("Last " + string + " Days"))
-			return false;
-		return true;
+		return timeFrameField.getAttribute("value").equals("Last " + string + " Days");
 	}
 
 	public boolean checkPhasesInRowCheckBox() {
@@ -172,9 +170,7 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 
 	public boolean checkThatAllPhasesAreInStatus(String phase, String... statuses) {
 		List<WebElement> tableRows = driver.findElements(By.xpath("//tr[@valign='top']"));
-		for (int i = 0; i < 13; i++) {
-			tableRows.remove(0);
-		}
+		tableRows.subList(0, 13).clear();
 
 		tableRows.stream().filter(e -> {
 			try {

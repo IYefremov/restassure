@@ -1,13 +1,12 @@
 package com.cyberiansoft.test.bo.webelements.impl;
 
-import static java.text.MessageFormat.format;
+import com.cyberiansoft.test.bo.webelements.IWebElement;
+import com.cyberiansoft.test.bo.webelements.WebElementFactory;
+import org.openqa.selenium.WebElement;
 
 import java.lang.reflect.InvocationTargetException;
 
-import org.openqa.selenium.WebElement;
-
-import com.cyberiansoft.test.bo.webelements.IWebElement;
-import com.cyberiansoft.test.bo.webelements.WebElementFactory;
+import static java.text.MessageFormat.format;
 
 public class DefaultElementFactory implements WebElementFactory {
     @Override
@@ -16,13 +15,7 @@ public class DefaultElementFactory implements WebElementFactory {
             return findImplementationFor(elementClass)
                     .getDeclaredConstructor(WebElement.class)
                     .newInstance(wrappedElement);
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        } catch (InvocationTargetException e) {
-            throw new RuntimeException(e);
-        } catch (NoSuchMethodException e) {
+        } catch (InstantiationException | NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }

@@ -104,23 +104,19 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
 
     public boolean isCardNumberRequiredErrorDisplayed() {
         appiumdriver.switchTo().frame(payframe);
-        boolean required =  appiumdriver.findElement(By.xpath("//span[@for='Number' and text()='Required']")).isDisplayed();
-        return required;
+        return appiumdriver.findElement(By.xpath("//span[@for='Number' and text()='Required']")).isDisplayed();
     }
 
     public boolean isExpirationMonthRequiredErrorDisplayed() {
-        boolean required =  appiumdriver.findElement(By.xpath("//span[@for='ExpirationMonth' and text()='Required']")).isDisplayed();
-        return required;
+        return appiumdriver.findElement(By.xpath("//span[@for='ExpirationMonth' and text()='Required']")).isDisplayed();
     }
 
     public boolean isExpirationYearRequiredErrorDisplayed() {
-        boolean required =  appiumdriver.findElement(By.xpath("//span[@for='ExpirationYear' and text()='Required']")).isDisplayed();
-        return required;
+        return appiumdriver.findElement(By.xpath("//span[@for='ExpirationYear' and text()='Required']")).isDisplayed();
     }
 
     public boolean isCVCRequiredErrorDisplayed() {
-        boolean required =  appiumdriver.findElement(By.xpath("//span[@for='CVC' and text()='Required']")).isDisplayed();
-        return required;
+        return appiumdriver.findElement(By.xpath("//span[@for='CVC' and text()='Required']")).isDisplayed();
     }
 
     public VNextInvoicesScreen clickBackButton() {

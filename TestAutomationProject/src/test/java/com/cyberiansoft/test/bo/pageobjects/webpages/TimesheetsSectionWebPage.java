@@ -62,8 +62,6 @@ public class TimesheetsSectionWebPage extends BaseWebPage{
 
 	public boolean checkStartingDay(String day) {
 		String startDate = employeeStartDate.findElements(By.tagName("td")).get(1).getText().substring(0,3);
-		if(startDate.equals(day))
-			return true;
-		return false;
+		return startDate.equals(day);
 	}
 }

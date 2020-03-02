@@ -14,7 +14,6 @@ import org.testng.Assert;
 import java.util.List;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.selectComboboxValue;
 
 //import com.cyberiansoft.test.bo.utils.WebElementExt;
 //import lombok.experimental.ExtensionMethod;
@@ -233,7 +232,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 				}
 			}
 		} else {
-			Assert.assertTrue(false, "Can't find " + wonumber + " work order");
+			Assert.fail("Can't find " + wonumber + " work order");
 		}
 		return PageFactory.initElements(driver, WorkOrderInfoTabWebPage.class);
 	}
@@ -256,7 +255,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		if (row != null) {
 			status = row.findElement(By.xpath("./td[" + wotable.getTableColumnIndex("Date") + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + wonumber + " work order");
+			Assert.fail("Can't find " + wonumber + " work order");
 		}
 		return status;
 	}
@@ -266,7 +265,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 		if (row != null) {
 			labeledCheckBoxSelect(row.findElement(By.xpath(".//td/input[contains(@id, 'cbAction')]")));
 		} else {
-			Assert.assertTrue(false, "Can't find " + wonumber + " work order");
+			Assert.fail("Can't find " + wonumber + " work order");
 		}
 	}
 
@@ -298,7 +297,7 @@ public class WorkOrdersWebPage extends WebPageWithFilter {
 					.getText();
 
 		} else {
-			Assert.assertTrue(false, "Can't find " + wonumber + " work order");
+			Assert.fail("Can't find " + wonumber + " work order");
 		}
 		return invoicenum;
 	}

@@ -45,7 +45,7 @@ public class WorkOrderTypeData {
         }
     }
 
-    public String getWorkOrderTypeID() { return workOrderTypeID; };
+    public String getWorkOrderTypeID() { return workOrderTypeID; }
 
-    public boolean isCanBeDraft() { return canBeFinalDraft; };
+    public boolean isCanBeDraft() { return canBeFinalDraft; }
 }

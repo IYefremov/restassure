@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.driverutils;
 
-import org.openqa.selenium.WebDriver;
-
 import com.cyberiansoft.test.core.BrowserType;
+import org.openqa.selenium.WebDriver;
 
 public class WebdriverInicializator {
 	

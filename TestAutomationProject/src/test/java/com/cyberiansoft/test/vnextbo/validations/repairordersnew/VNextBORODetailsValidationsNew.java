@@ -3,15 +3,12 @@ package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOActiveDevicesWebPage;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
-import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -123,8 +120,7 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyPhaseTotalPriceHasBeenChanged(String phase, String initialPrice) {
 
-        Assert.assertFalse(Utils.getText(new VNextBORODetailsWebPageNew().phaseTotalPrice(phase)).equals(initialPrice),
-                "Total price hasn't changed for the phase: " + phase);
+        Assert.assertNotEquals(initialPrice, Utils.getText(new VNextBORODetailsWebPageNew().phaseTotalPrice(phase)), "Total price hasn't changed for the phase: " + phase);
     }
 
     public static void verifyOrderPriorityIsCorrect(String priority) {
@@ -252,7 +248,7 @@ public class VNextBORODetailsValidationsNew {
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         WaitUtilsWebDriver.waitForNewTab();
         String inspectionWindowHandle = Utils.getNewTab(mainWindow);
-        Assert.assertFalse(inspectionWindowHandle.equals(mainWindow), "The inspection window hasn't been opened");
+        Assert.assertNotEquals(mainWindow, inspectionWindowHandle, "The inspection window hasn't been opened");
         Utils.closeNewTab(mainWindow);
     }
 }

@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.validations;
 
-import com.cyberiansoft.test.baseutils.CustomDateProvider;
-import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
@@ -9,10 +7,7 @@ import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-
-import java.time.LocalDate;
 
 public class MonitorSearchValidations {
 

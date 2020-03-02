@@ -78,7 +78,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 				serviceDetailsScreen.clickServiceDetailsDoneButton();
 			}
 		} else
-			Assert.assertTrue(false, "Can't find additional servicve: " + additionalservicename);
+			Assert.fail("Can't find additional servicve: " + additionalservicename);
 	}
 
 	public void openVehiclePartLaborServiceDetails(String additionalservicename) {

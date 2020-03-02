@@ -26,7 +26,6 @@ import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
-import org.testng.FileAssert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

@@ -87,8 +87,8 @@ public class ServicePackagesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithServicePackage(servicepackagename);
 		if (row != null) {
 			deleteTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");		
+		} else
+            Assert.fail("Can't find " + servicepackagename + " service package");
 	}
 	
 	public void deleteServicePackageAndCancelDeleting(String servicepackagename) {
@@ -96,7 +96,7 @@ public class ServicePackagesWebPage extends BaseWebPage {
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");	
+            Assert.fail("Can't find " + servicepackagename + " service package");
 		}
 	}
 	
@@ -104,8 +104,8 @@ public class ServicePackagesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithServicePackage(servicepackagename);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
+		} else
+            Assert.fail("Can't find " + servicepackagename + " service package");
 		wait.until(ExpectedConditions.visibilityOf(servicePackageModalWindow));
 		return PageFactory.initElements(
 				driver, NewServicePackageDialogWebPage.class);
@@ -120,8 +120,7 @@ public class ServicePackagesWebPage extends BaseWebPage {
 	
 	public boolean isServicePackageExists(String servicepackagename) {
 		wait.until(ExpectedConditions.visibilityOf(servicepackagestable.getWrappedElement()));
-		boolean exists =  servicepackagestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicepackagename + "']")).size() > 0;
-		return exists;
+        return servicepackagestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + servicepackagename + "']")).size() > 0;
 	}
 	
 	public String getTableServicePackageType(String servicepackagename) {
@@ -137,7 +136,7 @@ public class ServicePackagesWebPage extends BaseWebPage {
                     .replaceAll("\\u00A0", "")
                     .trim();
         } else
-            Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
+            Assert.fail("Can't find " + servicepackagename + " service package");
         return servicepkgtype;
     }
 
@@ -149,8 +148,8 @@ public class ServicePackagesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithServicePackage(servicepackagename);
 		if (row != null) {
 			row.findElement(By.xpath(".//a[contains(text(), 'Services')]")).click();
-		} else 
-			Assert.assertTrue(false, "Can't find " + servicepackagename + " service package");
+		} else
+            Assert.fail("Can't find " + servicepackagename + " service package");
 		waitForNewTab();
     	String mainWindowHandle = driver.getWindowHandle();
 		for (String activeHandle : driver.getWindowHandles()) {

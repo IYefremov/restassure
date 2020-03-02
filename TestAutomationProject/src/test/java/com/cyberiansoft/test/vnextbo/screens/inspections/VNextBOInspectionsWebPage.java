@@ -153,7 +153,7 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		if (inspectionCell != null)
 			inspectionStatus = inspectionCell.findElement(By.xpath(".//div[@class='entity-list__item__status__label']")).getText().trim();
 		else
-			Assert.assertTrue(false, "Can't find inspection: " + inspectionNumber);
+            Assert.fail("Can't find inspection: " + inspectionNumber);
 		return inspectionStatus;
 	}
 

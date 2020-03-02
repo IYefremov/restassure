@@ -25,7 +25,7 @@ public class ExtentTestNGIReporterListenerJS extends TestListenerAdapter impleme
 
 
     //private static ThreadLocal<ExtentTest> parentTest = new ThreadLocal<ExtentTest>();
-    private ThreadLocal<ExtentTest> extentTest = new ThreadLocal<ExtentTest>();
+    private ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     @Override
     public synchronized void onStart(ITestContext context) {
@@ -165,7 +165,7 @@ public class ExtentTestNGIReporterListenerJS extends TestListenerAdapter impleme
 
     @Override
     public void afterInvocation(IInvokedMethod method, ITestResult result) {
-        AfterClass testAnnotation = (AfterClass) result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(AfterClass.class);
+        AfterClass testAnnotation = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(AfterClass.class);
         if (testAnnotation != null) {
             ExtentTestManager.getTest().getModel().setEndTime(getTime(result.getEndMillis()));
         }
@@ -174,7 +174,7 @@ public class ExtentTestNGIReporterListenerJS extends TestListenerAdapter impleme
 
     @Override
     public void beforeInvocation(IInvokedMethod method, ITestResult result) {
-        BeforeClass testAnnotation = (BeforeClass) result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(BeforeClass.class);
+        BeforeClass testAnnotation = result.getMethod().getConstructorOrMethod().getMethod().getAnnotation(BeforeClass.class);
         if (testAnnotation != null) {
             if (!StringUtils.isEmpty(method.getTestMethod().getDescription()))
                 ExtentTestManager.createTest(method.getTestMethod().getDescription());

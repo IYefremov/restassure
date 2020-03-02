@@ -74,9 +74,7 @@ public class BaseTestClass {
                 TestServiceListener.setTestToTestRunMap(
                         tpIntegrationService.testCaseToTestRunMapRecursevley(
                                 tpIntegrationService.createTestPlanRun(testPlanId)));
-            } catch (UnirestException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (UnirestException | IOException e) {
                 e.printStackTrace();
             }
         }

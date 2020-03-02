@@ -82,7 +82,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
 
         VNextBOAuditLogDialogInteractions.clickAuditLogsPhasesAndDepartmentsTab();
         final String phasesLastRecord = VNextBOAuditLogDialogInteractions.getDepartmentsAndPhasesLastRecord();
-        Assert.assertTrue(!phasesLastRecord.isEmpty(), "The last phase record hasn't been displayed");
+        Assert.assertFalse(phasesLastRecord.isEmpty(), "The last phase record hasn't been displayed");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
@@ -139,7 +139,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         System.out.println("Random serviceQuantity: " + negativeServiceQuantity);
         System.out.println("ServiceQuantity: " + VNextBORODetailsPageInteractions.getServiceQuantity(serviceId) + "\n");
 
-        if (String.valueOf(Math.abs(Integer.valueOf(negativeServiceQuantity))).equals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId))) {
+        if (String.valueOf(Math.abs(Integer.parseInt(negativeServiceQuantity))).equals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId))) {
             negativeServiceQuantity = String.valueOf(-(RandomUtils.nextInt(10, 100)));
             System.out.println("Random serviceQuantity 2: " + negativeServiceQuantity);
         }
@@ -229,7 +229,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         System.out.println("Random servicePrice: " + servicePrice);
         System.out.println("ServicePrice: " + VNextBORODetailsPageInteractions.getServicePrice(serviceId));
 
-        if (String.valueOf(Math.abs(Integer.valueOf(servicePrice))).equals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId))) {
+        if (String.valueOf(Math.abs(Integer.parseInt(servicePrice))).equals(VNextBORODetailsPageInteractions.getServiceQuantity(serviceId))) {
             servicePrice = String.valueOf(-(RandomUtils.nextInt(10, 100)));
             System.out.println("Random servicePrice 2: " + servicePrice);
         }
@@ -362,7 +362,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         final double sum = values
                 .stream()
                 .mapToDouble(Double::parseDouble)
-                .reduce((val1, val2) -> val1 + val2)
+                .reduce(Double::sum)
                 .orElse(0.00);
 
         System.out.println("Sum: " + sum);
@@ -613,32 +613,32 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getTen()));
 
         VNextBOPageSwitcherSteps.changeItemsPerPage(String.valueOf(data.getPages().getTwenty()));
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTwenty());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTwenty()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getTwenty()));
 
         VNextBOPageSwitcherSteps.changeItemsPerPage(String.valueOf(data.getPages().getFifty()));
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getFifty());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getFifty()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getFifty()));
 
         VNextBOPageSwitcherSteps.changeItemsPerPage(String.valueOf(data.getPages().getHundred()));
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getHundred());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getHundred()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getHundred()));
 
         VNextBOPageSwitcherSteps.changeItemsPerPage(String.valueOf(data.getPages().getTen()));
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getTen()));
 
 
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getTen()));
         Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(),
                 "The header first page button is not clickable");
         Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(),
@@ -651,7 +651,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickHeaderPreviousPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getTen()));
         Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "The header last page button is not clickable");
         Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
@@ -663,7 +663,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
 
         VNextBOPageSwitcherSteps.clickHeaderLastPageButton();
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getTen()));
         Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderLastPageButtonClickable(),
                 "The header last page button is clickable");
         Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterLastPageButtonClickable(),
@@ -676,7 +676,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickHeaderFirstPageButton();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("1");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getTen()));
         Assert.assertFalse(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(),
                 "The header last page button is clickable");
         Assert.assertFalse(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(),
@@ -689,7 +689,7 @@ public class VNextBOMonitorTestCasesPart4 extends BaseTestCase {
         VNextBOPageSwitcherSteps.openPageByNumber(3);
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("3");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect(data.getPages().getTen());
-        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.valueOf(data.getPages().getTen()));
+        VNextBOROPageValidations.verifyMaximumNumberOfOrdersOnPage(Integer.parseInt(data.getPages().getTen()));
         Assert.assertTrue(VNextBOPageSwitcherValidations.isHeaderFirstPageButtonClickable(),
                 "The header first page button is not clickable");
         Assert.assertTrue(VNextBOPageSwitcherValidations.isFooterFirstPageButtonClickable(),

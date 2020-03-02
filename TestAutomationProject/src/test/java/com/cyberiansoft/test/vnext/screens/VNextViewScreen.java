@@ -44,7 +44,7 @@ public class VNextViewScreen extends VNextBaseScreen {
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(viewscreen.findElement(By.xpath(".//iframe[@class='printing-viewer']")));
     	final String startDateValue = estDetails.findElement(By.xpath(".//span[@data-path='Estimations.EstimationDate']/..")).getText();
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
-    	return startDateValue.substring(startDateSubstring.length(), startDateValue.length());
+    	return startDateValue.substring(startDateSubstring.length());
 	}
 
 	public String getCustomerNameValue() {
@@ -140,7 +140,7 @@ public class VNextViewScreen extends VNextBaseScreen {
 		String supplementAmaunt = contentTable.findElement(By.xpath(".//td/b[contains(text(), '" + supplementMatchString + "')]")).
 				getText().trim();
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
-		return  supplementAmaunt.substring(supplementMatchString.length(), supplementAmaunt.length());
+		return  supplementAmaunt.substring(supplementMatchString.length());
 	}
 
 	private WebElement getServiceTableRow(String serviceName) {

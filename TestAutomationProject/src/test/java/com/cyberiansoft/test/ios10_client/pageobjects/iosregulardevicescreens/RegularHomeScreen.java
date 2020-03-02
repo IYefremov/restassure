@@ -1,11 +1,6 @@
   package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-  import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCarHistoryScreen;
   import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
-  import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularSettingsScreen;
-  import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.*;
-  import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInspectionsSteps;
-  import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInvoicesScreenSteps;
   import com.cyberiansoft.test.ios10_client.utils.Helpers;
   import com.cyberiansoft.test.vnext.utils.WaitUtils;
   import io.appium.java_client.MobileBy;

@@ -78,9 +78,7 @@ public class iOSHDClientListener implements ITestListener, IInvokedMethodListene
 						.forEach(id -> {
 							try {
 								tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.PASSED, "Hello from automation :)");
-							} catch (UnirestException e) {
-								e.printStackTrace();
-							} catch (IOException e) {
+							} catch (UnirestException | IOException e) {
 								e.printStackTrace();
 							}
 						});
@@ -96,9 +94,7 @@ public class iOSHDClientListener implements ITestListener, IInvokedMethodListene
 						.forEach(id -> {
 							try {
 								tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.FAILED, "Hello from automation :)");
-							} catch (UnirestException e) {
-								e.printStackTrace();
-							} catch (IOException e) {
+							} catch (UnirestException | IOException e) {
 								e.printStackTrace();
 							}
 						});

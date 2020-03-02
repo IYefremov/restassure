@@ -342,7 +342,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 							By.xpath("./td[" + invoicestable.getTableColumnIndex("Status") + "]/table/tbody/tr/td"))
 					.getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
+			Assert.fail("Can't find " + invoicenumber + " invoice");
 		}
 		return status;
 	}
@@ -353,7 +353,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		if (row != null) {
 			status = row.findElement(By.xpath("./td[" + invoicestable.getTableColumnIndex("PO#") + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
+			Assert.fail("Can't find " + invoicenumber + " invoice");
 		}
 		return status;
 	}
@@ -364,7 +364,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		if (row != null) {
 			status = row.findElement(By.xpath("./td[" + invoicestable.getTableColumnIndex("Paid") + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
+			Assert.fail("Can't find " + invoicenumber + " invoice");
 		}
 		return status;
 	}
@@ -380,7 +380,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 			wait.until(ExpectedConditions.alertIsPresent()).accept();
 			waitForLoading();
 		} else {
-			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
+			Assert.fail("Can't find " + invoicenumber + " invoice");
 		}
 	}
 
@@ -435,7 +435,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 				}
 			}
 		} else {
-			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
+			Assert.fail("Can't find " + invoicenumber + " invoice");
 		}
 	}
 
@@ -581,7 +581,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		if (row != null) {
 			checkboxSelect(row.findElement(By.xpath(".//td/input[@type='checkbox']")));
 		} else {
-			Assert.assertTrue(false, "Can't find " + invoicenumber + " invoice");
+			Assert.fail("Can't find " + invoicenumber + " invoice");
 		}
 		driver.findElement(By.xpath("//span[@class='rtbText' and text()='Archive']")).click();
 		wait.until(ExpectedConditions.alertIsPresent()).accept();
@@ -1228,13 +1228,13 @@ public class InvoicesWebPage extends WebPageWithFilter {
 		waitForLoading();
 	}
 
-	public void setStatusForSelectedInvoices(String status) throws InterruptedException {
+	public void setStatusForSelectedInvoices(String status) {
 		List<WebElement> invoicesSelectCheckoxesChecked = driver
 				.findElement(By.id("ctl00_ctl00_Content_Main_grdInvoices"))
 				.findElements(By.className(" rfdCheckboxChecked"));
 		WebElement invoiceRow = null;
-		for (int i = 0; i < invoicesSelectCheckoxesChecked.size(); i++) {
-			invoiceRow = invoicesSelectCheckoxesChecked.get(i).findElement(By.xpath("..")).findElement(By.xpath(".."));
+		for (WebElement webElement : invoicesSelectCheckoxesChecked) {
+			invoiceRow = webElement.findElement(By.xpath("..")).findElement(By.xpath(".."));
 			invoiceRow.findElement(By.xpath("//td[contains(@class, 'rcbArrowCell rcbArrowCellLeft')]")).click();
 			driver.findElement(
 					By.xpath("//div[contains(@class, 'RadComboBoxDropDown RadComboBoxDropDown_Office2007 ')]"))

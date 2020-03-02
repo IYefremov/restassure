@@ -76,7 +76,7 @@ public class MailChecker {
 		try {
 			Folder[] f = store.getDefaultFolder().list();
 			for(Folder fd:f){
-			    Folder t[]=fd.list();
+			    Folder[] t =fd.list();
 			    for(Folder f1:t) {
 			    	System.out.println("==========" + f1.getName());
 			    }
@@ -104,7 +104,7 @@ public class MailChecker {
 		try {
 			Folder[] f = store.getDefaultFolder().list();
 			for(Folder fd:f){
-			    Folder t[]=fd.list();
+			    Folder[] t =fd.list();
 			    for(Folder f1:t) {
 			    	System.out.println("==========" + f1.getName());
 			    }
@@ -159,7 +159,6 @@ public class MailChecker {
                 if (bp.isMimeType("text/plain")) {
                     if (text == null)
                         text = getText(bp);
-                    continue;
                 } else if (bp.isMimeType("text/html")) {
                     String s = getText(bp);
                     if (s != null)

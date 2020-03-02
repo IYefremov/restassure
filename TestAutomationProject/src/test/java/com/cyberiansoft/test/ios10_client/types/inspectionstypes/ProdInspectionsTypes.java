@@ -1,8 +1,5 @@
 package com.cyberiansoft.test.ios10_client.types.inspectionstypes;
 
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularVisualInteriorScreen;
-import com.cyberiansoft.test.ios10_client.pageobjects.screensinterfaces.IBaseWizardScreen;
-
 public enum ProdInspectionsTypes implements IInspectionsTypes {
 
     MATRIX_INSPECTION("Matrix Inspection"),

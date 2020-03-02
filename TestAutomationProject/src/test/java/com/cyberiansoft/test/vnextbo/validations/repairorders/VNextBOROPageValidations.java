@@ -129,14 +129,12 @@ public class VNextBOROPageValidations {
         VNextBOROWebPage boroWebPage = new VNextBOROWebPage();
         if (expected)
             Assert.assertTrue(boroWebPage.getRepairOrdersTableBody().findElements(By.xpath("./tr"))
-                    .stream().filter((tableRow) ->
-                            tableRow.findElement(By.xpath(".//input[@title='Stock #']")).getAttribute("value").trim().equals(stockNumber))
-                    .findFirst().isPresent());
+                    .stream().anyMatch((tableRow) ->
+                            tableRow.findElement(By.xpath(".//input[@title='Stock #']")).getAttribute("value").trim().equals(stockNumber)));
         else
             Assert.assertFalse(boroWebPage.getRepairOrdersTableBody().findElements(By.xpath("./tr"))
-                    .stream().filter((tableRow) ->
-                            tableRow.findElement(By.xpath(".//input[@title='Stock #']")).getAttribute("value").trim().equals(stockNumber))
-                    .findFirst().isPresent());
+                    .stream().anyMatch((tableRow) ->
+                            tableRow.findElement(By.xpath(".//input[@title='Stock #']")).getAttribute("value").trim().equals(stockNumber)));
     }
 
     public static boolean isWorkOrderDisplayedByFirstName(String firstName, boolean expected) {

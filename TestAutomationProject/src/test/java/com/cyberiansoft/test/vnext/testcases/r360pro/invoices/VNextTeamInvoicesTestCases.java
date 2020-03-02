@@ -827,13 +827,12 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoiceNumber +
 					" in mail box " + nada.getEmailId() + ". At time " +
 					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
-			;
 		}
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyCancelEmailTeamInvoice(String rowID,
-												 String description, JSONObject testData) throws Exception {
+												 String description, JSONObject testData) {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -1018,7 +1017,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoices[i] +
 					" in mail box " + nada.getEmailId() + ". At time " +
 					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
-			;
 		}
 	}
 
@@ -1081,7 +1079,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		invoicesScreen.switchToMyInvoicesView();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-		final int lastInvoiceNumber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+		final int lastInvoiceNumber = Integer.parseInt(invoiceNumber.substring(invoiceStringLenght));
 
 		invoicesScreen.clickBackButton();
 
@@ -1091,7 +1089,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		homeScreen.clickInvoicesMenuItem();
 		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		final int newLastInvoiceNuber = Integer.parseInt(newInvoiceNumber.substring(invoiceStringLenght));
 		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + 1);
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -1113,7 +1111,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		invoicesScreen.switchToMyInvoicesView();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-		final int lastInvoiceNumber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+		final int lastInvoiceNumber = Integer.parseInt(invoiceNumber.substring(invoiceStringLenght));
 
 		invoicesScreen.clickBackButton();
 		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
@@ -1122,7 +1120,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		homeScreen.clickInvoicesMenuItem();
 		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-		final int newLastInvoiceNumber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		final int newLastInvoiceNumber = Integer.parseInt(newInvoiceNumber.substring(invoiceStringLenght));
 		Assert.assertEquals(newLastInvoiceNumber, lastInvoiceNumber + numberInvoicesToCreate);
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -1142,7 +1140,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		invoicesScreen.switchToMyInvoicesView();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-		final int lastInvoiceNumber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+		final int lastInvoiceNumber = Integer.parseInt(invoiceNumber.substring(invoiceStringLenght));
 
 		invoicesScreen.clickBackButton();
 
@@ -1156,7 +1154,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		InvoiceInfoSteps.setInvoicePONumber(poNumber);
 		final String newInvoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
 		Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
-		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		final int newLastInvoiceNuber = Integer.parseInt(newInvoiceNumber.substring(invoiceStringLenght));
 		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + 1);
 		invoicesScreen.clickBackButton();
 	}
@@ -1179,7 +1177,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
 		invoicesScreen.switchToMyInvoicesView();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
-		final int lastInvoiceNumber = Integer.valueOf(invoiceNumber.substring(invoiceStringLenght, invoiceNumber.length()));
+		final int lastInvoiceNumber = Integer.parseInt(invoiceNumber.substring(invoiceStringLenght));
 
 		ScreenNavigationSteps.pressBackButton();
 
@@ -1190,13 +1188,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-		workOrders.forEach(workOrderId -> {
-			InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true);
-		});
+		workOrders.forEach(workOrderId -> InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true));
 		InvoiceInfoSteps.setInvoicePONumber(ponumber);
 		final String newInvoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
 		Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
-		final int newLastInvoiceNuber = Integer.valueOf(newInvoiceNumber.substring(invoiceStringLenght, newInvoiceNumber.length()));
+		final int newLastInvoiceNuber = Integer.parseInt(newInvoiceNumber.substring(invoiceStringLenght));
 		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + 1);
 		ScreenNavigationSteps.pressBackButton();
 	}

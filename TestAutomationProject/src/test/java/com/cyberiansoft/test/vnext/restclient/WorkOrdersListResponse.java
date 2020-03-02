@@ -19,7 +19,7 @@ public class WorkOrdersListResponse {
     @JsonProperty("ErrorDescription")
     private Object ErrorDescription;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new HashMap<>();
 
     @JsonProperty("Result")
     public List<WorkOrderDTO> getResult() {

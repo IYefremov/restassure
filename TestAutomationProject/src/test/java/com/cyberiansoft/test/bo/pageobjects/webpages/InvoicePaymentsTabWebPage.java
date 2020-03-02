@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.TextField;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,12 +10,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.TextField;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
 
 public class InvoicePaymentsTabWebPage extends BaseWebPage {
 	
@@ -97,7 +94,7 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 		if (row != null) {
 			amount = row.findElement(By.xpath("./td[" + paymentsnotestable.getTableColumnIndex("Amount") + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + paymentstype + " payment type");	
+			Assert.fail("Can't find " + paymentstype + " payment type");
 		}
 		return amount; 
 	}
@@ -108,7 +105,7 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 		if (row != null) {
 			amount = row.findElement(By.xpath("./td[" + paymentsnotestable.getTableColumnIndex("Amount") + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find payment with the following description: " + paymentdesc + " payment type");	
+			Assert.fail("Can't find payment with the following description: " + paymentdesc + " payment type");
 		}
 		return amount; 
 	}
@@ -119,7 +116,7 @@ public class InvoicePaymentsTabWebPage extends BaseWebPage {
 		if (row != null) {
 			amount = row.findElement(By.xpath("./td[" + paymentsnotestable.getTableColumnIndex("Created By") + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + paymentstype + " payment type");	
+			Assert.fail("Can't find " + paymentstype + " payment type");
 		}
 		return amount; 
 	}

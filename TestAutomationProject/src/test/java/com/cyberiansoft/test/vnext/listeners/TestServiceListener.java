@@ -67,9 +67,7 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
                         try {
                             if (testToTestRunMap.containsKey(id))
                                 tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.PASSED, "Hello from automation :)");
-                        } catch (UnirestException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
+                        } catch (UnirestException | IOException e) {
                             e.printStackTrace();
                         }
                     });
@@ -86,9 +84,7 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
                         try {
                             if (testToTestRunMap.containsKey(id))
                                 tpIntegrationService.setTestCaseRunStatus(testToTestRunMap.get(id), TestCaseRunStatus.FAILED, "Hello from automation :)");
-                        } catch (UnirestException e) {
-                            e.printStackTrace();
-                        } catch (IOException e) {
+                        } catch (UnirestException | IOException e) {
                             e.printStackTrace();
                         }
                     });

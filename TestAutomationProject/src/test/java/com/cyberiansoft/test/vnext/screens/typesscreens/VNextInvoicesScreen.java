@@ -8,15 +8,16 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InvoiceListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -62,7 +63,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 				findElement(By.xpath(".//div[@class='truncate']")));
 		String wos = getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='accordion-item-content']")).
 					findElement(By.xpath(".//div[@class='truncate']")).getText().trim();
-		List<String> wosarray = Arrays.asList(wos.split(","));
+		String[] wosarray = wos.split(",");
 		for (String wonumber : wosarray)
 			workOrders.add(wonumber.trim());
 		return workOrders;
@@ -76,7 +77,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		BaseUtils.waitABit(500);
 		poNumber = getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='accordion-item-content']")).
 					findElement(By.xpath(".//div[contains(text(), 'PO#')]")).getText();
-		poNumber = poNumber.substring(3, poNumber.length()).trim();
+		poNumber = poNumber.substring(3).trim();
 		return poNumber;
 	}
 

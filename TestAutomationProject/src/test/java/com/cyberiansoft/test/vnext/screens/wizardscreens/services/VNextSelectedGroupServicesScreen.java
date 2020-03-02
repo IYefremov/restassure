@@ -23,7 +23,7 @@ public class VNextSelectedGroupServicesScreen extends VNextBaseGroupServicesScre
         if (servicecell != null) {
             tap(servicecell.findElement(By.xpath(".//*[@action='unselect-item']")));
         } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
     }
 
     public WebElement getSelectedServiceCell(String servicename) {

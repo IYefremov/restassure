@@ -19,13 +19,13 @@ public class CreditCardData {
     @JsonProperty("cvc")
     String cvc;
 
-    public String getCardNumber() { return cardNumber; };
+    public String getCardNumber() { return cardNumber; }
 
-    public String getIncorrectCardNumber() { return incorrectCardNumber; };
+    public String getIncorrectCardNumber() { return incorrectCardNumber; }
 
-    public String getExpirationMonth() { return expirationMonth; };
+    public String getExpirationMonth() { return expirationMonth; }
 
-    public String getExpirationYear() { return expirationYear; };
+    public String getExpirationYear() { return expirationYear; }
 
-    public String getCVC() { return cvc; };
+    public String getCVC() { return cvc; }
 }

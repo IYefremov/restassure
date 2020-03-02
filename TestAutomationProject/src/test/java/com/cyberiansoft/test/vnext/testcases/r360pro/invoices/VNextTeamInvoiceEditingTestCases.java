@@ -376,16 +376,12 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceSteps.saveInvoiceAsDraft();
         InvoiceSteps.openMenu(invoiceNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-        workOrders.forEach(workOrderId -> {
-            InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true);
-        });
+        workOrders.forEach(workOrderId -> InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true));
         ScreenNavigationSteps.pressBackButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogYesButtonAndGetMessage(),
                 VNextAlertMessages.CANCEL_ETING_INVOICE);
-        workOrders.forEach(workOrderId -> {
-            Assert.assertTrue(invoicesScreen.getInvoiceWorkOrders(invoiceNumber).contains(workOrderId));
-        });
+        workOrders.forEach(workOrderId -> Assert.assertTrue(invoicesScreen.getInvoiceWorkOrders(invoiceNumber).contains(workOrderId)));
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -417,9 +413,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         InvoiceSteps.saveInvoiceAsDraft();
         InvoiceSteps.openMenu(invoiceNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-        workOrders.forEach(workOrderId -> {
-            InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true);
-        });
+        workOrders.forEach(workOrderId -> InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true));
 
         invoiceInfoScreen.deattechWorkOrdersFromInvoice(workOrders);
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());

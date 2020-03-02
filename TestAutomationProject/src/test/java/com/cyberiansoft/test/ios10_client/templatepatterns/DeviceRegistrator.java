@@ -18,7 +18,6 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectE
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularSelectEnvironmentScreen;
 import com.cyberiansoft.test.ios10_client.types.envtypes.IOSReconproEnvironmentType;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.PageFactory;
 
 import java.util.HashMap;
 import java.util.Map;

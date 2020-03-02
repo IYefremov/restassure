@@ -210,7 +210,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		teamsPage.clickGoToPreviousPage();
 		Assert.assertEquals(data.getPage1(), teamsPage.getGoToPageFieldValue());
 
-		if (Integer.valueOf(lastpagenumber) < 50) {
+		if (Integer.parseInt(lastpagenumber) < 50) {
 			teamsPage.setPageSize(lastpagenumber);
 			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(teamsPage.getTeamsTableRowsCount()));
 		} else {
@@ -258,7 +258,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 
 		jobsPage.clickGoToPreviousPage();
 		Assert.assertEquals(data.getPage1(), jobsPage.getGoToPageFieldValue());
-		if (Integer.valueOf(lastpagenumber) < 50) {
+		if (Integer.parseInt(lastpagenumber) < 50) {
 			jobsPage.setPageSize(lastpagenumber);
 			Assert.assertEquals(Integer.valueOf(lastpagenumber), Integer.valueOf(jobsPage.getJobsTableRowsCount()));
 		} else {

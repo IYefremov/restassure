@@ -38,7 +38,7 @@ public class AppiumUtils {
                 }
                 break;
             case WEBVIEW_CONTEXT:
-                List<String> handlesList = new ArrayList<String>(contextNames);
+                List<String> handlesList = new ArrayList<>(contextNames);
                 if (handlesList.size() > 2)
                     DriverBuilder.getInstance().getAppiumDriver().context(handlesList.get(2));
                 else
