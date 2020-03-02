@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.InvoiceData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
@@ -59,6 +60,11 @@ public class InvoiceSteps {
     public static void createInvoice(InvoiceTypes invoiceType) {
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList();
         invoiceTypesScreen.selectInvoiceType(invoiceType);
+    }
+
+    public static void createInvoice(InvoiceTypes invoiceType, InvoiceData invoiceData) {
+        createInvoice(invoiceType);
+        InvoiceInfoSteps.setInvoicePONumber(invoiceData.getPoNumber());
     }
 
     public static void switchToTeamInvoicesView() {

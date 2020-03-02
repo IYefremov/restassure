@@ -11,7 +11,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.utils.VNextInspectionStatuses;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -35,11 +35,9 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestClass {
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, false);
 		MenuSteps.selectMenuItem(MenuItems.APPROVE);
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
-		approveScreen.saveApprovedInspection();
-		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.APPROVED);
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
+		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.APPROVED);
 		inspectionsScreen.clickBackButton();
 	}
 
@@ -50,11 +48,11 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestClass {
 		InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
 		String inspectionNumber = InspectionSteps.saveInspection();
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.NEW);
+		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.NEW);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.APPROVE);
 		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		approveScreen.drawSignature();
+		ApproveSteps.drawSignature();
 		approveScreen.clickClearSignatureButton();
 		approveScreen.clickSaveButton();
 		VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -62,7 +60,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestClass {
 		approveScreen.drawSignature();
 		approveScreen.saveApprovedInspection();
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.APPROVED);
+		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.APPROVED);
 		inspectionsScreen.clickBackButton();
 	}
 
@@ -73,7 +71,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestClass {
 		InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
 		String inspectionNumber = InspectionSteps.saveInspection();
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.NEW);
+		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.NEW);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.APPROVE);
 		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -81,7 +79,7 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestClass {
 		Assert.assertTrue(approveScreen.isClearButtonVisible());
 		ApproveSteps.saveApprove();
 		inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), VNextInspectionStatuses.APPROVED);
+		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.APPROVED);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuValidations.menuItemShouldBeVisible(MenuItems.APPROVE, false);
 		MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, true);

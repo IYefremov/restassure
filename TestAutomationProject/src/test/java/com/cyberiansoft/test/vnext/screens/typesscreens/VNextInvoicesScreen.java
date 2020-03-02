@@ -128,12 +128,10 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		return new VNextHomeScreen(appiumdriver);
 	}
 	
-	public VNextWorkOrdersScreen clickAddInvoiceButton() {
+	public void clickAddInvoiceButton() {
         clickAddButton();
-		VNextWorkOrdersScreen woscreeen = new VNextWorkOrdersScreen(appiumdriver);
 		if (appiumdriver.findElements(By.xpath("//div[text()='Tap a work order, and then tap Create Invoice.']")).size() > 0)
 			new VNextInformationDialog(appiumdriver).clickInformationDialogOKButton();
-		return woscreeen;
 	}
 	
 	public void switchToTeamInvoicesView() {

@@ -73,12 +73,6 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         return new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
-    public VNextWorkOrdersScreen cancelWorkOrder() {
-        clickCancelMenuItem();
-        VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-        String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-        return new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-    }
 
     public void clickCancelMenuItem() {
         clickMenuButton();

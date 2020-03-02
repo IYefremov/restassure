@@ -6,6 +6,7 @@ import org.testng.Assert;
 public class InvoiceInfoScreenValidations {
 
     public static void validateWorkOrderSelectedForInvoice(String workOrderId, boolean isSelected) {
+
         if (isSelected)
             Assert.assertTrue(VNextInvoiceInfoScreenInteractions.isWorkOrderSelectedForInvoice(workOrderId));
         else

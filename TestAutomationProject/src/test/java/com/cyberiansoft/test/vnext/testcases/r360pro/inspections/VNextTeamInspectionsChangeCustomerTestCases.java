@@ -62,7 +62,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         ScreenNavigationSteps.pressBackButton();
     }
@@ -77,7 +77,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
 
         InspectionSteps.openInspectionMenu(inspectionNumber);
@@ -119,8 +119,8 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerToWholesailForInspection(inspectionNumber, testwholesailcustomer);
-        inspectionsScreen.switchToTeamInspectionsView();
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testwholesailcustomer);
+        InspectionSteps.switchToTeamInspections();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testwholesailcustomer.getFullName());
         inspectionsScreen.switchToMyInspectionsView();
@@ -138,7 +138,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerForWorkOrderViaSearch(inspectionNumber, testCustomer2);
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         ScreenNavigationSteps.pressBackButton();
     }
@@ -153,7 +153,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         inspectionsScreen.switchToTeamInspectionsView();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);

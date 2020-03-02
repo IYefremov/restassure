@@ -15,10 +15,7 @@ import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
-import com.cyberiansoft.test.vnext.steps.MenuSteps;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
-import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
@@ -48,7 +45,7 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
 		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		vehicleVINHistoryScreen.clickBackButton();
-		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		availableServicesScreen.selectServices(workOrderData.getServicesList());
 		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
@@ -56,13 +53,12 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		WorkOrderSteps.openMenu(workOrderNumber);
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-		availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName()));
-		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
-		workOrdersScreen.clickBackButton();
+		WorkOrderSteps.saveWorkOrder();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 }

@@ -53,7 +53,7 @@ public class VehicleInfoScreenInteractions {
     }
 
     public static void selectMakeAndModel(String vehicleMake, String vehicleModel) {
-
+        VehicleInfoScreenInteractions.waitPageLoaded();
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         vehicleInfoScreen
                 .getDataFieldList()
