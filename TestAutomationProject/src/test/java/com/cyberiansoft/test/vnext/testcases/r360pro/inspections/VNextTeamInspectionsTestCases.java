@@ -40,6 +40,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.json.simple.JSONObject;
@@ -80,15 +81,14 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, testCaseData.getInspectionData());
 		final String inspectionNumber = InspectionSteps.saveInspection();
 
-		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.NEW);
+		InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.NEW);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.APPROVE);
 		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		ApproveSteps.drawSignature();
 		Assert.assertTrue(approveScreen.isClearButtonVisible());
 		ApproveSteps.saveApprove();
-		Assert.assertEquals(inspectionsScreen.getInspectionStatusValue(inspectionNumber), InspectionStatus.APPROVED);
+		InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());

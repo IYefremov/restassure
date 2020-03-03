@@ -43,7 +43,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath = "//div[@class='notice-plate']")
 	private WebElement presetCustomerPanel;
 
-	@FindBy(xpath = "//span[@class='client-mode']")
+	@FindBy(xpath = "//*[@class='notice-plate-info-name']")
 	private WebElement clientMode;
 
     public VNextCustomersScreen(WebDriver appiumdriver) {
@@ -104,10 +104,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		tap(wholesaleCustomerTab);
 	}
 
-	public void setCustomerAsDefault(AppCustomer customer) {
-		selectCustomer(customer);
-		MenuSteps.selectMenuItem(MenuItems.SET_AS_DEFAULT);
-	}
+
 
 	public boolean isCustomerExists(AppCustomer customer) {
 		WaitUtils.waitUntilElementIsClickable(customersList);

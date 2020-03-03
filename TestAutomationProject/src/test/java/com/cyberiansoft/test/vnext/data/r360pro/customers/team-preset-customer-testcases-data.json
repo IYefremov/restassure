@@ -50,16 +50,6 @@
     }
   ],
 
-  "testVerifyPresetCustomerCanceledIfUserGoFromRetailToWholesaleCustomerScreen": [
-    {
-      "rowID": "testVerifyPresetCustomerCanceledIfUserGoFromRetailToWholesaleCustomerScreen.01",
-      "description": "Test Case 82238:Verify 'Preset Customer' canceled if user go from Retail to Wholesale customer screen",
-      "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
-      }
-    }
-  ],
-
   "testVerifyUserCanCancelPresetCustomerIfUserGoFromRetailToWholesaleCustomerScreen": [
     {
       "rowID": "testVerifyUserCanCancelPresetCustomerIfUserGoFromRetailToWholesaleCustomerScreen.01",
