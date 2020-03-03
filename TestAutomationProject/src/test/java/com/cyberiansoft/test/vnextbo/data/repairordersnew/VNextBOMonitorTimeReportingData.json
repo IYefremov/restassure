@@ -36,7 +36,9 @@
           "testCaseID": "92551",
           "testCaseTitle": "User can't add a new record without required fields"
         }
-      ]
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager"
     }
   ],
   "verifyUserCanStartStopServices": [
@@ -48,7 +50,9 @@
           "testCaseID": "92554",
           "testCaseTitle": "User can start/stop services"
         }
-      ]
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager"
     }
   ],
   "verifyUserCanNotStartSimultaneouslyTwoOrMoreTimeRecordsForSameTechnician": [
@@ -60,7 +64,10 @@
           "testCaseID": "93046",
           "testCaseTitle": "User can't start simultaneously 2 or more time records for the same technician. Time reports can't overlaps by the time"
         }
-      ]
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager",
+      "technician1": "Yevhenii Rozstalnoy"
     }
   ],
   "verifyUserCanStartTwoOrMoreTimeReportsForDifferentTechnicians": [
@@ -72,7 +79,10 @@
           "testCaseID": "93048",
           "testCaseTitle": "User can start 2 or more time reports for the service for different technicians in the same time"
         }
-      ]
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager",
+      "technician1": "Yevhenii Rozstalnoy"
     }
   ],
   "verifyUserCanStartTimeReportsForOneTechnicianInTheSameTimeForDifferentServices": [
@@ -84,7 +94,10 @@
           "testCaseID": "93049",
           "testCaseTitle": "User can start time reports for 1 technician in the same time for different services"
         }
-      ]
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager",
+      "technician1": "Yevhenii Rozstalnoy"
     }
   ],
   "verifyUserCanEditValuesOfTimeReport": [

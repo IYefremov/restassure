@@ -26,32 +26,50 @@ public class VNextBOTimeReportingDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[@id='time-tracking-popup__started-only-check']")
     private WebElement startedOnlyCheckBox;
 
-    @FindBy(xpath = "//span[contains(@class,'time-tracking-popup__time-item-technician')]//span[@class='k-input']")
-    private List<WebElement> techniciansList;
-
-    @FindBy(xpath = "//input[contains(@data-bind,'endDateOutput')]")
-    private List<WebElement> endDatesList;
-
     @FindBy(xpath = "//div[@data-bind='text: entityName']")
     private List<WebElement> servicesList;
 
     @FindBy(xpath = "//tr[contains(@data-bind,'grid__row--green')]")
-    private List<WebElement> savedTimeRecords;
+    private List<WebElement> savedTimeRecordsList;
 
     @FindBy(xpath = "//tr[@class='grid__row--blue']")
-    private List<WebElement> notSavedTimeRecords;
+    private List<WebElement> notSavedTimeRecordsList;
 
     @FindBy(xpath = "//i[@class='icon-trash-bin']")
-    private List<WebElement> deleteIcons;
+    private List<WebElement> deleteIconsList;
+
+    @FindBy(xpath = "//tr[contains(@data-bind,'grid__row--green')]//input[contains(@data-bind,'endDateOutput')]")
+    private List<WebElement> savedRecordsStopDatesList;
+
+    @FindBy(xpath = "//tr[contains(@data-bind,'grid__row--green')]//input[contains(@data-bind,'startDateOutput')]")
+    private List<WebElement> savedRecordsStartDatesList;
+
+    @FindBy(xpath = "//tr[contains(@data-bind,'grid__row--green')]//span[contains(@class,'time-tracking-popup__time-item-technician')]//span[@class='k-input']")
+    private List<WebElement> savedRecordsTechniciansList;
+
+    @FindBy(xpath = "//tr[contains(@data-bind,'grid__row--green')]//i[@class='icon-timer-running']")
+    private List<WebElement> savedRecordsTimerIconsList;
+
+    @FindBy(xpath = "//b[contains(@data-bind,'isStarted') and not(contains(@style,'none'))]")
+    private List<WebElement> timeRecordsWithTime;
+
+    @FindBy(xpath = "//b[contains(@data-bind,'isStarted') and not(contains(@style,'none'))]")
+    private List<WebElement> serviceTotalTimeValuesList;
 
     @FindBy(xpath = "//tr[@class='grid__row--blue']//input[contains(@data-bind,'startDateOutput')]")
-    private WebElement notSavedRecordStartDate;
+    private WebElement notSavedRecordStartDateInputField;
+
+    @FindBy(xpath = "//tr[@class='grid__row--blue']//input[contains(@data-bind,'startDateOutput')]/ancestor::div[contains(@data-bind,'noStartDateSpecified')]")
+    private WebElement notSavedRecordStartDateDatePicker;
 
     @FindBy(xpath = "//tr[@class='grid__row--blue']//input[contains(@data-bind,'endDateOutput')]")
-    private WebElement notSavedRecordStopDate;
+    private WebElement notSavedRecordStopDateInputField;
 
     @FindBy(xpath = "//tr[@class='grid__row--blue']//span[contains(@class,'time-item-technician')]//span[@class='k-input']")
     private WebElement notSavedRecordTechnicianDropDown;
+
+    @FindBy(xpath = "//tr[@class='grid__row--blue']//span[contains(@class,'time-item-technician')]/ancestor::div[contains(@data-bind,'noTechnicianSpecified')]")
+    private WebElement notSavedRecordTechnicianFieldWithBorder;
 
     @FindBy(xpath = "//tr[@class='grid__row--blue']//i[@class='icon-save']")
     private WebElement notSavedRecordSaveIcon;
@@ -70,6 +88,11 @@ public class VNextBOTimeReportingDialog extends VNextBOBaseWebPage {
     public WebElement addButtonByServiceName(String service) {
 
         return driver.findElement(By.xpath("//div[text()='" + service + "']/ancestor::tr//div[contains(@data-bind,'onAddTimeItemClick')]"));
+    }
+
+    public WebElement totalTimeByServiceName(String service) {
+
+        return driver.findElement(By.xpath("//div[text()='" + service + "']/ancestor::tr//b"));
     }
 
     public VNextBOTimeReportingDialog() {

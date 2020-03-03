@@ -2,13 +2,10 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOTimeReportingDialog;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import org.openqa.selenium.WebElement;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,7 +52,7 @@ public class VNextBOTimeReportingDialogSteps {
 
     public static int getSavedRecordsNumber() {
 
-        return new VNextBOTimeReportingDialog().getSavedTimeRecords().size();
+        return new VNextBOTimeReportingDialog().getSavedTimeRecordsList().size();
     }
 
     public static void cancelAddingNewRecord() {
@@ -66,20 +63,21 @@ public class VNextBOTimeReportingDialogSteps {
     public static void saveNewRecord() {
 
         Utils.clickElement(new VNextBOTimeReportingDialog().getNotSavedRecordSaveIcon());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
-    public static void setStartDateTime() {
+    public static void setStartDateTimeForNewRecord(String statDate) {
 
         VNextBOTimeReportingDialog reportingDialog = new VNextBOTimeReportingDialog();
-        Utils.clickElement(reportingDialog.getNotSavedRecordStartDate());
-        Utils.clearAndType(reportingDialog.getNotSavedRecordStartDate(), LocalDateTime.now().format(DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a")));
+        Utils.clickElement(reportingDialog.getNotSavedRecordStartDateInputField());
+        Utils.clearAndType(reportingDialog.getNotSavedRecordStartDateInputField(), statDate);
     }
 
-    public static void setStopDateTime() {
+    public static void setStopDateTimeForNewRecord(String stopDate) {
 
         VNextBOTimeReportingDialog reportingDialog = new VNextBOTimeReportingDialog();
-        Utils.clickElement(reportingDialog.getNotSavedRecordStopDate());
-        Utils.clearAndType(reportingDialog.getNotSavedRecordStopDate(), LocalDateTime.now().plusHours(1).format(DateTimeFormatter.ofPattern("M/d/yyyy hh:mm a")));
+        Utils.clickElement(reportingDialog.getNotSavedRecordStopDateInputField());
+        Utils.clearAndType(reportingDialog.getNotSavedRecordStopDateInputField(), stopDate);
     }
 
     public static void setTechnicianForNewRecord(String technician) {
@@ -93,21 +91,50 @@ public class VNextBOTimeReportingDialogSteps {
     public static void deleteRecordByNumberAndCancelWithCancelButton(int recordNumber) {
 
         VNextBOTimeReportingDialog timeReportingDialog = new VNextBOTimeReportingDialog();
-        Utils.clickElement(timeReportingDialog.getDeleteIcons().get(recordNumber));
+        Utils.clickElement(timeReportingDialog.getDeleteIconsList().get(recordNumber));
         VNextBOModalDialogSteps.clickCancelButton();
     }
 
     public static void deleteRecordByNumberAndCancelWithXIcon(int recordNumber) {
 
         VNextBOTimeReportingDialog timeReportingDialog = new VNextBOTimeReportingDialog();
-        Utils.clickElement(timeReportingDialog.getDeleteIcons().get(recordNumber));
+        Utils.clickElement(timeReportingDialog.getDeleteIconsList().get(recordNumber));
         VNextBOModalDialogSteps.clickCloseButton();
     }
 
     public static void deleteRecordByNumber(int recordNumber) {
 
         VNextBOTimeReportingDialog timeReportingDialog = new VNextBOTimeReportingDialog();
-        Utils.clickElement(timeReportingDialog.getDeleteIcons().get(recordNumber));
+        Utils.clickElement(timeReportingDialog.getDeleteIconsList().get(recordNumber));
         VNextBOModalDialogSteps.clickOkButton();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void changeStartDateByTimeRecordNumber(int recordNumber, String stopDate) {
+
+        VNextBOTimeReportingDialog reportingDialog = new VNextBOTimeReportingDialog();
+        Utils.clickElement(reportingDialog.getSavedRecordsStartDatesList().get(recordNumber));
+        Utils.clearAndType(reportingDialog.getSavedRecordsStartDatesList().get(recordNumber), stopDate);
+        WaitUtilsWebDriver.waitABit(2000);
+        Utils.clickElement(reportingDialog.getSavedRecordsStopDatesList().get(recordNumber));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void changeStopDateByTimeRecordNumber(int recordNumber, String stopDate) {
+
+        VNextBOTimeReportingDialog reportingDialog = new VNextBOTimeReportingDialog();
+        Utils.clickElement(reportingDialog.getSavedRecordsStopDatesList().get(recordNumber));
+        Utils.clearAndType(reportingDialog.getSavedRecordsStopDatesList().get(recordNumber), stopDate);
+        WaitUtilsWebDriver.waitABit(2000);
+        Utils.clickElement(reportingDialog.getSavedRecordsStartDatesList().get(recordNumber));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void changeTechnicianByTimeRecordNumber(int recordNumber, String technician) {
+
+        VNextBOTimeReportingDialog reportingDialog = new VNextBOTimeReportingDialog();
+        Utils.clickElement(reportingDialog.getSavedRecordsTechniciansList().get(recordNumber));
+        Utils.clickWithJS(reportingDialog.dropDownOption(technician));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }
