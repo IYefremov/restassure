@@ -103,8 +103,8 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 		WebElement row = getTableRowWithEmailTemplate(templatename);
 		if (row != null) {
 			subject = row.findElement(By.xpath(".//td[5]")).getText();
-		} else 
-			Assert.assertTrue(false, "Can't find " + templatename + " email template");
+		} else
+			Assert.fail("Can't find " + templatename + " email template");
 		return subject;
 	}
 	
@@ -119,12 +119,12 @@ public class EmailTemplatesWebPage extends BaseWebPage {
         }
 	}
 	
-	public void clickEditEmailTemplate(String templatename) throws InterruptedException {
+	public void clickEditEmailTemplate(String templatename) {
 		WebElement row = getTableRowWithEmailTemplate(templatename);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + templatename + " email template");
+		} else
+			Assert.fail("Can't find " + templatename + " email template");
 	}
 	
 	public void deleteEmailTemplate(String templatename) {
@@ -132,16 +132,16 @@ public class EmailTemplatesWebPage extends BaseWebPage {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + templatename + " email template");	
+			Assert.fail("Can't find " + templatename + " email template");
 		}
 	}
 	
-	public void deleteEmailTemplateAndCancelDeleting(String templatename) throws InterruptedException {
+	public void deleteEmailTemplateAndCancelDeleting(String templatename) {
 		WebElement row = getTableRowWithEmailTemplate(templatename);
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + templatename + " email template");	
+			Assert.fail("Can't find " + templatename + " email template");
 		}
 	}
 

@@ -55,7 +55,7 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	
 	public String getLastPageNumber() {
 		String oftxt = "of ";
-		return pageoflabel.getText().substring(oftxt.length(), pageoflabel.getText().length());
+		return pageoflabel.getText().substring(oftxt.length());
 	}
 	
 	public String getCurrentlySelectedPageNumber() {
@@ -68,7 +68,7 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 		return gotopagefld.getAttribute("value");
 	}
 	
-	public void setPageSize(String pagesize) throws InterruptedException {
+	public void setPageSize(String pagesize) {
 		pagesizefld.clear();
 		wait.until(ExpectedConditions.visibilityOf(updateProcess));
 		wait.until(ExpectedConditions.invisibilityOf(updateProcess));
@@ -91,14 +91,14 @@ public class BackofficePaginationPanel  extends BaseWebPage {
 	}
 	
 	public void clickGoToNextPage()  {
-		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int currenpage = Integer.parseInt(getCurrentlySelectedPageNumber());
 		int nextpage = currenpage + 1;
 		gotonextpage.click();		
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + nextpage  + "']")));
 	}
 	
 	public void clickGoToPreviousPage() {
-		int currenpage = Integer.valueOf(getCurrentlySelectedPageNumber());
+		int currenpage = Integer.parseInt(getCurrentlySelectedPageNumber());
 		int previouspage = currenpage - 1;
 		gotopreviouspage.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class='rgCurrentPage']/span[text()='" + previouspage  + "']")));

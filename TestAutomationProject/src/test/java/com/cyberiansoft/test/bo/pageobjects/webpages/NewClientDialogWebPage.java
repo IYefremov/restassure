@@ -120,7 +120,7 @@ public class NewClientDialogWebPage extends BaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
-	public void createRetailClient(String firstname, String lastname) throws InterruptedException {
+	public void createRetailClient(String firstname, String lastname) {
 		switchToRetailCustomer();
 		setClientFirstName(firstname);
 		setClientLastName(lastname);

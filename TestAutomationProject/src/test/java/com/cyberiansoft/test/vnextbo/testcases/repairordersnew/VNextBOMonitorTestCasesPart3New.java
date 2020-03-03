@@ -71,6 +71,7 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
 		WaitUtilsWebDriver.waitForPageToBeLoaded();
 		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
+		WaitUtilsWebDriver.waitABit(3000);
 		VNextBORODetailsValidationsNew.verifyServiceStartedDateIsCorrect(data.getService(), data.getServiceStartedDate());
 		if (data.getServiceStatuses()[1].equals("Active") || data.getServiceStatuses()[1].equals("Rework"))
 			VNextBORODetailsValidationsNew.verifyServiceCompletedDateIsCorrect(data.getService(), "");
@@ -147,5 +148,30 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 		data.setNotesMessage(data.getNotesMessage() + RandomStringUtils.randomAlphabetic(7));
 		VNextBORODetailsValidationsNew.verifyMoreInfoSectionContainsCorrectFields();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanCheckInRO(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBORODetailsStepsNew.checkInPhase(data.getPhase());
+		VNextBORODetailsValidationsNew.verifyPhaseIsCheckedInCheckedOut(data.getPhase(), true);
+		VNextBORODetailsStepsNew.checkOutPhase(data.getPhase());
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanCheckOutRO(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBORODetailsStepsNew.checkInPhase(data.getPhase());
+		VNextBORODetailsStepsNew.checkOutPhase(data.getPhase());
+		VNextBORODetailsValidationsNew.verifyPhaseIsCheckedInCheckedOut(data.getPhase(), false);
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanSeePartsOfRO(String rowID, String description, JSONObject testData) {
+
+		VNextBORODetailsValidationsNew.verifyPartsTableIsDisplayed();
+		VNextBORODetailsValidationsNew.verifyPartsServicesAreDisplayed();
 	}
 }

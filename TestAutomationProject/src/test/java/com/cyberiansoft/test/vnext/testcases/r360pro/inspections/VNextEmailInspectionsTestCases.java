@@ -37,7 +37,7 @@ public class VNextEmailInspectionsTestCases extends BaseTestClass {
 
         HomeScreenSteps.openCustomers();
         CustomersScreenSteps.switchToRetailMode();
-        retailCustomerList.stream().forEach(retailCustomer -> {
+        retailCustomerList.forEach(retailCustomer -> {
             if (!CustomersInteractions.isCustomerExists(retailCustomer))
                 CustomersScreenSteps.createNewRetailCustomer(retailCustomer);
         });
@@ -56,9 +56,9 @@ public class VNextEmailInspectionsTestCases extends BaseTestClass {
             ScreenNavigationSteps.pressBackButton();
         }
         HomeScreenSteps.openInspections();
-        inspectionsList.stream().forEach(InspectionSteps::selectInspection);
+        inspectionsList.forEach(InspectionSteps::selectInspection);
         InspectionSteps.clickEmailButton();
-        CustomersScreenSteps.selectCustomer(retailCustomerList.get(0));
+        SelectCustomerScreenSteps.selectCustomer(retailCustomerList.get(0));
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
         ScreenNavigationSteps.pressBackButton();

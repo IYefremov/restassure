@@ -1,7 +1,10 @@
 package com.cyberiansoft.test.vnext.restclient;
 
 import com.cyberiansoft.test.dataclasses.r360.WorkOrderForInvoiceDTO;
-import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +25,7 @@ public class WorkOrderForInvoiceListResponse {
     @JsonProperty("ErrorDescription")
     private Object ErrorDescription;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new HashMap<>();
 
     @JsonProperty("Result")
     public WorkOrderForInvoiceDTO getResult() {

@@ -143,8 +143,7 @@ public class AllUsersWebPage extends WebPageWithPagination {
 	
 	
 	public boolean userExists(String username) {
-		boolean exists =  alluserstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + username + "']")).size() > 0;
-		return exists;
+		return alluserstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + username + "']")).size() > 0;
 	}
 
 }

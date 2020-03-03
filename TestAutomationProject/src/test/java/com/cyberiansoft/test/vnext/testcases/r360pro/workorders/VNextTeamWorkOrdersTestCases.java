@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.workorders;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.DamageData;
-import com.cyberiansoft.test.dataclasses.InspectionStatus;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -11,6 +10,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -18,22 +18,17 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.*;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
+import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnext.validations.WorkOrdersScreenValidations;
 import org.json.simple.JSONObject;
@@ -54,22 +49,21 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         final String workOrderNumber = WorkOrderSteps.createSimpleWorkOrder(testcustomer, WorkOrderTypes.KRAMAR_AUTO, workOrderData);
-        WorkOrderSteps.workOrderShouldBePresent(workOrderNumber);
-        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-        workOrdersMenuScreen.clickDeleteWorkOrderMenuButton();
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, true);
+        WorkOrderSteps.openMenu(workOrderNumber);
+        MenuSteps.selectMenuItem(MenuItems.DELETE);
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationDialog.clickInformationDialogDontDeleteButton();
-        workOrdersScreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderNumber));
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, true);
         WorkOrderSteps.deleteWorkOrder(workOrderNumber);
-        Assert.assertFalse(workOrdersScreen.isWorkOrderExists(workOrderNumber));
-        VNextHomeScreen homeScreen = workOrdersScreen.clickBackButton();
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, false);
+        ScreenNavigationSteps.pressBackButton();
 
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
         statusScreen.updateMainDB();
         homeScreen.clickWorkOrdersMenuItem();
-        Assert.assertFalse(workOrdersScreen.isWorkOrderExists(workOrderNumber));
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, false);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -82,27 +76,21 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         homeScreen.clickNewWorkOrderPopupMenu();
 
-        CustomersScreenSteps.selectCustomer(testcustomer);
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.O_KRAMAR);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-        final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.KRAMAR_AUTO2, workOrderData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
-        availableServicesScreen.changeScreen(ScreenType.CLAIM);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
         VNextWorkOrderClaimInfoScreen claimInfoScreen = new VNextWorkOrderClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         claimInfoScreen.selectInsuranceCompany(workOrderData.getInsuranceCompanyData().getInsuranceCompanyName());
         claimInfoScreen.setClaimNumber(workOrderData.getInsuranceCompanyData().getClaimNumber());
         claimInfoScreen.setPolicyNumber(workOrderData.getInsuranceCompanyData().getPolicyNumber());
-        VNextWorkOrdersScreen workOrdersScreen = claimInfoScreen.saveWorkOrderViaMenu();
-        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderNumber));
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-        WaitUtils.elementShouldBeVisible(workOrdersMenuScreen.getDeleteorderbtn(), false);
-        workOrdersMenuScreen.clickCloseWorkOrdersMenuButton();
-        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderNumber));
+        final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, true);
+        WorkOrderSteps.openMenu(workOrderNumber);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.DELETE, false);
+        MenuSteps.closeMenu();
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, true);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -118,24 +106,19 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
         inspectionsScreen.switchToTeamInspectionsView();
         inspectionsScreen.searchInpectionByFreeText(searchtext);
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionsScreen.getFirstInspectionNumber());
-        inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        InspectionSteps.openInspectionMenu(inspectionsScreen.getFirstInspectionNumber());
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO, workOrderData);
 
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-        final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
-        vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
-        VNextWorkOrdersScreen workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
-        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderNumber), "Can't find work order: " + workOrderNumber);
+        final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, true);
 
-        workOrdersScreen.switchToTeamWorkordersView();
-        Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderNumber));
-        workOrdersScreen.switchToMyWorkordersView();
+        WorkOrderSteps.switchToTeamWorkOrdersView();
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, true);
+        WorkOrderSteps.switchToMyWorkOrdersView();
         ScreenNavigationSteps.pressBackButton();
 
     }
@@ -155,8 +138,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         InspectionsValidations.verifyInspectionExists(inspectionNumber, true);
 
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -187,12 +170,12 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
 
         inspectionsScreen.switchToTeamInspectionsView();
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatus());
-        WaitUtils.elementShouldBeVisible(inspectionMenuScreen.getCreatewoinspectionbtn(), false);
+        inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.NEW.getStatusString());
+        MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, false);
         MenuSteps.closeMenu();
 
-        inspectionMenuScreen = inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatus());
-        Assert.assertTrue(inspectionMenuScreen.isCreateWorkOrderMenuPresent());
+        inspectionsScreen.clickOnFirstInspectionWithStatus(InspectionStatus.APPROVED.getStatusString());
+        MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, true);
         MenuSteps.closeMenu();
         inspectionsScreen.switchToMyInspectionsView();
         ScreenNavigationSteps.pressBackButton();
@@ -218,18 +201,15 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
 
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickApproveInspectionMenuItem();
-        VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        approveScreen.drawSignature();
-        approveScreen.clickSaveButton();
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
         inspectionsScreen.waitForInspectionsListIsVisibile();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
-        inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
-
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -252,18 +232,14 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
 
-        VNextInspectionsMenuScreen inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickApproveInspectionMenuItem();
-        VNextApproveScreen approvescreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        approvescreen.drawSignature();
-        approvescreen.clickSaveButton();
-        inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
-        inspectionMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionMenuScreen.clickCreateWorkOrderInspectionMenuItem();
-
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -288,28 +264,22 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         homeScreen.clickNewWorkOrderPopupMenu();
 
-        CustomersScreenSteps.selectCustomer(testcustomer);
-        VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        workOrderTypesList.selectWorkOrderType(WorkOrderTypes.KRAMAR_AUTO);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-        VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
-        final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
-        VNextWorkOrdersScreen workOrdersScreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.KRAMAR_AUTO, workOrderData);
+        final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
 
-        workOrdersScreen.switchToTeamWorkordersView();
-        workOrdersScreen.searchWorkOrderByFreeText(workOrderNumber);
+        WorkOrderSteps.switchToTeamWorkOrdersView();
+        SearchSteps.searchByText(workOrderNumber);
         BaseUtils.waitABit(10 * 1000);
         AppiumUtils.setNetworkOff();
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        WorkOrderSteps.openMenu(workOrderNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextErrorDialog errorDialog = new VNextErrorDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(errorDialog.clickOKButtonAndGetMessage(),
                 VNextAlertMessages.CONNECTION_IS_NOT_AVAILABLE);
         AppiumUtils.setAndroidNetworkOn();
         GeneralSteps.closeErrorDialog();
-        workOrdersScreen.switchToMyWorkordersView();
-        workOrdersScreen.clickBackButton();
+        WorkOrderSteps.switchToMyWorkOrdersView();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -331,20 +301,20 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
         workOrdersScreen.switchToTeamWorkordersView();
 
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        WorkOrderSteps.openMenu(workOrderNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN,newvinnumber);
         WorkOrderSteps.saveWorkOrder();
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
         BaseUtils.waitABit(10*1000);
         homeScreen.clickWorkOrdersMenuItem();
-        workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        WorkOrderSteps.openMenu(workOrderNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         VehicleInfoScreenValidations.dataFieldShouldHaveValue(VehicleDataField.VIN,newvinnumber);
         WorkOrderSteps.cancelWorkOrder();
         workOrdersScreen.switchToMyWorkordersView();
-        workOrdersScreen.clickBackButton();
-    }
+        ScreenNavigationSteps.pressBackButton();
+}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanEditTeamWorkOrderAddAndRemoveServices(String rowID,
@@ -382,7 +352,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
 
         selectedServicesScreen.saveWorkOrderViaMenu();
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
         BaseUtils.waitABit(10*1000);
         homeScreen.clickWorkOrdersMenuItem();
         WorkOrderSteps.openMenu(workOrderNumber);
@@ -410,7 +380,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
         WorkOrderSteps.saveWorkOrder();
         workOrdersScreen.switchToMyWorkordersView();
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -438,11 +408,11 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), workOrderData.getWorkOrderPrice());
         final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
         BaseUtils.waitABit(10*1000);
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
         homeScreen.clickWorkOrdersMenuItem();
         Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(workOrderNumber), workOrderData.getWorkOrderPrice(),
                 "Price is not valid for work order: " + workOrderNumber);
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -470,8 +440,9 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
 
         Assert.assertEquals(groupServicesScreen.getInspectionTotalPriceValue(), workOrderData.getWorkOrderPrice());
         final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        WorkOrderSteps.openMenu(workOrderNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         groupServicesScreen = new VNextGroupServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VNextSelectedGroupServicesScreen selectedGroupServicesScreen = groupServicesScreen.switchToSelectedGroupServicesView();
@@ -481,8 +452,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         groupServicesScreen.switchToSelectedGroupServicesView();
         Assert.assertEquals(selectedGroupServicesScreen.getInspectionTotalPriceValue(), amountTotalEdited);
         selectedGroupServicesScreen.switchToGroupServicesScreen();
-        workOrdersScreen = groupServicesScreen.saveWorkOrderViaMenu();
+        WorkOrderSteps.saveWorkOrder();
         Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(workOrderNumber), amountTotalEdited);
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 }

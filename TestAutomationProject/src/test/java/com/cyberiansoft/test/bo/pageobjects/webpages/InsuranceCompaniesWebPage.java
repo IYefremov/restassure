@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.List;
@@ -124,7 +123,7 @@ public class InsuranceCompaniesWebPage extends BaseWebPage {
 		if (row != null) {
 			clickEditTableRow(row);
 		} else
-			Assert.assertTrue(false, "Can't find " + insurancecompany + " insurance company");
+			Assert.fail("Can't find " + insurancecompany + " insurance company");
 		waitABit(1000);
 	}
 
@@ -133,7 +132,7 @@ public class InsuranceCompaniesWebPage extends BaseWebPage {
 		if (row != null) {
 			deleteTableRow(row);
 		} else
-			Assert.assertTrue(false, "Can't find " + insurancecompany + " insurance company");
+			Assert.fail("Can't find " + insurancecompany + " insurance company");
 	}
 
 	public void deleteInsuranceCompanyAndCancelDeleting(String insurancecompany) {
@@ -141,12 +140,11 @@ public class InsuranceCompaniesWebPage extends BaseWebPage {
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else
-			Assert.assertTrue(false, "Can't find " + insurancecompany + " insurance company");
+			Assert.fail("Can't find " + insurancecompany + " insurance company");
 	}
 
 	public boolean insuranceCompanyExists(String insurancecompany) {
-		boolean exists = insurancecompaniestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + insurancecompany + "']")).size() > 0;
-		return exists;
+        return insurancecompaniestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + insurancecompany + "']")).size() > 0;
 	}
 
 	public void setNewInsuranceCompanyName(String insurancecompany) {

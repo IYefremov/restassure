@@ -38,8 +38,8 @@ public class InspectionFactory implements ObjectFactory <InspectionDTO> {
 
     @Override
     public InspectionDTO createNew() throws IOException {
-        int inspnumber = Integer.valueOf(getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, GlobalUtils.getInspectionSymbol() + appLicenseEntity).getLocalNo());
+        int inspnumber = getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
+                employee.getEmployeeID(), true, GlobalUtils.INSPECTION_SYMBOL + appLicenseEntity).getLocalNo();
         device.setEmployeeId(employee.getEmployeeID());
 
         String estimationId = GlobalUtils.getUUID();
@@ -58,7 +58,7 @@ public class InspectionFactory implements ObjectFactory <InspectionDTO> {
                 device.getDeviceId(), appID,
                 employee.getEmployeeID(), true, inspection).execute();
         return getLastInspectionNumber(device.getLicenceId(), device.getDeviceId(), appID,
-                employee.getEmployeeID(), true, GlobalUtils.getInspectionSymbol() + appLicenseEntity);
+                employee.getEmployeeID(), true, GlobalUtils.INSPECTION_SYMBOL + appLicenseEntity);
     }
 
     public InspectionDTO getLastInspectionNumber(String licenceId, String deviceId, String applicationId,

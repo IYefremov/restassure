@@ -1,22 +1,13 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularPriceMatrixScreen;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
-import io.appium.java_client.TouchAction;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
-import io.appium.java_client.touch.WaitOptions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
-import static io.appium.java_client.touch.offset.ElementOption.element;
 
 public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
@@ -64,7 +55,7 @@ public class RegularVehiclePartScreen extends iOSRegularBaseScreen {
 
     public void clickDiscaunt(String discaunt) {
         MobileElement table = (MobileElement) appiumdriver.findElementByAccessibilityId("PriceMatrixItemDetails" + viewMode);
-        MobileElement elDiscount = (MobileElement) table.findElementByAccessibilityId(discaunt);
+        MobileElement elDiscount = table.findElementByAccessibilityId(discaunt);
         if (!elDiscount.isDisplayed())
             swipeToElement(table.findElement(MobileBy.AccessibilityId(discaunt)));
         table.findElement(MobileBy.AccessibilityId(discaunt)).click();

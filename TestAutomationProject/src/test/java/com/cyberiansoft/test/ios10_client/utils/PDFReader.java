@@ -1,10 +1,10 @@
 package com.cyberiansoft.test.ios10_client.utils;
 
-import java.io.File;
-
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripper;
 import org.apache.pdfbox.util.PDFTextStripperByArea;
+
+import java.io.File;
 
 public class PDFReader {
 	

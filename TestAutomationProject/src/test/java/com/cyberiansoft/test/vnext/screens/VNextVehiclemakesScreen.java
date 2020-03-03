@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class VNextVehiclemakesScreen extends VNextBaseScreen {
 
     @FindBy(xpath="//*[@data-autotests-id='makes-list']")
-    private WebElement makeslist;;
+    private WebElement makeslist;
 
     public VNextVehiclemakesScreen(WebDriver appiumdriver) {
         super(appiumdriver);

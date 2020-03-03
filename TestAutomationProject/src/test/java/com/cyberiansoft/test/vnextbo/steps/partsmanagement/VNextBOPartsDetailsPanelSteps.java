@@ -31,7 +31,7 @@ public class VNextBOPartsDetailsPanelSteps {
 
     public static void addNewPart(VNextBOPartsData data) {
         setAddNewPartValues(data);
-        final int partsCounterValueBefore = Integer.valueOf(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
+        final int partsCounterValueBefore = Integer.parseInt(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
         VNextBOAddNewPartDialogSteps.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
         VNextBOAddNewPartDialogValidations.verifySelectedPartsCounterValueIsCorrect(String.valueOf(partsCounterValueBefore + data.getPartItems().length));
         VNextBOAddNewPartDialogSteps.submit();

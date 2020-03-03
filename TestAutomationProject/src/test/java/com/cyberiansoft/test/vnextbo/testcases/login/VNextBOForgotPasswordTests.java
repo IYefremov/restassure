@@ -73,7 +73,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
-    public void verifyEmailIsNotSentToNotRegisteredUser(String rowID, String description, JSONObject testData) throws Exception {
+    public void verifyEmailIsNotSentToNotRegisteredUser(String rowID, String description, JSONObject testData) {
 
         forgotPasswordPage.setConfirmationMailFieldValue(NOT_REGISTERED_USER_EMAIL);
         forgotPasswordPage.clickSubmitButton();

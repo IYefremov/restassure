@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
-import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -80,6 +79,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         return teamviewtab.getAttribute("class").contains("active");
     }
 
+    //todo rewrite!!!
     protected void switchToMyView() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.elementToBeClickable(myviewtab));
@@ -100,16 +100,13 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         tap(searchbtn);
     }
 
-    private void setSearchText(String searchtext) {
-        ControlUtils.setValue(searchfld, searchtext);
-        clickCancelSearchButton();
-    }
-
     public void clickCancelSearchButton() {
         WaitUtils.click(cancelsearchbtn);
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
     }
 
+
+    //todo rewrite!!!
     public void clearSearchField() {
         if (cancelsearchbtn.isDisplayed()) {
             tap(clearsearchicon);
@@ -126,6 +123,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         }
     }
 
+    //todo rewrite!!!
     public void clickSearchButtonAndClear() {
         tap(searchbtn);
         if (searchfld.getAttribute("value").length() > 1) {

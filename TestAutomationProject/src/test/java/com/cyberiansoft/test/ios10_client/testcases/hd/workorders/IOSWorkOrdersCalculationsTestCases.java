@@ -86,11 +86,10 @@ public class IOSWorkOrdersCalculationsTestCases extends IOSHDBaseTestCase {
             DriverBuilder.getInstance().getAppiumDriver().hideKeyboard();
             if (serviceData.getServicePrice().equals(zeroPrice)) {
                 Assert.assertFalse(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
-                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
             } else {
                 Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
-                Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
             }
+            Assert.assertTrue(techniciansPopup.isTechnicianIsSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
             techniciansPopup.saveTechViewDetails();
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
         }

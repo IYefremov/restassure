@@ -3,7 +3,6 @@ package com.cyberiansoft.test.ios10_client.regularvalidations;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.wizarscreens.RegularSelectedServicesScreen;
-import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import org.testng.Assert;
 
 import java.util.List;

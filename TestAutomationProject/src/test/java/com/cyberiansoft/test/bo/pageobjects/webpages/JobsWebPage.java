@@ -254,8 +254,7 @@ public class JobsWebPage extends WebPageWithPagination {
 	
 	
 	public boolean isJobPresent(String job) {
-		boolean exists =  jobstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + job + "']")).size() > 0;
-		return exists;
+        return jobstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + job + "']")).size() > 0;
 	}
 	
 	public void clickEditJob(String job) {

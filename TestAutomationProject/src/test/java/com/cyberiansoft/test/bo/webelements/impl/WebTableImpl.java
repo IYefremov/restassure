@@ -1,11 +1,10 @@
 package com.cyberiansoft.test.bo.webelements.impl;
 
-import java.util.List;
-
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
 
 public class WebTableImpl extends AbstractWebElement implements WebTable {
 

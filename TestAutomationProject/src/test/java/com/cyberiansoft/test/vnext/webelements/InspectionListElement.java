@@ -19,6 +19,7 @@ public class InspectionListElement implements IWebElement {
 
     public void openMenu() {
         WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(idFieldLocator)), true);
+        WaitUtils.waitUntilElementIsClickable(rootElement.findElement(By.xpath(idFieldLocator)));
         WaitUtils.getGeneralFluentWait().until(driver -> {
             rootElement.findElement(By.xpath(idFieldLocator)).click();
             return true;

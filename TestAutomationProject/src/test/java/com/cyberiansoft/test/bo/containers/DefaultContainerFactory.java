@@ -13,9 +13,7 @@ public class DefaultContainerFactory implements ContainerFactory {
     private <C extends IWebContainer> C createInstanceOf(final Class<C> containerClass) {
         try {
             return containerClass.newInstance();
-        } catch (InstantiationException e) {
-            throw new RuntimeException(e);
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }

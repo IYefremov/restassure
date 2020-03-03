@@ -29,20 +29,17 @@ public class VNextBOPartsManagementWebPageValidations extends VNextBOBaseWebPage
 
     public static void verifyPastDuePartsBoxIsHighlighted() {
 
-        Assert.assertTrue(new VNextBOPartsManagementWebPage().getPastDuePartsButton().getAttribute("style").equals("border-color: rgb(235, 87, 87);"),
-                "\"Past Due Parts\" box hasn't been highlighted with red border");
+        Assert.assertEquals(new VNextBOPartsManagementWebPage().getPastDuePartsButton().getAttribute("style"), "border-color: rgb(235, 87, 87);", "\"Past Due Parts\" box hasn't been highlighted with red border");
     }
 
     public static void verifyInProgressBoxIsHighlighted() {
 
-        Assert.assertTrue(new VNextBOPartsManagementWebPage().getInProgressButton().getAttribute("style").equals("border-color: rgb(111, 207, 151);"),
-                "\"In Progress\" box hasn't been highlighted with green border");
+        Assert.assertEquals(new VNextBOPartsManagementWebPage().getInProgressButton().getAttribute("style"), "border-color: rgb(111, 207, 151);", "\"In Progress\" box hasn't been highlighted with green border");
     }
 
     public static void verifyCompletedBoxIsHighlighted() {
 
-        Assert.assertTrue(new VNextBOPartsManagementWebPage().getCompletedButton().getAttribute("style").equals("border-color: rgb(111, 207, 151);"),
-                "\"Completed\" box hasn't been highlighted with green border");
+        Assert.assertEquals(new VNextBOPartsManagementWebPage().getCompletedButton().getAttribute("style"), "border-color: rgb(111, 207, 151);", "\"Completed\" box hasn't been highlighted with green border");
     }
 
     public static void verifySavedSearchIsPresentedInTheList(String savedSearchName, boolean shouldBeDisplayed) {

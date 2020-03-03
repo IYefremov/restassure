@@ -84,11 +84,10 @@ public class IOSWorkOrdersCalculationsTestCases extends IOSRegularBaseTestCase {
             selectedServiceDetailsScreen.cancelSearchTechnician();
             if (serviceData.getServicePrice().equals(zeroPrice)) {
                 Assert.assertFalse(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
-                Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
             } else {
                 Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceDefaultTechnician().getTechnicianFullName()));
-                Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
             }
+            Assert.assertTrue(selectedServiceDetailsScreen.isTechnicianSelected(serviceData.getServiceNewTechnician().getTechnicianFullName()));
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
             selectedServiceDetailsScreen.saveSelectedServiceDetails();
 

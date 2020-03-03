@@ -110,7 +110,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			teamtype = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Type") + "]")).getText();
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 		return teamtype;
 	}
 
@@ -120,7 +120,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			teamlocation = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Location") + "]")).getText();
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 		return teamlocation;
 	}
 
@@ -130,7 +130,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			teamarea = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Area") + "]")).getText();
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 		return teamarea;
 	}
 
@@ -140,7 +140,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			teamtimesheettype = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Timesheet type") + "]")).getText();
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 		return teamtimesheettype;
 	}
 
@@ -150,7 +150,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			teamtimezone = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Time Zone") + "]")).getText();
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 		return teamtimezone;
 	}
 
@@ -160,7 +160,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			teamdesc = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Description") + "]")).getText();
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 		return teamdesc;
 	}
 
@@ -208,8 +208,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 
 	public boolean teamExists(String team) {
 		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
-		boolean exists = teamstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + team + "']")).size() > 0;
-		return exists;
+		return teamstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + team + "']")).size() > 0;
 	}
 
 	public void clickEditTeam(String team) {
@@ -217,7 +216,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			clickEditTableRow(row);
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 		waitABit(1000);
 	}
 
@@ -226,7 +225,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			deleteTableRow(row);
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 	}
 
 	public void deleteTeamIfExists(String team) {
@@ -240,7 +239,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			cancelDeletingTableRow(row);
 		} else
-			Assert.assertTrue(false, "Can't find " + team + " team");
+			Assert.fail("Can't find " + team + " team");
 	}
 
 	public void verifyTeamsDoNotExist(String team, String teamedited) {

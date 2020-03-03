@@ -28,6 +28,7 @@ import com.cyberiansoft.test.ios10_client.types.servicerequeststypes.ServiceRequ
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.WorkOrdersTypes;
 import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -837,7 +838,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
         inspectionsWebPage.makeSearchPanelVisible();
         inspectionsWebPage.selectSearchTimeFrame(WebConstants.TimeFrameValues.TIMEFRAME_CUSTOM);
         inspectionsWebPage.setTimeFrame(CustomDateProvider.getPreviousLocalizedDateFormattedShort(), CustomDateProvider.getTomorrowLocalizedDateFormattedShort());
-        inspectionsWebPage.selectSearchStatus(InspectionStatuses.DECLINED.getInspectionStatusValue());
+        inspectionsWebPage.selectSearchStatus(InspectionStatus.DECLINED.getStatusString());
         inspectionsWebPage.searchInspectionByNumber(inspectionNumber);
         Assert.assertEquals(inspectionsWebPage.getInspectionAmountApproved(inspectionNumber), "$0.00");
         Assert.assertEquals(inspectionsWebPage.getInspectionApprovedTotal(inspectionNumber), "$0.00");
@@ -1900,7 +1901,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
         //approveInspectionsScreen.clickApproveButton();
         myInspectionsScreen.clickFilterButton();
         myInspectionsScreen.clickStatusFilter();
-        myInspectionsScreen.clickFilterStatus(InspectionStatuses.DECLINED.getInspectionStatusValue());
+        myInspectionsScreen.clickFilterStatus(InspectionStatus.DECLINED);
         //myInspectionsScreen.clickBackButton();
         myInspectionsScreen.clickCloseFilterDialogButton();
         myInspectionsScreen.clickSaveFilterDialogButton();
@@ -2388,7 +2389,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testWOIfFeeBundleItemPricePolicyEqualsVehicleThenItWillBeAddedOnceForManyAssociatedServiceInstances(String rowID,
-                                                                                                                    String description, JSONObject testData) throws Exception {
+                                                                                                                    String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2418,7 +2419,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testWOVerifyThatDiscountsAreCalculatedCorrectlyOnAllLevels(String rowID,
-                                                                           String description, JSONObject testData) throws Exception {
+                                                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2467,7 +2468,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testWOVerifyThatUpchargesAreCalculatedCorrectlyOnAllLevels(String rowID,
-                                                                           String description, JSONObject testData) throws Exception {
+                                                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2516,7 +2517,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInvoicesVerifyThatOnPrintOutOfAllProTemplateAllCalculationDataIsCorrectProductionData(String rowID,
-                                                                                                          String description, JSONObject testData) throws Exception {
+                                                                                                          String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -2587,7 +2588,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInvoicesVerifyThatOnPrintOutOfAutoWorkListNetTemplateAllCalculationDataIsCorrect_ProdData(String rowID,
-                                                                                                              String description, JSONObject testData) throws Exception {
+                                                                                                              String description, JSONObject testData) {
 
         final String listTotal = "2368.00";
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
@@ -2715,7 +2716,7 @@ public class IOSCalculationsTestCases extends IOSHDBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testWOVerifyThatUpChargesAndDiscountsAreCalculatedCorrectlyOnAllLevels(String rowID,
-                                                                                       String description, JSONObject testData) throws Exception {
+                                                                                       String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();

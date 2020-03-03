@@ -6,12 +6,10 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.DateUtils;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
-import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROAdvancedSearchDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
-import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -116,6 +114,16 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         else {
             for (WebElement roNumber: new VNextBOROWebPageNew().getRoNumbersList()) {
                 Assert.assertEquals(Utils.getInputFieldValue(roNumber), expectedRoNumber, "RO number hasn't been correct");
+            }
+        }
+    }
+
+    public static void verifyPoNumbersAreCorrectInTheTable(String expectedPoNumber) {
+
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
+        else {
+            for (WebElement poNumber: new VNextBOROWebPageNew().getPoNumbersList()) {
+                Assert.assertEquals(Utils.getInputFieldValue(poNumber), expectedPoNumber, "PO number hasn't been correct");
             }
         }
     }
@@ -354,7 +362,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         WaitUtilsWebDriver.waitForNewTab();
         String invoiceWindowHandle = Utils.getNewTab(mainWindow);
 
-        Assert.assertFalse(invoiceWindowHandle.equals(mainWindow), "The invoice window hasn't been opened");
+        Assert.assertNotEquals(mainWindow, invoiceWindowHandle, "The invoice window hasn't been opened");
         Utils.closeNewTab(mainWindow);
     }
 
@@ -471,7 +479,8 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         if (equal) Assert.assertEquals(Utils.getText(ordersPage.getOrderNoteText()), noteText, "Note's text hasn't been correct");
-        else Assert.assertFalse(Utils.getText(ordersPage.getOrderNoteText()).equals(noteText), "Note's text hasn't been correct");
+        else
+            Assert.assertNotEquals(noteText, Utils.getText(ordersPage.getOrderNoteText()), "Note's text hasn't been correct");
     }
 
     public static void verifyPriorityIsCorrectForFirstOrder(String expectedPriority) {

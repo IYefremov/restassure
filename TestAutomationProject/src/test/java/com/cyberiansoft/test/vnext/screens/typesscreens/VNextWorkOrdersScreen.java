@@ -1,16 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
-import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.CustomersScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.customers.VNextChangeCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
-import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
@@ -47,7 +38,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     public VNextWorkOrdersScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
     public VNextWorkOrdersScreen() {
@@ -70,84 +61,43 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         return workorderslist.findElement(By.xpath(".//*[@action='select']/div[contains(@class, 'checkbox-item-title')]")).getText();
     }
 
-    public VNextWorkOrdersMenuScreen clickOnWorkOrderByNumber(String wonumber) {
-        if (isTeamViewActive()) {
-            if (!WaitUtils.isElementPresent(By.xpath("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")))
-                searchWorkOrderByFreeText(wonumber);
-        } else {
-            if (!WaitUtils.isElementPresent(By.xpath(("//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']"))))
-            clearSearchField();
-        }
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='work orders-list']")));
-        WaitUtils.getGeneralFluentWait().until(driver -> {
-            workorderslist.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")).click();
-            return true;
-        });
-        return new VNextWorkOrdersMenuScreen(appiumdriver);
-    }
-
-    public void selectWorkOrder(String wonumber) {
-        WebElement workordercell = getWorkOrderCell(wonumber);
+    public void selectWorkOrder(String workOrderNumber) {
+        WebElement workordercell = getWorkOrderCell(workOrderNumber);
         if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") == null)
             tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
     }
 
-    public void unselectWorkOrder(String wonumber) {
-        WebElement workordercell = getWorkOrderCell(wonumber);
+    public void unselectWorkOrder(String workOrderNumber) {
+        WebElement workordercell = getWorkOrderCell(workOrderNumber);
         if (workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
             tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
     }
 
-    public boolean isWorkOrderSelected(String woNumber) {
-        WebElement workordercell = getWorkOrderCell(woNumber);
-        return workordercell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked").equals("true");
-    }
-
-    public boolean isWorkOrderExists(String woNumber) {
+    public boolean isWorkOrderExists(String workOrderNumber) {
         //clearSearchField();
-        return workorderslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + woNumber + "']")).size() > 0;
+        return workorderslist.findElements(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + workOrderNumber + "']")).size() > 0;
     }
 
-    public VNextHomeScreen clickBackButton() {
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
-        clickScreenBackButton();
-        return new VNextHomeScreen(appiumdriver);
-    }
-
-    public String getWorkOrderPriceValue(String wonumber) {
+    public String getWorkOrderPriceValue(String workOrderNumber) {
         WaitUtils.elementShouldBeVisible(workorderslist, true);
-        WebElement workordercell = getWorkOrderCell(wonumber);
+        WebElement workordercell = getWorkOrderCell(workOrderNumber);
         return workordercell.findElement(By.xpath(".//div[@class='checkbox-item-title checkbox-item-price']")).getText();
     }
 
-    public String getWorkOrderStatusValue(String wonumber) {
+    public String getWorkOrderStatusValue(String workOrderNumber) {
         WaitUtils.elementShouldBeVisible(workorderslist, true);
-        WebElement workordercell = getWorkOrderCell(wonumber);
+        WebElement workordercell = getWorkOrderCell(workOrderNumber);
         return workordercell.findElement(By.xpath(".//span[contains(@class, 'entity-item-status-')]")).getText();
     }
 
-    public String getWorkOrderCustomerValue(String wonumber) {
+    public String getWorkOrderCustomerValue(String workOrderNumber) {
         WaitUtils.elementShouldBeVisible(workorderslist, true);
-        WebElement workordercell = getWorkOrderCell(wonumber);
+        WebElement workordercell = getWorkOrderCell(workOrderNumber);
         return workordercell.findElement(By.xpath(".//div[@class='entity-item-title']")).getText();
     }
 
-    public WebElement getWorkOrderCell(String wonumber) {
-        return getListCell(workorderslist, wonumber);
-    }
-
-    public void clickCreateInvoiceFromWorkOrder(String wonumber) {
-        WaitUtils.elementShouldBeVisible(workorderslist, true);
-        WebElement workordercell = getWorkOrderCell(wonumber);
-        tap(workordercell.findElement(By.xpath(".//div[contains(@class, 'checkbox-item-title') and text()='" + wonumber + "']")));
-        clickCreateInvoiceMenuItem();
-    }
-
-    public void clickCreateInvoiceMenuItem() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.visibilityOf(createinvoicemenu));
-        tap(createinvoicemenu);
+    public WebElement getWorkOrderCell(String workOrderNumber) {
+        return getListCell(workorderslist, workOrderNumber);
     }
 
     public void clickCreateInvoiceIcon() {
@@ -159,36 +109,8 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Downloading data']"));
     }
 
-    public boolean isTeamWorkordersViewActive() {
-        return isTeamViewActive();
-    }
-
     public void switchToMyWorkordersView() {
         switchToMyView();
-    }
-
-    //todo: make it as step
-    public void changeCustomerForWorkOrderViaSearch(String workOrderNumber, AppCustomer newCustomer) {
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-        workOrdersMenuScreen.clickChangeCustomerMenuItem();
-        CustomersScreenSteps.selectCustomer(newCustomer);
-        //changeCustomerScreen.switchToRetailMode();
-        //changeCustomerScreen.searchCustomerByName(newCustomer.getFullName());
-        //changeCustomerScreen.selectCustomer(newCustomer);
-        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-        informationDialog.clickInformationDialogYesButton();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
-    }
-
-    //todo: make it as step (rewrite)
-    public void changeCustomerToWholesailForWorkOrder(String workOrderNumber, AppCustomer newWholesailCustomer) {
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = clickOnWorkOrderByNumber(workOrderNumber);
-        VNextChangeCustomerScreen changeCustomerScreen = workOrdersMenuScreen.clickChangeCustomerMenuItem();
-        changeCustomerScreen.switchToWholesaleMode();
-        changeCustomerScreen.selectCustomer(newWholesailCustomer);
-        VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
-        informationDialog.clickInformationDialogYesButton();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Order customer...']"));
     }
 
     public void searchWorkOrderByFreeText(String searchtext) {
@@ -223,23 +145,5 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickSeparateInvoicesButton();
         waitForWorkOrderScreenInfoMessage("Invoices creation");
-    }
-
-    public void cancelCreatingSeparateInvoice() {
-        BaseUtils.waitABit(2000);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-        WebElement modalDlg = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='modal modal-loading modal-in']")));
-
-        wait = new WebDriverWait(appiumdriver, 10);
-        wait.until(ExpectedConditions.elementToBeClickable(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']"))));
-        //BaseUtils.waitABit(1000);
-        tap(modalDlg.findElement(By.xpath(".//span[text()='Cancel loading']")));
-
-        wait.until(ExpectedConditions.visibilityOf(
-                appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
-        wait = new WebDriverWait(appiumdriver, 120);
-        wait.until(ExpectedConditions.invisibilityOf(
-                appiumdriver.findElement(By.xpath("//*[text()='Invoice has been created']"))));
-
     }
 }

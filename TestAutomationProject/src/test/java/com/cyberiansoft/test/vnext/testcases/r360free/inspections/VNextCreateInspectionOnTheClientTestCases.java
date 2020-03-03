@@ -12,6 +12,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.email.getnada.NadaEMailService;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
@@ -74,7 +75,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
-        VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
+        VNextEmailScreen emailScreen = new VNextEmailScreen();
         NadaEMailService nadaEMailService = new NadaEMailService();
         emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 
@@ -113,7 +116,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWhichContainsBreakageServiceWithBigQuantity(String rowID,
-                                                                                  String description, JSONObject testData) throws Exception {
+                                                                                  String description, JSONObject testData) {
         
         final String damageName = "Hail Damage";
         
@@ -133,8 +136,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         Assert.assertEquals(servicedetailsscreen.getServiceAmountValue(), inspectionData.getMoneyServiceData().getServicePrice());
         servicedetailsscreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceQuantity());
         servicedetailsscreen.clickServiceDetailsDoneButton();
-        visualScreen = new VNextVisualScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        visualScreen.changeScreen(ScreenType.SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
@@ -162,7 +164,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
                 VNexBOLeftMenuPanel.class);
         VNextBOInspectionsWebPage inspectionsWebPage = leftMenu.selectInspectionsMenu();
         inspectionsWebPage.selectInspectionInTheList(inspectionNumber);
-        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(), testcustomer);
+        Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionCustomerName(), testcustomer); //todo  iconvertible types
         Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection(inspectionData.getMoneyServiceData().getServiceName()));
         Assert.assertTrue(inspectionsWebPage.isServicePresentForSelectedInspection(matrixServiceData.getMatrixServiceName()));
         Assert.assertTrue(inspectionsWebPage.isImageLegendContainsBreakageIcon(damageName));
@@ -171,7 +173,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWhithFullPopulatedCustomerInfo(String rowID,
-                                                                                String description, JSONObject testData) throws Exception {
+                                                                                String description, JSONObject testData) {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
@@ -185,7 +187,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateInspectionWhithCustomerWithFirstNameOnly(String rowID,
-                                                                   String description, JSONObject testData) throws Exception {
+                                                                   String description, JSONObject testData) {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
@@ -217,7 +219,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testCreateAndEmailInspectionWithTtwoMatrixPanel(String rowID,
-                                                                   String description, JSONObject testData) throws Exception {
+                                                                   String description, JSONObject testData) {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         InspectionData inspectionData = testCaseData.getInspectionData();
 
@@ -245,7 +247,9 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionPriceValue(inspectionNumber), inspectionData.getInspectionPrice());
-        VNextEmailScreen emailScreen = inspectionsScreen.clickOnInspectionToEmail(inspectionNumber);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
+        VNextEmailScreen emailScreen = new VNextEmailScreen();
         NadaEMailService nadaEMailService = new NadaEMailService();
         emailScreen.sentToEmailAddress(nadaEMailService.getEmailId());
 

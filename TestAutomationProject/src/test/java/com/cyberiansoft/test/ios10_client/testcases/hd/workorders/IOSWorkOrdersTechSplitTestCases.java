@@ -283,12 +283,11 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSHDBaseTestCase {
             if (serviceData.getServiceDefaultTechnician() != null) {
                 ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
                 TechniciansPopupValidations.verifyServiceTechnicianIsSelected(serviceData.getServiceDefaultTechnician());
-                TechniciansPopupSteps.saveTechViewDetails();
             } else {
                 ServiceDetailsScreenSteps.clickServiceTechniciansIcon();
                 TechniciansPopupValidations.verifyServiceTechnicianIsSelected(workOrderData.getVehicleInfoData().getNewTechnician());
-                TechniciansPopupSteps.saveTechViewDetails();
             }
+            TechniciansPopupSteps.saveTechViewDetails();
             ServiceDetailsScreenSteps.saveServiceDetails();
         }
         servicesScreen.cancelWizard();

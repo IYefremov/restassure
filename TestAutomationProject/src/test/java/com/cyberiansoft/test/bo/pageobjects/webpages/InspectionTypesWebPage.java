@@ -1,21 +1,18 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
-import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
-
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
+import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.bo.webelements.WebTable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.bo.webelements.WebTable;
+import java.util.List;
+
+import static com.cyberiansoft.test.bo.utils.WebElementsBot.clickAndWait;
 
 public class InspectionTypesWebPage extends BaseWebPage {
 	
@@ -52,24 +49,23 @@ public class InspectionTypesWebPage extends BaseWebPage {
 	}
 	
 	public boolean isInspectionTypeExists(String insptype) {
-		boolean exists =  inspectiontypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + insptype + "']")).size() > 0;
-		return exists;
+        return inspectiontypestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + insptype + "']")).size() > 0;
 	}
 	
 	public void deleteInspectionType(String insptype) {
 		WebElement row = getTableRowWithInspectionType(insptype);
 		if (row != null) {
 			deleteTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + insptype + " inspection type");			
+		} else
+			Assert.fail("Can't find " + insptype + " inspection type");
 	}
 	
 	public NewInspectionTypeDialogWebPage clickEditInspectionType(String insptype) {
 		WebElement row = getTableRowWithInspectionType(insptype);
 		if (row != null) {
 			clickEditTableRow(row);
-		} else 
-			Assert.assertTrue(false, "Can't find " + insptype + " inspection type");	
+		} else
+			Assert.fail("Can't find " + insptype + " inspection type");
 		return PageFactory.initElements(
 				driver, NewInspectionTypeDialogWebPage.class);
 	}

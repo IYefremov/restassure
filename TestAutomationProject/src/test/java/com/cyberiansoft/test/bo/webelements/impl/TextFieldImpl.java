@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.bo.webelements.impl;
 
-import org.openqa.selenium.WebElement;
-
 import com.cyberiansoft.test.bo.webelements.TextField;
+import org.openqa.selenium.WebElement;
 
 public class TextFieldImpl extends AbstractWebElement implements TextField {
     public TextFieldImpl(final WebElement wrappedElement) {

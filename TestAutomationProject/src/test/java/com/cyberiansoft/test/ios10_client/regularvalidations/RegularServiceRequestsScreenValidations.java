@@ -2,7 +2,6 @@ package com.cyberiansoft.test.ios10_client.regularvalidations;
 
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularServiceRequestsScreen;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularServiceRequestSteps;
-import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularVehicleInfoScreenSteps;
 import org.testng.Assert;
 
 public class RegularServiceRequestsScreenValidations {

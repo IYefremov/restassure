@@ -125,7 +125,7 @@ public class ServiceRequestsListVerifications {
     public static boolean verifyTagsAreAdded(String... tags) {
         for (String tag : tags) {
             final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
-            if (srListPage.getAllAddedTags().stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
+            if (srListPage.getAllAddedTags().stream().map(WebElement::getText).map(t -> t.substring(0, t.length() - 3))
                     .collect(Collectors.toList()).contains(tag)) {
                 srListPage.getTagField().sendKeys(tag);
                 srListPage.getTagField().sendKeys(Keys.ENTER);
@@ -148,11 +148,11 @@ public class ServiceRequestsListVerifications {
     public static boolean areTagsAdded(String... tags) {
         verifyServiceRequestInfoFrameIsOn();
         final ServiceRequestsListWebPage srListPage = new ServiceRequestsListWebPage();
-        System.out.println(srListPage.getAllAddedTags().stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
+        System.out.println(srListPage.getAllAddedTags().stream().map(WebElement::getText).map(t -> t.substring(0, t.length() - 3))
                 .collect(Collectors.toList()));
         List tagsToCheck = new LinkedList(Arrays.asList(tags));
         tagsToCheck.remove(0);
-        boolean result = srListPage.getAllAddedTags().stream().map(e -> e.getText()).map(t -> t.substring(0, t.length() - 3))
+        boolean result = srListPage.getAllAddedTags().stream().map(WebElement::getText).map(t -> t.substring(0, t.length() - 3))
                 .collect(Collectors.toList()).containsAll(tagsToCheck);
         Utils.clickElement(srListPage.getCloseServiceRequestButton());
         return result;
@@ -622,6 +622,7 @@ public class ServiceRequestsListVerifications {
         return true;
     }
 
+    //Todo  always  return  true
     public static boolean checkDocumentDownloadingInLC() {
         final WebDriver driver = DriverBuilder.getInstance().getDriver();
         String parentFrame = driver.getWindowHandle();

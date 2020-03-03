@@ -229,7 +229,7 @@ public class EmployeesWebPage extends WebPageWithPagination {
 	}
 
 	public List<String> getActiveEmployees() {
-		List<String> employee = new ArrayList<String>();
+		List<String> employee = new ArrayList<>();
 		List<WebElement> employeeact = employeestable.getWrappedElement()
 				.findElements(By.xpath(".//tbody/tr[contains(@id, 'ctl00_ctl00_Content_Main_gv_ctl00')]/td[4]"));
 		for (WebElement useractcell : employeeact) {
@@ -239,7 +239,7 @@ public class EmployeesWebPage extends WebPageWithPagination {
 	}
 
 	public String verifyEmployeesDuplicatesArchived(List<String> employeeact) {
-		List<String> employeearch = new ArrayList<String>();
+		List<String> employeearch = new ArrayList<>();
 		List<WebElement> usercolumnsarch = archivedemployeestable.getWrappedElement()
 				.findElements(By.xpath(".//tbody/tr[contains(@id, 'ctl00_ctl00_Content_Main_gvDeleted_ctl00')]/td[3]"));
 		for (WebElement useractcell : usercolumnsarch) {

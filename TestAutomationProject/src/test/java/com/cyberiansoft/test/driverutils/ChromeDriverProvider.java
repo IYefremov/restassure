@@ -50,4 +50,4 @@ public enum ChromeDriverProvider {
         chromeMobileWebDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         return chromeMobileWebDriver;
     }
-};
+}

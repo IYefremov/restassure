@@ -5,17 +5,15 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
@@ -45,10 +43,9 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
-        inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
+        InspectionSteps.openInspectionMenu(inspNumber);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -106,15 +103,17 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         
         final String userMail = "anastasiia.naumenko@cyberiansoft.com";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
 
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspNumber);
-        VNextViewScreen viewScreen = inspectionsMenuScreen.clickViewInspectionMenuItem();
-        viewScreen.clickScreenBackButton();
-        
-        VNextVehicleInfoScreen vehicleInfoScreen = inspectionsScreen.clickOpenInspectionToEdit(inspNumber);
+        InspectionSteps.openInspectionMenu(inspNumber);
+        MenuSteps.selectMenuItem(MenuItems.VIEW);
+        VNextViewScreen viewScreen = new VNextViewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        viewScreen.waitViewScreenLoaded();
+        ScreenNavigationSteps.pressBackButton();
+
+        InspectionSteps.openInspectionToEdit(inspNumber);
+        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         final String VIN = VehicleInfoScreenInteractions.getDataFieldValue(VehicleDataField.VIN);
         VehicleInfoScreenInteractions.selectColor(inspectionData.getVehicleInfo().getVehicleColor());
         VehicleInfoScreenInteractions.setYear(inspectionData.getVehicleInfo().getVehicleYear());
@@ -128,16 +127,17 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         claimInfoScreen.clickScreenForwardButton();
         SelectedServicesScreenSteps.switchToSelectedService();
-        VNextEmailScreen emailscreen = inspectionsScreen.clickOnInspectionToEmail(inspNumber);
-        if (!emailscreen.getToEmailFieldValue().equals(userMail))
-            emailscreen.sentToEmailAddress(userMail);
+        InspectionSteps.openInspectionMenu(inspNumber);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
+        VNextEmailScreen emailScreen = new VNextEmailScreen();
+        if (!emailScreen.getToEmailFieldValue().equals(userMail))
+            emailScreen.sentToEmailAddress(userMail);
 
-        emailscreen.clickSendEmailsButton();
-        informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        emailScreen.clickSendEmailsButton();
         msg = informationDialog.clickInformationDialogOKButtonAndGetMessage();
         Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGE_HAS_BEEEN_ADDDED_TO_THE_QUEUE);
-        Assert.assertTrue(inspectionsScreen.isEmailSentIconPresentForInspection(inspNumber));
-        inspectionsScreen.clickBackButton();
+        //Assert.assertTrue(inspectionsScreen.isEmailSentIconPresentForInspection(inspNumber));
+        ScreenNavigationSteps.pressBackButton();
     }
 
 }

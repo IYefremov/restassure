@@ -37,11 +37,22 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-        VNextBOROPageStepsNew.addNoteForFirstNoteAndNotSaveWItXIcon("91411");
+        VNextBOROPageStepsNew.addNoteForFirstOrderAndNotSaveWItXIcon("91411");
 		VNextBOROWebPageValidationsNew.verifyNoteTextIsCorrectForFirstOrder("91411", false);
 		VNextBOROPageStepsNew.openFirstOrderNotes();
 		VNextBONotesDialogValidationsNew.verifyNoteInTheNotesList("91411", false);
 		VNextBONotesDialogStepsNew.closeDialogWithXIcon();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanSeeAndCreateNotes(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		final String NOTE_TEXT = RandomStringUtils.randomAlphabetic(6);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.addNoteForFirstOrder(NOTE_TEXT);
+		VNextBOROWebPageValidationsNew.verifyNoteTextIsCorrectForFirstOrder(NOTE_TEXT, true);
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
 
@@ -64,6 +75,17 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
 		VNextBOROPageStepsNew.changeRoNumberForFirstOrder(newRoNumber);
 		VNextBOROWebPageValidationsNew.verifyRoNumbersAreCorrectInTheTable(newRoNumber);
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanChangePoNumOfRo(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		String newPoNumber = RandomStringUtils.randomAlphabetic(10);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.changePoNumberForFirstOrder(newPoNumber);
+		VNextBOROWebPageValidationsNew.verifyPoNumbersAreCorrectInTheTable(newPoNumber);
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
 
@@ -97,23 +119,26 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
-	public void verifyUserCanChangeStatusOfRoToClosedWithCompletedReason(String rowID, String description, JSONObject testData) {
+	public void verifyUserCanChangeStatusOfRoToClosed(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
 		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
 		VNextBORODetailsStepsNew.reopenOrderIfNeeded();
-		VNextBORODetailsStepsNew.closeOrderWithCompletedReason();
+		VNextBORODetailsStepsNew.closeOrderWithReason(data.getProblemReason());
 		VNextBORODetailsValidationsNew.verifyOrderStatusIsCorrect(data.getStatus());
-		VNextBORODetailsValidationsNew.verifyPhaseTextStatusIsCorrect(data.getPhase(), "Completed");
+		VNextBORODetailsValidationsNew.verifyOrderCloseReasonIsCorrect(data.getProblemReason());
+		VNextBORODetailsValidationsNew.verifyPhaseTextStatusIsCorrect(data.getPhase(), "Skipped");
 		VNextBORODetailsStepsNew.reopenOrderIfNeeded();
 		VNextBORODetailsValidationsNew.verifyOrderStatusIsCorrect("Approved");
 		VNextBORODetailsValidationsNew.verifyPhaseTextStatusIsCorrect(data.getPhase(), data.getPhaseStatus());
 		VNextBORODetailsStepsNew.startServiceByServiceName(data.getPhase(), data.getService());
-		VNextBORODetailsStepsNew.startServicesForPhase("Detail Station");
 		Utils.goToPreviousPage();
 		WaitUtilsWebDriver.waitForPageToBeLoaded();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+		Utils.refreshPage();
+		VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

@@ -28,7 +28,11 @@ import com.cyberiansoft.test.ios10_client.types.inspectionstypes.DentWizardInspe
 import com.cyberiansoft.test.ios10_client.types.invoicestypes.DentWizardInvoiceTypes;
 import com.cyberiansoft.test.ios10_client.types.wizardscreens.WizardScreenTypes;
 import com.cyberiansoft.test.ios10_client.types.workorderstypes.DentWizardWorkOrdersTypes;
-import com.cyberiansoft.test.ios10_client.utils.*;
+import com.cyberiansoft.test.ios10_client.utils.AlertsCaptions;
+import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.ios10_client.utils.PricesCalculations;
+import com.cyberiansoft.test.ios10_client.utils.UtilConstants;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -608,17 +612,17 @@ public class DentWizardRegularVersionTestCases extends ReconProDentWizardBaseTes
         myInspectionsScreen.clickArchiveInspectionButton();
         myInspectionsScreen.clickFilterButton();
         myInspectionsScreen.clickStatusFilter();
-        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.NEW.getStatus()));
-        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.APPROVED.getStatus()));
-        myInspectionsScreen.clickFilterStatus(InspectionStatus.NEW.getStatus());
-        myInspectionsScreen.clickFilterStatus(InspectionStatus.APPROVED.getStatus());
-        myInspectionsScreen.clickFilterStatus(InspectionStatus.ARCHIVED.getStatus());
-        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.ARCHIVED.getStatus()));
+        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.NEW));
+        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.APPROVED));
+        myInspectionsScreen.clickFilterStatus(InspectionStatus.NEW);
+        myInspectionsScreen.clickFilterStatus(InspectionStatus.APPROVED);
+        myInspectionsScreen.clickFilterStatus(InspectionStatus.ARCHIVED);
+        Assert.assertTrue(myInspectionsScreen.checkFilterStatusIsSelected(InspectionStatus.ARCHIVED));
         myInspectionsScreen.clickBackButton();
         myInspectionsScreen.clickSaveFilterDialogButton();
 
         Assert.assertTrue(myInspectionsScreen.checkInspectionExists(inspNumber));
-        Assert.assertEquals(myInspectionsScreen.checkFilterIsApplied(), true);
+        Assert.assertTrue(myInspectionsScreen.checkFilterIsApplied(),"FilterIsApplied is not true");
         myInspectionsScreen.clearFilter();
         myInspectionsScreen.clickSaveFilterDialogButton();
         RegularNavigationSteps.navigateBackScreen();

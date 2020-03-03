@@ -31,7 +31,7 @@ public class VNextInformationDialog extends VNextBaseScreen {
     public VNextInformationDialog() {
     }
 
-    public String getInformationDialogMessage() { ;
+    public String getInformationDialogMessage() {
         WaitUtils.elementShouldBeVisible(modaldlgmsg, true);
         return modaldlgmsg.getText();
     }

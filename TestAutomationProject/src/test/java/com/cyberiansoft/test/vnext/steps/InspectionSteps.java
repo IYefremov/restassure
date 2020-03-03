@@ -9,17 +9,13 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InspectionListElement;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
@@ -44,11 +40,10 @@ public class InspectionSteps {
         inspectionsScreen.clickAddInspectionButton();
         VNextCustomersScreen vNextCustomersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         vNextCustomersScreen.selectCustomer(customer);
-        VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         if (inspectionData.getInsuranceCompanyData() != null) {
-            vehicleInfoScreen.changeScreen(ScreenType.CLAIM);
+            WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
             VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
             claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         }
@@ -64,8 +59,8 @@ public class InspectionSteps {
     public static void archiveInspection(String inspectionNumber) {
         openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.ARCHIVE);
-        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        informationdlg.clickInformationDialogArchiveButton();
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        informationDialog.clickInformationDialogArchiveButton();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.waitNotificationMessageDissapears();
     }
@@ -77,8 +72,8 @@ public class InspectionSteps {
     }
 
     public static void openInspectionToEdit(String inspectionId) {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.clickOpenInspectionToEdit(inspectionId);
+        openInspectionMenu(inspectionId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
     }
 
     public static void selectInspectionType(InspectionTypes inspectionTypes) {
@@ -140,5 +135,14 @@ public class InspectionSteps {
     public static void clickEmailButton() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.getMultiselectInspectionEmailBtn().click();
+    }
+
+    public static void changeCustomerForInspection(String inspectionNumber, AppCustomer newCustomer) {
+        openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_CUSTOMER);
+        CustomersScreenSteps.selectCustomer(newCustomer);
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        informationDialog.clickInformationDialogYesButton();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Inspection customer...']"));
     }
 }

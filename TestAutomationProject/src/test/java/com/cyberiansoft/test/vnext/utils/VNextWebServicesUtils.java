@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.utils;
 
-import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import org.apache.http.HttpResponse;
@@ -14,7 +13,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class VNextWebServicesUtils {
@@ -43,7 +41,7 @@ public class VNextWebServicesUtils {
 		  BufferedReader in = new BufferedReader(
 			        new InputStreamReader(httpCon.getInputStream()));
 		  String inputLine;
-		  StringBuffer response = new StringBuffer();
+		  StringBuilder response = new StringBuilder();
 
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
@@ -71,7 +69,7 @@ public class VNextWebServicesUtils {
 		  BufferedReader in = new BufferedReader(
 			        new InputStreamReader(httpCon.getInputStream()));
 		  String inputLine;
-		  StringBuffer response = new StringBuffer();
+		  StringBuilder response = new StringBuilder();
 
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
@@ -99,7 +97,7 @@ public class VNextWebServicesUtils {
 		  BufferedReader in = new BufferedReader(
 			        new InputStreamReader(httpCon.getInputStream()));
 		  String inputLine;
-		  StringBuffer response = new StringBuffer();
+		  StringBuilder response = new StringBuilder();
 
 			while ((inputLine = in.readLine()) != null) {
 				response.append(inputLine);
@@ -114,7 +112,7 @@ public class VNextWebServicesUtils {
 		
 	}
 	
-	public static String getProdRegCode(String phonenumber) throws IOException {
+	public static String getProdRegCode(String phonenumber) {
 		 
 		String output = "";
 		try {
@@ -133,16 +131,12 @@ public class VNextWebServicesUtils {
 
 				output = br.readLine();
 
-			  } catch (MalformedURLException e) {
-
-				e.printStackTrace();
-
 			  } catch (IOException e) {
 
 				e.printStackTrace();
 
 			  }
-		 return output; 
+		return output;
 
 			}
 	

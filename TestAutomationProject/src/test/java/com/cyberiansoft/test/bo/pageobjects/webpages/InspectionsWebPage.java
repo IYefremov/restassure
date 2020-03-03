@@ -317,7 +317,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		if (row != null) {
 			approved = row.findElement(By.xpath(".//img[@title='Approved']")).isDisplayed();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 		return approved;
 	}
@@ -361,7 +361,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		if (row != null) {
 			row.findElement(By.xpath(".//a[contains(text(), '" + inspnumber + "')]")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 	}
 
@@ -371,7 +371,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			clickApproveMarkerTableRow(row);
 			acceptAlert();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 	}
 
@@ -389,8 +389,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			// Thread.sleep(5000);
 			// driver.findElement(By.id("btnDecline")).click();
 			wait.until(ExpectedConditions.elementToBeClickable(By.id("btnDecline"))).click();
-			;
-			// perform actions on new window
+            // perform actions on new window
 			driver.close();
 			driver.switchTo().window(parent);
 		}
@@ -524,7 +523,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		if (row != null) {
 			amaounapproved = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsApproved() + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 		return amaounapproved;
 	}
@@ -535,7 +534,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 		if (row != null) {
 			reason = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsReason() + "]")).getText();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 		return reason;
 	}
@@ -547,7 +546,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			status = row.findElement(By.xpath(".//td[" + getTableRowWithInspectionsStatus() + "]/img"))
 					.getAttribute("title");
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspnumber + " inspection");
+			Assert.fail("Can't find " + inspnumber + " inspection");
 		}
 		return status;
 	}
@@ -606,7 +605,7 @@ public class InspectionsWebPage extends WebPageWithFilter {
 			act.click(getTableRowWithInspection(inspectionnumber)
 					.findElement(By.xpath(".//span[text()='" + menuitem + "']"))).perform();
 		} else {
-			Assert.assertTrue(false, "Can't find " + inspectionnumber + " incpection");
+			Assert.fail("Can't find " + inspectionnumber + " incpection");
 		}
 	}
 

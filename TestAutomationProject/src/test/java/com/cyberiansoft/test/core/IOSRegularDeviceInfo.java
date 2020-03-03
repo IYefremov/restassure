@@ -2,7 +2,6 @@ package com.cyberiansoft.test.core;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.Properties;
 
 public class IOSRegularDeviceInfo {

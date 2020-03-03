@@ -51,7 +51,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
             serviceDetailsScreen.setServiceAmountValue(serviceAmount);
             serviceDetailsScreen.clickServiceDetailsDoneButton();
         } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
     }
 
     public void setServiceQuantityValue(String serviceName, String serviceQuantity) {
@@ -62,7 +62,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
             serviceDetailsScreen.setServiceQuantityValue(serviceQuantity);
             serviceDetailsScreen.clickServiceDetailsDoneButton();
         } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
     }
 
     public void clickOnSelectedService(String serviceName) {
@@ -70,7 +70,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         if (servicecell != null) {
             tap(servicecell);
         } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
     }
 
     public VNextNotesScreen clickServiceNotesOption(String serviceName) {
@@ -80,7 +80,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
             VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
             serviceDetailsScreen.clickServiceNotesOption();
         } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
         return new VNextNotesScreen();
     }
 
@@ -89,7 +89,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         if (servicecell != null) {
             tap(servicecell.findElement(By.xpath(".//*[@action='delete-service']")));
         } else
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
     }
 
     public String getSelectedServicePriceValue(String servicename) {
@@ -98,7 +98,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         if (servicerow != null) {
             serviceprice = servicerow.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
         } else
-            Assert.assertTrue(false, "Can't find service: " + servicename);
+            Assert.fail("Can't find service: " + servicename);
         return serviceprice;
     }
 
@@ -112,7 +112,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
                 tap(servicerow);
             imagesammary = servicerow.findElement(By.xpath(".//div[@class='img-item summary-item']")).getText().trim();
         } else
-            Assert.assertTrue(false, "Can't find service: " + servicename);
+            Assert.fail("Can't find service: " + servicename);
         return imagesammary;
     }
 
@@ -178,7 +178,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         if (servicerow != null)
             tap(servicerow.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + matrixservicename + "']")));
         else
-            Assert.assertTrue(false, "Can't find service: " + matrixservicename);
+            Assert.fail("Can't find service: " + matrixservicename);
         return new VNextVehiclePartsScreen(appiumdriver);
     }
 

@@ -6,7 +6,6 @@ import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.order.edit.PhaseElement;
 import com.cyberiansoft.test.vnext.webelements.order.edit.ServiceElement;
-import io.appium.java_client.MobileBy;
 import org.openqa.selenium.By;
 
 public class PhaseScreenInteractions {

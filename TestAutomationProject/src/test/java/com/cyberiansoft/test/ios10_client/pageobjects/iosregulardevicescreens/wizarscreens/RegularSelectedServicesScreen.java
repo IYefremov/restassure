@@ -9,7 +9,6 @@ import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -65,12 +64,12 @@ public class RegularSelectedServicesScreen extends RegularBaseServicesScreen {
     }
 
     public void openServiceDetailsByIndex(String servicename, int serviceDetailIndex) {
-        MobileElement serviceCell = ((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex));
+        MobileElement serviceCell = selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex);
         if (serviceCell.isDisplayed())
             serviceCell.click();
         else {
-            swipeToElement((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex));
-            ((MobileElement) selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex)).click();
+            swipeToElement(selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex));
+            selectedservicestable.findElementsByAccessibilityId(servicename).get(serviceDetailIndex).click();
         }
     }
 

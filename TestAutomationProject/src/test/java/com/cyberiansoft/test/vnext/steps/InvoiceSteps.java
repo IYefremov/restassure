@@ -1,9 +1,11 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.dataclasses.InvoiceData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
@@ -24,6 +26,7 @@ public class InvoiceSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String invoiceNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.saveInvoiceAsDraft();
+        BaseUtils.waitABit(30000);
         return invoiceNumber;
     }
 
@@ -56,7 +59,12 @@ public class InvoiceSteps {
 
     public static void createInvoice(InvoiceTypes invoiceType) {
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList();
-        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+        invoiceTypesScreen.selectInvoiceType(invoiceType);
+    }
+
+    public static void createInvoice(InvoiceTypes invoiceType, InvoiceData invoiceData) {
+        createInvoice(invoiceType);
+        InvoiceInfoSteps.setInvoicePONumber(invoiceData.getPoNumber());
     }
 
     public static void switchToTeamInvoicesView() {
@@ -73,6 +81,13 @@ public class InvoiceSteps {
         VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         WaitUtils.getGeneralFluentWait().until((webdriver) -> invoicesScreen.getInvoicesList().size() > 0);
         WaitUtils.waitUntilElementIsClickable(invoicesScreen.getRootElement());
+    }
+
+    public static void refreshPictures(String invoiceId) {
+        openMenu(invoiceId);
+        MenuSteps.selectMenuItem(MenuItems.REFRESH_PICTURES);
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        informationdlg.clickInformationDialogOKButton();
     }
 
 }

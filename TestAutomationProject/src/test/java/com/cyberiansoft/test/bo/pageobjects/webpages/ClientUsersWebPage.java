@@ -62,7 +62,7 @@ public class ClientUsersWebPage extends BaseWebPage {
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[1]/input")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + userfstname);
+			Assert.fail("Can't find client: " + userfstname);
 		}
 	}
 
@@ -72,7 +72,7 @@ public class ClientUsersWebPage extends BaseWebPage {
 		if (clientstablerow != null) {
 			clientstablerow.findElement(By.xpath(".//td[2]/input")).click();
 		} else {
-			Assert.assertTrue(false, "Can't find client: " + userfstname);
+			Assert.fail("Can't find client: " + userfstname);
 		}
 		driver.switchTo().alert().accept();
 		waitForLoading();

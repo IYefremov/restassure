@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.steps.monitoring;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.enums.MenuItems;
-import com.cyberiansoft.test.vnext.dto.RepairOrderDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
@@ -13,7 +12,6 @@ import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
-import org.testng.Assert;
 
 public class MonitorSteps {
 

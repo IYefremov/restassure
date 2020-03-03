@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.t
 
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -184,13 +185,13 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		appiumdriver.findElementByAccessibilityId("Status").click();
 	}
 
-	public boolean checkFilterStatusIsSelected(String filterstatus) {
+	public boolean checkFilterStatusIsSelected(InspectionStatus inspectionStatus) {
 		return appiumdriver.findElementsByXPath("//XCUIElementTypeTable[@name='StringSelector']/XCUIElementTypeCell[@name='"
-								+ filterstatus + "_Checked" + "']").size() > 0;
+								+ inspectionStatus.getStatusString() + "_Checked" + "']").size() > 0;
 	}
 
-	public void clickFilterStatus(String filterstatus) {
-		appiumdriver.findElementByAccessibilityId(filterstatus).click();
+	public void clickFilterStatus(InspectionStatus inspectionStatus) {
+		appiumdriver.findElementByAccessibilityId(inspectionStatus.getStatusString()).click();
 	}
 
 	public void clickSaveFilterDialogButton() {

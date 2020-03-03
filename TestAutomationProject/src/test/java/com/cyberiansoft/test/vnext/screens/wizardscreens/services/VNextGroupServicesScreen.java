@@ -32,7 +32,7 @@ public class VNextGroupServicesScreen extends VnextBaseServicesScreen {
         if (servicerow != null)
             tap(servicerow);
         else
-            Assert.assertTrue(false, "Can't find service group: " + serviceGroupName);
+            Assert.fail("Can't find service group: " + serviceGroupName);
 
         return new VNextAvailableGroupServicesList(appiumdriver);
     }

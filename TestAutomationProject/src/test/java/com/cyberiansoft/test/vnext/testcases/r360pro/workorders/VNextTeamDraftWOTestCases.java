@@ -15,16 +15,12 @@ import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -82,7 +78,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         Assert.assertEquals(msg, VNextAlertMessages.VIN_REQUIRED_MSG);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WorkOrderSteps.cancelWorkOrder();
-        workOrdersScreen.clickBackButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -100,8 +96,7 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
         WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
-        VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+        InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR);
         InvoiceSteps.cancelInvoice();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -121,17 +116,15 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
 
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        VNextInvoiceTypesList invoiceTypesScreen = workOrdersMenuScreen.clickCreateInvoiceMenuItem();
-
-        invoiceTypesScreen.selectInvoiceType(InvoiceTypes.O_KRAMAR);
+        WorkOrderSteps.openMenu(woNumber);
+        MenuSteps.selectMenuItem(MenuItems.CREATE_INVOICE);
+        InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR);
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsDraft();
 
-        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
-        VNextInvoiceMenuScreen invoiceMenuScreen = invoicesScreen.clickOnInvoiceByInvoiceNumber(invoiceNumber);
-        invoiceMenuScreen.clickEditInvoiceMenuItem();
+        InvoiceSteps.openMenu(invoiceNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
         invoiceInfoScreen.clickOnWorkOrder(woNumber);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
@@ -158,8 +151,9 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         Assert.assertEquals(workOrdersScreen.getWorkOrderStatusValue(woNumber),
                 WorkOrderStatuses.DRAFT.getWorkOrderStatusValue());
 
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+        WorkOrderSteps.openMenu(woNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
         availableServicesScreen.saveWorkOrderViaMenu();
@@ -184,9 +178,9 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(workOrderData.getServiceData().getServiceName());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
-        VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(woNumber);
-        WaitUtils.elementShouldBeVisible(workOrdersMenuScreen.getEditinspectionbtn(), false);
-        workOrdersMenuScreen.clickCloseWorkOrdersMenuButton();
+        WorkOrderSteps.openMenu(woNumber);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.EDIT, false);
+        MenuSteps.closeMenu();
         Assert.assertEquals(workOrdersScreen.getWorkOrderStatusValue(woNumber),
                 WorkOrderStatuses.APPROVED.getWorkOrderStatusValue());
         ScreenNavigationSteps.pressBackButton();
@@ -231,8 +225,9 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         workOrdersScreen.switchToMyWorkordersView();
         WorkOrderSteps.clickAddWorkOrderButton();
         CustomersScreenSteps.selectCustomer(testcustomer);
+
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
-        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, workOrderData);
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());

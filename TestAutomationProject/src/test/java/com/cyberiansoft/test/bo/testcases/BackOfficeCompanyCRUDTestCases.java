@@ -438,7 +438,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testCompanyEmailTemplatesCRUD(String rowID, String description, JSONObject testData) throws Exception {
+	public void testCompanyEmailTemplatesCRUD(String rowID, String description, JSONObject testData) {
 
 		BOCompanyCRUDData data = JSonDataParser.getTestDataFromJson(testData, BOCompanyCRUDData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
@@ -657,8 +657,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		workordertypespage.selectNewWorkOrderyTypeGroupServicesBy(wotypegroupby);
 		workordertypespage.selectNewWorkOrderyTypePriceAccess(wotypepriceaccess);
 		workordertypespage.selectNewWorkOrderyTypeSharing(wotypesharingtype);
-		for (int i = 0; i < wotypeoptions.length; i++) {
-			workordertypespage.chechWOTypeOption(wotypeoptions[i]);
+		for (String wotypeoption : wotypeoptions) {
+			workordertypespage.chechWOTypeOption(wotypeoption);
 		}
 		workordertypespage.setNewWorkOrderTypeMonitorRepairingInformation(true, true, "10");
 		workordertypespage.clickNewWorkOrderTypeCancelButton();
@@ -674,8 +674,8 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 		workordertypespage.selectNewWorkOrderyTypeGroupServicesBy(wotypegroupby);
 		workordertypespage.selectNewWorkOrderyTypePriceAccess(wotypepriceaccess);
 		workordertypespage.selectNewWorkOrderyTypeSharing(wotypesharingtype);
-		for (int i = 0; i < wotypeoptions.length; i++) {
-			workordertypespage.chechWOTypeOption(wotypeoptions[i]);
+		for (String wotypeoption : wotypeoptions) {
+			workordertypespage.chechWOTypeOption(wotypeoption);
 		}
 		workordertypespage.setNewWorkOrderTypeMonitorRepairingInformation(true, true, "10");
 		workordertypespage.clickNewWorkOrderTypeOKButton();

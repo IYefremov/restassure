@@ -5,20 +5,17 @@ import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleVINHistoryScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextWorkOrdersMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
-import com.cyberiansoft.test.vnext.steps.VehicleInfoScreenSteps;
-import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.json.simple.JSONObject;
@@ -48,21 +45,20 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
 		VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		vehicleVINHistoryScreen.clickBackButton();
-		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		availableServicesScreen.selectServices(workOrderData.getServicesList());
 		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
 		final String workOrderNumber = workOrdersScreen.getFirstWorkOrderNumber();
-		VNextWorkOrdersMenuScreen workOrdersMenuScreen = workOrdersScreen.clickOnWorkOrderByNumber(workOrderNumber);
-		workOrdersMenuScreen.clickEditWorkOrderMenuItem();
+		WorkOrderSteps.openMenu(workOrderNumber);
+		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
-		vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
-		availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName()));
-		workOrdersScreen = availableServicesScreen.saveWorkOrderViaMenu();
-		workOrdersScreen.clickBackButton();
+		WorkOrderSteps.saveWorkOrder();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 }

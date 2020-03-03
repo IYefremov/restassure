@@ -263,7 +263,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
         RegularMyInvoicesScreenSteps.selectInvoiceForPayment(invoiceNumber);
         RegularPaymentOptionsScreenSteps.closePaymentOptions();
         RegularPaymentScreenSteps.sitchToCashCheckPayOption();
-        Double expectedAmount = Double.valueOf(invoiceData.getInvoiceTotal()) - Double.valueOf(invoiceData.getCashCheckPaymentData().getCashCheckAmount());
+        Double expectedAmount = Double.parseDouble(invoiceData.getInvoiceTotal()) - Double.parseDouble(invoiceData.getCashCheckPaymentData().getCashCheckAmount());
         RegularPaymentScreenValidations.verifyCashCheckAmountValue(String.valueOf(expectedAmount));
         RegularPaymentScreenSteps.setCashCheckNumberValue(invoiceData.getCashCheckPaymentData().getCashCheckNumber());
         RegularPaymentScreenSteps.payForInvoice();
@@ -1353,7 +1353,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifySplitWorkForTechniciansUnderWO(String rowID,
-                                                         String description, JSONObject testData) throws Exception {
+                                                         String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
@@ -1470,7 +1470,7 @@ public class IOSRegularProdRegressionTestCases extends ReconProBaseTestCase {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testInspectionsMultipleInspectionsApproval(String rowID,
-                                                           String description, JSONObject testData) throws Exception {
+                                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         List<InspectionData> inspectionsData = testCaseData.getInspectionsData();

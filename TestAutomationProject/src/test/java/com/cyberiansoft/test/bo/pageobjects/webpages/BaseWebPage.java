@@ -47,30 +47,15 @@ public abstract class BaseWebPage {
 
 		moveToElement(childElement);
 
-		wait.until(new Function<WebDriver, Boolean>() {
-			@Override
-			public Boolean apply(WebDriver input) {
-				return childElement.isEnabled();
-			}
-		});
+		wait.until((Function<WebDriver, Boolean>) input -> childElement.isEnabled());
 
 		return childElement;
 	}
 
 	protected WebElement waitUntilElementIsClickable(final WebElement element) {
-		final WebElement childElement = wait.until(new Function<WebDriver, WebElement>() {
-			@Override
-			public WebElement apply(WebDriver input) {
-				return element;
-			}
-		});
+		final WebElement childElement = wait.until((Function<WebDriver, WebElement>) input -> element);
 		moveToElement(element);
-		wait.until(new Function<WebDriver, Boolean>() {
-			@Override
-			public Boolean apply(WebDriver input) {
-				return childElement.isEnabled();
-			}
-		});
+		wait.until((Function<WebDriver, Boolean>) input -> childElement.isEnabled());
 
 		return childElement;
 	}

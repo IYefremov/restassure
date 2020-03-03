@@ -9,7 +9,6 @@ import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.CustomersListElement;
-import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -44,7 +43,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath = "//div[@class='notice-plate']")
 	private WebElement presetCustomerPanel;
 
-	@FindBy(xpath = "//span[@class='client-mode']")
+	@FindBy(xpath = "//*[@class='notice-plate-info-name']")
 	private WebElement clientMode;
 
     public VNextCustomersScreen(WebDriver appiumdriver) {
@@ -63,7 +62,8 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	}
 
 	public boolean isAddCustomerButtonDisplayed() {
-		return customersScreen.findElements(By.xpath(".//*[@action='add']")).size() > 0;
+    	WaitUtils.waitUntilElementIsClickable(customersList);
+		return ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//*[@action='add']")).size() > 0;
 	}
 
 	public boolean isNothingFoundCaptionDisplayed() {
@@ -104,10 +104,7 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 		tap(wholesaleCustomerTab);
 	}
 
-	public void setCustomerAsDefault(AppCustomer customer) {
-		selectCustomer(customer);
-		MenuSteps.selectMenuItem(MenuItems.SET_AS_DEFAULT);
-	}
+
 
 	public boolean isCustomerExists(AppCustomer customer) {
 		WaitUtils.waitUntilElementIsClickable(customersList);

@@ -4,8 +4,8 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.Approve
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.EmailScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.NotesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.SelectEmployeePopup;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.ios.IOSElement;
@@ -275,13 +275,13 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		        .xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@name='Status'] "))).click();
 	}
 
-	public boolean isFilterStatusSelected(String filterstatus) {
+	public boolean isFilterStatusSelected(InspectionStatus inspectionStatus) {
 		return appiumdriver.findElements(
-				By.xpath("//XCUIElementTypeTable[@name='StringSelector']/XCUIElementTypeCell[@name='" + filterstatus + "_Checked" + "']")).size() > 0;
+				By.xpath("//XCUIElementTypeTable[@name='StringSelector']/XCUIElementTypeCell[@name='" + inspectionStatus.getStatusString() + "_Checked" + "']")).size() > 0;
 	}
 
-	public void clickFilterStatus(String filterstatus) {
-		appiumdriver.findElementByAccessibilityId(filterstatus).click();
+	public void clickFilterStatus(InspectionStatus inspectionStatus) {
+		appiumdriver.findElementByAccessibilityId(inspectionStatus.getStatusString()).click();
 	}
 	
 	public void showWorkOrdersForInspection(String inpection) {

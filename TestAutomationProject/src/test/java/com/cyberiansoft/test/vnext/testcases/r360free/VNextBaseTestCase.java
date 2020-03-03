@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.testcases;
+package com.cyberiansoft.test.vnext.testcases.r360free;
 
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.baseutils.BaseUtils;
@@ -44,10 +44,6 @@ public class VNextBaseTestCase {
     protected static Employee employee;
     protected static EnvironmentType envType;
 
-    protected static String deviceID;
-    protected static String licenseID;
-    protected static String appID;
-    protected static String appLicenseEntity;
 
     @BeforeSuite
     public void initializeSuite() {
@@ -122,33 +118,6 @@ public class VNextBaseTestCase {
         informationdlg.clickInformationDialogOKButton();
     }
 
-    public void registerTeamEdition(String licenseName) {
-        VNextEditionsScreen editionsScreen = new VNextEditionsScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextEnvironmentSelectionScreen environmentSelectionScreen = new VNextEnvironmentSelectionScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextTeamEditionVerificationScreen verificationScreen = new VNextTeamEditionVerificationScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextDownloadDataScreen downloadDataScreen = new VNextDownloadDataScreen(DriverBuilder.getInstance().getAppiumDriver());
-        VNextInformationDialog informationDialog = new VNextInformationDialog(DriverBuilder.getInstance().getAppiumDriver());
-
-        final String regCode = getDeviceRegistrationCode(deviceOfficeUrl,
-                VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(),
-                VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword(),
-                licenseName);
-
-        ActiveDevicesWebPage activeDevicesWebPage = new ActiveDevicesWebPage(DriverBuilder.getInstance().getDriver());
-        //deviceID = activeDevicesWebPage.getDeviceID();
-        //licenseID = activeDevicesWebPage.getLicenseID();
-        //appID = activeDevicesWebPage.getApplicationID();
-        //appLicenseEntity = activeDevicesWebPage.getLicenseEntityName();
-        DriverBuilder.getInstance().getDriver().quit();
-        AppiumUtils.switchApplicationContext(AppContexts.NATIVE_CONTEXT);
-        AppiumUtils.switchApplicationContext(AppContexts.WEBVIEW_CONTEXT);
-        editionsScreen.selectEdition("ReconPro Starter");
-        environmentSelectionScreen.selectEnvironment(envType);
-        verificationScreen.setDeviceRegistrationCode(regCode);
-        verificationScreen.clickVerifyButton();
-        downloadDataScreen.waitUntilDatabasesDownloaded();
-        informationDialog.clickInformationDialogOKButton();
-    }
 
     private void setupMobileDevice(MobilePlatform mobilePlatform) {
         if (mobilePlatform.getMobilePlatformString().contains("ios"))

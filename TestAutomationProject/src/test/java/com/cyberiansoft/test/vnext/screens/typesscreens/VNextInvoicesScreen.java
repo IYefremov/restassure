@@ -2,23 +2,22 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InvoiceListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
-import org.openqa.selenium.*;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Getter
@@ -64,7 +63,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 				findElement(By.xpath(".//div[@class='truncate']")));
 		String wos = getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='accordion-item-content']")).
 					findElement(By.xpath(".//div[@class='truncate']")).getText().trim();
-		List<String> wosarray = Arrays.asList(wos.split(","));
+		String[] wosarray = wos.split(",");
 		for (String wonumber : wosarray)
 			workOrders.add(wonumber.trim());
 		return workOrders;
@@ -78,7 +77,7 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		BaseUtils.waitABit(500);
 		poNumber = getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='accordion-item-content']")).
 					findElement(By.xpath(".//div[contains(text(), 'PO#')]")).getText();
-		poNumber = poNumber.substring(3, poNumber.length()).trim();
+		poNumber = poNumber.substring(3).trim();
 		return poNumber;
 	}
 
@@ -128,35 +127,11 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		clickScreenBackButton();
 		return new VNextHomeScreen(appiumdriver);
 	}
-
-	//todo: rewrite!!!
-	public VNextInvoiceMenuScreen clickOnInvoiceByInvoiceNumber(String invoiceID) {
-		WaitUtils.elementShouldBeVisible(getRootElement(),true);
-        if (!WaitUtils.isElementPresent(By.xpath("//div[@class='checkbox-item-title' and text()='" + invoiceID + "']")))
-			clearSearchField();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//*[@data-autotests-id='invoices-list']")));
-		WebElement invoiceCell = getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoiceID + "']"));
-		if (!invoiceCell.isDisplayed()) {
-			Actions actions = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			actions.moveToElement(getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoiceID + "']"))).perform();
-		}
-		BaseUtils.waitABit(500);
-		tap(getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + invoiceID + "']")));
-		return new VNextInvoiceMenuScreen(appiumdriver);
-	}
 	
-	public VNextEmailScreen clickOnInvoiceToEmail(String invoiceID) {
-		VNextInvoiceMenuScreen invoicemenulist = clickOnInvoiceByInvoiceNumber(invoiceID);
-		return invoicemenulist.clickEmailInvoiceMenuItem();
-	}
-	
-	public VNextWorkOrdersScreen clickAddInvoiceButton() {
+	public void clickAddInvoiceButton() {
         clickAddButton();
-		VNextWorkOrdersScreen woscreeen = new VNextWorkOrdersScreen(appiumdriver);
 		if (appiumdriver.findElements(By.xpath("//div[text()='Tap a work order, and then tap Create Invoice.']")).size() > 0)
 			new VNextInformationDialog(appiumdriver).clickInformationDialogOKButton();
-		return woscreeen;
 	}
 	
 	public void switchToTeamInvoicesView() {

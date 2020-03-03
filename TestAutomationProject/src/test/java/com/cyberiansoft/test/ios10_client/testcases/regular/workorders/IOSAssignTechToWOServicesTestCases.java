@@ -6,7 +6,6 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
-import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularMyWorkOrdersScreen;
@@ -218,8 +217,7 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
         Assert.assertTrue(regularSelectedServiceDetailsScreen.isTechnicianSelected(vehiclePartData.getServiceDefaultTechnician().getTechnicianFullName()));
         Assert.assertEquals(regularSelectedServiceDetailsScreen.getCustomTechnicianPercentage(vehiclePartData.getServiceDefaultTechnician().getTechnicianFullName()),
                 vehiclePartData.getServiceDefaultTechnician().getTechnicianPercentageValue());
-        Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice(vehiclePartData.getServiceDefaultTechnician().getTechnicianFullName()), "" +
-                vehiclePartData.getServiceDefaultTechnician().getTechnicianPriceValue());
+        Assert.assertEquals(regularSelectedServiceDetailsScreen.getTechnicianPrice(vehiclePartData.getServiceDefaultTechnician().getTechnicianFullName()), vehiclePartData.getServiceDefaultTechnician().getTechnicianPriceValue());
         Assert.assertTrue(regularSelectedServiceDetailsScreen.isEvenlyTabSelected());
         Assert.assertFalse(regularSelectedServiceDetailsScreen.isCustomTabSelected());
         regularSelectedServiceDetailsScreen.cancelSelectedServiceDetails();
@@ -478,11 +476,11 @@ public class IOSAssignTechToWOServicesTestCases extends IOSRegularBaseTestCase {
 
         for (ServiceData serviceData : bundleServiceData.getServices()) {
             serviceBundleScreen.openBundleInfo(serviceData.getServiceName());
-            String techString = "";
+            StringBuilder techString = new StringBuilder();
             for (ServiceTechnician serviceTechnician : workOrderData.getVehicleInfoData().getNewTechnicians())
-                techString = techString + ", " + serviceTechnician.getTechnicianFullName();
-            techString = techString.replaceFirst(",", "").trim();
-            Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString);
+                techString.append(", ").append(serviceTechnician.getTechnicianFullName());
+            techString = new StringBuilder(techString.toString().replaceFirst(",", "").trim());
+            Assert.assertEquals(selectedServiceDetailsScreen.getTechniciansValue(), techString.toString());
             selectedServiceDetailsScreen.clickCancel();
         }
         serviceBundleScreen.clickSaveButton();

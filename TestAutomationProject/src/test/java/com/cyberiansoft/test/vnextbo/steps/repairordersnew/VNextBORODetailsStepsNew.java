@@ -3,7 +3,10 @@ package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
-import com.cyberiansoft.test.vnextbo.screens.repairordersnew.*;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOChangeTechnicianDialogNew;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBONotesDialogNew;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROCompleteCurrentPhaseDialogNew;
+import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -103,6 +106,22 @@ public class VNextBORODetailsStepsNew {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
+    public static void checkInPhase(String phase) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+        Utils.clickElement(detailsWebPageNew.getCheckInActionButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void checkOutPhase(String phase) {
+
+        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
+        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+        Utils.clickElement(detailsWebPageNew.getCheckOutActionButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
     public static void setPhaseStatusIfNeeded(String phase, String expectedStatus) {
 
         if (Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase)).equals("Problem")) {
@@ -199,10 +218,11 @@ public class VNextBORODetailsStepsNew {
         return (Utils.getText(new VNextBORODetailsWebPageNew().getOrderStatusDropDown()));
     }
 
-    public static void closeOrderWithCompletedReason() {
+    public static void closeOrderWithReason(String reason) {
 
         changeOrderStatus("Closed");
-        VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason();
+        VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason(reason);
+        WaitUtilsWebDriver.waitABit(4000);
     }
 
     public static void startServicesForPhase(String phase) {
@@ -301,5 +321,33 @@ public class VNextBORODetailsStepsNew {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().getLogInfoButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void seeMoreInformationForOrder() {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getMoreInfoSection());
+    }
+
+    public static void turnOnOffPhaseEnforcement(boolean turnOn) {
+
+        if (turnOn) Utils.clickElement(new VNextBORODetailsWebPageNew().getPhaseEnforcementOnButton());
+        else Utils.clickElement(new VNextBORODetailsWebPageNew().getPhaseEnforcementOffButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(5000);
+    }
+
+    public static void addNewTask(VNextBOMonitorData taskData, boolean requiredFieldsOnly, boolean saveTask) {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddNewTaskButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        if (requiredFieldsOnly) VNextBOAddNewTaskDialogSteps.addNewTaskWithRequiredFields(taskData);
+        else VNextBOAddNewTaskDialogSteps.addNewTaskWithAllFields(taskData, saveTask);
+    }
+
+    public static void addNewTaskWithPredefinedTechnician(VNextBOMonitorData taskData) {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddNewTaskButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOAddNewTaskDialogSteps.addNewTaskWithPredefinedTechnician(taskData);
     }
 }

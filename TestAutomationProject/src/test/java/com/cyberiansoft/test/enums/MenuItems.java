@@ -4,11 +4,15 @@ import lombok.Getter;
 
 public enum MenuItems {
     EDIT("Edit"),
-    SAVE("Save Inspection"),
-    CANCEL("Cancel Inspection"),
-    EMAIL("Email Inspection"),
+    DELETE("Delete"),
+    SAVE_INPSECTION("Save Inspection"),
+    CANCEL_INPSECTION("Cancel Inspection"),
+    CANCEL_INVOICE("Cancel Invoice"),
+    EMAIL_INPSECTION("Email Inspection"),
+    EMAIL_INVOICE("Email Invoice"),
     APPROVE("Approve"),
     VIEW("View"),
+    VOID("Void"),
     ARCHIVE("Archive"),
     CHANGE_CUSTOMER("Change Customer"),
     SET_AS_DEFAULT("Set as Default"),
@@ -18,6 +22,7 @@ public enum MenuItems {
     COMPLETE("Complete"),
     CHANGE_STATUS("Change Status"),
     NOTES("Notes"),
+    REFRESH_PICTURES("Refresh Pictures"),
     CHANGE_DEPARTMENT(""),
     REPORT_PROBLEM("Report Problem"),
     RESOLVE_PROBLEM("Resolve Problem"),
@@ -32,6 +37,7 @@ public enum MenuItems {
     VIEW_SUPPLEMENT("View Supplement"),
     ADD_SUPPLEMENT("Add Supplement"),
     CREATE_WORK_ORDER("Create Work Order"),
+    CREATE_INVOICE("Create Invoice"),
     CHANGE_PO("Change PO#"),
     RESET_START_DATE("Reset Start Date");
 

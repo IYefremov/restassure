@@ -30,7 +30,7 @@ public class InspectionTypeData {
         }
     }
 
-    public String getInspTypeID() { return inspTypeID; };
+    public String getInspTypeID() { return inspTypeID; }
 
-    public boolean isCanBeFinalDraft() { return canBeFinalDraft; };
+    public boolean isCanBeFinalDraft() { return canBeFinalDraft; }
 }

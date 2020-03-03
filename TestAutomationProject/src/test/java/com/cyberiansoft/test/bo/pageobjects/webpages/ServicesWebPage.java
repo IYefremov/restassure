@@ -241,7 +241,7 @@ public class ServicesWebPage extends WebPageWithPagination {
 		if (row != null) {
 			clickEditTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + servicename + " service");
+            Assert.fail("Can't find " + servicename + " service");
 		}
 	}
 }

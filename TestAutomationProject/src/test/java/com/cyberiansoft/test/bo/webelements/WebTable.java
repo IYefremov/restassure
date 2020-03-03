@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.bo.webelements;
 
-import java.util.List;
-
 import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 public interface WebTable extends IWebElement {
 	

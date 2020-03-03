@@ -86,6 +86,8 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
         tap(savebtn);
     }
 
+
+    //todo Step!!
     public void setServiceStatus(String serviceNaame, ServiceStatus serviceStatus) {
         switch (serviceStatus) {
             case APPROVED:
@@ -103,7 +105,7 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
         if (serviceRow != null) {
             tap(serviceRow.findElement(By.xpath(".//label[contains(@for, 'approve')]")));
         } else {
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
         }
     }
 
@@ -112,7 +114,7 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
         if (serviceRow != null) {
             tap(serviceRow.findElement(By.xpath(".//label[contains(@for, 'decline')]")));
         } else {
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
         }
     }
 
@@ -121,7 +123,7 @@ public class VNextApproveServicesScreen extends VNextBaseScreen {
         if (serviceRow != null) {
             tap(serviceRow.findElement(By.xpath(".//label[contains(@for, 'skip')]")));
         } else {
-            Assert.assertTrue(false, "Can't find service: " + serviceName);
+            Assert.fail("Can't find service: " + serviceName);
         }
     }
 

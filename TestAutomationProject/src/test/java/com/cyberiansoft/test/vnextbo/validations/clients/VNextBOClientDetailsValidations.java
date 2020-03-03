@@ -63,12 +63,10 @@ public class VNextBOClientDetailsValidations {
         if (employee.getClientType().equals("Retail")) {
             Assert.assertEquals(clientInfoBlock.getRetailRadioButton().getAttribute("checked"), "true",
                     "\"Retail\" radiobutton hasn't been checked");
-            Assert.assertEquals(clientInfoBlock.getWholesaleRadioButton().getAttribute("checked"), null,
-                    "\"Wholesale\" radiobutton hasn't been checked");
+            Assert.assertNull(clientInfoBlock.getWholesaleRadioButton().getAttribute("checked"), "\"Wholesale\" radiobutton hasn't been checked");
         }
         else if (employee.getClientType().equals("Wholesale")) {
-            Assert.assertEquals(clientInfoBlock.getRetailRadioButton().getAttribute("checked"), null,
-                    "\"Retail\" radiobutton hasn't been checked");
+            Assert.assertNull(clientInfoBlock.getRetailRadioButton().getAttribute("checked"), "\"Retail\" radiobutton hasn't been checked");
             Assert.assertEquals(clientInfoBlock.getWholesaleRadioButton().getAttribute("checked"), "true",
                     "\"Wholesale\" radiobutton hasn't been checked");
         }
@@ -93,11 +91,9 @@ public class VNextBOClientDetailsValidations {
             Assert.assertEquals(accountInfoBlock.getPoNumberRequiredCheckbox().getAttribute("checked"), "true",
                     "\"PO# required\" checkbox hasn't been checked");
         } else {
-            Assert.assertEquals(accountInfoBlock.getPoNumberRequiredCheckbox().getAttribute("checked"), null,
-                    "\"PO# required\" checkbox hasn't been checked");
+            Assert.assertNull(accountInfoBlock.getPoNumberRequiredCheckbox().getAttribute("checked"), "\"PO# required\" checkbox hasn't been checked");
         }
-        Assert.assertEquals(accountInfoBlock.getPoNumberUpfrontRequiredCheckbox().getAttribute("checked"), null,
-                "\"PO# Upfront required\" checkbox hasn't been checked");
+        Assert.assertNull(accountInfoBlock.getPoNumberUpfrontRequiredCheckbox().getAttribute("checked"), "\"PO# Upfront required\" checkbox hasn't been checked");
     }
 
     public static void verifyAddressFieldsContainCorrectData(AddressData addressData) {
@@ -148,12 +144,9 @@ public class VNextBOClientDetailsValidations {
             Assert.assertEquals(emailOptionsBlock.getIncludeInspectionCheckbox().getAttribute("checked"), "true",
                     "\"Include Inspection\" checkbox hasn't been checked");
         } else {
-            Assert.assertEquals(emailOptionsBlock.getInvoicesCheckbox().getAttribute("checked"), null,
-                    "\"Invoices\" checkbox has been checked");
-            Assert.assertEquals(emailOptionsBlock.getInspectionsCheckbox().getAttribute("checked"), null,
-                    "\"Inspections\" checkbox has been checked");
-            Assert.assertEquals(emailOptionsBlock.getIncludeInspectionCheckbox().getAttribute("checked"), null,
-                    "\"Include Inspection\" checkbox has been checked");
+            Assert.assertNull(emailOptionsBlock.getInvoicesCheckbox().getAttribute("checked"), "\"Invoices\" checkbox has been checked");
+            Assert.assertNull(emailOptionsBlock.getInspectionsCheckbox().getAttribute("checked"), "\"Inspections\" checkbox has been checked");
+            Assert.assertNull(emailOptionsBlock.getIncludeInspectionCheckbox().getAttribute("checked"), "\"Include Inspection\" checkbox has been checked");
         }
     }
 
@@ -169,10 +162,8 @@ public class VNextBOClientDetailsValidations {
             Assert.assertEquals(preferencesBlock.getVehicleHistoryEnforcedCheckbox().getAttribute("checked"), "true",
                     "\"Vehicle History Enforced\" checkbox hasn't been checked");
         } else {
-            Assert.assertEquals(preferencesBlock.getUseSingleWoTypeCheckbox().getAttribute("checked"), null,
-                    "\"Use Single WO type\" checkbox has been checked");
-            Assert.assertEquals(preferencesBlock.getVehicleHistoryEnforcedCheckbox().getAttribute("checked"), null,
-                    "\"Vehicle History Enforced\" checkbox has been checked");
+            Assert.assertNull(preferencesBlock.getUseSingleWoTypeCheckbox().getAttribute("checked"), "\"Use Single WO type\" checkbox has been checked");
+            Assert.assertNull(preferencesBlock.getVehicleHistoryEnforcedCheckbox().getAttribute("checked"), "\"Vehicle History Enforced\" checkbox has been checked");
         }
 
     }

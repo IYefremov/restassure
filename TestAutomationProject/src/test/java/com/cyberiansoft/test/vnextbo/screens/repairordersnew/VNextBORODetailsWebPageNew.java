@@ -26,6 +26,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@class='serviceRow theader clearfix']/div[text() != '']")
     private List<WebElement> servicesTableColumnsTitles;
 
+    @FindBy(xpath = "//div[@id='reconmonitordetails-parts']//th")
+    private List<WebElement> partsTableColumnsTitles;
+
     @FindBy(xpath = "//div[@class='clmn_1']/*[@class='switchTable icon-arrow-down5']")
     private List<WebElement> phaseExpanderList;
 
@@ -37,6 +40,12 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[contains(@data-bind,'completePhase') and not(contains(@style,'display: none'))]")
     private WebElement completeCurrentPhaseActionButton;
+
+    @FindBy(xpath = "//div[@class='drop checkout']/div[contains(@data-bind,'phaseCheckIn') and not(contains(@style,'display: none'))]")
+    private WebElement checkInActionButton;
+
+    @FindBy(xpath = "//div[@class='drop checkout']/div[contains(@data-bind,'phaseCheckOut') and not(contains(@style,'display: none'))]")
+    private WebElement checkOutActionButton;
 
     @FindBy(xpath = "//div[@class='drop checkout']//div[contains(@data-bind,'serviceNotes') and not(contains(@style,'display: none'))]")
     private WebElement notesActionButton;
@@ -52,6 +61,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//span[@aria-owns='reconmonitor-details-status_listbox']//span[@class='k-input']")
     private WebElement orderStatusDropDown;
+
+    @FindBy(xpath = "//div[@class='reason']//span[@class='k-input']")
+    private WebElement orderCloseReason;
 
     @FindBy(xpath = "//button[@title='Reopen RO']")
     private WebElement reopenOrderButton;
@@ -74,8 +86,20 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tbody[@data-template='repair-order-part-list-item-template']//b")
     private List<WebElement> partServicesNamesList;
 
+    @FindBy(xpath = "//div[@class='linked-items-info__content']//span[@class='pull-left']")
+    private List<WebElement> inspectionsList;
+
     @FindBy(xpath = "//button[@data-bind='click: showLogWindow']")
     private WebElement logInfoButton;
+
+    @FindBy(xpath = "//label[@for='phaseEn-on']")
+    private WebElement phaseEnforcementOnButton;
+
+    @FindBy(xpath = "//label[@for='phaseEn-off']")
+    private WebElement phaseEnforcementOffButton;
+
+    @FindBy(xpath = "//button[@id='reconmonitordetails-view-add-task-button']")
+    private WebElement addNewTaskButton;
 
     public WebElement phaseRow(String phase) {
 
@@ -145,6 +169,11 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     public WebElement problemIndicatorByService(String service) {
 
         return serviceRowByName(service).findElement(By.xpath(".//i[@class='icon-problem-indicator' and not(contains(@style,'display: none;'))]"));
+    }
+
+    public WebElement serviceIcon(String service) {
+
+        return serviceRowByName(service).findElement(By.xpath(".//i[@class='help']/i"));
     }
 
     public WebElement serviceNameWebElement(String service) {

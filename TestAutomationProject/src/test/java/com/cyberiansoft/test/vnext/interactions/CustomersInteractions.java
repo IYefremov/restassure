@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.interactions;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import org.openqa.selenium.By;
 
 public class CustomersInteractions {
 

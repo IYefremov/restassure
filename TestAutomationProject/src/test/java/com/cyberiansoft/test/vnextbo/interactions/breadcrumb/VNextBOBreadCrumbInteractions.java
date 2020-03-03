@@ -42,10 +42,8 @@ public class VNextBOBreadCrumbInteractions {
         if (isSetWithEnter) {
             VNextBOBreadCrumbValidations.isLocationSearched(location);
             new Actions(DriverBuilder.getInstance().getDriver()).sendKeys(Keys.ENTER);
-            setLocation(location);
-        } else {
-            setLocation(location);
         }
+        setLocation(location);
     }
 
     private static void selectLocation(String location) {

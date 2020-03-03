@@ -5,13 +5,14 @@ import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInspectionsMenuScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -61,7 +62,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         ScreenNavigationSteps.pressBackButton();
     }
@@ -76,11 +77,12 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
 
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.clickEditInspectionMenuItem();
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableservicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableservicesscreen.selectService(inspectionData.getServiceData().getServiceName());
@@ -99,9 +101,8 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        VNextInspectionsMenuScreen inspectionsMenuScreen = inspectionsScreen.clickOnInspectionByInspNumber(inspectionNumber);
-        inspectionsMenuScreen.clickChangeCustomerMenuItem();
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_CUSTOMER);
         VNextCustomersScreen customersScreen = new VNextCustomersScreen();
         Assert.assertFalse(customersScreen.isAddCustomerButtonDisplayed());
         ScreenNavigationSteps.pressBackButton();
@@ -118,8 +119,8 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerToWholesailForInspection(inspectionNumber, testwholesailcustomer);
-        inspectionsScreen.switchToTeamInspectionsView();
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testwholesailcustomer);
+        InspectionSteps.switchToTeamInspections();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testwholesailcustomer.getFullName());
         inspectionsScreen.switchToMyInspectionsView();
@@ -137,7 +138,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerForWorkOrderViaSearch(inspectionNumber, testCustomer2);
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         ScreenNavigationSteps.pressBackButton();
     }
@@ -152,7 +153,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testCustomer1, InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionNumber = InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.changeCustomerForInspection(inspectionNumber, testCustomer2);
+        InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionNumber), testCustomer2.getFullName());
         inspectionsScreen.switchToTeamInspectionsView();
         inspectionsScreen.searchInpectionByFreeText(inspectionNumber);

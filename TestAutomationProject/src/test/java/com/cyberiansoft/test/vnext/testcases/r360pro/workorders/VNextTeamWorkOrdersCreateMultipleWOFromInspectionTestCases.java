@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -14,6 +15,8 @@ import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
+import com.cyberiansoft.test.vnext.validations.MenuValidations;
+import com.cyberiansoft.test.vnext.validations.WorkOrdersScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -54,7 +57,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         SelectedServicesScreenSteps.unselectServices(workOrderData.getInspectionData().getServicesList());
         ListServicesValidations.verifySelectedServices(workOrderData.getServicesList());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
-        WorkOrderSteps.workOrderShouldBePresent(workOrderId);
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderId, true);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -68,17 +71,17 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        InspectionMenuSteps.createWorkOrderMenuItemShouldBeVisible(false);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, false);
         InspectionMenuSteps.approveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        InspectionMenuSteps.createWorkOrderMenuItemShouldBeVisible(true);
+        MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, true);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR);
         VehicleInfoScreenInteractions.waitPageLoaded();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData().getServiceName());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
-        WorkOrderSteps.workOrderShouldBePresent(workOrderId);
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderId, true);
         ScreenNavigationSteps.pressBackButton();
     }
 }

@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
 import com.cyberiansoft.test.dataclasses.InspectionData;
-import com.cyberiansoft.test.dataclasses.InspectionStatus;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -9,6 +8,7 @@ import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -279,7 +279,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
 
         InspectionSteps.trySaveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        MenuSteps.selectMenuItem(MenuItems.EMAIL);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
 

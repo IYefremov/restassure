@@ -8,16 +8,7 @@ import com.cyberiansoft.test.email.getnada.NadaEMailService;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.enums.VehicleDataField;
-import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
@@ -59,7 +50,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
 
         final String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        MenuSteps.selectMenuItem(MenuItems.EMAIL);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
         ScreenNavigationSteps.pressBackButton();
@@ -105,7 +96,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
         final String inspectionNumber = InspectionSteps.saveInspection();
 
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        MenuSteps.selectMenuItem(MenuItems.EMAIL);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
         NadaEMailService nadaEMailService = new NadaEMailService();
         EmailSteps.sendEmail(nadaEMailService.getEmailId());
         ScreenNavigationSteps.pressBackButton();
@@ -156,7 +147,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
         final String inspectionNumber = InspectionSteps.saveInspection();
 
 		InspectionSteps.openInspectionMenu(inspectionNumber);
-		MenuSteps.selectMenuItem(MenuItems.EMAIL);
+		MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);
         NadaEMailService nadaEMailService = new NadaEMailService();
 		EmailSteps.sendEmail(nadaEMailService.getEmailId());
 		ScreenNavigationSteps.pressBackButton();

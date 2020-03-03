@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
-import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class EmailSteps {

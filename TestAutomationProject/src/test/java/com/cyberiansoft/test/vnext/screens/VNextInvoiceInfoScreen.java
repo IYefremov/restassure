@@ -1,12 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.menuscreens.VNextInvoiceMenuScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -15,7 +10,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -33,7 +27,7 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	private WebElement invoiceDate;
 
 	@FindBy(xpath="//*[@action='add-order']")
-	private WebElement addorderbtn;
+	private WebElement addOrderBtn;
 
 	@FindBy(xpath="//*[@action='create-invoice']/i")
 	private WebElement createinvoicemenu;
@@ -78,40 +72,14 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 		tap(pickerwheel.findElement(By.xpath(".//a[@class='link close-picker']")));
 	}
 
-	public void addWorkOrdersToInvoice(List<String> workOrders) {
-		VNextSelectWorkOrdersScreen selectWorkOrdersScreen = clickAddWorkOrdersButton();
-		for (String woNumber : workOrders)
-			selectWorkOrdersScreen.selectWorkOrder(woNumber);
-		selectWorkOrdersScreen.clickAddWorkOrders();
+	public WebElement getInvoiceWorkOrderPanel(String workOrderNumber) {
+		return getWorkOrdersList().stream().
+				filter(workOrdersPanel -> workOrdersPanel.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim().equals(workOrderNumber)).
+				findFirst()
+				.orElseThrow(() -> new RuntimeException("Work Order not found " + workOrderNumber));
 	}
 
-	public VNextSelectWorkOrdersScreen clickAddWorkOrdersButton() {
-		tap(addorderbtn);
-		return new VNextSelectWorkOrdersScreen(appiumdriver);
-	}
-
-	public void deattechWorkOrdersFromInvoice(List<String> workOrders) {
-		for (String woNumber : workOrders) {
-			WebElement woCell = getInvoiceWorkOrderPanel(woNumber);
-			if (woCell != null)
-				tap(woCell.findElement(By.xpath(".//*[@action='delete-order']")));
-			else
-				Assert.fail("Can't find work order: " + woNumber);
-		}
-	}
-
-	private WebElement getInvoiceWorkOrderPanel(String workOrderNumber) {
-		WebElement woCell = null;
-		List<WebElement> workOrdersPanels = getListOfInvoiceWorkOrders();
-		for (WebElement workOrdersPanel : workOrdersPanels)
-			if (workOrdersPanel.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim().equals(workOrderNumber)) {
-				woCell = workOrdersPanel;
-				break;
-			}
-		return woCell;
-	}
-
-	private List<WebElement> getListOfInvoiceWorkOrders() {
+	private List<WebElement> getWorkOrdersList() {
 		return invoiceInfoPanel.findElements(By.xpath(".//*[@action='edit-order']"));
 	}
 

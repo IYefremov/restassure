@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.interactions;
 
 import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 
@@ -22,6 +21,7 @@ public class VNextInvoiceInfoScreenInteractions {
         WaitUtils.waitUntilElementIsClickable(invoiceInfoScreen.getInvoiceTotalAmont());
         return invoiceInfoScreen.getInvoiceTotalAmont().getText().trim();
     }
+
 
     public static boolean isWorkOrderSelectedForInvoice(String workOrderId) {
         VNextInvoiceInfoScreen invoiceInfoScreen = new VNextInvoiceInfoScreen();

@@ -8,11 +8,9 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
@@ -70,9 +68,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		workordersscreen.clickCreateInvoiceIcon();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-        workOrders.forEach(workOrderId -> {
-			InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true);
-		});
+        workOrders.forEach(workOrderId -> InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true));
 		InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
 		final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
 		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
@@ -284,7 +280,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
             //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
-			vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
             VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			servicesscreen.switchToAvalableServicesView();
 			servicesscreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
@@ -299,9 +295,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		workordersscreen.clickCreateInvoiceIcon();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		informationDialog.clickSingleInvoiceButton();
-        workOrders.forEach(workOrderId -> {
-					InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true);
-				});
+        workOrders.forEach(workOrderId -> InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true));
 		InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
 		InvoiceInfoScreenValidations.validateInvoiceTotal(testCaseData.getInvoiceData().getInvoiceTotal());
 		InvoiceSteps.saveInvoiceAsFinal();
@@ -336,12 +330,12 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
             //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			//vehicleVINHistoryScreen.clickBackButton();
 			workOrders.add(vehicleInfoScreen.getNewInspectionNumber());
-			vehicleInfoScreen.changeScreen(ScreenType.SERVICES);
+			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
             VNextAvailableServicesScreen servicesscreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			servicesscreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
 			VNextSelectedServicesScreen selectservicesscreen =  servicesscreen.switchToSelectedServicesView();
 			selectservicesscreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
-			workordersscreen = vehicleInfoScreen.saveWorkOrderViaMenu();
+			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
         workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());

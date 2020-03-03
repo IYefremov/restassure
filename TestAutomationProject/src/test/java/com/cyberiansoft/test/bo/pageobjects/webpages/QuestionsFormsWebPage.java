@@ -101,7 +101,7 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	public void createQuestionSection(String questionsectionname, boolean expanded) {
 		if (isQuestionSectionExists(questionsectionname)) {
 			deleteQuestionSections(questionsectionname);
-		};
+		}
 		clickAddQuestionSectionButton();
 		clearAndType(newquestionsectionnamefld, questionsectionname);
 		if (expanded) {
@@ -258,12 +258,10 @@ public class QuestionsFormsWebPage extends BaseWebPage {
 	}
 
 	public boolean isQuestionFormExists(String questionformname) {
-		boolean exists =  questionformstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + questionformname + "']")).size() > 0;
-		return exists;
+		return questionformstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + questionformname + "']")).size() > 0;
 	}
 
 	public boolean isQuestionSectionExists(String questionsectionname) {
-		boolean exists =  questionsectionstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + questionsectionname + "']")).size() > 0;
-		return exists;
+		return questionsectionstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + questionsectionname + "']")).size() > 0;
 	}
 }

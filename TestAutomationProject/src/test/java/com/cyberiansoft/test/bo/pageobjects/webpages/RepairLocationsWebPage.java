@@ -206,7 +206,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			clickEditTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + repairlocation + " repair location");
+            Assert.fail("Can't find " + repairlocation + " repair location");
 		}
 	}
 
@@ -215,7 +215,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + repairlocation + " repair location");
+            Assert.fail("Can't find " + repairlocation + " repair location");
 		}
 	}
 

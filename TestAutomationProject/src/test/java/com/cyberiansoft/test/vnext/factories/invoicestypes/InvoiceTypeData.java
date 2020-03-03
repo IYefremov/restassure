@@ -22,7 +22,7 @@ public class InvoiceTypeData {
         }
     }
 
-    public String getInvoiceTypeID() { return invoiceTypeID; };
+    public String getInvoiceTypeID() { return invoiceTypeID; }
 
-    public boolean isCanBeFinalDraft() { return canBeFinalDraft; };
+    public boolean isCanBeFinalDraft() { return canBeFinalDraft; }
 }

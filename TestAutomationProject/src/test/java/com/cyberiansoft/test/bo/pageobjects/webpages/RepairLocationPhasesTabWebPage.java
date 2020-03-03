@@ -113,8 +113,7 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 	}
 	
 	public boolean isRepairLocationPhaseExists(String repairlocationphase) {
-		boolean exists =  phasestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + repairlocationphase + "']")).size() > 0;
-		return exists;
+        return phasestable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + repairlocationphase + "']")).size() > 0;
 	}
 	
 	public void deleteRepairLocationPhase(String repairlocationphase) {
@@ -122,7 +121,7 @@ public class RepairLocationPhasesTabWebPage extends BaseWebPage {
 		if (row != null) {
 			deleteTableRow(row);
 		} else {
-			Assert.assertTrue(false, "Can't find " + repairlocationphase + " repair location phase");	
+            Assert.fail("Can't find " + repairlocationphase + " repair location phase");
 		}
 	}
 	

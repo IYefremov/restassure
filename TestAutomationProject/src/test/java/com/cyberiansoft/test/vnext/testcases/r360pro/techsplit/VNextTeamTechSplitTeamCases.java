@@ -166,7 +166,7 @@ public class VNextTeamTechSplitTeamCases extends BaseTestClass {
         VehicleInfoScreenSteps.openTechnicianMenu();
         TechScreenValidations.validateTechniciansPercentage(technicianSplitData);
         TechnicianScreenInteractions.selectCustomOption();
-        customTechPercentages.stream().forEach(techPercentages -> {
+        customTechPercentages.forEach(techPercentages -> {
             TechnicianScreenInteractions.setTechnicianPercentage(technicianList.get(0).getEmployeeName(), techPercentages);
             TechnicianScreenSteps.closeTechnicianMenu();
             InformationDialogValidations.clickOKAndVerifyMessage("Total amount is not equals 100%.");

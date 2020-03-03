@@ -20,9 +20,7 @@ import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunDTO;
 import com.cyberiansoft.test.targetprocessintegration.enums.TestCaseRunStatus;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnext.listeners.TestNG_ConsoleRunner;
-import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.mashape.unirest.http.exceptions.UnirestException;
-import org.json.simple.JSONObject;
 import org.testng.*;
 
 import java.io.IOException;
@@ -43,9 +41,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
             String targetProcessSuiteID = context.getSuite().getParameter("tpsuite.id");
             try {
                 testPlanRunDTO = tpIntegrationService.createTestPlanRun(targetProcessSuiteID);
-            } catch (UnirestException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (UnirestException | IOException e) {
                 e.printStackTrace();
             }
         }
@@ -158,10 +154,7 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
                                 try {
                                     tpIntegrationService.setTestCaseRunStatus(testCaseRunDTO.getId().toString(), testCaseRunStatus, "");
                                     break;
-                                } catch (UnirestException e) {
-                                    e.printStackTrace();
-                                    break;
-                                } catch (IOException e) {
+                                } catch (UnirestException | IOException e) {
                                     e.printStackTrace();
                                     break;
                                 }
@@ -201,10 +194,6 @@ public class iOSregularClientListener extends TestListenerAdapter implements IIn
                     try {
                         tpIntegrationService.setTestCaseAutomatedField(targetProcessTestCaseData.getTestCaseID());
                     } catch (UnirestException e) {
-                        e.printStackTrace();
-                    } catch (UnrecognizedPropertyException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }

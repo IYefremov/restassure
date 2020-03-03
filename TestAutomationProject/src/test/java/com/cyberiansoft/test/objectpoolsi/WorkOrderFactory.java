@@ -49,7 +49,7 @@ public class WorkOrderFactory extends BasePooledObjectFactory<WorkOrderDTO> {
     public WorkOrderDTO create() throws Exception {
         if (lastWONumber == 0)
             lastWONumber = getLastWorkOrderNumber(licenseID, deviceID, appID,
-                    employeeID, true, GlobalUtils.getWorkOrderSymbol() + appLicenseEntity).getLocalNo();
+                    employeeID, true, GlobalUtils.WORK_ORDER_SYMBOL + appLicenseEntity).getLocalNo();
 
         Gson gson = new Gson();
         JtwigTemplate template = JtwigTemplate.inlineTemplate(gson.toJson(workOrderDTO));
@@ -79,7 +79,7 @@ public class WorkOrderFactory extends BasePooledObjectFactory<WorkOrderDTO> {
 
     @Override
     public PooledObject<WorkOrderDTO> wrap(WorkOrderDTO workOrder) {
-        return new DefaultPooledObject<WorkOrderDTO>(workOrder);
+        return new DefaultPooledObject<>(workOrder);
     }
 
     public static WorkOrderDTO getLastWorkOrderNumber(String licenceId, String deviceId, String applicationId,

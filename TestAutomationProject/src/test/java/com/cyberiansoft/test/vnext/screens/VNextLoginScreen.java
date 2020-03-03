@@ -143,7 +143,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
     }
 
     public ArrayList<String> getEmployeeList() {
-        ArrayList<String> employeesList = new ArrayList<String>();
+        ArrayList<String> employeesList = new ArrayList<>();
         List<WebElement> employees = employeeslist.findElements(By.xpath(".//*[@class='employee-list-item']"));
         for (WebElement employeeItem : employees)
             employeesList.add(employeeItem.getText().trim());
@@ -159,7 +159,10 @@ public class VNextLoginScreen extends VNextBaseScreen {
 
         boolean sorted = true;
         for (int i = 1; i < employeesListSorted.size(); i++) {
-            if (employeesListSorted.get(i).equals(employeesList.get(i)) == false) sorted = false;
+            if (!employeesListSorted.get(i).equals(employeesList.get(i))) {
+                sorted = false;
+                break;
+            }
         }
 
         return sorted;
