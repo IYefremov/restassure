@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.customers;
 
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
-import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -30,9 +29,6 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
     RetailCustomer retailCustomer1 = new RetailCustomer("Preset1", "RetailCustomer1");
     RetailCustomer retailCustomer2 = new RetailCustomer("Preset2", "RetailCustomer2");
 
-    RetailCustomer defaultRetailCustomer = new RetailCustomer("Retail", "");
-    WholesailCustomer defaultWholesailCustomer = new WholesailCustomer("Wholesale", "Wholesale", "Wholesale");
-
     @BeforeClass(description="Team Preset Customer Test Cases")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getPresetCustomerTestCasesDataPath();
@@ -46,9 +42,9 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
 
         CustomersScreenSteps.switchToWholesaleMode();
-        CustomersScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
+        CustomersScreenValidation.validateDefaultCustomerValue("");
         ScreenNavigationSteps.pressBackButton();
-        HomeScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
+        HomeScreenValidation.validateDefaultCustomerValue("");
     }
 
 
@@ -65,9 +61,9 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         HomeScreenSteps.openCustomers();
         CustomersScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
         CustomersScreenSteps.resetPresetCustomer();
-        CustomersScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName());
+        CustomersScreenValidation.validateDefaultCustomerValue("");
         ScreenNavigationSteps.pressBackButton();
-        HomeScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName().trim());
+        HomeScreenValidation.validateDefaultCustomerValue("");
     }
 
 
@@ -161,34 +157,6 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         CustomersScreenValidation.validateDefaultCustomerValue(testwholesailcustomer.getFullName());
         ScreenNavigationSteps.pressBackButton();
         HomeScreenValidation.validateDefaultCustomerValue(testwholesailcustomer.getFullName());
-    }
-
-
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
-    public void testVerifyPresetCustomerCanceledIfUserGoFromRetailToWholesaleCustomerScreen(String rowID,
-                                                      String description, JSONObject testData) {
-
-        WholesailCustomer defaultWholesailCustomer = new WholesailCustomer();
-        defaultWholesailCustomer.setCompanyName("Wholesale");
-        HomeScreenSteps.openCustomers();
-
-        CustomersScreenSteps.switchToRetailMode();
-        CustomerServiceSteps.createCustomerIfNotExistAndSetAsDefault(retailCustomer1);
-        CustomersScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
-        ScreenNavigationSteps.pressBackButton();
-        HomeScreenValidation.validateDefaultCustomerValue(retailCustomer1.getFullName());
-        HomeScreenSteps.openCustomers();
-
-        CustomersScreenSteps.switchToWholesaleMode();
-        CustomersScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
-        ScreenNavigationSteps.pressBackButton();
-        HomeScreenValidation.validateDefaultCustomerValue(defaultWholesailCustomer.getFullName());
-
-        HomeScreenSteps.openCustomers();
-        CustomersScreenSteps.switchToRetailMode();
-        CustomersScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName().trim());
-        ScreenNavigationSteps.pressBackButton();
-        HomeScreenValidation.validateDefaultCustomerValue(defaultRetailCustomer.getFullName());
     }
 
 }

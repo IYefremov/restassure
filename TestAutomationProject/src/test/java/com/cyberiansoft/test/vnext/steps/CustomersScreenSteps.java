@@ -42,12 +42,15 @@ public class CustomersScreenSteps {
 
     public static void setCustomerAsDefault(AppCustomer appCustomer) {
         VNextCustomersScreen customersScreen = new VNextCustomersScreen();
-        customersScreen.setCustomerAsDefault(appCustomer);
+        selectCustomer(appCustomer);
+        MenuSteps.selectMenuItem(MenuItems.SET_AS_DEFAULT);
         WaitUtilsWebDriver.waitForTextToBePresentInElement(customersScreen.getPresetCustomerPanel(), appCustomer.getFullName());
+        SearchSteps.cancelSearch();
     }
 
     public static void openCustomerForEdit(AppCustomer appCustomer) {
         selectCustomer(appCustomer);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
     }
+
 }

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WaitUtils {
 
-    private static final int durationInSeconds = 30;
+    private static final int durationInSeconds = 45;
     private static final int pullingIntervalInMils = 500;
 
     public static void collectionSizeIsGreaterThan(List<?> list, Integer expectedSize) {
