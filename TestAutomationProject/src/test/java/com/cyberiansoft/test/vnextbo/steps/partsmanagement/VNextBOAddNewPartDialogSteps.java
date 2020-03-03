@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddNewPartDialog;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAddNewPartDialogValidations;
@@ -15,6 +16,7 @@ public class VNextBOAddNewPartDialogSteps {
         Utils.clearAndType(addNewPartDialog.getServiceField(), serviceName);
         Utils.selectOptionInDropDownWithJs(addNewPartDialog.getServiceFieldDropDown(),
                 addNewPartDialog.dropDownFieldOption(serviceName));
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void setDescription(String description) {

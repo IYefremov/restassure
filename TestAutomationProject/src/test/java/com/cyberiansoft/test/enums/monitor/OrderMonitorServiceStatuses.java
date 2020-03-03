@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.enums;
+package com.cyberiansoft.test.enums.monitor;
 
 import lombok.Getter;
 
@@ -19,7 +19,7 @@ public enum OrderMonitorServiceStatuses {
 
     private String value;
 
-    OrderMonitorServiceStatuses(String value) {
+    OrderMonitorServiceStatuses(final String value) {
         this.value = value;
     }
 }

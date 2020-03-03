@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
@@ -9,6 +10,7 @@ import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCur
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import org.testng.Assert;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +42,14 @@ public class VNextBORODetailsPageSteps {
             VNextBORODetailsPageInteractions.setServiceStatusForService(serviceId, status);
             WaitUtilsWebDriver.waitForPageToBeLoaded();
         }
+    }
+
+    public static void setVendorPrice(String serviceId, VNextBOMonitorData data) {
+        Arrays.asList(data.getServiceVendorPrices())
+                .forEach(vendorPrice -> {
+                    VNextBORODetailsPageInteractions.setServiceVendorPrice(serviceId, data.getService(), vendorPrice);
+                    VNextBORODetailsPageValidations.verifyServiceVendorPriceIsSet(serviceId, vendorPrice);
+                });
     }
 
     public static void setServiceStatusForMultipleServicesByServiceId(List<String> serviceIds, String status) {

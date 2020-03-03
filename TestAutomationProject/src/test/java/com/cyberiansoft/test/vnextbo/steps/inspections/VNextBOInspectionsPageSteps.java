@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.inspections;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.inspections.VNextBOInspectionsDetailsData;
+import com.cyberiansoft.test.vnextbo.interactions.inspections.VNextBOInspectionsPageInteractions;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
@@ -222,7 +223,7 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
 
     public static void deleteSavedAdvancedSearchFilter(String filterName) {
 
-        new VNextBOInspectionsWebPage().openSavedAdvancedSearchFilter(filterName);
+        VNextBOInspectionsPageInteractions.openSavedAdvancedSearchFilter(filterName);
         VNextBOInspectionsAdvancedSearchSteps.deleteSavedSearchFilter();
     }
 

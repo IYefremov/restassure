@@ -86,29 +86,27 @@ public class VNextBOClientDetailsViewAccordionSteps {
         WaitUtilsWebDriver.waitABit(2000);
         WaitUtilsWebDriver.waitForElementToBeClickable(new VNextBOClientsDetailsViewAccordion().getClientsInfo(), 2);
         if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) clickClientsInfoTab("true");
-        final VNextBOClientInfoBlockInteractions clientInfoBlockInteractions = new VNextBOClientInfoBlockInteractions();
         if (employee.getClientType().toLowerCase().equals("retail")) {
-            clientInfoBlockInteractions.setRetailCompanyType();
+            VNextBOClientInfoBlockInteractions.setRetailCompanyType();
         } else if (employee.getClientType().toLowerCase().equals("wholesale")) {
-            clientInfoBlockInteractions.setWholesaleCompanyType();
+            VNextBOClientInfoBlockInteractions.setWholesaleCompanyType();
         }
-        clientInfoBlockInteractions.setCompanyName(employee.getCompanyName());
-        clientInfoBlockInteractions.setFirstName(employee.getEmployeeFirstName());
-        clientInfoBlockInteractions.setLastName(employee.getEmployeeLastName());
-        clientInfoBlockInteractions.setEmail(employee.getEmployeeEmail());
-        clientInfoBlockInteractions.setPhone(employee.getPhoneNumber());
+        VNextBOClientInfoBlockInteractions.setCompanyName(employee.getCompanyName());
+        VNextBOClientInfoBlockInteractions.setFirstName(employee.getEmployeeFirstName());
+        VNextBOClientInfoBlockInteractions.setLastName(employee.getEmployeeLastName());
+        VNextBOClientInfoBlockInteractions.setEmail(employee.getEmployeeEmail());
+        VNextBOClientInfoBlockInteractions.setPhone(employee.getPhoneNumber());
     }
 
     public static void setAccountInfoData(AccountInfoData accountInfoData) {
 
         if (!VNextBOClientDetailsValidations.verifyAccountInfoPanelIsExpanded()) clickAccountInfoTab("true");
-        final VNextBOAccountInfoBlockInteractions accountInfoBlockInteractions = new VNextBOAccountInfoBlockInteractions();
-        accountInfoBlockInteractions.setAccountingId(accountInfoData.getAccountingId());
-        accountInfoBlockInteractions.setAccountingId2(accountInfoData.getAccountingId2());
-        accountInfoBlockInteractions.setExportAs(accountInfoData.getExportAs());
-        accountInfoBlockInteractions.setClass(accountInfoData.getClassOption());
-        accountInfoBlockInteractions.setQbAccount(accountInfoData.getQbAccount());
-        accountInfoBlockInteractions.clickPoNumberRequiredCheckbox();
+        VNextBOAccountInfoBlockInteractions.setAccountingId(accountInfoData.getAccountingId());
+        VNextBOAccountInfoBlockInteractions.setAccountingId2(accountInfoData.getAccountingId2());
+        VNextBOAccountInfoBlockInteractions.setExportAs(accountInfoData.getExportAs());
+        VNextBOAccountInfoBlockInteractions.setClass(accountInfoData.getClassOption());
+        VNextBOAccountInfoBlockInteractions.setQbAccount(accountInfoData.getQbAccount());
+        VNextBOAccountInfoBlockInteractions.clickPoNumberRequiredCheckbox();
     }
 
     public static void setAddressData(AddressData addressData) {

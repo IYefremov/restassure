@@ -1,9 +1,8 @@
 package com.cyberiansoft.test.ios10_client.regularvalidations;
 
 import com.cyberiansoft.test.dataclasses.*;
-import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
-import com.cyberiansoft.test.enums.OrderMonitorStatuses;
-import com.cyberiansoft.test.ios10_client.hdclientsteps.AssignTechniciansSteps;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorServiceStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.RegularOrderMonitorScreen;
 import org.testng.Assert;
 

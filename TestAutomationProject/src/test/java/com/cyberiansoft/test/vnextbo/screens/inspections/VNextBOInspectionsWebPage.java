@@ -4,14 +4,12 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -129,8 +127,6 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
-	public boolean isInspectionApproveButtonVisible() {	return Utils.isElementDisplayed(approveInspectionIcon);	}
-
 	public void selectInspectionInTheList(String inspectionNumber) {
 		Utils.clickElement(driver.findElement(By.xpath("//div[@class='entity-list__item__description']/div/b[text()='" + inspectionNumber + "']")));
         WaitUtilsWebDriver.waitABit(4000);
@@ -221,16 +217,6 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		driver.navigate().refresh();
 	}
 
-	public void openApproveInspectionWindow() {
-		String parentHandle = driver.getWindowHandle();
-		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
-        VNextBOConfirmationDialogInteractions.clickYesButton();
-        WaitUtilsWebDriver.waitForNewTab();
-        String newWindow = Utils.getNewTab(parentHandle);
-		driver.switchTo().window(newWindow);
-        WaitUtilsWebDriver.waitForLoading();
-	}
-
 	public void declineInspection(String declineNotes) {
 		String parentHandle = driver.getWindowHandle();
 		VNextBOInspectionsPageSteps.clickInspectionApproveButton();
@@ -269,33 +255,5 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
 		}
 		return PageFactory.initElements(
 				driver, VNextBOInspectionInfoWebPage.class);
-	}
-
-	public VNextBOInspectionAdvancedSearchForm openSavedAdvancedSearchFilter(String filterName) {
-        WaitUtilsWebDriver.waitABit(2000);
-		Actions act = new Actions(driver);
-		act.moveToElement(savedSearchListForm.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i"))).perform();
-
-		savedSearchListForm.findElement(By.xpath(".//div/span[text()='" + filterName + "']/../i")).click();
-		return PageFactory.initElements(
-				driver, VNextBOInspectionAdvancedSearchForm.class);
-	}
-
-	public void setSearchFieldValue(String searchText) {
-		Utils.clearAndType(searchFld, searchText);
-	}
-
-	public void clickSearchFilterButton() {
-		Utils.clickElement(searchFilterBtn);
-		WaitUtils.isElementPresent(clearFilterBtn);
-	}
-
-	public String getFirstInspectionStatus() {
-		try {
-			return Utils.getText(inspectionStatusLabels.get(0));
-		} catch (Exception e) {
-			e.printStackTrace();
-			return "";
-		}
 	}
 }

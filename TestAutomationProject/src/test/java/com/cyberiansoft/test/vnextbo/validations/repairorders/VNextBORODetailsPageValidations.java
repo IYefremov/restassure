@@ -27,10 +27,7 @@ public class VNextBORODetailsPageValidations {
                 "The Vendor/Technician '" + name + "' hasn't been found.");
     }
 
-    public static void verifyServiceVendorPriceIsSet(String serviceId, String service, String vendorPrice) {
-        System.out.println("Vendor price: " + VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId));
-        System.out.println("vendor price to be inserted: " + vendorPrice);
-        VNextBORODetailsPageInteractions.setServiceVendorPrice(serviceId, service, vendorPrice);
+    public static void verifyServiceVendorPriceIsSet(String serviceId, String vendorPrice) {
         Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId), vendorPrice,
                 "The Vendor Price hasn't been changed");
     }
@@ -40,15 +37,15 @@ public class VNextBORODetailsPageValidations {
     }
 
     public static boolean isPhaseActionsTriggerDisplayed(String phase) {
-        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsTrigger(phase));
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsTrigger(phase), true, 5);
     }
 
     public static boolean isCheckInOptionDisplayedForPhase() {
-        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsCheckInOption());
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsCheckInOption(), true, 2);
     }
 
     public static boolean isCheckOutOptionDisplayedForPhase() {
-        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsCheckOutOption());
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsCheckOutOption(), true, 2);
     }
 
     public static void verifyCheckInOptionIsDisplayedForPhase() {

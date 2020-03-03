@@ -49,13 +49,15 @@ public class VNextBOLeftMenuInteractions {
 
     public static void selectDeviceManagementMenu() {
         selectMenuItem(MainMenuItems.SETTINGS.getMenu(), "Device Management");
-        Utils.refreshPage();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+//        Utils.refreshPage();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     public static void selectRepairOrdersMenu() {
         selectMenuItem(MainMenuItems.MONITOR.getMenu(), "Repair Orders");
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void expandMainMenu() {

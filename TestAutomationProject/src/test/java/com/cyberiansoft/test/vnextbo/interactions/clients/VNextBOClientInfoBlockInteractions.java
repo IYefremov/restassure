@@ -1,43 +1,35 @@
 package com.cyberiansoft.test.vnextbo.interactions.clients;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientInfoBlock;
-import org.openqa.selenium.support.PageFactory;
 
 public class VNextBOClientInfoBlockInteractions {
 
-    private VNextBOClientInfoBlock clientInfoBlock;
-
-    public VNextBOClientInfoBlockInteractions() {
-        clientInfoBlock = PageFactory.initElements(DriverBuilder.getInstance().getDriver(), VNextBOClientInfoBlock.class);
+    public static void setRetailCompanyType() {
+        Utils.clickElement(new VNextBOClientInfoBlock().getRetailRadioButton());
     }
 
-    public void setRetailCompanyType() {
-        Utils.clickElement(clientInfoBlock.getRetailRadioButton());
+    public static void setWholesaleCompanyType() {
+        Utils.clickElement(new VNextBOClientInfoBlock().getWholesaleRadioButton());
     }
 
-    public void setWholesaleCompanyType() {
-        Utils.clickElement(clientInfoBlock.getWholesaleRadioButton());
+    public static void setCompanyName(String companyName) {
+        Utils.clearAndType(new VNextBOClientInfoBlock().getCompanyInputField(), companyName);
     }
 
-    public void setCompanyName(String companyName) {
-        Utils.clearAndType(clientInfoBlock.getCompanyInputField(), companyName);
+    public static void setFirstName(String firstName) {
+        Utils.clearAndType(new VNextBOClientInfoBlock().getFirstNameInputField(), firstName);
     }
 
-    public void setFirstName(String firstName) {
-        Utils.clearAndType(clientInfoBlock.getFirstNameInputField(), firstName);
+    public static void setLastName(String lastName) {
+        Utils.clearAndType(new VNextBOClientInfoBlock().getLastNameInputField(), lastName);
     }
 
-    public void setLastName(String lastName) {
-        Utils.clearAndType(clientInfoBlock.getLastNameInputField(), lastName);
+    public static void setEmail(String email) {
+        Utils.clearAndType(new VNextBOClientInfoBlock().getEmailInputField(), email);
     }
 
-    public void setEmail(String email) {
-        Utils.clearAndType(clientInfoBlock.getEmailInputField(), email);
-    }
-
-    public void setPhone(String phone) {
-        Utils.clearAndType(clientInfoBlock.getPhoneInputField(), phone);
+    public static void setPhone(String phone) {
+        Utils.clearAndType(new VNextBOClientInfoBlock().getPhoneInputField(), phone);
     }
 }

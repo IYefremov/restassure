@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.devicemanagement.VNextBOPendingRegistrationWebPage;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
-import org.testng.Assert;
 
 public class VNextBOPendingRegistrationTabSteps extends VNextBODeviceManagementSteps {
 
@@ -33,8 +32,7 @@ public class VNextBOPendingRegistrationTabSteps extends VNextBODeviceManagementS
         VNextBOModalDialogSteps.clickYesButton();
     }
 
-    public static boolean checkWhetherDevicesNotFoundMessageIsDisplayed() {
-
-        return Utils.isElementDisplayed(new VNextBOPendingRegistrationWebPage().getNoDevicesFoundMessage());
+    public static boolean isDevicesNotFoundMessageDisplayed() {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPendingRegistrationWebPage().getNoDevicesFoundMessage(), true, 2);
     }
 }
