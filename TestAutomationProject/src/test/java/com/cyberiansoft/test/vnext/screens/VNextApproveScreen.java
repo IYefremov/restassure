@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 @Getter
 public class VNextApproveScreen extends VNextBaseScreen {
 	
-	@FindBy(xpath="//div[@data-automations-id='approve']")
+	@FindBy(xpath="//div[@data-automation-id='approve']")
 	private WebElement approcescreen;
 	
 	@FindBy(id="approve-signature-canvas")
