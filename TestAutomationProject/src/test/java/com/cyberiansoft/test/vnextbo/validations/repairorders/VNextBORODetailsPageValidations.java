@@ -37,24 +37,15 @@ public class VNextBORODetailsPageValidations {
     }
 
     public static boolean isPhaseActionsTriggerDisplayed(String phase) {
-        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsTrigger(phase), true, 5);
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsTrigger(phase));
     }
 
     public static boolean isCheckInOptionDisplayedForPhase() {
-        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsCheckInOption(), true, 2);
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsCheckInOption());
     }
 
     public static boolean isCheckOutOptionDisplayedForPhase() {
-        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsCheckOutOption(), true, 2);
-    }
-
-    public static void verifyCheckInOptionIsDisplayedForPhase() {
-        VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
-        if (isCheckInOptionDisplayedForPhase()) {
-            VNextBORODetailsPageInteractions.closeActionsDropDownForPhase();
-        } else {
-            VNextBORODetailsPageInteractions.clickCheckOutOptionForPhase();
-        }
+        return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsCheckOutOption());
     }
 
     public static boolean isRoDetailsSectionDisplayed() {

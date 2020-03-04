@@ -14,6 +14,7 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.inspections.VNextBOInspectionsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
@@ -300,9 +301,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.searchByWoAndTimeFrame(data.getOrderNumber(), TimeFrameValues.TIMEFRAME_CUSTOM);
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
-        Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(),
-                "The phase actions trigger hasn't been displayed");
-        VNextBORODetailsPageValidations.verifyCheckInOptionIsDisplayedForPhase();
+        VNextBORODetailsPageSteps.confirmCheckInOptionIsDisplayedForPhase();
         VNextBORODetailsPageSteps.setCheckInOptionForPhase();
         VNextBORODetailsPageSteps.setCheckOutOptionForPhase();
     }
@@ -314,6 +313,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(data.getLocation());
         VNextBOROAdvancedSearchDialogSteps.searchByWoAndTimeFrame(data.getOrderNumber(), TimeFrameValues.TIMEFRAME_CUSTOM);
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
+        VNextBORODetailsPageInteractions.waitForPhaseActionsTriggerToBeDisplayed(data.getPhase());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 

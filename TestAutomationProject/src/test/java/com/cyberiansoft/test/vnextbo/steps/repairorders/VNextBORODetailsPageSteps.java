@@ -61,6 +61,7 @@ public class VNextBORODetailsPageSteps {
 
     public static void setCheckInOptionForPhase() {
         VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        VNextBORODetailsPageInteractions.waitForPhaseActionsCheckInOption();
         Assert.assertTrue(VNextBORODetailsPageValidations.isCheckInOptionDisplayedForPhase(),
                 "The 'Check in' option hasn't been displayed for phase");
         VNextBORODetailsPageInteractions.clickCheckInOptionForPhase();
@@ -68,6 +69,7 @@ public class VNextBORODetailsPageSteps {
 
     public static void setCheckOutOptionForPhase() {
         VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        VNextBORODetailsPageInteractions.waitForPhaseActionsCheckOutOption();
         Assert.assertTrue(VNextBORODetailsPageValidations.isCheckOutOptionDisplayedForPhase(),
                 "The 'Check out' option hasn't been displayed for phase");
         VNextBORODetailsPageInteractions.clickCheckOutOptionForPhase();
@@ -193,5 +195,15 @@ public class VNextBORODetailsPageSteps {
 
     public static void resetServiceStartDate(List<String> allServicesId) {
         allServicesId.forEach(VNextBORODetailsPageSteps::resetServiceStartDate);
+    }
+
+    public static void confirmCheckInOptionIsDisplayedForPhase() {
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        VNextBORODetailsPageInteractions.waitForPhaseActionsCheckInOption();
+        if (VNextBORODetailsPageValidations.isCheckInOptionDisplayedForPhase()) {
+            VNextBORODetailsPageInteractions.closeActionsDropDownForPhase();
+        } else {
+            VNextBORODetailsPageInteractions.clickCheckOutOptionForPhase();
+        }
     }
 }

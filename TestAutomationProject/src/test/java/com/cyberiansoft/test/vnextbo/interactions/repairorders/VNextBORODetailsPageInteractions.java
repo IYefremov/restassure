@@ -306,7 +306,7 @@ public class VNextBORODetailsPageInteractions {
 
     private static void setOption(WebElement option) {
         Utils.clickElement(option);
-        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(new VNextBORODetailsPage().getPhaseActionsDropDown(), 5);
+        WaitUtilsWebDriver.waitForPageToBeLoaded(5);
     }
 
     public static void clickReportProblemForPhase(String phase) {
@@ -652,5 +652,21 @@ public class VNextBORODetailsPageInteractions {
 
     public static List<String> getPhasesServicesStatusesId(String phase) {
         return Utils.getText(new VNextBORODetailsPage().getPhaseServicesStatusesList(phase));
+    }
+
+    public static void waitForPhaseActionsTriggerToBeDisplayed() {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsTrigger(), true, 2);
+    }
+
+    public static void waitForPhaseActionsTriggerToBeDisplayed(String phase) {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsTrigger(phase), true, 2);
+    }
+
+    public static void waitForPhaseActionsCheckInOption() {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsCheckInOption(), true, 1);
+    }
+
+    public static void waitForPhaseActionsCheckOutOption() {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsCheckOutOption(), true, 1);
     }
 }
