@@ -21,7 +21,6 @@ import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
@@ -44,76 +43,86 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCanFindWorkOrdersOnBOAndDevice(String rowID,
-                                                   String description, JSONObject testData) {
+    public void testVerifyThatTheWOsAreAvailableOnBO(String rowID,
+                                                                  String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         List<WorkOrderData> workOrdersData = testCaseData.getWorkOrdersData();
-
-        /*TPIntegrationService tpIntegrationService = new TPIntegrationService();
-        TestPlanRunsDTO testPlanRunsDTO = tpIntegrationService.getTestPlanRunStatuses("107123");
-        int firstRunNumbers = testPlanRunsDTO.getItems().size();
-
-        boolean runTCs = true;
-        for (int i = 0; i <= 20; i++) {
-            if (!runTCs) {
-                testPlanRunsDTO = tpIntegrationService.getTestPlanRunStatuses("107123");
-                int currentRunsNumber = testPlanRunsDTO.getItems().size();
-                if (currentRunsNumber > firstRunNumbers) {
-                    runTCs = true;
-                } else {
-                    BaseUtils.waitABit(1000*60*2);
-                }
-
-            } else {
-
-
-                final TestPlanRunDTO testPlanRunDTO = testPlanRunsDTO.getItems().get(0);
-                TestCaseRunDTO testCaseRunDTO = testPlanRunDTO.getTestCaseRuns().getItems().stream()
-                        .filter(testCaseRun -> testCaseRun.getTestCase().getId().equals(106995))
-                        .findFirst().orElseThrow(() -> new RuntimeException("Can't find test cases with ID " + 106995));
-
-                if (testCaseRunDTO.getStatus().equals("Passed")) {
-                    String[] stockNumbers = testCaseRunDTO.getComment().split(",");
-
-                    for (String stockNumber : stockNumbers) {
-                        stockNumber = stockNumber.replace("<div>", "").replace("</div>", "");
-*/
+        WebDriver chromeDriver = WebdriverInicializator.getInstance().initWebDriver(BrowserType.CHROME);
+        chromeDriver.get("https://manheim-uat.cyberianconcepts.com/");
+        VNextBOLoginSteps.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(), VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
+        VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(workOrdersData.get(0).getMonitoring().getLocation());
 
         for (WorkOrderData workOrderData : workOrdersData) {
             Monitoring monitoringData = workOrderData.getMonitoring();
             String stockNumber = monitoringData.getStockNumber();
-            WebDriver chromeDriver = WebdriverInicializator.getInstance().initWebDriver(BrowserType.CHROME);
-            chromeDriver.get("https://manheim-uat.cyberianconcepts.com/");
-            VNextBOLoginSteps.userLogin(VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserName(), VNextTeamRegistrationInfo.getInstance().getBackOfficeStagingUserPassword());
 
-            VNextBOHomeWebPageSteps.openRepairOrdersMenuWithLocation(monitoringData.getLocation());
             VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
             VNextBOROAdvancedSearchDialogInteractions.setStockNum(stockNumber);
             VNextBOROAdvancedSearchDialogInteractions.setRepairStatus("All");
             VNextBOROAdvancedSearchDialogSteps.search();
             VNextBOROPageValidations.validateWorkOrderDisplayedByStockNumber(stockNumber, true);
-            final String workOrderId = VNextBOROPageInteractions.getWorkOrderNumberByStockNumber(stockNumber);
-            chromeDriver.quit();
+        }
+        chromeDriver.quit();
+    }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyThatTheWOsAreAvailableOnMobileDevice(String rowID,
+                                                     String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        List<WorkOrderData> workOrdersData = testCaseData.getWorkOrdersData();
+
+        for (WorkOrderData workOrderData : workOrdersData) {
+            Monitoring monitoringData = workOrderData.getMonitoring();
+            String stockNumber = monitoringData.getStockNumber();
             HomeScreenSteps.openUpdateWork();
             UpdateWorkSteps.searchRepairOrder(stockNumber);
-            PhaseScreenValidations.validatePhaseWorkOrderID(workOrderId);
             PhaseScreenValidations.validatePhaseStockNumber(stockNumber);
-            monitoringData.getOrderPhasesDto().forEach(phaseDto -> {
-                PhaseScreenValidations.validatePhaseStatus(phaseDto);
-                phaseDto.getPhaseServices().forEach(monitorServiceDTO -> {
-                    PhaseScreenValidations.validateServiceStatus(monitorServiceDTO.getMonitorService(), ServiceStatus.getStatus(monitorServiceDTO.getMonitorServiceStatus()));
-                });
-            });
-
             WizardScreenSteps.saveAction();
         }
     }
-                //}
-          //  }
-      //  }
-    //}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyTheApprovedServicesMustHaveActiveStatus(String rowID,
+                                                   String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        userCanFindWorkOrdersOnBOAndDevice(workOrderData);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyTheDeclinedServicesMustHaveRefusedStatus(String rowID,
+                                                                  String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        userCanFindWorkOrdersOnBOAndDevice(workOrderData);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyVerifyThatApprovedHasActiveStatusAndDeclinedHasRefusedStatus(String rowID,
+                                                                   String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        userCanFindWorkOrdersOnBOAndDevice(workOrderData);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyVerifyThatServicesHasOppositeToPreviousStatus(String rowID,
+                                                                   String description, JSONObject testData) {
+
+        TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+        WorkOrderData workOrderData = testCaseData.getWorkOrderData();
+
+        userCanFindWorkOrdersOnBOAndDevice(workOrderData);
+    }
+
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanCompletePhasesDevice(String rowID,
@@ -230,6 +239,23 @@ public class FindWorkOrdersTestCase extends BaseTestClass {
             if (monitorServiceDTO.getMonitorServiceStatus().equals(ServiceStatus.ACTIVE.getStatus()))
                 PhaseScreenValidations.validateServiceStatus(monitorServiceDTO.getMonitorService(), ServiceStatus.COMPLETED);
         }));
+        WizardScreenSteps.saveAction();
+    }
+
+    private void userCanFindWorkOrdersOnBOAndDevice(WorkOrderData workOrderData) {
+        Monitoring monitoringData = workOrderData.getMonitoring();
+        String stockNumber = monitoringData.getStockNumber();
+
+        HomeScreenSteps.openUpdateWork();
+        UpdateWorkSteps.searchRepairOrder(stockNumber);
+        PhaseScreenValidations.validatePhaseStockNumber(stockNumber);
+        monitoringData.getOrderPhasesDto().forEach(phaseDto -> {
+            PhaseScreenValidations.validatePhaseStatus(phaseDto);
+            phaseDto.getPhaseServices().forEach(monitorServiceDTO ->
+                PhaseScreenValidations.validateServiceStatus(monitorServiceDTO.getMonitorService(), ServiceStatus.getStatus(monitorServiceDTO.getMonitorServiceStatus()))
+            );
+        });
+
         WizardScreenSteps.saveAction();
     }
 }
