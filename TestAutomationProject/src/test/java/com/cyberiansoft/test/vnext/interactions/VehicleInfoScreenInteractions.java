@@ -6,7 +6,6 @@ import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.screens.VNextCustomKeyboard;
 import com.cyberiansoft.test.vnext.screens.VNextVehicleModelsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclemakesScreen;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -94,7 +93,8 @@ public class VehicleInfoScreenInteractions {
             }
     }
 
-    public static VNextCustomersScreen clickSelectOwnerCell() {
+    //todo rewrite
+    public static void clickSelectOwnerCell() {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         JavascriptExecutor je = (JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         je.executeScript("arguments[0].scrollIntoView(true);", vehicleInfoScreen.getSelectOwnerButton());
@@ -107,7 +107,6 @@ public class VehicleInfoScreenInteractions {
         } catch (TimeoutException e) {
             //do nothing
         }
-        return new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public static void setMileage(String milage) {

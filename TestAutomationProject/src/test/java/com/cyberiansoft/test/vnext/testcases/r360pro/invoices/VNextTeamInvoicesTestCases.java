@@ -26,7 +26,6 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -36,6 +35,7 @@ import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InvoiceInfoScreenValidations;
 import com.cyberiansoft.test.vnext.validations.InvoicesScreenValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
+import com.cyberiansoft.test.vnextbo.steps.users.CustomerServiceSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -55,22 +55,10 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 	public void beforeClass() {
 		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInvoicesTestCasesDataPath();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextCustomersScreen customersScreen = homeScreen.clickCustomersMenuItem();
-		customersScreen.switchToRetailMode();
-		if (!customersScreen.isCustomerExists(testCustomer1)) {
-			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
-			newCustomerScreen.createNewCustomer(testCustomer1);
-		}
-		if (!customersScreen.isCustomerExists(testCustomer2)) {
-			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
-			newCustomerScreen.createNewCustomer(testCustomer2);
-		}
-
-		if (!customersScreen.isCustomerExists(testcustomer)) {
-			VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
-			newCustomerScreen.createNewCustomer(testcustomer);
-		}
+		HomeScreenSteps.openCustomers();
+		CustomerServiceSteps.createCustomerIfNotExist(testCustomer1);
+		CustomerServiceSteps.createCustomerIfNotExist(testCustomer2);
+		CustomerServiceSteps.createCustomerIfNotExist(testcustomer);
 		ScreenNavigationSteps.pressBackButton();
 	}
 

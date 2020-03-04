@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
@@ -63,9 +62,8 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         for (ServiceData service : inspectionData.getServicesList())
             availableServicesScreen.selectService(service.getServiceName());
-        availableServicesScreen.clickScreenBackButton();
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        claimInfoScreen.clickScreenForwardButton();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
             Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
@@ -84,7 +82,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-        claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+        ClaimInfoSteps.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
@@ -123,9 +121,8 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         String msg = informationDialog.clickInformationDialogNoButtonAndGetMessage();
         Assert.assertEquals(msg, VNextAlertMessages.CANCEL_EDITING_INSPECTION_ALERT);
         vehicleInfoScreen.clickScreenForwardButton();
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-        claimInfoScreen.clickScreenForwardButton();
+        ClaimInfoSteps.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+        ScreenNavigationSteps.pressForwardButton();
         SelectedServicesScreenSteps.switchToSelectedService();
         InspectionSteps.openInspectionMenu(inspNumber);
         MenuSteps.selectMenuItem(MenuItems.EMAIL_INPSECTION);

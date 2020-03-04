@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
@@ -23,6 +22,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
+import com.cyberiansoft.test.vnextbo.steps.users.CustomerServiceSteps;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -42,18 +42,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
     public void settingUp() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getWorkOrdersChangeCustomerTestCasesDataPath();
         VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextCustomersScreen customersScreen = homeScreen.clickCustomersMenuItem();
-        customersScreen.switchToRetailMode();
-        if (!customersScreen.isCustomerExists(testcustomer1)) {
-            VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
-            newCustomerScreen.createNewCustomer(testcustomer1);
-            customersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        }
-        if (!customersScreen.isCustomerExists(testcustomer2)) {
-            VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
-            newCustomerScreen.createNewCustomer(testcustomer2);
-            customersScreen = new VNextCustomersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        }
+        homeScreen.clickCustomersMenuItem();
+        CustomerServiceSteps.createCustomerIfNotExist(testcustomer1);
+        CustomerServiceSteps.createCustomerIfNotExist(testcustomer2);
         ScreenNavigationSteps.pressBackButton();
     }
 

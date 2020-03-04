@@ -4,7 +4,6 @@ import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -12,7 +11,6 @@ import com.cyberiansoft.test.vnext.webelements.CustomersListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
@@ -46,19 +44,13 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 	@FindBy(xpath = "//*[@class='notice-plate-info-name']")
 	private WebElement clientMode;
 
-    public VNextCustomersScreen(WebDriver appiumdriver) {
-		super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
-	}
-
 	public VNextCustomersScreen() {
 		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
 	}
 
-	public VNextNewCustomerScreen clickAddCustomerButton() {
+	public void clickAddCustomerButton() {
 		tap(customersScreen.findElement(By.xpath(".//a[@class='floating-button color-red']")));
 		tap(customersScreen.findElement(By.xpath(".//*[@action='add_customer' and @class='customers-button']")));
-		return new VNextNewCustomerScreen(appiumdriver);
 	}
 
 	public boolean isAddCustomerButtonDisplayed() {

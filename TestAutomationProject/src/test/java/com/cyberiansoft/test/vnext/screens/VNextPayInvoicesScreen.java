@@ -43,7 +43,7 @@ public class VNextPayInvoicesScreen extends VNextBaseScreen {
         super(appiumdriver);
         PageFactory.initElements(appiumdriver, this);
         BaseUtils.waitABit(3000);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
         wait.until(ExpectedConditions.visibilityOf(payscreen));
         BaseUtils.waitABit(2000);
         wait = new WebDriverWait(appiumdriver, 30);

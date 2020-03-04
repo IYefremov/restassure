@@ -34,15 +34,12 @@ import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderType
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
-import com.cyberiansoft.test.vnext.validations.MenuValidations;
-import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
+import com.cyberiansoft.test.vnext.validations.*;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -84,9 +81,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.NEW);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.APPROVE);
-		VNextApproveScreen approveScreen = new VNextApproveScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		ApproveSteps.drawSignature();
-		Assert.assertTrue(approveScreen.isClearButtonVisible());
+		ApproveValidations.verifyClearButtonVisible(true);
 		ApproveSteps.saveApprove();
 		InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
@@ -157,10 +153,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR_NO_SHARING, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-		claimInfoScreen.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
-		claimInfoScreen.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
+		ClaimInfoSteps.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+		ClaimInfoSteps.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
+		ClaimInfoSteps.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
 		final String inspectionNumber = InspectionSteps.saveInspection();
 
 		InspectionSteps.switchToTeamInspections();
@@ -293,9 +288,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, newVinNumber);
 
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-		claimInfoScreen.saveInspectionViaMenu();
+		ClaimInfoSteps.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+		InspectionSteps.saveInspection();
 
 		inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
@@ -306,8 +300,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		VehicleInfoScreenValidations.validateVehicleInfo(vehicleInfoData);
 
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-		Assert.assertEquals(claimInfoScreen.getInsuranceCompany(), inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-		claimInfoScreen.cancelInspection();
+		ClaimInfoScreenValidations.validateInsuranceCompanyValue(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+		InspectionSteps.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 
 		WebDriver
@@ -373,9 +367,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-		VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		claimInfoScreen.clickScreenForwardButton();
-		availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		ScreenNavigationSteps.pressForwardButton();
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		selectedServicesScreen.isServiceSelected(inspectionData.getServiceData().getServiceName());
 		ScreenNavigationSteps.pressBackButton();

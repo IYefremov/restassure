@@ -13,9 +13,12 @@ public class HomeScreenSteps {
     public static void openCreateMyInspection() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         HomeScreenSteps.openInspections();
-        inspectionsScreen.switchToMyInspectionsView();
-        if (!GeneralWizardInteractions.isSearchFilterEmpty())
-            SearchSteps.searchByText("");
+        InspectionSteps.switchToMyInspections();
+        if (!GeneralWizardInteractions.isSearchFilterEmpty()) {
+            SearchSteps.openSearchMenu();
+            SearchSteps.fillTextSearch("");
+            SearchSteps.cancelSearch();
+        }
         inspectionsScreen.clickAddInspectionButton();
     }
 

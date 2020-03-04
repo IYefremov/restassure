@@ -9,4 +9,12 @@ public class ApproveValidations {
         VNextApproveScreen approveScreen = new VNextApproveScreen();
         Assert.assertEquals(approveScreen.getApprovePriceValue(), expectedPrice);
     }
+
+    public static void verifyClearButtonVisible(boolean isVisible) {
+        VNextApproveScreen approveScreen = new VNextApproveScreen();
+        if (isVisible)
+            Assert.assertTrue(approveScreen.isClearButtonVisible());
+        else
+            Assert.assertFalse(approveScreen.isClearButtonVisible());
+    }
 }
