@@ -81,7 +81,7 @@ public class VNextBOTimeReportingDialogValidations {
 
     public static void verifyStartDateIsCorrectByRecordNumber(int recordNumber, String expectedDate) {
 
-        Assert.assertEquals(Utils.getInputFieldValue(new VNextBOTimeReportingDialog().getSavedRecordsStartDatesList().get(recordNumber)), expectedDate,
+        Assert.assertTrue(Utils.getInputFieldValue(new VNextBOTimeReportingDialog().getSavedRecordsStartDatesList().get(recordNumber)).contains(expectedDate),
                 "Start date hasn't been correct");
     }
 
@@ -93,7 +93,7 @@ public class VNextBOTimeReportingDialogValidations {
 
     public static void verifyTechnicianIsCorrectByRecordNumber(int recordNumber, String expectedTechnician) {
 
-        Assert.assertEquals(Utils.getInputFieldValue(new VNextBOTimeReportingDialog().getSavedRecordsTechniciansList().get(recordNumber)), expectedTechnician,
+        Assert.assertEquals(Utils.getText(new VNextBOTimeReportingDialog().getSavedRecordsTechniciansList().get(recordNumber)), expectedTechnician,
                 "Technician hasn't been correct");
     }
 }

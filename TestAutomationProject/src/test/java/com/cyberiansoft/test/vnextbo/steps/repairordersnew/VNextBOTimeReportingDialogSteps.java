@@ -47,7 +47,9 @@ public class VNextBOTimeReportingDialogSteps {
 
     public static void addNewRecordForService(String service) {
 
-        Utils.clickElement(new VNextBOTimeReportingDialog().addButtonByServiceName(service));
+        VNextBOTimeReportingDialog reportingDialog = new VNextBOTimeReportingDialog();
+        Utils.clickElement(reportingDialog.addButtonByServiceName(service));
+        WaitUtilsWebDriver.waitForVisibility(reportingDialog.getNotSavedRecordCancelIcon());
     }
 
     public static int getSavedRecordsNumber() {
@@ -85,7 +87,7 @@ public class VNextBOTimeReportingDialogSteps {
         VNextBOTimeReportingDialog timeReportingDialog = new VNextBOTimeReportingDialog();
         Utils.clickElement(timeReportingDialog.getNotSavedRecordTechnicianDropDown());
         Utils.clickWithJS(timeReportingDialog.dropDownOption(technician));
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        //WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void deleteRecordByNumberAndCancelWithCancelButton(int recordNumber) {
@@ -110,14 +112,12 @@ public class VNextBOTimeReportingDialogSteps {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
-    public static void changeStartDateByTimeRecordNumber(int recordNumber, String stopDate) {
+    public static void clearStartDateByTimeRecordNumber(int recordNumber) {
 
         VNextBOTimeReportingDialog reportingDialog = new VNextBOTimeReportingDialog();
         Utils.clickElement(reportingDialog.getSavedRecordsStartDatesList().get(recordNumber));
-        Utils.clearAndType(reportingDialog.getSavedRecordsStartDatesList().get(recordNumber), stopDate);
-        WaitUtilsWebDriver.waitABit(2000);
-        Utils.clickElement(reportingDialog.getSavedRecordsStopDatesList().get(recordNumber));
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        Utils.clear(reportingDialog.getSavedRecordsStartDatesList().get(recordNumber));
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     public static void changeStopDateByTimeRecordNumber(int recordNumber, String stopDate) {
@@ -136,5 +136,10 @@ public class VNextBOTimeReportingDialogSteps {
         Utils.clickElement(reportingDialog.getSavedRecordsTechniciansList().get(recordNumber));
         Utils.clickWithJS(reportingDialog.dropDownOption(technician));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void closeErrorDialog() {
+
+        Utils.clickElement(new VNextBOTimeReportingDialog().getConfirmationButton());
     }
 }

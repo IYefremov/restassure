@@ -47,6 +47,9 @@ public class VNextBOTimeReportingDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//tr[contains(@data-bind,'grid__row--green')]//span[contains(@class,'time-tracking-popup__time-item-technician')]//span[@class='k-input']")
     private List<WebElement> savedRecordsTechniciansList;
 
+    @FindBy(xpath = "//div[@id='dialogModal']//button[@data-automation-id='modalConfirmButton']")
+    private WebElement confirmationButton;
+
     @FindBy(xpath = "//tr[contains(@data-bind,'grid__row--green')]//i[@class='icon-timer-running']")
     private List<WebElement> savedRecordsTimerIconsList;
 

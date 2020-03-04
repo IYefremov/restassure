@@ -67,7 +67,7 @@
       ],
       "service": "rozstalnoy_enable_labor",
       "technician": "Bratan Manager",
-      "technician1": "Yevhenii Rozstalnoy"
+      "technician1": "Rozstalnoy API Employee"
     }
   ],
   "verifyUserCanStartTwoOrMoreTimeReportsForDifferentTechnicians": [
@@ -82,7 +82,7 @@
       ],
       "service": "rozstalnoy_enable_labor",
       "technician": "Bratan Manager",
-      "technician1": "Yevhenii Rozstalnoy"
+      "technician1": "Rozstalnoy API Employee"
     }
   ],
   "verifyUserCanStartTimeReportsForOneTechnicianInTheSameTimeForDifferentServices": [
@@ -96,8 +96,7 @@
         }
       ],
       "service": "rozstalnoy_enable_labor",
-      "technician": "Bratan Manager",
-      "technician1": "Yevhenii Rozstalnoy"
+      "technician": "Bratan Manager"
     }
   ],
   "verifyUserCanEditValuesOfTimeReport": [
@@ -109,7 +108,10 @@
           "testCaseID": "93054",
           "testCaseTitle": "User can edit values of a time report"
         }
-      ]
+      ],
+      "service": "rozstalnoy_enable_labor",
+      "technician": "Bratan Manager",
+      "technician1": "Rozstalnoy API Employee"
     }
   ]
 }
