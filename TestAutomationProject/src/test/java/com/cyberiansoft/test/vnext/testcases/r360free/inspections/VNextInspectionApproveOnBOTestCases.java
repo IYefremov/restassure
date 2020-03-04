@@ -16,13 +16,9 @@ import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
@@ -58,12 +54,11 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VehicleInfoScreenValidations.validateVehicleInfo(inspectionData.getVehicleInfo());
 		
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		final InsuranceCompanyData insuranceCompanyData = inspectionData.getInsuranceCompanyData();
-		claimInfoScreen.selectInsuranceCompany(insuranceCompanyData.getInsuranceCompanyName());
-		claimInfoScreen.setClaimNumber(insuranceCompanyData.getClaimNumber());
-		claimInfoScreen.setPolicyNumber(insuranceCompanyData.getPolicyNumber());
-		claimInfoScreen.setDeductibleValue(insuranceCompanyData.getDeductible());
+        final InsuranceCompanyData insuranceCompanyData = inspectionData.getInsuranceCompanyData();
+		ClaimInfoSteps.selectInsuranceCompany(insuranceCompanyData.getInsuranceCompanyName());
+		ClaimInfoSteps.setClaimNumber(insuranceCompanyData.getClaimNumber());
+		ClaimInfoSteps.setPolicyNumber(insuranceCompanyData.getPolicyNumber());
+		ClaimInfoSteps.setDeductibleValue(insuranceCompanyData.getDeductible());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
@@ -119,12 +114,11 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		VehicleInfoScreenValidations.validateVehicleInfo(inspectionData.getVehicleInfo());
 
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		final InsuranceCompanyData insuranceCompanyData = inspectionData.getInsuranceCompanyData();
-		claimInfoScreen.selectInsuranceCompany(insuranceCompanyData.getInsuranceCompanyName());
-		claimInfoScreen.setClaimNumber(insuranceCompanyData.getClaimNumber());
-		claimInfoScreen.setPolicyNumber(insuranceCompanyData.getPolicyNumber());
-		claimInfoScreen.setDeductibleValue(insuranceCompanyData.getDeductible());
+        final InsuranceCompanyData insuranceCompanyData = inspectionData.getInsuranceCompanyData();
+		ClaimInfoSteps.selectInsuranceCompany(insuranceCompanyData.getInsuranceCompanyName());
+		ClaimInfoSteps.setClaimNumber(insuranceCompanyData.getClaimNumber());
+		ClaimInfoSteps.setPolicyNumber(insuranceCompanyData.getPolicyNumber());
+		ClaimInfoSteps.setDeductibleValue(insuranceCompanyData.getDeductible());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 

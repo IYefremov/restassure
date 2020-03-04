@@ -12,13 +12,9 @@ import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
@@ -56,11 +52,10 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         InspectionSteps.createInspection(testcustomer, inspectionData);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-        claimInfoScreen.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
-        claimInfoScreen.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
-        claimInfoScreen.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
+        ClaimInfoSteps.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+        ClaimInfoSteps.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
+        ClaimInfoSteps.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
+        ClaimInfoSteps.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());
@@ -108,11 +103,10 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         InspectionSteps.createInspection(testcustomer, inspectionData);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        claimInfoScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
-        claimInfoScreen.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
-        claimInfoScreen.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
-        claimInfoScreen.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
+        ClaimInfoSteps.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+        ClaimInfoSteps.setClaimNumber(inspectionData.getInsuranceCompanyData().getClaimNumber());
+        ClaimInfoSteps.setPolicyNumber(inspectionData.getInsuranceCompanyData().getPolicyNumber());
+        ClaimInfoSteps.setDeductibleValue(inspectionData.getInsuranceCompanyData().getDeductible());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen.selectService(inspectionData.getPercentageServiceData().getServiceName());

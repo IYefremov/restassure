@@ -19,7 +19,6 @@ import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
@@ -193,8 +192,8 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, inspectionData);
-        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
-        VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+        CustomersScreenSteps.clickAddCustomerButton();
+        VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
         newCustomerScreen.createNewCustomer(inspectionData.getInspectionRetailCustomer());
 
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();

@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
@@ -89,9 +88,8 @@ public class VNextHomeScreen extends VNextBaseScreen {
     public VNextHomeScreen() {
     }
 
-    public VNextCustomersScreen clickCustomersMenuItem() {
+    public void clickCustomersMenuItem() {
         tap(customersList);
-        return new VNextCustomersScreen(appiumdriver);
     }
 
     public VNextWorkOrdersScreen clickWorkOrdersMenuItem() {
