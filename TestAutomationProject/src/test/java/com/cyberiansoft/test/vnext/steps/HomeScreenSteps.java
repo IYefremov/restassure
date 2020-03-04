@@ -25,6 +25,11 @@ public class HomeScreenSteps {
     public static void openCreateMyWorkOrder() {
         HomeScreenSteps.openWorkOrders();
         WorkOrderSteps.switchToMyWorkOrdersView();
+        if (!GeneralWizardInteractions.isSearchFilterEmpty()) {
+            SearchSteps.openSearchMenu();
+            SearchSteps.fillTextSearch("");
+            SearchSteps.cancelSearch();
+        }
         WorkOrderSteps.clickAddWorkOrderButton();
     }
 

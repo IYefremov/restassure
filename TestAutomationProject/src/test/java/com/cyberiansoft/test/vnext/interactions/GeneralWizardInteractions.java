@@ -21,6 +21,7 @@ public class GeneralWizardInteractions {
 
     public static void setSearchText(String searchText) {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        WaitUtils.waitUntilElementIsClickable(baseWizardScreen.getSearchInput());
         WaitUtils.click(baseWizardScreen.getSearchInput());
         baseWizardScreen.getSearchInput().clear();
         baseWizardScreen.getSearchInput().sendKeys(searchText);

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.validations;
 
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.vnext.enums.InvoiceStatus;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import org.testng.Assert;
@@ -46,5 +47,10 @@ public class InvoicesScreenValidations {
     public static void validateInvoicePONumber(String invoiceId, String expectedPO) {
         VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         Assert.assertEquals(invoicesScreen.getInvoicePONumberValue(invoiceId), expectedPO);
+    }
+
+    public static void validateInvoiceCustomer(String invoiceId, AppCustomer expectedCustomer) {
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+        Assert.assertEquals(invoicesScreen.getInvoiceCustomerValue(invoiceId), expectedCustomer.getFullName());
     }
 }
