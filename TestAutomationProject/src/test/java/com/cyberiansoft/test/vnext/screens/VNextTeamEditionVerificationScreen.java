@@ -10,7 +10,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
-	
+
+	private static final String XPATH_REG_COMMON = "//*[@data-autotests-id='reg-code']";
+
 	@FindBy(xpath="//*[@class='verification-form']")
 	private WebElement phonevereficationform;
 	
@@ -22,6 +24,9 @@ public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//*[@data-autotests-id='reg-code-3']")
 	private WebElement regfld3;
+
+	@FindBy(xpath=XPATH_REG_COMMON)
+	private WebElement tbRegComomn;
 	
 	@FindBy(xpath="//*[@action='verify']")
 	private WebElement verifyBtn;
@@ -33,10 +38,8 @@ public class VNextTeamEditionVerificationScreen extends VNextBaseScreen {
 	
 	public void setDeviceRegistrationCode(String regCode) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-autotests-id='reg-code-1']")));
-        ControlUtils.setValue(regfld1, regCode.split("-")[0]);
-        ControlUtils.setValue(regfld2, regCode.split("-")[1]);
-        ControlUtils.setValue(regfld3, regCode.split("-")[2]);
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(XPATH_REG_COMMON)));
+        ControlUtils.setValue(tbRegComomn, regCode);
 	}
 	
 	public void clickVerifyButton() {
