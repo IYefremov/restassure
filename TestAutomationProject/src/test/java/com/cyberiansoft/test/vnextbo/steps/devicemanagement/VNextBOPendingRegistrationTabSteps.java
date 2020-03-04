@@ -32,8 +32,7 @@ public class VNextBOPendingRegistrationTabSteps extends VNextBODeviceManagementS
         VNextBOModalDialogSteps.clickYesButton();
     }
 
-    public static boolean checkWhetherDevicesNotFoundMessageIsDisplayed() {
-
-        return Utils.isElementDisplayed(new VNextBOPendingRegistrationWebPage().getNoDevicesFoundMessage());
+    public static boolean isDevicesNotFoundMessageDisplayed() {
+        return WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPendingRegistrationWebPage().getNoDevicesFoundMessage(), true, 2);
     }
 }

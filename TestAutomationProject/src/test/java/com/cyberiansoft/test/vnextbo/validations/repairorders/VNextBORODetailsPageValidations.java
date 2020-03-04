@@ -27,10 +27,7 @@ public class VNextBORODetailsPageValidations {
                 "The Vendor/Technician '" + name + "' hasn't been found.");
     }
 
-    public static void verifyServiceVendorPriceIsSet(String serviceId, String service, String vendorPrice) {
-        System.out.println("Vendor price: " + VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId));
-        System.out.println("vendor price to be inserted: " + vendorPrice);
-        VNextBORODetailsPageInteractions.setServiceVendorPrice(serviceId, service, vendorPrice);
+    public static void verifyServiceVendorPriceIsSet(String serviceId, String vendorPrice) {
         Assert.assertEquals(VNextBORODetailsPageInteractions.getServiceVendorPrice(serviceId), vendorPrice,
                 "The Vendor Price hasn't been changed");
     }
@@ -49,15 +46,6 @@ public class VNextBORODetailsPageValidations {
 
     public static boolean isCheckOutOptionDisplayedForPhase() {
         return Utils.isElementDisplayed(new VNextBORODetailsPage().getPhaseActionsCheckOutOption());
-    }
-
-    public static void verifyCheckInOptionIsDisplayedForPhase() {
-        VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
-        if (isCheckInOptionDisplayedForPhase()) {
-            VNextBORODetailsPageInteractions.closeActionsDropDownForPhase();
-        } else {
-            VNextBORODetailsPageInteractions.clickCheckOutOptionForPhase();
-        }
     }
 
     public static boolean isRoDetailsSectionDisplayed() {

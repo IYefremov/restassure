@@ -42,10 +42,14 @@ public class VNextBOPendingRegistrationsTabValidations {
 
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         boolean isDeviceDisplayed = false;
-        try {
-            isDeviceDisplayed = Utils.isElementDisplayed(new VNextBOPendingRegistrationWebPage().deviceRowByName(deviceNickName));
-            Assert.assertFalse(isDeviceDisplayed, "Device hasn't been deleted from the \"Pending Registration\" tab");
-        } catch (NoSuchElementException ex) {
+
+        if (VNextBOPendingRegistrationTabSteps.isDevicesNotFoundMessageDisplayed()) {
+            VNextBOPendingRegistrationsTabValidations.verifyPendingRegistrationDevicesNotFoundMessageIsCorrect();
+        } else {
+            try {
+                isDeviceDisplayed = WaitUtilsWebDriver.elementShouldBeVisible(
+                        new VNextBOPendingRegistrationWebPage().deviceRowByName(deviceNickName), true, 2);
+            } catch (NoSuchElementException ignored) {}
             Assert.assertFalse(isDeviceDisplayed, "Device hasn't been deleted from the \"Pending Registration\" tab");
         }
     }

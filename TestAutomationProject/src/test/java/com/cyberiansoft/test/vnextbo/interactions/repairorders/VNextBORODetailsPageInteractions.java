@@ -225,8 +225,9 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static String getServiceVendorPrice(String serviceId) {
-        return getTextValue(serviceId, "/div[@class='clmn_3_1']/span", ".00")
-                .replace("$", "");
+        final WebElement vendorPrice = new VNextBORODetailsPage().getElementInServicesTable(
+                serviceId, "/div[@class='clmn_3_1']/input");
+        return Utils.getInputFieldValue(vendorPrice, 3);
     }
 
     public static void setServiceVendorPrice(String serviceId, String serviceDescription, String newValue) {
@@ -272,7 +273,7 @@ public class VNextBORODetailsPageInteractions {
 
     private static void setTextValue(String serviceId, String serviceDescription, String xpath, String newValue) {
         final WebElement element = new VNextBORODetailsPage().getElementInServicesTable(serviceId, xpath);
-        Utils.clearAndType(element, newValue);
+        Utils.clearAndTypeWithJS(element, newValue);
         clickServiceDescriptionName(serviceDescription);
         WaitUtilsWebDriver.waitABit(1000);
     }
@@ -297,7 +298,7 @@ public class VNextBORODetailsPageInteractions {
 
     private static void handleActionsButton(WebElement phaseActionsDropDown) {
         try {
-            WaitUtilsWebDriver.waitForVisibility(phaseActionsDropDown, 5);
+            WaitUtilsWebDriver.waitForVisibility(phaseActionsDropDown, 1);
         } catch (Exception e) {
             Utils.clickElement(new VNextBORODetailsPage().getPhaseActionsTrigger());
         }
@@ -305,7 +306,7 @@ public class VNextBORODetailsPageInteractions {
 
     private static void setOption(WebElement option) {
         Utils.clickElement(option);
-        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(new VNextBORODetailsPage().getPhaseActionsDropDown(), 5);
+        WaitUtilsWebDriver.waitForPageToBeLoaded(5);
     }
 
     public static void clickReportProblemForPhase(String phase) {
@@ -651,5 +652,21 @@ public class VNextBORODetailsPageInteractions {
 
     public static List<String> getPhasesServicesStatusesId(String phase) {
         return Utils.getText(new VNextBORODetailsPage().getPhaseServicesStatusesList(phase));
+    }
+
+    public static void waitForPhaseActionsTriggerToBeDisplayed() {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsTrigger(), true, 2);
+    }
+
+    public static void waitForPhaseActionsTriggerToBeDisplayed(String phase) {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsTrigger(phase), true, 2);
+    }
+
+    public static void waitForPhaseActionsCheckInOption() {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsCheckInOption(), true, 1);
+    }
+
+    public static void waitForPhaseActionsCheckOutOption() {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsCheckOutOption(), true, 1);
     }
 }

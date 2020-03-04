@@ -3,8 +3,8 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
-import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
-import com.cyberiansoft.test.enums.OrderMonitorStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorServiceStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorStatuses;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.typesscreens.RegularTeamWorkOrdersScreen;
 import com.cyberiansoft.test.ios10_client.types.ordermonitorphases.OrderMonitorPhases;
 import io.appium.java_client.MobileBy;

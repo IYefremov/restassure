@@ -26,33 +26,36 @@
           "testCaseID": "90885"
         }
       ],
-      "statuses": [
-        "New",
-        "Approved"
-      ],
       "note": "12345"
     }
   ],
 
-  "verifyUserCanAddNewParts": [
+  "verifyUserCanAddAndDeleteNewParts": [
     {
-      "rowID": "verifyUserCanAddNewParts.01",
-      "description": "Test Case 83857:User can Add new parts",
+      "rowID": "verifyUserCanAddAndDeleteNewParts.01",
+      "description": "Test Case 83857:User can Add new parts. Test Case 84007:User can Delete the Part",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91187"
+        },
+        {
+          "testCaseID": "91183"
         }
       ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "service": "_ multiple presets (required, no prefix)",
-      "serviceDescription": "Test123",
-      "serviceCategory": "Accessories and Fluids",
-      "serviceSubcategory": "Books",
-      "partItems": [
-        "Catalog",
-        "Enthusiast Book"
-      ]
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-351-00087"
+      },
+      "partData": {
+        "service": "rozstalnoy_enable_parts",
+        "description": "Auto-test",
+        "category": "Accessories and Fluids",
+        "subcategory": "Books",
+        "partItems": [
+          "Catalog",
+          "Enthusiast Book"
+        ]
+      }
     }
   ],
 
@@ -66,8 +69,9 @@
         }
       ],
       "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "status": "Ordered"
+      "searchData": {
+        "woNum": "O-168-00015"
+      }
     }
   ],
 
@@ -80,26 +84,10 @@
           "testCaseID": "91179"
         }
       ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414"
-    }
-  ],
-
-  "verifyUserCanDeleteThePart": [
-    {
-      "rowID": "verifyUserCanDeleteThePart.01",
-      "description": "Test Case 84007:User can Delete the Part",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91183"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "partItems": [
-        "Catalog",
-        "Enthusiast Book"
-      ]
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-000-152787"
+      }
     }
   ],
 
@@ -115,8 +103,10 @@
           "testCaseID": "91140"
         }
       ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-351-00087"
+      },
       "labor": "Labor AM"
     }
   ],
@@ -139,46 +129,48 @@
           "testCaseID": "90947"
         }
       ],
-      "company": [
-        "SpainCo",
-        "AMT"
-      ],
-      "addressLine1": [
-        "address",
-        "5001 Birch St."
-      ],
-      "addressLine2": [
-        "address222",
-        "Newport Beach"
-      ],
-      "city": [
-        "Barcelona",
-        "Los Angeles"
-      ],
-      "country": [
-        "Canada",
-        "United States of America"
-      ],
-      "stateProvince": [
-        "Quebec",
-        "Arizona"
-      ],
-      "zip": [
-        "3456",
-        "92660"
-      ],
-      "email": [
-        "barca@gmail.com",
-        "amt@cyberiansoft.com"
-      ],
-      "phoneCode": [
-        "+1",
-        "+359"
-      ],
-      "phone": [
-        "298374",
-        "6145678903"
-      ]
+      "companyInfo": {
+        "company": [
+          "SpainCo",
+          "AMT"
+        ],
+        "addressLine1": [
+          "address",
+          "5001 Birch St."
+        ],
+        "addressLine2": [
+          "address222",
+          "Newport Beach"
+        ],
+        "city": [
+          "Barcelona",
+          "Los Angeles"
+        ],
+        "country": [
+          "Canada",
+          "United States of America"
+        ],
+        "stateProvince": [
+          "Quebec",
+          "Arizona"
+        ],
+        "zip": [
+          "3456",
+          "92660"
+        ],
+        "email": [
+          "barca@gmail.com",
+          "amt@cyberiansoft.com"
+        ],
+        "phoneCode": [
+          "+1",
+          "+359"
+        ],
+        "phone": [
+          "298374",
+          "6145678903"
+        ]
+      }
     }
   ],
 

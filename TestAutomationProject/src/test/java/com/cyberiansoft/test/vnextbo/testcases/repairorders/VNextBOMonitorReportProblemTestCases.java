@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.OrderMonitorServiceStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCompleteCurrentPhaseDialogInteractions;
@@ -42,6 +42,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
 
         VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         VNextBORODetailsPageInteractions.setPhaseStatus(data.getPhase(), OrderMonitorServiceStatuses.ACTIVE.getValue());
+        VNextBORODetailsPageInteractions.waitForPhaseActionsTriggerToBeDisplayed(data.getPhase());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 
@@ -106,6 +107,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBORODetailsPageInteractions.setPhaseStatus(data.getPhase(), data.getServiceStatuses()[0]);
         WaitUtilsWebDriver. waitForLoading();
         VNextBORODetailsPageInteractions.setPhaseStatus(data.getPhase(), OrderMonitorServiceStatuses.ACTIVE.getValue());
+        VNextBORODetailsPageInteractions.waitForPhaseActionsTriggerToBeDisplayed(data.getPhase());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 
@@ -129,6 +131,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
         VNextBOROSimpleSearchSteps.searchByText(data.getOrderNumber());
         VNextBOROPageSteps.openRODetailsPage(data.getOrderNumber());
         VNextBORODetailsPageInteractions.setPhaseStatus(data.getPhase(), OrderMonitorServiceStatuses.ACTIVE.getValue());
+        VNextBORODetailsPageInteractions.waitForPhaseActionsTriggerToBeDisplayed(data.getPhase());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 
@@ -226,6 +229,7 @@ public class VNextBOMonitorReportProblemTestCases extends BaseTestCase {
 
         VNextBORODetailsPageInteractions.expandPhasesTable(data.getPhase());
         VNextBORODetailsPageInteractions.setPhaseStatus(data.getPhase(), OrderMonitorServiceStatuses.ACTIVE.getValue());
+        VNextBORODetailsPageInteractions.waitForPhaseActionsTriggerToBeDisplayed(data.getPhase());
         Assert.assertTrue(VNextBORODetailsPageValidations.isPhaseActionsTriggerDisplayed(data.getPhase()),
                 "The phase actions trigger hasn't been displayed");
 

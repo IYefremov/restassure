@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
-import com.cyberiansoft.test.enums.OrderMonitorFlags;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorFlags;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
