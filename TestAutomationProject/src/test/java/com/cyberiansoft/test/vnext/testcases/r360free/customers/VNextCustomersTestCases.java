@@ -140,7 +140,6 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
 		newCustomerScreen.createNewCustomer(testcustomer);
 		ScreenNavigationSteps.pressBackButton();
-        homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		BaseUtils.waitABit(30000);
 		VNextStatusScreen statusscreen = homeScreen.clickStatusMenuItem();
 		statusscreen.updateMainDB(employee);

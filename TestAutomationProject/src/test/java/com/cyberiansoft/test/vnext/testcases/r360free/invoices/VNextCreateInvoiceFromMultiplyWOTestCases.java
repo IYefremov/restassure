@@ -60,8 +60,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
-        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		for (String woNumber : workOrders) {
+        for (String woNumber : workOrders) {
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
@@ -106,8 +105,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
-        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		for (String woNumber : workOrders) {
+        for (String woNumber : workOrders) {
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
@@ -158,8 +156,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			}
 		}
 
-        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
+        for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			for (int j = 0; j < wosToCreate; j++) {
 				workordersscreen.selectWorkOrder(workOrdersMap.get(workOrderData.getWorlOrderRetailCustomer().getFullName()).get(j));
 			}
@@ -218,8 +215,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
-        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		for (String woNumber : workOrders) {
+        for (String woNumber : workOrders) {
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
@@ -239,8 +235,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 
 		Assert.assertEquals(informationdialog.clickInformationDialogYesButtonAndGetMessage(),
 				VNextAlertMessages.CANCEL_CREATING_INVOICE);
-        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		for (String woNumber : workOrders)
+        for (String woNumber : workOrders)
 			workordersscreen.selectWorkOrder(woNumber);
 
 		workordersscreen.clickCreateInvoiceIcon();
@@ -323,8 +318,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			vehicleInfoScreen.saveWorkOrderViaMenu();
 		}
 
-        workordersscreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		for (String woNumber : workOrders) {
+        for (String woNumber : workOrders) {
 			workordersscreen.selectWorkOrder(woNumber);
 		}
 		workordersscreen.clickCreateInvoiceIcon();
