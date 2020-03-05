@@ -33,10 +33,12 @@ public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
     public static void searchByTextWithSpinnerLoading(String searchText) {
 
         VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear(2);
         WaitUtilsWebDriver.waitForElementToBeClickable(searchPanel.getSearchInputField());
         Utils.clearAndType(searchPanel.getSearchInputField(), searchText);
         Utils.clickElement(searchPanel.getSearchLoupeIcon());
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear(3);
         WaitUtilsWebDriver.waitABit(1000);
     }
 
@@ -55,5 +57,11 @@ public class VNextBOSearchPanelSteps extends VNextBOBaseWebPageSteps {
         WaitUtilsWebDriver.waitForElementToBeClickable(searchPanel.getSearchInputField());
         Utils.clearAndType(searchPanel.getSearchInputField(), searchText);
         Utils.clickElement(searchPanel.getSearchLoupeIcon());
+    }
+
+    public static void refreshPageAndSearch(String searchText) {
+        Utils.refreshPage();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear(10);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(searchText);
     }
 }

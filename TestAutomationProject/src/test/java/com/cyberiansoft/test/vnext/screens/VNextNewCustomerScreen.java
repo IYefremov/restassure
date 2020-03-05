@@ -3,15 +3,12 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -67,17 +64,10 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	@FindBy(xpath="//div[@data-page='states']")
 	private WebElement statespage;
 
-    public VNextNewCustomerScreen(WebDriver appiumdriver) {
-		super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
-		BaseUtils.waitABit(1000);
-	}
-
 	public VNextNewCustomerScreen() {
 	}
-	
+
+	//todo make step!!!
 	public void createNewCustomer(RetailCustomer retailCustomer) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.visibilityOf(firstnamefld));
@@ -217,7 +207,9 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	public String getCustomerCountry() {
 		return countrycell.getAttribute("value");
 	}
-	
+
+
+	//todo rewrite
 	public void selectCustomerState(String customerstate) {
 		//waitABit(2000);
 		if (customerstate.length() > 0) {
@@ -242,11 +234,6 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	public void clickSaveCustomerButton() {
 		WaitUtils.elementShouldBeVisible(savebtn, true);
 		tap(savebtn);
-	}
-	
-	public VNextCustomersScreen clickBackButton() {
-		clickScreenBackButton();
-		return new VNextCustomersScreen(appiumdriver);
 	}
 
 }

@@ -148,7 +148,7 @@ public class VNextBOPMOrderDetailsPartsDetailsLaborTests extends BaseTestCase {
         VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, "Labor AM");
         refreshPage();
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
-        VNextBOPartsDetailsPanelSteps.deleteLaborForPartByNumberInListANdLaborServiceName(0, laborServiceName);
+        VNextBOPartsDetailsPanelSteps.deleteLaborForPartByNumberInListAndLaborServiceName(0, laborServiceName);
         refreshPage();
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
         VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laborsAmountBeforeAdding);

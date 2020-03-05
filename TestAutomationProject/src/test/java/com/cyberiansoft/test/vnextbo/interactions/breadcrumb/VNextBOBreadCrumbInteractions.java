@@ -30,8 +30,8 @@ public class VNextBOBreadCrumbInteractions {
         if (!VNextBOBreadCrumbValidations.isLocationSet(location, 1)) {
             openLocationDropDown();
             selectLocation(location);
+            WaitUtilsWebDriver.waitForPageToBeLoaded(7);
         }
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void clickLocationName() {

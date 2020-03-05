@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.enums;
+package com.cyberiansoft.test.enums.monitor;
 
 import lombok.Getter;
 
@@ -21,7 +21,7 @@ public enum OrderMonitorRepairStatuses {
 
     private String value;
 
-    OrderMonitorRepairStatuses(String value) {
+    OrderMonitorRepairStatuses(final String value) {
         this.value = value;
     }
 }

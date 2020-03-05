@@ -72,10 +72,20 @@ public class WaitUtilsWebDriver {
         } catch (Exception ex) { }
     }
 
+    public static void waitForSpinnerToDisappear(int timeout) {
+        elementShouldBeVisible(VNextBOBaseWebPage.spinner, false, timeout);
+    }
+
     public static void waitForPageToBeLoaded() {
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         waitForSpinnerToDisappear();
+    }
+
+    public static void waitForPageToBeLoaded(int timeout) {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        waitForSpinnerToDisappear(timeout);
     }
 
     public static WebElement waitForVisibility(WebElement element) {

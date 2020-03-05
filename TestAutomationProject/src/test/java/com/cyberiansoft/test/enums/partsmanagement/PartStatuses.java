@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.enums;
+package com.cyberiansoft.test.enums.partsmanagement;
 
 import lombok.Getter;
 

@@ -12,4 +12,13 @@ public class CustomersScreenValidation {
         Assert.assertEquals(customersScreen.getDefaultCustomerValue(), customerValue);
     }
 
+    public static void validateAddCustomerButtonDisplayed(boolean isDisplayed) {
+        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
+        WaitUtils.waitUntilElementIsClickable(customersScreen.getCustomersList());
+        if (isDisplayed)
+            Assert.assertTrue(customersScreen.isAddCustomerButtonDisplayed());
+        else
+            Assert.assertFalse(customersScreen.isAddCustomerButtonDisplayed());
+    }
+
 }

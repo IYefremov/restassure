@@ -9,13 +9,18 @@ import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
 public class CustomerServiceSteps {
 
     // Step for creation customer if not Exist
-    public static void createCustomerIfNotExistAndSetAsDefault(RetailCustomer retailCustomer){
+    public static void createCustomerIfNotExist(RetailCustomer retailCustomer){
         VNextCustomersScreen customersScreen = new VNextCustomersScreen();
-        customersScreen.switchToRetailMode();
+        CustomersScreenSteps.switchToRetailMode();
         if (!customersScreen.isCustomerExists(retailCustomer)) {
-            VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+            CustomersScreenSteps.clickAddCustomerButton();
+            VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
             newCustomerScreen.createNewCustomer(retailCustomer);
         }
+    }
+
+    public static void createCustomerIfNotExistAndSetAsDefault(RetailCustomer retailCustomer){
+        createCustomerIfNotExist(retailCustomer);
         CustomersScreenSteps.setCustomerAsDefault(retailCustomer);
     }
 }

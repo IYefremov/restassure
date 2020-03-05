@@ -32,6 +32,11 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	@FindBy(xpath = "//div[@class='modal-body']/div[@class='modal-body__content']/div")
 	private List<WebElement> dialogMessagesList;
 
+    public VNextBOConfirmationDialog() {
+        super(DriverBuilder.getInstance().getDriver());
+        PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+    }
+
 	public WebElement getNoButton() {
 	    return confirmDialog.findElement(By.xpath(".//button[@data-automation-id='modalCancelButton']"));
     }
@@ -39,9 +44,4 @@ public class VNextBOConfirmationDialog extends VNextBOBaseWebPage {
 	public WebElement getYesButton() {
 	    return confirmDialog.findElement(By.xpath(".//button[@data-automation-id='modalConfirmButton']"));
     }
-	
-	public VNextBOConfirmationDialog() {
-		super(DriverBuilder.getInstance().getDriver());
-		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);	
-	}
 }

@@ -8,6 +8,10 @@ import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorGrid
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.*;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorFlags;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorRepairStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorServiceStatuses;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorStatuses;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOCurrentPhasePanelInteractions;

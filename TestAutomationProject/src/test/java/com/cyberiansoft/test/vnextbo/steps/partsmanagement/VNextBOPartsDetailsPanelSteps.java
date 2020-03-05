@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
-import com.cyberiansoft.test.enums.PartStatuses;
+import com.cyberiansoft.test.enums.partsmanagement.PartStatuses;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
@@ -34,8 +34,7 @@ public class VNextBOPartsDetailsPanelSteps {
         final int partsCounterValueBefore = Integer.parseInt(VNextBOAddNewPartDialogInteractions.getSelectedPartsCounter());
         VNextBOAddNewPartDialogSteps.selectPartsFromPartsList(Arrays.asList(data.getPartItems()));
         VNextBOAddNewPartDialogValidations.verifySelectedPartsCounterValueIsCorrect(String.valueOf(partsCounterValueBefore + data.getPartItems().length));
-        VNextBOAddNewPartDialogInteractions.clickSubmitButton();
-        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(false);
+        VNextBOAddNewPartDialogSteps.submit();
     }
 
     public static void setAddNewPartValues(VNextBOPartsData data) {
@@ -133,6 +132,7 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOPartsDetailsPanelInteractions.clickDeleteActionButtonForPartByNumberInList(partNumber);
         VNextBOModalDialogValidations.verifyDialogIsDisplayed();
         VNextBOModalDialogSteps.clickYesButton();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void openDocumentsDialogByNumberInList(int partNumber) {
@@ -166,7 +166,7 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOAddLaborPartsDialogSteps.addLaborServiceToPart(laborServiceName);
     }
 
-    public static void deleteLaborForPartByNumberInListANdLaborServiceName(int partNumber, String laborServiceName) {
+    public static void deleteLaborForPartByNumberInListAndLaborServiceName(int partNumber, String laborServiceName) {
 
         clickDeleteLaborButtonForPartByNumberInListAndServiceName(partNumber, laborServiceName);
         VNextBOModalDialogSteps.clickYesButton();
@@ -300,5 +300,10 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount);
         VNextBOPartsDetailsPanelValidations.verifyDuplicatePartIsAdded(woNum, expectedPartsAmount);
+    }
+
+    public static void updatePartsList(String woNum, int expectedPartsAmount) {
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount);
     }
 }

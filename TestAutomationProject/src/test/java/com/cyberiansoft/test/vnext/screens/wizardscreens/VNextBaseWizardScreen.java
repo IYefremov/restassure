@@ -106,7 +106,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         if (workOrderType != null)
             if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
                 clcikSaveViaMenuAsFinal();
-        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
         workOrdersScreen.clearSearchField();
         return workOrdersScreen;
@@ -116,7 +116,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         clickWizardMenuSaveButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickDraftButton();
-        return new VNextWorkOrdersScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        return new VNextWorkOrdersScreen();
     }
 
     public void clickMenuButton() {

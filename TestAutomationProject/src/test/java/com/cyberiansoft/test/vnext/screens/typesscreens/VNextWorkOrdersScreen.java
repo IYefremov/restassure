@@ -8,7 +8,6 @@ import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -35,11 +34,6 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     @FindBy(xpath = "//*[@data-autotests-id='work orders-list']/div")
     private List<WorkOrderListElement> workOrdersList;
-
-    public VNextWorkOrdersScreen(WebDriver appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
-    }
 
     public VNextWorkOrdersScreen() {
         PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
@@ -128,6 +122,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     }
 
+    //todo make a step!!!
     public void createSeparateInvoice(String workOrderNumber) {
         selectWorkOrder(workOrderNumber);
         clickCreateInvoiceIcon();
@@ -137,6 +132,8 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         waitForWorkOrderScreenInfoMessage("Invoice creation");
     }
 
+
+    //todo make a step!!!
     public void createSeparateInvoices(ArrayList<String> workOrders) {
         for (String workOrderNumber : workOrders)
             selectWorkOrder(workOrderNumber);

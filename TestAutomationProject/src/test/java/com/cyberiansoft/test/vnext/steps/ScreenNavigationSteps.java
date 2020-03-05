@@ -8,6 +8,11 @@ public class ScreenNavigationSteps {
         vNextBaseScreen.clickScreenBackButton();
     }
 
+    public static void pressForwardButton() {
+        VNextBaseScreen vNextBaseScreen = new VNextBaseScreen();
+        vNextBaseScreen.clickScreenForwardButton();
+    }
+
     public static void acceptScreen() {
         WizardScreenSteps.saveAction();
     }

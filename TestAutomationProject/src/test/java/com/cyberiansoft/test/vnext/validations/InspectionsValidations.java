@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.validations;
 
+import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import org.testng.Assert;
@@ -43,5 +44,10 @@ public class InspectionsValidations {
     public static void verifyInspectionApprovedPrice(String inspectionID, String expectedPrice) {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionApprovedPriceValue(inspectionID), expectedPrice);
+    }
+
+    public static void verifyInspectionCustomer(String inspectionID, AppCustomer expectedCustomer) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionID), expectedCustomer.getFullName());
     }
 }

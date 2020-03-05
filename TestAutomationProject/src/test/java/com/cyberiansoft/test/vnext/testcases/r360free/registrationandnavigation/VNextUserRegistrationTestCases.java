@@ -16,14 +16,9 @@ import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
-import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.VNextBaseTestCase;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
@@ -711,8 +706,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
         HomeScreenSteps.openCreateMyInspection();
-        VNextCustomersScreen customersScreen = new VNextCustomersScreen();
-        VNextNewCustomerScreen newCustomerScreen = customersScreen.clickAddCustomerButton();
+        CustomersScreenSteps.clickAddCustomerButton();
+        VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
         newCustomerScreen.setCustomerFirstName(firstname);
         newCustomerScreen.setCustomerLastName(lastname);
         newCustomerScreen.setCustomerEmail(customeremail);
@@ -723,8 +718,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, testVIN);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
-        VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        claimInfoScreen.selectInsuranceCompany("Test Insurance Company");
+        ClaimInfoSteps.selectInsuranceCompany("Test Insurance Company");
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         for (int i = 0; i < availablepricematrixes.length; i++) {

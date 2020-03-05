@@ -71,16 +71,34 @@ public class VNextBOActiveDevicesTabValidations extends VNextBODeviceManagementW
     }
 
     public static void verifyReplaceButtonIsDisplayedForDevice(String deviceName) {
+        final VNextBOActiveDevicesWebPage activeDevicesWebPage = new VNextBOActiveDevicesWebPage();
+        final WebElement button = WaitUtilsWebDriver.waitForElementNotToBeStale(
+                activeDevicesWebPage.replaceButtonByDeviceName(deviceName), 2);
+        final boolean visible = WaitUtilsWebDriver.elementShouldBeVisible(button, true, 3);
+        Assert.assertTrue(visible, "Replace button hasn't been displayed");
+    }
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOActiveDevicesWebPage().replaceButtonByDeviceName(deviceName)),
-                "Replace button hasn't been displayed");
+    public static boolean isReplaceButtonDisplayedForDevice(String deviceName) {
+        try {
+            return Utils.isElementDisplayed(new VNextBOActiveDevicesWebPage().replaceButtonByDeviceName(deviceName));
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
+    public static void verifyReplaceButtonByDeviceNameIsClickable(String deviceName) {
+        if (!isReplaceButtonDisplayedForDevice(deviceName)) {
+            VNextBOActiveDevicesTabSteps.hideRegistrationCodeByDeviceName(deviceName);
+        }
     }
 
     public static void verifyRegistrationNumberIsDisplayedForDevice(String deviceName) {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOActiveDevicesWebPage().registrationCodeByDeviceName(deviceName)),
+        WaitUtilsWebDriver.waitForElementNotToBeStale(new VNextBOActiveDevicesWebPage().registrationCodeByDeviceName(deviceName));
+        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(
+                new VNextBOActiveDevicesWebPage().registrationCodeByDeviceName(deviceName), true, 4),
                 "Registration code hasn't been displayed");
-        Assert.assertNotEquals(Utils.getText(new VNextBOActiveDevicesWebPage().registrationCodeByDeviceName(deviceName)), "", "Registration code has been empty");
+        Assert.assertNotEquals("", Utils.getText(new VNextBOActiveDevicesWebPage().registrationCodeByDeviceName(deviceName)),
+                "Registration code has been empty");
     }
 }

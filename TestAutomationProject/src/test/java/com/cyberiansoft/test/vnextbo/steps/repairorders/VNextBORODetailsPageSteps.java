@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
+import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROProblemsInteractions;
@@ -9,6 +10,7 @@ import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOCompleteCur
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBORODetailsPageValidations;
 import org.testng.Assert;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,6 +44,14 @@ public class VNextBORODetailsPageSteps {
         }
     }
 
+    public static void setVendorPrice(String serviceId, VNextBOMonitorData data) {
+        Arrays.asList(data.getServiceVendorPrices())
+                .forEach(vendorPrice -> {
+                    VNextBORODetailsPageInteractions.setServiceVendorPrice(serviceId, data.getService(), vendorPrice);
+                    VNextBORODetailsPageValidations.verifyServiceVendorPriceIsSet(serviceId, vendorPrice);
+                });
+    }
+
     public static void setServiceStatusForMultipleServicesByServiceId(List<String> serviceIds, String status) {
         for (String serviceId : serviceIds) {
             setServiceStatusByServiceId(serviceId, status);
@@ -51,6 +61,7 @@ public class VNextBORODetailsPageSteps {
 
     public static void setCheckInOptionForPhase() {
         VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        VNextBORODetailsPageInteractions.waitForPhaseActionsCheckInOption();
         Assert.assertTrue(VNextBORODetailsPageValidations.isCheckInOptionDisplayedForPhase(),
                 "The 'Check in' option hasn't been displayed for phase");
         VNextBORODetailsPageInteractions.clickCheckInOptionForPhase();
@@ -58,6 +69,7 @@ public class VNextBORODetailsPageSteps {
 
     public static void setCheckOutOptionForPhase() {
         VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        VNextBORODetailsPageInteractions.waitForPhaseActionsCheckOutOption();
         Assert.assertTrue(VNextBORODetailsPageValidations.isCheckOutOptionDisplayedForPhase(),
                 "The 'Check out' option hasn't been displayed for phase");
         VNextBORODetailsPageInteractions.clickCheckOutOptionForPhase();
@@ -183,5 +195,15 @@ public class VNextBORODetailsPageSteps {
 
     public static void resetServiceStartDate(List<String> allServicesId) {
         allServicesId.forEach(VNextBORODetailsPageSteps::resetServiceStartDate);
+    }
+
+    public static void confirmCheckInOptionIsDisplayedForPhase() {
+        VNextBORODetailsPageInteractions.openActionsDropDownForPhase();
+        VNextBORODetailsPageInteractions.waitForPhaseActionsCheckInOption();
+        if (VNextBORODetailsPageValidations.isCheckInOptionDisplayedForPhase()) {
+            VNextBORODetailsPageInteractions.closeActionsDropDownForPhase();
+        } else {
+            VNextBORODetailsPageInteractions.clickCheckOutOptionForPhase();
+        }
     }
 }

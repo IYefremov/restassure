@@ -11,6 +11,11 @@ public class WorkOrdersScreenValidations {
         Assert.assertEquals(workOrdersScreen.getWorkOrderCustomerValue(workOrderId), appCustomer.getFullName());
     }
 
+    public static void validateWorkOrderPriceValue(String workOrderId, String expectedPrice) {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        Assert.assertEquals(workOrdersScreen.getWorkOrderPriceValue(workOrderId), expectedPrice);
+    }
+
     public static void validateWorkOrderExists(String workOrderId, boolean exists) {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         if (exists)
