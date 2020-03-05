@@ -64,5 +64,10 @@ public class AvailableServicesScreenSteps {
         AvailableServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
     }
 
+    public static void switchToAvailableServices() {
+        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
+        servicesScreen.switchToAvalableServicesView();
+    }
+
 
 }

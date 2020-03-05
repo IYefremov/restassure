@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextApproveInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -32,7 +31,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     private WebElement inspectionslist;
 
     @FindBy(xpath = "//*[@action='multiselect-actions-approve']")
-    private WebElement multiselectinspapprovebtn;
+    private WebElement multiSelectInspApproveBtn;
 
     @FindBy(xpath = "//*[@action='multiselect-actions-archive']")
     private WebElement multiselectinsparchivebtn;
@@ -198,9 +197,8 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
             tap(inspcell.findElement(By.xpath(".//input[@type='checkbox']")));
     }
 
-    public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButton() {
-        tap(multiselectinspapprovebtn);
-        return new VNextApproveInspectionsScreen(appiumdriver);
+    public void clickMultiselectInspectionsApproveButton() {
+        tap(multiSelectInspApproveBtn);
     }
 
     public void clickMultiselectInspectionsArchiveButton() {
