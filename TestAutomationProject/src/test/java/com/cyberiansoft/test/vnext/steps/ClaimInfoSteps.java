@@ -18,7 +18,8 @@ public class ClaimInfoSteps {
 
     public static void selectInsuranceCompany(String insuranceCompany) {
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen();
-        WaitUtils.waitUntilElementIsClickable(claimInfoScreen.getInsuranceCompanyFld()).click();
+        WaitUtils.waitUntilElementIsClickable(claimInfoScreen.getInsuranceCompanyFld());
+        claimInfoScreen.openInsuranceCompaniesList();
         claimInfoScreen.selectInsuranceCompany(insuranceCompany);
     }
 
