@@ -15,13 +15,13 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	@FindBy(xpath="//div[@class='pages']/div[@data-page='claim']")
 	private WebElement claimScreen;
 	
-	@FindBy(name="Estimations.PolicyNumber")
+	@FindBy(name="//*[@data-field='PolicyNumber']")
 	private WebElement policyFld;
 	
-	@FindBy(xpath="//*[@for='estimationsInsuranceId']")
+	@FindBy(xpath="//*[@data-field='Insurance']")
 	private WebElement insuranceCompanyFld;
 	
-	@FindBy(name="Estimations.ClaimNumber")
+	@FindBy(name="//*[@data-field='ClaimNumber']")
 	private WebElement claimFld;
 	
 	@FindBy(name="Estimations.Deductible")
@@ -41,6 +41,10 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-deductible']")));
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 		keyboard.setFieldValue(deductibleFld.getAttribute("value"), deductible);
+	}
+
+	public void openInsuranceCompaniesList() {
+		insuranceCompanyFld.findElement(By.xpath(".//*[@class='formfield-item-arrow']")).click();
 	}
 
 	public void selectInsuranceCompany(String insuranceCompany) {

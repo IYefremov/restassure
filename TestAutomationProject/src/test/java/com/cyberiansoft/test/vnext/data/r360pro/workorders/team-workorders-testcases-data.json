@@ -30,8 +30,13 @@
       "vihicleInfo": {
         "vinNumber": "7777777777777"
       },
-      "moneyService": {
-        "serviceName": "Battery Installation"
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "insuranceCompany": {
         "insuranceCompanyName": "Miami Beach Insurance",
@@ -180,7 +185,7 @@
       "vihicleInfo": {
         "vinNumber": "7777777777777"
       },
-      "service" : {
+      "service": {
         "serviceName": "Labor Motor"
       },
       "moneyService": {

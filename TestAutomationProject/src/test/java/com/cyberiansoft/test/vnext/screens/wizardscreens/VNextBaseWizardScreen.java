@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @Getter
 public class VNextBaseWizardScreen extends VNextBaseScreen {
@@ -144,6 +145,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     }
 
     public String getInspectionTotalPriceValue() {
+        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.textToBePresentInElement(appiumdriver.findElement(By.xpath("//*[@id='total']")),"$"));
         return appiumdriver.findElement(By.xpath("//*[@id='total']")).getText().trim();
     }
 
