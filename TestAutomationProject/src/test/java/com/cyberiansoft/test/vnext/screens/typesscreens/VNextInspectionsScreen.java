@@ -82,6 +82,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public List<String> getAllInspectionsCustomers() {
         waitForInspectionsListIsVisibile();
+        WaitUtils.waitUntilElementIsClickable(inspectionslist);
         List<String> inspsCustomers = new ArrayList<>();
         List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//*[@action='select' and @class='entity-item-title']"));
         for (WebElement inspCell : inspections) {
@@ -178,11 +179,13 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         return isMyViewActive();
     }
 
+    //todo make a step!!!
     public void searchInpectionByFreeText(String searchtext) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(inspectionsScreen));
         WaitUtils.waitUntilElementIsClickable(inspectionsScreen.findElement(By.xpath(".//*[@class='page-content']")));
         SearchSteps.searchByText(searchtext);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Downloading data']"));
     }
 
     public void selectInspection(String inspectionNumber) {
@@ -195,10 +198,6 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         WebElement inspcell = getInspectionCell(inspectionNumber);
         if (inspcell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
             tap(inspcell.findElement(By.xpath(".//input[@type='checkbox']")));
-    }
-
-    public void clickMultiselectInspectionsApproveButton() {
-        tap(multiSelectInspApproveBtn);
     }
 
     public void clickMultiselectInspectionsArchiveButton() {

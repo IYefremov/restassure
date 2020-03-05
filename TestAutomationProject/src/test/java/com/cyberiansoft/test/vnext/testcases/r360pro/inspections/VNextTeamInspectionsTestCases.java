@@ -22,6 +22,7 @@ import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.config.VNextTeamRegistrationInfo;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.InspectionStatus;
+import com.cyberiansoft.test.vnext.enums.InvoiceStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -30,14 +31,13 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.*;
 import org.json.simple.JSONObject;
@@ -87,20 +87,17 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
-		VNextWorkOrderTypesList workOrderTypesList = new VNextWorkOrderTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		workOrderTypesList.selectWorkOrderType(WorkOrderTypes.ALL_AUTO_PHASES);
+		WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
 		BaseUtils.waitABit(60 * 1000);
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
+		AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
 		WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
 		InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR2, testCaseData.getInvoiceData());
 		final String invoiceNumber = InvoiceSteps.saveInvoice();
-		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
 		InvoiceSteps.switchToMyInvoicesView();
-		Assert.assertEquals(invoicesScreen.getInvoiceStatusValue(invoiceNumber), InspectionStatus.NEW);
+		InvoicesScreenValidations.validateInvoiceStatus(invoiceNumber, InvoiceStatus.NEW);
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -148,7 +145,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 																	String description, JSONObject testData) {
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-
 
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR_NO_SHARING, inspectionData);
@@ -365,7 +361,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
+		AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
 		ScreenNavigationSteps.pressForwardButton();
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
@@ -403,7 +399,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
+		AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuValidations.menuItemShouldBeVisible(MenuItems.APPROVE, true);

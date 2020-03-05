@@ -96,9 +96,9 @@ public class SearchSteps {
     }
 
     public static void searchByText(String text) {
-        openSearchFilters();
-        fillTextSearch(text);
-        search();
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(text);
+        SearchSteps.cancelSearch();
     }
 
     public static void searchByFlag(RepairOrderFlag repairOrderFlag) {
