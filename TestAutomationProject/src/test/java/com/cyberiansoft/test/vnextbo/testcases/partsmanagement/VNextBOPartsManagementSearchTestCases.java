@@ -246,18 +246,6 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanSearchROByCoreStatus(String rowID, String description, JSONObject testData) {
-
-        VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
-        VNextBOAdvancedSearchDialogSteps.setLaborCreditCheckbox();
-        VNextBOAdvancedSearchDialogSteps.setCoreStatusField("Return to Vendor (RTV)");
-        VNextBOAdvancedSearchDialogSteps.clickSearchButton();
-        VNextBOPartsDetailsPanelValidations.verifyAtLeastOnePartHasCorePriceMoreThanZero();
-        VNextBOPartsDetailsPanelValidations.verifyAtLeastOnePartHasCorrectCoreStatus("RTV Complete");
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFillAllFieldsOfAdvancedSearch(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
