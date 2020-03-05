@@ -498,18 +498,5 @@
         }
       ]
     }
-  ],
-
-  "verifyUserCanSearchROByCoreStatus": [
-    {
-      "rowID": "verifyUserCanSearchROByCoreStatus.01",
-      "description": "Test Case 93083: User can search RO by \"Core Status\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "93083",
-          "testCaseTitle": "User can search RO by \"Core Status\""
-        }
-      ]
-    }
   ]
 }

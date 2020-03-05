@@ -350,4 +350,10 @@ public class VNextBORODetailsStepsNew {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOAddNewTaskDialogSteps.addNewTaskWithPredefinedTechnician(taskData);
     }
+
+    public static void openTimeReporting() {
+
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getTimeReportingIcon());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
 }
