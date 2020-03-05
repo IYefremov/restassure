@@ -34,8 +34,7 @@ public class InspectionSteps {
     }
 
     public static String createR360Inspection(AppCustomer customer, InspectionData inspectionData) {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        inspectionsScreen.clickAddInspectionButton();
+        clickAddInspectionButton();
         CustomersScreenSteps.selectCustomer(customer);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
@@ -128,6 +127,11 @@ public class InspectionSteps {
         inspectionsScreen.selectInspection(inspectionId);
     }
 
+    public static void unSelectInspection(String inspectionId) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.unselectInspection(inspectionId);
+    }
+
     public static void clickEmailButton() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.getMultiselectInspectionEmailBtn().click();
@@ -140,5 +144,15 @@ public class InspectionSteps {
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationDialog.clickInformationDialogYesButton();
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Inspection customer...']"));
+    }
+
+    public static void clickAddInspectionButton() {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.clickAddButton();
+    }
+
+    public static void clickMultiSelectInspectionsApproveButton() {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.getMultiSelectInspApproveBtn().click();
     }
 }
