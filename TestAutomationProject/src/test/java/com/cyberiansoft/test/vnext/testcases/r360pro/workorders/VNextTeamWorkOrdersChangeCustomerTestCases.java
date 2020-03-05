@@ -31,16 +31,16 @@ import java.io.IOException;
 
 public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
 
-    final RetailCustomer testcustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
-    final RetailCustomer testcustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
+    final RetailCustomer testCustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
+    final RetailCustomer testCustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
 
     @BeforeClass(description = "Work Orders Change Customer Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getWorkOrdersChangeCustomerTestCasesDataPath();
         HomeScreenSteps.openCustomers();
-        CustomerServiceSteps.createCustomerIfNotExist(testcustomer1);
-        CustomerServiceSteps.createCustomerIfNotExist(testcustomer2);
+        CustomerServiceSteps.createCustomerIfNotExist(testCustomer1);
+        CustomerServiceSteps.createCustomerIfNotExist(testCustomer2);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -55,12 +55,12 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         HomeScreenSteps.openCreateMyWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
-        WorkOrderSteps.changeCustomer(woNumber, testcustomer2);
-        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testcustomer2);
+        WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -71,7 +71,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         HomeScreenSteps.openCreateMyWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR2, workOrderData);
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR2, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
@@ -88,13 +88,13 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         HomeScreenSteps.openCreateMyWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrderAsDraft();
-        WorkOrderSteps.changeCustomer(woNumber, testcustomer2);
-        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testcustomer2);
+        WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         BaseUtils.waitABit(1000*30);
         WorkOrderSteps.openMenu(woNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -102,7 +102,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getServiceData());
         WorkOrderSteps.saveWorkOrder();
-        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testcustomer2);
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         WorkOrdersScreenValidations.validateWorkOrderPriceValue(woNumber, workOrderData.getWorkOrderPrice());
         ScreenNavigationSteps.pressBackButton();
     }
@@ -114,7 +114,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         HomeScreenSteps.openCreateMyWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
@@ -133,7 +133,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         WholesailCustomer testWholesaleCustomer = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json"), WholesailCustomer.class);
         HomeScreenSteps.openCreateMyWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
@@ -153,13 +153,13 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         HomeScreenSteps.openCreateMyWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
-        WorkOrderSteps.changeCustomer(woNumber, testcustomer2);
-        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testcustomer2);
+        WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -170,19 +170,19 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
         HomeScreenSteps.openCreateMyWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
         AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
-        WorkOrderSteps.changeCustomer(woNumber, testcustomer2);
-        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testcustomer2);
+        WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         WorkOrderSteps.openMenu(woNumber);
         MenuSteps.selectMenuItem(MenuItems.CREATE_INVOICE);
         InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR);
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
-        InvoicesScreenValidations.validateInvoiceCustomer(invoiceNumber, testcustomer2);
+        InvoicesScreenValidations.validateInvoiceCustomer(invoiceNumber, testCustomer2);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -193,20 +193,20 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         HomeScreenSteps.openCreateTeamWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
         SearchSteps.textSearch(woNumber);
         WorkOrderSteps.switchToMyWorkOrdersView();
         WorkOrderSteps.switchToTeamWorkOrdersView();
-        WorkOrderSteps.changeCustomer(woNumber, testcustomer2);
+        WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
         ScreenNavigationSteps.pressBackButton();
         BaseUtils.waitABit(30*1000);
         HomeScreenSteps.openWorkOrders();
-        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testcustomer2);
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         WorkOrderSteps.switchToMyWorkOrdersView();
-        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testcustomer2);
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -217,13 +217,13 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         HomeScreenSteps.openCreateMyWorkOrder();
-        WorkOrderSteps.createWorkOrder(testcustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
+        WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
-        WorkOrderSteps.changeCustomer(woNumber, testcustomer2);
-        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testcustomer2);
+        WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
+        WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         ScreenNavigationSteps.pressBackButton();
     }
 }
