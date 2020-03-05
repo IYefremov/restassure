@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.ControlUtils;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -54,10 +55,10 @@ public class VNextLoginScreen extends VNextBaseScreen {
 
     public VNextLoginScreen(WebDriver appiumdriver) {
         super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+        PageFactory.initElements(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), this);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 60);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@data-page='employees']")));
-        WaitUtils.elementShouldBeVisible(appiumdriver.findElement(By.xpath("//div[@data-page='employees']")), true);
+        WaitUtils.elementShouldBeVisible(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@data-page='employees']")), true);
     }
 
     public VNextHomeScreen userLogin(String username, String userpsw) {
@@ -66,7 +67,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
             setUserLoginPassword(userpsw);
             tapLoginButton();
         }
-        return new VNextHomeScreen(appiumdriver);
+        return new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public VNextLoginScreen incorrectUserLogin(String username, String userpsw) {
@@ -74,11 +75,11 @@ public class VNextLoginScreen extends VNextBaseScreen {
         setUserLoginPassword(userpsw);
         tapLoginButton();
         BaseUtils.waitABit(300);
-        VNextInformationDialog infrmdialog = new VNextInformationDialog(appiumdriver);
+        VNextInformationDialog infrmdialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         String msg = infrmdialog.clickInformationDialogOKButtonAndGetMessage();
         Assert.assertEquals(msg, VNextAlertMessages.ENTERED_PASSWORD_IS_INCORRECT);
         waitUserListVisibility();
-        return new VNextLoginScreen(appiumdriver);
+        return new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public void setUserLoginPassword(String userpsw) {
@@ -90,13 +91,13 @@ public class VNextLoginScreen extends VNextBaseScreen {
     }
 
     public void selectEmployee(String username) {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 25);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 25);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(text(), '" + username + "')]")));
         tapListElement(employeeslist, username);
     }
 
     public void tapLoginButton() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 15);
         wait.until(ExpectedConditions.elementToBeClickable(loginbtn));
         //tap(loginbtn);
         loginbtn.click();
@@ -108,14 +109,14 @@ public class VNextLoginScreen extends VNextBaseScreen {
     }
 
     public void waitUserListVisibility() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 15);
         wait.until(ExpectedConditions.visibilityOf(employeeslist));
     }
 
     public void updateMainDB() {
         tap(updatemaindbbtn);
         BaseUtils.waitABit(10000);
-        VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
+        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
     }
 
@@ -123,7 +124,7 @@ public class VNextLoginScreen extends VNextBaseScreen {
         if (!searchfld.isDisplayed())
             searchicon.click();
         BaseUtils.waitABit(1000);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
+        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 15);
         wait.until(ExpectedConditions.elementToBeClickable(searchfld)).clear();
         searchfld.sendKeys(searchText + "\n");
         BaseUtils.waitABit(1000);
