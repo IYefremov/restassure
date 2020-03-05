@@ -111,6 +111,10 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("create.multiple.wo.from.inspection.td");
     }
 
+    public String getChangeDepartment() {
+        return props.getProperty("change.department");
+    }
+
     public String getDraftWorkOrdersTestCasesDataPath() {
         return props.getProperty("draft.wo.td");
     }
