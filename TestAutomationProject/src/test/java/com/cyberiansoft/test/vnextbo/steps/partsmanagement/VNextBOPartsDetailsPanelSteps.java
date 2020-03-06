@@ -246,11 +246,15 @@ public class VNextBOPartsDetailsPanelSteps {
         final WebElement selectedStatus = VNextBOPartsDetailsPanelInteractions.getSelectedStatus(status);
         if (selectedStatus != null) {
             VNextBOPartsDetailsPanelInteractions.selectStatusToDelete(selectedStatus);
-            clickDeleteServices();
+            deleteServices();
         } else {
-            VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
-            VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckBoxToBeOpened(false);
+            closeStatusesCheckbox();
         }
+    }
+
+    private static void closeStatusesCheckbox() {
+        VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
+        VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckBoxToBeOpened(false);
     }
 
     public static void deleteServicesByName(String ...names) {
@@ -305,5 +309,11 @@ public class VNextBOPartsDetailsPanelSteps {
     public static void updatePartsList(String woNum, int expectedPartsAmount) {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount);
+    }
+
+    public static void openPartsProvidersModalDialog() {
+        VNextBOPartsDetailsPanelInteractions.clickGetQuotesPartButton();
+        Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
+                "The Parts Providers modal dialog hasn't been opened");
     }
 }

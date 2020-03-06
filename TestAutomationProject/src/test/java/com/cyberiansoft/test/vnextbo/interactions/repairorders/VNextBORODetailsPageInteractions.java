@@ -659,7 +659,7 @@ public class VNextBORODetailsPageInteractions {
     }
 
     public static void waitForPhaseActionsTriggerToBeDisplayed(String phase) {
-        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsTrigger(phase), true, 2);
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBORODetailsPage().getPhaseActionsTrigger(phase), true, 5);
     }
 
     public static void waitForPhaseActionsCheckInOption() {
