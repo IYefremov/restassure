@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
@@ -100,17 +99,12 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
 
     public void switchToTeamWorkordersView() {
         switchToTeamView();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Downloading data']"));
     }
 
     public void switchToMyWorkordersView() {
         switchToMyView();
     }
 
-    public void searchWorkOrderByFreeText(String searchtext) {
-        SearchSteps.searchByText(searchtext);
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading work orders']"));
-    }
 
     public void waitForWorkOrderScreenInfoMessage(String infoMessage) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);

@@ -73,6 +73,8 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         tap(WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='team']")));
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='button active' and @action='team']")));
+        BaseUtils.waitABit(500);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     protected boolean isTeamViewActive() {

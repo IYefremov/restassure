@@ -14,7 +14,7 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(xpath = "//*[@data-autotests-id=\"search-input\"]")
     private WebElement searchInputField;
 
-    @FindBy(xpath = "//div[contains(@class,\"searchlist-filters-apply\")]")
+    @FindBy(xpath = "//div[contains(@class,\"common-filters-apply\")]")
     private WebElement searchButton;
 
     @FindBy(xpath = "//span[@data-automation-id=\"search-clear\"]")
@@ -26,7 +26,7 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(xpath = "//*[@data-autotests-id=\"search-cancel\"]")
     private WebElement cancelSearchInputButton;
 
-    @FindBy(id = "filter_timeframe")
+    @FindBy(xpath = "//*[@data-name='timeframe']/select")
     private ListPicker timeframe;
 
     @FindBy(id = "filter_dateFrom")
@@ -35,19 +35,19 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(id = "filter_dateTo")
     private DatePicker dateTo;
 
-    @FindBy(id = "filter_department")
+    @FindBy(xpath = "//*[@data-name='department']/select")
     private ListPicker department;
 
-    @FindBy(id = "filter_phase")
+    @FindBy(xpath = "//*[@data-name='phase']/select")
     private ListPicker phase;
 
-    @FindBy(id = "filter_status")
+    @FindBy(xpath = "//*[@data-name='status']/select")
     private ListPicker status;
 
-    @FindBy(id = "filter_flag")
+    @FindBy(xpath = "//*[@data-name='flag']/select")
     private ListPicker flag;
 
-    @FindBy(id = "filter_priority")
+    @FindBy(xpath = "//*[@data-name='priority']/select")
     private ListPicker priority;
 
     @FindBy(xpath = "//div[@class=\"searchlist-nothing-found\"]")

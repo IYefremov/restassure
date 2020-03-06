@@ -8,8 +8,8 @@ import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SearchSteps {
 
@@ -81,18 +81,21 @@ public class SearchSteps {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         WaitUtils.elementShouldBeVisible(commonFilterScreen.getSearchButton(), true);
         WaitUtils.click(commonFilterScreen.getSearchButton());
-        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(commonFilterScreen.getSearchButton()));
+        BaseUtils.waitABit(1000);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     public static void searchByTextAndStatus(String text, RepairOrderStatus status) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        openSearchFilters();
+        openSearchMenu();
         fillTextSearch(text);
+        clickCommonFiltersToggle();
         WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement());
         commonFilterScreen.getStatus().selectOption(status.getStatusString());
         search();
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(repairOrderScreen.getRootElement());
     }
 
     public static void searchByText(String text) {
@@ -105,7 +108,7 @@ public class SearchSteps {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
 
         openSearchFilters();
-        commonFilterScreen.getFlag().selectOption(repairOrderFlag.name());
+        commonFilterScreen.getFlag().selectOption(StringUtils.capitalize(StringUtils.lowerCase(repairOrderFlag.name())));
         search();
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
@@ -163,7 +166,7 @@ public class SearchSteps {
     public static void clearAllFilters() {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         repairOrderScreen.getActiveFilterslabel().clearAllFilters();
-        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+        //WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
     public static void openSearchMenu() {

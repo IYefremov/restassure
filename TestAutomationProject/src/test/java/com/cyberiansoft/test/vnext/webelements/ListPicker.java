@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 @Getter
 public class ListPicker implements IWebElement {
@@ -19,8 +20,8 @@ public class ListPicker implements IWebElement {
 
     public void selectOption(String elementName) {
         WaitUtils.click(rootElement);
-        WaitUtils.getGeneralFluentWait().until((webdriver) -> webdriver.findElements(By.xpath(elementsLocator)).size() > 0);
-        selectListElement(elementName);
+        Select dropdown = new Select(rootElement);
+        dropdown.selectByValue(elementName);
     }
 
     public void selectListElement(String elementName) {

@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 
 public class ActiveFiltersLabel implements IWebElement {
     private WebElement rootElement;
-    private String clearFilterButton = "//div[@class='searchlist-filters-values-remove']";
+    private String clearFilterButton = "//div[contains(@class, 'common-filters-clear')]";
 
     public ActiveFiltersLabel(WebElement rootElement) {
         this.rootElement = rootElement;

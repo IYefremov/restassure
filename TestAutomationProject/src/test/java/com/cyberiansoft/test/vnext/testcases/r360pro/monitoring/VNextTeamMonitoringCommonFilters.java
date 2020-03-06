@@ -49,7 +49,9 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     public void beforeMethod() {
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.openSearchFilters();
         SearchSteps.clearAllFilters();
+        SearchSteps.search();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -74,7 +76,9 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         EditOrderSteps.switchToInfo();
         EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
         WizardScreenSteps.saveAction();
+        SearchSteps.openSearchFilters();
         SearchSteps.clearAllFilters();
+        SearchSteps.search();
         SearchSteps.searchByPriority(OrderPriority.HIGH);
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
@@ -107,27 +111,5 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.IN_PROGRESS_ACTIVE);
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCanReturnToCommonFilterPageFromStatusPage(String rowID,
-                                     String description, JSONObject testData) {
-
-        SearchSteps.openSearchFilters();
-        SearchSteps.clickStatusFilter();
-        ScreenNavigationSteps.pressBackButton();
-        SearchSteps.clickDepartmentFilter();
-        ScreenNavigationSteps.pressBackButton();
-        SearchSteps.clickPhaseFilter();
-        ScreenNavigationSteps.pressBackButton();
-        SearchSteps.clickFlagFilter();
-        ScreenNavigationSteps.pressBackButton();
-        SearchSteps.clickPriorityFilter();
-        ScreenNavigationSteps.pressBackButton();
-
-        SearchSteps.fillTextSearch(workOrderId);
-        SearchSteps.search();
-        ScreenNavigationSteps.pressBackButton();
-
     }
 }

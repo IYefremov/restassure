@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class VNextPayInvoicesScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//div[@data-automations-id='pay']")
+    @FindBy(xpath="//div[@data-automation-id='pay']")
     private WebElement payscreen;
 
     @FindBy(xpath="//iframe[@class='invoice-pay-iframe']")
