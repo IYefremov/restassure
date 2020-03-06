@@ -28,7 +28,7 @@ public class InfoScreen extends MonitorScreen {
 
     public void setOrderPriority(OrderPriority orderPriority) {
         priorityItemsList.stream()
-                .filter(element -> element.getText().toLowerCase().contains(orderPriority.getValue()))
+                .filter(element -> element.getText().contains(orderPriority.getValue()))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Priority not found " + orderPriority.getValue()))
                 .click();

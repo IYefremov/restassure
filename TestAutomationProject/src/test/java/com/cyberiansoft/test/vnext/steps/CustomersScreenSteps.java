@@ -21,8 +21,8 @@ public class CustomersScreenSteps {
 
     public static void createNewRetailCustomer(RetailCustomer retailCustomer) {
         clickAddCustomerButton();
-        VNextNewCustomerScreen nextNewCustomerScreen = new VNextNewCustomerScreen();
-        nextNewCustomerScreen.createNewCustomer(retailCustomer);
+        VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
+        newCustomerScreen.createNewCustomer(retailCustomer);
     }
 
     public static void switchToRetailMode() {

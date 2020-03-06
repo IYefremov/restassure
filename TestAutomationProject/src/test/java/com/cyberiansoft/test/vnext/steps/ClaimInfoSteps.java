@@ -12,7 +12,7 @@ public class ClaimInfoSteps {
 
     public static void setClaimNumber(String claimNumber) {
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen();
-        WaitUtils.waitUntilElementIsClickable(claimInfoScreen.getClaimFld());
+        WaitUtils.elementShouldBeVisible(claimInfoScreen.getClaimFld(), true);
         claimInfoScreen.getClaimFld().sendKeys(claimNumber);
     }
 
