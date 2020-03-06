@@ -45,7 +45,7 @@ public class VNextBOPartsProvidersRequestFormDialogValidations {
         Assert.assertTrue(title.contains(carInfo), "The request form dialog title doesn't contain the vehicle info");
     }
 
-    public static void verifyPartsDisplayed(List<String> detailsPanelPartNamesByStatus) {
+    public static void verifyPartsAreDisplayed(List<String> detailsPanelPartNamesByStatus) {
         final List<String> requestFormPartNames = VNextBOPartsProvidersRequestFormDialogInteractions.getPartNamesList();
         Assert.assertTrue(detailsPanelPartNamesByStatus.containsAll(requestFormPartNames),
                 "The parts names on the PM page are not displayed properly in the request form dialog");

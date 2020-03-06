@@ -81,7 +81,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         final String title = VNextBOPartsProvidersRequestFormDialogInteractions.getTitle();
         VNextBOPartsProvidersRequestFormDialogValidations.verifyVinIsDisplayedInTitle(vin, title);
         VNextBOPartsProvidersRequestFormDialogValidations.verifyCarInfoIsDisplayedInTitle("Cadillac", title);
-        VNextBOPartsProvidersRequestFormDialogValidations.verifyPartsDisplayed(detailsPanelPartNamesByStatus);
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyPartsAreDisplayed(detailsPanelPartNamesByStatus);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
