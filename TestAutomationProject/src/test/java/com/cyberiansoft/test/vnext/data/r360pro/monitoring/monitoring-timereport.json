@@ -33,7 +33,7 @@
   ],
   "userCanResetStartDateOnServiceLevel": [
     {
-      "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
+      "rowID": "userCanResetStartDateOnServiceLevel.01",
       "description": "91006",
       "targetProcessTestCaseData": [
         {
@@ -49,7 +49,7 @@
   ],
   "userCanResetStartDateOnPhaseLevel": [
     {
-      "rowID": "userCanSeeTimeReportOnPhaseLevel.01",
+      "rowID": "userCanResetStartDateOnPhaseLevel.01",
       "description": "91007",
       "targetProcessTestCaseData": [
         {

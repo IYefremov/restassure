@@ -39,6 +39,10 @@ public class PhaseScreenInteractions {
         WaitUtils.click(serviceElement.getRootElement());
     }
 
+    public static void openServiceDetails(ServiceElement serviceElement) {
+        WaitUtils.click(serviceElement.getRootElement().findElement(By.xpath(serviceElement.getEditElementLocator())));
+    }
+
     public static void openPhaseElementMenu(PhaseElement phaseElement) {
         WaitUtils.click(phaseElement.getRootElement());
     }

@@ -4,26 +4,24 @@ import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class HomeScreenSteps {
     public static void openCreateMyInspection() {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        HomeScreenSteps.openInspections();
+        openInspections();
         InspectionSteps.switchToMyInspections();
         if (!GeneralWizardInteractions.isSearchFilterEmpty()) {
             SearchSteps.openSearchMenu();
             SearchSteps.fillTextSearch("");
             SearchSteps.cancelSearch();
         }
-        inspectionsScreen.clickAddInspectionButton();
+        InspectionSteps.clickAddInspectionButton();
     }
 
     public static void openCreateMyWorkOrder() {
-        HomeScreenSteps.openWorkOrders();
+        openWorkOrders();
         WorkOrderSteps.switchToMyWorkOrdersView();
         if (!GeneralWizardInteractions.isSearchFilterEmpty()) {
             SearchSteps.openSearchMenu();
@@ -34,14 +32,13 @@ public class HomeScreenSteps {
     }
 
     public static void openCreateTeamInspection() {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        HomeScreenSteps.openInspections();
-        inspectionsScreen.switchToTeamInspectionsView();
-        inspectionsScreen.clickAddInspectionButton();
+        openInspections();
+        InspectionSteps.switchToTeamInspections();
+        InspectionSteps.clickAddInspectionButton();
     }
 
     public static void openCreateTeamWorkOrder() {
-        HomeScreenSteps.openWorkOrders();
+        openWorkOrders();
         WorkOrderSteps.switchToTeamWorkOrdersView();
         WorkOrderSteps.clickAddWorkOrderButton();
     }

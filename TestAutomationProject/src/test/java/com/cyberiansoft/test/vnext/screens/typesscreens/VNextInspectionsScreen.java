@@ -162,11 +162,10 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public void switchToTeamInspectionsView() {
         switchToTeamView();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
     }
 
     public boolean isTeamInspectionsViewActive() {
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
         WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
         return isTeamViewActive();
     }

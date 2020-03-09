@@ -807,7 +807,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		emailScreen.clickScreenBackButton();
 		invoicesScreen.unselectAllSelectedInvoices();
-		invoicesScreen.switchToTeamInvoicesView();
+		invoicesScreen.switchToMyInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
