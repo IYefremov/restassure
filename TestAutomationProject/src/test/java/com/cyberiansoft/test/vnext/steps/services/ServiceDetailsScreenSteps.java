@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.ServiceDetailsInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.NotesSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -80,5 +81,18 @@ public class ServiceDetailsScreenSteps {
         serviceDetailsScreen.clickServiceNotesOption();
         NotesSteps.setNoteText(textNote);
         ScreenNavigationSteps.pressBackButton();
+    }
+
+    public static void startRepairOrderService() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        WaitUtils.waitUntilElementIsClickable(serviceDetailsScreen.getRootElement());
+        serviceDetailsScreen.getStartServiceBtn().click();
+        GeneralSteps.confirmDialog();
+    }
+
+    public static void completeRepairOrderService() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        serviceDetailsScreen.getCompleteServiceBtn().click();
+        GeneralSteps.confirmDialog();
     }
 }

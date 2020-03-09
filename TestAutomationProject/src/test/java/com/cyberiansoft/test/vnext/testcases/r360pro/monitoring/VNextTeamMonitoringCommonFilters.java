@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.MonitorValidations;
 import org.json.simple.JSONObject;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -48,10 +49,14 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     @BeforeMethod
     public void beforeMethod() {
         HomeScreenSteps.openMonitor();
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.openSearchFilters();
         SearchSteps.clearAllFilters();
-        SearchSteps.search();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -76,9 +81,6 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         EditOrderSteps.switchToInfo();
         EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
         WizardScreenSteps.saveAction();
-        SearchSteps.openSearchFilters();
-        SearchSteps.clearAllFilters();
-        SearchSteps.search();
         SearchSteps.searchByPriority(OrderPriority.HIGH);
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
