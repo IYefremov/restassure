@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -28,6 +29,7 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 
 		JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
 		VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+		Utils.refreshPage();
 		VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
 		VNextBOROPageStepsNew.searchOrdersByOrderNumber("O-000-147163");
 		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
@@ -70,6 +72,7 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 		VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
 		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
 		WaitUtilsWebDriver.waitForPageToBeLoaded();
+		WaitUtilsWebDriver.waitABit(3000);
 		VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
 		WaitUtilsWebDriver.waitABit(3000);
 		VNextBORODetailsValidationsNew.verifyServiceStartedDateIsCorrect(data.getService(), data.getServiceStartedDate());
@@ -151,21 +154,11 @@ public class VNextBOMonitorTestCasesPart3New extends BaseTestCase {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanCheckInRO(String rowID, String description, JSONObject testData) {
+	public void verifyUserCanCheckInCheckOutRO(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		VNextBORODetailsStepsNew.checkInPhase(data.getPhase());
-		VNextBORODetailsValidationsNew.verifyPhaseIsCheckedInCheckedOut(data.getPhase(), true);
-		VNextBORODetailsStepsNew.checkOutPhase(data.getPhase());
-	}
-
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void verifyUserCanCheckOutRO(String rowID, String description, JSONObject testData) {
-
-		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
-		VNextBORODetailsStepsNew.checkInPhase(data.getPhase());
-		VNextBORODetailsStepsNew.checkOutPhase(data.getPhase());
-		VNextBORODetailsValidationsNew.verifyPhaseIsCheckedInCheckedOut(data.getPhase(), false);
+		VNextBORODetailsStepsNew.checkInCheckOutPhase(data.getPhase());
+		VNextBORODetailsStepsNew.checkInCheckOutPhase(data.getPhase());
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

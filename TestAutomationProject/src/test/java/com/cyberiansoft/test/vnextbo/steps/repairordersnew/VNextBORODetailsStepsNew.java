@@ -7,6 +7,8 @@ import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOChangeTechni
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBONotesDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROCompleteCurrentPhaseDialogNew;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBORODetailsWebPageNew;
+import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
@@ -95,6 +97,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.getResolveProblemForPhaseActionButton());
         VNextBOROResolveProblemDialogStepsNew.resolveProblem();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(3000);
     }
 
     public static void resolveProblemForService(String service) {
@@ -104,22 +107,22 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.getResolveProblemForServiceActionButton());
         VNextBOROResolveProblemDialogStepsNew.resolveProblem();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(3000);
     }
 
-    public static void checkInPhase(String phase) {
+    public static void checkInCheckOutPhase(String phase) {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-        Utils.clickElement(detailsWebPageNew.getCheckInActionButton());
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
-    }
-
-    public static void checkOutPhase(String phase) {
-
-        VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
-        Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-        Utils.clickElement(detailsWebPageNew.getCheckOutActionButton());
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        try {
+            Utils.clickElement(detailsWebPageNew.getCheckInActionButton());
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
+            VNextBORODetailsValidationsNew.verifyPhaseIsCheckedInCheckedOut(phase, true);
+        } catch (NoSuchElementException ex) {
+            Utils.clickElement(detailsWebPageNew.getCheckOutActionButton());
+            WaitUtilsWebDriver.waitForPageToBeLoaded();
+            VNextBORODetailsValidationsNew.verifyPhaseIsCheckedInCheckedOut(phase, false);
+        }
     }
 
     public static void setPhaseStatusIfNeeded(String phase, String expectedStatus) {
@@ -131,6 +134,7 @@ public class VNextBORODetailsStepsNew {
             Utils.clickElement(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase));
             Utils.clickWithJS(new VNextBORODetailsWebPageNew().dropDownOption(expectedStatus));
             WaitUtilsWebDriver.waitForPageToBeLoaded();
+            WaitUtilsWebDriver.waitABit(5000);
         }
     }
 
@@ -145,7 +149,7 @@ public class VNextBORODetailsStepsNew {
             Utils.clickElement(detailsWebPage.serviceStatusDropDownByService(service));
             Utils.clickWithJS(detailsWebPage.dropDownOption(expectedStatus));
             WaitUtilsWebDriver.waitForPageToBeLoaded();
-            WaitUtilsWebDriver.waitABit(3000);
+            WaitUtilsWebDriver.waitABit(5000);
         }
     }
 
@@ -222,6 +226,7 @@ public class VNextBORODetailsStepsNew {
 
         changeOrderStatus("Closed");
         VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason(reason);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitABit(4000);
     }
 
@@ -253,8 +258,12 @@ public class VNextBORODetailsStepsNew {
     public static void addService(VNextBOMonitorData serviceData) {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        WaitUtilsWebDriver.waitABit(2000);
         VNextBOAddNewServiceDialogSteps.addService(serviceData);
+        WaitUtilsWebDriver.waitABit(4000);
         Utils.refreshPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(3000);
     }
 
     public static void addServiceWithoutSaveXIcon(VNextBOMonitorData serviceData) {
@@ -272,15 +281,23 @@ public class VNextBORODetailsStepsNew {
     public static void addLaborService(VNextBOMonitorData serviceData) {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        WaitUtilsWebDriver.waitABit(2000);
         VNextBOAddNewServiceDialogSteps.addLaborService(serviceData);
+        WaitUtilsWebDriver.waitABit(4000);
         Utils.refreshPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(3000);
     }
 
     public static void addPartService(VNextBOMonitorData serviceData) {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        WaitUtilsWebDriver.waitABit(2000);
         VNextBOAddNewServiceDialogSteps.addPartService(serviceData);
+        WaitUtilsWebDriver.waitABit(4000);
         Utils.refreshPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(3000);
     }
 
     public static int getPartServicesAmount() {
