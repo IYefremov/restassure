@@ -40,6 +40,11 @@ public class EditOrderSteps {
                 PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
     }
 
+    public static void openServiceDetails(ServiceData serviceData) {
+        PhaseScreenInteractions.openServiceDetails(
+                PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()));
+    }
+
     public static void setOrderPriority(OrderPriority orderPriority) {
         InfoScreen infoScreen = new InfoScreen();
         infoScreen.setOrderPriority(orderPriority);

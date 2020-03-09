@@ -65,6 +65,12 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath = "//input[@name='question-section']")
 	private List<WebElement> questionSections;
 
+	@FindBy(xpath = "//*[@data-action-name='startService']")
+	private WebElement startServiceBtn;
+
+	@FindBy(xpath = "//*[@data-action-name='completeService']")
+	private WebElement completeServiceBtn;
+
     public VNextServiceDetailsScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(appiumdriver, this);

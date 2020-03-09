@@ -166,7 +166,9 @@ public class SearchSteps {
     public static void clearAllFilters() {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         repairOrderScreen.getActiveFilterslabel().clearAllFilters();
-        //WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+        BaseUtils.waitABit(1000);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 
     public static void openSearchMenu() {

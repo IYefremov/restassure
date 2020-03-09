@@ -83,8 +83,8 @@ public class AutoAssignTechCases extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
-
         WizardScreenSteps.saveAction();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -142,8 +142,8 @@ public class AutoAssignTechCases extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
-
         WizardScreenSteps.saveAction();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -207,8 +207,8 @@ public class AutoAssignTechCases extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
         PhaseScreenValidations.validateServiceTechnician(serviceWithLoggedInTechnician);
-
         WizardScreenSteps.saveAction();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
     }
 }
