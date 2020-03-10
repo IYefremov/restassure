@@ -28,6 +28,7 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 
 		JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
 		VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+		Utils.refreshPage();
 		VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
 	}
 
@@ -151,6 +152,7 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBORODetailsValidationsNew.verifyOrderPriorityIsCorrect(data.getPriority());
 		Utils.goToPreviousPage();
 		WaitUtilsWebDriver.waitForPageToBeLoaded();
+		WaitUtilsWebDriver.waitABit(4000);
 		VNextBOROWebPageValidationsNew.verifyPriorityIsCorrectForFirstOrder(data.getPriority());
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}

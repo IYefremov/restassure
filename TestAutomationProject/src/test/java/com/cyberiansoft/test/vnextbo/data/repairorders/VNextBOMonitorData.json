@@ -1169,26 +1169,15 @@
     }
   ],
 
-  "verifyUserCanCheckInRO": [
+  "verifyUserCanCheckInCheckOutRO": [
     {
-      "rowID": "verifyUserCanCheckInRO.01",
-      "description": "Test Case 91258: User can Chek - In RO",
+      "rowID": "verifyUserCanCheckInCheckOutRO.01",
+      "description": "Test Case 91258: User can Chek - In RO. Test Case 91259: User can Chek - Out RO",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91258",
           "testCaseTitle": "User can Chek - In RO"
-        }
-      ],
-      "orderNumber": "O-000-147163",
-      "phase": "PDR Station"
-    }
-  ],
-
-  "verifyUserCanCheckOutRO": [
-    {
-      "rowID": "verifyUserCanCheckOutRO.01",
-      "description": "Test Case 91259: User can Chek - Out RO",
-      "targetProcessTestCaseData": [
+        },
         {
           "testCaseID": "91259",
           "testCaseTitle": "User can Chek - Out RO"

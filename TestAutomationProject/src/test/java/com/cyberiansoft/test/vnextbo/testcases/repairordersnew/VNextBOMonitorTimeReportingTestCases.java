@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -36,6 +37,7 @@ public class VNextBOMonitorTimeReportingTestCases extends BaseTestCase {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTimeReportingTD();
         VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+        Utils.refreshPage();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         WaitUtilsWebDriver.waitForPageToBeLoaded();

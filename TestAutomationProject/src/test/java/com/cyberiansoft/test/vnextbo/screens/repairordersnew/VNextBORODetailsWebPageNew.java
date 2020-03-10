@@ -151,7 +151,7 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     public WebElement serviceRowByName(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow'])[1]"));
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[contains(@class,'serviceRow')])[1]"));
     }
 
     public WebElement actionsMenuButtonForService(String service) {

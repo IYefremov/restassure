@@ -37,6 +37,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 
 		JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
 		VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+		Utils.refreshPage();
 		VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
 	}
 
@@ -47,7 +48,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 			Utils.closeAllNewWindowsExceptParentTab(parentTabHandle);
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
 	public void verifyUserCanOpenMonitorWithFullSetOfElements(String rowID, String description, JSONObject testData) {
 
 		VNextBOROWebPageValidationsNew.verifyTermsAndConditionsLinkIsDisplayed();
@@ -98,7 +99,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 		VNextBOModalDialogValidations.verifyDialogIsClosed(vNextBOTermsAndConditionsDialog);
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
 	public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
 
 		VNextBOROPageStepsNew.openIntercomMessenger();
@@ -224,6 +225,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		WaitUtilsWebDriver.waitABit(3000);
 		VNextBOROWebPageValidationsNew.verifyPoNumberFieldIsNotClickableForFirstOrder();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
@@ -233,8 +235,8 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
 		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-		VNextBOROPageStepsNew.checkOutOrder(data.getOrderNumber());
-		VNextBOROPageStepsNew.checkInOrder(data.getOrderNumber());
+		VNextBOROPageStepsNew.checkInCheckOutOrder(data.getOrderNumber());
+		VNextBOROPageStepsNew.checkInCheckOutOrder(data.getOrderNumber());
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
 
@@ -248,7 +250,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
 
-	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
 	public void verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion(String rowID, String description, JSONObject testData) {
 
 		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);

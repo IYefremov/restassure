@@ -106,7 +106,9 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded(data.getPhase(), "Active");
         VNextBORODetailsStepsNew.reportProblemOnPhaseLevelWithoutDescription(data.getPhase(), data.getProblemReason());
         Utils.goToPreviousPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROPageStepsNew.viewOrdersProblemsByOrderNumber(data.getOrderNumber());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBORODetailsValidationsNew.verifyPhaseStatusInDropdownFieldIsCorrect(data.getPhase(), "Problem");
         VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
     }
@@ -152,7 +154,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyTheUserCanViewTheServiceProblemFromROPageAndSystemExpandsThePhase(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
@@ -160,7 +162,9 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
         VNextBORODetailsStepsNew.reportProblemForServiceWithoutDescription(data.getService(), data.getProblemReason());
         Utils.goToPreviousPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROPageStepsNew.viewOrdersProblemsByOrderNumber(data.getOrderNumber());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBORODetailsValidationsNew.verifyServiceStatusIsCorrect(data.getService(), "Problem");
         VNextBORODetailsStepsNew.resolveProblemForService(data.getService());
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());

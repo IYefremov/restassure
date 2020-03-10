@@ -111,7 +111,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
         VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField("All");
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
-        WaitUtilsWebDriver.waitABit(2000);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void searchOrdersByPhaseStatus(String phase, String phaseStatus) {
@@ -250,9 +250,10 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
         WaitUtilsWebDriver.waitForVisibility(repairOrdersPage.getWoNumbersList().get(rowNumber));
-        WaitUtilsWebDriver.waitForElementNotToBeStale(repairOrdersPage.getWoNumbersList().get(rowNumber));
+        WaitUtilsWebDriver.waitABit(3000);
         Utils.clickElement(repairOrdersPage.getWoNumbersList().get(rowNumber));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(3000);
     }
 
     public static void viewOrdersProblemsByOrderNumber(String orderNumber) {
@@ -278,6 +279,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageValidationsNew.verifyDepartmentsAllAmountsIsCorrect();
         Utils.clickWithJS(ordersPage.departmentFilterDropDownOption(department));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(3000);
     }
 
     public static void filterOrdersByPhase(String phase) {
@@ -330,21 +332,17 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         return ordersAmount;
     }
 
-    public static void checkInOrder(String orderNumber) {
+    public static void checkInCheckOutOrder(String orderNumber) {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
-        VNextBOROWebPageValidationsNew.verifyCheckInCheckOutActionButtons(false);
-        Utils.clickElement(ordersPage.getCheckInActionButton());
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
-    }
-
-    public static void checkOutOrder(String orderNumber) {
-
-        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
-        Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
-        VNextBOROWebPageValidationsNew.verifyCheckInCheckOutActionButtons(true);
-        Utils.clickElement(ordersPage.getCheckOutActionButton());
+        if (Utils.isElementDisplayed(ordersPage.getCheckOutActionButton())) {
+            VNextBOROWebPageValidationsNew.verifyCheckInCheckOutActionButtons(true);
+            Utils.clickElement(ordersPage.getCheckOutActionButton());
+        } else {
+            VNextBOROWebPageValidationsNew.verifyCheckInCheckOutActionButtons(false);
+            Utils.clickElement(ordersPage.getCheckInActionButton());
+        }
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
