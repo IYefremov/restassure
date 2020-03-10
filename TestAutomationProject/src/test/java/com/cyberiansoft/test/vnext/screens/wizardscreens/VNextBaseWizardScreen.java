@@ -140,7 +140,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
 
     public VNextNotesScreen clickInspectionNotesOption() {
         clickMenuButton();
-        tap(inspectionnotesmenu);
+        MenuSteps.selectMenuItem(MenuItems.NOTES);
         return new VNextNotesScreen();
     }
 

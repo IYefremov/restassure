@@ -25,11 +25,13 @@ import com.cyberiansoft.test.vnext.enums.InvoiceStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.VNextChangeInvoicePONumberDialog;
+import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InvoiceInfoScreenValidations;
@@ -497,8 +499,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			}
 			WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
+			AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
 			WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
 
@@ -648,8 +649,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			HomeScreenSteps.openCreateMyWorkOrder();
 			WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
+			AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
 			WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
 
@@ -803,8 +803,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			}
 			WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
+			AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
 			WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
 
@@ -847,8 +846,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyWorkOrder();
 		WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
+		AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getServiceData());
 		final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
 		ScreenNavigationSteps.pressBackButton();
 
@@ -1109,8 +1107,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyWorkOrder();
 		WorkOrderSteps.createWorkOrder(testcustomer, wotype, testCaseData.getWorkOrderData());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		servicesScreen.selectServices(testCaseData.getWorkOrderData().getServicesList());
+		AvailableServicesScreenSteps.selectServices(testCaseData.getWorkOrderData().getServicesList());
 		final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
 		ScreenNavigationSteps.pressBackButton();
 		return workOrderNumber;
