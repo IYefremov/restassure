@@ -14,7 +14,6 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
-import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
@@ -215,8 +214,7 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         AppiumUtils.setAndroidNetworkOn();
         homeScreen.waitUntilQueueMessageInvisible();
 
-        VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
-        statusScreen.updateMainDB();
+        StatusScreenSteps.updateMainDB();
         homeScreen.clickWorkOrdersMenuItem();
         WorkOrderSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);

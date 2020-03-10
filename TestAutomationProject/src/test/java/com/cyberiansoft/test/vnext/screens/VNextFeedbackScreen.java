@@ -1,12 +1,9 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -40,12 +37,7 @@ public class VNextFeedbackScreen extends VNextBaseScreen {
 	@FindBy(xpath="//*[@action='send']")
 	private WebElement sendbtn;
 
-    public VNextFeedbackScreen(WebDriver appiumdriver) {
-		super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
-		BaseUtils.waitABit(3000);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
-		wait.until(ExpectedConditions.visibilityOf(feedbackscreen));
+    public VNextFeedbackScreen() {
 	}
 	
 	public void selectFeedbackType(String feedbackType) {
@@ -84,7 +76,7 @@ public class VNextFeedbackScreen extends VNextBaseScreen {
 				tap(btn);
 		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
 		Assert.assertEquals(informationdlg.clickInformationDialogOKButtonAndGetMessage(), VNextAlertMessages.YOUR_FEEDBACK_HAS_BEEN_SENT);
-		return new VNextStatusScreen(appiumdriver);
+		return new VNextStatusScreen();
 	}
 
 }

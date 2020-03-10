@@ -8,14 +8,9 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
-import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.MenuSteps;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
@@ -156,9 +151,8 @@ public class VNextTeamArchiveInspectionsTestCases extends BaseTestClass {
         InspectionSteps.archiveInspection(inspectionNumber);
         ScreenNavigationSteps.pressBackButton();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen();
-        VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
-        statusScreen.updateMainDB();
+        HomeScreenSteps.openStatus();
+        StatusScreenSteps.updateMainDB();
         HomeScreenSteps.openInspections();
         InspectionsValidations.verifyInspectionExists(inspectionNumber, true);
         ScreenNavigationSteps.pressBackButton();

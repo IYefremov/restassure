@@ -27,7 +27,10 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	private WebElement rootElement;
 	
 	@FindBy(xpath="//*[@action='hide-multiselect-actions']")
-	private WebElement cancelselectedinvoices;
+	private WebElement cancelSelectedInvoices;
+
+	@FindBy(xpath="//*[@action='multiselect-actions-send-email']")
+	private WebElement multiselectActionsSendEmail;
 
 	@FindBy(xpath = "//*[@data-autotests-id='invoices-list']")
 	private WebElement screenList;
@@ -117,11 +120,6 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.xpath("//div[@class='checkbox-item-title' and text()='" + invoiceID + "']"), 1));
 	}
 	
-	public void unselectAllSelectedInvoices() {
-		if (cancelselectedinvoices.isDisplayed())
-			tap(cancelselectedinvoices);
-	}
-	
 	public VNextHomeScreen clickBackButton() {
 		waitInvoicesScreenLoad();
 		clickScreenBackButton();
@@ -150,10 +148,6 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	public void selectInvoice(String invoiceID) {
 		if (getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//*[@action='check-item']")).getAttribute("checked") == null)
 			getInvoiceElement(invoiceID).getRootElement().findElement(By.xpath(".//*[@action='check-item']")).click();
-	}
-	
-	public void clickOnSelectedInvoicesMailButton() {
-		tap(appiumdriver.findElement(By.xpath(".//*[@action='multiselect-actions-send-email']")));
 	}
 
 	public boolean isInvoiceHasNotesIcon(String invoiceID) {

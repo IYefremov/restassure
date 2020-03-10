@@ -31,6 +31,6 @@ public class VNextEmailVerificationScreen extends VNextBaseScreen {
 		tap(activatebtn);
 		VNextInformationDialog informationdialog = new VNextInformationDialog(appiumdriver);
 		informationdialog.clickInformationDialogOKButton();
-		return new VNextStatusScreen(appiumdriver);
+		return new VNextStatusScreen();
 	}
 }

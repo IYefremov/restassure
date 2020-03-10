@@ -126,7 +126,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
         WebDriver webDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].click();", statusList);
-        return new VNextStatusScreen(appiumdriver);
+        return new VNextStatusScreen();
     }
 
     public void clickQueueMessageIcon() {

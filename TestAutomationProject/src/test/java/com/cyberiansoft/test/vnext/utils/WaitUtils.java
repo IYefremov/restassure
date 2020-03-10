@@ -121,8 +121,8 @@ public class WaitUtils {
     public static FluentWait<WebDriver> getGeneralFluentWait(int timeout, int pollingEvery) {
         return
                 new FluentWait<>(ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
-                        .withTimeout(Duration.ofSeconds(durationInSeconds))
-                        .pollingEvery(Duration.ofMillis(pullingIntervalInMils))
+                        .withTimeout(Duration.ofSeconds(timeout))
+                        .pollingEvery(Duration.ofMillis(pollingEvery))
                         .ignoring(ElementClickInterceptedException.class)
                         .ignoring(WebDriverException.class)
                         .ignoring(AssertionError.class)
