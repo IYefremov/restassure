@@ -117,7 +117,6 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         laborServicePartsList.clickBackButton();
         vehiclePartInfoScreen.clickScreenBackButton();
         serviceDetailsScreen.clickScreenBackButton();
-        vehiclePartInfoScreen = new VNextVehiclePartInfoPage(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
 
         InspectionSteps.saveInspection();

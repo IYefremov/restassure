@@ -234,7 +234,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		AvailableServicesScreenSteps.switchToAvailableServices();
 
 		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
