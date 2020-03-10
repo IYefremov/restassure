@@ -9,7 +9,7 @@ public class MenuScreenInteractions {
     public static WebElement getMenuItem(MenuItems menuItem) {
         GeneralMenuScreen menuScreen = new GeneralMenuScreen();
         WaitUtils.collectionSizeIsGreaterThan(menuScreen.getMenuItems(), 0);
-        return WaitUtils.getGeneralFluentWait(5, 1).until(driver -> menuScreen.getMenuItems().stream()
+        return WaitUtils.getGeneralFluentWait(10, 300).until(driver -> menuScreen.getMenuItems().stream()
                 .filter(WebElement::isDisplayed)
                 .filter((element) ->
                         element.getText().equals(menuItem.getMenuItemDataName()))

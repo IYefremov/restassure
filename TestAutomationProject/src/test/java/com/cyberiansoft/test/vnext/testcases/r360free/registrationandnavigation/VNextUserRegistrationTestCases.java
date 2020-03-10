@@ -27,9 +27,6 @@ import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextPaymentInfoWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextUpgradeInfoWebPage;
-import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import org.openqa.selenium.By;
@@ -44,7 +41,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 
 
@@ -921,9 +917,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
         VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
-        VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
+        HomeScreenSteps.openStatus();
+        StatusScreenSteps.openFeedBackScreen();
+        VNextFeedbackScreen feedbackscreen = new VNextFeedbackScreen();
         feedbackscreen.selectFeedbackType(feedbackType);
         feedbackscreen.selectArea(feedbackArea, subArea);
         feedbackscreen.setFeedbackSubject(feedbackSubject);
@@ -937,140 +933,6 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
                         .withSubject("Test Feedback Repair360");
         Assert.assertTrue(nada.waitForMessage(searchParametersBuilder));
 
-    }
-
-    @Test(testName = "Test Case 64407:R360: submit Customer Feedback from Repair360 ediition (upgraded from free)",
-            description = "Submit Customer Feedback from Repair360 ediition (upgraded from free)")
-    public void testSubmitCustomerFeedbackFromRepair360FreeEdiitionUpgratedFromFree() throws Exception {
-
-        final String userfirstname = "QA";
-        final String userlastname = "QA";
-        final String boeditionname = "Repair360 Free";
-        final String bolineofbusiness = "PDR/Hail";
-        final String userstate = "California";
-
-
-        final String edition = "Repair360";
-        final String userfullname = "Oleksandr Kramar";
-        final String cardnumber = "4242424242424242";
-        final String expirationmonth = "09";
-        final String expirationyear = "2021";
-        final String cvccode = "122";
-        final String billindaddressline1 = "First street 21/13";
-        final String billindcity = "New York";
-        final String billindzip = "79031";
-        final String billingcountry = "United States of America";
-        final String billingstate = "California";
-
-        final String feedbackType = "Feature Request";
-        final String feedbackArea = "Customers";
-        final String subArea = "Create/Edit customer";
-        final String feedbackSubject = "Test Feedback Repair360";
-        final String feedbackDesc = "Testing kayako ticket creation from feedback send from Repair360 Free";
-
-
-        //userregmail = usermailprefix + UUID.randomUUID() + usermailpostbox;
-        //userregmail = usermailprefix + "99999111" + usermailpostbox;
-        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationPersonalInfoScreen regscreen = new VNextRegistrationPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        regscreen.setUserRegistrationInfo(userfirstname, userlastname, userphonecountrycode, userregphone, userregmail);
-        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
-        regscreen.clickClearUserButton();
-        VNextModalDialog registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "User " + userregmail + " has been deleted");
-
-        regscreen.clickDoneButton();
-        BaseUtils.waitABit(4000);
-        VNextVerificationScreen verificationscreen = new VNextVerificationScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        verificationscreen.setDeviceRegistrationCode(VNextWebServicesUtils.getVerificationCodeByPhone(userphonecountrycode + userregphone).replaceAll("\"", ""));
-        verificationscreen.clickVerifyButton();
-        //registrationinformationdlg = new VNextModalDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        //Assert.assertEquals(registrationinformationdlg.clickInformationDialogOKButtonAndGetMessage(), "Your phone has been verified");
-
-        BaseUtils.waitABit(2000);
-        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
-        BaseUtils.waitABit(5000);
-        //ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//iframe")));
-        VNextRegistrationNewUserPersonalInfoScreen newuserpersonalinfoscreen = new VNextRegistrationNewUserPersonalInfoScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        newuserpersonalinfoscreen.setNewUserPersonaInfo(boeditionname, userstate);
-        newuserpersonalinfoscreen.clickDoneButton();
-        VNextRegistrationLineOfBusinessScreen reglineofbusinessscreen = new VNextRegistrationLineOfBusinessScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        //reglineofbusinessscreen.selectEdition(boeditionname);
-        reglineofbusinessscreen.selectLineOfBusiness(bolineofbusiness);
-        //reglineofbusinessscreen.clickDoneButton();
-        VNextRegistrationOverviewScreen registrationoverviewscreen = new VNextRegistrationOverviewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        Assert.assertEquals(registrationoverviewscreen.getUserFirstNameValue(), userfirstname);
-        Assert.assertEquals(registrationoverviewscreen.getUserLastNameValue(), userlastname);
-        Assert.assertEquals(registrationoverviewscreen.getUserCompanyNameValue(), boeditionname);
-        Assert.assertEquals(registrationoverviewscreen.getUserEmailValue(), userregmail);
-        //Assert.assertEquals(registrationoverviewscreen.getUserPhoneValue(), userregphoneformatted);
-        registrationoverviewscreen.clickDoneButton();
-        VNextRegistrationOverviewLegalInfosScreen registrationoverviewlegalinfoscreen =
-                new VNextRegistrationOverviewLegalInfosScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        registrationoverviewlegalinfoscreen.agreetermsAndconditions();
-        registrationoverviewlegalinfoscreen.clickSubmitButton();
-
-        BaseUtils.waitABit(25000);
-        VNextAppUtils.restartApp();
-        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 90);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
-        VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        //homescreen.clickUpgrateToProBanner();
-        VNextStatusScreen statuscsreen = homescreen.clickStatusMenuItem();
-        VNextEmailVerificationScreen emailverificationscren = statuscsreen.goToBackOfficeButton();
-        emailverificationscren.setEmailAddress(userregmail);
-        emailverificationscren.clickActivateButton();
-
-        NadaEMailService nada = new NadaEMailService();
-        nada.setEmailId(userregmail);
-        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder =
-                new NadaEMailService.MailSearchParametersBuilder()
-                        .withSubject("Repair360 Free: REGISTRATION");
-        String mailmessage = nada.getMailMessageBySubjectKeywords(searchParametersBuilder);
-        nada.deleteMessageWithSubject("Repair360 Free: REGISTRATION");
-        String linkText = "Click here";
-        List<String> allMatches = nada.getUrlsFromMessage(mailmessage, linkText);
-
-        String newbourl = allMatches.get(0).substring(0, allMatches.get(0).indexOf("\" style"));
-
-        WebDriver
-                webdriver = WebdriverInicializator.getInstance().initWebDriver(browsertype);
-        WebDriverUtils.webdriverGotoWebPage(newbourl);
-        VNextBOApproveAccountWebPage approvedaccountwebpage = PageFactory.initElements(
-                webdriver, VNextBOApproveAccountWebPage.class);
-        VNextBOLoginSteps.userLogin(userregmail, confirmpsw);
-        VNexBOLeftMenuPanel leftMenuPanel = PageFactory.initElements(webdriver,
-                VNexBOLeftMenuPanel.class);
-
-        VNextBOHeaderPanelSteps.clickUpgradeNowBanner();
-        VNextUpgradeInfoWebPage upgradeinfopage = new VNextUpgradeInfoWebPage(webdriver);
-
-        VNextPaymentInfoWebPage paymentinfopage = upgradeinfopage.clickUnlockRepair360EditionButton();
-
-        paymentinfopage.setUserPaymentsInfo(edition, userfullname, cardnumber,
-                expirationmonth, expirationyear, cvccode, billindaddressline1,
-                billindcity, billindzip, billingcountry, billingstate);
-
-        paymentinfopage.clickSaveAndCloseCongratsModal();
-        webdriver.quit();
-
-        VNextStatusScreen statusscreen = new VNextStatusScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
-        feedbackscreen.selectFeedbackType(feedbackType);
-        feedbackscreen.selectArea(feedbackArea, subArea);
-        feedbackscreen.setFeedbackSubject(feedbackSubject);
-        feedbackscreen.setFeedbackDescription(feedbackDesc);
-        statusscreen = feedbackscreen.clickSendButton();
-        statusscreen.clickBackButton();
-
-        nada = new NadaEMailService();
-        nada.setEmailId(userregmail);
-        searchParametersBuilder =
-                new NadaEMailService.MailSearchParametersBuilder()
-                        .withSubject("Test Feedback Repair360").waitTimeForMessage(Duration.ofMinutes(10), Duration.ofSeconds(30));
-        Assert.assertTrue(nada.waitForMessage(searchParametersBuilder));
     }
 
     @Test(testName = "Test Case 64408:R360: submit Customer Feedback from Repair360 ediition",
@@ -1166,15 +1028,15 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
         VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextStatusScreen statusscreen = homescreen.clickStatusMenuItem();
-        VNextFeedbackScreen feedbackscreen = statusscreen.clickFeedbackButton();
+        HomeScreenSteps.openStatus();
+        StatusScreenSteps.openFeedBackScreen();
+        VNextFeedbackScreen feedbackscreen = new VNextFeedbackScreen();
         feedbackscreen.selectFeedbackType(feedbackType);
         feedbackscreen.selectArea(feedbackArea, subArea);
         feedbackscreen.setFeedbackSubject(feedbackSubject);
         feedbackscreen.setFeedbackDescription(feedbackDesc);
-        statusscreen = feedbackscreen.clickSendButton();
-        statusscreen.clickBackButton();
+        feedbackscreen.clickSendButton();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(testName = "Test Case 83887:Repair360 - Key verification (invalid key)," +

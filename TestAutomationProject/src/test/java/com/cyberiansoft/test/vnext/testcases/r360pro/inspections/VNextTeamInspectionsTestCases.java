@@ -255,8 +255,8 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber));
 		ScreenNavigationSteps.pressBackButton();
 
-		VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
-		statusScreen.updateMainDB();
+		HomeScreenSteps.openStatus();
+		StatusScreenSteps.updateMainDB();
 
 		homeScreen.clickInspectionsMenuItem();
 		InspectionSteps.switchToTeamInspections();
