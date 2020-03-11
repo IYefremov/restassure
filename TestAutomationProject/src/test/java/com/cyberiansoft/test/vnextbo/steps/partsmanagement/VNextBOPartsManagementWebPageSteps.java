@@ -33,7 +33,7 @@ public class VNextBOPartsManagementWebPageSteps extends VNextBOBaseWebPageSteps 
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         Utils.clickElement(new VNextBOPartsManagementWebPage().getSavedSearchListGearIcon());
-        WaitUtilsWebDriver.getWebDriverWait(3).until(ExpectedConditions.elementToBeClickable(new VNextBOAdvancedSearchDialog().getCustomerField()));
+        WaitUtilsWebDriver.elementShouldBeClickable(new VNextBOAdvancedSearchDialog().getCustomerField(), true, 3);
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
@@ -48,7 +48,6 @@ public class VNextBOPartsManagementWebPageSteps extends VNextBOBaseWebPageSteps 
     public static void waitUntilPartsManagementPageIsLoaded() {
         WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsManagementWebPage().getPartsOrdersList(), true, 5);
         WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getPartsDetailsTable(), true, 5);
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitForPageToBeLoaded(5);
     }
 }

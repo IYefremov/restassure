@@ -6,7 +6,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsMan
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.partsmanagement.PartStatuses;
+import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -46,7 +46,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMGenericPartProviderFunctionalityTD();
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        status = PartStatuses.OPEN.getStatus();
+        status = PartStatus.OPEN.getStatus();
     }
 
     @AfterMethod
@@ -60,7 +60,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
 
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelValidations.verifyPartStatusesDoNotContainRestrictedStatus(PartStatuses.OPEN.getStatus());
+        VNextBOPartsDetailsPanelValidations.verifyPartStatusesDoNotContainRestrictedStatus(PartStatus.OPEN.getStatus());
         VNextBOPartsDetailsPanelInteractions.clickGetQuotesPartButton();
         Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
                 "The Parts Providers modal dialog hasn't been opened");
@@ -141,7 +141,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
 
         VNextBOPartsProvidersRequestFormDialogSteps.getQuotesForFirstParts(4);
         VNextBOPartsProvidersDialogSteps.closePartsProvidersDialog();
-        Assert.assertTrue(VNextBOPartsDetailsPanelInteractions.getPartIdsByStatus(PartStatuses.QUOTE_REQUESTED.getStatus())
+        Assert.assertTrue(VNextBOPartsDetailsPanelInteractions.getPartIdsByStatus(PartStatus.QUOTE_REQUESTED.getStatus())
                         .containsAll(partIdsByStatus.subList(0, 4)),
                 "The status of parts hasn't been changed from 'Open' to 'Quote Requested'");
 

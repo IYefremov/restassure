@@ -56,6 +56,17 @@ public class VNextBOPartsDetailsPanelInteractions {
         return Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPoInputFieldsList().get(order), 10);
     }
 
+    public static void setCorePrice(int order, String corePrice) {
+        final WebElement corePriceInputField = new VNextBOPartsDetailsPanel().getCorePriceInputFieldsList().get(order);
+        final String prevCorePrice = Utils.getInputFieldValue(corePriceInputField);
+        Utils.sendKeysWithEnter(corePriceInputField, corePrice);
+        Utils.clickElement(corePriceInputField.findElement(By.xpath(".//../..//div[text()='Core Price']")));
+        try {
+            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
+                    !prevCorePrice.equals(Utils.getInputFieldValue(corePriceInputField)));
+        } catch (Exception ignored) {}
+    }
+
     public static void setLaborCredit(int order, String laborCredit) {
         final WebElement laborCreditInputField = new VNextBOPartsDetailsPanel().getLaborCreditInputFieldsList().get(order);
         final String prevLaborCredit = Utils.getInputFieldValue(laborCreditInputField);
@@ -73,10 +84,18 @@ public class VNextBOPartsDetailsPanelInteractions {
         return laborCredit;
     }
 
+    public static String setCorePrice(int order) {
+        final String corePrice = RandomStringUtils.randomNumeric(2);
+        setCorePrice(order, corePrice);
+        return corePrice;
+    }
+
+    public static String getCorePrice(int order) {
+        return getFormattedInputField(new VNextBOPartsDetailsPanel().getCorePriceInputFieldsList().get(order));
+    }
+
     public static String getLaborCredit(int order) {
-        return Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getLaborCreditInputFieldsList().get(order), 10)
-                .replaceAll("[$,]", "")
-                .replace(".00", "");
+        return getFormattedInputField(new VNextBOPartsDetailsPanel().getLaborCreditInputFieldsList().get(order));
     }
 
     public static void setProvider(String provider) {
@@ -199,6 +218,16 @@ public class VNextBOPartsDetailsPanelInteractions {
 
     public static void setStatusForPartByPartNumber(int partNumber, String status) {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getPartStatusFields().get(partNumber));
+        Utils.selectOptionInDropDownWithJsScroll(status);
+    }
+
+    public static void setConditionForPartByPartNumber(int partNumber, String status) {
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getPartConditionFields().get(partNumber));
+        Utils.selectOptionInDropDownWithJsScroll(status);
+    }
+
+    public static void setCoreStatusForPartByPartNumber(int partNumber, String status) {
+        Utils.clickElement(new VNextBOPartsDetailsPanel().getPartCoreStatusFields().get(partNumber));
         Utils.selectOptionInDropDownWithJsScroll(status);
     }
 

@@ -32,6 +32,21 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Status hasn't been correct");
     }
 
+    public static void verifyPartCoreStatus(int partNumber, String expectedStatus) {
+        Assert.assertEquals(Utils.getText(new VNextBOPartsDetailsPanel().getPartCoreStatusFields().get(partNumber)), expectedStatus,
+                "Core status isn't displayed");
+    }
+
+    public static void verifyPartCondition(int partNumber, String expectedStatus) {
+        Assert.assertEquals(Utils.getText(new VNextBOPartsDetailsPanel().getPartConditionFields().get(partNumber)), expectedStatus,
+                "Condition isn't displayed");
+    }
+
+    public static void verifyPartCorePrice(int partNumber, String expectedCorePrice) {
+        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getCorePrice(partNumber), expectedCorePrice,
+                "The core price hasn't been set");
+    }
+
     public static void verifyPartPriceIsCorrect(int partNumber, String expectedPrice) {
 
         Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartPriceField().get(partNumber)), expectedPrice,
@@ -143,7 +158,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
         List<Boolean> laborCoreStatusIsCorrectFlagsList = new ArrayList<>();
-        for (WebElement coreStatus : detailsPanel.getPartCoreStatusField()) {
+        for (WebElement coreStatus : detailsPanel.getPartCoreStatusFields()) {
             laborCoreStatusIsCorrectFlagsList.add(Utils.getText(coreStatus).contains(expectedCoreStatus));
         }
         Assert.assertFalse(laborCoreStatusIsCorrectFlagsList.contains(false), "There hasn't been part with correct core status");
@@ -279,9 +294,8 @@ public class VNextBOPartsDetailsPanelValidations {
     }
 
     public static void verifyPartLaborCreditValue(int partNumber, String expected) {
-        final String vendorPrice =
-                VNextBOPartsDetailsPanelInteractions.getFormattedInputField(new VNextBOPartsDetailsPanel().getPartLaborCreditField().get(partNumber));
-        Assert.assertEquals(vendorPrice, expected, "The part labor credit is not displayed properly");
+        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getLaborCredit(partNumber), expected,
+                "The part labor credit is not displayed properly");
     }
 
     public static void verifyPartQuantityValue(int partNumber, String expected) {

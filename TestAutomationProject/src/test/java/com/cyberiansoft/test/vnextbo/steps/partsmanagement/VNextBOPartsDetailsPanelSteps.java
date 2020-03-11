@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
-import com.cyberiansoft.test.enums.partsmanagement.PartStatuses;
+import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
@@ -89,6 +89,12 @@ public class VNextBOPartsDetailsPanelSteps {
     public static void setStatusForPartByPartName(String partName, String status) {
         final int partNumber = VNextBOPartsDetailsPanelInteractions.getPartNumberByPartName(partName);
         VNextBOPartsDetailsPanelInteractions.setStatusForPartByPartNumber(partNumber, status);
+    }
+
+    public static void setConditionForPartByPartNumberInList(int partNumber, String condition) {
+
+        VNextBOPartsDetailsPanelInteractions.setConditionForPartByPartNumber(partNumber, condition);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void openPMPageAndSetStatusForPart(String pmWindow, String partName, String status) {
@@ -198,7 +204,7 @@ public class VNextBOPartsDetailsPanelSteps {
     }
 
     public static void addPartWithPartsListUpdate(VNextBOPartsData data, String woNum) {
-        final String status = PartStatuses.OPEN.getStatus();
+        final String status = PartStatus.OPEN.getStatus();
         addNewPart(data);
         updatePartsList(woNum);
         Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartStatusPresent(status),
@@ -212,7 +218,7 @@ public class VNextBOPartsDetailsPanelSteps {
     }
 
     public static void addPartIfOpenStatusIsNotPresent(VNextBOPartsData data, String woNum) {
-        final String status = PartStatuses.OPEN.getStatus();
+        final String status = PartStatus.OPEN.getStatus();
         if (!VNextBOPartsDetailsPanelValidations.isPartStatusPresent(status)) {
             addNewPart(data);
             updatePartsList(woNum);
@@ -223,7 +229,7 @@ public class VNextBOPartsDetailsPanelSteps {
     }
 
     public static void addPartIfOpenStatusIsNotPresent(VNextBOPartsData data, String woNum, int expectedNumber) {
-        final String status = PartStatuses.OPEN.getStatus();
+        final String status = PartStatus.OPEN.getStatus();
         final int partsNumber = expectedNumber - VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(status);
         for (int i = 0; i < partsNumber; i++) {
             WaitUtilsWebDriver.waitABit(1000);
