@@ -62,8 +62,10 @@ public class BaseTestCase {
         DriverBuilder.getInstance().setDriver(browserType);
         webdriver = DriverBuilder.getInstance().getDriver();
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
-        final String userName = context.getCurrentXmlTest().getParameter("userName");
-        final String userPassword = context.getCurrentXmlTest().getParameter("userPassword");
+        final String userName = context.getCurrentXmlTest().getParameter("userName") != null ?
+                context.getCurrentXmlTest().getParameter("userName") : VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+        final String userPassword = context.getCurrentXmlTest().getParameter("userPassword") != null ?
+                context.getCurrentXmlTest().getParameter("userPassword") : VNextBOConfigInfo.getInstance().getVNextBOPassword();
         VNextBOLoginSteps.userLogin(userName, userPassword);
     }
 
