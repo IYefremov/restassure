@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.MonitorValidations;
 import org.json.simple.JSONObject;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -48,8 +49,14 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
     @BeforeMethod
     public void beforeMethod() {
         HomeScreenSteps.openMonitor();
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.clearAllFilters();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -74,7 +81,6 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         EditOrderSteps.switchToInfo();
         EditOrderSteps.setOrderPriority(OrderPriority.HIGH);
         WizardScreenSteps.saveAction();
-        SearchSteps.clearAllFilters();
         SearchSteps.searchByPriority(OrderPriority.HIGH);
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
@@ -107,27 +113,5 @@ public class VNextTeamMonitoringCommonFilters extends BaseTestClass {
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.IN_PROGRESS_ACTIVE);
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCanReturnToCommonFilterPageFromStatusPage(String rowID,
-                                     String description, JSONObject testData) {
-
-        SearchSteps.openSearchFilters();
-        SearchSteps.clickStatusFilter();
-        ScreenNavigationSteps.pressBackButton();
-        SearchSteps.clickDepartmentFilter();
-        ScreenNavigationSteps.pressBackButton();
-        SearchSteps.clickPhaseFilter();
-        ScreenNavigationSteps.pressBackButton();
-        SearchSteps.clickFlagFilter();
-        ScreenNavigationSteps.pressBackButton();
-        SearchSteps.clickPriorityFilter();
-        ScreenNavigationSteps.pressBackButton();
-
-        SearchSteps.fillTextSearch(workOrderId);
-        SearchSteps.search();
-        ScreenNavigationSteps.pressBackButton();
-
     }
 }

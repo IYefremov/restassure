@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.enums.RepairOrderFlag;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
+import com.cyberiansoft.test.vnext.screens.monitoring.DepartmentScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.SelectLocationScreen;
@@ -25,6 +26,17 @@ public class MonitorSteps {
         WaitUtils.getGeneralFluentWait().until((webdriver) -> selectLocationScreen.getLocationList().size() > 0);
         BaseUtils.waitABit(1000);
         selectLocationScreen.selectLocationByText(locationPartialName);
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
+
+    public static void changeDepartment(String department) {
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        DepartmentScreen departmentScreen = new DepartmentScreen();
+
+        WaitUtils.elementShouldBeVisible(departmentScreen.getRootElement(), true);
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> departmentScreen.getDepartmentList().size() > 0);
+        BaseUtils.waitABit(1000);
+        departmentScreen.selectDepartmentByText(department);
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
     }
 

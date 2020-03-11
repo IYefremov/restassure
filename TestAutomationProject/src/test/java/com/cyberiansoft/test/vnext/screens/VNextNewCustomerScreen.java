@@ -16,6 +16,9 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='page customer-details page-on-center']")
 	private WebElement newcustomerscreen;
+
+	@FindBy(xpath="//*[@data-autotests-id='customer-form']")
+	private WebElement rootElement;
 	
 	@FindBy(xpath="//*[@action='save']")
 	private WebElement savebtn;
@@ -98,6 +101,11 @@ public class VNextNewCustomerScreen extends VNextBaseScreen {
 
 	
 	public void setCustomerFirstName(String firstname) {
+		WaitUtils.waitUntilElementIsClickable(rootElement);
+		WaitUtils.getGeneralFluentWait().until(driver -> {
+			firstnamefld.click();
+			return true;
+		});
 		firstnamefld.clear();
 		firstnamefld.sendKeys(firstname);
 	}

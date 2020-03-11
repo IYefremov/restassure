@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -15,7 +16,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextBOMonitorTestCasesPart5New extends BaseTestCase {
+public class VNextBOMonitorTasksTestCases extends BaseTestCase {
 
     final String TEST_ORDER_NUMBER = "O-000-147163";
     final String TEST_LOCATION = "Best Location Automation";
@@ -25,6 +26,7 @@ public class VNextBOMonitorTestCasesPart5New extends BaseTestCase {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
         VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+        Utils.refreshPage();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);

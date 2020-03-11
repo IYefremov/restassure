@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.dataclasses.LaborServiceData;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -45,11 +44,6 @@ public class VNextLaborServiceDetailsScreen extends VNextBaseScreen {
 
     public void saveLaborServiceDetails() {
         tap(savebtn);
-    }
-
-    public VNextAvailableServicesScreen clickBackButton(){
-        clickScreenBackButton();
-        return new VNextAvailableServicesScreen(appiumdriver);
     }
 
     public VNextLaborServicePartsList clickSelectPanelsAndPartsForLaborService(LaborServiceData laborService) {

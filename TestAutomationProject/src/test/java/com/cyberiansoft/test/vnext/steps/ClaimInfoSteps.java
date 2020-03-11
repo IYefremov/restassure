@@ -1,25 +1,26 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextClaimInfoScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class ClaimInfoSteps {
 
     public static void setPolicyNumber(String policyNumber) {
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen();
-        claimInfoScreen.getPolicyFld().clear();
         claimInfoScreen.getPolicyFld().sendKeys(policyNumber);
     }
 
     public static void setClaimNumber(String claimNumber) {
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen();
-        claimInfoScreen.getClaimFld().clear();
+        WaitUtils.elementShouldBeVisible(claimInfoScreen.getClaimFld(), true);
         claimInfoScreen.getClaimFld().sendKeys(claimNumber);
     }
 
     public static void selectInsuranceCompany(String insuranceCompany) {
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen();
-        claimInfoScreen.getInsuranceCompanyFld().clear();
-        claimInfoScreen.getInsuranceCompanyFld().sendKeys(insuranceCompany);
+        WaitUtils.waitUntilElementIsClickable(claimInfoScreen.getInsuranceCompanyFld());
+        claimInfoScreen.openInsuranceCompaniesList();
+        claimInfoScreen.selectInsuranceCompany(insuranceCompany);
     }
 
     public static void setDeductibleValue(String deductible) {

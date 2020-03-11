@@ -45,7 +45,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 
 	public VNextAvailableServicesScreen clickVehiclePartsSaveButton() {
 		tap(vehiclepartsscreen.findElement(By.xpath(".//*[@action='save']")));
-		return new VNextAvailableServicesScreen(appiumdriver);
+		return new VNextAvailableServicesScreen();
 	}
 }
  

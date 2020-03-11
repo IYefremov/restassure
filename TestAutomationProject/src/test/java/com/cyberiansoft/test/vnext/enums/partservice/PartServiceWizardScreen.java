@@ -7,8 +7,8 @@ public enum PartServiceWizardScreen {
     SUB_CATEGORY("Sub-Category"),
     PART_NAME("Part Name"),
     PART_POSITION("Part Position"),
-    SIZE("Size"),
-    SEVERITY("Severity");
+    SIZE("Select Size"),
+    SEVERITY("Select Severity");
 
     @Getter
     private String value;

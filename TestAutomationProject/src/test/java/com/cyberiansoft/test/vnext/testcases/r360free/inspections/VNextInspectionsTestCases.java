@@ -17,8 +17,8 @@ import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
@@ -61,8 +61,7 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectServices(inspectionData.getServicesList());
+        AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -117,12 +116,11 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
         ClaimInfoSteps.selectInsuranceCompany(insuranceCompany);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+        AvailableServicesScreenSteps.selectService(inspectionData.getMoneyServiceData());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VEHICLE_INFO);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         ScreenNavigationSteps.pressBackButton();

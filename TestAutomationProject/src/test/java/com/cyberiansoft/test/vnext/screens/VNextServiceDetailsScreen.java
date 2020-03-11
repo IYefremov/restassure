@@ -1,9 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextQuestionsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -13,7 +10,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -65,6 +61,12 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	@FindBy(xpath = "//input[@name='question-section']")
 	private List<WebElement> questionSections;
 
+	@FindBy(xpath = "//*[@data-action-name='startService']")
+	private WebElement startServiceBtn;
+
+	@FindBy(xpath = "//*[@data-action-name='completeService']")
+	private WebElement completeServiceBtn;
+
     public VNextServiceDetailsScreen(WebDriver appiumdriver) {
 		super(appiumdriver);
 		PageFactory.initElements(appiumdriver, this);
@@ -87,19 +89,7 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 			informationDialog.clickInformationDialogNoButton();
 		}
 	}
-	
-	public void clickDeleteServiceIcon() {
-		tap(rootElement.findElement(By.xpath(".//i[@action='remove']")));
-    }
-	
-	public VNextAvailableServicesScreen deleteService() {
-		clickDeleteServiceIcon();
-		VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-		String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-		Assert.assertTrue(msg.contains(VNextAlertMessages.ARE_YOU_SURE_REMOVE_THIS_ITEM));
-        return new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-	}
-	
+
 	public void setServiceAmountValue(String amount) {
 		clickServiceAmountField();	
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);

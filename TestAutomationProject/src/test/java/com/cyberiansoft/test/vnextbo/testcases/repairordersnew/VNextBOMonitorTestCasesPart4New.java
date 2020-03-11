@@ -29,6 +29,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
         VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+        Utils.refreshPage();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
@@ -159,23 +160,24 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase(String rowID, String description, JSONObject testData) {
 
 	    VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getServices()[0], data.getServiceStatuses()[1]);
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitABit(5000);
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getServices()[1], data.getServiceStatuses()[1]);
         VNextBORODetailsStepsNew.openChangeTechnicianDialogForPhase(data.getPhase());
         VNextBOChangeTechnicianDialogStepsNew.changeTechnicianAndSave(data.getVendor(), data.getTechnician());
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
         Utils.goToPreviousPage();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROPageStepsNew.openChangeTechnicianDialogForFirstOrder();
         VNextBOChangeTechnicianDialogStepsNew.changeTechnicianAndSave(data.getVendor(), data.getTechnician1());
         VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable(data.getTechnician1());
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+        Utils.refreshPage();
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getServices()[0], data.getTechnician1());
         VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getServices()[1], data.getTechnician1());
@@ -246,13 +248,13 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanSeeChangesOfPhasesInLogInfo(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitABit(5000);
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
         VNextBORODetailsStepsNew.openLogInfo();
         VNextBOLogInfoDialogStepsNew.openServicesTab();
@@ -264,17 +266,20 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyStartedServiceIconDiffersFromNotStarted(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
+        WaitUtilsWebDriver.waitABit(3000);
         VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(data.getService(), "icon-start-ro text-green");
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
+        WaitUtilsWebDriver.waitABit(3000);
         VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(data.getService(), "icon-start-ro text-green");
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
-        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect("DonNotTuch", "icon-clock text-green");
+        WaitUtilsWebDriver.waitABit(3000);
+        VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect("autotesthfBekUs", "icon-clock text-green");
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
@@ -299,7 +304,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyUserCanTurnOnOffPhaseEnforcement(String rowID, String description, JSONObject testData) {
 
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded("Detail Station", "Completed");

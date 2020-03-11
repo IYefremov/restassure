@@ -42,4 +42,5 @@ public class VNextAlertMessages {
 	public static String FIRST_NAME_IS_REQUIRED = "First Name is required";
     public static String PLEASE_SELECT_A_STATE_OR_PROVINCE = "Please select a state or province";
 	public static String PLEASE_SELECT_LINE_OF_BUSINESS = "Please select line of business";
+	public static String START_REPAIR_ORDER = "Start Repair Order";
 }

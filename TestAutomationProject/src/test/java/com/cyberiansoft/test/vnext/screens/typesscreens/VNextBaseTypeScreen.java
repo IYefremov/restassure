@@ -38,7 +38,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     private WebElement teamviewtab;
 
     @FindBy(xpath = "//*[@action='add']")
-    private WebElement addbtn;
+    private WebElement addBtn;
 
     public VNextBaseTypeScreen(WebDriver appiumdriver) {
         super(appiumdriver);
@@ -64,15 +64,17 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         return tableCell;
     }
 
-    protected void clickAddButton() {
-        WaitUtils.elementShouldBeVisible(addbtn, true);
-        tap(addbtn);
+    public void clickAddButton() {
+        WaitUtils.elementShouldBeVisible(addBtn, true);
+        tap(addBtn);
     }
 
     protected void switchToTeamView() {
         tap(WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='team']")));
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='button active' and @action='team']")));
+        BaseUtils.waitABit(500);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     protected boolean isTeamViewActive() {

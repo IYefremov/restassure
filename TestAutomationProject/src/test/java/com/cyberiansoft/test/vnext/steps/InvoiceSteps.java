@@ -57,6 +57,13 @@ public class InvoiceSteps {
         invoiceListElement.openMenu();
     }
 
+    public static void selectInvoice(String invoiceId) {
+        waitInvoicesScreenLoaded();
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+        InvoiceListElement invoiceListElement = invoicesScreen.getInvoiceElement(invoiceId);
+        invoiceListElement.select();
+    }
+
     public static void createInvoice(InvoiceTypes invoiceType) {
         VNextInvoiceTypesList invoiceTypesScreen = new VNextInvoiceTypesList();
         invoiceTypesScreen.selectInvoiceType(invoiceType);
@@ -88,6 +95,17 @@ public class InvoiceSteps {
         MenuSteps.selectMenuItem(MenuItems.REFRESH_PICTURES);
         VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
+    }
+
+    public static void clickMultiSelectActionsSendEmail() {
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+        invoicesScreen.getMultiselectActionsSendEmail().click();
+    }
+
+    public static void unSelectAllSelectedInvoices() {
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+        if (invoicesScreen.getCancelSelectedInvoices().isDisplayed())
+            invoicesScreen.getCancelSelectedInvoices().click();
     }
 
 }

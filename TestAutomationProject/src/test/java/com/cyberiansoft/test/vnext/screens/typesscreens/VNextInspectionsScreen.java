@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextApproveInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -32,7 +31,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
     private WebElement inspectionslist;
 
     @FindBy(xpath = "//*[@action='multiselect-actions-approve']")
-    private WebElement multiselectinspapprovebtn;
+    private WebElement multiSelectInspApproveBtn;
 
     @FindBy(xpath = "//*[@action='multiselect-actions-archive']")
     private WebElement multiselectinsparchivebtn;
@@ -83,6 +82,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public List<String> getAllInspectionsCustomers() {
         waitForInspectionsListIsVisibile();
+        WaitUtils.waitUntilElementIsClickable(inspectionslist);
         List<String> inspsCustomers = new ArrayList<>();
         List<WebElement> inspections = inspectionslist.findElements(By.xpath(".//*[@action='select' and @class='entity-item-title']"));
         for (WebElement inspCell : inspections) {
@@ -162,11 +162,10 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public void switchToTeamInspectionsView() {
         switchToTeamView();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
     }
 
     public boolean isTeamInspectionsViewActive() {
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Loading inspections']"));
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
         WaitUtils.elementShouldBeVisible(inspectionsScreen,true);
         return isTeamViewActive();
     }
@@ -179,11 +178,13 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         return isMyViewActive();
     }
 
+    //todo make a step!!!
     public void searchInpectionByFreeText(String searchtext) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.visibilityOf(inspectionsScreen));
         WaitUtils.waitUntilElementIsClickable(inspectionsScreen.findElement(By.xpath(".//*[@class='page-content']")));
         SearchSteps.searchByText(searchtext);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Downloading data']"));
     }
 
     public void selectInspection(String inspectionNumber) {
@@ -196,11 +197,6 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
         WebElement inspcell = getInspectionCell(inspectionNumber);
         if (inspcell.findElement(By.xpath(".//input[@type='checkbox']")).getAttribute("checked") != null)
             tap(inspcell.findElement(By.xpath(".//input[@type='checkbox']")));
-    }
-
-    public VNextApproveInspectionsScreen clickMultiselectInspectionsApproveButton() {
-        tap(multiselectinspapprovebtn);
-        return new VNextApproveInspectionsScreen(appiumdriver);
     }
 
     public void clickMultiselectInspectionsArchiveButton() {

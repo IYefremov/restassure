@@ -23,6 +23,8 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.interactions.invoices.VNextBOInvoicesPageInteractions;
@@ -51,7 +53,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         final WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -62,12 +64,12 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
         final String woNumber = vehicleInfoScreen.getNewInspectionNumber();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextServiceDetailsScreen serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(workOrderData.getMoneyServiceData().getServiceName());
-        serviceDetailsScreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServicePrice());
-        serviceDetailsScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceQuantity());
-        serviceDetailsScreen.clickServiceDetailsDoneButton();
-        availableServicesScreen.selectService(workOrderData.getPercentageServiceData().getServiceName());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+        AvailableServicesScreenSteps.openServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
+        ServiceDetailsScreenSteps.changeServicePrice(workOrderData.getMoneyServiceData().getServicePrice());
+        ServiceDetailsScreenSteps.changeServiceQuantity(workOrderData.getMoneyServiceData().getServiceQuantity());
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        AvailableServicesScreenSteps.selectService(workOrderData.getPercentageServiceData());
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
         VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -80,10 +82,10 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.clickOnSelectedService(matrixServiceData.getMatrixServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(matrixServiceData.getMatrixServiceName());
         Assert.assertEquals(vehiclePartsScreen.getVehiclePartsScrenPriceValue(),matrixServiceData.getVehiclePartData().getVehiclePartPrice());
         vehiclePartsScreen.clickScreenBackButton();
-        selectedServicesScreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
+        SelectedServicesScreenSteps.changeSelectedServicePrice(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
         selectedServicesScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
 
 
@@ -106,7 +108,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         final String woNote = "Only text Note";
         final String noteText = "Invoice text note";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         VehicleInfoScreenSteps.setVehicleInfo(testCaseData.getWorkOrderData().getVehicleInfoData());
         //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -145,7 +147,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
         WorkOrderSteps.clickAddWorkOrderButton();
         CustomersScreenSteps.selectCustomer(testcustomer);
@@ -156,10 +158,10 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         //vehicleVINHistoryScreen.clickBackButton();
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+        AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
+        SelectedServicesScreenSteps.changeSelectedServicePrice(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
         selectedServicesScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
         WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
@@ -203,7 +205,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         final String invoiceNote = "Only text Note";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -211,12 +213,12 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextServiceDetailsScreen serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(workOrderData.getMoneyServiceData().getServiceName());
-        serviceDetailsScreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServicePrice());
-        serviceDetailsScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceQuantity());
-        serviceDetailsScreen.clickServiceDetailsDoneButton();
-        availableServicesScreen.selectService(workOrderData.getPercentageServiceData().getServiceName());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+        AvailableServicesScreenSteps.openServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
+        ServiceDetailsScreenSteps.changeServicePrice(workOrderData.getMoneyServiceData().getServicePrice());
+        ServiceDetailsScreenSteps.changeServiceQuantity(workOrderData.getMoneyServiceData().getServiceQuantity());
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        AvailableServicesScreenSteps.selectService(workOrderData.getPercentageServiceData());
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
         VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -229,10 +231,10 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.clickOnSelectedService(matrixServiceData.getMatrixServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(matrixServiceData.getMatrixServiceName());
         Assert.assertEquals(vehiclePartsScreen.getVehiclePartsScrenPriceValue(), vehiclePartData.getVehiclePartPrice());
         vehiclePartsScreen.clickScreenBackButton();
-        selectedServicesScreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
+        SelectedServicesScreenSteps.changeSelectedServicePrice(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
         selectedServicesScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
 
         VNextWorkOrdersScreen workOrdersScreen = selectedServicesScreen.saveWorkOrderViaMenu();
@@ -255,7 +257,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -264,10 +266,10 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         VehicleInfoScreenValidations.validateVehicleInfo(workOrderData.getVehicleInfoData());
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         final MatrixServiceData matrixServiceData = workOrderData.getMatrixServiceData();
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
-        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen();
         for (VehiclePartData vehiclePartData : matrixServiceData.getVehiclePartsData()) {
             VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
             vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
@@ -279,9 +281,9 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
             vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
         }
-        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.clickOnSelectedService(matrixServiceData.getMatrixServiceName());
+        vehiclePartsScreen.clickVehiclePartsSaveButton();
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.openServiceDetails(matrixServiceData.getMatrixServiceName());
         Assert.assertEquals(vehiclePartsScreen.getVehiclePartsScrenPriceValue(), workOrderData.getWorkOrderPrice());
         vehiclePartsScreen.clickScreenBackButton();
         //Assert.assertEquals(selectedServicesScreen.getSelectedPriceMatrixValueForPriceMatrixService(matrixServiceData.getMatrixServiceName()), matrixServiceData.getHailMatrixName());
@@ -308,15 +310,14 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //vehicleVINHistoryScreen.clickBackButton();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
-        availableServicesScreen.selectService(workOrderData.getPercentageServiceData().getServiceName());
+        AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
+        AvailableServicesScreenSteps.selectService(workOrderData.getPercentageServiceData());
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
         WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
@@ -335,16 +336,15 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
         //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         //vehicleVINHistoryScreen.clickBackButton();
         final String workOrderNumber = vehicleInfoScreen.getNewInspectionNumber();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
-        availableServicesScreen.selectService(workOrderData.getPercentageServiceData().getServiceName());
+        AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
+        AvailableServicesScreenSteps.selectService(workOrderData.getPercentageServiceData());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
         WizardScreenSteps.saveAction();
         WorkOrderSteps.createInvoiceFromWorkOrder(workOrderNumber);

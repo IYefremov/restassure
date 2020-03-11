@@ -1,0 +1,75 @@
+<suite name="Cyberiansoft R360 ReconPro tests suite 3" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
+    </listeners>
+    <test name="Monitor Advanced Search Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorAdvancedSearchTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Report Problem Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorReportProblemTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Simple Search Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorSimpleSearchTestCasesNew"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 1">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart1New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 2">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart2New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 3">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart3New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tests Part 4">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTestCasesPart4New"/>
+        </classes>
+    </test>
+    <test name="Monitor Tasks Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTasksTestCases"/>
+        </classes>
+    </test>
+    <test name="Monitor Time Reporting Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTimeReportingTestCases"/>
+        </classes>
+    </test>
+    <test name="Monitor Grid Tests">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorGridDataTestCases"/>
+        </classes>
+    </test>
+</suite>

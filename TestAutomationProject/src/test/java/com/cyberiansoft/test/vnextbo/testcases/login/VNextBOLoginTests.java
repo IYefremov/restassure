@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnextbo.validations.homepage.VNextBOHomeWebPageVali
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,7 +35,7 @@ public class VNextBOLoginTests extends BaseTestCase {
 
     @Override
     @BeforeClass
-    public void login() {
+    public void login(ITestContext context) {
 
         browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
         DriverBuilder.getInstance().setDriver(browserType);

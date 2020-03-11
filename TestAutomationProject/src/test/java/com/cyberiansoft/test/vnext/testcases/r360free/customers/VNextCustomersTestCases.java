@@ -18,9 +18,10 @@ import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
-import com.cyberiansoft.test.vnext.screens.VNextStatusScreen;
 import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
+import com.cyberiansoft.test.vnext.steps.StatusScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -109,8 +110,7 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 		ScreenNavigationSteps.pressBackButton();
         homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		BaseUtils.waitABit(1000);
-		VNextStatusScreen statusscreen = homeScreen.clickStatusMenuItem();
-		statusscreen.updateMainDB(employee);
+		StatusScreenSteps.updateMainDB();
 		//homeScreen = statusscreen.clickBackButton();
 		homeScreen.clickCustomersMenuItem();
 		CustomersScreenSteps.openCustomerForEdit(testcustomer);
@@ -134,16 +134,14 @@ public class VNextCustomersTestCases extends BaseTestCaseWithDeviceRegistrationA
 
 		deleteCustomerOnBackOffice(testcustomer.getFirstName(), testcustomer.getLastName());
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		homeScreen.clickCustomersMenuItem();
+		HomeScreenSteps.openCustomers();
 		CustomersScreenSteps.clickAddCustomerButton();
 		VNextNewCustomerScreen newCustomerScreen = new VNextNewCustomerScreen();
 		newCustomerScreen.createNewCustomer(testcustomer);
 		ScreenNavigationSteps.pressBackButton();
 		BaseUtils.waitABit(30000);
-		VNextStatusScreen statusscreen = homeScreen.clickStatusMenuItem();
-		statusscreen.updateMainDB(employee);
-		homeScreen.clickCustomersMenuItem();
+		StatusScreenSteps.updateMainDB();
+		HomeScreenSteps.openCustomers();
 		CustomersScreenSteps.openCustomerForEdit(testcustomer);
 		Assert.assertEquals(newCustomerScreen.getCustomerFirstName(), testcustomer.getFirstName());
 		Assert.assertEquals(newCustomerScreen.getCustomerLastName(), testcustomer.getLastName());

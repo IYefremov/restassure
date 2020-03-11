@@ -5,7 +5,9 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VnextBaseServicesScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.ServiceListItem;
 import org.testng.Assert;
 
 import java.util.List;
@@ -54,11 +56,12 @@ public class ListServicesValidations {
     }
 
     public static void validateAvailableServiceCount(String serviceName, Integer expectedCount) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.switchToAvalableServicesView();
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+        AvailableServicesScreenSteps.switchToAvailableServices();
         SearchSteps.textSearch(serviceName);
+        ServiceListItem serviceListItem = availableServicesScreen.getServiceListItem(serviceName);
         WaitUtils.getGeneralFluentWait().until(driver -> {
-            Assert.assertEquals(servicesScreen.getServiceAmountSelectedValue(serviceName), (int) expectedCount);
+            Assert.assertEquals(serviceListItem.getNumberOfAddedServices(), (int) expectedCount);
             return true;
         });
     }

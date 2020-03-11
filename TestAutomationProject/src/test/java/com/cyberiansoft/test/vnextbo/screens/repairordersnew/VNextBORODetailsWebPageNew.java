@@ -101,6 +101,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[@id='reconmonitordetails-view-add-task-button']")
     private WebElement addNewTaskButton;
 
+    @FindBy(xpath = "//i[@class='icon-timer-for-ro']")
+    private WebElement timeReportingIcon;
+
     public WebElement phaseRow(String phase) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@data-name='" + phase + "']"));
@@ -148,7 +151,7 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
 
     public WebElement serviceRowByName(String service) {
 
-        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[@class='serviceRow'])[1]"));
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("(//div[@class='clmn_2']//div[contains(.,'" + service + "')]/ancestor::div[contains(@class,'serviceRow')])[1]"));
     }
 
     public WebElement actionsMenuButtonForService(String service) {

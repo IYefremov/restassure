@@ -15,13 +15,13 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	@FindBy(xpath="//div[@class='pages']/div[@data-page='claim']")
 	private WebElement claimScreen;
 	
-	@FindBy(name="Estimations.PolicyNumber")
+	@FindBy(name="//*[@data-field='PolicyNumber']")
 	private WebElement policyFld;
 	
-	@FindBy(name="Estimations.OtherInsuranceName")
+	@FindBy(xpath="//*[@data-field='Insurance']")
 	private WebElement insuranceCompanyFld;
 	
-	@FindBy(name="Estimations.ClaimNumber")
+	@FindBy(name="//*[@data-field='ClaimNumber']")
 	private WebElement claimFld;
 	
 	@FindBy(name="Estimations.Deductible")
@@ -29,6 +29,9 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	
 	@FindBy(name="Estimations.AccidentDate")
 	private WebElement accidentdateFld;
+
+	@FindBy(xpath="//*[@data-autotests-id='companies-list']")
+	private WebElement companiesList;
 
 	public VNextClaimInfoScreen() {
 		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
@@ -38,5 +41,13 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-deductible']")));
 		VNextCustomKeyboard keyboard = new VNextCustomKeyboard(appiumdriver);
 		keyboard.setFieldValue(deductibleFld.getAttribute("value"), deductible);
+	}
+
+	public void openInsuranceCompaniesList() {
+		insuranceCompanyFld.findElement(By.xpath(".//*[@class='formfield-item-arrow']")).click();
+	}
+
+	public void selectInsuranceCompany(String insuranceCompany) {
+		companiesList.findElement(By.xpath(".//div[contains(text(), '" + insuranceCompany + "')]")).click();
 	}
 }

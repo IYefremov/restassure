@@ -100,10 +100,8 @@ public class VNextCustomersScreen extends VNextBaseScreen {
 
 	public boolean isCustomerExists(AppCustomer customer) {
 		WaitUtils.waitUntilElementIsClickable(customersList);
-		SearchSteps.openSearchMenu();
-		SearchSteps.fillTextSearch(customer.getFullName());
-		SearchSteps.cancelSearch();
-		return customersList.findElements(By.xpath(".//p[text()='" + customer.getFullName() + "']")).size() > 0;
+		SearchSteps.searchByText(customer.getFullName());
+		return customersListArray.stream().anyMatch(customersListElement -> customersListElement.getCustomerFullName().equals(customer.getFullName()));
 	}
 
 	public String getDefaultCustomerValue() {

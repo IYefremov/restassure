@@ -24,10 +24,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
-    private String workOrderId = "";
 
     @BeforeClass(description = "Team Monitoring Time Tracking Visibility")
     public void beforeClass() {
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
+    }
+
+    public String createWorkOrder() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
@@ -39,8 +42,9 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
-        workOrderId = WorkOrderSteps.saveWorkOrder();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
+        return workOrderId;
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -52,6 +56,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         nonLocationManagerEmployee.setEmployeeFirstName("Test");
         nonLocationManagerEmployee.setEmployeeLastName("Test");
 
+        final String workOrderId = createWorkOrder();
         HomeScreenSteps.logOut();
         GeneralSteps.logIn(nonLocationManagerEmployee);
         MonitorSteps.editOrder(workOrderId);
@@ -75,6 +80,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         locationManagerEmployee.setEmployeeFirstName("Test");
         locationManagerEmployee.setEmployeeLastName("Test");
 
+        final String workOrderId = createWorkOrder();
         MonitorSteps.editOrder(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceDto);
@@ -107,6 +113,8 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.STOP);
         GeneralSteps.confirmDialog();
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -116,6 +124,12 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         ServiceData serviceDto = workOrderData.getServiceData();
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
+        final String workOrderId = createWorkOrder();
+        MonitorSteps.editOrder(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        EditOrderSteps.openServiceMenu(serviceDto);
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
@@ -139,8 +153,15 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
     public void verifyStartStopVisibleOnlyInActiveStatePhaseLevel(String rowID,
                                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        ServiceData serviceDto = workOrderData.getServiceData();
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
+        final String workOrderId = createWorkOrder();
+        MonitorSteps.editOrder(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        EditOrderSteps.openPhaseMenu(phaseDto);
+        MenuSteps.selectMenuItem(MenuItems.START);
+        GeneralSteps.confirmDialog();
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
@@ -157,5 +178,7 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
         MenuSteps.closeMenu();
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
     }
 }
