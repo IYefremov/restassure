@@ -10,6 +10,7 @@ import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOLeftMenuValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -20,7 +21,7 @@ public class VNextBOHomePageAccessRightsTestCases extends BaseTestCase {
 
 	@Override
 	@BeforeClass
-	public void login() {
+	public void login(ITestContext context) {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getHomePageAccessRightsTD();
 		webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());

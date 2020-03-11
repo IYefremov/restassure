@@ -16,7 +16,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextBOMonitorTestCasesPart5New extends BaseTestCase {
+public class VNextBOMonitorTasksTestCases extends BaseTestCase {
 
     final String TEST_ORDER_NUMBER = "O-000-147163";
     final String TEST_LOCATION = "Best Location Automation";
