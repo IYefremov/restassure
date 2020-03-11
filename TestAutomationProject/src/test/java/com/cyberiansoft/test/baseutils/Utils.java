@@ -207,19 +207,24 @@ public class Utils {
 
     public static void selectOptionInDropDownWithJsScroll(String optionName) {
 
-        JavascriptExecutor javascriptExecutor = ((JavascriptExecutor) DriverBuilder.getInstance().getDriver());
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        JavascriptExecutor javascriptExecutor = ((JavascriptExecutor) driver);
         javascriptExecutor.executeScript("document.querySelector(\"div[aria-hidden='false'] div.k-list-scroller\").scrollTop+=-1000");
         boolean isOptionDisplayed = false;
         int scrollingNumber = 0;
         do {
             try {
-                isOptionDisplayed = isElementDisplayed(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]")));
+                isOptionDisplayed = isElementDisplayed(driver.findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'" + optionName + "')]")));
             } catch (Exception ex) {
                 javascriptExecutor.executeScript("document.querySelector(\"div[aria-hidden='false'] div.k-list-scroller\").scrollTop+=100");
                 scrollingNumber++;
             }
         } while ((!isOptionDisplayed) || (scrollingNumber == 3));
-        clickWithJS((DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]"))));
+        if (optionName.equals("")) {
+            clickElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'" + optionName + "')]/../../../div[contains(@class, 'k-list-optionlabel')]"));
+        } else {
+            clickWithJS(driver.findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'" + optionName + "')]")));
+        }
     }
 
     public static String getNewTab(String mainWindow) {

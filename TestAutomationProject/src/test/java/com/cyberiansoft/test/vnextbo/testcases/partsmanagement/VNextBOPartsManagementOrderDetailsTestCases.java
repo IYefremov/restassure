@@ -18,6 +18,7 @@ import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps
 import com.cyberiansoft.test.vnextbo.steps.leftmenupanel.VNextBOLeftMenuSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsOrdersListPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPartsBlockSteps;
@@ -157,7 +158,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
         VNextBOAdvancedSearchDialogSteps.setRepairStatusField(RepairStatus.IN_PROGRESS_ALL.getValue());
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOPartsOrdersListPanelSteps.openPartOrderDetailsByNumberInList(0);
@@ -169,5 +170,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, PartCondition.REMANUFACTURED.getValue());
         VNextBOPartsDetailsPanelSteps.setConditionForPartByPartNumberInList(0, PartCondition.RECONDITIONED.getValue());
         VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, PartCondition.RECONDITIONED.getValue());
+        VNextBOPartsDetailsPanelSteps.setConditionForPartByPartNumberInList(0, "");
+        VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, "");
     }
 }

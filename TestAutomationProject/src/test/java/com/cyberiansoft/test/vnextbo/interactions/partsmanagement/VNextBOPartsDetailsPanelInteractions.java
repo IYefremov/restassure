@@ -221,9 +221,9 @@ public class VNextBOPartsDetailsPanelInteractions {
         Utils.selectOptionInDropDownWithJsScroll(status);
     }
 
-    public static void setConditionForPartByPartNumber(int partNumber, String status) {
+    public static void setConditionForPartByPartNumber(int partNumber, String condition) {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getPartConditionFields().get(partNumber));
-        Utils.selectOptionInDropDownWithJsScroll(status);
+        Utils.selectOptionInDropDownWithJsScroll(condition);
     }
 
     public static void setCoreStatusForPartByPartNumber(int partNumber, String status) {
