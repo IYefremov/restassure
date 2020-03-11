@@ -4,7 +4,6 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
@@ -40,7 +39,7 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		AvailableServicesScreenSteps.selectServices(workOrderData.getServicesList());
 		final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
 		WorkOrderSteps.openMenu(workOrderNumber);

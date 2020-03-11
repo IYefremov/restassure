@@ -716,7 +716,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
         ClaimInfoSteps.selectInsuranceCompany("Test Insurance Company");
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         for (int i = 0; i < availablepricematrixes.length; i++) {
             MatrixServiceData matrixServiceData = new MatrixServiceData();
             AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);

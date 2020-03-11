@@ -9,7 +9,6 @@ import com.cyberiansoft.test.vnext.webelements.ServiceListItem;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -28,30 +27,18 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     @FindBy(xpath = "//div[@data-page='services-list']")
     private WebElement servicesscreen;
 
-    @FindBy(xpath = "//div[@data-page='services-add']")
-    private WebElement selectservicesscreen;
+    @FindBy(xpath = "//*[@data-autotests-id='all-services' and @data-view-mode='selected']/div")
+    private List<ServiceListItem> servicesList;
 
     @FindBy(xpath = "//div[@class='checkbox-item-content-main']")
     private List<ServiceListItem> serviceList;
-
-    public VNextSelectedServicesScreen(WebDriver appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
-    }
 
     public VNextSelectedServicesScreen() {
         PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
-    public void setServiceAmountValue(String serviceName, String serviceAmount) {
-        WebElement servicecell = getSelectedServiceCell(serviceName);
-        if (servicecell != null) {
-            tap(servicecell);
-            VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
-            serviceDetailsScreen.setServiceAmountValue(serviceAmount);
-            serviceDetailsScreen.clickServiceDetailsDoneButton();
-        } else
-            Assert.fail("Can't find service: " + serviceName);
+    public ServiceListItem getServiceListItem(String serviceName) {
+        return servicesList.stream().filter(listElement -> listElement.getServiceName().equals(serviceName)).findFirst().orElseThrow(() -> new RuntimeException("service not found " + serviceName));
     }
 
     public void setServiceQuantityValue(String serviceName, String serviceQuantity) {
@@ -61,14 +48,6 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
             VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
             serviceDetailsScreen.setServiceQuantityValue(serviceQuantity);
             serviceDetailsScreen.clickServiceDetailsDoneButton();
-        } else
-            Assert.fail("Can't find service: " + serviceName);
-    }
-
-    public void clickOnSelectedService(String serviceName) {
-        WebElement servicecell = getSelectedServiceCell(serviceName);
-        if (servicecell != null) {
-            tap(servicecell);
         } else
             Assert.fail("Can't find service: " + serviceName);
     }
@@ -100,20 +79,6 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
         } else
             Assert.fail("Can't find service: " + servicename);
         return serviceprice;
-    }
-
-    public String getSelectedServiceImageSummaryValue(String servicename) {
-        String imagesammary = "";
-        WebElement servicerow = getSelectedServiceCell(servicename);
-        if (servicerow != null) {
-            if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
-                tap(servicerow);
-            if (!servicerow.getAttribute("class").contains("accordion-item-expanded"))
-                tap(servicerow);
-            imagesammary = servicerow.findElement(By.xpath(".//div[@class='img-item summary-item']")).getText().trim();
-        } else
-            Assert.fail("Can't find service: " + servicename);
-        return imagesammary;
     }
 
     public int getQuantityOfSelectedService(String servicename) {

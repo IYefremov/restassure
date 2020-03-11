@@ -20,7 +20,6 @@ import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextErrorDialog;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextGroupServicesScreen;
@@ -29,12 +28,10 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedS
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
-import com.cyberiansoft.test.vnext.validations.MenuValidations;
-import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
-import com.cyberiansoft.test.vnext.validations.WorkOrdersScreenValidations;
+import com.cyberiansoft.test.vnext.validations.*;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -333,10 +330,10 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         for (int i = 0; i < amountToSelect; i++)
             AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(workOrderData.getMoneyServiceData().getServiceName()), amountToSelect);
+        ListServicesValidations.validateAvailableServiceCount(workOrderData.getMoneyServiceData().getServiceName(), amountToSelect);
         for (int i = 0; i < amountToSelect; i++)
             AvailableServicesScreenSteps.selectService(workOrderData.getPercentageServiceData());
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
+        ListServicesValidations.validateAvailableServiceCount(workOrderData.getPercentageServiceData().getServiceName(), amountToSelect);
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getMoneyServiceData().getServiceName()), amountToSelect);
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
@@ -348,8 +345,8 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         WorkOrderSteps.openMenu(workOrderNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(workOrderData.getMoneyServiceData().getServiceName()), amountToSelect);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
+        ListServicesValidations.validateAvailableServiceCount(workOrderData.getMoneyServiceData().getServiceName(), amountToSelect);
+        ListServicesValidations.validateAvailableServiceCount(workOrderData.getPercentageServiceData().getServiceName(), amountToSelect);
         availableServicesScreen.switchToSelectedServicesView();
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getMoneyServiceData().getServiceName()), amountToSelect);
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
@@ -358,13 +355,13 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         selectedServicesScreen.uselectService(workOrderData.getMoneyServiceData().getServiceName());
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), defaultCountForMoneyService);
         selectedServicesScreen.switchToAvalableServicesView();
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(workOrderData.getMoneyServiceData().getServiceName()), 2);
-        Assert.assertEquals(availableServicesScreen.getServiceAmountSelectedValue(workOrderData.getPercentageServiceData().getServiceName()), defaultCountForMoneyService);
-        availableServicesScreen.selectService(workOrderData.getPercentageServiceData().getServiceName());
-        availableServicesScreen.selectService(workOrderData.getPercentageServiceData().getServiceName());
-        availableServicesScreen.selectService(workOrderData.getMoneyServiceData().getServiceName());
+        ListServicesValidations.validateAvailableServiceCount(workOrderData.getMoneyServiceData().getServiceName(), 2);
+        ListServicesValidations.validateAvailableServiceCount(workOrderData.getPercentageServiceData().getServiceName(), defaultCountForMoneyService);
+        AvailableServicesScreenSteps.selectService(workOrderData.getPercentageServiceData());
+        AvailableServicesScreenSteps.selectService(workOrderData.getPercentageServiceData());
+        AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
 
-        availableServicesScreen.switchToSelectedServicesView();
+        SelectedServicesScreenSteps.switchToSelectedService();
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getMoneyServiceData().getServiceName()), amountToSelect);
         Assert.assertEquals(selectedServicesScreen.getNumberOfServicesSelectedByName(workOrderData.getPercentageServiceData().getServiceName()), amountToSelect);
         WorkOrderSteps.saveWorkOrder();
@@ -381,13 +378,13 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.KRAMAR_AUTO, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
-        VNextServiceDetailsScreen serviceDetailsScreen = availableServicesScreen.openServiceDetailsScreen(workOrderData.getMoneyServiceData().getServiceName());
-        serviceDetailsScreen.setServiceAmountValue(workOrderData.getMoneyServiceData().getServicePrice());
-        serviceDetailsScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceQuantity());
-        serviceDetailsScreen.clickServiceDetailsDoneButton();
-        availableServicesScreen.openServiceDetailsScreen(workOrderData.getPercentageServiceData().getServiceName());
-        serviceDetailsScreen.setServiceAmountValue(workOrderData.getPercentageServiceData().getServicePrice());
-        serviceDetailsScreen.clickServiceDetailsDoneButton();
+        AvailableServicesScreenSteps.openServiceDetails(workOrderData.getMoneyServiceData().getServiceName());
+        ServiceDetailsScreenSteps.changeServicePrice(workOrderData.getMoneyServiceData().getServicePrice());
+        ServiceDetailsScreenSteps.changeServiceQuantity(workOrderData.getMoneyServiceData().getServiceQuantity());
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        AvailableServicesScreenSteps.openServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
+        ServiceDetailsScreenSteps.changeServicePrice(workOrderData.getPercentageServiceData().getServicePrice());
+        ServiceDetailsScreenSteps.saveServiceDetails();
         Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), workOrderData.getWorkOrderPrice());
         final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
         BaseUtils.waitABit(10 * 1000);

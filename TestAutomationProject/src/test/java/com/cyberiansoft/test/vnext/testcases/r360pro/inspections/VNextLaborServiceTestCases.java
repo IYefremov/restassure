@@ -48,9 +48,8 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.
-                openLaborServiceDetails(inspectionData.getLaborServiceData().getServiceName());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+        AvailableServicesScreenSteps.openServiceDetails(inspectionData.getLaborServiceData().getServiceName());
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickSelectPanelsAndParts();
         VNextLaborServicePanelsList laborServicePanelsList = new VNextLaborServicePanelsList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -76,15 +75,12 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.
-                selectLaborService(inspectionData.getLaborServiceData().getServiceName());
+        AvailableServicesScreenSteps.openServiceDetails(inspectionData.getLaborServiceData().getServiceName());
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickSelectPanelsAndParts();
         VNextLaborServicePanelsList laborServicePanelsList = new VNextLaborServicePanelsList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertFalse(laborServicePanelsList.isPartsTabEnabled());
-        laborServicePanelsList.clickBackButton();
-        serviceDetailsScreen.clickServiceDetailsDoneButton();
+        ScreenNavigationSteps.pressBackButton();
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -99,9 +95,6 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.switchToAvalableServicesView();
-
         AvailableServicesScreenSteps.selectMatrixService(inspectionData.getMatrixServiceData());
         VehiclePartData vehiclePartData = inspectionData.getMatrixServiceData().getVehiclePartData();
         VNextVehiclePartsScreen priceMatrixesScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -132,8 +125,6 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.switchToAvalableServicesView();
 
         AvailableServicesScreenSteps.selectMatrixService(inspectionData.getMatrixServiceData());
         VNextVehiclePartsScreen priceMatrixesScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -177,9 +168,7 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.
-                selectLaborService(inspectionData.getLaborServiceData().getServiceName());
+        AvailableServicesScreenSteps.openServiceDetails(inspectionData.getLaborServiceData().getServiceName());
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickSelectPanelsAndParts();
         VNextLaborServicePanelsList laborServicePanelsList = new VNextLaborServicePanelsList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
