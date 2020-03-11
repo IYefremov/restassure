@@ -12,8 +12,8 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
@@ -45,8 +45,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
+        AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
 
         final String inspectionNumber = InspectionSteps.saveInspectionAsDraft();
         InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.DRAFT);
@@ -79,9 +78,8 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestClass {
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
-        availableServicesScreen.saveInspectionAsDraft();
+        AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
+        InspectionSteps.saveInspectionAsDraft();
 
         InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.DRAFT);
         ScreenNavigationSteps.pressBackButton();
@@ -119,8 +117,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestClass {
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectService(inspectionData.getServiceData().getServiceName());
+        AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
         InspectionSteps.saveInspection();
         InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.NEW);
 

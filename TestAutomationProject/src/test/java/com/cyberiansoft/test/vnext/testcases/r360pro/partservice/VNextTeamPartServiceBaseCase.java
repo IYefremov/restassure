@@ -43,7 +43,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         SearchSteps.textSearch(basicPartService.getServiceName());
         PartServiceSteps.selectPartService(basicPartService);
         PartServiceSteps.confirmPartInfo();
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName().getPartNameList().get(0));
+        SelectedServicesScreenSteps.openServiceDetails("PREF: " + basicPartService.getPartName().getPartNameList().get(0));
         ServiceDetailsScreenSteps.changeServicePrice(editedPartService.getServicePrice());
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartServiceSteps.changeCategory(editedPartService);
@@ -54,7 +54,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  Engine Oil Filter Kit");
+        SelectedServicesScreenSteps.openServiceDetails("PREF: Engine Oil Filter Kit");
         ServiceDetailsValidations.verifyServicePrice(editedPartService.getServicePrice());
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartInfoScreenValidations.validatePartInfo(editedPartService);
@@ -83,7 +83,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  " + basicPartService.getPartName().getPartNameList().get(0));
+        SelectedServicesScreenSteps.openServiceDetails("PREF: " + basicPartService.getPartName().getPartNameList().get(0));
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartServiceSteps.changeCategory(editedPartService);
         PartServiceSteps.confirmPartInfo();
@@ -92,7 +92,7 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SelectedServicesScreenSteps.openServiceDetails("PREF:  Parking Brake Cable Lever");
+        SelectedServicesScreenSteps.openServiceDetails("PREF: Parking Brake Cable Lever");
         ServiceDetailsScreenSteps.openPartServiceDetails();
         PartInfoScreenValidations.validatePartInfo(editedPartService);
         PartServiceSteps.confirmPartInfo();

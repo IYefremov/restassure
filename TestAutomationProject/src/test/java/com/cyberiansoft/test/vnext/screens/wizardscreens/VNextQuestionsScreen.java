@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -53,10 +52,5 @@ public class VNextQuestionsScreen extends VNextBaseWizardScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='save']")));
         tap(questionsscreen.findElement(By.xpath(".//*[@action='save']")));
-    }
-
-    public VNextSelectedServicesScreen saveQuestions() {
-        clickDoneButton();
-        return new VNextSelectedServicesScreen(appiumdriver);
     }
 }

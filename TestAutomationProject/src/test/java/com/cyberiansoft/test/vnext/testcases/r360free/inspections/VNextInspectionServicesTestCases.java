@@ -26,6 +26,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
@@ -59,8 +60,8 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
@@ -84,8 +85,8 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
@@ -114,10 +115,10 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 
-		availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(0));
-		availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(1));
+		AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(0));
+		AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(1));
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(0)));
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(1)));
@@ -130,7 +131,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(1)));
 
 		availableServicesScreen.switchToAvalableServicesView();
-		availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(2));
+		AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(2));
 		availableServicesScreen.switchToSelectedServicesView();
 
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(2)));
@@ -156,9 +157,9 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		for (int i = 0; i < firstPartNumber; i++)
-			availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(i));
+			AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(i));
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (int i = 0; i < firstPartNumber; i++)
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(i)));
@@ -171,7 +172,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(i)));
 		availableServicesScreen.switchToAvalableServicesView();
 		for (int i = firstPartNumber; i < inspectionData.getServicesList().size(); i++)
-			availableServicesScreen.selectService(inspectionData.getServiceNameByIndex(i));
+			AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(i));
 		availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData service : inspectionData.getServicesList())
@@ -196,8 +197,8 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData service : inspectionData.getServicesList())
@@ -260,8 +261,8 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData service : inspectionData.getServicesList())
@@ -356,11 +357,11 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		List<WebElement> services = availableServicesScreen.getServicesListItems();
 		List<String> servicesTxt = new ArrayList<>();
-		for (WebElement lst : services)
-			servicesTxt.add(availableServicesScreen.getServiceListItemName(lst));
+		//for (WebElement lst : services)
+		//	servicesTxt.add(availableServicesScreen.getServiceListItemName(lst));
 
 		for (String srv : allServicesTxt) {
 			Assert.assertTrue(servicesTxt.contains(srv));
@@ -379,10 +380,10 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 
-		availableServicesScreen.selectServices(inspectionData.getMoneyServicesList());
-		availableServicesScreen.selectServices(inspectionData.getPercentageServicesList());
+		AvailableServicesScreenSteps.selectServices(inspectionData.getMoneyServicesList());
+		AvailableServicesScreenSteps.selectServices(inspectionData.getPercentageServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData moneyService : inspectionData.getMoneyServicesList())
@@ -404,15 +405,15 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData service : inspectionData.getServicesList())
 			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
 		selectedServicesScreen.switchToAvalableServicesView();
-		availableServicesScreen.selectServices(inspectionData.getServicesList());
-		selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
+		availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
 			Assert.assertEquals(selectedServicesScreen.getQuantityOfSelectedService(service.getServiceName()), servicesNumberSelected);
 
@@ -441,11 +442,11 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData serviceData : inspectionData.getServicesList()) {
-			selectedServicesScreen.setServiceAmountValue(serviceData.getServiceName(), serviceData.getServicePrice());
+			SelectedServicesScreenSteps.changeSelectedServicePrice(serviceData.getServiceName(), serviceData.getServicePrice());
 		}
 		Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspPrice);
 		final String inspectionNumber = InspectionSteps.saveInspection();
@@ -456,16 +457,16 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		selectedServicesScreen.uselectService(inspectionData.getServicesList().get(0).getServiceName());
 
 		selectedServicesScreen.switchToAvalableServicesView();
-		availableServicesScreen.selectServices(inspectionData.getMoneyServicesList());
+		AvailableServicesScreenSteps.selectServices(inspectionData.getMoneyServicesList());
 		availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData serviceData : inspectionData.getMoneyServicesList()) {
-			selectedServicesScreen.setServiceAmountValue(serviceData.getServiceName(), serviceData.getServicePrice());
+			SelectedServicesScreenSteps.changeSelectedServicePrice(serviceData.getServiceName(), serviceData.getServicePrice());
 		}
 
-		selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServicesList().get(0).getServiceName(),
+		SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServicesList().get(0).getServiceName(),
 				firstMoneyServicePrice);
-		selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServicesList().get(1).getServiceName(),
+		SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServicesList().get(1).getServiceName(),
 				secondMoneyServicePrice);
 		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServicesList().get(1).getServiceName(),
 				secondMoneyServiceQty);
@@ -485,7 +486,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		final MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -510,7 +511,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -535,7 +536,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -559,13 +560,13 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		ServiceData percentageService = inspectionData.getPercentageServiceData();
-		availableServicesScreen.selectService(percentageService.getServiceName());
+		AvailableServicesScreenSteps.selectService(percentageService);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		Assert.assertTrue(selectedServicesScreen.isServiceSelected(percentageService.getServiceName()));
 		Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(percentageService.getServiceName()), percentageService.getServicePrice());
-		selectedServicesScreen.setServiceAmountValue(percentageService.getServiceName(), percentageService.getServicePrice2());
+		SelectedServicesScreenSteps.changeSelectedServicePrice(percentageService.getServiceName(), percentageService.getServicePrice2());
 		Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(percentageService.getServiceName()), percentageService.getServicePrice2() + "%");
 		selectedServicesScreen.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
@@ -580,12 +581,12 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectService(inspectionData.getMoneyServiceData());
 		final ServiceData percentageService = inspectionData.getPercentageServiceData();
-		availableServicesScreen.selectService(percentageService.getServiceName());
+		AvailableServicesScreenSteps.selectService(percentageService);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		selectedServicesScreen.setServiceAmountValue(percentageService.getServiceName(), percentageService.getServicePrice());
+		SelectedServicesScreenSteps.changeSelectedServicePrice(percentageService.getServiceName(), percentageService.getServicePrice());
 		Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(percentageService.getServiceName()), percentageService.getServicePrice2());
 		selectedServicesScreen.saveInspectionViaMenu();
 		ScreenNavigationSteps.pressBackButton();
@@ -600,11 +601,11 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		final ServiceData moneyService = inspectionData.getMoneyServiceData();
-		availableServicesScreen.selectService(moneyService.getServiceName());
+		AvailableServicesScreenSteps.selectService(moneyService);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		selectedServicesScreen.setServiceAmountValue(moneyService.getServiceName(), moneyService.getServicePrice());
+		SelectedServicesScreenSteps.changeSelectedServicePrice(moneyService.getServiceName(), moneyService.getServicePrice());
 		Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(moneyService.getServiceName()), moneyService.getServicePrice2());
 		selectedServicesScreen.saveInspectionViaMenu();
 		ScreenNavigationSteps.pressBackButton();
@@ -619,9 +620,9 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getMoneyServicesList());
-		availableServicesScreen.selectServices(inspectionData.getPercentageServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getMoneyServicesList());
+		AvailableServicesScreenSteps.selectServices(inspectionData.getPercentageServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
 		selectedServicesScreen.uselectService(inspectionData.getMoneyServicesList().get(0).getServiceName());
@@ -648,11 +649,11 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getMoneyServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getMoneyServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData serviceData : inspectionData.getMoneyServicesList())
-			selectedServicesScreen.setServiceAmountValue(serviceData.getServiceName(), serviceData.getServicePrice());
+			SelectedServicesScreenSteps.changeSelectedServicePrice(serviceData.getServiceName(), serviceData.getServicePrice());
 		Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
 		selectedServicesScreen.uselectService(inspectionData.getMoneyServicesList().get(1).getServiceName());
@@ -671,8 +672,8 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectServices(inspectionData.getMoneyServicesList());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectServices(inspectionData.getMoneyServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData serviceData : inspectionData.getMoneyServicesList())
 			selectedServicesScreen.uselectService(serviceData.getServiceName());
@@ -692,7 +693,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		final MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());

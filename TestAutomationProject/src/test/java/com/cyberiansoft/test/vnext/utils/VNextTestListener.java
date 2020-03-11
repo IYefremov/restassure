@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.utils;
 import com.cyberiansoft.test.baseutils.AppiumUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import org.openqa.selenium.WebDriver;
 import org.testng.*;
 
@@ -48,7 +47,6 @@ public class VNextTestListener extends TestListenerAdapter implements IInvokedMe
 	    }*/
 	    AppiumUtils.setAndroidNetworkOn();
 	    VNextAppUtils.restartApp();
-	    VNextHomeScreen homescreen = new VNextHomeScreen(appiumdriver);
 	}
 	
 	@Override

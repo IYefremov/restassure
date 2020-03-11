@@ -51,4 +51,9 @@ public class WizardScreenSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         baseWizardScreen.clcikSaveViaMenuAsFinal();
     }
+
+    public static void clickNotesMenuButton() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickInspectionNotesOption();
+    }
 }

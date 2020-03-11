@@ -25,11 +25,13 @@ import com.cyberiansoft.test.vnext.enums.InvoiceStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.VNextChangeInvoicePONumberDialog;
+import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InvoiceInfoScreenValidations;
@@ -129,8 +131,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		//invoicesScreen.waitUntilInvoiceDisappearsFromList(invoiceNumber);
 		ScreenNavigationSteps.pressBackButton();
 		HomeScreenSteps.openStatus();
-		VNextStatusScreen statusScreen = new VNextStatusScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		statusScreen.updateMainDB();
+		StatusScreenSteps.updateMainDB();
 
 		HomeScreenSteps.openInvoices();
 
@@ -287,7 +288,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int picturesToAdd = 4;
 		final int picturesToDelete = 2;
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
 
 		HomeScreenSteps.openCreateMyInvoice(workOrderNumber);
@@ -309,10 +309,10 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		InvoiceSteps.waitInvoicesScreenLoaded();
 		ScreenNavigationSteps.pressBackButton();
 
-		VNextStatusScreen statusScreen = homeScreen.clickStatusMenuItem();
-		statusScreen.updateMainDB();
+		HomeScreenSteps.openStatus();
+		StatusScreenSteps.updateMainDB();
 
-		homeScreen.clickInvoicesMenuItem();
+		HomeScreenSteps.openInvoices();
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
 		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd - picturesToDelete);
@@ -423,7 +423,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 3;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
 
@@ -433,18 +432,17 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		for (String invoiceNumber : invoices)
-			invoicesScreen.selectInvoice(invoiceNumber);
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 
 		NadaEMailService nada = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nada.getEmailId());
 
 		final String msg = emailScreen.sendEmail();
-		invoicesScreen.unselectAllSelectedInvoices();
-		invoicesScreen.clickBackButton();
+		InvoiceSteps.unSelectAllSelectedInvoices();
+		ScreenNavigationSteps.pressBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
 
 		for (String invoiceNumber : invoices) {
@@ -465,24 +463,20 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 3;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
-
 			HomeScreenSteps.openCreateMyInvoice(workOrderNumber);
-
 			InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR, testCaseData.getInvoiceData());
 			invoices.add(InvoiceSteps.saveInvoiceAsFinal());
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		for (String invoiceNumber : invoices)
-			invoicesScreen.selectInvoice(invoiceNumber);
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		ScreenNavigationSteps.pressBackButton();
-		invoicesScreen.unselectAllSelectedInvoices();
+		InvoiceSteps.unSelectAllSelectedInvoices();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -493,14 +487,10 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
 		final int invoicesToCreate = 3;
-		String[] invoices = new String[invoicesToCreate];
+		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-
-		for (int i = 0; i < invoices.length; i++) {
-			VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-			workOrdersScreen.switchToTeamWorkordersView();
-			WorkOrderSteps.clickAddWorkOrderButton();
+		for (int i = 0; i < invoicesToCreate; i++) {
+			HomeScreenSteps.openCreateTeamWorkOrder();
 			CustomersScreenSteps.switchToRetailMode();
 			if (i == 0) {
 				CustomersScreenSteps.selectCustomer(testCustomer1);
@@ -509,33 +499,30 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			}
 			WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
+			AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
 			WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
 
 			InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR, testCaseData.getInvoiceData());
-			invoices[i] = InvoiceSteps.saveInvoiceAsFinal();
+			invoices.add(InvoiceSteps.saveInvoiceAsFinal());
 			ScreenNavigationSteps.pressBackButton();
 		}
-
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		for (String invoiceNumber : invoices)
-			invoicesScreen.selectInvoice(invoiceNumber);
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		SelectCustomerScreenSteps.selectCustomer(testCustomer2);
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		NadaEMailService nada = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nada.getEmailId());
 		final String msg = emailScreen.sendEmail();
-		invoicesScreen.unselectAllSelectedInvoices();
-		invoicesScreen.clickBackButton();
+		InvoiceSteps.unSelectAllSelectedInvoices();
+		ScreenNavigationSteps.pressBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
 
-		for (int i = 1; i < invoices.length; i++) {
+		for (int i = 1; i < invoices.size(); i++) {
 			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
-					.withSubjectAndAttachmentFileName("Invoice " + invoices[i], invoices[i] + ".pdf");
-			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoices[i] +
+					.withSubjectAndAttachmentFileName("Invoice " + invoices.get(i), invoices.get(i) + ".pdf");
+			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoices.get(i) +
 					" in mail box " + nada.getEmailId() + ". At time " +
 					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
 		}
@@ -550,7 +537,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 1;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
 
@@ -560,17 +546,16 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		for (String invoiceNumber : invoices)
-			invoicesScreen.selectInvoice(invoiceNumber);
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		NadaEMailService nada = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nada.getEmailId());
 
 		emailScreen.sendEmail();
-		invoicesScreen.unselectAllSelectedInvoices();
-		invoicesScreen.clickBackButton();
+		InvoiceSteps.unSelectAllSelectedInvoices();
+		ScreenNavigationSteps.pressBackButton();
 
 		for (String invoiceNumber : invoices) {
 			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
@@ -590,7 +575,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 1;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
 
@@ -600,10 +584,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		for (String invoiceNumber : invoices)
-			invoicesScreen.selectInvoice(invoiceNumber);
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		emailScreen.clickToEmailAddressRemoveButton();
 		emailScreen.sentToCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
@@ -614,7 +597,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		msg = emailScreen.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 		ScreenNavigationSteps.pressBackButton();
-		invoicesScreen.unselectAllSelectedInvoices();
+		InvoiceSteps.unSelectAllSelectedInvoices();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -628,7 +611,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 1;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
 
@@ -638,10 +620,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		for (String invoiceNumber : invoices)
-			invoicesScreen.selectInvoice(invoiceNumber);
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		emailScreen.clickToEmailAddressRemoveButton();
 		final String wrongMail = VNextFreeRegistrationInfo.getInstance().getR360UserMail().
@@ -651,7 +632,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		Assert.assertEquals(msg, String.format(VNextAlertMessages.THE_EMAIL_ADDRESS_IS_NOT_VALID, wrongMail));
 
 		ScreenNavigationSteps.pressBackButton();
-		invoicesScreen.unselectAllSelectedInvoices();
+		InvoiceSteps.unSelectAllSelectedInvoices();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -664,13 +645,11 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 3;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			HomeScreenSteps.openCreateMyWorkOrder();
 			WorkOrderSteps.createWorkOrder(testCustomer1, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
+			AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
 			WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
 
@@ -679,17 +658,15 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		invoicesScreen.switchToTeamInvoicesView();
-		for (String invoiceNumber : invoices) {
-			invoicesScreen.selectInvoice(invoiceNumber);
-		}
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		InvoiceSteps.switchToTeamInvoicesView();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		NadaEMailService nada = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nada.getEmailId());
 		final String msg = emailScreen.sendEmail();
-		invoicesScreen.unselectAllSelectedInvoices();
+		InvoiceSteps.unSelectAllSelectedInvoices();
 		InvoiceSteps.switchToMyInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
@@ -712,21 +689,20 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 3;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			invoices.add(createSimpleInvoice(testCaseData));
 		}
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+		HomeScreenSteps.openInvoices();
 
-		invoicesScreen.switchToTeamInvoicesView();
+		InvoiceSteps.switchToTeamInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
-		homeScreen.clickInvoicesMenuItem();
-		invoices.forEach(invoiceNumber -> invoicesScreen.selectInvoice(invoiceNumber));
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		ScreenNavigationSteps.pressBackButton();
-		invoicesScreen.unselectAllSelectedInvoices();
-		invoicesScreen.switchToMyInvoicesView();
+		InvoiceSteps.unSelectAllSelectedInvoices();
+		InvoiceSteps.switchToMyInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -739,7 +715,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 1;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
 
@@ -749,12 +724,12 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		invoicesScreen.switchToTeamInvoicesView();
-		invoicesScreen.clickBackButton();
-		homeScreen.clickInvoicesMenuItem();
-		invoices.forEach(invoiceNumber -> invoicesScreen.selectInvoice(invoiceNumber));
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		InvoiceSteps.switchToTeamInvoicesView();
+		ScreenNavigationSteps.pressBackButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		emailScreen.clickToEmailAddressRemoveButton();
 		emailScreen.sentToCCEmailAddress(VNextFreeRegistrationInfo.getInstance().getR360UserMail());
@@ -765,8 +740,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		msg = emailScreen.sendEmail();
 		Assert.assertEquals(msg, VNextAlertMessages.THE_TO_BOX_IS_EMPTY);
 		emailScreen.clickScreenBackButton();
-		invoicesScreen.unselectAllSelectedInvoices();
-		invoicesScreen.switchToMyInvoicesView();
+		InvoiceSteps.unSelectAllSelectedInvoices();
+		InvoiceSteps.switchToMyInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -780,7 +755,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		final int invoicesToCreate = 1;
 		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < invoicesToCreate; i++) {
 			String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
 
@@ -790,13 +764,12 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		invoicesScreen.switchToTeamInvoicesView();
-		invoicesScreen.clickBackButton();
-		homeScreen.clickInvoicesMenuItem();
-		for (String invoiceNumber : invoices)
-			invoicesScreen.selectInvoice(invoiceNumber);
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		InvoiceSteps.switchToTeamInvoicesView();
+		ScreenNavigationSteps.pressBackButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		emailScreen.clickToEmailAddressRemoveButton();
 		final String wrongMail = VNextFreeRegistrationInfo.getInstance().getR360UserMail().
@@ -806,8 +779,8 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		Assert.assertEquals(msg, String.format(VNextAlertMessages.THE_EMAIL_ADDRESS_IS_NOT_VALID, wrongMail));
 
 		emailScreen.clickScreenBackButton();
-		invoicesScreen.unselectAllSelectedInvoices();
-		invoicesScreen.switchToMyInvoicesView();
+		InvoiceSteps.unSelectAllSelectedInvoices();
+		InvoiceSteps.switchToMyInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -818,11 +791,9 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
 		final int invoicesToCreate = 3;
-		String[] invoices = new String[invoicesToCreate];
+		ArrayList<String> invoices = new ArrayList<>();
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-
-		for (int i = 0; i < invoices.length; i++) {
+		for (int i = 0; i < invoicesToCreate; i++) {
 			HomeScreenSteps.openCreateTeamWorkOrder();
 			CustomersScreenSteps.switchToRetailMode();
 			if (i == 0) {
@@ -832,37 +803,35 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 			}
 			WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-			VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-			availableServicesScreen.selectService(testCaseData.getWorkOrderData().getMoneyServiceData().getServiceName());
+			AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
 			WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
 			WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
 
 			InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR, testCaseData.getInvoiceData());
-			invoices[i] = InvoiceSteps.saveInvoiceAsFinal();
+			invoices.add(InvoiceSteps.saveInvoiceAsFinal());
 			ScreenNavigationSteps.pressBackButton();
 		}
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
+		HomeScreenSteps.openInvoices();
 		InvoiceSteps.switchToTeamInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
-		homeScreen.clickInvoicesMenuItem();
-		for (String invoiceNumber : invoices)
-			invoicesScreen.selectInvoice(invoiceNumber);
-		invoicesScreen.clickOnSelectedInvoicesMailButton();
+		HomeScreenSteps.openInvoices();
+		invoices.forEach(invoiceNumber -> InvoiceSteps.selectInvoice(invoiceNumber));
+		InvoiceSteps.clickMultiSelectActionsSendEmail();
 		SelectCustomerScreenSteps.selectCustomer(testCustomer2);
 		VNextEmailScreen emailScreen = new VNextEmailScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		NadaEMailService nada = new NadaEMailService();
 		emailScreen.sentToEmailAddress(nada.getEmailId());
 		final String msg = emailScreen.sendEmail();
-		invoicesScreen.unselectAllSelectedInvoices();
+		InvoiceSteps.unSelectAllSelectedInvoices();
 		InvoiceSteps.switchToMyInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
 		Assert.assertEquals(msg, VNextAlertMessages.YOUR_EMAIL_MESSAGES_HAVE_BEEEN_ADDDED_TO_THE_QUEUE);
 
-		for (int i = 1; i < invoices.length; i++) {
+		for (int i = 1; i < invoices.size(); i++) {
 			NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
-					.withSubjectAndAttachmentFileName("Invoice " + invoices[i], invoices[i] + ".pdf");
-			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoices[i] +
+					.withSubjectAndAttachmentFileName("Invoice " + invoices.get(i), invoices.get(i) + ".pdf");
+			Assert.assertTrue(nada.waitForMessage(searchParametersBuilder), "Can't find invoice: " + invoices.get(i) +
 					" in mail box " + nada.getEmailId() + ". At time " +
 					LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
 		}
@@ -877,8 +846,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyWorkOrder();
 		WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		servicesScreen.selectService(testCaseData.getWorkOrderData().getServiceData().getServiceName());
+		AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getServiceData());
 		final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
 		ScreenNavigationSteps.pressBackButton();
 
@@ -906,21 +874,22 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData);
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		invoicesScreen.switchToMyInvoicesView();
+		HomeScreenSteps.openInvoices();
+		InvoiceSteps.switchToMyInvoicesView();
+		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int lastInvoiceNumber = Integer.parseInt(invoiceNumber.substring(invoiceStringLenght));
 
-		invoicesScreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
 
-		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
 		workOrdersScreen.createSeparateInvoice(workOrderNumber);
 		ScreenNavigationSteps.pressBackButton();
 
-		homeScreen.clickInvoicesMenuItem();
+		HomeScreenSteps.openInvoices();
 		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int newLastInvoiceNuber = Integer.parseInt(newInvoiceNumber.substring(invoiceStringLenght));
 		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + 1);
@@ -937,21 +906,22 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < numberInvoicesToCreate; i++)
 			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData));
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		invoicesScreen.switchToMyInvoicesView();
+		HomeScreenSteps.openInvoices();
+		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+		InvoiceSteps.switchToMyInvoicesView();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int lastInvoiceNumber = Integer.parseInt(invoiceNumber.substring(invoiceStringLenght));
 
-		invoicesScreen.clickBackButton();
-		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+		ScreenNavigationSteps.pressBackButton();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
 		workOrdersScreen.createSeparateInvoices(workOrders);
 		ScreenNavigationSteps.pressBackButton();
 
-		homeScreen.clickInvoicesMenuItem();
+		HomeScreenSteps.openInvoices();
 		final String newInvoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int newLastInvoiceNumber = Integer.parseInt(newInvoiceNumber.substring(invoiceStringLenght));
 		Assert.assertEquals(newLastInvoiceNumber, lastInvoiceNumber + numberInvoicesToCreate);
@@ -967,17 +937,18 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData);
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		invoicesScreen.switchToMyInvoicesView();
+		HomeScreenSteps.openInvoices();
+		InvoiceSteps.switchToMyInvoicesView();
+		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int lastInvoiceNumber = Integer.parseInt(invoiceNumber.substring(invoiceStringLenght));
 
-		invoicesScreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
 
-		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
 		workOrdersScreen.selectWorkOrder(workOrderNumber);
 		workOrdersScreen.clickCreateInvoiceIcon();
 
@@ -989,7 +960,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		Assert.assertEquals(invoicesScreen.getFirstInvoiceNumber(), newInvoiceNumber);
 		final int newLastInvoiceNuber = Integer.parseInt(newInvoiceNumber.substring(invoiceStringLenght));
 		Assert.assertEquals(newLastInvoiceNuber, lastInvoiceNumber + 1);
-		invoicesScreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -1003,18 +974,19 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		for (int i = 0; i < numberInvoicesToCreate; i++)
 			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData));
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		invoicesScreen.switchToMyInvoicesView();
+		HomeScreenSteps.openInvoices();
+		InvoiceSteps.switchToMyInvoicesView();
+		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 		final int lastInvoiceNumber = Integer.parseInt(invoiceNumber.substring(invoiceStringLenght));
 
 		ScreenNavigationSteps.pressBackButton();
 
-		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
 		for (String workOrderNumber : workOrders)
 			workOrdersScreen.selectWorkOrder(workOrderNumber);
 		workOrdersScreen.clickCreateInvoiceIcon();
@@ -1030,25 +1002,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		ScreenNavigationSteps.pressBackButton();
 	}
 
-	//@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-	public void testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton(String rowID,
-																			  String description, JSONObject testData) {
-
-		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
-
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData);
-
-		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
-		workOrdersScreen.selectWorkOrder(workOrderNumber);
-		workOrdersScreen.clickCreateInvoiceIcon();
-
-		ScreenNavigationSteps.pressBackButton();
-		workOrdersScreen.unselectWorkOrder(workOrderNumber);
-		ScreenNavigationSteps.pressBackButton();
-
-	}
-
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyUserCantCreateSeparateInvoiceIfInvoiceTypeIsNotAssignedToWO(String rowID,
 																					  String description, JSONObject testData) {
@@ -1057,16 +1010,17 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		String workOrderNumber = createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData);
 
-		VNextInvoicesScreen invoicesScreen = homeScreen.clickInvoicesMenuItem();
-		invoicesScreen.switchToMyInvoicesView();
+		HomeScreenSteps.openInvoices();
+		InvoiceSteps.switchToMyInvoicesView();
+		VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
 		final String invoiceNumber = invoicesScreen.getFirstInvoiceNumber();
 
 		ScreenNavigationSteps.pressBackButton();
 
-		VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
 		workOrdersScreen.selectWorkOrder(workOrderNumber);
 		workOrdersScreen.clickCreateInvoiceIcon();
 
@@ -1153,8 +1107,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyWorkOrder();
 		WorkOrderSteps.createWorkOrder(testcustomer, wotype, testCaseData.getWorkOrderData());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		servicesScreen.selectServices(testCaseData.getWorkOrderData().getServicesList());
+		AvailableServicesScreenSteps.selectServices(testCaseData.getWorkOrderData().getServicesList());
 		final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
 		ScreenNavigationSteps.pressBackButton();
 		return workOrderNumber;

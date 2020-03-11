@@ -21,15 +21,15 @@ public class SelectedServicesScreenSteps {
     }
 
     public static void openServiceDetails(String serviceName) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.switchToSelectedServicesView();
-        servicesScreen.openServiceDetails(serviceName);
+        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
+        selectedServicesScreen.switchToSelectedServicesView();
+        selectedServicesScreen.getServiceListItem(serviceName).openServiceDetails();
     }
 
     public static void openLaborServiceDetails(String serviceName) {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
         servicesScreen.switchToSelectedServicesView();
-        servicesScreen.openLaborServiceDetails(serviceName);
+        servicesScreen.openServiceDetails(serviceName);
     }
 
     public static void switchToSelectedService() {
@@ -39,5 +39,11 @@ public class SelectedServicesScreenSteps {
 
     public static void openMatrixServiceVehiclePartDetails(VehiclePartData vehiclePartData) {
         ListSelectPageInteractions.selectItem(vehiclePartData.getVehiclePartName());
+    }
+
+    public static void changeSelectedServicePrice(String serviceName, String servicePrice) {
+        openServiceDetails(serviceName);
+        ServiceDetailsScreenSteps.changeServicePrice(servicePrice);
+        ServiceDetailsScreenSteps.saveServiceDetails();
     }
 }

@@ -6,6 +6,8 @@ import com.cyberiansoft.test.vnext.interactions.services.AvailableServiceScreenI
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.By;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,11 +23,12 @@ public class AvailableServicesScreenSteps {
         servicesScreen.switchToAvalableServicesView();
         SearchSteps.textSearch(serviceName);
         servicesScreen.selectSingleService(serviceName);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
     }
 
     public static void clickAddServiceButton(String serviceName) {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.clickAddServiceButton(serviceName);
+        servicesScreen.selectSingleService(serviceName);
     }
 
     public static void selectServiceGroup(String groupName) {
@@ -53,7 +56,7 @@ public class AvailableServicesScreenSteps {
 
     public static void selectMatrixService(MatrixServiceData matrixServiceData) {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.openMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
+        servicesScreen.selectSingleService(matrixServiceData.getMatrixServiceName());
         if (matrixServiceData.getHailMatrixName() != null) {
             VNextPriceMatrixesScreen priceMatrixesScreen = new VNextPriceMatrixesScreen();
             priceMatrixesScreen.selectHailMatrix(matrixServiceData.getHailMatrixName());
