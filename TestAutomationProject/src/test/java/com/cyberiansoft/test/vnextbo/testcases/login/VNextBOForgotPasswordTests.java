@@ -21,6 +21,7 @@ import com.cyberiansoft.test.vnextbo.validations.homepage.VNextBOHomeWebPageVali
 import com.cyberiansoft.test.vnextbo.validations.login.VNextBOLoginValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -35,7 +36,7 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
 
     @Override
     @BeforeClass
-    public void login() {
+    public void login(ITestContext context) {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginForgotPasswordTD();
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         userName = VNextBOConfigInfo.getInstance().getVNextBONadaTestMail();

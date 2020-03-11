@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnextbo.utils.VNextEnvironmentUtils;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeSuite;
@@ -56,13 +57,13 @@ public class BaseTestCase {
     }
 
     @BeforeClass
-    public void login() {
+    public void login(ITestContext context) {
         browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
         DriverBuilder.getInstance().setDriver(browserType);
         webdriver = DriverBuilder.getInstance().getDriver();
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
-        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+        final String userName = context.getCurrentXmlTest().getParameter("userName");
+        final String userPassword = context.getCurrentXmlTest().getParameter("userPassword");
         VNextBOLoginSteps.userLogin(userName, userPassword);
     }
 

@@ -1,0 +1,110 @@
+<suite name="Cyberiansoft R360 ReconPro tests suite 1" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
+    </listeners>
+    <test name="Invoice Details Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>
+        </classes>
+    </test>
+    <test name="Operations Invoices Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOOperationsInvoicesTestCases"/>
+        </classes>
+    </test>
+    <test name="Quick Notes Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.quicknotes.VNextBOQuickNotesTestCases"/>
+        </classes>
+    </test>
+    <test name="Inspections General Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsGeneralTests"/>
+        </classes>
+    </test>
+    <test name="Inspections Details Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsDetailsTests"/>
+        </classes>
+    </test>
+    <test name="Inspections Archiving Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsArchivingTests"/>
+        </classes>
+    </test>
+    <test name="Inspections Approve Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsApproveTests"/>
+        </classes>
+    </test>
+    <test name="Inspections Search Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.inspections.VNextBOInspectionsSearchTests"/>
+        </classes>
+    </test>
+    <test name="Parts Management Dashboard Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementDashboardTestCases"/>
+        </classes>
+    </test>
+    <test name="Parts Management Search Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementSearchTestCases"/>
+        </classes>
+    </test>
+    <test name="Parts Management Order Details Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementOrderDetailsTestCases"/>
+        </classes>
+    </test>
+    <test name="Parts Management Order Details Status CheckBox Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsStatusCheckBoxTests"/>
+        </classes>
+    </test>
+    <test name="Parts Management Order Details Parts Details Status Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsStatusTests"/>
+        </classes>
+    </test>
+    <test name="Parts Management Order Details Parts Details Labor Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsLaborTests"/>
+        </classes>
+    </test>
+    <test name="Parts Management Generic Part Provider Functionality Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementGenericPartProviderFunctionalityTestCases"/>
+        </classes>
+    </test>
+</suite>

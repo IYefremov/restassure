@@ -15,6 +15,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//TODO: get rid of WaitUtilsWebDriver.waitABit
 public class VNextBORODetailsStepsNew {
 
     public static List<String> getServiceAndTaskDescriptionsList() {
