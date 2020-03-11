@@ -20,6 +20,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailable
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
@@ -60,8 +61,8 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		ClaimInfoSteps.setPolicyNumber(insuranceCompanyData.getPolicyNumber());
 		ClaimInfoSteps.setDeductibleValue(insuranceCompanyData.getDeductible());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+		AvailableServicesScreenSteps.selectService(inspectionData.getMoneyServiceData());
 		final MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		final VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
@@ -74,7 +75,7 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
-		selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
+		SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
 		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
 		final String inspectionNumber = InspectionSteps.saveInspection();
@@ -120,22 +121,22 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		ClaimInfoSteps.setPolicyNumber(insuranceCompanyData.getPolicyNumber());
 		ClaimInfoSteps.setDeductibleValue(insuranceCompanyData.getDeductible());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 
-		availableServicesScreen.selectService(inspectionData.getMoneyServiceData().getServiceName());
+		AvailableServicesScreenSteps.selectService(inspectionData.getMoneyServiceData());
 		final MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
 		AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
 		final VehiclePartData vehiclePartData = matrixServiceData.getVehiclePartData();
-        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen();
 		VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
 		vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
 		vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 		vehiclePartInfoScreen.selectVehiclePartAdditionalService(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
 		vehiclePartInfoScreen.clickScreenBackButton();
         vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+		vehiclePartsScreen.clickVehiclePartsSaveButton();
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		selectedServicesScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
+		SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
 		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
 		final String inspectionNumber = InspectionSteps.saveInspection();

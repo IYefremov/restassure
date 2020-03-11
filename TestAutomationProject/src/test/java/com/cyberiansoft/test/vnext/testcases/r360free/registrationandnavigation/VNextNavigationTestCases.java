@@ -19,6 +19,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -59,9 +60,9 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         InspectionSteps.createInspection(testcustomer, inspectionData);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         for (ServiceData service : inspectionData.getServicesList())
-            availableServicesScreen.selectService(service.getServiceName());
+            AvailableServicesScreenSteps.selectService(service);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
