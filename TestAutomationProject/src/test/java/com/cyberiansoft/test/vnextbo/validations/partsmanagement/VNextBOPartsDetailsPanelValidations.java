@@ -209,8 +209,9 @@ public class VNextBOPartsDetailsPanelValidations {
         Assert.assertEquals(actualPartsStatuses, expectedStatusesList, "Statuses list hasn't been correct");
     }
 
-    public static void verifyPartStatusesDoNotContainRestrictedStatus(String restrictedStatus) {
-        Assert.assertFalse(VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().contains(restrictedStatus), "The status " + restrictedStatus + " is displayed for the opened part");
+    public static void verifyPartStatusesDoNotContainStatus(String status) {
+        Assert.assertFalse(VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().contains(status),
+                "The status " + status + " is displayed");
     }
 
     public static boolean isPartStatusPresent(String status) {
