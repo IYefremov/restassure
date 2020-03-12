@@ -12,8 +12,10 @@ public class ClaimInfoSteps {
 
     public static void setClaimNumber(String claimNumber) {
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen();
-        WaitUtils.elementShouldBeVisible(claimInfoScreen.getClaimFld(), true);
-        claimInfoScreen.getClaimFld().sendKeys(claimNumber);
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            claimInfoScreen.getClaimFld().sendKeys(claimNumber);
+            return true;
+        });
     }
 
     public static void selectInsuranceCompany(String insuranceCompany) {

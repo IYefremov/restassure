@@ -22,11 +22,11 @@ public class WorkOrdersScreenValidations {
         Assert.assertEquals(workOrdersScreen.getWorkOrderStatusValue(workOrderId), expectedStatus.getWorkOrderStatusValue());
     }
 
-    public static void validateWorkOrderExists(String workOrderId, boolean exists) {
+    public static void validateWorkOrderExists(String workOrderId, boolean isExists) {
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
-        if (exists)
-            Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderId));
+        if (isExists)
+            Assert.assertTrue(workOrdersScreen.isWorkOrderExists(workOrderId), "Can't find work order: " + workOrderId);
         else
-            Assert.assertFalse(workOrdersScreen.isWorkOrderExists(workOrderId));
+            Assert.assertFalse(workOrdersScreen.isWorkOrderExists(workOrderId), "Work order should not exists: " + workOrderId);
     }
 }

@@ -9,7 +9,6 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.ios10_client.utils.PDFReader;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
@@ -85,8 +84,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
         ScreenNavigationSteps.pressBackButton();
         SelectedServicesScreenSteps.switchToSelectedService();
-        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-        selectedServicesScreen.openSelectedMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(matrixServiceData.getMatrixServiceName());
         for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
 			VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
             vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
@@ -135,8 +133,7 @@ public class VNextInspectionsSendMailTestCases extends BaseTestCaseWithDeviceReg
         AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
         ScreenNavigationSteps.pressBackButton();
         SelectedServicesScreenSteps.switchToSelectedService();
-		VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-		selectedServicesScreen.openSelectedMatrixServiceDetails(matrixServiceData.getMatrixServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(matrixServiceData.getMatrixServiceName());
         VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         for (VehiclePartData vehiclePartData : inspectionData.getVehiclePartsData()) {
             vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());

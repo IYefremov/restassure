@@ -11,7 +11,6 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
@@ -207,13 +206,11 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
 
         InspectionSteps.archiveInspection(inspectionNumber);
-        Assert.assertFalse(inspectionsScreen.isInspectionExists(inspectionNumber), "Inspection: " + inspectionNumber +
-                " still exists, but shouldn't");
+        InspectionsValidations.verifyInspectionExists(inspectionNumber, false);
         ScreenNavigationSteps.pressBackButton();
 
     }
@@ -224,14 +221,14 @@ public class VNextInspectionsTestCases extends BaseTestCaseWithDeviceRegistratio
 
         final int inspToArchive = 3;
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         int inspectionNumbers = inspectionsScreen.getNumberOfInspectionsInList();
 
         for (int i = 0; i < inspToArchive; i++) {
             String inspectionNumber = inspectionsScreen.getFirstInspectionNumber();
             InspectionSteps.archiveInspection(inspectionNumber);
-            Assert.assertFalse(inspectionsScreen.isInspectionExists(inspectionNumber));
+            InspectionsValidations.verifyInspectionExists(inspectionNumber, false);
         }
         Assert.assertEquals(inspectionsScreen.getNumberOfInspectionsInList(), inspectionNumbers - inspToArchive);
         ScreenNavigationSteps.pressBackButton();

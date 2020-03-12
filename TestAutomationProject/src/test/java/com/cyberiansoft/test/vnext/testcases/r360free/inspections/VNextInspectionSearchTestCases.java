@@ -13,7 +13,6 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
@@ -70,9 +69,8 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         vehiclePartInfoScreen.selectVehiclePartAdditionalService(matrixServiceData.getVehiclePartData().getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
         vehiclePartsScreen.clickVehiclePartsSaveButton();
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
+        SelectedServicesScreenSteps.changeSelectedServiceQuantity(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
         inspectionNumber = InspectionSteps.saveInspection();
         InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
@@ -120,10 +118,9 @@ public class VNextInspectionSearchTestCases extends BaseTestCaseWithDeviceRegist
         vehiclePartInfoScreen.selectVehiclePartSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
         vehiclePartInfoScreen.selectVehiclePartAdditionalService(matrixServiceData.getVehiclePartData().getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-         vehiclePartsScreen.clickVehiclePartsSaveButton();
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        vehiclePartsScreen.clickVehiclePartsSaveButton();
         SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
+        SelectedServicesScreenSteps.changeSelectedServiceQuantity(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
         archivedinspnumber = InspectionSteps.saveInspection();
         InspectionsValidations.verifyInspectionTotalPrice(archivedinspnumber, PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));

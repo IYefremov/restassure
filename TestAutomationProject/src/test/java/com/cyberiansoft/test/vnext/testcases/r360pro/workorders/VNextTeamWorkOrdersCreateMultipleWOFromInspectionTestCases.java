@@ -54,7 +54,7 @@ public class VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases extends 
         ListServicesValidations.verifySelectedServices(workOrderData.getInspectionData().getServicesList());
         AvailableServicesScreenSteps.selectServices(workOrderData.getServicesList());
         ListServicesValidations.verifySelectedServices(summaryServiceList);
-        SelectedServicesScreenSteps.unselectServices(workOrderData.getInspectionData().getServicesList());
+        SelectedServicesScreenSteps.unSelectServices(workOrderData.getInspectionData().getServicesList());
         ListServicesValidations.verifySelectedServices(workOrderData.getServicesList());
         String workOrderId = WorkOrderSteps.saveWorkOrder();
         WorkOrdersScreenValidations.validateWorkOrderExists(workOrderId, true);

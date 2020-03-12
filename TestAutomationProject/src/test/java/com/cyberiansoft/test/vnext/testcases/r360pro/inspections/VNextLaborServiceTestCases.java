@@ -14,13 +14,14 @@ import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.SelectedServicesScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -57,8 +58,8 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         laborServicePartsList.selectServiceLaborPart(inspectionData.getLaborServiceData().getLaborServicePart());
         laborServicePartsList.saveLaborServiceParts();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(inspectionData.getLaborServiceData().getServiceName()),
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenValidations.validateSelectedServicePrice(inspectionData.getLaborServiceData().getServiceName(),
                 inspectionData.getLaborServiceData().getLaborServicePrice());
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();

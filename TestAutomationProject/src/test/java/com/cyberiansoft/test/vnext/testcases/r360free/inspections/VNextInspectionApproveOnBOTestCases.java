@@ -17,7 +17,6 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
@@ -72,11 +71,9 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 		vehiclePartInfoScreen.selectVehiclePartAdditionalService(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
 		vehiclePartInfoScreen.clickScreenBackButton();
-        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-
+        vehiclePartsScreen.clickVehiclePartsSaveButton();
 		SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
-		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
+		SelectedServicesScreenSteps.changeSelectedServiceQuantity(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));
@@ -135,9 +132,8 @@ public class VNextInspectionApproveOnBOTestCases extends BaseTestCaseWithDeviceR
 		vehiclePartInfoScreen.clickScreenBackButton();
         vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		vehiclePartsScreen.clickVehiclePartsSaveButton();
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
-		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
+		SelectedServicesScreenSteps.changeSelectedServiceQuantity(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
 
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, PricesCalculations.getPriceRepresentation(inspectionData.getInspectionPrice()));

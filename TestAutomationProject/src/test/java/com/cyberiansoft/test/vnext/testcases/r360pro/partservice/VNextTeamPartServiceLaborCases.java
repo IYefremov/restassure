@@ -50,11 +50,9 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
         SelectedServicesScreenSteps.switchToSelectedService();
-        ListServicesValidations.verifyServiceSelected(basicPartService.getServiceName());
-        laborServiceData.stream()
-                .map(LaborServiceData::getServiceName)
-                .collect(Collectors.toList())
-                .forEach(ListServicesValidations::verifyServiceSelected);
+        ListServicesValidations.verifyServiceSelected(basicPartService.getServiceName(), true);
+        laborServiceData
+                .forEach(serviceData -> ListServicesValidations.verifyServiceSelected(serviceData.getServiceName(), true));
 
         inspectionId = InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -82,11 +80,8 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
         SelectedServicesScreenSteps.switchToSelectedService();
-        ListServicesValidations.verifyServiceSelected(laborServiceData.getServiceName());
-        partServiceData.stream()
-                .map(PartServiceData::getServiceName)
-                .collect(Collectors.toList())
-                .forEach(ListServicesValidations::verifyServiceSelected);
+        ListServicesValidations.verifyServiceSelected(laborServiceData.getServiceName(), true);
+        partServiceData.forEach(serviceData -> ListServicesValidations.verifyServiceSelected(serviceData.getServiceName(), true));
 
         inspectionId = InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -120,15 +115,15 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
             PartServiceSteps.confirmPartInfo();
         });
         SelectedServicesScreenSteps.switchToSelectedService();
-        SelectedServicesScreenSteps.unselectService(laborServiceToRemoveWithPartService.getServiceName());
+        SelectedServicesScreenSteps.unSelectService(laborServiceToRemoveWithPartService.getServiceName());
         GeneralSteps.confirmDialog();
-        SelectedServicesScreenSteps.unselectService(laborServiceToRemoveWithoutPartService.getServiceName());
+        SelectedServicesScreenSteps.unSelectService(laborServiceToRemoveWithoutPartService.getServiceName());
         GeneralSteps.declineDialog();
 
-        ListServicesValidations.verifyServiceSelected(expectedPresentPartService.getServiceName());
-        ListServicesValidations.verifyServiceNotSelected(laborServiceToRemoveWithPartService.getServiceName());
-        ListServicesValidations.verifyServiceNotSelected(expectedRemovedPartService.getServiceName());
-        ListServicesValidations.verifyServiceNotSelected(laborServiceToRemoveWithoutPartService.getServiceName());
+        ListServicesValidations.verifyServiceSelected(expectedPresentPartService.getServiceName(), true);
+        ListServicesValidations.verifyServiceSelected(laborServiceToRemoveWithPartService.getServiceName(), false);
+        ListServicesValidations.verifyServiceSelected(expectedRemovedPartService.getServiceName(), false);
+        ListServicesValidations.verifyServiceSelected(laborServiceToRemoveWithoutPartService.getServiceName(), false);
 
         inspectionId = InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -158,15 +153,15 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
             PartServiceSteps.confirmPartInfo();
         });
         SelectedServicesScreenSteps.switchToSelectedService();
-        SelectedServicesScreenSteps.unselectService(partServiceToRemoveWithLaborService.getServiceName());
+        SelectedServicesScreenSteps.unSelectService(partServiceToRemoveWithLaborService.getServiceName());
         GeneralSteps.confirmDialog();
-        SelectedServicesScreenSteps.unselectService(partServiceToRemoveWithoutLaborService.getServiceName());
+        SelectedServicesScreenSteps.unSelectService(partServiceToRemoveWithoutLaborService.getServiceName());
         GeneralSteps.declineDialog();
 
-        ListServicesValidations.verifyServiceSelected(expectedPresentLaborService.getServiceName());
-        ListServicesValidations.verifyServiceNotSelected(partServiceToRemoveWithLaborService.getServiceName());
-        ListServicesValidations.verifyServiceNotSelected(expectedRemovedLaborService.getServiceName());
-        ListServicesValidations.verifyServiceNotSelected(partServiceToRemoveWithoutLaborService.getServiceName());
+        ListServicesValidations.verifyServiceSelected(expectedPresentLaborService.getServiceName(), true);
+        ListServicesValidations.verifyServiceSelected(partServiceToRemoveWithLaborService.getServiceName(), false);
+        ListServicesValidations.verifyServiceSelected(expectedRemovedLaborService.getServiceName(), false);
+        ListServicesValidations.verifyServiceSelected(partServiceToRemoveWithoutLaborService.getServiceName(), false);
 
         inspectionId = InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();

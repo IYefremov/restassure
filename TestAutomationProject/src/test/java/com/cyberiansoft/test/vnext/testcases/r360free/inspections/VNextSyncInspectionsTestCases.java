@@ -5,12 +5,12 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.InspectionSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -31,14 +31,14 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final String expectedQueue = "1";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
-		homescreen = settingsscreen.setManualSendOn().clickBackButton();
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
+		homeScreen = settingsScreen.setManualSendOn().clickBackButton();
+		HomeScreenSteps.openInspections();
 		InspectionSteps.createR360Inspection(testcustomer, inspectionData);
-		homescreen = inspectionsscreen.clickBackButton();
-		Assert.assertEquals(homescreen.getQueueMessageValue(), expectedQueue);
-		homescreen.clickQueueMessageIcon();
+		ScreenNavigationSteps.pressBackButton();
+		Assert.assertEquals(homeScreen.getQueueMessageValue(), expectedQueue);
+		homeScreen.clickQueueMessageIcon();
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -47,14 +47,14 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final int expectedQueue = 5;
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
-		homescreen = settingsscreen.setManualSendOn().clickBackButton();
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
+		homeScreen = settingsScreen.setManualSendOn().clickBackButton();
+		HomeScreenSteps.openInspections();
 		for (int i = 0; i < expectedQueue-1; i++)
 			InspectionSteps.createR360Inspection(testcustomer, inspectionData);
-		homescreen = inspectionsscreen.clickBackButton();
-		Assert.assertEquals(homescreen.getQueueMessageValue(), String.valueOf(expectedQueue));
+		ScreenNavigationSteps.pressBackButton();
+		Assert.assertEquals(homeScreen.getQueueMessageValue(), String.valueOf(expectedQueue));
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -63,13 +63,13 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
-		homescreen = settingsscreen.setManualSendOff().clickBackButton();
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
+		homeScreen = settingsScreen.setManualSendOff().clickBackButton();
+		HomeScreenSteps.openInspections();
 		InspectionSteps.createR360Inspection(testcustomer, inspectionData);
-		homescreen = inspectionsscreen.clickBackButton();
-		Assert.assertFalse(homescreen.isQueueMessageVisible());
+		ScreenNavigationSteps.pressBackButton();
+		Assert.assertFalse(homeScreen.isQueueMessageVisible());
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -79,16 +79,16 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final String expectedQueue = "1";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
-		homescreen = settingsscreen.setManualSendOn().clickBackButton();
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
+		homeScreen = settingsScreen.setManualSendOn().clickBackButton();
+		HomeScreenSteps.openInspections();
 		InspectionSteps.createR360Inspection(testcustomer, inspectionData);
-		homescreen = inspectionsscreen.clickBackButton();
-		Assert.assertEquals(homescreen.getQueueMessageValue(), expectedQueue);
-		homescreen.clickQueueMessageIcon();
-		homescreen.waitUntilQueueMessageInvisible();
-		Assert.assertFalse(homescreen.isQueueMessageVisible());
+		ScreenNavigationSteps.pressBackButton();
+		Assert.assertEquals(homeScreen.getQueueMessageValue(), expectedQueue);
+		homeScreen.clickQueueMessageIcon();
+		homeScreen.waitUntilQueueMessageInvisible();
+		Assert.assertFalse(homeScreen.isQueueMessageVisible());
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -98,17 +98,17 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final int expectedQueue = 5;
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
 		AppiumUtils.setNetworkOff();
-		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
-		homescreen = settingsscreen.setManualSendOff().clickBackButton();
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
+		homeScreen = settingsScreen.setManualSendOff().clickBackButton();
+		HomeScreenSteps.openInspections();
 		for (int i = 0; i < expectedQueue-1; i++)
 			InspectionSteps.createR360Inspection(testcustomer, inspectionData);
-		homescreen = inspectionsscreen.clickBackButton();
+		ScreenNavigationSteps.pressBackButton();
 		AppiumUtils.setAndroidNetworkOn();
-		homescreen.waitUntilQueueMessageInvisible();
-		Assert.assertFalse(homescreen.isQueueMessageVisible());
+		homeScreen.waitUntilQueueMessageInvisible();
+		Assert.assertFalse(homeScreen.isQueueMessageVisible());
 	}
 
 	@Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
@@ -118,16 +118,16 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 		final String expectedQueue = "1";
 
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
 		AppiumUtils.setNetworkOff();
-		VNextSettingsScreen settingsscreen = homescreen.clickSettingsMenuItem();
-		homescreen = settingsscreen.setManualSendOff().clickBackButton();
-		VNextInspectionsScreen inspectionsscreen = homescreen.clickInspectionsMenuItem();
+		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
+		homeScreen = settingsScreen.setManualSendOff().clickBackButton();
+		HomeScreenSteps.openInspections();
 		InspectionSteps.createR360Inspection(testcustomer, inspectionData);
-		homescreen = inspectionsscreen.clickBackButton();
-		homescreen.clickQueueMessageIcon();
+		ScreenNavigationSteps.pressBackButton();
+		homeScreen.clickQueueMessageIcon();
 		BaseUtils.waitABit(3000);
-		Assert.assertEquals(homescreen.getQueueMessageValue(), expectedQueue);
+		Assert.assertEquals(homeScreen.getQueueMessageValue(), expectedQueue);
 		AppiumUtils.setAndroidNetworkOn();
 	}
 
