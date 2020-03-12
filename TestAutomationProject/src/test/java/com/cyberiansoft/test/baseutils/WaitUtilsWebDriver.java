@@ -209,7 +209,7 @@ public class WaitUtilsWebDriver {
     public static void waitForDropDownToBeClosed(WebElement dropDown, int timeout) {
         try {
             waitForElementNotToBeStale(dropDown, timeout);
-            waitForAttributeToBe(dropDown, "aria-hidden", "true");
+            waitForAttributeToBe(dropDown, "aria-hidden", "true", 1);
         } catch (Exception ignored) {}
     }
 

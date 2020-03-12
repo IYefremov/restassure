@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
+import com.cyberiansoft.test.enums.partsmanagement.PartCondition;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
@@ -26,6 +27,7 @@ import org.testng.Assert;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class VNextBOPartsDetailsPanelSteps {
 
@@ -91,10 +93,11 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOPartsDetailsPanelInteractions.setStatusForPartByPartNumber(partNumber, status);
     }
 
-    public static void setConditionForPartByPartNumberInList(int partNumber, String condition) {
-
-        VNextBOPartsDetailsPanelInteractions.setConditionForPartByPartNumber(partNumber, condition);
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    public static void setAllConditionsForPartByPartNumberInList(int partNumber) {
+        Stream.of(PartCondition.values()).forEach(condition -> {
+            VNextBOPartsDetailsPanelInteractions.setConditionForPartByPartNumber(partNumber, condition.getValue());
+            VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, condition.getValue());
+        });
     }
 
     public static void openPMPageAndSetStatusForPart(String pmWindow, String partName, String status) {
@@ -252,7 +255,7 @@ public class VNextBOPartsDetailsPanelSteps {
         final WebElement selectedStatus = VNextBOPartsDetailsPanelInteractions.getSelectedStatus(status);
         if (selectedStatus != null) {
             VNextBOPartsDetailsPanelInteractions.selectStatusToDelete(selectedStatus);
-            clickDeleteServices();
+            deleteServices();
         } else {
             VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
             VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckBoxToBeOpened(false);

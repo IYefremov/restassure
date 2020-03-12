@@ -222,8 +222,13 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static void setConditionForPartByPartNumber(int partNumber, String condition) {
-        Utils.clickElement(new VNextBOPartsDetailsPanel().getPartConditionFields().get(partNumber));
-        Utils.selectOptionInDropDownWithJsScroll(condition);
+        final VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(detailsPanel.getPartConditionFields().get(partNumber));
+        if (condition.equals("")) {
+            Utils.clickElement(detailsPanel.getPartDropDownEmptyField());
+        } else {
+            Utils.selectOptionInDropDownWithJs(detailsPanel.getPartsListBoxOptions(), condition);
+        }
     }
 
     public static void setCoreStatusForPartByPartNumber(int partNumber, String status) {

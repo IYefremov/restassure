@@ -7,7 +7,6 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.RepairStatus;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.enums.partsmanagement.CoreStatus;
-import com.cyberiansoft.test.enums.partsmanagement.PartCondition;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
@@ -162,15 +161,6 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.setRepairStatusField(RepairStatus.IN_PROGRESS_ALL.getValue());
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOPartsOrdersListPanelSteps.openPartOrderDetailsByNumberInList(0);
-        VNextBOPartsDetailsPanelSteps.setConditionForPartByPartNumberInList(0, PartCondition.NEW.getValue());
-        VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, PartCondition.NEW.getValue());
-        VNextBOPartsDetailsPanelSteps.setConditionForPartByPartNumberInList(0, PartCondition.USED.getValue());
-        VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, PartCondition.USED.getValue());
-        VNextBOPartsDetailsPanelSteps.setConditionForPartByPartNumberInList(0, PartCondition.REMANUFACTURED.getValue());
-        VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, PartCondition.REMANUFACTURED.getValue());
-        VNextBOPartsDetailsPanelSteps.setConditionForPartByPartNumberInList(0, PartCondition.RECONDITIONED.getValue());
-        VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, PartCondition.RECONDITIONED.getValue());
-        VNextBOPartsDetailsPanelSteps.setConditionForPartByPartNumberInList(0, "");
-        VNextBOPartsDetailsPanelValidations.verifyPartCondition(0, "");
+        VNextBOPartsDetailsPanelSteps.setAllConditionsForPartByPartNumberInList(0);
     }
 }

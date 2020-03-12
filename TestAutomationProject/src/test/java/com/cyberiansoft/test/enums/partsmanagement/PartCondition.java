@@ -8,7 +8,8 @@ public enum PartCondition {
     NEW("New"),
     USED("Used"),
     REMANUFACTURED("Remanufactured"),
-    RECONDITIONED("Reconditioned");
+    RECONDITIONED("Reconditioned"),
+    EMPTY("");
 
     private String value;
 
