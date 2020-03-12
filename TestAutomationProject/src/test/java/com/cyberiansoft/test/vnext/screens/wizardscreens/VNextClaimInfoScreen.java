@@ -15,13 +15,13 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 	@FindBy(xpath="//div[@class='pages']/div[@data-page='claim']")
 	private WebElement claimScreen;
 	
-	@FindBy(name="//*[@data-field='PolicyNumber']")
+	@FindBy(xpath="//*[@data-field='PolicyNumber']/input")
 	private WebElement policyFld;
 	
 	@FindBy(xpath="//*[@data-field='Insurance']")
 	private WebElement insuranceCompanyFld;
-	
-	@FindBy(name="//*[@data-field='ClaimNumber']")
+
+	@FindBy(xpath="//*[@data-field='ClaimNumber']/input")
 	private WebElement claimFld;
 	
 	@FindBy(name="Estimations.Deductible")

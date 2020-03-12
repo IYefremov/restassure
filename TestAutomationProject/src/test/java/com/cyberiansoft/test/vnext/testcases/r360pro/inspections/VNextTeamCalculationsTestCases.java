@@ -26,6 +26,7 @@ import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
 import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -142,7 +143,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
 
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
+        SelectedServicesScreenSteps.changeSelectedServiceQuantity(inspectionData.getMoneyServiceData().getServiceName(), inspectionData.getMoneyServiceData().getServiceQuantity());
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
         InspectionSteps.trySaveInspection();
@@ -169,7 +170,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
         List<ServiceData> moneyServices = inspectionData.getMoneyServicesList();
         for (ServiceData moneyService : moneyServices) {
-            selectedServicesScreen.setServiceQuantityValue(moneyService.getServiceName(), moneyService.getServiceQuantity());
+            SelectedServicesScreenSteps.changeSelectedServiceQuantity(moneyService.getServiceName(), moneyService.getServiceQuantity());
             float moneyServicePrice = BackOfficeUtils.getServicePriceValue(moneyService.getServicePrice()) *
                     BackOfficeUtils.getServiceQuantityValue(moneyService.getServiceQuantity());
             String newprice = PricesUtils.getFormattedServicePriceValue(moneyServicePrice + moneyServicePrice * BackOfficeUtils.getServicePriceValue(inspectionData.getServiceData().getServicePrice()) / 100);
@@ -218,13 +219,15 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         List<ServiceData> moneyServices = inspectionData.getMoneyServicesList();
-        for (ServiceData moneyService : moneyServices)
-            AvailableServicesScreenSteps.selectService(moneyService);
+        moneyServices.forEach(moneyService -> {
+                AvailableServicesScreenSteps.openServiceDetails(moneyService);
+                ServiceDetailsScreenSteps.saveServiceDetails();
+        });
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData moneyService : moneyServices) {
             SelectedServicesScreenSteps.changeSelectedServicePrice(moneyService.getServiceName(), moneyService.getServicePrice());
             if (moneyService.getServiceQuantity() != null)
-                selectedServicesScreen.setServiceQuantityValue(moneyService.getServiceName(), moneyService.getServiceQuantity());
+                SelectedServicesScreenSteps.changeSelectedServiceQuantity(moneyService.getServiceName(), moneyService.getServiceQuantity());
         }
         Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
         final String inspectionNumber = InspectionSteps.saveInspection();
@@ -354,23 +357,21 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
 
         for (ServiceData moneyService : moneyServices) {
             VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker(markerIndex);
-            serviceDetailsScreen.setServiceAmountValue(moneyService.getServicePrice());
-            serviceDetailsScreen.setServiceQuantityValue(moneyService.getServiceQuantity());
+            ServiceDetailsScreenSteps.changeServicePrice(moneyService.getServicePrice());
+            ServiceDetailsScreenSteps.changeServiceQuantity(moneyService.getServiceQuantity());
             VNextQuestionsScreen questionsScreen = serviceDetailsScreen.clickServiceQuestionSection("Test Section");
             QuestionsData questionsData = new QuestionsData();
             questionsData.setQuestionName("Free Text");
             questionsData.setQuestionAnswer("some text");
             QuestionFormSteps.answerGeneralTextQuestion(questionsData);
             questionsScreen.clickDoneButton();
-            serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-            serviceDetailsScreen.clickServiceDetailsDoneButton();
-            visualScreen = new VNextVisualScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+            ServiceDetailsScreenSteps.saveServiceDetails();
             BaseUtils.waitABit(1000);
             markerIndex++;
         }
         visualScreen.clickDamageCancelEditingButton();
         Assert.assertEquals(visualScreen.getInspectionTotalPriceValue(), inspectionData.getInspectionPrice());
-        final String inspectionNumber = InspectionSteps.saveInspection();
+        InspectionSteps.saveInspection();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getFirstInspectionPrice(), inspectionData.getInspectionPrice());
         ScreenNavigationSteps.pressBackButton();
@@ -391,11 +392,10 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
         visualScreen.clickDefaultDamageType(inspectionData.getMoneyServiceData().getServiceName());
         visualScreen.clickCarImage();
         BaseUtils.waitABit(1000);
-        VNextServiceDetailsScreen serviceDetailsScreen = visualScreen.clickCarImageMarker();
-        serviceDetailsScreen.setServiceAmountValue(inspectionData.getMoneyServiceData().getServicePrice());
-        serviceDetailsScreen.setServiceQuantityValue(inspectionData.getMoneyServiceData().getServiceQuantity());
-        serviceDetailsScreen.clickServiceDetailsDoneButton();
-        visualScreen = new VNextVisualScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        visualScreen.clickCarImageMarker();
+        ServiceDetailsScreenSteps.changeServicePrice(inspectionData.getMoneyServiceData().getServicePrice());
+        ServiceDetailsScreenSteps.changeServiceQuantity(inspectionData.getMoneyServiceData().getServiceQuantity());
+        ServiceDetailsScreenSteps.saveServiceDetails();
 
         VNextSelectDamagesScreen selectdamagesscreen = visualScreen.clickAddServiceButton();
         selectdamagesscreen.selectAllDamagesTab();

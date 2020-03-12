@@ -12,6 +12,8 @@ public class ServiceListItem implements IWebElement {
     private String serviceDescriptionLocator = ".//div[@class='checkbox-item-description']";
     private String servicePartInfoLocator = ".//div[@class='part-info-desc-name']";
     private String addServiceLocator = ".//*[@action='add-service']";
+    private String unSelectServiceLocator = ".//*[@action='delete-service']";
+    private String matrixServiceLocator = ".//div[@class='checkbox-item-subtitle checkbox-item-price']";
 
     public ServiceListItem(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -45,8 +47,19 @@ public class ServiceListItem implements IWebElement {
         rootElement.findElement(By.xpath(addServiceLocator)).click();
     }
 
+    public void clickDeleteService() {
+        rootElement.findElement(By.xpath(unSelectServiceLocator)).click();
+    }
+
     public void openServiceDetails() {
-        rootElement.findElement(By.xpath(serviceNameLocator)).click();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            rootElement.findElement(By.xpath(serviceNameLocator)).click();
+            return true;
+        });
+    }
+
+    public String getMatrixServiceValue() {
+        return WaitUtils.getGeneralFluentWait().until((driver) -> rootElement.findElement(By.xpath(matrixServiceLocator)).getText().trim());
     }
 
 }

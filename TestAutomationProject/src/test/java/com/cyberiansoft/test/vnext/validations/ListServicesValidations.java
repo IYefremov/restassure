@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedS
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VnextBaseServicesScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ServiceListItem;
 import org.testng.Assert;
@@ -16,33 +17,25 @@ public class ListServicesValidations {
 
     public static void verifySelectedServices(List<ServiceData> expectedServiceList) {
         VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-        selectedServicesScreen.switchToSelectedServicesView();
-        expectedServiceList.forEach(serviceData -> Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName())));
+        SelectedServicesScreenSteps.switchToSelectedService();
+        expectedServiceList.forEach(serviceData -> Assert.assertTrue(
+                selectedServicesScreen.getServicesList().stream().anyMatch(service -> service.getServiceName().equals(serviceData.getServiceName()))));
     }
 
-    public static void verifyServiceSelected(String serviceName) {
+    public static void verifyServiceSelected(String serviceName, boolean isSelected) {
         VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-        selectedServicesScreen.switchToSelectedServicesView();
-        Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceName));
-    }
-
-    public static void verifyServiceNotSelected(String serviceName) {
-        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-        selectedServicesScreen.switchToSelectedServicesView();
-        Assert.assertFalse(selectedServicesScreen.isServiceSelected(serviceName));
-
-    }
-
-    public static void verifyNoServicesSelected() {
-        VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-        Assert.assertTrue(selectedServicesScreen.getServicesListItems().isEmpty());
+        SelectedServicesScreenSteps.switchToSelectedService();
+        if (isSelected)
+            Assert.assertTrue(selectedServicesScreen.getServicesList().stream().anyMatch(service -> service.getServiceName().equals(serviceName)));
+        else
+            Assert.assertFalse(selectedServicesScreen.getServicesList().stream().anyMatch(service -> service.getServiceName().equals(serviceName)));
     }
 
     public static void verifyServiceWithDescriptionSelected(String expectedServiceName, String expectedDescription) {
         VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
         selectedServicesScreen.switchToSelectedServicesView();
         Assert.assertTrue(
-                selectedServicesScreen.getServiceList()
+                selectedServicesScreen.getServicesList()
                         .stream()
                         .anyMatch(
                                 service -> service.getServiceName().equals(expectedServiceName)

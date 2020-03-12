@@ -13,14 +13,16 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.*;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -52,31 +54,31 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String quickNoteText1 = "Alum Hood";
         final String quickNoteText2 = "Left Fender";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.setNoteText(noteText);
         NotesSteps.addQuickNote(quickNoteText1);
         NotesSteps.addQuickNote(quickNoteText2);
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickServiceDetailsDoneButton();
-        selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
 
         ScreenNavigationSteps.pressBackButton();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
-        inspectionsScreen = selectedServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -88,8 +90,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String notetext = "abcd%:?*()текст";
         final String noteTextValid = "abcd%:?*()";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -99,19 +100,21 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(0));
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(1));
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceNameByIndex(1));
-        notesScreen.setNoteText(notetext);
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceNameByIndex(1));
+        ServiceDetailsScreenSteps.openServiceNotes();
+        NotesSteps.setNoteText(notetext);
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickServiceDetailsDoneButton();
 
-        selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceNameByIndex(1));
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceNameByIndex(1));
+        ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.verifyNoteIsPresent(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
-        inspectionsScreen = selectedServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -122,8 +125,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         final String notetext = "abcd%:?*()текст";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -134,18 +136,20 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(0));
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(1));
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceNameByIndex(1));
-        notesScreen.setNoteText(notetext);
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceNameByIndex(1));
+        ServiceDetailsScreenSteps.openServiceNotes();
+        NotesSteps.setNoteText(notetext);
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickServiceDetailsDoneButton();
 
-        selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceNameByIndex(1));
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceNameByIndex(1));
+        ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.verifyNoteIsPresent(notetext);
         ScreenNavigationSteps.pressBackButton();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
-        inspectionsScreen = selectedServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -155,8 +159,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         final int notesToAdd = 9;
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -172,8 +175,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
             availableServicesScreen.swipeScreenLeft();
         }
 
-        inspectionsScreen = availableServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -183,8 +186,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         final String noteTextValid = "abcd%:?*()";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -193,15 +195,16 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.setNoteText(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         Assert.assertEquals(serviceDetailsScreen.getServiceNotesValue(), noteTextValid);
         serviceDetailsScreen.clickServiceDetailsDoneButton();
-        inspectionsScreen = availableServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -214,8 +217,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String quickNoteText1 = "Alum Hood";
         final String quickNoteText2 = "Left Fender";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -224,8 +226,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.setNoteText(noteText);
         NotesSteps.addQuickNote(quickNoteText1);
         NotesSteps.addQuickNote(quickNoteText2);
@@ -236,8 +239,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         ScreenNavigationSteps.pressBackButton();
         serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickServiceDetailsDoneButton();
-        inspectionsScreen = selectedServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -250,8 +253,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String quickNoteText1 = "Alum Hood";
         final String quickNoteText2 = "Left Fender";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -260,9 +262,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        SelectedServicesScreenSteps.switchToSelectedService();
 
-        selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.setNoteText(noteText);
         NotesSteps.addQuickNote(quickNoteText1);
         NotesSteps.addQuickNote(quickNoteText2);
@@ -270,8 +273,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
-        inspectionsScreen = availableServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -281,8 +284,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         final String noteTextValid = "abcd%:?*()";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -293,13 +295,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         VNextNotesScreen notesScreen = availableServicesScreen.clickInspectionNotesOption();
         notesScreen.setNoteText(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen = new VNextAvailableServicesScreen();
         availableServicesScreen.clickInspectionNotesOption();
         NotesSteps.verifyNoteIsPresent(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen = new VNextAvailableServicesScreen();
-        inspectionsScreen = availableServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -310,8 +310,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         final String noteTextValid = "abcd%:?*()";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -328,13 +327,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        availableServicesScreen = new VNextAvailableServicesScreen();
         availableServicesScreen.clickInspectionNotesOption();
         NotesSteps.verifyNoteIsPresent(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen = new VNextAvailableServicesScreen();
-        inspectionsScreen = availableServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -344,8 +341,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         final String noteTextValid = "abcd%:?*()";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -357,13 +353,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         notesScreen.setNoteText(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen = new VNextAvailableServicesScreen();
         availableServicesScreen.clickInspectionNotesOption();
         NotesSteps.verifyNoteIsPresent(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen = new VNextAvailableServicesScreen();
-        inspectionsScreen = availableServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -374,8 +368,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         final String noteTextValid = "abcd%:?*()";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -388,14 +381,12 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         NotesSteps.addPhotoFromCamera();
         BaseUtils.waitABit(2000);
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen = new VNextAvailableServicesScreen();
         availableServicesScreen.clickInspectionNotesOption();
         NotesSteps.verifyNoteIsPresent(noteTextValid);
         NotesSteps.verifyPicturesPresent();
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen = new VNextAvailableServicesScreen();
-        inspectionsScreen = availableServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -405,8 +396,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         final String noteTextValid = "abcd%:?*()";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -429,8 +419,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         NotesSteps.verifyNoteIsPresent(noteTextValid);
         NotesSteps.verifyPicturesPresent();
         ScreenNavigationSteps.pressBackButton();
-        availableServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -442,8 +432,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         final String quickNoteText1 = "Alum Hood";
         final String quickNoteText2 = "Left Fender";
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -452,8 +441,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        VNextNotesScreen notesScreen = selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.setNoteText(noteText);
         NotesSteps.addQuickNote(quickNoteText1);
         NotesSteps.addQuickNote(quickNoteText2);
@@ -467,8 +457,9 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.clickServiceNotesOption(inspectionData.getServiceData().getServiceName());
-        notesScreen.getClearNoteButton().click();
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.openServiceNotes();
+        //notesScreen.getClearNoteButton().click();
         NotesSteps.verifyNoteIsPresent("");
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
@@ -476,8 +467,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         NotesSteps.verifyNoteIsPresent("");
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
-        selectedServicesScreen.cancelInspection();
-        inspectionsScreen.clickBackButton();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -500,7 +491,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
             AvailableServicesScreenSteps.selectService(serviceAdd);
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData serviceAdd : inspectionData.getServicesList()) {
-            selectedServicesScreen.clickServiceNotesOption(serviceAdd.getServiceName());
+            SelectedServicesScreenSteps.openServiceDetails(serviceAdd.getServiceName());
+            ServiceDetailsScreenSteps.openServiceNotes();
             NotesSteps.addPhotoFromCamera();
             NotesSteps.verifyPicturesPresent();
             ScreenNavigationSteps.pressBackButton();
@@ -534,8 +526,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         final int addedPictures = 1;
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -560,10 +551,10 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
 
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-        Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getMatrixServiceData().getMatrixServiceName()));
-        inspectionsScreen = selectedServicesScreen.saveInspectionViaMenu();
-        homeScreen = inspectionsScreen.clickBackButton();
-        homeScreen.waitUntilQueueMessageInvisible();
+        ListServicesValidations.verifyServiceSelected(inspectionData.getMatrixServiceData().getMatrixServiceName(), true);
+        InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+        //homeScreen.waitUntilQueueMessageInvisible();
 
         BaseUtils.waitABit(45000);
 

@@ -135,6 +135,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     }
 
     public String getNewInspectionNumber() {
+        WaitUtils.waitUntilElementIsClickable(inspectionnumber);
         return inspectionnumber.getText().trim();
     }
 

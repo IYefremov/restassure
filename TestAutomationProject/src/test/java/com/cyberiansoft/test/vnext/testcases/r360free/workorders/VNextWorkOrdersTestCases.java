@@ -15,8 +15,8 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import org.json.simple.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -48,7 +48,7 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData serviceData : workOrderData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(serviceData.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(serviceData.getServiceName(), true);
 		WorkOrderSteps.saveWorkOrder();
 		ScreenNavigationSteps.pressBackButton();
 	}

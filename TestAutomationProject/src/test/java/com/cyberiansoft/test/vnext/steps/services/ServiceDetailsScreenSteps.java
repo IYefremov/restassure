@@ -77,8 +77,7 @@ public class ServiceDetailsScreenSteps {
     }
 
     public static void setServiceTextNotes(String textNote) {
-        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
-        serviceDetailsScreen.clickServiceNotesOption();
+        openServiceNotes();
         NotesSteps.setNoteText(textNote);
         ScreenNavigationSteps.pressBackButton();
     }
@@ -94,5 +93,10 @@ public class ServiceDetailsScreenSteps {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         serviceDetailsScreen.getCompleteServiceBtn().click();
         GeneralSteps.confirmDialog();
+    }
+
+    public static void openServiceNotes() {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        serviceDetailsScreen.clickServiceNotesOption();
     }
 }

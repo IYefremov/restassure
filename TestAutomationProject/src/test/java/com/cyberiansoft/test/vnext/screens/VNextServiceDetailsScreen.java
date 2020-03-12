@@ -77,9 +77,8 @@ public class VNextServiceDetailsScreen extends VNextBaseScreen {
 	public VNextServiceDetailsScreen() {
 	}
 	
-	public VNextNotesScreen clickServiceNotesOption() {
+	public void clickServiceNotesOption() {
 		tap(notesbutton);
-		return new VNextNotesScreen();
 	}
 	
 	public void clickServiceDetailsDoneButton() {

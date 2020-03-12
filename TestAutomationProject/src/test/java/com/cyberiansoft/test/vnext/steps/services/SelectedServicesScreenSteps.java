@@ -10,14 +10,14 @@ import java.util.List;
 
 public class SelectedServicesScreenSteps {
 
-    public static void unselectServices(List<ServiceData> serviceDataList) {
-        serviceDataList.stream().map(ServiceData::getServiceName).forEach(SelectedServicesScreenSteps::unselectService);
+    public static void unSelectServices(List<ServiceData> serviceDataList) {
+        serviceDataList.stream().map(ServiceData::getServiceName).forEach(SelectedServicesScreenSteps::unSelectService);
     }
 
-    public static void unselectService(String serviceName) {
+    public static void unSelectService(String serviceName) {
         VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-        selectedServicesScreen.switchToSelectedServicesView();
-        selectedServicesScreen.uselectService(serviceName);
+        SelectedServicesScreenSteps.switchToSelectedService();
+        selectedServicesScreen.getServiceListItem(serviceName).clickDeleteService();
     }
 
     public static void openServiceDetails(String serviceName) {
@@ -44,6 +44,12 @@ public class SelectedServicesScreenSteps {
     public static void changeSelectedServicePrice(String serviceName, String servicePrice) {
         openServiceDetails(serviceName);
         ServiceDetailsScreenSteps.changeServicePrice(servicePrice);
+        ServiceDetailsScreenSteps.saveServiceDetails();
+    }
+
+    public static void changeSelectedServiceQuantity(String serviceName, String serviceQuantity) {
+        openServiceDetails(serviceName);
+        ServiceDetailsScreenSteps.changeServiceQuantity(serviceQuantity);
         ServiceDetailsScreenSteps.saveServiceDetails();
     }
 }

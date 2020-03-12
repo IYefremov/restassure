@@ -25,6 +25,7 @@ import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import com.cyberiansoft.test.vnext.utils.VNextWebServicesUtils;
+import com.cyberiansoft.test.vnext.validations.SelectedServicesScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOApproveAccountWebPage;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -727,7 +728,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
             vehiclePartInfoPage.clickSaveVehiclePartInfo();
             vehiclePartsScreen.clickVehiclePartsSaveButton();
             VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-            Assert.assertTrue(selectedServicesScreen.isPriceMatrixValuePresentForSelectedServicesByName(matrixservice, availablepricematrixes[i]));
+            SelectedServicesScreenValidations.validateMatrixServiceIsSelectedForService(matrixservice, availablepricematrixes[i]);
             selectedServicesScreen.switchToAvalableServicesView();
         }
         InspectionSteps.cancelInspection();

@@ -24,6 +24,7 @@ import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
+import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
@@ -67,7 +68,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         ScreenNavigationSteps.pressBackButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
-            Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+            ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VEHICLE_INFO);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
@@ -87,7 +88,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData service : inspectionData.getServicesList())
-            Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+            ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 
         final String inspectionNumber = InspectionSteps.saveInspection();
         InspectionsValidations.verifyInspectionExists(inspectionNumber, true);

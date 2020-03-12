@@ -34,7 +34,6 @@ import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
@@ -126,16 +125,17 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 																						  String description, JSONObject testData) {
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen();
-		VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+		HomeScreenSteps.openInspections();
 		InspectionSteps.switchToTeamInspections();
 		Assert.assertTrue(inspectionsScreen.isTeamInspectionsViewActive());
 		ScreenNavigationSteps.pressBackButton();
-		inspectionsScreen = homeScreen.clickInspectionsMenuItem();
+		HomeScreenSteps.openInspections();
 		Assert.assertTrue(inspectionsScreen.isTeamInspectionsViewActive());
 		InspectionSteps.switchToMyInspections();
 		Assert.assertTrue(inspectionsScreen.isMyInspectionsViewActive());
 		ScreenNavigationSteps.pressBackButton();
-		homeScreen.clickInspectionsMenuItem();
+		HomeScreenSteps.openInspections();
 		Assert.assertTrue(inspectionsScreen.isMyInspectionsViewActive());
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -364,8 +364,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
 		ScreenNavigationSteps.pressForwardButton();
 		SelectedServicesScreenSteps.switchToSelectedService();
-		VNextSelectedServicesScreen selectedServicesScreen = new VNextSelectedServicesScreen();
-		selectedServicesScreen.isServiceSelected(inspectionData.getServiceData().getServiceName());
+		ListServicesValidations.verifyServiceSelected(inspectionData.getServiceData().getServiceName(), true);
 		ScreenNavigationSteps.pressBackButton();
 		ScreenNavigationSteps.pressBackButton();
 		VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();

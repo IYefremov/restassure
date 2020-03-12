@@ -86,7 +86,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         Assert.assertEquals(vehiclePartsScreen.getVehiclePartsScrenPriceValue(),matrixServiceData.getVehiclePartData().getVehiclePartPrice());
         vehiclePartsScreen.clickScreenBackButton();
         SelectedServicesScreenSteps.changeSelectedServicePrice(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
+        SelectedServicesScreenSteps.changeSelectedServiceQuantity(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
 
 
         VNextWorkOrdersScreen workOrdersScreen = selectedServicesScreen.saveWorkOrderViaMenu();
@@ -158,11 +158,10 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         //vehicleVINHistoryScreen.clickBackButton();
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        SelectedServicesScreenSteps.switchToSelectedService();
         SelectedServicesScreenSteps.changeSelectedServicePrice(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
+        SelectedServicesScreenSteps.changeSelectedServiceQuantity(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
         WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
         WorkOrderSummarySteps.createInvoiceOptionAndSaveWO();
 
@@ -228,14 +227,13 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
         vehiclePartInfoScreen.selectVehiclePartAdditionalService(vehiclePartData.getVehiclePartAdditionalService().getServiceName());
         vehiclePartInfoScreen.clickScreenBackButton();
-        vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+        vehiclePartsScreen.clickVehiclePartsSaveButton();
         VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         SelectedServicesScreenSteps.openServiceDetails(matrixServiceData.getMatrixServiceName());
         Assert.assertEquals(vehiclePartsScreen.getVehiclePartsScrenPriceValue(), vehiclePartData.getVehiclePartPrice());
         vehiclePartsScreen.clickScreenBackButton();
         SelectedServicesScreenSteps.changeSelectedServicePrice(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServicePrice());
-        selectedServicesScreen.setServiceQuantityValue(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
+        SelectedServicesScreenSteps.changeSelectedServiceQuantity(workOrderData.getMoneyServiceData().getServiceName(), workOrderData.getMoneyServiceData().getServiceQuantity());
 
         VNextWorkOrdersScreen workOrdersScreen = selectedServicesScreen.saveWorkOrderViaMenu();
         final String woPrice = workOrdersScreen.getWorkOrderPriceValue(workOrderNumber);

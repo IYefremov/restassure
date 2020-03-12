@@ -4,7 +4,6 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
@@ -99,14 +98,13 @@ public class VNextHomeScreen extends VNextBaseScreen {
     }
 
     @Step
-    public VNextInspectionsScreen clickInspectionsMenuItem() {
+    public void clickInspectionsMenuItem() {
         WebDriver webDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         WaitUtils.getGeneralFluentWait().until(driver -> {
             JavascriptExecutor executor = (JavascriptExecutor) webDriver;
             executor.executeScript("arguments[0].click();", inspectionsList);
             return true;
         });
-        return new VNextInspectionsScreen(appiumdriver);
     }
 
     public VNextInvoicesScreen clickInvoicesMenuItem() {

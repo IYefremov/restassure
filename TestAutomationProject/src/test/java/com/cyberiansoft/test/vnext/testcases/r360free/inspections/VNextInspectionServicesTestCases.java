@@ -29,6 +29,8 @@ import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
+import com.cyberiansoft.test.vnext.validations.SelectedServicesScreenValidations;
 import com.cyberiansoft.test.vnext.validations.VehicleInfoScreenValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
@@ -60,19 +62,18 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		SelectedServicesScreenSteps.switchToSelectedService();
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		availableServicesScreen.switchToSelectedServicesView();
+		SelectedServicesScreenSteps.switchToSelectedService();
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
-		availableServicesScreen.cancelInspection();
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
+		InspectionSteps.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -89,19 +90,19 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		availableServicesScreen.swipeScreenRight();
 		BaseUtils.waitABit(2000);
 		availableServicesScreen.swipeScreenLeft();
 		availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		availableServicesScreen.swipeScreenRight();
 		BaseUtils.waitABit(2000);
 		availableServicesScreen.swipeScreenLeft();
 		availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		availableServicesScreen.saveInspectionViaMenu();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -120,21 +121,21 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(0));
 		AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(1));
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(0)));
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(1)));
+		ListServicesValidations.verifyServiceSelected(inspectionData.getServiceNameByIndex(0), true);
+		ListServicesValidations.verifyServiceSelected(inspectionData.getServiceNameByIndex(1), true);
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(0)));
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(1)));
+		ListServicesValidations.verifyServiceSelected(inspectionData.getServiceNameByIndex(0), true);
+		ListServicesValidations.verifyServiceSelected(inspectionData.getServiceNameByIndex(1), true);
 
 		availableServicesScreen.switchToAvalableServicesView();
 		AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(2));
 		availableServicesScreen.switchToSelectedServicesView();
 
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(2)));
+		ListServicesValidations.verifyServiceSelected(inspectionData.getServiceNameByIndex(2), true);
 		InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -142,7 +143,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 
 		availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		selectedServicesScreen.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -162,28 +163,28 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(i));
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 		for (int i = 0; i < firstPartNumber; i++)
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(i)));
+			ListServicesValidations.verifyServiceSelected(inspectionData.getServiceNameByIndex(i), true);
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		availableServicesScreen.switchToSelectedServicesView();
 		for (int i = 0; i < firstPartNumber; i++)
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getServiceNameByIndex(i)));
+			ListServicesValidations.verifyServiceSelected(inspectionData.getServiceNameByIndex(i), true);
 		availableServicesScreen.switchToAvalableServicesView();
 		for (int i = firstPartNumber; i < inspectionData.getServicesList().size(); i++)
 			AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(i));
 		availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		selectedServicesScreen.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -202,7 +203,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		ScreenNavigationSteps.pressBackButton();
 		BaseUtils.waitABit(30000);
@@ -266,14 +267,14 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		availableServicesScreen.switchToSelectedServicesView();
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		InspectionSteps.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 
@@ -384,14 +385,11 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 
 		AvailableServicesScreenSteps.selectServices(inspectionData.getMoneyServicesList());
 		AvailableServicesScreenSteps.selectServices(inspectionData.getPercentageServicesList());
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		SelectedServicesScreenSteps.switchToSelectedService();
 
-		for (ServiceData moneyService : inspectionData.getMoneyServicesList())
-			Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(moneyService.getServiceName()), moneyService.getServicePrice());
-		for (ServiceData percService : inspectionData.getPercentageServicesList())
-			Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(percService.getServiceName()), percService.getServicePrice());
-
-		selectedServicesScreen.cancelInspection();
+		inspectionData.getMoneyServicesList().forEach(moneyService -> SelectedServicesScreenValidations.validateSelectedServicePrice(moneyService.getServiceName(), moneyService.getServicePrice()));
+		inspectionData.getPercentageServicesList().forEach(percService -> SelectedServicesScreenValidations.validateSelectedServicePrice(percService.getServiceName(), percService.getServicePrice()));
+		InspectionSteps.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -410,7 +408,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
 		for (ServiceData service : inspectionData.getServicesList())
-			Assert.assertTrue(selectedServicesScreen.isServiceSelected(service.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 		selectedServicesScreen.switchToAvalableServicesView();
 		AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
 		availableServicesScreen.switchToSelectedServicesView();
@@ -454,7 +452,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		availableServicesScreen.switchToSelectedServicesView();
-		selectedServicesScreen.uselectService(inspectionData.getServicesList().get(0).getServiceName());
+		SelectedServicesScreenSteps.unSelectService(inspectionData.getServicesList().get(0).getServiceName());
 
 		selectedServicesScreen.switchToAvalableServicesView();
 		AvailableServicesScreenSteps.selectServices(inspectionData.getMoneyServicesList());
@@ -468,7 +466,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 				firstMoneyServicePrice);
 		SelectedServicesScreenSteps.changeSelectedServicePrice(inspectionData.getMoneyServicesList().get(1).getServiceName(),
 				secondMoneyServicePrice);
-		selectedServicesScreen.setServiceQuantityValue(inspectionData.getMoneyServicesList().get(1).getServiceName(),
+		SelectedServicesScreenSteps.changeSelectedServiceQuantity(inspectionData.getMoneyServicesList().get(1).getServiceName(),
 				secondMoneyServiceQty);
 
 		Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(),
@@ -494,10 +492,9 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehiclePartInfoScreen.selectVehiclePartSize(matrixServiceData.getVehiclePartData().getVehiclePartSize());
 		vehiclePartInfoScreen.selectVehiclePartSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
 		vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-		vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+		vehiclePartsScreen.clickVehiclePartsSaveButton();
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixServiceData.getMatrixServiceName()));
+		ListServicesValidations.verifyServiceSelected(matrixServiceData.getMatrixServiceName(), true);
 		selectedServicesScreen.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -519,10 +516,9 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehiclePartInfoScreen.selectVehiclePartSize(matrixServiceData.getVehiclePartData().getVehiclePartSize());
 		vehiclePartInfoScreen.selectVehiclePartSeverity(matrixServiceData.getVehiclePartData().getVehiclePartSeverity());
 		vehiclePartInfoScreen.clickSaveVehiclePartInfo();
-		vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
+		vehiclePartsScreen.clickVehiclePartsSaveButton();
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixServiceData.getMatrixServiceName()));
+		ListServicesValidations.verifyServiceSelected(matrixServiceData.getMatrixServiceName(), true);
 		selectedServicesScreen.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -546,7 +542,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehiclePartInfoScreen.clickSaveVehiclePartInfo();
 		vehiclePartsScreen.clickVehiclePartsSaveButton();
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixServiceData.getMatrixServiceName()));
+		ListServicesValidations.verifyServiceSelected(matrixServiceData.getMatrixServiceName(), true);
 		selectedServicesScreen.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -564,11 +560,11 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		ServiceData percentageService = inspectionData.getPercentageServiceData();
 		AvailableServicesScreenSteps.selectService(percentageService);
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(percentageService.getServiceName()));
-		Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(percentageService.getServiceName()), percentageService.getServicePrice());
+		ListServicesValidations.verifyServiceSelected(percentageService.getServiceName(), true);
+		SelectedServicesScreenValidations.validateSelectedServicePrice(percentageService.getServiceName(), percentageService.getServicePrice());
 		SelectedServicesScreenSteps.changeSelectedServicePrice(percentageService.getServiceName(), percentageService.getServicePrice2());
-		Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(percentageService.getServiceName()), percentageService.getServicePrice2() + "%");
-		selectedServicesScreen.cancelInspection();
+		SelectedServicesScreenValidations.validateSelectedServicePrice(percentageService.getServiceName(), percentageService.getServicePrice2() + "%");
+		InspectionSteps.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -581,14 +577,13 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		AvailableServicesScreenSteps.selectService(inspectionData.getMoneyServiceData());
 		final ServiceData percentageService = inspectionData.getPercentageServiceData();
 		AvailableServicesScreenSteps.selectService(percentageService);
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		SelectedServicesScreenSteps.switchToSelectedService();
 		SelectedServicesScreenSteps.changeSelectedServicePrice(percentageService.getServiceName(), percentageService.getServicePrice());
-		Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(percentageService.getServiceName()), percentageService.getServicePrice2());
-		selectedServicesScreen.saveInspectionViaMenu();
+		SelectedServicesScreenValidations.validateSelectedServicePrice(percentageService.getServiceName(), percentageService.getServicePrice2());
+		InspectionSteps.saveInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -601,13 +596,12 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		final ServiceData moneyService = inspectionData.getMoneyServiceData();
 		AvailableServicesScreenSteps.selectService(moneyService);
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		SelectedServicesScreenSteps.switchToSelectedService();
 		SelectedServicesScreenSteps.changeSelectedServicePrice(moneyService.getServiceName(), moneyService.getServicePrice());
-		Assert.assertEquals(selectedServicesScreen.getSelectedServicePriceValue(moneyService.getServiceName()), moneyService.getServicePrice2());
-		selectedServicesScreen.saveInspectionViaMenu();
+		SelectedServicesScreenValidations.validateSelectedServicePrice(moneyService.getServiceName(), moneyService.getServicePrice2());
+		InspectionSteps.saveInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
 
@@ -625,16 +619,16 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		AvailableServicesScreenSteps.selectServices(inspectionData.getPercentageServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
 
-		selectedServicesScreen.uselectService(inspectionData.getMoneyServicesList().get(0).getServiceName());
-		selectedServicesScreen.uselectService(inspectionData.getPercentageServicesList().get(0).getServiceName());
+		SelectedServicesScreenSteps.unSelectService(inspectionData.getMoneyServicesList().get(0).getServiceName());
+		SelectedServicesScreenSteps.unSelectService(inspectionData.getPercentageServicesList().get(0).getServiceName());
 		final String inspectionNumber = InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(inspectionData.getMoneyServicesList().get(1).getServiceName()));
-		Assert.assertFalse(selectedServicesScreen.isServiceSelected(inspectionData.getMoneyServicesList().get(0).getServiceName()));
-		Assert.assertFalse(selectedServicesScreen.isServiceSelected(inspectionData.getPercentageServicesList().get(0).getServiceName()));
+		ListServicesValidations.verifyServiceSelected(inspectionData.getMoneyServicesList().get(1).getServiceName(), true);
+		ListServicesValidations.verifyServiceSelected(inspectionData.getMoneyServicesList().get(0).getServiceName(), false);
+		ListServicesValidations.verifyServiceSelected(inspectionData.getPercentageServicesList().get(0).getServiceName(),false);
 		InspectionSteps.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -656,7 +650,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 			SelectedServicesScreenSteps.changeSelectedServicePrice(serviceData.getServiceName(), serviceData.getServicePrice());
 		Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
 
-		selectedServicesScreen.uselectService(inspectionData.getMoneyServicesList().get(1).getServiceName());
+		SelectedServicesScreenSteps.unSelectService(inspectionData.getMoneyServicesList().get(1).getServiceName());
 		BaseUtils.waitABit(300);
 		Assert.assertEquals(selectedServicesScreen.getTotalPriceValue(), editedPrice);
 		selectedServicesScreen.cancelInspection();
@@ -675,11 +669,10 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
 		AvailableServicesScreenSteps.selectServices(inspectionData.getMoneyServicesList());
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		for (ServiceData serviceData : inspectionData.getMoneyServicesList())
-			selectedServicesScreen.uselectService(serviceData.getServiceName());
+		SelectedServicesScreenSteps.unSelectServices(inspectionData.getMoneyServicesList());
 
 		for (ServiceData serviceData : inspectionData.getMoneyServicesList())
-			Assert.assertFalse(selectedServicesScreen.isServiceSelected(serviceData.getServiceName()));
+			ListServicesValidations.verifyServiceSelected(serviceData.getServiceName(), false);
 		selectedServicesScreen.cancelInspection();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -710,7 +703,7 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		vehiclePartInfoScreen.clickScreenBackButton();
 		vehiclePartInfoScreen.clickSaveVehiclePartInfo();
 		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
-		Assert.assertTrue(selectedServicesScreen.isServiceSelected(matrixServiceData.getMatrixServiceName()));
+		ListServicesValidations.verifyServiceSelected(matrixServiceData.getMatrixServiceName(), true);
 
 		Assert.assertEquals(selectedServicesScreen.getInspectionTotalPriceValue(), inspectionData.getInspectionPrice());
 		selectedServicesScreen.cancelInspection();
