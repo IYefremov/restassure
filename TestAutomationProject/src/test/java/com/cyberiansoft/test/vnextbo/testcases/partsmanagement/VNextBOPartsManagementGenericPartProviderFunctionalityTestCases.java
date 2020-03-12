@@ -24,34 +24,34 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZon
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZoneMyShopPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZoneProductResultsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.stores.VNextBOAutoZoneValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
+
 public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases extends BaseTestCase {
 
-    private String status;
+    private final String status = PartStatuses.OPEN.getStatus();
 
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMGenericPartProviderFunctionalityTD();
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        status = PartStatuses.OPEN.getStatus();
     }
 
-    @AfterMethod
-    public void refreshPage() {
-        Utils.refreshPage();
+    @BeforeMethod
+    public void goToPage() {
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -60,17 +60,11 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
 
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelValidations.verifyPartStatusesDoNotContainRestrictedStatus(PartStatuses.OPEN.getStatus());
-        VNextBOPartsDetailsPanelInteractions.clickGetQuotesPartButton();
-        Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
-                "The Parts Providers modal dialog hasn't been opened");
-        VNextBOPartsProvidersDialogSteps.openRequestFormDialogWithGetNewQuoteButton(data.getProvider());
-        Assert.assertTrue(VNextBOPartsProvidersRequestFormDialogValidations.isRequestFormDialogMessageDisplayed(),
-                "The warning message hasn't been displayed");
-        Assert.assertEquals(VNextBOPartsProvidersRequestFormDialogInteractions.getRequestFormDialogMessage(),
-                VNextBOAlertMessages.NO_PARTS_TO_ORDER, "The message hasn't been shown correctly");
-        Assert.assertTrue(VNextBOPartsProvidersRequestFormDialogValidations.isRequestQuoteButtonDisabled(),
-                "The request quote button is not disabled");
+        VNextBOPartsDetailsPanelValidations.verifyPartStatusesDoNotContainStatus(status);
+        VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
+        VNextBOPartsProvidersDialogSteps.openRequestFormDialog(VNextBOPartsProvidersDialogSteps.getRandomDataProvider());
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyNoPartsToOrderMessageHasBeenDisplayed();
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyRequestQuoteButtonIsDisabled();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -80,22 +74,14 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
         final String vin = VNextBOPartsOrdersListPanelInteractions.getFirstOrderVinNumber();
-
         VNextBOPartsDetailsPanelSteps.addPartIfOpenStatusIsNotPresent(data.getPartData(), data.getSearchData().getWoNum());
         final List<String> detailsPanelPartNamesByStatus = VNextBOPartsDetailsPanelInteractions.getPartNamesByStatus(status);
-        VNextBOPartsDetailsPanelSteps.clickGetQuotesPartButton();
-        VNextBOPartsProvidersDialogSteps.openRequestFormDialogWithGetNewQuoteButton(data.getProvider());
-
+        VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
+        VNextBOPartsProvidersDialogSteps.openRequestFormDialog(VNextBOPartsProvidersDialogSteps.getRandomDataProvider());
         final String title = VNextBOPartsProvidersRequestFormDialogInteractions.getTitle();
-        Assert.assertEquals(vin, VNextBOPartsProvidersRequestFormDialogInteractions.getVinFromTitle(title),
-                "The request form dialog title doesn't contain the VIN number");
-        Assert.assertTrue(title.contains("Cadillac"),
-                "The request form dialog title doesn't contain the vehicle info");
-        final List<String> requestFormPartNames = VNextBOPartsProvidersRequestFormDialogInteractions.getPartNamesList();
-        Assert.assertTrue(detailsPanelPartNamesByStatus.containsAll(requestFormPartNames),
-                "The parts names on the PM page are not displayed properly in the request form dialog");
-        Assert.assertEquals(detailsPanelPartNamesByStatus.size(), requestFormPartNames.size(),
-                "The number of parts on the PM page and in the request form dialog differs");
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyVinIsDisplayedInTitle(vin, title);
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyCarInfoIsDisplayedInTitle("Cadillac", title);
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyPartsAreDisplayed(detailsPanelPartNamesByStatus);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -113,8 +99,8 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         final List<String> detailsPanelPartNamesByStatus = VNextBOPartsDetailsPanelInteractions.getPartNamesByStatus(status);
         final List<String> partIdsByStatus = VNextBOPartsDetailsPanelInteractions.getPartIdsByStatus(status);
 
-        VNextBOPartsDetailsPanelSteps.clickGetQuotesPartButton();
-        VNextBOPartsProvidersDialogSteps.openRequestFormDialogWithGetNewQuoteButton(data.getProvider());
+        VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
+        VNextBOPartsProvidersDialogSteps.openRequestFormDialog(data.getProvider());
 
         final List<String> partNames = VNextBOPartsProvidersRequestFormDialogInteractions.getPartNamesList();
         Assert.assertTrue(detailsPanelPartNamesByStatus.containsAll(partNames),
@@ -135,7 +121,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         final List<String> parts = Arrays.asList(partNames.get(firstRandom), partNames.get(secondRandom));
         final String title = VNextBOPartsProvidersRequestFormDialogInteractions.getTitle();
         VNextBOPartsProvidersRequestFormDialogInteractions.clickCancelButton();
-        VNextBOPartsProvidersDialogSteps.openRequestFormDialogWithGetNewQuoteButton(data.getProvider());
+        VNextBOPartsProvidersDialogSteps.openRequestFormDialog(data.getProvider());
         Assert.assertTrue(VNextBOPartsProvidersRequestFormDialogValidations.isRequestQuoteButtonDisabled(),
                 "The request quote button hasn't been disabled");
 

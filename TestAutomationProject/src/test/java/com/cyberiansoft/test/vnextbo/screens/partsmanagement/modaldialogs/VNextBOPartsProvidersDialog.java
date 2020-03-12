@@ -29,7 +29,11 @@ public class VNextBOPartsProvidersDialog extends VNextBOBaseWebPage {
     }
 
     public WebElement getProviderByName(String provider) {
-        return driver.findElement(By.xpath("//div[text()='" + provider + "']"));
+        return partsProvidersModal.findElement(By.xpath(".//div[text()='" + provider + "']"));
+    }
+
+    public List<WebElement> getDataProvidersList() {
+        return partsProvidersModal.findElements(By.xpath(".//img[contains(@src, 'data')]/..//div[contains(text(), '')]"));
     }
 
     public WebElement getGetNewQuoteButtonByProviderName(String provider) {
