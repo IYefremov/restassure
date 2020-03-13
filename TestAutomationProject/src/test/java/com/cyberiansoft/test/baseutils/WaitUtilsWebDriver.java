@@ -209,7 +209,7 @@ public class WaitUtilsWebDriver {
     public static void waitForDropDownToBeClosed(WebElement dropDown, int timeout) {
         try {
             waitForElementNotToBeStale(dropDown, timeout);
-            waitForAttributeToBe(dropDown, "aria-hidden", "true");
+            waitForAttributeToBe(dropDown, "aria-hidden", "true", 1);
         } catch (Exception ignored) {}
     }
 
@@ -303,7 +303,7 @@ public class WaitUtilsWebDriver {
 
     public static void waitForPendingRequestsToComplete() {
 
-        boolean requestsAreCompleted = false;
+        boolean requestsAreCompleted;
         try {
             do {
                 requestsAreCompleted = (boolean) ((JavascriptExecutor) DriverBuilder.getInstance().getDriver()).executeScript("return angular.element(document.body).injector().get('$http').pendingRequests.length === 0");

@@ -7,9 +7,9 @@ import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorGridData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.*;
+import com.cyberiansoft.test.enums.RepairStatus;
+import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.enums.monitor.OrderMonitorFlags;
-import com.cyberiansoft.test.enums.monitor.OrderMonitorRepairStatuses;
 import com.cyberiansoft.test.enums.monitor.OrderMonitorServiceStatuses;
 import com.cyberiansoft.test.enums.monitor.OrderMonitorStatuses;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
@@ -184,7 +184,7 @@ public class VNextBOMonitorGridDataTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setWoNum(orderNumber);
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
-        VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(OrderMonitorRepairStatuses.All.getValue());
+        VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(RepairStatus.All.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
         Assert.assertTrue(VNextBOROPageValidations.isWorkOrderDisplayedByName(orderNumber, true),
                 "The work order is not displayed after search by clicking the 'Search' icon");

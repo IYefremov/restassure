@@ -59,6 +59,9 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Labor credit']")
     private List<WebElement> laborCreditInputFieldsList;
 
+    @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Core price']")
+    private List<WebElement> corePriceInputFieldsList;
+
     @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='PO#']")
     private List<WebElement> poInputFieldsList;
 
@@ -81,10 +84,10 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private List<WebElement> partVendorPriceField;
 
     @FindBy(xpath = "//span[contains(@class,'service-condition-dropdown')]//span[@class='k-input']")
-    private List<WebElement> partConditionField;
+    private List<WebElement> partConditionFields;
 
     @FindBy(xpath = "//span[contains(@class,'service-core-status-dropdown')]//span[@class='k-input']")
-    private List<WebElement> partCoreStatusField;
+    private List<WebElement> partCoreStatusFields;
 
     @FindBy(xpath = "//ul[@id='partsOrderingCorePriceStatus_listbox']")
     private List<WebElement> partCoreStatusDropDown;
@@ -100,6 +103,9 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@class='k-animation-container' and @aria-hidden='false']/div[contains(@class, 'k-list-container')]")
     private WebElement partDropDown;
+
+    @FindBy(xpath = "//div[@aria-hidden='false']//div[contains(@class, 'k-list-optionlabel')]")
+    private WebElement partDropDownEmptyField;
 
     @FindBy(xpath = "//div[@class='k-animation-container' and @aria-hidden='false']/div[contains(@class, 'k-list-container')]//li")
     private List<WebElement> partsListBoxOptions;

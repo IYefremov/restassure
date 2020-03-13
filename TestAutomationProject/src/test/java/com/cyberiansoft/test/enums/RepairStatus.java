@@ -1,9 +1,9 @@
-package com.cyberiansoft.test.enums.monitor;
+package com.cyberiansoft.test.enums;
 
 import lombok.Getter;
 
 @Getter
-public enum OrderMonitorRepairStatuses {
+public enum RepairStatus {
 
     All("All"),
     IN_PROGRESS_ALL("In Progress - All"),
@@ -21,7 +21,7 @@ public enum OrderMonitorRepairStatuses {
 
     private String value;
 
-    OrderMonitorRepairStatuses(final String value) {
+    RepairStatus(final String value) {
         this.value = value;
     }
 }

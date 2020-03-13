@@ -177,6 +177,11 @@ public class Utils {
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }
 
+    public static void selectOptionInDropDownWithJs(List<WebElement> listBox, String selection) {
+        getMatchingOptionInListBox(listBox, selection).ifPresent(Utils::clickWithJS);
+        WaitUtilsWebDriver.waitForPageToBeLoaded(3);
+    }
+
     public static void selectOptionInDropDownWithJs(WebElement dropDown, WebElement option) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibility(option);
@@ -199,27 +204,31 @@ public class Utils {
     }
 
     public static Optional<WebElement> getMatchingOptionInListBox(List<WebElement> listBox, String selection) {
-        return listBox
-                .stream()
-                .filter((option) -> getText(option).equals(selection))
-                .findFirst();
+        final List<String> options = getText(listBox);
+        for (int i = 0; i < options.size(); i++) {
+            if (options.get(i).equals(selection)) {
+                return Optional.ofNullable(listBox.get(i));
+            }
+        }
+        return Optional.empty();
     }
 
     public static void selectOptionInDropDownWithJsScroll(String optionName) {
 
-        JavascriptExecutor javascriptExecutor = ((JavascriptExecutor) DriverBuilder.getInstance().getDriver());
+        final WebDriver driver = DriverBuilder.getInstance().getDriver();
+        JavascriptExecutor javascriptExecutor = ((JavascriptExecutor) driver);
         javascriptExecutor.executeScript("document.querySelector(\"div[aria-hidden='false'] div.k-list-scroller\").scrollTop+=-1000");
         boolean isOptionDisplayed = false;
         int scrollingNumber = 0;
         do {
             try {
-                isOptionDisplayed = isElementDisplayed(DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]")));
+                isOptionDisplayed = isElementDisplayed(driver.findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]")));
             } catch (Exception ex) {
                 javascriptExecutor.executeScript("document.querySelector(\"div[aria-hidden='false'] div.k-list-scroller\").scrollTop+=100");
                 scrollingNumber++;
             }
         } while ((!isOptionDisplayed) || (scrollingNumber == 3));
-        clickWithJS((DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]"))));
+        clickWithJS(driver.findElement(By.xpath("//div[@aria-hidden='false']//li[contains(.,'  " + optionName + "')]")));
     }
 
     public static String getNewTab(String mainWindow) {

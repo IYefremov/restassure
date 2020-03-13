@@ -9,7 +9,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.enums.invoices.InvoiceStatuses;
-import com.cyberiansoft.test.enums.partsmanagement.PartStatuses;
+import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.inspections.VNextBOInspectionsPageInteractions;
@@ -122,7 +122,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
         final String woNum = data.getSearchData().getWoNum();
-        final String orderedStatus = PartStatuses.ORDERED.getStatus();
+        final String orderedStatus = PartStatus.ORDERED.getStatus();
 
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
@@ -147,7 +147,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyLaborsExtenderIsDisplayed(numberOfParts);
         VNextBOPartsDetailsPanelValidations.verifyPartCheckboxIsDisplayed(numberOfParts);
         VNextBOPartsDetailsPanelValidations.verifyPartDefaultValues(numberOfParts);
-        VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(numberOfParts, PartStatuses.OPEN.getStatus());
+        VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(numberOfParts, PartStatus.OPEN.getStatus());
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartsListSize() - 1);
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
     }
