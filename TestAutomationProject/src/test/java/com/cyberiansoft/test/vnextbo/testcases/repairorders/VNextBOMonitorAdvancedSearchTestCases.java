@@ -5,9 +5,9 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.monitor.OrderMonitorFlags;
-import com.cyberiansoft.test.enums.monitor.OrderMonitorRepairStatuses;
+import com.cyberiansoft.test.enums.RepairStatus;
 import com.cyberiansoft.test.enums.TimeFrameValues;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorFlags;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
@@ -463,7 +463,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_90_DAYS.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
@@ -931,7 +931,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_30_DAYS.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
@@ -947,7 +947,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_WEEKTODATE.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
@@ -963,7 +963,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTWEEK.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
@@ -979,7 +979,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_TODAY.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
@@ -995,7 +995,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_MONTHTODATE.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
@@ -1011,7 +1011,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_YEARTODATE.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
@@ -1027,7 +1027,7 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_LASTYEAR.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         VNextBOROPageValidations.verifyOrdersAfterSearchByTimeFrame(
@@ -1043,30 +1043,30 @@ public class VNextBOMonitorAdvancedSearchTestCases extends BaseTestCase {
 
         Assert.assertTrue(defaultSearchFilterText.contains(TimeFrameValues.TIMEFRAME_30_DAYS.getName()),
                 "The search filter doesn't contain the timeFrame " + TimeFrameValues.TIMEFRAME_30_DAYS.getName());
-        Assert.assertTrue(defaultSearchFilterText.contains(OrderMonitorRepairStatuses.IN_PROGRESS_ALL.getValue()),
+        Assert.assertTrue(defaultSearchFilterText.contains(RepairStatus.IN_PROGRESS_ALL.getValue()),
                 "The search filter doesn't contain the repair status "
-                        + OrderMonitorRepairStatuses.IN_PROGRESS_ALL.getValue());
+                        + RepairStatus.IN_PROGRESS_ALL.getValue());
 
         VNextBOROAdvancedSearchDialogSteps.openAdvancedSearchDialog();
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_90_DAYS.getName());
         VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(
-                OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                RepairStatus.IN_PROGRESS_ACTIVE.getValue());
         VNextBOROAdvancedSearchDialogSteps.search();
 
         String searchFilterText = VNextBOROPageInteractions.getSearchFilterText();
         Assert.assertTrue(searchFilterText.contains(TimeFrameValues.TIMEFRAME_90_DAYS.getName()),
                 "The search filter doesn't contain the timeFrame " + TimeFrameValues.TIMEFRAME_90_DAYS.getName());
-        Assert.assertTrue(searchFilterText.contains(OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue()),
+        Assert.assertTrue(searchFilterText.contains(RepairStatus.IN_PROGRESS_ACTIVE.getValue()),
                 "The search filter doesn't contain the repair status "
-                        + OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                        + RepairStatus.IN_PROGRESS_ACTIVE.getValue());
 
         VNextBOROPageSteps.openRODetailsPage();
         VNextBORODetailsPageSteps.openRoPageByClickingBreadCrumbRo();
         searchFilterText = VNextBOROPageInteractions.getSearchFilterText();
         Assert.assertTrue(searchFilterText.contains(TimeFrameValues.TIMEFRAME_90_DAYS.getName()),
                 "The search filter doesn't contain the timeFrame " + TimeFrameValues.TIMEFRAME_90_DAYS.getName());
-        Assert.assertTrue(searchFilterText.contains(OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue()),
+        Assert.assertTrue(searchFilterText.contains(RepairStatus.IN_PROGRESS_ACTIVE.getValue()),
                 "The search filter doesn't contain the repair status "
-                        + OrderMonitorRepairStatuses.IN_PROGRESS_ACTIVE.getValue());
+                        + RepairStatus.IN_PROGRESS_ACTIVE.getValue());
     }
 }

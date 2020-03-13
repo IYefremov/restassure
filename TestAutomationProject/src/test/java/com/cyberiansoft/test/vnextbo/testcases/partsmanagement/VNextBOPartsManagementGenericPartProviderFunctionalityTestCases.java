@@ -6,7 +6,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsMan
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.partsmanagement.PartStatuses;
+import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -30,6 +30,7 @@ import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VN
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.stores.VNextBOAutoZoneValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -41,7 +42,7 @@ import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWe
 
 public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases extends BaseTestCase {
 
-    private final String status = PartStatuses.OPEN.getStatus();
+    private final String status = PartStatus.OPEN.getStatus();
 
     @BeforeClass
     public void settingUp() {
@@ -52,6 +53,11 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
     public void goToPage() {
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
+    }
+
+    @AfterMethod
+    public void refreshPage() {
+        Utils.refreshPage();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -127,7 +133,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
 
         VNextBOPartsProvidersRequestFormDialogSteps.getQuotesForFirstParts(4);
         VNextBOPartsProvidersDialogSteps.closePartsProvidersDialog();
-        Assert.assertTrue(VNextBOPartsDetailsPanelInteractions.getPartIdsByStatus(PartStatuses.QUOTE_REQUESTED.getStatus())
+        Assert.assertTrue(VNextBOPartsDetailsPanelInteractions.getPartIdsByStatus(PartStatus.QUOTE_REQUESTED.getStatus())
                         .containsAll(partIdsByStatus.subList(0, 4)),
                 "The status of parts hasn't been changed from 'Open' to 'Quote Requested'");
 
