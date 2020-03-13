@@ -13,19 +13,19 @@ import java.util.List;
 @Getter
 public class VNextApproveInspectionsScreen extends VNextBaseScreen {
 
-    @FindBy(xpath="//div[@data-page='approve-inspections']")
+    @FindBy(xpath = "//div[@data-page='approve-inspections']")
     private WebElement rootElement;
 
-    @FindBy(xpath="//*[@action='select-all' and @value='1']")
+    @FindBy(xpath = "//*[@action='select-all' and @value='1']")
     private WebElement approveAllBtn;
 
-    @FindBy(xpath="//*[@action='select-all' and @value='3']")
+    @FindBy(xpath = "//*[@action='select-all' and @value='3']")
     private WebElement declineAllBtn;
 
     @FindBy(xpath = "//*[@class='approve-inspections-container']/div")
     private List<ApproveInspectionListElement> approveInspectionsList;
 
-    @FindBy(xpath="//*[@action='save']")
+    @FindBy(xpath = "//*[@action='save']")
     private WebElement saveBtn;
 
     public VNextApproveInspectionsScreen() {
