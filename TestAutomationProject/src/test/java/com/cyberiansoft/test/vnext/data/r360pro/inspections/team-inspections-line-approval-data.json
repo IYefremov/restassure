@@ -29,6 +29,36 @@
       ]
     }
   ],
+  "testVerifyUserCanSelectSeveralInspectionWithLineApproveForApprove": [
+    {
+      "rowID": "testVerifyUserCanSelectSeveralInspectionWithLineApproveForApprove.01",
+      "description": "Test Case 73110:Verify user can select several Inspection with line approve for approve.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91711",
+          "testCaseTitle": "Verify user can select several Inspection with line approve for approve."
+        }
+      ],
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Labor Motor",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceStatus": "Approved"
+        }
+      ]
+    }
+  ],
   "testVerifyUserCanApproveDeclineAndSkipDifferentServicesInOneInspection": [
     {
       "rowID": "testVerifyUserCanApproveDeclineAndSkipDifferentServicesInOneInspection.01",
