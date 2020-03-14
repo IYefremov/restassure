@@ -52,7 +52,7 @@ public class BaseTestCase {
             String testPlanId = testCaseIdFromMaven.get();
             try {
                 TestListenerAllure.setTestToTestRunMap(
-                        tpIntegrationService.testCaseToTestRunMapRecursevley(testPlanRun != null ? testPlanRun :
+                        tpIntegrationService.testCaseToTestRunMapRecursevley(testPlanRun.getName() != null ? testPlanRun :
                                 tpIntegrationService.createTestPlanRun(testPlanId)));
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();
