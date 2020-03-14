@@ -5,6 +5,7 @@ import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.TestEnvironments;
 import com.cyberiansoft.test.globalutils.EnvironmentsData;
+import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunDTO;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -35,14 +36,23 @@ public class BaseTestCase {
     }
 
     @BeforeSuite
-    public void setUp() {
+    public void setUp() throws IOException, UnirestException {
         Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
+        Optional<String> releaseIdFromMaven = Optional.ofNullable(System.getProperty("releaseId"));
+        TPIntegrationService tpIntegrationService = new TPIntegrationService();
+        TestPlanRunDTO testPlanRun = new TestPlanRunDTO();
+
+        if (releaseIdFromMaven.isPresent()) {
+            testPlanRun = tpIntegrationService.getAllTestPlanRuns().getItems().stream().
+                    filter(run -> run.getName().contains(releaseIdFromMaven.get())).
+                    findAny().orElse(null);
+        }
+
         if (testCaseIdFromMaven.isPresent()) {
-            TPIntegrationService tpIntegrationService = new TPIntegrationService();
             String testPlanId = testCaseIdFromMaven.get();
             try {
                 TestListenerAllure.setTestToTestRunMap(
-                        tpIntegrationService.testCaseToTestRunMapRecursevley(
+                        tpIntegrationService.testCaseToTestRunMapRecursevley(testPlanRun != null ? testPlanRun :
                                 tpIntegrationService.createTestPlanRun(testPlanId)));
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();
@@ -53,7 +63,7 @@ public class BaseTestCase {
         if (testEnv.isPresent())
             backOfficeURL = VNextEnvironmentUtils.getBackOfficeURL(TestEnvironments.valueOf(testEnv.get()));
         else
-            backOfficeURL =  EnvironmentsData.getInstance().getVNextIntegrationBackOfficeURL();
+            backOfficeURL = EnvironmentsData.getInstance().getVNextIntegrationBackOfficeURL();
     }
 
     @BeforeClass
