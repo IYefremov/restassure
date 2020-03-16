@@ -22,6 +22,9 @@ public class VNextGroupServicesScreen extends VnextBaseServicesScreen {
 
     }
 
+    public VNextGroupServicesScreen() {
+    }
+
     public WebElement getServicesList() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         return wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//*[@data-autotests-id='all-services']"))));
