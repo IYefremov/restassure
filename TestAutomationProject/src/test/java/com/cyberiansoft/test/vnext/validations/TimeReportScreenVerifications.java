@@ -23,4 +23,14 @@ public class TimeReportScreenVerifications {
         else
             Assert.assertEquals("", endDateLable.getText());
     }
+
+    public static void validateTimeReportIsEmpty(Boolean isEmpty) {
+        WaitUtils.waitUntilElementIsClickable(new TimeReportScreen().getRootElement());
+        if (isEmpty) {
+            WaitUtils.waitUntilElementIsClickable(new TimeReportScreen().getEmptyBlock());
+            Assert.assertTrue(new TimeReportScreen().getEmptyBlock().isDisplayed());
+        }
+        else
+            Assert.assertFalse(new TimeReportScreen().getEmptyBlock().isDisplayed());
+    }
 }

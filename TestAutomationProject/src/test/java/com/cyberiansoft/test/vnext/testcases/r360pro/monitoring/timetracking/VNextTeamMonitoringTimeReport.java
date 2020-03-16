@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking;
 
-import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -11,6 +10,7 @@ import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextGroupServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -23,11 +23,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class VNextTeamMonitoringTimeReport extends BaseTestClass {
-    private String workOrderId = "";
 
     @BeforeClass(description = "Team Monitoring Time Report")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringTimeReportDataPath();
+    }
+
+    public String createWorkOrder(WorkOrderData workOrderData) {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         final String inspectionId = InspectionSteps.saveInspection();
@@ -35,25 +37,42 @@ public class VNextTeamMonitoringTimeReport extends BaseTestClass {
         InspectionMenuSteps.approveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.selectCreateWorkOrder();
-        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_WO_MONITOR);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
-        workOrderId = WorkOrderSteps.saveWorkOrder();
+        VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen();
+        groupServicesScreen.openServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
         ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+        return workOrderId;
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanSeeTimeReportOnServiceLevel(String rowID,
                                                    String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData serviceDto = workOrderData.getServiceData();
+        ServiceData serviceDto = workOrderData.getDamageData().getMoneyServices().get(1);
+
+        final String workOrderId = createWorkOrder(workOrderData);
 
         MonitorSteps.editOrder(workOrderId);
+        MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, false);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        GeneralSteps.confirmDialog();
+        MonitorSteps.openItem(workOrderId);
+
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceDto);
-        MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, false);
+
+        MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
+        TimeReportScreenVerifications.validateTimeReportIsEmpty(true);
+        ScreenNavigationSteps.pressBackButton();
+
+        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
+
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
         TimeReportScreenVerifications.startDateShouldBePresent(true);
@@ -77,14 +96,26 @@ public class VNextTeamMonitoringTimeReport extends BaseTestClass {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
+        final String workOrderId = createWorkOrder(workOrderData);
+
         MonitorSteps.editOrder(workOrderId);
+        MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, false);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        GeneralSteps.confirmDialog();
+        MonitorSteps.openItem(workOrderId);
+        MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, true);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openPhaseMenu(phaseDto);
-        MenuValidations.menuItemShouldBeEnabled(MenuItems.TIME_REPORT, false);
+        MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
+        TimeReportScreenVerifications.validateTimeReportIsEmpty(true);
+        ScreenNavigationSteps.pressBackButton();
+        EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
+
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.TIME_REPORT);
+
         TimeReportScreenVerifications.startDateShouldBePresent(true);
         TimeReportScreenVerifications.endDateShouldBePresent(false);
         ScreenNavigationSteps.pressBackButton();
