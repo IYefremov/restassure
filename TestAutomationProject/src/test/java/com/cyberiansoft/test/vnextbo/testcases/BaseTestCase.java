@@ -37,23 +37,31 @@ public class BaseTestCase {
 
     @BeforeSuite
     public void setUp() throws IOException, UnirestException {
-        Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
+        Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         Optional<String> releaseIdFromMaven = Optional.ofNullable(System.getProperty("releaseId"));
         TPIntegrationService tpIntegrationService = new TPIntegrationService();
-        TestPlanRunDTO testPlanRun = new TestPlanRunDTO();
 
-        if (releaseIdFromMaven.isPresent()) {
-            testPlanRun = tpIntegrationService.getAllTestPlanRuns().getItems().stream().
-                    filter(run -> run.getName().contains(releaseIdFromMaven.get())).
-                    findAny().orElse(null);
-        }
-
-        if (testCaseIdFromMaven.isPresent()) {
-            String testPlanId = testCaseIdFromMaven.get();
+        if (testPlanIdFromMaven.isPresent()) {
+            String testPlanId = testPlanIdFromMaven.get();
             try {
-                TestListenerAllure.setTestToTestRunMap(
-                        tpIntegrationService.testCaseToTestRunMapRecursevley(testPlanRun.getName() != null ? testPlanRun :
-                                tpIntegrationService.createTestPlanRun(testPlanId)));
+                if (releaseIdFromMaven.isPresent()) {
+                    TestPlanRunDTO testPlanRun = tpIntegrationService.getAllTestPlanRuns().getItems().stream().
+                            filter(run -> run.getName().contains(releaseIdFromMaven.get())).
+                            findAny().orElse(null);
+                    if (testPlanRun != null) {
+                        testPlanRun = tpIntegrationService.getTestPlanRunInfo(testPlanRun.getId().toString());
+                        if (testPlanRun.getTestCaseRuns() != null)
+                            TestListenerAllure.setTestToTestRunMap(tpIntegrationService.testCaseToTestRunMapRecursively(testPlanRun));
+                    }
+                    else {
+                        TestListenerAllure.setTestToTestRunMap(
+                                tpIntegrationService.testCaseToTestRunMapRecursively(tpIntegrationService.createTestPlanRun(testPlanId, releaseIdFromMaven.get())));
+                    }
+                } else {
+                    TestListenerAllure.setTestToTestRunMap(
+                            tpIntegrationService.testCaseToTestRunMapRecursively(
+                                    tpIntegrationService.createTestPlanRun(testPlanId)));
+                }
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();
             }
