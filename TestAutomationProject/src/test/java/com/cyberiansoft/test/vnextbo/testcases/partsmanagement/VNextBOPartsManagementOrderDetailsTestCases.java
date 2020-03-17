@@ -150,6 +150,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyPartCoreStatus(0, CoreStatus.RETURN_TO_VENDOR.getStatus());
         VNextBOPartsDetailsPanelInteractions.setCoreStatusForPartByPartNumber(0, CoreStatus.RTV_COMPLETE.getStatus());
         VNextBOPartsDetailsPanelValidations.verifyPartCoreStatus(0, CoreStatus.RTV_COMPLETE.getStatus());
+        VNextBOPartsDetailsPanelSteps.checkNACoreStatusOptionIsNotDisplayed(0);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -162,5 +163,15 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOPartsOrdersListPanelSteps.openPartOrderDetailsByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.setAllConditionsForPartByPartNumberInList(0);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeVendorPrice(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
+        final String vendorPrice = VNextBOPartsDetailsPanelInteractions.setVendorPrice(0);
+        VNextBOPartsDetailsPanelValidations.verifyPartVendorPrice(0, vendorPrice);
     }
 }

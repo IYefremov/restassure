@@ -187,4 +187,34 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPMNotesDialogValidations.verifyNewNoteHasNotBeenAdded(note);
         VNextBOPMNotesDialogSteps.closeNoteDialog();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCancelDeletingThePartWithXIcon(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        final String woNum = data.getSearchData().getWoNum();
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+        VNextBOPartsDetailsPanelSteps.addPartWithPartsListUpdateIfNotPresent(data.getPartData(), woNum);
+        final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
+        VNextBOPartsDetailsPanelSteps.deletePartByNumberInListAndCancelDeletingWithXIcon(
+                VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartData().getPartItems()[0]));
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCancelDeletingThePartWithNoButton(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        final String woNum = data.getSearchData().getWoNum();
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+        VNextBOPartsDetailsPanelSteps.addPartWithPartsListUpdateIfNotPresent(data.getPartData(), woNum);
+        final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
+        VNextBOPartsDetailsPanelSteps.deletePartByNumberInListAndCancelDeletingWithNoButton(
+                VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartData().getPartItems()[0]));
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+    }
 }

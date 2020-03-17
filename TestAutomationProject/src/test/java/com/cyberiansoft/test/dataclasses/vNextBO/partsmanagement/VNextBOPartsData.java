@@ -23,4 +23,7 @@ public class VNextBOPartsData {
 
     @JsonProperty("partItems")
     private String[] partItems;
+
+    @JsonProperty("oemParts")
+    private String[] oemParts;
 }
