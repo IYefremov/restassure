@@ -74,7 +74,7 @@ public class BaseTestClass {
             String testPlanId = testCaseIdFromMaven.get();
             try {
                 TestServiceListener.setTestToTestRunMap(
-                        tpIntegrationService.testCaseToTestRunMapRecursevley(
+                        tpIntegrationService.testCaseToTestRunMapRecursively(
                                 tpIntegrationService.createTestPlanRun(testPlanId)));
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();

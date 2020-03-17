@@ -45,7 +45,7 @@ public class IOSHDBaseTestCase {
             String testPlanId = testCaseIdFromMaven.get();
             try {
                 IOSRegularTestCasesListener.setTestToTestRunMap(
-                        tpIntegrationService.testCaseToTestRunMapRecursevley(
+                        tpIntegrationService.testCaseToTestRunMapRecursively(
                                 tpIntegrationService.createTestPlanRun(testPlanId)));
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();

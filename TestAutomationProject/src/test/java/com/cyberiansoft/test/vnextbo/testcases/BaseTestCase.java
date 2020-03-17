@@ -5,6 +5,7 @@ import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.TestEnvironments;
 import com.cyberiansoft.test.globalutils.EnvironmentsData;
+import com.cyberiansoft.test.targetprocessintegration.dto.TestPlanRunDTO;
 import com.cyberiansoft.test.targetprocessintegration.model.TPIntegrationService;
 import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -35,15 +36,32 @@ public class BaseTestCase {
     }
 
     @BeforeSuite
-    public void setUp() {
-        Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
-        if (testCaseIdFromMaven.isPresent()) {
-            TPIntegrationService tpIntegrationService = new TPIntegrationService();
-            String testPlanId = testCaseIdFromMaven.get();
+    public void setUp() throws IOException, UnirestException {
+        Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
+        Optional<String> releaseIdFromMaven = Optional.ofNullable(System.getProperty("releaseId"));
+        TPIntegrationService tpIntegrationService = new TPIntegrationService();
+
+        if (testPlanIdFromMaven.isPresent()) {
+            String testPlanId = testPlanIdFromMaven.get();
             try {
-                TestListenerAllure.setTestToTestRunMap(
-                        tpIntegrationService.testCaseToTestRunMapRecursevley(
-                                tpIntegrationService.createTestPlanRun(testPlanId)));
+                if (releaseIdFromMaven.isPresent()) {
+                    TestPlanRunDTO testPlanRun = tpIntegrationService.getAllTestPlanRuns().getItems().stream().
+                            filter(run -> run.getName().contains(releaseIdFromMaven.get())).
+                            findAny().orElse(null);
+                    if (testPlanRun != null) {
+                        testPlanRun = tpIntegrationService.getTestPlanRunInfo(testPlanRun.getId().toString());
+                        if (testPlanRun.getTestCaseRuns() != null)
+                            TestListenerAllure.setTestToTestRunMap(tpIntegrationService.testCaseToTestRunMapRecursively(testPlanRun));
+                    }
+                    else {
+                        TestListenerAllure.setTestToTestRunMap(
+                                tpIntegrationService.testCaseToTestRunMapRecursively(tpIntegrationService.createTestPlanRun(testPlanId, releaseIdFromMaven.get())));
+                    }
+                } else {
+                    TestListenerAllure.setTestToTestRunMap(
+                            tpIntegrationService.testCaseToTestRunMapRecursively(
+                                    tpIntegrationService.createTestPlanRun(testPlanId)));
+                }
             } catch (UnirestException | IOException e) {
                 e.printStackTrace();
             }
@@ -53,7 +71,7 @@ public class BaseTestCase {
         if (testEnv.isPresent())
             backOfficeURL = VNextEnvironmentUtils.getBackOfficeURL(TestEnvironments.valueOf(testEnv.get()));
         else
-            backOfficeURL =  EnvironmentsData.getInstance().getVNextIntegrationBackOfficeURL();
+            backOfficeURL = EnvironmentsData.getInstance().getVNextIntegrationBackOfficeURL();
     }
 
     @BeforeClass
