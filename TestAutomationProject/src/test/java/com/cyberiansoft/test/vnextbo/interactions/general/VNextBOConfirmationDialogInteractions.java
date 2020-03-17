@@ -14,7 +14,7 @@ public class VNextBOConfirmationDialogInteractions {
 
     public static void clickYesButton() {
         clickModalDialogButton(new VNextBOConfirmationDialog().getYesButton());
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitForPageToBeLoaded(5);
     }
 
     public static void clickNoButton() {

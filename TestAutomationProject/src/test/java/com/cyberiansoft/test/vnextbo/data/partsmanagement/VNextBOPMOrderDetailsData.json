@@ -276,13 +276,52 @@
       "location": "Rozstalnoy_location",
       "searchData": {
         "woNum": "O-236-00009"
-      },
-      "partData": {
-        "partNames": [
-          "Part: Bumper"
-        ]
-      },
-      "partNumber": "04711-SNH-A90ZZ"
+      }
+    }
+  ],
+  "verifyUserCanChangeCorePrice": [
+    {
+      "rowID": "verifyUserCanChangeCorePrice.01",
+      "description": "User can change Core Price",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93074"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-374-00003"
+      }
+    }
+  ],
+  "verifyUserCanChangeCoreStatus": [
+    {
+      "rowID": "verifyUserCanChangeCoreStatus.01",
+      "description": "User can change Core Status",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93080"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-374-00003"
+      }
+    }
+  ],
+  "verifyUserCanSelectPartConditions": [
+    {
+      "rowID": "verifyUserCanSelectPartConditions.01",
+      "description": "User can select Part Conditions",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "93042"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-374-00003"
+      }
     }
   ]
 }

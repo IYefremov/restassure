@@ -4,7 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.partsmanagement.PartStatuses;
+import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -121,7 +121,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyLaborsExtenderIsDisplayed(numberOfParts);
         VNextBOPartsDetailsPanelValidations.verifyPartCheckboxIsDisplayed(numberOfParts);
         VNextBOPartsDetailsPanelValidations.verifyPartDefaultValues(numberOfParts);
-        VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(numberOfParts, PartStatuses.OPEN.getStatus());
+        VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(numberOfParts, PartStatus.OPEN.getStatus());
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartsListSize() - 1);
         VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
     }

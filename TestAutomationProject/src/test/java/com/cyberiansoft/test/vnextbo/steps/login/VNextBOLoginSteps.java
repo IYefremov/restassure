@@ -17,7 +17,7 @@ public class VNextBOLoginSteps {
             VNextBOLoginInteractions.setPasswordField(userPsw);
             Utils.clickElement(loginButton);
             WaitUtilsWebDriver.elementShouldBeVisible(new VNexBOLeftMenuPanel().getMenuButton(), true);
-            WaitUtilsWebDriver.waitForPageToBeLoaded();
+            WaitUtilsWebDriver.waitForPageToBeLoaded(7);
         }
     }
 

@@ -9,8 +9,16 @@
         }
       ],
       "description": "91017",
-      "service": {
-        "serviceName": "Labor AM"
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
       }
     }
   ],
@@ -26,8 +34,19 @@
       ],
       "monitoring": {
         "orderPhaseDto": {
-          "phaseName": "AutomationPhaseLevel"
+          "phaseName": "PhaseLevel"
         }
+      },
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
       }
     }
   ],

@@ -3,7 +3,7 @@ package com.cyberiansoft.test.enums.partsmanagement;
 import lombok.Getter;
 
 @Getter
-public enum PartStatuses {
+public enum PartStatus {
 
     ALL("All"),
     OPEN("Open"),
@@ -25,7 +25,7 @@ public enum PartStatuses {
 
     private String status;
 
-    PartStatuses(final String status) {
+    PartStatus(final String status) {
         this.status = status;
     }
 }

@@ -11,7 +11,8 @@ public enum WorkOrderTypes {
     O_KRAMAR_NO_DRAFT("O_Kramar_No_Draft"),
     O_KRAMAR_3_SERVICE_GROUPING("O_Kramar 3 Service grouping"),
     ALL_AUTO_PHASES("All_auto_Phases"),
-    AUTOMATION_MONITORING("automationMonitoring");
+    AUTOMATION_MONITORING("automationMonitoring"),
+    AUTOMATION_WO_MONITOR("Automation_WO_Monitor");
 
     private final String woType;
 
