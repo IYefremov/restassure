@@ -31,12 +31,12 @@ public class ApproveServicesScreenValidations {
     }
 
     public static void verifyDeclineReasonScreenDisplayed() {
-        VNextDeclineReasonScreen vNextDeclineReasonScreen = new VNextDeclineReasonScreen();
+        VNextDeclineReasonScreen declineReasonScreen = new VNextDeclineReasonScreen();
         WaitUtilsWebDriver.getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(10))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.visibilityOfAllElements(vNextDeclineReasonScreen.getApproveServicesScreen()));
-        Assert.assertEquals( vNextDeclineReasonScreen.getScreenText(),"Reason","Screen Reason not displayed or has wrong text");
+                .until(ExpectedConditions.visibilityOfAllElements(declineReasonScreen.getApproveServicesScreen()));
+        Assert.assertEquals( declineReasonScreen.getScreenText(),"Reason","Screen Reason not displayed or has wrong text");
     }
 
     public static void verifyApproveAllButtonDisplayed(boolean isDisplayed) {
