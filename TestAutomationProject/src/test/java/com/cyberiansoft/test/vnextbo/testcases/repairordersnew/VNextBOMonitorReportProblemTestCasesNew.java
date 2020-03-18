@@ -109,6 +109,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROPageStepsNew.viewOrdersProblemsByOrderNumber(data.getOrderNumber());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(5000);
         VNextBORODetailsValidationsNew.verifyPhaseStatusInDropdownFieldIsCorrect(data.getPhase(), "Problem");
         VNextBORODetailsStepsNew.resolveProblemOnPhaseLevel(data.getPhase());
     }
@@ -176,6 +177,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Completed");
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBORODetailsValidationsNew.verifyReportProblemActionButtonIsNotDisplayedForCompletedService(data.getService());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.BusyWait;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOLogInfoDialogNew;
 import org.testng.Assert;
@@ -20,6 +21,7 @@ public class VNextBOLogInfoDialogValidationsNew {
 
     public static void verifyFirstRecordStatusIsCorrect(String expectedStatus) {
 
+        BusyWait.create(15000, 500, __ -> Utils.getText(new VNextBOLogInfoDialogNew().getFirstRecordStatus()).equals(expectedStatus));
         Assert.assertEquals(Utils.getText(new VNextBOLogInfoDialogNew().getFirstRecordStatus()), expectedStatus,
                 "First log record status hasn't been correct");
     }

@@ -24,8 +24,8 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
     final String TEST_ORDER_NUMBER = "O-000-147163";
     final String TEST_LOCATION = "Best Location Automation";
 
-	@BeforeClass
-	public void settingUp() {
+    @BeforeClass
+    public void settingUp() {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
         VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
@@ -33,7 +33,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-	}
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeQuantityForService(String rowID, String description, JSONObject testData) {
@@ -90,6 +90,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
         VNextBORODetailsStepsNew.setServicePrice(data.getService(), "0");
+        WaitUtilsWebDriver.waitABit(3000);
         VNextBORODetailsStepsNew.setServicePrice(data.getService(), "-" + data.getServicePrice());
         VNextBORODetailsValidationsNew.verifyServicePriceIsCorrect(data.getService(), "($" + data.getServicePrice() + ")");
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
@@ -113,7 +114,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBORODetailsValidationsNew.verifyPhaseIsDisplayed(data.getPhase());
-	}
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeTechnicianOfRo(String rowID, String description, JSONObject testData) {
@@ -163,7 +164,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase(String rowID, String description, JSONObject testData) {
 
-	    VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getServices()[0], data.getServiceStatuses()[1]);
         WaitUtilsWebDriver.waitABit(5000);
@@ -177,7 +178,6 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOChangeTechnicianDialogStepsNew.changeTechnicianAndSave(data.getVendor(), data.getTechnician1());
         VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable(data.getTechnician1());
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-        Utils.refreshPage();
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getServices()[0], data.getTechnician1());
         VNextBORODetailsValidationsNew.verifyServiceTechnicianIsCorrect(data.getServices()[1], data.getTechnician1());
@@ -238,11 +238,13 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         Utils.goToPreviousPage();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Utils.refreshPage();
+        //WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
         VNextBOROWebPageValidationsNew.verifyFirstOrderInvoiceNumberIsCorrect(data.getInvoiceNumber());
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Utils.refreshPage();
+        //WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
@@ -272,13 +274,10 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
-        WaitUtilsWebDriver.waitABit(3000);
         VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(data.getService(), "icon-start-ro text-green");
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[1]);
-        WaitUtilsWebDriver.waitABit(3000);
         VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect(data.getService(), "icon-start-ro text-green");
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), data.getServiceStatuses()[0]);
-        WaitUtilsWebDriver.waitABit(3000);
         VNextBORODetailsValidationsNew.verifyServiceIconIsCorrect("autotesthfBekUs", "icon-clock text-green");
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
