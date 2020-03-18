@@ -238,13 +238,11 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         Utils.goToPreviousPage();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Utils.refreshPage();
-        //WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
         VNextBOROWebPageValidationsNew.verifyFirstOrderInvoiceNumberIsCorrect(data.getInvoiceNumber());
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         Utils.refreshPage();
-        //WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
