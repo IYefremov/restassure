@@ -47,6 +47,11 @@ public class VNextBOPartsDetailsPanelValidations {
                 "The core price hasn't been set");
     }
 
+    public static void verifyPartVendorPrice(int partNumber, String expectedVendorPrice) {
+        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getVendorPrice(partNumber), expectedVendorPrice,
+                "The vendor price hasn't been set");
+    }
+
     public static void verifyPartPriceIsCorrect(int partNumber, String expectedPrice) {
 
         Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartPriceField().get(partNumber)), expectedPrice,
@@ -308,5 +313,9 @@ public class VNextBOPartsDetailsPanelValidations {
     public static void verifyPartDefaultValues(int partNumber) {
         verifyPartVendorPriceValue(partNumber, "0");
         verifyPartLaborCreditValue(partNumber, "0");
+    }
+
+    public static boolean isCoreStatusOptionDisplayed(int partNumber, String option) {
+        return Utils.getText(new VNextBOPartsDetailsPanel().getPartCoreStatusFields().get(partNumber)).contains(option);
     }
 }

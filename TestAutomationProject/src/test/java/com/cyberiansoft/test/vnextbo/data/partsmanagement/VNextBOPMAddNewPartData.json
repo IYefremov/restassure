@@ -130,5 +130,39 @@
         "woNum": "O-000-147532"
       }
     }
+  ],
+  "verifyUserCanAddNewOEMPart": [
+    {
+      "rowID": "verifyUserCanAddNewOEMPart.01",
+      "description": "Test case 89086: Verify user add new OEM part",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91194"
+        }
+      ],
+      "location": "Location_Phase_enforc_partial",
+      "searchData": {
+        "woNum": "O-000-147532"
+      },
+      "partData": {
+        "service": "Alexei Part Empty",
+        "description": "Auto-test",
+        "category": "Brake",
+        "subcategory": "Disc Pads and Brake Shoes",
+        "partItems": [
+          "Disc Brake Pad Brake->Disc Pads and Brake Shoes",
+          "Disc Brake Pad Set Brake->Disc Pads and Brake Shoes"
+        ],
+        "oemParts": [
+          "06435-S2A-000",
+          "Disc Brake Pad Set Brake->Disc Pads and Brake Shoes",
+          "MyOwnOEM2"
+        ],
+        "partNames": [
+          "Opt_prefix Windshield Adhesive Kit",
+          "Opt_prefix Back Glass Adhesive Kit"
+        ]
+      }
+    }
   ]
 }

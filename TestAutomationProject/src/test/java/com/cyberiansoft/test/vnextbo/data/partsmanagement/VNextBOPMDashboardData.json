@@ -181,5 +181,19 @@
       ],
       "location": "Best Location Automation"
     }
+  ],
+
+  "verifyUserCanSelectOrdersWithQuoteReceivedParts": [
+    {
+      "rowID": "verifyUserCanSelectOrdersWithQuoteReceivedParts.01",
+      "description": "User can select orders with \"Quote received\" Parts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "109780",
+          "testCaseTitle": "User can select orders with \"Quote received\" Parts"
+        }
+      ],
+      "location": "Rozstalnoy_location"
+    }
   ]
 }

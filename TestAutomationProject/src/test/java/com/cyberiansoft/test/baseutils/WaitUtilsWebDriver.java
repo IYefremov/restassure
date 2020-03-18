@@ -341,13 +341,13 @@ public class WaitUtilsWebDriver {
                         if (shouldBeVisible)
                             try {
                                 return element.isDisplayed();
-                            } catch (NoSuchElementException ex) {
+                            } catch (TimeoutException | NoSuchElementException ex) {
                                 return false;
                             }
                         else {
                             try {
                                 return !element.isDisplayed();
-                            } catch (NoSuchElementException ex) {
+                            } catch (TimeoutException | NoSuchElementException ex) {
                                 return true;
                             }
                         }
