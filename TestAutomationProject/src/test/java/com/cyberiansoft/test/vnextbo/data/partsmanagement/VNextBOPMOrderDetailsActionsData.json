@@ -177,5 +177,53 @@
         "woNum": "O-000-152787"
       }
     }
+  ],
+  "verifyUserCanCancelDeletingThePartWithXIcon": [
+    {
+      "rowID": "verifyUserCanCancelDeletingThePartWithXIcon.01",
+      "description": "Test case 84008: User can cancel deleting (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91184"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      },
+      "partData": {
+        "service": "IvPartTest_RequitedFilled",
+        "description": "Auto-test",
+        "category": "Engine",
+        "subcategory": "Control Modules",
+        "partItems": [
+          "Engine Control Module Clip"
+        ]
+      }
+    }
+  ],
+  "verifyUserCanCancelDeletingThePartWithNoButton": [
+    {
+      "rowID": "verifyUserCanCancelDeletingThePartWithNoButton.01",
+      "description": "Test case 84009: User can cancel deleting (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91185"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147532"
+      },
+      "partData": {
+        "service": "IvPartTest_RequitedFilled",
+        "description": "Auto-test",
+        "category": "Engine",
+        "subcategory": "Control Modules",
+        "partItems": [
+          "Engine Control Module Clip"
+        ]
+      }
+    }
   ]
 }

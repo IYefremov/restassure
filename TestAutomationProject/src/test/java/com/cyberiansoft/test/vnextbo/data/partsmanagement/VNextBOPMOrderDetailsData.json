@@ -323,5 +323,20 @@
         "woNum": "O-374-00003"
       }
     }
+  ],
+  "verifyUserCanChangeVendorPrice": [
+    {
+      "rowID": "verifyUserCanChangeVendorPrice.01",
+      "description": "Test Case 83957: User can change \"Vendor Price\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91154"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchData": {
+        "woNum": "O-374-00003"
+      }
+    }
   ]
 }

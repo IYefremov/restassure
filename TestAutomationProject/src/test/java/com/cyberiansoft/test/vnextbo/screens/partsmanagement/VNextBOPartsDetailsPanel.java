@@ -62,6 +62,9 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Core price']")
     private List<WebElement> corePriceInputFieldsList;
 
+    @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Vendor price']")
+    private List<WebElement> vendorPriceInputFieldsList;
+
     @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='PO#']")
     private List<WebElement> poInputFieldsList;
 

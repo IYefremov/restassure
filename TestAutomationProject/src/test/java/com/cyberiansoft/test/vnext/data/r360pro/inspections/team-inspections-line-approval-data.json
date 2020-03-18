@@ -28,6 +28,35 @@
         }
       ]
     }
+  ],  "testVerifyUserNeedToSelectReasonForDeclineSkipAllServicesInInspection": [
+    {
+      "rowID": "testVerifyUserNeedToSelectReasonForDeclineSkipAllServicesInInspection.01",
+      "description": "Test Case 71747:Verify user need to select reason for decline/skip all services in Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91706",
+          "testCaseTitle": "Verify user need to select reason for decline/skip all services in Inspection"
+        }
+      ],
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Declined"
+        },
+        {
+          "serviceName": "Labor Motor",
+          "serviceStatus": "Declined"
+        },
+        {
+          "serviceName": "Anastasia Labor Avarage Data",
+          "serviceStatus": "Skipped"
+        }
+      ]
+    }
   ],
   "testVerifyUserCanSelectSeveralInspectionWithLineApproveForApprove": [
     {
@@ -54,6 +83,36 @@
         },
         {
           "serviceName": "Anastasia Labor Avarage Data",
+          "serviceStatus": "Approved"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCantAprroveInspectionsWithDifferentCustomers": [
+    {
+      "rowID": "testVerifyUserCantAprroveInspectionsWithDifferentCustomers.01",
+      "description": "Test Case 74191:Verify user can't aprrove Inspections with different customers.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91718",
+          "testCaseTitle": "Verify user can't aprrove Inspections with different customers."
+        }
+      ],
+      "inspType": "O_Kramar3",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Labor",
+          "serviceStatus": "Approved"
+        },
+        {
+          "serviceName": "Battery Installation",
           "serviceStatus": "Approved"
         }
       ]

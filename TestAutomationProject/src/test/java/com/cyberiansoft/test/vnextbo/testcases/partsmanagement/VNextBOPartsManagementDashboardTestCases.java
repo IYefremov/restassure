@@ -3,16 +3,22 @@ package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.partsmanagement.DashboardFilters;
+import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBODashboardPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsOrdersListPanelSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBODashboardPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsManagementWebPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsOrdersListPanelValidations;
@@ -192,5 +198,21 @@ public class VNextBOPartsManagementDashboardTestCases extends BaseTestCase {
         Assert.assertEquals(VNextBOBreadCrumbInteractions.getActiveLocationValue(), data.getLocation(),
                 "The selected location hasn't been displayed");
         VNextBOBreadCrumbInteractions.closeLocationDropDown();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectOrdersWithQuoteReceivedParts(String rowID, String description, JSONObject testData) {
+
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+        final String filter = DashboardFilters.QUOTE_RECEIVED.getFilter();
+        final String status = PartStatus.QUOTE_RECEIVED.getStatus();
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBODashboardPanelSteps.waitForDashboardToBeLoaded();
+        VNextBODashboardPanelValidations.verifyFiltersAreNotApplied();
+        VNextBODashboardPanelSteps.applyFilter(filter);
+        VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(status);
+        final int partsNumber = VNextBOPartsDetailsPanelSteps.getPartsCountForAllOrdersByStatus(status);
+        VNextBODashboardPanelValidations.verifyDashboardValueByFilterName(filter, partsNumber);
     }
 }
