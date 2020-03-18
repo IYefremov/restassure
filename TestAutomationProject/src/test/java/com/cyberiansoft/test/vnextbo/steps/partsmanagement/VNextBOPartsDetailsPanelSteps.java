@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
+import com.cyberiansoft.test.enums.partsmanagement.CoreStatus;
 import com.cyberiansoft.test.enums.partsmanagement.PartCondition;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
@@ -11,6 +12,7 @@ import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.V
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddLaborPartsDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsOrdersListPanel;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
@@ -144,6 +146,22 @@ public class VNextBOPartsDetailsPanelSteps {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
+    public static void deletePartByNumberInListAndCancelDeletingWithXIcon(int partNumber) {
+        VNextBOPartsDetailsPanelInteractions.clickActionsButtonForPartByNumberInList(partNumber);
+        VNextBOPartsDetailsPanelInteractions.clickDeleteActionButtonForPartByNumberInList(partNumber);
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogSteps.clickCloseButton();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void deletePartByNumberInListAndCancelDeletingWithNoButton(int partNumber) {
+        VNextBOPartsDetailsPanelInteractions.clickActionsButtonForPartByNumberInList(partNumber);
+        VNextBOPartsDetailsPanelInteractions.clickDeleteActionButtonForPartByNumberInList(partNumber);
+        VNextBOModalDialogValidations.verifyDialogIsDisplayed();
+        VNextBOModalDialogSteps.clickNoButton();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
     public static void openDocumentsDialogByNumberInList(int partNumber) {
 
         VNextBOPartsDetailsPanelInteractions.clickActionsButtonForPartByNumberInList(partNumber);
@@ -212,6 +230,13 @@ public class VNextBOPartsDetailsPanelSteps {
         updatePartsList(woNum);
         Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isPartStatusPresent(status),
                 "The part is not displayed with " + status + " status");
+    }
+
+    public static void addPartWithPartsListUpdateIfNotPresent(VNextBOPartsData data, String woNum) {
+        if (VNextBOPartsDetailsPanelInteractions.getPartNumbersByPartName(data.getPartItems()[0]).isEmpty()) {
+            addNewPart(data);
+            updatePartsList(woNum);
+        }
     }
 
     public static void addPartIfNotPresentWithPartsListUpdate(VNextBOPartsData data, String woNum) {
@@ -324,5 +349,22 @@ public class VNextBOPartsDetailsPanelSteps {
         VNextBOPartsDetailsPanelInteractions.clickGetQuotesPartButton();
         Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
                 "The Parts Providers modal dialog hasn't been opened");
+    }
+
+    public static void checkNACoreStatusOptionIsNotDisplayed(int partNumber) {
+        VNextBOPartsDetailsPanelInteractions.openCoreStatusDropDown(partNumber);
+        Assert.assertFalse(VNextBOPartsDetailsPanelValidations.isCoreStatusOptionDisplayed(
+                partNumber, CoreStatus.NA.getStatus()), "The core status option is displayed");
+    }
+
+    public static int getPartsCountForAllOrdersByStatus(String status) {
+        return new VNextBOPartsOrdersListPanel().getListOptions()
+                .stream()
+                .map((order) -> {
+                    VNextBOPartsOrdersListPanelSteps.openPartOrderDetails(order);
+                    return VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(status);
+                })
+                .reduce((prev, next) -> prev + next)
+                .orElse(0);
     }
 }
