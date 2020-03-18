@@ -1,9 +1,16 @@
 package com.cyberiansoft.test.vnext.validations;
 
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnext.screens.VNextApproveServicesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextDeclineReasonScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ApproveServicesListElement;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 public class ApproveServicesScreenValidations {
 
@@ -21,6 +28,15 @@ public class ApproveServicesScreenValidations {
         WaitUtils.waitUntilElementIsClickable(approveServicesScreen.getRootElement());
         ApproveServicesListElement service = approveServicesScreen.getServiceElement(serviceName);
         Assert.assertEquals(service.getServicePrice(), expectedPrice);
+    }
+
+    public static void verifyDeclineReasonScreenDisplayed() {
+        VNextDeclineReasonScreen declineReasonScreen = new VNextDeclineReasonScreen();
+        WaitUtilsWebDriver.getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(10))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(StaleElementReferenceException.class)
+                .until(ExpectedConditions.visibilityOfAllElements(declineReasonScreen.getApproveServicesScreen()));
+        Assert.assertEquals( declineReasonScreen.getScreenText(),"Reason","Screen Reason not displayed or has wrong text");
     }
 
     public static void verifyApproveAllButtonDisplayed(boolean isDisplayed) {

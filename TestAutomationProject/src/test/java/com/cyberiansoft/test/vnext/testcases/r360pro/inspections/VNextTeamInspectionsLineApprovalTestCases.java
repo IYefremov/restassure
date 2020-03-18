@@ -68,6 +68,35 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserNeedToSelectReasonForDeclineSkipAllServicesInInspection(String rowID,
+                                                                                   String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        List<ServiceData> services = inspectionData.getServicesList();
+        services.forEach(AvailableServicesScreenSteps::selectService);
+
+        final String inspectionNumber = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveServicesScreenValidations.verifyApproveAllButtonDisplayed(true);
+        ApproveServicesScreenValidations.verifyDeclineAllButtonDisplayed(true);
+        ApproveServicesScreenValidations.verifySkipAllButtonDisplayed(true);
+        for (ServiceData service : services) {
+            ApproveServicesScreenValidations.validateServiceExistsForApprove(service.getServiceName(), true);
+            ApproveServicesSteps.setServiceStatus(service.getServiceName(), service.getServiceStatus());
+        }
+        ApproveServicesSteps.clickDeclineAllButton();
+        ApproveServicesSteps.saveApprovedServices();
+        ApproveServicesScreenValidations.verifyDeclineReasonScreenDisplayed();
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanSelectSeveralInspectionWithLineApproveForApprove(String rowID,
                                                                                   String description, JSONObject testData) {
 
@@ -84,6 +113,34 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         }
         inspectionsNumbers.forEach(InspectionSteps::selectInspection);
         InspectionSteps.clickMultiSelectInspectionsApproveButton();
+        inspectionsNumbers.forEach(s -> ApproveInspectionsScreenValidations.validateInspectionExists(s, true));
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCantAprroveInspectionsWithDifferentCustomers(String rowID,
+                                                                           String description, JSONObject testData) {
+        RetailCustomer secondCustomer = new RetailCustomer();
+        secondCustomer.setFirstName("Alexei");
+        secondCustomer.setLastName("M");
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<ServiceData> services = inspectionData.getServicesList();
+        List<String> inspectionsNumbers = new ArrayList<>();
+        HomeScreenSteps.openInspections();
+        for (int i = 0; i <= services.size()-1; i++) {
+            InspectionSteps.clickAddInspectionButton();
+
+            RetailCustomer customer = i == 0 ? testcustomer : secondCustomer;
+            InspectionSteps.createInspection(customer, InspectionTypes.O_KRAMAR3, inspectionData);
+            WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+            AvailableServicesScreenSteps.selectService(services.get(i));
+            inspectionsNumbers.add(InspectionSteps.saveInspection());
+        }
+        inspectionsNumbers.forEach(InspectionSteps::selectInspection);
+        InspectionSteps.clickMultiSelectInspectionsApproveButton();
+        SelectCustomerScreenSteps.selectCustomer(secondCustomer);
+        inspectionsNumbers.remove(0);
         inspectionsNumbers.forEach(s -> ApproveInspectionsScreenValidations.validateInspectionExists(s, true));
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
