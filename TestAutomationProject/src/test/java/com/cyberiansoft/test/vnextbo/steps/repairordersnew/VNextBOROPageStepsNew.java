@@ -370,6 +370,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void openFirstOrderNotes() {
 
         Utils.clickElement(new VNextBOROWebPageNew().getOrderNoteText());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void addNoteForFirstOrderAndNotSaveWItXIcon(String noteText) {

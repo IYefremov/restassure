@@ -15,7 +15,7 @@ public class VNextBOROAdvancedSearchDialogNew extends VNextBOBaseWebPage {
     @FindBy(className = "advSearch")
     private WebElement advancedSearchDialog;
 
-    @FindBy(xpath = "//button[@data-bind='click: search.start']")
+    @FindBy(xpath = "//button[contains(@data-bind,'click: search.start')]")
     private WebElement searchButton;
 
     @FindBy(xpath = "//div[@class='advSearch']//button[contains(text(), 'Save')]")

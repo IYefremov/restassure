@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
@@ -72,6 +73,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
+            ConditionWaiter.create(__ -> Utils.getText(new VNextBOROWebPageNew().getOrdersTechniciansList().get(0)).contains(expectedTechnician));
             for (WebElement technician: new VNextBOROWebPageNew().getOrdersTechniciansList()) {
                 Assert.assertTrue(Utils.getText(technician).contains(expectedTechnician), "Technician hasn't been correct");
             }

@@ -35,7 +35,7 @@ public class VNextBOBreadCrumbInteractions {
     }
 
     public static void clickLocationName() {
-        Utils.clickElement(new VNextBOBreadCrumbPanel().getLocationName());
+        Utils.clickWithJS(new VNextBOBreadCrumbPanel().getLocationName());
     }
 
     public static void setLocation(String location, boolean isSetWithEnter) {

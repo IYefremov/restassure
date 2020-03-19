@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROCompleteCurrentPhaseDialogNew;
@@ -18,13 +19,14 @@ public class VNextBOROCompleteCurrentPhaseDialogStepsNew {
 
         VNextBOROCompleteCurrentPhaseDialogNew completeCurrentPhaseDialog = new VNextBOROCompleteCurrentPhaseDialogNew();
         Utils.clickElement(completeCurrentPhaseDialog.getCompleteCurrentPhaseButton());
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.invisibilityOf(completeCurrentPhaseDialog.getCompleteCurrentPhaseDialog()));
+        ConditionWaiter.create(__ -> !completeCurrentPhaseDialog.getCompleteCurrentPhaseDialog().isDisplayed());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void resolveProblemForService(String service) {
 
         VNextBOROCompleteCurrentPhaseDialogNew completeCurrentPhaseDialog = new VNextBOROCompleteCurrentPhaseDialogNew();
+        ConditionWaiter.create(__ -> completeCurrentPhaseDialog.resolveButtonByServiceName(service).isEnabled());
         Utils.clickElement(completeCurrentPhaseDialog.resolveButtonByServiceName(service));
     }
 }
