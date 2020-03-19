@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.timetracking;
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -121,26 +122,50 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
     public void verifyStartStopVisibleOnlyInActiveStateServiceLevel(String rowID,
                                                                     String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData serviceDto = workOrderData.getServiceData();
+        ServiceData serviceDto = workOrderData.getDamageData().getMoneyServices().get(1);
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        final String workOrderId = createWorkOrder();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_WO_MONITOR);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+
         MonitorSteps.editOrder(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        GeneralSteps.confirmDialog();
+        MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
+
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
+
         EditOrderSteps.openServiceMenu(serviceDto);
-        MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
+        MenuSteps.selectMenuItem(MenuItems.STOP);
+        GeneralSteps.confirmDialog();
+
+        EditOrderSteps.openServiceMenu(serviceDto);
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
+        MenuSteps.selectStatus(ServiceStatus.PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
-        MenuSteps.selectMenuItem(MenuItems.RESOLVE_PROBLEM);
-        ProblemReportingSteps.resolveProblem();
-        EditOrderSteps.openServiceMenu(serviceDto);
         MenuSteps.selectMenuItem(MenuItems.COMPLETE);
         GeneralSteps.confirmDialog();
+        WizardScreenSteps.saveAction();
+        WizardScreenSteps.saveAction();
         EditOrderSteps.openServiceMenu(serviceDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);
@@ -150,21 +175,43 @@ public class VNextTeamMonitoringTimetrackingVisibility extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void уverifyStartStopVisibleOnlyInActiveStatePhaseLevel(String rowID,
+    public void verifyStartStopVisibleOnlyInActiveStatePhaseLevel(String rowID,
                                                                   String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        ServiceData serviceDto = workOrderData.getServiceData();
         OrderPhaseDto phaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
 
-        final String workOrderId = createWorkOrder();
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_WO_MONITOR);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+
         MonitorSteps.editOrder(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        GeneralSteps.confirmDialog();
+        MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
+
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuSteps.selectMenuItem(MenuItems.START);
         GeneralSteps.confirmDialog();
         EditOrderSteps.openPhaseMenu(phaseDto);
-        MenuSteps.selectMenuItem(MenuItems.REPORT_PROBLEM);
+        MenuSteps.selectMenuItem(MenuItems.CHANGE_STATUS);
+        MenuSteps.selectStatus(ServiceStatus.PROBLEM);
         ProblemReportingSteps.setProblemReason(phaseDto.getProblemReason());
+        EditOrderSteps.openPhaseMenu(phaseDto);
+        MenuSteps.selectMenuItem(MenuItems.STOP);
+        GeneralSteps.confirmDialog();
         EditOrderSteps.openPhaseMenu(phaseDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.STOP, false);

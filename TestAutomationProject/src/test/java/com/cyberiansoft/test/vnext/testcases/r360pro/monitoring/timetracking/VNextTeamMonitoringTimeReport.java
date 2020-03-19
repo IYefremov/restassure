@@ -10,7 +10,6 @@ import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextGroupServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -39,8 +38,7 @@ public class VNextTeamMonitoringTimeReport extends BaseTestClass {
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_WO_MONITOR);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen();
-        groupServicesScreen.openServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
         AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
         ScreenNavigationSteps.pressBackButton();
         final String workOrderId = WorkOrderSteps.saveWorkOrder();
