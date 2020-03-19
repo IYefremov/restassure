@@ -1,4 +1,26 @@
 {
+  "testResults": [
+    {
+      "testCaseId": "107577",
+      "workOrderNumber": "8668722",
+      "result": true
+    },
+    {
+      "testCaseId": "107579",
+      "workOrderNumber": "8668723",
+      "result": true
+    },
+    {
+      "testCaseId": "107585",
+      "workOrderNumber": "8668724",
+      "result": true
+    },
+    {
+      "testCaseId": "107587",
+      "workOrderNumber": "8668725",
+      "result": true
+    }
+  ],
   "userCanChangeFlagsOfWorkOrder": [
     {
       "rowID": "userCanChangeFlagsOfWorkOrder.01",
@@ -317,15 +339,20 @@
           "testCaseTitle": "Verify \"Start\"&&\"Stop\" buttons are visible in active state (\"Work Status Tracking\" = \"Phase level only\")"
         }
       ],
-      "service": {
-        "serviceName": "Labor AM"
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
       },
       "monitoring": {
         "orderPhaseDto": {
-          "phaseName": "AutomationServiceLevel"
-        },
-        "orderPhaseDto": {
-          "phaseName": "AutomationPhaseLevel",
+          "phaseName": "PhaseLevel",
           "problemReason": "PROBLEM REASON"
         }
       }
@@ -341,8 +368,16 @@
           "testCaseTitle": "Verify \"Start\"&&\"Stop\" buttons are visible in active state (\"Work Status Tracking\" = \"Service And Phase Levels\")"
         }
       ],
-      "service": {
-        "serviceName": "Labor AM"
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
       },
       "monitoring": {
         "orderPhaseDto": {
