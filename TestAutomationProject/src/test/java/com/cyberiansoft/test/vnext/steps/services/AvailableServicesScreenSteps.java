@@ -5,8 +5,10 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.interactions.services.AvailableServiceScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextPriceMatrixesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextGroupServicesScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.GroupServiceListItem;
 import org.openqa.selenium.By;
 
 import java.util.List;
@@ -20,7 +22,7 @@ public class AvailableServicesScreenSteps {
 
     public static void selectService(String serviceName) {
         VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.switchToAvalableServicesView();
+        switchToAvailableServices();
         SearchSteps.textSearch(serviceName);
         servicesScreen.selectSingleService(serviceName);
         WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
@@ -32,8 +34,12 @@ public class AvailableServicesScreenSteps {
     }
 
     public static void selectServiceGroup(String groupName) {
-        VNextAvailableServicesScreen servicesScreen = new VNextAvailableServicesScreen();
-        servicesScreen.selectServiceGroup(groupName);
+        VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen();
+        groupServicesScreen.switchToAvailableGroupServicesView();
+        WaitUtils.getGeneralFluentWait().until((webdriver) -> groupServicesScreen.getGroupServiceList().size() > 0);
+        WaitUtils.waitUntilElementIsClickable(groupServicesScreen.getRootElement());
+        GroupServiceListItem groupServiceElement = groupServicesScreen.getGroupServiceElement(groupName);
+        groupServiceElement.selectGroupService();
     }
 
     public static void selectService(ServiceData serviceData) {

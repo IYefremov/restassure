@@ -23,7 +23,6 @@ import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextGroupServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedGroupServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
@@ -77,8 +76,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
 
         WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.KRAMAR_AUTO2, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        groupServicesScreen.openServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
         workOrderData.getDamageData().getMoneyServices().forEach(serviceData -> AvailableServicesScreenSteps.selectService(serviceData));
         ScreenNavigationSteps.pressBackButton();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
@@ -405,28 +403,28 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.O_KRAMAR_3_SERVICE_GROUPING, workOrderData);
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextGroupServicesScreen groupServicesScreen = new VNextGroupServicesScreen();
         for (DamageData damageData : workOrderData.getDamagesData()) {
-            groupServicesScreen.openServiceGroup(damageData.getDamageGroupName());
+            AvailableServicesScreenSteps.selectServiceGroup(damageData.getDamageGroupName());
             for (ServiceData serviceData : damageData.getMoneyServices()) {
                 AvailableServicesScreenSteps.selectService(serviceData);
             }
 
             ScreenNavigationSteps.pressBackButton();
         }
-        Assert.assertEquals(groupServicesScreen.getInspectionTotalPriceValue(), workOrderData.getWorkOrderPrice());
+        WizardScreenValidations.validateTotalPriceValue(workOrderData.getWorkOrderPrice());
         final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
         WorkOrderSteps.openMenu(workOrderNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextSelectedGroupServicesScreen selectedGroupServicesScreen = groupServicesScreen.switchToSelectedGroupServicesView();
-        selectedGroupServicesScreen.uselectService(workOrderData.getDamagesData().get(0).getMoneyServices().get(0).getServiceName());
-        selectedGroupServicesScreen.switchToGroupServicesScreen();
-        Assert.assertEquals(groupServicesScreen.getInspectionTotalPriceValue(), amountTotalEdited);
-        groupServicesScreen.switchToSelectedGroupServicesView();
-        Assert.assertEquals(selectedGroupServicesScreen.getInspectionTotalPriceValue(), amountTotalEdited);
-        selectedGroupServicesScreen.switchToGroupServicesScreen();
+        SelectedServicesScreenSteps.switchToSelectedService();
+        SelectedServicesScreenSteps.unSelectService(workOrderData.getDamagesData().get(0).getMoneyServices().get(0).getServiceName());
+        AvailableServicesScreenSteps.switchToAvailableServices();
+        WizardScreenValidations.validateTotalPriceValue(amountTotalEdited);
+        SelectedServicesScreenSteps.switchToSelectedService();
+        WizardScreenValidations.validateTotalPriceValue(amountTotalEdited);
+        AvailableServicesScreenSteps.switchToAvailableServices();
         WorkOrderSteps.saveWorkOrder();
         WorkOrdersScreenValidations.validateWorkOrderPriceValue(workOrderNumber, amountTotalEdited);
         ScreenNavigationSteps.pressBackButton();

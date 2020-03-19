@@ -37,10 +37,10 @@ public class BaseTestClass {
 
     public BaseTestClass() {
         testcustomer = new RetailCustomer();
-        //testcustomer.setFirstName("000Automation");
-        //testcustomer.setLastName("Retail");
-        testcustomer.setFirstName("Olegg");
-        testcustomer.setLastName("Rom");
+        testcustomer.setFirstName("000Automation");
+        testcustomer.setLastName("Retail");
+        //testcustomer.setFirstName("Olegg");
+        //testcustomer.setLastName("Rom");
 
         testwholesailcustomer = new WholesailCustomer();
         testwholesailcustomer.setFirstName("Automation");
