@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
-import com.cyberiansoft.test.baseutils.BusyWait;
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROCompleteCurrentPhaseDialogNew;
 import org.openqa.selenium.NoSuchElementException;
@@ -38,7 +38,7 @@ public class VNextBOROCompleteCurrentPhaseDialogValidationsNew {
 
     public static void verifyCancelButtonIsDisplayed() {
 
-        BusyWait.create(10000, 500, __ -> new VNextBOROCompleteCurrentPhaseDialogNew().getCancelButton().isDisplayed());
+        ConditionWaiter.create(__ -> new VNextBOROCompleteCurrentPhaseDialogNew().getCancelButton().isDisplayed());
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROCompleteCurrentPhaseDialogNew().getCancelButton()),
                 "Cancel button hasn't been displayed.");
     }

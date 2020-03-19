@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
-import com.cyberiansoft.test.baseutils.BusyWait;
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOChangeTechnicianDialogNew;
@@ -12,9 +12,9 @@ public class VNextBOChangeTechnicianDialogStepsNew {
 
         VNextBOChangeTechnicianDialogNew changeTechnicianDialog = new VNextBOChangeTechnicianDialogNew();
         WaitUtilsWebDriver.waitABit(3000);
-        BusyWait.create(10000, 500, __ -> changeTechnicianDialog.getVendorDropDown().isEnabled());
+        ConditionWaiter.create(__ -> changeTechnicianDialog.getVendorDropDown().isEnabled());
         Utils.clickWithJS(changeTechnicianDialog.getVendorDropDown());
-        BusyWait.create(10000, 500, __ -> changeTechnicianDialog.dropDownOption(vendor).isEnabled());
+        ConditionWaiter.create(__ -> changeTechnicianDialog.dropDownOption(vendor).isEnabled());
         Utils.clickWithJS(changeTechnicianDialog.dropDownOption(vendor));
         WaitUtilsWebDriver.waitABit(2000);
     }

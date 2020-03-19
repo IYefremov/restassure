@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
-import com.cyberiansoft.test.baseutils.BusyWait;
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -72,7 +72,7 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyProblemIndicatorIsDisplayedForPhase(String phase) {
 
-        BusyWait.create(10000, 500, __ -> new VNextBORODetailsWebPageNew().problemIndicatorByPhase(phase).isDisplayed());
+        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().problemIndicatorByPhase(phase).isDisplayed());
         Assert.assertTrue(new VNextBORODetailsWebPageNew().problemIndicatorByPhase(phase).isDisplayed(),
                 "Problem indicator hasn't been displayed for the phase '" + phase + "'.");
     }
@@ -85,14 +85,14 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyPhaseStatusInDropdownFieldIsCorrect(String phase, String status) {
 
-        BusyWait.create(10000, 500, __ -> Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase)).equals(status));
+        ConditionWaiter.create(__ -> Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase)).equals(status));
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase)), status,
                 "Status hasn't been correct for the '" + phase + "'.");
     }
 
     public static void verifyPhaseTextStatusIsCorrect(String phase, String status) {
 
-        BusyWait.create(10000, 500, __ -> Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusTextByPhase(phase)).equals(status));
+        ConditionWaiter.create(__ -> Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusTextByPhase(phase)).equals(status));
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().phaseStatusTextByPhase(phase)), status,
                 "Status hasn't been correct for the '" + phase + "'.");
     }
@@ -136,7 +136,7 @@ public class VNextBORODetailsValidationsNew {
     public static void verifyServiceIsDisplayed(String serviceDescription, boolean shouldBeDisplayed) {
 
         if (shouldBeDisplayed) {
-            BusyWait.create(10000, 500, __ -> new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription).isDisplayed());
+            ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription).isDisplayed());
             Assert.assertTrue(Utils.isElementDisplayed(new VNextBORODetailsWebPageNew().serviceDescription(serviceDescription)),
                     "Service with description " + serviceDescription + " hasn't been added");
         }
@@ -196,7 +196,7 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyServiceTechnicianIsCorrect(String service, String expectedTechnician) {
 
-        BusyWait.create(10000, 500, __ -> Utils.getText(new VNextBORODetailsWebPageNew().serviceTechnicianDropDown(service)).equals(expectedTechnician));
+        ConditionWaiter.create(__ -> Utils.getText(new VNextBORODetailsWebPageNew().serviceTechnicianDropDown(service)).equals(expectedTechnician));
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceTechnicianDropDown(service)), expectedTechnician,
                 "Technician hasn't been correct");
     }
@@ -238,7 +238,7 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyServiceIconIsCorrect(String service, String expectedServiceIcon) {
 
-        BusyWait.create(10000, 500, __ -> new VNextBORODetailsWebPageNew().serviceIcon(service).getAttribute("class").equals(expectedServiceIcon));
+        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().serviceIcon(service).getAttribute("class").equals(expectedServiceIcon));
         Assert.assertEquals(new VNextBORODetailsWebPageNew().serviceIcon(service).getAttribute("class"), expectedServiceIcon,
                 "Service icon hasn't been correct");
     }

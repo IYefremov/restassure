@@ -1,6 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
-import com.cyberiansoft.test.baseutils.BusyWait;
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
@@ -38,7 +38,7 @@ public class VNextBORODetailsStepsNew {
 
     public static void expandPhaseByName(String phase) {
 
-        BusyWait.create(10000, 500, __ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isEnabled());
+        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isEnabled());
         Utils.clickElement(new VNextBORODetailsWebPageNew().expandPhaseButton(phase));
         WaitUtilsWebDriver.waitABit(5000);
     }
@@ -73,7 +73,7 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
         Utils.clickElement(detailsWebPageNew.getCompleteCurrentPhaseActionButton());
-        BusyWait.create(10000, 500, __ -> new VNextBOROCompleteCurrentPhaseDialogNew().getCompleteCurrentPhaseDialog().isDisplayed());
+        ConditionWaiter.create(__ -> new VNextBOROCompleteCurrentPhaseDialogNew().getCompleteCurrentPhaseDialog().isDisplayed());
     }
 
     public static void reportProblemOnPhaseLevelWithDescription(String phase, String problemReason, String problemDescription) {
@@ -98,7 +98,7 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-        BusyWait.create(10000, 500, __ -> detailsWebPageNew.actionsMenuButtonForPhase(phase).isEnabled());
+        ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForPhase(phase).isEnabled());
         Utils.clickElement(detailsWebPageNew.getResolveProblemForPhaseActionButton());
         VNextBOROResolveProblemDialogStepsNew.resolveProblem();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
