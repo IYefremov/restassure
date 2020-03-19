@@ -230,7 +230,7 @@ public class VNextBORODetailsStepsNew {
     public static void closeOrderWithReason(String reason) {
 
         changeOrderStatus("Closed");
-        VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason(reason);
+        VNextBOCloseRODialogStepsNew.closeOrderWithReason(reason);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitABit(4000);
     }

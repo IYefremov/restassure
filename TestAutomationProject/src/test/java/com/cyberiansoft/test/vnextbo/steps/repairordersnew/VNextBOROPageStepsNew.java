@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
@@ -343,6 +344,25 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
             VNextBOROWebPageValidationsNew.verifyCheckInCheckOutActionButtons(false);
             Utils.clickElement(ordersPage.getCheckInActionButton());
         }
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void closeOrder(String orderNumber, String reason) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled());
+        Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
+        Utils.clickElement(ordersPage.getCloseRoActionButton());
+        VNextBOCloseRODialogStepsNew.closeOrderWithReason(reason);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitABit(4000);
+    }
+
+    public static void changeOrderFlag(String orderNumber, String flagTitle) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled());
+        Utils.clickElement(ordersPage.flagIconByFlagTitle(flagTitle));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 

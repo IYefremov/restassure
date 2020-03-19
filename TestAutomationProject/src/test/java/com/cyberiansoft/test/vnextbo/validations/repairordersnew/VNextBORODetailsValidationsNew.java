@@ -60,6 +60,7 @@ public class VNextBORODetailsValidationsNew {
 
     public static void verifyOrderStatusIsCorrect(String expectedStatus) {
 
+        ConditionWaiter.create(__ -> Utils.getText(new VNextBORODetailsWebPageNew().getOrderStatusDropDown()).equals(expectedStatus));
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().getOrderStatusDropDown()), expectedStatus,
                 "Order status hasn't been correct");
     }
