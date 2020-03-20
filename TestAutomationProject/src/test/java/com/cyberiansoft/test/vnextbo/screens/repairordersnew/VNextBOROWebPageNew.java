@@ -95,6 +95,9 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind,'click: phaseCheckOut')]")
     private WebElement checkOutActionButton;
 
+    @FindBy(xpath = "//div[contains(@data-bind,'click: closeRO')]")
+    private WebElement closeRoActionButton;
+
     @FindBy(xpath = "//div[contains(@data-bind,'click: completeActivePhase')]")
     private WebElement completeCurrentPhaseActionButton;
 
@@ -137,6 +140,16 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class,'priority-icon') and @style='background: red;']/i[@class='icon-arrow-up']")
     private WebElement highPriorityIcon;
 
+    public WebElement orderColumnByOrderNumber(String orderNumber) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//strong[@data-bind='text: orderNo' and text()='" + orderNumber + "']/ancestor::td"));
+    }
+
+    public WebElement orderRowByOrderNumber(String orderNumber) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//strong[@data-bind='text: orderNo' and text()='" + orderNumber + "']/ancestor::tr"));
+    }
+
     public WebElement savedSearchOptionByName(String searchName) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@class='savedSearch' and text()='" + searchName + "']"));
@@ -145,6 +158,11 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     public WebElement actionsButtonByOrderNumber(String orderNumber) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//strong[text()='" + orderNumber + "']/ancestor::tr//i[@class='icon-list menu-trigger']"));
+    }
+
+    public WebElement flagIconByFlagTitle(String flagTitle) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@title='" + flagTitle + "']/a"));
     }
 
     public WebElement problemIndicatorByOrderNumber(String orderNumber) {

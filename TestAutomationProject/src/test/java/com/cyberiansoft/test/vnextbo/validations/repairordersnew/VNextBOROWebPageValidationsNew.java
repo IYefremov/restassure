@@ -512,4 +512,12 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().getEditSavedSearchPencilIcon()),
                 "Edit search pencil icon has been displayed");
     }
+
+    public static void verifyOrderFlagIsCorrect(String orderNumber, String expectedBorderColor, String flagColor) {
+
+        Assert.assertEquals(new VNextBOROWebPageNew().orderColumnByOrderNumber(orderNumber).getCssValue("border-left"), expectedBorderColor,
+                "Left border has had incorrect color");
+        Assert.assertEquals(new VNextBOROWebPageNew().orderRowByOrderNumber(orderNumber).getAttribute("class"), flagColor,
+                "Row has had incorrect background color");
+    }
 }
