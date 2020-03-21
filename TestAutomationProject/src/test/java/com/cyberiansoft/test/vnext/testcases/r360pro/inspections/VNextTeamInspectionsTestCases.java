@@ -8,7 +8,6 @@ import com.cyberiansoft.test.bo.pageobjects.webpages.InspectionsWebPage;
 import com.cyberiansoft.test.bo.pageobjects.webpages.OperationsWebPage;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.core.BrowserType;
-import com.cyberiansoft.test.dataclasses.DamageData;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
@@ -30,10 +29,12 @@ import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
+import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.VNextSettingsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
@@ -124,7 +125,6 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 	public void testVerifyWhenUserGoBackFromInspectionsScreenToHomeWeSaveLastSelectedMode(String rowID,
 																						  String description, JSONObject testData) {
 
-		VNextHomeScreen homeScreen = new VNextHomeScreen();
 		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
 		HomeScreenSteps.openInspections();
 		InspectionSteps.switchToTeamInspections();
@@ -424,18 +424,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		MenuValidations.menuItemShouldBeVisible(MenuItems.NOTES, true);
 		MenuSteps.closeMenu();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
-		VNextVisualScreen visualScreen = new VNextVisualScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+		inspectionData.getDamagesData().forEach(VisualScreenSteps::addDefaultDamage);
 
-		int markerCount = 0;
-		for (DamageData damageData : inspectionData.getDamagesData()) {
-			VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
-			BaseUtils.waitABit(1000);
-			selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
-			visualScreen.clickCarImageACoupleTimes(markerCount + 1);
-			markerCount++;
-		}
-
-		Assert.assertEquals(visualScreen.getNumberOfImageMarkers(), inspectionData.getDamagesData().size());
+		VisualScreenValidations.numberOfMarksShouldBeEqualTo(inspectionData.getDamagesData().size());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		baseWizardScreen.clickMenuButton();
 		MenuValidations.menuItemShouldBeVisible(MenuItems.SAVE_INPSECTION, true);

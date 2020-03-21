@@ -1,18 +1,14 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -46,31 +42,12 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
     @FindBy(xpath = "//*[@action='remove-all-breakages']")
     private WebElement removebreakagesbtn;
 
-    public VNextVisualScreen(WebDriver appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[contains(@data-page, 'visual')]")));
-        BaseUtils.waitABit(1000);
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
-    }
-
     public VNextVisualScreen() {
     }
 
     public VNextSelectDamagesScreen clickAddServiceButton() {
         tap(adddamagesbtn);
         tap(appiumdriver.findElement(By.xpath("//*[@action='add-other']")));
-        return new VNextSelectDamagesScreen(appiumdriver);
-    }
-
-    public void selectDefaultDamage(String damageType) {
-        clickAddServiceButton();
-        clickDefaultDamageType(damageType);
-    }
-
-    public VNextSelectDamagesScreen clickOtherServiceOption() {
-        tap(damagetypeslist.findElement(By.xpath(".//span[text()='Other']")));
         return new VNextSelectDamagesScreen(appiumdriver);
     }
 
@@ -136,16 +113,6 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
 
     public int getNumberOfImageMarkers() {
         return appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img")).size();
-    }
-
-    public VNextVisualScreen clickDefaultDamageType(String damagetype) {
-        WaitUtils.getGeneralFluentWait().until(driver -> {
-            Actions actions = new Actions(appiumdriver);
-            actions.moveToElement(defaulttab, 30, 0).click().perform();
-            return true;
-        });
-        tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
-        return new VNextVisualScreen(appiumdriver);
     }
 
     public void clickRemoveAllBreakagesButton() {

@@ -366,16 +366,44 @@
       "vihicleInfo": {
         "vinNumber": "19UUA66278A050105"
       },
-      "moneyServices": [
+      "damagesData": [
         {
-          "serviceName": "Dent Repair",
-          "servicePrice": "20.00",
-          "serviceQuantity": "10.58"
+          "damageGroupName": "Detail",
+          "moneyService": {
+            "serviceName": "Dent Repair",
+            "servicePrice": "20.00",
+            "serviceQuantity": "10.58",
+            "questionData": {
+              "questionSetionName": "Test Section",
+              "textQuestionData": {
+                "questionName": "Free Text",
+                "questionAnswerText": "some text"
+              },
+              "logicalQuestionData": {
+                "questionName": "Logical",
+                "logicalAnswer": "No"
+              }
+            }
+          }
         },
         {
-          "serviceName": "Dent Repair",
-          "servicePrice": "647.99",
-          "serviceQuantity": "6"
+          "damageGroupName": "Detail",
+          "moneyService": {
+            "serviceName": "Dent Repair",
+            "servicePrice": "647.99",
+            "serviceQuantity": "6",
+            "questionData": {
+              "questionSetionName": "Test Section",
+              "textQuestionData": {
+                "questionName": "Free Text",
+                "questionAnswerText": "some text"
+              },
+              "logicalQuestionData": {
+                "questionName": "Logical",
+                "logicalAnswer": "No"
+              }
+            }
+          }
         }
       ],
       "inspPrice": "$4099.54"
@@ -395,14 +423,22 @@
       "vihicleInfo": {
         "vinNumber": "19UUA66278A050105"
       },
-      "moneyService": {
-        "serviceName": "Miscellanious",
-        "servicePrice": "506.35",
-        "serviceQuantity": "5.00"
-      },
-      "percentageService": {
-        "serviceName": "APercent_QualityControl"
-      },
+      "damagesData": [
+        {
+          "damageGroupName": "Miscellanious",
+          "moneyService": {
+            "serviceName": "Miscellanious",
+            "servicePrice": "506.35",
+            "serviceQuantity": "5.00"
+          }
+        },
+        {
+          "damageGroupName": "Detail",
+          "percentageService": {
+            "serviceName": "APercent_QualityControl"
+          }
+        }
+      ],
       "inspPrice": "$2798.98"
     }
   ],
@@ -414,9 +450,12 @@
       "vihicleInfo": {
         "vinNumber": "19UUA66278A050105"
       },
-      "moneyService": {
-        "serviceName": "Detail",
-        "servicePrice": "-9"
+      "damageData": {
+        "damageGroupName": "Detail",
+        "moneyService": {
+          "serviceName": "Detail",
+          "servicePrice": "-9.00"
+        }
       },
       "inspPrice": "$8.44"
     }
