@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.DamageData;
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
@@ -11,6 +12,18 @@ import org.testng.Assert;
 
 public class VisualScreenSteps {
 
+    public static void addDefaultDamage(DamageData damageData) {
+        clickAddService();
+        SelectDamagesSteps.selectDefaultDamage(damageData);
+        addServiceToPicture();
+    }
+
+    public static void addNonDefaultDamage(DamageData damageData, ServiceData serviceData) {
+        clickAddService();
+        SelectDamagesSteps.selectNonDefaultDamage(damageData, serviceData);
+        addServiceToPicture();
+    }
+
     public static void addDamage(DamageData damageData) {
         VNextVisualScreen visualScreen = new VNextVisualScreen();
         VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
@@ -18,7 +31,8 @@ public class VisualScreenSteps {
             selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
         } else {
             selectDamagesScreen.selectAllDamagesTab();
-            VNextVisualServicesScreen visualServicesScreen = selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
+            selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
+            VNextVisualServicesScreen visualServicesScreen = new VNextVisualServicesScreen();
             visualServicesScreen.selectCustomService(damageData.getMoneyService().getServiceName());
         }
         visualScreen.clickCarImage();
@@ -31,16 +45,28 @@ public class VisualScreenSteps {
             selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
         } else {
             selectDamagesScreen.selectAllDamagesTab();
-            VNextVisualServicesScreen visualServicesScreen = selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
+            selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
+            VNextVisualServicesScreen visualServicesScreen = new VNextVisualServicesScreen();
             visualServicesScreen.selectCustomService(damageData.getMoneyService().getServiceName());
         }
+    }
+
+    public static void clickAddService() {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
+        visualScreen.clickAddServiceButton();
+    }
+
+    public static void clickDamageCancelEditingButton() {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
+        visualScreen.clickDamageCancelEditingButton();
     }
 
     public static void selectPartServiceDamage(DamageData damageData) {
         VNextVisualScreen visualScreen = new VNextVisualScreen();
         VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
         selectDamagesScreen.selectAllDamagesTab();
-        VNextVisualServicesScreen visualServicesScreen = selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
+        selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
+        VNextVisualServicesScreen visualServicesScreen = new VNextVisualServicesScreen();
         visualServicesScreen.selectCustomService(damageData.getPartServiceData().getServiceName());
     }
 
@@ -57,6 +83,16 @@ public class VisualScreenSteps {
     public static void openEditDamage() {
         VNextVisualScreen visualScreen = new VNextVisualScreen();
         visualScreen.clickCarImageMarker();
+    }
+
+    public static void openEditDamage(int markerIndex) {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
+        visualScreen.clickCarImageMarker(markerIndex);
+    }
+
+    public static int getNumberOfAddedDamages() {
+        VNextVisualScreen visualScreen = new VNextVisualScreen();
+        return visualScreen.getNumberOfImageMarkers();
     }
 
     public static void editVisualDamage(String newPrice) {

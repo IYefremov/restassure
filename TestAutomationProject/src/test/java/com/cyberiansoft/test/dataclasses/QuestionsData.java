@@ -39,4 +39,8 @@ public class QuestionsData {
     private DatePickerQuestion datePickerQuestion;
     @JsonProperty("signatureQuestion")
     private SignatureQuestion signatureQuestion;
+    @JsonProperty("textQuestionData")
+    private TextQuestionData textQuestionData;
+    @JsonProperty("logicalQuestionData")
+    private LogicalQuestionData logicalQuestionData;
 }

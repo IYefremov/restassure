@@ -1,7 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,20 +28,20 @@ public class VNextSelectDamagesScreen extends VNextBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(defaulttab));
 	}
+
+	public VNextSelectDamagesScreen() {
+	}
 	
 	public void selectAllDamagesTab() {
 		tap(alltab);
 	}
 	
-	public VNextVisualScreen clickDefaultDamageType(String damagetype) {
+	public void clickDefaultDamageType(String damagetype) {
 		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
-		return new VNextVisualScreen(appiumdriver);
 	}
 
-	public VNextVisualServicesScreen clickCustomDamageType(String damagetype) {
+	public void clickCustomDamageType(String damagetype) {
 		tap(damagetypeslist.findElement(By.xpath(".//span[text()='" + damagetype + "']")));
-		return new VNextVisualServicesScreen(appiumdriver);
 	}
-	
-	
+
 }
