@@ -1,53 +1,42 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.DamageData;
-import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualServicesScreen;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
-import org.testng.Assert;
 
 public class VisualScreenSteps {
 
-    public static void addDefaultDamage(DamageData damageData) {
+    public static void selectDefaultDamage(DamageData damageData) {
         clickAddService();
         SelectDamagesSteps.selectDefaultDamage(damageData);
+    }
+
+    public static void selectNonDefaultDamage(DamageData damageData, String serviceName) {
+        clickAddService();
+        SelectDamagesSteps.selectNonDefaultDamage(damageData, serviceName);
+    }
+
+    public static void addDefaultDamage(DamageData damageData) {
+        selectDefaultDamage(damageData);
         addServiceToPicture();
     }
 
-    public static void addNonDefaultDamage(DamageData damageData, ServiceData serviceData) {
-        clickAddService();
-        SelectDamagesSteps.selectNonDefaultDamage(damageData, serviceData);
+    public static void addNonDefaultDamage(DamageData damageData, String serviceName) {
+        selectNonDefaultDamage(damageData, serviceName);
         addServiceToPicture();
     }
 
     public static void addDamage(DamageData damageData) {
-        VNextVisualScreen visualScreen = new VNextVisualScreen();
-        VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
-        if (damageData.getMoneyService() == null) {
-            selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
-        } else {
-            selectDamagesScreen.selectAllDamagesTab();
-            selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
-            VNextVisualServicesScreen visualServicesScreen = new VNextVisualServicesScreen();
-            visualServicesScreen.selectCustomService(damageData.getMoneyService().getServiceName());
-        }
-        visualScreen.clickCarImage();
+        selectDamage(damageData);
+        addServiceToPicture();
     }
 
-    public static void selectMoneyServiceDamage(DamageData damageData) {
-        VNextVisualScreen visualScreen = new VNextVisualScreen();
-        VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
+    public static void selectDamage(DamageData damageData) {
         if (damageData.getMoneyService() == null) {
-            selectDamagesScreen.clickDefaultDamageType(damageData.getDamageGroupName());
+            selectDefaultDamage(damageData);
         } else {
-            selectDamagesScreen.selectAllDamagesTab();
-            selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
-            VNextVisualServicesScreen visualServicesScreen = new VNextVisualServicesScreen();
-            visualServicesScreen.selectCustomService(damageData.getMoneyService().getServiceName());
+            selectNonDefaultDamage(damageData, damageData.getMoneyService().getServiceName());
         }
     }
 
@@ -61,23 +50,9 @@ public class VisualScreenSteps {
         visualScreen.clickDamageCancelEditingButton();
     }
 
-    public static void selectPartServiceDamage(DamageData damageData) {
-        VNextVisualScreen visualScreen = new VNextVisualScreen();
-        VNextSelectDamagesScreen selectDamagesScreen = visualScreen.clickAddServiceButton();
-        selectDamagesScreen.selectAllDamagesTab();
-        selectDamagesScreen.clickCustomDamageType(damageData.getDamageGroupName());
-        VNextVisualServicesScreen visualServicesScreen = new VNextVisualServicesScreen();
-        visualServicesScreen.selectCustomService(damageData.getPartServiceData().getServiceName());
-    }
-
     public static void addServiceToPicture() {
         VNextVisualScreen visualScreen = new VNextVisualScreen();
         visualScreen.clickCarImageOnRandom();
-    }
-
-    public static void verifyNumberOfAddedDamages(int numberOfExpectedDamages) {
-        VNextVisualScreen visualScreen = new VNextVisualScreen();
-        Assert.assertEquals(visualScreen.getNumberOfImageMarkers(), numberOfExpectedDamages);
     }
 
     public static void openEditDamage() {
@@ -99,11 +74,6 @@ public class VisualScreenSteps {
         openEditDamage();
         ServiceDetailsScreenSteps.changeServicePrice(newPrice);
         ServiceDetailsScreenSteps.closeServiceDetailsScreen();
-    }
-
-    public static void verifyInspectionTotalPrice(String expectedPrice) {
-        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        Assert.assertEquals(baseWizardScreen.getInspectionTotalPriceValue(), expectedPrice);
     }
 
     public static void removeAllBreakages() {

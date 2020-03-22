@@ -61,9 +61,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 	public void beforeTestCase() {
 		VNextHomeScreen homeScreen = new VNextHomeScreen();
 		if (homeScreen.isQueueMessageVisible()) {
-			VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
+			HomeScreenSteps.openSettings();
+			VNextSettingsScreen settingsScreen = new VNextSettingsScreen();
 			settingsScreen.setManualSendOff();
-			settingsScreen.clickBackButton();
+			ScreenNavigationSteps.pressBackButton();
 			homeScreen.waitUntilQueueMessageInvisible();
 		}
 	}
@@ -112,11 +113,10 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData);
 		final String inspectionNumber = InspectionSteps.saveInspection();
 
-		VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		InspectionSteps.switchToTeamInspections();
-		Assert.assertTrue(inspectionsScreen.isTeamInspectionsViewActive());
-		inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
-		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);
+		InspectionsValidations.verifyTeamTabActive(true);
+		SearchSteps.searchByText(inspectionNumber);
+		InspectionsValidations.verifyInspectionExists(inspectionNumber, true);
 		InspectionSteps.switchToMyInspections();
 		ScreenNavigationSteps.pressBackButton();
 	}
@@ -242,8 +242,9 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
 		VNextHomeScreen homeScreen = new VNextHomeScreen();
-		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
-		settingsScreen.setManualSendOn().clickBackButton();
+		HomeScreenSteps.openSettings();
+		VNextSettingsScreen settingsScreen = new VNextSettingsScreen();
+		ScreenNavigationSteps.pressBackButton();
 
 		HomeScreenSteps.openCreateTeamInspection();
 		InspectionSteps.createInspection(testwholesailcustomer, InspectionTypes.O_KRAMAR, inspectionData);
@@ -258,7 +259,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		HomeScreenSteps.openStatus();
 		StatusScreenSteps.updateMainDB();
 
-		homeScreen.clickInspectionsMenuItem();
+		HomeScreenSteps.openInspections();
 		InspectionSteps.switchToTeamInspections();
 		inspectionsScreen.searchInpectionByFreeText(inspectionNumber);
 		Assert.assertTrue(inspectionsScreen.isInspectionExists(inspectionNumber), "Can't find inspection: " + inspectionNumber);

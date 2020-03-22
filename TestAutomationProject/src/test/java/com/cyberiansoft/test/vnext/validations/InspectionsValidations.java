@@ -3,6 +3,8 @@ package com.cyberiansoft.test.vnext.validations;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class InspectionsValidations {
@@ -49,5 +51,15 @@ public class InspectionsValidations {
     public static void verifyInspectionCustomer(String inspectionID, AppCustomer expectedCustomer) {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         Assert.assertEquals(inspectionsScreen.getInspectionCustomerValue(inspectionID), expectedCustomer.getFullName());
+    }
+
+    public static void verifyTeamTabActive(boolean isActive) {
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        WaitUtils.elementShouldBeVisible(inspectionsScreen.getRootElement(),true);
+        if (isActive)
+            Assert.assertTrue(inspectionsScreen.isTeamViewActive());
+        else
+            Assert.assertFalse(inspectionsScreen.isTeamViewActive());
     }
 }

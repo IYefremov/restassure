@@ -365,7 +365,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
         ServiceDetailsScreenSteps.changeServiceQuantity(moneyDamage.getMoneyService().getServiceQuantity());
         ServiceDetailsScreenSteps.saveServiceDetails();
 
-        VisualScreenSteps.addNonDefaultDamage(percentageDamage, percentageDamage.getPercentageService());
+        VisualScreenSteps.addNonDefaultDamage(percentageDamage, percentageDamage.getPercentageService().getServiceName());
 
         VisualScreenSteps.clickDamageCancelEditingButton();
         WizardScreenValidations.validateTotalPriceValue(inspectionData.getInspectionPrice());

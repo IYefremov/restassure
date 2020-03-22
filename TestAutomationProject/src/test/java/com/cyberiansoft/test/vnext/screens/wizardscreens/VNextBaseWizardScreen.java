@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
-import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypeData;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -67,11 +66,10 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     public VNextBaseWizardScreen() {
     }
 
-    public VNextInspectionsScreen cancelInspection() {
+    public void cancelInspection() {
         clickCancelMenuItem();
         VNextInformationDialog informationdlg = new VNextInformationDialog(appiumdriver);
-        String msg = informationdlg.clickInformationDialogYesButtonAndGetMessage();
-        return new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        informationdlg.clickInformationDialogYesButtonAndGetMessage();
     }
 
 
@@ -85,21 +83,19 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         informationDialog.clickFinalButton();
     }
 
-    public VNextInspectionsScreen saveInspectionAsDraft() {
+    public void saveInspectionAsDraft() {
         clickWizardMenuSaveButton();
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickDraftButton();
-        return new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
-    public VNextInspectionsScreen saveInspectionViaMenu() {
+    public void saveInspectionViaMenu() {
         clickWizardMenuSaveButton();
         if (inspectionType != null)
             if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
                 clcikSaveViaMenuAsFinal();
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
-        return inspectionsScreen;
     }
 
     public VNextWorkOrdersScreen saveWorkOrderViaMenu() {

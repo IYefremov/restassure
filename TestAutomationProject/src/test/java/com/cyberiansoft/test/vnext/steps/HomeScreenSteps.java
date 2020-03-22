@@ -50,6 +50,11 @@ public class HomeScreenSteps {
         homeScreen.clickInspectionsMenuItem();
     }
 
+    public static void openSettings() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        homeScreen.clickSettingsMenuItem();
+    }
+
     public static void openInvoices() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
         WaitUtils.waitUntilElementIsClickable(homeScreen.getRootElement());
