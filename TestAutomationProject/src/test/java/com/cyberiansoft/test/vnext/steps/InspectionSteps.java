@@ -18,7 +18,7 @@ import org.openqa.selenium.By;
 public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
         CustomersScreenSteps.selectCustomer(customer);
-        InspectionSteps.selectInspectionType(inspectionTypes);
+        selectInspectionType(inspectionTypes);
         VehicleInfoScreenSteps.setVIN("777777");
     }
 
@@ -105,11 +105,6 @@ public class InspectionSteps {
         baseWizardScreen.clickCancelMenuItem();
         VNextInformationDialog informationDialog = new VNextInformationDialog();
         informationDialog.clickInformationDialogYesButton();
-    }
-
-    public static void navigateHomeScreen() {
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.clickBackButton();
     }
 
     public static void switchToTeamInspections() {

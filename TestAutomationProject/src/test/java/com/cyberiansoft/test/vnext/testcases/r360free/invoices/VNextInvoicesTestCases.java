@@ -54,6 +54,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
         VNextHomeScreen homeScreen = new VNextHomeScreen();
+        HomeScreenSteps.openCreateMyWorkOrder();
         VNextVehicleInfoScreen vehicleInfoScreen = homeScreen.openCreateWOWizard(testcustomer);
         final WorkOrderData workOrderData = testCaseData.getWorkOrderData();
         VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
@@ -147,8 +148,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         WorkOrderData workOrderData = testCaseData.getWorkOrderData();
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen();
-        VNextWorkOrdersScreen workOrdersScreen = homeScreen.clickWorkOrdersMenuItem();
+        HomeScreenSteps.openWorkOrders();
         WorkOrderSteps.clickAddWorkOrderButton();
         CustomersScreenSteps.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();

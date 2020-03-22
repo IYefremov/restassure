@@ -4,8 +4,6 @@ import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
@@ -17,7 +15,6 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -78,12 +75,6 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='new_inspection']")
     private WebElement newInspectionBtn;
 
-    public VNextHomeScreen(WebDriver appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
-        WaitUtils.elementShouldBeVisible(getRootElement(),true);
-    }
-
     public VNextHomeScreen() {
     }
 
@@ -91,10 +82,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
         tap(customersList);
     }
 
-    public VNextWorkOrdersScreen clickWorkOrdersMenuItem() {
+    public void clickWorkOrdersMenuItem() {
         WaitUtils.elementShouldBeVisible(workOrdersList,true);
         tap(workOrdersList);
-        return new VNextWorkOrdersScreen();
     }
 
     @Step
@@ -107,24 +97,21 @@ public class VNextHomeScreen extends VNextBaseScreen {
         });
     }
 
-    public VNextInvoicesScreen clickInvoicesMenuItem() {
+    public void clickInvoicesMenuItem() {
         tap(invoicesList);
         BaseUtils.waitABit(2000);
-        return new VNextInvoicesScreen();
     }
 
-    public VNextSettingsScreen clickSettingsMenuItem() {
+    public void clickSettingsMenuItem() {
         if (!settingsList.isDisplayed())
             tap(moreList);
         tap(settingsList);
-        return new VNextSettingsScreen(appiumdriver);
     }
 
-    public VNextStatusScreen clickStatusMenuItem() {
+    public void clickStatusMenuItem() {
         WebDriver webDriver = ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         JavascriptExecutor executor = (JavascriptExecutor) webDriver;
         executor.executeScript("arguments[0].click();", statusList);
-        return new VNextStatusScreen();
     }
 
     public void clickQueueMessageIcon() {

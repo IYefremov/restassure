@@ -1,8 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.wizardscreens;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextSelectDamagesScreen;
-import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -13,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
-import java.util.Random;
 
 @Getter
 public class VNextVisualScreen extends VNextBaseWizardScreen {
@@ -22,7 +19,7 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
     private WebElement rootElement;
 
     @FindBy(xpath = "//div[@class='car-image-wrapper']/img")
-    private WebElement carimage;
+    private WebElement carImage;
 
     @FindBy(xpath = "//div[@class='car-marker']/img")
     private WebElement carmarker;
@@ -45,18 +42,9 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
     public VNextVisualScreen() {
     }
 
-    public VNextSelectDamagesScreen clickAddServiceButton() {
+    public void clickAddServiceButton() {
         tap(adddamagesbtn);
         tap(appiumdriver.findElement(By.xpath("//*[@action='add-other']")));
-        return new VNextSelectDamagesScreen(appiumdriver);
-    }
-
-    public void clickCarImage() {
-        int servicesAdded = getNumberOfImageMarkers();
-        if (servicesAdded > 0) {
-            clickCarImageSecondTime();
-        } else
-            tap(carimage);
     }
 
     //todo: rewrite method not to use elements size()
@@ -71,38 +59,13 @@ public class VNextVisualScreen extends VNextBaseWizardScreen {
         //act.moveToElement(elem).moveByOffset(x, y).click().perform();
     }
 
-    public void clickCarImageSecondTime() {
-        WebElement elem = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//img[@class='car-image']"));
-        int width = elem.getSize().getWidth();
-        Actions act = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        act.moveToElement(elem).moveByOffset(20, 20).click().perform();
-    }
-
-    public void clickCarImageACoupleTimes(int touchTimes) {
-        WebDriverWait wait = new WebDriverWait(ChromeDriverProvider.INSTANCE.getMobileChromeDriver(), 15);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//img[@class='car-image']")));
-        WebElement elem = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//img[@class='car-image']"));
-        Actions act = new Actions(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        for (int i = 0; i < touchTimes; i++) {
-            int x = new Random().nextInt(elem.getSize().width / 2);
-            int y = new Random().nextInt(elem.getSize().height / 2);
-            if (new Random().nextBoolean()) {
-                x *= -1;
-                y *= -1;
-            }
-            act.moveToElement(elem).moveByOffset(x, y).click().perform();
-        }
-    }
-
-    public VNextServiceDetailsScreen clickCarImageMarker() {
+    public void clickCarImageMarker() {
         tap(carmarker);
-        return new VNextServiceDetailsScreen(appiumdriver);
     }
 
-    public VNextServiceDetailsScreen clickCarImageMarker(int markerItemIndex) {
+    public void clickCarImageMarker(int markerItemIndex) {
         List<WebElement> markerList = appiumdriver.findElements(By.xpath("//div[@class='car-marker']/img"));
         WaitUtils.click(markerList.get(markerItemIndex));
-        return new VNextServiceDetailsScreen(appiumdriver);
     }
 
     public void clickDamageCancelEditingButton() {

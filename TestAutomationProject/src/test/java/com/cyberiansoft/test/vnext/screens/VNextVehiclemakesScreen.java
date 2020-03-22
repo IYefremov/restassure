@@ -20,7 +20,12 @@ public class VNextVehiclemakesScreen extends VNextBaseScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-page='make']")));
     }
 
-    public VNextVehicleModelsScreen selectVehicleMake(String vehicleMake) {
+    public VNextVehiclemakesScreen() {
+
+    }
+
+
+        public VNextVehicleModelsScreen selectVehicleMake(String vehicleMake) {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-make='" + vehicleMake + "']")));
         tap(makeslist.findElement(By.xpath(".//*[@data-make='" + vehicleMake + "']")));

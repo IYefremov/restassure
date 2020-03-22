@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InvoiceListElement;
@@ -118,12 +117,6 @@ public class VNextInvoicesScreen extends VNextBaseTypeScreen {
 	public void waitUntilInvoiceDisappearsFromList(String invoiceID) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 3);
 		wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.xpath("//div[@class='checkbox-item-title' and text()='" + invoiceID + "']"), 1));
-	}
-	
-	public VNextHomeScreen clickBackButton() {
-		waitInvoicesScreenLoad();
-		clickScreenBackButton();
-		return new VNextHomeScreen(appiumdriver);
 	}
 	
 	public void clickAddInvoiceButton() {
