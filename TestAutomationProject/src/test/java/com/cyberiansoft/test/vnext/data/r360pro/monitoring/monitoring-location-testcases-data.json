@@ -1,0 +1,30 @@
+{
+
+  "testVerifyUserCanEnterToSelectLocation": [
+    {
+      "rowID": "testVerifyUserCanEnterToSelectLocation.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92274",
+          "testCaseTitle": "Verify user can enter to 'Select Location'"
+        },
+        {
+          "testCaseID": "92278",
+          "testCaseTitle": "Verify user can search location (positive case)"
+        },
+        {
+          "testCaseID": "92280",
+          "testCaseTitle": "Verify user can search location (negative case)"
+        },
+        {
+          "testCaseID": "92275",
+          "testCaseTitle": "Verify user sees warning message if chosen location is empty"
+        }
+      ],
+      "monitoring": {
+        "location": "automationMonitoring"
+      }
+    }
+  ]
+}
