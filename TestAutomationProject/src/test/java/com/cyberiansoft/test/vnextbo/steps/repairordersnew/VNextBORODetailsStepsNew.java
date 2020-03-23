@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
@@ -37,6 +38,7 @@ public class VNextBORODetailsStepsNew {
 
     public static void expandPhaseByName(String phase) {
 
+        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isEnabled());
         Utils.clickElement(new VNextBORODetailsWebPageNew().expandPhaseButton(phase));
         WaitUtilsWebDriver.waitABit(5000);
     }
@@ -45,6 +47,7 @@ public class VNextBORODetailsStepsNew {
 
         Utils.clickElement(new VNextBORODetailsWebPageNew().collapsePhaseButton(phase));
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitABit(2000);
     }
 
     public static void reportProblemOnPhaseLevelWithoutDescription(String phase, String problemReason) {
@@ -62,7 +65,7 @@ public class VNextBORODetailsStepsNew {
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
         Utils.clickElement(detailsWebPageNew.getReportProblemForServiceActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithoutDescription(problemReason);
-        WaitUtilsWebDriver.waitABit(5000);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void openCompleteCurrentPhaseDialog(String phase) {
@@ -70,7 +73,7 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
         Utils.clickElement(detailsWebPageNew.getCompleteCurrentPhaseActionButton());
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.visibilityOf(new VNextBOROCompleteCurrentPhaseDialogNew().getCompleteCurrentPhaseDialog()));
+        ConditionWaiter.create(__ -> new VNextBOROCompleteCurrentPhaseDialogNew().getCompleteCurrentPhaseDialog().isDisplayed());
     }
 
     public static void reportProblemOnPhaseLevelWithDescription(String phase, String problemReason, String problemDescription) {
@@ -95,6 +98,7 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
+        ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForPhase(phase).isEnabled());
         Utils.clickElement(detailsWebPageNew.getResolveProblemForPhaseActionButton());
         VNextBOROResolveProblemDialogStepsNew.resolveProblem();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -226,7 +230,7 @@ public class VNextBORODetailsStepsNew {
     public static void closeOrderWithReason(String reason) {
 
         changeOrderStatus("Closed");
-        VNextBOCloseRODialogStepsNew.closeOrderWithCompletedReason(reason);
+        VNextBOCloseRODialogStepsNew.closeOrderWithReason(reason);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitABit(4000);
     }

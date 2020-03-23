@@ -7,7 +7,6 @@ import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.config.VNextEnvironmentInfo;
 import com.cyberiansoft.test.vnext.config.VNextFreeRegistrationInfo;
 import com.cyberiansoft.test.vnext.factories.environments.EnvironmentType;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import org.testng.annotations.BeforeTest;
@@ -39,6 +38,5 @@ public class BaseTestCaseWithDeviceRegistrationAndUserLogin extends VNextBaseTes
             VNextLoginScreen loginScreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
 		}
-        new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 	}
 }

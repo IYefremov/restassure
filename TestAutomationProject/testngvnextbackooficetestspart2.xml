@@ -1,4 +1,7 @@
 <suite name="Cyberiansoft R360 ReconPro tests suite 2" verbose="10" configfailurepolicy="continue">
+    <listeners>
+        <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
+    </listeners>
     <test name="Home Page Tests">
         <parameter name="userName" value="test.automation2@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>

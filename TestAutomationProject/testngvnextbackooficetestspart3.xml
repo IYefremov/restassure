@@ -72,4 +72,11 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorGridDataTestCases"/>
         </classes>
     </test>
+    <test name="Monitor Grid Tests Part 2">
+        <parameter name="userName" value="test.automation3@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorGridTestCases"/>
+        </classes>
+    </test>
 </suite>

@@ -95,7 +95,7 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
         VNextLoginScreen loginscreen = new VNextLoginScreen(chromeDriver);
         Employee employee = BaseTestClass.getEmployee();
         loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
-        new VNextHomeScreen(chromeDriver);
+        new VNextHomeScreen();
     }
 
     @Override
@@ -144,7 +144,7 @@ public class TestServiceListener implements ITestListener, IInvokedMethodListene
         VNextLoginScreen loginscreen = new VNextLoginScreen(chromeDriver);
         Employee employee = BaseTestClass.getEmployee();
         loginscreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
-        new VNextHomeScreen(chromeDriver);
+        new VNextHomeScreen();
     }
 
     @Override

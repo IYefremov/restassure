@@ -77,7 +77,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
-    protected boolean isTeamViewActive() {
+    public boolean isTeamViewActive() {
         return teamviewtab.getAttribute("class").contains("active");
     }
 

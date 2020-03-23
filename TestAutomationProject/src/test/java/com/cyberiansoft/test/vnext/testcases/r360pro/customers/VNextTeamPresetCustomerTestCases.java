@@ -12,10 +12,7 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.validations.CustomersScreenValidation;
-import com.cyberiansoft.test.vnext.validations.HomeScreenValidation;
-import com.cyberiansoft.test.vnext.validations.InspectionsScreenValidation;
-import com.cyberiansoft.test.vnext.validations.WorkOrdersScreenValidations;
+import com.cyberiansoft.test.vnext.validations.*;
 import com.cyberiansoft.test.vnextbo.steps.users.CustomerServiceSteps;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -103,7 +100,7 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(InspectionTypes.O_KRAMAR, inspectionData);
         final String inspectionId = InspectionSteps.saveInspection();
-        InspectionsScreenValidation.validateInspectionCustomerValueByInspectionNumber(inspectionId, retailCustomer1.getFullName());
+        InspectionsValidations.verifyInspectionCustomer(inspectionId, retailCustomer1);
         ScreenNavigationSteps.pressBackButton();
 
     }

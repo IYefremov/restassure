@@ -61,8 +61,8 @@ public class VehicleInfoScreenInteractions {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Vehicle info data not found " + VehicleDataField.VIN.getValue())).sendKeys(Keys.TAB);
         WaitUtils.click(vehicleInfoScreen.getMakeSectionExpandButton());
-        VNextVehiclemakesScreen vehiclemakesScreen = new VNextVehiclemakesScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextVehicleModelsScreen vehicleModelsScreen = vehiclemakesScreen.selectVehicleMake(vehicleMake);
+        VNextVehiclemakesScreen vehicleMakesScreen = new VNextVehiclemakesScreen();
+        VNextVehicleModelsScreen vehicleModelsScreen = vehicleMakesScreen.selectVehicleMake(vehicleMake);
         vehicleModelsScreen.selectVehicleModel(vehicleModel);
     }
 

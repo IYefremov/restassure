@@ -820,7 +820,7 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
         VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        VNextHomeScreen homescreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        VNextHomeScreen homescreen = new VNextHomeScreen();
         Assert.assertTrue(homescreen.isUpgrateToProBannerVisible());
 
 
@@ -1221,6 +1221,5 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[text()='Data has been successfully downloaded']")));
         VNextInformationDialog informationdlg = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationdlg.clickInformationDialogOKButton();
-        new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 }

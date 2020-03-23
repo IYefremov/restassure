@@ -27,5 +27,55 @@
         ]
       }
     }
+  ],
+  "verifyUserCanCloseRO": [
+    {
+      "rowID": "verifyUserCanCloseRO.01",
+      "description": "Test Case 91402: User can close RO with \"None\" reason",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91402",
+          "testCaseTitle": "User can close RO with \"None\" reason"
+        }
+      ],
+      "problemReason": "(None)",
+      "phase": "Rozstalnoy"
+    },
+    {
+      "rowID": "verifyUserCanCloseRO.02",
+      "description": "Test Case 91403: User can close RO with \"Completed\" reason",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91403",
+          "testCaseTitle": "User can close RO with \"Completed\" reason"
+        }
+      ],
+      "problemReason": "Completed",
+      "phase": "Rozstalnoy"
+    },
+    {
+      "rowID": "verifyUserCanCloseRO.03",
+      "description": "Test Case 91404: User can close RO with \"Skipped\" reason",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91404",
+          "testCaseTitle": "User can close RO with \"Skipped\" reason"
+        }
+      ],
+      "problemReason": "Skipped",
+      "phase": "Rozstalnoy"
+    }
+  ],
+  "verifyUserCanChangeFlagOfRo": [
+    {
+      "rowID": "verifyUserCanChangeFlagOfRo.01",
+      "description": "Test Case 91395: User can change a Flag of RO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91395",
+          "testCaseTitle": "User can change a Flag of RO"
+        }
+      ]
+    }
   ]
 }

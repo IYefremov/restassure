@@ -32,8 +32,10 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		final String expectedQueue = "1";
 
         VNextHomeScreen homeScreen = new VNextHomeScreen();
-		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
-		homeScreen = settingsScreen.setManualSendOn().clickBackButton();
+		HomeScreenSteps.openSettings();
+		VNextSettingsScreen settingsScreen = new VNextSettingsScreen();
+		settingsScreen.setManualSendOn();
+		ScreenNavigationSteps.pressBackButton();
 		HomeScreenSteps.openInspections();
 		InspectionSteps.createR360Inspection(testcustomer, inspectionData);
 		ScreenNavigationSteps.pressBackButton();
@@ -48,8 +50,10 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		final int expectedQueue = 5;
 
         VNextHomeScreen homeScreen = new VNextHomeScreen();
-		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
-		homeScreen = settingsScreen.setManualSendOn().clickBackButton();
+		HomeScreenSteps.openSettings();
+		VNextSettingsScreen settingsScreen = new VNextSettingsScreen();
+		settingsScreen.setManualSendOn();
+		ScreenNavigationSteps.pressBackButton();
 		HomeScreenSteps.openInspections();
 		for (int i = 0; i < expectedQueue-1; i++)
 			InspectionSteps.createR360Inspection(testcustomer, inspectionData);
@@ -64,8 +68,10 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         VNextHomeScreen homeScreen = new VNextHomeScreen();
-		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
-		homeScreen = settingsScreen.setManualSendOff().clickBackButton();
+		HomeScreenSteps.openSettings();
+		VNextSettingsScreen settingsScreen = new VNextSettingsScreen();
+		settingsScreen.setManualSendOff();
+		ScreenNavigationSteps.pressBackButton();
 		HomeScreenSteps.openInspections();
 		InspectionSteps.createR360Inspection(testcustomer, inspectionData);
 		ScreenNavigationSteps.pressBackButton();
@@ -80,8 +86,10 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 		final String expectedQueue = "1";
 
         VNextHomeScreen homeScreen = new VNextHomeScreen();
-		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
-		homeScreen = settingsScreen.setManualSendOn().clickBackButton();
+		HomeScreenSteps.openSettings();
+		VNextSettingsScreen settingsScreen = new VNextSettingsScreen();
+		settingsScreen.setManualSendOn();
+		ScreenNavigationSteps.pressBackButton();
 		HomeScreenSteps.openInspections();
 		InspectionSteps.createR360Inspection(testcustomer, inspectionData);
 		ScreenNavigationSteps.pressBackButton();
@@ -100,8 +108,10 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 
         VNextHomeScreen homeScreen = new VNextHomeScreen();
 		AppiumUtils.setNetworkOff();
-		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
-		homeScreen = settingsScreen.setManualSendOff().clickBackButton();
+		HomeScreenSteps.openSettings();
+		VNextSettingsScreen settingsScreen = new VNextSettingsScreen();
+		settingsScreen.setManualSendOff();
+		ScreenNavigationSteps.pressBackButton();
 		HomeScreenSteps.openInspections();
 		for (int i = 0; i < expectedQueue-1; i++)
 			InspectionSteps.createR360Inspection(testcustomer, inspectionData);
@@ -120,8 +130,10 @@ public class VNextSyncInspectionsTestCases extends BaseTestCaseWithDeviceRegistr
 
         VNextHomeScreen homeScreen = new VNextHomeScreen();
 		AppiumUtils.setNetworkOff();
-		VNextSettingsScreen settingsScreen = homeScreen.clickSettingsMenuItem();
-		homeScreen = settingsScreen.setManualSendOff().clickBackButton();
+		HomeScreenSteps.openSettings();
+		VNextSettingsScreen settingsScreen = new VNextSettingsScreen();
+		settingsScreen.setManualSendOff();
+		ScreenNavigationSteps.pressBackButton();
 		HomeScreenSteps.openInspections();
 		InspectionSteps.createR360Inspection(testcustomer, inspectionData);
 		ScreenNavigationSteps.pressBackButton();

@@ -1,14 +1,12 @@
 package com.cyberiansoft.test.vnext.screens.typesscreens;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InspectionListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -47,22 +45,12 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     final public static int MAX_NUMBER_OF_INPECTIONS = 51;
 
-    public VNextInspectionsScreen(WebDriver appiumdriver) {
-        super(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
-    }
-
     public VNextInspectionsScreen() {
         PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
     public void clickAddInspectionButton() {
         clickAddButton();
-    }
-
-    public VNextHomeScreen clickBackButton() {
-        clickScreenBackButton();
-        return new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public String getFirstInspectionNumber() {
