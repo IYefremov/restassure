@@ -32,6 +32,10 @@ public class VNextBOPartsDetailsPanelInteractions {
         VNextBOPartsProvidersDialogInteractions.waitForPartsProvidersModalDialogToBeOpened();
     }
 
+    public static void waitForGetQuotesButtonToBeDisplayed(boolean expected) {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getGetQuotesButton(), expected, 3);
+    }
+
     public static void setPoByStatusIfEmpty(String status) {
         new VNextBOPartsDetailsPanel().getPoInputFieldsByStatus(status).forEach(po -> {
             if (Utils.getInputFieldValue(po, 2).isEmpty()) {
@@ -57,47 +61,45 @@ public class VNextBOPartsDetailsPanelInteractions {
         return Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPoInputFieldsList().get(order), 10);
     }
 
-    public static void setCorePrice(int order, String corePrice) {
-        final WebElement corePriceInputField = new VNextBOPartsDetailsPanel().getCorePriceInputFieldsList().get(order);
-        final String prevCorePrice = Utils.getInputFieldValue(corePriceInputField);
-        Utils.sendKeysWithEnter(corePriceInputField, corePrice);
-        Utils.clickElement(corePriceInputField.findElement(By.xpath(".//../..//div[text()='Core Price']")));
-        try {
-            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
-                    !prevCorePrice.equals(Utils.getInputFieldValue(corePriceInputField)));
-        } catch (Exception ignored) {}
+    private static void setCorePrice(int order, String corePrice) {
+        setValue(order, corePrice, "Core Price", new VNextBOPartsDetailsPanel().getCorePriceInputFieldsList());
     }
 
-    public static void setVendorPrice(int order, String vendorPrice) {
-        final WebElement vendorPriceInputField = new VNextBOPartsDetailsPanel().getVendorPriceInputFieldsList().get(order);
-        final String prevVendorPrice = Utils.getInputFieldValue(vendorPriceInputField);
-        Utils.sendKeysWithEnter(vendorPriceInputField, vendorPrice);
-        Utils.clickElement(vendorPriceInputField.findElement(By.xpath(".//../..//div[text()='Vendor Price']")));
-        try {
-            WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
-                    !prevVendorPrice.equals(Utils.getInputFieldValue(vendorPriceInputField)));
-        } catch (Exception ignored) {}
+    private static void setVendorPrice(int order, String vendorPrice) {
+        setValue(order, vendorPrice, "Vendor Price", new VNextBOPartsDetailsPanel().getVendorPriceInputFieldsList());
     }
 
-    public static void setLaborCredit(int order, String laborCredit) {
-        final WebElement laborCreditInputField = new VNextBOPartsDetailsPanel().getLaborCreditInputFieldsList().get(order);
-        final String prevLaborCredit = Utils.getInputFieldValue(laborCreditInputField);
-        Utils.sendKeysWithEnter(laborCreditInputField, laborCredit);
-        Utils.clickElement(laborCreditInputField.findElement(By.xpath(".//../..//div[text()='Labor Credit']")));
+    private static void setQuantity(int order, String quantity) {
+        setValue(order, quantity, "Quantity", new VNextBOPartsDetailsPanel().getQuantityInputFieldsList());
+    }
+
+    private static void setPrice(int order, String quantity) {
+        setValue(order, quantity, "Price", new VNextBOPartsDetailsPanel().getPriceInputFieldsList());
+    }
+
+    private static void setLaborCredit(int order, String laborCredit) {
+        setValue(order, laborCredit, "Labor Credit", new VNextBOPartsDetailsPanel().getLaborCreditInputFieldsList());
+    }
+
+    private static void setValue(int order, String value, String fieldTitle, List<WebElement> list) {
+        final WebElement inputField = list.get(order);
+        final String prevValue = Utils.getInputFieldValue(inputField);
+        Utils.sendKeysWithEnter(inputField, value);
+        Utils.clickElement(inputField.findElement(By.xpath(".//../..//div[text()='" + fieldTitle + "']")));
         try {
             WaitUtilsWebDriver.getShortWait().until((ExpectedCondition<Boolean>) driver ->
-                    !prevLaborCredit.equals(Utils.getInputFieldValue(laborCreditInputField)));
+                    !prevValue.equals(Utils.getInputFieldValue(inputField)));
         } catch (Exception ignored) {}
     }
 
     public static String setLaborCredit(int order) {
-        final String laborCredit = RandomStringUtils.randomNumeric(2);
+        final String laborCredit = String.valueOf(RandomUtils.nextInt(10, 100));
         setLaborCredit(order, laborCredit);
         return laborCredit;
     }
 
     public static String setCorePrice(int order) {
-        final String corePrice = RandomStringUtils.randomNumeric(2);
+        final String corePrice = String.valueOf(RandomUtils.nextInt(10, 100));
         setCorePrice(order, corePrice);
         return corePrice;
     }
@@ -106,6 +108,43 @@ public class VNextBOPartsDetailsPanelInteractions {
         final String vendorPrice = String.valueOf(RandomUtils.nextInt(10, 100));
         setVendorPrice(order, vendorPrice);
         return vendorPrice;
+    }
+
+    public static String setQuantity(int order) {
+        final String quantity = String.valueOf(RandomUtils.nextInt(10, 100));
+        setQuantity(order, quantity);
+        return quantity;
+    }
+
+    public static String getQuantity(int order) {
+        return Utils
+                .getInputFieldValue(new VNextBOPartsDetailsPanel().getQuantityInputFieldsList().get(order), 3)
+                .replaceAll("[.][0-9]{3}", "");
+    }
+
+    public static void setCurrentDateIntoTheETAField(int order) {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(partsDetailsPanel.getEtaFieldsCalendarButton().get(order));
+        WaitUtilsWebDriver.waitForAttributeToBe(
+                partsDetailsPanel.getEtaFieldsList().get(order), "aria-expanded", "true", 2);
+        Utils.clickElement(partsDetailsPanel.getEtaCalendarTodayCell());
+        WaitUtilsWebDriver.waitForAttributeToBe(
+                partsDetailsPanel.getEtaFieldsList().get(order), "aria-expanded", "false", 2);
+    }
+
+    public static String getETA(int order) {
+        return Utils
+                .getInputFieldValue(new VNextBOPartsDetailsPanel().getEtaFieldsList().get(order), 3);
+    }
+
+    public static String setPrice(int order) {
+        final String price = String.valueOf(RandomUtils.nextInt(10, 100));
+        setPrice(order, price);
+        return price;
+    }
+
+    public static String getPrice(int order) {
+        return getFormattedInputField(new VNextBOPartsDetailsPanel().getPriceInputFieldsList().get(order));
     }
 
     public static String getVendorPrice(int order) {
@@ -190,6 +229,24 @@ public class VNextBOPartsDetailsPanelInteractions {
                 }
             });
         }
+    }
+
+    public static void clickServiceCheckbox(int order) {
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitABit(1000);
+        final WebElement serviceCheckbox = new VNextBOPartsDetailsPanel().getPartCheckboxesList().get(order);
+        WaitUtilsWebDriver.waitForElementNotToBeStale(serviceCheckbox);
+        Utils.clickElement(serviceCheckbox);
+    }
+
+    public static void waitForStatusesCheckboxToBeEnabled() {
+        WaitUtilsWebDriver.waitForAttributeToContain(new VNextBOPartsDetailsPanel().getStatusesCheckbox(),
+                "class", "items-toggle--checked", 4);
+    }
+
+    public static void waitForStatusesCheckboxToBeDisabled() {
+        WaitUtilsWebDriver.waitForAttributeNotToContain(new VNextBOPartsDetailsPanel().getStatusesCheckbox(),
+                "class", "items-toggle--checked", 4);
     }
 
     public static int getPartNumberByPartName(String partName) {

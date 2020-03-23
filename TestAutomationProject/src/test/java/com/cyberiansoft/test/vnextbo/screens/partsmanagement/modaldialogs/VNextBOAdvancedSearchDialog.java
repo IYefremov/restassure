@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.screens.partsmanagement;
+package com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;

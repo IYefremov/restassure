@@ -59,8 +59,14 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Labor credit']")
     private List<WebElement> laborCreditInputFieldsList;
 
+    @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Quantity']")
+    private List<WebElement> quantityInputFieldsList;
+
     @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Core price']")
     private List<WebElement> corePriceInputFieldsList;
+
+    @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Price']")
+    private List<WebElement> priceInputFieldsList;
 
     @FindBy(xpath = "//div[@id='part-entity-details']//input[@title='Vendor price']")
     private List<WebElement> vendorPriceInputFieldsList;
@@ -114,7 +120,10 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     private List<WebElement> partsListBoxOptions;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'estimatedTimeArrival')]")
-    private List<WebElement> partEtaField;
+    private List<WebElement> etaFieldsList;
+
+    @FindBy(xpath = "//div[text()='ETA']/..//span[contains(@class, 'k-i-calendar')]")
+    private List<WebElement> etaFieldsCalendarButton;
 
     @FindBy(xpath = "//input[contains(@data-bind, 'quantityFormatted')]")
     private List<WebElement> partQuantityField;
@@ -148,6 +157,9 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@id='partsTable']//div[@data-order-service-id]")
     private List<WebElement> partsList;
+
+    @FindBy(xpath = "//div[contains(@class, 'k-animation-container') and contains(@style, 'display: block')]//td[contains(@class, 'k-today')]")
+    private WebElement etaCalendarTodayCell;
 
     public VNextBOPartsDetailsPanel() {
         super(DriverBuilder.getInstance().getDriver());

@@ -1,8 +1,10 @@
 package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
 
+import com.cyberiansoft.test.baseutils.CustomDateProvider;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.enums.partsmanagement.CoreStatus;
 import com.cyberiansoft.test.enums.partsmanagement.PartCondition;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
@@ -10,11 +12,12 @@ import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDia
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
-import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddLaborPartsDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsOrdersListPanel;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAddLaborPartsDialog;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOAddNewPartDialogSteps;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOConfirmationDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
@@ -42,14 +45,18 @@ public class VNextBOPartsDetailsPanelSteps {
     }
 
     public static void setAddNewPartValues(VNextBOPartsData data) {
-        WaitUtilsWebDriver.waitABit(1000);
-        VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
-        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(true);
+        openAddNewPartDialog();
         VNextBOAddNewPartDialogSteps.setServiceField(data.getService());
         VNextBOAddNewPartDialogValidations.verifyServiceFieldIsCorrect(data.getService());
         VNextBOAddNewPartDialogSteps.setDescription(data.getDescription());
         VNextBOAddNewPartDialogSteps.setCategory(data.getCategory());
         VNextBOAddNewPartDialogSteps.setSubCategory(data.getSubcategory());
+    }
+
+    public static void openAddNewPartDialog() {
+        WaitUtilsWebDriver.waitABit(1000);
+        VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
+        VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(true);
     }
 
     public static void clickAddNewPartButton() {
@@ -178,8 +185,11 @@ public class VNextBOPartsDetailsPanelSteps {
 
     public static void expandLaborBlockForPartByNumberInList(int partNumber) {
 
-        Utils.clickWithJS(new VNextBOPartsDetailsPanel().getLaborsExpander().get(partNumber));
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickWithJS(partsDetailsPanel.getLaborsExpander().get(partNumber));
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitForAttributeNotToContain(
+                partsDetailsPanel.getPartLaborsBlock().get(partNumber), "style", "display: none", 2);
     }
 
     public static int getLaborsAmountForPartByNumberInList(int partNumber) {
@@ -366,5 +376,29 @@ public class VNextBOPartsDetailsPanelSteps {
                 })
                 .reduce((prev, next) -> prev + next)
                 .orElse(0);
+    }
+
+    public static void setNewRandomValuesForThePart(VNextBOPartsManagementData data, int order) {
+        final String vendorPrice = VNextBOPartsDetailsPanelInteractions.setVendorPrice(order);
+        VNextBOPartsDetailsPanelValidations.verifyPartVendorPrice(order, vendorPrice);
+
+        final String quantity = VNextBOPartsDetailsPanelInteractions.setQuantity(order);
+        VNextBOPartsDetailsPanelValidations.verifyQuantity(order, quantity);
+
+        final String corePrice = VNextBOPartsDetailsPanelInteractions.setCorePrice(order);
+        VNextBOPartsDetailsPanelValidations.verifyPartCorePrice(order, corePrice);
+
+        final String laborCredit = VNextBOPartsDetailsPanelInteractions.setLaborCredit(order);
+        VNextBOPartsDetailsPanelValidations.verifyPartLaborCreditValue(order, laborCredit);
+
+        VNextBOPartsDetailsPanelInteractions.setProvider(data.getProvider());
+        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(order, data.getProvider());
+
+        final String price = VNextBOPartsDetailsPanelInteractions.setPrice(order);
+        VNextBOPartsDetailsPanelValidations.verifyPrice(order, price);
+
+        final String eta = CustomDateProvider.getCurrentDateInFullFormat(true);
+        VNextBOPartsDetailsPanelInteractions.setCurrentDateIntoTheETAField(order);
+        VNextBOPartsDetailsPanelValidations.verifyETA(order, eta);
     }
 }
