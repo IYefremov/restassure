@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.screens.partsmanagement;
+package com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
@@ -34,6 +34,12 @@ public class VNextBOAddNewPartDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//ul[@id='service-instance-form-service_listbox']")
     private WebElement serviceFieldDropDown;
+
+    @FindBy(xpath = "//ul[@id='service-instance-form-service_listbox']/li")
+    private List<WebElement> serviceFieldDropDownOptions;
+
+    @FindBy(xpath = "//span[@aria-controls='service-instance-form-service_listbox']")
+    private WebElement serviceFieldArrow;
 
     @FindBy(xpath = "//textarea[@data-bind='value: services.selectedService.serviceDescription']")
     private WebElement descriptionTextarea;

@@ -42,7 +42,7 @@ public class VNextBOConfirmationDialogInteractions {
 
     public static void clickModalDialogButton(WebElement button) {
         final By dialog = By.id("dialogModal");
-        WaitUtilsWebDriver.elementShouldBeVisible(dialog, true, 2);
+        WaitUtilsWebDriver.elementShouldBeVisible(dialog, true, 4);
         Utils.clickElement(button);
         WaitUtilsWebDriver.elementShouldBeVisible(dialog, false, 3);
     }

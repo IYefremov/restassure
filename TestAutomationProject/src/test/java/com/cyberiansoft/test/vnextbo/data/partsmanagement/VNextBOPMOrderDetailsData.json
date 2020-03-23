@@ -1,20 +1,4 @@
 {
-  "verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox": [
-    {
-      "rowID": "verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox.01",
-      "description": "Test Case 83855:User can see Parts details of RO. Test Case 83951:User can select the Part by activating the check-box",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91137"
-        },
-        {
-          "testCaseID": "91150"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414"
-    }
-  ],
   "verifyUserCanAddAndDeleteLabor": [
     {
       "rowID": "verifyUserCanAddAndDeleteLabor.01",
@@ -36,101 +20,6 @@
       "location": "Best Location Automation",
       "woNum": "O-000-152414",
       "labor": "Labor AM"
-    }
-  ],
-  "verifyUserCanTypeLaborServiceNameAddingLabor": [
-    {
-      "rowID": "verifyUserCanTypeLaborServiceNameAddingLabor.01",
-      "description": "Test Case 83943:User can type labor service name Adding labor. Test Case 83944:User can clear typed name of Labor service clicking on \"X-icon\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91143"
-        },
-        {
-          "testCaseID": "91144"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "laborStart": "not",
-      "labor": "Not Multi Labor (optional clarification)"
-    }
-  ],
-  "verifyUserCanCancelAddingLabor": [
-    {
-      "rowID": "verifyUserCanCancelAddingLabor.01",
-      "description": "Test Case 83945:User can cancel Adding labor (X-icon). Test Case 83947:User can cancel Adding labor (Cancel)",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91145"
-        },
-        {
-          "testCaseID": "91146"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "labor": "Labor AM"
-    }
-  ],
-  "verifyUserCanMaximizeMinimizeThePartTab": [
-    {
-      "rowID": "verifyUserCanMaximizeMinimizeThePartTab.01",
-      "description": "Test Case 83949:User can minimize/maximize the @Part tab",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91147"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "labor": "Labor AM"
-    }
-  ],
-  "verifyUserCanChangeOEM": [
-    {
-      "rowID": "verifyUserCanChangeOEM.01",
-      "description": "Test Case 83954:User can change \"OEM#\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91152"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414",
-      "oemNum": "24234"
-    }
-  ],
-  "verifyUserCanChangePartsInputFields": [
-    {
-      "rowID": "verifyUserCanChangePartsInputFields.01",
-      "description": "Test Case 83957:User can change \"Vendor Price\", Test Case 83959: User can change \"Price\", Test Case 83960: User can change \"Quantity\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91154"
-        },
-        {
-          "testCaseID": "91156"
-        },
-        {
-          "testCaseID": "91158"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414"
-    }
-  ],
-  "verifyUserCanChangeETA": [
-    {
-      "rowID": "verifyUserCanChangeETA.01",
-      "description": "Test Case 83961:User can change \"ETA\"",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91160"
-        }
-      ],
-      "location": "Best Location Automation",
-      "woNum": "O-000-152414"
     }
   ],
   "verifyUserCanChangeStatusOfThePart": [
@@ -227,22 +116,6 @@
       }
     }
   ],
-  "verifyUserCanChangeProviderOfThePart": [
-    {
-      "rowID": "verifyUserCanChangeProviderOfThePart.01",
-      "description": "Test case 83855: User can see Part's details of RO. Test case 83974: User can change Provider of the Part",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "91173"
-        }
-      ],
-      "location": "Best Location Automation",
-      "searchData": {
-        "woNum": "O-168-00026"
-      },
-      "provider": "Test Team"
-    }
-  ],
   "verifyUserCanChangePartForSpecifiedParts": [
     {
       "rowID": "verifyUserCanChangePartForSpecifiedParts.01",
@@ -262,36 +135,6 @@
         ]
       },
       "partNumber": "04711-SNH-A90ZZ"
-    }
-  ],
-  "verifyUserCanChangeLaborCredit": [
-    {
-      "rowID": "verifyUserCanChangeLaborCredit.01",
-      "description": "User can change Labor Credit",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "93077"
-        }
-      ],
-      "location": "Rozstalnoy_location",
-      "searchData": {
-        "woNum": "O-236-00009"
-      }
-    }
-  ],
-  "verifyUserCanChangeCorePrice": [
-    {
-      "rowID": "verifyUserCanChangeCorePrice.01",
-      "description": "User can change Core Price",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "93074"
-        }
-      ],
-      "location": "Rozstalnoy_location",
-      "searchData": {
-        "woNum": "O-374-00003"
-      }
     }
   ],
   "verifyUserCanChangeCoreStatus": [
@@ -324,18 +167,52 @@
       }
     }
   ],
-  "verifyUserCanChangeVendorPrice": [
+  "verifyUserCanChangePartValues": [
     {
-      "rowID": "verifyUserCanChangeVendorPrice.01",
-      "description": "Test Case 83957: User can change \"Vendor Price\"",
+      "rowID": "verifyUserCanChangePartValues.01",
+      "description": "Test Case 83960: User can change \"Quantity\". Test Case 83959: User can change \"Price\". Test Case 83961: User can change \"ETA\". Test Case 83957: User can change \"Vendor Price\". Test Case 83974: User can change Provider of the Part. User can change Labor Credit. User can change Core Price.",
       "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91158"
+        },
+        {
+          "testCaseID": "91173"
+        },
+        {
+          "testCaseID": "93077"
+        },
+        {
+          "testCaseID": "93074"
+        },
+        {
+          "testCaseID": "91156"
+        },
+        {
+          "testCaseID": "91160"
+        },
         {
           "testCaseID": "91154"
         }
       ],
-      "location": "Rozstalnoy_location",
+      "location": "Best Location Automation",
       "searchData": {
-        "woNum": "O-374-00003"
+        "woNum": "O-000-152414"
+      },
+      "provider": "VK TEAM"
+    }
+  ],
+  "verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox": [
+    {
+      "rowID": "verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox.01",
+      "description": "Test Case 83951:User can select the Part by activating the check-box",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91150"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-152414"
       }
     }
   ]

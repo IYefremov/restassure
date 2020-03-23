@@ -10,8 +10,8 @@ import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOAddNewPartDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOAddNewPartDialogSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAddNewPartDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
@@ -94,7 +94,7 @@ public class VNextBOPartsManagementAddNewPartTestCases extends BaseTestCase {
 
         VNextBOPartsDetailsPanelSteps.clickAddNewPartButton();
         VNextBOAddNewPartDialogValidations.verifyDialogIsDisplayed(true);
-        VNextBOAddNewPartDialogInteractions.setServiceName(service);
+        VNextBOAddNewPartDialogSteps.setServiceName(service);
         final List<String> highlightedServices = VNextBOAddNewPartDialogInteractions
                 .getHighlightedServicesInDropDown(service);
         Assert.assertEquals(highlightedServices.size(), 1, "Only one service has to be highlighted");
@@ -144,6 +144,22 @@ public class VNextBOPartsManagementAddNewPartTestCases extends BaseTestCase {
             VNextBOPartsDetailsPanelValidations.isDeleteSelectedPartsButtonDisplayed(true);
             VNextBOPartsDetailsPanelValidations.verifyPartIsDisplayed(partName, true);
         }
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanFilterAvailableServicesListByEnteredText(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
+        VNextBOPartsDetailsPanelSteps.openAddNewPartDialog();
+        VNextBOAddNewPartDialogSteps.openServiceDropDown();
+        final int optionsSize = VNextBOAddNewPartDialogSteps.getServiceDropDownOptionsSize();
+        VNextBOAddNewPartDialogSteps.closeServiceDropDown();
+        VNextBOAddNewPartDialogSteps.setServiceName(data.getPartData().getService());
+        VNextBOAddNewPartDialogSteps.waitForServiceListOptionsToBeUpdatedInDropDown(optionsSize);
+        VNextBOAddNewPartDialogValidations.verifyServiceOptionsInDropDownContainText(data.getPartData().getService());
+        VNextBOAddNewPartDialogSteps.cancel();
     }
 
 //    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

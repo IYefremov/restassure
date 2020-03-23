@@ -1,24 +1,29 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.RepairStatus;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.enums.partsmanagement.CoreStatus;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
+import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBORODetailsPartsBlockInteractions;
+import com.cyberiansoft.test.vnextbo.steps.addOns.VNextBOAddOnsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.leftmenupanel.VNextBOLeftMenuSteps;
-import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOAdvancedSearchDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsOrdersListPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPartsBlockSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
@@ -28,15 +33,43 @@ import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBORODetail
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
 public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsTD();
+    }
+
+    @BeforeTest
+    public void turnOffAddOnForPunchOut() {
+        // PRECONDITIONS FOR THE TC "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage" -
+        // needs to be run at least 10 minutes before the TC
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+        VNextBOLoginSteps.userLogin(userName, userPassword);
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
+        VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-000-152414");
+        VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(true);
+        VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(true);
+        VNextBOLeftMenuInteractions.selectAddOnsMenu();
+        VNextBOAddOnsPageSteps.turnOffAddOnByName("Punch Out Process");
+        DriverBuilder.getInstance().getDriver().close();
+        WaitUtilsWebDriver.waitABit(1000);
+    }
+
+    @BeforeMethod
+    public void goToPage() {
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
     }
 
@@ -81,16 +114,7 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
                 "The PO# hasn't been set");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangeProviderOfThePart(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelInteractions.setProvider(data.getProvider());
-        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(0, data.getProvider());
-    }
-
+    //todo fails, needs clarifications. The part# is not saved. Most probably it's a bug.
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangePartForSpecifiedParts(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
@@ -124,24 +148,6 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangeLaborCredit(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        final String laborCredit = VNextBOPartsDetailsPanelInteractions.setLaborCredit(0);
-        VNextBOPartsDetailsPanelValidations.verifyPartLaborCreditValue(0, laborCredit);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangeCorePrice(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        final String corePrice = VNextBOPartsDetailsPanelInteractions.setCorePrice(0);
-        VNextBOPartsDetailsPanelValidations.verifyPartCorePrice(0, corePrice);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeCoreStatus(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
@@ -166,12 +172,27 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanChangeVendorPrice(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanChangePartValues(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        final String vendorPrice = VNextBOPartsDetailsPanelInteractions.setVendorPrice(0);
-        VNextBOPartsDetailsPanelValidations.verifyPartVendorPrice(0, vendorPrice);
+        VNextBOPartsDetailsPanelSteps.setNewRandomValuesForThePart(data, 0);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectAndDeselectThePartByActivatingAndDeactivatingTheCheckbox(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
+        VNextBOPartsDetailsPanelInteractions.clickServiceCheckbox(0);
+        VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckboxToBeEnabled();
+        VNextBOPartsDetailsPanelValidations.verifyStatusesCheckboxIsEnabled(true);
+        VNextBOPartsDetailsPanelValidations.verifyDeleteSelectedPartsButtonIsDisplayed(true);
+        VNextBOPartsDetailsPanelInteractions.clickServiceCheckbox(0);
+        VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckboxToBeDisabled();
+        VNextBOPartsDetailsPanelValidations.verifyStatusesCheckboxIsEnabled(false);
+        VNextBOPartsDetailsPanelValidations.verifyDeleteSelectedPartsButtonIsDisplayed(false);
     }
 }

@@ -3,7 +3,8 @@ package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
-import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddNewPartDialog;
+import com.cyberiansoft.test.vnextbo.screens.VNextBOAddNewServiceMonitorDialog;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAddNewPartDialog;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
@@ -44,5 +45,12 @@ public class VNextBOAddNewPartDialogValidations {
                 .stream()
                 .anyMatch(part -> !part.contains(text));
         Assert.assertFalse(door, "The parts list options don't contain the filtering word " + text);
+    }
+
+    public static void verifyServiceOptionsInDropDownContainText(String text) {
+        final boolean contains = Utils.getText(new VNextBOAddNewServiceMonitorDialog().getServiceListBoxOptions())
+                .stream()
+                .allMatch(t -> t.contains(text));
+        Assert.assertTrue(contains, "The service options in dropdown do not contain text '" + text + "'");
     }
 }
