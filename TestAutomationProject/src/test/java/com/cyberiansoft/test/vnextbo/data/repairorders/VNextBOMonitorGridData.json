@@ -77,5 +77,30 @@
         }
       ]
     }
+  ],
+  "verifyUserCanStartCompleteServicesAndPhasesFromTheMainRosPage": [
+    {
+      "rowID": "verifyUserCanStartCompleteServicesAndPhasesFromTheMainRosPage.01",
+      "description": "Test Case 91379: User can start/complete services and phases from the main RO's page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91379",
+          "testCaseTitle": "User can start/complete services and phases from the main RO's page"
+        }
+      ],
+      "phase": "Rozstalnoy"
+    }
+  ],
+  "verifyUserCanPrioritizeRepairOrder": [
+    {
+      "rowID": "verifyUserCanPrioritizeRepairOrder.01",
+      "description": "Test Case 91393: User can prioritize Repair Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91393",
+          "testCaseTitle": "User can prioritize Repair Order"
+        }
+      ]
+    }
   ]
 }

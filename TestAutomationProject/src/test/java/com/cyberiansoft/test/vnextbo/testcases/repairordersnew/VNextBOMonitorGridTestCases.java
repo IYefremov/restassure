@@ -66,4 +66,51 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         VNextBOROPageStepsNew.changeOrderFlag(TEST_ORDER_NUMBER, "White");
         VNextBOROWebPageValidationsNew.verifyOrderFlagIsCorrect(TEST_ORDER_NUMBER, "0px none rgb(70, 70, 70)", "white");
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanStartCompleteServicesAndPhasesFromTheMainRosPage(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber("O-368-00007");
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOROWebPageValidationsNew.verifyStartPhaseServicesActionButtonIsDisplayed(true);
+        VNextBOROWebPageValidationsNew.verifyFirstServiceIconInTheCurrentPhaseDropdown(0,"icon-start-ro");
+        VNextBOROPageStepsNew.startFirstServiceForTheCurrentPhase();
+        VNextBOROWebPageValidationsNew.verifyFirstServiceIconInTheCurrentPhaseDropdown(0,"icon-checkmark_thin");
+        VNextBOROPageStepsNew.startPhaseServicesForFirstOrder();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOROWebPageValidationsNew.verifyStartPhaseServicesActionButtonIsDisplayed(false);
+        VNextBOROWebPageValidationsNew.verifyFirstServiceIconInTheCurrentPhaseDropdown(1, "icon-checkmark_thin");
+        VNextBOROPageStepsNew.completeCurrentPhaseForFirstOrder();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOROWebPageValidationsNew.verifyPhasesAreCorrectInTheTable("Completed");
+        VNextBOROWebPageValidationsNew.verifyCurrentPhaseDoesNotContainServices();
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded("rozstalnoy_enable_money", "Active");
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded("rozstalnoy_disable_money", "Active");
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded("api task", "Active");
+        VNextBORODetailsStepsNew.setServiceStatusIfNeeded("Note1568105975480", "Active");
+        VNextBORODetailsStepsNew.resetStartDateIfNeededByServiceName(data.getPhase(), "rozstalnoy_enable_money");
+        VNextBORODetailsStepsNew.resetStartDateIfNeededByServiceName(data.getPhase(), "rozstalnoy_disable_money");
+        VNextBORODetailsStepsNew.resetStartDateIfNeededByServiceName(data.getPhase(), "api task");
+        VNextBORODetailsStepsNew.resetStartDateIfNeededByServiceName(data.getPhase(), "Note1568105975480");
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+        Utils.goToPreviousPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanPrioritizeRepairOrder(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.changeOrderPriority(TEST_ORDER_NUMBER, "red");
+        VNextBOROWebPageValidationsNew.verifyPriorityIsCorrectForFirstOrder("High");
+        VNextBOROPageStepsNew.changeOrderPriority(TEST_ORDER_NUMBER, "green");
+        VNextBOROWebPageValidationsNew.verifyPriorityIsCorrectForFirstOrder("Low");
+        VNextBOROPageStepsNew.changeOrderPriority(TEST_ORDER_NUMBER, "none");
+        VNextBOROWebPageValidationsNew.verifyPriorityIsCorrectForFirstOrder("Normal");
+	}
 }

@@ -352,6 +352,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled());
         Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
+        WaitUtilsWebDriver.waitABit(1000);
         Utils.clickElement(ordersPage.getCloseRoActionButton());
         VNextBOCloseRODialogStepsNew.closeOrderWithReason(reason);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -362,7 +363,17 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled());
+        Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
         Utils.clickElement(ordersPage.flagIconByFlagTitle(flagTitle));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void changeOrderPriority(String orderNumber, String priorityColor) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled());
+        Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
+        Utils.clickElement(ordersPage.priorityIconByFlagColor(priorityColor));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
@@ -380,10 +391,30 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         }
     }
 
+    public static void startFirstServiceForTheCurrentPhase() {
+
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getOrdersPhasesList().get(0).isEnabled());
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.clickElement(new VNextBOROWebPageNew().getCurrentPhaseServiceRecords().get(0));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+    }
+
     public static void completeCurrentPhaseForFirstOrder() {
 
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getOrdersPhasesList().get(0).isEnabled());
         Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+        WaitUtilsWebDriver.waitABit(1000);
         Utils.clickElement(new VNextBOROWebPageNew().getCompleteCurrentPhaseActionButton());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void startPhaseServicesForFirstOrder() {
+
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getOrdersPhasesList().get(0).isEnabled());
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+        Utils.clickElement(new VNextBOROWebPageNew().getStartPhaseServicesActionButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
