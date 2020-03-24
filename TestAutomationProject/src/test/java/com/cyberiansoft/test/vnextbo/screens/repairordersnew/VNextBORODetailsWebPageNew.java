@@ -53,6 +53,9 @@ public class VNextBORODetailsWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind,'phaseStart') and not(contains(@style,'display: none'))]")
     private WebElement startServicesActionButton;
 
+    @FindBy(xpath = "//div[contains(@data-bind,'serviceRejectStart') and not(contains(@style,'display: none'))]")
+    private WebElement resetStartDateActionButton;
+
     @FindBy(xpath = "//div[@class='drop checkout']//div[contains(@data-bind,'reportProblemMenu') and not(contains(@style,'display: none'))]")
     private WebElement reportProblemForServiceActionButton;
 

@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOROWebPageNew
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.validations.VNextBOBaseWebPageValidations;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -178,6 +179,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
     public static void verifyProblemIndicatorIsDisplayedForOrder(String orderNumber) {
 
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().problemIndicatorByOrderNumber(orderNumber).isDisplayed());
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().problemIndicatorByOrderNumber(orderNumber)),
                 "Problems indicator hasn't been displayed for the order " + orderNumber);
     }
@@ -519,5 +521,41 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
                 "Left border has had incorrect color");
         Assert.assertEquals(new VNextBOROWebPageNew().orderRowByOrderNumber(orderNumber).getAttribute("class"), flagColor,
                 "Row has had incorrect background color");
+    }
+
+    public static void verifyStartPhaseServicesActionButtonIsDisplayed(boolean shouldBeDisplayed) {
+
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getOrdersPhasesList().get(0).isEnabled());
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+        WaitUtilsWebDriver.waitABit(1000);
+        if (shouldBeDisplayed) {
+            Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getStartPhaseServicesActionButton()),
+                    "Start phase services action button hasn't been displayed");
+        } else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().getStartPhaseServicesActionButton()),
+                "Start phase services action button has been displayed");
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+    }
+
+    public static void verifyFirstServiceIconInTheCurrentPhaseDropdown(int serviceNumber, String expectedIcon) {
+
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getOrdersPhasesList().get(0).isEnabled());
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+        WaitUtilsWebDriver.waitABit(1000);
+        Assert.assertEquals(new VNextBOROWebPageNew().getCurrentPhaseServiceRecords().
+                        get(serviceNumber).findElement(By.xpath("./i[not(contains(@style,'display: none;'))]")).getAttribute("class"), expectedIcon,
+                "Service icon hasn't been correct");
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+    }
+
+    public static void verifyCurrentPhaseDoesNotContainServices() {
+
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getOrdersPhasesList().get(0).isEnabled());
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
+        WaitUtilsWebDriver.waitABit(1000);
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getCurrentPhaseNoServicesMessage()),
+                "No services message hasn't been displayed");
+        Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getCurrentPhaseNoServicesMessage()), "There are no individual services to start or complete!",
+                "No services message has contained incorrect text");
+        Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
     }
 }

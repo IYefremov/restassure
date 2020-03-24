@@ -99,6 +99,7 @@ public class VNextBORODetailsValidationsNew {
     }
     public static void verifyServiceStatusIsCorrect(String service, String status) {
 
+        ConditionWaiter.create(__ -> Utils.getText(new VNextBORODetailsWebPageNew().serviceStatusDropDownByService(service)).equals(status));
         Assert.assertEquals(Utils.getText(new VNextBORODetailsWebPageNew().serviceStatusDropDownByService(service)), status,
                 "Status hasn't been correct for the '" + service + "'.");
     }
