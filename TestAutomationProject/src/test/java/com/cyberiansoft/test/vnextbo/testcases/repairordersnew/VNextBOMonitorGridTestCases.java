@@ -8,6 +8,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOChangeTechnicianDialogStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
@@ -50,7 +51,6 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangeFlagOfRo(String rowID, String description, JSONObject testData) {
 
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBOROPageStepsNew.changeOrderFlag(TEST_ORDER_NUMBER, "Test");
         VNextBOROWebPageValidationsNew.verifyOrderFlagIsCorrect(TEST_ORDER_NUMBER, "3px solid rgb(128, 0, 128)", "purple");
         VNextBOROPageStepsNew.changeOrderFlag(TEST_ORDER_NUMBER, "Blue");
@@ -105,7 +105,6 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanPrioritizeRepairOrder(String rowID, String description, JSONObject testData) {
 
-        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBOROPageStepsNew.changeOrderPriority(TEST_ORDER_NUMBER, "red");
         VNextBOROWebPageValidationsNew.verifyPriorityIsCorrectForFirstOrder("High");
         VNextBOROPageStepsNew.changeOrderPriority(TEST_ORDER_NUMBER, "green");
@@ -113,4 +112,39 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         VNextBOROPageStepsNew.changeOrderPriority(TEST_ORDER_NUMBER, "none");
         VNextBOROWebPageValidationsNew.verifyPriorityIsCorrectForFirstOrder("Normal");
 	}
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCloseUnCloseWorkOrder(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.closeOrder(TEST_ORDER_NUMBER, data.getProblemReason());
+        VNextBOROPageStepsNew.reopenOrder(TEST_ORDER_NUMBER);
+        VNextBOROWebPageValidationsNew.verifyPhasesAreCorrectInTheTable(data.getPhase());
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+        VNextBORODetailsValidationsNew.verifyOrderStatusIsCorrect("Approved");
+        Utils.goToPreviousPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeMoreThanOneTechniciansLinkedToOnePhase(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOROPageStepsNew.openChangeTechnicianDialogForFirstOrder();
+        VNextBOChangeTechnicianDialogStepsNew.changeTechnicianAndSave(data.getVendor(), data.getTechnician());
+        VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable(data.getTechnician());
+        VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+        VNextBORODetailsStepsNew.expandPhaseByName(data.getPhase());
+        VNextBORODetailsStepsNew.setServiceTechnician("roz_dis_part_money", "Drake Ramores");
+        VNextBORODetailsStepsNew.setServiceTechnician("roz_en_part_money", "Eric Meahan");
+        VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
+        Utils.goToPreviousPage();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable("Drake Ramores");
+        VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable("Eric Meahan");
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
 }

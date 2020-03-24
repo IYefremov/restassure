@@ -21,7 +21,7 @@ public class VNextBOLogInfoDialogValidationsNew {
 
     public static void verifyFirstRecordStatusIsCorrect(String expectedStatus) {
 
-        ConditionWaiter.create(15000, 1000, __ -> Utils.getText(new VNextBOLogInfoDialogNew().getFirstRecordStatus()).equals(expectedStatus));
+        ConditionWaiter.create(15000, 1000, __ -> Utils.getText(new VNextBOLogInfoDialogNew().getFirstRecordStatus()).equals(expectedStatus)).execute();
         Assert.assertEquals(Utils.getText(new VNextBOLogInfoDialogNew().getFirstRecordStatus()), expectedStatus,
                 "First log record status hasn't been correct");
     }

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOTimeReportingDialog;
 import org.testng.Assert;
@@ -36,6 +37,7 @@ public class VNextBOTimeReportingDialogValidations {
 
     public static void verifySavedRecordsNumberIsCorrect(int expectedRecordsNumber) {
 
+        ConditionWaiter.create(__ -> new VNextBOTimeReportingDialog().getSavedTimeRecordsList().size() == expectedRecordsNumber).execute();
         Assert.assertTrue(new VNextBOTimeReportingDialog().getSavedTimeRecordsList().size() == expectedRecordsNumber,
                 "Saved records number hasn't been correct");
     }
@@ -81,6 +83,7 @@ public class VNextBOTimeReportingDialogValidations {
 
     public static void verifyStartDateIsCorrectByRecordNumber(int recordNumber, String expectedDate) {
 
+        ConditionWaiter.create(__ -> Utils.getInputFieldValue(new VNextBOTimeReportingDialog().getSavedRecordsStartDatesList().get(recordNumber)).contains(expectedDate)).execute();
         Assert.assertTrue(Utils.getInputFieldValue(new VNextBOTimeReportingDialog().getSavedRecordsStartDatesList().get(recordNumber)).contains(expectedDate),
                 "Start date hasn't been correct");
     }

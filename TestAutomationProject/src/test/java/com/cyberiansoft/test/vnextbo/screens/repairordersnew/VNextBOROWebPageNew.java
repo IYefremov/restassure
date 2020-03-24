@@ -98,6 +98,9 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind,'click: closeRO')]")
     private WebElement closeRoActionButton;
 
+    @FindBy(xpath = "//div[contains(@data-bind,'click: uncloseRO')]")
+    private WebElement reopenRoActionButton;
+
     @FindBy(xpath = "//div[contains(@data-bind,'click: completeActivePhase')]")
     private WebElement completeCurrentPhaseActionButton;
 

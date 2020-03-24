@@ -12,9 +12,9 @@ public class VNextBOChangeTechnicianDialogStepsNew {
 
         VNextBOChangeTechnicianDialogNew changeTechnicianDialog = new VNextBOChangeTechnicianDialogNew();
         WaitUtilsWebDriver.waitABit(3000);
-        ConditionWaiter.create(__ -> changeTechnicianDialog.getVendorDropDown().isEnabled());
+        ConditionWaiter.create(__ -> changeTechnicianDialog.getVendorDropDown().isEnabled()).execute();
         Utils.clickWithJS(changeTechnicianDialog.getVendorDropDown());
-        ConditionWaiter.create(__ -> changeTechnicianDialog.dropDownOption(vendor).isEnabled());
+        ConditionWaiter.create(__ -> changeTechnicianDialog.dropDownOption(vendor).isEnabled()).execute();
         Utils.clickWithJS(changeTechnicianDialog.dropDownOption(vendor));
         WaitUtilsWebDriver.waitABit(2000);
     }
