@@ -17,6 +17,7 @@ public class ServiceElement implements IWebElement {
     private String technicianLocator = ".//div[@data-phase-tech]";
     private String checkElementLocator = ".//*[@action='check-item']";
     private String editElementLocator = ".//*[@action='edit-service']";
+    private String notesElementLocator = ".//*[@data-service-notes]";
 
     public ServiceElement(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -24,13 +25,19 @@ public class ServiceElement implements IWebElement {
 
     public String getName() {
         return WaitUtils.getGeneralFluentWait().until(
-                driver -> rootElement.findElement(By.xpath(nameLocator)).getText()
+                driver -> rootElement.findElement(By.xpath(nameLocator)).getText().trim()
         );
     }
 
     public String getTechnician() {
         return WaitUtils.getGeneralFluentWait().until(
-                driver -> rootElement.findElement(By.xpath(technicianLocator)).getText()
+                driver -> rootElement.findElement(By.xpath(technicianLocator)).getText().trim()
+        );
+    }
+
+    public String getNotes() {
+        return WaitUtils.getGeneralFluentWait().until(
+                driver -> rootElement.findElement(By.xpath(notesElementLocator)).getText().trim()
         );
     }
 
