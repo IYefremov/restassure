@@ -1,0 +1,75 @@
+{
+
+  "testVerifyUserCanSwitchToInfoMode": [
+    {
+      "rowID": "testVerifyUserCanSwitchToInfoMode.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92274",
+          "testCaseTitle": "Verify user can switch to 'Info' mode"
+        },
+        {
+          "testCaseID": "92356",
+          "testCaseTitle": "Verify user can set order's priority to 'High'"
+        },
+        {
+          "testCaseID": "92354",
+          "testCaseTitle": "Verify user can set order's priority to 'Low'"
+        },
+        {
+          "testCaseID": "92355",
+          "testCaseTitle": "Verify user can set order's priority to 'Normal'"
+        }
+      ],
+      "monitoring": {
+        "location": "automationMonitoring",
+        "orderInfoDto": {
+          "vin": "777777"
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanStartTheService": [
+    {
+      "rowID": "testVerifyUserCanStartTheService.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92274",
+          "testCaseTitle": "Verify user can start the service"
+        },
+        {
+          "testCaseID": "92364",
+          "testCaseTitle": "Verify user can reach the page with the services edit icons"
+        }
+      ],
+      "service":
+        {
+          "serviceName": "Labor AM",
+          "serviceStatus": "STARTED"
+        }
+    }
+  ],
+  "testVerifyUserCanTypeTheNoteForService": [
+    {
+      "rowID": "testVerifyUserCanTypeTheNoteForService.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92369",
+          "testCaseTitle": "Verify user can reach to the 'Notes' page"
+        },
+        {
+          "testCaseID": "92370",
+          "testCaseTitle": "Verify user can type the note for service"
+        }
+      ],
+      "service":
+      {
+        "serviceName": "Labor AM",
+        "serviceStatus": "STARTED"
+      }
+    }
+  ]
+}

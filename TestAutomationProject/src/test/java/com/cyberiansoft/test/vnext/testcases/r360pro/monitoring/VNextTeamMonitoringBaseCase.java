@@ -16,6 +16,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.validations.monitor.RepairOrderInfoValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -58,7 +59,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.switchToInfo();
         expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
-        EditOrderSteps.verifyOrderInfo(expectedOrderInfo);
+        RepairOrderInfoValidations.verifyOrderInfo(expectedOrderInfo);
         WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
     }

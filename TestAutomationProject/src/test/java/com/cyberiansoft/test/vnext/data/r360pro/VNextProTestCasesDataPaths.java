@@ -206,4 +206,8 @@ public class VNextProTestCasesDataPaths {
     public String getMonitoringLocationDataPath() {
         return props.getProperty("monitoring.location");
     }
+
+    public String getMonitoringEditRODataPath() {
+        return props.getProperty("monitoring.edit.ro");
+    }
 }
