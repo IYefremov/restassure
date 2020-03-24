@@ -198,27 +198,26 @@ public class SingleSelectionServiceTests extends BaseTestClass {
                                                                               String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         DamageData moneyServiceDamageData = inspectionData.getDamagesData().get(0);
-        DamageData laborServiceDamageDate = inspectionData.getDamagesData().get(1);
-        DamageData partServiceDamageDate = inspectionData.getDamagesData().get(2);
+        DamageData laborServiceDamageData = inspectionData.getDamagesData().get(1);
+        DamageData partServiceDamageData = inspectionData.getDamagesData().get(2);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
-        VisualScreenSteps.selectMoneyServiceDamage(moneyServiceDamageData);
+        VisualScreenSteps.selectDamage(moneyServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         VisualScreenSteps.addServiceToPicture();
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
         VisualScreenSteps.clearAllMarks();
 
-        VisualScreenSteps.selectMoneyServiceDamage(laborServiceDamageDate);
+        VisualScreenSteps.selectDamage(laborServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         VisualScreenSteps.addServiceToPicture();
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
         VisualScreenSteps.clearAllMarks();
 
-        VisualScreenSteps.selectPartServiceDamage(partServiceDamageDate);
-        VisualScreenSteps.addServiceToPicture();
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
+        VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
+        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenSteps.addServiceToPicture();
@@ -233,35 +232,33 @@ public class SingleSelectionServiceTests extends BaseTestClass {
                                                                              String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         DamageData moneyServiceDamageData = inspectionData.getDamagesData().get(0);
-        DamageData laborServiceDamageDate = inspectionData.getDamagesData().get(1);
-        DamageData partServiceDamageDate = inspectionData.getDamagesData().get(2);
+        DamageData laborServiceDamageData = inspectionData.getDamagesData().get(1);
+        DamageData partServiceDamageData = inspectionData.getDamagesData().get(2);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
-        VisualScreenSteps.selectMoneyServiceDamage(moneyServiceDamageData);
+        VisualScreenSteps.selectDamage(moneyServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
-        VisualScreenSteps.selectMoneyServiceDamage(laborServiceDamageDate);
+        VisualScreenSteps.selectDamage(laborServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
-        VisualScreenSteps.selectPartServiceDamage(partServiceDamageDate);
-        VisualScreenSteps.addServiceToPicture();
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
+        VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
+        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionToEdit(inspectionId);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
-        VisualScreenSteps.selectMoneyServiceDamage(moneyServiceDamageData);
+        VisualScreenSteps.selectDamage(moneyServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
-        VisualScreenSteps.selectMoneyServiceDamage(laborServiceDamageDate);
+        VisualScreenSteps.selectDamage(laborServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
-        VisualScreenSteps.selectPartServiceDamage(partServiceDamageDate);
-        VisualScreenSteps.addServiceToPicture();
+        VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
         ListServicesValidations.validateMessagePresent(true, "Service can be added once");
 
         InspectionSteps.cancelInspection();
@@ -273,31 +270,30 @@ public class SingleSelectionServiceTests extends BaseTestClass {
                                                                              String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         DamageData moneyServiceDamageData = inspectionData.getDamagesData().get(0);
-        DamageData laborServiceDamageDate = inspectionData.getDamagesData().get(1);
-        DamageData partServiceDamageDate = inspectionData.getDamagesData().get(2);
+        DamageData laborServiceDamageData = inspectionData.getDamagesData().get(1);
+        DamageData partServiceDamageData = inspectionData.getDamagesData().get(2);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
-        VisualScreenSteps.selectMoneyServiceDamage(moneyServiceDamageData);
+        VisualScreenSteps.selectDamage(moneyServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         VisualScreenSteps.addServiceToPicture();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(2);
         VisualScreenSteps.clearAllMarks();
 
-        VisualScreenSteps.selectMoneyServiceDamage(laborServiceDamageDate);
+        VisualScreenSteps.selectDamage(laborServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         VisualScreenSteps.addServiceToPicture();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(2);
         VisualScreenSteps.clearAllMarks();
 
-        VisualScreenSteps.selectPartServiceDamage(partServiceDamageDate);
-        VisualScreenSteps.addServiceToPicture();
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
+        VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
+        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenSteps.addServiceToPicture();
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
+        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(2);
@@ -310,8 +306,8 @@ public class SingleSelectionServiceTests extends BaseTestClass {
                                                                             String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         DamageData moneyServiceDamageData = inspectionData.getDamagesData().get(0);
-        DamageData laborServiceDamageDate = inspectionData.getDamagesData().get(1);
-        DamageData partServiceDamageDate = inspectionData.getDamagesData().get(2);
+        DamageData laborServiceDamageData = inspectionData.getDamagesData().get(1);
+        DamageData partServiceDamageData = inspectionData.getDamagesData().get(2);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
@@ -319,19 +315,18 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         InspectionSteps.openInspectionToEdit(inspectionId);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
 
-        VisualScreenSteps.selectMoneyServiceDamage(moneyServiceDamageData);
+        VisualScreenSteps.selectDamage(moneyServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(1);
         VisualScreenSteps.clearAllMarks();
 
-        VisualScreenSteps.selectMoneyServiceDamage(laborServiceDamageDate);
+        VisualScreenSteps.selectDamage(laborServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(1);
         VisualScreenSteps.clearAllMarks();
 
-        VisualScreenSteps.selectPartServiceDamage(partServiceDamageDate);
-        VisualScreenSteps.addServiceToPicture();
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageDate.getPartServiceData());
+        VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
+        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(1);

@@ -1,5 +1,8 @@
 package com.cyberiansoft.test.vnext.screens;
 
+import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
+import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,6 +22,9 @@ public class VNextSelectWorkOrdersScreen extends VNextBaseScreen {
     @FindBy(xpath="//*[@action='save']")
     private WebElement addworkordersbtn;
 
+    @FindBy(xpath = "//*[@data-autotests-id='-list']/div")
+    private List<WorkOrderListElement> workOrdersList;
+
     @FindBy(xpath="//*[@data-autotests-id='-list']")
     private WebElement workorderslist;
 
@@ -27,6 +33,10 @@ public class VNextSelectWorkOrdersScreen extends VNextBaseScreen {
         PageFactory.initElements(appiumdriver, this);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
         wait.until(ExpectedConditions. presenceOfElementLocated(selectworkordersscreen));
+    }
+
+    public VNextSelectWorkOrdersScreen() {
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
     public WebElement getWorkOrderCell(String wonumber) {

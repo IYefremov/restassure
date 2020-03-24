@@ -131,6 +131,24 @@
       }
     }
   ],
+  "verifyUserCanFilterAvailableServicesListByEnteredText": [
+    {
+      "rowID": "verifyUserCanFilterAvailableServicesListByEnteredText.01",
+      "description": "Verify user can filter available services list by entered text",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "115261"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-236-00009"
+      },
+      "partData": {
+        "service": "GS"
+      }
+    }
+  ],
   "verifyUserCanAddNewOEMPart": [
     {
       "rowID": "verifyUserCanAddNewOEMPart.01",

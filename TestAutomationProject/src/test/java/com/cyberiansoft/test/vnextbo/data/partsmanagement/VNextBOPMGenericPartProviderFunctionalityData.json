@@ -70,9 +70,9 @@
       "provider": "Generic Part Provider - Test Team"
     }
   ],
-  "verifyUserCanImportCorePriceFromPunchoutWebStore": [
+  "verifyUserCanImportCorePriceFromPunchOutWebStore": [
     {
-      "rowID": "verifyUserCanImportCorePriceFromPunchoutWebStore.01",
+      "rowID": "verifyUserCanImportCorePriceFromPunchOutWebStore.01",
       "description": "Verify user can Import Core Price from Punchout Web Store",
       "targetProcessTestCaseData": [
         {
@@ -97,6 +97,22 @@
         ]
       },
       "provider": "AutoZone"
+    }
+  ],
+  "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage": [
+    {
+      "rowID": "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage.01",
+      "description": "Verify the Punch-Out functionality is enabled by the feature on the \"Add-on\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97519",
+          "testCaseTitle": "Verify the Punch-Out functionality is enabled by the feature on the \"Add-on\" page"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-152414"
+      }
     }
   ]
 }

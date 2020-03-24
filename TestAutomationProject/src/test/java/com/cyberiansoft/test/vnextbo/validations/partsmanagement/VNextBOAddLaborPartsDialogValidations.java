@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddLaborPartsDialog;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAddLaborPartsDialog;
 import org.testng.Assert;
 
 public class VNextBOAddLaborPartsDialogValidations {

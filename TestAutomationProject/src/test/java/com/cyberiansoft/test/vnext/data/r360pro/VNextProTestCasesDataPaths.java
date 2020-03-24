@@ -202,4 +202,8 @@ public class VNextProTestCasesDataPaths {
     public String getMonitoringSearchFiltersDataPath() {
         return props.getProperty("monitoring.search.filters");
     }
+
+    public String getMonitoringLocationDataPath() {
+        return props.getProperty("monitoring.location");
+    }
 }

@@ -1,9 +1,9 @@
-package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
+package com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
-import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAdvancedSearchDialog;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;

@@ -89,7 +89,7 @@ public class BasicVehiclePartsTests extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_IT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.VISUAL);
-        VisualScreenSteps.addDamage(damageData);
+        VisualScreenSteps.addNonDefaultDamage(damageData, damageData.getMoneyService().getServiceName());
         VisualScreenSteps.openEditDamage();
         ServiceDetailsScreenSteps.selectVehiclePart(damageData.getMoneyService().getVehiclePart());
         ServiceDetailsValidations.servicePartShouldBe(damageData.getMoneyService().getVehiclePart());

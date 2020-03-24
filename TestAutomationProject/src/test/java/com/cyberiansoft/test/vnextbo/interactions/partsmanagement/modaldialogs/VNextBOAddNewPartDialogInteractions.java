@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOAddNewPartDialog;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAddNewPartDialog;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import java.util.List;
@@ -56,11 +56,6 @@ public class VNextBOAddNewPartDialogInteractions {
             WaitUtilsWebDriver.getWebDriverWait(3).until((ExpectedCondition<Boolean>) driver ->
                     VNextBOAddNewPartDialogInteractions.getDisplayedPartsListOptionsSize() != prevSize);
         } catch (Exception ignored) {}
-    }
-
-    public static void setServiceName(String serviceName) {
-        VNextBOAddNewPartDialog addNewPartDialog = new VNextBOAddNewPartDialog();
-        Utils.clearAndType(addNewPartDialog.getServiceField(), serviceName);
     }
 
     public static List<String> getHighlightedServicesInDropDown(String serviceName) {

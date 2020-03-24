@@ -478,8 +478,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         final int addedpictures = 1;
 
-        VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        homeScreen.clickInspectionsMenuItem();
+        HomeScreenSteps.openInspections();
         final String inspectionNumber = InspectionSteps.createR360Inspection(testcustomer, inspectionData);
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);

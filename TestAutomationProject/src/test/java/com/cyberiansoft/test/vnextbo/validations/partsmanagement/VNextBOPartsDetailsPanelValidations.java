@@ -52,6 +52,20 @@ public class VNextBOPartsDetailsPanelValidations {
                 "The vendor price hasn't been set");
     }
 
+    public static void verifyQuantity(int partNumber, String expectedQuantity) {
+        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getQuantity(partNumber), expectedQuantity,
+                "The quantity hasn't been set");
+    }
+
+    public static void verifyETA(int partNumber, String date) {
+        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getETA(partNumber), date, "The ETA hasn't been set");
+    }
+
+    public static void verifyPrice(int partNumber, String expectedPrice) {
+        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getPrice(partNumber), expectedPrice,
+                "The price hasn't been set");
+    }
+
     public static void verifyPartPriceIsCorrect(int partNumber, String expectedPrice) {
 
         Assert.assertEquals(Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartPriceField().get(partNumber)), expectedPrice,
@@ -112,7 +126,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyPartContainsLaborByPartNumberAndLaborServiceName(int partNumber, String laborService) {
 
-        Assert.assertTrue(new VNextBOPartsDetailsPanel().laborsNamesListForPartByNumberInList(0).
+        Assert.assertTrue(new VNextBOPartsDetailsPanel().laborsNamesListForPartByNumberInList(partNumber).
                 stream().map(WebElement::getText).collect(Collectors.toList()).contains(laborService), "Part hasn't contained labor service");
     }
 
@@ -120,7 +134,7 @@ public class VNextBOPartsDetailsPanelValidations {
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         Date currentDate = new Date();
-        String actualEtaDate = Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartEtaField().get(partNumber));
+        String actualEtaDate = Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getEtaFieldsList().get(partNumber));
         if (orderPhase.equals("Past Due Parts"))
             Assert.assertTrue(dateFormat.parse(actualEtaDate).before(currentDate), "Part order's ETA date hasn't been correct");
         if (orderPhase.equals("In Progress"))
@@ -131,7 +145,7 @@ public class VNextBOPartsDetailsPanelValidations {
     public static void verifyEtaDateIsCorrectAfterSearch(String expectedEtaDate, String etaSearchField) throws ParseException {
 
         DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-        String actualEtaDate = Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getPartEtaField().get(0));
+        String actualEtaDate = Utils.getInputFieldValue(new VNextBOPartsDetailsPanel().getEtaFieldsList().get(0));
         if (etaSearchField.equals("ETA From"))
         Assert.assertTrue(dateFormat.parse(actualEtaDate).after(dateFormat.parse(expectedEtaDate)) ||
                 dateFormat.parse(actualEtaDate).equals(dateFormat.parse(expectedEtaDate)), "ETA hasn't been correct");
@@ -194,6 +208,14 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Delete button hasn't been displayed");
         else Assert.assertFalse(Utils.isElementDisplayed(partsDetailsPanel.getDeleteSelectedPartsButton()),
                 "Delete button has been displayed");
+    }
+
+    public static void verifyStatusesCheckboxIsEnabled(boolean expected) {
+        System.out.println(new VNextBOPartsDetailsPanel().getStatusesCheckbox().getAttribute("class"));
+        final boolean activated = new VNextBOPartsDetailsPanel().getStatusesCheckbox()
+                .getAttribute("class")
+                .contains("items-toggle--checked");
+        Assert.assertEquals(expected, activated, "The statuses checkbox isn't activated/deactivated");
     }
 
     public static boolean isDeleteSelectedPartsButtonDisplayed(boolean shouldBeDisplayed) {
@@ -317,5 +339,10 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static boolean isCoreStatusOptionDisplayed(int partNumber, String option) {
         return Utils.getText(new VNextBOPartsDetailsPanel().getPartCoreStatusFields().get(partNumber)).contains(option);
+    }
+
+    public static void verifyGetQuotesButtonIsDisplayed(boolean expected) {
+        Assert.assertEquals(expected, Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getGetQuotesButton()),
+                "The 'Get quotes' button han't been displayed/hidden");
     }
 }

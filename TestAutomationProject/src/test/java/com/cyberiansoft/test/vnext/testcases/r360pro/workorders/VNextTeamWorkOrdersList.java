@@ -210,7 +210,7 @@ public class VNextTeamWorkOrdersList extends BaseTestClass {
         homeScreen.waitUntilQueueMessageInvisible();
 
         StatusScreenSteps.updateMainDB();
-        homeScreen.clickWorkOrdersMenuItem();
+        HomeScreenSteps.openWorkOrders();
         WorkOrderSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
 

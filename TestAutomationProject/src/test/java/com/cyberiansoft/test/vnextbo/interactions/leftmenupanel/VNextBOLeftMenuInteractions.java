@@ -6,6 +6,7 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.enums.MainMenuItems;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
+import com.cyberiansoft.test.vnextbo.steps.addOns.VNextBOAddOnsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
@@ -24,6 +25,11 @@ public class VNextBOLeftMenuInteractions {
     public static void selectPartsManagementMenu() {
         selectMenuItem(MainMenuItems.OPERATIONS.getMenu(), "Parts Management");
         VNextBOPartsManagementWebPageSteps.waitUntilPartsManagementPageIsLoaded();
+    }
+
+    public static void selectAddOnsMenu() {
+        openMainMenu(MainMenuItems.ADD_ONS.getMenu());
+        VNextBOAddOnsPageSteps.waitForAddOnsPageToBeLoaded();
     }
 
     public static void selectUsersMenu() {
@@ -85,12 +91,16 @@ public class VNextBOLeftMenuInteractions {
     }
 
     private static void selectMenuItem(String mainMenuItemName, String subMenuItemName) {
-        expandMainMenu();
-        clickMainMenuItem(mainMenuItemName);
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        openMainMenu(mainMenuItemName);
         clickSubMenuItem(subMenuItemName);
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+    }
+
+    private static void openMainMenu(String mainMenuItemName) {
+        expandMainMenu();
+        clickMainMenuItem(mainMenuItemName);
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 }

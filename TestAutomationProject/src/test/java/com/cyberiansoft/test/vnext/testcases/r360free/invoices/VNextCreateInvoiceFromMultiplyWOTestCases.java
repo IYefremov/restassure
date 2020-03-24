@@ -9,7 +9,6 @@ import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextWorkOrdersScreen;
@@ -46,8 +45,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> workOrders = new ArrayList<>();
 
-        VNextHomeScreen homescreen = new VNextHomeScreen();
-		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workordersscreen = new VNextWorkOrdersScreen();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
 			CustomersScreenSteps.selectCustomer(testcustomer);
@@ -86,13 +85,13 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> workOrders = new ArrayList<>();
 
-        VNextHomeScreen homescreen = new VNextHomeScreen();
-		homescreen.clickCustomersMenuItem();
+		HomeScreenSteps.openCustomers();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			CustomerServiceSteps.createCustomerIfNotExist(workOrderData.getWorlOrderRetailCustomer());
 		}
 		ScreenNavigationSteps.pressBackButton();
-		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workordersscreen = new VNextWorkOrdersScreen();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
 			CustomersScreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
@@ -134,13 +133,13 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		final int wosToCreate = 2;
 		Map<String, List<String>> workOrdersMap = new HashMap<>();
 
-        VNextHomeScreen homescreen = new VNextHomeScreen();
-		homescreen.clickCustomersMenuItem();
+        HomeScreenSteps.openCustomers();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			CustomerServiceSteps.createCustomerIfNotExist(workOrderData.getWorlOrderRetailCustomer());
 		}
 		ScreenNavigationSteps.pressBackButton();
-		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workordersscreen = new VNextWorkOrdersScreen();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			for (int i = 0; i < wosToCreate; i++) {
 				WorkOrderSteps.clickAddWorkOrderButton();
@@ -251,8 +250,8 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 		ArrayList<String> workOrders = new ArrayList<>();
 
-        VNextHomeScreen homescreen = new VNextHomeScreen();
-		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workordersscreen = new VNextWorkOrdersScreen();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
 			CustomersScreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());
@@ -290,13 +289,13 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 		ArrayList<String> workOrders = new ArrayList<>();
 
 
-        VNextHomeScreen homescreen = new VNextHomeScreen();
-		homescreen.clickCustomersMenuItem();
+        HomeScreenSteps.openCustomers();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			CustomerServiceSteps.createCustomerIfNotExist(workOrderData.getWorlOrderRetailCustomer());
 		}
 		ScreenNavigationSteps.pressBackButton();
-		VNextWorkOrdersScreen workordersscreen = homescreen.clickWorkOrdersMenuItem();
+		HomeScreenSteps.openWorkOrders();
+		VNextWorkOrdersScreen workordersscreen = new VNextWorkOrdersScreen();
 		for (WorkOrderData workOrderData : testCaseData.getWorkOrdersData()) {
 			WorkOrderSteps.clickAddWorkOrderButton();
 			CustomersScreenSteps.selectCustomer(workOrderData.getWorlOrderRetailCustomer());

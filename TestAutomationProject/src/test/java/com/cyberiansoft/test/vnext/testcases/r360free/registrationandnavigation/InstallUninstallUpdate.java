@@ -1,11 +1,9 @@
 package com.cyberiansoft.test.vnext.testcases.r360free.registrationandnavigation;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextLoginScreen;
 import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
-import com.cyberiansoft.test.vnext.utils.VNextAppUtils;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -42,14 +40,6 @@ public class InstallUninstallUpdate extends BaseTestCaseWithDeviceRegistrationAn
 		loginscreen.selectEmployee(testEmployee);
         ScreenNavigationSteps.pressBackButton();
 		loginscreen.waitUserListVisibility();
-	}
-	
-	@Test(testName= "Test Case 35901:vNext - Log in from the list of available users (success case)", description = "Log in from the list of available users (success case)")
-	public void testLogInSuccessCase() {
-		VNextAppUtils.restartApp();
-		//VNextLoginScreen loginScreen = new VNextLoginScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-		//loginScreen.userLogin(employee.getEmployeeName(), employee.getEmployeePassword());
-		new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 	}
 
 }

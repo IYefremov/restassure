@@ -61,13 +61,12 @@ public class VNextLoginScreen extends VNextBaseScreen {
         WaitUtils.elementShouldBeVisible(ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@data-page='employees']")), true);
     }
 
-    public VNextHomeScreen userLogin(String username, String userpsw) {
+    public void userLogin(String username, String userpsw) {
         selectEmployee(username);
         if (!StringUtils.isEmpty(userpsw)) {
             setUserLoginPassword(userpsw);
             tapLoginButton();
         }
-        return new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
     }
 
     public VNextLoginScreen incorrectUserLogin(String username, String userpsw) {

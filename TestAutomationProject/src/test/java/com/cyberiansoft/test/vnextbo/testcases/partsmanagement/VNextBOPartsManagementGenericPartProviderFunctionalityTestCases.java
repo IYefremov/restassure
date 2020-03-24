@@ -6,7 +6,9 @@ import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsMan
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.addons.IntegrationStatus;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
+import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -15,7 +17,9 @@ import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsOr
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.stores.VNextBOAutoZoneProductResultsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.stores.VNextBOAutoZoneQuoteDetailsPageInteractions;
+import com.cyberiansoft.test.vnextbo.steps.addOns.VNextBOAddOnsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogSteps;
@@ -24,6 +28,7 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZon
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZoneMyShopPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZoneProductResultsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.addons.VNextBOAddOnsPageValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogValidations;
@@ -140,7 +145,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanImportCorePriceFromPunchoutWebStore(String rowID, String description, JSONObject testData) {
+    public void verifyUserCanImportCorePriceFromPunchOutWebStore(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
         final VNextBOPartsData partData = data.getPartData();
         final VNextBOPartsManagementSearchData searchData = data.getSearchData();
@@ -172,5 +177,26 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isShoppingCartButtonDisplayed(true),
                 "The shopping cart button hasn't been displayed");
         VNextBOShoppingCartDialogSteps.completeOrder(partData, price, corePrice);
+    }
+
+    // PRECONDITIONS ARE RUN IN THE VNextBOPartsManagementOrderDetailsTestCases CLASS -
+    // the TC needs to be run at least 10 minutes after the preconditions
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
+        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
+        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+        VNextBOLoginSteps.userLogin(userName, userPassword);
+        VNextBOLeftMenuInteractions.selectAddOnsMenu();
+        VNextBOAddOnsPageValidations.verifyAddOnIntegrationStatus("Punch Out Process", IntegrationStatus.OFF);
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
+        VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(false);
+        VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(false);
+        VNextBOLeftMenuInteractions.selectAddOnsMenu();
+        VNextBOAddOnsPageSteps.turnOnAddOnByName("Punch Out Process");
     }
 }
