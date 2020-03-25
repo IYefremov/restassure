@@ -132,5 +132,17 @@
       "vendor": "Test Team",
       "technician": "_Ira Autotest"
     }
+  ],
+  "verifyUserCanSeeAndCreateNotes": [
+    {
+      "rowID": "verifyUserCanSeeAndCreateNotes.01",
+      "description": "Test Case 91406: User can see and create notes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91406",
+          "testCaseTitle": "User can see and create notes"
+        }
+      ]
+    }
   ]
 }

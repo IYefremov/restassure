@@ -447,6 +447,16 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBONotesDialogStepsNew.addNote(noteText, true);
     }
 
+    public static void addNoteForFirstOrderFromOthersMenu(String orderNumber, String noteText) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled()).execute();
+        Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
+        WaitUtilsWebDriver.waitABit(1000);
+        Utils.clickElement(ordersPage.getNotesActionButton());
+        VNextBONotesDialogStepsNew.addNote(noteText, true);
+    }
+
     public static void changeStockNumberForFirstOrder(String newStockNumber) {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();

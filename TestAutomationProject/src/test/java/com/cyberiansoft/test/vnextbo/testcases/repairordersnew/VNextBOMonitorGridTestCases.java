@@ -14,6 +14,7 @@ import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -146,5 +147,13 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable("Eric Meahan");
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSeeAndCreateNotes(String rowID, String description, JSONObject testData) {
+
+        final String NOTE_TEXT = RandomStringUtils.randomAlphabetic(6);
+        VNextBOROPageStepsNew.addNoteForFirstOrderFromOthersMenu(TEST_ORDER_NUMBER, NOTE_TEXT);
+        VNextBOROWebPageValidationsNew.verifyNoteTextIsCorrectForFirstOrder(NOTE_TEXT, true);
     }
 }

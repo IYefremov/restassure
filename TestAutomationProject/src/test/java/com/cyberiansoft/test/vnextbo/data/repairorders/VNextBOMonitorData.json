@@ -256,11 +256,15 @@
   "verifyUserCanSeeAndCreateNotes": [
     {
       "rowID": "verifyUserCanSeeAndCreateNotes.01",
-      "description": "Test Case 91302: User can see and create notes",
+      "description": "Test Case 91302: User can see and create notes. Test Case 91410: User can create notes (Left of RO)",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91302",
           "testCaseTitle": "User can see and create notes"
+        },
+        {
+          "testCaseID": "91410",
+          "testCaseTitle": "User can create notes (Left of RO)"
         }
       ],
       "orderNumber": "O-000-147163"

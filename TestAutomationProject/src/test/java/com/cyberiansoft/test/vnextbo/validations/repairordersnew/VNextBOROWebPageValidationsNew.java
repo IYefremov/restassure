@@ -483,7 +483,10 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
     public static void verifyNoteTextIsCorrectForFirstOrder(String noteText, boolean equal) {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
-        if (equal) Assert.assertEquals(Utils.getText(ordersPage.getOrderNoteText()), noteText, "Note's text hasn't been correct");
+        if (equal) {
+            ConditionWaiter.create(__ -> Utils.getText(ordersPage.getOrderNoteText()).equals(noteText)).execute();
+            Assert.assertEquals(Utils.getText(ordersPage.getOrderNoteText()), noteText, "Note's text hasn't been correct");
+        }
         else
             Assert.assertNotEquals(noteText, Utils.getText(ordersPage.getOrderNoteText()), "Note's text hasn't been correct");
     }
