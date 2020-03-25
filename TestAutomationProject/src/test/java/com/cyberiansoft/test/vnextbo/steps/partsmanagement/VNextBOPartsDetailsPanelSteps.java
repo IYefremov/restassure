@@ -17,6 +17,7 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsOrdersL
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAddLaborPartsDialog;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOAddLaborPartsDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOAddNewPartDialogSteps;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOConfirmationDialogValidations;
@@ -279,12 +280,6 @@ public class VNextBOPartsDetailsPanelSteps {
                 "The parts number is not with " + status + " status is not >= " + expectedNumber);
     }
 
-    public static void clickGetQuotesPartButton() {
-        VNextBOPartsDetailsPanelInteractions.clickGetQuotesPartButton();
-        Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
-                "The Parts Providers modal dialog hasn't been opened");
-    }
-
     public static void deleteServicesByStatus(String status) {
         VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
         final WebElement selectedStatus = VNextBOPartsDetailsPanelInteractions.getSelectedStatus(status);
@@ -306,6 +301,19 @@ public class VNextBOPartsDetailsPanelSteps {
         if (VNextBOPartsDetailsPanelValidations.isDeleteSelectedPartsButtonDisplayed(true)) {
             deleteServices();
         }
+    }
+
+    public static List<String> getProviderDropDownOptions() {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        Utils.clickElement(partsDetailsPanel.getProviderFieldArrow());
+        return Utils.getText(partsDetailsPanel.getPartsListBoxOptions());
+    }
+
+    public static String selectProviderInDropDown() {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        final String selection = Utils.selectOption(partsDetailsPanel.getPartDropDown(), partsDetailsPanel.getPartsListBoxOptions());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        return selection;
     }
 
     private static void clickDeleteServices() {

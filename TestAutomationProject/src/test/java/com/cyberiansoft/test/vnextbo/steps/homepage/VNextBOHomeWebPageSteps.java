@@ -63,8 +63,7 @@ public class VNextBOHomeWebPageSteps extends VNextBOBaseWebPageSteps {
 
     public static String openAccessReconProBOWindow() {
 
-        Utils.clickElement(new VNextBOHomeWebPage().getAccessReconProBOLink());
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        clickAccessReconProBOLink();
         //Certification error handling
         try {
             if (DriverBuilder.getInstance().getDriver().findElement(By.xpath("//button[@id='details-button']")).isDisplayed()) {
@@ -78,5 +77,11 @@ public class VNextBOHomeWebPageSteps extends VNextBOBaseWebPageSteps {
         final String reconProBoPageUrl = Utils.getUrl();
         Utils.goToPreviousPage();
         return reconProBoPageUrl;
+    }
+
+    public static void clickAccessReconProBOLink() {
+        Utils.clickElement(new VNextBOHomeWebPage().getAccessReconProBOLink());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitUntilTitleContains("ReconPro");
     }
 }

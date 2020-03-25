@@ -185,7 +185,7 @@ public class BackOfficeCompanyTestCases extends BaseTestCase {
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 		CompanyWebPage companyWebPage = new CompanyWebPage(webdriver);
 
-		TeamsWebPage teamsPage = new TeamsWebPage(webdriver);
+		TeamsWebPage teamsPage = new TeamsWebPage();
 		backOfficeHeader.clickCompanyLink();
 		companyWebPage.clickTeamsLink();
 

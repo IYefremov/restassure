@@ -170,6 +170,16 @@ public class Utils {
                 });
     }
 
+    public static String selectOption(WebElement dropDown, List<WebElement> listBox) {
+        if (listBox.size() == 0) {
+            return null;
+        } else {
+            final String selection = Utils.getText(listBox.get(RandomUtils.nextInt(0, listBox.size())));
+            selectOption(dropDown, listBox, selection);
+            return selection;
+        }
+    }
+
     public static void selectOptionInDropDownWithJs(WebElement dropDown, List<WebElement> listBox, String selection) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);

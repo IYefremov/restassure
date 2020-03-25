@@ -114,7 +114,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
                 "The PO# hasn't been set");
     }
 
-    //todo fails, needs clarifications. The part# is not saved. Most probably it's a bug.
+    //todo fails, the part# is not saved.
+    //todo BUG: https://cyb.tpondemand.com/restui/board.aspx?#page=bug/117118
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangePartForSpecifiedParts(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
