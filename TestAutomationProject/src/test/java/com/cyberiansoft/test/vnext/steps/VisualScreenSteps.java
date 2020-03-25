@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.DamageData;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVisualScreen;
@@ -9,6 +10,7 @@ public class VisualScreenSteps {
 
     public static void selectDefaultDamage(DamageData damageData) {
         clickAddService();
+        BaseUtils.waitABit(500);
         SelectDamagesSteps.selectDefaultDamage(damageData);
     }
 

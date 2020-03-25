@@ -210,4 +210,8 @@ public class VNextProTestCasesDataPaths {
     public String getMonitoringEditRODataPath() {
         return props.getProperty("monitoring.edit.ro");
     }
+
+    public String getMonitoringStartPhaseServicesDataPath() {
+        return props.getProperty("monitoring.start.phasesercics");
+    }
 }
