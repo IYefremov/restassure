@@ -98,8 +98,23 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@data-bind,'click: closeRO')]")
     private WebElement closeRoActionButton;
 
+    @FindBy(xpath = "//div[contains(@data-bind,'click: showNotes')]")
+    private WebElement notesActionButton;
+
+    @FindBy(xpath = "//div[contains(@data-bind,'click: uncloseRO')]")
+    private WebElement reopenRoActionButton;
+
     @FindBy(xpath = "//div[contains(@data-bind,'click: completeActivePhase')]")
     private WebElement completeCurrentPhaseActionButton;
+
+    @FindBy(xpath = "//div[contains(@data-bind,'click: startActivePhase')]")
+    private WebElement startPhaseServicesActionButton;
+
+    @FindBy(xpath = "//p/div[@class='menu-item']")
+    private List<WebElement> currentPhaseServiceRecords;
+
+    @FindBy(xpath = "//i[@class='no-records']")
+    private WebElement currentPhaseNoServicesMessage;
 
     @FindBy(xpath = "//li[@id='departmentsdropTab']/a")
     private WebElement departmentsSwitcherTab;
@@ -161,6 +176,16 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     }
 
     public WebElement flagIconByFlagTitle(String flagTitle) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@title='" + flagTitle + "']/a"));
+    }
+
+    public WebElement priorityIconByFlagColor(String color) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[contains(@data-bind,\"priorityColor == '" + color + "'\")]"));
+    }
+
+    public WebElement priorityArrowIconByColor(String flagTitle) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[@title='" + flagTitle + "']/a"));
     }

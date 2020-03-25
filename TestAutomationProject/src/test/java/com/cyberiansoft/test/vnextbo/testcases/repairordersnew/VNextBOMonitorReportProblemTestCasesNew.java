@@ -180,6 +180,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBORODetailsValidationsNew.verifyReportProblemActionButtonIsNotDisplayedForCompletedService(data.getService());
         VNextBORODetailsStepsNew.setServiceStatusIfNeeded(data.getService(), "Active");
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
@@ -288,7 +289,7 @@ public class VNextBOMonitorReportProblemTestCasesNew extends BaseTestCase {
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanCompleteCurrentPhaseWithProblemServices(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);

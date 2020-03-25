@@ -38,7 +38,7 @@ public class VNextBOROCompleteCurrentPhaseDialogValidationsNew {
 
     public static void verifyCancelButtonIsDisplayed() {
 
-        ConditionWaiter.create(__ -> new VNextBOROCompleteCurrentPhaseDialogNew().getCancelButton().isDisplayed());
+        ConditionWaiter.create(__ -> new VNextBOROCompleteCurrentPhaseDialogNew().getCancelButton().isDisplayed()).execute();
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROCompleteCurrentPhaseDialogNew().getCancelButton()),
                 "Cancel button hasn't been displayed.");
     }

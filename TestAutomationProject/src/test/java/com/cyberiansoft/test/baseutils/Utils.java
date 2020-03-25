@@ -195,6 +195,7 @@ public class Utils {
     public static void selectOptionInDropDownWithJs(WebElement dropDown, WebElement option) {
         waitForDropDownToBeOpened(dropDown);
         WaitUtilsWebDriver.waitForVisibility(option);
+        ConditionWaiter.create(__ -> option.isEnabled()).execute();
         clickWithJS(option);
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }

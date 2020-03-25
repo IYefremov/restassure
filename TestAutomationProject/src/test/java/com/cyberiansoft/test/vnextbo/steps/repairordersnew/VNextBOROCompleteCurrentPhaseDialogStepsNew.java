@@ -19,14 +19,14 @@ public class VNextBOROCompleteCurrentPhaseDialogStepsNew {
 
         VNextBOROCompleteCurrentPhaseDialogNew completeCurrentPhaseDialog = new VNextBOROCompleteCurrentPhaseDialogNew();
         Utils.clickElement(completeCurrentPhaseDialog.getCompleteCurrentPhaseButton());
-        ConditionWaiter.create(__ -> !completeCurrentPhaseDialog.getCompleteCurrentPhaseDialog().isDisplayed());
+        ConditionWaiter.create(__ -> !completeCurrentPhaseDialog.getCompleteCurrentPhaseDialog().isDisplayed()).execute();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void resolveProblemForService(String service) {
 
         VNextBOROCompleteCurrentPhaseDialogNew completeCurrentPhaseDialog = new VNextBOROCompleteCurrentPhaseDialogNew();
-        ConditionWaiter.create(__ -> completeCurrentPhaseDialog.resolveButtonByServiceName(service).isEnabled());
+        ConditionWaiter.create(__ -> completeCurrentPhaseDialog.resolveButtonByServiceName(service).isEnabled()).execute();
         Utils.clickElement(completeCurrentPhaseDialog.resolveButtonByServiceName(service));
     }
 }

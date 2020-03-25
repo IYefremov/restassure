@@ -4,38 +4,35 @@ import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
-import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
-import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
-import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.validations.monitor.RepairOrderInfoValidations;
+import com.cyberiansoft.test.vnext.validations.InformationDialogValidations;
+import com.cyberiansoft.test.vnext.validations.MonitorValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
-public class VNextTeamMonitoringBaseCase extends BaseTestClass {
-    private String inspectionId = "";
+public class VNextMonitorLocationTestCases extends BaseTestClass {
     private String workOrderId = "";
 
-    @BeforeClass(description = "Team Monitoring Base Case")
+    @BeforeClass(description = "Team Monitor Location Test")
     public void beforeClass() {
-        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringLocationDataPath();
+
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
-        inspectionId = InspectionSteps.saveInspection();
+        final String inspectionId = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.approveInspection();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         InspectionMenuSteps.selectCreateWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
@@ -46,21 +43,18 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCanViewOrderInfoViaEdit(String rowID,
-                                            String description, JSONObject testData) {
-
+    public void testVerifyUserCanEnterToSelectLocation(String rowID,
+                                                                                                         String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderInfoDto expectedOrderInfo = workOrderData.getMonitoring().getOrderInfoDto();
+        String defLocation = workOrderData.getMonitoring().getLocation();
+        final String location = "1111 Automation";
 
         HomeScreenSteps.openMonitor();
-        MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSteps.openItem(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
-        EditOrderSteps.switchToInfo();
-        expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
-        RepairOrderInfoValidations.verifyOrderInfo(expectedOrderInfo);
-        WizardScreenSteps.saveAction();
+        MonitorSteps.changeLocation(location);
+        InformationDialogValidations.clickOKAndVerifyMessage("Sorry, there are no repair orders by the current criteria.");
+        MonitorSteps.changeLocation(defLocation);
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
+
     }
 }
