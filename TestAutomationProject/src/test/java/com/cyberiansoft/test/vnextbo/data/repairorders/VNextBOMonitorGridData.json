@@ -102,5 +102,47 @@
         }
       ]
     }
+  ],
+  "verifyUserCanCloseUnCloseWorkOrder": [
+    {
+      "rowID": "verifyUserCanCloseUnCloseWorkOrder.01",
+      "description": "Test Case 98842: Verify user can close and unclose work order (RO grid)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "98842",
+          "testCaseTitle": "Verify user can close and unclose work order (RO grid)"
+        }
+      ],
+      "problemReason": "Completed",
+      "phase": "Rozstalnoy"
+    }
+  ],
+  "verifyUserCanChangeMoreThanOneTechniciansLinkedToOnePhase": [
+    {
+      "rowID": "verifyUserCanChangeMoreThanOneTechniciansLinkedToOnePhase.01",
+      "description": "Test Case 91377: User can change more than 1 different technicians linked to 1 phase",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91377",
+          "testCaseTitle": "User can change more than 1 different technicians linked to 1 phase"
+        }
+      ],
+      "orderNumber": "O-000-152650",
+      "phase": "Rozstalnoy2",
+      "vendor": "Test Team",
+      "technician": "_Ira Autotest"
+    }
+  ],
+  "verifyUserCanSeeAndCreateNotes": [
+    {
+      "rowID": "verifyUserCanSeeAndCreateNotes.01",
+      "description": "Test Case 91406: User can see and create notes",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91406",
+          "testCaseTitle": "User can see and create notes"
+        }
+      ]
+    }
   ]
 }
