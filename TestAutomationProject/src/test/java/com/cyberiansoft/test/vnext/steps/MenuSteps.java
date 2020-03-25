@@ -9,7 +9,7 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class MenuSteps {
     public static void selectMenuItem(MenuItems menuItem) {
-        BaseUtils.waitABit(2000);
+        BaseUtils.waitABit(3000);
         GeneralMenuScreen repairOrderMenuScreen = new GeneralMenuScreen();
         WaitUtils.elementShouldBeVisible(repairOrderMenuScreen.getRootElement(), true);
         WaitUtils.getGeneralFluentWait().until(driver -> {
@@ -20,7 +20,7 @@ public class MenuSteps {
 
     public static void selectStatus(ServiceStatus serviceStatus) {
         StatusSelectScreen statusSelectScreen = new StatusSelectScreen();
-        BaseUtils.waitABit(2000);
+        BaseUtils.waitABit(3000);
         WaitUtils.elementShouldBeVisible(statusSelectScreen.getStatusItemByText(serviceStatus.getStatus()), true);
         WaitUtils.waitUntilElementIsClickable(statusSelectScreen.getRootElement());
         WaitUtils.click(statusSelectScreen.getStatusItemByText(serviceStatus.getStatus()));

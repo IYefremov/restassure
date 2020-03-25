@@ -9,6 +9,7 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.enums.OrderPriority;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.dto.OrderInfoDto;
+import com.cyberiansoft.test.vnext.dto.OrderPhaseDto;
 import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -16,6 +17,7 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.PhaseScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
@@ -127,6 +129,49 @@ public class VNextMonitorEditROTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         PhaseScreenValidations.validateServiceNotes(serviceData, notesText);
+
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanAssignTheTechOnTheServiceLevel(String rowID,
+                                                 String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        ServiceData serviceData = workOrderData.getServiceData();
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        EditOrderSteps.openServiceMenu(serviceData);
+        MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
+        PhaseScreenSteps.selectTechnician(serviceData.getServiceDefaultTechnician());
+        PhaseScreenValidations.validateServiceTechnician(serviceData);
+
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanAssignTheTechOnPhaseLevel(String rowID,
+                                                                String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderPhaseDto orderPhaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
+        ServiceData serviceData = workOrderData.getServiceData();
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        EditOrderSteps.openPhaseMenu(orderPhaseDto);
+        MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
+        PhaseScreenSteps.selectTechnician(serviceData.getServiceDefaultTechnician());
+        PhaseScreenValidations.validateServiceTechnician(serviceData);
 
         WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
