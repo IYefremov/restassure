@@ -39,9 +39,6 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
     @BeforeClass(description = "Team Supplements Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getSupplementsTestCasesDataPath();
-        //VNextHomeScreen homeScreen = new VNextHomeScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        //VNextInspectionsScreen inspectionsScreen = homeScreen.clickInspectionsMenuItem();
-       // WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
         HomeScreenSteps.openInspections();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.clickSearchButtonAndClear();
@@ -191,7 +188,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
 
         InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+//        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
         MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         for (ServiceData service : inspectionData.getServicesList())
@@ -231,16 +228,16 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
         ServiceDetailsScreenSteps.saveServiceDetails();
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
-        MenuSteps.selectMenuItem(MenuItems.VIEW_SUPPLEMENT);
-        ViewScreenValidations.verifyServiceOriginalAmaunt(inspectionData.getMoneyServiceData().getServiceName(), serviceOriginalAmaunt);
+        //MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
+        /*ViewScreenValidations.verifyServiceOriginalAmaunt(inspectionData.getMoneyServiceData().getServiceName(), serviceOriginalAmaunt);
         ViewScreenValidations.verifySupplementAmaunt(supplementAmaunt);
         ViewScreenValidations.verifyServiceTotalAmaunt(inspectionData.getMoneyServiceData().getServiceName(), serviceTotalAmaunt);
         ScreenNavigationSteps.pressBackButton();
 
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
-        MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.VIEW_SUPPLEMENT);*/
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 
         AvailableServicesScreenSteps.selectServiceAndSetData(inspectionData.getServiceData());

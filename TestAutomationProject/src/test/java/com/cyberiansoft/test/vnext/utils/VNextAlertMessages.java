@@ -25,7 +25,7 @@ public class VNextAlertMessages {
 	public static String CANCEL_ETING_INVOICE = "Any unsaved changes will be lost. Are you sure you want to stop editing this Invoice?";
 	public static String CANCEL_ETING_WORK_ORDER = "Any unsaved changes will be lost. Are you sure you want to stop editing this Work Order?";
 	public static String ARE_YOU_SURE_YOU_WANT_VOID_INVOICE = "Are you sure you want to void\n%s?";
-	public static String NEW_SUPPLEMENT_WILL_NOT_BE_ADDED = "New supplement will not be added because you have not made any changes to services.";
+	public static String NEW_SUPPLEMENT_WILL_NOT_BE_ADDED = "No changes were made, so the new supplement will not be saved";
 	public static String TOTAL_AMOUNT_OF_INSPECTION_CANT_BE_LESS_THAN_0 = "Total amount of Inspection can't be less than 0";
 	public static String TOTAL_AMOUNT_OF_INSPECTION_EXCEEDS_THE_MAXIMUM_ALLOWED = "Total amount of Inspection exceeds the maximum allowed value of 999999999.99";
 	public static String YOUR_CARD_WAS_DECLINED = "Your card was declined.";

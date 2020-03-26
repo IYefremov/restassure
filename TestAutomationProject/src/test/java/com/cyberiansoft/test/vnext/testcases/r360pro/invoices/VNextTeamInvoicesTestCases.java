@@ -1051,7 +1051,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyInvoice(workOrderNumber);
 		InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR, testCaseData.getInvoiceData());
 		final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
-		InvoiceSteps.switchToMyInvoicesView();
 		InvoiceSteps.switchToTeamInvoicesView();
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);

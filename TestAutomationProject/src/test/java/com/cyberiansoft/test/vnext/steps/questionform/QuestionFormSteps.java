@@ -42,4 +42,9 @@ public class QuestionFormSteps {
     public static void saveQuestionForm() {
         ListSelectPageInteractions.saveListPage();
     }
+
+    public static void answerImageQuestion(QuestionsData questionData) {
+        QuestionScreenInteractions.clickQuestionCamera(questionData.getQuestionName());
+    }
+
 }

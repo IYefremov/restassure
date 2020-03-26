@@ -12,7 +12,6 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
-import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextWorkOrderTypesList;
 import com.cyberiansoft.test.vnext.steps.*;
@@ -47,13 +46,14 @@ public class VNextVehicleOwnerSupportTestCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
 
         VehicleInfoScreenInteractions.clickSelectOwnerCell();
-        CustomersScreenSteps.switchToRetailMode();
-        CustomersScreenSteps.clickAddCustomerButton();
-        VNextNewCustomerScreen nextNewCustomerScreen = new VNextNewCustomerScreen();
+        //CustomersScreenSteps.switchToRetailMode();
+        //CustomersScreenSteps.clickAddCustomerButton();
+
+        //VNextNewCustomerScreen nextNewCustomerScreen = new VNextNewCustomerScreen();
         final String customerFirstName = StringUtils.capitalize(GlobalUtils.getUUID());
         final String customerLastName = StringUtils.capitalize(GlobalUtils.getUUID());
-        nextNewCustomerScreen.createNewCustomer(new RetailCustomer(customerFirstName, customerLastName));
-
+       // nextNewCustomerScreen.createNewCustomer(new RetailCustomer(customerFirstName, customerLastName));
+        CustomerServiceSteps.createCustomerIfNotExist(new RetailCustomer(customerFirstName, customerLastName));
         VehicleInfoScreenValidations.ownerShouldBe(customerFirstName + " " + customerLastName);
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();

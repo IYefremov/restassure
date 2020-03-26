@@ -8,9 +8,9 @@ public class QuestionServiceListValidations {
     public static void validateServicePresent(String serviceName) {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         WaitUtils.getGeneralFluentWait().until(driver -> {
-            Assert.assertNotEquals(availableServicesScreen.getServicesListItems().stream()
+            Assert.assertNotEquals(availableServicesScreen.getServicesList().stream()
                     .filter(
-                            serviceElement -> serviceElement.getText().contains(serviceName)
+                            serviceElement -> serviceElement.getServiceName().contains(serviceName)
                     ).count(), 0);
             return true;
         });
