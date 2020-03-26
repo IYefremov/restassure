@@ -21,6 +21,7 @@ public class Utils {
         try {
             WaitUtilsWebDriver.waitForElementNotToBeStale(element, 3);
             WaitUtilsWebDriver.elementShouldBeClickable(element, true, 3);
+            ConditionWaiter.create(__ -> element.isEnabled()).execute();
             element.click();
         } catch (Exception ignored) {
             WaitUtilsWebDriver.waitABit(500);

@@ -10,7 +10,8 @@ public class VNextBOCloseRODialogStepsNew {
     public static void closeOrderWithReason(String reason) {
 
         VNextBOCloseRODialogNew closeOrderDialog = new VNextBOCloseRODialogNew();
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        ConditionWaiter.create(__ -> closeOrderDialog.getReasonDropDown().isEnabled()).execute();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         Utils.clickElement(closeOrderDialog.getReasonDropDown());
         ConditionWaiter.create(__ -> closeOrderDialog.reasonDropDownOption(reason).isEnabled()).execute();
         Utils.clickWithJS(closeOrderDialog.reasonDropDownOption(reason));

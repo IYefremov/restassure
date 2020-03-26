@@ -64,7 +64,9 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
+            WaitUtilsWebDriver.waitForPendingRequestsToComplete();
             for (WebElement phase: new VNextBOROWebPageNew().getOrdersPhasesList()) {
+                ConditionWaiter.create(__ -> Utils.getText(phase).equals(expectedPhase)).execute();
                 Assert.assertEquals(Utils.getText(phase), expectedPhase, "Phase hasn't been correct");
             }
         }
