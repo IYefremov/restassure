@@ -117,8 +117,7 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
         workOrders.forEach(workOrderId -> InvoiceInfoScreenValidations.validateWorkOrderSelectedForInvoice(workOrderId, true));
 
         WizardScreenSteps.clickCancelMenuItem();
-        InformationDialogValidations.clickYesAndVerifyMessage(VNextAlertMessages.CANCEL_ETING_WORK_ORDER);
-        InvoiceSteps.saveInvoiceAsFinal();
+        InformationDialogValidations.clickYesAndVerifyMessage(VNextAlertMessages.CANCEL_ETING_INVOICE);
         ScreenNavigationSteps.pressBackButton();
     }
 

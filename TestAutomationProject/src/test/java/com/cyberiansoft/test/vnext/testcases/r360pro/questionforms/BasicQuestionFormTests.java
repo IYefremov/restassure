@@ -78,6 +78,7 @@ public class BasicQuestionFormTests extends BaseTestClass {
         GeneralSteps.closeErrorDialog();
 
         QuestionFormSteps.answerGeneralSlideQuestion(secondRequiredQuestion);
+        QuestionFormSteps.answerImageQuestion(questionsDataList.get(2));
         QuestionFormValidations.validateGeneralQuestionAnswer(secondRequiredQuestion);
 
         InspectionSteps.trySaveInspection();

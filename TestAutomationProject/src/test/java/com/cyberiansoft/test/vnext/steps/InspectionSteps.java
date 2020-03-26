@@ -114,6 +114,7 @@ public class InspectionSteps {
 
     public static void switchToMyInspections() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
+        inspectionsScreen.waitForInspectionsListIsVisibile();
         inspectionsScreen.switchToMyInspectionsView();
     }
 

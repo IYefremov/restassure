@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextApproveServicesScreen;
@@ -12,7 +13,12 @@ public class ApproveServicesSteps {
     public static void clickApproveAllButton() {
         VNextApproveServicesScreen approveServicesScreen = new VNextApproveServicesScreen();
         WaitUtils.elementShouldBeVisible(approveServicesScreen.getApproveAllBtn(), true);
-        WaitUtils.click(approveServicesScreen.getApproveAllBtn());
+        BaseUtils.waitABit(1000);
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            approveServicesScreen.getApproveAllBtn().click();
+            return true;
+        });
+        //WaitUtils.click(approveServicesScreen.getApproveAllBtn());
     }
 
     public static void clickDeclineAllButton() {

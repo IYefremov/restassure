@@ -39,6 +39,6 @@ public class ClaimInfoScreenValidations {
 
     public static void validateInsuranceCompanyValue(String expectedInsuranceCompany) {
         VNextClaimInfoScreen claimInfoScreen = new VNextClaimInfoScreen();
-        Assert.assertEquals(claimInfoScreen.getInsuranceCompanyFld().getAttribute("value"), expectedInsuranceCompany);
+        Assert.assertEquals(claimInfoScreen.getInsuranceCompanyValue(), expectedInsuranceCompany);
     }
 }

@@ -7,6 +7,7 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
+import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
@@ -53,7 +54,7 @@ public class AutoAssignTechCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
@@ -112,7 +113,7 @@ public class AutoAssignTechCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);
@@ -177,7 +178,7 @@ public class AutoAssignTechCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        SearchSteps.searchByText(workOrderId);
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         EditOrderSteps.openServiceMenu(serviceWithNonDefaultTechnician);

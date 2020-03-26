@@ -44,7 +44,7 @@ public class MonitorSteps {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.getGeneralFluentWait().until((webdriver) -> repairOrderScreen.getRepairOrderListElements().size() > 0);
         RepairOrderListElement repairOrder = repairOrderScreen.getRepairOrderElement(workOrderId);
-        WaitUtils.elementShouldBeVisible(repairOrder.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(repairOrder.getRootElement());
         repairOrder.openMenu();
     }
 

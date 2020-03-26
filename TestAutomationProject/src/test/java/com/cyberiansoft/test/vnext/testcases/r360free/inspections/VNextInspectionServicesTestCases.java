@@ -358,8 +358,6 @@ public class VNextInspectionServicesTestCases extends BaseTestCaseWithDeviceRegi
 		HomeScreenSteps.openCreateMyInspection();
 		InspectionSteps.createInspection(testcustomer, inspectionData);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
-		List<WebElement> services = availableServicesScreen.getServicesListItems();
 		List<String> servicesTxt = new ArrayList<>();
 		//for (WebElement lst : services)
 		//	servicesTxt.add(availableServicesScreen.getServiceListItemName(lst));

@@ -72,6 +72,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
                                                                                    String description, JSONObject testData) {
 
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String declineReason = "Too expensive";
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
@@ -91,8 +92,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         }
         ApproveServicesSteps.clickDeclineAllButton();
         ApproveServicesSteps.saveApprovedServices();
-        ApproveServicesScreenValidations.verifyDeclineReasonScreenDisplayed();
-        ScreenNavigationSteps.pressBackButton();
+        ApproveServicesSteps.selectDeclineReason(declineReason);
         ScreenNavigationSteps.pressBackButton();
     }
 
