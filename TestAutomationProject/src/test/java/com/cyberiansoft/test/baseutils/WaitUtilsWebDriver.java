@@ -66,9 +66,9 @@ public class WaitUtilsWebDriver {
 
     public static void waitForSpinnerToDisappear() {
         try {
-            getWebDriverWait(4).until(ExpectedConditions.visibilityOf(VNextBOBaseWebPage.spinner));
+            ConditionWaiter.create(__ -> VNextBOBaseWebPage.spinner.isDisplayed()).execute();
             WebElement spinner = DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[contains(@class, 'k-loading-image')]"));
-            getWebDriverWait(8).until(ExpectedConditions.invisibilityOf(spinner));
+            ConditionWaiter.create(15000, 500, __ -> !spinner.isDisplayed()).execute();
         } catch (Exception ex) { }
     }
 
