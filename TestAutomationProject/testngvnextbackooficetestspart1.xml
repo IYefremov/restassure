@@ -86,13 +86,13 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementSearchTestCases"/>
         </classes>
     </test>
-    <test name="Parts Management Order Details Tests">
+<!--    <test name="Parts Management Order Details Tests">
         <parameter name="userName" value="test.automation1@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementOrderDetailsTestCases"/>
         </classes>
-    </test>
+    </test>-->
     <test name="Parts Management Order Details Status CheckBox Tests">
         <parameter name="userName" value="test.automation1@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>
