@@ -40,18 +40,6 @@
       ]
     }
   ],
-  "verifyUserCanCloseCommonFiltersPopDownWindow": [
-    {
-      "rowID": "verifyUserCanCloseCommonFiltersPopDownWindow.01",
-      "description": "",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "92290",
-          "testCaseTitle": "Verify user can close \"Common filters\" pop-dawn window"
-        }
-      ]
-    }
-  ],
   "userCanFindTheNecessaryPriority": [
     {
       "rowID": "userCanFindTheNecessaryPriority.01",

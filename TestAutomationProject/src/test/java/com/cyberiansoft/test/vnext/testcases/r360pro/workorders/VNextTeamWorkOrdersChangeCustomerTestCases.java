@@ -197,10 +197,10 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
-        SearchSteps.textSearch(woNumber);
         WorkOrderSteps.switchToMyWorkOrdersView();
         WorkOrderSteps.switchToTeamWorkOrdersView();
         WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
+
         ScreenNavigationSteps.pressBackButton();
         BaseUtils.waitABit(30*1000);
         HomeScreenSteps.openWorkOrders();

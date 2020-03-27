@@ -13,13 +13,13 @@ public class MonitorSearchValidations {
 
     public static void validateTimeFrameFromValue(String expectedDateValue) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        Assert.assertEquals(commonFilterScreen.getDateFrom().getRootElement().getAttribute("value"),
+        Assert.assertEquals(commonFilterScreen.getDateFrom().getAttribute("value"),
                 expectedDateValue);
     }
 
     public static void validateTimeFrameToValue(String expectedDateValue) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        Assert.assertEquals(commonFilterScreen.getDateTo().getRootElement().getAttribute("value"),
+        Assert.assertEquals(commonFilterScreen.getDateTo().getAttribute("value"),
                 expectedDateValue);
     }
 
