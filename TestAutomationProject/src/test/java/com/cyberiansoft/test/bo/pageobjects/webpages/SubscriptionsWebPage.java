@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
@@ -33,6 +34,15 @@ public class SubscriptionsWebPage extends BaseWebPage {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
+
+	public SubscriptionsWebPage() {
+		super(DriverBuilder.getInstance().getDriver());
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+	}
+
+	public WebElement getEditButtonBySubscriptionName(String name) {
+	    return driver.findElement(By.xpath("//td[text()='" + name + "']/../td/input[@title='Edit']"));
+    }
 
 	public boolean checkGrid() {
 		try {

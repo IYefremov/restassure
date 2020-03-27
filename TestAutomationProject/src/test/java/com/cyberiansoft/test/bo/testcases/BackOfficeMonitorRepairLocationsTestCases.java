@@ -469,7 +469,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 
 		CompanyWebPage companypage = new CompanyWebPage(webdriver);
 		backOfficeHeader.clickCompanyLink();
-		TeamsWebPage teamspage = new TeamsWebPage(webdriver);
+		TeamsWebPage teamspage = new TeamsWebPage();
 		companypage.clickTeamsLink();
 		teamspage.makeSearchPanelVisible();
 		teamspage.setTeamLocationSearchCriteria(data.getTeamName());
@@ -495,7 +495,7 @@ public class BackOfficeMonitorRepairLocationsTestCases extends BaseTestCase {
 
 		companypage = new CompanyWebPage(webdriver);
 		backOfficeHeader.clickCompanyLink();
-		teamspage = new TeamsWebPage(webdriver);
+		teamspage = new TeamsWebPage();
 		companypage.clickTeamsLink();
 		teamspage.makeSearchPanelVisible();
 		teamspage.setTeamLocationSearchCriteria(data.getTeamName());

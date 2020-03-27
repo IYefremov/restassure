@@ -403,4 +403,18 @@ public class WaitUtilsWebDriver {
     public static void waitUntilTitleContains(String title) {
         getWait().until(ExpectedConditions.titleContains(title));
     }
+
+    public static void waitUntilTitleContains(String title, int timeOut) {
+        getWebDriverWait(timeOut).until(ExpectedConditions.titleContains(title));
+    }
+
+    public static void waitUntilTitleContainsIgnoringException(String title, int timeOut) {
+        try {
+            waitUntilTitleContains(title, timeOut);
+        } catch (Exception ignored) {}
+    }
+
+    public static void waitUntilTitleIs(String title) {
+        getWait().until(ExpectedConditions.titleIs(title));
+    }
 }

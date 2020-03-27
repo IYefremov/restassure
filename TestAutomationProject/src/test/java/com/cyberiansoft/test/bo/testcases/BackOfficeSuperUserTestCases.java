@@ -25,7 +25,7 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		SuperUserWebPage superUserPage = new SuperUserWebPage(webdriver);
+		SuperUserWebPage superUserPage = new SuperUserWebPage();
 		backOfficeHeader.clickSuperUserLink();
 		AllUsersWebPage allUsersPage = new AllUsersWebPage(webdriver);
 		superUserPage.clickAllUsersLink();
@@ -69,7 +69,7 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		SuperUserWebPage superUserPage = new SuperUserWebPage(webdriver);
+		SuperUserWebPage superUserPage = new SuperUserWebPage();
 		backOfficeHeader.clickSuperUserLink();
 		AllEmployeesWebPage allEmployeesPage = new AllEmployeesWebPage(webdriver);
 		superUserPage.clickAllEmployeesLink();
@@ -112,7 +112,7 @@ public class BackOfficeSuperUserTestCases extends BaseTestCase {
 		BOSuperUserData data = JSonDataParser.getTestDataFromJson(testData, BOSuperUserData.class);
 		BackOfficeHeaderPanel backOfficeHeader = new BackOfficeHeaderPanel(webdriver);
 
-		SuperUserWebPage superUserPage = new SuperUserWebPage(webdriver);
+		SuperUserWebPage superUserPage = new SuperUserWebPage();
 		backOfficeHeader.clickSuperUserLink();
 		ApplicationsWebPage applicationsPage = new ApplicationsWebPage(webdriver);
 		superUserPage.clickApplicationsLink();

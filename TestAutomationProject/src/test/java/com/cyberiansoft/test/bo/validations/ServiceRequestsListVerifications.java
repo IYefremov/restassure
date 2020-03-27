@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.bo.verifications;
+package com.cyberiansoft.test.bo.validations;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;

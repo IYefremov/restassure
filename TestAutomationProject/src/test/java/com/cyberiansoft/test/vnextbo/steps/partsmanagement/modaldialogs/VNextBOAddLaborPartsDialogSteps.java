@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnextbo.steps.partsmanagement;
+package com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;

@@ -114,11 +114,11 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsLaborTests"/>
         </classes>
     </test>
-    <test name="Parts Management Generic Part Provider Functionality Tests">
+    <test name="Parts Management Generic Part Provider and Punchout Tests">
         <parameter name="userName" value="test.automation1@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementGenericPartProviderFunctionalityTestCases"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMGenericPartProviderAndPunchOutTestCases"/>
         </classes>
     </test>
     <test name="Money And Percentage Services Tests">
