@@ -65,7 +65,7 @@ public class RepairOrderListElement implements IWebElement {
     }
 
     public void openMenu() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(repairOrderLocator)), true);
+        WaitUtils.waitUntilElementIsClickable(rootElement.findElement(By.xpath(repairOrderLocator)));
         WaitUtils.click(rootElement.findElement(By.xpath(repairOrderLocator)));
     }
 

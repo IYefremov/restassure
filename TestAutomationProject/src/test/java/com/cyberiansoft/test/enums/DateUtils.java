@@ -6,6 +6,7 @@ public enum DateUtils {
     THE_SHORTEST_DATE_FORMAT("M/d/uuuu"),
     DETAILED_FULL_DATE_FORMAT("EEEE, MMMM dd, uuuu"),
     SHORT_DATE_FORMAT_WITH_COMMA("MMM d, uuuu"),
+    FULL_DATE_FORMAT_WITH_MINUS("uuuu-MM-dd"),
     ZONE_ID("US/Pacific");
 
     private String data;

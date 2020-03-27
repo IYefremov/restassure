@@ -78,6 +78,7 @@ public class WorkOrderSteps {
         WaitUtils.waitUntilElementIsClickable(workOrdersScreen.getRootElement());
         WorkOrderListElement workOrder = workOrdersScreen.getWorkOrderElement(workOrderId);
         workOrder.openMenu();
+
     }
 
     public static void cancelWorkOrder() {
@@ -108,6 +109,7 @@ public class WorkOrderSteps {
         CustomersScreenSteps.selectCustomer(newCustomer);
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationDialog.clickInformationDialogYesButton();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     public static void createInvoiceFromWorkOrder(String workOrderId) {

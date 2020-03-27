@@ -126,7 +126,7 @@ public class SearchSteps {
 
     public static void selectPriority(OrderPriority orderPriority) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        commonFilterScreen.getPriority().selectListElement(orderPriority.getValue());
+        commonFilterScreen.getPriority().selectOption(orderPriority.getValue());
     }
 
     public static void searchByDepartment(String departmentName) {
@@ -193,6 +193,11 @@ public class SearchSteps {
         GeneralWizardInteractions.openSearchFilter();
         GeneralWizardInteractions.setSearchText(serviceName);
         GeneralWizardInteractions.closeSearchFilter();
+    }
+
+    public static void textSearchTeam(String serviceName) {
+        textSearch(serviceName);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     public static void clearFilters() {

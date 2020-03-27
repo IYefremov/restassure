@@ -21,7 +21,7 @@ public class WorkOrderListElement implements IWebElement {
 
     public void openMenu() {
         WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(idFieldLocator)), true);
-        WaitUtils.getGeneralFluentWait().until(driver -> {
+        WaitUtils.getGeneralFluentWait(5, 300).until(driver -> {
             rootElement.findElement(By.xpath(idFieldLocator)).click();
             return true;
         });
