@@ -1,55 +1,5 @@
 {
 
-  "testVerifyUserCanPresetRetailCustomer": [
-    {
-      "rowID": "testVerifyUserCanPresetRetailCustomer.01",
-      "description": "Test Case 82203:Verify user can preset retail customer",
-      "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
-      }
-    }
-  ],
-
-  "testVerifyUserCanPresetWholesaleCustomer": [
-    {
-      "rowID": "testVerifyUserCanPresetWholesaleCustomer.01",
-      "description": "Test Case 82204:Verify user can preset wholwsale customer",
-      "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
-      }
-    }
-  ],
-
-  "testVerifyUserCanChangePresetCustomer": [
-    {
-      "rowID": "testVerifyUserCanChangePresetCustomer.01",
-      "description": "Test Case 82205:Verify user can change preset customer",
-      "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
-      }
-    }
-  ],
-
-  "testVerifyUserCanCreateInspectionWithPresetCustomer": [
-    {
-      "rowID": "testVerifyUserCanCreateInspectionWithPresetCustomer.01",
-      "description": "Test Case 82206:Verify user can Create Inspection with preset customer",
-      "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
-      }
-    }
-  ],
-
-  "testVerifyUserCanCancelPresetCustomer": [
-    {
-      "rowID": "testVerifyUserCanCancelPresetCustomer.01",
-      "description": "Test Case 82208:Verify user can cancel preset customer",
-      "inspType": "O_Kramar",
-      "vihicleInfo": {"vinNumber": "7777777777777"
-      }
-    }
-  ],
-
   "testVerifyUserCanCancelPresetCustomerIfUserGoFromRetailToWholesaleCustomerScreen": [
     {
       "rowID": "testVerifyUserCanCancelPresetCustomerIfUserGoFromRetailToWholesaleCustomerScreen.01",

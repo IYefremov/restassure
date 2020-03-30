@@ -22,6 +22,18 @@ public class PhaseScreenInteractions {
                 .orElseThrow(() -> new RuntimeException("Phase element not found " + phaseName)));
     }
 
+    public static boolean isPhaseExists(String phaseName) {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            phasesScreen.getPhaseListElements().forEach(elem -> elem.getRootElement().isDisplayed());
+            return true;
+        });
+        BaseUtils.waitABit(2000);
+        return phasesScreen.getPhaseListElements().stream()
+                .anyMatch((serviceElement) ->
+                        serviceElement.getName().equals(phaseName));
+    }
+
     public static ServiceElement getServiceElements(String serviceName) {
         PhasesScreen phasesScreen = new PhasesScreen();
         WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
@@ -33,6 +45,17 @@ public class PhaseScreenInteractions {
                         serviceElement.getName().contains(serviceName))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Service element not found " + serviceName)));
+    }
+
+    public static boolean isServiceExists(String serviceName) {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
+        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(phasesScreen.getRootElement());
+        BaseUtils.waitABit(2000);
+        return phasesScreen.getServiceElementsList().stream()
+                .anyMatch((serviceElement) ->
+                        serviceElement.getName().contains(serviceName));
     }
 
     public static void openServiceElementMenu(ServiceElement serviceElement) {

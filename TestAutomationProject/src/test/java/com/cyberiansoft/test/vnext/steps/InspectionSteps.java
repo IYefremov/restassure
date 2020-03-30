@@ -150,5 +150,6 @@ public class InspectionSteps {
     public static void clickMultiSelectInspectionsApproveButton() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.getMultiSelectInspApproveBtn().click();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 }

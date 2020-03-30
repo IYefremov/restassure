@@ -16,6 +16,20 @@ public class PhaseScreenValidations {
         Assert.assertEquals(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()).getStatus().toLowerCase(), serviceStatus.getStatus().toLowerCase());
     }
 
+    public static void validateServicePresent(ServiceData serviceData, boolean isPresent) {
+        if (isPresent)
+            Assert.assertTrue(PhaseScreenInteractions.isServiceExists(serviceData.getServiceName()));
+        else
+            Assert.assertFalse(PhaseScreenInteractions.isServiceExists(serviceData.getServiceName()));
+    }
+
+    public static void validatePhasePresent(OrderPhaseDto orderPhaseDto, boolean isPresent) {
+        if (isPresent)
+            Assert.assertTrue(PhaseScreenInteractions.isPhaseExists(orderPhaseDto.getPhaseName()));
+        else
+            Assert.assertFalse(PhaseScreenInteractions.isPhaseExists(orderPhaseDto.getPhaseName()));
+    }
+
     public static void validateServiceNotes(ServiceData serviceData, String expectedServiceNotes) {
         Assert.assertEquals(PhaseScreenInteractions.getServiceElements(serviceData.getServiceName()).getNotes(), expectedServiceNotes);
     }
