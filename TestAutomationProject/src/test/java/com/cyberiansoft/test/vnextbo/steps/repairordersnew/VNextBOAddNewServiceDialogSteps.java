@@ -71,7 +71,7 @@ public class VNextBOAddNewServiceDialogSteps {
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
-    private static void closeDialogWithXIcon() {
+    public static void closeDialogWithXIcon() {
 
         Utils.clickElement(new VNextBOAddNewServiceDialog().getCloseXIconButton());
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();

@@ -16,6 +16,20 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.login.VNextBOForgotPasswordTests"/>
         </classes>
     </test>
+    <test name="Home Page Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePageTestCases"/>
+        </classes>
+    </test>
+    <test name="Home Page Access Rights Tests">
+        <parameter name="userName" value="test.automation2@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.homepage.VNextBOHomePageAccessRightsTestCases"/>
+        </classes>
+    </test>
     <test name="Users General Tests">
         <parameter name="userName" value="test.automation2@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>

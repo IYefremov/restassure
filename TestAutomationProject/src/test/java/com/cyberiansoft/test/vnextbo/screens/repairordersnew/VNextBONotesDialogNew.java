@@ -34,6 +34,12 @@ public class VNextBONotesDialogNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//button[contains(@data-bind, 'saveNote')]")
     private WebElement noteSaveButton;
 
+    @FindBy(id = "showMedia")
+    private WebElement showMediaSwitcher;
+
+    @FindBy(id = "showServicesNotes")
+    private WebElement showServicesNotesSwitcher;
+
     public VNextBONotesDialogNew() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

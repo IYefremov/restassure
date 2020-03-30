@@ -173,6 +173,61 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 		VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
 	}
 
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanSeeBreadcrumb(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOBreadCrumbValidations.verifyFirstBreadCrumbElementIsCorrect("Repair Orders");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "Location hasn't been displayed.");
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanSeeWoInTheBreadcrumb(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBOBreadCrumbValidations.verifyFirstBreadCrumbElementIsCorrect("Repair Orders");
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "Location hasn't been displayed.");
+		VNextBOBreadCrumbValidations.verifyLastBreadCrumbElementIsCorrect(data.getOrderNumber());
+		Utils.goToPreviousPage();
+		WaitUtilsWebDriver.waitForPageToBeLoaded();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanChangeLocationBeingOnDetailsWoPage(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBOBreadCrumbInteractions.setLocation(data.getSearchLocation());
+		WaitUtilsWebDriver.waitForPageToBeLoaded();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+		VNextBOROWebPageValidationsNew.verifyOrderTableContainsRecords();
+		VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+		WaitUtilsWebDriver.waitForPageToBeLoaded();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanReturnToTheMainPage(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBOBreadCrumbInteractions.clickFirstBreadCrumbLink();
+		WaitUtilsWebDriver.waitForPageToBeLoaded();
+		VNextBOROWebPageValidationsNew.verifyOrderTableContainsRecords();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyCurrentLocationIsVisibleAfterLocationDropdownIsClicked(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOBreadCrumbInteractions.clickLocationName();
+		Assert.assertTrue(VNextBOBreadCrumbValidations.isLocationSet(data.getLocation()), "Location hasn't been displayed.");
+		VNextBOBreadCrumbInteractions.clickLocationName();
+	}
+
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanFilterRObyDepartments(String rowID, String description, JSONObject testData) {
 

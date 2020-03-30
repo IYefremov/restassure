@@ -9,10 +9,12 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOAddNewServiceDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBONotesDialogStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOAddNewServiceDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBONotesDialogValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
@@ -42,6 +44,18 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBOROWebPageValidationsNew.verifyNoteTextIsCorrectForFirstOrder("91411", false);
 		VNextBOROPageStepsNew.openFirstOrderNotes();
 		VNextBONotesDialogValidationsNew.verifyNoteInTheNotesList("91411", false);
+		VNextBONotesDialogStepsNew.closeDialogWithXIcon();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserSeesServiceNotesAndImagesByDefault(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openFirstOrderNotes();
+		VNextBONotesDialogValidationsNew.verifyShowMediaSwitcherIsTurnedOn();
+		VNextBONotesDialogValidationsNew.verifyShowServicesNotesSwitcherIsTurnedOn();
 		VNextBONotesDialogStepsNew.closeDialogWithXIcon();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
@@ -218,6 +232,20 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		int	initialPartServicesNumber = VNextBORODetailsStepsNew.getPartServicesAmount();
 		VNextBORODetailsStepsNew.addPartService(data);
 		VNextBORODetailsValidationsNew.verifyPartServicesAmountIsCorrect(initialPartServicesNumber + 1);
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanFilterAvailableServicesListByEnteredText(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		data.setServiceDescription(data.getServiceDescription() + RandomStringUtils.randomAlphabetic(7));
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.openAddNewServiceDialog();
+		VNextBOAddNewServiceDialogValidations.verifyFilterWorksForServiceField(data.getService());
+		VNextBOAddNewServiceDialogSteps.closeDialogWithXIcon();
 		Utils.goToPreviousPage();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
