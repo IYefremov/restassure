@@ -214,4 +214,8 @@ public class VNextProTestCasesDataPaths {
     public String getMonitoringStartPhaseServicesDataPath() {
         return props.getProperty("monitoring.start.phasesercics");
     }
+
+    public String getMonitoringFocusModeButtonTestCasesDataPath() {
+        return props.getProperty("monitoring.focusmode.button");
+    }
 }

@@ -93,6 +93,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         ApproveServicesSteps.clickDeclineAllButton();
         ApproveServicesSteps.saveApprovedServices();
         ApproveServicesSteps.selectDeclineReason(declineReason);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
         ScreenNavigationSteps.pressBackButton();
     }
 
