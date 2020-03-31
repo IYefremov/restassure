@@ -300,9 +300,7 @@ public class VNextBORODetailsStepsNew {
 
     public static void addService(VNextBOMonitorData serviceData) {
 
-        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().getAddServiceButton().isEnabled()).execute();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.addService(serviceData);
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
@@ -314,22 +312,19 @@ public class VNextBORODetailsStepsNew {
 
     public static void addServiceWithoutSaveXIcon(VNextBOMonitorData serviceData) {
 
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.populateServiceDataAndClickXIcon(serviceData);
     }
 
     public static void addServiceWithoutSaveCancelButton(VNextBOMonitorData serviceData) {
 
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.populateServiceDataAndClickCancelButton(serviceData);
     }
 
     public static void addLaborService(VNextBOMonitorData serviceData) {
 
-        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().getAddServiceButton().isEnabled()).execute();
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.addLaborService(serviceData);
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
@@ -341,15 +336,20 @@ public class VNextBORODetailsStepsNew {
 
     public static void addPartService(VNextBOMonitorData serviceData) {
 
-        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().getAddServiceButton().isEnabled()).execute();
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.addPartService(serviceData);
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         Utils.refreshPage();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+    }
+
+    public static void openAddNewServiceDialog() {
+
+        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().getAddServiceButton().isEnabled()).execute();
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }

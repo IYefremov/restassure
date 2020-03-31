@@ -3,7 +3,11 @@ package com.cyberiansoft.test.vnextbo.validations.repairordersnew;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOAddNewServiceDialog;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class VNextBOAddNewServiceDialogValidations {
 
@@ -87,5 +91,15 @@ public class VNextBOAddNewServiceDialogValidations {
         verifyServiceIsCorrect(serviceData.getService());
         verifyCategoryIsCorrect(serviceData.getServiceCategory());
         verifySubCategoryIsCorrect(serviceData.getServiceSubcategory());
+    }
+
+    public static void verifyFilterWorksForServiceField(String text) {
+
+        VNextBOAddNewServiceDialog addNewServiceDialog = new VNextBOAddNewServiceDialog();
+        Utils.clickElement(addNewServiceDialog.getServiceDropDownField());
+        Utils.clearAndType(addNewServiceDialog.getServiceDropDownField(), text);
+        List<String> displayedOptionsList = addNewServiceDialog.displayedDropdownOptionsList().stream().map(WebElement::getText).collect(Collectors.toList());
+        Assert.assertTrue(displayedOptionsList.stream().allMatch(option -> option.toLowerCase().contains(text.toLowerCase())),
+                String.format("Not all displayed services contained %s in the name", text));
     }
 }

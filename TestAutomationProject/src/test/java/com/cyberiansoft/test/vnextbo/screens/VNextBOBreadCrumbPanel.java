@@ -37,6 +37,9 @@ public class VNextBOBreadCrumbPanel extends VNextBOBaseWebPage {
     @FindBy(className = "breadcrumbs")
     private WebElement breadCrumbsLink;
 
+    @FindBy(xpath = "//div[@class='breadcrumbs']//a")
+    private WebElement firstBreadCrumbElement;
+
     @FindBy(xpath = "//strong[contains(@data-bind, 'breadcrumb.last')]")
     private WebElement lastBreadCrumb;
 

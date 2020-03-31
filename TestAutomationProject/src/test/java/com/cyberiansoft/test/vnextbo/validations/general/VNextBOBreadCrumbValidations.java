@@ -8,6 +8,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.Assert;
 
 public class VNextBOBreadCrumbValidations {
 
@@ -70,5 +71,19 @@ public class VNextBOBreadCrumbValidations {
                         .getText()
                         .toLowerCase()
                         .contains(searchLocation.toLowerCase()));
+    }
+
+    public static void verifyFirstBreadCrumbElementIsCorrect(String value) {
+
+        Assert.assertEquals(Utils.getText(new VNextBOBreadCrumbPanel().getFirstBreadCrumbElement()), value,
+                "First breadcrumb element hasn't been correct");
+
+    }
+
+    public static void verifyLastBreadCrumbElementIsCorrect(String value) {
+
+        Assert.assertEquals(Utils.getText(new VNextBOBreadCrumbPanel().getLastBreadCrumb()), value,
+                "Last breadcrumb element hasn't been correct");
+
     }
 }
