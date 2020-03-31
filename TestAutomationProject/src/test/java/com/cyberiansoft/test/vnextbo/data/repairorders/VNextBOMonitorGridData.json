@@ -144,5 +144,22 @@
         }
       ]
     }
+  ],
+  "verifyUserCanChangeStockRoPoInvoiceColumn": [
+    {
+      "rowID": "verifyUserCanChangeStockRoPoInvoiceColumn.01",
+      "description": "Test Case 91385: User can change fields of \"Stock# / RO# / PO# / Invoice\" column",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91385",
+          "testCaseTitle": "User can change fields of \"Stock# / RO# / PO# / Invoice\" column"
+        }
+      ],
+      "location": "1111 Automation",
+      "orderNumber": "O-000-152073",
+      "poNum": "Lorem Ipsum",
+      "roNum": "113",
+      "stockNum": "Test1"
+    }
   ]
 }

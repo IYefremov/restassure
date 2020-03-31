@@ -196,7 +196,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
-    public static void openSavedSearchesList() {
+    public static void clickSavedSearchesDropDownField() {
 
         Utils.clickElement(new VNextBOROWebPageNew().getSavedSearchDropDownField());
     }
@@ -204,7 +204,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void searchBySavedAdvancedSearch(String searchName) {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
-        openSavedSearchesList();
+        clickSavedSearchesDropDownField();
         VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName);
         Utils.clickElement(repairOrdersPage.savedSearchOptionByName(searchName));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -213,7 +213,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void openSavedAdvancedSearch(String searchName) {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
-        openSavedSearchesList();
+        clickSavedSearchesDropDownField();
         VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName);
         Utils.clickElement(repairOrdersPage.savedSearchOptionByName(searchName));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -488,5 +488,21 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         Utils.clickElement(new VNextBOROWebPageNew().getOrdersTechniciansList().get(0));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void pinUnpinSavedSearchInTheDropdown(String searchName) {
+
+        clickSavedSearchesDropDownField();
+        Utils.clickWithJS(new VNextBOROWebPageNew().pinSavedSearch(searchName));
+        clickSavedSearchesDropDownField();
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().pinnedSearchBlock(searchName).isEnabled()).execute();
+    }
+
+    public static void unpinSavedSearch(String searchName) {
+
+        Utils.hoverElement(new VNextBOROWebPageNew().pinnedSearchBlock(searchName));
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().pinnedSearchXIcon(searchName).isDisplayed()).execute();
+        Utils.clickWithJS(new VNextBOROWebPageNew().pinnedSearchXIcon(searchName));
+        ConditionWaiter.create(__ -> !new VNextBOROWebPageNew().pinnedSearchBlock(searchName).isDisplayed()).execute();
     }
 }

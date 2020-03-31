@@ -564,4 +564,31 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
                 "No services message has contained incorrect text");
         Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
     }
+
+    public static void verifyPinnedSearchIsDisplayed(String savedSearch, boolean shouldBeDisplayed) {
+
+        if (shouldBeDisplayed) {
+            ConditionWaiter.create(__ -> new VNextBOROWebPageNew().pinnedSearchBlock(savedSearch).isDisplayed()).execute();
+            Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().pinnedSearchBlock(savedSearch)),
+                    "Pinned search hasn't been displayed");
+        }
+        else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().pinnedSearchBlock(savedSearch)),
+                "Pinned search has been displayed");
+    }
+
+    public static void verifyPinSavedSearchIconBackground(String savedSearch, String expectedColor) {
+
+        VNextBOROPageStepsNew.clickSavedSearchesDropDownField();
+        Assert.assertTrue(new VNextBOROWebPageNew().pinSavedSearch(savedSearch).getCssValue("background").contains(expectedColor),
+                "Pin icon background hasn't been correct");
+        VNextBOROPageStepsNew.clickSavedSearchesDropDownField();
+    }
+
+    public static void verifyNotificationMessageIsDisplayedAndCorrect() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getNotificationMessage()),
+                "Notification message hasn't been displayed");
+        Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNotificationMessage()), "Warning. You cannot add more than 3 pinned searches.",
+                "Unpin tooltip text hasn't been correct");
+    }
 }

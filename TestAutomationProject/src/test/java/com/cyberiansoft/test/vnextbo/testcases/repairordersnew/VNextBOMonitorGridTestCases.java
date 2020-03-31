@@ -8,6 +8,7 @@ import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOChangeTechnicianDialogStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
@@ -155,5 +156,27 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         final String NOTE_TEXT = RandomStringUtils.randomAlphabetic(6);
         VNextBOROPageStepsNew.addNoteForFirstOrderFromOthersMenu(TEST_ORDER_NUMBER, NOTE_TEXT);
         VNextBOROWebPageValidationsNew.verifyNoteTextIsCorrectForFirstOrder(NOTE_TEXT, true);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStockRoPoInvoiceColumn(String rowID, String description, JSONObject testData) {
+
+        VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOROPageStepsNew.changeStockNumberForFirstOrder("111");
+        VNextBOROPageStepsNew.changeRoNumberForFirstOrder("111");
+        VNextBOROPageStepsNew.changePoNumberForFirstOrder("111");
+        VNextBOROPageStepsNew.changeStockNumberForFirstOrder(data.getStockNum());
+        VNextBOROPageStepsNew.changeRoNumberForFirstOrder(data.getRoNum());
+        VNextBOROPageStepsNew.changePoNumberForFirstOrder(data.getPoNum());
+        VNextBOROWebPageValidationsNew.verifyStockNumbersAreCorrectInTheTable(data.getStockNum());
+        VNextBOROWebPageValidationsNew.verifyRoNumbersAreCorrectInTheTable(data.getRoNum());
+        VNextBOROWebPageValidationsNew.verifyPoNumbersAreCorrectInTheTable(data.getPoNum());
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
+        VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

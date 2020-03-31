@@ -155,6 +155,9 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class,'priority-icon') and @style='background: red;']/i[@class='icon-arrow-up']")
     private WebElement highPriorityIcon;
 
+    @FindBy(xpath = "//div[@class='notification__message']")
+    private WebElement notificationMessage;
+
     public WebElement orderColumnByOrderNumber(String orderNumber) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//strong[@data-bind='text: orderNo' and text()='" + orderNumber + "']/ancestor::td"));
@@ -218,6 +221,21 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     public WebElement ordersAmountForPhaseInTable(String phase) {
 
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[@id='departmentTabwideScreen2']//span[text()='" + phase + "']/ancestor::div/span[@class='pull-right']"));
+    }
+
+    public WebElement pinSavedSearch(String savedSearch) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[text()='" + savedSearch + "']/ancestor::div[@class='dropdown__list__item']/button"));
+    }
+
+    public WebElement pinnedSearchBlock(String savedSearch) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[text()='" + savedSearch + "']/ancestor::div[contains(@class,'dashboard__item')]"));
+    }
+
+    public WebElement pinnedSearchXIcon(String savedSearch) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[text()='" + savedSearch + "']/ancestor::div[contains(@class,'dashboard__item')]/i"));
     }
 
     public VNextBOROWebPageNew() {

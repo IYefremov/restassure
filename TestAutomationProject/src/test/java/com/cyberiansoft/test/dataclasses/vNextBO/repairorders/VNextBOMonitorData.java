@@ -88,6 +88,9 @@ public class VNextBOMonitorData {
     @JsonProperty("roNum")
     private String roNum;
 
+    @JsonProperty("poNum")
+    private String poNum;
+
     @JsonProperty("stockNum")
     private String stockNum;
 
