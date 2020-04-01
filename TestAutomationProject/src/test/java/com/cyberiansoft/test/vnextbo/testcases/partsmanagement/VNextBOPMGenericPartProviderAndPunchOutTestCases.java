@@ -189,6 +189,7 @@ public class VNextBOPMGenericPartProviderAndPunchOutTestCases extends BaseTestCa
         final String received = PartStatus.RECEIVED.getStatus();
         final String message = VNextBOAlertMessages.MARK_PART_AS_RECEIVED;
 
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(searchData.getWoNum());
         VNextBOPartsDetailsPanelSteps.addPartIfOpenStatusIsNotPresent(partData, searchData.getWoNum());
@@ -216,6 +217,7 @@ public class VNextBOPMGenericPartProviderAndPunchOutTestCases extends BaseTestCa
     public void verifyPartProviderDropDownIsEmptyByDefaultWhenTheUserAddsService(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
         VNextBOPartsDetailsPanelSteps.addNewPart(data.getPartData());
@@ -228,6 +230,7 @@ public class VNextBOPMGenericPartProviderAndPunchOutTestCases extends BaseTestCa
     public void verifyPartProviderFieldIsFilledAndUserCantChangeItWhenPartIsQuoted(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
         VNextBOPartsDetailsPanelSteps.addNewPart(data.getPartData());
