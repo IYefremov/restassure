@@ -33,7 +33,6 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         Utils.refreshPage();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
 	}
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -74,7 +73,6 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber("O-368-00007");
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROWebPageValidationsNew.verifyStartPhaseServicesActionButtonIsDisplayed(true);
         VNextBOROWebPageValidationsNew.verifyFirstServiceIconInTheCurrentPhaseDropdown(0,"icon-start-ro");
         VNextBOROPageStepsNew.startFirstServiceForTheCurrentPhase();
@@ -101,7 +99,6 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         Utils.goToPreviousPage();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -133,7 +130,6 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROPageStepsNew.openChangeTechnicianDialogForFirstOrder();
         VNextBOChangeTechnicianDialogStepsNew.changeTechnicianAndSave(data.getVendor(), data.getTechnician());
         VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable(data.getTechnician());
@@ -147,7 +143,6 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable("Drake Ramores");
         VNextBOROWebPageValidationsNew.verifyTechniciansAreCorrectInTheTable("Eric Meahan");
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -164,7 +159,6 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROPageStepsNew.changeStockNumberForFirstOrder("111");
         VNextBOROPageStepsNew.changeRoNumberForFirstOrder("111");
         VNextBOROPageStepsNew.changePoNumberForFirstOrder("111");
@@ -177,6 +171,5 @@ public class VNextBOMonitorGridTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 }

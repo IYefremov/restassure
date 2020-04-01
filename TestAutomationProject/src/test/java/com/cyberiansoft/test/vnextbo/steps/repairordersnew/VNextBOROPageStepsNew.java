@@ -113,6 +113,8 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField("All");
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getWoNumbersList().size() == 1).execute();
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getWoNumbersList().get(0).isEnabled()).execute();
     }
 
     public static void searchOrdersByPhaseStatus(String phase, String phaseStatus) {
