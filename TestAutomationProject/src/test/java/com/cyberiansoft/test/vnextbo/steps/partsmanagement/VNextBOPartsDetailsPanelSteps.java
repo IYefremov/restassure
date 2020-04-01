@@ -27,7 +27,6 @@ import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VN
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartDocumentsDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogValidations;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 
 import java.util.Arrays;
@@ -82,13 +81,13 @@ public class VNextBOPartsDetailsPanelSteps {
     public static void clickAddLaborButtonForPartByNumberInList(int partNumber) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().getAddLaborButton().get(partNumber));
-        WaitUtilsWebDriver.getWebDriverWait(2).until(ExpectedConditions.visibilityOf(new VNextBOAddLaborPartsDialog().getAddLaborButton()));
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOAddLaborPartsDialog().getDialogContent(), true, 5);
     }
 
     public static void clickDeleteLaborButtonForPartByNumberInListAndServiceName(int partNumber, String laborServiceName) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().deleteLaborButton(partNumber, laborServiceName));
-        WaitUtilsWebDriver.getWebDriverWait(2).until(ExpectedConditions.visibilityOf(new VNextBOModalDialog().getYesButton()));
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOModalDialog().getYesButton(), true, 2);
     }
 
     public static void setStatusForPartByPartNumberInList(int partNumber, String status) {
@@ -189,7 +188,7 @@ public class VNextBOPartsDetailsPanelSteps {
         Utils.clickWithJS(partsDetailsPanel.getLaborsExpander().get(partNumber));
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitForAttributeNotToContain(
-                partsDetailsPanel.getPartLaborsBlock().get(partNumber), "style", "display: none", 2);
+                partsDetailsPanel.getPartLaborsBlock().get(partNumber), "style", "display: none", 3);
     }
 
     public static int getLaborsAmountForPartByNumberInList(int partNumber) {
@@ -279,12 +278,6 @@ public class VNextBOPartsDetailsPanelSteps {
                 "The parts number is not with " + status + " status is not >= " + expectedNumber);
     }
 
-    public static void clickGetQuotesPartButton() {
-        VNextBOPartsDetailsPanelInteractions.clickGetQuotesPartButton();
-        Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
-                "The Parts Providers modal dialog hasn't been opened");
-    }
-
     public static void deleteServicesByStatus(String status) {
         VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
         final WebElement selectedStatus = VNextBOPartsDetailsPanelInteractions.getSelectedStatus(status);
@@ -310,8 +303,7 @@ public class VNextBOPartsDetailsPanelSteps {
 
     private static void clickDeleteServices() {
         VNextBOPartsDetailsPanelInteractions.clickDeleteButton();
-        Assert.assertTrue(VNextBOConfirmationDialogInteractions.getConfirmationDialogMessage().contains(
-                VNextBOAlertMessages.VERIFY_TO_BE_DELETED), "The message hasn't been displayed");
+        VNextBOConfirmationDialogValidations.verifyDialogMessageIsDisplayed(VNextBOAlertMessages.VERIFY_TO_BE_DELETED);
     }
 
     public static void deleteServices() {

@@ -24,4 +24,8 @@ public class VNextBORODetailsPartsBlockInteractions {
         final List<WebElement> parts = detailsPartsBlock.getPartsByName(partName);
         return Utils.getText(detailsPartsBlock.getPartNumber(parts).get(0));
     }
+
+    public static List<String> getPartOrderedFromValues() {
+        return Utils.getText(new VNextBORODetailsPartsBlock().getOrderedFrom());
+    }
 }

@@ -7,7 +7,6 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsManagem
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAdvancedSearchDialog;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class VNextBOPartsManagementWebPageSteps extends VNextBOBaseWebPageSteps {
 
@@ -41,7 +40,7 @@ public class VNextBOPartsManagementWebPageSteps extends VNextBOBaseWebPageSteps 
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
         Utils.clickElement(new VNextBOPartsManagementWebPage().editSavedSearchButtonByName(searchName));
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(new VNextBOAdvancedSearchDialog().getCustomerField()));
+        WaitUtilsWebDriver.elementShouldBeClickable(new VNextBOAdvancedSearchDialog().getCustomerField(), true, 5);
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 

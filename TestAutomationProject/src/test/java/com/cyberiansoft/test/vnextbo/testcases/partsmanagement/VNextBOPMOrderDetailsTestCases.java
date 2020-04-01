@@ -1,25 +1,20 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.enums.RepairStatus;
 import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.enums.partsmanagement.CoreStatus;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBORODetailsPartsBlockInteractions;
-import com.cyberiansoft.test.vnextbo.steps.addOns.VNextBOAddOnsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.leftmenupanel.VNextBOLeftMenuSteps;
-import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsOrdersListPanelSteps;
@@ -34,37 +29,17 @@ import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
-public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
+public class VNextBOPMOrderDetailsTestCases extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsTD();
-    }
-
-    @BeforeTest
-    public void turnOffAddOnForPunchOut() {
-        // PRECONDITIONS FOR THE TC "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage" -
-        // needs to be run at least 10 minutes before the TC
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-        VNextBOLoginSteps.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-000-152414");
-        VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(true);
-        VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(true);
-        VNextBOLeftMenuInteractions.selectAddOnsMenu();
-        VNextBOAddOnsPageSteps.turnOffAddOnByName("Punch Out Process");
-        DriverBuilder.getInstance().getDriver().close();
-        WaitUtilsWebDriver.waitABit(1000);
     }
 
     @BeforeMethod
@@ -114,7 +89,8 @@ public class VNextBOPartsManagementOrderDetailsTestCases extends BaseTestCase {
                 "The PO# hasn't been set");
     }
 
-    //todo fails, needs clarifications. The part# is not saved. Most probably it's a bug.
+    //todo fails, the part# is not saved.
+    //todo BUG: https://cyb.tpondemand.com/restui/board.aspx?#page=bug/117118
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangePartForSpecifiedParts(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);

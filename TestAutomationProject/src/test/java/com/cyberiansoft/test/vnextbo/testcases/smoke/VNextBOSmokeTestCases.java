@@ -4,17 +4,21 @@ import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBONewSmokeData;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOQuickNotesData;
 import com.cyberiansoft.test.dataclasses.vNextBO.deviceManagement.VNextBODeviceManagementData;
+import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.TimeFrameValues;
+import com.cyberiansoft.test.enums.addons.IntegrationStatus;
 import com.cyberiansoft.test.enums.invoices.InvoiceStatuses;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.inspections.VNextBOInspectionsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
+import com.cyberiansoft.test.vnextbo.steps.addOns.VNextBOAddOnsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
@@ -319,5 +323,31 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
 
         VNextBORODetailsPageSteps.setReportProblemForPhase(data.getPhase(), data.getProblemReason(), data.getProblemDescription());
         VNextBORODetailsPageSteps.setResolveProblemForPhase(data.getPhase());
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        final String addOn = "Punch Out Process";
+        VNextBOLeftMenuInteractions.selectAddOnsMenu();
+        final String addOnStatus = VNextBOAddOnsPageSteps.getAddOnStatus(addOn);
+        if (addOnStatus.equals(IntegrationStatus.ON.name())) {
+            VNextBOLeftMenuInteractions.selectPartsManagementMenu();
+            VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+            VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
+            VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(true);
+            VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(true);
+            VNextBOLeftMenuInteractions.selectAddOnsMenu();
+            VNextBOAddOnsPageSteps.turnOffAddOnByName(addOn);
+            VNextBOAddOnsPageSteps.refreshPageWhileAddOnStatusIsChanged(addOn, IntegrationStatus.OFF);
+            VNextBOLeftMenuInteractions.selectPartsManagementMenu();
+            VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+            VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
+            VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(false);
+            VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(false);
+            VNextBOLeftMenuInteractions.selectAddOnsMenu();
+        }
+        VNextBOAddOnsPageSteps.turnOnAddOnByName(addOn);
     }
 }

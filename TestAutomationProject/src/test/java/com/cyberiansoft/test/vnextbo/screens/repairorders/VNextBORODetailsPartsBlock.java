@@ -114,4 +114,8 @@ public class VNextBORODetailsPartsBlock extends VNextBOBaseWebPage {
                 getReceived(parts).get(0)
         );
     }
+
+    public List<WebElement> getOrderedFrom() {
+        return partsBlock.findElements(By.xpath(".//td[contains(@class, 'grid__centered')][4]/div"));
+    }
 }

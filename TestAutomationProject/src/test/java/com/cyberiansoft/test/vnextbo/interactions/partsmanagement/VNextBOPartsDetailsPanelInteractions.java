@@ -27,6 +27,15 @@ public class VNextBOPartsDetailsPanelInteractions {
         return (int) getPartStatusFieldsValues().stream().filter(part -> part.contains(status)).count();
     }
 
+    public static int getFirstPartOrderWithGivenStatus(String status) {
+        for (int i = 0; i < getPartStatusFieldsValues().size(); i++) {
+            if (getPartStatusFieldsValues().get(i).contains(status)) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
     public static void clickGetQuotesPartButton() {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getGetQuotesButton());
         VNextBOPartsProvidersDialogInteractions.waitForPartsProvidersModalDialogToBeOpened();
@@ -282,7 +291,8 @@ public class VNextBOPartsDetailsPanelInteractions {
         final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
         final WebElement partInputField = WaitUtilsWebDriver.waitForVisibility(partsDetailsPanel.getPartInputField(order));
         Utils.clearAndType(partInputField, partNumber);
-        WaitUtilsWebDriver.waitForAttributeToContain(partInputField, "aria-busy", "false");
+        WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(partInputField, "aria-busy", "false");
+        Utils.clickElement(partsDetailsPanel.getPartNumbersTitlesList().get(order));
     }
 
     public static void clearPartNumber(int order) {

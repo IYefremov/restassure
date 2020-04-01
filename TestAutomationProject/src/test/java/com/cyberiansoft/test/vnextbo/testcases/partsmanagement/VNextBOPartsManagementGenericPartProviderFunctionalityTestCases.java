@@ -6,9 +6,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsMan
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
-import com.cyberiansoft.test.enums.addons.IntegrationStatus;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
-import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -17,9 +15,8 @@ import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsOr
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.stores.VNextBOAutoZoneProductResultsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.stores.VNextBOAutoZoneQuoteDetailsPageInteractions;
-import com.cyberiansoft.test.vnextbo.steps.addOns.VNextBOAddOnsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
+import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOConfirmationDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogSteps;
@@ -28,9 +25,8 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZon
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZoneMyShopPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZoneProductResultsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.validations.addons.VNextBOAddOnsPageValidations;
+import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
-import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.stores.VNextBOAutoZoneValidations;
 import org.json.simple.JSONObject;
@@ -73,7 +69,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
         VNextBOPartsDetailsPanelValidations.verifyPartStatusesDoNotContainStatus(status);
         VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
-        VNextBOPartsProvidersDialogSteps.openRequestFormDialog(VNextBOPartsProvidersDialogSteps.getRandomDataProvider());
+        VNextBOPartsProvidersDialogSteps.openRequestFormDialog(VNextBOPartsProvidersDialogSteps.getRandomGenericPartProvider());
         VNextBOPartsProvidersRequestFormDialogValidations.verifyNoPartsToOrderMessageHasBeenDisplayed();
         VNextBOPartsProvidersRequestFormDialogValidations.verifyRequestQuoteButtonIsDisabled();
     }
@@ -88,7 +84,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         VNextBOPartsDetailsPanelSteps.addPartIfOpenStatusIsNotPresent(data.getPartData(), data.getSearchData().getWoNum());
         final List<String> detailsPanelPartNamesByStatus = VNextBOPartsDetailsPanelInteractions.getPartNamesByStatus(status);
         VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
-        VNextBOPartsProvidersDialogSteps.openRequestFormDialog(VNextBOPartsProvidersDialogSteps.getRandomDataProvider());
+        VNextBOPartsProvidersDialogSteps.openRequestFormDialog(VNextBOPartsProvidersDialogSteps.getRandomGenericPartProvider());
         final String title = VNextBOPartsProvidersRequestFormDialogInteractions.getTitle();
         VNextBOPartsProvidersRequestFormDialogValidations.verifyVinIsDisplayedInTitle(vin, title);
         VNextBOPartsProvidersRequestFormDialogValidations.verifyCarInfoIsDisplayedInTitle("Cadillac", title);
@@ -118,8 +114,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
                 "The parts names on the PM page are not displayed properly in the request form dialog");
         Assert.assertEquals(detailsPanelPartNamesByStatus.size(), partNames.size(),
                 "The number of parts on the PM page and in the request form dialog differs");
-        Assert.assertTrue(VNextBOPartsProvidersRequestFormDialogValidations.isRequestQuoteButtonDisabled(),
-                "The request quote button hasn't been disabled");
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyRequestQuoteButtonIsDisabled();
         final int firstRandom = Utils.getRandomNumber(0, 2);
         final int secondRandom = Utils.getRandomNumber(2, 4);
         VNextBOPartsProvidersRequestFormDialogInteractions.clickPartCheckbox(firstRandom);
@@ -133,8 +128,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         final String title = VNextBOPartsProvidersRequestFormDialogInteractions.getTitle();
         VNextBOPartsProvidersRequestFormDialogInteractions.clickCancelButton();
         VNextBOPartsProvidersDialogSteps.openRequestFormDialog(data.getProvider());
-        Assert.assertTrue(VNextBOPartsProvidersRequestFormDialogValidations.isRequestQuoteButtonDisabled(),
-                "The request quote button hasn't been disabled");
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyRequestQuoteButtonIsDisabled();
 
         VNextBOPartsProvidersRequestFormDialogSteps.getQuotesForFirstParts(4);
         VNextBOPartsProvidersDialogSteps.closePartsProvidersDialog();
@@ -155,9 +149,7 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
 
 //        VNextBOPartsDetailsPanelSteps.deleteServicesByStatus(status);
         VNextBOPartsDetailsPanelSteps.addPartIfOpenStatusIsNotPresent(partData, searchData.getWoNum());
-        VNextBOPartsDetailsPanelInteractions.clickGetQuotesPartButton();
-        Assert.assertTrue(VNextBOPartsProvidersDialogValidations.isPartsProvidersModalDialogOpened(),
-                "The Parts Providers modal dialog hasn't been opened");
+        VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
         VNextBOPartsProvidersDialogSteps.openStore(data.getProvider());
         VNextBOAutoZoneValidations.verifyAutoZonePageIsOpened("AutoZonePro.com");
         VNextBOAutoZoneLoginPageSteps.loginToAutoZone();
@@ -179,24 +171,59 @@ public class VNextBOPartsManagementGenericPartProviderFunctionalityTestCases ext
         VNextBOShoppingCartDialogSteps.completeOrder(partData, price, corePrice);
     }
 
-    // PRECONDITIONS ARE RUN IN THE VNextBOPartsManagementOrderDetailsTestCases CLASS -
-    // the TC needs to be run at least 10 minutes after the preconditions
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage(String rowID, String description, JSONObject testData) {
+    public void verifyWarningMessageIsDisplayedForGenericPartProviderWithoutEmailPartIsSetAsReceivedAndProviderIsStored(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+        final VNextBOPartsData partData = data.getPartData();
+        final VNextBOPartsManagementSearchData searchData = data.getSearchData();
+        final String open = PartStatus.OPEN.getStatus();
+        final String received = PartStatus.RECEIVED.getStatus();
+        final String message = VNextBOAlertMessages.MARK_PART_AS_RECEIVED;
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(searchData.getWoNum());
+        VNextBOPartsDetailsPanelSteps.addPartIfOpenStatusIsNotPresent(partData, searchData.getWoNum());
+        final int partsNumberWithOpenStatus = VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(open);
+        final int partsNumberWithReceivedStatus = VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(received);
+        final int partToBeChanged = VNextBOPartsDetailsPanelInteractions.getFirstPartOrderWithGivenStatus(received);
+        VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
+        VNextBOPartsProvidersDialogSteps.openRequestFormDialogForGenericPartProvider(data.getProvider());
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyRequestQuoteButtonIsDisabled();
+        VNextBOPartsProvidersRequestFormDialogSteps.getQuotesForFirstParts(1);
+        VNextBOConfirmationDialogSteps.getMessageAndReject(message);
+        VNextBOPartsProvidersRequestFormDialogSteps.requestQuote();
+        VNextBOConfirmationDialogSteps.getMessageAndConfirm(message);
+        VNextBOPartsProvidersRequestFormDialogInteractions.waitForRequestFormDialogToBeClosed();
+        VNextBOPartsProvidersDialogSteps.closePartsProvidersDialog();
+        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(open), partsNumberWithOpenStatus - 1,
+                "The number of 'Open' statuses hasn't been reduced by one");
+        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(received), partsNumberWithReceivedStatus + 1,
+                "The number of 'Received' statuses hasn't been increased by one");
+        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(partToBeChanged, data.getProvider());
+        VNextBOPartsDetailsPanelSteps.deleteServicesByStatus(received);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyPartProviderDropDownIsEmptyByDefaultWhenTheUserAddsService(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        webdriverGotoWebPage(VNextBOConfigInfo.getInstance().getVNextBOCompanionappURL());
-        final String userName = VNextBOConfigInfo.getInstance().getVNextBONadaMail();
-        final String userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
-        VNextBOLoginSteps.userLogin(userName, userPassword);
-        VNextBOLeftMenuInteractions.selectAddOnsMenu();
-        VNextBOAddOnsPageValidations.verifyAddOnIntegrationStatus("Punch Out Process", IntegrationStatus.OFF);
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(false);
-        VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(false);
-        VNextBOLeftMenuInteractions.selectAddOnsMenu();
-        VNextBOAddOnsPageSteps.turnOnAddOnByName("Punch Out Process");
+        VNextBOPartsDetailsPanelSteps.addNewPart(data.getPartData());
+        final int partsIndex = VNextBOPartsDetailsPanelSteps.getPartsListSize() - 1;
+        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(partsIndex, "");
+        VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(partsIndex);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyPartProviderFieldIsFilledAndUserCantChangeItWhenPartIsQuoted(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
+        VNextBOPartsDetailsPanelSteps.addNewPart(data.getPartData());
+        final int partsIndex = VNextBOPartsDetailsPanelSteps.getPartsListSize() - 1;
+        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(partsIndex, "");
+        VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(partsIndex);
     }
 }

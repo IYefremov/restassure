@@ -166,6 +166,10 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 
+    public List<WebElement> getPartNumbersTitlesList() {
+        return partsDetailsTable.findElements(By.xpath(".//div[text()='Part#']"));
+    }
+
     public List<WebElement> laborsNamesListForPartByNumberInList(int partNumber) {
 
         return partDetails.get(partNumber).findElements(By.xpath(".//div[@class='grid-flex__row grid-flex__divider']//span[@data-bind='text: serviceName']"));

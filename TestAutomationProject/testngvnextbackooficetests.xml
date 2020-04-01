@@ -129,7 +129,7 @@
     </test>
     <test name="Parts Management Order Details Tests">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementOrderDetailsTestCases"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsTestCases"/>
         </classes>
     </test>
     <test name="Parts Management Dashboard Tests">
@@ -139,7 +139,7 @@
     </test>
     <test name="Parts Management Search Tests">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementSearchTestCases"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMSearchTestCases"/>
         </classes>
     </test>
     <test name="Parts Management Order Details Status CheckBox Tests">

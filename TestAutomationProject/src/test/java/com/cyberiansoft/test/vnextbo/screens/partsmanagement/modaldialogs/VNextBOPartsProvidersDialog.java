@@ -32,11 +32,19 @@ public class VNextBOPartsProvidersDialog extends VNextBOBaseWebPage {
         return partsProvidersModal.findElement(By.xpath(".//div[text()='" + provider + "']"));
     }
 
-    public List<WebElement> getDataProvidersList() {
+    public List<WebElement> getGenericPartProvidersList() {
         return partsProvidersModal.findElements(By.xpath(".//img[contains(@src, 'data')]/..//div[contains(text(), '')]"));
     }
 
-    public WebElement getGetNewQuoteButtonByProviderName(String provider) {
+    public WebElement getGenericPartProviderByProviderName(String provider) {
+        return partsProvidersModal.findElement(By.xpath(".//div[text()='Generic Part Provider - " + provider + "']"));
+    }
+
+    public WebElement getStoreGetNewQuoteButtonByProviderName(String provider) {
         return getProviderByName(provider).findElement(By.xpath(".//../..//button[text()='Get New Quote']"));
+    }
+
+    public WebElement getGenericPartProviderGetNewQuoteButtonByProviderName(String provider) {
+        return getGenericPartProviderByProviderName(provider).findElement(By.xpath(".//../..//button[text()='Get New Quote']"));
     }
 }

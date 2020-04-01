@@ -35,17 +35,17 @@ public class VNextBOModalDialogSteps {
     public static void clickYesButton() {
 
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
-        WaitUtilsWebDriver.waitForVisibility(modalDialog.getYesButton(), 4);
+        WaitUtilsWebDriver.elementShouldBeVisible(modalDialog.getYesButton(), true, 4);
         Utils.clickElement(modalDialog.getYesButton());
-        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getYesButton(), 4);
+        WaitUtilsWebDriver.elementShouldBeVisible(modalDialog.getYesButton(), false, 4);
     }
 
     public static void clickNoButton() {
 
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
-        WaitUtilsWebDriver.waitForVisibility(modalDialog.getNoButton(), 4);
+        WaitUtilsWebDriver.elementShouldBeVisible(modalDialog.getNoButton(), true, 4);
         Utils.clickElement(modalDialog.getNoButton());
-        WaitUtilsWebDriver.waitForInvisibility(modalDialog.getNoButton(), 4);
+        WaitUtilsWebDriver.elementShouldBeVisible(modalDialog.getNoButton(), false, 4);
     }
 
     public static void clickCancelButton() {
