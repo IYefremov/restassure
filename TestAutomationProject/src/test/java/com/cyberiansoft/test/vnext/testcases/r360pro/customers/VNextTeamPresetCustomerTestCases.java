@@ -122,7 +122,6 @@ public class VNextTeamPresetCustomerTestCases extends BaseTestClass {
 
         HomeScreenSteps.openCreateMyWorkOrder();
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR, workOrderData);
-        VehicleInfoScreenSteps.openTechnicianMenu();
 
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getMoneyServiceData());
