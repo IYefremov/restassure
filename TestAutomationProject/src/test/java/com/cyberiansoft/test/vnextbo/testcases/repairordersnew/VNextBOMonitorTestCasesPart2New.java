@@ -249,4 +249,45 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		Utils.goToPreviousPage();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanPinSavedSearches(String rowID, String description, JSONObject testData) {
+
+		final String FIRST_SAVED_SEARCH = "My Completed Work";
+		final String SECOND_SAVED_SEARCH = "My Location - Active Work";
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(FIRST_SAVED_SEARCH, true);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(SECOND_SAVED_SEARCH, true);
+		VNextBOROWebPageValidationsNew.verifyPinSavedSearchIconBackground(FIRST_SAVED_SEARCH, "rgb(112, 112, 112)");
+		VNextBOROPageStepsNew.unpinSavedSearch(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.unpinSavedSearch(SECOND_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyPinSavedSearchIconBackground(FIRST_SAVED_SEARCH, "rgb(255, 255, 255)");
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(FIRST_SAVED_SEARCH, false);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(SECOND_SAVED_SEARCH, false);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(FIRST_SAVED_SEARCH, false);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(SECOND_SAVED_SEARCH, false);
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanNotPinMoreThanThreeSavedSearches(String rowID, String description, JSONObject testData) {
+
+		final String FIRST_SAVED_SEARCH = "My Completed Work";
+		final String SECOND_SAVED_SEARCH = "My Location - Active Work";
+		final String THIRD_SAVED_SEARCH = "My Work Queue";
+		final String FOURTH_SAVED_SEARCH = "My WIP List";
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(THIRD_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FOURTH_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyNotificationMessageIsDisplayedAndCorrect();
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(FOURTH_SAVED_SEARCH, false);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(THIRD_SAVED_SEARCH);
+	}
 }

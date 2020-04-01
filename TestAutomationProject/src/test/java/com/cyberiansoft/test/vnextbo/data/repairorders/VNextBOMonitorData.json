@@ -1208,6 +1208,32 @@
     }
   ],
 
+  "verifyUserCanPinSavedSearches": [
+    {
+      "rowID": "verifyUserCanPinSavedSearches.01",
+      "description": "Test Case 91232: User can PIN saved searches",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91232",
+          "testCaseTitle": "User can PIN saved searches"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanNotPinMoreThanThreeSavedSearches": [
+    {
+      "rowID": "verifyUserCanNotPinMoreThanThreeSavedSearches.01",
+      "description": "Test Case 92587: User can't pin more than 3 saved searches",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92587",
+          "testCaseTitle": "User can't pin more than 3 saved searches"
+        }
+      ]
+    }
+  ],
+
   "verifyUserCannotEditSavedSearch": [
     {
       "rowID": "verifyUserCannotEditSavedSearch.01",
