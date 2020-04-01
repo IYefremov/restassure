@@ -28,6 +28,10 @@ public class VNextBOPartsProvidersDialog extends VNextBOBaseWebPage {
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 
+    public List<WebElement> getOptionsList() {
+        return partsProvidersModal.findElements(By.xpath(".//div[contains(@data-bind, 'name')]"));
+    }
+
     public WebElement getProviderByName(String provider) {
         return partsProvidersModal.findElement(By.xpath(".//div[text()='" + provider + "']"));
     }

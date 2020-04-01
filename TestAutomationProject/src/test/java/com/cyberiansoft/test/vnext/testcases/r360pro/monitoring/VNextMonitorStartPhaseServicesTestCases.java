@@ -114,7 +114,6 @@ public class VNextMonitorStartPhaseServicesTestCases extends BaseTestClass {
             MenuSteps.selectStatus(ServiceStatus.SKIPPED);
         });
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
-        PhaseScreenValidations.validatePhaseStatus(orderPhaseDto);
         orderPhaseDto.getPhaseServices().forEach(service -> PhaseScreenValidations.validateServiceStatus(service.getMonitorService(), ServiceStatus.SKIPPED));
 
         WizardScreenSteps.saveAction();

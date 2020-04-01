@@ -47,6 +47,11 @@ public class VNextClaimInfoScreen extends VNextBaseWizardScreen {
 		insuranceCompanyFld.findElement(By.xpath(".//*[@class='formfield-item-arrow']")).click();
 	}
 
+	public String getInsuranceCompanyValue() {
+		return  insuranceCompanyFld.findElement(By.xpath(".//input[contains(@name, 'InsuranceName')]")).
+				getAttribute("value").trim();
+	}
+
 	public void selectInsuranceCompany(String insuranceCompany) {
 		companiesList.findElement(By.xpath(".//div[contains(text(), '" + insuranceCompany + "')]")).click();
 	}

@@ -4,14 +4,13 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import lombok.Getter;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+@Getter
 public class BackOfficeHeaderPanel extends BaseWebPage {
 
     @FindBy(id = "ctl00_ctl00_LoginStatus_LoginStatus1")
@@ -21,16 +20,16 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	private WebElement hometab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Company']")
-	private WebElement companytab;
+	private WebElement companyTab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Operations']")
-	private WebElement operationstab;
+	private WebElement operationsTab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Monitor']")
-	private WebElement monitortab;
+	private WebElement monitorTab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Super User']")
-	private WebElement superusertab;
+	private WebElement superUserTab;
 
 	@FindBy(xpath = "//span[@class='rtsTxt' and text()='Miscellaneous']")
 	private WebElement miscellaneoustab;
@@ -48,6 +47,15 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
+
+	public BackOfficeHeaderPanel() {
+		super(DriverBuilder.getInstance().getDriver());
+		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
+	}
+
+	public WebElement getTab(String tab) {
+	    return driver.findElement(By.xpath("//span[@class='rtsTxt' and text()='" + tab + "']"));
+    }
 
 	public void clickLogout() {
 		try {
@@ -74,19 +82,19 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 	}
 
     public void clickSuperUserLink() {
-        openSubmenu(superusertab, "Super User");
+        openSubmenu(superUserTab, "Super User");
     }
 
 	public void clickOperationsLink() {
-        openSubmenu(operationstab, "Operations");
+        openSubmenu(operationsTab, "Operations");
 	}
 
     public void clickMonitorLink() {
-        openSubmenu(monitortab, "Monitor");
+        openSubmenu(monitorTab, "Monitor");
     }
 
     public void clickCompanyLink() {
-        openSubmenu(companytab, "Company");
+        openSubmenu(companyTab, "Company");
     }
 
     public void clickMiscellaneousLink() {
@@ -110,14 +118,14 @@ public class BackOfficeHeaderPanel extends BaseWebPage {
 		driver.navigate().refresh();
 	}
 
-    private void openSubmenu(WebElement subMenu, String title) {
+    private void openSubmenu(WebElement menu, String title) {
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
-        Utils.clickElement(subMenu);
+        Utils.clickElement(menu);
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         try {
             WaitUtilsWebDriver.waitUntilTitleContains(title);
         } catch (Exception e) {
-            Utils.clickElement(subMenu);
+            Utils.clickElement(menu);
             WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
             WaitUtilsWebDriver.waitUntilTitleContains(title);
         }

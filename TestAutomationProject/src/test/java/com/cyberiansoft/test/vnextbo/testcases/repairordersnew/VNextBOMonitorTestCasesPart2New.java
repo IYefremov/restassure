@@ -9,10 +9,12 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOAddNewServiceDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBONotesDialogStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBORODetailsStepsNew;
 import com.cyberiansoft.test.vnextbo.steps.repairordersnew.VNextBOROPageStepsNew;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
+import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOAddNewServiceDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBONotesDialogValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBORODetailsValidationsNew;
 import com.cyberiansoft.test.vnextbo.validations.repairordersnew.VNextBOROWebPageValidationsNew;
@@ -42,6 +44,18 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBOROWebPageValidationsNew.verifyNoteTextIsCorrectForFirstOrder("91411", false);
 		VNextBOROPageStepsNew.openFirstOrderNotes();
 		VNextBONotesDialogValidationsNew.verifyNoteInTheNotesList("91411", false);
+		VNextBONotesDialogStepsNew.closeDialogWithXIcon();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserSeesServiceNotesAndImagesByDefault(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openFirstOrderNotes();
+		VNextBONotesDialogValidationsNew.verifyShowMediaSwitcherIsTurnedOn();
+		VNextBONotesDialogValidationsNew.verifyShowServicesNotesSwitcherIsTurnedOn();
 		VNextBONotesDialogStepsNew.closeDialogWithXIcon();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
 	}
@@ -220,5 +234,60 @@ public class VNextBOMonitorTestCasesPart2New extends BaseTestCase {
 		VNextBORODetailsValidationsNew.verifyPartServicesAmountIsCorrect(initialPartServicesNumber + 1);
 		Utils.goToPreviousPage();
 		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanFilterAvailableServicesListByEnteredText(String rowID, String description, JSONObject testData) {
+
+		VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
+		data.setServiceDescription(data.getServiceDescription() + RandomStringUtils.randomAlphabetic(7));
+		VNextBOROPageStepsNew.searchOrdersByOrderNumber(data.getOrderNumber());
+		VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
+		VNextBORODetailsStepsNew.openAddNewServiceDialog();
+		VNextBOAddNewServiceDialogValidations.verifyFilterWorksForServiceField(data.getService());
+		VNextBOAddNewServiceDialogSteps.closeDialogWithXIcon();
+		Utils.goToPreviousPage();
+		VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanPinSavedSearches(String rowID, String description, JSONObject testData) {
+
+		final String FIRST_SAVED_SEARCH = "My Completed Work";
+		final String SECOND_SAVED_SEARCH = "My Location - Active Work";
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(FIRST_SAVED_SEARCH, true);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(SECOND_SAVED_SEARCH, true);
+		VNextBOROWebPageValidationsNew.verifyPinSavedSearchIconBackground(FIRST_SAVED_SEARCH, "rgb(112, 112, 112)");
+		VNextBOROPageStepsNew.unpinSavedSearch(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.unpinSavedSearch(SECOND_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyPinSavedSearchIconBackground(FIRST_SAVED_SEARCH, "rgb(255, 255, 255)");
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(FIRST_SAVED_SEARCH, false);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(SECOND_SAVED_SEARCH, false);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(FIRST_SAVED_SEARCH, false);
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(SECOND_SAVED_SEARCH, false);
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void verifyUserCanNotPinMoreThanThreeSavedSearches(String rowID, String description, JSONObject testData) {
+
+		final String FIRST_SAVED_SEARCH = "My Completed Work";
+		final String SECOND_SAVED_SEARCH = "My Location - Active Work";
+		final String THIRD_SAVED_SEARCH = "My Work Queue";
+		final String FOURTH_SAVED_SEARCH = "My WIP List";
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(THIRD_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FOURTH_SAVED_SEARCH);
+		VNextBOROWebPageValidationsNew.verifyNotificationMessageIsDisplayedAndCorrect();
+		VNextBOROWebPageValidationsNew.verifyPinnedSearchIsDisplayed(FOURTH_SAVED_SEARCH, false);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(FIRST_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(SECOND_SAVED_SEARCH);
+		VNextBOROPageStepsNew.pinUnpinSavedSearchInTheDropdown(THIRD_SAVED_SEARCH);
 	}
 }

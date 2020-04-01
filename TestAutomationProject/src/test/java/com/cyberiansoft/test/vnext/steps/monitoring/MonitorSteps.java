@@ -13,6 +13,7 @@ import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
+import org.openqa.selenium.By;
 
 public class MonitorSteps {
 
@@ -43,8 +44,9 @@ public class MonitorSteps {
     public static void openItem(String workOrderId) {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.getGeneralFluentWait().until((webdriver) -> repairOrderScreen.getRepairOrderListElements().size() > 0);
+        BaseUtils.waitABit(1000);
         RepairOrderListElement repairOrder = repairOrderScreen.getRepairOrderElement(workOrderId);
-        WaitUtils.elementShouldBeVisible(repairOrder.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(repairOrder.getRootElement());
         repairOrder.openMenu();
     }
 
@@ -66,5 +68,6 @@ public class MonitorSteps {
         BaseUtils.waitABit(2000);
         WaitUtils.click(phasesScreen.getPhasesMenuButton());
         MenuSteps.selectMenuItem(focusMode);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 }

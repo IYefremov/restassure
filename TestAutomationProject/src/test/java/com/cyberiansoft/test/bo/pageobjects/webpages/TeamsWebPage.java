@@ -1,8 +1,9 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
+import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import static com.cyberiansoft.test.bo.utils.WebElementsBot.*;
 
+@Getter
 public class TeamsWebPage extends WebPageWithPagination {
 
 	@FindBy(xpath = "//span[@id='ctl00_ctl00_Content_Main_cpFilterer']/div")
@@ -23,7 +25,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 	private WebElement searchbtn;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvTeams_ctl00")
-	private WebTable teamstable;
+	private WebTable teamsTable;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_gvTeams_ctl00_ctl02_ctl00_lbInsert")
 	private WebElement addteambtn;
@@ -34,10 +36,10 @@ public class TeamsWebPage extends WebPageWithPagination {
 	private TextField searchteamlocationfld;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_Input")
-	private ComboBox searchtypecbx;
+	private ComboBox searchTypeCbx;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_DropDown")
-	private DropDown searchtypedd;
+	private DropDown searchTypeDd;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_timeZones")
 	private WebElement searchtimezonecmb;
@@ -48,14 +50,14 @@ public class TeamsWebPage extends WebPageWithPagination {
 	@FindBy(xpath = "//input[@title='Delete']")
 	private WebElement deletemarker;
 
-	public TeamsWebPage(WebDriver driver) {
-		super(driver);
+	public TeamsWebPage() {
+		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
 
 	public boolean searchPanelIsExpanded() {
-		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
+		wait.until(ExpectedConditions.visibilityOf(teamsTable.getWrappedElement()));
 		return searchtab.getAttribute("class").contains("open");
 	}
 
@@ -90,25 +92,25 @@ public class TeamsWebPage extends WebPageWithPagination {
 	}
 
 	public void verifyTeamsTableColumnsAreVisible() {
-		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
-		Assert.assertTrue(teamstable.tableColumnExists("Guests"));
-		Assert.assertTrue(teamstable.tableColumnExists("Managers"));
-		Assert.assertTrue(teamstable.tableColumnExists("Service Prices"));
-		Assert.assertTrue(teamstable.tableColumnExists("Team"));
-		Assert.assertTrue(teamstable.tableColumnExists("Type"));
-		Assert.assertTrue(teamstable.tableColumnExists("Service Assign"));
-		Assert.assertTrue(teamstable.tableColumnExists("Location"));
-		Assert.assertTrue(teamstable.tableColumnExists("Area"));
-		Assert.assertTrue(teamstable.tableColumnExists("Timesheet type"));
-		Assert.assertTrue(teamstable.tableColumnExists("Time Zone"));
-		Assert.assertTrue(teamstable.tableColumnExists("Description"));
+		wait.until(ExpectedConditions.visibilityOf(teamsTable.getWrappedElement()));
+		Assert.assertTrue(teamsTable.tableColumnExists("Guests"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Managers"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Service Prices"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Team"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Type"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Service Assign"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Location"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Area"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Timesheet type"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Time Zone"));
+		Assert.assertTrue(teamsTable.tableColumnExists("Description"));
 	}
 
 	public String getTableTeamType(String team) {
 		String teamtype = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamtype = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Type") + "]")).getText();
+			teamtype = row.findElement(By.xpath(".//td[" + teamsTable.getTableColumnIndex("Type") + "]")).getText();
 		} else
 			Assert.fail("Can't find " + team + " team");
 		return teamtype;
@@ -118,7 +120,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamlocation = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamlocation = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Location") + "]")).getText();
+			teamlocation = row.findElement(By.xpath(".//td[" + teamsTable.getTableColumnIndex("Location") + "]")).getText();
 		} else
 			Assert.fail("Can't find " + team + " team");
 		return teamlocation;
@@ -128,7 +130,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamarea = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamarea = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Area") + "]")).getText();
+			teamarea = row.findElement(By.xpath(".//td[" + teamsTable.getTableColumnIndex("Area") + "]")).getText();
 		} else
 			Assert.fail("Can't find " + team + " team");
 		return teamarea;
@@ -138,7 +140,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamtimesheettype = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamtimesheettype = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Timesheet type") + "]")).getText();
+			teamtimesheettype = row.findElement(By.xpath(".//td[" + teamsTable.getTableColumnIndex("Timesheet type") + "]")).getText();
 		} else
 			Assert.fail("Can't find " + team + " team");
 		return teamtimesheettype;
@@ -148,7 +150,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamtimezone = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamtimezone = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Time Zone") + "]")).getText();
+			teamtimezone = row.findElement(By.xpath(".//td[" + teamsTable.getTableColumnIndex("Time Zone") + "]")).getText();
 		} else
 			Assert.fail("Can't find " + team + " team");
 		return teamtimezone;
@@ -158,7 +160,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 		String teamdesc = "";
 		WebElement row = getTableRowWithTeam(team);
 		if (row != null) {
-			teamdesc = row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Description") + "]")).getText();
+			teamdesc = row.findElement(By.xpath(".//td[" + teamsTable.getTableColumnIndex("Description") + "]")).getText();
 		} else
 			Assert.fail("Can't find " + team + " team");
 		return teamdesc;
@@ -174,7 +176,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 	}
 
 	public List<WebElement> getTeamsTableRows() {
-		return teamstable.getTableRows();
+		return teamsTable.getTableRows();
 	}
 
 	public TeamsWebPage setTeamLocationSearchCriteria(String teamlocation) {
@@ -184,7 +186,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 	}
 
 	public void selectSearchType(String _type) {
-		selectComboboxValue(searchtypecbx, searchtypedd, _type);
+		selectComboboxValue(searchTypeCbx, searchTypeDd, _type);
 	}
 
 	public void selectSearchTimeZone(String timezone) {
@@ -193,13 +195,13 @@ public class TeamsWebPage extends WebPageWithPagination {
 	}
 
 	public void verifySearchResultsByTeamLocation(String tmlocation) {
-		Assert.assertTrue(teamstable.getWrappedElement().findElements(By.xpath(".//tbody/tr[contains(@id, 'ctl00_ctl00_Content_Main_gvTeams_ctl00')]/td[text()='" + tmlocation + "']")).size() > 0);
+		Assert.assertTrue(teamsTable.getWrappedElement().findElements(By.xpath(".//tbody/tr[contains(@id, 'ctl00_ctl00_Content_Main_gvTeams_ctl00')]/td[text()='" + tmlocation + "']")).size() > 0);
 	}
 
 	public WebElement getTableRowWithTeam(String team) {
 		List<WebElement> rows = getTeamsTableRows();
 		for (WebElement row : rows) {
-			if (row.findElement(By.xpath(".//td[" + teamstable.getTableColumnIndex("Team") + "]")).getText().contains(team)) {
+			if (row.findElement(By.xpath(".//td[" + teamsTable.getTableColumnIndex("Team") + "]")).getText().contains(team)) {
 				return row;
 			}
 		}
@@ -207,8 +209,8 @@ public class TeamsWebPage extends WebPageWithPagination {
 	}
 
 	public boolean teamExists(String team) {
-		wait.until(ExpectedConditions.visibilityOf(teamstable.getWrappedElement()));
-		return teamstable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + team + "']")).size() > 0;
+		wait.until(ExpectedConditions.visibilityOf(teamsTable.getWrappedElement()));
+		return teamsTable.getWrappedElement().findElements(By.xpath(".//tr/td[text()='" + team + "']")).size() > 0;
 	}
 
 	public void clickEditTeam(String team) {

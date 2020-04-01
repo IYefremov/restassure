@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import com.cyberiansoft.test.vnext.webelements.DatePicker;
 import com.cyberiansoft.test.vnext.webelements.ListPicker;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -20,7 +19,7 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(xpath = "//span[@data-automation-id=\"search-clear\"]")
     private WebElement clearSearchInputButton;
 
-    @FindBy(xpath = "//div[contains(@class,'searchlist-filters-clear')]")
+    @FindBy(xpath = "//div[contains(@class,'common-filters-clear')]")
     private WebElement clearFilter;
 
     @FindBy(xpath = "//*[@data-autotests-id=\"search-cancel\"]")
@@ -29,11 +28,11 @@ public class CommonFilterScreen extends MonitorScreen {
     @FindBy(xpath = "//*[@data-name='timeframe']/select")
     private ListPicker timeframe;
 
-    @FindBy(id = "filter_dateFrom")
-    private DatePicker dateFrom;
+    @FindBy(xpath = "//*[@data-name='dateFrom']")
+    private WebElement dateFrom;
 
-    @FindBy(id = "filter_dateTo")
-    private DatePicker dateTo;
+    @FindBy(xpath = "//*[@data-name='dateTo']")
+    private WebElement dateTo;
 
     @FindBy(xpath = "//*[@data-name='department']/select")
     private ListPicker department;

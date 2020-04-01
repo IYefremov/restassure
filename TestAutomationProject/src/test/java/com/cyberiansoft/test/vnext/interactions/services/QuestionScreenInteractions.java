@@ -10,6 +10,11 @@ public class QuestionScreenInteractions {
         WaitUtils.click(questionScreen.getGeneralQuestionByText(questionName).getAnswerElement(questionAnswer));
     }
 
+    public static void clickQuestionCamera(String questionName) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        WaitUtils.waitUntilElementIsClickable(questionScreen.getGeneralQuestionByText(questionName).getRootElement());
+        WaitUtils.click(questionScreen.getGeneralQuestionByText(questionName).getQuestionCameraElement());
+    }
 
     public static void fillQuestionTextBox(String questionName, String answerText) {
         QuestionScreen questionScreen = new QuestionScreen();

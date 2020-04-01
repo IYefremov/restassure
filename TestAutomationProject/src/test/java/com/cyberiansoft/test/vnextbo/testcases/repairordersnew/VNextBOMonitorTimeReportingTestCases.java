@@ -40,7 +40,6 @@ public class VNextBOMonitorTimeReportingTestCases extends BaseTestCase {
         Utils.refreshPage();
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
-        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
         VNextBORODetailsStepsNew.openTimeReporting();
 	}

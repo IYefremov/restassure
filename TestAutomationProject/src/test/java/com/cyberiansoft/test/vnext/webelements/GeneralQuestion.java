@@ -18,6 +18,7 @@ public class GeneralQuestion implements IWebElement {
     private String selectedAnswersLocation = ".//div[contains(@class,'multi-select-answers')]/div[contains(@class,'selected-answer')]";
     private String clearButtonLocator = ".//*[@class='selected-answer-clear']";
     private String saveMultiAnswerQuestion = ".//div[contains(@class,'pply-multi-select-answers')]";
+    private String cameraLocator = ".//*[contains(@class, 'add-image-from-camera')]";
 
     public GeneralQuestion(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -58,5 +59,9 @@ public class GeneralQuestion implements IWebElement {
 
     public WebElement getSaveButton() {
         return rootElement.findElement(By.xpath(saveMultiAnswerQuestion));
+    }
+
+    public WebElement getQuestionCameraElement() {
+        return rootElement.findElement(By.xpath(cameraLocator));
     }
 }

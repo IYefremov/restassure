@@ -21,6 +21,7 @@ public class Utils {
         try {
             WaitUtilsWebDriver.waitForElementNotToBeStale(element, 3);
             WaitUtilsWebDriver.elementShouldBeClickable(element, true, 3);
+            ConditionWaiter.create(__ -> element.isEnabled()).execute();
             element.click();
         } catch (Exception ignored) {
             WaitUtilsWebDriver.waitABit(500);
@@ -168,6 +169,16 @@ public class Utils {
                     moveToElement(option);
                     clickElement(option);
                 });
+    }
+
+    public static String selectOption(WebElement dropDown, List<WebElement> listBox) {
+        if (listBox.size() == 0) {
+            return null;
+        } else {
+            final String selection = Utils.getText(listBox.get(RandomUtils.nextInt(0, listBox.size())));
+            selectOption(dropDown, listBox, selection);
+            return selection;
+        }
     }
 
     public static void selectOptionInDropDownWithJs(WebElement dropDown, List<WebElement> listBox, String selection) {

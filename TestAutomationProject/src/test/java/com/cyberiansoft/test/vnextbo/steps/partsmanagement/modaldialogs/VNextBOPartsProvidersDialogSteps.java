@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VNextBOPartsProvidersDialogSteps {
 
@@ -44,5 +45,18 @@ public class VNextBOPartsProvidersDialogSteps {
         final List<WebElement> providerNamesList = new VNextBOPartsProvidersDialog().getGenericPartProvidersList();
         int order = RandomUtils.nextInt(0, providerNamesList.size());
         return Utils.getText(providerNamesList.get(order));
+    }
+
+    public static List<String> getOptionsList() {
+        return Utils.getText(new VNextBOPartsProvidersDialog().getOptionsList())
+                .stream()
+                .map(option -> option.substring(option.indexOf("-") + 2))
+                .collect(Collectors.toList());
+    }
+
+    public static List<String> getProvidersList() {
+        final List<String> providers = Utils.getText(new VNextBOPartsProvidersDialog().getOptionsList());
+        providers.forEach(System.out::println);
+        return providers;
     }
 }

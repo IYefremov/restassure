@@ -82,7 +82,7 @@ public class BackOfficeCompanyCRUDTestCases extends BaseTestCase {
 
 		backOfficeHeader.clickCompanyLink();
 
-		TeamsWebPage teamspage = new TeamsWebPage(webdriver);
+		TeamsWebPage teamspage = new TeamsWebPage();
 		companyWebPage.clickTeamsLink();
 		teamspage.makeSearchPanelVisible();
 		teamspage.setTeamLocationSearchCriteria(data.getTeam()).clickFindButton();

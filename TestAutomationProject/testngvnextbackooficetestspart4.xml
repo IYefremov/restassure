@@ -1,4 +1,4 @@
-<suite name="Cyberiansoft R360 ReconPro tests suite 3" verbose="10" configfailurepolicy="continue">
+<suite name="Cyberiansoft R360 ReconPro tests suite 4" verbose="10" configfailurepolicy="continue">
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
     </listeners>
@@ -7,20 +7,6 @@
         <parameter name="userPassword" value="test12345"/>
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorTimeReportingTestCases"/>
-        </classes>
-    </test>
-    <test name="Monitor Grid Tests">
-        <parameter name="userName" value="test.automation4@getnada.com"/>
-        <parameter name="userPassword" value="test12345"/>
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairorders.VNextBOMonitorGridDataTestCases"/>
-        </classes>
-    </test>
-    <test name="Monitor Grid Tests Part 2">
-        <parameter name="userName" value="test.automation4@getnada.com"/>
-        <parameter name="userPassword" value="test12345"/>
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.repairordersnew.VNextBOMonitorGridTestCases"/>
         </classes>
     </test>
     <test name="Monitor Tests Part 1">

@@ -62,6 +62,9 @@
           {
             "questionName": "Required question2",
             "questionAnswer": "No"
+          },
+          {
+            "questionName": "Image qst"
           }
         ]
       }
@@ -236,10 +239,10 @@
       },
       "services": [
         {
-          "serviceName": "Oksi Part service"
+          "serviceName": "Oksi Part service - Category"
         },
         {
-          "serviceName": "Oksi_Part_Service"
+          "serviceName": "Oksi_Part_Service - Several"
         },
         {
           "serviceName": "Labor with vehicle data"

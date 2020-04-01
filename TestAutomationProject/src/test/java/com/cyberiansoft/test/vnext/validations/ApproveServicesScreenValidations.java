@@ -35,7 +35,7 @@ public class ApproveServicesScreenValidations {
         WaitUtilsWebDriver.getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(10))
                 .ignoring(NoSuchElementException.class)
                 .ignoring(StaleElementReferenceException.class)
-                .until(ExpectedConditions.visibilityOfAllElements(declineReasonScreen.getApproveServicesScreen()));
+                .until(ExpectedConditions.visibilityOfAllElements(declineReasonScreen.getDeclineReasonScreen()));
         Assert.assertEquals( declineReasonScreen.getScreenText(),"Reason","Screen Reason not displayed or has wrong text");
     }
 

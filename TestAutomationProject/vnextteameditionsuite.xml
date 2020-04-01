@@ -33,7 +33,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesEditWOInInvoiceTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringBaseCase"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCommonFilters"/>
-            <!--<class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitoringSearchFiltersTestCases"/>-->
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitoringSearchFiltersTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCalculations"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting.VNextTeamMonitoringProblemReporting"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.problemreporting.VNextTeamProblemEnforcement"/>
@@ -57,6 +57,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorLocationTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorEditROTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorStartPhaseServicesTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFocusModeButtonTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamPresetCustomerTestCases"/>
         </classes>

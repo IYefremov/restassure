@@ -113,6 +113,8 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField("All");
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getWoNumbersList().size() == 1).execute();
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getWoNumbersList().get(0).isEnabled()).execute();
     }
 
     public static void searchOrdersByPhaseStatus(String phase, String phaseStatus) {
@@ -196,7 +198,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
     }
 
-    public static void openSavedSearchesList() {
+    public static void clickSavedSearchesDropDownField() {
 
         Utils.clickElement(new VNextBOROWebPageNew().getSavedSearchDropDownField());
     }
@@ -204,7 +206,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void searchBySavedAdvancedSearch(String searchName) {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
-        openSavedSearchesList();
+        clickSavedSearchesDropDownField();
         VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName);
         Utils.clickElement(repairOrdersPage.savedSearchOptionByName(searchName));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -213,7 +215,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void openSavedAdvancedSearch(String searchName) {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
-        openSavedSearchesList();
+        clickSavedSearchesDropDownField();
         VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName);
         Utils.clickElement(repairOrdersPage.savedSearchOptionByName(searchName));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -251,7 +253,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
         WaitUtilsWebDriver.waitForVisibility(repairOrdersPage.getWoNumbersList().get(rowNumber));
-        WaitUtilsWebDriver.waitABit(3000);
+        ConditionWaiter.create(__ -> repairOrdersPage.getWoNumbersList().get(rowNumber).isEnabled()).execute();
         Utils.clickElement(repairOrdersPage.getWoNumbersList().get(rowNumber));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         WaitUtilsWebDriver.waitABit(3000);
@@ -280,13 +282,15 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageValidationsNew.verifyDepartmentsAllAmountsIsCorrect();
         Utils.clickWithJS(ordersPage.departmentFilterDropDownOption(department));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(3000);
+        ConditionWaiter.create(__ -> ordersPage.getDepartmentsDropdown().isEnabled());
     }
 
     public static void filterOrdersByPhase(String phase) {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         Utils.clickElement(ordersPage.getPhasesDropdown());
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         VNextBOROWebPageValidationsNew.verifyPhasesAllAmountsIsCorrect();
         Utils.clickWithJS(ordersPage.phaseFilterDropDownOption(phase));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -352,11 +356,11 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled()).execute();
         Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> ordersPage.getCloseRoActionButton().isEnabled()).execute();
         Utils.clickElement(ordersPage.getCloseRoActionButton());
         VNextBOCloseRODialogStepsNew.closeOrderWithReason(reason);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(4000);
+        ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled()).execute();
     }
 
     public static void reopenOrder(String orderNumber) {
@@ -364,10 +368,10 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled()).execute();
         Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> ordersPage.getReopenRoActionButton().isEnabled()).execute();
         Utils.clickElement(ordersPage.getReopenRoActionButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(4000);
+        ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled()).execute();
     }
 
     public static void changeOrderFlag(String orderNumber, String flagTitle) {
@@ -384,6 +388,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled()).execute();
         Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
+        ConditionWaiter.create(__ -> ordersPage.priorityIconByFlagColor(priorityColor).isEnabled()).execute();
         Utils.clickElement(ordersPage.priorityIconByFlagColor(priorityColor));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
@@ -416,7 +421,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getOrdersPhasesList().get(0).isEnabled()).execute();
         Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getCompleteCurrentPhaseActionButton().isEnabled()).execute();
         Utils.clickElement(new VNextBOROWebPageNew().getCompleteCurrentPhaseActionButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
@@ -452,7 +457,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         ConditionWaiter.create(__ -> ordersPage.actionsButtonByOrderNumber(orderNumber).isEnabled()).execute();
         Utils.clickElement(ordersPage.actionsButtonByOrderNumber(orderNumber));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> ordersPage.getNotesActionButton().isEnabled()).execute();
         Utils.clickElement(ordersPage.getNotesActionButton());
         VNextBONotesDialogStepsNew.addNote(noteText, true);
     }
@@ -485,5 +490,21 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         Utils.clickElement(new VNextBOROWebPageNew().getOrdersTechniciansList().get(0));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+    }
+
+    public static void pinUnpinSavedSearchInTheDropdown(String searchName) {
+
+        clickSavedSearchesDropDownField();
+        Utils.clickWithJS(new VNextBOROWebPageNew().pinSavedSearch(searchName));
+        clickSavedSearchesDropDownField();
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().pinnedSearchBlock(searchName).isEnabled()).execute();
+    }
+
+    public static void unpinSavedSearch(String searchName) {
+
+        Utils.hoverElement(new VNextBOROWebPageNew().pinnedSearchBlock(searchName));
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().pinnedSearchXIcon(searchName).isDisplayed()).execute();
+        Utils.clickWithJS(new VNextBOROWebPageNew().pinnedSearchXIcon(searchName));
+        ConditionWaiter.create(__ -> !new VNextBOROWebPageNew().pinnedSearchBlock(searchName).isDisplayed()).execute();
     }
 }

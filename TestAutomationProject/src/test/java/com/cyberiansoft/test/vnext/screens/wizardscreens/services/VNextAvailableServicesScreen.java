@@ -26,9 +26,6 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     @FindBy(xpath = "//*[@data-view-mode='available']/div")
     private List<ServiceListItem> servicesList;
 
-    @FindBy(xpath = "//div[contains(@class,'service-item')]")
-    private List<WebElement> servicesListItems;
-
     public VNextAvailableServicesScreen() {
         PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }

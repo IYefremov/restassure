@@ -9,6 +9,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 @Getter
 public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
 
@@ -74,6 +76,11 @@ public class VNextBOAddNewServiceDialog extends VNextBOBaseWebPage {
     public WebElement dropDownOption(String optionName) {
 
         return driver.findElement(By.xpath("//ul[@aria-hidden='false']//li[contains(text(),'" + optionName + "')]"));
+    }
+
+    public List<WebElement> displayedDropdownOptionsList() {
+
+        return driver.findElements(By.xpath("//ul[@aria-hidden='false']//li"));
     }
 
     public WebElement partListItem(String partName) {

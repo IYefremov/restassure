@@ -345,4 +345,8 @@ public class VNextBOPartsDetailsPanelValidations {
         Assert.assertEquals(expected, Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getGetQuotesButton()),
                 "The 'Get quotes' button han't been displayed/hidden");
     }
+
+    public static void verifyProviderOptionsAreDisplayed(final List<String> providerOptions) {
+        Assert.assertTrue(!providerOptions.isEmpty(), "The provider options are not displayed");
+    }
 }

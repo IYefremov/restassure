@@ -85,6 +85,79 @@
     }
   ],
 
+  "verifyUserCanSeeBreadcrumb": [
+    {
+      "rowID": "verifyUserCanSeeBreadcrumb.01",
+      "description": "Test Case 91220: User can see breadcrumb",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91220",
+          "testCaseTitle": "User can see breadcrumb"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
+  "verifyUserCanSeeWoInTheBreadcrumb": [
+    {
+      "rowID": "verifyUserCanSeeWoInTheBreadcrumb.01",
+      "description": "Test Case 91221: User can see WO in the breadcrumb",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91221",
+          "testCaseTitle": "User can see WO in the breadcrumb"
+        }
+      ],
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanChangeLocationBeingOnDetailsWoPage": [
+    {
+      "rowID": "verifyUserCanChangeLocationBeingOnDetailsWoPage.01",
+      "description": "Test Case 91222: User can change location being on detail's page of WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91222",
+          "testCaseTitle": "User can change location being on detail's page of WO"
+        }
+      ],
+      "searchLocation": "Rozstalnoy_location",
+      "location": "Best Location Automation",
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyUserCanReturnToTheMainPage": [
+    {
+      "rowID": "verifyUserCanReturnToTheMainPage.01",
+      "description": "Test Case 91223: User can return to the main page of WO",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91223",
+          "testCaseTitle": "User can return to the main page of WO"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
+  "verifyCurrentLocationIsVisibleAfterLocationDropdownIsClicked": [
+    {
+      "rowID": "verifyCurrentLocationIsVisibleAfterLocationDropdownIsClicked.01",
+      "description": "Test Case 100896: Verify the current location is visible after location drop-down is clicked (\"Monitor\" page)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "100896",
+          "testCaseTitle": "Verify the current location is visible after location drop-down is clicked (\"Monitor\" page)"
+        }
+      ],
+      "location": "Best Location Automation"
+    }
+  ],
+
   "verifyUserCanUsePaging": [
     {
       "rowID": "verifyUserCanUsePaging.01",
@@ -271,6 +344,20 @@
     }
   ],
 
+  "verifyUserSeesServiceNotesAndImagesByDefault": [
+    {
+      "rowID": "verifyUserSeesServiceNotesAndImagesByDefault.01",
+      "description": "Test Case 116365: Verify user sees service notes and images by default",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "116365",
+          "testCaseTitle": "Verify user sees service notes and images by default"
+        }
+      ],
+      "orderNumber": "O-000-147163"
+    }
+  ],
+
   "verifyUserCanChangeStockOfRo": [
     {
       "rowID": "verifyUserCanChangeStockOfRo.01",
@@ -387,11 +474,15 @@
     },
     {
       "rowID": "verifyUserCanChangeStatusOfRoToClosed.02",
-      "description": "Test Case 91347: User can change Status of RO to \"Closed\" with \"None\" reason",
+      "description": "Test Case 91347: User can change Status of RO to \"Closed\" with \"None\" reason. Test Case 98837: Verify user can close and unclose work order",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91347",
           "testCaseTitle": "User can change Status of RO to \"Closed\" with \"None\" reason"
+        },
+        {
+          "testCaseID": "98837",
+          "testCaseTitle": "Verify user can close and unclose work order"
         }
       ],
       "location": "Rozstalnoy_location",
@@ -537,6 +628,21 @@
       "serviceCategory": "Body",
       "serviceSubcategory": "Bumper",
       "servicePart": "Air Dam"
+    }
+  ],
+
+  "verifyUserCanFilterAvailableServicesListByEnteredText": [
+    {
+      "rowID": "verifyUserCanFilterAvailableServicesListByEnteredText.01",
+      "description": "Test Case 115262: Verify user can filter available services list by entered text",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "115262",
+          "testCaseTitle": "Verify user can filter available services list by entered text"
+        }
+      ],
+      "orderNumber": "O-000-147163",
+      "service": "Part"
     }
   ],
 
@@ -1099,6 +1205,32 @@
       "flag": "All",
       "sortBy": "Priority, Newest to Oldest",
       "searchName": "My Location - Active Work"
+    }
+  ],
+
+  "verifyUserCanPinSavedSearches": [
+    {
+      "rowID": "verifyUserCanPinSavedSearches.01",
+      "description": "Test Case 91232: User can PIN saved searches",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91232",
+          "testCaseTitle": "User can PIN saved searches"
+        }
+      ]
+    }
+  ],
+
+  "verifyUserCanNotPinMoreThanThreeSavedSearches": [
+    {
+      "rowID": "verifyUserCanNotPinMoreThanThreeSavedSearches.01",
+      "description": "Test Case 92587: User can't pin more than 3 saved searches",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92587",
+          "testCaseTitle": "User can't pin more than 3 saved searches"
+        }
+      ]
     }
   ],
 

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.inspections;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
@@ -69,6 +70,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.setNoteText(myInspectionNote);
         ScreenNavigationSteps.pressBackButton();
 
+        BaseUtils.waitABit(10000);
         InspectionSteps.switchToTeamInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
@@ -197,6 +199,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.addQuickNote(quickNoteText1);
         NotesSteps.addPhotoFromCamera();
         ScreenNavigationSteps.pressHardwareBackButton();
+        BaseUtils.waitABit(10000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1);

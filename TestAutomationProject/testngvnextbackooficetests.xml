@@ -127,11 +127,11 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.services.VNextBOLaborAndPartServicesTestCases"/>
         </classes>
     </test>
-    <test name="Parts Management Order Details Tests">
+<!--    <test name="Parts Management Order Details Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsTestCases"/>
         </classes>
-    </test>
+    </test>-->
     <test name="Parts Management Dashboard Tests">
         <classes>
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPartsManagementDashboardTestCases"/>

@@ -66,9 +66,9 @@ public class WaitUtilsWebDriver {
 
     public static void waitForSpinnerToDisappear() {
         try {
-            getWebDriverWait(4).until(ExpectedConditions.visibilityOf(VNextBOBaseWebPage.spinner));
+            ConditionWaiter.create(__ -> VNextBOBaseWebPage.spinner.isDisplayed()).execute();
             WebElement spinner = DriverBuilder.getInstance().getDriver().findElement(By.xpath("//div[contains(@class, 'k-loading-image')]"));
-            getWebDriverWait(8).until(ExpectedConditions.invisibilityOf(spinner));
+            ConditionWaiter.create(15000, 500, __ -> !spinner.isDisplayed()).execute();
         } catch (Exception ex) { }
     }
 
@@ -402,5 +402,19 @@ public class WaitUtilsWebDriver {
 
     public static void waitUntilTitleContains(String title) {
         getWait().until(ExpectedConditions.titleContains(title));
+    }
+
+    public static void waitUntilTitleContains(String title, int timeOut) {
+        getWebDriverWait(timeOut).until(ExpectedConditions.titleContains(title));
+    }
+
+    public static void waitUntilTitleContainsIgnoringException(String title, int timeOut) {
+        try {
+            waitUntilTitleContains(title, timeOut);
+        } catch (Exception ignored) {}
+    }
+
+    public static void waitUntilTitleIs(String title) {
+        getWait().until(ExpectedConditions.titleIs(title));
     }
 }

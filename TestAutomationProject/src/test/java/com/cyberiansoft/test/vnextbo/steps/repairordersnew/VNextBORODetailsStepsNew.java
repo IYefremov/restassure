@@ -16,7 +16,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//TODO: get rid of WaitUtilsWebDriver.waitABit
 public class VNextBORODetailsStepsNew {
 
     public static List<String> getServiceAndTaskDescriptionsList() {
@@ -40,15 +39,16 @@ public class VNextBORODetailsStepsNew {
 
         ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isEnabled()).execute();
         Utils.clickElement(new VNextBORODetailsWebPageNew().expandPhaseButton(phase));
-        WaitUtilsWebDriver.waitABit(5000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void collapsePhaseByName(String phase) {
 
         ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().collapsePhaseButton(phase).isEnabled()).execute();
         Utils.clickElement(new VNextBORODetailsWebPageNew().collapsePhaseButton(phase));
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
-        WaitUtilsWebDriver.waitABit(2000);
     }
 
     public static void reportProblemOnPhaseLevelWithoutDescription(String phase, String problemReason) {
@@ -56,7 +56,7 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForPhase(phase).isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> detailsWebPageNew.getReportProblemForPhaseActionButton().isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.getReportProblemForPhaseActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithoutDescription(problemReason);
         ConditionWaiter.create(__ -> detailsWebPageNew.phaseStatusDropDownByPhase(phase).equals("Problem")).execute();
@@ -67,7 +67,7 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForService(service).isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> detailsWebPageNew.getReportProblemForServiceActionButton().isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.getReportProblemForServiceActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithoutDescription(problemReason);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -79,7 +79,7 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForPhase(phase).isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> detailsWebPageNew.getCompleteCurrentPhaseActionButton().isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.getCompleteCurrentPhaseActionButton());
         ConditionWaiter.create(__ -> new VNextBOROCompleteCurrentPhaseDialogNew().getCancelButton().isDisplayed()).execute();
     }
@@ -89,7 +89,7 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForPhase(phase).isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> detailsWebPageNew.getReportProblemForPhaseActionButton().isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.getReportProblemForPhaseActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithDescription(problemReason, problemDescription);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -101,7 +101,7 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForService(service).isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> detailsWebPageNew.getReportProblemForServiceActionButton().isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.getReportProblemForServiceActionButton());
         VNextBOROReportProblemDialogStepsNew.reportProblemWithDescription(problemReason, problemDescription);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
@@ -113,11 +113,12 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForPhase(phase).isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForPhase(phase));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> detailsWebPageNew.getResolveProblemForPhaseActionButton().isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.getResolveProblemForPhaseActionButton());
         VNextBOROResolveProblemDialogStepsNew.resolveProblem();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void resolveProblemForService(String service) {
@@ -125,11 +126,12 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         ConditionWaiter.create(__ -> detailsWebPageNew.actionsMenuButtonForService(service).isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.actionsMenuButtonForService(service));
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> detailsWebPageNew.getResolveProblemForServiceActionButton().isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.getResolveProblemForServiceActionButton());
         VNextBOROResolveProblemDialogStepsNew.resolveProblem();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void checkInCheckOutPhase(String phase) {
@@ -156,14 +158,16 @@ public class VNextBORODetailsStepsNew {
             Utils.clickElement(new VNextBORODetailsWebPageNew().phaseStatusDropDownByPhase(phase));
             Utils.clickWithJS(new VNextBORODetailsWebPageNew().dropDownOption(expectedStatus));
             WaitUtilsWebDriver.waitForPageToBeLoaded();
-            WaitUtilsWebDriver.waitABit(5000);
+            WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+            WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         }
     }
 
     public static void setServiceStatusIfNeeded(String service, String expectedStatus) {
 
         VNextBORODetailsWebPageNew detailsWebPage = new VNextBORODetailsWebPageNew();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         if (Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals("Problem")) {
             resolveProblemForService(service);
             ConditionWaiter.create(__ -> !Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals("Problem")).execute();
@@ -199,7 +203,7 @@ public class VNextBORODetailsStepsNew {
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.serviceVendorPriceInputField(service));
         Utils.clearAndTypeUsingKeyboard(detailsWebPageNew.serviceVendorPriceInputField(service), vendorPrice);
-        WaitUtilsWebDriver.waitABit(1000);
+        ConditionWaiter.create(__ -> detailsWebPageNew.serviceNameWebElement(service).isEnabled()).execute();
         Utils.clickElement(detailsWebPageNew.serviceNameWebElement(service));
     }
 
@@ -215,9 +219,11 @@ public class VNextBORODetailsStepsNew {
 
         VNextBORODetailsWebPageNew detailsWebPageNew = new VNextBORODetailsWebPageNew();
         Utils.clickElement(detailsWebPageNew.serviceTechnicianDropDown(service));
-        WaitUtilsWebDriver.waitABit(5000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        ConditionWaiter.create(__ -> detailsWebPageNew.dropDownOption(technician).isEnabled()).execute();
         Utils.clickWithJS(detailsWebPageNew.dropDownOption(technician));
-        WaitUtilsWebDriver.waitForTextToBePresentInElement(detailsWebPageNew.serviceTechnicianDropDown(service), technician);
+        ConditionWaiter.create(__ -> Utils.getText(detailsWebPageNew.serviceTechnicianDropDown(service)).equals(technician)).execute();
     }
 
     public static String getPhaseTotalPrice(String phase) {
@@ -252,7 +258,8 @@ public class VNextBORODetailsStepsNew {
         changeOrderStatus("Closed");
         VNextBOCloseRODialogStepsNew.closeOrderWithReason(reason);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(4000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void startServicesForPhase(String phase) {
@@ -293,47 +300,58 @@ public class VNextBORODetailsStepsNew {
 
     public static void addService(VNextBOMonitorData serviceData) {
 
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
-        WaitUtilsWebDriver.waitABit(2000);
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.addService(serviceData);
-        WaitUtilsWebDriver.waitABit(4000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         Utils.refreshPage();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void addServiceWithoutSaveXIcon(VNextBOMonitorData serviceData) {
 
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.populateServiceDataAndClickXIcon(serviceData);
     }
 
     public static void addServiceWithoutSaveCancelButton(VNextBOMonitorData serviceData) {
 
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.populateServiceDataAndClickCancelButton(serviceData);
     }
 
     public static void addLaborService(VNextBOMonitorData serviceData) {
 
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
-        WaitUtilsWebDriver.waitABit(2000);
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.addLaborService(serviceData);
-        WaitUtilsWebDriver.waitABit(4000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         Utils.refreshPage();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void addPartService(VNextBOMonitorData serviceData) {
 
-        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
-        WaitUtilsWebDriver.waitABit(2000);
+        openAddNewServiceDialog();
         VNextBOAddNewServiceDialogSteps.addPartService(serviceData);
-        WaitUtilsWebDriver.waitABit(4000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         Utils.refreshPage();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(3000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+    }
+
+    public static void openAddNewServiceDialog() {
+
+        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().getAddServiceButton().isEnabled()).execute();
+        Utils.clickElement(new VNextBORODetailsWebPageNew().getAddServiceButton());
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static int getPartServicesAmount() {
@@ -386,7 +404,8 @@ public class VNextBORODetailsStepsNew {
         if (turnOn) Utils.clickElement(new VNextBORODetailsWebPageNew().getPhaseEnforcementOnButton());
         else Utils.clickElement(new VNextBORODetailsWebPageNew().getPhaseEnforcementOffButton());
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        WaitUtilsWebDriver.waitABit(5000);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void addNewTask(VNextBOMonitorData taskData, boolean requiredFieldsOnly, boolean saveTask) {

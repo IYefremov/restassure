@@ -31,6 +31,22 @@
       }
     }
   ],
+  "testVerifyUserCanArchiveTeamInspection": [
+    {
+      "rowID": "testVerifyUserCanArchiveTeamInspection.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91743",
+          "testCaseTitle": "Verify user can't archive Team Inspection"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ],
   "testVerifyUserCanArchiveInspectionUsingSearch": [
     {
       "rowID": "testVerifyUserCanArchiveInspectionUsingSearch.01",

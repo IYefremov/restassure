@@ -59,12 +59,15 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
 
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.openSearchFilters();
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(workOrderId);
+        SearchSteps.clickCommonFiltersToggle();
         MonitorSearchSteps.selectTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM);
         MonitorSearchSteps.selectDateFromAndDateTo(previousDay, nextDay);
-        SearchSteps.fillTextSearch(workOrderId);
-        MonitorSearchValidations.validateTimeFrameFromValue(CustomDateProvider.getFormattedLocalizedDate(previousDay, DateUtils.SHORT_DATE_FORMAT_WITH_COMMA));
-        MonitorSearchValidations.validateTimeFrameToValue(CustomDateProvider.getFormattedLocalizedDate(nextDay, DateUtils.SHORT_DATE_FORMAT_WITH_COMMA));
+        SearchSteps.search();
+        SearchSteps.openSearchFilters();
+        MonitorSearchValidations.validateTimeFrameFromValue(CustomDateProvider.getFormattedLocalizedDate(previousDay, DateUtils.FULL_DATE_FORMAT_WITH_MINUS));
+        MonitorSearchValidations.validateTimeFrameToValue(CustomDateProvider.getFormattedLocalizedDate(nextDay, DateUtils.FULL_DATE_FORMAT_WITH_MINUS));
         SearchSteps.clearFilters();
         MonitorSearchValidations.validateTimeFrameFromValue("");
         MonitorSearchValidations.validateTimeFrameToValue("");
@@ -81,26 +84,13 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
 
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.openSearchFilters();
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(workOrderId);
+        SearchSteps.clickCommonFiltersToggle();
         MonitorSearchSteps.selectTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM);
         MonitorSearchSteps.selectDateFromAndDateTo(previousDay, nextDay);
-        SearchSteps.fillTextSearch(workOrderId);
         SearchSteps.search();
         MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
-        ScreenNavigationSteps.pressBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanCloseCommonFiltersPopDownWindow(String rowID,
-                                            String description, JSONObject testData) {
-
-        HomeScreenSteps.openMonitor();
-        MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.openSearchFilters();
-        MonitorSearchValidations.validateCommonFilterPanelVisible(true);
-        SearchSteps.clickCommonFiltersToggle();
-        MonitorSearchValidations.validateCommonFilterPanelVisible(false);
-        SearchSteps.cancelSearch();
         ScreenNavigationSteps.pressBackButton();
     }
 
@@ -110,19 +100,17 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
 
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.openSearchFilters();
-        SearchSteps.clickPriorityFilter();
         SearchSteps.openSearchMenu();
-        SearchSteps.fillTextSearch(OrderPriority.NORMAL.getValue());
-        MonitorSearchValidations.validatePriorityListElementNumber(1);
+        SearchSteps.fillTextSearch(workOrderId);
+        SearchSteps.clickCommonFiltersToggle();
         SearchSteps.selectPriority(OrderPriority.NORMAL);
         MonitorSearchValidations.validatePriorityValue(OrderPriority.NORMAL);
-        SearchSteps.fillTextSearch(workOrderId);
         SearchSteps.search();
+        MonitorValidations.verifyRepairOrderPresentInList(workOrderId);
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanFindTheNecessaryStatus(String rowID,
                                                 String description, JSONObject testData) {
 
@@ -140,7 +128,7 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanFindTheNecessaryPhase(String rowID,
                                               String description, JSONObject testData) {
 
@@ -161,7 +149,7 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanFindTheNecessaryDepartment(String rowID,
                                              String description, JSONObject testData) {
 
@@ -181,7 +169,7 @@ public class VNextMonitoringSearchFiltersTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanFindTheNecessaryFlag(String rowID,
                                                   String description, JSONObject testData) {
 

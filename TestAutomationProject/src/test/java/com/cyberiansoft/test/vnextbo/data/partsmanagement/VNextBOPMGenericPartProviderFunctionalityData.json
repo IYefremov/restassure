@@ -176,5 +176,93 @@
       },
       "provider": "IvanTestOtherLocation"
     }
+  ],
+  "verifyPartProviderIsEmptyAfterAddingNewPartService": [
+    {
+      "rowID": "verifyPartProviderIsEmptyAfterAddingNewPartService.01",
+      "description": "Verify part provider dropdown will be empty by default when the user adds the service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "110666",
+          "testCaseTitle": "Verify part provider dropdown will be empty by default when the user adds the service"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147524"
+      },
+      "partData": {
+        "service": "IvPartTest_NoneClarif",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Doors",
+        "partItems": [
+          "Door Applique Clip"
+        ],
+        "partNames": [
+          "IvPartTest_NoneClarif"
+        ]
+      }
+    }
+  ],
+  "verifyUserCanManuallySelectPartProviderFromDropDownWhenBOFeaturesAreDisabled": [
+    {
+      "rowID": "verifyUserCanManuallySelectPartProviderFromDropDownWhenBOFeaturesAreDisabled.01",
+      "description": "Verify user can manually select part provider from the dropdown when BO features \"Punchout Part Providers\" and \"Parts Ordering - Generic\" are disabled",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "110668",
+          "testCaseTitle": "Verify user can manually select part provider from the dropdown when BO features \"Punchout Part Providers\" and \"Parts Ordering - Generic\" are disabled"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147524"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ]
+    }
+  ],
+  "verifyAvailablePartProvidersAfterClickingTheGetQuoteButton": [
+    {
+      "rowID": "verifyAvailablePartProvidersAfterClickingTheGetQuoteButton.01",
+      "description": "Verify the list of available part providers when a user clicks \"Get Quote\" button(only contain configured for RO location Punch-Out and Generic providers)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "110670",
+          "testCaseTitle": "Verify the list of available part providers when a user clicks \"Get Quote\" button(only contain configured for RO location Punch-Out and Generic providers)"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147524"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ]
+    }
+  ],
+  "verifyUserSeesListOfPartProvidersEnabledOnBOLevelIfNoPartProviderTeamIsCreatedForROLocation": [
+    {
+      "rowID": "verifyUserSeesListOfPartProvidersEnabledOnBOLevelIfNoPartProviderTeamIsCreatedForROLocation.01",
+      "description": "Verify user sees a list of part providers enabled on BO level If no one part provider team is created for RO location",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "110672",
+          "testCaseTitle": "Verify user sees a list of part providers enabled on BO level If no one part provider team is created for RO location"
+        }
+      ],
+      "location": "zayats location",
+      "searchData": {
+        "woNum": "O-018-00035"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ]
+    }
   ]
 }
