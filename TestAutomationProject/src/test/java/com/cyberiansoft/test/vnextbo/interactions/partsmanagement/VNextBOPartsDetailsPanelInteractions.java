@@ -335,6 +335,7 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static void clickActionsButtonForPartByNumberInList(int partNumber) {
+        WaitUtilsWebDriver.waitForElementNotToBeStale(new VNextBOPartsDetailsPanel().getActionsButton().get(partNumber));
         Utils.clickElement(new VNextBOPartsDetailsPanel().getActionsButton().get(partNumber));
     }
 
