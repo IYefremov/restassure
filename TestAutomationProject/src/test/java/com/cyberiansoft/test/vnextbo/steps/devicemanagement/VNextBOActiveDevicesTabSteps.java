@@ -97,6 +97,9 @@ public class VNextBOActiveDevicesTabSteps extends VNextBODeviceManagementSteps {
 
         Utils.clickElement(new VNextBOActiveDevicesWebPage().replaceButtonByDeviceName(deviceName));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        final VNextBOActiveDevicesWebPage devicesWebPage = new VNextBOActiveDevicesWebPage();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(devicesWebPage.registrationCodeByDeviceName(deviceName));
+        WaitUtilsWebDriver.waitForVisibility(devicesWebPage.registrationCodeByDeviceName(deviceName), 4);
     }
 
     public static void hideRegistrationCodeByDeviceName(String deviceName) {

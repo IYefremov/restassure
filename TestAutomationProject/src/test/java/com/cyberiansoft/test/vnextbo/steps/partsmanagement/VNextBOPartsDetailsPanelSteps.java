@@ -82,13 +82,13 @@ public class VNextBOPartsDetailsPanelSteps {
     public static void clickAddLaborButtonForPartByNumberInList(int partNumber) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().getAddLaborButton().get(partNumber));
-        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOAddLaborPartsDialog().getDialogContent(), true, 5);
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOAddLaborPartsDialog().getDialogContent(), 5);
     }
 
     public static void clickDeleteLaborButtonForPartByNumberInListAndServiceName(int partNumber, String laborServiceName) {
 
         Utils.clickElement(new VNextBOPartsDetailsPanel().deleteLaborButton(partNumber, laborServiceName));
-        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOModalDialog().getYesButton(), true, 2);
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOModalDialog().getYesButton(), 2);
     }
 
     public static void setStatusForPartByPartNumberInList(int partNumber, String status) {

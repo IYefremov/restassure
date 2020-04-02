@@ -95,9 +95,7 @@ public class VNextBOActiveDevicesTabValidations extends VNextBODeviceManagementW
     public static void verifyRegistrationNumberIsDisplayedForDevice(String deviceName) {
 
         final VNextBOActiveDevicesWebPage devicesWebPage = new VNextBOActiveDevicesWebPage();
-        WaitUtilsWebDriver.waitForElementNotToBeStale(devicesWebPage.registrationCodeByDeviceName(deviceName));
-        Assert.assertTrue(WaitUtilsWebDriver.elementShouldBeVisible(
-                devicesWebPage.registrationCodeByDeviceName(deviceName), true, 4),
+        Assert.assertTrue(Utils.isElementDisplayed(devicesWebPage.registrationCodeByDeviceName(deviceName)),
                 "Registration code hasn't been displayed");
         Assert.assertNotEquals("", Utils.getText(devicesWebPage.registrationCodeByDeviceName(deviceName)),
                 "Registration code has been empty");

@@ -13,7 +13,7 @@ import java.util.List;
 public class VNextBOPartsProvidersRequestFormDialogInteractions {
 
     public static void waitForRequestFormDialogToBeOpened() {
-        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsProvidersRequestFormDialog().getRequestFormDialog(), true, 5);
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOPartsProvidersRequestFormDialog().getRequestFormDialog(), 5);
     }
 
     public static void waitForRequestFormDialogToBeClosed() {
