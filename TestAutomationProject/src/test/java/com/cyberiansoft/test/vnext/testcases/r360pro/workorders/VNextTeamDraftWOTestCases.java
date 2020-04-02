@@ -166,7 +166,6 @@ public class VNextTeamDraftWOTestCases extends BaseTestClass {
         AvailableServicesScreenSteps.selectService(workOrderData.getServiceData());
         final String woNumber = WorkOrderSteps.saveWorkOrder();
 
-        SearchSteps.textSearch(woNumber);
         WorkOrderSteps.openMenu(woNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
