@@ -1,12 +1,8 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.bo.enums.companyinfo.CompanyInfoTab;
 import com.cyberiansoft.test.bo.enums.menu.Menu;
 import com.cyberiansoft.test.bo.enums.menu.SubMenu;
-import com.cyberiansoft.test.bo.steps.company.companyinfo.CompanyInfoTabSteps;
-import com.cyberiansoft.test.bo.steps.company.companyinfo.IntegrationSettingsBlockSteps;
-import com.cyberiansoft.test.bo.steps.company.companyinfo.PartProvidersDialogSteps;
 import com.cyberiansoft.test.bo.steps.company.teams.TeamsPageSteps;
 import com.cyberiansoft.test.bo.steps.company.teams.TeamsSearchSteps;
 import com.cyberiansoft.test.bo.steps.menu.BackOfficeMenuSteps;
@@ -292,27 +288,5 @@ public class VNextBOPMGenericPartProviderAndPunchOutTestCases extends BaseTestCa
         VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
         Assert.assertTrue(teamsList.containsAll(VNextBOPartsProvidersDialogSteps.getOptionsList()),
                 "The teams list doesn't contain all parts providers");
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserSeesListOfPartProvidersEnabledOnBOLevelIfNoPartProviderTeamIsCreatedForROLocation(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
-        BackOfficeMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
-        SubscriptionsWebPageSteps.setFullModeForSubscriptions(data.getSubscriptions());
-        BackOfficeMenuSteps.open(Menu.COMPANY, SubMenu.COMPANY_INFO);
-        String parentWindow = Utils.getParentTab();
-        CompanyInfoTabSteps.openTab(CompanyInfoTab.INTEGRATION_SETTINGS);
-        IntegrationSettingsBlockSteps.openPartProvidersSettingsDialog(parentWindow);
-        final List<String> partProviderOptions = PartProvidersDialogSteps.getPartProviderOptions();
-        Utils.closeAllNewWindowsExceptParentTab(parentWindow);
-        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
-        Assert.assertTrue(partProviderOptions.containsAll(VNextBOPartsProvidersDialogSteps.getProvidersList()),
-                "The list of providers differs from the list of providers on the classical BO");
     }
 }

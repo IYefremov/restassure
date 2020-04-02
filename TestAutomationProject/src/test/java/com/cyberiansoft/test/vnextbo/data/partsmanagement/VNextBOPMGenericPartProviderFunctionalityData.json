@@ -244,25 +244,5 @@
         "Parts Ordering - Generic"
       ]
     }
-  ],
-  "verifyUserSeesListOfPartProvidersEnabledOnBOLevelIfNoPartProviderTeamIsCreatedForROLocation": [
-    {
-      "rowID": "verifyUserSeesListOfPartProvidersEnabledOnBOLevelIfNoPartProviderTeamIsCreatedForROLocation.01",
-      "description": "Verify user sees a list of part providers enabled on BO level If no one part provider team is created for RO location",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "110672",
-          "testCaseTitle": "Verify user sees a list of part providers enabled on BO level If no one part provider team is created for RO location"
-        }
-      ],
-      "location": "zayats location",
-      "searchData": {
-        "woNum": "O-018-00035"
-      },
-      "subscriptions": [
-        "Punchout Part Providers",
-        "Parts Ordering - Generic"
-      ]
-    }
   ]
 }
