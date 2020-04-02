@@ -161,7 +161,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
     public void verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
@@ -266,7 +266,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 4)
     public void verifyStartedServiceIconDiffersFromNotStarted(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
@@ -301,7 +301,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 3)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanTurnOnOffPhaseEnforcement(String rowID, String description, JSONObject testData) {
 
         VNextBORODetailsStepsNew.setPhaseStatusIfNeeded("Detail Station", "Completed");

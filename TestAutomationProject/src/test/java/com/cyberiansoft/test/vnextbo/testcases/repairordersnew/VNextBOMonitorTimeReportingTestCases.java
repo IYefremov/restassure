@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.repairordersnew;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -107,6 +106,7 @@ public class VNextBOMonitorTimeReportingTestCases extends BaseTestCase {
         VNextBOTimeReportingDialogSteps.saveNewRecord();
         VNextBOTimeReportingDialogValidations.verifySavedRecordsNumberIsCorrect(initialRecordsAmount);
         VNextBOTimeReportingDialogValidations.verifyStartedDateFieldIsHighLighted();
+        VNextBOTimeReportingDialogSteps.cancelAddingNewRecord();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -141,6 +141,7 @@ public class VNextBOMonitorTimeReportingTestCases extends BaseTestCase {
         VNextBOTimeReportingDialogSteps.setTechnicianForNewRecord(data.getTechnician());
         VNextBOTimeReportingDialogSteps.saveNewRecord();
         VNextBOTimeReportingDialogValidations.verifySavedRecordsNumberIsCorrect(initialRecordsAmount + 1);
+        VNextBOTimeReportingDialogSteps.cancelAddingNewRecord();
         VNextBOTimeReportingDialogSteps.deleteRecordByNumber(4);
     }
 
@@ -158,9 +159,9 @@ public class VNextBOMonitorTimeReportingTestCases extends BaseTestCase {
         VNextBOTimeReportingDialogSteps.setTechnicianForNewRecord(data.getTechnician1());
         VNextBOTimeReportingDialogSteps.saveNewRecord();
         VNextBOTimeReportingDialogValidations.verifySavedRecordsNumberIsCorrect(initialRecordsAmount + 2);
+        VNextBOTimeReportingDialogSteps.deleteRecordByNumber(5);
         VNextBOTimeReportingDialogSteps.deleteRecordByNumber(4);
-        VNextBOTimeReportingDialogSteps.deleteRecordByNumber(4);
-        VNextBOTimeReportingDialogValidations.verifySavedRecordsNumberIsCorrect(initialRecordsAmount);
+        VNextBOTimeReportingDialogSteps.deleteRecordByNumber(7);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
