@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.repairordersnew;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.repairordersnew.VNextBOTimeReportingDialog;
@@ -106,10 +107,12 @@ public class VNextBOTimeReportingDialogSteps {
 
     public static void deleteRecordByNumber(int recordNumber) {
 
+        int initialRecordsAmount = VNextBOTimeReportingDialogSteps.getSavedRecordsNumber();
         VNextBOTimeReportingDialog timeReportingDialog = new VNextBOTimeReportingDialog();
         Utils.clickElement(timeReportingDialog.getDeleteIconsList().get(recordNumber));
         VNextBOModalDialogSteps.clickOkButton();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        ConditionWaiter.create(__ -> VNextBOTimeReportingDialogSteps.getSavedRecordsNumber() == initialRecordsAmount - 1).execute();
     }
 
     public static void clearStartDateByTimeRecordNumber(int recordNumber) {

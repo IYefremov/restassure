@@ -324,7 +324,7 @@
   "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog": [
     {
       "rowID": "verifyUserCanSaveAllOptionsOfAdvancedSearchDialog.01",
-      "description": "Test Case 91127: User can Save options of \"Advanced Search\".",
+      "description": "Test Case 83815: User can Save options of \"Advanced Search\".",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91127",
@@ -344,8 +344,7 @@
       "notes": "Autotest",
       "fromDate": "12/14/2016",
       "toDate": "12/14/2018",
-      "orderedFrom": "Test Team",
-      "searchName": "Test91127"
+      "orderedFrom": "Test Team"
     }
   ],
 

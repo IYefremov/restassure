@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
+import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
@@ -27,9 +28,9 @@ public class VNextBOPMOrderDetailsPartsDetailsLaborTests extends BaseTestCase {
     public void settingUp() {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsPartsDetailsLaborTD();
-        com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions.selectPartsManagementMenu();
+        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("automationMonitoring");
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear(3);
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-444-00531");
     }
 
@@ -144,13 +145,15 @@ public class VNextBOPMOrderDetailsPartsDetailsLaborTests extends BaseTestCase {
     public void verifyUserCanDeleteLabor(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
-        int laborsAmountBeforeAdding = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
-        VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, "Labor AM");
-        refreshPage();
-        VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
+        if (VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0) == 0) {
+            VNextBOPartsDetailsPanelSteps.addLaborForPartByNumberInList(0, "Labor AM");
+            VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-444-00531");
+            VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
+        }
+        final int laborsAmountBeforeDeleting = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.deleteLaborForPartByNumberInListAndLaborServiceName(0, laborServiceName);
-        refreshPage();
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-444-00531");
         VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
-        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laborsAmountBeforeAdding);
+        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laborsAmountBeforeDeleting);
     }
 }

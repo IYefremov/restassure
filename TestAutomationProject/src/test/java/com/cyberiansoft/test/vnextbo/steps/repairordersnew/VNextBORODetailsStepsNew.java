@@ -37,6 +37,7 @@ public class VNextBORODetailsStepsNew {
 
     public static void expandPhaseByName(String phase) {
 
+        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isDisplayed()).execute();
         ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isEnabled()).execute();
         Utils.clickElement(new VNextBORODetailsWebPageNew().expandPhaseButton(phase));
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();

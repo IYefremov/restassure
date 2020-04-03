@@ -12,14 +12,25 @@ public class VNextBOPartsProvidersRequestFormDialogValidations {
 
     public static boolean isRequestFormDialogOpened() {
         return Utils.isElementWithAttributeContainingValueDisplayed(new VNextBOPartsProvidersRequestFormDialog()
-                        .getRequestFormDialog(),
-                "style", "display: block;", 0);
+                        .getRequestFormDialog(), "style", "display: block;", 0);
+    }
+
+    public static boolean isRequestFormDialogClosed() {
+        return Utils.isElementWithAttributeContainingValueDisplayed(new VNextBOPartsProvidersRequestFormDialog()
+                        .getRequestFormDialog(), "style", "display: none;", 0);
+    }
+
+    public static void verifyRequestFormDialogIsOpened(boolean expected) {
+        if (expected) {
+            Assert.assertTrue(isRequestFormDialogOpened(), "The Request form dialog hasn't been opened");
+        } else {
+            Assert.assertTrue(isRequestFormDialogClosed(), "The Request form dialog hasn't been closed");
+        }
     }
 
     public static boolean isRequestQuoteButtonDisabled() {
         return Utils.isElementWithAttributeContainingValueDisplayed(new VNextBOPartsProvidersRequestFormDialog()
-                        .getRequestQuoteButton(),
-                "disabled", "true", 0);
+                        .getRequestQuoteButton(), "disabled", "true", 0);
     }
 
     public static boolean isRequestFormDialogMessageDisplayed() {

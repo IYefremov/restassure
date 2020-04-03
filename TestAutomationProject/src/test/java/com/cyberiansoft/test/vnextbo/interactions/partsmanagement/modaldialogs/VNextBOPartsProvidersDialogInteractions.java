@@ -17,7 +17,13 @@ public class VNextBOPartsProvidersDialogInteractions {
     }
 
     public static void clickGetNewQuoteButton(String provider) {
-        Utils.clickElement(new VNextBOPartsProvidersDialog().getGetNewQuoteButtonByProviderName(provider));
+        Utils.clickElement(new VNextBOPartsProvidersDialog().getStoreGetNewQuoteButtonByProviderName(provider));
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
+        VNextBOPartsProvidersRequestFormDialogInteractions.waitForRequestFormDialogToBeOpened();
+    }
+
+    public static void clickGetNewQuoteButtonForGenericPartProvider(String provider) {
+        Utils.clickElement(new VNextBOPartsProvidersDialog().getGenericPartProviderGetNewQuoteButtonByProviderName(provider));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOPartsProvidersRequestFormDialogInteractions.waitForRequestFormDialogToBeOpened();
     }

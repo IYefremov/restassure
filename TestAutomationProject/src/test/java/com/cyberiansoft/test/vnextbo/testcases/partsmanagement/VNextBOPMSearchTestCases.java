@@ -4,6 +4,8 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.RepairStatus;
+import com.cyberiansoft.test.enums.TimeFrameValues;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
@@ -12,27 +14,35 @@ import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsOrdersListPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOAdvancedSearchDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOSearchPanelValidations;
-import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOAdvancedSearchDialogValidations;
-import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
-import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsManagementWebPageValidations;
-import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsOrdersListPanelValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.*;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.text.ParseException;
 
-public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
+import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
+
+public class VNextBOPMSearchTestCases extends BaseTestCase {
 
     private VNextBOPartsManagementSearchData baseSearchData;
-    private static final String BASE_DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/partsmanagement/VNextBOPartsManagementBaseData.json";
+    private static final String BASE_DATA_FILE = "src/test/java/com/cyberiansoft/test/vnextbo/data/partsmanagement/VNextBOPMBaseData.json";
 
     @BeforeClass
     public void settingUp() throws Exception {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPartsManagementSearchTD();
         baseSearchData = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(BASE_DATA_FILE), VNextBOPartsManagementSearchData.class);
+    }
+
+    @BeforeMethod
+    public void goToPage() {
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation("Best Location Automation");
     }
@@ -197,8 +207,12 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
         VNextBOAdvancedSearchDialogSteps.setOrderedFromField("Test Team");
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Ordered From: Test Team");
-        VNextBOPartsOrdersListPanelValidations.verifyOrdersVendorsAreCorrect("Test Team");
-        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+        final String woNum = VNextBOBreadCrumbInteractions.getLastBreadCrumbText();
+        VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
+        VNextBOROAdvancedSearchDialogSteps.searchByWoTimeFrameAndRepairStatus(
+                woNum, TimeFrameValues.TIMEFRAME_CUSTOM, RepairStatus.All);
+        VNextBOROPageSteps.openRODetailsPage(woNum);
+        VNextBORODetailsPartsBlockValidations.verifyOrderedFromFieldsContainText("Test Team");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -281,6 +295,7 @@ public class VNextBOPartsManagementSearchTestCases extends BaseTestCase {
     public void verifyUserCanSaveAllOptionsOfAdvancedSearchDialog(String rowID, String description, JSONObject testData) {
 
         VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
+        data.setSearchName("TestWO-" + RandomStringUtils.randomAlphanumeric(5));
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
         VNextBOAdvancedSearchDialogSteps.setAllFields(data);
         VNextBOAdvancedSearchDialogSteps.saveSearch();

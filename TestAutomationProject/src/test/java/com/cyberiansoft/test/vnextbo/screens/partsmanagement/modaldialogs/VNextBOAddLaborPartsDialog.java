@@ -18,6 +18,9 @@ public class VNextBOAddLaborPartsDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[@aria-owns='parts-labor-service-form-labors_listbox']")
     private WebElement selectLaborServiceField;
 
+    @FindBy(id = "parts-labor-service-form-labors_listbox")
+    private WebElement laborListBox;
+
     @FindBy(id = "parts-labor-service-form-labors-list")
     private WebElement laborServicesDropDown;
 
@@ -35,7 +38,7 @@ public class VNextBOAddLaborPartsDialog extends VNextBOBaseWebPage {
 
     public WebElement serviceDropDownOption(String optionName) {
 
-        return driver.findElement(By.xpath("//ul[@aria-hidden='false']/li[text()='" + optionName + "']"));
+        return laborListBox.findElement(By.xpath(".//li[text()='" + optionName + "']"));
     }
 
     public VNextBOAddLaborPartsDialog() {
