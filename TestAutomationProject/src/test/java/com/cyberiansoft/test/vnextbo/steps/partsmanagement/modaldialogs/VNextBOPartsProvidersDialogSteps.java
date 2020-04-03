@@ -21,6 +21,12 @@ public class VNextBOPartsProvidersDialogSteps {
                 "The request form dialog hasn't been opened");
     }
 
+    public static void openRequestFormDialogForGenericPartProvider(String provider) {
+        VNextBOPartsProvidersDialogInteractions.clickGetNewQuoteButtonForGenericPartProvider(provider);
+        Assert.assertTrue(VNextBOPartsProvidersRequestFormDialogValidations.isRequestFormDialogOpened(),
+                "The request form dialog hasn't been opened");
+    }
+
     public static String openStore(String provider) {
         WaitUtilsWebDriver.waitABit(1000);
         final String mainWindow = DriverBuilder.getInstance().getDriver().getWindowHandle();
@@ -35,8 +41,8 @@ public class VNextBOPartsProvidersDialogSteps {
         VNextBOPartsProvidersDialogInteractions.waitForPartsProvidersModalDialogToBeClosed();
     }
 
-    public static String getRandomDataProvider() {
-        final List<WebElement> providerNamesList = new VNextBOPartsProvidersDialog().getDataProvidersList();
+    public static String getRandomGenericPartProvider() {
+        final List<WebElement> providerNamesList = new VNextBOPartsProvidersDialog().getGenericPartProvidersList();
         int order = RandomUtils.nextInt(0, providerNamesList.size());
         return Utils.getText(providerNamesList.get(order));
     }

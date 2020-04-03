@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialog;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogValidations;
 import org.testng.Assert;
 
 import java.util.Arrays;
@@ -12,7 +13,13 @@ import java.util.List;
 public class VNextBOPartsProvidersRequestFormDialogInteractions {
 
     public static void waitForRequestFormDialogToBeOpened() {
-        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsProvidersRequestFormDialog().getRequestFormDialog(), true, 5);
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOPartsProvidersRequestFormDialog().getRequestFormDialog(), 5);
+    }
+
+    public static void waitForRequestFormDialogToBeClosed() {
+        WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(
+                new VNextBOPartsProvidersRequestFormDialog().getRequestFormDialog(), "style", "display: none", 5);
+        VNextBOPartsProvidersRequestFormDialogValidations.verifyRequestFormDialogIsOpened(false);
     }
 
     public static String getRequestFormDialogMessage() {

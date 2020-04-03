@@ -4,6 +4,7 @@ import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDia
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOPartDocumentsDialogInteractions;
 import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOConfirmationDialog;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
+import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOConfirmationDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartAddNewDocumentDialogValidations;
 import org.testng.Assert;
 
@@ -43,7 +44,6 @@ public class VNextBOPartDocumentsDialogSteps {
 
     private static void clickDeleteDocumentButton(int order) {
         VNextBOPartDocumentsDialogInteractions.clickDeleteDocumentButton(order);
-        Assert.assertTrue(VNextBOConfirmationDialogInteractions.getConfirmationDialogMessage().contains(
-                VNextBOAlertMessages.VERIFY_TO_BE_DELETED), "The message hasn't been displayed");
+        VNextBOConfirmationDialogValidations.verifyDialogMessageIsDisplayed(VNextBOAlertMessages.VERIFY_TO_BE_DELETED);
     }
 }

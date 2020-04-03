@@ -64,8 +64,7 @@ public class VNextBOPartsOrdersListPanelValidations {
 
     public static void verifyOrdersVendorsAreCorrect(String expectedText) {
 
-        final VNextBOPartsOrdersListPanel ordersListPanel = new VNextBOPartsOrdersListPanel();
-        for (WebElement vendor : ordersListPanel.getVendorNumOptions()) {
+        for (WebElement vendor : new VNextBOPartsOrdersListPanel().getVendorNumOptions()) {
             Assert.assertTrue(Utils.getText(vendor).contains(expectedText), "Vendor hasn't been correct");
         }
     }

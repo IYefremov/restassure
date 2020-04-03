@@ -99,20 +99,82 @@
       "provider": "AutoZone"
     }
   ],
-  "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage": [
+  "verifyWarningMessageIsDisplayedForGenericPartProviderWithoutEmailPartIsSetAsReceivedAndProviderIsStored": [
     {
-      "rowID": "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage.01",
-      "description": "Verify the Punch-Out functionality is enabled by the feature on the \"Add-on\" page",
+      "rowID": "verifyWarningMessageIsDisplayedForGenericPartProviderWithoutEmailPartIsSetAsReceivedAndProviderIsStored.01",
+      "description": "Verify user sees the warning message If selected Generic Part Provider has no email address and part will be set as received and povider will be stored",
       "targetProcessTestCaseData": [
         {
-          "testCaseID": "97519",
-          "testCaseTitle": "Verify the Punch-Out functionality is enabled by the feature on the \"Add-on\" page"
+          "testCaseID": "110673",
+          "testCaseTitle": "Verify user sees the warning message If selected Generic Part Provider has no email address and part will be set as received and povider will be stored"
         }
       ],
       "location": "Best Location Automation",
       "searchData": {
-        "woNum": "O-000-152414"
-      }
+        "woNum": "O-086-00001"
+      },
+      "partData": {
+        "service": "01_New",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Doors",
+        "partItems": [
+          "Door Applique Clip"
+        ]
+      },
+      "provider": "IvanTestOtherLocation"
+    }
+  ],
+  "verifyPartProviderDropDownIsEmptyByDefaultWhenTheUserAddsService": [
+    {
+      "rowID": "verifyPartProviderDropDownIsEmptyByDefaultWhenTheUserAddsService.01",
+      "description": "Verify part provider dropdown is empty by default when the user adds the service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "110666",
+          "testCaseTitle": "Verify part provider dropdown is empty by default when the user adds the service"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147524"
+      },
+      "partData": {
+        "service": "IvPartTest_OptionClarif",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Adhesives",
+        "partItems": [
+          "Windshield Adhesive Kit"
+        ]
+      },
+      "provider": "IvanTestOtherLocation"
+    }
+  ],
+  "verifyPartProviderFieldIsFilledAndUserCantChangeItWhenPartIsQuoted": [
+    {
+      "rowID": "verifyPartProviderFieldIsFilledAndUserCantChangeItWhenPartIsQuoted.01",
+      "description": "Verify the Part Provider field is filled and user can't change it when the part is quoted",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "110674",
+          "testCaseTitle": "Verify the Part Provider field is filled and user can't change it when the part is quoted"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147524"
+      },
+      "partData": {
+        "service": "IvPartTest_OptionClarif",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Adhesives",
+        "partItems": [
+          "Windshield Adhesive Kit"
+        ]
+      },
+      "provider": "IvanTestOtherLocation"
     }
   ],
   "verifyPartProviderIsEmptyAfterAddingNewPartService": [
@@ -176,26 +238,6 @@
       "location": "Best Location Automation",
       "searchData": {
         "woNum": "O-000-147524"
-      },
-      "subscriptions": [
-        "Punchout Part Providers",
-        "Parts Ordering - Generic"
-      ]
-    }
-  ],
-  "verifyUserSeesListOfPartProvidersEnabledOnBOLevelIfNoPartProviderTeamIsCreatedForROLocation": [
-    {
-      "rowID": "verifyUserSeesListOfPartProvidersEnabledOnBOLevelIfNoPartProviderTeamIsCreatedForROLocation.01",
-      "description": "Verify user sees a list of part providers enabled on BO level If no one part provider team is created for RO location",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "110672",
-          "testCaseTitle": "Verify user sees a list of part providers enabled on BO level If no one part provider team is created for RO location"
-        }
-      ],
-      "location": "zayats location",
-      "searchData": {
-        "woNum": "O-018-00035"
       },
       "subscriptions": [
         "Punchout Part Providers",

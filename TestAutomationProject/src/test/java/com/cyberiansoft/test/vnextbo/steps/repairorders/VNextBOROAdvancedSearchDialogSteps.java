@@ -1,8 +1,9 @@
 package com.cyberiansoft.test.vnextbo.steps.repairorders;
 
 import com.cyberiansoft.test.dataclasses.vNextBO.repairorders.VNextBOMonitorData;
-import com.cyberiansoft.test.enums.monitor.OrderMonitorFlags;
+import com.cyberiansoft.test.enums.RepairStatus;
 import com.cyberiansoft.test.enums.TimeFrameValues;
+import com.cyberiansoft.test.enums.monitor.OrderMonitorFlags;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROAdvancedSearchDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBOROPageInteractions;
 import com.cyberiansoft.test.vnextbo.validations.repairorders.VNextBOROAdvancedSearchDialogValidations;
@@ -23,6 +24,14 @@ public class VNextBOROAdvancedSearchDialogSteps {
         openAdvancedSearchDialog();
         VNextBOROAdvancedSearchDialogInteractions.setWoNum(order);
         VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(timeFrameValue.getName());
+        search();
+    }
+
+    public static void searchByWoTimeFrameAndRepairStatus(String order, TimeFrameValues timeFrameValue, RepairStatus status) {
+        openAdvancedSearchDialog();
+        VNextBOROAdvancedSearchDialogInteractions.setWoNum(order);
+        VNextBOROAdvancedSearchDialogInteractions.setTimeFrame(timeFrameValue.getName());
+        VNextBOROAdvancedSearchDialogInteractions.setRepairStatus(status.getValue());
         search();
     }
 

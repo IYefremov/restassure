@@ -300,7 +300,7 @@
           "testCaseID": "90791"
         }
       ],
-      "deviceName": "jj automation do not change"
+      "deviceName": "jj DO NOT DELETE"
     }
   ],
 
@@ -397,6 +397,23 @@
       "orderNumber": "O-000-147163",
       "phase": "Detail Station",
       "problemReason": "No part"
+    }
+  ],
+
+  "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage": [
+    {
+      "rowID": "verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage.01",
+      "description": "Verify the Punch-Out functionality is enabled by the feature on the \"Add-on\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97519",
+          "testCaseTitle": "Verify the Punch-Out functionality is enabled by the feature on the \"Add-on\" page"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-152414"
+      }
     }
   ]
 }
