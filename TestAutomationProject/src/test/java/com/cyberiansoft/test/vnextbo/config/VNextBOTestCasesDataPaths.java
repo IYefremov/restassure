@@ -110,6 +110,10 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.parts.management.order.details.parts.details.labor.td");
     }
 
+    public String getReportsTD() {
+        return properties.getProperty("vnextbo.reports.td");
+    }
+
     public String getSmokeTD() {
         return properties.getProperty("vnextbo.smoke.td");
     }

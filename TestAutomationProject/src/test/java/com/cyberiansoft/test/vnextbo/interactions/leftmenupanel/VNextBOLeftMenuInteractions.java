@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOBaseWebPage;
 import com.cyberiansoft.test.vnextbo.steps.addOns.VNextBOAddOnsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.inspections.VNextBOInspectionsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
+import com.cyberiansoft.test.vnextbo.steps.reports.VNextBOReportsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.users.VNextBOUsersPageSteps;
 
 public class VNextBOLeftMenuInteractions {
@@ -30,6 +31,14 @@ public class VNextBOLeftMenuInteractions {
     public static void selectAddOnsMenu() {
         openMainMenu(MainMenuItems.ADD_ONS.getMenu());
         VNextBOAddOnsPageSteps.waitForAddOnsPageToBeLoaded();
+    }
+
+    // TODO the page has to be reloaded because of the bug https://cyb.tpondemand.com/restui/board.aspx?#page=bug/118799
+    // TODO delete Utils.refreshPage() after fix
+    public static void selectReportsMenu() {
+        openMainMenu(MainMenuItems.REPORTS.getMenu());
+        VNextBOReportsPageSteps.waitForReportsPageToBeLoaded();
+        Utils.refreshPage();
     }
 
     public static void selectUsersMenu() {
