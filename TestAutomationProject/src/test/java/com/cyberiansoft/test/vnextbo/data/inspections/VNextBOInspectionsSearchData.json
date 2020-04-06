@@ -406,5 +406,18 @@
         }
       ]
     }
+  ],
+
+  "verifyUserCanSearchInspectionsUsingSavedAdvancedSearch": [
+    {
+      "rowID": "verifyUserCanSearchInspectionsUsingSavedAdvancedSearch.01",
+      "description": "Test Case 90934: User can search \"Inspections\" using saved \"Advanced Search\" form",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90934",
+          "testCaseTitle": "User can search \"Inspections\" using saved \"Advanced Search\" form"
+        }
+      ]
+    }
   ]
 }
