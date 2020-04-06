@@ -32,7 +32,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement customer: new VNextBOROWebPageNew().getOrdersCustomersList()) {
+            for (WebElement customer : new VNextBOROWebPageNew().getOrdersCustomersList()) {
                 Assert.assertEquals(Utils.getText(customer), expectedCustomer, "Customer hasn't been correct");
             }
         }
@@ -53,7 +53,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement technician: new VNextBOROWebPageNew().getOrdersTechniciansList()) {
+            for (WebElement technician : new VNextBOROWebPageNew().getOrdersTechniciansList()) {
                 Assert.assertTrue(Utils.getText(technician).contains(expectedEmployee),
                         "Employee " + Utils.getText(technician) + "hasn't been correct");
             }
@@ -65,7 +65,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
             WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-            for (WebElement phase: new VNextBOROWebPageNew().getOrdersPhasesList()) {
+            for (WebElement phase : new VNextBOROWebPageNew().getOrdersPhasesList()) {
                 ConditionWaiter.create(__ -> Utils.getText(phase).equals(expectedPhase)).execute();
                 Assert.assertEquals(Utils.getText(phase), expectedPhase, "Phase hasn't been correct");
             }
@@ -77,7 +77,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
             ConditionWaiter.create(__ -> Utils.getText(new VNextBOROWebPageNew().getOrdersTechniciansList().get(0)).contains(expectedTechnician)).execute();
-            for (WebElement technician: new VNextBOROWebPageNew().getOrdersTechniciansList()) {
+            for (WebElement technician : new VNextBOROWebPageNew().getOrdersTechniciansList()) {
                 ConditionWaiter.create(__ -> Utils.getText(technician).contains(expectedTechnician)).execute();
                 Assert.assertTrue(Utils.getText(technician).contains(expectedTechnician), "Technician hasn't been correct");
             }
@@ -88,7 +88,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement department: new VNextBOROWebPageNew().getOrdersDepartmentsList()) {
+            for (WebElement department : new VNextBOROWebPageNew().getOrdersDepartmentsList()) {
                 Assert.assertEquals(Utils.getText(department), expectedDepartment, "Department hasn't been correct");
             }
         }
@@ -98,7 +98,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement woType: new VNextBOROWebPageNew().getWoTypesList()) {
+            for (WebElement woType : new VNextBOROWebPageNew().getWoTypesList()) {
                 Assert.assertEquals(Utils.getText(woType), expectedWoType, "WO type hasn't been correct");
             }
         }
@@ -108,7 +108,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement woNumber: new VNextBOROWebPageNew().getWoNumbersList()) {
+            for (WebElement woNumber : new VNextBOROWebPageNew().getWoNumbersList()) {
                 Assert.assertEquals(Utils.getText(woNumber), expectedWoNumber, "WO number hasn't been correct");
             }
         }
@@ -118,7 +118,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement roNumber: new VNextBOROWebPageNew().getRoNumbersList()) {
+            for (WebElement roNumber : new VNextBOROWebPageNew().getRoNumbersList()) {
                 Assert.assertEquals(Utils.getInputFieldValue(roNumber), expectedRoNumber, "RO number hasn't been correct");
             }
         }
@@ -128,7 +128,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement poNumber: new VNextBOROWebPageNew().getPoNumbersList()) {
+            for (WebElement poNumber : new VNextBOROWebPageNew().getPoNumbersList()) {
                 Assert.assertEquals(Utils.getInputFieldValue(poNumber), expectedPoNumber, "PO number hasn't been correct");
             }
         }
@@ -138,7 +138,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement stockNumber: new VNextBOROWebPageNew().getStockNumbersList()) {
+            for (WebElement stockNumber : new VNextBOROWebPageNew().getStockNumbersList()) {
                 Assert.assertEquals(Utils.getInputFieldValue(stockNumber), expectedStockNumber, "Stock number hasn't been correct");
             }
         }
@@ -148,7 +148,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
         if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed()) verifyNotFoundMessageIsCorrect();
         else {
-            for (WebElement vinNumber: new VNextBOROWebPageNew().getVinNumbersList()) {
+            for (WebElement vinNumber : new VNextBOROWebPageNew().getVinNumbersList()) {
                 Assert.assertEquals(Utils.getText(vinNumber), expectedVinNumber, "VIN number hasn't been correct");
             }
         }
@@ -190,7 +190,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
     public static void verifyNotFoundMessageIsCorrect() {
 
         Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNoRecordsFoundMessage()), "No records found. Please refine search criteria ...",
-                    "No records found message hasn't been displayed or has been incorrect");
+                "No records found message hasn't been displayed or has been incorrect");
     }
 
     public static void verifySortingByStartDateIsCorrect(List<WebElement> actualStartDatesElementsList, List<Date> expectedStartDatesList) throws ParseException {
@@ -350,12 +350,15 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
                 "Saved search field has contained incorrect value");
     }
 
-    public static void verifySavedSearchDropDownListContainsSavedSearch(String searchName) {
+    public static void verifySavedSearchDropDownListContainsSavedSearch(String searchName, boolean shouldBeDisplayed) {
 
         List<String> savedSearchesList = new VNextBOROWebPageNew().getSavedSearchDropDownList().stream().
                 map(WebElement::getText).collect(Collectors.toList());
-        Assert.assertTrue(savedSearchesList.contains(searchName),
-                "Saved search hasn't been presented in the saved searches list");
+        if (shouldBeDisplayed)
+            Assert.assertTrue(savedSearchesList.contains(searchName),
+                    "Saved search hasn't been presented in the saved searches list");
+        else Assert.assertTrue(!savedSearchesList.contains(searchName),
+                "Saved search hasn't been deleted");
     }
 
     public static void verifyFirstOrderInvoiceNumberIsCorrect(String expectedInvoiceNumber) {
@@ -403,8 +406,8 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
     public static void verifyOrdersTableContainsCorrectColumns() {
 
-        List<String> correctTitlesList = Arrays.asList("Order / Type / Department","Customer / Vehicle","VIN# / Stock# / RO# / PO# / Invoice",
-        "Order Amount\nVendor Amount", "Start Date / Target Date", "Technicians", "Current Phase / Days in Phase", "Completed (%)", "Other");
+        List<String> correctTitlesList = Arrays.asList("Order / Type / Department", "Customer / Vehicle", "VIN# / Stock# / RO# / PO# / Invoice",
+                "Order Amount\nVendor Amount", "Start Date / Target Date", "Technicians", "Current Phase / Days in Phase", "Completed (%)", "Other");
         List<String> columnsTitles = new VNextBOROWebPageNew().getRepairOrdersTableColumnsTitles().stream().
                 map(WebElement::getText).collect(Collectors.toList());
         Assert.assertEquals(columnsTitles, correctTitlesList, "Repair orders table has contained incorrect columns");
@@ -488,15 +491,14 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         if (equal) {
             ConditionWaiter.create(__ -> Utils.getText(ordersPage.getOrderNoteText()).equals(noteText)).execute();
             Assert.assertEquals(Utils.getText(ordersPage.getOrderNoteText()), noteText, "Note's text hasn't been correct");
-        }
-        else
+        } else
             Assert.assertNotEquals(noteText, Utils.getText(ordersPage.getOrderNoteText()), "Note's text hasn't been correct");
     }
 
     public static void verifyPriorityIsCorrectForFirstOrder(String expectedPriority) {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
-        switch(expectedPriority) {
+        switch (expectedPriority) {
             case "Low":
                 Assert.assertTrue(Utils.isElementDisplayed(ordersPage.getLowPriorityIcon()), "Low priority icon hasn't been displayed");
                 break;
@@ -507,7 +509,8 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
                 try {
                     Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getLowPriorityIcon()), "Low priority icon has been displayed");
                     Assert.assertFalse(Utils.isElementDisplayed(ordersPage.getHighPriorityIcon()), "High priority icon has been displayed");
-                } catch (NoSuchElementException ex) {}
+                } catch (NoSuchElementException ex) {
+                }
 
                 break;
         }
@@ -515,8 +518,9 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
     public static void verifySavedSearchEditPencilIconIsDisplayed(boolean shouldBeDisplayed) {
 
-        if (shouldBeDisplayed) Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getEditSavedSearchPencilIcon()),
-                "Edit search pencil icon hasn't been displayed");
+        if (shouldBeDisplayed)
+            Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getEditSavedSearchPencilIcon()),
+                    "Edit search pencil icon hasn't been displayed");
         else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().getEditSavedSearchPencilIcon()),
                 "Edit search pencil icon has been displayed");
     }
@@ -537,8 +541,9 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         if (shouldBeDisplayed) {
             Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getStartPhaseServicesActionButton()),
                     "Start phase services action button hasn't been displayed");
-        } else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().getStartPhaseServicesActionButton()),
-                "Start phase services action button has been displayed");
+        } else
+            Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().getStartPhaseServicesActionButton()),
+                    "Start phase services action button has been displayed");
         Utils.clickElement(new VNextBOROWebPageNew().getOrdersPhasesList().get(0));
     }
 
@@ -571,8 +576,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
             ConditionWaiter.create(__ -> new VNextBOROWebPageNew().pinnedSearchBlock(savedSearch).isDisplayed()).execute();
             Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().pinnedSearchBlock(savedSearch)),
                     "Pinned search hasn't been displayed");
-        }
-        else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().pinnedSearchBlock(savedSearch)),
+        } else Assert.assertFalse(Utils.isElementDisplayed(new VNextBOROWebPageNew().pinnedSearchBlock(savedSearch)),
                 "Pinned search has been displayed");
     }
 
@@ -590,5 +594,18 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
                 "Notification message hasn't been displayed");
         Assert.assertEquals(Utils.getText(new VNextBOROWebPageNew().getNotificationMessage()), "Warning. You cannot add more than 3 pinned searches.",
                 "Unpin tooltip text hasn't been correct");
+    }
+
+    public static void verifyPinnedSearchCounterNumberIsCorrect(String savedSearch) {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        if (VNextBOROPageStepsNew.checkIfNoRecordsFoundMessageIsDisplayed())
+            Assert.assertEquals(Utils.getText(ordersPage.pinnedSearchCounter(savedSearch)), "0",
+                    "Pinned search has contained incorrect counter number");
+        else {
+            int ordersNumber = new VNextBOROWebPageNew().getRepairOrdersTableRowsList().size();
+            Assert.assertEquals(Integer.parseInt(Utils.getText(ordersPage.pinnedSearchCounter(savedSearch))), ordersNumber,
+                    "Pinned search has contained incorrect counter number");
+        }
     }
 }

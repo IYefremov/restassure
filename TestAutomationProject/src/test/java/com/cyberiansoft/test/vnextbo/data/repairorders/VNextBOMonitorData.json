@@ -11,7 +11,6 @@
       ]
     }
   ],
-
   "verifyUserCanOpenAndCloseTermsAndConditions": [
     {
       "rowID": "verifyUserCanOpenAndCloseTermsAndConditions.01",
@@ -24,7 +23,6 @@
       ]
     }
   ],
-
   "verifyUserCanOpenAndClosePrivacyPolicy": [
     {
       "rowID": "verifyUserCanOpenAndClosePrivacyPolicy.01",
@@ -37,7 +35,6 @@
       ]
     }
   ],
-
   "verifyUserCanOpenAndCloseIntercom": [
     {
       "rowID": "verifyUserCanOpenAndCloseIntercom.01",
@@ -50,7 +47,6 @@
       ]
     }
   ],
-
   "verifyUserCanChangeLocation": [
     {
       "rowID": "verifyUserCanChangeLocation.01",
@@ -69,7 +65,6 @@
       "location": "Best Location Automation"
     }
   ],
-
   "verifyUserCanChangeLocationUsingSearch": [
     {
       "rowID": "verifyUserCanChangeLocationUsingSearch.01",
@@ -84,7 +79,6 @@
       "location": "Best Location Automation"
     }
   ],
-
   "verifyUserCanSeeBreadcrumb": [
     {
       "rowID": "verifyUserCanSeeBreadcrumb.01",
@@ -98,7 +92,6 @@
       "location": "Best Location Automation"
     }
   ],
-
   "verifyUserCanSeeWoInTheBreadcrumb": [
     {
       "rowID": "verifyUserCanSeeWoInTheBreadcrumb.01",
@@ -113,7 +106,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanChangeLocationBeingOnDetailsWoPage": [
     {
       "rowID": "verifyUserCanChangeLocationBeingOnDetailsWoPage.01",
@@ -129,7 +121,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanReturnToTheMainPage": [
     {
       "rowID": "verifyUserCanReturnToTheMainPage.01",
@@ -143,7 +134,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyCurrentLocationIsVisibleAfterLocationDropdownIsClicked": [
     {
       "rowID": "verifyCurrentLocationIsVisibleAfterLocationDropdownIsClicked.01",
@@ -157,7 +147,6 @@
       "location": "Best Location Automation"
     }
   ],
-
   "verifyUserCanUsePaging": [
     {
       "rowID": "verifyUserCanUsePaging.01",
@@ -170,7 +159,6 @@
       ]
     }
   ],
-
   "verifyUserCanUsePaginationFilter": [
     {
       "rowID": "verifyUserCanUsePaginationFilter.01",
@@ -183,7 +171,6 @@
       ]
     }
   ],
-
   "verifyUserCanFilterRObyDepartments": [
     {
       "rowID": "verifyUserCanFilterRObyDepartments.01",
@@ -196,7 +183,6 @@
       ]
     }
   ],
-
   "verifyUserCanFilterRObyPhases": [
     {
       "rowID": "verifyUserCanFilterRObyPhases.01",
@@ -209,7 +195,6 @@
       ]
     }
   ],
-
   "verifyUserCanSeeAndChangeRoDetails": [
     {
       "rowID": "verifyUserCanSeeAndChangeRoDetails.01",
@@ -228,7 +213,6 @@
       "woType": "01ZalexWO_tp"
     }
   ],
-
   "verifyUserCannotChangePoForInvoicedOrders": [
     {
       "rowID": "verifyUserCannotChangePoForInvoicedOrders.01",
@@ -246,7 +230,6 @@
       "orderNumber": "O-062-00197"
     }
   ],
-
   "verifyUserCanChangeStatusOfRoToCheckInCheckOut": [
     {
       "rowID": "verifyUserCanChangeStatusOfRoToCheckInCheckOut.01",
@@ -260,7 +243,6 @@
       "orderNumber": "O-000-147159"
     }
   ],
-
   "verifyUserCanShowOrCloseNotesToTheLeftOfRo": [
     {
       "rowID": "verifyUserCanShowOrCloseNotesToTheLeftOfRo.01",
@@ -274,7 +256,6 @@
       "orderNumber": "O-000-147159"
     }
   ],
-
   "verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion": [
     {
       "rowID": "verifyPhasesAreUpdatedWithoutRefreshAfterTheirCompletion.01",
@@ -289,7 +270,6 @@
       "service": "Car-Washing"
     }
   ],
-
   "verifyUserCanTypeAndNotSaveNotesWithXIcon": [
     {
       "rowID": "verifyUserCanTypeAndNotSaveNotesWithXIcon.01",
@@ -307,7 +287,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanTypeAndNotSaveNotesWithClose": [
     {
       "rowID": "verifyUserCanTypeAndNotSaveNotesWithClose.01",
@@ -325,7 +304,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanSeeAndCreateNotes": [
     {
       "rowID": "verifyUserCanSeeAndCreateNotes.01",
@@ -343,7 +321,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserSeesServiceNotesAndImagesByDefault": [
     {
       "rowID": "verifyUserSeesServiceNotesAndImagesByDefault.01",
@@ -357,7 +334,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanChangeStockOfRo": [
     {
       "rowID": "verifyUserCanChangeStockOfRo.01",
@@ -371,7 +347,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanChangeRoNumOfRo": [
     {
       "rowID": "verifyUserCanChangeRoNumOfRo.01",
@@ -385,7 +360,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanChangePoNumOfRo": [
     {
       "rowID": "verifyUserCanChangePoNumOfRo.01",
@@ -399,7 +373,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanChangeStatusOfRo": [
     {
       "rowID": "verifyUserCanChangeStatusOfRo.01",
@@ -438,7 +411,6 @@
       "status": "Approved"
     }
   ],
-
   "verifyUserCannotChangeStatusOfRoToDraft": [
     {
       "rowID": "verifyUserCannotChangeStatusOfRoToDraft.01",
@@ -453,7 +425,6 @@
       "status": "Draft"
     }
   ],
-
   "verifyUserCanChangeStatusOfRoToClosed": [
     {
       "rowID": "verifyUserCanChangeStatusOfRoToClosed.01",
@@ -511,7 +482,6 @@
       "phaseStatus": "Active"
     }
   ],
-
   "verifyUserCanChangePriorityOfRo": [
     {
       "rowID": "verifyUserCanChangePriorityOfRo.01",
@@ -550,7 +520,6 @@
       "priority": "High"
     }
   ],
-
   "verifyUserCanAddNewService": [
     {
       "rowID": "verifyUserCanAddNewService.01",
@@ -570,7 +539,6 @@
       "serviceQuantity": "7.000"
     }
   ],
-
   "verifyUserCanAddNewMoneyService": [
     {
       "rowID": "verifyUserCanAddNewMoneyService.01",
@@ -590,7 +558,6 @@
       "serviceQuantity": "0.001"
     }
   ],
-
   "verifyUserCanAddNewLaborService": [
     {
       "rowID": "verifyUserCanAddNewLaborService.01",
@@ -610,7 +577,6 @@
       "serviceLaborTime": "3.5"
     }
   ],
-
   "verifyUserCanAddNewPartService": [
     {
       "rowID": "verifyUserCanAddNewPartService.01",
@@ -630,7 +596,6 @@
       "servicePart": "Air Dam"
     }
   ],
-
   "verifyUserCanFilterAvailableServicesListByEnteredText": [
     {
       "rowID": "verifyUserCanFilterAvailableServicesListByEnteredText.01",
@@ -645,7 +610,6 @@
       "service": "Part"
     }
   ],
-
   "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon": [
     {
       "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItXIcon.01",
@@ -665,7 +629,6 @@
       "serviceQuantity": "7.000"
     }
   ],
-
   "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton": [
     {
       "rowID": "verifyUserCanSelectDetailsOfAddNewServiceAndNotAddItCancelButton.01",
@@ -685,7 +648,6 @@
       "serviceQuantity": "7.000"
     }
   ],
-
   "verifyUserCanChangeFlagOfRo": [
     {
       "rowID": "verifyUserCanChangeFlagOfRoToWhite.01",
@@ -779,7 +741,6 @@
       "flagColor": "purple"
     }
   ],
-
   "verifyUserCanChangeStatusOfRoService": [
     {
       "rowID": "verifyUserCanChangeStatusOfRoService.01",
@@ -872,7 +833,6 @@
       "serviceStartedDate": "02/15/2020"
     }
   ],
-
   "verifyUserCanSeeServicesOfRo": [
     {
       "rowID": "verifyUserCanSeeServicesOfRo.01",
@@ -888,7 +848,6 @@
       "service": "autotestcgoDbvR"
     }
   ],
-
   "verifyUserCanChangeVendorPriceOfRo": [
     {
       "rowID": "verifyUserCanChangeVendorPriceOfRo.01",
@@ -908,7 +867,6 @@
       ]
     }
   ],
-
   "verifyUserCanChangeVendorTechnicianOfRo": [
     {
       "rowID": "verifyUserCanChangeVendorTechnicianOfRo.01",
@@ -926,7 +884,6 @@
       "technician": "Alex Zak"
     }
   ],
-
   "verifyUserCanCreateNoteOfServiceOfRo": [
     {
       "rowID": "verifyUserCanCreateNoteOfServiceOfRo.01",
@@ -943,7 +900,6 @@
       "notesMessage": "Autotest 91285"
     }
   ],
-
   "verifyUserCanSeeMoreInformationOfRo": [
     {
       "rowID": "verifyUserCanSeeMoreInformationOfRo.01",
@@ -957,7 +913,6 @@
       "orderNumber": "O-000-147163"
     }
   ],
-
   "verifyUserCanTypeAndNotSaveNoteOfRoService": [
     {
       "rowID": "verifyUserCanTypeAndNotSaveNoteOfRoService.01",
@@ -974,7 +929,6 @@
       "notesMessage": "Autotest 91286"
     }
   ],
-
   "verifyUserCanChangeQuantityForService": [
     {
       "rowID": "verifyUserCanChangeQuantityForService.01",
@@ -991,7 +945,6 @@
       "serviceQuantity": "125.000"
     }
   ],
-
   "verifyUserCanEnterNegativeNumberForServiceQuantity": [
     {
       "rowID": "verifyUserCanEnterNegativeNumberForServiceQuantity.01",
@@ -1008,7 +961,6 @@
       "serviceQuantity": "-2.000"
     }
   ],
-
   "verifyUserCannotEnterTextForServiceQuantity": [
     {
       "rowID": "verifyUserCannotEnterTextForServiceQuantity.01",
@@ -1025,7 +977,6 @@
       "serviceQuantity": "10.000"
     }
   ],
-
   "verifyUserCanChangePriceForService": [
     {
       "rowID": "verifyUserCanChangePriceForService.01",
@@ -1042,7 +993,6 @@
       "servicePrice": "45.00"
     }
   ],
-
   "verifyUserCanEnterNegativeNumberForServicePrice": [
     {
       "rowID": "verifyUserCanEnterNegativeNumberForServicePrice.01",
@@ -1059,7 +1009,6 @@
       "servicePrice": "45.00"
     }
   ],
-
   "verifyUserCannotEnterTextForServicePrice": [
     {
       "rowID": "verifyUserCannotEnterTextForServicePrice.01",
@@ -1076,7 +1025,6 @@
       "servicePrice": "d"
     }
   ],
-
   "verifyUserCanSeePhaseOfRo": [
     {
       "rowID": "verifyUserCanSeePhaseOfRo.01",
@@ -1091,7 +1039,6 @@
       "phase": "PDR Station"
     }
   ],
-
   "verifyUserCanChangeTechnicianOfRo": [
     {
       "rowID": "verifyUserCanChangeTechnicianOfRo.01",
@@ -1110,7 +1057,6 @@
       "technician1": "Alex Zak"
     }
   ],
-
   "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo": [
     {
       "rowID": "verifyUserCanChangeAndNotSaveWithXButtonTechnicianOfRo.01",
@@ -1126,9 +1072,9 @@
       "service": "Car-Washing",
       "vendor": "01_TimeRep_team",
       "technician": "Aleksandr Filimonov",
-      "technician1": "Alex Zak"    }
+      "technician1": "Alex Zak"
+    }
   ],
-
   "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo": [
     {
       "rowID": "verifyUserCanChangeAndNotSaveWithCancelButtonTechnicianOfRo.01",
@@ -1147,7 +1093,6 @@
       "technician1": "Alex Zak"
     }
   ],
-
   "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase": [
     {
       "rowID": "verifyUserCanSeeAndChangeTechniciansOfTheCurrentPhase.01",
@@ -1173,7 +1118,6 @@
       ]
     }
   ],
-
   "verifyUserCanSearchBySavedSearchForm": [
     {
       "rowID": "verifyUserCanSearchBySavedSearchForm.01",
@@ -1207,7 +1151,6 @@
       "searchName": "My Location - Active Work"
     }
   ],
-
   "verifyUserCanPinSavedSearches": [
     {
       "rowID": "verifyUserCanPinSavedSearches.01",
@@ -1220,7 +1163,6 @@
       ]
     }
   ],
-
   "verifyUserCanNotPinMoreThanThreeSavedSearches": [
     {
       "rowID": "verifyUserCanNotPinMoreThanThreeSavedSearches.01",
@@ -1233,7 +1175,33 @@
       ]
     }
   ],
-
+  "verifyUserCanSeeCountersOfPinnedSearches": [
+    {
+      "rowID": "verifyUserCanSeeCountersOfPinnedSearches.01",
+      "description": "Test Case 92592: User can see counters of pinned searches",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92592",
+          "testCaseTitle": "User can see counters of pinned searches"
+        }
+      ],
+      "location": "Rozstalnoy_location",
+      "searchName": "Red"
+    }
+  ],
+  "verifyUserCanEditSavedSearch": [
+    {
+      "rowID": "verifyUserCanEditSavedSearch.01",
+      "description": "Test Case 91231: User can see saved searchs in the \"Saved\" list use and edit its",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91231",
+          "testCaseTitle": "User can see saved searchs in the \"Saved\" list use and edit its"
+        }
+      ],
+      "searchName": "autotest 91231"
+    }
+  ],
   "verifyUserCannotEditSavedSearch": [
     {
       "rowID": "verifyUserCannotEditSavedSearch.01",
@@ -1248,7 +1216,6 @@
       "searchName": "My Location - Active Work"
     }
   ],
-
   "verifyUserCanSeeArbitrationDate": [
     {
       "rowID": "verifyUserCanSeeArbitrationDate.01",
@@ -1268,7 +1235,6 @@
       "arbitrationDate": "10/1/2019"
     }
   ],
-
   "verifyUserCanSeeInvoiceOfRo": [
     {
       "rowID": "verifyUserCanSeeInvoiceOfRo.01",
@@ -1284,7 +1250,6 @@
       "invoiceNumber": "I-000-00997"
     }
   ],
-
   "verifyUserCanSeeChangesOfPhasesInLogInfo": [
     {
       "rowID": "verifyUserCanSeeChangesOfPhasesInLogInfo.01",
@@ -1304,7 +1269,6 @@
       ]
     }
   ],
-
   "verifyUserCanCheckInCheckOutRO": [
     {
       "rowID": "verifyUserCanCheckInCheckOutRO.01",
@@ -1323,7 +1287,6 @@
       "phase": "PDR Station"
     }
   ],
-
   "verifyUserCanSeePartsOfRO": [
     {
       "rowID": "verifyUserCanCheckOutRO.01",
@@ -1336,7 +1299,6 @@
       ]
     }
   ],
-
   "verifyStartedServiceIconDiffersFromNotStarted": [
     {
       "rowID": "verifyStartedServiceIconDiffersFromNotStarted.01",
@@ -1356,7 +1318,6 @@
       ]
     }
   ],
-
   "verifyUserCanSeeInspectionsOfRo": [
     {
       "rowID": "verifyUserCanSeeInspectionsOfRo.01",
@@ -1371,7 +1332,6 @@
       "orderNumber": "O-000-152460"
     }
   ],
-
   "verifyUserCanTurnOnOffPhaseEnforcement": [
     {
       "rowID": "verifyUserCanTurnOnOffPhaseEnforcement.01",
@@ -1388,7 +1348,6 @@
       ]
     }
   ],
-
   "verifyUserCanAddANewTaskWithAllFields": [
     {
       "rowID": "verifyUserCanAddANewTaskWithAllFields.01",
@@ -1407,7 +1366,6 @@
       "notesMessage": "93027"
     }
   ],
-
   "verifyUserCanAddANewTaskWithRequiredFields": [
     {
       "rowID": "verifyUserCanAddANewTaskWithRequiredFields.01",
@@ -1426,7 +1384,6 @@
       "notesMessage": "93031"
     }
   ],
-
   "verifyUserCanCancelTaskAdding": [
     {
       "rowID": "verifyUserCanCancelTaskAdding.01",
@@ -1445,7 +1402,6 @@
       "notesMessage": "93032"
     }
   ],
-
   "verifyUserCanAddNewTaskWithPredefinedTechnician": [
     {
       "rowID": "verifyUserCanAddNewTaskWithPredefinedTechnician.01",

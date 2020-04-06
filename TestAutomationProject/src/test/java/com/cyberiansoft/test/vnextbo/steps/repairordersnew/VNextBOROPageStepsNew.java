@@ -117,6 +117,18 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getWoNumbersList().get(0).isEnabled()).execute();
     }
 
+    public static void saveSearchByRoNumber(String orderNumber, String searchName) {
+
+        VNextBOSearchPanelSteps.openAdvancedSearchForm();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        VNextBOROAdvancedSearchDialogStepsNew.setRoNumberField(orderNumber);
+        VNextBOROAdvancedSearchDialogStepsNew.setCustomTimeFrame(fromDate, toDate);
+        VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField("All");
+        VNextBOROAdvancedSearchDialogStepsNew.setSearchNameField(searchName);
+        VNextBOROAdvancedSearchDialogStepsNew.saveSearch();
+    }
+
     public static void searchOrdersByPhaseStatus(String phase, String phaseStatus) {
 
         VNextBOSearchPanelSteps.openAdvancedSearchForm();
@@ -207,7 +219,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
         clickSavedSearchesDropDownField();
-        VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName);
+        VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName, true);
         Utils.clickElement(repairOrdersPage.savedSearchOptionByName(searchName));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
@@ -216,7 +228,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         VNextBOROWebPageNew repairOrdersPage = new VNextBOROWebPageNew();
         clickSavedSearchesDropDownField();
-        VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName);
+        VNextBOROWebPageValidationsNew.verifySavedSearchDropDownListContainsSavedSearch(searchName, true);
         Utils.clickElement(repairOrdersPage.savedSearchOptionByName(searchName));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
         Utils.clickElement(repairOrdersPage.getEditSavedSearchPencilIcon());
@@ -234,7 +246,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
                 .collect(Collectors.toList());
     }
 
-    public static List<Date> getAscSortedStartDatesListValues(List<WebElement> startDatesWebElementsList) throws ParseException{
+    public static List<Date> getAscSortedStartDatesListValues(List<WebElement> startDatesWebElementsList) throws ParseException {
 
         List<Date> notSortedDates = new ArrayList<>();
         for (WebElement element : startDatesWebElementsList) {
@@ -400,8 +412,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         if (displayNote) {
             WaitUtilsWebDriver.waitForVisibility(ordersPage.getOrderNoteText());
             VNextBOROWebPageValidationsNew.verifyNotePopUpIsDisplayed(true);
-        }
-        else {
+        } else {
             WaitUtilsWebDriver.waitForInvisibility(ordersPage.getOrderNoteText());
             VNextBOROWebPageValidationsNew.verifyNotePopUpIsDisplayed(false);
         }
