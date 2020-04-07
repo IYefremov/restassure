@@ -84,5 +84,37 @@
       "fromDate": "1/1/2018",
       "toDate": "9/26/2019"
     }
+  ],
+
+  "verifyUserCanArchiveInspectionsFromInspectionsList": [
+    {
+      "rowID": "verifyUserCanArchiveInspectionsFromInspectionsList.01",
+      "description": "Test Case 90894: User can Archive Inspections",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90894",
+          "testCaseTitle": "User can Archive Inspections"
+        }
+      ],
+      "inspectionId": "E-444-00188",
+      "fromDate": "1/1/2018",
+      "toDate": "9/26/2019"
+    }
+  ],
+
+  "verifyUserCanUnArchiveInspectionsFromInspectionsList": [
+    {
+      "rowID": "verifyUserCanUnArchiveInspectionsFromInspectionsList.01",
+      "description": "Test Case 90898: User can Unarchive Inspection",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90898",
+          "testCaseTitle": "User can Unarchive Inspection"
+        }
+      ],
+      "inspectionId": "E-444-00188",
+      "fromDate": "1/1/2018",
+      "toDate": "9/26/2019"
+    }
   ]
 }

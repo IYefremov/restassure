@@ -41,14 +41,12 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
 
         Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getDeleteButton());
         VNextBOModalDialogSteps.clickNoButton();
-        //WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void deleteSavedSearchWithoutSaveXIcon() {
 
         Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getDeleteButton());
         VNextBOModalDialogSteps.clickCloseButton();
-        //WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void setHasThisTextField(String text) {
