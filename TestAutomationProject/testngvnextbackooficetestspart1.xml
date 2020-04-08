@@ -107,6 +107,13 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMGenericPartProviderAndPunchOutTestCases"/>
         </classes>
     </test>
+    <test name="Reports Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.reports.VNextBOReportsTestCases"/>
+        </classes>
+    </test>
     <test name="Money And Percentage Services Tests">
         <parameter name="userName" value="test.automation2@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>

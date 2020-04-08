@@ -18,7 +18,7 @@ public class BackOfficeUtils {
         return LocalDate.now();
     }
 
-    private static LocalDate getCurrentDateLocalized() {
+    public static LocalDate getCurrentDateLocalized() {
         return LocalDate.now(getZoneId());
     }
 

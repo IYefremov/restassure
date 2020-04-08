@@ -1,0 +1,85 @@
+{
+  "verifyUserCanGenerateTimeReportAndReceiveByEmail": [
+    {
+      "rowID": "verifyUserCanGenerateTimeReportAndReceiveByEmail.01",
+      "description": "Verify user can generate time report (receive by Email)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "107647",
+          "testCaseTitle": "Verify user can generate time report (receive by Email)"
+        }
+      ],
+      "report": "TimeReport",
+      "timeZone": "Pacific Standard Time",
+      "team": "Test Team",
+      "employee": "Ivan Yefremov",
+      "email": "cyberiansoft.test@getnada.com"
+    }
+  ],
+  "verifyUserCanGenerateTimeReportAndReceiveByPhone": [
+    {
+      "rowID": "verifyUserCanGenerateTimeReportAndReceiveByPhone.01",
+      "description": "Verify user can generate time report (receive by phone)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "107648",
+          "testCaseTitle": "Verify user can generate time report (receive by phone)"
+        }
+      ],
+      "report": "TimeReport",
+      "timeZone": "Pacific Standard Time",
+      "team": "Test Team",
+      "employee": "Ivan Yefremov",
+      "email": "cyberiansoft.test@getnada.com"
+    }
+  ],
+  "verifyUserCanCancelTimeReportByClickingCancelButtonOrRejectingWithXIcon": [
+    {
+      "rowID": "verifyUserCanCancelTimeReportByClickingCancelButtonOrRejectingWithXIcon.01",
+      "description": "Verify user can cancel time report by pressing \"Cancel\" button or by reject \"x\" icon",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "107650",
+          "testCaseTitle": "Verify user can cancel time report by pressing \"Cancel\" button or by reject \"x\" icon"
+        }
+      ],
+      "report": "TimeReport"
+    }
+  ],
+  "verifyTheEmailAndPhoneFieldsAreValidated": [
+    {
+      "rowID": "verifyTheEmailAndPhoneFieldsAreValidated.01",
+      "description": "Verify the \"Email\" and \"Phone\" fields validation",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "107651",
+          "testCaseTitle": "Verify the \"Email\" and \"Phone\" fields validation"
+        }
+      ],
+      "report": "TimeReport",
+      "invalidEmails": [
+        "iyefremovcyberiansoft.com",
+        "iyefrem ov@cyberiansoft.com",
+        ""
+      ],
+      "invalidPhones": [
+        "asd",
+        "123456-78"
+      ]
+    }
+  ],
+  "verifySystemSupportsTeamTimeZones": [
+    {
+      "rowID": "verifySystemSupportsTeamTimeZones.01",
+      "description": "Verify system supports Team TimeZones",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "109778",
+          "testCaseTitle": "Verify system supports Team TimeZones"
+        }
+      ],
+      "report": "TimeReport",
+      "timeZone": "Pacific Standard Time"
+    }
+  ]
+}
