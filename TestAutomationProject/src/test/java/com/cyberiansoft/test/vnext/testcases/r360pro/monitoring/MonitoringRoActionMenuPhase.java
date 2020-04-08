@@ -1,7 +1,10 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
+import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.dataclasses.partservice.PartName;
+import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
@@ -21,6 +24,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MonitoringRoActionMenuPhase extends BaseTestClass {
@@ -136,6 +140,57 @@ public class MonitoringRoActionMenuPhase extends BaseTestClass {
         EditOrderSteps.openPhaseMenu(orderPhaseDto);
         MenuValidations.menuItemShouldBeEnabled(MenuItems.START, false);
         MenuSteps.closeMenu();
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
+
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyTheScanButtonIsAvailableFromThePhasePagePhaseServicePagePartsPageROInfo(String rowID,
+                                                       String description, JSONObject testData) {
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_MONITORING);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        PartServiceData partServiceData = new PartServiceData();
+        partServiceData.setServiceName("Engine part");
+        partServiceData.setSubCategory("Filters");
+        PartName partName = new PartName();
+        List<String> list = new ArrayList<>();
+        list.add("Engine Oil Filter");
+        partName.setPartNameList(list);
+        partName.setIsMultiSelect(true);
+        partServiceData.setPartName(partName);
+        SearchSteps.textSearch(partServiceData.getServiceName());
+        PartServiceSteps.selectPartService(partServiceData);
+        PartServiceSteps.confirmPartInfo();
+        AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
+        workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        SearchSteps.searchByText(workOrderId);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        MonitorSteps.clickQuickActionsButton();
+        MenuValidations.menuItemShouldBeVisible(MenuItems.SCAN, true);
+        MenuSteps.closeMenu();
+
+        EditOrderSteps.switchToParts();
+        MonitorSteps.clickQuickActionsButton();
+        MenuValidations.menuItemShouldBeVisible(MenuItems.SCAN, true);
+        MenuSteps.closeMenu();
+
+        EditOrderSteps.switchToInfo();
+        MonitorSteps.clickQuickActionsButton();
+        MenuValidations.menuItemShouldBeVisible(MenuItems.SCAN, true);
+        MenuSteps.closeMenu();
+
         WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();
 

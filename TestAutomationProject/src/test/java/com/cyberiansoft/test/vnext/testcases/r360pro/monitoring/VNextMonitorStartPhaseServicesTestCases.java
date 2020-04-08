@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
-import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceStatus;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -13,6 +12,7 @@ import com.cyberiansoft.test.vnext.enums.RepairOrderStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
@@ -79,7 +79,6 @@ public class VNextMonitorStartPhaseServicesTestCases extends BaseTestClass {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         OrderPhaseDto orderPhaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
-        ServiceData serviceData = workOrderData.getServiceData();
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
@@ -115,6 +114,66 @@ public class VNextMonitorStartPhaseServicesTestCases extends BaseTestClass {
         });
         MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
         orderPhaseDto.getPhaseServices().forEach(service -> PhaseScreenValidations.validateServiceStatus(service.getMonitorService(), ServiceStatus.SKIPPED));
+
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanStartStopAndCompleteServicesUsingMultiSelects(String rowID,
+                                                      String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderPhaseDto orderPhaseDto = workOrderData.getMonitoring().getOrderPhaseDto();
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_WO_MONITOR);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        GeneralSteps.confirmDialog();
+        MonitorSteps.openItem(workOrderId);
+
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        orderPhaseDto.getPhaseServices().forEach(service -> {
+                    PhaseScreenInteractions.selectService(service.getMonitorService());
+                });
+        PhaseScreenInteractions.clickStartServices();
+        orderPhaseDto.getPhaseServices().forEach(service -> {
+            PhaseScreenValidations.validateServiceStatus(service.getMonitorService(), ServiceStatus.STARTED);
+            PhaseScreenValidations.validateStartIconPresentForService(service.getMonitorService(), true);
+        });
+        orderPhaseDto.getPhaseServices().forEach(service -> {
+            PhaseScreenInteractions.selectService(service.getMonitorService());
+        });
+        PhaseScreenInteractions.clickStopServices();
+        orderPhaseDto.getPhaseServices().forEach(service -> {
+            PhaseScreenValidations.validateServiceStatus(service.getMonitorService(), ServiceStatus.STARTED);
+            PhaseScreenValidations.validateStartIconPresentForService(service.getMonitorService(), false);
+        });
+
+        orderPhaseDto.getPhaseServices().forEach(service -> {
+            PhaseScreenInteractions.selectService(service.getMonitorService());
+        });
+        PhaseScreenInteractions.clickCompleteServices();
+
+        MonitorSteps.toggleFocusMode(MenuItems.FOCUS_MODE_ON);
+        orderPhaseDto.getPhaseServices().forEach(service -> PhaseScreenValidations.validateServiceStatus(service.getMonitorService(), ServiceStatus.COMPLETED));
 
         WizardScreenSteps.saveAction();
         ScreenNavigationSteps.pressBackButton();

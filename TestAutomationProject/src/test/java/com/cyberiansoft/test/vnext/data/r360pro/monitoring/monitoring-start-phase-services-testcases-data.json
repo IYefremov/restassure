@@ -26,7 +26,6 @@
       }
     }
   ],
-
   "testVerifyUserCanChangeServicesStatus": [
     {
       "rowID": "testVerifyUserCanChangeServicesStatus.01",
@@ -67,6 +66,48 @@
         }
       }
     }
+  ],
+  "testVerifyUserCanStartStopAndCompleteServicesUsingMultiSelects": [
+    {
+      "rowID": "testVerifyUserCanStartStopAndCompleteServicesUsingMultiSelects.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92344",
+          "testCaseTitle": "Verify user can start, stop and complete services using multi select"
+        }
+      ],
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "orderPhaseDto": {
+          "phaseName": "PhaseAndServiceLevel",
+          "status": "SKIPPED",
+          "phaseServices": [
+            {
+              "monitorService": {
+                "serviceName": "Orom_Money_Service"
+              },
+              "monitorServiceStatus": "Completed"
+            },
+            {
+              "monitorService": {
+                "serviceName": "Auto_adding_Task"
+              },
+              "monitorServiceStatus": "Completed"
+            }
+          ]
+        }
+      }
+    }
   ]
-
 }

@@ -64,10 +64,15 @@ public class MonitorSteps {
     }
 
     public static void toggleFocusMode(MenuItems focusMode) {
+        clickQuickActionsButton();
+        MenuSteps.selectMenuItem(focusMode);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
+    public static void clickQuickActionsButton() {
         PhasesScreen phasesScreen = new PhasesScreen();
         BaseUtils.waitABit(2000);
         WaitUtils.click(phasesScreen.getPhasesMenuButton());
-        MenuSteps.selectMenuItem(focusMode);
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        BaseUtils.waitABit(1000);
     }
 }
