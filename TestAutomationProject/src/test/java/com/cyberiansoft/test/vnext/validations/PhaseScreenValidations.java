@@ -75,4 +75,11 @@ public class PhaseScreenValidations {
     public static void validatePhaseStockNumber(String expectedStockNumber) {
         Assert.assertEquals(PhaseScreenInteractions.getPhasesStockNumber(), expectedStockNumber);
     }
+
+    public static void validateStartIconPresentForService(ServiceData serviceData, Boolean shouldPresent) {
+        if (shouldPresent)
+            Assert.assertTrue(PhaseScreenInteractions.isServiceStartIconPresent(serviceData.getServiceName()));
+        else
+            Assert.assertFalse(PhaseScreenInteractions.isServiceStartIconPresent(serviceData.getServiceName()));
+    }
 }

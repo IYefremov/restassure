@@ -145,5 +145,17 @@
         }
       }
     }
+  ],
+  "testVerifyTheScanButtonIsAvailableFromThePhasePagePhaseServicePagePartsPageROInfo": [
+    {
+      "rowID": "testVerifyTheScanButtonIsAvailableFromThePhasePagePhaseServicePagePartsPageROInfo.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92332",
+          "testCaseTitle": "Verify the scan button is available from the 'Phase', page, 'Phase service', page, 'Parts', page 'RO Info'"
+        }
+      ]
+    }
   ]
 }

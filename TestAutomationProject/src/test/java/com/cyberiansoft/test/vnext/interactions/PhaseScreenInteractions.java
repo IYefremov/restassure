@@ -58,6 +58,11 @@ public class PhaseScreenInteractions {
                         serviceElement.getName().contains(serviceName));
     }
 
+    public static boolean isServiceStartIconPresent(String serviceName) {
+        ServiceElement serviceElement = getServiceElements(serviceName);
+        return serviceElement.isStartIconPresent();
+    }
+
     public static void openServiceElementMenu(ServiceElement serviceElement) {
         WaitUtils.click(serviceElement.getRootElement());
     }
@@ -91,6 +96,11 @@ public class PhaseScreenInteractions {
     }
 
     public static void selectService(ServiceData serviceData) {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        WaitUtils.collectionSizeIsGreaterThan(phasesScreen.getServiceElementsList(), 0);
+        WaitUtils.elementShouldBeVisible(phasesScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementIsClickable(phasesScreen.getRootElement());
+        BaseUtils.waitABit(2000);
         ServiceElement serviceElement = getServiceElements(serviceData.getServiceName());
         serviceElement.getRootElement().findElement(By.xpath(serviceElement.getCheckElementLocator())).click();
     }

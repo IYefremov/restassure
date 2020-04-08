@@ -18,6 +18,7 @@ public class ServiceElement implements IWebElement {
     private String checkElementLocator = ".//*[@action='check-item']";
     private String editElementLocator = ".//*[@action='edit-service']";
     private String notesElementLocator = ".//*[@data-service-notes]";
+    private String startIconLocator = ".//div[@class='icon-item-content-title']/span[@class='icon-item-arrow']";
 
     public ServiceElement(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -52,5 +53,9 @@ public class ServiceElement implements IWebElement {
 
     public Boolean isStartDatePresent() {
         return WaitUtils.isElementPresent(rootElement.findElement(By.xpath(startDateLocator)));
+    }
+
+    public Boolean isStartIconPresent() {
+        return rootElement.findElements(By.xpath(startIconLocator)).size() > 0;
     }
 }
