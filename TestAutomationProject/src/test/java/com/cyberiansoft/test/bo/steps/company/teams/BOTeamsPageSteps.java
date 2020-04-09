@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-public class TeamsPageSteps {
+public class BOTeamsPageSteps {
 
     public static List<String> getTeamsList() {
         final TeamsWebPage teamsPage = new TeamsWebPage();

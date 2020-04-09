@@ -8,7 +8,7 @@ import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 
-public class SubscriptionsWebPageSteps {
+public class BOSubscriptionsWebPageSteps {
 
     public static void openEditDialogForSubscription(String name) {
         Utils.clickElement(new SubscriptionsWebPage().getEditButtonBySubscriptionName(name));

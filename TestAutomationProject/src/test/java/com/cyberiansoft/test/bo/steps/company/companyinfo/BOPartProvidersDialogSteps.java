@@ -6,7 +6,7 @@ import com.cyberiansoft.test.bo.enums.companyinfo.PartProvidersDialog;
 
 import java.util.List;
 
-public class PartProvidersDialogSteps {
+public class BOPartProvidersDialogSteps {
 
     public static List<String> getPartProviderOptions() {
         final PartProvidersDialog partProvidersDialog = new PartProvidersDialog();
