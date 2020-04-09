@@ -32,7 +32,7 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
         VNextBOInspectionsPageValidations.verifyArchiveIconIsDisplayed();
-        VNextBOInspectionsPageSteps.clickArchiveIcon();
+        VNextBOInspectionsPageSteps.clickInspectionDetailsArchiveIcon();
         VNextBOInspectionsPageSteps.selectArchiveReason("Reason: Test");
         VNextBOModalDialog confirmArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyYesButtonIsDisplayed();
@@ -48,7 +48,7 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        VNextBOInspectionsPageSteps.clickArchiveIcon();
+        VNextBOInspectionsPageSteps.clickInspectionDetailsArchiveIcon();
         VNextBOInspectionsPageSteps.selectArchiveReason("Reason: Test");
         VNextBOModalDialog confirmArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCloseButton();
@@ -61,7 +61,7 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
         VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrameAndNumber(data.getInspectionId(), data.getFromDate(), data.getToDate());
-        VNextBOInspectionsPageSteps.clickArchiveIcon();
+        VNextBOInspectionsPageSteps.clickInspectionDetailsArchiveIcon();
         VNextBOInspectionsPageSteps.selectArchiveReason("Reason: Test");
         VNextBOModalDialog confirmArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickYesButton();
@@ -71,7 +71,7 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
         Assert.assertEquals(VNextBOInspectionsPageSteps.getSelectedInspectionArchivingReason(),
                 "Inspection archived with reason: Test",
                 "Archiving reason hasn't been correct");
-        VNextBOInspectionsPageSteps.unArchiveInspection();
+        VNextBOInspectionsPageSteps.unArchiveInspectionFromInspectionDetails();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
@@ -79,16 +79,16 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
     public void verifyUserCanCancelUnArchivingWithNoButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.archiveInspection(data, "Reason: Test");
+        VNextBOInspectionsPageSteps.archiveInspectionFromInspectionDetails(data, "Reason: Test");
         VNextBOInspectionsPageValidations.verifyUnArchiveIconIsDisplayed();
-        VNextBOInspectionsPageSteps.clickUnArchiveIcon();
+        VNextBOInspectionsPageSteps.clickInspectionDetailsUnArchiveIcon();
         VNextBOModalDialog confirmUnArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogValidations.verifyYesButtonIsDisplayed();
         VNextBOModalDialogValidations.verifyNoButtonIsDisplayed();
         VNextBOModalDialogValidations.verifyCloseButtonIsDisplayed();
         VNextBOModalDialogSteps.clickNoButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmUnArchivingDialog);
-        VNextBOInspectionsPageSteps.unArchiveInspection();
+        VNextBOInspectionsPageSteps.unArchiveInspectionFromInspectionDetails();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
@@ -96,12 +96,12 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
     public void verifyUserCanCancelUnArchivingWithCloseButton(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.archiveInspection(data, "Reason: Test");
-        VNextBOInspectionsPageSteps.clickUnArchiveIcon();
+        VNextBOInspectionsPageSteps.archiveInspectionFromInspectionDetails(data, "Reason: Test");
+        VNextBOInspectionsPageSteps.clickInspectionDetailsUnArchiveIcon();
         VNextBOModalDialog confirmUnArchivingDialog = new VNextBOModalDialog();
         VNextBOModalDialogSteps.clickCloseButton();
         VNextBOModalDialogValidations.verifyDialogIsClosed(confirmUnArchivingDialog);
-        VNextBOInspectionsPageSteps.unArchiveInspection();
+        VNextBOInspectionsPageSteps.unArchiveInspectionFromInspectionDetails();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
@@ -109,12 +109,19 @@ public class VNextBOInspectionsArchivingTests extends BaseTestCase {
     public void verifyUserCanUnArchiveInspection(String rowID, String description, JSONObject testData) {
 
         VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
-        VNextBOInspectionsPageSteps.archiveInspection(data, "Reason: Test");
-        VNextBOInspectionsPageSteps.clickUnArchiveIcon();
-        VNextBOModalDialog confirmArchivingDialog = new VNextBOModalDialog();
-        VNextBOModalDialogSteps.clickYesButton();
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
-        VNextBOModalDialogValidations.verifyDialogIsClosed(confirmArchivingDialog);
+        VNextBOInspectionsPageSteps.archiveFirstInspectionFromInspectionsList(data, "Reason: Test");
+        VNextBOInspectionsPageValidations.verifyInspectionStatusIsCorrect(data.getInspectionId(), "Archived");
+        VNextBOInspectionsPageSteps.unArchiveInspectionFromInspectionDetails();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanUnArchiveInspectionsFromInspectionsList(String rowID, String description, JSONObject testData) {
+
+        VNextBOInspectionsDetailsData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionsDetailsData.class);
+        VNextBOInspectionsPageSteps.archiveFirstInspectionFromInspectionsList(data, "Reason: Test");
+        VNextBOInspectionsPageSteps.unArchiveInspectionFromInspectionsList();
         VNextBOInspectionsPageValidations.verifyInspectionStatusIsCorrect(data.getInspectionId(), "New");
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }

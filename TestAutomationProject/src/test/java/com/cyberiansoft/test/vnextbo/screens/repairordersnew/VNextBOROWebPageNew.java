@@ -238,6 +238,11 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
         return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[text()='" + savedSearch + "']/ancestor::div[contains(@class,'dashboard__item')]/i"));
     }
 
+    public WebElement pinnedSearchCounter(String savedSearch) {
+
+        return DriverBuilder.getInstance().getDriver().findElement(By.xpath("//span[text()='" + savedSearch + "']/ancestor::div[contains(@class,'dashboard__item')]/div[@class='dashboard__item__counter']"));
+    }
+
     public VNextBOROWebPageNew() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

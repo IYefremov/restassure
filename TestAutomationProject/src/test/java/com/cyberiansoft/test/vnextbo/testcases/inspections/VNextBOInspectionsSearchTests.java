@@ -69,7 +69,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         Assert.assertTrue(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists("Archived"),
-        "\"Saved searches list hasn't contained saved Archived search\");");
+                "\"Saved searches list hasn't contained saved Archived search\");");
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsDisplayed();
@@ -90,8 +90,8 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("123");
         VNextBOInspectionsPageValidations.verifyClearFilterIconIsDisplayed();
-        for (String inspectionName: VNextBOInspectionsPageSteps.getNamesOfAllInspectionsInTheList()
-             ) {
+        for (String inspectionName : VNextBOInspectionsPageSteps.getNamesOfAllInspectionsInTheList()
+        ) {
             Assert.assertTrue(inspectionName.contains("123"), inspectionName + "hasn't contained searched text \"123\"");
         }
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Text: 123"),
@@ -116,7 +116,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
 
         VNextBOInspectionsPageSteps.openAdvancedSearchForm();
         Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getAllOptionsFromDropdownByName("Status"),
-                expectedStatusDropDownOptions,"Status dropdown options set hasn't been correct");
+                expectedStatusDropDownOptions, "Status dropdown options set hasn't been correct");
         Assert.assertEquals(VNextBOInspectionsAdvancedSearchSteps.getAllOptionsFromDropdownByName("Timeframe"),
                 expectedTimeFrameDropDownOptions, "Timeframe dropdown options set hasn't been correct");
         VNextBOInspectionsAdvancedSearchSteps.setAllAdvancedSearchFields(valuesForSearch);
@@ -263,12 +263,10 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.advancedSearchInspectionByCustomer("Best Customer");
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Customer: Best Customer"),
                 "Search option under Search field hasn't been correct");
-        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
-        {
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed()) {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
-        }
-        else {
+        } else {
             VNextBOInspectionsPageValidations.verifyCustomerNameIsCorrect("Best Customer");
         }
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
@@ -281,12 +279,10 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.advancedSearchInspectionByPONumber("123");
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("PO#: 123"),
                 "Search option under Search field hasn't been correct");
-        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
-        {
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed()) {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
-        }
-        else {
+        } else {
             Assert.assertTrue(VNextBOInspectionsPageSteps.getSelectedInspectionParameterValueByName("PO#").contains("123"),
                     "Inspection has been found incorrectly");
         }
@@ -300,12 +296,10 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.advancedSearchInspectionByRONumber("123");
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("RO#: 123"),
                 "Search option under Search field hasn't been correct");
-        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
-        {
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed()) {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
-        }
-        else {
+        } else {
             Assert.assertTrue(VNextBOInspectionsPageSteps.getSelectedInspectionParameterValueByName("RO#").contains("123"),
                     "Inspection has been found incorrectly");
         }
@@ -319,12 +313,10 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.advancedSearchInspectionByStockNumber("123");
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Stock#: 123"),
                 "Search option under Search field hasn't been correct");
-        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
-        {
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed()) {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
-        }
-        else {
+        } else {
             Assert.assertTrue(VNextBOInspectionsPageSteps.getSelectedInspectionParameterValueByName("Stock#").contains("123"),
                     "Inspection has been found incorrectly");
         }
@@ -338,12 +330,10 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.advancedSearchInspectionByVIN("123");
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("VIN: 123"),
                 "Search option under Search field hasn't been correct");
-        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
-        {
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed()) {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
-        }
-        else {
+        } else {
             Assert.assertTrue(VNextBOInspectionsPageSteps.getSelectedInspectionParameterValueByName("VIN").contains("123"),
                     "Inspection has been found incorrectly");
         }
@@ -357,13 +347,11 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.advancedSearchInspectionByInspectionNumber("222");
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Inspection#: 222"),
                 "Search option under Search field hasn't been correct");
-        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
-        {
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed()) {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
-        }
-        else {
-            for (String inspectionNumber: VNextBOInspectionsPageSteps.getNumbersOfAllInspectionsInTheList()
+        } else {
+            for (String inspectionNumber : VNextBOInspectionsPageSteps.getNumbersOfAllInspectionsInTheList()
             ) {
                 Assert.assertTrue(inspectionNumber.contains("222"),
                         "Record with incorrect number has been found");
@@ -378,28 +366,17 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOInspectionSearchData.class);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
         VNextBOInspectionsPageSteps.advancedSearchInspectionByStatus(data.getValueForSearch());
-        if (!data.getValueForSearch().equals("All Active"))
-        {
+        if (!data.getValueForSearch().equals("All Active")) {
             Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Status: " + data.getValueForSearch()),
                     "Search option under Search field hasn't been correct");
         }
-        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
-        {
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed()) {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
-        }
-        else {
-            if (!data.getValueForSearch().equals("All Active")){
-                for (String inspectionStatus: VNextBOInspectionsPageSteps.getStatusesOfAllInspectionsInTheList()
-                ) {
-                    Assert.assertEquals(inspectionStatus, data.getValueForSearch(),
-                            "Record with incorrect status has been found");
-                }
-            }
-            else {
-                Assert.assertTrue(VNextBOInspectionsPageSteps.getStatusesOfAllInspectionsInTheList().size() > 0,
-                        "Active inspections have not been found");
-            }
+        } else {
+            if (!data.getValueForSearch().equals("All Active")) {
+                VNextBOInspectionsPageValidations.verifyInspectionsStatusesAreCorrect(data.getValueForSearch());
+            } else VNextBOInspectionsPageValidations.verifyInspectionsListIsDisplayed();
         }
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
@@ -412,15 +389,10 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.searchInspectionByCustomTimeFrame(data.getValueForSearch());
         Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Timeframe: " + data.getValueForSearch()),
                 "Search option under Search field hasn't been correct");
-        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
-        {
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed()) {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
-        }
-        else {
-            Assert.assertTrue(VNextBOInspectionsPageSteps.getStatusesOfAllInspectionsInTheList().size() > 0,
-                    "inspections have not been found");
-        }
+        } else VNextBOInspectionsPageValidations.verifyInspectionsListIsDisplayed();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
@@ -437,8 +409,21 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOInspectionAdvancedSearchForm);
         Assert.assertEquals("From: 01/01/2018, To: 10/01/2019", VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue(),
                 "Search option under Search field hasn't been correct");
-        Assert.assertTrue(VNextBOInspectionsPageSteps.getStatusesOfAllInspectionsInTheList().size() > 0,
-                "inspections have not been found");
+        VNextBOInspectionsPageValidations.verifyInspectionsListIsDisplayed();
+        VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchInspectionsUsingSavedAdvancedSearch(String rowID, String description, JSONObject testData) {
+
+        VNextBOInspectionsPageSteps.searchBySavedAdvancedSearch("john");
+        if (VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkIsDisplayed())
+            VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
+                    VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
+        else {
+            VNextBOInspectionsPageValidations.verifyInspectionsListIsDisplayed();
+            VNextBOInspectionsPageValidations.verifyInspectionsStatusesAreCorrect("Approved");
+        }
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 }

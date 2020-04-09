@@ -34,6 +34,19 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
         Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getDeleteButton());
         VNextBOModalDialogSteps.clickYesButton();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+    }
+
+    public static void deleteSavedSearchWithoutSaveNoButton() {
+
+        Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getDeleteButton());
+        VNextBOModalDialogSteps.clickNoButton();
+    }
+
+    public static void deleteSavedSearchWithoutSaveXIcon() {
+
+        Utils.clickElement(new VNextBOROAdvancedSearchDialogNew().getDeleteButton());
+        VNextBOModalDialogSteps.clickCloseButton();
     }
 
     public static void setHasThisTextField(String text) {
@@ -161,7 +174,8 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
         WaitUtilsWebDriver.waitABit(1000);
         Utils.clearAndType(advancedSearchDialog.getDaysInPhaseFromValue(), daysFromValue);
         WaitUtilsWebDriver.waitABit(1000);
-        if (daysToValue != null) Utils.sendKeysWithJS(advancedSearchDialog.getDaysInPhaseToValue(), String.valueOf(daysToValue));
+        if (daysToValue != null)
+            Utils.sendKeysWithJS(advancedSearchDialog.getDaysInPhaseToValue(), String.valueOf(daysToValue));
     }
 
     public static void setDaysInProcess(String daysInProcessCondition, String daysFromValue, Optional<String> daysToValue) {
@@ -173,7 +187,8 @@ public class VNextBOROAdvancedSearchDialogStepsNew {
         WaitUtilsWebDriver.waitABit(1000);
         Utils.clearAndType(advancedSearchDialog.getDaysInProcessFromValue(), daysFromValue);
         WaitUtilsWebDriver.waitABit(1000);
-        if (daysToValue != null) Utils.sendKeysWithJS(advancedSearchDialog.getDaysInProcessToValue(), String.valueOf(daysToValue));
+        if (daysToValue != null)
+            Utils.sendKeysWithJS(advancedSearchDialog.getDaysInProcessToValue(), String.valueOf(daysToValue));
     }
 
     public static void setFlagField(String flag) {

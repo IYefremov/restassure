@@ -36,8 +36,8 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
         VNextBOInspectionsWebPage inspectionsPage =
                 new VNextBOInspectionsWebPage();
         WaitUtilsWebDriver.waitForVisibilityOfAllOptions(inspectionsPage.savedSearchesList);
-        for (WebElement searchName: inspectionsPage.savedSearchesList
-                ) {
+        for (WebElement searchName : inspectionsPage.savedSearchesList
+        ) {
             if (Utils.getText(searchName).equals(filterName))
                 return true;
         }
@@ -61,7 +61,7 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
 
     public static void verifyHowToCreateInspectionLinkTextIsCorrect(String actualResult) {
 
-        Assert.assertEquals(actualResult,  "Click here to learn how to create your first inspection",
+        Assert.assertEquals(actualResult, "Click here to learn how to create your first inspection",
                 "\"Click here to learn how to create your first inspection\" link hasn't been displayed");
     }
 
@@ -80,14 +80,14 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
     }
 
     public static void verifyArchiveIconIsDisplayed() {
-        WaitUtilsWebDriver.getWebDriverWait(4).until(ExpectedConditions.visibilityOf(new VNextBOInspectionsWebPage().archiveIcon));
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().archiveIcon),
+        WaitUtilsWebDriver.getWebDriverWait(4).until(ExpectedConditions.visibilityOf(new VNextBOInspectionsWebPage().inspectionDetailsArchiveIcon));
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().inspectionDetailsArchiveIcon),
                 "Archive icon hasn't been displayed.");
     }
 
     public static void verifyUnArchiveIconIsDisplayed() {
-        WaitUtilsWebDriver.getWebDriverWait(4).until(ExpectedConditions.visibilityOf(new VNextBOInspectionsWebPage().unArchiveIcon));
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().unArchiveIcon),
+        WaitUtilsWebDriver.getWebDriverWait(4).until(ExpectedConditions.visibilityOf(new VNextBOInspectionsWebPage().inspectionDetailsUnArchiveIcon));
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().inspectionDetailsUnArchiveIcon),
                 "Unarchive icon hasn't been displayed.");
     }
 
@@ -142,5 +142,11 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
         WaitUtilsWebDriver.getWebDriverWait(5).until(ExpectedConditions.visibilityOf(new VNextBOInspectionsWebPage().inspectionDetailsPanel));
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOInspectionsWebPage().inspectionDetailsPanel),
                 "Inspection details panel hasn't been displayed");
+    }
+
+    public static void verifyInspectionsStatusesAreCorrect(String expectedStatus) {
+
+        Assert.assertTrue(VNextBOInspectionsPageSteps.getStatusesOfAllInspectionsInTheList().stream().allMatch(status -> status.equals(expectedStatus)),
+                "Not all inspections in the list has had correct status");
     }
 }

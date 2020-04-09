@@ -20,6 +20,7 @@ public enum MenuItems {
     START("Start"),
     START_RO("Start RO"),
     STOP("Stop"),
+    SCAN("Scan"),
     COMPLETE("Complete"),
     CHANGE_STATUS("Change Status"),
     NOTES("Notes"),
