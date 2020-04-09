@@ -7,7 +7,7 @@ import com.cyberiansoft.test.bo.enums.menu.SubMenu;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BackOfficeHeaderPanel;
 import org.openqa.selenium.By;
 
-public class BackOfficeMenuSteps {
+public class BOMenuSteps {
 
     public static void open(Menu menu, SubMenu subMenu) {
         openTab(menu);
@@ -32,5 +32,6 @@ public class BackOfficeMenuSteps {
         } else {
             WaitUtilsWebDriver.waitUntilTitleContains(tab.getValue());
         }
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 }

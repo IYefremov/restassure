@@ -329,9 +329,8 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        final String addOn = "Punch Out Process";
         VNextBOLeftMenuInteractions.selectAddOnsMenu();
-        final String addOnStatus = VNextBOAddOnsPageSteps.getAddOnStatus(addOn);
+        final String addOnStatus = VNextBOAddOnsPageSteps.getAddOnStatus(data.getAddOn());
         if (addOnStatus.equals(IntegrationStatus.ON.name())) {
             VNextBOLeftMenuInteractions.selectPartsManagementMenu();
             VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
@@ -339,8 +338,8 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
             VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(true);
             VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(true);
             VNextBOLeftMenuInteractions.selectAddOnsMenu();
-            VNextBOAddOnsPageSteps.turnOffAddOnByName(addOn);
-            VNextBOAddOnsPageSteps.refreshPageWhileAddOnStatusIsChanged(addOn, IntegrationStatus.OFF);
+            VNextBOAddOnsPageSteps.turnOffAddOnByName(data.getAddOn());
+            VNextBOAddOnsPageSteps.refreshPageWhileAddOnStatusIsChanged(data.getAddOn(), IntegrationStatus.OFF);
             VNextBOLeftMenuInteractions.selectPartsManagementMenu();
             VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
             VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
@@ -348,6 +347,6 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
             VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(false);
             VNextBOLeftMenuInteractions.selectAddOnsMenu();
         }
-        VNextBOAddOnsPageSteps.turnOnAddOnByName(addOn);
+        VNextBOAddOnsPageSteps.turnOnAddOnByName(data.getAddOn());
     }
 }

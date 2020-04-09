@@ -7,6 +7,7 @@ import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDia
 import com.cyberiansoft.test.vnextbo.screens.addons.VNextBOAddOnsPage;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.validations.addons.VNextBOAddOnsPageValidations;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
@@ -21,7 +22,7 @@ public class VNextBOAddOnsPageSteps {
     public static void turnOffAddOnByName(String addOn) {
         final VNextBOAddOnsPage addOnsPage = new VNextBOAddOnsPage();
         if (Utils.getText(addOnsPage.getIntegrationStatus(addOn)).equals(IntegrationStatus.ON.name())) {
-            WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getAddOnsTurnOffButton(addOn), 3);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getAddOnsTurnOffButton(addOn));
             Utils.clickElement(addOnsPage.getAddOnsTurnOffButton(addOn));
             confirmAddOnChange(addOn);
         } else {
@@ -34,7 +35,9 @@ public class VNextBOAddOnsPageSteps {
         final VNextBOAddOnsPage addOnsPage = new VNextBOAddOnsPage();
         final String addOnStatus = Utils.getText(addOnsPage.getIntegrationStatus(addOn));
         if (addOnStatus.equals(IntegrationStatus.OFF.name())) {
-            Utils.clickElement(addOnsPage.getAddOnsTurnOnButton(addOn));
+            final WebElement addOnsTurnOnButton = addOnsPage.getAddOnsTurnOnButton(addOn);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsTurnOnButton);
+            Utils.clickElement(addOnsTurnOnButton);
             confirmAddOnChange(addOn);
         }
     }
