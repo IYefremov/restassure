@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
+import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -123,6 +124,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
                                                   String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        final String quickNotes = "No damage found";
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
@@ -146,14 +148,14 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
 
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.addRepairOrderNote();
-        NotesSteps.addQuickNote("No damage found");
+        NotesSteps.addQuickNote(quickNotes);
         ScreenNavigationSteps.pressBackButton();
-        NotesSteps.verifyNotePresentInList("No damage found");
+        NotesSteps.verifyNotePresentInList(quickNotes);
         ScreenNavigationSteps.pressBackButton();
 
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.verifyNotePresentInList("No damage found");
+        NotesSteps.verifyNotePresentInList(quickNotes);
         ScreenNavigationSteps.pressBackButton();
         SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
@@ -164,6 +166,9 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
                                                                      String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        WholesailCustomer technician = new WholesailCustomer();
+        technician.setFirstName("111");
+        technician.setLastName("111");
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
@@ -189,7 +194,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         MonitorSteps.openItem(workOrderId);
 
         MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
-        GeneralListSteps.selectListItem("111 111");
+        GeneralListSteps.selectListItem(technician.getFullName());
 
         MonitorSteps.openItem(workOrderId);
 
