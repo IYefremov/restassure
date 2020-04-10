@@ -50,6 +50,97 @@
       }
     }
   ],
+  "testVerifyUserCanCompleteTheOrder": [
+    {
+      "rowID": "testVerifyUserCanCompleteTheOrder.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92386",
+          "testCaseTitle": "Verify the user can complete the order"
+        }
+      ],
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "orderInfoDto": {
+          "vin": "777777"
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanAddTheNoteUsingQuickNotesInputField": [
+    {
+      "rowID": "testVerifyUserCanAddTheNoteUsingQuickNotesInputField.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92378",
+          "testCaseTitle": "Verify user can add the note using 'Quick Notes' input field"
+        }
+      ],
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "orderInfoDto": {
+          "vin": "777777"
+        }
+      }
+    }
+  ],
+  "testVerifyUserCanSelectTechnicianOnTheAssignTechPage": [
+    {
+      "rowID": "testVerifyUserCanSelectTechnicianOnTheAssignTechPage.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92381",
+          "testCaseTitle": "Verify user can select technician on the 'Assign Tech' page"
+        }
+      ],
+      "service": {
+        "serviceName": "olrom",
+        "serviceDefaultTechnician": {
+          "technicianFirstName": "111",
+          "technicianLastName": "111"
+        }
+      },
+      "damageData": {
+        "damageGroupName": "Other",
+        "moneyServices": [
+          {
+            "serviceName": "olrom"
+          },
+          {
+            "serviceName": "Orom_Money_Service"
+          }
+        ]
+      },
+      "monitoring": {
+        "orderInfoDto": {
+          "vin": "777777"
+        }
+      }
+    }
+  ],
   "userCanSetAndResolveProblemOnServiceLevel": [
     {
       "rowID": "userCanSetAndResolveProblemOnServiceLevel.01",

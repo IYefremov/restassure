@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
+import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -16,6 +17,9 @@ import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
+import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
+import com.cyberiansoft.test.vnext.validations.InformationDialogValidations;
+import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import com.cyberiansoft.test.vnext.validations.monitor.RepairOrderInfoValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
@@ -31,6 +35,16 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
     @BeforeClass(description = "Team Monitoring Base Case")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getMonitoringBaseCaseDataPath();
+
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void userCanViewOrderInfoViaEdit(String rowID,
+                                            String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        OrderInfoDto expectedOrderInfo = workOrderData.getMonitoring().getOrderInfoDto();
+
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         inspectionId = InspectionSteps.saveInspection();
@@ -43,14 +57,6 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         AvailableServicesScreenSteps.selectServices(MonitoringDataUtils.getTestSerivceData());
         workOrderId = WorkOrderSteps.saveWorkOrder();
         ScreenNavigationSteps.pressBackButton();
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void userCanViewOrderInfoViaEdit(String rowID,
-                                            String description, JSONObject testData) {
-
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        OrderInfoDto expectedOrderInfo = workOrderData.getMonitoring().getOrderInfoDto();
 
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
@@ -61,6 +67,136 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
         RepairOrderInfoValidations.verifyOrderInfo(expectedOrderInfo);
         WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanCompleteTheOrder(String rowID,
+                                            String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        Employee locationManagerEmployee = new Employee();
+        locationManagerEmployee.setEmployeeFirstName("Oleg");
+        locationManagerEmployee.setEmployeeLastName("Romanchuk");
+        locationManagerEmployee.setEmployeePassword("54321");
+
+        HomeScreenSteps.logOut();
+        GeneralSteps.logIn(locationManagerEmployee);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_WO_MONITOR);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openItem(workOrderId);
+
+
+
+        MonitorSteps.changeLocation("automationMonitoring");
+        /*HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        EditOrderSteps.switchToInfo();
+        expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
+        RepairOrderInfoValidations.verifyOrderInfo(expectedOrderInfo);
+        WizardScreenSteps.saveAction();
+        ScreenNavigationSteps.pressBackButton();*/
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanAddTheNoteUsingQuickNotesInputField(String rowID,
+                                                  String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_WO_MONITOR);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openItem(workOrderId);
+
+        MenuSteps.selectMenuItem(MenuItems.NOTES);
+        NotesSteps.addRepairOrderNote();
+        NotesSteps.addQuickNote("No damage found");
+        ScreenNavigationSteps.pressBackButton();
+        NotesSteps.verifyNotePresentInList("No damage found");
+        ScreenNavigationSteps.pressBackButton();
+
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.NOTES);
+        NotesSteps.verifyNotePresentInList("No damage found");
+        ScreenNavigationSteps.pressBackButton();
+        SearchSteps.searchByText("");
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanSelectTechnicianOnTheAssignTechPage(String rowID,
+                                                                     String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.approveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        InspectionMenuSteps.selectCreateWorkOrder();
+        WorkOrderSteps.createWorkOrder(WorkOrderTypes.AUTOMATION_WO_MONITOR);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServiceGroup(workOrderData.getDamageData().getDamageGroupName());
+        AvailableServicesScreenSteps.selectServices(workOrderData.getDamageData().getMoneyServices());
+        ScreenNavigationSteps.pressBackButton();
+        final String workOrderId = WorkOrderSteps.saveWorkOrder();
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.changeLocation("automationMonitoring");
+        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        InformationDialogValidations.clickStartAndVerifyMessage(VNextAlertMessages.START_REPAIR_ORDER);
+        MonitorSteps.openItem(workOrderId);
+
+        MenuSteps.selectMenuItem(MenuItems.ASSIGN_TECH);
+        GeneralListSteps.selectListItem("111 111");
+
+        MonitorSteps.openItem(workOrderId);
+
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        PhaseScreenValidations.validateServiceTechnician(workOrderData.getServiceData());
+        WizardScreenSteps.saveAction();
+        SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();
     }
 }

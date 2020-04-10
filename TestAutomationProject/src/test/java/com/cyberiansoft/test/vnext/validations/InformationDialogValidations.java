@@ -1,6 +1,8 @@
 package com.cyberiansoft.test.vnext.validations;
 
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 
 public class InformationDialogValidations {
@@ -15,6 +17,7 @@ public class InformationDialogValidations {
         VNextInformationDialog informationDialog = new VNextInformationDialog();
         String msg = informationDialog.clickInformationDialogStartButton();
         Assert.assertEquals(msg, expectedMessage);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
     public static void clickStopAndVerifyMessage(String expectedMessage) {
