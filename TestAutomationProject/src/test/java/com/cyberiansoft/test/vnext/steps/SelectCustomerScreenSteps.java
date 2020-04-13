@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.webelements.CustomersListElement;
+import com.cyberiansoft.test.vnext.webelements.customers.CustomersListElement;
 
 public class SelectCustomerScreenSteps {
 

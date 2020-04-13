@@ -7,7 +7,7 @@ import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
-import com.cyberiansoft.test.vnext.webelements.CustomersListElement;
+import com.cyberiansoft.test.vnext.webelements.customers.CustomersListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
