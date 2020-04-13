@@ -25,7 +25,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestClass {
 
 	@BeforeClass(description = "Wholesale Customers Test Cases")
 	public void beforeClass() {
-		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getWholesailCustomersTestCasesDataPath();
+		JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getWholesaleCustomersTestCasesDataPath();
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

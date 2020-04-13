@@ -3,7 +3,7 @@ package com.cyberiansoft.test.vnextbo.steps.users;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
-import com.cyberiansoft.test.vnext.steps.CustomersScreenSteps;
+import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 
 
 public class CustomerServiceSteps {

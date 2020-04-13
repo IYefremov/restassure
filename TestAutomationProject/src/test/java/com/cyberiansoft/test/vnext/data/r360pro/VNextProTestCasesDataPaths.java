@@ -187,8 +187,12 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("wo.owner.support");
     }
 
-    public String getWholesailCustomersTestCasesDataPath() {
+    public String getWholesaleCustomersTestCasesDataPath() {
         return props.getProperty("wholesale.customers");
+    }
+
+    public String getWholesaleCustomersContactsTestCasesDataPath() {
+        return props.getProperty("wholesale.customers.contacts");
     }
 
     public String getViewInspectionTestCasesDataPath() {

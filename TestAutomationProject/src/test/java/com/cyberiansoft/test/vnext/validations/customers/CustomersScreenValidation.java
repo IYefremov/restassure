@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.validations;
+package com.cyberiansoft.test.vnext.validations.customers;
 
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -21,4 +21,10 @@ public class CustomersScreenValidation {
             Assert.assertFalse(customersScreen.isAddCustomerButtonDisplayed());
     }
 
+    public static void verifyCustomersAreFoundCorrectly(String searchText) {
+
+        Assert.assertTrue(new VNextCustomersScreen().getCustomersListArray().
+                stream().allMatch(customer -> customer.getCustomerFullName().contains(searchText)),
+                "Customers have been found incorrectly by customer name");
+    }
 }
