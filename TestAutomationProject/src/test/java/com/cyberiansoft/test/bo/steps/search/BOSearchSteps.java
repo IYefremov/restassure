@@ -5,7 +5,7 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.pageobjects.webpages.BOSearchPanel;
 import com.cyberiansoft.test.bo.validations.search.SearchValidations;
 
-public class SearchSteps {
+public class BOSearchSteps {
 
     public static void expandSearchTab() {
         final BOSearchPanel searchPanel = new BOSearchPanel();
