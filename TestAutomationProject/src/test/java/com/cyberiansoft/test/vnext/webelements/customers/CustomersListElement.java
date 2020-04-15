@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.webelements;
+package com.cyberiansoft.test.vnext.webelements.customers;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
@@ -9,20 +9,20 @@ import org.openqa.selenium.WebElement;
 @Getter
 public class CustomersListElement implements IWebElement {
     private WebElement rootElement;
-    private String fullNameieldLocator = ".//p[@class='list-item-text list-item-name']";
+    private String fullNameFieldLocator = ".//p[@class='list-item-text list-item-name']";
 
     public CustomersListElement(WebElement rootElement) {
         this.rootElement = rootElement;
     }
 
     public String getCustomerFullName() {
-        return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElement(By.xpath(fullNameieldLocator)).getText().trim());
+        return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElement(By.xpath(fullNameFieldLocator)).getText().trim());
     }
 
     public void selectCustomer() {
-        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(fullNameieldLocator)), true);
+        WaitUtils.elementShouldBeVisible(rootElement.findElement(By.xpath(fullNameFieldLocator)), true);
         WaitUtils.getGeneralFluentWait().until(driver -> {
-            rootElement.findElement(By.xpath(fullNameieldLocator)).click();
+            rootElement.findElement(By.xpath(fullNameFieldLocator)).click();
             return true;
         });
     }

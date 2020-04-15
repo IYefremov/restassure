@@ -77,14 +77,14 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitForPageToBeLoaded() {
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        waitUntilPageIsLoadedWithJs();
+        waitForPendingRequestsToComplete();
         waitForSpinnerToDisappear();
     }
 
     public static void waitForPageToBeLoaded(int timeout) {
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        waitUntilPageIsLoadedWithJs();
+        waitForPendingRequestsToComplete();
         waitForSpinnerToDisappear(timeout);
     }
 
@@ -198,7 +198,7 @@ public class WaitUtilsWebDriver {
 
     public static void waitForDropDownToBeOpened(WebElement dropDown) {
         try {
-            WaitUtilsWebDriver.waitForAttributeToBe(dropDown, "aria-hidden", "false", 2);
+            waitForAttributeToBe(dropDown, "aria-hidden", "false", 2);
         } catch (Exception ignored) {}
     }
 
@@ -267,6 +267,7 @@ public class WaitUtilsWebDriver {
         try {
             return waitForAttributeToContain(element, attribute, value, timeOut);
         } catch (Exception ignored) {
+            ignored.printStackTrace();
             return false;
         }
     }
@@ -358,7 +359,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static boolean elementShouldBeClickable(WebElement element, boolean condition, int timeOut) {
-        final WebDriverWait wait = WaitUtilsWebDriver.getWebDriverWait(timeOut);
+        final WebDriverWait wait = getWebDriverWait(timeOut);
         if (condition) {
             try {
                 wait.until(ExpectedConditions.elementToBeClickable(element));

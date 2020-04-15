@@ -32,5 +32,6 @@ public class BOMenuSteps {
         } else {
             WaitUtilsWebDriver.waitUntilTitleContains(tab.getValue());
         }
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 }

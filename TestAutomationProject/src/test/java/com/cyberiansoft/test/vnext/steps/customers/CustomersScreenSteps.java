@@ -1,17 +1,27 @@
-package com.cyberiansoft.test.vnext.steps;
+package com.cyberiansoft.test.vnext.steps.customers;
 
+import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.screens.VNextNewCustomerScreen;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
+import com.cyberiansoft.test.vnext.steps.MenuSteps;
+import com.cyberiansoft.test.vnext.steps.SearchSteps;
 
 public class CustomersScreenSteps {
 
     public static void selectCustomer(AppCustomer customer) {
         VNextCustomersScreen customersScreen = new VNextCustomersScreen();
         customersScreen.selectCustomer(customer);
+    }
+
+    public static void tapOnCustomer(String companyName) {
+
+        Utils.clickElement(new VNextCustomersScreen()
+                .getCustomersListArray()
+                .stream().filter(customer -> customer.getCustomerFullName().contains(companyName)).findFirst().get().getRootElement());
     }
 
     public static void clickAddCustomerButton() {

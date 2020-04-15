@@ -1,0 +1,63 @@
+{
+
+  "verifyUserCanSearchContacts": [
+    {
+      "rowID": "verifyUserCanSearchContacts.01",
+      "description": "Test Case 92129: User can Search Contacts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92129",
+          "testCaseTitle": "User can Search Contacts"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseTheSearch": [
+    {
+      "rowID": "verifyUserCanCloseTheSearch.01",
+      "description": "Test Case 92130: User can close the \"Search\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92130",
+          "testCaseTitle": "User can close the \"Search\""
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearTheSearchFieldXIcon": [
+    {
+      "rowID": "verifyUserCanClearTheSearchFieldXIcon.01",
+      "description": "Test Case 92131: User can clear the Search field (X-icon)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92131",
+          "testCaseTitle": "User can clear the Search field (X-icon)"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseTheSearchWithFilledSearchField": [
+    {
+      "rowID": "verifyUserCanCloseTheSearchWithFilledSearchField.01",
+      "description": "Test Case 92132: User can close the Search with filled Search field",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92132",
+          "testCaseTitle": "User can close the Search with filled Search field"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanMinimizeDropDownWindowOfNewContactsAdding": [
+    {
+      "rowID": "verifyUserCanMinimizeDropDownWindowOfNewContactsAdding.01",
+      "description": "Test Case 92133: User can minimize drop-down window of New Contacts adding",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92133",
+          "testCaseTitle": "User can minimize drop-down window of New Contacts adding"
+        }
+      ]
+    }
+  ]
+}

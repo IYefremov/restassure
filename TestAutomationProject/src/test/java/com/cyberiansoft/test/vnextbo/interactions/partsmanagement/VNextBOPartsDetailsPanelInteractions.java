@@ -9,6 +9,7 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPa
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -286,9 +287,15 @@ public class VNextBOPartsDetailsPanelInteractions {
     public static void setPartNumber(int order, String partNumber) {
         final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
         final WebElement partInputField = WaitUtilsWebDriver.waitForVisibility(partsDetailsPanel.getPartInputField(order));
-        Utils.clearAndType(partInputField, partNumber);
-        WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(partInputField, "aria-busy", "false");
-        Utils.clickElement(partsDetailsPanel.getPartNumbersTitlesList().get(order));
+        try {
+            Utils.clickElement(partsDetailsPanel.getPartNumberArrowsList().get(order));
+            WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(partInputField, "aria-busy", "false");
+            Utils.selectOptionInDropDownWithJsScroll(partNumber);
+        } catch (Exception e) {
+            Utils.clearAndType(partInputField, partNumber);
+            WaitUtilsWebDriver.waitForAttributeToContainIgnoringException(partInputField, "aria-busy", "false");
+            Utils.clickElement(partsDetailsPanel.getPartNumbersTitlesList().get(order));
+        }
     }
 
     public static void clearPartNumber(int order) {
@@ -303,7 +310,12 @@ public class VNextBOPartsDetailsPanelInteractions {
 
     public static void setStatusForPartByPartNumber(int partNumber, String status) {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getPartStatusFields().get(partNumber));
-        Utils.selectOptionInDropDownWithJsScroll(status);
+        try {
+            Utils.selectOptionInDropDownWithJsScroll(status);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("The status hasn't been set");
+        }
     }
 
     public static void setConditionForPartByPartNumber(int partNumber, String condition) {
@@ -319,6 +331,8 @@ public class VNextBOPartsDetailsPanelInteractions {
     public static void setCoreStatusForPartByPartNumber(int partNumber, String status) {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getPartCoreStatusFields().get(partNumber));
         Utils.selectOptionInDropDownWithJsScroll(status);
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
     }
 
     public static void openCoreStatusDropDown(int partNumber) {

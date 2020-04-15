@@ -1,6 +1,11 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.bo.enums.menu.Menu;
+import com.cyberiansoft.test.bo.enums.menu.SubMenu;
+import com.cyberiansoft.test.bo.steps.company.workordertypes.BOWorkOrderTypeDialogSteps;
+import com.cyberiansoft.test.bo.steps.company.workordertypes.BOWorkOrderTypesPageSteps;
+import com.cyberiansoft.test.bo.steps.menu.BOMenuSteps;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -14,6 +19,7 @@ import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuI
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBORODetailsPartsBlockInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.leftmenupanel.VNextBOLeftMenuSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
@@ -40,6 +46,16 @@ public class VNextBOPMOrderDetailsTestCases extends BaseTestCase {
     @BeforeClass
     public void settingUp() {
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getPMOrderDetailsTD();
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
+        try {
+            VNextBOHomeWebPageSteps.clickLogo();
+            VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
+            BOMenuSteps.open(Menu.COMPANY, SubMenu.WORK_ORDER_TYPES);
+            BOWorkOrderTypesPageSteps.openEditWOTypeDialogByType("01ZalexWO_tp");
+            BOWorkOrderTypeDialogSteps.removeApprovalRequiredOption();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @BeforeMethod
@@ -90,8 +106,6 @@ public class VNextBOPMOrderDetailsTestCases extends BaseTestCase {
                 "The PO# hasn't been set");
     }
 
-    //todo fails, the part# is not saved.
-    //todo BUG: https://cyb.tpondemand.com/restui/board.aspx?#page=bug/117118
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanChangePartForSpecifiedParts(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
@@ -129,6 +143,7 @@ public class VNextBOPMOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
         VNextBOPartsDetailsPanelInteractions.setCoreStatusForPartByPartNumber(0, CoreStatus.RETURN_TO_VENDOR.getStatus());
         VNextBOPartsDetailsPanelValidations.verifyPartCoreStatus(0, CoreStatus.RETURN_TO_VENDOR.getStatus());
         VNextBOPartsDetailsPanelInteractions.setCoreStatusForPartByPartNumber(0, CoreStatus.RTV_COMPLETE.getStatus());

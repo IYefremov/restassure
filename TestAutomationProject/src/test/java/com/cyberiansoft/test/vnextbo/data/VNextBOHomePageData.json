@@ -123,7 +123,7 @@
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91069",
-          "testCaseTitle": "Verify user can see \"Home page\""
+          "testCaseTitle": "User can click on \"Access ReconPro BackOffice\""
         }
       ]
     }

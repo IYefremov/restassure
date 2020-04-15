@@ -36,7 +36,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 	private TextField searchteamlocationfld;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_Input")
-	private ComboBox searchTypeCbx;
+	private ComboBox searchTypeCmb;
 
 	@FindBy(id = "ctl00_ctl00_Content_Main_ctl04_filterer_comboType_DropDown")
 	private DropDown searchTypeDd;
@@ -186,7 +186,7 @@ public class TeamsWebPage extends WebPageWithPagination {
 	}
 
 	public void selectSearchType(String _type) {
-		selectComboboxValue(searchTypeCbx, searchTypeDd, _type);
+		selectComboboxValue(searchTypeCmb, searchTypeDd, _type);
 	}
 
 	public void selectSearchTimeZone(String timezone) {

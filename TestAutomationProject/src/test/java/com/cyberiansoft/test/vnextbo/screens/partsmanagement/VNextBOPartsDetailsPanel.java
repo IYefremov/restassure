@@ -110,6 +110,9 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[contains(@class, 'service-oem-number-combobox') and @role='combobox']")
     private List<WebElement> partNumberInputFields;
 
+    @FindBy(xpath = "//span[contains(@class, 'service-oem-number-combobox')]//span[@aria-label='select']")
+    private List<WebElement> partNumberArrowsList;
+
     @FindBy(xpath = "//div[@class='k-animation-container' and @aria-hidden='false']/div[contains(@class, 'k-list-container')]")
     private WebElement partDropDown;
 
