@@ -1,5 +1,4 @@
 {
-
   "verifyUserCanSearchContacts": [
     {
       "rowID": "verifyUserCanSearchContacts.01",
@@ -56,6 +55,86 @@
         {
           "testCaseID": "92133",
           "testCaseTitle": "User can minimize drop-down window of New Contacts adding"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelAddingCustomerContactsDoNotSave": [
+    {
+      "rowID": "verifyUserCanCancelAddingCustomerContactsDoNotSave.01",
+      "description": "Test Case 92123: User can cancel adding \"Customer Contacts\" (Don't save)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92123",
+          "testCaseTitle": "User can cancel adding \"Customer Contacts\" (Don't save)"
+        }
+      ],
+      "firstName": "Finlandia",
+      "lastName": "Blackurant",
+      "companyName": "Vodka",
+      "email": "finka@kwdnf",
+      "phone": "0987",
+      "address1": "Fin",
+      "address2": "Land",
+      "city": "Reikj",
+      "country": "Peru",
+      "zip": "2345"
+    }
+  ],
+  "verifyUserCanCancelAddingCustomerContactsButSaveChanges": [
+    {
+      "rowID": "verifyUserCanCancelAddingCustomerContactsButSaveChanges.01",
+      "description": "Test Case 92124: User can cancel adding \"Customer Contacts\" but save changes (Save)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92124",
+          "testCaseTitle": "User can cancel adding \"Customer Contacts\" but save changes (Save)"
+        }
+      ],
+      "firstName": "El",
+      "lastName": "Jimador",
+      "companyName": "Tekila",
+      "email": "tek@wen",
+      "phone": "34875",
+      "address1": "Tek",
+      "address2": "Ila",
+      "city": "Mehico",
+      "country": "United States of America",
+      "state": "Connecticut",
+      "zip": "23534"
+    }
+  ],
+  "verifyUserCanAddCustomerContacts": [
+    {
+      "rowID": "verifyUserCanAddCustomerContacts.01",
+      "description": "Test Case 92122: User can add \"Customer Contacts\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92122",
+          "testCaseTitle": "User can add \"Customer Contacts\""
+        }
+      ],
+      "firstName": "Jack",
+      "lastName": "Daniels",
+      "companyName": "Whiskey",
+      "email": "jk@gmail.com",
+      "phone": "123",
+      "address1": "Adr",
+      "address2": "Str",
+      "city": "Gorod",
+      "country": "United States of America",
+      "state": "Colorado",
+      "zip": "123"
+    }
+  ],
+  "verifyUserCanCloseEditCustomerContactsWindow": [
+    {
+      "rowID": "verifyUserCanCloseEditCustomerContactsWindow.01",
+      "description": "Test Case 92126: User can close \"Edit\" Customer's Contacts window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92126",
+          "testCaseTitle": "User can close \"Edit\" Customer's Contacts window"
         }
       ]
     }

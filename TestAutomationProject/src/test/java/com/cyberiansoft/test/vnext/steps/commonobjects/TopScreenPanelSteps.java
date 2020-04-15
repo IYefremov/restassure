@@ -31,6 +31,11 @@ public class TopScreenPanelSteps {
         Utils.clickElement(new VNextTopScreenPanel().getClearSearchIcon());
     }
 
+    public static void saveChanges() {
+
+        Utils.clickElement(new VNextTopScreenPanel().getSaveIcon());
+    }
+
     public static void fillSearchField(String searchText) {
 
         VNextTopScreenPanel topScreenPanel = new VNextTopScreenPanel();

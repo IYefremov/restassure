@@ -18,13 +18,13 @@ public class VNextCustomerContactsScreen extends VNextBaseScreen {
 	private WebElement plusButton;
 
 	@FindBy(xpath="//a[@class='floating-button color-red']/i[@class='icon icon-close']")
-	private WebElement closeButton;
+	private WebElement xIconButton;
 
 	@FindBy(xpath="//div[@data-autotests-id='contacts-list']")
 	private WebElement contactsList;
 
 	@FindBy(xpath="//div[@class='page-content']//div[@class='list-item']")
-	private List<CustomerContactListElement> contactsNamesList;
+	private List<CustomerContactListElement> contactsRecordsList;
 
 	@FindBy(xpath="//a[@action='add_from_device_contact']/span[@class='speed-dial-icon']")
 	private WebElement fromContactsIcon;
@@ -37,6 +37,15 @@ public class VNextCustomerContactsScreen extends VNextBaseScreen {
 
 	@FindBy(xpath="//a[@action='add_customer']/span[@class='speed-dial-label']")
 	private WebElement newContactButton;
+
+	@FindBy(xpath="//div[@data-automation-id='edit']")
+	private WebElement editContactButton;
+
+	@FindBy(xpath="//div[@class='actions-menu-close']")
+	private WebElement closeButton;
+
+	@FindBy(xpath="//div[@class='nothing-found-content-text']")
+	private WebElement nothingFoundMessage;
 
 	public VNextCustomerContactsScreen() {
 		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);

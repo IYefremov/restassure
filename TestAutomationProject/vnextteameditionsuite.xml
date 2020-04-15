@@ -60,7 +60,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitorFocusModeButtonTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextTeamPresetCustomerTestCases"/>
-            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersContactsSearchTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.customers.VNextWholesaleCustomersContactsTestCases"/>
         </classes>
     </test>
 </suite>
