@@ -11,29 +11,29 @@ public class TopScreenPanelSteps {
 
     public static void goToThePreviousScreen() {
 
-        Utils.clickElement(new VNextTopScreenPanel().getBackButton());
+        new VNextTopScreenPanel().getBackButton().click();
     }
 
     public static void openSearchPanel() {
 
         ConditionWaiter.create(__ -> new VNextTopScreenPanel().getSearchButton().isDisplayed()).execute();
         WaitUtilsWebDriver.waitABit(1000);
-        Utils.clickElement(new VNextTopScreenPanel().getSearchButton());
+        new VNextTopScreenPanel().getSearchButton().click();
     }
 
     public static void cancelSearch() {
 
-        Utils.clickElement(new VNextTopScreenPanel().getCancelSearchButton());
+        new VNextTopScreenPanel().getCancelSearchButton().click();
     }
 
     public static void clearSearchField() {
 
-        Utils.clickElement(new VNextTopScreenPanel().getClearSearchIcon());
+        new VNextTopScreenPanel().getClearSearchIcon().click();
     }
 
     public static void saveChanges() {
 
-        Utils.clickElement(new VNextTopScreenPanel().getSaveIcon());
+        new VNextTopScreenPanel().getSaveButton().click();
     }
 
     public static void fillSearchField(String searchText) {

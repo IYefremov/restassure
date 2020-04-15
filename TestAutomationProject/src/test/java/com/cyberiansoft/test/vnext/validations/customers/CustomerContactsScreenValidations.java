@@ -9,7 +9,7 @@ public class CustomerContactsScreenValidations {
 
     public static void verifyPlusButtonIsDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextCustomerContactsScreen().getPlusButton()),
+        Assert.assertTrue(new VNextCustomerContactsScreen().getPlusButton().isDisplayed(),
                 "'Plus' button hasn't been displayed");
     }
 
@@ -29,13 +29,13 @@ public class CustomerContactsScreenValidations {
     public static void verifyXIconButtonIsDisplayed() {
 
         ConditionWaiter.create(__ -> new VNextCustomerContactsScreen().getXIconButton().isDisplayed()).execute();
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextCustomerContactsScreen().getXIconButton()),
+        Assert.assertTrue(new VNextCustomerContactsScreen().getXIconButton().isDisplayed(),
                 "'Close' button hasn't been displayed");
     }
 
     public static void verifyFromContactsIconAndButtonAreDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextCustomerContactsScreen().getFromContactsButton()),
+        Assert.assertTrue(new VNextCustomerContactsScreen().getFromContactsButton().isDisplayed(),
                 "'From contacts' button button hasn't been displayed");
         Assert.assertTrue(Utils.isElementDisplayed(new VNextCustomerContactsScreen().getFromContactsIcon()),
                 "'From contacts' icon button hasn't been displayed");
@@ -43,7 +43,7 @@ public class CustomerContactsScreenValidations {
 
     public static void verifyNewContactIconAndButtonAreDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextCustomerContactsScreen().getNewContactButton()),
+        Assert.assertTrue(new VNextCustomerContactsScreen().getNewContactButton().isDisplayed(),
                 "'New contact' button button hasn't been displayed");
         Assert.assertTrue(Utils.isElementDisplayed(new VNextCustomerContactsScreen().getNewContactIcon()),
                 "'New contact' icon button hasn't been displayed");
@@ -60,13 +60,13 @@ public class CustomerContactsScreenValidations {
     public static void verifyEditButtonIsDisplayed() {
 
         ConditionWaiter.create(__ -> new VNextCustomerContactsScreen().getEditContactButton().isDisplayed()).execute();
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextCustomerContactsScreen().getEditContactButton()),
+        Assert.assertTrue(new VNextCustomerContactsScreen().getEditContactButton().isDisplayed(),
                 "'Edit' contact button hasn't been displayed");
     }
 
     public static void verifyCloseButtonIsDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextCustomerContactsScreen().getCloseButton()),
+        Assert.assertTrue(new VNextCustomerContactsScreen().getCloseButton().isDisplayed(),
                 "'Close' button hasn't been displayed");
     }
 }
