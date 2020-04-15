@@ -11,7 +11,7 @@ public class VNextTopScreenPanelValidations {
 
         ConditionWaiter.create(__ -> !new VNextTopScreenPanel().getBackButton().isDisplayed()).execute();
         ConditionWaiter.create(__ -> new VNextTopScreenPanel().getBackButton().isDisplayed()).execute();
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextTopScreenPanel().getBackButton()),
+        Assert.assertTrue(new VNextTopScreenPanel().getBackButton().isDisplayed(),
                 "'Back' button hasn't been displayed");
     }
 
@@ -23,24 +23,24 @@ public class VNextTopScreenPanelValidations {
 
     public static void verifySearchIconIsDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextTopScreenPanel().getSearchButton()),
+        Assert.assertTrue(new VNextTopScreenPanel().getSearchButton().isDisplayed(),
                 "'Search' button hasn't been displayed");
     }
 
     public static void verifyClearIconIsDisplayed(boolean shouldBeDisplayed) {
 
         if (shouldBeDisplayed)
-            Assert.assertTrue(Utils.isElementDisplayed(new VNextTopScreenPanel().getClearSearchIcon()), "Clear icon hasn't been displayed");
+            Assert.assertTrue(new VNextTopScreenPanel().getClearSearchIcon().isDisplayed(), "Clear icon hasn't been displayed");
         else
-            Assert.assertFalse(Utils.isElementDisplayed(new VNextTopScreenPanel().getClearSearchIcon()), "Clear icon has been displayed");
+            Assert.assertFalse(new VNextTopScreenPanel().getClearSearchIcon().isDisplayed(), "Clear icon has been displayed");
     }
 
     public static void verifyCloseButtonIsDisplayed(boolean shouldBeDisplayed) {
 
         if (shouldBeDisplayed)
-            Assert.assertTrue(Utils.isElementDisplayed(new VNextTopScreenPanel().getCancelSearchButton()), "Close button hasn't been displayed");
+            Assert.assertTrue(new VNextTopScreenPanel().getCancelSearchButton().isDisplayed(), "Close button hasn't been displayed");
         else
-            Assert.assertFalse(Utils.isElementDisplayed(new VNextTopScreenPanel().getCancelSearchButton()), "Close button has been displayed");
+            Assert.assertFalse(new VNextTopScreenPanel().getCancelSearchButton().isDisplayed(), "Close button has been displayed");
     }
 
     public static void verifySearchFieldIsDisplayed(boolean shouldBeDisplayed) {
