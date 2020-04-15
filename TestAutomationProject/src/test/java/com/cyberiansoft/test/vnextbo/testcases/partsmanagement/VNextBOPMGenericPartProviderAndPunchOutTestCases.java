@@ -257,8 +257,8 @@ public class VNextBOPMGenericPartProviderAndPunchOutTestCases extends BaseTestCa
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
         VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
-        BackOfficeMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
-        SubscriptionsWebPageSteps.setNoneModeForSubscriptions(data.getSubscriptions());
+        BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
+        BOSubscriptionsPageSteps.setNoneModeForSubscriptions(data.getSubscriptions());
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
