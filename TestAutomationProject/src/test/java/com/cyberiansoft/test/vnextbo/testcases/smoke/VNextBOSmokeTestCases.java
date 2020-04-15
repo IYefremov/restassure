@@ -16,7 +16,6 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.inspections.VNextBOInspectionsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.leftmenupanel.VNextBOLeftMenuInteractions;
-import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.repairorders.VNextBORODetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.addOns.VNextBOAddOnsPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.clients.VNextBOClientDetailsViewAccordionSteps;
@@ -329,22 +328,23 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
     public void verifyPunchOutFunctionalityIsEnabledByFeatureOnTheAddOnPage(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        final String addOn = "Punch Out Process";
+        final String addOn = data.getAddOnsData().getAddOn();
         VNextBOLeftMenuInteractions.selectAddOnsMenu();
-        final String addOnStatus = VNextBOAddOnsPageSteps.getAddOnStatus(addOn);
+        final String addOnStatus = VNextBOAddOnsPageSteps.getAddOnStatus(data.getAddOnsData().getAddOn());
         if (addOnStatus.equals(IntegrationStatus.ON.name())) {
+
             VNextBOLeftMenuInteractions.selectPartsManagementMenu();
             VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
             VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-            VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(true);
+            VNextBOPartsDetailsPanelSteps.waitForGetQuotesButtonToBeDisplayed(true);
             VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(true);
             VNextBOLeftMenuInteractions.selectAddOnsMenu();
             VNextBOAddOnsPageSteps.turnOffAddOnByName(addOn);
-            VNextBOAddOnsPageSteps.refreshPageWhileAddOnStatusIsChanged(addOn, IntegrationStatus.OFF);
+            VNextBOAddOnsPageSteps.checkAddOnIsChangedToStatus(addOn, IntegrationStatus.OFF);
             VNextBOLeftMenuInteractions.selectPartsManagementMenu();
             VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
             VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-            VNextBOPartsDetailsPanelInteractions.waitForGetQuotesButtonToBeDisplayed(false);
+            VNextBOPartsDetailsPanelSteps.waitForGetQuotesButtonToBeDisplayed(false);
             VNextBOPartsDetailsPanelValidations.verifyGetQuotesButtonIsDisplayed(false);
             VNextBOLeftMenuInteractions.selectAddOnsMenu();
         }

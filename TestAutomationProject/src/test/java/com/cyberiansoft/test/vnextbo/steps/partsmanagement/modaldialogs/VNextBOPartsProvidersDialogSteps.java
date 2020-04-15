@@ -54,6 +54,10 @@ public class VNextBOPartsProvidersDialogSteps {
                 .collect(Collectors.toList());
     }
 
+    public static int getOptionsListSize() {
+        return new VNextBOPartsProvidersDialog().getOptionsList().size();
+    }
+
     public static List<String> getProvidersList() {
         final List<String> providers = Utils.getText(new VNextBOPartsProvidersDialog().getOptionsList());
         providers.forEach(System.out::println);

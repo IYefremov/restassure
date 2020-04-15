@@ -17,7 +17,7 @@ import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class VNextBOClientsSearchTests extends BaseTestCase {
+public class VNextBOClientsSearchBlockTests extends BaseTestCase {
 
     @BeforeClass
     public void settingUp() {

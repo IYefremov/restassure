@@ -78,6 +78,14 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.parts.management.order.details.td");
     }
 
+    public String getPMWithTurnedOnPunchOutAddOnTD() {
+        return properties.getProperty("vnextbo.parts.management.with.turned.on.punchout.addon.td");
+    }
+
+    public String getPMWithTurnedOffPunchOutAddOnTD() {
+        return properties.getProperty("vnextbo.parts.management.with.turned.off.punchout.addon.td");
+    }
+
     public String getPMAddNewPartTD() {
         return properties.getProperty("vnextbo.parts.management.add.new.part.td");
     }

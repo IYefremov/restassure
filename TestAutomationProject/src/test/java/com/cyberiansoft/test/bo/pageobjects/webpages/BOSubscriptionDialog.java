@@ -1,7 +1,7 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.bo.pageobjects.webpages.dialogs.BODialog;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
-import com.cyberiansoft.test.driverutils.DriverBuilder;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 @Getter
-public class SubscriptionDialog extends BaseWebPage {
+public class BOSubscriptionDialog extends BODialog {
 
     @FindBy(xpath="//td[@class='ModalDialog']//div[contains(text(), 'Subscribtion')]")
     private WebElement subscriptionDialog;
@@ -17,11 +17,8 @@ public class SubscriptionDialog extends BaseWebPage {
     @FindBy(id="ctl00_ctl00_Content_Main_ctl01_ctl01_Card_rblMode")
     private WebElement modeBlock;
 
-    @FindBy(id="ctl00_ctl00_Content_Main_ctl01_ctl02_BtnOk")
-    private WebElement okButton;
-
-    public SubscriptionDialog() {
-        super(DriverBuilder.getInstance().getDriver());
+    public BOSubscriptionDialog() {
+        super();
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
     }
 

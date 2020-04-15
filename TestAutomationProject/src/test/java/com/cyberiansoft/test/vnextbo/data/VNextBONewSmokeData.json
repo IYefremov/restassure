@@ -413,6 +413,9 @@
       "location": "Best Location Automation",
       "searchData": {
         "woNum": "O-000-152414"
+      },
+      "addOnsData": {
+        "addOn": "Punch Out Process"
       }
     }
   ]

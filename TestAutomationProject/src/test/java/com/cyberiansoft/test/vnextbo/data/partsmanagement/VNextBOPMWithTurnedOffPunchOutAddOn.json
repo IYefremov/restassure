@@ -1,0 +1,50 @@
+{
+  "verifyProviderDropDownIsEnabledIfGetQuotesButtonIsNotAvailable": [
+    {
+      "rowID": "verifyProviderDropDownIsEnabledIfGetQuotesButtonIsNotAvailable.01",
+      "description": "Test Case 119338:Verify if 'Get Quotes' button isn't available then Provider dropdown is enabled",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "119338"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-163-00092"
+      },
+      "addOnsData": {
+        "addOn": "Punch Out Process"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ]
+    }
+  ],
+  "verifyAllGenericPunchoutPartProvidersWithNATeamTypeHaveTheSameLocationsOrAreaAsSelectedRO": [
+    {
+      "rowID": "verifyAllGenericPunchoutPartProvidersWithNATeamTypeHaveTheSameLocationsOrAreaAsSelectedRO.01",
+      "description": "Test Case 119341:Verify generic/punchout part providers that have type N/A in Team settings are shown (\"Get Qoutes\" button is disabled). Generic providers have the same repair locations or have the same Area as selected Repair Order",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "119341"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "addOnsData": {
+        "addOn": "Punch Out Process"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "areaLocationData": {
+        "area": "Anastasia_Area",
+        "provider": "N/A"
+      }
+    }
+  ]
+}

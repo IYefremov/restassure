@@ -28,13 +28,13 @@ public class WebPageWithFilter extends WebPageWithPagination {
     private ComboBox searchBillingCmb;
 
     @FindBy(xpath = "//div[contains(@id, 'filterer_ddlPORequired_DropDown')]")
-    private DropDown searchBillingDropDown;
+    private DropDown searchBillingDd;
 
     @FindBy(xpath = "//input[contains(@id, 'filterer_txtInvoiceNo')]")
     private TextField invoiceField;
 
     public WebPageWithFilter selectBillingOption(WebConstants.BillingValues billingValues) {
-        selectComboboxValue(searchBillingCmb, searchBillingDropDown, billingValues.getName());
+        selectComboboxValue(searchBillingCmb, searchBillingDd, billingValues.getName());
         return this;
     }
 
