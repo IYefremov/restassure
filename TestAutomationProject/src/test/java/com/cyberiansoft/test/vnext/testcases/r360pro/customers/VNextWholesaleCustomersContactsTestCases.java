@@ -26,6 +26,7 @@ import org.testng.annotations.Test;
 public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
     final String TEST_CONTACT_NAME = "Test1 Test1";
+    private static final String PRECONDITIONS_FILE = "src/test/java/com/cyberiansoft/test/vnext/data/r360pro/customers/wholesale-customers-contact-base-data.json";
 
     @BeforeClass(description = "Wholesale Customers Contacts search Test Cases")
     public void beforeClass() {
@@ -62,8 +63,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseTheSearch(String rowID, String description, JSONObject testData) {
 
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
         CustomerOptionsScreenSteps.openCustomerContacts();
         TopScreenPanelSteps.openSearchPanel();
@@ -76,12 +76,10 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanClearTheSearchFieldXIcon(String rowID, String description, JSONObject testData) {
 
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
         CustomerOptionsScreenSteps.openCustomerContacts();
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(TEST_CONTACT_NAME);
+        TopScreenPanelSteps.searchData(TEST_CONTACT_NAME);
         TopScreenPanelSteps.clearSearchField();
         VNextTopScreenPanelValidations.verifySearchFieldContainsCorrectValue("");
         TopScreenPanelSteps.cancelSearch();
@@ -91,12 +89,10 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseTheSearchWithFilledSearchField(String rowID, String description, JSONObject testData) {
 
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
         CustomerOptionsScreenSteps.openCustomerContacts();
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(TEST_CONTACT_NAME);
+        TopScreenPanelSteps.searchData(TEST_CONTACT_NAME);
         TopScreenPanelSteps.cancelSearch();
         CustomerContactsScreenValidations.verifyContactsWereFoundCorrectlyByName(TEST_CONTACT_NAME);
         TopScreenPanelSteps.goToThePreviousScreen();
@@ -105,8 +101,7 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanMinimizeDropDownWindowOfNewContactsAdding(String rowID, String description, JSONObject testData) {
 
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
         CustomerOptionsScreenSteps.openCustomerContacts();
         CustomerContactsScreenSteps.clickPlusButton();
@@ -122,18 +117,16 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
         CustomerContact contactData = JSonDataParser.getTestDataFromJson(testData, CustomerContact.class);
         contactData.setLastName(contactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
         CustomerOptionsScreenSteps.openCustomerContacts();
         CustomerContactsScreenSteps.clickPlusButton();
         CustomerContactsScreenSteps.clickNewContactButton();
         NewContactScreenSteps.setAllContactData(contactData);
-        NewContactScreenValidations.verifyAllCustomerDataIsCorrect(contactData);
+        NewContactScreenValidations.verifyAllContactDataIsCorrect(contactData);
         TopScreenPanelSteps.goToThePreviousScreen();
         WarningDialogSteps.clickDontSaveButton();
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(contactData.getLastName());
+        TopScreenPanelSteps.searchData(contactData.getLastName());
         CustomerContactsScreenValidations.verifyNotFoundMessageIsDisplayed();
         TopScreenPanelSteps.cancelSearch();
         TopScreenPanelSteps.goToThePreviousScreen();
@@ -144,18 +137,16 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
         CustomerContact contactData = JSonDataParser.getTestDataFromJson(testData, CustomerContact.class);
         contactData.setLastName(contactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
         CustomerOptionsScreenSteps.openCustomerContacts();
         CustomerContactsScreenSteps.clickPlusButton();
         CustomerContactsScreenSteps.clickNewContactButton();
         NewContactScreenSteps.setAllContactData(contactData);
-        NewContactScreenValidations.verifyAllCustomerDataIsCorrect(contactData);
+        NewContactScreenValidations.verifyAllContactDataIsCorrect(contactData);
         TopScreenPanelSteps.goToThePreviousScreen();
         WarningDialogSteps.clickSaveButton();
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(contactData.getLastName());
+        TopScreenPanelSteps.searchData(contactData.getLastName());
         CustomerContactsScreenValidations.verifyContactsWereFoundCorrectlyByName(contactData.getLastName());
         TopScreenPanelSteps.cancelSearch();
         TopScreenPanelSteps.goToThePreviousScreen();
@@ -166,17 +157,15 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
 
         CustomerContact contactData = JSonDataParser.getTestDataFromJson(testData, CustomerContact.class);
         contactData.setLastName(contactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
         CustomerOptionsScreenSteps.openCustomerContacts();
         CustomerContactsScreenSteps.clickPlusButton();
         CustomerContactsScreenSteps.clickNewContactButton();
         NewContactScreenSteps.setAllContactData(contactData);
-        NewContactScreenValidations.verifyAllCustomerDataIsCorrect(contactData);
+        NewContactScreenValidations.verifyAllContactDataIsCorrect(contactData);
         TopScreenPanelSteps.saveChanges();
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(contactData.getLastName());
+        TopScreenPanelSteps.searchData(contactData.getLastName());
         CustomerContactsScreenValidations.verifyContactsWereFoundCorrectlyByName(contactData.getLastName());
         TopScreenPanelSteps.cancelSearch();
         TopScreenPanelSteps.goToThePreviousScreen();
@@ -185,18 +174,92 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanCloseEditCustomerContactsWindow(String rowID, String description, JSONObject testData) {
 
-        CustomerContact contactData = JSonDataParser.getTestDataFromJson(testData, CustomerContact.class);
-        contactData.setLastName(contactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(testwholesailcustomer.getCompany());
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
         CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
         CustomerOptionsScreenSteps.openCustomerContacts();
-        TopScreenPanelSteps.openSearchPanel();
-        TopScreenPanelSteps.fillSearchField(TEST_CONTACT_NAME);
+        TopScreenPanelSteps.searchData(TEST_CONTACT_NAME);
         CustomerContactsScreenSteps.tapOnFirstContact();
         CustomerContactsScreenValidations.verifyEditButtonIsDisplayed();
         CustomerContactsScreenValidations.verifyCloseButtonIsDisplayed();
         CustomerContactsScreenSteps.clickCloseButton();
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanEditCustomerContacts(String rowID, String description, JSONObject testData) throws Exception {
+
+        CustomerContact baseContact = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITIONS_FILE), CustomerContact.class);
+        CustomerContact editedContactData = JSonDataParser.getTestDataFromJson(testData, CustomerContact.class);
+        baseContact.setLastName(baseContact.getLastName() + RandomStringUtils.randomAlphanumeric(5));
+        editedContactData.setLastName(editedContactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.addNewContact(baseContact);
+        TopScreenPanelSteps.searchData(baseContact.getLastName());
+        CustomerContactsScreenSteps.tapOnFirstContact();
+        CustomerContactsScreenSteps.clickEditContactButton();
+        NewContactScreenSteps.setAllContactData(editedContactData);
+        NewContactScreenValidations.verifyAllContactDataIsCorrect(editedContactData);
+        TopScreenPanelSteps.saveChanges();
+        TopScreenPanelSteps.searchData(editedContactData.getLastName());
+        CustomerContactsScreenValidations.verifyContactsWereFoundCorrectlyByName(editedContactData.getLastName());
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.searchData(baseContact.getLastName());
+        CustomerContactsScreenValidations.verifyNotFoundMessageIsDisplayed();
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCancelEditingCustomerContactDontSave(String rowID, String description, JSONObject testData) throws Exception {
+
+        CustomerContact baseContact = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITIONS_FILE), CustomerContact.class);
+        CustomerContact editedContactData = JSonDataParser.getTestDataFromJson(testData, CustomerContact.class);
+        baseContact.setLastName(baseContact.getLastName() + RandomStringUtils.randomAlphanumeric(5));
+        editedContactData.setLastName(editedContactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.addNewContact(baseContact);
+        TopScreenPanelSteps.searchData(baseContact.getLastName());
+        CustomerContactsScreenSteps.tapOnFirstContact();
+        CustomerContactsScreenSteps.clickEditContactButton();
+        NewContactScreenSteps.setAllContactData(editedContactData);
+        TopScreenPanelSteps.goToThePreviousScreen();
+        WarningDialogSteps.clickDontSaveButton();
+        TopScreenPanelSteps.searchData(editedContactData.getLastName());
+        CustomerContactsScreenValidations.verifyNotFoundMessageIsDisplayed();
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.searchData(baseContact.getLastName());
+        CustomerContactsScreenValidations.verifyContactsWereFoundCorrectlyByName(baseContact.getLastName());
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCancelEditingCustomerContactSave(String rowID, String description, JSONObject testData) throws Exception {
+
+        CustomerContact baseContact = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITIONS_FILE), CustomerContact.class);
+        CustomerContact editedContactData = JSonDataParser.getTestDataFromJson(testData, CustomerContact.class);
+        baseContact.setLastName(baseContact.getLastName() + RandomStringUtils.randomAlphanumeric(5));
+        editedContactData.setLastName(editedContactData.getLastName() + RandomStringUtils.randomAlphanumeric(5));
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.addNewContact(baseContact);
+        TopScreenPanelSteps.searchData(baseContact.getLastName());
+        CustomerContactsScreenSteps.tapOnFirstContact();
+        CustomerContactsScreenSteps.clickEditContactButton();
+        NewContactScreenSteps.setAllContactData(editedContactData);
+        TopScreenPanelSteps.goToThePreviousScreen();
+        WarningDialogSteps.clickSaveButton();
+        TopScreenPanelSteps.searchData(editedContactData.getLastName());
+        CustomerContactsScreenValidations.verifyContactsWereFoundCorrectlyByName(editedContactData.getLastName());
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.searchData(baseContact.getLastName());
+        CustomerContactsScreenValidations.verifyNotFoundMessageIsDisplayed();
         TopScreenPanelSteps.cancelSearch();
         TopScreenPanelSteps.goToThePreviousScreen();
     }
