@@ -20,6 +20,9 @@ public class VNextBOPartsProvidersDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@id='parts-providers-modal']//button[@aria-label='Close']")
     private WebElement closeButton;
 
+    @FindBy(xpath = "//div[@class='notification__message']")
+    private WebElement notificationMessage;
+
     @FindBy(xpath = "//div[contains(@data-bind, 'withProviderName')]")
     private List<WebElement> providerNamesList;
 

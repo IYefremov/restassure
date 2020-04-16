@@ -384,6 +384,10 @@ public class VNextBOPartsDetailsPanelSteps {
                 .orElse(0);
     }
 
+    public static void waitForGetQuotesButtonToBeDisplayed(boolean expected) {
+        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getGetQuotesButton(), expected, 3);
+    }
+
     public static void setNewRandomValuesForThePart(VNextBOPartsManagementData data, int order) {
         final String vendorPrice = VNextBOPartsDetailsPanelInteractions.setVendorPrice(order);
         VNextBOPartsDetailsPanelValidations.verifyPartVendorPrice(order, vendorPrice);

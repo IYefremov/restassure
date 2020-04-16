@@ -3,11 +3,11 @@ package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.enums.menu.Menu;
 import com.cyberiansoft.test.bo.enums.menu.SubMenu;
-import com.cyberiansoft.test.bo.steps.company.teams.BOTeamsPageSteps;
 import com.cyberiansoft.test.bo.steps.company.teams.BOTeamsSearchSteps;
+import com.cyberiansoft.test.bo.steps.company.teams.BOTeamsTableSteps;
 import com.cyberiansoft.test.bo.steps.menu.BOMenuSteps;
 import com.cyberiansoft.test.bo.steps.search.BOSearchSteps;
-import com.cyberiansoft.test.bo.steps.superuser.subscriptions.BOSubscriptionsWebPageSteps;
+import com.cyberiansoft.test.bo.steps.superuser.subscriptions.BOSubscriptionsPageSteps;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
@@ -258,7 +258,7 @@ public class VNextBOPMGenericPartProviderAndPunchOutTestCases extends BaseTestCa
 
         VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
         BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
-        BOSubscriptionsWebPageSteps.setNoneModeForSubscriptions(data.getSubscriptions());
+        BOSubscriptionsPageSteps.setNoneModeForSubscriptions(data.getSubscriptions());
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
@@ -275,12 +275,13 @@ public class VNextBOPMGenericPartProviderAndPunchOutTestCases extends BaseTestCa
 
         VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
         BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
-        BOSubscriptionsWebPageSteps.setFullModeForSubscriptions(data.getSubscriptions());
+        BOSubscriptionsPageSteps.setFullModeForSubscriptions(data.getSubscriptions());
         BOMenuSteps.open(Menu.COMPANY, SubMenu.TEAMS);
         BOSearchSteps.expandSearchTab();
         BOTeamsSearchSteps.selectSearchType("Part Provider");
         BOSearchSteps.search();
-        final List<String> teamsList = BOTeamsPageSteps.getTeamsList();
+        final List<String> teamsList = BOTeamsTableSteps.getValuesListByColumnName("Team");
+        teamsList.forEach(System.out::println);
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());

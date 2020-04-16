@@ -8,4 +8,5 @@ public class VNextBOAlertMessages {
     public static String USE_VALID_EMAIL = "Please use a valid email address";
     public static String USE_VALID_PHONE = "Please use a valid phone number";
     public static String MARK_PART_AS_RECEIVED = "The Part Provider interface is not configured. Would you like to mark this part as received?";
+    public static String NO_PART_PROVIDER = "No part provider has been configured for the given repair location or area";
 }

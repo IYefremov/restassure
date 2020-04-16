@@ -2,23 +2,23 @@ package com.cyberiansoft.test.bo.steps.superuser.subscriptions;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SubscriptionDialog;
-import com.cyberiansoft.test.bo.pageobjects.webpages.SubscriptionsWebPage;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BOSubscriptionDialog;
+import com.cyberiansoft.test.bo.pageobjects.webpages.BOSubscriptionsPage;
 import org.openqa.selenium.WebElement;
 
 import java.util.Arrays;
 
-public class BOSubscriptionsWebPageSteps {
+public class BOSubscriptionsPageSteps {
 
     public static void openEditDialogForSubscription(String name) {
-        Utils.clickElement(new SubscriptionsWebPage().getEditButtonBySubscriptionName(name));
+        Utils.clickElement(new BOSubscriptionsPage().getEditButtonBySubscriptionName(name));
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.elementShouldBeVisible(new SubscriptionDialog().getSubscriptionDialog(), true, 10);
+        WaitUtilsWebDriver.elementShouldBeVisible(new BOSubscriptionDialog().getSubscriptionDialog(), true, 10);
     }
 
     private static void setMode(WebElement mode) {
-        final SubscriptionDialog dialog = new SubscriptionDialog();
+        final BOSubscriptionDialog dialog = new BOSubscriptionDialog();
         WaitUtilsWebDriver.elementShouldBeClickable(mode, true, 10);
         Utils.clickElement(mode);
         WaitUtilsWebDriver.waitABit(1000);
@@ -29,11 +29,11 @@ public class BOSubscriptionsWebPageSteps {
     }
 
     public static void setFullMode() {
-        setMode(new SubscriptionDialog().getFullMode());
+        setMode(new BOSubscriptionDialog().getFullMode());
     }
 
     public static void setNoneMode() {
-        setMode(new SubscriptionDialog().getNoneMode());
+        setMode(new BOSubscriptionDialog().getNoneMode());
     }
 
     public static void setNoneModeForSubscriptions(String ...subscriptions) {

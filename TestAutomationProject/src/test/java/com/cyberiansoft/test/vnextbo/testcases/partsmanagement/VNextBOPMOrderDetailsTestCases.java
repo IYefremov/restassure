@@ -91,7 +91,8 @@ public class VNextBOPMOrderDetailsTestCases extends BaseTestCase {
                 });
         Utils.openTab(pmWindow);
         VNextBOPartsDetailsPanelSteps.deleteServicesByStatus(PartStatus.AUDITED.getStatus());
-        Utils.closeAllNewWindowsExceptParentTab(pmWindow);    }
+        Utils.closeAllNewWindowsExceptParentTab(pmWindow);
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyThePONumberFieldIsDisplayedAndEditableOnThePMPage(String rowID, String description, JSONObject testData) {

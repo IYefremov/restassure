@@ -42,10 +42,6 @@ public class VNextBOPartsDetailsPanelInteractions {
         VNextBOPartsProvidersDialogInteractions.waitForPartsProvidersModalDialogToBeOpened();
     }
 
-    public static void waitForGetQuotesButtonToBeDisplayed(boolean expected) {
-        WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getGetQuotesButton(), expected, 3);
-    }
-
     public static void setPoByStatusIfEmpty(String status) {
         new VNextBOPartsDetailsPanel().getPoInputFieldsByStatus(status).forEach(po -> {
             if (Utils.getInputFieldValue(po, 2).isEmpty()) {

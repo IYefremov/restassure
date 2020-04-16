@@ -434,7 +434,7 @@ public class BackOfficeMonitorTestCases extends BaseTestCase {
 		activeVechicleByPhasePage.clickPhasesInRow();
 		activeVechicleByPhasePage.clickFindButton();
 		Assert.assertTrue(activeVechicleByPhasePage.checkThatAllPhasesAreInStatus("PDR Station", "Active"));
-		SubscriptionsWebPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
+		BOSubscriptionsPage subscriptionsPege = activeVechicleByPhasePage.clickSubscriptionsButton();
 		Assert.assertTrue(subscriptionsPege.checkGrid());
 		subscriptionsPege.clickAddButton();
 		Assert.assertTrue(subscriptionsPege.checkAddPopUpContent());

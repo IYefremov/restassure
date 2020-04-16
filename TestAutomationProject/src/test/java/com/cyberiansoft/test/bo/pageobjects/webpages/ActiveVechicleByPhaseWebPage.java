@@ -190,14 +190,14 @@ public class ActiveVechicleByPhaseWebPage extends BaseWebPage {
 		return true;
 	}
 
-	public SubscriptionsWebPage clickSubscriptionsButton() throws InterruptedException {
+	public BOSubscriptionsPage clickSubscriptionsButton() throws InterruptedException {
 		String mainWindow = driver.getWindowHandle();
 		subscriptionsBTN.click();
 		Thread.sleep(1500);
 		for (String window : driver.getWindowHandles()) {
 			if (!window.equals(mainWindow)) {
 				driver.switchTo().window(window);
-				return PageFactory.initElements(driver, SubscriptionsWebPage.class);
+				return PageFactory.initElements(driver, BOSubscriptionsPage.class);
 			}
 		}
 		return null;

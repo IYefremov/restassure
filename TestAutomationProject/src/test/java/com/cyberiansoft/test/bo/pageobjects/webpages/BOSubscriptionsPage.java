@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class SubscriptionsWebPage extends BaseWebPage {
+public class BOSubscriptionsPage extends BaseWebPage {
 
 	@FindBy(id = "ctl00_Content_gv_ctl00_ctl02_ctl00_lbInsert")
 	WebElement addButton;
@@ -30,12 +30,12 @@ public class SubscriptionsWebPage extends BaseWebPage {
 	@FindBy(id="ctl00_Content_ctl01_ctl01_Card_rtpStartTime_dateInput")
 	WebElement startTimeField;
 
-	public SubscriptionsWebPage(WebDriver driver) {
+	public BOSubscriptionsPage(WebDriver driver) {
 		super(driver);
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}
 
-	public SubscriptionsWebPage() {
+	public BOSubscriptionsPage() {
 		super(DriverBuilder.getInstance().getDriver());
 		PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
 	}

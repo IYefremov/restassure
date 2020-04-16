@@ -6,6 +6,8 @@ import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsOrdersL
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import java.util.List;
+
 public class VNextBOPartsOrdersListPanelSteps {
 
     public static void openPartOrderDetailsByNumberInList(int orderNumberInList) {
@@ -21,5 +23,9 @@ public class VNextBOPartsOrdersListPanelSteps {
             Utils.clickElement(order);
             WaitUtilsWebDriver.waitForPageToBeLoaded(3);
         }
+    }
+
+    public static List<String> getCustomerNamesListOptions() {
+        return Utils.getText(new VNextBOPartsOrdersListPanel().getCustomerNamesListOptions());
     }
 }
