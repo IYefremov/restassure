@@ -73,7 +73,7 @@ public class NewContactScreenValidations {
                 "'ZIP' field has contained incorrect value");
     }
 
-    public static void verifyAllCustomerDataIsCorrect(CustomerContact contact) {
+    public static void verifyAllContactDataIsCorrect(CustomerContact contact) {
 
         verifyFirstNameFieldContainsCorrectValue(contact.getFirstName());
         verifyLastNameFieldContainsCorrectValue(contact.getLastName());

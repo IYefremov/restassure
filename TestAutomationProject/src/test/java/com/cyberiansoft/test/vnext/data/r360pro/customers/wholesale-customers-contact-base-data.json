@@ -1,0 +1,13 @@
+{
+  "firstName": "Auto",
+  "lastName": "Test",
+  "companyName": "TestTeam",
+  "email": "auto@gmail.com",
+  "phone": "9808343",
+  "address1": "Office1",
+  "address2": "Office2",
+  "city": "New York",
+  "country": "United States of America",
+  "state": "Colorado",
+  "zip": "888888"
+}

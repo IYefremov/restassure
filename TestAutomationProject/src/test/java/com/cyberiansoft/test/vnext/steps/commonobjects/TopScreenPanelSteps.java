@@ -44,4 +44,12 @@ public class TopScreenPanelSteps {
         topScreenPanel.getSearchField().sendKeys(searchText);
         BaseUtils.waitABit(1000);
     }
+
+    public static void searchData(String searchText) {
+
+        TopScreenPanelSteps.openSearchPanel();
+        if (new VNextTopScreenPanel().getClearSearchIcon().isDisplayed())
+            TopScreenPanelSteps.clearSearchField();
+        TopScreenPanelSteps.fillSearchField(searchText);
+    }
 }

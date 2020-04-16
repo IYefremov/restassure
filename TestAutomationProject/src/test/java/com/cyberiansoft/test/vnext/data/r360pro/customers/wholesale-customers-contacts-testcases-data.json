@@ -138,5 +138,74 @@
         }
       ]
     }
+  ],
+  "verifyUserCanEditCustomerContacts": [
+    {
+      "rowID": "verifyUserCanEditCustomerContacts.01",
+      "description": "Test Case 92125: User can edit Customer's Contacts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92125",
+          "testCaseTitle": "User can edit Customer's Contacts"
+        }
+      ],
+      "firstName": "Johny",
+      "lastName": "Walker",
+      "companyName": "Scotch",
+      "email": "walker@gmail.com",
+      "phone": "3463",
+      "address1": "Asgaard",
+      "address2": "Tor",
+      "city": "Selo",
+      "country": "Canada",
+      "state": "Alberta",
+      "zip": "776"
+    }
+  ],
+  "verifyUserCanCancelEditingCustomerContactDontSave": [
+    {
+      "rowID": "verifyUserCanCancelEditingCustomerContactDontSave.01",
+      "description": "Test Case 92127: User can cancel editing Customer's Contacts (Don't save)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92127",
+          "testCaseTitle": "User can cancel editing Customer's Contacts (Don't save)"
+        }
+      ],
+      "firstName": "Gordon",
+      "lastName": "Fizz",
+      "companyName": "Gin",
+      "email": "gin@jdfn",
+      "phone": "3645",
+      "address1": "Gin",
+      "address2": "Fizz",
+      "city": "City",
+      "country": "Australia",
+      "state": "Tasmania",
+      "zip": "457657"
+    }
+  ],
+  "verifyUserCanCancelEditingCustomerContactSave": [
+    {
+      "rowID": "verifyUserCanCancelEditingCustomerContactDontSave.01",
+      "description": "Test Case 92128: User can cancel editing Customer's Contacts but save changes (Save)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92128",
+          "testCaseTitle": "User can cancel editing Customer's Contacts but save changes (Save)"
+        }
+      ],
+      "firstName": "Cinzano",
+      "lastName": "Bianco",
+      "companyName": "Vermouth",
+      "email": "verm@dk",
+      "phone": "7364",
+      "address1": "Ver",
+      "address2": "Mut",
+      "city": "Milan",
+      "country": "Canada",
+      "state": "Quebec",
+      "zip": "12334"
+    }
   ]
 }
