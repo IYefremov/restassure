@@ -64,9 +64,9 @@ public class BaseTestClass {
     }
 
     @BeforeSuite
-    public void beforeSuite() {
+    @Parameters({"lic.name"})
+    public void beforeSuite(String licenseName) {
 
-        String licenseName = "OKramar_android3";
         Optional<String> testCaseIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         //Optional<String> testCaseIdFromMaven = Optional.ofNullable("97261");
         if (testCaseIdFromMaven.isPresent()) {
@@ -133,7 +133,7 @@ public class BaseTestClass {
 
         String regCode = activeDevicesWebPage.getFirstRegCodeInTable();
         DriverBuilder.getInstance().getDriver().quit();
-       // chromeDriver.quit();
+        // chromeDriver.quit();
         return regCode;
     }
 }

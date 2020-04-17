@@ -87,4 +87,29 @@ public class NewContactScreenValidations {
         if (contact.getState() != null) verifyStateFieldContainsCorrectValue(contact.getState());
         verifyZipFieldContainsCorrectValue(contact.getZip());
     }
+
+    public static void verifyCountriesScreenIsOpened() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextNewContactScreen().getCountriesScreen()),
+                "Countries screen hasn't been opened");
+    }
+
+    public static void verifyNewContactScreenIsOpened() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextNewContactScreen().getNewContactScreen()),
+                "New Contact screen hasn't been opened");
+    }
+
+    public static void verifyCountriesAreFoundCorrectly(String searchText) {
+
+        Assert.assertTrue(new VNextNewContactScreen().getCountriesRecordsList().
+                        stream().allMatch(country -> country.getCountryName().contains(searchText)),
+                "Countries have been found incorrectly");
+    }
+
+    public static void verifyAllCountriesAreDisplayed() {
+
+        Assert.assertEquals(new VNextNewContactScreen().getCountriesRecordsList().size(), 137,
+                "Not all countries have been displayed");
+    }
 }

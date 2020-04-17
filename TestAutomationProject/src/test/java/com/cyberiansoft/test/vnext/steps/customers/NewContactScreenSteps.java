@@ -110,4 +110,9 @@ public class NewContactScreenSteps {
         if (contact.getState() != null) setState(contact.getState());
         setZip(contact.getZip());
     }
+
+    public static void openCountrySearchPage() {
+
+        Utils.clickElement(new VNextNewContactScreen().getCountryField());
+    }
 }
