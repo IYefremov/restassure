@@ -207,5 +207,53 @@
       "state": "Quebec",
       "zip": "12334"
     }
+  ],
+  "verifyUserCanReturnBackFromCountriesPage": [
+    {
+      "rowID": "verifyUserCanReturnBackFromCountriesPage.01",
+      "description": "Test Case 92140: User can return back from \"Countries\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92140",
+          "testCaseTitle": "User can return back from \"Countries\" page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchCountriesUsingSearch": [
+    {
+      "rowID": "verifyUserCanSearchCountriesUsingSearch.01",
+      "description": "Test Case 92143: User can search Countries using Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92143",
+          "testCaseTitle": "User can search Countries using Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseFilledCountrySearch": [
+    {
+      "rowID": "verifyUserCanCloseFilledCountrySearch.01",
+      "description": "Test Case 92144: User can close filled Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92144",
+          "testCaseTitle": "User can close filled Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearCountriesSearch": [
+    {
+      "rowID": "verifyUserCanClearCountriesSearch.01",
+      "description": "Test Case 92145: User can clear the Countrie's Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92145",
+          "testCaseTitle": "User can clear the Countrie's Search"
+        }
+      ]
+    }
   ]
 }

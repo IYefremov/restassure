@@ -263,4 +263,81 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         TopScreenPanelSteps.cancelSearch();
         TopScreenPanelSteps.goToThePreviousScreen();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanReturnBackFromCountriesPage(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenSteps.openCountrySearchPage();
+        NewContactScreenValidations.verifyCountriesScreenIsOpened();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        NewContactScreenValidations.verifyNewContactScreenIsOpened();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSearchCountriesUsingSearch(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenSteps.openCountrySearchPage();
+        TopScreenPanelSteps.openSearchPanel();
+        TopScreenPanelSteps.fillSearchField("Gree");
+        NewContactScreenValidations.verifyCountriesAreFoundCorrectly("Gree");
+        TopScreenPanelSteps.clearSearchField();
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCloseFilledCountrySearch(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenSteps.openCountrySearchPage();
+        TopScreenPanelSteps.openSearchPanel();
+        TopScreenPanelSteps.fillSearchField("Gree");
+        TopScreenPanelSteps.cancelSearch();
+        NewContactScreenValidations.verifyCountriesAreFoundCorrectly("Gree");
+        VNextTopScreenPanelValidations.verifySearchIconIsDisplayed();
+        TopScreenPanelSteps.openSearchPanel();
+        TopScreenPanelSteps.clearSearchField();
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanClearCountriesSearch(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenSteps.openCountrySearchPage();
+        TopScreenPanelSteps.openSearchPanel();
+        TopScreenPanelSteps.fillSearchField("Gree");
+        TopScreenPanelSteps.clearSearchField();
+        VNextTopScreenPanelValidations.verifySearchFieldContainsCorrectValue("");
+        NewContactScreenValidations.verifyAllCountriesAreDisplayed();
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
 }

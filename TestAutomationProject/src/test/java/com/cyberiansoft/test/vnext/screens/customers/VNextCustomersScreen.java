@@ -22,98 +22,97 @@ import java.util.List;
 
 @Getter
 public class VNextCustomersScreen extends VNextBaseScreen {
-	
-	@FindBy(xpath="//div[@data-page='customers-list']")
-	private WebElement customersScreen;
 
-	@FindBy(xpath = "//*[@data-autotests-id='customers-list']")
-	private WebElement customersList;
+    @FindBy(xpath = "//div[@data-page='customers-list']")
+    private WebElement customersScreen;
 
-	@FindBy(xpath = "//*[@data-autotests-id='customers-list']/div")
-	private List<CustomersListElement> customersListArray;
+    @FindBy(xpath = "//*[@data-autotests-id='customers-list']")
+    private WebElement customersList;
 
-	@FindBy(xpath = "//*[@action='select-retail']")
-	private WebElement retailCustomerTab;
+    @FindBy(xpath = "//*[@data-autotests-id='customers-list']/div")
+    private List<CustomersListElement> customersRecordsList;
 
-	@FindBy(xpath = "//*[@action='select-wholesale']")
-	private WebElement wholesaleCustomerTab;
+    @FindBy(xpath = "//*[@action='select-retail']")
+    private WebElement retailCustomerTab;
 
-	@FindBy(xpath = "//div[@class='notice-plate']")
-	private WebElement presetCustomerPanel;
+    @FindBy(xpath = "//*[@action='select-wholesale']")
+    private WebElement wholesaleCustomerTab;
 
-	@FindBy(xpath = "//*[@class='notice-plate-info-name']")
-	private WebElement clientMode;
+    @FindBy(xpath = "//div[@class='notice-plate']")
+    private WebElement presetCustomerPanel;
 
-	public VNextCustomersScreen() {
-		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
-	}
+    @FindBy(xpath = "//*[@class='notice-plate-info-name']")
+    private WebElement clientMode;
 
-	public void clickAddCustomerButton() {
-		tap(customersScreen.findElement(By.xpath(".//a[@class='floating-button color-red']")));
-		tap(customersScreen.findElement(By.xpath(".//*[@action='add_customer' and @class='customers-button']")));
-	}
+    public VNextCustomersScreen() {
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
+    }
 
-	public boolean isAddCustomerButtonDisplayed() {
-    	WaitUtils.waitUntilElementIsClickable(customersList);
-		return ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//*[@action='add']")).size() > 0;
-	}
+    public void clickAddCustomerButton() {
+        tap(customersScreen.findElement(By.xpath(".//a[@class='floating-button color-red']")));
+        tap(customersScreen.findElement(By.xpath(".//*[@action='add_customer' and @class='customers-button']")));
+    }
 
-	public boolean isNothingFoundCaptionDisplayed() {
-		return customersScreen.findElement(By.xpath(".//b[text()='Nothing found']")).isDisplayed();
-	}
+    public boolean isAddCustomerButtonDisplayed() {
+        WaitUtils.waitUntilElementIsClickable(customersList);
+        return ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//*[@action='add']")).size() > 0;
+    }
 
-	public void selectCustomer(AppCustomer customer) {
+    public boolean isNothingFoundCaptionDisplayed() {
+        return customersScreen.findElement(By.xpath(".//b[text()='Nothing found']")).isDisplayed();
+    }
 
-		WaitUtils.waitUntilElementIsClickable(customersList);
-		if (customer.isWholesale()) {
-			switchToWholesaleMode();
-		} else {
-			switchToRetailMode();
-		}
-		SearchSteps.openSearchMenu();
-		SearchSteps.fillTextSearch(customer.getFullName());
-		CustomersListElement customersListElement = getCustomerElement(customer.getFullName());
-		customersListElement.selectCustomer();
-	}
+    public void selectCustomer(AppCustomer customer) {
 
-	public CustomersListElement getCustomerElement(String fullName) {
-		return customersListArray.stream().filter(listElement -> listElement.getCustomerFullName().equals(fullName)).findFirst().orElseThrow(() -> new RuntimeException("customer not found " + fullName));
-	}
+        WaitUtils.waitUntilElementIsClickable(customersList);
+        if (customer.isWholesale()) {
+            switchToWholesaleMode();
+        } else {
+            switchToRetailMode();
+        }
+        SearchSteps.openSearchMenu();
+        SearchSteps.fillTextSearch(customer.getFullName());
+        CustomersListElement customersListElement = getCustomerElement(customer.getFullName());
+        customersListElement.selectCustomer();
+    }
 
-	public void switchToRetailMode() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.visibilityOf(retailCustomerTab));
-		WaitUtils.getGeneralFluentWait().until(driver -> {
-			Actions actions = new Actions(appiumdriver);
-			actions.moveToElement(retailCustomerTab, 30, 0).click().perform();
-			return true;
-		});
-	}
+    public CustomersListElement getCustomerElement(String fullName) {
+        return customersRecordsList.stream().filter(listElement -> listElement.getCustomerFullName().equals(fullName)).findFirst().orElseThrow(() -> new RuntimeException("customer not found " + fullName));
+    }
 
-	public void switchToWholesaleMode() {
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.visibilityOf(wholesaleCustomerTab));
-		tap(wholesaleCustomerTab);
-	}
+    public void switchToRetailMode() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+        wait.until(ExpectedConditions.visibilityOf(retailCustomerTab));
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            Actions actions = new Actions(appiumdriver);
+            actions.moveToElement(retailCustomerTab, 30, 0).click().perform();
+            return true;
+        });
+    }
+
+    public void switchToWholesaleMode() {
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
+        wait.until(ExpectedConditions.visibilityOf(wholesaleCustomerTab));
+        tap(wholesaleCustomerTab);
+    }
 
 
+    public boolean isCustomerExists(AppCustomer customer) {
+        WaitUtils.waitUntilElementIsClickable(customersList);
+        SearchSteps.searchByText(customer.getFullName());
+        return customersRecordsList.stream().anyMatch(customersListElement -> customersListElement.getCustomerFullName().equals(customer.getFullName()));
+    }
 
-	public boolean isCustomerExists(AppCustomer customer) {
-		WaitUtils.waitUntilElementIsClickable(customersList);
-		SearchSteps.searchByText(customer.getFullName());
-		return customersListArray.stream().anyMatch(customersListElement -> customersListElement.getCustomerFullName().equals(customer.getFullName()));
-	}
+    public String getDefaultCustomerValue() {
+        return clientMode.getText();
+    }
 
-	public String getDefaultCustomerValue() {
-		return clientMode.getText();
-	}
+    public void resetPresetCustomer() {
+        presetCustomerPanel.findElement(By.xpath(".//div[@class='notice-plate-remove']")).click();
+    }
 
-	public void resetPresetCustomer() {
-		presetCustomerPanel.findElement(By.xpath(".//div[@class='notice-plate-remove']")).click();
-	}
-
-	public void openCustomerForEdit(AppCustomer customer) {
-		selectCustomer(customer);
-		MenuSteps.selectMenuItem(MenuItems.EDIT);
-	}
+    public void openCustomerForEdit(AppCustomer customer) {
+        selectCustomer(customer);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+    }
 }

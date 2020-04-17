@@ -23,8 +23,8 @@ public class CustomersScreenValidation {
 
     public static void verifyCustomersAreFoundCorrectly(String searchText) {
 
-        Assert.assertTrue(new VNextCustomersScreen().getCustomersListArray().
-                stream().allMatch(customer -> customer.getCustomerFullName().contains(searchText)),
+        Assert.assertTrue(new VNextCustomersScreen().getCustomersRecordsList().
+                        stream().allMatch(customer -> customer.getCustomerFullName().contains(searchText)),
                 "Customers have been found incorrectly by customer name");
     }
 }

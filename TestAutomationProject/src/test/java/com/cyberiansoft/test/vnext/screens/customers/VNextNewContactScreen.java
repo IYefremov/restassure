@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.customers;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
+import com.cyberiansoft.test.vnext.webelements.customers.CountriesListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
@@ -9,8 +10,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 @Getter
 public class VNextNewContactScreen extends VNextBaseScreen {
+
+    @FindBy(xpath = "//form[@data-autotests-id='contact-form']")
+    private WebElement newContactScreen;
 
     @FindBy(id = "contactDetailsFirstName")
     private WebElement firstNameField;
@@ -53,6 +59,9 @@ public class VNextNewContactScreen extends VNextBaseScreen {
 
     @FindBy(xpath = "//div[contains(@class,'states-list')]")
     private WebElement statesScreen;
+
+    @FindBy(xpath = "//div[@data-autotests-id='countries-list']/div")
+    private List<CountriesListElement> countriesRecordsList;
 
     public WebElement countryRecord(String country) {
 
