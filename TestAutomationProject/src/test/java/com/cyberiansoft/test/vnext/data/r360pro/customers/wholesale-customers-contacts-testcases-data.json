@@ -255,5 +255,65 @@
         }
       ]
     }
+  ],
+  "verifyUserCanReturnBackFromStateProvincePage": [
+    {
+      "rowID": "verifyUserCanReturnBackFromStateProvincePage.01",
+      "description": "Test Case 92147: User can return back from \"State/Province\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92147",
+          "testCaseTitle": "User can return back from \"State/Province\" page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSelectStateProvinceUsingSearch": [
+    {
+      "rowID": "verifyUserCanReturnBackFromStateProvincePage.01",
+      "description": "Test Case 92150: User can select States/Provinces using Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92150",
+          "testCaseTitle": "User can select States/Provinces using Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseFilledStateSearch": [
+    {
+      "rowID": "verifyUserCanCloseFilledStateSearch.01",
+      "description": "Test Case 92151: User can close filled Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92151",
+          "testCaseTitle": "User can close filled Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearStateProvinceSearch": [
+    {
+      "rowID": "verifyUserCanClearStateProvinceSearch.01",
+      "description": "Test Case 92152: User can clear the State/Province's Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92152",
+          "testCaseTitle": "User can clear the State/Province's Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanNewContactPage": [
+    {
+      "rowID": "verifyUserCanNewContactPage.01",
+      "description": "Test Case 92137: User can see \"New Contact\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92137",
+          "testCaseTitle": "User can see \"New Contact\" page"
+        }
+      ]
+    }
   ]
 }

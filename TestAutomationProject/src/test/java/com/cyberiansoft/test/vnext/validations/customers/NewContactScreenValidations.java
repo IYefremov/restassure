@@ -94,6 +94,12 @@ public class NewContactScreenValidations {
                 "Countries screen hasn't been opened");
     }
 
+    public static void verifyStateProvinceScreenIsOpened() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextNewContactScreen().getStatesScreen()),
+                "State/Province screen hasn't been opened");
+    }
+
     public static void verifyNewContactScreenIsOpened() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextNewContactScreen().getNewContactScreen()),
@@ -103,8 +109,15 @@ public class NewContactScreenValidations {
     public static void verifyCountriesAreFoundCorrectly(String searchText) {
 
         Assert.assertTrue(new VNextNewContactScreen().getCountriesRecordsList().
-                        stream().allMatch(country -> country.getCountryName().contains(searchText)),
+                        stream().allMatch(country -> country.getRecordText().contains(searchText)),
                 "Countries have been found incorrectly");
+    }
+
+    public static void verifyStatesAreFoundCorrectly(String searchText) {
+
+        Assert.assertTrue(new VNextNewContactScreen().getCountriesRecordsList().
+                        stream().allMatch(country -> country.getRecordText().contains(searchText)),
+                "States have been found incorrectly");
     }
 
     public static void verifyAllCountriesAreDisplayed() {
