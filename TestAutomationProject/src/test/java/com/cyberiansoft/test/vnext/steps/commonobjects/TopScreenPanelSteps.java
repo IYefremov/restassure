@@ -12,6 +12,7 @@ public class TopScreenPanelSteps {
     public static void goToThePreviousScreen() {
 
         new VNextTopScreenPanel().getBackButton().click();
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void openSearchPanel() {

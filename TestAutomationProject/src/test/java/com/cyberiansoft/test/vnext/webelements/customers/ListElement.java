@@ -7,15 +7,15 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 @Getter
-public class CountriesListElement implements IWebElement {
+public class ListElement implements IWebElement {
     private WebElement rootElement;
-    private String nameFieldLocator = ".//div[@class='simple-item-main-content']";
+    private String recordTextLocator = ".//div[@class='simple-item-main-content']";
 
-    public CountriesListElement(WebElement rootElement) {
+    public ListElement(WebElement rootElement) {
         this.rootElement = rootElement;
     }
 
-    public String getCountryName() {
-        return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElement(By.xpath(nameFieldLocator)).getText().trim());
+    public String getRecordText() {
+        return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElement(By.xpath(recordTextLocator)).getText().trim());
     }
 }

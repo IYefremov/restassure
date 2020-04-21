@@ -340,4 +340,93 @@ public class VNextWholesaleCustomersContactsTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
         TopScreenPanelSteps.goToThePreviousScreen();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanReturnBackFromStateProvincePage(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenSteps.openStateProvinceSearchPage();
+        NewContactScreenValidations.verifyStateProvinceScreenIsOpened();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        NewContactScreenValidations.verifyNewContactScreenIsOpened();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanSelectStateProvinceUsingSearch(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenSteps.openStateProvinceSearchPage();
+        TopScreenPanelSteps.openSearchPanel();
+        TopScreenPanelSteps.fillSearchField("Ala");
+        NewContactScreenValidations.verifyStatesAreFoundCorrectly("Ala");
+        TopScreenPanelSteps.clearSearchField();
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanCloseFilledStateSearch(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenSteps.openStateProvinceSearchPage();
+        TopScreenPanelSteps.openSearchPanel();
+        TopScreenPanelSteps.fillSearchField("Ala");
+        TopScreenPanelSteps.cancelSearch();
+        NewContactScreenValidations.verifyStatesAreFoundCorrectly("Ala");
+        VNextTopScreenPanelValidations.verifySearchIconIsDisplayed();
+        TopScreenPanelSteps.openSearchPanel();
+        TopScreenPanelSteps.clearSearchField();
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanClearStateProvinceSearch(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenSteps.openStateProvinceSearchPage();
+        TopScreenPanelSteps.openSearchPanel();
+        TopScreenPanelSteps.fillSearchField("Ala");
+        TopScreenPanelSteps.clearSearchField();
+        VNextTopScreenPanelValidations.verifySearchFieldContainsCorrectValue("");
+        TopScreenPanelSteps.cancelSearch();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanNewContactPage(String rowID, String description, JSONObject testData) {
+
+        TopScreenPanelSteps.searchData(testwholesailcustomer.getCompany());
+        CustomersScreenSteps.tapOnCustomer(testwholesailcustomer.getCompany());
+        CustomerOptionsScreenSteps.openCustomerContacts();
+        CustomerContactsScreenSteps.clickPlusButton();
+        CustomerContactsScreenSteps.clickNewContactButton();
+        NewContactScreenValidations.verifyNewContactScreenIsOpened();
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
 }

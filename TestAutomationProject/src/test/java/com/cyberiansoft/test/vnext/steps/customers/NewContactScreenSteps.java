@@ -115,4 +115,9 @@ public class NewContactScreenSteps {
 
         Utils.clickElement(new VNextNewContactScreen().getCountryField());
     }
+
+    public static void openStateProvinceSearchPage() {
+
+        Utils.clickElement(new VNextNewContactScreen().getStateField());
+    }
 }
