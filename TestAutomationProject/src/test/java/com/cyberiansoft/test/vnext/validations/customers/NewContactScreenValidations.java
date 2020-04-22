@@ -100,6 +100,12 @@ public class NewContactScreenValidations {
                 "State/Province screen hasn't been opened");
     }
 
+    public static void verifyContactsListScreenIsOpened() {
+
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextNewContactScreen().getContactsListScreen()),
+                "Contacts list screen hasn't been opened");
+    }
+
     public static void verifyNewContactScreenIsOpened() {
 
         Assert.assertTrue(Utils.isElementDisplayed(new VNextNewContactScreen().getNewContactScreen()),
@@ -116,7 +122,7 @@ public class NewContactScreenValidations {
     public static void verifyStatesAreFoundCorrectly(String searchText) {
 
         Assert.assertTrue(new VNextNewContactScreen().getCountriesRecordsList().
-                        stream().allMatch(country -> country.getRecordText().contains(searchText)),
+                        stream().allMatch(state -> state.getRecordText().contains(searchText)),
                 "States have been found incorrectly");
     }
 
@@ -124,5 +130,12 @@ public class NewContactScreenValidations {
 
         Assert.assertEquals(new VNextNewContactScreen().getCountriesRecordsList().size(), 137,
                 "Not all countries have been displayed");
+    }
+
+    public static void verifyContactsAreFoundCorrectly(String searchText) {
+
+        Assert.assertTrue(new VNextNewContactScreen().getContactsRecordsList().
+                        stream().allMatch(contact -> contact.getRecordText().contains(searchText)),
+                "Contacts have been found incorrectly");
     }
 }
