@@ -30,6 +30,9 @@ public class VNextNewContactScreen extends VNextBaseScreen {
     @FindBy(id = "contactDetailsEmail")
     private WebElement emailField;
 
+    @FindBy(xpath = "//div[@data-field='Email']/a[@action='address-book']")
+    private WebElement emailFieldBookIcon;
+
     @FindBy(id = "contactDetailsPhone")
     private WebElement phoneField;
 
@@ -60,11 +63,17 @@ public class VNextNewContactScreen extends VNextBaseScreen {
     @FindBy(xpath = "//div[contains(@class,'states-list')]")
     private WebElement statesScreen;
 
+    @FindBy(xpath = "//div[contains(@class,'oneline-list-loader')]")
+    private WebElement contactsListScreen;
+
     @FindBy(xpath = "//div[@data-autotests-id='countries-list']/div")
     private List<ListElement> countriesRecordsList;
 
     @FindBy(xpath = "//div[@data-autotests-id='countries-list']/div")
     private List<ListElement> stateRecordsList;
+
+    @FindBy(xpath = "//div[contains(@class,'oneline-list-loader')]/div")
+    private List<ListElement> contactsRecordsList;
 
     public WebElement countryRecord(String country) {
 

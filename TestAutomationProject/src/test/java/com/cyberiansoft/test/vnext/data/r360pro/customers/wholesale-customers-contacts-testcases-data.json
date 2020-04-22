@@ -315,5 +315,41 @@
         }
       ]
     }
+  ],
+  "verifyUserCanReturnBackFromListOfContactsPage": [
+    {
+      "rowID": "verifyUserCanReturnBackFromListOfContactsPage.01",
+      "description": "Test Case 92155: User can return back from \"List of contacts\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92155",
+          "testCaseTitle": "User can return back from \"List of contacts\" page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseFilledSearch": [
+    {
+      "rowID": "verifyUserCanCloseFilledSearch.01",
+      "description": "Test Case 92159: User can close filled Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92159",
+          "testCaseTitle": "User can close filled Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearTheEmailSearch": [
+    {
+      "rowID": "verifyUserCanClearTheEmailSearch.01",
+      "description": "Test Case 92160: User can clear the Email's Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92160",
+          "testCaseTitle": "User can clear the Email's Search"
+        }
+      ]
+    }
   ]
 }

@@ -120,4 +120,9 @@ public class NewContactScreenSteps {
 
         Utils.clickElement(new VNextNewContactScreen().getStateField());
     }
+
+    public static void openContactsListPage() {
+
+        Utils.clickElement(new VNextNewContactScreen().getEmailFieldBookIcon());
+    }
 }
