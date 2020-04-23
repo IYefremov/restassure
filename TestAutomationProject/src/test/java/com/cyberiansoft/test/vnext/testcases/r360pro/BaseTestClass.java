@@ -133,7 +133,7 @@ public class BaseTestClass {
 
         String regCode = activeDevicesWebPage.getFirstRegCodeInTable();
         DriverBuilder.getInstance().getDriver().quit();
-       // chromeDriver.quit();
+        // chromeDriver.quit();
         return regCode;
     }
 }

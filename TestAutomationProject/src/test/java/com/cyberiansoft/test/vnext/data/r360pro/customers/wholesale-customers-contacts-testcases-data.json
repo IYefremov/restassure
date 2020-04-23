@@ -1,5 +1,4 @@
 {
-
   "verifyUserCanSearchContacts": [
     {
       "rowID": "verifyUserCanSearchContacts.01",
@@ -56,6 +55,299 @@
         {
           "testCaseID": "92133",
           "testCaseTitle": "User can minimize drop-down window of New Contacts adding"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCancelAddingCustomerContactsDoNotSave": [
+    {
+      "rowID": "verifyUserCanCancelAddingCustomerContactsDoNotSave.01",
+      "description": "Test Case 92123: User can cancel adding \"Customer Contacts\" (Don't save)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92123",
+          "testCaseTitle": "User can cancel adding \"Customer Contacts\" (Don't save)"
+        }
+      ],
+      "firstName": "Finlandia",
+      "lastName": "Blackurant",
+      "companyName": "Vodka",
+      "email": "finka@kwdnf",
+      "phone": "0987",
+      "address1": "Fin",
+      "address2": "Land",
+      "city": "Reikj",
+      "country": "Peru",
+      "zip": "2345"
+    }
+  ],
+  "verifyUserCanCancelAddingCustomerContactsButSaveChanges": [
+    {
+      "rowID": "verifyUserCanCancelAddingCustomerContactsButSaveChanges.01",
+      "description": "Test Case 92124: User can cancel adding \"Customer Contacts\" but save changes (Save)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92124",
+          "testCaseTitle": "User can cancel adding \"Customer Contacts\" but save changes (Save)"
+        }
+      ],
+      "firstName": "El",
+      "lastName": "Jimador",
+      "companyName": "Tekila",
+      "email": "tek@wen",
+      "phone": "34875",
+      "address1": "Tek",
+      "address2": "Ila",
+      "city": "Mehico",
+      "country": "United States of America",
+      "state": "Connecticut",
+      "zip": "23534"
+    }
+  ],
+  "verifyUserCanAddCustomerContacts": [
+    {
+      "rowID": "verifyUserCanAddCustomerContacts.01",
+      "description": "Test Case 92122: User can add \"Customer Contacts\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92122",
+          "testCaseTitle": "User can add \"Customer Contacts\""
+        }
+      ],
+      "firstName": "Jack",
+      "lastName": "Daniels",
+      "companyName": "Whiskey",
+      "email": "jk@gmail.com",
+      "phone": "123",
+      "address1": "Adr",
+      "address2": "Str",
+      "city": "Gorod",
+      "country": "United States of America",
+      "state": "Colorado",
+      "zip": "123"
+    }
+  ],
+  "verifyUserCanCloseEditCustomerContactsWindow": [
+    {
+      "rowID": "verifyUserCanCloseEditCustomerContactsWindow.01",
+      "description": "Test Case 92126: User can close \"Edit\" Customer's Contacts window",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92126",
+          "testCaseTitle": "User can close \"Edit\" Customer's Contacts window"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanEditCustomerContacts": [
+    {
+      "rowID": "verifyUserCanEditCustomerContacts.01",
+      "description": "Test Case 92125: User can edit Customer's Contacts",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92125",
+          "testCaseTitle": "User can edit Customer's Contacts"
+        }
+      ],
+      "firstName": "Johny",
+      "lastName": "Walker",
+      "companyName": "Scotch",
+      "email": "walker@gmail.com",
+      "phone": "3463",
+      "address1": "Asgaard",
+      "address2": "Tor",
+      "city": "Selo",
+      "country": "Canada",
+      "state": "Alberta",
+      "zip": "776"
+    }
+  ],
+  "verifyUserCanCancelEditingCustomerContactDontSave": [
+    {
+      "rowID": "verifyUserCanCancelEditingCustomerContactDontSave.01",
+      "description": "Test Case 92127: User can cancel editing Customer's Contacts (Don't save)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92127",
+          "testCaseTitle": "User can cancel editing Customer's Contacts (Don't save)"
+        }
+      ],
+      "firstName": "Gordon",
+      "lastName": "Fizz",
+      "companyName": "Gin",
+      "email": "gin@jdfn",
+      "phone": "3645",
+      "address1": "Gin",
+      "address2": "Fizz",
+      "city": "City",
+      "country": "Australia",
+      "state": "Tasmania",
+      "zip": "457657"
+    }
+  ],
+  "verifyUserCanCancelEditingCustomerContactSave": [
+    {
+      "rowID": "verifyUserCanCancelEditingCustomerContactDontSave.01",
+      "description": "Test Case 92128: User can cancel editing Customer's Contacts but save changes (Save)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92128",
+          "testCaseTitle": "User can cancel editing Customer's Contacts but save changes (Save)"
+        }
+      ],
+      "firstName": "Cinzano",
+      "lastName": "Bianco",
+      "companyName": "Vermouth",
+      "email": "verm@dk",
+      "phone": "7364",
+      "address1": "Ver",
+      "address2": "Mut",
+      "city": "Milan",
+      "country": "Canada",
+      "state": "Quebec",
+      "zip": "12334"
+    }
+  ],
+  "verifyUserCanReturnBackFromCountriesPage": [
+    {
+      "rowID": "verifyUserCanReturnBackFromCountriesPage.01",
+      "description": "Test Case 92140: User can return back from \"Countries\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92140",
+          "testCaseTitle": "User can return back from \"Countries\" page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSearchCountriesUsingSearch": [
+    {
+      "rowID": "verifyUserCanSearchCountriesUsingSearch.01",
+      "description": "Test Case 92143: User can search Countries using Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92143",
+          "testCaseTitle": "User can search Countries using Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseFilledCountrySearch": [
+    {
+      "rowID": "verifyUserCanCloseFilledCountrySearch.01",
+      "description": "Test Case 92144: User can close filled Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92144",
+          "testCaseTitle": "User can close filled Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearCountriesSearch": [
+    {
+      "rowID": "verifyUserCanClearCountriesSearch.01",
+      "description": "Test Case 92145: User can clear the Countrie's Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92145",
+          "testCaseTitle": "User can clear the Countrie's Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanReturnBackFromStateProvincePage": [
+    {
+      "rowID": "verifyUserCanReturnBackFromStateProvincePage.01",
+      "description": "Test Case 92147: User can return back from \"State/Province\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92147",
+          "testCaseTitle": "User can return back from \"State/Province\" page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanSelectStateProvinceUsingSearch": [
+    {
+      "rowID": "verifyUserCanReturnBackFromStateProvincePage.01",
+      "description": "Test Case 92150: User can select States/Provinces using Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92150",
+          "testCaseTitle": "User can select States/Provinces using Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseFilledStateSearch": [
+    {
+      "rowID": "verifyUserCanCloseFilledStateSearch.01",
+      "description": "Test Case 92151: User can close filled Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92151",
+          "testCaseTitle": "User can close filled Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearStateProvinceSearch": [
+    {
+      "rowID": "verifyUserCanClearStateProvinceSearch.01",
+      "description": "Test Case 92152: User can clear the State/Province's Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92152",
+          "testCaseTitle": "User can clear the State/Province's Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanNewContactPage": [
+    {
+      "rowID": "verifyUserCanNewContactPage.01",
+      "description": "Test Case 92137: User can see \"New Contact\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92137",
+          "testCaseTitle": "User can see \"New Contact\" page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanReturnBackFromListOfContactsPage": [
+    {
+      "rowID": "verifyUserCanReturnBackFromListOfContactsPage.01",
+      "description": "Test Case 92155: User can return back from \"List of contacts\" page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92155",
+          "testCaseTitle": "User can return back from \"List of contacts\" page"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanCloseFilledSearch": [
+    {
+      "rowID": "verifyUserCanCloseFilledSearch.01",
+      "description": "Test Case 92159: User can close filled Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92159",
+          "testCaseTitle": "User can close filled Search"
+        }
+      ]
+    }
+  ],
+  "verifyUserCanClearTheEmailSearch": [
+    {
+      "rowID": "verifyUserCanClearTheEmailSearch.01",
+      "description": "Test Case 92160: User can clear the Email's Search",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92160",
+          "testCaseTitle": "User can clear the Email's Search"
         }
       ]
     }

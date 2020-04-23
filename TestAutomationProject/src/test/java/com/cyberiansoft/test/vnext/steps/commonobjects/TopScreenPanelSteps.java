@@ -11,24 +11,30 @@ public class TopScreenPanelSteps {
 
     public static void goToThePreviousScreen() {
 
-        Utils.clickElement(new VNextTopScreenPanel().getBackButton());
+        new VNextTopScreenPanel().getBackButton().click();
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void openSearchPanel() {
 
         ConditionWaiter.create(__ -> new VNextTopScreenPanel().getSearchButton().isDisplayed()).execute();
         WaitUtilsWebDriver.waitABit(1000);
-        Utils.clickElement(new VNextTopScreenPanel().getSearchButton());
+        new VNextTopScreenPanel().getSearchButton().click();
     }
 
     public static void cancelSearch() {
 
-        Utils.clickElement(new VNextTopScreenPanel().getCancelSearchButton());
+        new VNextTopScreenPanel().getCancelSearchButton().click();
     }
 
     public static void clearSearchField() {
 
-        Utils.clickElement(new VNextTopScreenPanel().getClearSearchIcon());
+        new VNextTopScreenPanel().getClearSearchIcon().click();
+    }
+
+    public static void saveChanges() {
+
+        new VNextTopScreenPanel().getSaveButton().click();
     }
 
     public static void fillSearchField(String searchText) {
@@ -38,5 +44,13 @@ public class TopScreenPanelSteps {
         Utils.clickElement(topScreenPanel.getSearchField());
         topScreenPanel.getSearchField().sendKeys(searchText);
         BaseUtils.waitABit(1000);
+    }
+
+    public static void searchData(String searchText) {
+
+        TopScreenPanelSteps.openSearchPanel();
+        if (new VNextTopScreenPanel().getClearSearchIcon().isDisplayed())
+            TopScreenPanelSteps.clearSearchField();
+        TopScreenPanelSteps.fillSearchField(searchText);
     }
 }

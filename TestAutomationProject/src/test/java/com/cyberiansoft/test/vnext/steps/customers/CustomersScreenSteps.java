@@ -20,7 +20,7 @@ public class CustomersScreenSteps {
     public static void tapOnCustomer(String companyName) {
 
         Utils.clickElement(new VNextCustomersScreen()
-                .getCustomersListArray()
+                .getCustomersRecordsList()
                 .stream().filter(customer -> customer.getCustomerFullName().contains(companyName)).findFirst().get().getRootElement());
     }
 
