@@ -44,14 +44,13 @@ public class VNextBOAdvancedSearchInvoiceFormSteps {
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
     }
 
-    public static void searchByInvoiceAndCustomTimeFrameToDateAndStatus(String invoice, String toDate, String status) {
+    public static void searchByInvoiceAndCustomTimeFrameFromDate(String invoice, String fromDate) {
 
         VNextBOInvoicesPageInteractions.clickAdvancedSearchCaret();
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsOpened();
         VNextBOAdvancedSearchInvoiceFormInteractions.setInvoiceNumber(invoice);
         VNextBOAdvancedSearchInvoiceFormInteractions.setTimeFrame(TimeFrameValues.TIMEFRAME_CUSTOM.getName());
-        VNextBOAdvancedSearchInvoiceFormInteractions.setToDate(toDate);
-        VNextBOAdvancedSearchInvoiceFormInteractions.setStatus(status);
+        VNextBOAdvancedSearchInvoiceFormInteractions.setFromDate(fromDate);
         VNextBOAdvancedSearchInvoiceFormInteractions.clickSearchButton();
         VNextBOAdvancedSearchInvoiceFormValidations.verifyAdvancedSearchDialogIsClosed();
     }

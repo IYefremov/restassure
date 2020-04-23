@@ -169,6 +169,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.openPageByNumber(4);
         VNextBOUsersPageSteps.clickLogo();
         VNextBOLeftMenuInteractions.clickSubMenuItem("Users");
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("4");
         VNextBOPageSwitcherSteps.clickHeaderFirstPageButton();
         WaitUtilsWebDriver.waitForSpinnerToDisappear();

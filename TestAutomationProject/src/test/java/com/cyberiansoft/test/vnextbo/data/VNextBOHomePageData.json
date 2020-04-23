@@ -2,7 +2,7 @@
   "verifyUserCanSeeHomePage": [
     {
       "rowID": "verifyUserCanSeeHomePage.01",
-      "description": "Test Case 91060: Verify user can see \"Home page\"",
+      "description": "Test Case 84373: Verify user can see \"Home page\"",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "91060",

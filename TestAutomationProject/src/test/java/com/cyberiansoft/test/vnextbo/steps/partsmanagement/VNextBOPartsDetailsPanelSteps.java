@@ -352,13 +352,13 @@ public class VNextBOPartsDetailsPanelSteps {
 
     public static void updatePartsListAfterDuplicating(String woNum, int expectedPartsAmount) {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount, woNum);
         VNextBOPartsDetailsPanelValidations.verifyDuplicatePartIsAdded(woNum, expectedPartsAmount);
     }
 
     public static void updatePartsList(String woNum, int expectedPartsAmount) {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount, woNum);
     }
 
     public static void openPartsProvidersModalDialog() {

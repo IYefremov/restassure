@@ -11,7 +11,9 @@ import java.util.Arrays;
 public class BOSubscriptionsPageSteps {
 
     public static void openEditDialogForSubscription(String name) {
-        Utils.clickElement(new BOSubscriptionsPage().getEditButtonBySubscriptionName(name));
+        final BOSubscriptionsPage subscriptionsPage = new BOSubscriptionsPage();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(subscriptionsPage.getEditButtonBySubscriptionName(name));
+        Utils.clickElement(subscriptionsPage.getEditButtonBySubscriptionName(name));
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.elementShouldBeVisible(new BOSubscriptionDialog().getSubscriptionDialog(), true, 10);

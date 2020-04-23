@@ -2,6 +2,7 @@ package com.cyberiansoft.test.bo.pageobjects.webpages;
 
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
+import lombok.Getter;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -9,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.concurrent.TimeUnit;
 
-
+@Getter
 public class WebPageWithPagination extends BaseWebPage {
 
 	public final int MAX_TABLE_ROW_COUNT_VALUE = 50;
@@ -31,10 +32,10 @@ public class WebPageWithPagination extends BaseWebPage {
 	private WebElement paginations;
 
 	@FindBy(xpath = "//input[contains(@id, 'ChangePageSizeTextBox')][1]")
-	private WebElement pagesizefld;
+	private WebElement pageSizeField;
 
 	@FindBy(xpath = "//*[contains(@id, 'ChangePageSizeLinkButton')]")
-	private WebElement changesizebtn;
+	private WebElement changeSizeButton;
 
 	@FindBy(xpath = "//input[contains(@id, 'GoToPageTextBox') and @type='text']")
 	private WebElement gotopagefld;
@@ -76,17 +77,17 @@ public class WebPageWithPagination extends BaseWebPage {
 	}
 
 	public void setPageSize(String pageSize) {
-		setAttribute(pagesizefld, "value", "");
-		wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).clear();
-		wait.until(ExpectedConditions.elementToBeClickable(pagesizefld)).sendKeys(pageSize);
-		pagesizefld.sendKeys(Keys.ENTER);
+		setAttribute(pageSizeField, "value", "");
+		wait.until(ExpectedConditions.elementToBeClickable(pageSizeField)).clear();
+		wait.until(ExpectedConditions.elementToBeClickable(pageSizeField)).sendKeys(pageSize);
+		pageSizeField.sendKeys(Keys.ENTER);
 		try {
-			wait.until(ExpectedConditions.elementToBeClickable(changesizebtn)).click();
+			wait.until(ExpectedConditions.elementToBeClickable(changeSizeButton)).click();
 		} catch (WebDriverException e) {
 			wait
 					.ignoring(StaleElementReferenceException.class)
-					.until(ExpectedConditions.elementToBeClickable(changesizebtn));
-			clickWithJS(changesizebtn);
+					.until(ExpectedConditions.elementToBeClickable(changeSizeButton));
+			clickWithJS(changeSizeButton);
 		}
 		waitForLoading();
 	}

@@ -18,6 +18,8 @@ import org.testng.Assert;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Getter
 public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
@@ -118,12 +120,23 @@ public class VNextBOInspectionsWebPage extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[@class='control-checkbox']")
     public List<WebElement> inspectionsControlCheckBoxes;
 
+    @FindBy(xpath = "//div[@class='entity-details__col']//div[@class='text-ellipsis' and contains(text(), '')]/span")
+    public List<WebElement> inspectionsVehicleInfoBlockValues;
+
+    @FindBy(xpath = "//div[@class='entity-details__col']//div[contains(text(), 'Vehicle')]/span")
+    public List<WebElement> inspectionsVehicleInfoValues;
+
     public WebElement savedAdvancedSearch(String searchName) {
         return driver.findElement(By.xpath("//span[@data-bind='click: applySavedSearch' and text()='" + searchName + "']"));
     }
 
     public WebElement selectedInspectionFieldValueByName(String fieldLabel) {
         return driver.findElement(By.xpath("//div[@class='text-ellipsis' and contains(text(), '" + fieldLabel + "')]/span"));
+    }
+
+    public List<WebElement> getSelectedInspectionVehicleInfoValues() {
+        return Stream.concat(inspectionsVehicleInfoValues.stream(), inspectionsVehicleInfoBlockValues.stream())
+                .collect(Collectors.toList());
     }
 
     public WebElement archivingReasonByName(String reason) {

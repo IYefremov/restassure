@@ -65,6 +65,13 @@ public class VNextBOInspectionsPageValidations extends VNextBOBaseWebPageValidat
                 "\"Click here to learn how to create your first inspection\" link hasn't been displayed");
     }
 
+    public static void verifyInspectionVehicleInfoContainsText(String substring) {
+        final boolean contains = VNextBOInspectionsPageSteps.getSelectedInspectionVehicleInfoValues()
+                .stream()
+                .anyMatch(info -> info.contains(substring));
+        Assert.assertTrue(contains, "The inspection vehicle info doesn't contain the '" + substring + "' value");
+    }
+
     public static boolean verifyHowToCreateInspectionLinkIsDisplayed() {
         try {
             return Utils.isElementDisplayed(new VNextBOInspectionsWebPage().howToCreateInspectionLink);

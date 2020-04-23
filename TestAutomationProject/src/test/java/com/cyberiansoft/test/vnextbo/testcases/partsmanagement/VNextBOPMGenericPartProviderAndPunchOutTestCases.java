@@ -1,13 +1,6 @@
 package com.cyberiansoft.test.vnextbo.testcases.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
-import com.cyberiansoft.test.bo.enums.menu.Menu;
-import com.cyberiansoft.test.bo.enums.menu.SubMenu;
-import com.cyberiansoft.test.bo.steps.company.teams.BOTeamsSearchSteps;
-import com.cyberiansoft.test.bo.steps.company.teams.BOTeamsTableSteps;
-import com.cyberiansoft.test.bo.steps.menu.BOMenuSteps;
-import com.cyberiansoft.test.bo.steps.search.BOSearchSteps;
-import com.cyberiansoft.test.bo.steps.superuser.subscriptions.BOSubscriptionsPageSteps;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsData;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementData;
 import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsManagementSearchData;
@@ -23,8 +16,6 @@ import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.V
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.stores.VNextBOAutoZoneProductResultsPageInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.stores.VNextBOAutoZoneQuoteDetailsPageInteractions;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
-import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOConfirmationDialogSteps;
-import com.cyberiansoft.test.vnextbo.steps.homepage.VNextBOHomeWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogSteps;
@@ -33,7 +24,6 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZon
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZoneMyShopPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.stores.VNextBOAutoZoneProductResultsPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
-import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersRequestFormDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.stores.VNextBOAutoZoneValidations;
@@ -41,7 +31,6 @@ import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
 import java.util.Arrays;
 import java.util.List;
@@ -174,120 +163,5 @@ public class VNextBOPMGenericPartProviderAndPunchOutTestCases extends BaseTestCa
         Assert.assertTrue(VNextBOPartsDetailsPanelValidations.isShoppingCartButtonDisplayed(true),
                 "The shopping cart button hasn't been displayed");
         VNextBOShoppingCartDialogSteps.completeOrder(partData, price, corePrice);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyWarningMessageIsDisplayedForGenericPartProviderWithoutEmailPartIsSetAsReceivedAndProviderIsStored(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-        final VNextBOPartsData partData = data.getPartData();
-        final VNextBOPartsManagementSearchData searchData = data.getSearchData();
-        final String open = PartStatus.OPEN.getStatus();
-        final String received = PartStatus.RECEIVED.getStatus();
-        final String message = VNextBOAlertMessages.MARK_PART_AS_RECEIVED;
-
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(searchData.getWoNum());
-        VNextBOPartsDetailsPanelSteps.addPartIfOpenStatusIsNotPresent(partData, searchData.getWoNum());
-        final int partsNumberWithOpenStatus = VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(open);
-        final int partsNumberWithReceivedStatus = VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(received);
-        final int partToBeChanged = VNextBOPartsDetailsPanelInteractions.getFirstPartOrderWithGivenStatus(received);
-        VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
-        VNextBOPartsProvidersDialogSteps.openRequestFormDialogForGenericPartProvider(data.getProvider());
-        VNextBOPartsProvidersRequestFormDialogValidations.verifyRequestQuoteButtonIsDisabled();
-        VNextBOPartsProvidersRequestFormDialogSteps.getQuotesForFirstParts(1);
-        VNextBOConfirmationDialogSteps.getMessageAndReject(message);
-        VNextBOPartsProvidersRequestFormDialogSteps.requestQuote();
-        VNextBOConfirmationDialogSteps.getMessageAndConfirm(message);
-        VNextBOPartsProvidersRequestFormDialogInteractions.waitForRequestFormDialogToBeClosed();
-        VNextBOPartsProvidersDialogSteps.closePartsProvidersDialog();
-        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(open), partsNumberWithOpenStatus - 1,
-                "The number of 'Open' statuses hasn't been reduced by one");
-        Assert.assertEquals(VNextBOPartsDetailsPanelInteractions.getPartsNumberWithStatus(received), partsNumberWithReceivedStatus + 1,
-                "The number of 'Received' statuses hasn't been increased by one");
-        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(partToBeChanged, data.getProvider());
-        VNextBOPartsDetailsPanelSteps.deleteServicesByStatus(received);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyPartProviderDropDownIsEmptyByDefaultWhenTheUserAddsService(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelSteps.addNewPart(data.getPartData());
-        final int partsIndex = VNextBOPartsDetailsPanelSteps.getPartsListSize() - 1;
-        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(partsIndex, "");
-        VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(partsIndex);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyPartProviderFieldIsFilledAndUserCantChangeItWhenPartIsQuoted(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelSteps.addNewPart(data.getPartData());
-        final int partsIndex = VNextBOPartsDetailsPanelSteps.getPartsListSize() - 1;
-        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(partsIndex, "");
-        VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(partsIndex);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyPartProviderIsEmptyAfterAddingNewPartService(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelValidations.verifyDetailsPanelIsDisplayed();
-        final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
-        VNextBOPartsDetailsPanelSteps.addNewPart(data.getPartData());
-        VNextBOPartsDetailsPanelSteps.updatePartsList(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts + 1);
-        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(numberOfParts, "");
-        VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(numberOfParts);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanManuallySelectPartProviderFromDropDownWhenBOFeaturesAreDisabled(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
-        BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
-        BOSubscriptionsPageSteps.setNoneModeForSubscriptions(data.getSubscriptions());
-        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        final List<String> providerOptions = VNextBOPartsDetailsPanelSteps.getProviderDropDownOptions();
-        VNextBOPartsDetailsPanelValidations.verifyProviderOptionsAreDisplayed(providerOptions);
-        final String provider = VNextBOPartsDetailsPanelSteps.selectProviderInDropDown();
-        VNextBOPartsDetailsPanelValidations.verifyProviderIsSet(0, provider);
-    }
-
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyAvailablePartProvidersAfterClickingTheGetQuoteButton(String rowID, String description, JSONObject testData) {
-        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
-
-        VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
-        BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
-        BOSubscriptionsPageSteps.setFullModeForSubscriptions(data.getSubscriptions());
-        BOMenuSteps.open(Menu.COMPANY, SubMenu.TEAMS);
-        BOSearchSteps.expandSearchTab();
-        BOTeamsSearchSteps.selectSearchType("Part Provider");
-        BOSearchSteps.search();
-        final List<String> teamsList = BOTeamsTableSteps.getValuesListByColumnName("Team");
-        teamsList.forEach(System.out::println);
-        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
-        VNextBOLeftMenuInteractions.selectPartsManagementMenu();
-        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        VNextBOPartsDetailsPanelSteps.openPartsProvidersModalDialog();
-        Assert.assertTrue(teamsList.containsAll(VNextBOPartsProvidersDialogSteps.getOptionsList()),
-                "The teams list doesn't contain all parts providers");
     }
 }

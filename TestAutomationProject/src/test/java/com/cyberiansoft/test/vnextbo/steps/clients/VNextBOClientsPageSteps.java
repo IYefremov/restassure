@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientInfoBlock;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
@@ -69,6 +70,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(new VNextBOClientsWebPage().getEditDropMenuButton());
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickArchiveDropMenuButton() {
@@ -85,6 +87,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
 
         clickActionsButtonForClient(client);
         clickEditDropMenuButton();
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(new VNextBOClientInfoBlock().getClientInfoPanel());
     }
 
     public static void searchClientByEmail(String email) {

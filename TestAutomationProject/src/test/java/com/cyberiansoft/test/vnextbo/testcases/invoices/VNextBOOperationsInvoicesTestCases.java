@@ -111,7 +111,7 @@ public class VNextBOOperationsInvoicesTestCases extends BaseTestCase {
         VNextBOInvoicesPageSteps.confirmUnvoidingFirstInvoice();
 
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(invoiceNumber);
+        VNextBOAdvancedSearchInvoiceFormSteps.searchByInvoiceAndCustomTimeFrameFromDate(invoiceNumber, data.getFromDate());
         Assert.assertTrue(VNextBOInvoicesPageValidations.isInvoiceDisplayed(invoiceNumber),
                 "The invoice is not displayed after being unvoided");
     }

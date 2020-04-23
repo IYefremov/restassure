@@ -55,7 +55,7 @@
         <parameter name="userName" value="test.automation2@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsSearchTests"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsSearchBlockTests"/>
         </classes>
     </test>
     <test name="Clients Archive Restore Tests">

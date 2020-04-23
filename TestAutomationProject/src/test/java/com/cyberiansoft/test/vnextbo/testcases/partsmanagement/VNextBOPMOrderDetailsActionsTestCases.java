@@ -52,7 +52,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(
                 VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartData().getPartItems()[0]));
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts - 1);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts - 1, woNum);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -108,6 +108,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartDocumentsDialogInteractions.closePartDocumentsDialog();
     }
 
+    //todo bug https://cyb.tpondemand.com/entity/121692-r360-bo-the-search-filter-is
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDuplicateThePart(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
@@ -123,7 +124,8 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyPartDefaultValues(numberOfParts);
         VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(numberOfParts, PartStatus.OPEN.getStatus());
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartsListSize() - 1);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum); //todo delete after bug fix
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts, woNum);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -135,7 +137,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.clickDuplicatePartsAndCancelWithXIcon(0);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts, woNum);
         VNextBOPartsDetailsPanelSteps.updatePartsListAfterDuplicating(woNum, numberOfParts);
     }
 
@@ -148,7 +150,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.clickDuplicatePartsAndCancel(0);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts, woNum);
         VNextBOPartsDetailsPanelSteps.updatePartsListAfterDuplicating(woNum, numberOfParts);
     }
 
@@ -200,7 +202,7 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInListAndCancelDeletingWithXIcon(
                 VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartData().getPartItems()[0]));
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts, woNum);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -215,6 +217,6 @@ public class VNextBOPMOrderDetailsActionsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInListAndCancelDeletingWithNoButton(
                 VNextBOPartsDetailsPanelSteps.getPartNumberInTheListByServiceName(data.getPartData().getPartItems()[0]));
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts, woNum);
     }
 }

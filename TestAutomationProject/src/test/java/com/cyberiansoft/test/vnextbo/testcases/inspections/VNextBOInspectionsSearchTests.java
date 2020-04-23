@@ -88,13 +88,11 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchInspectionsUsingSearch(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("123");
+        final String searchText = "123";
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(searchText);
         VNextBOInspectionsPageValidations.verifyClearFilterIconIsDisplayed();
-        for (String inspectionName : VNextBOInspectionsPageSteps.getNamesOfAllInspectionsInTheList()
-        ) {
-            Assert.assertTrue(inspectionName.contains("123"), inspectionName + "hasn't contained searched text \"123\"");
-        }
-        Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Text: 123"),
+        VNextBOInspectionsPageValidations.verifyInspectionVehicleInfoContainsText(searchText);
+        Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Text: " + searchText),
                 "Search option under Search field hasn't been correct");
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
@@ -283,7 +281,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
         } else {
-            Assert.assertTrue(VNextBOInspectionsPageSteps.getSelectedInspectionParameterValueByName("PO#").contains("123"),
+            Assert.assertTrue(VNextBOInspectionsPageSteps.getSelectedInspectionVehicleInfoValues().contains("123"),
                     "Inspection has been found incorrectly");
         }
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();

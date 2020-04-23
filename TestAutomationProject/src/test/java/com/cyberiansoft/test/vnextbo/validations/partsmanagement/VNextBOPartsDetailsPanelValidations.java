@@ -90,8 +90,9 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Actions menu hasn't been displayed");
     }
 
-    public static void verifyPartsAmountIsUpdated(int expectedPartsAmount) {
+    public static void verifyPartsAmountIsUpdated(int expectedPartsAmount, String woNum) {
         VNextBOPartsDetailsPanelInteractions.updatePartsAmount(expectedPartsAmount);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum); //todo delete after bug fix 121692
         Assert.assertEquals(VNextBOPartsDetailsPanelSteps.getPartsListSize(), expectedPartsAmount,
                 "Parts amount hasn't been correct");
     }
@@ -99,7 +100,7 @@ public class VNextBOPartsDetailsPanelValidations {
     public static void verifyDuplicatePartIsAdded(String woNum, int expectedPartsAmount) {
         if (!isLaborsExtenderVisible(expectedPartsAmount)) {
             VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
-            verifyPartsAmountIsUpdated(expectedPartsAmount);
+            verifyPartsAmountIsUpdated(expectedPartsAmount, woNum);
         }
     }
 

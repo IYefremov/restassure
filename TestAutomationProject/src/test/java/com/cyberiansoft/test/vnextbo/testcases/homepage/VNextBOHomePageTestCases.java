@@ -132,7 +132,8 @@ public class VNextBOHomePageTestCases extends BaseTestCase {
         VNextBOHomeWebPageValidations.verifySupportForBoPageIsOpened(actualSupportForBoPageUrl);
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //todo bug https://cyb.tpondemand.com/restui/board.aspx?#page=bug/119001
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanOpenSupportForMobileAppPage(String rowID, String description, JSONObject testData) {
 
         final String actualSupportForMobileAppPageUrl = VNextBOHomeWebPageSteps.openSupportForMobileAppWindow();

@@ -265,6 +265,10 @@ public class VNextBOInspectionsPageSteps extends VNextBOBaseWebPageSteps {
         return Utils.getText(new VNextBOInspectionsWebPage().selectedInspectionFieldValueByName(parameterName));
     }
 
+    public static List<String> getSelectedInspectionVehicleInfoValues() {
+        return Utils.getText(new VNextBOInspectionsWebPage().getSelectedInspectionVehicleInfoValues());
+    }
+
     public static void waitUntilInspectionsPageIsOpened() {
         VNextBOInspectionsWebPage inspectionsWebPage = new VNextBOInspectionsWebPage();
         WaitUtilsWebDriver.getWait().until(ExpectedConditions.visibilityOf(inspectionsWebPage.getInspectionsList()));

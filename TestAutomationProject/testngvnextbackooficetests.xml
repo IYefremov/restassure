@@ -79,7 +79,7 @@
     </test>
     <test name="Clients Search Tests">
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsSearchTests"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.clients.VNextBOClientsSearchBlockTests"/>
         </classes>
     </test>
     <test name="Clients Archive Restore Tests">
