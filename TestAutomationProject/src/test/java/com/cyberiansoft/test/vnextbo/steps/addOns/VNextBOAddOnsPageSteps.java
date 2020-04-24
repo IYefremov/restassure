@@ -42,6 +42,7 @@ public class VNextBOAddOnsPageSteps {
     }
 
     private static void confirmAddOnChange(String addOn) {
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitABit(1000);
         VNextBOConfirmationDialogInteractions.clickYesButton();
         WaitUtilsWebDriver.waitABit(1000);
