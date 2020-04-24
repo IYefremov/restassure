@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.screens.monitoring.SelectLocationScreen;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
+import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
 import org.openqa.selenium.By;
@@ -74,5 +75,16 @@ public class MonitorSteps {
         BaseUtils.waitABit(2000);
         WaitUtils.click(phasesScreen.getPhasesMenuButton());
         BaseUtils.waitABit(1000);
+    }
+
+    public static void openCommonFiltersPage() {
+
+        TopScreenPanelSteps.openSearchPanel();
+        WaitUtils.click(new RepairOrderScreen().getCommonFiltersToggle());
+    }
+
+    public static void tapOnFirstOrder() {
+
+        WaitUtils.click(new RepairOrderScreen().getRepairOrderListElements().get(0).getRootElement());
     }
 }
