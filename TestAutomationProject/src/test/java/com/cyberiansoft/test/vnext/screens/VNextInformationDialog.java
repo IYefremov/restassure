@@ -31,6 +31,10 @@ public class VNextInformationDialog extends VNextBaseScreen {
     public VNextInformationDialog() {
     }
 
+    public boolean isInformationDialogExists() {
+        return ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//body/div[contains(@class, 'modal-warning')]")).size() > 0;
+    }
+
     public String getInformationDialogMessage() {
         WaitUtils.elementShouldBeVisible(modaldlgmsg, true);
         return modaldlgmsg.getText();

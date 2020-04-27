@@ -4,6 +4,7 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
+import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralListSteps;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
@@ -51,5 +52,16 @@ public class PhaseScreenSteps {
     public static void selectTechnician(ServiceTechnician serviceTechnician) {
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
         GeneralListSteps.selectListItem(serviceTechnician.getTechnicianFullName());
+    }
+
+    public static void clickAddButton() {
+        PhasesScreen phasesScreen = new PhasesScreen();
+        phasesScreen.getAddButton().click();
+    }
+
+    public static void addTask() {
+        clickAddButton();
+        PhasesScreen phasesScreen = new PhasesScreen();
+        phasesScreen.getTaskButton().click();
     }
 }
