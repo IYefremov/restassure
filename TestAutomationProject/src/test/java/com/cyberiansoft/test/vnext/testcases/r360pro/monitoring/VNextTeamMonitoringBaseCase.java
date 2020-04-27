@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.monitoring;
 
 import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
-import com.cyberiansoft.test.dataclasses.WholesailCustomer;
+import com.cyberiansoft.test.dataclasses.RetailCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataclasses.r360.RepairOrdersSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -66,7 +66,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        MonitorSteps.changeLocation("automationMonitoring");
+        MonitorSteps.changeLocation(workOrderData.getMonitoring().getLocation());
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
@@ -77,7 +77,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanCompleteTheOrder(String rowID,
                                                   String description, JSONObject testData) {
 
@@ -87,9 +87,6 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         locationManagerEmployee.setEmployeeLastName("Romanchuk");
         locationManagerEmployee.setEmployeePassword("54321");
 
-        HomeScreenSteps.logOut();
-        GeneralSteps.logIn(locationManagerEmployee);
-
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
         final String inspectionId = InspectionSteps.saveInspection();
@@ -106,22 +103,17 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        MonitorSteps.changeLocation("automationMonitoring");
+        MonitorSteps.changeLocation(workOrderData.getMonitoring().getLocation());
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
 
-
-        MonitorSteps.changeLocation("automationMonitoring");
-        /*HomeScreenSteps.openMonitor();
-        MonitorSteps.changeLocation("automationMonitoring");
-        SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        InformationDialogValidations.clickStartAndVerifyMessage(VNextAlertMessages.START_REPAIR_ORDER);
         MonitorSteps.openItem(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.EDIT);
-        EditOrderSteps.switchToInfo();
-        expectedOrderInfo.setStartDate(LocalDate.now().format(DateTimeFormatter.ofPattern("MMM dd, yyyy")));
-        RepairOrderInfoValidations.verifyOrderInfo(expectedOrderInfo);
-        WizardScreenSteps.saveAction();
-        ScreenNavigationSteps.pressBackButton();*/
+        MenuSteps.selectMenuItem(MenuItems.COMPLETE);
+        GeneralSteps.confirmDialog();
+        MonitorValidations.verifyRepairOrderValues(workOrderId, workOrderData.getMonitoring().getRepairOrderData());
+        ScreenNavigationSteps.pressBackButton();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -129,7 +121,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
                                                                      String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        final String quickNotes = "No damage found";
+        final String quickNotes = "Warranty expired";
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
@@ -147,7 +139,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        MonitorSteps.changeLocation("automationMonitoring");
+        MonitorSteps.changeLocation(workOrderData.getMonitoring().getLocation());
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
 
@@ -171,7 +163,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
                                                                      String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        WholesailCustomer technician = new WholesailCustomer();
+        RetailCustomer technician = new RetailCustomer();
         technician.setFirstName("111");
         technician.setLastName("111");
 
@@ -191,7 +183,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.openMonitor();
-        MonitorSteps.changeLocation("automationMonitoring");
+        MonitorSteps.changeLocation(workOrderData.getMonitoring().getLocation());
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.START_RO);
