@@ -46,7 +46,7 @@ public class MonitorSearchValidations {
 
     public static void validateStatusValue(RepairOrderStatus repairOrderStatus) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        Assert.assertEquals(commonFilterScreen.getStatus().getRootElement().getAttribute("value"),
+        Assert.assertEquals(commonFilterScreen.getRepairStatus().getRootElement().getAttribute("value"),
                 repairOrderStatus.getStatusString());
     }
 

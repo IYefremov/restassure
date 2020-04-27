@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.MonitoringDataUtils;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.WholesailCustomer;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
+import com.cyberiansoft.test.dataclasses.r360.RepairOrdersSearchData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.enums.MenuItems;
@@ -14,14 +15,19 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.EditOrderSteps;
 import com.cyberiansoft.test.vnext.steps.monitoring.MonitorSteps;
+import com.cyberiansoft.test.vnext.steps.monitoring.RepairOrdersCommonFiltersPageSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InformationDialogValidations;
+import com.cyberiansoft.test.vnext.validations.MenuValidations;
+import com.cyberiansoft.test.vnext.validations.MonitorValidations;
 import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
 import com.cyberiansoft.test.vnext.validations.monitor.RepairOrderInfoValidations;
+import com.cyberiansoft.test.vnext.validations.monitor.RepairOrdersCommonFiltersPageValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -73,7 +79,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
 
     //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanCompleteTheOrder(String rowID,
-                                            String description, JSONObject testData) {
+                                                  String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         Employee locationManagerEmployee = new Employee();
@@ -105,7 +111,6 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         MonitorSteps.openItem(workOrderId);
 
 
-
         MonitorSteps.changeLocation("automationMonitoring");
         /*HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
@@ -121,7 +126,7 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAddTheNoteUsingQuickNotesInputField(String rowID,
-                                                  String description, JSONObject testData) {
+                                                                     String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         final String quickNotes = "No damage found";
@@ -202,6 +207,38 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         PhaseScreenValidations.validateServiceTechnician(workOrderData.getServiceData());
         WizardScreenSteps.saveAction();
         SearchSteps.searchByText("");
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyCommonFiltersOpenAsSeparatePage(String rowID, String description, JSONObject testData) throws Exception {
+
+        final String DEFAULT_FIELD_VALUES = "src/test/java/com/cyberiansoft/test/vnext/data/r360pro/monitoring/default-common-filters-fields-values.json";
+        RepairOrdersSearchData searchData = JSonDataParser.getTestDataFromJson(testData, RepairOrdersSearchData.class);
+        RepairOrdersSearchData defaultFieldValues = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(DEFAULT_FIELD_VALUES), RepairOrdersSearchData.class);
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.openCommonFiltersPage();
+        RepairOrdersCommonFiltersPageValidations.verifyCommonFiltersScreenHasAllElements();
+        RepairOrdersCommonFiltersPageValidations.verifyTimeFrameDropDownContainsCorrectOptions();
+        RepairOrdersCommonFiltersPageValidations.verifyPriorityDropDownContainsCorrectOptions();
+        RepairOrdersCommonFiltersPageSteps.setAllSearchFields(searchData);
+        RepairOrdersCommonFiltersPageValidations.verifyAllFieldsContainCorrectValues(searchData);
+        SearchSteps.search();
+        MonitorValidations.verifyRepairOrdersScreenIsOpenedWithOrders();
+        MonitorSteps.openCommonFiltersPage();
+        RepairOrdersCommonFiltersPageSteps.clearFilters();
+        RepairOrdersCommonFiltersPageValidations.verifyAllFieldsContainCorrectValues(defaultFieldValues);
+        TopScreenPanelSteps.goToThePreviousScreen();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyActionMenuIsOpenedWithoutLoadingSpinner(String rowID, String description, JSONObject testData) {
+
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.tapOnFirstOrder();
+        MenuValidations.verifyMenuScreenIsOpened();
+        MenuSteps.closeMenu();
         ScreenNavigationSteps.pressBackButton();
     }
 }

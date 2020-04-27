@@ -28,4 +28,13 @@ public class MonitorValidations {
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
         Assert.assertNotNull(repairOrderScreen.getRepairOrderElement(repairOrderId));
     }
+
+    public static void verifyRepairOrdersScreenIsOpenedWithOrders() {
+
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        Assert.assertTrue(repairOrderScreen.getRepairOrderList().isDisplayed(),
+                "Repair orders screen hasn't been opened");
+        Assert.assertTrue(repairOrderScreen.getRepairOrderListElements().size() > 0,
+                "Repair orders records have not been displayed");
+    }
 }

@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.screens.monitoring;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.Button;
 import com.cyberiansoft.test.vnext.webelements.ListPicker;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -14,13 +15,13 @@ public class CommonFilterScreen extends MonitorScreen {
     private WebElement searchInputField;
 
     @FindBy(xpath = "//div[contains(@class,\"common-filters-apply\")]")
-    private WebElement searchButton;
+    private Button searchButton;
 
     @FindBy(xpath = "//span[@data-automation-id=\"search-clear\"]")
     private WebElement clearSearchInputButton;
 
     @FindBy(xpath = "//div[contains(@class,'common-filters-clear')]")
-    private WebElement clearFilter;
+    private Button clearFilter;
 
     @FindBy(xpath = "//*[@data-autotests-id=\"search-cancel\"]")
     private WebElement cancelSearchInputButton;
@@ -41,7 +42,7 @@ public class CommonFilterScreen extends MonitorScreen {
     private ListPicker phase;
 
     @FindBy(xpath = "//*[@data-name='status']/select")
-    private ListPicker status;
+    private ListPicker repairStatus;
 
     @FindBy(xpath = "//*[@data-name='flag']/select")
     private ListPicker flag;
@@ -51,6 +52,9 @@ public class CommonFilterScreen extends MonitorScreen {
 
     @FindBy(xpath = "//div[@class=\"searchlist-nothing-found\"]")
     private WebElement nothingFoundLable;
+
+    @FindBy(xpath = "//div[@data-name='savedSearch']/select")
+    private ListPicker savedSearch;
 
     public CommonFilterScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);

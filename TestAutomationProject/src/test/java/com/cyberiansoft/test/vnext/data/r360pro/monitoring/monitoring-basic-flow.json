@@ -546,5 +546,37 @@
         }
       }
     }
+  ],
+  "verifyCommonFiltersOpenAsSeparatePage": [
+    {
+      "rowID": "verifyCommonFiltersOpenAsSeparatePage.01",
+      "description": "Test Case 108412: Monitor - Common filters open as separate page",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "108412",
+          "testCaseTitle": "Monitor - Common filters open as separate page"
+        }
+      ],
+      "savedSearch": "My Location - Active Work",
+      "timeFrame": "Last 90 days",
+      "department": "Default",
+      "phase": "PhaseAndServiceLevel",
+      "repairStatus": "All",
+      "flag": "All",
+      "priority": "Normal"
+    }
+  ],
+
+  "verifyActionMenuIsOpenedWithoutLoadingSpinner": [
+    {
+      "rowID": "verifyActionMenuIsOpenedWithoutLoadingSpinner.01",
+      "description": "Test Case 109447: R360 Client - Monitor - POS - Action Menu without loading spinner",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "109447",
+          "testCaseTitle": "R360 Client - Monitor - POS - Action Menu without loading spinner"
+        }
+      ]
+    }
   ]
 }
