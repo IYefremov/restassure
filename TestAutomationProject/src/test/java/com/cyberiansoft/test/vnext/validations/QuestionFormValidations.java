@@ -32,4 +32,12 @@ public class QuestionFormValidations {
         });
     }
 
+    public static void validateQuestionAnswered(QuestionsData questionData, boolean answered) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        if (answered)
+            Assert.assertTrue(questionScreen.getTextQuestionByText(questionData.getQuestionName()).getRootElement().getAttribute("class").contains("answered-question"));
+        else
+            Assert.assertFalse(questionScreen.getTextQuestionByText(questionData.getQuestionName()).getRootElement().getAttribute("class").contains("answered-question"));
+    }
+
 }
