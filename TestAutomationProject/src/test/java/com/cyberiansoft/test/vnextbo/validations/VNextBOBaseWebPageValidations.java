@@ -67,6 +67,14 @@ public class VNextBOBaseWebPageValidations {
         Assert.assertTrue(isIntercomButtonDisplayed, "Intercom button hasn't been displayed");
     }
 
+    public static void verifyIntercomButtonWithoutFrameIsDisplayed() {
+
+        WebDriver driver = DriverBuilder.getInstance().getDriver();
+        VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(driver);
+        boolean isIntercomButtonDisplayed = Utils.isElementDisplayed(baseWebPage.openCloseIntercomButton);
+        Assert.assertTrue(isIntercomButtonDisplayed, "Intercom button hasn't been displayed");
+    }
+
     public static void verifyIntercomMessengerIsOpened() {
 
         WebDriver driver = DriverBuilder.getInstance().getDriver();

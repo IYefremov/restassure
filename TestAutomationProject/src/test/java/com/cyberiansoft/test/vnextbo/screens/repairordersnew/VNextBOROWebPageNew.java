@@ -119,8 +119,20 @@ public class VNextBOROWebPageNew extends VNextBOBaseWebPage {
     @FindBy(xpath = "//li[@id='departmentsdropTab']/a")
     private WebElement departmentsSwitcherTab;
 
+    @FindBy(xpath = "//li[@id='departmentsWideDropTab']")
+    private WebElement departmentsWideSwitcherTab;
+
     @FindBy(xpath = "//li[@id='phasesdropTab']/a")
     private WebElement phasesSwitcherTab;
+
+    @FindBy(xpath = "//li[@id='phasesWideDropTab']")
+    private WebElement phasesWideSwitcherTab;
+
+    @FindBy(xpath = "//div[@id='departmentTabwideScreen1']")
+    private WebElement departmentsWideFilterTable;
+
+    @FindBy(xpath = "//div[@id='departmentTabwideScreen2']")
+    private WebElement phasesWideFilterTable;
 
     @FindBy(xpath = "//div[@id='departmentTabNoWideScreen1']//span[@class='k-input']")
     private WebElement departmentsDropdown;

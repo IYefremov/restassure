@@ -206,7 +206,7 @@ public class VNextBOMonitorTestCasesPart4New extends BaseTestCase {
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);
         Utils.goToPreviousPage();
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
-        VNextBOROPageStepsNew.searchBySavedAdvancedSearch("111");
+        VNextBOROPageStepsNew.searchBySavedAdvancedSearch("333");
         VNextBOROWebPageValidationsNew.verifySavedSearchEditPencilIconIsDisplayed(true);
         VNextBOROPageStepsNew.searchBySavedAdvancedSearch(data.getSearchName());
         VNextBOROWebPageValidationsNew.verifySavedSearchEditPencilIconIsDisplayed(false);
