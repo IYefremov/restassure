@@ -1,8 +1,8 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.questionforms;
 
+import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
-import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -23,18 +23,18 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class BasicQuestionFormTests extends BaseTestClass {
+public class BasicQuestionFormTestCases extends BaseTestClass {
 
-    @BeforeClass(description = "Team Monitoring Basic Flow Test")
+    @BeforeClass(description = "Team Basic Question Form Test Cases")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getQuestionFormBasicCasesDataPath();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanAnswerQuestionsSeparatley(String rowID,
+    public void testVerifyUserCanAnswerQuestionsSeparatley(String rowID,
                                                        String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
         QuestionsData expectedTrafficLightQuestionValuesAfterFirstSwipe = questionsDataList.get(0);
 
@@ -55,10 +55,10 @@ public class BasicQuestionFormTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyValidationOfRequiredQuestionsOnSaveInspection(String rowID,
+    public void testVerifyValidationOfRequiredQuestionsOnSaveInspection(String rowID,
                                                                     String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
         QuestionsData firstRequiredQuestion = questionsDataList.get(0);
         QuestionsData secondRequiredQuestion = questionsDataList.get(1);
@@ -87,10 +87,10 @@ public class BasicQuestionFormTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyUserCanAnswerTextQuestionsSeparatley(String rowID,
+    public void testVerifyUserCanAnswerTextQuestionsSeparatley(String rowID,
                                                            String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
         QuestionsData multiAnswerPredefinedQuestion = questionsDataList.get(0);
         QuestionsData singleAnswerPredefinedQuestion = questionsDataList.get(1);
@@ -114,10 +114,10 @@ public class BasicQuestionFormTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyValidationOfRequiredTextQuestionsOnSaveInspection(String rowID,
+    public void testVerifyValidationOfRequiredTextQuestionsOnSaveInspection(String rowID,
                                                                         String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
         QuestionsData firstRequiredQuestion = questionsDataList.get(0);
         QuestionsData secondRequiredQuestion = questionsDataList.get(1);
@@ -151,10 +151,10 @@ public class BasicQuestionFormTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyQuestionsHasDefaultAnswers(String rowID,
+    public void testVerifyQuestionsHasDefaultAnswers(String rowID,
                                                  String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
         QuestionsData questionWithPredefinedAnswer = questionsDataList.get(0);
 
@@ -169,13 +169,13 @@ public class BasicQuestionFormTests extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyQFShownForServiceAndEntityLevels(String rowID,
+    public void testVerifyQFShownForServiceAndEntityLevels(String rowID,
                                                        String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
         QuestionsData questionWithPredefinedAnswer = questionsDataList.get(0);
-        ServiceData serviceData = workOrderData.getServiceData();
+        ServiceData serviceData = inspectionData.getServiceData();
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_NOT_REQUIRED);
@@ -240,16 +240,16 @@ public class BasicQuestionFormTests extends BaseTestClass {
 //    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered(String rowID,
+    public void testVerifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered(String rowID,
                                                                                      String description, JSONObject testData) {
-        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
         QuestionsData serviceQuestion = questionsDataList.get(0);
-        List<ServiceData> expectedServices = workOrderData.getServicesList();
+        List<ServiceData> expectedServices = inspectionData.getServicesList();
         ServiceData firstExpectedNeedToSetupService = expectedServices.get(0);
         ServiceData secondExpectedNeedToSetupService = expectedServices.get(1);
         ServiceData expectedSelectedService = expectedServices.get(2);
-        PartServiceData partServiceData = workOrderData.getPartServiceDataList().get(0);
+        PartServiceData partServiceData = inspectionData.getPartServiceDataList().get(0);
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_ANSWER_SERVICES);
@@ -289,6 +289,37 @@ public class BasicQuestionFormTests extends BaseTestClass {
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
     }
-}
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyThatItIsPossibleToSaveEntityWithoutAnswerToNotRequiredQuestion(String rowID,
+                                                                                     String description, JSONObject testData) {
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_NOT_REQUIRED);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+
+        InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyThatItIsPossibleToSetDefaultAnswerForQuestion(String rowID,
+                                                                                         String description, JSONObject testData) {
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_NOT_REQUIRED);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+        QuestionFormValidations.validateQuestionAnswered(inspectionData.getQuestionScreenData().getQuestionsData().get(0), false);
+        QuestionFormValidations.validateQuestionAnswered(inspectionData.getQuestionScreenData().getQuestionsData().get(1), true);
+
+        InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+}
 

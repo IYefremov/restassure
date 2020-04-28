@@ -1,7 +1,7 @@
 {
-  "verifyUserCanAnswerQuestionsSeparatley": [
+  "testVerifyUserCanAnswerQuestionsSeparatley": [
     {
-      "rowID": "verifyUserCanAnswerQuestionsSeparatley.01",
+      "rowID": "testVerifyUserCanAnswerQuestionsSeparatley.01",
       "description": "TFSID:90014",
       "targetProcessTestCaseData": [
         {
@@ -43,9 +43,9 @@
       }
     }
   ],
-  "verifyValidationOfRequiredQuestionsOnSaveInspection": [
+  "testVerifyValidationOfRequiredQuestionsOnSaveInspection": [
     {
-      "rowID": "verifyUserCanAnswerQuestionsSeparatley.01",
+      "rowID": "testVerifyValidationOfRequiredQuestionsOnSaveInspection.01",
       "description": "TFSID:90021",
       "targetProcessTestCaseData": [
         {
@@ -70,9 +70,9 @@
       }
     }
   ],
-  "verifyUserCanAnswerTextQuestionsSeparatley": [
+  "testVerifyUserCanAnswerTextQuestionsSeparatley": [
     {
-      "rowID": " .01",
+      "rowID": "testVerifyUserCanAnswerTextQuestionsSeparatley.01",
       "description": "TFSID: ",
       "questionScreenData": {
         "questionsData": [
@@ -99,9 +99,9 @@
       }
     }
   ],
-  "verifyValidationOfRequiredTextQuestionsOnSaveInspection": [
+  "testVerifyValidationOfRequiredTextQuestionsOnSaveInspection": [
     {
-      "rowID": " .01",
+      "rowID": "testVerifyValidationOfRequiredTextQuestionsOnSaveInspection.01",
       "description": "TFSID: ",
       "targetProcessTestCaseData": [
         {
@@ -134,9 +134,9 @@
       }
     }
   ],
-  "verifyQuestionsHasDefaultAnswers": [
+  "testVerifyQuestionsHasDefaultAnswers": [
     {
-      "rowID": " verifyQuestionsHasDefaultAnswers.01",
+      "rowID": " testVerifyQuestionsHasDefaultAnswers.01",
       "description": "TFSID: 87011",
       "targetProcessTestCaseData": [
         {
@@ -157,9 +157,9 @@
       }
     }
   ],
-  "verifyQFShownForServiceAndEntityLevels": [
+  "testVerifyQFShownForServiceAndEntityLevels": [
     {
-      "rowID": " verifyQFShownForServiceAndEntityLevels.01",
+      "rowID": " testVerifyQFShownForServiceAndEntityLevels.01",
       "description": "TFSID: 87014",
       "targetProcessTestCaseData": [
         {
@@ -219,9 +219,9 @@
       ]
     }
   ],
-  "verifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered": [
+  "testVerifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered": [
     {
-      "rowID": " verifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered.01",
+      "rowID": " testVerifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered.01",
       "description": "TFSID: 87013",
       "targetProcessTestCaseData": [
         {
@@ -260,6 +260,50 @@
           "partPosition": "Rear"
         }
       ]
+    }
+  ],
+  "testVerifyThatItIsPossibleToSaveEntityWithoutAnswerToNotRequiredQuestion": [
+    {
+      "rowID": " testVerifyThatItIsPossibleToSaveEntityWithoutAnswerToNotRequiredQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91814",
+          "testCaseTitle": "R360 Inspection - Verify that it is possible to save entity without answer to not required question"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Discount"
+        }
+      ]
+    }
+  ],
+  "testVerifyThatItIsPossibleToSetDefaultAnswerForQuestion": [
+    {
+      "rowID": " testVerifyThatItIsPossibleToSetDefaultAnswerForQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91815",
+          "testCaseTitle": "R360 Inspection - Verify that it is possible to set default answer for question"
+        }
+      ],
+      "services": [
+        {
+          "serviceName": "Discount"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "No need to setup"
+          },
+          {
+            "questionName": "Test"
+          }
+        ]
+      }
     }
   ]
 }
