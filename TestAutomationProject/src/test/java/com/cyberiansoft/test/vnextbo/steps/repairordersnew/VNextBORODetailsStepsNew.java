@@ -37,7 +37,7 @@ public class VNextBORODetailsStepsNew {
 
     public static void expandPhaseByName(String phase) {
 
-        ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isDisplayed()).execute();
+        ConditionWaiter.create(30000, 1000, __ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isDisplayed()).execute();
         ConditionWaiter.create(__ -> new VNextBORODetailsWebPageNew().expandPhaseButton(phase).isEnabled()).execute();
         Utils.clickElement(new VNextBORODetailsWebPageNew().expandPhaseButton(phase));
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
@@ -178,6 +178,7 @@ public class VNextBORODetailsStepsNew {
             Utils.clickWithJS(detailsWebPage.dropDownOption(expectedStatus));
             WaitUtilsWebDriver.waitForPageToBeLoaded();
             WaitUtilsWebDriver.waitABit(5000);
+            ConditionWaiter.create(__ -> detailsWebPage.serviceStatusDropDownByService(service).isEnabled()).execute();
             ConditionWaiter.create(__ -> Utils.getText(detailsWebPage.serviceStatusDropDownByService(service)).equals(expectedStatus)).execute();
         }
     }

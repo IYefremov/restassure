@@ -113,7 +113,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROAdvancedSearchDialogStepsNew.setRepairStatusField("All");
         VNextBOROAdvancedSearchDialogStepsNew.clickSearchButton();
         WaitUtilsWebDriver.waitForPageToBeLoaded();
-        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getWoNumbersList().size() == 1).execute();
+        ConditionWaiter.create(20000, 500, __ -> new VNextBOROWebPageNew().getWoNumbersList().size() == 1).execute();
         ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getWoNumbersList().get(0).isEnabled()).execute();
     }
 
@@ -287,6 +287,13 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
             Utils.clickElement(new VNextBOROWebPageNew().getDepartmentsSwitcherTab());
     }
 
+    public static void switchToFilterWideTab(String tabName) {
+        if (tabName.equals("Phases"))
+            Utils.clickElement(new VNextBOROWebPageNew().getPhasesWideSwitcherTab());
+        else if (tabName.equals("Departments"))
+            Utils.clickElement(new VNextBOROWebPageNew().getDepartmentsWideSwitcherTab());
+    }
+
     public static void filterOrdersByDepartment(String department) {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
@@ -311,7 +318,8 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
     public static void changeDepartmentForFirstOrder(String department) {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
-        WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.elementToBeClickable(ordersPage.getOrdersDepartmentsList().get(0)));
+        ConditionWaiter.create(__-> ordersPage.getOrdersDepartmentsList().get(0).isDisplayed()).execute();
+        ConditionWaiter.create(__-> ordersPage.getOrdersDepartmentsList().get(0).isEnabled()).execute();
         Utils.clickElement(ordersPage.getOrdersDepartmentsList().get(0));
         Utils.clickWithJS(ordersPage.orderDepartmentDropDownOption(department));
         WaitUtilsWebDriver.getShortWait().until(ExpectedConditions.textToBePresentInElement(ordersPage.getOrdersDepartmentsList().get(0), department));
@@ -326,6 +334,18 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         if (ordersPage.getOrdersAmountThroughDepartmentsList().size() == 0) {
             Utils.clickWithActions(ordersPage.getDepartmentsDropdown());
             WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughDepartmentsList(), 2);
+        }
+    }
+
+    public static void openPhasesDropDown() {
+
+        VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
+        Utils.clickWithActions(ordersPage.getPhasesSwitcherTab());
+        Utils.clickWithActions(ordersPage.getPhasesDropdown());
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughPhasesList(), 2);
+        if (ordersPage.getOrdersAmountThroughPhasesList().size() == 0) {
+            Utils.clickWithActions(ordersPage.getPhasesDropdown());
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughPhasesList(), 2);
         }
     }
 
@@ -344,6 +364,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         int ordersAmount = 0;
+        openPhasesDropDown();
         if (!Utils.getText(ordersPage.ordersAmountForPhaseInTable(phase)).trim().equals(""))
             ordersAmount = Integer.parseInt(Utils.getText(ordersPage.ordersAmountForPhaseInTable(phase)).trim());
         return ordersAmount;
@@ -499,6 +520,7 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
     public static void openChangeTechnicianDialogForFirstOrder() {
 
+        ConditionWaiter.create(__ -> new VNextBOROWebPageNew().getOrdersTechniciansList().size() > 0).execute();
         Utils.clickElement(new VNextBOROWebPageNew().getOrdersTechniciansList().get(0));
         WaitUtilsWebDriver.waitForPageToBeLoaded();
     }

@@ -53,7 +53,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 
 		VNextBOROWebPageValidationsNew.verifyTermsAndConditionsLinkIsDisplayed();
 		VNextBOROWebPageValidationsNew.verifyPrivacyPolicyLinkIsDisplayed();
-		VNextBOROWebPageValidationsNew.verifyIntercomButtonIsDisplayed();
+		VNextBOROWebPageValidationsNew.verifyIntercomButtonWithoutFrameIsDisplayed();
 		VNextBOROWebPageValidationsNew.verifyLogoIsDisplayed();
 		VNextBOROWebPageValidationsNew.verifyTimeBoxIsDisplayed();
 		VNextBOSearchPanelValidations.verifySearchFieldIsDisplayed();
@@ -63,11 +63,11 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 		VNextBOROWebPageValidationsNew.verifyCopyRightTextIsDisplayed();
 		VNextBOROWebPageValidationsNew.verifySavedSearchDropDownFieldIdDisplayed();
 		VNextBOROWebPageValidationsNew.verifyDepartmentsTabIsDisplayed();
-		VNextBOROWebPageValidationsNew.verifyDepartmentDropdownIsDisplayed();
-		VNextBOROPageStepsNew.switchToFilterTab("Phases");
+		VNextBOROWebPageValidationsNew.verifyDepartmentsFilterTableIsDisplayed();
+		VNextBOROPageStepsNew.switchToFilterWideTab("Phases");
 		VNextBOROWebPageValidationsNew.verifyPhasesTabIsDisplayed();
-		VNextBOROWebPageValidationsNew.verifyPhasesDropdownIsDisplayed();
-		VNextBOROPageStepsNew.switchToFilterTab("Departments");
+		VNextBOROWebPageValidationsNew.verifyPhasesFilterTableIsDisplayed();
+		VNextBOROPageStepsNew.switchToFilterWideTab("Departments");
 		VNextBOROWebPageValidationsNew.verifyOrdersTableContainsCorrectColumns();
 	}
 
@@ -102,7 +102,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
 	public void verifyUserCanOpenAndCloseIntercom(String rowID, String description, JSONObject testData) {
 
-		VNextBOROPageStepsNew.openIntercomMessenger();
+		VNextBOROPageStepsNew.openIntercomMessengerWithoutFrame();
 		VNextBOROWebPageValidationsNew.verifyIntercomMessengerIsOpened();
 		VNextBOROPageStepsNew.closeIntercom();
 	}
@@ -261,7 +261,7 @@ public class VNextBOMonitorTestCasesPart1New extends BaseTestCase {
 		Utils.goToPreviousPage();
 		WaitUtilsWebDriver.waitForPageToBeLoaded();
 		VNextBOROWebPageValidationsNew.verifyWoTypesAreCorrectInTheTable(data.getWoType());
-		VNextBOROPageStepsNew.changeDepartmentForFirstOrder("Default");
+  		VNextBOROPageStepsNew.changeDepartmentForFirstOrder("Default");
 		int defaultOrdersAmount = VNextBOROPageStepsNew.getOrdersAmountForDepartment("Default");
 		int deptOrdersAmount = VNextBOROPageStepsNew.getOrdersAmountForDepartment("_dep");
 		VNextBOROPageStepsNew.changeDepartmentForFirstOrder("_dep");

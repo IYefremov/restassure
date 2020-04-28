@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.validations.commonobjects;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.vnextbo.screens.commonobjects.VNextBOSearchPanel;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
@@ -24,6 +25,7 @@ public class VNextBOSearchPanelValidations extends VNextBOBaseWebPageValidations
     public static void verifySearchFieldIsDisplayed() {
 
         VNextBOSearchPanel searchPanel = new VNextBOSearchPanel();
+        ConditionWaiter.create(__-> searchPanel.getSearchInputField().isDisplayed()).execute();
         Assert.assertTrue(Utils.isElementDisplayed(searchPanel.getSearchInputField()),
                 "Search input field hasn't been displayed.");
         Assert.assertTrue(Utils.isElementDisplayed(searchPanel.getSearchLoupeIcon()),
