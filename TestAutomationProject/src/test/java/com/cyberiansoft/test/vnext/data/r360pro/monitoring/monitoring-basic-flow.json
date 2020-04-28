@@ -44,6 +44,7 @@
         }
       ],
       "monitoring": {
+        "location": "automationMonitoring",
         "orderInfoDto": {
           "vin": "777777"
         }
@@ -72,8 +73,11 @@
         ]
       },
       "monitoring": {
-        "orderInfoDto": {
-          "vin": "777777"
+        "location": "automationMonitoring",
+        "repairOrderData": {
+          "phaseName": "PHASEANDSERVICELEVEL",
+          "vin": "777777",
+          "completePercentage": "33%"
         }
       }
     }
@@ -100,6 +104,7 @@
         ]
       },
       "monitoring": {
+        "location": "automationMonitoring",
         "orderInfoDto": {
           "vin": "777777"
         }
@@ -135,6 +140,7 @@
         ]
       },
       "monitoring": {
+        "location": "automationMonitoring",
         "orderInfoDto": {
           "vin": "777777"
         }
