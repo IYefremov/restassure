@@ -1,11 +1,14 @@
 package com.cyberiansoft.test.vnext.steps;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
+import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class HomeScreenSteps {
@@ -83,12 +86,25 @@ public class HomeScreenSteps {
         WaitUtils.click(vNextBaseScreen.getLogoutButton());
     }
 
-    public static void openMonitor() {
+    public static void clickMonitor() {
         VNextHomeScreen homeScreen = new VNextHomeScreen();
 
         JavascriptExecutor je = (JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         je.executeScript("arguments[0].scrollIntoView(true);", homeScreen.getMonitor());
         WaitUtils.click(homeScreen.getMonitor());
+        BaseUtils.waitABit(500);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
+    public static void openMonitor() {
+        clickMonitor();
+        VNextInformationDialog informationDialog = new VNextInformationDialog();
+        if (informationDialog.isInformationDialogExists()) {
+            informationDialog.clickInformationDialogOKButton();
+            SearchSteps.openSearchMenu();
+            SearchSteps.fillTextSearch("");
+            SearchSteps.cancelSearch();
+        }
     }
 
     public static void openCustomers() {

@@ -29,4 +29,13 @@ public class MenuValidations {
         }
 
     }
+
+    public static void verifyMenuScreenIsOpened() {
+
+        GeneralMenuScreen repairOrderMenuScreen = new GeneralMenuScreen();
+        Assert.assertTrue(repairOrderMenuScreen.getRootElement().isDisplayed(),
+                "Action menu hasn't been displayed");
+        Assert.assertTrue(repairOrderMenuScreen.getMenuItems().size() > 0,
+                "Action menu buttons haven't been displayed");
+    }
 }

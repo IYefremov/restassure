@@ -70,6 +70,12 @@ public class VNextBOBaseWebPageSteps {
         driver.switchTo().defaultContent();
     }
 
+    public static void openIntercomMessengerWithoutFrame()
+    {
+        Utils.clickElement(new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver()).openCloseIntercomButton);
+    }
+
+
     public static void closeIntercom()
     {
         WebDriver driver = DriverBuilder.getInstance().getDriver();

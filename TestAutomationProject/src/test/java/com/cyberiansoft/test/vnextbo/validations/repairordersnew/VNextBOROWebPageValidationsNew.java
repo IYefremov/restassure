@@ -322,26 +322,26 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
     public static void verifyDepartmentsTabIsDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getDepartmentsSwitcherTab()),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getDepartmentsWideSwitcherTab()),
                 "Departments switcher tab hasn't been displayed");
     }
 
     public static void verifyPhasesTabIsDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getPhasesSwitcherTab()),
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getPhasesWideSwitcherTab()),
                 "Phases switcher tab hasn't been displayed");
     }
 
-    public static void verifyDepartmentDropdownIsDisplayed() {
+    public static void verifyDepartmentsFilterTableIsDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getDepartmentsDropdown()),
-                "Departments dropdown hasn't been displayed");
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getDepartmentsWideFilterTable()),
+                "Departments filter table hasn't been displayed");
     }
 
-    public static void verifyPhasesDropdownIsDisplayed() {
+    public static void verifyPhasesFilterTableIsDisplayed() {
 
-        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getPhasesDropdown()),
-                "Phases dropdown hasn't been displayed");
+        Assert.assertTrue(Utils.isElementDisplayed(new VNextBOROWebPageNew().getPhasesWideFilterTable()),
+                "Phases filter table hasn't been displayed");
     }
 
     public static void verifySavedSearchDropDownFieldContainsCorrectValue(String expectedValue) {
@@ -355,10 +355,16 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
         List<String> savedSearchesList = new VNextBOROWebPageNew().getSavedSearchDropDownList().stream().
                 map(WebElement::getText).collect(Collectors.toList());
         if (shouldBeDisplayed)
+        {
+            ConditionWaiter.create(__ -> savedSearchesList.contains(searchName)).execute();
             Assert.assertTrue(savedSearchesList.contains(searchName),
                     "Saved search hasn't been presented in the saved searches list");
-        else Assert.assertTrue(!savedSearchesList.contains(searchName),
-                "Saved search hasn't been deleted");
+        }
+        else  {
+            ConditionWaiter.create(__ -> !savedSearchesList.contains(searchName)).execute();
+            Assert.assertTrue(!savedSearchesList.contains(searchName),
+                    "Saved search hasn't been deleted");
+        }
     }
 
     public static void verifyFirstOrderInvoiceNumberIsCorrect(String expectedInvoiceNumber) {

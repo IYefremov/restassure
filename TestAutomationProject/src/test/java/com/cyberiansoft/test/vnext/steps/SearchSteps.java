@@ -24,17 +24,17 @@ public class SearchSteps {
 
     public static void selectStatus(RepairOrderStatus status) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        commonFilterScreen.getStatus().selectListElement(status.getStatusString());
+        commonFilterScreen.getRepairStatus().selectListElement(status.getStatusString());
     }
 
     public static void clickStatusFilter() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
         WaitUtils.getGeneralFluentWait()
                 .until(driver -> {
-                    commonFilterScreen.getStatus().getRootElement().click();
+                    commonFilterScreen.getRepairStatus().getRootElement().click();
                     return true;
                 });
-        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getStatus().getElementsLocator())).size() > 0);
+        WaitUtils.getGeneralFluentWait().until((webDriver) -> webDriver.findElements(By.xpath(commonFilterScreen.getRepairStatus().getElementsLocator())).size() > 0);
     }
 
     public static void clickDepartmentFilter() {
@@ -79,8 +79,8 @@ public class SearchSteps {
 
     public static void search() {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        WaitUtils.elementShouldBeVisible(commonFilterScreen.getSearchButton(), true);
-        WaitUtils.click(commonFilterScreen.getSearchButton());
+        WaitUtils.elementShouldBeVisible(commonFilterScreen.getSearchButton().rootElement, true);
+        commonFilterScreen.getSearchButton().click();
         BaseUtils.waitABit(1000);
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
@@ -90,8 +90,8 @@ public class SearchSteps {
         openSearchMenu();
         fillTextSearch(text);
         clickCommonFiltersToggle();
-        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getStatus().getRootElement());
-        commonFilterScreen.getStatus().selectOption(status.getStatusString());
+        WaitUtils.waitUntilElementIsClickable(commonFilterScreen.getRepairStatus().getRootElement());
+        commonFilterScreen.getRepairStatus().selectOption(status.getStatusString());
         search();
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
