@@ -51,6 +51,8 @@ public class WaitUtilsWebDriver {
         return new FluentWait<>(DriverBuilder.getInstance().getDriver())
                 .pollingEvery(pollingMillis)
                 .withTimeout(timeout)
+                .ignoring(NoSuchElementException.class)
+                .ignoring(TimeoutException.class)
                 .ignoring(WebDriverException.class);
     }
 
@@ -93,7 +95,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static WebElement waitForVisibility(WebElement element, int timeout) {
-        return new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeout).until(ExpectedConditions.visibilityOf(element));
+        return getWebDriverWait(timeout).until(ExpectedConditions.visibilityOf(element));
     }
 
     public static WebElement waitForVisibility(By xpath) {
@@ -114,19 +116,16 @@ public class WaitUtilsWebDriver {
 
     public static void waitForInvisibility(By by, int timeoutInSeconds) {
         final WebDriver driver = DriverBuilder.getInstance().getDriver();
-        new WebDriverWait(driver, timeoutInSeconds).until(ExpectedConditions.invisibilityOf(driver.findElement(by)));
+        getWebDriverWait(timeoutInSeconds).until(ExpectedConditions.invisibilityOf(driver.findElement(by)));
     }
 
     public static void waitForInvisibilityIgnoringException(WebElement element) {
-        try {
-            getWait().until(ExpectedConditions.invisibilityOf(element));
-        } catch (Exception ignored) {}
+        getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(15)).until(ExpectedConditions.invisibilityOf(element));
     }
 
     public static void waitForInvisibilityIgnoringException(WebElement element, int timeoutSeconds) {
-        try {
-            new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutSeconds).until(ExpectedConditions.invisibilityOf(element));
-        } catch (Exception ignored) {}
+        getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(timeoutSeconds))
+                .until(ExpectedConditions.invisibilityOf(element));
     }
 
     public static WebElement waitForElementToBeClickable(WebElement element) {
@@ -134,7 +133,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static WebElement waitForElementToBeClickable(WebElement element, int timeoutSeconds) {
-        return new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutSeconds).until(ExpectedConditions.elementToBeClickable(element));
+        return getWebDriverWait(timeoutSeconds).until(ExpectedConditions.elementToBeClickable(element));
     }
 
     public static void waitForNewTab() {
@@ -159,31 +158,21 @@ public class WaitUtilsWebDriver {
     }
 
     public static List<WebElement> waitForVisibilityOfAllOptions(List<WebElement> listBox) {
-        getShortWait().until(ExpectedConditions.visibilityOfAllElements(listBox));
-        return listBox;
+        return waitForVisibilityOfAllOptions(listBox, 5);
     }
 
     public static List<WebElement> waitForVisibilityOfAllOptions(List<WebElement> listBox, int timeoutSeconds) {
-        new WebDriverWait(DriverBuilder.getInstance().getDriver(), timeoutSeconds).until(ExpectedConditions.visibilityOfAllElements(listBox));
-        return listBox;
+        return getWebDriverWait(timeoutSeconds).until(ExpectedConditions.visibilityOfAllElements(listBox));
     }
 
     public static List<WebElement> waitForVisibilityOfAllOptionsIgnoringException(List<WebElement> listBox) {
-        try {
-            waitForVisibilityOfAllOptions(listBox);
-            return listBox;
-        } catch (Exception ignored) {
-            return null;
-        }
+        return getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(15))
+                .until(ExpectedConditions.visibilityOfAllElements(listBox));
     }
 
     public static List<WebElement> waitForVisibilityOfAllOptionsIgnoringException(List<WebElement> listBox, int timeoutSeconds) {
-        try {
-            waitForVisibilityOfAllOptions(listBox, timeoutSeconds);
-            return listBox;
-        } catch (Exception ignored) {
-            return null;
-        }
+        return getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(timeoutSeconds))
+                .until(ExpectedConditions.visibilityOfAllElements(listBox));
     }
 
     public static void waitForVisibilityIgnoringException(WebElement element) {
@@ -276,10 +265,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitForInputFieldValueIgnoringException(WebElement element, String value) {
-        try {
-            new WebDriverWait(DriverBuilder.getInstance().getDriver(), 10)
-                    .until(ExpectedConditions.attributeToBe(element, "value", value));
-        } catch (Exception e) {}
+        getFluentWait().until(ExpectedConditions.attributeToBe(element, "value", value));
     }
 
     public static void waitForTextToBePresentInElement(WebElement element, String text) {
@@ -413,9 +399,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitUntilTitleContainsIgnoringException(String title, int timeOut) {
-        try {
-            waitUntilTitleContains(title, timeOut);
-        } catch (Exception ignored) {}
+        getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(timeOut)).until(ExpectedConditions.titleIs(title));
     }
 
     public static void waitUntilTitleIs(String title) {
