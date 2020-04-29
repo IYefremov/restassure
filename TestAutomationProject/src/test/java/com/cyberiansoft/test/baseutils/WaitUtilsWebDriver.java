@@ -191,9 +191,12 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitForVisibilityIgnoringException(WebElement element, int timeoutSeconds) {
-        try {
-            waitForVisibility(element, timeoutSeconds);
-        } catch (NoSuchElementException | TimeoutException ignored) {}
+        new FluentWait<>(DriverBuilder.getInstance().getDriver())
+                .pollingEvery(Duration.ofSeconds(timeoutSeconds))
+                .withTimeout(Duration.ofMillis(500))
+                .ignoring(NoSuchElementException.class)
+                .ignoring(TimeoutException.class)
+                .until(ExpectedConditions.visibilityOf(element));
     }
 
     public static void waitForDropDownToBeOpened(WebElement dropDown) {
