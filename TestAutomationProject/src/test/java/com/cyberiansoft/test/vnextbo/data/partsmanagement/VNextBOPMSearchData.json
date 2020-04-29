@@ -181,7 +181,8 @@
           "testCaseID": "91118",
           "testCaseTitle": "User can search RO by \"Part#\" using Advanced Search"
         }
-      ]
+      ],
+      "partNum": "ATP-17507"
     }
   ],
 
@@ -207,7 +208,8 @@
           "testCaseID": "91122",
           "testCaseTitle": "User can search RO by \"Ordered From\" using Advanced Search"
         }
-      ]
+      ],
+      "orderedFrom": "Advanced Denis"
     }
   ],
 
@@ -260,7 +262,7 @@
       "notes": "Autotest",
       "fromDate": "12/14/2016",
       "toDate": "12/14/2018",
-      "orderedFrom": "Test Team",
+      "orderedFrom": "Rozstalnoy_PP",
       "searchName": "Test91123"
     }
   ],
@@ -316,7 +318,7 @@
       "notes": "aaaaaaaaa",
       "fromDate": "01/26/2019",
       "toDate": "01/26/2019",
-      "orderedFrom": "01_TimeRep_team",
+      "orderedFrom": "Rozstalnoy_PP",
       "searchName": "Test91128"
     }
   ],
@@ -344,7 +346,7 @@
       "notes": "Autotest",
       "fromDate": "12/14/2016",
       "toDate": "12/14/2018",
-      "orderedFrom": "Test Team"
+      "orderedFrom": "Rozstalnoy_PP"
     }
   ],
 
@@ -371,7 +373,7 @@
       "notes": "aaaaaaaaa",
       "fromDate": "05/01/2019",
       "toDate": "06/01/2019",
-      "orderedFrom": "01_TimeRep_team",
+      "orderedFrom": "Rozstalnoy_PP",
       "searchName": "Test91130"
     }
   ],
@@ -399,7 +401,7 @@
       "notes": "aaaaaaaaa",
       "fromDate": "05/01/2019",
       "toDate": "06/01/2019",
-      "orderedFrom": "01_TimeRep_team",
+      "orderedFrom": "Rozstalnoy_PP",
       "searchName": "Test91131"
     }
   ],
@@ -427,7 +429,7 @@
       "notes": "aaaaaaaaa",
       "fromDate": "05/01/2019",
       "toDate": "06/01/2019",
-      "orderedFrom": "01_TimeRep_team",
+      "orderedFrom": "Rozstalnoy_PP",
       "searchName": "Test91132"
     }
   ],
@@ -455,7 +457,7 @@
       "notes": "aaaaaaaaa",
       "fromDate": "05/01/2019",
       "toDate": "06/01/2019",
-      "orderedFrom": "01_TimeRep_team",
+      "orderedFrom": "Rozstalnoy_PP",
       "searchName": "Test91133"
     }
   ],

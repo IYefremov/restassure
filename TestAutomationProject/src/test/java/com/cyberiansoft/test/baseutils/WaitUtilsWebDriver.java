@@ -193,7 +193,7 @@ public class WaitUtilsWebDriver {
     public static void waitForVisibilityIgnoringException(WebElement element, int timeoutSeconds) {
         try {
             waitForVisibility(element, timeoutSeconds);
-        } catch (Exception ignored) {}
+        } catch (NoSuchElementException | TimeoutException ignored) {}
     }
 
     public static void waitForDropDownToBeOpened(WebElement dropDown) {

@@ -12,7 +12,7 @@ public class VNextBOBaseWebPageSteps {
     {
         VNextBOBaseWebPage baseWebPage = new VNextBOBaseWebPage(DriverBuilder.getInstance().getDriver());
         Utils.clickElement(baseWebPage.logoBox);
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void openUserProfile()

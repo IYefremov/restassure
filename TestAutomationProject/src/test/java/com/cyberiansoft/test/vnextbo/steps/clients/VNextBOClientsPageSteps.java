@@ -25,13 +25,13 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
     public static void openActiveTab() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getActiveTab());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void openArchivedTab() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getArchivedTab());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static int getClientsAmount() {
@@ -133,17 +133,21 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
     public static void archiveClient(String clientName) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(clientName);
-        clickActionsButtonForClient(clientName);
-        clickArchiveDropMenuButton();
-        VNextBOModalDialogSteps.clickOkButton();
+        try {
+            clickActionsButtonForClient(clientName);
+            clickArchiveDropMenuButton();
+            VNextBOModalDialogSteps.clickOkButton();
+        } catch (Exception e) {}
     }
 
     public static void restoreClient(String clientName) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(clientName);
-        clickActionsButtonForClient(clientName);
-        clickRestoreDropMenuButton();
-        VNextBOModalDialogSteps.clickOkButton();
+        try {
+            clickActionsButtonForClient(clientName);
+            clickRestoreDropMenuButton();
+            VNextBOModalDialogSteps.clickOkButton();
+        } catch (Exception ignored) {}
     }
 
     public static void createNewClient(VNextBOClientsData clientsData, boolean wholesale){

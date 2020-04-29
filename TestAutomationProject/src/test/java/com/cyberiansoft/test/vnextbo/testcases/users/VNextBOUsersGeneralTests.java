@@ -169,7 +169,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.openPageByNumber(4);
         VNextBOUsersPageSteps.clickLogo();
         VNextBOLeftMenuInteractions.clickSubMenuItem("Users");
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("4");
         VNextBOPageSwitcherSteps.clickHeaderFirstPageButton();
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
@@ -191,6 +191,7 @@ public class VNextBOUsersGeneralTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.openPageByNumber(2);
         VNextBOUsersPageSteps.clickLogo();
         VNextBOLeftMenuInteractions.clickSubMenuItem("Users");
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
         VNextBOPageSwitcherValidations.verifyOpenedPageNumberIsCorrect("2");
         VNextBOPageSwitcherValidations.verifyItemsPerPageNumberIsCorrect("50");
         VNextBOPageSwitcherSteps.changeItemsPerPage("10");

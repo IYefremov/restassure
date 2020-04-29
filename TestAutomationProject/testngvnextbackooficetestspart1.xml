@@ -2,13 +2,13 @@
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
     </listeners>
-    <test name="Invoice Details Tests">
-        <parameter name="userName" value="test.automation1@getnada.com"/>
-        <parameter name="userPassword" value="test12345"/>
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>
-        </classes>
-    </test>
+    <!--<test name="Invoice Details Tests">-->
+        <!--<parameter name="userName" value="test.automation1@getnada.com"/>-->
+        <!--<parameter name="userPassword" value="test12345"/>-->
+        <!--<classes>-->
+            <!--<class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>-->
+        <!--</classes>-->
+    <!--</test>-->
     <test name="Operations Invoices Tests">
         <parameter name="userName" value="test.automation1@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>

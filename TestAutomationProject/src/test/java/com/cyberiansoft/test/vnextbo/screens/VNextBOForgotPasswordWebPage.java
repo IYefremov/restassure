@@ -56,11 +56,11 @@ public class VNextBOForgotPasswordWebPage extends VNextBOBaseWebPage {
 	public boolean isSubmitButtonDisplayed()  { return submitBtn.isDisplayed(); }
 	
 	public void clickSubmitButton() {
-		submitBtn.click();
+	    Utils.clickElement(submitBtn);
 	}
 
 	public void clickLoginLink() {
-		loginLink.click();
+		Utils.clickElement(loginLink);
 	}
 	
 	public String getErrorMessageValue() {
