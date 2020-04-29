@@ -9,7 +9,7 @@ public class BOSearchSteps {
 
     public static void expandSearchTab() {
         final BOSearchPanel searchPanel = new BOSearchPanel();
-        WaitUtilsWebDriver.elementShouldBeVisible(searchPanel.getSearchTogglerButton(), true);
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(searchPanel.getSearchTogglerButton());
         WaitUtilsWebDriver.waitForAttributeToContain(searchPanel.getSearchPanel(), "class", "slider");
         if (!SearchValidations.isSearchExpanded()) {
             Utils.clickElement(searchPanel.getSearchTogglerButton());

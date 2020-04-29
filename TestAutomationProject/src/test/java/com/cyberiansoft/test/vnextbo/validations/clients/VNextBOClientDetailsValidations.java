@@ -183,7 +183,9 @@ public class VNextBOClientDetailsValidations {
 
     public static void verifyAllClientDetailsBlocksData(VNextBOClientsData clientsData, boolean wholesale, boolean selectedCheckboxes) {
 
-        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab("true");
+        if (!VNextBOClientDetailsValidations.verifyClientInfoPanelIsExpanded()) {
+            VNextBOClientDetailsViewAccordionSteps.clickClientsInfoTab("true");
+        }
         VNextBOClientDetailsValidations.verifyClientInfoFieldsContainCorrectData(clientsData.getEmployee());
         VNextBOClientDetailsViewAccordionSteps.clickAccountInfoTab("true");
         VNextBOClientDetailsValidations.verifyAccountInfoFieldsContainCorrectData(clientsData.getAccountInfoData(), selectedCheckboxes);

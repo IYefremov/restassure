@@ -152,8 +152,7 @@ public class VNextBOPMOrderDetailsPartsDetailsLaborTests extends BaseTestCase {
         }
         final int laborsAmountBeforeDeleting = VNextBOPartsDetailsPanelSteps.getLaborsAmountForPartByNumberInList(0);
         VNextBOPartsDetailsPanelSteps.deleteLaborForPartByNumberInListAndLaborServiceName(0, laborServiceName);
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("O-444-00531");
-        VNextBOPartsDetailsPanelSteps.expandLaborBlockForPartByNumberInList(0);
-        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laborsAmountBeforeDeleting);
+        VNextBOPartsDetailsPanelSteps.refreshPageWhileLaborIsUpdated("O-444-00531", 0, laborsAmountBeforeDeleting - 1);
+        VNextBOPartsDetailsPanelValidations.verifyLaborsAmountIsCorrect(0, laborsAmountBeforeDeleting -1);
     }
 }

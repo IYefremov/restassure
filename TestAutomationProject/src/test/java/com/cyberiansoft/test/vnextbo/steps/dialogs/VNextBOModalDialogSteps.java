@@ -19,6 +19,7 @@ public class VNextBOModalDialogSteps {
     public static void clickOkButton() {
 
         VNextBOModalDialog modalDialog = new VNextBOModalDialog();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(modalDialog.getConfirmOKButton());
         WaitUtilsWebDriver.waitForVisibility(modalDialog.getConfirmOKButton(), 4);
         Utils.clickElement(modalDialog.getConfirmOKButton());
         WaitUtilsWebDriver.waitForInvisibility(modalDialog.getConfirmOKButton(), 4);

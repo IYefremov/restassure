@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.bo.validations.teams;
+package com.cyberiansoft.test.bo.validations.company.teams;
 
 import com.cyberiansoft.test.bo.steps.company.teams.BOTeamsDialogSteps;
 import org.testng.Assert;

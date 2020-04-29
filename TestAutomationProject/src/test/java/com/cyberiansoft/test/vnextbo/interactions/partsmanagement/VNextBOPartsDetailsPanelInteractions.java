@@ -331,8 +331,7 @@ public class VNextBOPartsDetailsPanelInteractions {
     public static void setCoreStatusForPartByPartNumber(int partNumber, String status) {
         Utils.clickElement(new VNextBOPartsDetailsPanel().getPartCoreStatusFields().get(partNumber));
         Utils.selectOptionInDropDownWithJsScroll(status);
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void openCoreStatusDropDown(int partNumber) {

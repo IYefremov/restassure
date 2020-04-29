@@ -16,6 +16,7 @@ import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.dialogs.VNextBOModalDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionsAdvancedSearchValidations;
 import com.cyberiansoft.test.vnextbo.validations.inspections.VNextBOInspectionsPageValidations;
+import org.apache.commons.lang.RandomStringUtils;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -43,7 +44,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         put("Status", "New");
         put("Inspection#", "123");
         put("Timeframe", "Week to Date");
-        put("Search Name", "AutomationSearchTest");
+        put("Search Name", "AutomationSearchTest-" + RandomStringUtils.randomAlphanumeric(3));
     }};
 
     Map<String, String> editedValuesForSearch = new HashMap<String, String>() {{
@@ -55,7 +56,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         put("Status", "New");
         put("Inspection#", "456");
         put("Timeframe", "Week to Date");
-        put("Search Name", "AutomationSearchTest2");
+        put("Search Name", "AutomationSearchTest2-" + RandomStringUtils.randomAlphanumeric(3));
     }};
 
     @BeforeClass
@@ -88,13 +89,11 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchInspectionsUsingSearch(String rowID, String description, JSONObject testData) {
 
-        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading("123");
+        final String searchText = "123";
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(searchText);
         VNextBOInspectionsPageValidations.verifyClearFilterIconIsDisplayed();
-        for (String inspectionName : VNextBOInspectionsPageSteps.getNamesOfAllInspectionsInTheList()
-        ) {
-            Assert.assertTrue(inspectionName.contains("123"), inspectionName + "hasn't contained searched text \"123\"");
-        }
-        Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Text: 123"),
+        VNextBOInspectionsPageValidations.verifyInspectionVehicleInfoContainsText(searchText);
+        Assert.assertTrue(VNextBOInspectionsPageSteps.getCustomSearchInfoTextValue().contains("Text: " + searchText),
                 "Search option under Search field hasn't been correct");
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
@@ -151,7 +150,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOInspectionsPageSteps.saveAdvancedSearch(valuesForSearch);
         VNextBOInspectionsPageValidations.verifyEditAdvancedSearchIconIsDisplayed();
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        Assert.assertTrue(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists("AutomationSearchTest"),
+        Assert.assertTrue(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists(valuesForSearch.get("Search Name")),
                 "Saved searches list hasn't contained saved AutomationSearchTest search");
         VNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
         VNextBOInspectionsAdvancedSearchSteps.deleteSavedSearchFilter();
@@ -234,7 +233,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
         VNextBOModalDialogSteps.clickNoButton();
         VNextBOInspectionsAdvancedSearchValidations.verifyAdvancedSearchFormIsNotDisplayed(vNextBOInspectionAdvancedSearchForm);
         VNextBOInspectionsPageSteps.clickExpandAdvancedSearchPanel();
-        Assert.assertTrue(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists("AutomationSearchTest"),
+        Assert.assertTrue(VNextBOInspectionsPageValidations.verifySavedAdvancedSearchFilterExists(valuesForSearch.get("Search Name")),
                 "Saved searches list hasn't contained saved AutomationSearchTest search");
         VNextBOInspectionsPageSteps.clickEditAdvancedSearchIcon();
         VNextBOInspectionsAdvancedSearchSteps.deleteSavedSearchFilter();
@@ -283,7 +282,7 @@ public class VNextBOInspectionsSearchTests extends BaseTestCase {
             VNextBOInspectionsPageValidations.verifyHowToCreateInspectionLinkTextIsCorrect(
                     VNextBOInspectionsPageSteps.getNotFoundInspectionMessage());
         } else {
-            Assert.assertTrue(VNextBOInspectionsPageSteps.getSelectedInspectionParameterValueByName("PO#").contains("123"),
+            Assert.assertTrue(VNextBOInspectionsPageSteps.getSelectedInspectionVehicleInfoValues().contains("123"),
                     "Inspection has been found incorrectly");
         }
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();

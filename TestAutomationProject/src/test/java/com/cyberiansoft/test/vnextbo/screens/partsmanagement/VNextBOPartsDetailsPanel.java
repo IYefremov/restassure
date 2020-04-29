@@ -23,7 +23,7 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(id = "parts-providers-list")
     private WebElement getQuotesButton;
 
-    @FindBy(xpath = "//div[@id='part-entity-details']//div[contains(@data-bind, 'deleteParts')]")
+    @FindBy(xpath = "//div[@id='part-entity-details']//button[@data-automation-id='delete-parts-submit']")
     private WebElement deleteSelectedPartsButton;
 
     @FindBy(xpath = "//div[contains(@class, 'entity-details__head__all-items-toggle  pull-left')]")

@@ -82,7 +82,8 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOClientServicesPageValidations.verifyServicesTableIsDisplayed();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //todo bug https://cyb.tpondemand.com/restui/board.aspx?#page=bug/118999
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSwitchBetweenPages(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.clickHeaderNextPageButton();
@@ -104,7 +105,8 @@ public class VNextBOClientsClientServicesTests extends BaseTestCase {
         VNextBOPageSwitcherSteps.clickHeaderFirstPageButton();
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //todo bug https://cyb.tpondemand.com/restui/board.aspx?#page=bug/118999
+    @Test(enabled = false, dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanUsePageFilter(String rowID, String description, JSONObject testData) {
 
         VNextBOPageSwitcherSteps.changeItemsPerPage("20");

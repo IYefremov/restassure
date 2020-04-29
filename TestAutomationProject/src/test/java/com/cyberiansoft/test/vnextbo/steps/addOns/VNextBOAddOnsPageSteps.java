@@ -23,7 +23,7 @@ public class VNextBOAddOnsPageSteps {
             refreshPageWhileAddOnIsChangedFromPendingStatusToOnOrOffStatus(addOn);
         }
         if (Utils.getText(addOnsPage.getIntegrationStatus(addOn)).equals(IntegrationStatus.ON.name())) {
-            WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getAddOnsTurnOffButton(addOn), 3);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getAddOnsTurnOffButton(addOn));
             Utils.clickElement(addOnsPage.getAddOnsTurnOffButton(addOn));
             confirmAddOnChange(addOn);
         }
@@ -35,13 +35,14 @@ public class VNextBOAddOnsPageSteps {
             refreshPageWhileAddOnIsChangedFromPendingStatusToOnOrOffStatus(addOn);
         }
         if (Utils.getText(addOnsPage.getIntegrationStatus(addOn)).equals(IntegrationStatus.OFF.name())) {
-            WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getAddOnsTurnOnButton(addOn), 3);
+            WaitUtilsWebDriver.waitForElementNotToBeStale(addOnsPage.getAddOnsTurnOnButton(addOn), 5);
             Utils.clickElement(addOnsPage.getAddOnsTurnOnButton(addOn));
             confirmAddOnChange(addOn);
         }
     }
 
     private static void confirmAddOnChange(String addOn) {
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitABit(1000);
         VNextBOConfirmationDialogInteractions.clickYesButton();
         WaitUtilsWebDriver.waitABit(1000);

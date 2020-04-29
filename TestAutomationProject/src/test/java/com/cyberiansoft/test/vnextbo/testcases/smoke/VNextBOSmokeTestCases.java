@@ -100,6 +100,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
                 "The status of inspection hasn't been changed from 'New' to 'Approved'");
     }
 
+    //todo bug https://cyb.tpondemand.com/entity/121692-r360-bo-the-search-filter-is
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddAndDeleteNewParts(String rowID, String description, JSONObject testData) {
 
@@ -113,11 +114,13 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         final int numberOfParts = VNextBOPartsDetailsPanelSteps.getPartsListSize();
         VNextBOPartsDetailsPanelSteps.addNewPart(data.getPartData());
         VNextBOPartsDetailsPanelSteps.updatePartsList(woNum);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts + 2);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts + 2, woNum);
 
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(numberOfParts + 1);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum); //todo delete after bug fix
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(numberOfParts);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum); //todo delete after bug fix
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts, woNum);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
@@ -136,6 +139,7 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(0, orderedStatus);
     }
 
+    //todo bug https://cyb.tpondemand.com/entity/121692-r360-bo-the-search-filter-is
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanDuplicateThePart(String rowID, String description, JSONObject testData) {
         VNextBONewSmokeData data = JSonDataParser.getTestDataFromJson(testData, VNextBONewSmokeData.class);
@@ -152,7 +156,8 @@ public class VNextBOSmokeTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelValidations.verifyPartDefaultValues(numberOfParts);
         VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(numberOfParts, PartStatus.OPEN.getStatus());
         VNextBOPartsDetailsPanelSteps.deletePartByNumberInList(VNextBOPartsDetailsPanelSteps.getPartsListSize() - 1);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts);
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum); //todo delete after bug fix
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(numberOfParts, woNum);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

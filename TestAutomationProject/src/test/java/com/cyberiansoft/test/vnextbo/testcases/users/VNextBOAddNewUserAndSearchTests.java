@@ -144,7 +144,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByPhone(String rowID, String description, JSONObject testData) {
 
         VNextBOUsersPageSteps.searchUserByPhone(newUserPhone);
-        Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found by phone");
+        Assert.assertTrue(VNextBOUsersPageSteps.getUsersTableRowsCount() > 0, "User hasn't been found by phone");
         Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText(newUserPhone));
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Phone: " + newUserPhone);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
@@ -164,7 +164,7 @@ public class VNextBOAddNewUserAndSearchTests extends BaseTestCase {
     public void verifyUserCanSearchByName(String rowID, String description, JSONObject testData) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(newUserFirstName);
-        Assert.assertEquals(VNextBOUsersPageSteps.getUsersTableRowsCount(), 1, "User hasn't been found");
+        Assert.assertTrue(VNextBOUsersPageSteps.getUsersTableRowsCount() > 0, "User hasn't been found");
         Assert.assertTrue(VNextBOUsersPageValidations.verifyUserIsPresentOnCurrentPageByText(newUserFirstName));
         VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Name: " + newUserFirstName);
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();

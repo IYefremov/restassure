@@ -4,6 +4,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOClientsData;
 import com.cyberiansoft.test.vnextbo.screens.clients.VNextBOClientsWebPage;
+import com.cyberiansoft.test.vnextbo.screens.clients.clientdetails.VNextBOClientInfoBlock;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
@@ -24,13 +25,13 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
     public static void openActiveTab() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getActiveTab());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static void openArchivedTab() {
 
         Utils.clickElement(new VNextBOClientsWebPage().getArchivedTab());
-        WaitUtilsWebDriver.waitForSpinnerToDisappear();
+        WaitUtilsWebDriver.waitForPageToBeLoaded();
     }
 
     public static int getClientsAmount() {
@@ -69,6 +70,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(new VNextBOClientsWebPage().getEditDropMenuButton());
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
     }
 
     public static void clickArchiveDropMenuButton() {
@@ -85,6 +87,7 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
 
         clickActionsButtonForClient(client);
         clickEditDropMenuButton();
+        WaitUtilsWebDriver.waitForVisibilityIgnoringException(new VNextBOClientInfoBlock().getClientInfoPanel());
     }
 
     public static void searchClientByEmail(String email) {
@@ -130,17 +133,21 @@ public class VNextBOClientsPageSteps extends VNextBOBaseWebPageSteps {
     public static void archiveClient(String clientName) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(clientName);
-        clickActionsButtonForClient(clientName);
-        clickArchiveDropMenuButton();
-        VNextBOModalDialogSteps.clickOkButton();
+        try {
+            clickActionsButtonForClient(clientName);
+            clickArchiveDropMenuButton();
+            VNextBOModalDialogSteps.clickOkButton();
+        } catch (Exception e) {}
     }
 
     public static void restoreClient(String clientName) {
 
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(clientName);
-        clickActionsButtonForClient(clientName);
-        clickRestoreDropMenuButton();
-        VNextBOModalDialogSteps.clickOkButton();
+        try {
+            clickActionsButtonForClient(clientName);
+            clickRestoreDropMenuButton();
+            VNextBOModalDialogSteps.clickOkButton();
+        } catch (Exception ignored) {}
     }
 
     public static void createNewClient(VNextBOClientsData clientsData, boolean wholesale){

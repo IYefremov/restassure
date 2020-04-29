@@ -124,7 +124,7 @@ public class VNextBOInspectionsAdvancedSearchSteps {
         Utils.clearAndType(fieldWithAutocomplete, value);
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        Utils.clickWithJS(advancedSearchForm.dropDownFieldOption(value));
+        Utils.clickElement(advancedSearchForm.dropDownFieldOption(value));
     }
 
     public static void setAllAdvancedSearchFields(Map<String, String> listWithValuesForFields) {

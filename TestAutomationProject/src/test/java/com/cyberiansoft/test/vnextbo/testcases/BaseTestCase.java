@@ -36,7 +36,7 @@ public class BaseTestCase {
     }
 
     @BeforeSuite
-    public void setUp() throws IOException, UnirestException {
+    public void setUp() {
         Optional<String> testPlanIdFromMaven = Optional.ofNullable(System.getProperty("testPlanId"));
         Optional<String> releaseIdFromMaven = Optional.ofNullable(System.getProperty("releaseId"));
         TPIntegrationService tpIntegrationService = new TPIntegrationService();

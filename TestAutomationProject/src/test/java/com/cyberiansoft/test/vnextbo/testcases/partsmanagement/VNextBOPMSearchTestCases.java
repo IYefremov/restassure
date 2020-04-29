@@ -181,11 +181,12 @@ public class VNextBOPMSearchTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByOEMNumUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
-        VNextBOAdvancedSearchDialogSteps.setPartNumberField("My OEM");
+        VNextBOAdvancedSearchDialogSteps.setPartNumberField(data.getPartNum());
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
-        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Part#: My OEM");
-        VNextBOPartsDetailsPanelValidations.verifyPartNumberIsCorrect(0, "My OEM");
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Part#: " + data.getPartNum());
+        VNextBOPartsDetailsPanelValidations.verifyPartNumberIsCorrect(0, data.getPartNum());
         VNextBOSearchPanelSteps.clearSearchFilterWithSpinnerLoading();
     }
 
@@ -203,16 +204,17 @@ public class VNextBOPMSearchTestCases extends BaseTestCase {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanSearchROByOrderedFromUsingAdvancedSearch(String rowID, String description, JSONObject testData) {
 
+        VNextBOPartsManagementSearchData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementSearchData.class);
         VNextBOPartsManagementWebPageSteps.openAdvancedSearchForm();
-        VNextBOAdvancedSearchDialogSteps.setOrderedFromField("Test Team");
+        VNextBOAdvancedSearchDialogSteps.setOrderedFromField(data.getOrderedFrom());
         VNextBOAdvancedSearchDialogSteps.clickSearchButton();
-        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Ordered From: Test Team");
-        final String woNum = VNextBOBreadCrumbInteractions.getLastBreadCrumbText();
+        VNextBOSearchPanelValidations.verifySearchFilterTextIsCorrect("Ordered From: " + data.getOrderedFrom());
+        final String woNum = VNextBOPartsOrdersListPanelSteps.getPartNumberByOrder(0);
         VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
         VNextBOROAdvancedSearchDialogSteps.searchByWoTimeFrameAndRepairStatus(
                 woNum, TimeFrameValues.TIMEFRAME_CUSTOM, RepairStatus.All);
         VNextBOROPageSteps.openRODetailsPage(woNum);
-        VNextBORODetailsPartsBlockValidations.verifyOrderedFromFieldsContainText("Test Team");
+        VNextBORODetailsPartsBlockValidations.verifyOrderedFromFieldsContainText(data.getOrderedFrom());
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)

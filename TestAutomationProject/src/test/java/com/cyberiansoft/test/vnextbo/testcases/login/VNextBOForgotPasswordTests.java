@@ -10,7 +10,6 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOForgotPasswordWebPage;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOResetPasswordPage;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
@@ -149,7 +148,6 @@ public class VNextBOForgotPasswordTests extends BaseTestCase {
 
         webdriverGotoWebPage(resetPasswordUrl);
 
-        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
         VNextBOHomeWebPageValidations.verifySupportForBOButtonIsDisplayed();
         VNextBOHeaderPanelSteps.logout();
         VNextBOLoginInteractions.clickForgotPasswordLink();

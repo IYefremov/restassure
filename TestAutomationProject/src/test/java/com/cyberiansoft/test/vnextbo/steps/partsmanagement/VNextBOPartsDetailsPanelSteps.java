@@ -117,6 +117,7 @@ public class VNextBOPartsDetailsPanelSteps {
     public static void setPriceForPartByPartNumberInList(int partNumber, String price) {
 
         VNextBOPartsDetailsPanel detailsPanel = new VNextBOPartsDetailsPanel();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(detailsPanel.getPartPriceField().get(partNumber));
         Utils.clickElement(detailsPanel.getPartPriceField().get(partNumber));
         Utils.clearAndType(detailsPanel.getPartPriceField().get(partNumber), price);
         Utils.clickElement(detailsPanel.getPartQuantityField().get(partNumber));
@@ -190,6 +191,18 @@ public class VNextBOPartsDetailsPanelSteps {
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitForAttributeNotToContain(
                 partsDetailsPanel.getPartLaborsBlock().get(partNumber), "style", "display: none", 3);
+    }
+
+    public static void refreshPageWhileLaborIsUpdated(String order, int partNumber, int amount) {
+        int attempts = 4;
+        while (attempts > 0) {
+            VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(order);
+            expandLaborBlockForPartByNumberInList(0);
+            if (getLaborsAmountForPartByNumberInList(partNumber) == amount) {
+                break;
+            }
+            attempts--;
+        }
     }
 
     public static int getLaborsAmountForPartByNumberInList(int partNumber) {
@@ -352,13 +365,13 @@ public class VNextBOPartsDetailsPanelSteps {
 
     public static void updatePartsListAfterDuplicating(String woNum, int expectedPartsAmount) {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount, woNum);
         VNextBOPartsDetailsPanelValidations.verifyDuplicatePartIsAdded(woNum, expectedPartsAmount);
     }
 
     public static void updatePartsList(String woNum, int expectedPartsAmount) {
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(woNum);
-        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount);
+        VNextBOPartsDetailsPanelValidations.verifyPartsAmountIsUpdated(expectedPartsAmount, woNum);
     }
 
     public static void openPartsProvidersModalDialog() {

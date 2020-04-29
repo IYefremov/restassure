@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnextbo.testcases.login;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.core.BrowserType;
 import com.cyberiansoft.test.dataclasses.vNextBO.VNextBOHomePageData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -10,7 +11,6 @@ import com.cyberiansoft.test.vnextbo.config.VNextBOConfigInfo;
 import com.cyberiansoft.test.vnextbo.config.VNextBOTestCasesDataPaths;
 import com.cyberiansoft.test.vnextbo.interactions.VNextBOLoginInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOFooterPanelInteractions;
-import com.cyberiansoft.test.vnextbo.screens.VNextBOHomeWebPage;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOHeaderPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -36,16 +36,18 @@ public class VNextBOLoginTests extends BaseTestCase {
     @Override
     @BeforeClass
     public void login(ITestContext context) {
-
-        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
-        DriverBuilder.getInstance().setDriver(browserType);
-        webdriver = DriverBuilder.getInstance().getDriver();
-        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getLoginTD();
+        userName = VNextBOConfigInfo.getInstance().getVNextBONadaTestMail();
+        userPassword = VNextBOConfigInfo.getInstance().getVNextBOPassword();
+        browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
     }
 
     @BeforeMethod
-    public void setUp() {
+    public void restart() {
+        if (browserType.getBrowserTypeString().equals(BrowserType.FIREFOX.getBrowserTypeString())) {
+            browserType = BaseUtils.getBrowserType(VNextBOConfigInfo.getInstance().getDefaultBrowser());
+            DriverBuilder.getInstance().setDriver(browserType);
+        }
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
     }
 
@@ -118,7 +120,6 @@ public class VNextBOLoginTests extends BaseTestCase {
 
         VNextBOHomePageData data = JSonDataParser.getTestDataFromJson(testData, VNextBOHomePageData.class);
         VNextBOLoginSteps.userLogin(data.getLogin(), data.getPassword());
-        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
         VNextBOHomeWebPageValidations.verifySupportForBOButtonIsDisplayed();
         VNextBOHeaderPanelSteps.logout();
     }
@@ -129,14 +130,27 @@ public class VNextBOLoginTests extends BaseTestCase {
         VNextBOLoginInteractions.setEmailField(userName);
         VNextBOLoginInteractions.setPasswordField(userPassword);
         webdriverGotoWebPage("https://www.google.com");
-        webdriver.navigate().back();
+        Utils.goToPreviousPage();
         Assert.assertEquals(VNextBOLoginInteractions.getValueFromEmailField(), "",
                 "Email field hasn't been empty");
         Assert.assertEquals(VNextBOLoginInteractions.getValueFromPasswordField(), "",
                 "Password field hasn't been empty");
         VNextBOLoginInteractions.waitUntilPageIsLoaded();
         VNextBOLoginSteps.userLogin(userName, userPassword);
-        VNextBOHomeWebPage vNextBOHomeWebPage = new VNextBOHomeWebPage();
         VNextBOHomeWebPageValidations.verifySupportForBOButtonIsDisplayed();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 8)
+    public void verifyUserCannotOpenHomePageInAnotherBrowserAfterPastingTheUrlOfTheLoggedUser(String rowID, String description, JSONObject testData) {
+
+        VNextBOLoginSteps.userLogin(userName, userPassword);
+        final String url = Utils.getUrl();
+        Utils.closeWindows();
+        browserType = BaseUtils.getBrowserType(BrowserType.FIREFOX.getBrowserTypeString());
+        DriverBuilder.getInstance().setDriver(browserType);
+        webdriverGotoWebPage(url);
+        Assert.assertTrue(VNextBOLoginValidations.isLoginFormDisplayed(),
+                "The login page hasn't been displayed");
+        Utils.closeWindows();
     }
 }

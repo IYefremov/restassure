@@ -2,13 +2,13 @@
     <listeners>
         <listener class-name="com.cyberiansoft.test.vnextbo.utils.TestListenerAllure"/>
     </listeners>
-    <test name="Invoice Details Tests">
-        <parameter name="userName" value="test.automation1@getnada.com"/>
-        <parameter name="userPassword" value="test12345"/>
-        <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>
-        </classes>
-    </test>
+    <!--<test name="Invoice Details Tests">-->
+        <!--<parameter name="userName" value="test.automation1@getnada.com"/>-->
+        <!--<parameter name="userPassword" value="test12345"/>-->
+        <!--<classes>-->
+            <!--<class name="com.cyberiansoft.test.vnextbo.testcases.invoices.VNextBOInvoiceDetailsTestCases"/>-->
+        <!--</classes>-->
+    <!--</test>-->
     <test name="Operations Invoices Tests">
         <parameter name="userName" value="test.automation1@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>
@@ -100,11 +100,18 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsPartsDetailsLaborTests"/>
         </classes>
     </test>
-    <test name="Parts Management Generic Part Provider and Punchout Tests">
+    <test name="Parts Management Generic Part Provider and Punchout With Turned on 'Punchout process' add-on Tests">
         <parameter name="userName" value="test.automation1@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>
         <classes>
-            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMGenericPartProviderAndPunchOutTestCases"/>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMWithTurnedOnPunchOutAddOnTestCases"/>
+        </classes>
+    </test>
+    <test name="Parts Management Generic Part Provider and Punchout With Turned off 'Punchout process' add-on Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMWithTurnedOffPunchOutAddOnTestCases"/>
         </classes>
     </test>
     <test name="Reports Tests">

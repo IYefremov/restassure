@@ -13,11 +13,23 @@ public class BOClientsDialogSteps {
         selectComboboxValue(clientsDialog.getDefaultAreaCmb(), clientsDialog.getDefaultAreaDd(), area);
     }
 
+    public static String getDefaultArea() {
+        return Utils.getInputFieldValue(new BOClientsDialog().getDefaultAreaCmb().getWrappedElement());
+    }
+
     public static void submit() {
         final BOClientsDialog clientsDialog = new BOClientsDialog();
         Utils.clickElement(clientsDialog.getOkButton());
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitForInvisibilityIgnoringException(clientsDialog.getClientDialog(), 3);
+    }
+
+    public static void cancel() {
+        final BOClientsDialog clientsDialog = new BOClientsDialog();
+        Utils.clickElement(clientsDialog.getCancelButton());
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.waitForInvisibilityIgnoringException(clientsDialog.getClientDialog(), 2);
     }
 }
