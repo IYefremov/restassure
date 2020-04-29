@@ -321,5 +321,39 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart(String rowID,
+                                                                                         String description, JSONObject testData) {
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
+        QuestionsData serviceQuestion = questionsDataList.get(0);
+        List<ServiceData> expectedServices = inspectionData.getServicesList();
+        ServiceData expectedSelectedService = expectedServices.get(0);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_ANSWER_SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+
+        QuestionFormSteps.answerGeneralQuestion(serviceQuestion);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES, 1);
+
+        QuestionServiceListSteps.switchToSelectedServiceView();
+        inspectionData.getServicesList().forEach(serviceData -> {
+            QuestionServiceListValidations.validateServicePresent(serviceData.getServiceName());
+        });
+        QuestionServiceListSteps.openServiceDetails(expectedSelectedService.getServiceName());
+        ServiceDetailsValidations.verifyPartsServicePresent(true);
+        ServiceDetailsValidations.verifyLaborServicesButtonPresent(false);
+        ServiceDetailsScreenSteps.openPartServiceDetails();
+        PartServiceSteps.confirmPartInfo();
+        ServiceDetailsValidations.verifyPartsServicePresent(true);
+        ServiceDetailsValidations.verifyLaborServicesButtonPresent(true);
+
+        ServiceDetailsScreenSteps.closeServiceDetailsScreen();
+
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
 }
 
