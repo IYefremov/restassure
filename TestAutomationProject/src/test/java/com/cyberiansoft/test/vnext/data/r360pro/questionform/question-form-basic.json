@@ -305,5 +305,45 @@
         ]
       }
     }
+  ],
+  "testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart": [
+    {
+      "rowID": " testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91817",
+          "testCaseTitle": "R360 Inspection - Verify that when part service is added with labor as answer services , labor is linked to part after configuration part"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "do you the service?",
+            "questionAnswer": "hecked And OK'd"
+          }
+        ]
+      },
+      "services": [
+        {
+          "serviceName": "Oksi Part service - Part name"
+        },
+        {
+          "serviceName": "Labor_base_vehicle_data_all"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Rear"
+        }
+      ]
+    }
   ]
 }
