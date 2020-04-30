@@ -28,6 +28,8 @@ public class PartServiceSteps {
     public static void selectpartServiceDetails(PartServiceData partServiceData) {
         if (partServiceData.getCategory() != null)
             PartServiceSteps.selectCategory(partServiceData.getCategory());
+        else
+            ServiceDetailsScreenSteps.openPartServiceDetails();
         if (partServiceData.getSubCategory() != null)
             PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
         if (partServiceData.getPartName() != null)
@@ -55,6 +57,8 @@ public class PartServiceSteps {
     }
 
     public static void selectPartPosition(String partPosition) {
+        PartInfoScreen partInfoScreen = new PartInfoScreen();
+        partInfoScreen.getPartPositionField().click();
         ListSelectPageInteractions.waitListPageReady(PartServiceWizardScreen.PART_POSITION.getValue());
         ListSelectPageInteractions.selectItem(partPosition);
     }
