@@ -188,7 +188,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
 
         InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
         InspectionSteps.openInspectionMenu(inspectionNumber);
-//        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
         MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         for (ServiceData service : inspectionData.getServicesList())
@@ -228,7 +228,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
         ServiceDetailsScreenSteps.saveServiceDetails();
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        //MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
         MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
         /*ViewScreenValidations.verifyServiceOriginalAmaunt(inspectionData.getMoneyServiceData().getServiceName(), serviceOriginalAmaunt);
         ViewScreenValidations.verifySupplementAmaunt(supplementAmaunt);
