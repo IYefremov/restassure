@@ -73,7 +73,13 @@
   "testVerifyUserCanAnswerTextQuestionsSeparatley": [
     {
       "rowID": "testVerifyUserCanAnswerTextQuestionsSeparatley.01",
-      "description": "TFSID: ",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91825",
+          "testCaseTitle": "Verify that steps are separated for every question section. User can change or clear answers for its (for 'Text' question type)"
+        }
+      ],
       "questionScreenData": {
         "questionsData": [
           {
@@ -92,7 +98,42 @@
             ]
           },
           {
-            "questionName": "Free question",
+            "questionName": "Free question required",
+            "questionAnswer": "SOME_ANSWER"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyValidationForRequiredQuestionsGoingForwardBackFromQuestionSection": [
+    {
+      "rowID": "testVerifyValidationForRequiredQuestionsGoingForwardBackFromQuestionSection.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91827",
+          "testCaseTitle": "Verify validation for required questions going forward/back from question section (for 'Text' question type)"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Multi question required",
+            "questionAnswers": [
+              "Answer 1",
+              "Answer 2"
+            ],
+            "questionAnswer": "Answer 1, Answer 2"
+          },
+          {
+            "questionName": "Single question required",
+            "questionAnswer": "Answer 1",
+            "questionAnswers": [
+              "Answer 1"
+            ]
+          },
+          {
+            "questionName": "Free question required",
             "questionAnswer": "SOME_ANSWER"
           }
         ]

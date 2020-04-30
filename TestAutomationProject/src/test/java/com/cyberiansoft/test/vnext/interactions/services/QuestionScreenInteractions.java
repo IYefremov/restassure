@@ -19,6 +19,7 @@ public class QuestionScreenInteractions {
     public static void fillQuestionTextBox(String questionName, String answerText) {
         QuestionScreen questionScreen = new QuestionScreen();
         questionScreen.getTextQuestionByText(questionName).getTextInputElement().sendKeys(answerText);
+        questionScreen.getTextQuestionByText(questionName).getQuestionNameElement().click();
     }
 
     public static void saveMulitAnswerQuestion(String questionName) {

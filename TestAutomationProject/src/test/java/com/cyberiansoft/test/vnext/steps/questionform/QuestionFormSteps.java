@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.dataclasses.TextQuestionData;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.QuestionScreenInteractions;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.questions.QuestionScreen;
 
 public class QuestionFormSteps {
 
@@ -45,6 +46,11 @@ public class QuestionFormSteps {
 
     public static void answerImageQuestion(QuestionsData questionData) {
         QuestionScreenInteractions.clickQuestionCamera(questionData.getQuestionName());
+    }
+
+    public static void clearSelectedQuestion(QuestionsData questionData) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        questionScreen.getGeneralQuestionByText(questionData.getQuestionName()).clearQuestion();
     }
 
 }
