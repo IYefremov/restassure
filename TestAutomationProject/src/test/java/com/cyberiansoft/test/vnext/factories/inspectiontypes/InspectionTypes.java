@@ -12,6 +12,7 @@ public enum InspectionTypes {
     ROZ_TEXT_QUESTION("Roz_text_questions"),
     ROZ_WITHOUT_QUESTIONS("Rozstalnoy_IT_without_questions"),
     ROZSTALNOY_IT("Rozstalnoy_IT"),
+    ROZSTALNOY_TEXT_QUESTIONS_IT("Roz_text_questions_IT"),
     WITH_QUESTIONS_NOT_REQUIRED("Insp with QF not required"),
     WITH_QUESTIONS_ANSWER_SERVICES("Insp with QF answer service");
 

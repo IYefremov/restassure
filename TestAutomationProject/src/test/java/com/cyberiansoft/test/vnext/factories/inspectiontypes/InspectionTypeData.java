@@ -20,10 +20,8 @@ public class InspectionTypeData {
                 canBeFinalDraft= true;
                 break;
             case INSP_TYPE_APPROV_REQUIRED:
-                inspTypeID = "";
-                canBeFinalDraft= false;
-                break;
             case O_KRAMAR_NO_SHARING:
+            case ROZSTALNOY_TEXT_QUESTIONS_IT:
                 inspTypeID = "";
                 canBeFinalDraft= false;
                 break;

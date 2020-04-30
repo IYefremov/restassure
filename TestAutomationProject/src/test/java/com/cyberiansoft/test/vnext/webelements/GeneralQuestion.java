@@ -28,6 +28,10 @@ public class GeneralQuestion implements IWebElement {
         return rootElement.findElement(By.xpath(questionNameLocator)).getText();
     }
 
+    public WebElement getQuestionNameElement() {
+        return rootElement.findElement(By.xpath(questionNameLocator));
+    }
+
     public WebElement getAnswerElement(String text) {
         return WaitUtils.getGeneralFluentWait().until(driver -> rootElement.findElements(By.xpath(answerLocator))
                 .stream()
