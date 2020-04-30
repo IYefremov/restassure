@@ -37,4 +37,10 @@ public class MonitorValidations {
         Assert.assertTrue(repairOrderScreen.getRepairOrderListElements().size() > 0,
                 "Repair orders records have not been displayed");
     }
+
+    public static void verifySearchMaskContainsSearchValue(String searchFilterValue) {
+
+        Assert.assertTrue(new RepairOrderScreen().getSearchFiltersValue().getText().contains(searchFilterValue),
+                "Search mask hasn't contained vale " + searchFilterValue);
+    }
 }

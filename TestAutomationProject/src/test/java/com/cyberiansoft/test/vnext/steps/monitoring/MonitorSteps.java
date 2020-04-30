@@ -87,4 +87,11 @@ public class MonitorSteps {
 
         WaitUtils.click(new RepairOrderScreen().getRepairOrderListElements().get(0).getRootElement());
     }
+
+    public static void clearSearchFilters() {
+
+        RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
+        repairOrderScreen.getClearSearchFiltersIcon().click();
+        WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+    }
 }

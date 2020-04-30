@@ -233,4 +233,21 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         MenuSteps.closeMenu();
         ScreenNavigationSteps.pressBackButton();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySearchCanBePerformedByPriorityAndReturnBack(String rowID, String description, JSONObject testData) throws Exception {
+
+        RepairOrdersSearchData searchData = JSonDataParser.getTestDataFromJson(testData, RepairOrdersSearchData.class);
+        HomeScreenSteps.openMonitor();
+        MonitorSteps.openCommonFiltersPage();
+        RepairOrdersCommonFiltersPageValidations.verifyCommonFiltersScreenHasAllElements();
+        RepairOrdersCommonFiltersPageValidations.verifyPriorityDropDownContainsCorrectOptions();
+        RepairOrdersCommonFiltersPageSteps.selectPriority(searchData.getPriority());
+        RepairOrdersCommonFiltersPageValidations.verifyPriorityFieldContainsCorrectValue(searchData.getPriority());
+        RepairOrdersCommonFiltersPageSteps.tapSearchButton();
+        MonitorValidations.verifyRepairOrdersScreenIsOpenedWithOrders();
+        MonitorValidations.verifySearchMaskContainsSearchValue(searchData.getPriority());
+        MonitorSteps.clearSearchFilters();
+        TopScreenPanelSteps.goToThePreviousScreen();
+    }
 }

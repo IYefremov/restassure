@@ -584,5 +584,19 @@
         }
       ]
     }
+  ],
+
+  "verifySearchCanBePerformedByPriorityAndReturnBack": [
+    {
+      "rowID": "verifySearchCanBePerformedByPriorityAndReturnBack.01",
+      "description": "Test Case 92314: ReconPro - Monitor - CommonFilters - Priority - verify if Priority perform search and back from common filters",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92314",
+          "testCaseTitle": "ReconPro - Monitor - CommonFilters - Priority - verify if Priority perform search and back from common filters"
+        }
+      ],
+      "priority": "Normal"
+    }
   ]
 }
