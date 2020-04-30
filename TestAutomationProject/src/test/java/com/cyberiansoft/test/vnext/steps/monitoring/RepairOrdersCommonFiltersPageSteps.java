@@ -1,7 +1,11 @@
 package com.cyberiansoft.test.vnext.steps.monitoring;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.r360.RepairOrdersSearchData;
 import com.cyberiansoft.test.vnext.screens.monitoring.CommonFilterScreen;
+import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.By;
 
 public class RepairOrdersCommonFiltersPageSteps {
 
@@ -43,11 +47,14 @@ public class RepairOrdersCommonFiltersPageSteps {
     public static void tapSearchButton() {
 
         new CommonFilterScreen().getSearchButton().click();
+        BaseUtils.waitABit(1000);
+        waitUntilRepairsOrdersPageIsOpened();
     }
 
     public static void clearFilters() {
 
         new CommonFilterScreen().getClearFilter().click();
+        waitUntilRepairsOrdersPageIsOpened();
     }
 
     public static void setAllSearchFields(RepairOrdersSearchData searchData) {
@@ -59,5 +66,15 @@ public class RepairOrdersCommonFiltersPageSteps {
         selectRepairStatus(searchData.getRepairStatus());
         selectFlag(searchData.getFlag());
         selectPriority(searchData.getPriority());
+    }
+
+    private static void waitUntilRepairsOrdersPageIsOpened() {
+
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        WaitUtils.getGeneralFluentWait()
+                .until(driver -> {
+                    new RepairOrderScreen().getRepairOrderList().isDisplayed();
+                    return true;
+                });
     }
 }
