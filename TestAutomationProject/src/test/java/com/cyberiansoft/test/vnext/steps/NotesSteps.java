@@ -114,7 +114,7 @@ public class NotesSteps {
     public static String addQuickNotesByCount(int count) {
         StringBuilder note = new StringBuilder();
         String result = "";
-        final String quickNoteText = "Test Quick Note 1";
+        final String quickNoteText = "Note15";
         for (int i = 1; i <= count; i++) {
             NotesSteps.addQuickNote(quickNoteText);
             note.append("\n");
