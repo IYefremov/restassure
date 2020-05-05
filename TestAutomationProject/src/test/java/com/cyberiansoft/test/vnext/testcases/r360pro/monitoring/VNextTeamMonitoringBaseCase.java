@@ -164,8 +164,8 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         RetailCustomer technician = new RetailCustomer();
-        technician.setFirstName("111");
-        technician.setLastName("111");
+        technician.setFirstName("1111");
+        technician.setLastName("2222");
 
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);

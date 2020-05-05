@@ -124,8 +124,8 @@
       "service": {
         "serviceName": "olrom",
         "serviceDefaultTechnician": {
-          "technicianFirstName": "111",
-          "technicianLastName": "111"
+          "technicianFirstName": "1111",
+          "technicianLastName": "2222"
         }
       },
       "damageData": {

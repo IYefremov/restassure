@@ -98,9 +98,7 @@ public class VNextMonitorStartPhaseServicesTestCases extends BaseTestClass {
         HomeScreenSteps.openMonitor();
         MonitorSteps.changeLocation("automationMonitoring");
         SearchSteps.searchByTextAndStatus(workOrderId, RepairOrderStatus.All);
-        MonitorSteps.openItem(workOrderId);
-        MenuSteps.selectMenuItem(MenuItems.START_RO);
-        GeneralSteps.confirmDialog();
+        MonitorSteps.startRepairOrder(workOrderId);
         MonitorSteps.openItem(workOrderId);
 
         MenuSteps.selectMenuItem(MenuItems.EDIT);
