@@ -21,8 +21,8 @@ public class VNextBOMonitorTasksTestCases extends BaseTestCase {
     final String TEST_ORDER_NUMBER = "O-000-147163";
     final String TEST_LOCATION = "Best Location Automation";
 
-	@BeforeClass
-	public void settingUp() {
+    @BeforeClass
+    public void settingUp() {
 
         JSONDataProvider.dataFile = VNextBOTestCasesDataPaths.getInstance().getMonitorTD();
         VNextBOLeftMenuInteractions.selectRepairOrdersMenu();
@@ -30,7 +30,7 @@ public class VNextBOMonitorTasksTestCases extends BaseTestCase {
         VNextBOBreadCrumbInteractions.setLocation(TEST_LOCATION);
         VNextBOROPageStepsNew.searchOrdersByOrderNumber(TEST_ORDER_NUMBER);
         VNextBOROPageStepsNew.openOrderDetailsByNumberInList(0);
-	}
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddANewTaskWithAllFields(String rowID, String description, JSONObject testData) {
@@ -69,7 +69,7 @@ public class VNextBOMonitorTasksTestCases extends BaseTestCase {
         VNextBORODetailsStepsNew.collapsePhaseByName(data.getPhase());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanAddNewTaskWithPredefinedTechnician(String rowID, String description, JSONObject testData) {
 
         VNextBOMonitorData data = JSonDataParser.getTestDataFromJson(testData, VNextBOMonitorData.class);

@@ -239,7 +239,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanChangeSequenceNumberForMoneyServiceOrder(String rowID, String description, JSONObject testData) {
 
         VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
@@ -252,7 +252,7 @@ public class VNextBOMoneyAndPercentageServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanChangeSequenceNumberForPercentageServiceOrder(String rowID, String description, JSONObject testData) {
 
         VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
