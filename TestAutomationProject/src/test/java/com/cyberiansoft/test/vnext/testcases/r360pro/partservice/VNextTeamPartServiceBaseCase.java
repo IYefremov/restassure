@@ -137,7 +137,8 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartService.getServiceName());
         AvailableServicesScreenSteps.openServiceDetails(basicPartService.getServiceName());
-        PartServiceSteps.selectPartPosition(basicPartService.getPartPosition());
+        ServiceDetailsScreenSteps.openPartServiceDetails();
+        PartServiceSteps.changePartPosition(basicPartService.getPartPosition());
         PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.CATEGORY);
         PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.SUB_CATEGORY);
         PartInfoScreenValidations.fieldShouldBeReadonly(true, PartInfoScreenField.PART_NAME);
@@ -162,7 +163,8 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartService.getServiceName());
         AvailableServicesScreenSteps.openServiceDetails(basicPartService.getServiceName());
-        PartServiceSteps.selectPartPosition(basicPartService.getPartPosition());
+        ServiceDetailsScreenSteps.openPartServiceDetails();
+        PartServiceSteps.changePartPosition(basicPartService.getPartPosition());
         PartServiceSteps.confirmPartInfo();
         PartServiceSteps.addLaborService();
         basicPartService.getLaborServiceDataList().stream().map(LaborServiceData::getServiceName).forEach(LaborServiceSteps::selectService);

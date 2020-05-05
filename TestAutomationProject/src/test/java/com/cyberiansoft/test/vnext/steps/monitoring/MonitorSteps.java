@@ -8,6 +8,7 @@ import com.cyberiansoft.test.vnext.screens.monitoring.DepartmentScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.RepairOrderScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.SelectLocationScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
@@ -93,5 +94,13 @@ public class MonitorSteps {
         RepairOrderScreen repairOrderScreen = new RepairOrderScreen();
         repairOrderScreen.getClearSearchFiltersIcon().click();
         WaitUtils.elementShouldBeVisible(repairOrderScreen.getRootElement(), true);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
+    public static void startRepairOrder(String workOrderId) {
+        MonitorSteps.openItem(workOrderId);
+        MenuSteps.selectMenuItem(MenuItems.START_RO);
+        GeneralSteps.confirmDialog();
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 }
