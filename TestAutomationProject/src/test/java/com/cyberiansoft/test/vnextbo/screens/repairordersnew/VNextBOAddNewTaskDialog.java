@@ -18,7 +18,7 @@ public class VNextBOAddNewTaskDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//span[@aria-owns='add-task-form-phases-dropdown_listbox']//span[@class='k-input']")
     private WebElement phaseDropDownField;
 
-    @FindBy(xpath = "//span[@aria-owns='add-task-form-tasks-dropdown_listbox']//span[@class='k-input']")
+    @FindBy(xpath = "//label[@for='add-task-form-tasks-dropdown']/following-sibling::div//span[@class='k-select']")
     private WebElement taskDropDownField;
 
     @FindBy(xpath = "//span[@aria-owns='add-task-form-teams-dropdown_listbox']//span[@class='k-input']")

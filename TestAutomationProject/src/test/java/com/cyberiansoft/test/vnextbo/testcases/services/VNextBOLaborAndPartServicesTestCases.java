@@ -187,7 +187,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 1)
     public void verifyUserCanChangeSequenceNumberForLaborServiceOrder(String rowID, String description, JSONObject testData) {
 
         VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
@@ -200,7 +200,7 @@ public class VNextBOLaborAndPartServicesTestCases extends BaseTestCase {
         VNextBOServicesWebPageSteps.deleteServiceByName(serviceData.getServiceName());
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class, priority = 2)
     public void verifyUserCanChangeSequenceNumberForPartServiceOrder(String rowID, String description, JSONObject testData) {
 
         VNextBOServiceData serviceData = JSonDataParser.getTestDataFromJson(testData, VNextBOServiceData.class);
