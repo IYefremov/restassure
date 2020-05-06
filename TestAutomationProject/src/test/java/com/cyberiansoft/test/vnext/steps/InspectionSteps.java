@@ -37,7 +37,7 @@ public class InspectionSteps {
     public static String createR360Inspection(AppCustomer customer, InspectionData inspectionData) {
         clickAddInspectionButton();
         CustomersScreenSteps.selectCustomer(customer);
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         if (inspectionData.getInsuranceCompanyData() != null) {
             WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);

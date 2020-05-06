@@ -15,7 +15,6 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextErrorDialog;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -209,7 +208,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO);
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SelectedServicesScreenSteps.switchToSelectedService();
         workOrderData.getServicesList().forEach(serviceData -> ListServicesValidations.verifyServiceSelected(serviceData.getServiceName(), true));
@@ -238,7 +237,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
         WorkOrderSteps.createWorkOrder(WorkOrderTypes.KRAMAR_AUTO);
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getServiceData());
         final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
@@ -416,7 +415,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
         WorkOrderSteps.openMenu(workOrderNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SelectedServicesScreenSteps.switchToSelectedService();
         SelectedServicesScreenSteps.unSelectService(workOrderData.getDamagesData().get(0).getMoneyServices().get(0).getServiceName());

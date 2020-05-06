@@ -1,7 +1,6 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -86,6 +85,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	public void clickOnWorkOrder(String workOrderNumber) {
 		tap(appiumdriver.
 				findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + workOrderNumber + "']")));
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 	}
 }

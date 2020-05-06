@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -27,7 +26,7 @@ public class VNextVehicleModelsScreen extends VNextBaseScreen {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-model='" + vehicleModel + "']")));
         tap(modelslist.findElement(By.xpath(".//*[@data-model='" + vehicleModel + "']")));
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         return vehicleInfoScreen;
     }
 }

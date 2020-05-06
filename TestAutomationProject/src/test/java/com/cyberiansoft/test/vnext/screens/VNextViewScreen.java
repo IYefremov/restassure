@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +35,7 @@ public class VNextViewScreen extends VNextBaseScreen {
     public void waitViewScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(viewscreen));
-		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+		//HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 	}
 
 	public String getEstimationDateValue() {

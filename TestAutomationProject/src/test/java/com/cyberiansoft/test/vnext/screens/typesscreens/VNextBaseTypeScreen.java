@@ -73,7 +73,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         tap(WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='team']")));
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='button active' and @action='team']")));
-        BaseUtils.waitABit(500);
+        //BaseUtils.waitABit(500);
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
@@ -88,7 +88,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         WaitUtils.getGeneralFluentWait().until(driver -> {
             Actions actions = new Actions(appiumdriver);
             actions.moveToElement(myviewtab, 30, 0).click().perform();
-            BaseUtils.waitABit(3000);
+            //BaseUtils.waitABit(3000);
             wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class,'button active') and @action='my']")));
             return true;
         });

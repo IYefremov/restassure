@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.steps;
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.dataclasses.VehicleInfoData;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.TechnicianScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
@@ -17,7 +16,7 @@ import java.util.stream.Collectors;
 public class VehicleInfoScreenSteps {
     public static void setVehicleInfo(VehicleInfoData vehicleInfoDto) {
         VehicleInfoScreenInteractions.waitPageLoaded();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         if (vehicleInfoDto.getVINNumber() != null)
             VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, vehicleInfoDto.getVINNumber());
         if (vehicleInfoDto.getVehicleMake() != null && vehicleInfoDto.getVehicleModel() != null)
@@ -39,7 +38,7 @@ public class VehicleInfoScreenSteps {
     }
 
     public static void setVIN(String vin) {
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(vehicleInfoScreen.getRootElement());

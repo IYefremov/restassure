@@ -98,15 +98,7 @@ public class VehicleInfoScreenInteractions {
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
         JavascriptExecutor je = (JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
         je.executeScript("arguments[0].scrollIntoView(true);", vehicleInfoScreen.getSelectOwnerButton());
-
         WaitUtils.click(vehicleInfoScreen.getSelectOwnerButton());
-
-        try {
-            if (ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(By.xpath("//*[@action='select-owner']")).size() > 0)
-                WaitUtils.click(vehicleInfoScreen.getSelectOwnerButton());
-        } catch (TimeoutException e) {
-            //do nothing
-        }
     }
 
     public static void setMileage(String milage) {
