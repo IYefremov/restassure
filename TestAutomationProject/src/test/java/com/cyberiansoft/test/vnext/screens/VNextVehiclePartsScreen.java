@@ -1,6 +1,5 @@
 package com.cyberiansoft.test.vnext.screens;
 
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.PriceMatrixScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -25,7 +24,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(vehiclepartsscreen));
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 	}
 
 	public VNextVehiclePartsScreen() {
@@ -33,7 +32,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 	
 	public VNextVehiclePartInfoPage selectVehiclePart(String vehiclePartName) {
     	WaitUtils.waitUntilElementIsClickable(vehiclepartsscreen);
-		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+		//HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		PriceMatrixScreenInteractions.selectItem(vehiclePartName);
 		return new VNextVehiclePartInfoPage(appiumdriver);
 	}

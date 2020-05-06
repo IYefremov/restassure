@@ -8,7 +8,6 @@ import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
@@ -67,7 +66,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
         InspectionSteps.saveInspection();

@@ -12,7 +12,6 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
@@ -98,7 +97,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         BaseUtils.waitABit(1000*30);
         WorkOrderSteps.openMenu(woNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(workOrderData.getServiceData());
         WorkOrderSteps.saveWorkOrder();

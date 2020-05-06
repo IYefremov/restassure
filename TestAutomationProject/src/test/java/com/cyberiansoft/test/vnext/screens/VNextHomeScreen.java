@@ -3,7 +3,6 @@ package com.cyberiansoft.test.vnext.screens;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.AppCustomer;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.steps.WorkOrderSteps;
 import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
@@ -143,7 +142,7 @@ public class VNextHomeScreen extends VNextBaseScreen {
         WorkOrderSteps.clickAddWorkOrderButton();
         CustomersScreenSteps.selectCustomer(testcustomer);
         VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         return vehicleInfoScreen;
     }
 

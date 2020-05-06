@@ -27,7 +27,6 @@ import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextEmailScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
@@ -90,7 +89,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		MenuSteps.selectMenuItem(MenuItems.CREATE_WORK_ORDER);
 		WorkOrderSteps.createWorkOrder(WorkOrderTypes.O_KRAMAR_CREATE_INVOICE);
 		BaseUtils.waitABit(60 * 1000);
-		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+		//HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
 		AvailableServicesScreenSteps.selectService(testCaseData.getWorkOrderData().getMoneyServiceData());
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.WORKORDER_SUMMARY);
