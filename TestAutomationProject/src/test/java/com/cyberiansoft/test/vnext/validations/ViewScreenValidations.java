@@ -11,12 +11,13 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class ViewScreenValidations {
 
     public static void verifyEstimationDataFieldFormat() {
         DateTimeFormatter dateFormatLong =
-                DateTimeFormatter.ofPattern("dd MMMM yyyy hh:mm a");
+                DateTimeFormatter.ofPattern("dd MMMM yyyy hh:mm a",  Locale.US);
         VNextViewScreen viewScreen = new VNextViewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         String date = viewScreen.getEstimationDateValue();
         Assert.assertTrue(isValidFormat(dateFormatLong, date));
