@@ -15,6 +15,12 @@ public class TopScreenPanelSteps {
         WaitUtilsWebDriver.waitABit(500);
     }
 
+    public static void goToTheNextScreen() {
+
+        new VNextTopScreenPanel().getForwardButton().click();
+        WaitUtilsWebDriver.waitABit(500);
+    }
+
     public static void openSearchPanel() {
 
         ConditionWaiter.create(__ -> new VNextTopScreenPanel().getSearchButton().isDisplayed()).execute();
