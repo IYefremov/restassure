@@ -20,6 +20,12 @@ public class VNextBOPartAddNewDocumentDialog extends VNextBOBaseWebPage {
     @FindBy(id = "documentPopup-type")
     private WebElement numberField;
 
+    @FindBy(xpath = "//label[text()='Number']")
+    private WebElement numberLabel;
+
+    @FindBy(xpath = "//label[text()='Number']/..//input[@type='text']")
+    private WebElement numberInputField;
+
     @FindBy(id = "documentPopup-notes")
     private WebElement notesField;
 
@@ -50,6 +56,11 @@ public class VNextBOPartAddNewDocumentDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[@data-name='number']/div[contains(@class, ' validation-message-wrapper')]")
     private WebElement warningMessage;
 
+    @FindBy(xpath = "//label[text()='Provider']/..//span[@aria-owns]")
+    private WebElement providerField;
+
+    @FindBy(xpath = "//div[@aria-hidden='false']/div[contains(@class, 'k-list-container')]//li")
+    private List<WebElement> providerListBox;
 
     @FindBy(xpath = "//span[@aria-owns='document-popup-price-document-type_listbox']")
     private WebElement typeField;
@@ -86,5 +97,9 @@ public class VNextBOPartAddNewDocumentDialog extends VNextBOBaseWebPage {
 
     public WebElement getXIcon() {
         return addNewDocumentDialog.findElement(By.xpath(".//button[@aria-label='Close']"));
+    }
+
+    public WebElement getTypeFieldWithValue() {
+        return typeField.findElement(By.xpath(".//span[@class='k-input']"));
     }
 }

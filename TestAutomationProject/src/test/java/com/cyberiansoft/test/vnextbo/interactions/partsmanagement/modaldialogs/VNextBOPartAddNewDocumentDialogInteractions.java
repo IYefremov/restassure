@@ -14,7 +14,8 @@ public class VNextBOPartAddNewDocumentDialogInteractions {
 
     public static void setDocumentNumber(String documentNumber) {
         final VNextBOPartAddNewDocumentDialog addNewDocumentDialog = new VNextBOPartAddNewDocumentDialog();
-        Utils.clearAndType(addNewDocumentDialog.getNumberField(), documentNumber);
+        Utils.clearAndType(addNewDocumentDialog.getNumberInputField(), documentNumber);
+        Utils.clickElement(addNewDocumentDialog.getNumberLabel());
     }
 
     public static void setDocumentNotes(String documentNotes) {

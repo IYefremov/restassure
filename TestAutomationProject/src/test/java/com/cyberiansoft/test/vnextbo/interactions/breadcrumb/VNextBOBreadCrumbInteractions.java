@@ -6,7 +6,6 @@ import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnextbo.screens.VNextBOBreadCrumbPanel;
 import com.cyberiansoft.test.vnextbo.validations.general.VNextBOBreadCrumbValidations;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 
@@ -15,6 +14,10 @@ public class VNextBOBreadCrumbInteractions {
     public static void clickFirstBreadCrumbLink() {
         Utils.clickElement(new VNextBOBreadCrumbPanel().getBreadCrumbsLink());
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+    }
+
+    public static void clickLastBreadCrumb() {
+        Utils.clickElement(new VNextBOBreadCrumbPanel().getLastBreadCrumb());
     }
 
     public static String getLastBreadCrumbText() {
@@ -79,12 +82,5 @@ public class VNextBOBreadCrumbInteractions {
                 .waitForVisibilityOfAllOptions(breadCrumbPanel.getLocationLabels()).size();
         Utils.clearAndType(breadCrumbPanel.getLocationSearchInput(), searchLocation);
         return locationsNum;
-    }
-
-    public static void clickLocationInDropDown(String location) {
-        new VNextBOBreadCrumbPanel().getLocationLabels().stream().filter(loc -> loc.getText().contains(location))
-                .findFirst()
-                .ifPresent(WebElement::click);
-        WaitUtilsWebDriver.waitForLoading();
     }
 }

@@ -1,0 +1,99 @@
+{
+  "verifyUserCanAddDocumentWhileChangingStatusToReceivedForOnePartService": [
+    {
+      "rowID": "verifyUserCanAddDocumentWhileChangingStatusToReceivedForOnePartService.01",
+      "description": "Test Case 123418:Verify user can add document when tries to change status to 'Received' for one part service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123418"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      }
+    }
+  ],
+  "verifyUserCanAddDocumentWhileChangingStatusToReceivedForMultiplePartServices": [
+    {
+      "rowID": "verifyUserCanAddDocumentWhileChangingStatusToReceivedForMultiplePartServices.01",
+      "description": "Test Case 123419:Verify user can add document when tries to change status to 'Received' for multiple part services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123419"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "provider": "AutomationDoNotChangeNA"
+    }
+  ],
+  "verifyPartServiceStatusesAreNotChangedIfUserCancelsDocument": [
+    {
+      "rowID": "verifyPartServiceStatusesAreNotChangedIfUserCancelsDocument.01",
+      "description": "Test Case 123420:Verify If user cancel document creation then part services status don't changed.",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123420"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "provider": "AutomationDoNotChangeNA"
+    }
+  ],
+  "verifyDocumentTypeVendorInvoiceIsPreselected": [
+    {
+      "rowID": "verifyDocumentTypeVendorInvoiceIsPreselected.01",
+      "description": "Test Case 123421:Verify Document type 'Vendor Invoice' is preselected",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123421"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "documentData": {
+        "type": "Vendor Invoice"
+      }
+    }
+  ],
+  "verifyProviderDropDownContainsProvidersOfSelectedPartServices": [
+    {
+      "rowID": "verifyProviderDropDownContainsProvidersOfSelectedPartServices.01",
+      "description": "Test Case 123422:Verify the \"Provider\" dropdown contains providers of selected part services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123422"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "providerOptions": [
+        "AutomationDoNotChangeNA",
+        "DoNotChangeIraNA",
+        "DoNotChangeAutomNA"
+      ]
+    }
+  ]
+}

@@ -72,7 +72,7 @@ public class VNextBORONotesPageInteractions {
         try {
             return Objects
                     .requireNonNull(WaitUtilsWebDriver
-                            .waitForVisibilityOfAllOptionsIgnoringException(new VNextBOOrderServiceNotesDialog().getRoNotesList(), 10))
+                            .waitForVisibilityOfAllOptions(new VNextBOOrderServiceNotesDialog().getRoNotesList(), 10))
                     .size();
         } catch (Exception ignored) {
             return 0;

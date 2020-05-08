@@ -32,6 +32,17 @@ public class VNextBOPartsDetailsPanelValidations {
                 "Status hasn't been correct");
     }
 
+    public static void verifyAtLeastOneProviderIsSet() {
+        Assert.assertTrue(VNextBOPartsDetailsPanelSteps.getOrderOfPartWithProviderSet() >= 0,
+                "The part should have a provider set");
+    }
+
+    public static void verifyPartStatusIsCorrect(List<String> partStatusFieldsValues) {
+        for (int i = 0; i < partStatusFieldsValues.size(); i++) {
+            verifyPartStatusIsCorrect(i, partStatusFieldsValues.get(i));
+        }
+    }
+
     public static void verifyPartCoreStatus(int partNumber, String expectedStatus) {
         Assert.assertEquals(Utils.getText(new VNextBOPartsDetailsPanel().getPartCoreStatusFields().get(partNumber)), expectedStatus,
                 "Core status isn't displayed");
@@ -212,7 +223,6 @@ public class VNextBOPartsDetailsPanelValidations {
     }
 
     public static void verifyStatusesCheckboxIsEnabled(boolean expected) {
-        System.out.println(new VNextBOPartsDetailsPanel().getStatusesCheckbox().getAttribute("class"));
         final boolean activated = new VNextBOPartsDetailsPanel().getStatusesCheckbox()
                 .getAttribute("class")
                 .contains("items-toggle--checked");
@@ -310,6 +320,16 @@ public class VNextBOPartsDetailsPanelValidations {
         Assert.assertTrue(visible, "The part checkbox hasn't been displayed");
     }
 
+    public static void verifyPartCheckboxIsChecked(int partNumber) {
+        final boolean checked = Utils.isChecked(new VNextBOPartsDetailsPanel().getPartCheckboxesList().get(partNumber));
+        Assert.assertTrue(checked, "The part checkbox hasn't been checked");
+    }
+
+    public static void verifyPartCheckboxIsUnchecked(int partNumber) {
+        final boolean unchecked = !Utils.isChecked(new VNextBOPartsDetailsPanel().getPartCheckboxesList().get(partNumber));
+        Assert.assertTrue(unchecked, "The part checkbox hasn't been unchecked");
+    }
+
     public static void verifyPartVendorPriceValue(int partNumber, String expected) {
         final String vendorPrice =
                 VNextBOPartsDetailsPanelInteractions.getFormattedInputField(new VNextBOPartsDetailsPanel().getPartVendorPriceField().get(partNumber));
@@ -349,5 +369,9 @@ public class VNextBOPartsDetailsPanelValidations {
 
     public static void verifyProviderOptionsAreDisplayed(final List<String> providerOptions) {
         Assert.assertTrue(!providerOptions.isEmpty(), "The provider options are not displayed");
+    }
+
+    public static boolean isAllPartsCheckDropDownOpened() {
+        return Utils.isElementDisplayed(new VNextBOPartsDetailsPanel().getHeaderDropDown());
     }
 }

@@ -162,17 +162,8 @@ public class WaitUtilsWebDriver {
     }
 
     public static List<WebElement> waitForVisibilityOfAllOptions(List<WebElement> listBox, int timeoutSeconds) {
-        return getWebDriverWait(timeoutSeconds).until(ExpectedConditions.visibilityOfAllElements(listBox));
-    }
-
-    public static List<WebElement> waitForVisibilityOfAllOptionsIgnoringException(List<WebElement> listBox) {
-        return getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(15))
-                .until(ExpectedConditions.visibilityOfAllElements(listBox));
-    }
-
-    public static List<WebElement> waitForVisibilityOfAllOptionsIgnoringException(List<WebElement> listBox, int timeoutSeconds) {
-        return getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(timeoutSeconds))
-                .until(ExpectedConditions.visibilityOfAllElements(listBox));
+        getWebDriverWait(timeoutSeconds).until((ExpectedCondition<Boolean>) driver -> listBox.size() > 0);
+        return listBox;
     }
 
     public static void waitForVisibilityIgnoringException(WebElement element) {
@@ -180,11 +171,7 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitForVisibilityIgnoringException(WebElement element, int timeoutSeconds) {
-        new FluentWait<>(DriverBuilder.getInstance().getDriver())
-                .pollingEvery(Duration.ofSeconds(timeoutSeconds))
-                .withTimeout(Duration.ofMillis(500))
-                .ignoring(NoSuchElementException.class)
-                .ignoring(TimeoutException.class)
+        getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(timeoutSeconds))
                 .until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -372,7 +359,7 @@ public class WaitUtilsWebDriver {
 
     public static boolean elementShouldBeClickable(List<WebElement> elements, boolean condition, int timeOut) {
         final FluentWait<WebDriver> wait = getFluentWait(Duration.ofMillis(100), Duration.ofMillis(500));
-        waitForVisibilityOfAllOptionsIgnoringException(elements, timeOut);
+        waitForVisibilityOfAllOptions(elements, timeOut);
         if (condition) {
             try {
                 elements.forEach(e -> wait.until(ExpectedConditions.elementToBeClickable(e)));
@@ -399,7 +386,9 @@ public class WaitUtilsWebDriver {
     }
 
     public static void waitUntilTitleContainsIgnoringException(String title, int timeOut) {
-        getFluentWait(Duration.ofMillis(500), Duration.ofSeconds(timeOut)).until(ExpectedConditions.titleIs(title));
+        try {
+            waitUntilTitleContains(title, timeOut);
+        } catch (Exception ignored) {}
     }
 
     public static void waitUntilTitleIs(String title) {

@@ -202,7 +202,7 @@ public class RepairOrdersWebPage extends WebPageWithPagination {
 
 	private WebElement getTableRowWithRepairOrder(String wo) {
         final List<WebElement> rows = getRepairOrdersTableRows();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(rows);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(rows);
 		for (WebElement row : rows) {
 			try {
 				if (Utils.getText(row.findElement(By.xpath(".//td[" + repairorderstable

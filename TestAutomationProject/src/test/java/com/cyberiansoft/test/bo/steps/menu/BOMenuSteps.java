@@ -16,7 +16,11 @@ public class BOMenuSteps {
 
     private static void openSubMenu(SubMenu subMenu) {
         Utils.clickElement(By.xpath("//span[@class='navLinkTitle' and text()='" + subMenu.getValue() + "']"));
-        WaitUtilsWebDriver.waitUntilTitleContainsIgnoringException(subMenu.getValue(), 4);
+        if (subMenu.getValue().equals(SubMenu.SUBSCRIBE.getValue())) {
+            WaitUtilsWebDriver.waitUntilTitleContains("Subscriptions", 4);
+        } else {
+            WaitUtilsWebDriver.waitUntilTitleContains(subMenu.getValue(), 4);
+        }
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitABit(1000);

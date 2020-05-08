@@ -32,4 +32,8 @@ public class VNextBOPartsOrdersListPanelSteps {
     public static String getPartNumberByOrder(int order) {
         return Utils.getText(new VNextBOPartsOrdersListPanel().getWONumberListOptions().get(order));
     }
+
+    public static List<String> getPartStatusesList() {
+        return Utils.getText(new VNextBOPartsOrdersListPanel().getStatusOptions());
+    }
 }

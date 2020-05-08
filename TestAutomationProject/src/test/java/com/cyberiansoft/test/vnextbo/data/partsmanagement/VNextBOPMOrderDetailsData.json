@@ -215,5 +215,29 @@
         "woNum": "O-000-152414"
       }
     }
+  ],
+  "verifyUserCanChangeStatusForMultipleServices": [
+    {
+      "rowID": "verifyUserCanChangeStatusForMultipleServices.01",
+      "description": "Test Case 122527:Verify user can change status for multiple services",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "122527"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-163-00040"
+      },
+      "partData": {
+        "service": "Oksi Part service - Part name",
+        "description": "Auto-test",
+        "category": "Body",
+        "subcategory": "Bumper",
+        "partItems": [
+          "Bumper Cover Support"
+        ]
+      }
+    }
   ]
 }

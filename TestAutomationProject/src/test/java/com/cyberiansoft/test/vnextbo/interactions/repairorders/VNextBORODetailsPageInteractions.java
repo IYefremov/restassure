@@ -113,7 +113,7 @@ public class VNextBORODetailsPageInteractions {
 
     public static List<String> getAllServicesId(String description) {
         final List<WebElement> allServicesByName = new VNextBORODetailsPage().getAllServicesByName(description);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(allServicesByName);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(allServicesByName);
         try {
             return allServicesByName.stream().map(element -> WaitUtilsWebDriver.getWait()
                     .ignoring(StaleElementReferenceException.class)
@@ -203,7 +203,7 @@ public class VNextBORODetailsPageInteractions {
 
     public static List<String> getServiceAndTaskDescriptionsList() {
         final List<WebElement> serviceAndTaskDescriptionsList = new VNextBORODetailsPage().getServiceAndTaskDescriptionsList();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(serviceAndTaskDescriptionsList, 3);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(serviceAndTaskDescriptionsList, 3);
         return serviceAndTaskDescriptionsList
                 .stream()
                 .map(WebElement::getText)
@@ -510,7 +510,7 @@ public class VNextBORODetailsPageInteractions {
 
     public static List<String> getServicesTableHeaderValues() {
         final List<WebElement> servicesTableColumns = new VNextBORODetailsPage().getServicesTableColumns();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(servicesTableColumns);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(servicesTableColumns);
         final List<String> stringCollection = servicesTableColumns
                 .stream()
                 .map(WebElement::getText)

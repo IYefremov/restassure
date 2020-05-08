@@ -26,7 +26,7 @@ public class VNextBOInvoicesPageValidations {
     public static boolean isInvoiceDisplayed(String invoice) {
         final List<WebElement> invoiceNumbers = new VNextBOInvoicesWebPage().getInvoiceNumbers();
         WaitUtilsWebDriver.waitABit(1000);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(invoiceNumbers);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(invoiceNumbers);
         return invoiceNumbers
                 .stream()
                 .anyMatch(n -> n.getText().equals(invoice));
