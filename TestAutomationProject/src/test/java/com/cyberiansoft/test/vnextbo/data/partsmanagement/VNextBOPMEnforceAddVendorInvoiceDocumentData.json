@@ -11,7 +11,11 @@
       "location": "Best Location Automation",
       "searchData": {
         "woNum": "O-000-147163"
-      }
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ]
     }
   ],
   "verifyUserCanAddDocumentWhileChangingStatusToReceivedForMultiplePartServices": [
@@ -69,7 +73,11 @@
       },
       "documentData": {
         "type": "Vendor Invoice"
-      }
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ]
     }
   ],
   "verifyProviderDropDownContainsProvidersOfSelectedPartServices": [

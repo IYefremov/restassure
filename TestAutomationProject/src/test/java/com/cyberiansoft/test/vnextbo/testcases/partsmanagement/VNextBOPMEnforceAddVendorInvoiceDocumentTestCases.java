@@ -50,16 +50,19 @@ public class VNextBOPMEnforceAddVendorInvoiceDocumentTestCases extends BaseTestC
     @BeforeMethod
     public void goToPage() {
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
+        VNextBOBaseWebPageSteps.clickLogo();
+        VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
+        BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifyUserCanAddDocumentWhileChangingStatusToReceivedForOnePartService(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
+        BOSubscriptionsPageSteps.setFullModeForSubscriptions(data.getSubscriptions());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-
         final int order = VNextBOPartsDetailsPanelSteps.getOrderOfPartWithProviderSet();
         Assert.assertTrue(VNextBOPartsOrdersListPanelValidations.isPartStatusOpenedOrApproved(0),
                 "The part doesn't have the 'Opened' or 'Approved' status");
@@ -85,15 +88,11 @@ public class VNextBOPMEnforceAddVendorInvoiceDocumentTestCases extends BaseTestC
     public void verifyUserCanAddDocumentWhileChangingStatusToReceivedForMultiplePartServices(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        VNextBOBaseWebPageSteps.clickLogo();
-        VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
-        BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
         BOSubscriptionsPageSteps.setNoneModeForSubscriptions(data.getSubscriptions());
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        System.out.println(Arrays.toString(data.getProviderOptions()));
         VNextBOPartsDetailsPanelInteractions.setProvider(0, data.getProvider());
         VNextBOPartsDetailsPanelInteractions.setProvider(1, data.getProvider());
         VNextBOPartsDetailsPanelInteractions.setProvider(2, data.getProvider());
@@ -136,15 +135,11 @@ public class VNextBOPMEnforceAddVendorInvoiceDocumentTestCases extends BaseTestC
     public void verifyPartServiceStatusesAreNotChangedIfUserCancelsDocument(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        VNextBOBaseWebPageSteps.clickLogo();
-        VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
-        BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
         BOSubscriptionsPageSteps.setNoneModeForSubscriptions(data.getSubscriptions());
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-        System.out.println(Arrays.toString(data.getProviderOptions()));
         VNextBOPartsDetailsPanelInteractions.setProvider(0, data.getProvider());
         VNextBOPartsDetailsPanelInteractions.setProvider(1, data.getProvider());
         VNextBOPartsDetailsPanelInteractions.setProvider(2, data.getProvider());
@@ -177,10 +172,10 @@ public class VNextBOPMEnforceAddVendorInvoiceDocumentTestCases extends BaseTestC
     public void verifyDocumentTypeVendorInvoiceIsPreselected(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
+        BOSubscriptionsPageSteps.setFullModeForSubscriptions(data.getSubscriptions());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
-
         final int order = VNextBOPartsDetailsPanelSteps.getOrderOfPartWithProviderSet();
         Assert.assertTrue(VNextBOPartsOrdersListPanelValidations.isPartStatusOpenedOrApproved(0),
                 "The part doesn't have the 'Opened' or 'Approved' status");
@@ -202,9 +197,6 @@ public class VNextBOPMEnforceAddVendorInvoiceDocumentTestCases extends BaseTestC
     public void verifyProviderDropDownContainsProvidersOfSelectedPartServices(String rowID, String description, JSONObject testData) {
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
-        VNextBOBaseWebPageSteps.clickLogo();
-        VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
-        BOMenuSteps.open(Menu.SUPER_USER, SubMenu.SUBSCRIBE);
         BOSubscriptionsPageSteps.setNoneModeForSubscriptions(data.getSubscriptions());
         webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();

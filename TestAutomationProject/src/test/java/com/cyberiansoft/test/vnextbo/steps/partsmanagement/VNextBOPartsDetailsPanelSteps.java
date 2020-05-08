@@ -33,7 +33,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -511,16 +510,5 @@ public class VNextBOPartsDetailsPanelSteps {
             }
         }
         return -1;
-    }
-
-    public static List<Integer> getListOfOrdersWithTheSamePartProviders() { //todo delete if not necessary!!!
-        final List<String> providersList = getProvidersList();
-        final List<Integer> orders = new ArrayList<>();
-        for (int i = 0; i < providersList.size(); i++) {
-            if (!providersList.get(i).isEmpty()) {
-                orders.add(i);
-            }
-        }
-        return orders;
     }
 }
