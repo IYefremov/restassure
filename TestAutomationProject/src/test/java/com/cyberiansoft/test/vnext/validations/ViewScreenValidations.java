@@ -65,9 +65,14 @@ public class ViewScreenValidations {
         Assert.assertEquals(viewScreen.getServiceSupplementAmount(serviceName), expectedAmaunt);
     }
 
-    public static void verifySupplementAmaunt(String expectedAmaunt) {
+    public static void verifySupplementAmount(String expectedAmaunt) {
         VNextViewScreen viewScreen = new VNextViewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        Assert.assertEquals(viewScreen.getSupplementAmaunt(), expectedAmaunt);
+        Assert.assertEquals(viewScreen.getSupplementAmount(), expectedAmaunt);
+    }
+
+    public static void verifyOriginalAmount(String expectedAmaunt) {
+        VNextViewScreen viewScreen = new VNextViewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        Assert.assertEquals(viewScreen.getOriginalAmount(), expectedAmaunt);
     }
 
     public static void verifyServiceTotalAmaunt(String serviceName, String expectedAmaunt) {

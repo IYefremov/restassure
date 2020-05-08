@@ -5,6 +5,7 @@ import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -15,6 +16,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Getter
 public class VNextBaseTypeScreen extends VNextBaseScreen {
@@ -73,8 +75,14 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
         tap(WaitUtils.waitUntilElementIsClickable(By.xpath("//*[@action='team']")));
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@class='button active' and @action='team']")));
-        WebElement loader = appiumdriver.findElement(By.xpath("//*[contains(@class, 'modal-loading modal-in')]"));
-        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.stalenessOf(loader));
+        WebElement loader;
+        try {
+            appiumdriver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            loader = appiumdriver.findElement(By.xpath("//*[contains(@class, 'modal-loading modal-in')]"));
+            WaitUtils.getGeneralFluentWait().until(ExpectedConditions.stalenessOf(loader));
+        } catch (NoSuchElementException e) {
+
+        }
     }
 
     public boolean isTeamViewActive() {
