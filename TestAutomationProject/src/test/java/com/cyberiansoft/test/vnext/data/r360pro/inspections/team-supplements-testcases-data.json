@@ -103,6 +103,34 @@
       ]
     }
   ],
+  "testVerifyUserCanAddSupplementWhenCreateInspection": [
+    {
+      "rowID": "testVerifyUserCanAddSupplementWhenCreateInspection.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91722",
+          "testCaseTitle": "Verify user can add supplement when create Inspection"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "TEST"
+      },
+      "services": [
+        {
+          "serviceName": "Battery Installation",
+          "servicePrice": "30",
+          "serviceQuantity": "3"
+        },
+        {
+          "serviceName": "Labor",
+          "servicePrice": "50",
+          "serviceQuantity": "2"
+        }
+      ]
+    }
+  ],
   "testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection": [
     {
       "rowID": "testVerifyUserCanAddSupplementsOnlyForApprovedOrNewInspection.01",
@@ -183,6 +211,48 @@
           "servicePrice": "30"
         }
       ]
+    }
+  ],
+  "testVerifyUserCanViewSupplement": [
+    {
+      "rowID": "testVerifyUserCanViewSupplement.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91725",
+          "testCaseTitle": "Verify user can View supplement"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "TEST"
+      },
+      "service": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "9",
+        "serviceStatus": "New"
+      }
+    }
+  ],
+  "testVerifyUserCanSendSupplement": [
+    {
+      "rowID": "testVerifyUserCanSendSupplement.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91726",
+          "testCaseTitle": "Verify user can send supplement"
+        }
+      ],
+      "inspType": "O_Kramar",
+      "vihicleInfo": {
+        "vinNumber": "TEST"
+      },
+      "service": {
+        "serviceName": "Battery Installation",
+        "servicePrice": "9",
+        "serviceStatus": "New"
+      }
     }
   ]
 }
