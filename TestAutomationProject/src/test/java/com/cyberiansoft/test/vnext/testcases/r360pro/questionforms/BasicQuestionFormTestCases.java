@@ -6,6 +6,7 @@ import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
+import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
@@ -97,18 +98,67 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         QuestionsData textQuestion = questionsDataList.get(2);
 
         HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZ_TEXT_QUESTION);
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_TEXT_QUESTIONS_IT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
 
         QuestionFormSteps.answerGeneralPredefinedQuestion(multiAnswerPredefinedQuestion, true);
         QuestionFormValidations.validateGeneralQuestionAnswer(multiAnswerPredefinedQuestion);
+        QuestionFormSteps.clearSelectedQuestion(multiAnswerPredefinedQuestion);
+        QuestionFormValidations.validateQuestionAnswered(multiAnswerPredefinedQuestion, false);
 
         QuestionFormSteps.answerGeneralPredefinedQuestion(singleAnswerPredefinedQuestion, false);
         QuestionFormValidations.validateGeneralQuestionAnswer(singleAnswerPredefinedQuestion);
+        QuestionFormSteps.clearSelectedQuestion(singleAnswerPredefinedQuestion);
+        QuestionFormValidations.validateQuestionAnswered(singleAnswerPredefinedQuestion, false);
+
+        QuestionFormSteps.answerGeneralTextQuestion(textQuestion);
+        QuestionFormValidations.validateTextQuestionAnswer(textQuestion);
+        QuestionFormSteps.clearSelectedQuestion(textQuestion);
+        QuestionFormValidations.validateQuestionAnswered(textQuestion, false);
+
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyValidationForRequiredQuestionsGoingForwardBackFromQuestionSection(String rowID,
+                                                               String description, JSONObject testData) {
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
+
+        QuestionsData multiAnswerPredefinedQuestion = questionsDataList.get(0);
+        QuestionsData singleAnswerPredefinedQuestion = questionsDataList.get(1);
+        QuestionsData textQuestion = questionsDataList.get(2);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.ROZSTALNOY_TEXT_QUESTIONS_IT);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+        InspectionSteps.trySaveInspection();
+        GeneralValidations.errorDialogShouldBePresent(true, "Please answer all necessary questions");
+        GeneralSteps.acceptDialog();
+
+        QuestionFormSteps.answerGeneralPredefinedQuestion(multiAnswerPredefinedQuestion, true);
+        QuestionFormValidations.validateGeneralQuestionAnswer(multiAnswerPredefinedQuestion);
+        InspectionSteps.trySaveInspection();
+        GeneralValidations.errorDialogShouldBePresent(true, "Please answer all necessary questions");
+        GeneralSteps.acceptDialog();
+
+        QuestionFormSteps.answerGeneralPredefinedQuestion(singleAnswerPredefinedQuestion, false);
+        QuestionFormValidations.validateGeneralQuestionAnswer(singleAnswerPredefinedQuestion);
+        InspectionSteps.trySaveInspection();
+        GeneralValidations.errorDialogShouldBePresent(true, "Please answer all necessary questions");
+        GeneralSteps.acceptDialog();
 
         QuestionFormSteps.answerGeneralTextQuestion(textQuestion);
         QuestionFormValidations.validateTextQuestionAnswer(textQuestion);
 
+        final String inspectionId = InspectionSteps.saveInspection();
+        InspectionSteps.openInspectionMenu(inspectionId);
+        MenuSteps.selectMenuItem(MenuItems.EDIT);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+        questionsDataList.forEach(questionsData -> {
+            QuestionFormValidations.validateQuestionAnswered(questionsData, true);
+        });
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -319,6 +369,40 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         QuestionFormValidations.validateQuestionAnswered(inspectionData.getQuestionScreenData().getQuestionsData().get(1), true);
 
         InspectionSteps.saveInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart(String rowID,
+                                                                                         String description, JSONObject testData) {
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
+        QuestionsData serviceQuestion = questionsDataList.get(0);
+        List<ServiceData> expectedServices = inspectionData.getServicesList();
+        ServiceData expectedSelectedService = expectedServices.get(0);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_ANSWER_SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+
+        QuestionFormSteps.answerGeneralQuestion(serviceQuestion);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES, 1);
+
+        QuestionServiceListSteps.switchToSelectedServiceView();
+        inspectionData.getServicesList().forEach(serviceData -> {
+            QuestionServiceListValidations.validateServicePresent(serviceData.getServiceName());
+        });
+        QuestionServiceListSteps.openServiceDetails(expectedSelectedService.getServiceName());
+        ServiceDetailsValidations.verifyPartsServicePresent(true);
+        ServiceDetailsValidations.verifyLaborServicesButtonPresent(false);
+        ServiceDetailsScreenSteps.openPartServiceDetails();
+        PartServiceSteps.confirmPartInfo();
+        ServiceDetailsValidations.verifyPartsServicePresent(true);
+        ServiceDetailsValidations.verifyLaborServicesButtonPresent(true);
+
+        ServiceDetailsScreenSteps.closeServiceDetailsScreen();
+
+        InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
     }
 }

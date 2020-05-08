@@ -10,6 +10,7 @@ public enum MenuItems {
     CANCEL_INVOICE("Cancel Invoice"),
     EMAIL_INPSECTION("Email Inspection"),
     EMAIL_INVOICE("Email Invoice"),
+    EMAIL_SUPPLEMENT("Email Supplement"),
     APPROVE("Approve"),
     VIEW("View"),
     VOID("Void"),

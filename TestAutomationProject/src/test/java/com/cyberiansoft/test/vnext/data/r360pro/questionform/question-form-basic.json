@@ -73,7 +73,13 @@
   "testVerifyUserCanAnswerTextQuestionsSeparatley": [
     {
       "rowID": "testVerifyUserCanAnswerTextQuestionsSeparatley.01",
-      "description": "TFSID: ",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91825",
+          "testCaseTitle": "Verify that steps are separated for every question section. User can change or clear answers for its (for 'Text' question type)"
+        }
+      ],
       "questionScreenData": {
         "questionsData": [
           {
@@ -92,7 +98,42 @@
             ]
           },
           {
-            "questionName": "Free question",
+            "questionName": "Free question required",
+            "questionAnswer": "SOME_ANSWER"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyValidationForRequiredQuestionsGoingForwardBackFromQuestionSection": [
+    {
+      "rowID": "testVerifyValidationForRequiredQuestionsGoingForwardBackFromQuestionSection.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91827",
+          "testCaseTitle": "Verify validation for required questions going forward/back from question section (for 'Text' question type)"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Multi question required",
+            "questionAnswers": [
+              "Answer 1",
+              "Answer 2"
+            ],
+            "questionAnswer": "Answer 1, Answer 2"
+          },
+          {
+            "questionName": "Single question required",
+            "questionAnswer": "Answer 1",
+            "questionAnswers": [
+              "Answer 1"
+            ]
+          },
+          {
+            "questionName": "Free question required",
             "questionAnswer": "SOME_ANSWER"
           }
         ]
@@ -304,6 +345,46 @@
           }
         ]
       }
+    }
+  ],
+  "testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart": [
+    {
+      "rowID": " testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91817",
+          "testCaseTitle": "R360 Inspection - Verify that when part service is added with labor as answer services , labor is linked to part after configuration part"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "do you the service?",
+            "questionAnswer": "hecked And OK'd"
+          }
+        ]
+      },
+      "services": [
+        {
+          "serviceName": "Oksi Part service - Part name"
+        },
+        {
+          "serviceName": "Labor_base_vehicle_data_all"
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Rear"
+        }
+      ]
     }
   ]
 }

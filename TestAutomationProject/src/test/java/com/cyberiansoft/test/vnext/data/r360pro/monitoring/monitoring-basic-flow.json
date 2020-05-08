@@ -124,8 +124,8 @@
       "service": {
         "serviceName": "olrom",
         "serviceDefaultTechnician": {
-          "technicianFirstName": "111",
-          "technicianLastName": "111"
+          "technicianFirstName": "1111",
+          "technicianLastName": "2222"
         }
       },
       "damageData": {
@@ -583,6 +583,20 @@
           "testCaseTitle": "R360 Client - Monitor - POS - Action Menu without loading spinner"
         }
       ]
+    }
+  ],
+
+  "verifySearchCanBePerformedByPriorityAndReturnBack": [
+    {
+      "rowID": "verifySearchCanBePerformedByPriorityAndReturnBack.01",
+      "description": "Test Case 92314: ReconPro - Monitor - CommonFilters - Priority - verify if Priority perform search and back from common filters",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92314",
+          "testCaseTitle": "ReconPro - Monitor - CommonFilters - Priority - verify if Priority perform search and back from common filters"
+        }
+      ],
+      "priority": "Normal"
     }
   ]
 }

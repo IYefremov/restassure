@@ -38,7 +38,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         final String noteText = UUID.randomUUID().toString();
         final String quickNoteText1 = "Warranty expired";
-        final String quickNoteText2 = "Test Quick Note 1";
+        final String quickNoteText2 = "Note15";
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
@@ -70,7 +70,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.setNoteText(myInspectionNote);
         ScreenNavigationSteps.pressBackButton();
 
-        BaseUtils.waitABit(10000);
+        BaseUtils.waitABit(15000);
         InspectionSteps.switchToTeamInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
@@ -116,8 +116,8 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
                                                        String description, JSONObject testData) {
 
         final String newNoteText = "new Notes";
-        final String quickNoteText1 = "Test Quick Note 1";
-        final String quickNoteText2 = "tr5555";
+        final String quickNoteText1 = "Note15";
+        final String quickNoteText2 = "Note1";
         final String noteText = UUID.randomUUID().toString();
 
         HomeScreenSteps.openInspections();
@@ -160,7 +160,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
 
         final String noteText = UUID.randomUUID().toString();
         final String quickNoteText1 = "Warranty expired";
-        final String quickNoteText2 = "Test Quick Note 1";
+        final String quickNoteText2 = "Note15";
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
@@ -189,7 +189,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
                                                             String description, JSONObject testData) {
 
         final String noteText = UUID.randomUUID().toString();
-        final String quickNoteText1 = "Test Quick Note 1";
+        final String quickNoteText1 = "Note15";
 
         HomeScreenSteps.openInspections();
         InspectionSteps.switchToTeamInspections();
@@ -199,7 +199,7 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.addQuickNote(quickNoteText1);
         NotesSteps.addPhotoFromCamera();
         ScreenNavigationSteps.pressHardwareBackButton();
-        BaseUtils.waitABit(10000);
+        BaseUtils.waitABit(15000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1);

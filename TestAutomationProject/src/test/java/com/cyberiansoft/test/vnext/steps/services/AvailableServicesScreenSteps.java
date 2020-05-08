@@ -78,5 +78,8 @@ public class AvailableServicesScreenSteps {
         servicesScreen.switchToAvalableServicesView();
     }
 
+    public static void openServicesList() {
 
+        new VNextAvailableServicesScreen().getAllServicesList().click();
+    }
 }

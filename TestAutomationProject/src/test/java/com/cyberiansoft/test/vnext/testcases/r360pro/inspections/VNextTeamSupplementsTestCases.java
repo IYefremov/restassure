@@ -115,6 +115,35 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanAddSupplementWhenCreateInspection(String rowID,
+                                                                 String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String serviceOriginalAmaunt2 = "$22.00";
+        final String supplementAmaunt2 = "$168.00";
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.selectServices(inspectionData.getServicesList());
+        inspectionData.getServicesList().forEach(serviceData -> {
+            SelectedServicesScreenSteps.openServiceDetails(serviceData.getServiceName());
+            ServiceDetailsScreenSteps.changeServicePrice(serviceData.getServicePrice());
+            ServiceDetailsScreenSteps.changeServiceQuantity(serviceData.getServiceQuantity());
+            ServiceDetailsScreenSteps.saveServiceDetails();
+        });
+        final String inspectionNumber = InspectionSteps.saveInspection();
+
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.VIEW_SUPPLEMENT);
+        ViewScreenValidations.verifyOriginalAmount(serviceOriginalAmaunt2);
+        ViewScreenValidations.verifySupplementAmount(supplementAmaunt2);
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAddSupplementAfterApproveInspection(String rowID,
                                                                      String description, JSONObject testData) {
 
@@ -188,7 +217,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
 
         InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
         InspectionSteps.openInspectionMenu(inspectionNumber);
-//        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
         MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         for (ServiceData service : inspectionData.getServicesList())
@@ -214,9 +243,6 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
     public void testVerifyAmountForNewServiceInSupplement(String rowID,
                                                                               String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-        final String serviceOriginalAmaunt = "$9.00";
-        final String supplementAmaunt = "$141.00";
-        final String serviceTotalAmaunt = "$150.00";
 
         final String serviceOriginalAmaunt2 = "$150.00";
         final String supplementAmaunt2 = "$60.00";
@@ -228,7 +254,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
         ServiceDetailsScreenSteps.saveServiceDetails();
         String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.openInspectionMenu(inspectionNumber);
-        //MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
         MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
         /*ViewScreenValidations.verifyServiceOriginalAmaunt(inspectionData.getMoneyServiceData().getServiceName(), serviceOriginalAmaunt);
         ViewScreenValidations.verifySupplementAmaunt(supplementAmaunt);
@@ -251,7 +277,7 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
         MenuSteps.selectMenuItem(MenuItems.VIEW_SUPPLEMENT);
         ViewScreenValidations.verifyServiceOriginalAmaunt(inspectionData.getMoneyServiceData().getServiceName(), serviceOriginalAmaunt2);
-        ViewScreenValidations.verifySupplementAmaunt(supplementAmaunt2);
+        ViewScreenValidations.verifySupplementAmount(supplementAmaunt2);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
     }
@@ -295,4 +321,89 @@ public class VNextTeamSupplementsTestCases extends BaseTestClass {
         Assert.assertFalse(pdfText.contains("Supplement"));
     }
 
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanViewSupplement(String rowID,
+                                                                     String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String serviceOriginalAmount = "$0.00";
+        final String supplementAmount = "$9.00";
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
+
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+
+        AvailableServicesScreenSteps.selectService(inspectionData.getServiceData().getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.changeServicePrice(inspectionData.getServiceData().getServicePrice());
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        InspectionSteps.saveInspection();
+        InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.NEW);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.VIEW_SUPPLEMENT);
+        ViewScreenValidations.verifyServiceOriginalAmaunt(inspectionData.getServiceData().getServiceName(), serviceOriginalAmount);
+        ViewScreenValidations.verifyServiceSupplementAmaunt(inspectionData.getServiceData().getServiceName(), supplementAmount);
+        ViewScreenValidations.verifySupplementAmount(supplementAmount);
+        ViewScreenValidations.verifyOriginalAmount(serviceOriginalAmount);
+        ScreenNavigationSteps.pressBackButton();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanSendSupplement(String rowID,
+                                                String description, JSONObject testData) throws Exception {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String serviceOriginalAmount = "$0.00";
+        final String supplementAmount = "$9.00";
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR, inspectionData);
+        final String inspectionNumber = InspectionSteps.saveInspection();
+
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
+
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.ADD_SUPPLEMENT);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+
+        AvailableServicesScreenSteps.selectService(inspectionData.getServiceData().getServiceName());
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
+        ServiceDetailsScreenSteps.changeServicePrice(inspectionData.getServiceData().getServicePrice());
+        ServiceDetailsScreenSteps.saveServiceDetails();
+        InspectionSteps.saveInspection();
+        InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.NEW);
+        InspectionSteps.openInspectionMenu(inspectionNumber);
+        MenuSteps.selectMenuItem(MenuItems.SUPPLEMENT);
+        MenuSteps.selectMenuItem(MenuItems.EMAIL_SUPPLEMENT);
+        NadaEMailService nadaEMailService = new NadaEMailService();
+        EmailSteps.sendEmail(nadaEMailService.getEmailId());
+        ScreenNavigationSteps.pressBackButton();
+
+        final String inspectionReportFileName = inspectionNumber + ".pdf";
+        NadaEMailService.MailSearchParametersBuilder searchParametersBuilder = new NadaEMailService.MailSearchParametersBuilder()
+                .withSubjectAndAttachmentFileName(inspectionNumber, inspectionReportFileName);
+        Assert.assertTrue(nadaEMailService.downloadMessageAttachment(searchParametersBuilder), "Can't find invoice: " + inspectionNumber +
+                " in mail box " + nadaEMailService.getEmailId() + ". At time " +
+                LocalDateTime.now().getHour() + ":" + LocalDateTime.now().getMinute());
+        nadaEMailService.deleteMessageWithSubject(inspectionNumber);
+        File pdfdoc = new File(inspectionReportFileName);
+        String pdftext = PDFReader.getPDFText(pdfdoc);
+        Assert.assertTrue(pdftext.contains(serviceOriginalAmount));
+        Assert.assertTrue(pdftext.contains(supplementAmount));
+        Assert.assertTrue(pdftext.contains(inspectionData.getServiceData().getServiceName()));
+    }
 }

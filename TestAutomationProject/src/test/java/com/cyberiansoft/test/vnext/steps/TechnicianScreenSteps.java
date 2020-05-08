@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.dataclasses.Employee;
 import com.cyberiansoft.test.vnext.interactions.TechnicianScreenInteractions;
+import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 
 import java.util.List;
 import java.util.Map;
@@ -28,5 +29,13 @@ public class TechnicianScreenSteps {
 
     public static void selectDefault() {
         TechnicianScreenInteractions.selectDefault();
+    }
+
+    public static void searchAndSelectTechnician(String techName) {
+
+        TopScreenPanelSteps.searchData(techName);
+        TechnicianScreenInteractions.selectTechnician(techName);
+        TopScreenPanelSteps.clearSearchField();
+        TopScreenPanelSteps.cancelSearch();
     }
 }

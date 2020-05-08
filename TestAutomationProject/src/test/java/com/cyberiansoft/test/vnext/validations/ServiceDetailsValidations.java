@@ -40,6 +40,11 @@ public class ServiceDetailsValidations {
         Assert.assertEquals(WaitUtils.isElementPresent(serviceDetailsScreen.getPartServiceInfoTitle()), shouldBePresent);
     }
 
+    public static void verifyLaborServicesButtonPresent(boolean shouldBePresent) {
+        VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
+        Assert.assertEquals(WaitUtils.isElementPresent(serviceDetailsScreen.getLaborServicesButton()), shouldBePresent);
+    }
+
     public static void verifyUserIsOnDetailsPage() {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         WaitUtils.elementShouldBeVisible(serviceDetailsScreen.getRootElement(), true);

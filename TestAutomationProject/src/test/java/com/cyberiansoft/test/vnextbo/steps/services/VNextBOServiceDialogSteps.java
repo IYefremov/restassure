@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnextbo.steps.services;
 
+import com.cyberiansoft.test.baseutils.ConditionWaiter;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.dataclasses.vNextBO.services.VNextBOServiceData;
@@ -57,7 +58,7 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(addNewServiceDialog.getMoneyPriceField());
         Utils.sendKeysWithJS(addNewServiceDialog.getMoneyPriceFieldToBeEdited(), price);
         Utils.clickElement(addNewServiceDialog.getPriceFieldLabel());
-        WaitUtilsWebDriver.waitForInputFieldValueIgnoringException(addNewServiceDialog.getMoneyPriceField(), price);
+        ConditionWaiter.create(__ -> Utils.getInputFieldValue(addNewServiceDialog.getMoneyPriceField()).contains(price)).execute();
     }
 
     private static void setPercentageServicePrice(String price) {
@@ -66,7 +67,7 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(addNewServiceDialog.getPercentagePriceField());
         Utils.sendKeysWithJS(addNewServiceDialog.getPercentagePriceFieldToBeEdited(), price);
         Utils.clickElement(addNewServiceDialog.getPriceFieldLabel());
-        WaitUtilsWebDriver.waitForInputFieldValueIgnoringException(addNewServiceDialog.getPercentagePriceField(), price);
+        ConditionWaiter.create(__ -> Utils.getInputFieldValue(addNewServiceDialog.getPercentagePriceField()).contains(price)).execute();
     }
 
     private static void setClarification(String clarification) {
@@ -114,7 +115,7 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
         Utils.clickElement(addNewServiceDialog.getLaborRateField());
         Utils.sendKeysWithJS(addNewServiceDialog.getLaborRateFieldToBeEdited(), laborRate);
         Utils.clickElement(addNewServiceDialog.getLaborRateFieldLabel());
-        WaitUtilsWebDriver.waitForInputFieldValueIgnoringException(addNewServiceDialog.getLaborRateField(), laborRate);
+        ConditionWaiter.create(__ -> Utils.getInputFieldValue(addNewServiceDialog.getLaborRateField()).contains(laborRate)).execute();
     }
 
     private static void setDefaultLaborTime(String defaultLaborTime) {
@@ -158,7 +159,8 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
 
         setBaseServiceData(serviceData, true);
         if (serviceData.getServicePriceType().equals("Money")) setMoneyServicePrice(serviceData.getServicePrice());
-        if (serviceData.getServicePriceType().equals("Percentage")) setPercentageServicePrice(serviceData.getServicePrice());
+        if (serviceData.getServicePriceType().equals("Percentage"))
+            setPercentageServicePrice(serviceData.getServicePrice());
         setClarificationFields(serviceData);
         clickSaveButton();
         WaitUtilsWebDriver.waitForSpinnerToDisappear();
@@ -187,7 +189,8 @@ public class VNextBOServiceDialogSteps extends VNextBOBaseWebPageSteps {
 
         setBaseServiceData(serviceData, false);
         if (serviceData.getServicePriceType().equals("Money")) setMoneyServicePrice(serviceData.getServicePrice());
-        if (serviceData.getServicePriceType().equals("Percentage")) setPercentageServicePrice(serviceData.getServicePrice());
+        if (serviceData.getServicePriceType().equals("Percentage"))
+            setPercentageServicePrice(serviceData.getServicePrice());
         setClarificationFields(serviceData);
         clickSaveButton();
         WaitUtilsWebDriver.waitForSpinnerToDisappear();

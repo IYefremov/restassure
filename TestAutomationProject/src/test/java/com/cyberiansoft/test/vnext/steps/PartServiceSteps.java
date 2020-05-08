@@ -20,20 +20,24 @@ public class PartServiceSteps {
 
     }
 
-    public static void changeCategory(PartServiceData partServiceData) {
-        WaitUtils.click(PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.CATEGORY));
-        PartServiceSteps.selectpartServiceDetails(partServiceData);
-    }
-
     public static void selectpartServiceDetails(PartServiceData partServiceData) {
-        if (partServiceData.getCategory() != null)
+        if (partServiceData.getCategory() != null) {
             PartServiceSteps.selectCategory(partServiceData.getCategory());
-        if (partServiceData.getSubCategory() != null)
-            PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
-        if (partServiceData.getPartName() != null)
-            PartServiceSteps.selectPartName(partServiceData.getPartName());
-        if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
-            PartServiceSteps.selectPartPosition(partServiceData.getPartPosition());
+            if (partServiceData.getSubCategory() != null)
+                PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
+            if (partServiceData.getPartName() != null)
+                PartServiceSteps.selectPartName(partServiceData.getPartName());
+            if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
+                PartServiceSteps.selectPartPosition(partServiceData.getPartPosition());
+        } else {
+            ServiceDetailsScreenSteps.openPartServiceDetails();
+            if (partServiceData.getSubCategory() != null)
+                PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
+            if (partServiceData.getPartName() != null)
+                PartServiceSteps.selectPartName(partServiceData.getPartName());
+            if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
+                PartServiceSteps.changePartPosition(partServiceData.getPartPosition());
+        }
     }
 
     public static void selectCategory(String category) {
@@ -59,6 +63,16 @@ public class PartServiceSteps {
         ListSelectPageInteractions.selectItem(partPosition);
     }
 
+    public static void changePartPosition(String partPosition) {
+        PartInfoScreen partInfoScreen = new PartInfoScreen();
+        partInfoScreen.getPartPositionField().click();
+        selectPartPosition(partPosition);
+    }
+
+    public static void changeCategory(PartServiceData partServiceData) {
+        WaitUtils.click(PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.CATEGORY));
+        PartServiceSteps.selectpartServiceDetails(partServiceData);
+    }
 
     public static void acceptDetailsScreen() {
         ListSelectPageInteractions.saveListPage();

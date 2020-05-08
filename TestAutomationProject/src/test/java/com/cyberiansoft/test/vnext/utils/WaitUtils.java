@@ -91,7 +91,7 @@ public class WaitUtils {
     }
 
     public static void waitUntilElementInvisible(final By locator) {
-        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        ChromeDriverProvider.INSTANCE.getMobileChromeDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
         WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
         ChromeDriverProvider.INSTANCE.getMobileChromeDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }

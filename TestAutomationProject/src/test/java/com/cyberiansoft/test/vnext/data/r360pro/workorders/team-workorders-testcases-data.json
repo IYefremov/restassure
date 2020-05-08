@@ -245,5 +245,65 @@
       ],
       "workOrderPrice": "$34.76"
     }
+  ],
+  "testVerifyUserCanIncreaseTechniciansQuantityForCustomTechSplit": [
+    {
+      "rowID": "testVerifyUserCanIncreaseTechniciansQuantityForCustomTechSplit.01",
+      "description": "Test Case 91964: User can increase qty of Technicians of WO creating WO for custom tech split (Team)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91964",
+          "testCaseTitle": "User can increase qty of Technicians of WO creating WO for custom tech split (Team)"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "moneyServices": [
+        {
+          "serviceName": "Orom_Money_Service"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCanSeparateAmountOfWOWithLaborServiceForTwoTechnicians": [
+    {
+      "rowID": "testVerifyUserCanSeparateAmountOfWOWithLaborServiceForTwoTechnicians.01",
+      "description": "Test Case 91957: User can separate amount of WO with labor service for 2 Technicians evenly (Team)",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91957",
+          "testCaseTitle": "User can separate amount of WO with labor service for 2 Technicians evenly (Team)"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "moneyServices": [
+        {
+          "serviceName": "Orom_Money_Service"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserCanSplitValueCustomAndSeeConfirmationWindow": [
+    {
+      "rowID": "testVerifyUserCanSplitValueCustomAndSeeConfirmationWindow.01",
+      "description": "Test Case 91967: User can split value Custom after Evenly split and see Confirmation window about split change",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91967",
+          "testCaseTitle": "User can split value Custom after Evenly split and see Confirmation window about split change"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "moneyServices": [
+        {
+          "serviceName": "Orom_Money_Service"
+        }
+      ]
+    }
   ]
 }

@@ -15,6 +15,9 @@ public class PartInfoScreen extends MonitorScreen {
     @FindBy(xpath = "//div[@data-field]")
     private List<WebElement> partInfoFields;
 
+    @FindBy(xpath = "//*[@action='select-position']")
+    private WebElement partPositionField;
+
     @FindBy(xpath = "//*[@action='save']")
     private WebElement saveButton;
 

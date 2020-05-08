@@ -52,7 +52,7 @@ public class VNextCreateInvoiceFromMultiplyWOTestCases extends BaseTestCaseWithD
 			WorkOrderSteps.clickAddWorkOrderButton();
 			CustomersScreenSteps.selectCustomer(testcustomer);
 			VNextVehicleInfoScreen vehicleInfoScreen = new VNextVehicleInfoScreen();
-            HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+
 			VehicleInfoScreenSteps.setVehicleInfo(workOrderData.getVehicleInfoData());
             //VNextVehicleVINHistoryScreen vehicleVINHistoryScreen = new VNextVehicleVINHistoryScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 			//vehicleVINHistoryScreen.clickBackButton();

@@ -11,12 +11,13 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Locale;
 
 public class ViewScreenValidations {
 
     public static void verifyEstimationDataFieldFormat() {
         DateTimeFormatter dateFormatLong =
-                DateTimeFormatter.ofPattern("dd MMMM yyyy hh:mm a");
+                DateTimeFormatter.ofPattern("dd MMMM yyyy hh:mm a",  Locale.US);
         VNextViewScreen viewScreen = new VNextViewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         String date = viewScreen.getEstimationDateValue();
         Assert.assertTrue(isValidFormat(dateFormatLong, date));
@@ -64,9 +65,14 @@ public class ViewScreenValidations {
         Assert.assertEquals(viewScreen.getServiceSupplementAmount(serviceName), expectedAmaunt);
     }
 
-    public static void verifySupplementAmaunt(String expectedAmaunt) {
+    public static void verifySupplementAmount(String expectedAmaunt) {
         VNextViewScreen viewScreen = new VNextViewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        Assert.assertEquals(viewScreen.getSupplementAmaunt(), expectedAmaunt);
+        Assert.assertEquals(viewScreen.getSupplementAmount(), expectedAmaunt);
+    }
+
+    public static void verifyOriginalAmount(String expectedAmaunt) {
+        VNextViewScreen viewScreen = new VNextViewScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        Assert.assertEquals(viewScreen.getOriginalAmount(), expectedAmaunt);
     }
 
     public static void verifyServiceTotalAmaunt(String serviceName, String expectedAmaunt) {

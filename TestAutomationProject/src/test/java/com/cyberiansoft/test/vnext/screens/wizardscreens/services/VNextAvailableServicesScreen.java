@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.screens.wizardscreens.services;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.Button;
 import com.cyberiansoft.test.vnext.webelements.ServiceListItem;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -18,10 +19,10 @@ import java.util.List;
 public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
     @FindBy(xpath = "//div[@data-page='services-list']")
-    private WebElement servicesscreen;
+    private WebElement servicesScreen;
 
     @FindBy(xpath = "//*[@data-autotests-id='all-services']")
-    private WebElement allserviceslist;
+    private Button allServicesList;
 
     @FindBy(xpath = "//*[@data-view-mode='available']/div")
     private List<ServiceListItem> servicesList;
@@ -37,10 +38,6 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
         });
     }
 
-    public void selectServiceGroup(String groupName) {
-        allserviceslist.findElement(By.xpath(".//*[@action='select-group']/*[ contains(text(), '"+ groupName + "')]")).click();
-    }
-
     public void selectSingleService(String serviceName) {
         WaitUtils.getGeneralFluentWait().until(driver -> {
             getServiceListItem(serviceName).clickAddService();
@@ -54,8 +51,8 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
 
     public String getTotalPriceValue() {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-        wait.until(ExpectedConditions.visibilityOf(servicesscreen.findElement(By.xpath(".//span[@id='total']"))));
-        return servicesscreen.findElement(By.xpath(".//span[@id='total']")).getText().trim();
+        wait.until(ExpectedConditions.visibilityOf(servicesScreen.findElement(By.xpath(".//span[@id='total']"))));
+        return servicesScreen.findElement(By.xpath(".//span[@id='total']")).getText().trim();
     }
 
 }

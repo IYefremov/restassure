@@ -8,7 +8,6 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.VehicleDataField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.customers.VNextCustomersScreen;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInspectionTypesList;
@@ -57,7 +56,7 @@ public class VNextWholesaleCustomersTestCases extends BaseTestClass {
 		customersScreen.selectCustomer(testwholesailcustomer);
         VNextInspectionTypesList inspectionTypesList = new VNextInspectionTypesList(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 		inspectionTypesList.selectInspectionType(InspectionTypes.O_KRAMAR);
-		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+		//HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		VehicleInfoScreenInteractions.setDataFiled(VehicleDataField.VIN, inspectionData.getVehicleInfo().getVINNumber());
 		GeneralWizardInteractions.saveViaMenu();
 		ScreenNavigationSteps.pressBackButton();

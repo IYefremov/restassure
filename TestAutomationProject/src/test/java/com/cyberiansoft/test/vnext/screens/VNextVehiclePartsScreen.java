@@ -25,7 +25,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(vehiclepartsscreen));
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 	}
 
 	public VNextVehiclePartsScreen() {

@@ -2,7 +2,6 @@ package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +35,7 @@ public class VNextViewScreen extends VNextBaseScreen {
     public void waitViewScreenLoaded() {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 60);
 		wait.until(ExpectedConditions.visibilityOf(viewscreen));
-		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+		//HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 	}
 
 	public String getEstimationDateValue() {
@@ -134,13 +133,22 @@ public class VNextViewScreen extends VNextBaseScreen {
 		return  totalAmaunt;
 	}
 
-	public String getSupplementAmaunt() {
+	public String getSupplementAmount() {
     	final String supplementMatchString = "8Supplement Amount: ";
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(viewscreen.findElement(By.xpath(".//iframe[@class='printing-viewer']")));
 		String supplementAmaunt = contentTable.findElement(By.xpath(".//td/b[contains(text(), '" + supplementMatchString + "')]")).
 				getText().trim();
 		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
 		return  supplementAmaunt.substring(supplementMatchString.length());
+	}
+
+	public String getOriginalAmount() {
+		final String originalMatchString = "8Original Amount: ";
+		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().frame(viewscreen.findElement(By.xpath(".//iframe[@class='printing-viewer']")));
+		String supplementAmaunt = contentTable.findElement(By.xpath(".//td[contains(text(), '" + originalMatchString + "')]")).
+				getText().trim();
+		ChromeDriverProvider.INSTANCE.getMobileChromeDriver().switchTo().defaultContent();
+		return  supplementAmaunt.substring(originalMatchString.length());
 	}
 
 	private WebElement getServiceTableRow(String serviceName) {

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.screens.monitoring;
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.ActiveFiltersLabel;
+import com.cyberiansoft.test.vnext.webelements.Button;
 import com.cyberiansoft.test.vnext.webelements.RepairOrderListElement;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
@@ -41,6 +42,12 @@ public class RepairOrderScreen extends MonitorScreen {
 
     @FindBy(xpath = "//div[@class=\"searchlist-nothing-found\"]")
     private WebElement nothingFoundLable;
+
+    @FindBy(xpath = "//div[@class='searchlist-filters-values-text']")
+    private WebElement searchFiltersValue;
+
+    @FindBy(xpath = "//div[@class='searchlist-filters-values-remove']")
+    private Button clearSearchFiltersIcon;
 
     public RepairOrderScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
