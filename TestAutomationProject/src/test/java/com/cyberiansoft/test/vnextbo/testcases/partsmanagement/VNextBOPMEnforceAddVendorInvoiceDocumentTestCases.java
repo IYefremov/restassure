@@ -60,6 +60,7 @@ public class VNextBOPMEnforceAddVendorInvoiceDocumentTestCases extends BaseTestC
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
         BOSubscriptionsPageSteps.setFullModeForSubscriptions(data.getSubscriptions());
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
@@ -173,6 +174,7 @@ public class VNextBOPMEnforceAddVendorInvoiceDocumentTestCases extends BaseTestC
         VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
 
         BOSubscriptionsPageSteps.setFullModeForSubscriptions(data.getSubscriptions());
+        webdriverGotoWebPage(BaseTestCase.getBackOfficeURL());
         VNextBOLeftMenuInteractions.selectPartsManagementMenu();
         VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
         VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
