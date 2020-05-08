@@ -15,6 +15,9 @@ public class VNextTopScreenPanel extends VNextBaseScreen {
     @FindBy(xpath = "//span[@action='back']")
     private Button backButton;
 
+    @FindBy(xpath = "//span[@action='forward']")
+    private Button forwardButton;
+
     @FindBy(xpath = "//*[@data-automation-id='search-icon']")
     private Button searchButton;
 
