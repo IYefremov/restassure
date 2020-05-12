@@ -1093,13 +1093,18 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyInvoice(workOrderNumber);
 		InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR, testCaseData.getInvoiceData());
 		final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
-
+		BaseUtils.waitABit(10000);
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
 
 		String result = NotesSteps.addQuickNotesFromListByCount(10);
+		Assert.assertFalse(result.isEmpty());
 		ScreenNavigationSteps.pressBackButton();
-		NotesSteps.verifyNoteIsPresent(result);
+		BaseUtils.waitABit(10000);
+		InvoiceSteps.openMenu(invoiceNumber);
+		MenuSteps.selectMenuItem(MenuItems.NOTES);
+		NotesSteps.verifyNoteIsPresent(result.trim());
+		ScreenNavigationSteps.pressBackButton();
 		ScreenNavigationSteps.pressBackButton();
 	}
 

@@ -91,7 +91,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
 
     //todo rewrite!!!
     protected void switchToMyView() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(myviewtab));
         WaitUtils.getGeneralFluentWait().until(driver -> {
             Actions actions = new Actions(appiumdriver);
