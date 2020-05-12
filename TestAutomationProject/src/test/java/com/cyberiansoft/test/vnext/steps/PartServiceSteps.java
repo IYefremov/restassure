@@ -81,7 +81,6 @@ public class PartServiceSteps {
     public static void confirmPartInfo() {
         PartInfoScreen partInfoScreen = new PartInfoScreen();
         WaitUtils.click(partInfoScreen.getSaveButton());
-        WaitUtils.elementShouldBeVisible(partInfoScreen.getRootElement(), false);
     }
 
     public static void addLaborService() {

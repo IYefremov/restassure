@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.testcases.r360pro.invoices;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.TestCaseData;
 import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
@@ -225,6 +226,9 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         InvoiceInfoSteps.setInvoicePONumber(testCaseData.getInvoiceData().getNewPoNumber());
         InvoiceSteps.saveInvoiceAsDraft();
+        ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(10000);
+        HomeScreenSteps.openInvoices();
         InvoicesScreenValidations.validateInvoicePONumber(invoiceNumber, testCaseData.getInvoiceData().getNewPoNumber());
         InvoicesScreenValidations.validateInvoiceStatus(invoiceNumber, InvoiceStatus.DRAFT);
         InvoiceSteps.switchToMyInvoicesView();

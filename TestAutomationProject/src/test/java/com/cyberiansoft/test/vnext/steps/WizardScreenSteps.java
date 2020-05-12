@@ -1,6 +1,7 @@
 package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.vnext.enums.ScreenType;
+import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
@@ -16,6 +17,11 @@ public class WizardScreenSteps {
         );
         WaitUtils.elementShouldBeVisible(baseWizardScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(baseWizardScreen.getRootElement());
+        switch (screenType) {
+            case VISUAL:
+                HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+                break;
+        }
         //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
     }
 
