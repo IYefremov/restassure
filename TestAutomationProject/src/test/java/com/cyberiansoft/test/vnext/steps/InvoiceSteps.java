@@ -108,4 +108,9 @@ public class InvoiceSteps {
             invoicesScreen.getCancelSelectedInvoices().click();
     }
 
+    public static void clickAddInvoice() {
+        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
+        invoicesScreen.clickAddInvoiceButton();
+    }
+
 }
