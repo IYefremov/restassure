@@ -60,8 +60,7 @@ public class VNextSelectWorkOrdersScreen extends VNextBaseScreen {
             tap(workordercell.findElement(By.xpath(".//input[@type='checkbox']")));
     }
 
-    public VNextInvoiceInfoScreen clickAddWorkOrders() {
+    public void clickAddWorkOrders() {
         tap(addworkordersbtn);
-        return new VNextInvoiceInfoScreen(appiumdriver);
     }
 }

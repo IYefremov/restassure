@@ -5,7 +5,6 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -36,12 +35,6 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	
 	@FindBy(xpath="//div[@class='invoce-info-container']")
 	private WebElement invoiceInfoPanel;
-
-    public VNextInvoiceInfoScreen(WebDriver appiumdriver) {
-		super(appiumdriver);
-		PageFactory.initElements(appiumdriver, this);
-		WaitUtils.elementShouldBeVisible(getRootElement(),true);
-	}
 
 	public VNextInvoiceInfoScreen() {
 		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
@@ -83,8 +76,8 @@ public class VNextInvoiceInfoScreen extends VNextBaseScreen {
 	}
 
 	public void clickOnWorkOrder(String workOrderNumber) {
+		WaitUtils.elementShouldBeVisible(getRootElement(),true);
 		tap(appiumdriver.
 				findElement(By.xpath("//div[@class='checkbox-item-title' and text()='" + workOrderNumber + "']")));
-        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 	}
 }

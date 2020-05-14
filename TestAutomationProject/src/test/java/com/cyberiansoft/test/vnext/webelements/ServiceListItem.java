@@ -48,7 +48,11 @@ public class ServiceListItem implements IWebElement {
     }
 
     public void clickDeleteService() {
-        rootElement.findElement(By.xpath(unSelectServiceLocator)).click();
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            rootElement.findElement(By.xpath(unSelectServiceLocator)).click();
+            return true;
+        });
+        //rootElement.findElement(By.xpath(unSelectServiceLocator)).click();
     }
 
     public void openServiceDetails() {

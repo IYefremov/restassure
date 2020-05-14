@@ -110,18 +110,6 @@ public class NotesSteps {
         noteScreen.getCommentTest().sendKeys(noteText);
     }
 
-    public static String addQuickNotesByCount(int count) {
-        StringBuilder note = new StringBuilder();
-        String result = "";
-        final String quickNoteText = "Note15";
-        for (int i = 1; i <= count; i++) {
-            NotesSteps.addQuickNote(quickNoteText);
-            note.append("\n");
-            note.append(quickNoteText) ;
-        }
-        return result;
-    }
-
     public static List<String> getListOfQuickNotes(int count) {
         VNextNotesScreen notesScreen = new VNextNotesScreen();
         notesScreen.switchToQuickNotes();
