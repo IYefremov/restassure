@@ -65,6 +65,25 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCantCreateInvoiceWithDeletedWO(String rowID,
+                                                         String description, JSONObject testData) {
+
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        final String workOrderNumber = WorkOrderSteps.createSimpleWorkOrder(testcustomer, WorkOrderTypes.KRAMAR_AUTO, workOrderData);
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, true);
+        WorkOrderSteps.deleteWorkOrder(workOrderNumber);
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, false);
+        ScreenNavigationSteps.pressBackButton();
+
+        HomeScreenSteps.openInvoices();
+        InvoiceSteps.switchToMyInvoicesView();
+        InvoiceSteps.clickAddInvoice();
+
+        WorkOrdersScreenValidations.validateWorkOrderExists(workOrderNumber, false);
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCantDeleteWOIfAllowDeleteOFF(String rowID,
                                                            String description, JSONObject testData) {
 

@@ -24,7 +24,6 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
     final RetailCustomer testCustomer1 = new RetailCustomer("RetailCustomer", "RetailLast");
     final RetailCustomer testCustomer2 = new RetailCustomer("RetailCustomer2", "RetailLast2");
 
-
     @BeforeClass(description = "Work Orders Change Customer Test Cases")
     public void settingUp() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInspectionsChangeCustomersTestCasesDataPath();
@@ -66,7 +65,6 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
 
         InspectionSteps.openInspectionMenu(inspectionNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
-        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceData());
         InspectionSteps.saveInspection();
@@ -102,7 +100,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         final String inspectionNumber = InspectionSteps.saveInspection();
         InspectionSteps.changeCustomerForInspection(inspectionNumber, testwholesailcustomer);
         InspectionSteps.switchToTeamInspections();
-        SearchSteps.textSearch(inspectionNumber);
+        SearchSteps.textSearchTeam(inspectionNumber);
         InspectionsValidations.verifyInspectionCustomer(inspectionNumber, testwholesailcustomer);
         InspectionSteps.switchToMyInspections();
         ScreenNavigationSteps.pressBackButton();
@@ -134,7 +132,7 @@ public class VNextTeamInspectionsChangeCustomerTestCases extends BaseTestClass {
         InspectionSteps.changeCustomerForInspection(inspectionNumber, testCustomer2);
         InspectionsValidations.verifyInspectionCustomer(inspectionNumber, testCustomer2);
         InspectionSteps.switchToTeamInspections();
-        SearchSteps.textSearch(inspectionNumber);
+        SearchSteps.textSearchTeam(inspectionNumber);
         InspectionsValidations.verifyInspectionCustomer(inspectionNumber, testCustomer2);
         InspectionSteps.switchToMyInspections();
         ScreenNavigationSteps.pressBackButton();
