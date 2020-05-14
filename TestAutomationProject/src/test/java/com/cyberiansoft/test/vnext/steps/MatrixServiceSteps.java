@@ -66,7 +66,7 @@ public class MatrixServiceSteps {
 
     public static void openPartServiceDetailsInsideMatrixService(PartServiceData partServiceData) {
         MatrixServiceDetailsScreenInteractions.selectService(partServiceData.getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceData);
+        PartServiceSteps.selectPartServiceDetails(partServiceData);
     }
 
     public static void openPartServiceDetails(PartServiceData partService) {

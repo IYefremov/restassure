@@ -84,6 +84,7 @@ public class WaitUtils {
     }
 
     public static void click(final WebElement webElement) {
+        WaitUtils.elementShouldBeVisible(webElement, true);
         WaitUtils.getGeneralFluentWait().until((webdriver) -> {
             webElement.click();
             return true;
