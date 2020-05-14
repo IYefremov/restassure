@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 public class WaitUtils {
 
     private static final int durationInSeconds = 45;
-    private static final int pullingIntervalInMils = 500;
+    private static final int pullingIntervalInMils = 300;
 
     public static void collectionSizeIsGreaterThan(List<?> list, Integer expectedSize) {
         WaitUtils.getGeneralFluentWait().until(driver -> list.size() > expectedSize);
@@ -128,5 +128,16 @@ public class WaitUtils {
                         .ignoring(AssertionError.class)
                         .ignoring(StaleElementReferenceException.class)
                         .ignoring(RuntimeException.class);
+    }
+
+    public static void waitLoadDialogDisappears() {
+        WebElement loader;
+        try {
+            ChromeDriverProvider.INSTANCE.getMobileChromeDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            loader = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//*[contains(@class, 'modal-loading modal-in')]"));
+            getGeneralFluentWait().until(ExpectedConditions.stalenessOf(loader));
+        } catch (NoSuchElementException e) {
+
+        }
     }
 }

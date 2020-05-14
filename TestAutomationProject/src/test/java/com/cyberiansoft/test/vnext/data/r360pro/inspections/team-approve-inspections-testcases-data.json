@@ -7,6 +7,25 @@
         {
           "testCaseID": "90314",
           "testCaseTitle": "Verify user can create Inspection in status \"New\""
+        },
+        {
+          "testCaseID": "90315",
+          "testCaseTitle": "Verify user can create Inspection in status \"New\""
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      }
+    }
+  ],
+  "testVerifyUserCanApproveTeamInspectionInStatusNew": [
+    {
+      "rowID": "testVerifyUserCanApproveTeamInspectionInStatusNew.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "90764",
+          "testCaseTitle": "Verify user can approve Team Inspection in Status \"New\""
         }
       ],
       "vihicleInfo": {

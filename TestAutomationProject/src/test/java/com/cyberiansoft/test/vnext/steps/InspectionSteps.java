@@ -14,7 +14,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InspectionListElement;
-import org.openqa.selenium.By;
 
 public class InspectionSteps {
     public static void createInspection(AppCustomer customer, InspectionTypes inspectionTypes) {
@@ -37,7 +36,6 @@ public class InspectionSteps {
     public static String createR360Inspection(AppCustomer customer, InspectionData inspectionData) {
         clickAddInspectionButton();
         CustomersScreenSteps.selectCustomer(customer);
-        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
         if (inspectionData.getInsuranceCompanyData() != null) {
             WizardScreenSteps.navigateToWizardScreen(ScreenType.CLAIM);
@@ -140,7 +138,7 @@ public class InspectionSteps {
         CustomersScreenSteps.selectCustomer(newCustomer);
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         informationDialog.clickInformationDialogYesButton();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[text()='Saving Inspection customer...']"));
+        WaitUtils.waitLoadDialogDisappears();
     }
 
     public static void clickAddInspectionButton() {
@@ -151,6 +149,6 @@ public class InspectionSteps {
     public static void clickMultiSelectInspectionsApproveButton() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.getMultiSelectInspApproveBtn().click();
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        WaitUtils.waitLoadDialogDisappears();
     }
 }

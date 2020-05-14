@@ -2,7 +2,7 @@ package com.cyberiansoft.test.vnext.steps;
 
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextApproveScreen;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInspectionsScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class  ApproveSteps {
 
@@ -13,8 +13,7 @@ public class  ApproveSteps {
 
     public static void saveApprove() {
         ListSelectPageInteractions.saveListPage();
-        VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
-        inspectionsScreen.waitNotificationMessageDissapears();
+        WaitUtils.waitLoadDialogDisappears();
     }
 
     public static void clickClearSignatureButton() {

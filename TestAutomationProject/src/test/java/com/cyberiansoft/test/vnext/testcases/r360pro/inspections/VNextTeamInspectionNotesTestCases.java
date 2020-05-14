@@ -81,7 +81,8 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         InspectionSteps.switchToMyInspections();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.verifyNoteIsPresent(teamInspectionNote);
+        NotesSteps.verifyNoteIsPresent(myInspectionNote + teamInspectionNote);
+        BaseUtils.waitABit(1000);
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.switchToMyInspections();
         ScreenNavigationSteps.pressBackButton();
@@ -171,9 +172,11 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         NotesSteps.addQuickNote(quickNoteText2);
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
         ScreenNavigationSteps.pressHardwareBackButton();
+        BaseUtils.waitABit(10000);
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
+        BaseUtils.waitABit(1000);
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.switchToMyInspections();
         ScreenNavigationSteps.pressBackButton();
@@ -221,11 +224,11 @@ public class VNextTeamInspectionNotesTestCases extends BaseTestClass {
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
         NotesSteps.setNoteText(noteText);
-        resultNoteText = noteText + NotesSteps.addQuickNotesByCount(5);
+        resultNoteText = noteText + "\n" + NotesSteps.addQuickNotesFromListByCount(5);
         ScreenNavigationSteps.pressHardwareBackButton();
         InspectionSteps.openInspectionMenu(inspectionId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.verifyNoteIsPresent(resultNoteText);
+        NotesSteps.verifyNoteIsPresent(resultNoteText.trim());
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.switchToMyInspections();
         ScreenNavigationSteps.pressBackButton();
