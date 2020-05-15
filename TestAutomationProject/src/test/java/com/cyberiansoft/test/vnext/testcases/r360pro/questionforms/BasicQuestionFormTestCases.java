@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnext.testcases.r360pro.questionforms;
 import com.cyberiansoft.test.dataclasses.InspectionData;
 import com.cyberiansoft.test.dataclasses.QuestionsData;
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.dataclasses.WorkOrderData;
 import com.cyberiansoft.test.dataclasses.partservice.PartServiceData;
 import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
@@ -33,7 +34,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAnswerQuestionsSeparatley(String rowID,
-                                                       String description, JSONObject testData) {
+                                                           String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
@@ -57,7 +58,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyValidationOfRequiredQuestionsOnSaveInspection(String rowID,
-                                                                    String description, JSONObject testData) {
+                                                                        String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
@@ -89,7 +90,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAnswerTextQuestionsSeparatley(String rowID,
-                                                           String description, JSONObject testData) {
+                                                               String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
@@ -122,7 +123,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyValidationForRequiredQuestionsGoingForwardBackFromQuestionSection(String rowID,
-                                                               String description, JSONObject testData) {
+                                                                                            String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
@@ -165,7 +166,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyValidationOfRequiredTextQuestionsOnSaveInspection(String rowID,
-                                                                        String description, JSONObject testData) {
+                                                                            String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
@@ -202,7 +203,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyQuestionsHasDefaultAnswers(String rowID,
-                                                 String description, JSONObject testData) {
+                                                     String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
@@ -220,7 +221,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyQFShownForServiceAndEntityLevels(String rowID,
-                                                       String description, JSONObject testData) {
+                                                           String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
 
@@ -242,56 +243,34 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
     }
 
 
-//    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-//    public void verifyPartServiceIsAddedAndLinkedWithLaborAfterQuestionIsAnswered(String rowID,
-//                                                                                  String description, JSONObject testData) {
-//        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-//        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
-//        QuestionsData serviceQuestion = questionsDataList.get(0);
-//        List<ServiceData> expectedServices = workOrderData.getServicesList();
-//        ServiceData expectedNeedToSetupService = expectedServices.get(0);
-//        ServiceData expectedSelectedService = expectedServices.get(1);
-//        ServiceData expectedLinkedLaborService = expectedServices.get(2);
-//        PartServiceData partServiceData = workOrderData.getPartServiceDataList().get(0);
-//
-//        HomeScreenSteps.openCreateMyInspection();
-//        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_ANSWER_SERVICES);
-//        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
-//
-//        QuestionFormSteps.answerGeneralQuestion(serviceQuestion);
-//        QuestionFormValidations.validateGeneralQuestionAnswer(serviceQuestion);
-//        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES, 1);
-//
-//        QuestionServiceListSteps.switchToNeedToSetupServiceView();
-//        QuestionServiceListValidations.validateServicePresent(expectedNeedToSetupService.getServiceName());
-//        QuestionServiceListSteps.switchToSelectedServiceView();
-//        QuestionServiceListValidations.validateServicePresent(expectedSelectedService.getServiceName());
-//        QuestionServiceListSteps.openServiceDetails(expectedSelectedService.getServiceName());
-//        LaborServiceSteps.addPartService();
-//        PartServiceSteps.switchToSelectedView();
-//        PartServiceListValidations.validateNoServicePresent();
-//        PartServiceSteps.confirmPartInfo();
-//        LaborServiceSteps.confirmServiceDetails();
-//        QuestionServiceListSteps.switchToNeedToSetupServiceView();
-//        QuestionServiceListSteps.openServiceDetails(expectedNeedToSetupService.getServiceName());
-//        PartServiceSteps.selectpartServiceDetails(partServiceData);
-//        PartServiceSteps.confirmPartInfo();
-//        QuestionServiceListSteps.switchToSelectedServiceView();
-//        QuestionServiceListSteps.openServiceDetails(expectedLinkedLaborService.getServiceName());
-//        ServiceDetailsValidations.verifyPartsServicePresent(false);
-//        LaborServiceSteps.addPartService();
-//        PartServiceSteps.switchToSelectedView();
-//        //This will fail because of bug
-//        PartServiceListValidations.validateServicePresent(expectedNeedToSetupService.getServiceName());
-//        PartServiceSteps.confirmPartInfo();
-//        LaborServiceSteps.confirmServiceDetails();
-//        InspectionSteps.cancelInspection();
-//        ScreenNavigationSteps.pressBackButton();
-//    }
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyPartServiceIsAddedAndLinkedWithLaborAfterQuestionIsAnswered(String rowID,
+                                                                                  String description, JSONObject testData) {
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        List<QuestionsData> questionsDataList = workOrderData.getQuestionScreenData().getQuestionsData();
+        QuestionsData serviceQuestion = questionsDataList.get(0);
+        List<ServiceData> expectedServices = workOrderData.getServicesList();
+        ServiceData expectedNeedToSetupService = expectedServices.get(0);
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.WITH_QUESTIONS_ANSWER_SERVICES);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
+
+        QuestionFormSteps.answerGeneralQuestion(serviceQuestion);
+        QuestionFormValidations.validateGeneralQuestionAnswer(serviceQuestion);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES, 1);
+        QuestionServiceListSteps.openServiceDetails(expectedNeedToSetupService.getServiceName());
+        ServiceDetailsValidations.verifyLaborServicesButtonPresent(false);
+        ServiceDetailsScreenSteps.setPartInfo();
+        ServiceDetailsValidations.verifyLaborServicesButtonPresent(true);
+        ScreenNavigationSteps.acceptScreen();
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPartServiceIsAddedAndNotLinkedWithLaborAfterQuestionIsAnswered(String rowID,
-                                                                                     String description, JSONObject testData) {
+                                                                                         String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
         QuestionsData serviceQuestion = questionsDataList.get(0);
@@ -323,7 +302,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
         LaborServiceSteps.confirmServiceDetails();
         QuestionServiceListSteps.switchToNeedToSetupServiceView();
         QuestionServiceListSteps.openServiceDetails(firstExpectedNeedToSetupService.getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceData);
+        PartServiceSteps.selectPartServiceDetailsWithOpenedDetails(partServiceData);
         PartServiceSteps.confirmPartInfo();
         PartServiceSteps.confirmPartInfo();
         QuestionServiceListSteps.switchToSelectedServiceView();
@@ -342,7 +321,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyThatItIsPossibleToSaveEntityWithoutAnswerToNotRequiredQuestion(String rowID,
-                                                                                     String description, JSONObject testData) {
+                                                                                         String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         HomeScreenSteps.openCreateMyInspection();
@@ -357,7 +336,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyThatItIsPossibleToSetDefaultAnswerForQuestion(String rowID,
-                                                                                         String description, JSONObject testData) {
+                                                                        String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
 
         HomeScreenSteps.openCreateMyInspection();
@@ -374,7 +353,7 @@ public class BasicQuestionFormTestCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyThatWhenPartServiceIsAddedWithLaborAsAnswerServicesLaborIsLinkedToPartAfterConfigurationPart(String rowID,
-                                                                                         String description, JSONObject testData) {
+                                                                                                                       String description, JSONObject testData) {
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<QuestionsData> questionsDataList = inspectionData.getQuestionScreenData().getQuestionsData();
         QuestionsData serviceQuestion = questionsDataList.get(0);

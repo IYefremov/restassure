@@ -33,7 +33,6 @@ public class ServiceDetailsScreenSteps {
         serviceDetailsScreen.clickServiceDetailsDoneButton();
     }
 
-
     public static void openTechniciansScreen() {
         ServiceDetailsInteractions.waitPageReady();
         ServiceDetailsInteractions.openTechnicianMenu();
@@ -98,5 +97,11 @@ public class ServiceDetailsScreenSteps {
     public static void openServiceNotes() {
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         serviceDetailsScreen.clickServiceNotesOption();
+    }
+
+    public static void setPartInfo() {
+
+        WaitUtils.click(new VNextServiceDetailsScreen().getPartServiceInfoTitle());
+        ScreenNavigationSteps.acceptScreen();
     }
 }

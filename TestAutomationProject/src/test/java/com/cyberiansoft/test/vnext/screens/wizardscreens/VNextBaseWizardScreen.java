@@ -117,6 +117,8 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     }
 
     public void clickMenuButton() {
+        WaitUtils.elementShouldBeVisible(menubtn, true);
+        WaitUtils.waitUntilElementIsClickable(menubtn);
         tap(menubtn);
     }
 
@@ -126,6 +128,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
     }
 
     public void clickSaveMenuButton() {
+        WaitUtils.elementShouldBeVisible(savemenu, true);
         WaitUtils.waitUntilElementIsClickable(savemenu);
         tap(savemenu);
     }
