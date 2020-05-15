@@ -402,7 +402,7 @@ public class VNextTeamWorkOrdersTestCases extends BaseTestClass {
         AvailableServicesScreenSteps.openServiceDetails(workOrderData.getPercentageServiceData().getServiceName());
         ServiceDetailsScreenSteps.changeServicePrice(workOrderData.getPercentageServiceData().getServicePrice());
         ServiceDetailsScreenSteps.saveServiceDetails();
-        Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), workOrderData.getWorkOrderPrice());
+        WizardScreenValidations.validateTotalPriceValue(workOrderData.getWorkOrderPrice());
         final String workOrderNumber = WorkOrderSteps.saveWorkOrder();
         BaseUtils.waitABit(10 * 1000);
         ScreenNavigationSteps.pressBackButton();

@@ -1,20 +1,20 @@
 package com.cyberiansoft.test.vnext.screens;
 
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.utils.PricesUtils;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.ServiceListItem;
+import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
+import lombok.Getter;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Getter
 public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 
 	@FindBy(xpath = "//div[@data-page='matrix-info']")
@@ -29,8 +29,11 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(xpath = "//div[@input='price']")
 	private WebElement vehiclepartpricefld;
 
-	@FindBy(xpath = "//*[@data-autotests-id='all-services']")
-	private WebElement additionalavailableserviceslist;
+	//@FindBy(xpath = "//*[@data-autotests-id='all-services']")
+	//private WebElement additionalavailableserviceslist;
+
+	@FindBy(xpath = "//*[@data-view-mode='available']/div")
+	private List<ServiceListItem> servicesList;
 
 	@FindBy(xpath = "//*[@action='notes']")
 	private WebElement notesbutton;
@@ -38,16 +41,11 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(xpath = "//*[@action='save']")
 	private WebElement savebtn;
 
-    public VNextVehiclePartInfoPage(WebDriver appiumdriver) {
-		super(appiumdriver);
-		PageFactory.initElements(appiumdriver, this);
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
-		wait.until(ExpectedConditions.visibilityOf(vehiclepartinfoscreen));
-	}
-
 	public VNextVehiclePartInfoPage() {
+		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
 	}
 
+	//todo: rewrite
 	public void selectVehiclePartSize(String vehiclepartsize) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='size']")));
@@ -57,6 +55,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartsize + "')]")));
 	}
 
+	//todo: rewrite
 	public void selectVehiclePartSeverity(String vehiclepartseverity) {
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='severity']")));
@@ -66,19 +65,13 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		tap(appiumdriver.findElement(By.xpath("//*[@action='select-item']/div/div[contains(text(), '" + vehiclepartseverity + "')]")));
 	}
 
-	public void selectVehiclePartAdditionalService(String additionalservicename) {
-		WebElement addservs = getVehiclePartAdditionalServiceCell(additionalservicename);
-		String servicePrice = "";
-		if (addservs != null) {
-			servicePrice = addservs.findElement(By.xpath(".//div[@class='checkbox-item-subtitle checkbox-item-price']")).getText().trim();
-			tap(WaitUtils.waitUntilElementIsClickable(addservs.findElement(By.xpath(".//*[@action='add-service']"))));
-			WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
-			if (PricesUtils.isServicePriceEqualsZero(servicePrice)) {
-                VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-				serviceDetailsScreen.clickServiceDetailsDoneButton();
-			}
-		} else
-			Assert.fail("Can't find additional servicve: " + additionalservicename);
+
+	//todo: make a step
+	public void selectVehiclePartAdditionalService(String serviceName) {
+		WaitUtils.getGeneralFluentWait().until(driver -> {
+			getServiceListItem(serviceName).clickAddService();
+			return true;
+		});
 	}
 
 	public void openVehiclePartLaborServiceDetails(String additionalservicename) {
@@ -86,38 +79,15 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 		tap(webElement);
 	}
 
-	public List<String> getListOfAdditionalServices() {
-		List<String> additionalServices = new ArrayList<>();
-		List<WebElement> addservs1 = getAvailableServicesList();
-		for (WebElement additinalservice : addservs1) {
-			additionalServices.add(additinalservice.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText());
-		}
-		return additionalServices;
+	public ServiceListItem getServiceListItem(String serviceName) {
+		return servicesList.stream().filter(listElement -> listElement.getServiceName().equals(serviceName)).findFirst().orElseThrow(() -> new RuntimeException("service not found " + serviceName));
 	}
 
-	private List<WebElement> getAvailableServicesList() {
-		return additionalavailableserviceslist.findElements(By.xpath(".//*[@action='open-available-service-details']"));
-	}
-
-	private String getServiceListItemName(WebElement srvlistitem) {
-		return srvlistitem.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().trim();
-	}
-
-	public VNextServiceDetailsScreen openServiceDetailsScreen(String servicename) {
-		tap(additionalavailableserviceslist.findElement(By.xpath(".//div[@class='checkbox-item-title' and text()='" + servicename + "']")));
-		return new VNextServiceDetailsScreen(appiumdriver);
-	}
-
-	public WebElement getVehiclePartAdditionalServiceCell(String additionalservicename) {
-		WebElement addsrvc = null;
-		List<WebElement> addservs = getAvailableServicesList();
-		for (WebElement additinalservice : addservs) {
-			if (additinalservice.findElement(By.xpath(".//div[@class='checkbox-item-title']")).getText().equals(additionalservicename)) {
-				addsrvc = additinalservice;
-				break;
-			}
-		}
-		return addsrvc;
+	public void openServiceDetailsScreen(String serviceName) {
+		WaitUtils.getGeneralFluentWait().until(driver -> {
+			getServiceListItem(serviceName).openServiceDetails();
+			return true;
+		});
 	}
 
 	public String getMatrixServiceTotalPriceValue() {

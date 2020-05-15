@@ -130,6 +130,7 @@ public class InspectionSteps {
     public static void clickEmailButton() {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.getMultiselectInspectionEmailBtn().click();
+        WaitUtils.waitLoadDialogDisappears();
     }
 
     public static void changeCustomerForInspection(String inspectionNumber, AppCustomer newCustomer) {

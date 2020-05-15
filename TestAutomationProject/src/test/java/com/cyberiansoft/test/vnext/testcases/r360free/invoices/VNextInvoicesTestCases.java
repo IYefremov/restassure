@@ -39,7 +39,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.io.File;
-import java.util.List;
 
 public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
 
@@ -273,9 +272,7 @@ public class VNextInvoicesTestCases extends BaseTestCaseWithDeviceRegistrationAn
             VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
             vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
             vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
-            List<String> additionalServices = vehiclePartInfoScreen.getListOfAdditionalServices();
-            for (String serviceName : additionalServices)
-                vehiclePartInfoScreen.selectVehiclePartAdditionalService(serviceName);
+            vehiclePartInfoScreen.getServicesList().forEach(serviceListItem -> vehiclePartInfoScreen.selectVehiclePartAdditionalService(serviceListItem.getServiceName()));
             vehiclePartInfoScreen.clickScreenBackButton();
             vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
 

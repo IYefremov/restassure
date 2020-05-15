@@ -7,6 +7,10 @@
         {
           "testCaseID": "91968",
           "testCaseTitle": "Verify Automatically calculate service level tech split based on WO level split creating WO for 1 Technician"
+        },
+        {
+          "testCaseID": "91970",
+          "testCaseTitle": "Amount of the service is recalculated automatically between technicians when user change qty of technicians different then qty of WO technicians"
         }
       ],
       "technicianList": [

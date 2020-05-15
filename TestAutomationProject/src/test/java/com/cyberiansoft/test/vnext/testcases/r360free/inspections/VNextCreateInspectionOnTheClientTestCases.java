@@ -41,7 +41,6 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithDeviceRegistrationAndUserLogin {
     
@@ -227,9 +226,7 @@ public class VNextCreateInspectionOnTheClientTestCases extends BaseTestCaseWithD
             VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
             vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
             vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
-            List<String> additionalServices = vehiclePartInfoScreen.getListOfAdditionalServices();
-            for (String serviceName : additionalServices)
-                vehiclePartInfoScreen.selectVehiclePartAdditionalService(serviceName);
+            vehiclePartInfoScreen.getServicesList().forEach(serviceListItem -> vehiclePartInfoScreen.selectVehiclePartAdditionalService(serviceListItem.getServiceName()));
             vehiclePartInfoScreen.clickSaveVehiclePartInfo();
 
         }

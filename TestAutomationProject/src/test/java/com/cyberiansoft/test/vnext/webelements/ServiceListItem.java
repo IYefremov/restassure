@@ -52,7 +52,6 @@ public class ServiceListItem implements IWebElement {
             rootElement.findElement(By.xpath(unSelectServiceLocator)).click();
             return true;
         });
-        //rootElement.findElement(By.xpath(unSelectServiceLocator)).click();
     }
 
     public void openServiceDetails() {

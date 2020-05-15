@@ -11,18 +11,13 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.validations.ApproveInspectionsScreenValidations;
-import com.cyberiansoft.test.vnext.validations.ApproveServicesScreenValidations;
-import com.cyberiansoft.test.vnext.validations.ApproveValidations;
-import com.cyberiansoft.test.vnext.validations.InspectionsValidations;
+import com.cyberiansoft.test.vnext.validations.*;
 import org.json.simple.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -316,7 +311,6 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.switchToAvailableServices();
 
         MatrixServiceData matrixServiceData = inspectionData.getMatrixServiceData();
@@ -344,7 +338,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         }
         vehiclePartsScreen.clickVehiclePartsSaveButton();
 
-        Assert.assertEquals(availableServicesScreen.getTotalPriceValue(), inspectionData.getInspectionPrice());
+        WizardScreenValidations.validateTotalPriceValue(inspectionData.getInspectionPrice());
         final String inspectionNumber = InspectionSteps.saveInspection();
         InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getInspectionPrice());
         InspectionSteps.openInspectionMenu(inspectionNumber);
