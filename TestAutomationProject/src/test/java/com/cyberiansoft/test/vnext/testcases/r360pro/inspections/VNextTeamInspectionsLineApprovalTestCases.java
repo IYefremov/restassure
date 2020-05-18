@@ -22,8 +22,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -121,8 +119,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
     public void testVerifyUserCantAprroveInspectionsWithDifferentCustomers(String rowID,
                                                                            String description, JSONObject testData) {
         RetailCustomer secondCustomer = new RetailCustomer();
-        secondCustomer.setFirstName("Alexei");
-        secondCustomer.setLastName("M");
+        secondCustomer.setFirstName("Test");
+        secondCustomer.setLastName("User");
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<ServiceData> services = inspectionData.getServicesList();
         List<String> inspectionsNumbers = new ArrayList<>();
@@ -525,9 +523,7 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         for (InspectionData inspectionData : inspectionsData) {
             InspectionSteps.switchToMyInspections();
             InspectionSteps.clickAddInspectionButton();
-            Instant begin = Instant.now();
             InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
-            System.out.println("++++a: " + Duration.between(begin, Instant.now()).toMillis()/1000);
             WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
             inspectionData.getServicesList().forEach(AvailableServicesScreenSteps::selectService);
             SelectedServicesScreenSteps.switchToSelectedService();
