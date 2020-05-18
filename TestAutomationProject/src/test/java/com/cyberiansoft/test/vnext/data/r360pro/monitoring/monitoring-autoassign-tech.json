@@ -41,8 +41,8 @@
         {
           "serviceName": "Paint",
           "serviceDefaultTechnician": {
-            "technicianFirstName": "1111",
-            "technicianLastName": "2222"
+            "technicianFirstName": "test",
+            "technicianLastName": "test"
           }
         },
         {
@@ -67,40 +67,14 @@
       ],
       "services": [
         {
-          "serviceName": "rozstalnoy_disable_labor",
+          "serviceName": "Rock Fun Service",
           "serviceDefaultTechnician": {
             "technicianFirstName": "1111",
             "technicianLastName": "2222"
           }
         },
         {
-          "serviceName": "rozstalnoy_disable_labor",
-          "serviceDefaultTechnician": {
-            "technicianFirstName": "Employee",
-            "technicianLastName": "Employee"
-          }
-        }
-      ]
-    },
-    {
-      "rowID": "autoAssignTechToBundleServices.02",
-      "description": "",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "94255",
-          "testCaseTitle": "Auto-assign tech to Bundle services"
-        }
-      ],
-      "services": [
-        {
-          "serviceName": "rozstalnoy_disable_money",
-          "serviceDefaultTechnician": {
-            "technicianFirstName": "1111",
-            "technicianLastName": "2222"
-          }
-        },
-        {
-          "serviceName": "rozstalnoy_disable_money",
+          "serviceName": "Rock Fun Service",
           "serviceDefaultTechnician": {
             "technicianFirstName": "Employee",
             "technicianLastName": "Employee"

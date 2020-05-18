@@ -22,7 +22,6 @@ public class WizardScreenSteps {
                 HelpingScreenInteractions.dismissHelpingScreenIfPresent();
                 break;
         }
-        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
     }
 
     public static void navigateToWizardScreen(ScreenType screenType, Integer index) {
