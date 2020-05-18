@@ -22,6 +22,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -519,13 +521,15 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
         HomeScreenSteps.openInspections();
+
         for (InspectionData inspectionData : inspectionsData) {
             InspectionSteps.switchToMyInspections();
             InspectionSteps.clickAddInspectionButton();
+            Instant begin = Instant.now();
             InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
+            System.out.println("++++a: " + Duration.between(begin, Instant.now()).toMillis()/1000);
             WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
             inspectionData.getServicesList().forEach(AvailableServicesScreenSteps::selectService);
-
             SelectedServicesScreenSteps.switchToSelectedService();
             inspectionData.getServicesList().forEach(service -> {
                 if (service.getServicePrice() != null) {
@@ -536,9 +540,9 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
             });
             inspectionData.setInspectionNumber(InspectionSteps.saveInspection());
         }
+
         inspectionsData.forEach(inspectionData -> InspectionSteps.selectInspection(inspectionData.getInspectionNumber()));
         InspectionSteps.clickMultiSelectInspectionsApproveButton();
-
         for (InspectionData inspectionData : inspectionsData) {
             if (inspectionData.getInspectionStatus().equals(InspectionStatus.DECLINED.getStatusString())) {
                 ApproveInspectionsSteps.declineInspection(inspectionData.getInspectionNumber(), inspectionData.getDeclineReason());

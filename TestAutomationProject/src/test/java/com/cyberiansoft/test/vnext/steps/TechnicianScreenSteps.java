@@ -38,4 +38,12 @@ public class TechnicianScreenSteps {
         TopScreenPanelSteps.clearSearchField();
         TopScreenPanelSteps.cancelSearch();
     }
+
+    public static void searchAndUnSelectTechnician(String techName) {
+
+        TopScreenPanelSteps.searchData(techName);
+        TechnicianScreenInteractions.unSelectTechnician(techName);
+        TopScreenPanelSteps.clearSearchField();
+        TopScreenPanelSteps.cancelSearch();
+    }
 }
