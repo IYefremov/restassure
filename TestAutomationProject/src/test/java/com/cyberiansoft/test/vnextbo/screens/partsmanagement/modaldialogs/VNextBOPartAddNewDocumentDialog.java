@@ -23,6 +23,9 @@ public class VNextBOPartAddNewDocumentDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//label[text()='Number']")
     private WebElement numberLabel;
 
+    @FindBy(xpath = "//label[text()='Number']/..//span[contains(@class, 'k-select')]")
+    private WebElement numberInputFieldArrow;
+
     @FindBy(xpath = "//label[text()='Number']/..//input[@type='text']")
     private WebElement numberInputField;
 
@@ -50,8 +53,14 @@ public class VNextBOPartAddNewDocumentDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//input[@id='documentPopup-amount']/preceding-sibling::input")
     private WebElement amountField;
 
+    @FindBy(xpath = "//label[text()='Amount']")
+    private WebElement amountLabel;
+
     @FindBy(id = "document-popup__upload")
     private WebElement attachmentField;
+
+    @FindBy(xpath = "//span[contains(@data-bind, 'attachmentFileName')]")
+    private WebElement attachmentValue;
 
     @FindBy(xpath = "//div[@data-name='number']/div[contains(@class, ' validation-message-wrapper')]")
     private WebElement warningMessage;
@@ -59,8 +68,11 @@ public class VNextBOPartAddNewDocumentDialog extends VNextBOBaseWebPage {
     @FindBy(xpath = "//label[text()='Provider']/..//span[@aria-owns]")
     private WebElement providerField;
 
+    @FindBy(xpath = "//div[@class='k-animation-container' and @aria-hidden='false']/div[contains(@class, 'k-list-container')]")
+    private WebElement openedDropDown;
+
     @FindBy(xpath = "//div[@aria-hidden='false']/div[contains(@class, 'k-list-container')]//li")
-    private List<WebElement> providerListBox;
+    private List<WebElement> openedListBox;
 
     @FindBy(xpath = "//span[@aria-owns='document-popup-price-document-type_listbox']")
     private WebElement typeField;
@@ -70,6 +82,12 @@ public class VNextBOPartAddNewDocumentDialog extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//ul[@id='document-popup-price-document-type_listbox']/li")
     private List<WebElement> typeListBox;
+
+    @FindBy(xpath = "//div[@id='document-popup-price-document-type-list']/../following-sibling::div[1]")
+    private WebElement numberDropDown;
+
+    @FindBy(xpath = "//div[@id='document-popup-price-document-type-list']/../following-sibling::div[1]//li")
+    private List<WebElement> numberListBox;
 
     @FindBy(xpath = "//button[@data-automation-id='documentPopup-submit']")
     private WebElement saveButton;

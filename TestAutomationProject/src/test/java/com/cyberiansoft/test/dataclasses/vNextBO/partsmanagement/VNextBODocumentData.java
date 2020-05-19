@@ -23,6 +23,9 @@ public class VNextBODocumentData {
     @JsonProperty("attachment")
     private String attachment;
 
+    @JsonProperty("displayedAttachmentName")
+    private String displayedAttachmentName;
+
     public String getAttachment() {
         return System.getProperty("user.dir") + "/resources/sunrise.png";
     }
@@ -34,7 +37,7 @@ public class VNextBODocumentData {
     }
 
     private void setRandomNumber() {
-        this.number = String.valueOf(RandomUtils.nextInt(1, 99));
+        this.number = String.valueOf(RandomUtils.nextInt(1, 99999));
     }
 
     private void setRandomNotes() {
@@ -42,6 +45,6 @@ public class VNextBODocumentData {
     }
 
     private void setRandomAmount() {
-        this.amount = String.valueOf(RandomUtils.nextInt(1, 99));
+        this.amount = String.valueOf(RandomUtils.nextInt(1, 9));
     }
 }

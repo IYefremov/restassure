@@ -33,6 +33,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -506,6 +507,39 @@ public class VNextBOPartsDetailsPanelSteps {
         final List<String> providersList = getProvidersList();
         for (int i = 0; i < providersList.size(); i++) {
             if (!providersList.get(i).isEmpty()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static List<Integer> getOrderOfPartsWithProviderSet(String provider) {
+        final List<String> providersList = getProvidersList();
+        List<Integer> serviceOrders = new ArrayList<>();
+        for (int i = 0; i < providersList.size(); i++) {
+            if (providersList.get(i).equals(provider)) {
+                System.out.println("equals: " + providersList.get(i));
+                serviceOrders.add(i);
+            }
+        }
+        return serviceOrders;
+    }
+
+    public static List<Integer> getOrderOfPartsWithProviderSet() {
+        final List<String> providersList = getProvidersList();
+        List<Integer> serviceOrders = new ArrayList<>();
+        for (int i = 0; i < providersList.size(); i++) {
+            if (!providersList.get(i).isEmpty()) {
+                serviceOrders.add(i);
+            }
+        }
+        return serviceOrders;
+    }
+
+    public static int getOrderOfPartWithEmptyProviderField() {
+        final List<String> providersList = getProvidersList();
+        for (int i = 0; i < providersList.size(); i++) {
+            if (providersList.get(i).isEmpty()) {
                 return i;
             }
         }

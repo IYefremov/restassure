@@ -14,17 +14,23 @@ public class VNextBOChangePartsDialogSteps {
         return Utils.getText(new VNextBOChangePartsDialog().getSelectStatusError());
     }
 
+    public static void waitForDialogToBeClosed(int timeoutInSeconds) {
+        WaitUtilsWebDriver.waitForInvisibility(new VNextBOChangePartsDialog().getChangeStatusDialog(), timeoutInSeconds);
+    }
+
+    public static void clickSubmitButton() {
+        Utils.clickElement(new VNextBOChangePartsDialog().getSubmitButton());
+        waitForDialogToBeClosed(3);
+    }
+
     public static void submit() {
-        final VNextBOChangePartsDialog changePartsDialog = new VNextBOChangePartsDialog();
-        Utils.clickElement(changePartsDialog.getSubmitButton());
-        WaitUtilsWebDriver.waitForInvisibility(changePartsDialog.getChangeStatusDialog(), 3);
+        clickSubmitButton();
         WaitUtilsWebDriver.waitForPageToBeLoaded(1);
     }
 
     public static void cancel() {
-        final VNextBOChangePartsDialog changePartsDialog = new VNextBOChangePartsDialog();
-        Utils.clickElement(changePartsDialog.getCancelButton());
-        WaitUtilsWebDriver.waitForInvisibility(changePartsDialog.getChangeStatusDialog(), 3);
+        Utils.clickElement(new VNextBOChangePartsDialog().getCancelButton());
+        waitForDialogToBeClosed(3);
         WaitUtilsWebDriver.waitForPageToBeLoaded(1);
     }
 

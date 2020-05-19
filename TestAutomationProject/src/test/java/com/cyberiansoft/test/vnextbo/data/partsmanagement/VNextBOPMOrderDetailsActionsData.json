@@ -46,7 +46,9 @@
         ]
       },
       "documentData": {
-        "type": "Credit Memo"
+        "type": "Credit Memo",
+        "attachment": "/resources/sunrise.png",
+        "displayedAttachmentName": "sunrise.png"
       }
     },
     {
@@ -72,7 +74,8 @@
       },
       "documentData": {
         "type": "Vendor Invoice",
-        "attachment": "/resources/sunrise.png"
+        "attachment": "/resources/sunrise.png",
+        "displayedAttachmentName": "sunrise.png"
       }
     }
   ],

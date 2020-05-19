@@ -103,5 +103,161 @@
         "DoNotChangeAutomNA"
       ]
     }
+  ],
+  "verifyUserCannotCreateDocumentIfProviderDropDownIsEmpty": [
+    {
+      "rowID": "verifyUserCannotCreateDocumentIfProviderDropDownIsEmpty.01",
+      "description": "Test Case 123423:Verify If provider dropdown is empty then user can't create document",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123423"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ]
+    }
+  ],
+  "verifyDocumentIsCreatedOnlyForChosenServicesAndDesignatedProvider": [
+    {
+      "rowID": "verifyDocumentIsCreatedOnlyForChosenServicesAndDesignatedProvider.01",
+      "description": "Test Case 123424:Verify the document is created for only chosen services and specific provider",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123424"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "providerOptions": [
+        "AutomationDoNotChangeNA",
+        "DoNotChangeIraNA"
+      ]
+    }
+  ],
+  "verifyTheDocumentTypeIsApplied": [
+    {
+      "rowID": "verifyTheVendorInvoiceDocumentTypeIsApplied.01",
+      "description": "Test Case 123426:Verify the document type in Document dialog (vendor invoice / credit memo) as selected will be applied for created document",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123426"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "documentData": {
+        "type": "Vendor Invoice"
+      }
+    },
+    {
+      "rowID": "verifyTheCreditMemoDocumentTypeIsApplied.01",
+      "description": "Test Case 123426:Verify the document type in Document dialog (vendor invoice / credit memo) as selected will be applied for created document",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123426"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "documentData": {
+        "type": "Vendor Invoice"
+      }
+    }
+  ],
+  "verifyTheDocumentsSearchWorksOnlyWithinTheCurrentOrder": [
+    {
+      "rowID": "verifyTheDocumentsSearchWorksOnlyWithinTheCurrentOrder.01",
+      "description": "Test Case 123427:Verify the documents search will work in the scope of current Repair Order only",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123427"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "documentData": {
+        "type": "Vendor Invoice"
+      },
+      "provider": "AutomationDoNotChangeNA"
+    }
+  ],
+  "verifyTheFieldsAreNotEditableAfterSelectingTheExistingDocumentNumber": [
+    {
+      "rowID": "verifyTheFieldsAreNotEditableAfterSelectingTheExistingDocumentNumber.01",
+      "description": "Test Case 123428:Verify user is not able to edit document fields after selecting the existing document number",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "123428"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "provider": "AutomationDoNotChangeNA",
+      "documentData": {
+        "type": "Vendor Invoice",
+        "attachment": "/resources/sunrise.png",
+        "displayedAttachmentName": "sunrise.png"
+      }
+    }
+  ],
+  "verifyTheSameDocumentLinkedToSeveralServicesIsDeletedOnlyFromCurrentService": [
+    {
+      "rowID": "verifyTheSameDocumentLinkedToSeveralServicesIsDeletedOnlyFromCurrentService.01",
+      "description": "Test Case 125516:Verify the same document linked to several services is deleted only from current service",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125516"
+        }
+      ],
+      "location": "Best Location Automation",
+      "searchData": {
+        "woNum": "O-000-147163"
+      },
+      "subscriptions": [
+        "Punchout Part Providers",
+        "Parts Ordering - Generic"
+      ],
+      "provider": "AutomationDoNotChangeNA",
+      "documentData": {
+        "type": "Vendor Invoice",
+        "attachment": "/resources/sunrise.png"
+      }
+    }
   ]
 }

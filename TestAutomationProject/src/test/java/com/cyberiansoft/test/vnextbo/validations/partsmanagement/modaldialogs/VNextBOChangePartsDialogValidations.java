@@ -14,6 +14,11 @@ public class VNextBOChangePartsDialogValidations {
                 "The initial 'Select status' prompt hasn't been displayed");
     }
 
+    public static void verifyChangePartsDialogIsClosed() {
+        Assert.assertTrue(Utils.isElementInvisible(new VNextBOChangePartsDialog().getChangeStatusDialog()),
+                "The 'Change Parts' dialog hasn't been closed");
+    }
+
     public static boolean isSubmitButtonEnabled() {
         return Utils.attributeEquals(new VNextBOChangePartsDialog().getSubmitButton(), "disabled", "false");
     }

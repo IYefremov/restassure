@@ -12,6 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 public class VNextBOToasterNotification extends VNextBOBaseWebPage {
 
     @FindBy(xpath = "//div[@class='notification__content']")
+    private WebElement content;
+
+    @FindBy(xpath = "//div[@class='notification__message']")
     private WebElement message;
 
     public VNextBOToasterNotification() {

@@ -9,7 +9,6 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPa
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -316,7 +315,6 @@ public class VNextBOPartsDetailsPanelInteractions {
             Utils.selectOptionInDropDownWithJsScroll(status);
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("The status hasn't been set");
         }
     }
 

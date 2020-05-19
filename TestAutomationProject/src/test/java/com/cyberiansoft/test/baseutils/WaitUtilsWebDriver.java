@@ -162,7 +162,9 @@ public class WaitUtilsWebDriver {
     }
 
     public static List<WebElement> waitForVisibilityOfAllOptions(List<WebElement> listBox, int timeoutSeconds) {
-        getWebDriverWait(timeoutSeconds).until((ExpectedCondition<Boolean>) driver -> listBox.size() > 0);
+        try {
+            getWebDriverWait(timeoutSeconds).until((ExpectedCondition<Boolean>) driver -> listBox.size() > 0);
+        } catch (Exception ignored) {}
         return listBox;
     }
 

@@ -3,6 +3,7 @@ package com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOPartAddNewDocumentDialog;
+import org.openqa.selenium.Keys;
 
 public class VNextBOPartAddNewDocumentDialogInteractions {
 
@@ -10,6 +11,12 @@ public class VNextBOPartAddNewDocumentDialogInteractions {
         final VNextBOPartAddNewDocumentDialog addNewDocumentDialog = new VNextBOPartAddNewDocumentDialog();
         Utils.clickElement(addNewDocumentDialog.getTypeField());
         Utils.selectOptionInDropDownWithJs(addNewDocumentDialog.getTypeDropDown(), addNewDocumentDialog.getTypeListBox(), documentType);
+    }
+
+    public static void setDocumentProvider(String provider) {
+        final VNextBOPartAddNewDocumentDialog addNewDocumentDialog = new VNextBOPartAddNewDocumentDialog();
+        Utils.clickElement(addNewDocumentDialog.getProviderField());
+        Utils.selectOption(addNewDocumentDialog.getOpenedDropDown(), addNewDocumentDialog.getOpenedListBox(), provider);
     }
 
     public static void setDocumentNumber(String documentNumber) {
@@ -25,7 +32,10 @@ public class VNextBOPartAddNewDocumentDialogInteractions {
 
     public static void setDocumentAmount(String documentAmount) {
         final VNextBOPartAddNewDocumentDialog addNewDocumentDialog = new VNextBOPartAddNewDocumentDialog();
-        Utils.sendKeys(addNewDocumentDialog.getAmountField(), documentAmount);
+        WaitUtilsWebDriver.waitABit(500);
+        Utils.sendKeys(addNewDocumentDialog.getAmountField(), documentAmount, Keys.TAB);
+        Utils.clickElement(addNewDocumentDialog.getNumberLabel());
+        WaitUtilsWebDriver.waitABit(500);
     }
 
     public static void setDocumentCurrentDate() {

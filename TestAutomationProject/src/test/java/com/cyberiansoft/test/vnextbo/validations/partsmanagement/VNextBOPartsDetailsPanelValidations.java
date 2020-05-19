@@ -37,6 +37,11 @@ public class VNextBOPartsDetailsPanelValidations {
                 "The part should have a provider set");
     }
 
+    public static void verifyAtLeastOneServiceWithEmptyProviderIsDisplayed() {
+        Assert.assertTrue(VNextBOPartsDetailsPanelSteps.getOrderOfPartWithEmptyProviderField() >= 0,
+                "The order should have a service with empty provider");
+    }
+
     public static void verifyPartStatusIsCorrect(List<String> partStatusFieldsValues) {
         for (int i = 0; i < partStatusFieldsValues.size(); i++) {
             verifyPartStatusIsCorrect(i, partStatusFieldsValues.get(i));

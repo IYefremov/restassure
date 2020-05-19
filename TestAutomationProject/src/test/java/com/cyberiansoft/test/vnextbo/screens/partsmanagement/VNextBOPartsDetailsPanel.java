@@ -167,6 +167,9 @@ public class VNextBOPartsDetailsPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//div[contains(@class, 'k-animation-container') and contains(@style, 'display: block')]//td[contains(@class, 'k-today')]")
     private WebElement etaCalendarTodayCell;
 
+    @FindBy(xpath = "//div[@class='notification__message']")
+    private WebElement notificationMessage;
+
     public VNextBOPartsDetailsPanel() {
         super(DriverBuilder.getInstance().getDriver());
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);

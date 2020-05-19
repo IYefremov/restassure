@@ -24,7 +24,7 @@ public class Utils {
             ConditionWaiter.create(__ -> element.isEnabled()).execute();
             element.click();
         } catch (Exception ignored) {
-            WaitUtilsWebDriver.waitABit(500);
+            WaitUtilsWebDriver.waitABit(1000);
             clickWithJS(element);
         }
     }
@@ -569,7 +569,11 @@ public class Utils {
     }
 
     public static List<String> getText(List<WebElement> list) {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(list);
+        return getText(list, 5);
+    }
+
+    public static List<String> getText(List<WebElement> list, int timeOut) {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(list, timeOut);
         return list
                 .stream()
                 .map(WaitUtilsWebDriver::waitForElementNotToBeStale)
