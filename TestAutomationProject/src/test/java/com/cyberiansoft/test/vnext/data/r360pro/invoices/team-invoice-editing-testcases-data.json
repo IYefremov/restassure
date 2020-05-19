@@ -97,7 +97,11 @@
       "targetProcessTestCaseData": [
         {
           "testCaseID": "92008",
-          "testCaseTitle": "Verify user can't edit final Invoice."
+          "testCaseTitle": "Verify user can't edit final Invoice"
+        },
+        {
+          "testCaseID": "92009",
+          "testCaseTitle": "Verify user can save Final Invoice when create Invoice"
         }
       ],
       "workOrderData": {

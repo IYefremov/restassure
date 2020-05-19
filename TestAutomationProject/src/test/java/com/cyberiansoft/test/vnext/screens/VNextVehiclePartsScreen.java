@@ -35,7 +35,7 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
     	WaitUtils.waitUntilElementIsClickable(vehiclepartsscreen);
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		PriceMatrixScreenInteractions.selectItem(vehiclePartName);
-		return new VNextVehiclePartInfoPage(appiumdriver);
+		return new VNextVehiclePartInfoPage();
 	}
 	
 	public String getVehiclePartsScrenPriceValue() {

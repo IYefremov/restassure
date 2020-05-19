@@ -98,7 +98,7 @@ public class VNextTeamPartServiceBundleCases extends BaseTestClass {
         SearchSteps.textSearch(bundleServiceData.getBundleServiceName());
         AvailableServicesScreenSteps.openServiceDetails(bundleServiceData.getBundleServiceName());
         BundleServiceSteps.openServiceDetails(partServiceInsideBundle.getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceInsideBundle);
+        PartServiceSteps.selectPartServiceDetails(partServiceInsideBundle);
         PartServiceSteps.confirmPartInfo();
         PartServiceSteps.addLaborService();
         laborServiceListInsideParts.forEach((service) -> LaborServiceSteps.selectService(service.getServiceName()));

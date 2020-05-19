@@ -23,15 +23,16 @@ public class VNextTeamWorkOrdersTechniciansTestCases extends BaseTestClass {
     @BeforeClass(description = "Team Work Orders Technicians Test Cases")
     public void beforeClass() {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getWorkOrdersTestCasesDataPath();
-        HomeScreenSteps.openWorkOrders();
-        WorkOrderSteps.switchToTeamWorkOrdersView();
+        //HomeScreenSteps.openWorkOrders();
+        //WorkOrderSteps.switchToTeamWorkOrdersView();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanIncreaseTechniciansQuantityForCustomTechSplit(String rowID, String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        WorkOrderSteps.clickAddWorkOrderButton();
+
+        HomeScreenSteps.openCreateTeamWorkOrder();
         WorkOrderSteps.createWorkOrder(testwholesailcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
         VehicleInfoScreenInteractions.openTechnicianList();
         TechnicianScreenInteractions.selectCustomOption();
@@ -42,13 +43,14 @@ public class VNextTeamWorkOrdersTechniciansTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
         TopScreenPanelSteps.goToThePreviousScreen();
         WarningDialogSteps.clickYesButton();
+        TopScreenPanelSteps.goToThePreviousScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanSeparateAmountOfWOWithLaborServiceForTwoTechnicians(String rowID, String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        WorkOrderSteps.clickAddWorkOrderButton();
+        HomeScreenSteps.openCreateTeamWorkOrder();
         WorkOrderSteps.createWorkOrder(testwholesailcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
         VehicleInfoScreenInteractions.openTechnicianList();
         TechnicianScreenSteps.searchAndSelectTechnician("Test Test");
@@ -70,13 +72,14 @@ public class VNextTeamWorkOrdersTechniciansTestCases extends BaseTestClass {
         TopScreenPanelSteps.goToThePreviousScreen();
         TopScreenPanelSteps.goToThePreviousScreen();
         WarningDialogSteps.clickYesButton();
+        TopScreenPanelSteps.goToThePreviousScreen();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanSplitValueCustomAndSeeConfirmationWindow(String rowID, String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
-        WorkOrderSteps.clickAddWorkOrderButton();
+        HomeScreenSteps.openCreateTeamWorkOrder();
         WorkOrderSteps.createWorkOrder(testwholesailcustomer, WorkOrderTypes.AUTOMATION_WO_MONITOR, workOrderData);
         VehicleInfoScreenInteractions.openTechnicianList();
         TechnicianScreenSteps.searchAndSelectTechnician("Test Test");
@@ -98,5 +101,6 @@ public class VNextTeamWorkOrdersTechniciansTestCases extends BaseTestClass {
         WarningDialogSteps.clickOkButton();
         TopScreenPanelSteps.goToThePreviousScreen();
         WarningDialogSteps.clickYesButton();
+        TopScreenPanelSteps.goToThePreviousScreen();
     }
 }

@@ -16,6 +16,7 @@ public class QuestionServiceListInteractions {
 
     public static void openServiceDetails(String serviceName) {
         QuestionServiceListScreen questionServiceListScreen = new QuestionServiceListScreen();
+        WaitUtils.getGeneralFluentWait().until(__ -> questionServiceListScreen.getServiceList().size() > 0);
         WaitUtils.click(questionServiceListScreen.getServiceList()
                 .stream()
                 .filter(service -> service.getText().contains(serviceName))

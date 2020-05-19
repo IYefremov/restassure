@@ -1093,13 +1093,40 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		HomeScreenSteps.openCreateMyInvoice(workOrderNumber);
 		InvoiceSteps.createInvoice(InvoiceTypes.O_KRAMAR, testCaseData.getInvoiceData());
 		final String invoiceNumber = InvoiceSteps.saveInvoiceAsFinal();
-
+		BaseUtils.waitABit(10000);
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
 
 		String result = NotesSteps.addQuickNotesFromListByCount(10);
+		Assert.assertFalse(result.isEmpty());
 		ScreenNavigationSteps.pressBackButton();
-		NotesSteps.verifyNoteIsPresent(result);
+		BaseUtils.waitABit(10000);
+		InvoiceSteps.openMenu(invoiceNumber);
+		MenuSteps.selectMenuItem(MenuItems.NOTES);
+		NotesSteps.verifyNoteIsPresent(result.trim());
+		ScreenNavigationSteps.pressBackButton();
+		ScreenNavigationSteps.pressBackButton();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices(String rowID,
+																		  String description, JSONObject testData) throws Exception {
+
+		TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
+
+		final int invoicesToCreate = 6;
+		ArrayList<String> workOrders = new ArrayList<>();
+
+		for (int i = 0; i < invoicesToCreate; i++) {
+			workOrders.add(createSimpleWorkOrder(WorkOrderTypes.O_KRAMAR_INVOICE, testCaseData));
+		}
+		HomeScreenSteps.openWorkOrders();
+		WorkOrderSteps.selectWorkOrders(workOrders);
+		WorkOrderSteps.clickCreateInvoice();
+		VNextInformationDialog informationDialog = new VNextInformationDialog();
+		informationDialog.clickSeparateInvoicesButton();
+
+		WorkOrderSteps.clickCancelCreateSeparateInvoice();
 		ScreenNavigationSteps.pressBackButton();
 	}
 

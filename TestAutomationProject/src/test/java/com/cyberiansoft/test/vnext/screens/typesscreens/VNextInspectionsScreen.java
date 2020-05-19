@@ -189,6 +189,7 @@ public class VNextInspectionsScreen extends VNextBaseTypeScreen {
 
     public void clickMultiselectInspectionsArchiveButton() {
         tap(multiselectinsparchivebtn);
+        WaitUtils.waitLoadDialogDisappears();
     }
 
     public void waitNotificationMessageDissapears() {

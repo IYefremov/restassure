@@ -719,33 +719,6 @@
       }
     }
   ],
-  "testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton": [
-    {
-      "rowID": "testVerifyUserCanCancelInvoiceCreationUsingHardwareBackButton.01",
-      "description": "Test Case 83736:Verify user can cancel Invoice creation using hardware back button",
-      "targetProcessTestCaseData": [
-        {
-          "testCaseID": "90703",
-          "testCaseTitle": "Verify user can cancel Invoice creation using hardware back button (Android only)."
-        }
-      ],
-      "workOrderData": {
-        "workOrderType": "O_Kramar",
-        "vihicleInfo": {
-          "vinNumber": "7777777777777"
-        },
-        "services": [
-          {
-            "serviceName": "Battery Installation"
-          }
-        ]
-      },
-      "invoiceData": {
-        "invoiceType": "O_Kramar",
-        "poNumber": "12345"
-      }
-    }
-  ],
   "testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices": [
     {
       "rowID": "testVerifyUserCanCancelInvoiceCreationUsingPopup_SeparateInvoices.01",
@@ -761,9 +734,11 @@
         "vihicleInfo": {
           "vinNumber": "7777777777777"
         },
-        "service": {
-          "serviceName": "Battery Installation"
-        }
+        "services": [
+          {
+            "serviceName": "Battery Installation"
+          }
+        ]
       },
       "invoiceData": {
         "invoiceType": "O_Kramar",

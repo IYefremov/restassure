@@ -9,7 +9,6 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextGroupServ
 import com.cyberiansoft.test.vnext.steps.SearchSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.GroupServiceListItem;
-import org.openqa.selenium.By;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,7 +24,6 @@ public class AvailableServicesScreenSteps {
         switchToAvailableServices();
         SearchSteps.textSearch(serviceName);
         servicesScreen.selectSingleService(serviceName);
-        WaitUtils.waitUntilElementInvisible(By.xpath("//div[@class='notifier-contaier']"));
     }
 
     public static void clickAddServiceButton(String serviceName) {

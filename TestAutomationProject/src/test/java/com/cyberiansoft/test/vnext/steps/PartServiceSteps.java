@@ -15,12 +15,12 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 public class PartServiceSteps {
     public static void selectPartService(PartServiceData partServiceData) {
         AvailableServicesScreenSteps.openServiceDetails(partServiceData.getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceData);
+        PartServiceSteps.selectPartServiceDetails(partServiceData);
         ServiceDetailsScreenSteps.saveServiceDetails();
 
     }
 
-    public static void selectpartServiceDetails(PartServiceData partServiceData) {
+    public static void selectPartServiceDetails(PartServiceData partServiceData) {
         if (partServiceData.getCategory() != null) {
             PartServiceSteps.selectCategory(partServiceData.getCategory());
             if (partServiceData.getSubCategory() != null)
@@ -38,6 +38,15 @@ public class PartServiceSteps {
             if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
                 PartServiceSteps.changePartPosition(partServiceData.getPartPosition());
         }
+    }
+
+    public static void selectPartServiceDetailsWithOpenedDetails(PartServiceData partServiceData) {
+        if (partServiceData.getSubCategory() != null)
+            PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
+        if (partServiceData.getPartName() != null)
+            PartServiceSteps.selectPartName(partServiceData.getPartName());
+        if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
+            PartServiceSteps.selectPartPosition(partServiceData.getPartPosition());
     }
 
     public static void selectCategory(String category) {
@@ -71,7 +80,7 @@ public class PartServiceSteps {
 
     public static void changeCategory(PartServiceData partServiceData) {
         WaitUtils.click(PartInfoScreenInteractions.getPartInfoScreenField(PartInfoScreenField.CATEGORY));
-        PartServiceSteps.selectpartServiceDetails(partServiceData);
+        PartServiceSteps.selectPartServiceDetails(partServiceData);
     }
 
     public static void acceptDetailsScreen() {
@@ -81,7 +90,6 @@ public class PartServiceSteps {
     public static void confirmPartInfo() {
         PartInfoScreen partInfoScreen = new PartInfoScreen();
         WaitUtils.click(partInfoScreen.getSaveButton());
-        WaitUtils.elementShouldBeVisible(partInfoScreen.getRootElement(), false);
     }
 
     public static void addLaborService() {

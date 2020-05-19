@@ -36,7 +36,7 @@ public class VNextNotesScreen extends VNextBaseScreen {
 
     public void selectQuickNote(String quickNoteText) {
         quickNotesList.stream()
-                .filter(element -> element.getText().contains(quickNoteText))
+                .filter(element -> element.getText().equals(quickNoteText))
                 .findFirst().orElseThrow(() -> new RuntimeException("Quick note not found " + quickNoteText))
                 .click();
     }

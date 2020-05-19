@@ -217,7 +217,7 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         VisualScreenSteps.clearAllMarks();
 
         VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
+        PartServiceSteps.selectPartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenSteps.addServiceToPicture();
@@ -243,7 +243,7 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         VisualScreenSteps.selectDamage(laborServiceDamageData);
         VisualScreenSteps.addServiceToPicture();
         VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
+        PartServiceSteps.selectPartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         String inspectionId = InspectionSteps.saveInspection();
@@ -289,11 +289,11 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         VisualScreenSteps.clearAllMarks();
 
         VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
+        PartServiceSteps.selectPartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenSteps.addServiceToPicture();
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
+        PartServiceSteps.selectPartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(2);
@@ -326,7 +326,7 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         VisualScreenSteps.clearAllMarks();
 
         VisualScreenSteps.addNonDefaultDamage(partServiceDamageData, partServiceDamageData.getPartServiceData().getServiceName());
-        PartServiceSteps.selectpartServiceDetails(partServiceDamageData.getPartServiceData());
+        PartServiceSteps.selectPartServiceDetails(partServiceDamageData.getPartServiceData());
         PartServiceSteps.confirmPartInfo();
         ServiceDetailsScreenSteps.saveServiceDetails();
         VisualScreenValidations.numberOfMarksShouldBeEqualTo(1);

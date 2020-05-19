@@ -14,10 +14,10 @@ import java.util.concurrent.TimeUnit;
 public class WaitUtils {
 
     private static final int durationInSeconds = 45;
-    private static final int pullingIntervalInMils = 500;
+    private static final int pullingIntervalInMils = 300;
 
     public static void collectionSizeIsGreaterThan(List<?> list, Integer expectedSize) {
-        WaitUtils.getGeneralFluentWait().until(driver -> list.size() > expectedSize);
+        getGeneralFluentWait().until(driver -> list.size() > expectedSize);
     }
 
     public static boolean isElementPresent(By locator) {
@@ -41,7 +41,7 @@ public class WaitUtils {
     }
 
     public static void elementShouldBeVisible(WebElement element, Boolean shoulBeVisible) {
-        WaitUtils.getGeneralFluentWait()
+        getGeneralFluentWait()
                 .withTimeout(Duration.ofSeconds(60))
                 .until((webDriver) -> {
                     if (shoulBeVisible)
@@ -61,30 +61,31 @@ public class WaitUtils {
     }
 
     public static WebElement waitUntilElementIsClickable(final By locator) {
-        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
+        getGeneralFluentWait().until(ExpectedConditions.elementToBeClickable(locator));
         return ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(locator);
     }
 
     public static void waitUntilElementIsClickable(final By locator, WebDriver appiumdriver) {
-        WaitUtils.waitUntilElementIsClickable(locator);
+        waitUntilElementIsClickable(locator);
     }
 
     public static WebElement waitUntilElementIsClickable(final WebElement webElement) {
-        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.elementToBeClickable(webElement));
+        getGeneralFluentWait().until(ExpectedConditions.elementToBeClickable(webElement));
         return webElement;
     }
 
     //click(Webelement) cannot be called in this case, because element will not be searched again after fail, because its not proxy
     //TODO: convert locator to PROXY web element and call click(Webelement)
     public static void click(final By locator) {
-        WaitUtils.getGeneralFluentWait().until((webdriver) -> {
+        getGeneralFluentWait().until((webdriver) -> {
             ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(locator).click();
             return true;
         });
     }
 
     public static void click(final WebElement webElement) {
-        WaitUtils.getGeneralFluentWait().until((webdriver) -> {
+        elementShouldBeVisible(webElement, true);
+        getGeneralFluentWait().until((webdriver) -> {
             webElement.click();
             return true;
         });
@@ -92,12 +93,12 @@ public class WaitUtils {
 
     public static void waitUntilElementInvisible(final By locator) {
         ChromeDriverProvider.INSTANCE.getMobileChromeDriver().manage().timeouts().implicitlyWait(1, TimeUnit.SECONDS);
-        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        getGeneralFluentWait().until(ExpectedConditions.invisibilityOfElementLocated(locator));
         ChromeDriverProvider.INSTANCE.getMobileChromeDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     public static void assertEquals(Object expected, Object actual) {
-        WaitUtils.getGeneralFluentWait().until(driver -> {
+        getGeneralFluentWait().until(driver -> {
             Assert.assertEquals(expected,
                     actual
             );
@@ -128,5 +129,16 @@ public class WaitUtils {
                         .ignoring(AssertionError.class)
                         .ignoring(StaleElementReferenceException.class)
                         .ignoring(RuntimeException.class);
+    }
+
+    public static void waitLoadDialogDisappears() {
+        WebElement loader;
+        try {
+            ChromeDriverProvider.INSTANCE.getMobileChromeDriver().manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            loader = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//*[contains(@class, 'modal-loading modal-in')]"));
+            getGeneralFluentWait().until(ExpectedConditions.stalenessOf(loader));
+        } catch (NoSuchElementException e) {
+
+        }
     }
 }

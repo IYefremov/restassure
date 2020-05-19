@@ -58,8 +58,10 @@ public class VNextTeamTechSplitServiceCases extends BaseTestClass {
         ServiceDetailsScreenSteps.openTechniciansScreen();
         TechScreenValidations.validateTechnicianValue(employee.getEmployeeName(), servicePrice);
 
-
         TechnicianScreenSteps.selectTechnicians(employeeList);
+        TechScreenValidations.validateTechniciansValues(expectedTechSplit);
+        TechnicianScreenSteps.closeTechnicianMenu();
+        ServiceDetailsScreenSteps.openTechniciansScreen();
         TechScreenValidations.validateTechniciansValues(expectedTechSplit);
         TechnicianScreenSteps.closeTechnicianMenu();
         ServiceDetailsScreenSteps.saveServiceDetails();

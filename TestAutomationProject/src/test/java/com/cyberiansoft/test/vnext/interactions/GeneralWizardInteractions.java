@@ -2,6 +2,7 @@ package com.cyberiansoft.test.vnext.interactions;
 
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class GeneralWizardInteractions {
     public static void saveViaMenu() {
@@ -29,7 +30,8 @@ public class GeneralWizardInteractions {
 
     public static void closeSearchFilter() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        WaitUtils.click(baseWizardScreen.getCancelSearchBtn());
+        baseWizardScreen.getCancelSearchBtn().click();
+        WaitUtils.getGeneralFluentWait(3, 300).until(ExpectedConditions.invisibilityOf(baseWizardScreen.getCancelSearchBtn()));
     }
 
     public static boolean isSearchFilterEmpty() {

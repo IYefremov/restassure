@@ -197,7 +197,7 @@ public class SearchSteps {
 
     public static void textSearchTeam(String serviceName) {
         textSearch(serviceName);
-        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+        WaitUtils.waitLoadDialogDisappears();
     }
 
     public static void clearFilters() {

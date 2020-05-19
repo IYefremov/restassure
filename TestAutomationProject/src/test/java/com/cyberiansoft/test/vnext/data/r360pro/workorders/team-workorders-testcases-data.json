@@ -17,6 +17,24 @@
       }
     }
   ],
+  "testVerifyUserCantCreateInvoiceWithDeletedWO": [
+    {
+      "rowID": "testVerifyUserCantCreateInvoiceWithDeletedWO.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "91993",
+          "testCaseTitle": "Verify user can't create Invoice with deleted WO"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "moneyService": {
+        "serviceName": "Battery Installation"
+      }
+    }
+  ],
   "testVerifyUserCantDeleteWOIfAllowDeleteOFF": [
     {
       "rowID": "testVerifyUserCantDeleteWOIfAllowDeleteOFF.01",

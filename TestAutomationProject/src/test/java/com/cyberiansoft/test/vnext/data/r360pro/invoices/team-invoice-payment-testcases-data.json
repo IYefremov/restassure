@@ -569,6 +569,10 @@
         {
           "testCaseID": "92064",
           "testCaseTitle": "Verify payment amount is updated after part payment using Cash/Check method"
+        },
+        {
+          "testCaseID": "92065",
+          "testCaseTitle": "Verify payment amount is equal to invoice unpaid amount"
         }
       ],
       "workOrderData": {

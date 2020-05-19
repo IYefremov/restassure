@@ -18,6 +18,8 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.WorkOrderListElement;
 import org.openqa.selenium.By;
 
+import java.util.ArrayList;
+
 public class WorkOrderSteps {
 
     public static String createSimpleWorkOrder(AppCustomer customer, WorkOrderTypes workOrderType, WorkOrderData workOrderData) {
@@ -117,5 +119,22 @@ public class WorkOrderSteps {
         switchToMyWorkOrdersView();
         WorkOrderSteps.openMenu(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.CREATE_INVOICE);
+    }
+
+    public static void selectWorkOrders(ArrayList<String> workOrders) {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        workOrders.forEach(workOrderId -> {
+            workOrdersScreen.selectWorkOrder(workOrderId);
+        });
+    }
+
+    public static void clickCreateInvoice() {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        workOrdersScreen.getCreateInvoiceIcon().click();
+    }
+
+    public static void clickCancelCreateSeparateInvoice() {
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        workOrdersScreen.clickCancelCreateSeparateInvoice();
     }
 }

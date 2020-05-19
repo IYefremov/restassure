@@ -6,7 +6,6 @@ import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -114,9 +113,8 @@ public class HomeScreenSteps {
 
     public static void openCreateMyInvoice(String workOrderId) {
         openInvoices();
-        VNextInvoicesScreen invoicesScreen = new VNextInvoicesScreen();
         InvoiceSteps.switchToMyInvoicesView();
-        invoicesScreen.clickAddInvoiceButton();
+        InvoiceSteps.clickAddInvoice();
         WorkOrderSteps.createInvoiceFromWorkOrder(workOrderId);
     }
 

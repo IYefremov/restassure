@@ -8,6 +8,9 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NotesSteps {
 
     public static void setNoteText(String noteText) {
@@ -32,11 +35,7 @@ public class NotesSteps {
         VNextNotesScreen noteScreen = new VNextNotesScreen();
         WaitUtils.elementShouldBeVisible(noteScreen.getRootElement(), true);
         WaitUtils.waitUntilElementIsClickable(noteScreen.getNoteEditField());
-        WaitUtils.getGeneralFluentWait().until(webDriver -> {
-            Assert.assertTrue(noteScreen.getNoteEditField().getAttribute("value").contains(noteText));
-            return true;
-        });
-
+        Assert.assertEquals(noteScreen.getNoteEditField().getAttribute("value").replace("\n", " "), noteText.replace("\n", " "));
     }
 
     public static void addQuickNote(String quickNoteText) {
@@ -111,24 +110,23 @@ public class NotesSteps {
         noteScreen.getCommentTest().sendKeys(noteText);
     }
 
-    public static String addQuickNotesByCount(int count) {
-        StringBuilder note = new StringBuilder();
-        String result = "";
-        final String quickNoteText = "Note15";
-        for (int i = 1; i <= count; i++) {
-            NotesSteps.addQuickNote(quickNoteText);
-            note.append("\n");
-            note.append(quickNoteText) ;
+    public static List<String> getListOfQuickNotes(int count) {
+        VNextNotesScreen notesScreen = new VNextNotesScreen();
+        notesScreen.switchToQuickNotes();
+        List<String> quickNotesList = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            quickNotesList.add(notesScreen.getQuickNotesList().get(i).getText());
         }
-        return result;
+        ScreenNavigationSteps.pressBackButton();
+        return  quickNotesList;
     }
 
     public static String addQuickNotesFromListByCount(int count) {
-        VNextNotesScreen noteScreen = new VNextNotesScreen();
+        List<String> quickNotesList = getListOfQuickNotes(count);
         StringBuilder stringBuilder = new StringBuilder();
-        noteScreen.getQuickNotesList().stream().limit(count).forEach(element ->  {
-            NotesSteps.addQuickNote(element.getText());
-            stringBuilder.append(element.getText()).append("\n");
+        quickNotesList.forEach(notesText -> {
+            stringBuilder.append(notesText.trim()).append("\n");
+            NotesSteps.addQuickNote(notesText);
         });
         return stringBuilder.toString();
     }

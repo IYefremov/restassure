@@ -29,10 +29,13 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     private WebElement createinvoicemenu;
 
     @FindBy(xpath = "//*[@action='multiselect-actions-create-invoice']")
-    private WebElement createinvoiceicon;
+    private WebElement createInvoiceIcon;
 
     @FindBy(xpath = "//*[@data-autotests-id='work orders-list']/div")
     private List<WorkOrderListElement> workOrdersList;
+
+    @FindBy(xpath = "//div[@class='page-content wizard-start']")
+    private WebElement loadPage;
 
     public VNextWorkOrdersScreen() {
         PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
@@ -93,7 +96,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
     }
 
     public void clickCreateInvoiceIcon() {
-        tap(createinvoiceicon);
+        tap(createInvoiceIcon);
     }
 
     public void switchToTeamWorkordersView() {
@@ -135,5 +138,11 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickSeparateInvoicesButton();
         waitForWorkOrderScreenInfoMessage("Invoices creation");
+    }
+
+    public void clickCancelCreateSeparateInvoice() {
+        WaitUtils.waitUntilElementIsClickable(loadPage);
+        WebElement cancelBtn = WaitUtils.getGeneralFluentWait(20, 300).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='cancel']")));
+        WaitUtils.waitUntilElementIsClickable(cancelBtn).click();
     }
 }

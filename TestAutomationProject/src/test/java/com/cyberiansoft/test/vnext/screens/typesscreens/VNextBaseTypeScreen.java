@@ -6,11 +6,9 @@ import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -42,11 +40,6 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='add']")
     private WebElement addBtn;
 
-    public VNextBaseTypeScreen(WebDriver appiumdriver) {
-        super(appiumdriver);
-        PageFactory.initElements(appiumdriver, this);
-    }
-
     public VNextBaseTypeScreen() {
     }
 
@@ -67,8 +60,12 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
     }
 
     public void clickAddButton() {
-        WaitUtils.elementShouldBeVisible(addBtn, true);
-        tap(addBtn);
+        WaitUtils.getGeneralFluentWait().until(driver -> {
+            addBtn.click();
+            return true;
+        });
+        //WaitUtils.elementShouldBeVisible(addBtn, true);
+        //tap(addBtn);
     }
 
     protected void switchToTeamView() {
@@ -91,7 +88,7 @@ public class VNextBaseTypeScreen extends VNextBaseScreen {
 
     //todo rewrite!!!
     protected void switchToMyView() {
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+        WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
         wait.until(ExpectedConditions.elementToBeClickable(myviewtab));
         WaitUtils.getGeneralFluentWait().until(driver -> {
             Actions actions = new Actions(appiumdriver);

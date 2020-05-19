@@ -41,6 +41,25 @@ public class VNextApproveTeamInspectionsTestCases extends BaseTestClass {
 	}
 
 	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+	public void testVerifyUserCanApproveTeamInspectionInStatusNew(String rowID,
+																String description, JSONObject testData) {
+		HomeScreenSteps.openCreateMyInspection();
+		InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR);
+		String inspectionNumber = InspectionSteps.saveInspection();
+		InspectionSteps.switchToTeamInspections();
+		SearchSteps.textSearchTeam(inspectionNumber);
+		InspectionSteps.openInspectionMenu(inspectionNumber);
+		MenuValidations.menuItemShouldBeVisible(MenuItems.CREATE_WORK_ORDER, false);
+		MenuSteps.selectMenuItem(MenuItems.APPROVE);
+		ApproveSteps.drawSignature();
+		ApproveSteps.saveApprove();
+		InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
+		InspectionSteps.switchToMyInspections();
+		InspectionsValidations.verifyInspectionStatus(inspectionNumber, InspectionStatus.APPROVED);
+		ScreenNavigationSteps.pressBackButton();
+	}
+
+	@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
 	public void testVerifyCleanIconWorkCorrectly(String rowID,
 																String description, JSONObject testData) {
         HomeScreenSteps.openCreateMyInspection();
