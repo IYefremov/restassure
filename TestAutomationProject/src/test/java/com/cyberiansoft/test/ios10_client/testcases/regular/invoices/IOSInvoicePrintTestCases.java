@@ -156,6 +156,7 @@ public class IOSInvoicePrintTestCases extends IOSRegularBaseTestCase {
         RegularInvoiceInfoScreenSteps.setInvoicePONumber(testCaseData.getInvoiceData().getPoNumber());
         final String invoicenum = RegularInvoiceInfoScreenSteps.getInvoiceNumber();
         RegularInvoicesSteps.saveInvoiceAsFinal();
+        myWorkOrdersScreen.waitMyWorkOrdersScreenLoaded();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();

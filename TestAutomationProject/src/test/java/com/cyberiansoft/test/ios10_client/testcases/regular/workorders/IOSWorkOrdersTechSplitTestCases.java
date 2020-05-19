@@ -346,7 +346,7 @@ public class IOSWorkOrdersTechSplitTestCases extends IOSRegularBaseTestCase {
         RegularServiceDetailsScreenSteps.selectServiceTechnician(workOrderData.getVehicleInfoData().getNewTechnician());
         //selectedServiceDetailsScreen.unselecTechnician(workOrderData.getVehicleInfoData().getDefaultTechnician().getTechnicianFullName());
         RegularServiceDetailsScreenSteps.saveServiceDetails();
-        RegularAssignTechniciansSteps.assignTechniciansToWorkOrderWithServices();
+        RegularAssignTechniciansSteps.clickDoneButton();
 
         RegularNavigationSteps.navigateToServicesScreen();
         RegularServicesScreenSteps.switchToSelectedServices();

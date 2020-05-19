@@ -136,6 +136,8 @@ public class RegularMyInspectionsScreen extends RegularBaseTypeScreenWithTabs {
 		selectUIAPickerValue(reason);
 		appiumdriver.findElementByAccessibilityId("StringPickerVC_Status Reason")
 				.findElement(MobileBy.AccessibilityId("Done")).click();
+		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 45);
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId("Archiving inspection...")));
 	}
 	
 	public String getInspectionPriceValue(String inspectionnumber) {

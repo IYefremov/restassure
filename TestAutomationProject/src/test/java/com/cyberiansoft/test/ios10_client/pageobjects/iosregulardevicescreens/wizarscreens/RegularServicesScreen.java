@@ -100,6 +100,7 @@ public class RegularServicesScreen extends RegularBaseServicesScreen {
 	}
 	
 	public void selectService(String servicename) {
+		waitServicesScreenLoaded();
 		WebElement searchFild = appiumdriver.findElementByClassName("XCUIElementTypeSearchField");
 		searchFild.clear();
 

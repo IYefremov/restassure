@@ -4,6 +4,7 @@ public enum IOSReconproEnvironmentType {
 
     INTEGRATION("QC Environment"),
     DEVELOPMENT("Dev Environment"),
+    QC4("QC4"),
     UAT("UAT Environment");
 
 
