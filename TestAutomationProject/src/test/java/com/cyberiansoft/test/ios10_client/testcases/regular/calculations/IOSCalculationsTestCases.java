@@ -17,6 +17,8 @@ import com.cyberiansoft.test.ios10_client.config.ReconProIOSStageInfo;
 import com.cyberiansoft.test.ios10_client.data.IOSReconProTestCasesDataPaths;
 import com.cyberiansoft.test.ios10_client.generalvalidations.AlertsValidations;
 import com.cyberiansoft.test.ios10_client.hdclientsteps.ServicePartSteps;
+import com.cyberiansoft.test.ios10_client.hdclientsteps.ServicesScreenSteps;
+import com.cyberiansoft.test.ios10_client.hdvalidations.WizardScreenValidations;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.*;
 import com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.baseappscreens.RegularCustomersScreen;
@@ -570,11 +572,11 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         questionsScreen.swipeScreenUp();
         questionsScreen.selectAnswerForQuestion(workOrderData.getQuestionScreenData().getQuestionData());
         RegularNavigationSteps.navigateToServicesScreen();
-        RegularServicesScreen servicesScreen = new RegularServicesScreen();
         for (ServiceData serviceData : workOrderData.getServicesList()) {
             RegularServicesScreenSteps.selectServiceWithServiceData(serviceData);
         }
-        Assert.assertEquals(servicesScreen.getTotalAmaunt(), workOrderData.getWorkOrderPrice());
+        BaseUtils.waitABit(2000);
+        WizardScreenValidations.verifyScreenTotalPrice(workOrderData.getWorkOrderPrice());
         RegularNavigationSteps.navigateToOrderSummaryScreen();
         RegularOrderSummaryScreen orderSummaryScreen = new RegularOrderSummaryScreen();
         orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
@@ -1000,7 +1002,7 @@ public class IOSCalculationsTestCases extends IOSRegularBaseTestCase {
         teamWorkOrdersScreen.clickHomeButton();
         homeScreen.clickMyWorkOrdersButton();
         myWorkOrdersScreen.approveWorkOrder(workOrders.get(1), iOSInternalProjectConstants.MAN_INSP_EMPLOYEE, iOSInternalProjectConstants.USER_PASSWORD);
-        BaseUtils.waitABit(1000);
+        RegularMyWorkOrdersSteps.waitMyWorkOrdersLoaded();
         RegularMyWorkOrdersSteps.selectWorkOrderForEdit(workOrders.get(1));
         RegularVehicleScreen vehicleScreen = new RegularVehicleScreen();
         vehicleScreen.setPO(testCaseData.getInvoiceData().getPoNumber());

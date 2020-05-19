@@ -219,7 +219,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public boolean isStartServiceButtonPresent() {
-		return startservicebtn.isDisplayed();
+		return appiumdriver.findElementsByAccessibilityId("Start Service").size() > 0;
 	}
 
 	public boolean isStartPhaseButtonPresent() {
@@ -299,6 +299,7 @@ public class  RegularOrderMonitorScreen extends iOSRegularBaseScreen {
 	}
 
 	public boolean isServicePresent(String serviceName) {
+		waitOrderMonitorScreenLoaded();
 		return monitorserviceslist.findElementsByAccessibilityId(serviceName).size() > 0;
 	}
 

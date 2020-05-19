@@ -149,7 +149,7 @@ public class IOSOrderMonitorTestCases extends IOSRegularBaseTestCase {
         orderMonitorScreen.clickStartPhaseButton();
 
         orderMonitorScreen.selectPanel(dyeService);
-        Assert.assertFalse(orderMonitorScreen.isStartPhaseButtonExists());
+        Assert.assertFalse(orderMonitorScreen.isStartServiceButtonPresent());
         Assert.assertTrue(orderMonitorScreen.isServiceStartDateExists());
 
         orderMonitorScreen.clickServiceStatusCell();

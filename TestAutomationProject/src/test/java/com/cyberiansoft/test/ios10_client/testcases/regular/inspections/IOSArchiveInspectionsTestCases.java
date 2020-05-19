@@ -14,6 +14,7 @@ import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularHomeScreenSt
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularInspectionsSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularMyInspectionsSteps;
 import com.cyberiansoft.test.ios10_client.regularclientsteps.RegularNavigationSteps;
+import com.cyberiansoft.test.ios10_client.regularvalidations.RegularMyInspectionsScreenValidations;
 import com.cyberiansoft.test.ios10_client.testcases.regular.IOSRegularBaseTestCase;
 import com.cyberiansoft.test.ios10_client.types.inspectionstypes.InspectionsTypes;
 import com.cyberiansoft.test.ios10_client.utils.iOSInternalProjectConstants;
@@ -60,7 +61,7 @@ public class IOSArchiveInspectionsTestCases extends IOSRegularBaseTestCase {
         RegularMyInspectionsScreen myInspectionsScreen = new RegularMyInspectionsScreen();
         myInspectionsScreen.archiveInspection(inspNumber,
                 inspectionData.getArchiveReason());
-        Assert.assertTrue(myInspectionsScreen.checkInspectionDoesntExists(inspNumber));
+        RegularMyInspectionsScreenValidations.verifyInspectionPresent(inspNumber, false);
         RegularNavigationSteps.navigateBackScreen();
 
     }
@@ -96,7 +97,7 @@ public class IOSArchiveInspectionsTestCases extends IOSRegularBaseTestCase {
         myInspectionsScreen.clickArchiveInspections();
         myInspectionsScreen.selectReasonToArchive(testCaseData.getArchiveReason());
         for (String inspectionNumber : inspectionsID) {
-            Assert.assertTrue(myInspectionsScreen.checkInspectionDoesntExists(inspectionNumber));
+            RegularMyInspectionsScreenValidations.verifyInspectionPresent(inspectionNumber, false);
         }
         RegularNavigationSteps.navigateBackScreen();
     }

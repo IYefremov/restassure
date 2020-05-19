@@ -47,6 +47,10 @@ public class ReconProIOSStageInfo {
         return props.getProperty("backoffice.uat");
     }
 
+    public String getBackOfficeQC4URL() {
+        return props.getProperty("backoffice.qc4");
+    }
+
     public String getDentWizardBackOfficeStagingURL() {
         return props.getProperty("backofficedw.integration");
     }

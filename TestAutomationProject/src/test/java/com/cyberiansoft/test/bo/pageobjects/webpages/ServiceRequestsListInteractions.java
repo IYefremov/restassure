@@ -73,7 +73,7 @@ public class ServiceRequestsListInteractions {
 	}
 
     public void clickAddSRButton() {
-        Utils.clickElement(srListPage.getAddServiceRequestButton());
+        srListPage.getAddServiceRequestButton().click();
         waitForLoading();
         WaitUtilsWebDriver.waitForInvisibility(srListPage.getEditServiceRequestPanelImage());
     }
@@ -277,7 +277,7 @@ public class ServiceRequestsListInteractions {
     }
 
     public void clickDoneButton() {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(srListPage.getDonebtns());
+
         for (WebElement donebtn : srListPage.getDonebtns()) {
             if (donebtn.isDisplayed()) {
                 Utils.clickElement(donebtn);
