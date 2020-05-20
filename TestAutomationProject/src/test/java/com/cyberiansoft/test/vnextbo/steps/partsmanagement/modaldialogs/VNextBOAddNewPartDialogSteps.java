@@ -78,7 +78,7 @@ public class VNextBOAddNewPartDialogSteps {
 
     public static int getServiceDropDownOptionsSize() {
         final VNextBOAddNewPartDialog addNewPartDialog = new VNextBOAddNewPartDialog();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(addNewPartDialog.getServiceFieldDropDownOptions(), 3);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(addNewPartDialog.getServiceFieldDropDownOptions(), 3);
         return addNewPartDialog.getServiceFieldDropDownOptions().size();
     }
 

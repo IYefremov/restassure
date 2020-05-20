@@ -13,7 +13,12 @@ public class BOSubscriptionsPageSteps {
     public static void openEditDialogForSubscription(String name) {
         final BOSubscriptionsPage subscriptionsPage = new BOSubscriptionsPage();
         WaitUtilsWebDriver.waitForElementNotToBeStale(subscriptionsPage.getEditButtonBySubscriptionName(name));
-        Utils.clickElement(subscriptionsPage.getEditButtonBySubscriptionName(name));
+        try {
+            Utils.clickElement(subscriptionsPage.getEditButtonBySubscriptionName(name));
+        } catch (Exception e) {
+            WaitUtilsWebDriver.waitABit(1500);
+            Utils.clickElement(subscriptionsPage.getEditButtonBySubscriptionName(name));
+        }
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
         WaitUtilsWebDriver.elementShouldBeVisible(new BOSubscriptionDialog().getSubscriptionDialog(), true, 10);
@@ -21,13 +26,15 @@ public class BOSubscriptionsPageSteps {
 
     private static void setMode(WebElement mode) {
         final BOSubscriptionDialog dialog = new BOSubscriptionDialog();
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(mode);
         WaitUtilsWebDriver.elementShouldBeClickable(mode, true, 10);
         Utils.clickElement(mode);
         WaitUtilsWebDriver.waitABit(1000);
         Utils.clickElement(dialog.getOkButton());
         WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
         WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.elementShouldBeVisible(dialog.getSubscriptionDialog(), false, 5);
+        WaitUtilsWebDriver.waitABit(1000);
     }
 
     public static void setFullMode() {
@@ -47,8 +54,12 @@ public class BOSubscriptionsPageSteps {
 
     public static void setFullModeForSubscriptions(String ...subscriptions) {
         Arrays.asList(subscriptions).forEach(subscription -> {
-            openEditDialogForSubscription(subscription);
-            setFullMode();
+            try {
+                openEditDialogForSubscription(subscription);
+                setFullMode();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         });
     }
 }

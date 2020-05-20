@@ -12,7 +12,7 @@ public class VNextBOAddNewPartDialogInteractions {
     public static int getPartsListSize() {
         try {
             final VNextBOAddNewPartDialog addNewPartDialog = new VNextBOAddNewPartDialog();
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(addNewPartDialog.getPartsList(), 2);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(addNewPartDialog.getPartsList(), 2);
             return addNewPartDialog.getPartsList().size();
         } catch (Exception e) {
             return 0;

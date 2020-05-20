@@ -12,6 +12,9 @@ import org.openqa.selenium.support.PageFactory;
 @Getter
 public class VNextBOPartsManagementWebPage extends VNextBOBaseWebPage {
 
+    @FindBy(id = "parts-view")
+    private WebElement partsManagementBlock;
+
     @FindBy(xpath = "//i[@data-bind='click: location.toggle']")
     private WebElement locationArrowSearchExpander;
 

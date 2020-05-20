@@ -38,6 +38,7 @@ import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InvoiceInfoScreenValidations;
 import com.cyberiansoft.test.vnext.validations.InvoicesScreenValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
+import com.cyberiansoft.test.vnext.validations.NotesValidations;
 import com.cyberiansoft.test.vnextbo.steps.users.CustomerServiceSteps;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -269,13 +270,13 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
 		NotesSteps.deleteAllPictures();
-		NotesSteps.verifyNoPicturesPresent();
+		NotesValidations.verifyNoPicturesPresent();
 		ScreenNavigationSteps.pressBackButton();
 
 		InvoiceSteps.refreshPictures(invoiceNumber);
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
-		NotesSteps.verifyNoPicturesPresent();
+		NotesValidations.verifyNoPicturesPresent();
 		ScreenNavigationSteps.pressBackButton();
 		InvoiceSteps.waitInvoicesScreenLoaded();
 		ScreenNavigationSteps.pressBackButton();
@@ -305,7 +306,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
 
 		NotesSteps.deletePictures(picturesToDelete);
-		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd - picturesToDelete);
+		NotesValidations.verifyNumberOfPicturesPresent(picturesToAdd - picturesToDelete);
 		ScreenNavigationSteps.pressBackButton();
 		InvoiceSteps.waitInvoicesScreenLoaded();
 		ScreenNavigationSteps.pressBackButton();
@@ -316,7 +317,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		HomeScreenSteps.openInvoices();
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
-		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd - picturesToDelete);
+		NotesValidations.verifyNumberOfPicturesPresent(picturesToAdd - picturesToDelete);
 		ScreenNavigationSteps.pressBackButton();
 		InvoiceSteps.waitInvoicesScreenLoaded();
 		ScreenNavigationSteps.pressBackButton();
@@ -343,7 +344,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
 		NotesSteps.deleteAllPictures();
-		NotesSteps.verifyNoPicturesPresent();
+		NotesValidations.verifyNoPicturesPresent();
 		ScreenNavigationSteps.pressBackButton();
 
 		InvoiceSteps.openMenu(invoiceNumber);
@@ -353,13 +354,13 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
-		NotesSteps.verifyNoPicturesPresent();
+		NotesValidations.verifyNoPicturesPresent();
 		ScreenNavigationSteps.pressBackButton();
 
 		InvoiceSteps.refreshPictures(invoiceNumber);
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
-		NotesSteps.verifyNoPicturesPresent();
+		NotesValidations.verifyNoPicturesPresent();
 		ScreenNavigationSteps.pressBackButton();
 
 		ScreenNavigationSteps.pressBackButton();
@@ -388,7 +389,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
-		NotesSteps.verifyNoteIsPresent(notetext + "\n" + quicknote);
+		NotesValidations.verifyNoteIsPresent(notetext + "\n" + quicknote);
 		ScreenNavigationSteps.pressBackButton();
 
 		InvoiceSteps.switchToMyInvoicesView();
@@ -1057,7 +1058,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
 		NotesSteps.setNoteText(notetext);
 		NotesSteps.addQuickNote(quicknote);
-		NotesSteps.verifyNoteIsPresent(notetext + "\n" + quicknote);
+		NotesValidations.verifyNoteIsPresent(notetext + "\n" + quicknote);
 		ScreenNavigationSteps.pressBackButton();
 
 		InvoiceSteps.openMenu(invoiceNumber);
@@ -1070,13 +1071,13 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
 
-		NotesSteps.verifyNumberOfPicturesPresent(picturesToAdd);
+		NotesValidations.verifyNumberOfPicturesPresent(picturesToAdd);
 		ScreenNavigationSteps.pressBackButton();
 
 
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
-		NotesSteps.verifyNoteIsPresent(notetext + "\n" + quicknote);
+		NotesValidations.verifyNoteIsPresent(notetext + "\n" + quicknote);
 		ScreenNavigationSteps.pressBackButton();
 		InvoiceSteps.switchToMyInvoicesView();
 		ScreenNavigationSteps.pressBackButton();
@@ -1103,7 +1104,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 		BaseUtils.waitABit(10000);
 		InvoiceSteps.openMenu(invoiceNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
-		NotesSteps.verifyNoteIsPresent(result.trim());
+		NotesValidations.verifyNoteIsPresent(result.trim());
 		ScreenNavigationSteps.pressBackButton();
 		ScreenNavigationSteps.pressBackButton();
 	}

@@ -29,7 +29,7 @@ public class InspectionSteps {
 
     public static void createInspection(InspectionTypes inspectionTypes, InspectionData inspectionData) {
         InspectionSteps.selectInspectionType(inspectionTypes);
-        HelpingScreenInteractions.dismissHelpingScreenIfPresent();
+        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         VehicleInfoScreenSteps.setVehicleInfo(inspectionData.getVehicleInfo());
     }
 

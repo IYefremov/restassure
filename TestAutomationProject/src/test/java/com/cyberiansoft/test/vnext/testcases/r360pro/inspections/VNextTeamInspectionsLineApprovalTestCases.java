@@ -119,8 +119,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
     public void testVerifyUserCantAprroveInspectionsWithDifferentCustomers(String rowID,
                                                                            String description, JSONObject testData) {
         RetailCustomer secondCustomer = new RetailCustomer();
-        secondCustomer.setFirstName("Alexei");
-        secondCustomer.setLastName("M");
+        secondCustomer.setFirstName("Test");
+        secondCustomer.setLastName("User");
         InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
         List<ServiceData> services = inspectionData.getServicesList();
         List<String> inspectionsNumbers = new ArrayList<>();
@@ -519,13 +519,13 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         List<InspectionData> inspectionsData = testCaseData.getInspectionsData();
 
         HomeScreenSteps.openInspections();
+
         for (InspectionData inspectionData : inspectionsData) {
             InspectionSteps.switchToMyInspections();
             InspectionSteps.clickAddInspectionButton();
             InspectionSteps.createInspection(testcustomer, InspectionTypes.O_KRAMAR3, inspectionData);
             WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
             inspectionData.getServicesList().forEach(AvailableServicesScreenSteps::selectService);
-
             SelectedServicesScreenSteps.switchToSelectedService();
             inspectionData.getServicesList().forEach(service -> {
                 if (service.getServicePrice() != null) {
@@ -536,9 +536,9 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
             });
             inspectionData.setInspectionNumber(InspectionSteps.saveInspection());
         }
+
         inspectionsData.forEach(inspectionData -> InspectionSteps.selectInspection(inspectionData.getInspectionNumber()));
         InspectionSteps.clickMultiSelectInspectionsApproveButton();
-
         for (InspectionData inspectionData : inspectionsData) {
             if (inspectionData.getInspectionStatus().equals(InspectionStatus.DECLINED.getStatusString())) {
                 ApproveInspectionsSteps.declineInspection(inspectionData.getInspectionNumber(), inspectionData.getDeclineReason());

@@ -123,7 +123,7 @@ public class VNextBORODetailsPageValidations {
 
     private static void verifyPartPhaseStatusIsCorrect(String[] phaseStatuses) {
         final List<WebElement> partsPhaseStatusDropDowns = new VNextBORODetailsPage().getPartsPhaseStatusDropDowns();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(partsPhaseStatusDropDowns);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(partsPhaseStatusDropDowns);
         if (!partsPhaseStatusDropDowns.isEmpty()) {
             final List<String> statuses = Utils.getText(partsPhaseStatusDropDowns);
             final boolean matching = statuses.stream().allMatch(partStatus -> partStatus.equals(phaseStatuses[0])

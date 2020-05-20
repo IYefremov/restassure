@@ -16,7 +16,7 @@ public class VNextBOAddNewServiceMonitorDialogValidations {
     public static boolean isPartDescriptionDisplayed(String description) {
         Utils.refreshPage();
         final List<WebElement> partDescriptions = new VNextBOAddNewServiceMonitorDialog().getPartDescriptions();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(partDescriptions);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(partDescriptions);
         return partDescriptions
                 .stream()
                 .anyMatch(e -> {

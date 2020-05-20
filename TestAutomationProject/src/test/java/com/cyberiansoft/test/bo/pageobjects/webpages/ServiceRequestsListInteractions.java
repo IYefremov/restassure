@@ -73,7 +73,7 @@ public class ServiceRequestsListInteractions {
 	}
 
     public void clickAddSRButton() {
-        Utils.clickElement(srListPage.getAddServiceRequestButton());
+        srListPage.getAddServiceRequestButton().click();
         waitForLoading();
         WaitUtilsWebDriver.waitForInvisibility(srListPage.getEditServiceRequestPanelImage());
     }
@@ -277,7 +277,7 @@ public class ServiceRequestsListInteractions {
     }
 
     public void clickDoneButton() {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(srListPage.getDonebtns());
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(srListPage.getDonebtns());
         for (WebElement donebtn : srListPage.getDonebtns()) {
             if (donebtn.isDisplayed()) {
                 Utils.clickElement(donebtn);
@@ -497,7 +497,7 @@ public class ServiceRequestsListInteractions {
 	public void findClick(By by, By byInner, String startDate) {
         waitForLoading();
         final WebDriver driver = DriverBuilder.getInstance().getDriver();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(driver.findElements(By.className("rsWrap")));
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(driver.findElements(By.className("rsWrap")));
 
                 WaitUtilsWebDriver.getWait()
 						.until(ExpectedConditions.elementToBeClickable(driver.findElement(by)))

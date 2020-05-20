@@ -127,6 +127,7 @@ public class RegularInvoiceInfoScreen extends RegularBaseWizardScreen implements
 	}
 	
 	public String getInvoiceCustomer() {
+		waitInvoiceInfoScreenLoaded();
 		return appiumdriver.findElementByAccessibilityId("viewPrompt").getAttribute("value");
 	}
 

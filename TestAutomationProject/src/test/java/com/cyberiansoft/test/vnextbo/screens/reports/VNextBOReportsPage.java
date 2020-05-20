@@ -36,17 +36,17 @@ public class VNextBOReportsPage extends VNextBOBaseWebPage {
         return reportsBlock.findElement(By.className("PageBody"));
     }
 
-    public List<WebElement> getTableColumns() {
-        return getReportTable().findElements(By.xpath(".//div[@class='Table-row']"));
+    public List<WebElement> getTableRows() {
+        return reportsBlock.findElements(By.xpath(".//div[@class='Table-row']"));
     }
 
     public WebElement getGenerateButtonForReport(String report) {
-        return getTableColumns().stream().map(row -> {
-            if (Utils.getText(row.findElement(By.xpath(".//div"))).equals(report)) {
-                return row.findElement(By.xpath(".//button"));
-            }
-            return null;
-        }).findFirst().orElseThrow(() ->
-                new RuntimeException("The 'Generate Report' button hasn't been found for the " + report + "."));
+        return getTableRows()
+                .stream()
+                .filter(row -> Utils.getText(row.findElement(By.xpath("./div[text()]"))).equals(report))
+                .map(row -> row.findElement(By.xpath(".//button")))
+                .findFirst()
+                .orElseThrow(() ->
+                new RuntimeException("The 'Generate Report' button hasn't been found for the '" + report + "' report"));
     }
 }

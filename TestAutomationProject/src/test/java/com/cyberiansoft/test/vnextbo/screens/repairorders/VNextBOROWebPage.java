@@ -278,7 +278,7 @@ public class VNextBOROWebPage extends VNextBOBaseWebPage {
 
     public WebElement getRandomOrderNumber() {
         final List<WebElement> orders =
-                WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(woNumbersList);
+                WaitUtilsWebDriver.waitForVisibilityOfAllOptions(woNumbersList);
         return orders != null ? orders.get(RandomUtils.nextInt(0, orders.size())) : null;
     }
 

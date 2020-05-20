@@ -277,7 +277,7 @@ public class VNextBORODetailsPage extends VNextBOBaseWebPage {
             final List<WebElement> elements = driver.findElements(By.xpath("//div[contains(text(), '" + service + "')]"));
             List<WebElement> servicesByNames = new ArrayList<>();
 
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(elements);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(elements);
             final List<String> collect = Utils.getText(elements).stream().map(String::trim).collect(Collectors.toList());
 
             for (int i = 0; i < collect.size(); i++) {

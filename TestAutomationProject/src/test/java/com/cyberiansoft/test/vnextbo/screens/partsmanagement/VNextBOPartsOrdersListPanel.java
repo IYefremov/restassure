@@ -46,6 +46,9 @@ public class VNextBOPartsOrdersListPanel extends VNextBOBaseWebPage {
     @FindBy(xpath = "//ul[@data-automation-id='partsOrdersList']/li//span[text()='RO#:']/parent::div")
     private List<WebElement> roNumOptions;
 
+    @FindBy(xpath = "//ul[@data-automation-id='partsOrdersList']/li//div[contains(@class, 'status__label')]")
+    private List<WebElement> statusOptions;
+
     @FindBy(xpath = "//div[@class='progress-message']/a")
     private WebElement ordersListEmptyState;
 

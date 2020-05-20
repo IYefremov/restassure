@@ -439,7 +439,7 @@ public class VNextTeamInspectionsTestCases extends BaseTestClass {
 		InspectionSteps.saveInspection();
 		InspectionSteps.openInspectionMenu(inspectionNumber);
 		MenuSteps.selectMenuItem(MenuItems.NOTES);
-		NotesSteps.verifyNoteIsPresent(inspectionNote);
+		NotesValidations.verifyNoteIsPresent(inspectionNote);
 		ScreenNavigationSteps.pressBackButton();
 
 		InspectionSteps.openInspectionMenu(inspectionNumber);

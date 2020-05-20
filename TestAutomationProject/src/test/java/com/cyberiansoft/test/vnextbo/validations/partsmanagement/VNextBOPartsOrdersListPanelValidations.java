@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.vnextbo.validations.partsmanagement;
 
 import com.cyberiansoft.test.baseutils.Utils;
+import com.cyberiansoft.test.enums.WorkOrderStatuses;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsOrdersListPanel;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsOrdersListPanelSteps;
 import org.apache.commons.lang.StringUtils;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -91,5 +93,10 @@ public class VNextBOPartsOrdersListPanelValidations {
                "\"Click here to learn how to create your first work order\" message hasn't been displayed");
         Assert.assertEquals(Utils.getText(ordersListPanel.getOrdersListEmptyState()), "Click here to learn how to create your first work order",
                  "Empty state message hasn't been correct");
+    }
+
+    public static boolean isPartStatusOpenedOrApproved(int order) {
+        final String status = VNextBOPartsOrdersListPanelSteps.getPartStatusesList().get(order);
+        return status.equals(WorkOrderStatuses.NEW.getValue()) || status.equals(WorkOrderStatuses.APPROVED.getValue());
     }
 }

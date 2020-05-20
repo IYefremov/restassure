@@ -315,7 +315,9 @@ public class IOSCreateWorkOrderTestCases extends IOSRegularBaseTestCase {
         invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
         RegularQuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(testCaseData.getInvoiceData().getQuestionScreenData());
         invoiceInfoScreen.clickSaveAsFinal();
+        myWorkOrdersScreen.waitMyWorkOrdersScreenLoaded();
         RegularNavigationSteps.navigateBackScreen();
+
         homeScreen.clickStatusButton();
         homeScreen.updateDatabase();
         RegularMainScreen mainScreen = new RegularMainScreen();

@@ -72,6 +72,7 @@ public class IOSInvoiceChangeCustomerTestCases extends IOSRegularBaseTestCase {
         invoiceInfoScreen.setPO(testCaseData.getInvoiceData().getPoNumber());
         String invoiceNumber = invoiceInfoScreen.getInvoiceNumber();
         invoiceInfoScreen.clickSaveAsDraft();
+        myWorkOrdersScreen.waitMyWorkOrdersScreenLoaded();
         RegularNavigationSteps.navigateBackScreen();
 
         RegularHomeScreenSteps.navigateToMyInvoicesScreen();

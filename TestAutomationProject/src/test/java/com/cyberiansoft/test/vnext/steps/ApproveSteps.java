@@ -17,6 +17,7 @@ public class  ApproveSteps {
     public static void saveApprove() {
         ListSelectPageInteractions.saveListPage();
         WaitUtils.waitLoadDialogDisappears();
+        WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='notifier-contaier']")));
         WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
                 ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
         ));

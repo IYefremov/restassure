@@ -157,7 +157,7 @@ public class UsersWebPage extends WebPageWithPagination {
 
     public WebElement getTableRowWithActiveUser(String firstName, String lastName) {
         List<WebElement> rows = getUsersTableRows();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(rows);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(rows);
         return rows
                 .stream()
                 .peek(row -> WaitUtilsWebDriver.waitForElementNotToBeStale(row).findElement(By.xpath(".//td[3]")))

@@ -189,7 +189,7 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		clickArchiveInspectionButton();
 		selectReasonToArchive(reason);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.numberOfElementsToBeLessThan(MobileBy.AccessibilityId(inpectionNumber), 1)  );
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(MobileBy.AccessibilityId(inpectionNumber)));
 	}
 
 	public void archiveInspections(List<String> inspections, String reason)  {
@@ -251,6 +251,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	public boolean isInspectionExists(String inspection) {
 		waitInspectionsScreenLoaded();
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(By.name("InspectionsPageTableLeft")));
 		return elementExists(inspection);
 	}
 

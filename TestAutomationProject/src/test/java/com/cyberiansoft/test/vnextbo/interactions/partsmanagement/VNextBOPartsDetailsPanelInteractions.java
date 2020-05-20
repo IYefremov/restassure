@@ -9,7 +9,6 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPa
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
-import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -166,8 +165,12 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static void setProvider(String provider) {
+        setProvider(0, provider);
+    }
+
+    public static void setProvider(int order, String provider) {
         final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
-        Utils.clickElement(partsDetailsPanel.getProviderFieldArrow());
+        Utils.clickElement(partsDetailsPanel.getProviderFieldArrows().get(order));
         Utils.selectOption(partsDetailsPanel.getPartDropDown(), partsDetailsPanel.getPartsListBoxOptions(), provider);
     }
 
@@ -178,7 +181,7 @@ public class VNextBOPartsDetailsPanelInteractions {
     public static List<String> getPartIdsByStatus(String status) {
         final List<WebElement> partsList = new VNextBOPartsDetailsPanel().getPartsList();
         final List<String> partIds = new ArrayList<>();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(partsList, 5);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(partsList, 5);
 
         partsList.forEach(part -> {
             final WebElement inputField = part.findElement(By.xpath(".//input[contains(@class, 'service-status-dropdown')]"));
@@ -238,11 +241,9 @@ public class VNextBOPartsDetailsPanelInteractions {
     }
 
     public static void clickServiceCheckbox(int order) {
-        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
-        WaitUtilsWebDriver.waitABit(1000);
-        final WebElement serviceCheckbox = new VNextBOPartsDetailsPanel().getPartCheckboxesList().get(order);
-        WaitUtilsWebDriver.waitForElementNotToBeStale(serviceCheckbox);
-        Utils.clickElement(serviceCheckbox);
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        WaitUtilsWebDriver.waitForElementNotToBeStale(partsDetailsPanel.getPartCheckboxesList().get(order));
+        Utils.clickElement(partsDetailsPanel.getPartCheckboxesList().get(order));
     }
 
     public static void waitForStatusesCheckboxToBeEnabled() {
@@ -314,7 +315,6 @@ public class VNextBOPartsDetailsPanelInteractions {
             Utils.selectOptionInDropDownWithJsScroll(status);
         } catch (Exception e) {
             e.printStackTrace();
-            Assert.fail("The status hasn't been set");
         }
     }
 

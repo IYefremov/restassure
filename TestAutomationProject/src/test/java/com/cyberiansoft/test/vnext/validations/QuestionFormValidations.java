@@ -40,4 +40,12 @@ public class QuestionFormValidations {
             Assert.assertFalse(questionScreen.getTextQuestionByText(questionData.getQuestionName()).getRootElement().getAttribute("class").contains("answered-question"));
     }
 
+    public static void validateQuestionHasNotes(String questionName, boolean hasNotes) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        if (hasNotes)
+            Assert.assertTrue(questionScreen.getAnsweredQuestionByText(questionName).getQuestionNotesIcon().getAttribute("class").contains("has-notes"));
+        else
+            Assert.assertFalse(questionScreen.getAnsweredQuestionByText(questionName).getQuestionNotesIcon().getAttribute("class").contains("has-notes"));
+    }
+
 }

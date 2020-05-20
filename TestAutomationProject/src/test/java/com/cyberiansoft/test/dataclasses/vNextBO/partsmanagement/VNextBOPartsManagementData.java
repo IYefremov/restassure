@@ -26,8 +26,8 @@ public class VNextBOPartsManagementData extends VNextBOBaseData {
     @JsonProperty("subscriptions")
     private String[] subscriptions;
 
-    @JsonProperty("dashboardItemsNames")
-    private String[] dashboardItemsNames;
+    @JsonProperty("providerOptions")
+    private String[] providerOptions;
 
     @JsonProperty("statusesList")
     private List<String> statusesList;
