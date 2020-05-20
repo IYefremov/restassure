@@ -188,7 +188,7 @@ public class QuestionsScreen extends BaseWizardScreen {
 
 		action = new TouchAction(appiumdriver);
 		action.tap(element(element, 30, element.getSize().getHeight() - 20)).perform();
-		appiumdriver.findElementByAccessibilityId("Done").click();
+		//appiumdriver.findElementByAccessibilityId("Done").click();
 	}
 	
 	public void selectTaxPoint(String taxpoint) {

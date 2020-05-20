@@ -9,6 +9,7 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -35,7 +36,9 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void waitMyWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver>  wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MyWorkOrdersTable")));
+		WebElement myWoTable =  wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("MyWorkOrdersTable")));
+		wait = new WebDriverWait(appiumdriver, 60);
+		wait.until(ExpectedConditions.elementToBeClickable(myWoTable));
 	}
 
 	public void clickAddOrderButton() {
@@ -113,7 +116,7 @@ public class RegularMyWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderId) {
 		waitMyWorkOrdersScreenLoaded();
-		WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(mywotable.findElementByAccessibilityId(workOrderId))).click();
 	}
 	

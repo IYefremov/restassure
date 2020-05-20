@@ -16,6 +16,8 @@ public class RegularTechRevenueScreen extends iOSRegularBaseScreen {
 	}
 	
 	public boolean isTechIsPresentInReport(String techname) {
+		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 5);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.name("Tech Revenue"))).click();
 		return appiumdriver.findElementsByAccessibilityId(techname).size() > 0;
 	}
 
