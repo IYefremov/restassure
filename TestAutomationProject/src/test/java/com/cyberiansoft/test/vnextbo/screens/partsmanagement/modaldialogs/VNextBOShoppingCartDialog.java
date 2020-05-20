@@ -43,7 +43,7 @@ public class VNextBOShoppingCartDialog extends VNextBOBaseWebPage {
     }
 
     public WebElement getRepairOrderPartInputByPartName(String store, String partName) {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(shoppingCartStoreBlocks, 3);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(shoppingCartStoreBlocks, 3);
         for (WebElement shoppingCartStoreBlock : shoppingCartStoreBlocks) {
             final String storeName = Utils.getText(shoppingCartStoreBlock.findElement(By.xpath(".//div[contains(@data-bind, 'name')]")));
             if (storeName.contains(store)) {

@@ -32,13 +32,13 @@
 //    @Attachment(value = "Unable to save screenshot")
 //    static String failToSaveScreenshot(Exception e) {
 //        return String.format("%s\n%s\n%s", "Failed to save screenshot",
-//                e.getMessage(), Arrays.toString(e.getStackTrace()));
+//                e.getContent(), Arrays.toString(e.getStackTrace()));
 //    }
 //
 //    @Attachment(value = "Unable to save video")
 //    static String failToSaveVideo(Exception e) {
 //        return String.format("%s\n%s\n%s", "Failed to save video",
-//                e.getMessage(), Arrays.toString(e.getStackTrace()));
+//                e.getContent(), Arrays.toString(e.getStackTrace()));
 //    }
 //
 //    @Attachment(value = "Video record", type = "video/avi")

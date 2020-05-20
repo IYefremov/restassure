@@ -24,7 +24,7 @@ public class Utils {
             ConditionWaiter.create(__ -> element.isEnabled()).execute();
             element.click();
         } catch (Exception ignored) {
-            WaitUtilsWebDriver.waitABit(500);
+            WaitUtilsWebDriver.waitABit(1000);
             clickWithJS(element);
         }
     }
@@ -168,7 +168,7 @@ public class Utils {
 
     public static void selectOption(WebElement dropDown, List<WebElement> listBox, String selection) {
         waitForDropDownToBeOpened(dropDown);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(listBox, 1);
         getMatchingOptionInListBox(listBox, selection)
                 .ifPresent((option) -> {
                     moveToElement(option);
@@ -180,7 +180,7 @@ public class Utils {
         if (listBox.size() == 0) {
             return null;
         } else {
-            final String selection = Utils.getText(listBox.get(RandomUtils.nextInt(0, listBox.size())));
+            final String selection = getText(listBox.get(RandomUtils.nextInt(0, listBox.size())));
             selectOption(dropDown, listBox, selection);
             return selection;
         }
@@ -188,7 +188,7 @@ public class Utils {
 
     public static void selectOptionInDropDownWithJs(WebElement dropDown, List<WebElement> listBox, String selection) {
         waitForDropDownToBeOpened(dropDown);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(listBox, 1);
         getMatchingOptionInListBox(listBox, selection).ifPresent(Utils::clickWithJS);
         WaitUtilsWebDriver.waitForDropDownToBeClosed(dropDown, 1);
     }
@@ -208,7 +208,7 @@ public class Utils {
 
     public static void selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox, String selection, boolean draggable) {
         if (draggable) {
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(listBox, 1);
             final WebElement webElement = listBox
                     .stream()
                     .filter(option -> getText(option).equals(selection))
@@ -223,7 +223,7 @@ public class Utils {
     public static Optional<WebElement> getMatchingOptionInListBox(List<WebElement> listBox, String selection) {
         final List<String> options = getText(listBox);
         for (int i = 0; i < options.size(); i++) {
-            if (options.get(i).equals(selection)) {
+            if (options.get(i).trim().equals(selection)) {
                 return Optional.ofNullable(listBox.get(i));
             }
         }
@@ -279,7 +279,7 @@ public class Utils {
     public static String selectOptionInDropDown(WebElement dropDown, List<WebElement> listBox) {
         final int minOptionNumber = 1;
         waitForDropDownToBeOpened(dropDown);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(listBox, 1);
         final int random = RandomUtils.nextInt(minOptionNumber, listBox.size());
         String selectedText = getText(listBox.get(random));
         getMatchingOptionInListBox(listBox, selectedText)
@@ -295,7 +295,7 @@ public class Utils {
     public static String selectOptionInDropDownWithJs(WebElement dropDown, List<WebElement> listBox) {
         final int minOptionNumber = 1;
         waitForDropDownToBeOpened(dropDown);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox, 1);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(listBox, 1);
         final int random = RandomUtils.nextInt(minOptionNumber, listBox.size());
         String selectedText = getText(listBox.get(random));
         getMatchingOptionInListBox(listBox, selectedText).ifPresent(Utils::clickWithJS);
@@ -421,7 +421,7 @@ public class Utils {
     }
 
     public static void selectDataFromBoxList(List<WebElement> listBox, WebElement list, String data) {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(listBox);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(listBox);
         for (WebElement selected : listBox) {
             if (selected.getText().equals(data)) {
                 new Actions(DriverBuilder.getInstance().getDriver()).moveToElement(selected)
@@ -569,7 +569,11 @@ public class Utils {
     }
 
     public static List<String> getText(List<WebElement> list) {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(list);
+        return getText(list, 5);
+    }
+
+    public static List<String> getText(List<WebElement> list, int timeOut) {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(list, timeOut);
         return list
                 .stream()
                 .map(WaitUtilsWebDriver::waitForElementNotToBeStale)
@@ -578,12 +582,44 @@ public class Utils {
     }
 
     public static List<String> getTextByValue(List<WebElement> list) {
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(list);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(list);
         return list
                 .stream()
                 .map(WaitUtilsWebDriver::waitForElementNotToBeStale)
                 .map(e -> e.getAttribute("value"))
                 .collect(Collectors.toList());
+    }
+
+    public static boolean isChecked(WebElement option) {
+        return option.isSelected();
+    }
+
+    public static boolean isChecked(WebElement option, int timeout) {
+        return WaitUtilsWebDriver.waitForVisibility(option, timeout).isSelected();
+    }
+
+    public static boolean attributeContains(WebElement element, String attribute, String value) {
+        try {
+            return element.getAttribute(attribute).contains(value);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static boolean attributeEquals(WebElement element, String attribute, String value) {
+        try {
+            return element.getAttribute(attribute).equals(value);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static String getAttribute(WebElement element, String attribute) {
+        try {
+            return element.getAttribute(attribute);
+        } catch (Exception e) {
+            return "";
+        }
     }
 
     public static void acceptAlertIfPresent() {

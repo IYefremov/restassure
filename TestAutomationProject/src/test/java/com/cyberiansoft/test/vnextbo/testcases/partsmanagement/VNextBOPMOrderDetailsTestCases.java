@@ -25,12 +25,14 @@ import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsDetailsPa
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsManagementWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.VNextBOPartsOrdersListPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOAdvancedSearchDialogSteps;
+import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOChangePartsDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROAdvancedSearchDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBORODetailsPartsBlockSteps;
 import com.cyberiansoft.test.vnextbo.steps.repairorders.VNextBOROPageSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBOPartsDetailsPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.VNextBORODetailsPartsBlockValidations;
+import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOChangePartsDialogValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -38,6 +40,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static com.cyberiansoft.test.vnextbo.utils.WebDriverUtils.webdriverGotoWebPage;
 
@@ -186,5 +190,44 @@ public class VNextBOPMOrderDetailsTestCases extends BaseTestCase {
         VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckboxToBeDisabled();
         VNextBOPartsDetailsPanelValidations.verifyStatusesCheckboxIsEnabled(false);
         VNextBOPartsDetailsPanelValidations.verifyDeleteSelectedPartsButtonIsDisplayed(false);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanChangeStatusForMultipleServices(String rowID, String description, JSONObject testData) {
+        VNextBOPartsManagementData data = JSonDataParser.getTestDataFromJson(testData, VNextBOPartsManagementData.class);
+
+        final int EXPECTED_PARTS_NUMBER = 3;
+        VNextBOBreadCrumbInteractions.setLocation(data.getLocation());
+        VNextBOSearchPanelSteps.searchByTextWithSpinnerLoading(data.getSearchData().getWoNum());
+
+        VNextBOPartsDetailsPanelSteps.addExpectedNumberOfParts(data.getPartData(), data.getSearchData().getWoNum(), EXPECTED_PARTS_NUMBER);
+        VNextBOPartsDetailsPanelSteps.deleteServicesByStatus(PartStatus.PROBLEM.getStatus(), "Pending");
+        VNextBOPartsDetailsPanelSteps.checkServiceCheckbox(0);
+        VNextBOPartsDetailsPanelSteps.checkServiceCheckbox(1);
+        final List<String> partStatusFieldsValues = VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues();
+        VNextBOPartsDetailsPanelSteps.openChangeStatusDialog();
+        VNextBOChangePartsDialogValidations.verifyInitialDialogSettings();
+        VNextBOChangePartsDialogSteps.cancel();
+        VNextBOPartsDetailsPanelValidations.verifyPartCheckboxIsChecked(0);
+        VNextBOPartsDetailsPanelValidations.verifyPartCheckboxIsChecked(1);
+        VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(partStatusFieldsValues);
+        Stream.of(PartStatus.values())
+                .map(PartStatus::getStatus)
+                .filter(status -> !(status.equals(PartStatus.RECEIVED.getStatus()) ||
+                        status.equals(PartStatus.PROBLEM.getStatus()) ||
+                        status.equals(PartStatus.ALL.getStatus())))
+                .forEach(status -> {
+                    VNextBOPartsDetailsPanelSteps.checkServiceCheckbox(0);
+                    VNextBOPartsDetailsPanelSteps.checkServiceCheckbox(1);
+                    VNextBOPartsDetailsPanelSteps.openChangeStatusDialog();
+                    VNextBOChangePartsDialogSteps.setStatus(status);
+                    VNextBOChangePartsDialogSteps.submit();
+                    VNextBOPartsDetailsPanelValidations.verifyPartCheckboxIsUnchecked(0);
+                    VNextBOPartsDetailsPanelValidations.verifyPartCheckboxIsUnchecked(1);
+                    VNextBOPartsDetailsPanelSteps.waitForPartStatusToBeUpdated(0, status);
+                    VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(0, status);
+                    VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(1, status);
+                    VNextBOPartsDetailsPanelValidations.verifyPartStatusIsCorrect(2, partStatusFieldsValues.get(2));
+                });
     }
 }

@@ -9,9 +9,16 @@ public class VNextBOToasterNotificationValidations {
 
     public static void verifyMessageTextIsCorrect(String expectedText) {
         VNextBOToasterNotification notification = new VNextBOToasterNotification();
-        WaitUtilsWebDriver.waitForVisibility(notification.getMessage());
-        String actualNotificationText = Utils.getText(notification.getMessage());
+        WaitUtilsWebDriver.waitForVisibility(notification.getContent());
+        String actualNotificationText = Utils.getText(notification.getContent());
         Assert.assertEquals(actualNotificationText, expectedText,
                 "Notification message hasn't been correct");
+    }
+
+    public static void verifyMessageContainsText(String expectedText) {
+        VNextBOToasterNotification notification = new VNextBOToasterNotification();
+        String actualNotificationText = Utils.getText(notification.getMessage());
+        Assert.assertTrue(actualNotificationText.contains(expectedText),
+                "The notification message '" + actualNotificationText + "' doesn't contain '" + expectedText + " text");
     }
 }

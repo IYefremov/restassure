@@ -8,6 +8,7 @@ import com.cyberiansoft.test.dataclasses.vNextBO.partsmanagement.VNextBOPartsMan
 import com.cyberiansoft.test.enums.partsmanagement.CoreStatus;
 import com.cyberiansoft.test.enums.partsmanagement.PartCondition;
 import com.cyberiansoft.test.enums.partsmanagement.PartStatus;
+import com.cyberiansoft.test.vnextbo.interactions.breadcrumb.VNextBOBreadCrumbInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.general.VNextBOConfirmationDialogInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.VNextBOPartsDetailsPanelInteractions;
 import com.cyberiansoft.test.vnextbo.interactions.partsmanagement.modaldialogs.VNextBOAddNewPartDialogInteractions;
@@ -15,6 +16,7 @@ import com.cyberiansoft.test.vnextbo.screens.VNextBOModalDialog;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsOrdersListPanel;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAddLaborPartsDialog;
+import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOChangePartsDialog;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
 import com.cyberiansoft.test.vnextbo.steps.dialogs.VNextBOModalDialogSteps;
 import com.cyberiansoft.test.vnextbo.steps.partsmanagement.modaldialogs.VNextBOAddLaborPartsDialogSteps;
@@ -28,10 +30,14 @@ import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VN
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartDocumentsDialogValidations;
 import com.cyberiansoft.test.vnextbo.validations.partsmanagement.modaldialogs.VNextBOPartsProvidersDialogValidations;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class VNextBOPartsDetailsPanelSteps {
@@ -95,6 +101,7 @@ public class VNextBOPartsDetailsPanelSteps {
 
         VNextBOPartsDetailsPanelInteractions.setStatusForPartByPartNumber(partNumber, status);
         WaitUtilsWebDriver.waitForPageToBeLoaded();
+        waitForPartStatusToBeUpdated(partNumber, status);
     }
 
     public static void setStatusForPartByPartName(String partName, String status) {
@@ -171,7 +178,6 @@ public class VNextBOPartsDetailsPanelSteps {
     }
 
     public static void openDocumentsDialogByNumberInList(int partNumber) {
-
         VNextBOPartsDetailsPanelInteractions.clickActionsButtonForPartByNumberInList(partNumber);
         VNextBOPartsDetailsPanelInteractions.clickDocumentsActionButtonForPartByNumberInList(partNumber);
         VNextBOPartDocumentsDialogValidations.verifyPartDocumentsDialogIsOpened(true);
@@ -292,6 +298,44 @@ public class VNextBOPartsDetailsPanelSteps {
                 "The parts number is not with " + status + " status is not >= " + expectedNumber);
     }
 
+    public static void addExpectedNumberOfParts(VNextBOPartsData data, String woNum, int expectedNumber) {
+        int partsNumber = getNumberOfPartsWithoutProblemOrPendingStatuses();
+        for (; partsNumber < expectedNumber; partsNumber++) {
+            WaitUtilsWebDriver.waitABit(1000);
+            addNewPart(data);
+            updatePartsList(woNum, partsNumber > 0);
+        }
+    }
+
+    private static int getNumberOfPartsWithoutProblemOrPendingStatuses() {
+        return VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues()
+                .stream()
+                .filter(s -> !(s.equals(PartStatus.PROBLEM.getStatus()) || s.equals("Pending")))
+                .collect(Collectors.toList())
+                .size();
+    }
+
+    public static void waitForPartStatusToBeUpdated(int order, String expectedStatus) {
+        try {
+            WaitUtilsWebDriver.getWebDriverWait(3).until((ExpectedCondition<Boolean>) driver ->
+                    VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().get(order).contains(expectedStatus));
+        } catch (Exception ignored) {}
+    }
+
+    public static String getPartStatusValue(int order) {
+        return VNextBOPartsDetailsPanelInteractions.getPartStatusFieldsValues().get(order);
+    }
+
+    public static void checkServiceCheckbox(int order) {
+        if (!Utils.isChecked(new VNextBOPartsDetailsPanel().getPartCheckboxesList().get(order))) {
+            VNextBOPartsDetailsPanelInteractions.clickServiceCheckbox(order);
+        }
+    }
+
+    public static void waitForVisibilityOfCheckboxes() {
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOPartsDetailsPanel().getPartCheckboxesList());
+    }
+
     public static void deleteServicesByStatus(String status) {
         VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
         final WebElement selectedStatus = VNextBOPartsDetailsPanelInteractions.getSelectedStatus(status);
@@ -303,9 +347,30 @@ public class VNextBOPartsDetailsPanelSteps {
         }
     }
 
+    public static void deleteServicesByStatus(String... statuses) {
+        openStatusesCheckbox();
+        Stream.of(statuses)
+                .map(VNextBOPartsDetailsPanelInteractions::getSelectedStatus)
+                .filter(Objects::nonNull)
+                .forEach(el -> {
+                    VNextBOPartsDetailsPanelInteractions.selectStatusToDelete(el);
+                    deleteServices();
+                });
+        closeStatusesCheckbox();
+    }
+
+    private static void openStatusesCheckbox() {
+        if (!VNextBOPartsDetailsPanelValidations.isAllPartsCheckDropDownOpened()) {
+            VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
+            VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckBoxToBeOpened(true);
+        }
+    }
+
     private static void closeStatusesCheckbox() {
-        VNextBOPartsDetailsPanelInteractions.clickStatusesCheckBox();
-        VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckBoxToBeOpened(false);
+        if (VNextBOPartsDetailsPanelValidations.isAllPartsCheckDropDownOpened()) {
+            VNextBOBreadCrumbInteractions.clickLastBreadCrumb();
+            VNextBOPartsDetailsPanelInteractions.waitForStatusesCheckBoxToBeOpened(false);
+        }
     }
 
     public static void deleteServicesByName(String ...names) {
@@ -317,7 +382,7 @@ public class VNextBOPartsDetailsPanelSteps {
 
     public static List<String> getProviderDropDownOptions() {
         final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
-        Utils.clickElement(partsDetailsPanel.getProviderFieldArrow());
+        Utils.clickElement(partsDetailsPanel.getProviderFieldArrows().get(0));
         return Utils.getText(partsDetailsPanel.getPartsListBoxOptions());
     }
 
@@ -423,5 +488,61 @@ public class VNextBOPartsDetailsPanelSteps {
         final String eta = CustomDateProvider.getCurrentDateInFullFormat(true);
         VNextBOPartsDetailsPanelInteractions.setCurrentDateIntoTheETAField(order);
         VNextBOPartsDetailsPanelValidations.verifyETA(order, eta);
+    }
+
+    public static void openChangeStatusDialog() {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        WaitUtilsWebDriver.waitForVisibility(partsDetailsPanel.getChangeStatusButton());
+        Utils.clickElement(partsDetailsPanel.getChangeStatusButton());
+        WaitUtilsWebDriver.waitForVisibility(new VNextBOChangePartsDialog().getChangeStatusDialog());
+    }
+
+    public static List<String> getProvidersList() {
+        final VNextBOPartsDetailsPanel partsDetailsPanel = new VNextBOPartsDetailsPanel();
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(partsDetailsPanel.getPartProviderInputField());
+        return Utils.getText(partsDetailsPanel.getPartProviderInputField());
+    }
+
+    public static int getOrderOfPartWithProviderSet() {
+        final List<String> providersList = getProvidersList();
+        for (int i = 0; i < providersList.size(); i++) {
+            if (!providersList.get(i).isEmpty()) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static List<Integer> getOrderOfPartsWithProviderSet(String provider) {
+        final List<String> providersList = getProvidersList();
+        List<Integer> serviceOrders = new ArrayList<>();
+        for (int i = 0; i < providersList.size(); i++) {
+            if (providersList.get(i).equals(provider)) {
+                System.out.println("equals: " + providersList.get(i));
+                serviceOrders.add(i);
+            }
+        }
+        return serviceOrders;
+    }
+
+    public static List<Integer> getOrderOfPartsWithProviderSet() {
+        final List<String> providersList = getProvidersList();
+        List<Integer> serviceOrders = new ArrayList<>();
+        for (int i = 0; i < providersList.size(); i++) {
+            if (!providersList.get(i).isEmpty()) {
+                serviceOrders.add(i);
+            }
+        }
+        return serviceOrders;
+    }
+
+    public static int getOrderOfPartWithEmptyProviderField() {
+        final List<String> providersList = getProvidersList();
+        for (int i = 0; i < providersList.size(); i++) {
+            if (providersList.get(i).isEmpty()) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

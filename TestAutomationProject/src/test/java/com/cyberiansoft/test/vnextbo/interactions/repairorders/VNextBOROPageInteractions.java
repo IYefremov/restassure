@@ -105,7 +105,7 @@ public class VNextBOROPageInteractions {
 
     public static void selectSavedSearchDropDownOption(String option) {
         final List<WebElement> savedSearchDropDownOptions = new VNextBOROWebPage().getSavedSearchDropDownOptions();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(savedSearchDropDownOptions);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(savedSearchDropDownOptions);
         savedSearchDropDownOptions
                 .stream()
                 .filter(o -> o.getText().equals(option))
@@ -298,7 +298,7 @@ public class VNextBOROPageInteractions {
 
     public static List<String> getOrdersTargetDatesList() {
         final List<WebElement> ordersDateList = new VNextBOROWebPage().getTargetDateOrdersList();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersDateList);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(ordersDateList);
         return ordersDateList.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
@@ -462,7 +462,7 @@ public class VNextBOROPageInteractions {
     public static List<String> getOrdersPriorityValues() {
         final List<WebElement> priorityIconsList = new VNextBOROWebPage().getPriorityIconsList();
         List<String> priorityValuesList = new ArrayList<>();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(priorityIconsList);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(priorityIconsList);
         priorityIconsList.forEach(icon -> {
             if (icon.getAttribute("style").contains("red")) {
                 priorityValuesList.add(OrderPriority.HIGH.getValue());
@@ -520,7 +520,7 @@ public class VNextBOROPageInteractions {
 
     public static int getOrdersNumberOnPage() {
         final List<WebElement> ordersNumber = new VNextBOROWebPage().getWoNumbersList();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersNumber, 5);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(ordersNumber, 5);
         return ordersNumber.size();
     }
 

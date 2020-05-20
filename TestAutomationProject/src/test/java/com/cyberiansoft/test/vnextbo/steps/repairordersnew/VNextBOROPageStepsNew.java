@@ -330,10 +330,10 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
 
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         Utils.clickWithActions(ordersPage.getDepartmentsDropdown());
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughDepartmentsList(), 2);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(ordersPage.getOrdersAmountThroughDepartmentsList(), 2);
         if (ordersPage.getOrdersAmountThroughDepartmentsList().size() == 0) {
             Utils.clickWithActions(ordersPage.getDepartmentsDropdown());
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughDepartmentsList(), 2);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(ordersPage.getOrdersAmountThroughDepartmentsList(), 2);
         }
     }
 
@@ -342,10 +342,10 @@ public class VNextBOROPageStepsNew extends VNextBOBaseWebPageSteps {
         VNextBOROWebPageNew ordersPage = new VNextBOROWebPageNew();
         Utils.clickWithActions(ordersPage.getPhasesSwitcherTab());
         Utils.clickWithActions(ordersPage.getPhasesDropdown());
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughPhasesList(), 2);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(ordersPage.getOrdersAmountThroughPhasesList(), 2);
         if (ordersPage.getOrdersAmountThroughPhasesList().size() == 0) {
             Utils.clickWithActions(ordersPage.getPhasesDropdown());
-            WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(ordersPage.getOrdersAmountThroughPhasesList(), 2);
+            WaitUtilsWebDriver.waitForVisibilityOfAllOptions(ordersPage.getOrdersAmountThroughPhasesList(), 2);
         }
     }
 

@@ -78,6 +78,10 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.parts.management.order.details.td");
     }
 
+    public String getPMEnforceAddVendorInvoiceDocumentTD() {
+        return properties.getProperty("vnextbo.parts.management.enforce.add.vendor.invoice.document.td");
+    }
+
     public String getPMWithTurnedOnPunchOutAddOnTD() {
         return properties.getProperty("vnextbo.parts.management.with.turned.on.punchout.addon.td");
     }

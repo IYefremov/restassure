@@ -421,7 +421,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
     public static void verifyDepartmentsAllAmountsIsCorrect() {
 
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(new VNextBOROWebPageNew().getOrdersAmountThroughDepartmentsList(), 2);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOROWebPageNew().getOrdersAmountThroughDepartmentsList(), 2);
         List<String> ordersAmountsList = new VNextBOROWebPageNew().getOrdersAmountThroughDepartmentsList().stream().
                 map(WebElement::getText).collect(Collectors.toList());
         int ordersCalculatedAmount = 0;
@@ -435,7 +435,7 @@ public class VNextBOROWebPageValidationsNew extends VNextBOBaseWebPageValidation
 
     public static void verifyPhasesAllAmountsIsCorrect() {
 
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(new VNextBOROWebPageNew().getOrdersAmountThroughPhasesList(), 2);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(new VNextBOROWebPageNew().getOrdersAmountThroughPhasesList(), 2);
         List<String> ordersAmountsList = new VNextBOROWebPageNew().getOrdersAmountThroughPhasesList().stream().
                 map(WebElement::getText).collect(Collectors.toList());
         int ordersCalculatedAmount = 0;

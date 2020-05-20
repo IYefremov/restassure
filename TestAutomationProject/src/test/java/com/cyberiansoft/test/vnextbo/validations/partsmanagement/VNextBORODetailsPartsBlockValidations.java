@@ -13,7 +13,7 @@ public class VNextBORODetailsPartsBlockValidations {
     public static void verifyServicePartsFieldsAreNotChangeable(String partName) {
         final VNextBORODetailsPartsBlock detailsPartsBlock = new VNextBORODetailsPartsBlock();
         final List<WebElement> parts = detailsPartsBlock.getPartsByName(partName);
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(parts, 7);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(parts, 7);
 
         final boolean changeable = detailsPartsBlock.getPartFieldsByName(parts)
                                 .stream()

@@ -59,6 +59,6 @@ public class VNextBOPartDocumentsDialogValidations {
         verifyDate(order, BackOfficeUtils.getCurrentDate(true));
         verifyDueDate(order, BackOfficeUtils.getCurrentDate(true));
         verifyAmount(order, data.getAmount());
-        verifyAttachment(order, "sunrise.png");
+        verifyAttachment(order, data.getDisplayedAttachmentName());
     }
 }

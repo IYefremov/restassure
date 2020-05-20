@@ -86,6 +86,20 @@
             <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsStatusCheckBoxTests"/>
         </classes>
     </test>
+    <test name="Parts Management Order Details Actions Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMOrderDetailsActionsTestCases"/>
+        </classes>
+    </test>
+    <test name="Parts Management Enforce And Vendor Invoice Document Tests">
+        <parameter name="userName" value="test.automation1@getnada.com"/>
+        <parameter name="userPassword" value="test12345"/>
+        <classes>
+            <class name="com.cyberiansoft.test.vnextbo.testcases.partsmanagement.VNextBOPMEnforceAddVendorInvoiceDocumentTestCases"/>
+        </classes>
+    </test>
     <test name="Parts Management Order Details Parts Details Status Tests">
         <parameter name="userName" value="test.automation1@getnada.com"/>
         <parameter name="userPassword" value="test12345"/>

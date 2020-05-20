@@ -9,7 +9,7 @@ public class VNextBODashboardPanelSteps {
 
     public static void waitForDashboardToBeLoaded() {
         final VNextBODashboardPanel dashboardPanel = new VNextBODashboardPanel();
-        WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(dashboardPanel.getDashboardItems(), 7);
+        WaitUtilsWebDriver.waitForVisibilityOfAllOptions(dashboardPanel.getDashboardItems(), 7);
     }
 
     public static void applyFilter(String name) {

@@ -268,7 +268,7 @@ public class RepairLocationsWebPage extends WebPageWithPagination {
 			return wait.until((ExpectedCondition<Boolean>) driver -> {
                 final List<WebElement> elements = repairlocationstable.getWrappedElement()
                         .findElements(By.xpath(".//tr/td[text()='" + repairLocation + "']"));
-                WaitUtilsWebDriver.waitForVisibilityOfAllOptionsIgnoringException(elements);
+                WaitUtilsWebDriver.waitForVisibilityOfAllOptions(elements);
                 return elements.size() > 0;
             });
 		} catch (Exception ignored) {
