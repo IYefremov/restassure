@@ -19,6 +19,10 @@ public class GeneralQuestion implements IWebElement {
     private String clearButtonLocator = ".//*[@class='selected-answer-clear']";
     private String saveMultiAnswerQuestion = ".//div[contains(@class,'pply-multi-select-answers')]";
     private String cameraLocator = ".//*[contains(@class, 'add-image-from-camera')]";
+    private String selectDateLocator = ".//*[@name='Question.QuestionDate']";
+    private String selectTimeLocator = ".//*[@name='Question.QuestionTime']";
+    private String signatureLocator = ".//*[@class='handwriting-answer-placeholder']";
+    private String questionNotesIcon = ".//*[contains(@class,'selected-answer-notes ')]";
 
     public GeneralQuestion(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -67,5 +71,21 @@ public class GeneralQuestion implements IWebElement {
 
     public WebElement getQuestionCameraElement() {
         return rootElement.findElement(By.xpath(cameraLocator));
+    }
+
+    public WebElement getSelectDateElement() {
+        return this.rootElement.findElement(By.xpath(selectDateLocator));
+    }
+
+    public WebElement getSelectTimeElement() {
+        return this.rootElement.findElement(By.xpath(selectTimeLocator));
+    }
+
+    public WebElement getSignatureElement() {
+        return this.rootElement.findElement(By.xpath(signatureLocator));
+    }
+
+    public WebElement getQuestionNotesIcon() {
+        return this.rootElement.findElement(By.xpath(questionNotesIcon));
     }
 }

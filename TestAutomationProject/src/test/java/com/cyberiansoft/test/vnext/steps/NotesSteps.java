@@ -6,7 +6,6 @@ import com.cyberiansoft.test.vnext.screens.menuscreens.notes.NoteListMenuScreen;
 import com.cyberiansoft.test.vnext.screens.monitoring.VNextRepairOrderNoteScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
-import org.testng.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,13 +30,6 @@ public class NotesSteps {
         notesScreen.getClearNoteButton().click();
     }
 
-    public static void verifyNoteIsPresent(String noteText) {
-        VNextNotesScreen noteScreen = new VNextNotesScreen();
-        WaitUtils.elementShouldBeVisible(noteScreen.getRootElement(), true);
-        WaitUtils.waitUntilElementIsClickable(noteScreen.getNoteEditField());
-        Assert.assertEquals(noteScreen.getNoteEditField().getAttribute("value").replace("\n", " "), noteText.replace("\n", " "));
-    }
-
     public static void addQuickNote(String quickNoteText) {
         VNextNotesScreen notesScreen = new VNextNotesScreen();
 
@@ -52,26 +44,28 @@ public class NotesSteps {
         WaitUtils.click(notesScreen.getTakePictureButton());
     }
 
-    public static void verifyPicturesPresent() {
-        VNextNotesScreen notesScreen = new VNextNotesScreen();
-        WaitUtils.collectionSizeIsGreaterThan(notesScreen.getPictureElementList(), 0);
-    }
-
     public static void deleteAllPictures() {
         VNextNotesScreen notesScreen = new VNextNotesScreen();
-        By removePictureButton = By.xpath("//span[contains(@class,'button-delete')]");
+        By removePictureButton = By.xpath("//span[contains(@class,'slide-remove')]");
         //TODO: Probably will fail when deleteing multiple images as it modifies collection on which we using foreach
-        notesScreen.getPictureElementList().forEach(pictureElement -> {
-            pictureElement.click();
+        int picturesNumber = notesScreen.getPictureElementList().size();
+        notesScreen.getPictureElementList().get(0).click();
+        for (int i = 0; i < picturesNumber; i++) {
             WaitUtils.waitUntilElementIsClickable(removePictureButton);
             WaitUtils.click(removePictureButton);
             GeneralSteps.confirmDialog();
-        });
+        }
+        WaitUtils.elementShouldBeVisible(notesScreen.getRootElement(), true);
+        /*notesScreen.getPictureElementList().forEach(pictureElement -> {
+            WaitUtils.waitUntilElementIsClickable(removePictureButton);
+            WaitUtils.click(removePictureButton);
+            GeneralSteps.confirmDialog();
+        });*/
     }
 
     public static void deletePictures(int numberToDelete) {
         VNextNotesScreen notesScreen = new VNextNotesScreen();
-        By removePictureButton = By.xpath("//span[contains(@class,'button-delete')]");
+        By removePictureButton = By.xpath("//span[contains(@class,'slide-remove')]");
         WaitUtils.click(notesScreen.getPictureElement());
         for (int i = 0; i < numberToDelete; i++) {
             WaitUtils.waitUntilElementIsClickable(removePictureButton);
@@ -82,26 +76,10 @@ public class NotesSteps {
         notesScreen.clickScreenBackButton();
     }
 
-    public static void verifyNoPicturesPresent() {
-        VNextNotesScreen notesScreen = new VNextNotesScreen();
-        Assert.assertEquals(notesScreen.getPictureElementList().size(), 0);
-    }
-
-    public static void verifyNumberOfPicturesPresent(int expectedNumber) {
-        VNextNotesScreen notesScreen = new VNextNotesScreen();
-        Assert.assertEquals(notesScreen.getPictureElementList().size(), expectedNumber);
-    }
-
     public static void addRepairOrderNote() {
         NoteListMenuScreen noteListMenuScreen = new NoteListMenuScreen();
         WaitUtils.waitUntilElementIsClickable(noteListMenuScreen.getAddNewNoteButton());
         noteListMenuScreen.getAddNewNoteButton().click();
-    }
-
-    public static void verifyNotePresentInList(String noteText) {
-        NoteListMenuScreen noteListMenuScreen = new NoteListMenuScreen();
-        WaitUtils.collectionSizeIsGreaterThan(noteListMenuScreen.getNoteListElements(), 0);
-        Assert.assertNotNull(noteListMenuScreen.getNoteByText(noteText));
     }
 
     public static void setRepairOrderNoteText(String noteText) {

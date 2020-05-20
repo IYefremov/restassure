@@ -12,7 +12,10 @@ import com.cyberiansoft.test.driverutils.WebdriverInicializator;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.screens.*;
+import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
+import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
@@ -23,6 +26,7 @@ import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
+import com.cyberiansoft.test.vnext.validations.NotesValidations;
 import com.cyberiansoft.test.vnextbo.screens.VNexBOLeftMenuPanel;
 import com.cyberiansoft.test.vnextbo.screens.inspections.VNextBOInspectionsWebPage;
 import com.cyberiansoft.test.vnextbo.steps.login.VNextBOLoginSteps;
@@ -73,7 +77,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         serviceDetailsScreen.clickServiceDetailsDoneButton();
         SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
         ServiceDetailsScreenSteps.openServiceNotes();
-        NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
+        NotesValidations.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
 
         ScreenNavigationSteps.pressBackButton();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
@@ -110,7 +114,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceNameByIndex(1));
         ServiceDetailsScreenSteps.openServiceNotes();
-        NotesSteps.verifyNoteIsPresent(noteTextValid);
+        NotesValidations.verifyNoteIsPresent(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
         InspectionSteps.cancelInspection();
@@ -145,7 +149,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
 
         SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceNameByIndex(1));
         ServiceDetailsScreenSteps.openServiceNotes();
-        NotesSteps.verifyNoteIsPresent(notetext);
+        NotesValidations.verifyNoteIsPresent(notetext);
         ScreenNavigationSteps.pressBackButton();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
         InspectionSteps.cancelInspection();
@@ -235,7 +239,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickServiceNotesOption();
-        NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
+        NotesValidations.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
         ScreenNavigationSteps.pressBackButton();
         serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickServiceDetailsDoneButton();
@@ -269,7 +273,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         NotesSteps.setNoteText(noteText);
         NotesSteps.addQuickNote(quickNoteText1);
         NotesSteps.addQuickNote(quickNoteText2);
-        NotesSteps.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
+        NotesValidations.verifyNoteIsPresent(noteText + '\n' + quickNoteText1 + '\n' + quickNoteText2);
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
         serviceDetailsScreen.clickServiceDetailsDoneButton();
@@ -296,7 +300,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         notesScreen.setNoteText(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
         availableServicesScreen.clickInspectionNotesOption();
-        NotesSteps.verifyNoteIsPresent(noteTextValid);
+        NotesValidations.verifyNoteIsPresent(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -328,7 +332,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.clickInspectionNotesOption();
-        NotesSteps.verifyNoteIsPresent(noteTextValid);
+        NotesValidations.verifyNoteIsPresent(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -354,7 +358,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
         availableServicesScreen.clickInspectionNotesOption();
-        NotesSteps.verifyNoteIsPresent(noteTextValid);
+        NotesValidations.verifyNoteIsPresent(noteTextValid);
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -382,8 +386,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         BaseUtils.waitABit(2000);
         ScreenNavigationSteps.pressBackButton();
         availableServicesScreen.clickInspectionNotesOption();
-        NotesSteps.verifyNoteIsPresent(noteTextValid);
-        NotesSteps.verifyPicturesPresent();
+        NotesValidations.verifyNoteIsPresent(noteTextValid);
+        NotesValidations.verifyPicturesPresent();
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -416,8 +420,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         availableServicesScreen.clickInspectionNotesOption();
-        NotesSteps.verifyNoteIsPresent(noteTextValid);
-        NotesSteps.verifyPicturesPresent();
+        NotesValidations.verifyNoteIsPresent(noteTextValid);
+        NotesValidations.verifyPicturesPresent();
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
@@ -460,11 +464,11 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceData().getServiceName());
         ServiceDetailsScreenSteps.openServiceNotes();
         //notesScreen.getClearNoteButton().click();
-        NotesSteps.verifyNoteIsPresent("");
+        NotesValidations.verifyNoteIsPresent("");
         ScreenNavigationSteps.pressBackButton();
         VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         serviceDetailsScreen.clickServiceNotesOption();
-        NotesSteps.verifyNoteIsPresent("");
+        NotesValidations.verifyNoteIsPresent("");
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
         InspectionSteps.cancelInspection();
@@ -493,7 +497,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
             SelectedServicesScreenSteps.openServiceDetails(serviceAdd.getServiceName());
             ServiceDetailsScreenSteps.openServiceNotes();
             NotesSteps.addPhotoFromCamera();
-            NotesSteps.verifyPicturesPresent();
+            NotesValidations.verifyPicturesPresent();
             ScreenNavigationSteps.pressBackButton();
             VNextServiceDetailsScreen serviceDetailsScreen = new VNextServiceDetailsScreen();
             serviceDetailsScreen.clickServiceDetailsDoneButton();
@@ -542,7 +546,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
             vNextVehiclePartInfoPage.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
             VNextNotesScreen notesScreen = vNextVehiclePartInfoPage.clickMatrixServiceNotesOption();
             NotesSteps.addPhotoFromCamera();
-            NotesSteps.verifyPicturesPresent();
+            NotesValidations.verifyPicturesPresent();
             ScreenNavigationSteps.pressBackButton();
             ScreenNavigationSteps.pressBackButton();
             vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
