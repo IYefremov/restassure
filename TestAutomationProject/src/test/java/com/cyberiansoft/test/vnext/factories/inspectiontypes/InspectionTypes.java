@@ -14,6 +14,7 @@ public enum InspectionTypes {
     ROZSTALNOY_IT("Rozstalnoy_IT"),
     ROZSTALNOY_TEXT_QUESTIONS_IT("Roz_text_questions_IT"),
     WITH_QUESTIONS_NOT_REQUIRED("Insp with QF not required"),
+    AUTOTEST_QUESTIONS_FORMS("Autotest - Question forms"),
     WITH_QUESTIONS_ANSWER_SERVICES("Insp with QF answer service");
 
     private final String inspType;

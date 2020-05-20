@@ -64,6 +64,8 @@ public class IOSRegularBaseTestCase {
             deviceofficeurl = ReconProIOSStageInfo.getInstance().getBackOfficeStagingURL();
         else if (envType.equals(IOSReconproEnvironmentType.UAT))
             deviceofficeurl = ReconProIOSStageInfo.getInstance().getBackOfficeUATURL();
+        else if (envType.equals(IOSReconproEnvironmentType.QC4))
+            deviceofficeurl = ReconProIOSStageInfo.getInstance().getBackOfficeQC4URL();
 
         initTestUser(iOSInternalProjectConstants.USERSIMPLE_LOGIN, iOSInternalProjectConstants.USER_PASSWORD);
         DeviceRegistrator.getInstance().installAndRegisterDevice(browsertype, mobilePlatform, deviceofficeurl,

@@ -22,10 +22,7 @@ import com.cyberiansoft.test.vnext.steps.monitoring.RepairOrdersCommonFiltersPag
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.validations.InformationDialogValidations;
-import com.cyberiansoft.test.vnext.validations.MenuValidations;
-import com.cyberiansoft.test.vnext.validations.MonitorValidations;
-import com.cyberiansoft.test.vnext.validations.PhaseScreenValidations;
+import com.cyberiansoft.test.vnext.validations.*;
 import com.cyberiansoft.test.vnext.validations.monitor.RepairOrderInfoValidations;
 import com.cyberiansoft.test.vnext.validations.monitor.RepairOrdersCommonFiltersPageValidations;
 import org.json.simple.JSONObject;
@@ -147,12 +144,12 @@ public class VNextTeamMonitoringBaseCase extends BaseTestClass {
         NotesSteps.addRepairOrderNote();
         NotesSteps.addQuickNote(quickNotes);
         ScreenNavigationSteps.pressBackButton();
-        NotesSteps.verifyNotePresentInList(quickNotes);
+        NotesValidations.verifyNotePresentInList(quickNotes);
         ScreenNavigationSteps.pressBackButton();
 
         MonitorSteps.openItem(workOrderId);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
-        NotesSteps.verifyNotePresentInList(quickNotes);
+        NotesValidations.verifyNotePresentInList(quickNotes);
         ScreenNavigationSteps.pressBackButton();
         SearchSteps.searchByText("");
         ScreenNavigationSteps.pressBackButton();

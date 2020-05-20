@@ -73,7 +73,7 @@ public class ServiceRequestsListInteractions {
 	}
 
     public void clickAddSRButton() {
-        Utils.clickElement(srListPage.getAddServiceRequestButton());
+        srListPage.getAddServiceRequestButton().click();
         waitForLoading();
         WaitUtilsWebDriver.waitForInvisibility(srListPage.getEditServiceRequestPanelImage());
     }
