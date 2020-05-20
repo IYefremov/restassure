@@ -60,6 +60,7 @@ public class DatePicker implements IWebElement {
             ((JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver())
                     .executeScript("arguments[0].click();", yearElement);
         }
+        BaseUtils.waitABit(500);
         ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(closePickerButton).click();
         BaseUtils.waitABit(500);
     }

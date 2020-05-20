@@ -1,11 +1,10 @@
 package com.cyberiansoft.test.vnext.steps.questionform;
 
-import com.cyberiansoft.test.dataclasses.LogicalQuestionData;
-import com.cyberiansoft.test.dataclasses.QuestionsData;
-import com.cyberiansoft.test.dataclasses.TextQuestionData;
+import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.QuestionScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.questions.QuestionScreen;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 
 public class QuestionFormSteps {
 
@@ -48,9 +47,46 @@ public class QuestionFormSteps {
         QuestionScreenInteractions.clickQuestionCamera(questionData.getQuestionName());
     }
 
+    public static void answerImageQuestion(ImageQuestion imageQuestion) {
+        if (imageQuestion.getNumberOFImages() > 0) {
+            for (int i = 0; i < imageQuestion.getNumberOFImages(); i++)
+                QuestionScreenInteractions.clickQuestionCamera(imageQuestion.getQuestionName());
+        }
+        else
+            QuestionScreenInteractions.clickQuestionCamera(imageQuestion.getQuestionName());
+    }
+
     public static void clearSelectedQuestion(QuestionsData questionData) {
         QuestionScreen questionScreen = new QuestionScreen();
         questionScreen.getGeneralQuestionByText(questionData.getQuestionName()).clearQuestion();
     }
 
+    public static void answerDateQuestion(DatePickerQuestion datePickerQuestion, int month, int day, int year) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        WaitUtils.waitUntilElementIsClickable(questionScreen.getNotAnsweredQuestionByText(datePickerQuestion.getQuestionName()).getRootElement());
+        questionScreen.getNotAnsweredQuestionByText(datePickerQuestion.getQuestionName()).getSelectDateElement().click();
+        questionScreen.selectDatePickerValue(month, day, year);
+        questionScreen.getNotAnsweredQuestionByText(datePickerQuestion.getQuestionName()).getQuestionNameElement().click();
+    }
+
+    public static void answerTimeQuestion(TimePickerQuestion timePickerQuestion, int hours, int minutes, int seconds) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        WaitUtils.waitUntilElementIsClickable(questionScreen.getNotAnsweredQuestionByText(timePickerQuestion.getQuestionName()).getRootElement());
+        questionScreen.getNotAnsweredQuestionByText(timePickerQuestion.getQuestionName()).getSelectTimeElement().click();
+        questionScreen.selectDatePickerValue(hours, minutes, seconds);
+        questionScreen.getNotAnsweredQuestionByText(timePickerQuestion.getQuestionName()).getQuestionNameElement().click();
+    }
+
+    public static void answerSignatureQuestion(SignatureQuestion signatureQuestion) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        WaitUtils.waitUntilElementIsClickable(questionScreen.getNotAnsweredQuestionByText(signatureQuestion.getQuestionName()).getRootElement());
+        questionScreen.getNotAnsweredQuestionByText(signatureQuestion.getQuestionName()).getSignatureElement().click();
+        questionScreen.drawSignature();
+    }
+
+    public static void clickQuestionNotes(String questionName) {
+        QuestionScreen questionScreen = new QuestionScreen();
+        WaitUtils.waitUntilElementIsClickable(questionScreen.getAnsweredQuestionByText(questionName).getRootElement());
+        questionScreen.getAnsweredQuestionByText(questionName).getQuestionNotesIcon().click();
+    }
 }
