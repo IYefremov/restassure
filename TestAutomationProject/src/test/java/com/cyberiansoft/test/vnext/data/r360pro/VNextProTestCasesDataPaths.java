@@ -222,4 +222,8 @@ public class VNextProTestCasesDataPaths {
     public String getMonitoringFocusModeButtonTestCasesDataPath() {
         return props.getProperty("monitoring.focusmode.button");
     }
+
+    public String getServiceRequestsTestCasesDataPath() {
+        return props.getProperty("service.requests");
+    }
 }

@@ -7,6 +7,7 @@ public enum MenuItems {
     DELETE("Delete"),
     SAVE_INPSECTION("Save Inspection"),
     CANCEL_INPSECTION("Cancel Inspection"),
+    CREATE_INPSECTION("Create Inspection"),
     CANCEL_INVOICE("Cancel Invoice"),
     EMAIL_INPSECTION("Email Inspection"),
     EMAIL_INVOICE("Email Invoice"),

@@ -6,6 +6,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnext.screens.commonobjects.VNextTopScreenPanel;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import org.openqa.selenium.Keys;
 
 public class TopScreenPanelSteps {
 
@@ -49,6 +50,7 @@ public class TopScreenPanelSteps {
         WaitUtils.waitUntilElementIsClickable(topScreenPanel.getSearchField());
         Utils.clickElement(topScreenPanel.getSearchField());
         topScreenPanel.getSearchField().sendKeys(searchText);
+        topScreenPanel.getSearchField().sendKeys(Keys.ENTER);
         BaseUtils.waitABit(1000);
     }
 
@@ -58,5 +60,12 @@ public class TopScreenPanelSteps {
         if (new VNextTopScreenPanel().getClearSearchIcon().isDisplayed())
             TopScreenPanelSteps.clearSearchField();
         TopScreenPanelSteps.fillSearchField(searchText);
+    }
+
+    public static void resetSearch() {
+
+        openSearchPanel();
+        clearSearchField();
+        cancelSearch();
     }
 }

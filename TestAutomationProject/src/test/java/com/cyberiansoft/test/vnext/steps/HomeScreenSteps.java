@@ -95,6 +95,16 @@ public class HomeScreenSteps {
         WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
     }
 
+    public static void clickServiceRequests() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+
+        JavascriptExecutor je = (JavascriptExecutor) ChromeDriverProvider.INSTANCE.getMobileChromeDriver();
+        je.executeScript("arguments[0].scrollIntoView(true);", homeScreen.getServiceRequests());
+        WaitUtils.click(homeScreen.getServiceRequests());
+        BaseUtils.waitABit(500);
+        WaitUtils.waitUntilElementInvisible(By.xpath("//*[@data-autotests-id='preloader']"));
+    }
+
     public static void openMonitor() {
         clickMonitor();
         VNextInformationDialog informationDialog = new VNextInformationDialog();
@@ -104,6 +114,12 @@ public class HomeScreenSteps {
             SearchSteps.fillTextSearch("");
             SearchSteps.cancelSearch();
         }
+    }
+
+    public static void openServiceRequests() {
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        WaitUtils.waitUntilElementIsClickable(homeScreen.getRootElement());
+        clickServiceRequests();
     }
 
     public static void openCustomers() {
