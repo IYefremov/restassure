@@ -1,0 +1,59 @@
+{
+  "verifySRIsFoundByFirstCustomerName": [
+    {
+      "rowID": "verifySRIsFoundByFirstCustomerName.01",
+      "description": "Test Case 125686:Verify search will find Service Requests by \"First Customer name\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125686"
+        }
+      ],
+      "searchData": {
+        "customer": "abracadabra",
+        "hasThisText": "EMotorFN"
+      }
+    }
+  ],
+  "verifySRIsFoundByLastCustomerName": [
+    {
+      "rowID": "verifySRIsFoundByLastCustomerName.01",
+      "description": "Test Case 125687:Verify search will find Service Requests by \"Last Customer name\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125687"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "EMotorLN"
+      }
+    }
+  ],
+  "verifySRIsFoundByCompanyName": [
+    {
+      "rowID": "verifySRIsFoundByCompanyName.01",
+      "description": "Test Case 125688:Verify search will find Service Requests by \"Company name\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125688"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "E MOTOR CARS"
+      }
+    }
+  ],
+  "verifySRIsFoundByCustomerEmail": [
+    {
+      "rowID": "verifySRIsFoundByCustomerEmail.01",
+      "description": "Test Case 125689:Verify search will find Service Requests by \"Company email\"",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "125689"
+        }
+      ],
+      "searchData": {
+        "hasThisText": "emotorcars@gmail.com"
+      }
+    }
+  ]
+}

@@ -236,6 +236,10 @@ public class WaitUtilsWebDriver {
         }
     }
 
+    public static boolean waitForAttributeNotToContain(WebElement element, String attribute, String value) {
+        return waitForAttributeNotToContain(element, attribute, value, 5);
+    }
+
     public static boolean waitForAttributeToContainIgnoringException(WebElement element, String attribute, String value) {
         try {
             return waitForAttributeToContain(element, attribute, value);

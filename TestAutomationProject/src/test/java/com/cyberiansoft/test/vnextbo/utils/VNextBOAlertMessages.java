@@ -11,4 +11,5 @@ public class VNextBOAlertMessages {
     public static String NO_PART_PROVIDER = "No part provider has been configured for the given repair location or area";
     public static String NO_STATUS_SELECTED = "Please select status";
     public static String CANNOT_CHANGE_STATUS_TO_RECEIVED_WITHOUT_PROVIDER = "You cannot change the status to 'Received' if the provider is not specified";
+    public static String NO_RECORDS_FOUND = "No records found. Please refine search criteria ...";
 }

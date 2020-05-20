@@ -74,6 +74,10 @@ public class VNextBOTestCasesDataPaths {
         return properties.getProperty("vnextbo.quick.notes.td");
     }
 
+    public String getSRSearchTD() {
+        return properties.getProperty("vnextbo.service.requests.search.td");
+    }
+
     public String getPMOrderDetailsTD() {
         return properties.getProperty("vnextbo.parts.management.order.details.td");
     }

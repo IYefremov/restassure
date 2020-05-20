@@ -18,4 +18,13 @@ public class BOClientsDialog extends BODialog {
 
     @FindBy(id="ctl00_ctl00_Content_Main_ctl05_ctl01_Card_comboAreas_DropDown")
     private DropDown defaultAreaDd;
+
+    @FindBy(id="ctl00_ctl00_Content_Main_ctl05_ctl01_Card_tbFirstName")
+    private WebElement firstName;
+
+    @FindBy(id="ctl00_ctl00_Content_Main_ctl05_ctl01_Card_tbLastName")
+    private WebElement lastName;
+
+    @FindBy(id="ctl00_ctl00_Content_Main_ctl05_ctl01_Card_tbEmail")
+    private WebElement email;
 }

@@ -28,6 +28,11 @@ public class VNextBOLeftMenuInteractions {
         VNextBOPartsManagementWebPageSteps.waitUntilPartsManagementPageIsLoaded();
     }
 
+    public static void selectServiceRequestsMenu() {
+        selectMenuItem(MainMenuItems.OPERATIONS.getMenu(), "Service Requests");
+        VNextBOPartsManagementWebPageSteps.waitUntilServiceRequestsPageIsLoaded();
+    }
+
     public static void selectAddOnsMenu() {
         openMainMenu(MainMenuItems.ADD_ONS.getMenu());
         VNextBOAddOnsPageSteps.waitForAddOnsPageToBeLoaded();
