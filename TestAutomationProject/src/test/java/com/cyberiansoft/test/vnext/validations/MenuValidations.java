@@ -16,7 +16,6 @@ public class MenuValidations {
             Assert.assertTrue(MenuScreenInteractions.getMenuItem(menuItem).isDisplayed(),
                     menuItem.getMenuItemDataName() + "menu item hasn't been displayed");
         }
-            //WaitUtils.elementShouldBeVisible(MenuScreenInteractions.getMenuItem(menuItem), shouldBeVisible);
         else
             Assert.assertNull(MenuScreenInteractions.getMenuItem(menuItem));
     }
