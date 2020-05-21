@@ -8,4 +8,7 @@ public class VNextBOSRData {
 
     @JsonProperty("searchData")
     private VNextBOSRSearchData searchData;
+
+    @JsonProperty("infoText")
+    private String infoText;
 }
