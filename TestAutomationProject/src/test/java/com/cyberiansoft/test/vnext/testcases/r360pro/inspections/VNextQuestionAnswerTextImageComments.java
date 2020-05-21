@@ -126,4 +126,52 @@ public class VNextQuestionAnswerTextImageComments extends BaseTestClass {
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
     }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanChangeCommentForQuestion(String rowID,
+                                                          String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String notesText = "Test 1";
+        final String newNotesText = "Test New";
+        int numberOfPictureNotes = 2;
+        int deletePictureNotes = 1;
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOTEST_QUESTIONS_FORMS);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS, 2);
+
+        List<QuestionsData> questionsData = inspectionData.getQuestionScreenData().getQuestionsData();
+        questionsData.forEach(question -> {
+            QuestionFormSteps.clickQuestionNotes(question.getQuestionName());
+            NotesSteps.setNoteText(notesText);
+            NotesSteps.addPhotoFromCamera();
+            NotesSteps.addPhotoFromCamera();
+            TopScreenPanelSteps.goToThePreviousScreen();
+        });
+
+        inspectionData.getQuestionScreenData().getQuestionsData().forEach(questionData -> {
+            QuestionFormSteps.clickQuestionNotes(questionData.getQuestionName());
+            NotesValidations.verifyNoteIsPresent(notesText);
+            NotesValidations.verifyNumberOfPicturesPresent(numberOfPictureNotes);
+            NotesSteps.deletePictures(deletePictureNotes);
+            NotesSteps.tapNoteTextAndClear();
+            NotesSteps.setNoteText(newNotesText);
+            TopScreenPanelSteps.goToThePreviousScreen();
+
+            final String inspectionId = InspectionSteps.saveInspectionAsDraft();
+            InspectionSteps.openInspectionToEdit(inspectionId);
+            WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS, 2);
+            QuestionFormSteps.clickQuestionNotes(questionData.getQuestionName());
+            NotesValidations.verifyNoteIsPresent(newNotesText);
+            NotesValidations.verifyNumberOfPicturesPresent(deletePictureNotes);
+            TopScreenPanelSteps.goToThePreviousScreen();
+            InspectionSteps.saveInspectionAsDraft();
+            InspectionSteps.openInspectionToEdit(inspectionId);
+            WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS, 2);
+        });
+
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
 }
