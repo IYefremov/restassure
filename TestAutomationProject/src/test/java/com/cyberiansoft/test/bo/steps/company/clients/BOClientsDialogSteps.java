@@ -17,6 +17,18 @@ public class BOClientsDialogSteps {
         return Utils.getInputFieldValue(new BOClientsDialog().getDefaultAreaCmb().getWrappedElement());
     }
 
+    public static String getFirstName() {
+        return Utils.getInputFieldValue(new BOClientsDialog().getFirstName());
+    }
+
+    public static String getLastName() {
+        return Utils.getInputFieldValue(new BOClientsDialog().getLastName());
+    }
+
+    public static String getEmail() {
+        return Utils.getInputFieldValue(new BOClientsDialog().getEmail());
+    }
+
     public static void submit() {
         final BOClientsDialog clientsDialog = new BOClientsDialog();
         Utils.clickElement(clientsDialog.getOkButton());

@@ -5,8 +5,10 @@ import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsDetailsPanel;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.VNextBOPartsManagementWebPage;
 import com.cyberiansoft.test.vnextbo.screens.partsmanagement.modaldialogs.VNextBOAdvancedSearchDialog;
+import com.cyberiansoft.test.vnextbo.screens.servicerequests.VNextBOSRPage;
 import com.cyberiansoft.test.vnextbo.steps.VNextBOBaseWebPageSteps;
 import com.cyberiansoft.test.vnextbo.steps.commonobjects.VNextBOSearchPanelSteps;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 
 public class VNextBOPartsManagementWebPageSteps extends VNextBOBaseWebPageSteps {
 
@@ -51,5 +53,13 @@ public class VNextBOPartsManagementWebPageSteps extends VNextBOBaseWebPageSteps 
         WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsManagementWebPage().getPartsOrdersList(), true, 2);
         WaitUtilsWebDriver.elementShouldBeVisible(new VNextBOPartsDetailsPanel().getPartsDetailsTable(), true, 2);
         WaitUtilsWebDriver.waitForSpinnerToDisappear(4);
+    }
+
+    public static void waitUntilServiceRequestsPageIsLoaded() {
+        WaitUtilsWebDriver.waitUntilPageIsLoadedWithJs();
+        WaitUtilsWebDriver.waitForPendingRequestsToComplete();
+        WaitUtilsWebDriver.getWebDriverWait(4).until((ExpectedCondition<Boolean>) driver ->
+                WaitUtilsWebDriver.waitForAttributeNotToContain(
+                        new VNextBOSRPage().getServiceRequestsView(), "class", "hidden"));
     }
 }

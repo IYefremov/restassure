@@ -17,6 +17,9 @@ public class VNextBOBaseWebPage {
     @FindBy(id = "app-progress-spinner")
     public static WebElement loadingProcess;
 
+    @FindBy(xpath = "//img[@alt='spinner']")
+    public WebElement reactSpinner;
+
     @FindBy(xpath = "//body[contains(@class, 'body')]")
     public WebElement bodyElement;
 
