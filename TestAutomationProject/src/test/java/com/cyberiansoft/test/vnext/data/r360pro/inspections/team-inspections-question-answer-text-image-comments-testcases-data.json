@@ -82,5 +82,27 @@
         ]
       }
     }
+  ],
+  "testVerifyUserCanChangeCommentForQuestion": [
+    {
+      "rowID": "testVerifyUserCanChangeCommentForQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "110982",
+          "testCaseTitle": "Verify user can change comment for question"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Traffic-light"
+          },
+          {
+            "questionName": "Logical Y/N"
+          }
+        ]
+      }
+    }
   ]
 }

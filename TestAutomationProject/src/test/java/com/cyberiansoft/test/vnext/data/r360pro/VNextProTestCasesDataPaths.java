@@ -226,4 +226,8 @@ public class VNextProTestCasesDataPaths {
     public String getQuestionAnswerTextImageCommentsTestCasesDataPath() {
         return props.getProperty("question.testimage.comments");
     }
+
+    public String getServiceRequestsTestCasesDataPath() {
+        return props.getProperty("service.requests");
+    }
 }

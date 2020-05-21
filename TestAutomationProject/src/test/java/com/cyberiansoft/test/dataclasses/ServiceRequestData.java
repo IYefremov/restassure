@@ -13,6 +13,9 @@ public class ServiceRequestData {
     @JsonProperty("serviceRequestType")
     String serviceRequestType;
 
+    @JsonProperty("serviceRequestNumber")
+    String serviceRequestNumber;
+
     @JsonProperty("wholesailCustomer")
     WholesailCustomer wholesailCustomer;
 

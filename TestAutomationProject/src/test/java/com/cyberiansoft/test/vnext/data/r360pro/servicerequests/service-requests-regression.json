@@ -1,0 +1,23 @@
+{
+  "testVerifyUserCanCreateInspectionFromServiceRequest": [
+    {
+      "rowID": "testVerifyUserCanCreateInspectionFromServiceRequest.01",
+      "description": "Test case 109069: R360Client - Services Request - Create Inspection from SR",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "109069",
+          "testCaseTitle": "R360Client - Services Request - Create Inspection from SR"
+        }
+      ],
+      "serviceRequestNumber": "R-00056548",
+      "vihicleInfo": {
+        "vinNumber": "2C4RDGBG7KR538962",
+        "vehicleMake": "Mercedes-Benz",
+        "vehicleModel": "B-Class",
+        "vehicleYear": "1999",
+        "stockNumber": "017758",
+        "roNumber": "NCN28380"
+      }
+    }
+  ]
+}

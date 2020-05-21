@@ -11,8 +11,11 @@ public class MenuValidations {
     public static void menuItemShouldBeVisible(MenuItems menuItem, Boolean shouldBeVisible) {
         GeneralMenuScreen repairOrderMenuScreen = new GeneralMenuScreen();
         WaitUtils.collectionSizeIsGreaterThan(repairOrderMenuScreen.getMenuItems(), 1);
-        if (shouldBeVisible)
-            WaitUtils.elementShouldBeVisible(MenuScreenInteractions.getMenuItem(menuItem), shouldBeVisible);
+        if (shouldBeVisible) {
+            WaitUtils.getGeneralFluentWait().until(__ -> MenuScreenInteractions.getMenuItem(menuItem).isDisplayed());
+            Assert.assertTrue(MenuScreenInteractions.getMenuItem(menuItem).isDisplayed(),
+                    menuItem.getMenuItemDataName() + "menu item hasn't been displayed");
+        }
         else
             Assert.assertNull(MenuScreenInteractions.getMenuItem(menuItem));
     }
@@ -28,6 +31,11 @@ public class MenuValidations {
             Assert.assertEquals((boolean) MenuScreenInteractions.getMenuItem(menuItem).getAttribute("class").contains("disabled-action"), !shouldBeVisible);
         }
 
+    }
+
+    public static void verifyMenuItemIsVisible(String menuItem) {
+
+        Assert.assertTrue(MenuScreenInteractions.getMenuItem(menuItem).isDisplayed(), menuItem + " Menu item hasn't been displayed");
     }
 
     public static void verifyMenuScreenIsOpened() {
