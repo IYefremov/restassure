@@ -96,7 +96,7 @@ public class BaseTestClass {
             VNextInformationDialog informationDialog = new VNextInformationDialog(chromeWebDriver);
 
             //GeneralSteps.skipGuide();
-            editionsScreen.selectEdition("ReconPro Starter");
+            editionsScreen.selectEdition("ReconPro");
             environmentSelectionScreen.selectEnvironment(environmentType);
             verificationScreen.setDeviceRegistrationCode(regCode);
             verificationScreen.clickVerifyButton();
