@@ -19,8 +19,8 @@ import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InformationDialogValidations;
-import com.cyberiansoft.test.vnext.validations.InvoicesScreenValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
+import com.cyberiansoft.test.vnext.validations.invoices.InvoicesScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -38,7 +38,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
     public void settingDown() {
     }
 
-    public  String createInvoice(WorkOrderData workOrderData, InvoiceData invoiceData) {
+    public String createInvoice(WorkOrderData workOrderData, InvoiceData invoiceData) {
         HomeScreenSteps.openCreateTeamWorkOrder();
         WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
@@ -51,7 +51,7 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayTeamInvoice(String rowID, String description, JSONObject testData) {
 
 
@@ -74,9 +74,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyYourCardWasDeclinedOnPayTeamInvoiceWith4000000000000002(String rowID,
-                                                                                          String description, JSONObject testData) {
+                                                                                  String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -98,9 +98,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyYourCardsSecurityCodeIsIncorrectOnPayTeamInvoiceWith4000000000000127(String rowID,
-                                                                                  String description, JSONObject testData) {
+                                                                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -123,9 +123,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPayTeamInvoiceAfterCorrectingValidationErrors(String rowID,
-                                                                                               String description, JSONObject testData) {
+                                                                        String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -150,9 +150,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPayTeamInvoiceWithValidVisaCard(String rowID,
-                                                                        String description, JSONObject testData) {
+                                                          String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -173,9 +173,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserSeePOROPaymentMethodIfPOROMethodEqualsON(String rowID,
-                                                                                          String description, JSONObject testData) {
+                                                                       String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -187,9 +187,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserSeePOROPaymentActionForPaidInvoices(String rowID,
-                                                          String description, JSONObject testData) {
+                                                                  String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -213,9 +213,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserSeePOROPaymentActionForNotFullyPaidInvoice(String rowID,
-                                                                  String description, JSONObject testData) {
+                                                                         String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String payAmount = "8";
@@ -235,9 +235,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPaymentPOROIsEqualToInvoicePONumber(String rowID,
-                                                                         String description, JSONObject testData) {
+                                                              String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -252,9 +252,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPOROFieldIsRequired(String rowID,
-                                                              String description, JSONObject testData) {
+                                              String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String payPOROValue = "";
@@ -273,9 +273,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyNotesFieldIsOptionalForPOROPayment(String rowID,
-                                              String description, JSONObject testData) {
+                                                             String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -290,9 +290,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanGoBackToInvoiceListWithoutSavePayment(String rowID,
-                                                             String description, JSONObject testData) {
+                                                                       String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -315,9 +315,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyEnteredPOOnPOROPaymentScreenIsSavedForInvoice(String rowID,
-                                                                       String description, JSONObject testData) {
+                                                                        String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -339,9 +339,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCantSeePaymentTypePOROForInvoiceIfAmountIsZero(String rowID,
-                                                                        String description, JSONObject testData) {
+                                                                             String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String zeroPrice = "0";
@@ -363,9 +363,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserSeeCashCheckPaymentMethodIfCashCheckMethodEqualsON(String rowID,
-                                                                         String description, JSONObject testData) {
+                                                                                 String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -378,9 +378,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCantSeeCashCheckPaymentActionForPaidInvoices(String rowID,
-                                                                         String description, JSONObject testData) {
+                                                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -397,9 +397,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserSeeCashCheckPaymentActionForNotFullyPaidInvoice(String rowID,
-                                                                           String description, JSONObject testData) {
+                                                                              String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String payAmount = "8";
@@ -419,9 +419,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanGoBackFromCachCheckScreenToInvoiceListWithoutSavePayment(String rowID,
-                                                                              String description, JSONObject testData) {
+                                                                                          String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -437,9 +437,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
     }
 
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyAmountFieldIsRequiredForCashCheckMethod(String rowID,
-                                                                                          String description, JSONObject testData) {
+                                                                  String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -457,9 +457,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyNotesFieldIsOptionalForCashCheckType(String rowID,
-                                                                 String description, JSONObject testData) {
+                                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String paymentCheckNumber = "0123456789";
@@ -480,9 +480,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyCheckFieldIsOptionalForCashCheckMethod(String rowID,
-                                                                  String description, JSONObject testData) {
+                                                                 String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -503,15 +503,15 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPaymentAmountIsUpdatedAfterPartPaymentUsingCashCheckMethod(String rowID,
-                                                                 String description, JSONObject testData) {
+                                                                                     String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String payAmount = "5";
         final String paymentCheckNumber = "100";
         final String paymentNotes = "PaymentNotes";
-        final String paymentTotal= "4.00";
+        final String paymentTotal = "4.00";
 
         final String invoiceNumber = createInvoice(testCaseData.getWorkOrderData(), testCaseData.getInvoiceData());
         InvoiceSteps.openMenu(invoiceNumber);
@@ -538,9 +538,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanPayOneInvoiceUsingCCAndCashCheckPaymentMethod(String rowID,
-                                                                                     String description, JSONObject testData) {
+                                                                               String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String payAmount = "5";
@@ -575,9 +575,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanPayInvoiceUsingCashCheckAndPOROPaymentMethod(String rowID,
-                                                                               String description, JSONObject testData) {
+                                                                              String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String payAmount = "5";
@@ -605,9 +605,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCantPayAmountLessThen0UsingCashCheckMethod(String rowID,
-                                                                              String description, JSONObject testData) {
+                                                                         String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         final String payAmount = "-5";
@@ -631,9 +631,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyErrorMessageIsDisplayedIfCardInfoIsNotPopulatedOnPayMyInvoice(String rowID,
-                                                                                          String description, JSONObject testData) {
+                                                                                        String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -654,9 +654,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyYourCardWasDeclinedOnPayInvoiceWith4000000000000002(String rowID,
-                                                                                  String description, JSONObject testData) {
+                                                                              String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -678,9 +678,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyYourCardsSecurityCodeIsIncorrectOnPayInvoiceWith4000000000000127(String rowID,
-                                                                                               String description, JSONObject testData) {
+                                                                                           String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -702,9 +702,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPayInvoiceAfterCorrectingValidationErrors(String rowID,
-                                                                        String description, JSONObject testData) {
+                                                                    String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -730,9 +730,9 @@ public class VNextPayInvoicesTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyPayInvoiceWithValidVisaCard(String rowID,
-                                                          String description, JSONObject testData) {
+                                                      String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 

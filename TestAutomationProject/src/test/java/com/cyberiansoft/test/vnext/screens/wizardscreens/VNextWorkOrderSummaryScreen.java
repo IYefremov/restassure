@@ -9,15 +9,15 @@ import org.openqa.selenium.support.PageFactory;
 
 @Getter
 public class VNextWorkOrderSummaryScreen extends VNextBaseWizardScreen {
-	
-	@FindBy(xpath="//div[@data-page='summary']")
-	private WebElement wosummaryscreen;
-	
-	@FindBy(xpath="//*[@action='auto-invoice']")
-	private WebElement autoInvoiceCreateoption;
 
-	public VNextWorkOrderSummaryScreen() {
-		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
-	}
+    @FindBy(xpath = "//div[@data-page='summary']")
+    private WebElement woSummaryScreen;
+
+    @FindBy(xpath = "//*[@action='auto-invoice']")
+    private WebElement autoInvoiceCreateOption;
+
+    public VNextWorkOrderSummaryScreen() {
+        PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
+    }
 
 }

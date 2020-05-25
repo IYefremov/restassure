@@ -5,8 +5,8 @@ import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextWorkOrderSummarySc
 public class WorkOrderSummarySteps {
 
     public static void createInvoiceOptionAndSaveWO() {
-        VNextWorkOrderSummaryScreen  workOrderSummaryScreen = new VNextWorkOrderSummaryScreen();
-        workOrderSummaryScreen.getAutoInvoiceCreateoption().click();
+        VNextWorkOrderSummaryScreen workOrderSummaryScreen = new VNextWorkOrderSummaryScreen();
+        workOrderSummaryScreen.getAutoInvoiceCreateOption().click();
         WizardScreenSteps.saveAction();
     }
 }

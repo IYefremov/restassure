@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
 
     @FindBy(xpath = "//div[contains(@data-page,'list')]")
-    private WebElement servicesscreen;
+    private WebElement servicesScreen;
 
     @FindBy(xpath = "//div[@class='notifier']")
     private WebElement notificationPopup;
@@ -28,9 +28,9 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     }
 
     public void switchToAvalableServicesView() {
-        WaitUtils.waitUntilElementIsClickable(servicesscreen.findElement(By.xpath("//*[contains(@class,'services-list') and @data-view-mode]")));
+        WaitUtils.waitUntilElementIsClickable(servicesScreen.findElement(By.xpath(".//*[@action='available']")));
         WaitUtils.getGeneralFluentWait().until(driver -> {
-            tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
+            tap(servicesScreen.findElement(By.xpath(".//*[@action='available']")));
             return true;
         });
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);

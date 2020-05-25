@@ -15,10 +15,10 @@ import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
-import com.cyberiansoft.test.vnext.validations.InvoicesScreenValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import com.cyberiansoft.test.vnext.validations.WorkOrdersScreenValidations;
 import com.cyberiansoft.test.vnext.validations.customers.CustomersScreenValidation;
+import com.cyberiansoft.test.vnext.validations.invoices.InvoicesScreenValidations;
 import com.cyberiansoft.test.vnextbo.steps.users.CustomerServiceSteps;
 import org.json.simple.JSONObject;
 import org.testng.annotations.AfterClass;
@@ -47,9 +47,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
     public void settingDown() {
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanChangeCustomerIfAllowClientChangingEqualsON(String rowID,
-                                                                                          String description, JSONObject testData) {
+                                                                             String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
@@ -63,9 +63,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCantChangeCustomerIfAllowClientChangingEqualsOFF(String rowID,
-                                                                             String description, JSONObject testData) {
+                                                                               String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
@@ -80,9 +80,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyIfChangedCustomerIsSavedAfterEditWO(String rowID,
-                                                                             String description, JSONObject testData) {
+                                                              String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
@@ -94,7 +94,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         final String woNumber = WorkOrderSteps.saveWorkOrderAsDraft();
         WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
         WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
-        BaseUtils.waitABit(1000*30);
+        BaseUtils.waitABit(1000 * 30);
         WorkOrderSteps.openMenu(woNumber);
         MenuSteps.selectMenuItem(MenuItems.EDIT);
         //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
@@ -106,9 +106,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCantCreateNewCustomerOnChangeCustomerScreen(String rowID,
-                                                                             String description, JSONObject testData) {
+                                                                          String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
@@ -125,9 +125,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanChangeRetailCustomerToWholesaleForWO(String rowID,
-                                                                             String description, JSONObject testData) throws IOException {
+                                                                      String description, JSONObject testData) throws IOException {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         WholesailCustomer testWholesaleCustomer = JSonDataParser.getTestDataFromJson(new File("src/test/java/com/cyberiansoft/test/vnext/data/test-wholesail-customer.json"), WholesailCustomer.class);
@@ -146,9 +146,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanSelectCustomerUsingSearch(String rowID,
-                                                                      String description, JSONObject testData) {
+                                                           String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         HomeScreenSteps.openCreateMyWorkOrder();
@@ -162,9 +162,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyInvoiceCreatedWithChangedCustomer(String rowID,
-                                                           String description, JSONObject testData) {
+                                                            String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -185,9 +185,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanChangeCustomerForTeamWO(String rowID,
-                                                            String description, JSONObject testData) {
+                                                         String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
@@ -201,7 +201,7 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         WorkOrderSteps.changeCustomer(woNumber, testCustomer2);
 
         ScreenNavigationSteps.pressBackButton();
-        BaseUtils.waitABit(30*1000);
+        BaseUtils.waitABit(30 * 1000);
         HomeScreenSteps.openWorkOrders();
         WorkOrdersScreenValidations.validateWorkOrderCustomerValue(woNumber, testCustomer2);
         WorkOrderSteps.switchToMyWorkOrdersView();
@@ -209,9 +209,9 @@ public class VNextTeamWorkOrdersChangeCustomerTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanCreateCustomerAfterChangingCustomerForWO(String rowID,
-                                                                             String description, JSONObject testData) {
+                                                                          String description, JSONObject testData) {
 
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
