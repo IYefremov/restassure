@@ -95,6 +95,10 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("invoice.editing.td");
     }
 
+    public String getInvoicePrintViewTestCasesDataPath() {
+        return props.getProperty("invoice.print.view.td");
+    }
+
     public String getInvoicePaymentTestCasesDataPath() {
         return props.getProperty("invoice.payment.td");
     }

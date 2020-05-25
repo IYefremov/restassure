@@ -6,6 +6,7 @@ import com.cyberiansoft.test.vnext.interactions.GeneralWizardInteractions;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.screens.VNextHomeScreen;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
+import com.cyberiansoft.test.vnext.steps.commonobjects.dialogs.InformationDialogSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -139,5 +140,14 @@ public class HomeScreenSteps {
         WaitUtils.waitUntilElementIsClickable(homeScreen.getRootElement());
         WaitUtils.elementShouldBeVisible(homeScreen.getStatusList(), true);
         homeScreen.clickStatusMenuItem();
+    }
+
+    public static void startInvoiceCreation() {
+
+        VNextHomeScreen homeScreen = new VNextHomeScreen();
+        WaitUtils.waitUntilElementIsClickable(homeScreen.getAddBtn());
+        WaitUtils.click(homeScreen.getAddBtn());
+        WaitUtils.click(homeScreen.getNewInvoiceBtn());
+        InformationDialogSteps.clickOkButton();
     }
 }

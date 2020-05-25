@@ -77,6 +77,9 @@ public class VNextHomeScreen extends VNextBaseScreen {
     @FindBy(xpath = "//*[@action='new_inspection']")
     private WebElement newInspectionBtn;
 
+    @FindBy(xpath = "//*[@action='new_invoice']")
+    private WebElement newInvoiceBtn;
+
     public VNextHomeScreen() {
     }
 
