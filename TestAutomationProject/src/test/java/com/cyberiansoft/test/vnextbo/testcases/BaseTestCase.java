@@ -66,12 +66,16 @@ public class BaseTestCase {
                 e.printStackTrace();
             }
         }
-
-        Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
-        if (testEnv.isPresent())
-            backOfficeURL = VNextEnvironmentUtils.getBackOfficeURL(TestEnvironments.valueOf(testEnv.get()));
-        else
-            backOfficeURL = EnvironmentsData.getInstance().getVNextIntegrationBackOfficeURL();
+        Optional<String> boURLParam = Optional.ofNullable(System.getProperty("testNewBOURL"));
+        if (boURLParam.isPresent())
+            backOfficeURL = boURLParam.get();
+        else {
+            Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
+            if (testEnv.isPresent())
+                backOfficeURL = VNextEnvironmentUtils.getBackOfficeURL(TestEnvironments.valueOf(testEnv.get()));
+            else
+                backOfficeURL = EnvironmentsData.getInstance().getVNextIntegrationBackOfficeURL();
+        }
     }
 
     @BeforeClass
