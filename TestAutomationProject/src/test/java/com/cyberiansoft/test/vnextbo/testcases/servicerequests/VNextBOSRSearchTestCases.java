@@ -20,8 +20,9 @@ import com.cyberiansoft.test.vnextbo.steps.servicerequests.VNextBOSRTableSteps;
 import com.cyberiansoft.test.vnextbo.testcases.BaseTestCase;
 import com.cyberiansoft.test.vnextbo.validations.commonobjects.VNextBOReactSearchPanelValidations;
 import com.cyberiansoft.test.vnextbo.validations.servicerequests.VNextBOSRTableValidations;
+import com.cyberiansoft.test.vnextbo.validations.servicerequests.details.VNextBOSRGeneralInfoValidations;
+import com.cyberiansoft.test.vnextbo.validations.servicerequests.details.VNextBOSRVehicleInfoValidations;
 import org.json.simple.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -44,15 +45,16 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifySRIsFoundByFirstCustomerName(String rowID, String description, JSONObject testData) {
+    public void verifySRIsFoundByCustomersFirstName(String rowID, String description, JSONObject testData) {
         VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
 
-        VNextBOReactSearchPanelSteps.searchByText(data.getSearchData().getCustomer());
+        final String firstName = data.getSearchData().getCustomer();
+        VNextBOReactSearchPanelSteps.searchByText(firstName);
         VNextBOSRTableValidations.verifyNotFoundNotificationIsDisplayed();
         VNextBOReactSearchPanelValidations.verifyClearSearchIconIsDisplayed();
         VNextBOReactSearchPanelSteps.clearSearchFilter();
         VNextBOReactSearchPanelValidations.verifySearchInputFieldIsEmpty();
-        VNextBOReactSearchPanelValidations.verifyDefaultFilterInfoTextIsDisplayed();
+        VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed();
         VNextBOReactSearchPanelSteps.searchByText(data.getSearchData().getHasThisText());
         final List<String> customerNameFields = VNextBOSRTableSteps.getUniqueCustomerNameFields();
         VNextBOBaseWebPageSteps.clickLogo();
@@ -69,10 +71,11 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void verifySRIsFoundByLastCustomerName(String rowID, String description, JSONObject testData) {
+    public void verifySRIsFoundByCustomersLastName(String rowID, String description, JSONObject testData) {
         VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
 
-        VNextBOReactSearchPanelSteps.searchByText(data.getSearchData().getHasThisText());
+        final String lastName = data.getSearchData().getHasThisText();
+        VNextBOReactSearchPanelSteps.searchByText(lastName);
         final List<String> customerNameFields = VNextBOSRTableSteps.getUniqueCustomerNameFields();
         VNextBOBaseWebPageSteps.clickLogo();
         VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
@@ -82,7 +85,7 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
             BOClientsSearchSteps.setClientName(customer);
             BOSearchSteps.search();
             BOClientsTableSteps.openEditDialogForClient(customer);
-            BOClientsTableValidations.verifyTheClientsLastName(data.getSearchData().getHasThisText());
+            BOClientsTableValidations.verifyTheClientsLastName(lastName);
             BOClientsDialogSteps.cancel();
         });
     }
@@ -91,19 +94,18 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
     public void verifySRIsFoundByCompanyName(String rowID, String description, JSONObject testData) {
         VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
 
-        VNextBOReactSearchPanelSteps.searchByText(data.getSearchData().getHasThisText());
-        final List<String> customerNameFields = VNextBOSRTableSteps.getUniqueCustomerNameFields();
-        customerNameFields.forEach(customer -> {
-            Assert.assertTrue(customer.contains(data.getSearchData().getHasThisText()),
-                    "The SR hasn't been found by customer");
-        });
+        final String company = data.getSearchData().getHasThisText();
+        VNextBOReactSearchPanelSteps.searchByText(company);
+        VNextBOSRTableSteps.getUniqueCustomerNameFields()
+                .forEach(customer -> VNextBOSRTableValidations.verifySRContainingValueIsDisplayed(customer, company));
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void verifySRIsFoundByCustomerEmail(String rowID, String description, JSONObject testData) {
         VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
 
-        VNextBOReactSearchPanelSteps.searchByText(data.getSearchData().getHasThisText());
+        final String email = data.getSearchData().getHasThisText();
+        VNextBOReactSearchPanelSteps.searchByText(email);
         final List<String> customerNameFields = VNextBOSRTableSteps.getUniqueCustomerNameFields();
         VNextBOBaseWebPageSteps.clickLogo();
         VNextBOHomeWebPageSteps.clickAccessReconProBOLink();
@@ -113,8 +115,61 @@ public class VNextBOSRSearchTestCases extends BaseTestCase {
             BOClientsSearchSteps.setClientName(customer);
             BOSearchSteps.search();
             BOClientsTableSteps.openEditDialogForClient(customer);
-            BOClientsTableValidations.verifyTheCustomersEmail(data.getSearchData().getHasThisText());
+            BOClientsTableValidations.verifyTheCustomersEmail(email);
             BOClientsDialogSteps.cancel();
         });
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySRIsFoundByVIN(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        final String vinNum = data.getSearchData().getHasThisText();
+        VNextBOReactSearchPanelSteps.searchByText(vinNum);
+        VNextBOSRTableSteps.openSRDetailsPage(0);
+        VNextBOSRVehicleInfoValidations.verifyVinIsDisplayed(vinNum);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySRIsFoundByRO(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        final String roNum = data.getSearchData().getHasThisText();
+        VNextBOReactSearchPanelSteps.searchByText(roNum);
+        VNextBOSRTableSteps.openSRDetailsPage(0);
+        VNextBOSRGeneralInfoValidations.verifyRoIsDisplayed(roNum);
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySRIsFoundByStockNum(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        final String stockNum = data.getSearchData().getHasThisText();
+        VNextBOReactSearchPanelSteps.searchByText(stockNum);
+        VNextBOSRTableSteps.getUniqueStockNumbersFields()
+                .forEach(stock -> VNextBOSRTableValidations.verifySRContainingValueIsDisplayed(stock, stockNum));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifySRIsFoundBySRNum(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        final String srNum = data.getSearchData().getHasThisText();
+        VNextBOReactSearchPanelSteps.searchByText(srNum);
+        VNextBOSRTableSteps.getSRNumValues()
+                .forEach(sr -> VNextBOSRTableValidations.verifySRContainingValueIsDisplayed(sr, srNum));
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void verifyUserCanDeleteSearchOptions(String rowID, String description, JSONObject testData) {
+        VNextBOSRData data = JSonDataParser.getTestDataFromJson(testData, VNextBOSRData.class);
+
+        final String type = data.getSearchData().getHasThisText();
+        final String infoText = data.getInfoText();
+        VNextBOReactSearchPanelSteps.searchByText(type);
+        VNextBOReactSearchPanelValidations.verifyFilterInfoTextIsDisplayed(infoText);
+        VNextBOReactSearchPanelSteps.clearSearchFilter();
+        VNextBOReactSearchPanelValidations.verifySearchInputFieldIsEmpty();
+        VNextBOSRTableValidations.verifyEitherNotificationOrSRsListIsDisplayed();
     }
 }

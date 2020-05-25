@@ -12,10 +12,15 @@ public class VNextBOReactSearchPanelValidations {
         Assert.assertTrue(Utils.isElementDisplayed(new VNextBOReactSearchPanel().getSearchXIcon()));
     }
 
-    public static void verifyDefaultFilterInfoTextIsDisplayed() {
+    public static void verifyFilterInfoTextIsDisplayed() {
         Assert.assertEquals(Utils.getText(new VNextBOReactSearchPanel().getFilterInfoText()),
                 "Timeframe: " + TimeFrameValues.TIMEFRAME_30_DAYS.getName() + ";",
                 "The default filter info text hasn't been displayed");
+    }
+
+    public static void verifyFilterInfoTextIsDisplayed(String text) {
+        Assert.assertEquals(Utils.getText(new VNextBOReactSearchPanel().getFilterInfoText()), text,
+                "The filter info text hasn't been displayed");
     }
 
     public static void verifySearchInputFieldIsEmpty() {

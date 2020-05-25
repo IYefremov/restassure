@@ -20,6 +20,12 @@ public class VNextBOSRTable extends VNextBOSRPage {
     @FindBy(xpath = "//div[contains(@class, 'Table-cell') and not(@style)]//div[@class='ServiceTableTextBlock-text'][1]")
     private List<WebElement> customersList;
 
+    @FindBy(xpath = "//div[contains(@class, 'Table-cell') and not(@style)]//div[@class='ServiceTableTextBlock-text'][3]")
+    private List<WebElement> stockNumbersList;
+
+    @FindBy(xpath = "//div[contains(@class, 'ServiceRequests-cell') and @style]//div[@class='ServiceTableTextBlock-text'][1]")
+    private List<WebElement> srNumbersList;
+
     public VNextBOSRTable() {
         super();
         PageFactory.initElements(new ExtendedFieldDecorator(driver), this);
