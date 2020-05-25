@@ -10,6 +10,9 @@ import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
+import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.NotesValidations;
 import com.cyberiansoft.test.vnext.validations.QuestionFormValidations;
@@ -171,6 +174,57 @@ public class VNextQuestionAnswerTextImageComments extends BaseTestClass {
             WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS, 2);
         });
 
+        InspectionSteps.cancelInspection();
+        ScreenNavigationSteps.pressBackButton();
+    }
+
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    public void testVerifyUserCanAddCommentForQuestionInService(String rowID,
+                                                              String description, JSONObject testData) {
+
+        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
+        final String notestText = "Test 1";
+        int numberOfPictureNotes = 2;
+
+        HomeScreenSteps.openCreateMyInspection();
+        InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOTEST_QUESTIONS_FORMS);
+
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        AvailableServicesScreenSteps.openServiceDetails(inspectionData.getMoneyServiceData());
+        ServiceDetailsScreenSteps.openQuestionForm(inspectionData.getMoneyServiceData().getQuestionData().getQuestionSetionName());
+        QuestionFormSteps.answerTextQuestion(inspectionData.getMoneyServiceData().getQuestionData().getTextQuestionData());
+        QuestionFormSteps.answerLogicalQuestion(inspectionData.getMoneyServiceData().getQuestionData().getLogicalQuestionData());
+        inspectionData.getMoneyServiceData().getQuestionData().getSelectListOptionQuestions().forEach(selectListOptionQuestion -> {
+            QuestionFormSteps.answerListOptionQuestion(selectListOptionQuestion);
+        });
+
+        List<QuestionsData> questionsData = inspectionData.getQuestionScreenData().getQuestionsData();
+        questionsData.forEach(question -> {
+            QuestionFormSteps.clickQuestionNotes(question.getQuestionName());
+            NotesSteps.setNoteText(notestText);
+            NotesSteps.addPhotoFromCamera();
+            NotesSteps.addPhotoFromCamera();
+            TopScreenPanelSteps.goToThePreviousScreen();
+        });
+
+
+        QuestionFormSteps.saveQuestionForm();
+        ServiceDetailsScreenSteps.saveServiceDetails();
+
+        final String inspectionId = InspectionSteps.saveInspectionAsDraft();
+        InspectionSteps.openInspectionToEdit(inspectionId);
+        WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
+        SelectedServicesScreenSteps.openServiceDetails(inspectionData.getMoneyServiceData().getServiceName());
+        ServiceDetailsScreenSteps.openQuestionForm(inspectionData.getMoneyServiceData().getQuestionData().getQuestionSetionName());
+        questionsData.forEach(question -> {
+            QuestionFormValidations.validateQuestionHasNotes(question.getQuestionName(), true);
+            QuestionFormSteps.clickQuestionNotes(question.getQuestionName());
+            NotesValidations.verifyNumberOfPicturesPresent(numberOfPictureNotes);
+            NotesValidations.verifyNoteIsPresent(notestText);
+            TopScreenPanelSteps.goToThePreviousScreen();
+        });
+        QuestionFormSteps.saveQuestionForm();
+        ServiceDetailsScreenSteps.saveServiceDetails();
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
     }

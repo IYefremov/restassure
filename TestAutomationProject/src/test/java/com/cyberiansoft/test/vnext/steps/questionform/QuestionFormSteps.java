@@ -27,6 +27,16 @@ public class QuestionFormSteps {
             QuestionScreenInteractions.clickQuestionAnswer(questionData.getQuestionName(), questionData.getQuestionAnswer());
     }
 
+    public static void answerListOptionQuestion(SelectListOptionQuestion selectListOptionQuestion) {
+        if (selectListOptionQuestion.isMultiselect()) {
+            selectListOptionQuestion.getQuestionAnswers().forEach(answer ->
+                    QuestionScreenInteractions.clickQuestionAnswer(selectListOptionQuestion.getQuestionName(), answer)
+            );
+            QuestionScreenInteractions.saveMulitAnswerQuestion(selectListOptionQuestion.getQuestionName());
+        } else
+            QuestionScreenInteractions.clickQuestionAnswer(selectListOptionQuestion.getQuestionName(), selectListOptionQuestion.getQuestionAnswer());
+    }
+
     public static void answerGeneralTextQuestion(QuestionsData textQuestion) {
         QuestionScreenInteractions.fillQuestionTextBox(textQuestion.getQuestionName(), textQuestion.getQuestionAnswer());
     }
