@@ -55,6 +55,7 @@ public class AvailableServicesScreenSteps {
 
     public static void openServiceDetails(String serviceName) {
         AvailableServiceScreenInteractions.switchToAvailableServicesView();
+        SearchSteps.textSearch(serviceName);
         AvailableServiceScreenInteractions.openServiceDetails(serviceName);
     }
 
