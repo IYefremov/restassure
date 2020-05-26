@@ -4,9 +4,12 @@ import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextBaseScreen;
 import com.cyberiansoft.test.vnext.webelements.decoration.FiledDecorator;
 import lombok.Getter;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 @Getter
 public class VNextInvoiceViewScreen extends VNextBaseScreen {
@@ -32,7 +35,28 @@ public class VNextInvoiceViewScreen extends VNextBaseScreen {
     @FindBy(xpath = "//td[@class='editable-field date-field']")
     private WebElement invoiceDate;
 
+    @FindBy(xpath = "//span[@class='service-name']")
+    private List<WebElement> servicesList;
+
+    @FindBy(xpath = "//td[@data-path='jsonData.Vehicle.VIN']")
+    private WebElement vinNumber;
+
+    @FindBy(xpath = "//td[@data-path='jsonData.Vehicle.Make']")
+    private WebElement make;
+
+    @FindBy(xpath = "//td[@data-path='jsonData.Vehicle.Model']")
+    private WebElement model;
+
+    @FindBy(xpath = "//td[@data-path='jsonData.Vehicle.Year']")
+    private WebElement year;
+
     public VNextInvoiceViewScreen() {
         PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
+    }
+
+    public WebElement service(String serviceName) {
+
+        return ChromeDriverProvider.INSTANCE.getMobileChromeDriver()
+                .findElement(By.xpath("//span[@class='service-name' and contains(text(), '" + serviceName + "')]"));
     }
 }

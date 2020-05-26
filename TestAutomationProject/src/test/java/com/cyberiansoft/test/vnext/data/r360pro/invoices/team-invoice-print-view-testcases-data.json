@@ -1,27 +1,74 @@
 {
-  "testVerifyUserSeeCorrectCustomerSignatureOnInvoicePrinting": [
+  "testVerifyUserSeeCorrectCustomerSignature": [
     {
-      "rowID": "testVerifyUserSeeCorrectCustomerSignatureOnInvoicePrinting.01",
+      "rowID": "testVerifyUserSeeCorrectCustomerSignature.01",
       "description": "Test Case 92075: R360 client: Verify correct Customer's Signature is shown on Invoice Printing",
       "targetProcessTestCaseData": [
         {
           "testCaseID": "92075",
           "testCaseTitle": "R360 client: Verify correct Customer's Signature is shown on Invoice Printing"
         }
-      ],
-      "workOrderData": {
-        "vihicleInfo": {
-          "vinNumber": "3GNAL2EK6DS624120"
-        },
-        "services": [
-          {
-            "serviceName": "Battery Installation"
-          },
-          {
-            "serviceName": "Labor"
-          }
-        ]
-      }
+      ]
+    }
+  ],
+  "testVerifyUserSeeCorrectServiceAndVehicleInfo": [
+    {
+      "rowID": "testVerifyUserSeeCorrectServiceAndVehicleInfo.01",
+      "description": "Test Case 92076: R360 client: Verify correct info is shown in Services table on Invoice Printing",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92076",
+          "testCaseTitle": "R360 client: Verify correct info is shown in Services table on Invoice Printing"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserSeeCorrectCustomerInfo": [
+    {
+      "rowID": "testVerifyUserSeeCorrectCustomerInfo.01",
+      "description": "Test Case 92079: R360 client: Verify correct Customer Info is shown on Printing",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92079",
+          "testCaseTitle": "R360 client: Verify correct Customer Info is shown on Printing"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserSeeCorrectInvoiceDate": [
+    {
+      "rowID": "testVerifyUserSeeCorrectInvoiceDate.01",
+      "description": "Test Case 92080: R360 client: Verify correct invoice date is shown on Printing",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92080",
+          "testCaseTitle": "R360 client: Verify correct invoice date is shown on Printing"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserSeeInvoicePrintViewScreen": [
+    {
+      "rowID": "testVerifyUserSeeInvoicePrintViewScreen.01",
+      "description": "Test Case 92081: R360 client: Verify HTML page is opened on tapping 'View' action for team Invoice",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92081",
+          "testCaseTitle": "R360 client: Verify HTML page is opened on tapping 'View' action for team Invoice"
+        }
+      ]
+    }
+  ],
+  "testVerifyUserSeeCorrectInvoiceNumber": [
+    {
+      "rowID": "testVerifyUserSeeCorrectInvoiceNumber.01",
+      "description": "Test Case 92082: R360 client: Verify correct Invoice # is shown on Printing",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "92082",
+          "testCaseTitle": "R360 client: Verify correct Invoice # is shown on Printing"
+        }
+      ]
     }
   ]
 }
