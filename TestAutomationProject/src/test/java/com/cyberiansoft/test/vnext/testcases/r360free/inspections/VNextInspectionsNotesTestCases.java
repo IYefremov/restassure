@@ -14,7 +14,7 @@ import com.cyberiansoft.test.vnext.data.r360free.VNextFreeTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.screens.VNextNotesScreen;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
@@ -541,7 +541,8 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         AvailableServicesScreenSteps.selectMatrixService(inspectionData.getMatrixServiceData());
         VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         for (VehiclePartData vehiclePartData : inspectionData.getMatrixServiceData().getVehiclePartsData()) {
-            VNextVehiclePartInfoPage vNextVehiclePartInfoPage = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            VNextVehiclePartInfoScreen vNextVehiclePartInfoPage = new VNextVehiclePartInfoScreen();
             vNextVehiclePartInfoPage.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
             vNextVehiclePartInfoPage.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
             VNextNotesScreen notesScreen = vNextVehiclePartInfoPage.clickMatrixServiceNotesOption();
@@ -553,7 +554,7 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         }
         availableServicesScreen = vehiclePartsScreen.clickVehiclePartsSaveButton();
 
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        availableServicesScreen.switchToSelectedServicesView();
         ListServicesValidations.verifyServiceSelected(inspectionData.getMatrixServiceData().getMatrixServiceName(), true);
         InspectionSteps.saveInspection();
         ScreenNavigationSteps.pressBackButton();

@@ -723,7 +723,8 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
             MatrixServiceData matrixServiceData = new MatrixServiceData();
             AvailableServicesScreenSteps.selectMatrixService(matrixServiceData);
             VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-            VNextVehiclePartInfoPage vehiclePartInfoPage = vehiclePartsScreen.selectVehiclePart(vehiclepartname);
+            vehiclePartsScreen.selectVehiclePart(vehiclepartname);
+            VNextVehiclePartInfoScreen vehiclePartInfoPage = new VNextVehiclePartInfoScreen();
             vehiclePartInfoPage.selectVehiclePartSize(vehiclepartsize);
             vehiclePartInfoPage.selectVehiclePartSeverity(vehiclepartseverities[i]);
             vehiclePartInfoPage.clickSaveVehiclePartInfo();

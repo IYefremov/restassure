@@ -25,17 +25,15 @@ public class VNextVehiclePartsScreen extends VNextBaseScreen {
 		PageFactory.initElements(appiumdriver, this);
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 15);
 		wait.until(ExpectedConditions.visibilityOf(vehiclepartsscreen));
-        //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 	}
 
 	public VNextVehiclePartsScreen() {
 	}
 	
-	public VNextVehiclePartInfoPage selectVehiclePart(String vehiclePartName) {
+	public void selectVehiclePart(String vehiclePartName) {
     	WaitUtils.waitUntilElementIsClickable(vehiclepartsscreen);
 		HelpingScreenInteractions.dismissHelpingScreenIfPresent();
 		PriceMatrixScreenInteractions.selectItem(vehiclePartName);
-		return new VNextVehiclePartInfoPage();
 	}
 	
 	public String getVehiclePartsScrenPriceValue() {
