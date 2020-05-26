@@ -54,7 +54,7 @@ public class VNextInvoiceViewScreen extends VNextBaseScreen {
         PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
     }
 
-    public WebElement service(String serviceName) {
+    public WebElement serviceCellByServiceName(String serviceName) {
 
         return ChromeDriverProvider.INSTANCE.getMobileChromeDriver()
                 .findElement(By.xpath("//span[@class='service-name' and contains(text(), '" + serviceName + "')]"));

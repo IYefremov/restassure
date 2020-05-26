@@ -10,6 +10,8 @@ import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
+import com.cyberiansoft.test.vnext.steps.invoices.InvoiceSteps;
+import com.cyberiansoft.test.vnext.steps.invoices.VNextInvoiceViewScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.invoices.VNextInvoiceViewScreenValidations;
@@ -30,9 +32,6 @@ public class VNextTeamInvoicePrintViewTestCases extends BaseTestClass {
 
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInvoicePrintViewTestCasesDataPath();
         testCaseData = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITIONS_FILE), TestCaseData.class);
-        HomeScreenSteps.openCustomers();
-        CustomerServiceSteps.createCustomerIfNotExist(testcustomer);
-        ScreenNavigationSteps.pressBackButton();
 
         HomeScreenSteps.startInvoiceCreation();
         invoiceNumber = createWorkOrderWithInvoice(testCaseData.getWorkOrderData());
@@ -40,11 +39,13 @@ public class VNextTeamInvoicePrintViewTestCases extends BaseTestClass {
         TopScreenPanelSteps.cancelSearch();
         InvoiceSteps.approveInvoice(invoiceNumber);
         InvoiceSteps.viewInvoice(invoiceNumber);
+        VNextInvoiceViewScreenSteps.switchToPrintViewScreenFrame();
     }
 
     @AfterClass()
     public void goToTheHomeScreen() {
 
+        VNextInvoiceViewScreenSteps.switchToDefaultContent();
         TopScreenPanelSteps.goToThePreviousScreen();
         TopScreenPanelSteps.resetSearch();
         TopScreenPanelSteps.goToThePreviousScreen();
@@ -67,7 +68,7 @@ public class VNextTeamInvoicePrintViewTestCases extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserSeeCorrectCustomerInfo(String rowID, String description, JSONObject testData) {
 
-        VNextInvoiceViewScreenValidations.verifyCustomerInfoIsDisplayed(testcustomer);
+        VNextInvoiceViewScreenValidations.verifyCustomerInfoIsDisplayed("US");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
