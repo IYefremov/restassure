@@ -21,23 +21,14 @@ public class PartServiceSteps {
     }
 
     public static void selectPartServiceDetails(PartServiceData partServiceData) {
-        if (partServiceData.getCategory() != null) {
+        if (partServiceData.getCategory() != null)
             PartServiceSteps.selectCategory(partServiceData.getCategory());
-            if (partServiceData.getSubCategory() != null)
-                PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
-            if (partServiceData.getPartName() != null)
-                PartServiceSteps.selectPartName(partServiceData.getPartName());
-            if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
-                PartServiceSteps.selectPartPosition(partServiceData.getPartPosition());
-        } else {
-            ServiceDetailsScreenSteps.openPartServiceDetails();
-            if (partServiceData.getSubCategory() != null)
-                PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
-            if (partServiceData.getPartName() != null)
-                PartServiceSteps.selectPartName(partServiceData.getPartName());
-            if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
-                PartServiceSteps.changePartPosition(partServiceData.getPartPosition());
-        }
+        if (partServiceData.getSubCategory() != null)
+            PartServiceSteps.selectSubCategory(partServiceData.getSubCategory());
+        if (partServiceData.getPartName() != null)
+            PartServiceSteps.selectPartName(partServiceData.getPartName());
+        if (partServiceData.getPartPosition() != null && partServiceData.getPartPosition() != "")
+            PartServiceSteps.selectPartPosition(partServiceData.getPartPosition());
     }
 
     public static void selectPartServiceDetailsWithOpenedDetails(PartServiceData partServiceData) {

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.vnext.steps.services;
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
@@ -33,6 +34,11 @@ public class VehiclePartsScreenSteps {
             vehiclePartInfoScreen.clickSaveVehiclePartInfo();
         }
         vehiclePartInfoScreen.clickScreenBackButton();
+    }
+
+    public static void selectVehiclePartAdditionalService(ServiceData serviceData) {
+        VNextVehiclePartInfoPage vehiclePartInfoScreen = new VNextVehiclePartInfoPage();
+        vehiclePartInfoScreen.selectVehiclePartAdditionalService(serviceData.getServiceName());
     }
 
     public static void selectVehiclePartSizeAndSeverity(String vehiclePartSize, String vehiclePartSeverity) {

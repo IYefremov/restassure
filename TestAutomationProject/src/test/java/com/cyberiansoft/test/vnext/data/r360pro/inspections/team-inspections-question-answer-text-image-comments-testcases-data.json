@@ -117,8 +117,8 @@
       ],
       "moneyService": {
         "serviceName": "Anastasia money",
-        "questionData" : {
-          "questionSetionName" : "Alexei's section 2",
+        "questionData": {
+          "questionSetionName": "Alexei's section 2",
           "textQuestionData": {
             "questionName": "Do you know? Do you love? Do you really would like to use this note'?",
             "questionAnswerText": "I would like to use this note"
@@ -165,6 +165,183 @@
           }
         ]
       }
+    }
+  ],
+  "testVerifyUserCanRemoveCommentsForQuestionInService": [
+    {
+      "rowID": "testVerifyUserCanRemoveCommentsForQuestionInService.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "111139",
+          "testCaseTitle": " Verify user can remove comments from question in service"
+        }
+      ],
+      "moneyService": {
+        "serviceName": "Anastasia money",
+        "questionData": {
+          "questionSetionName": "Alexei's section 2",
+          "textQuestionData": {
+            "questionName": "Do you know? Do you love? Do you really would like to use this note'?",
+            "questionAnswerText": "I would like to use this note"
+          },
+          "logicalQuestionData": {
+            "questionName": "Logical (Required)",
+            "logicalAnswer": "No"
+          },
+          "selectListOptionQuestions": [
+            {
+              "questionName": "Traffic Light (Required)",
+              "questionAnswer": "Checked And OK'd",
+              "isMultiselect": false
+            },
+            {
+              "questionName": "Single Select (Required)",
+              "questionAnswer": "Value 1"
+            },
+            {
+              "questionName": "Multi Select (Required)",
+              "questionAnswers": [
+                "Value 6",
+                "Value 5",
+                "Value 4"
+              ],
+              "isMultiselect": true
+            }
+          ]
+        }
+      },
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Do you know? Do you love? Do you really would like to use this note'?"
+          },
+          {
+            "questionName": "Logical (Required)"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyUserCanAddCommentToQFInMonitor": [
+    {
+      "rowID": "testVerifyUserCanAddCommentToQFInMonitor.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "112517",
+          "testCaseTitle": " Verify user can add comment to QF in Monitor"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "service": {
+        "serviceName": "Expenses_money (AM)"
+      },
+      "questionScreenData": {
+        "questionData": {
+          "imageQuestions": [
+            {
+              "questionName": "Image 1",
+              "numberOFImages": 1
+            },
+            {
+              "questionName": "Image 2",
+              "numberOFImages": 1
+            },
+            {
+              "questionName": "Image 3",
+              "numberOFImages": 1
+            },
+            {
+              "questionName": "Image 4",
+              "numberOFImages": 1
+            }
+          ]
+        }
+      },
+      "partServiceDataList": [
+        {
+          "serviceName": "Nikolay's Part Categories",
+          "category": "Engine",
+          "subCategory": "Filters",
+          "partName": {
+            "partNameList": [
+              "Engine Oil Filter Kit"
+            ],
+            "isMultiSelect": false
+          }
+        },
+        {
+          "serviceName": "Nikolay's Part",
+          "category": "Brake",
+          "subCategory": "Bearings",
+          "partName": {
+            "partNameList": [
+              "Air Brake Compressor Crank Shaft Bearing"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Rear"
+        },
+        {
+          "serviceName": "Nikolay's Part [MOTOR]",
+          "category": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Front"
+        },
+        {
+          "serviceName": "Oksi Part service - Category",
+          "subCategory": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Front"
+        },
+        {
+          "serviceName": "Oksi Part service - None_Motor",
+          "category": "Engine",
+          "subCategory": "Filters",
+          "partName": {
+            "partNameList": [
+              "Engine Oil Filter Kit"
+            ],
+            "isMultiSelect": false
+          }
+        },
+        {
+          "serviceName": "Oksi Part service - Subcategory",
+          "partName": {
+            "partNameList": [
+              "ABS Control Module Stud"
+            ],
+            "isMultiSelect": false
+          }
+        }
+      ],
+      "matrixService":
+        {
+          "matrixServiceName": "zayatsPriceMatrixService",
+          "hailMatrixName": "zayatsPriceMatrix",
+          "vehiclePartData": {
+            "vehiclePartName": "Roof",
+            "vehiclePartSize": "DIME",
+            "vehiclePartSeverity": "LIGHT",
+            "vehiclePartAdditionalService":
+            {
+              "serviceName": "Body Shop 1"
+            }
+          }
+        }
     }
   ]
 }
