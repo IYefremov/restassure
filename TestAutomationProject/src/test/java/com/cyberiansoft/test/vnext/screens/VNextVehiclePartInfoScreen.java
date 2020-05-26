@@ -15,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
 
 @Getter
-public class VNextVehiclePartInfoPage extends VNextBaseScreen {
+public class VNextVehiclePartInfoScreen extends VNextBaseScreen {
 
 	@FindBy(xpath = "//div[@data-page='matrix-info']")
 	private WebElement vehiclepartinfoscreen;
@@ -29,9 +29,6 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(xpath = "//div[@input='price']")
 	private WebElement vehiclepartpricefld;
 
-	//@FindBy(xpath = "//*[@data-autotests-id='all-services']")
-	//private WebElement additionalavailableserviceslist;
-
 	@FindBy(xpath = "//*[@data-view-mode='available']/div")
 	private List<ServiceListItem> servicesList;
 
@@ -41,7 +38,7 @@ public class VNextVehiclePartInfoPage extends VNextBaseScreen {
 	@FindBy(xpath = "//*[@action='save']")
 	private WebElement savebtn;
 
-	public VNextVehiclePartInfoPage() {
+	public VNextVehiclePartInfoScreen() {
 		PageFactory.initElements(new FiledDecorator(ChromeDriverProvider.INSTANCE.getMobileChromeDriver()), this);
 	}
 
