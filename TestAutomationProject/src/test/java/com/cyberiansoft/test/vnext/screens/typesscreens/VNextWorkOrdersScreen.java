@@ -112,7 +112,7 @@ public class VNextWorkOrdersScreen extends VNextBaseTypeScreen {
         WebDriverWait wait = new WebDriverWait(appiumdriver, 10);
         wait.until(ExpectedConditions.visibilityOf(
                 appiumdriver.findElement(By.xpath("//*[text()='" + infoMessage + "']"))));
-        wait = new WebDriverWait(appiumdriver, 40);
+        wait = new WebDriverWait(appiumdriver, 90);
         wait.until(ExpectedConditions.invisibilityOf(
                 appiumdriver.findElement(By.xpath("//*[text()='" + infoMessage + "']"))));
 

@@ -1062,6 +1062,7 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
         NotesSteps.addQuickNote(quicknote);
         NotesValidations.verifyNoteIsPresent(notetext + "\n" + quicknote);
         ScreenNavigationSteps.pressBackButton();
+        BaseUtils.waitABit(10000);
 
         InvoiceSteps.openMenu(invoiceNumber);
         MenuSteps.selectMenuItem(MenuItems.NOTES);
@@ -1075,7 +1076,6 @@ public class VNextTeamInvoicesTestCases extends BaseTestClass {
 
         NotesValidations.verifyNumberOfPicturesPresent(picturesToAdd);
         ScreenNavigationSteps.pressBackButton();
-
 
         InvoiceSteps.openMenu(invoiceNumber);
         MenuSteps.selectMenuItem(MenuItems.NOTES);

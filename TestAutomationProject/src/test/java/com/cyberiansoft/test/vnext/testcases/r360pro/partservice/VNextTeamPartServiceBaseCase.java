@@ -209,8 +209,10 @@ public class VNextTeamPartServiceBaseCase extends BaseTestClass {
         AvailableServicesScreenSteps.openServiceDetails(laborServiceData.getServiceName());
         LaborServiceSteps.addPartService();
         partsInsideLabor.forEach((service) -> {
-            SearchSteps.textSearch(service.getServiceName());
-            PartServiceSteps.selectPartService(service);
+            AvailableServicesScreenSteps.openServiceDetails(service.getServiceName());
+            ServiceDetailsScreenSteps.openPartServiceDetails();
+            PartServiceSteps.changePartPosition(service.getPartPosition());
+            PartServiceSteps.confirmPartInfo();
             PartServiceSteps.confirmPartInfo();
         });
         ScreenNavigationSteps.pressBackButton();
