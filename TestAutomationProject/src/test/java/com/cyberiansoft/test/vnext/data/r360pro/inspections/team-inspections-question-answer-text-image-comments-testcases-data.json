@@ -328,20 +328,184 @@
           }
         }
       ],
-      "matrixService":
-        {
-          "matrixServiceName": "zayatsPriceMatrixService",
-          "hailMatrixName": "zayatsPriceMatrix",
-          "vehiclePartData": {
-            "vehiclePartName": "Roof",
-            "vehiclePartSize": "DIME",
-            "vehiclePartSeverity": "LIGHT",
-            "vehiclePartAdditionalService":
-            {
-              "serviceName": "Body Shop 1"
-            }
+      "matrixService": {
+        "matrixServiceName": "zayatsPriceMatrixService",
+        "hailMatrixName": "zayatsPriceMatrix",
+        "vehiclePartData": {
+          "vehiclePartName": "Roof",
+          "vehiclePartSize": "DIME",
+          "vehiclePartSeverity": "LIGHT",
+          "vehiclePartAdditionalService": {
+            "serviceName": "Body Shop 1"
           }
         }
+      }
+    }
+  ],
+  "testVerifyCommentsSavedIfUserCreateWOFromInspection": [
+    {
+      "rowID": "testVerifyCommentsSavedIfUserCreateWOFromInspection.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "112523",
+          "testCaseTitle": "Verify comments saved if user create WO from Inspection"
+        }
+      ],
+      "questionScreensData": [
+        {
+          "screenName": "All Question Types",
+          "questionData": {
+            "textQuestionData": {
+              "questionName": "Free text",
+              "questionAnswerText": "some text"
+            },
+            "imageQuestion": {
+              "questionName": "Image",
+              "numberOFImages": 1
+            },
+            "datePickerQuestion": {
+              "questionName": "Date"
+            },
+            "timePickerQuestion": {
+              "questionName": "Time"
+            },
+            "signatureQuestion": {
+              "questionName": "Signature"
+            }
+          },
+          "questionsData": [
+            {
+              "questionName": "Traffic-light"
+            },
+            {
+              "questionName": "Logical Y/N"
+            },
+            {
+              "questionName": "Single-select"
+            },
+            {
+              "questionName": "Free text"
+            },
+            {
+              "questionName": "Multi-select"
+            },
+            {
+              "questionName": "Image"
+            },
+            {
+              "questionName": "Date"
+            },
+            {
+              "questionName": "Time"
+            },
+            {
+              "questionName": "Signature"
+            }
+          ]
+        },
+        {
+          "questionData": {
+            "screenName": "A Lot Of Images",
+            "imageQuestions": [
+              {
+                "questionName": "Image 1",
+                "numberOFImages": 1
+              },
+              {
+                "questionName": "Image 2",
+                "numberOFImages": 1
+              },
+              {
+                "questionName": "Image 3",
+                "numberOFImages": 1
+              },
+              {
+                "questionName": "Image 4",
+                "numberOFImages": 1
+              }
+            ]
+          }
+        }
+      ],
+      "partServiceDataList": [
+        {
+          "serviceName": "Nikolay's Part Categories",
+          "category": "Engine",
+          "subCategory": "Filters",
+          "partName": {
+            "partNameList": [
+              "Engine Oil Filter Kit"
+            ],
+            "isMultiSelect": false
+          }
+        },
+        {
+          "serviceName": "Nikolay's Part",
+          "category": "Brake",
+          "subCategory": "Bearings",
+          "partName": {
+            "partNameList": [
+              "Air Brake Compressor Crank Shaft Bearing"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Rear"
+        },
+        {
+          "serviceName": "Nikolay's Part [MOTOR]",
+          "category": "Bumper",
+          "partName": {
+            "partNameList": [
+              "Bumper"
+            ],
+            "isMultiSelect": false
+          },
+          "partPosition": "Front"
+        },
+        {
+          "serviceName": "Oksi Part service - Category",
+          "category": "Filters",
+          "partName": {
+            "partNameList": [
+              "Engine Oil Filter"
+            ],
+            "isMultiSelect": false
+          }
+        },
+        {
+          "serviceName": "Oksi Part service - None_Motor",
+          "category": "Engine",
+          "subCategory": "Filters",
+          "partName": {
+            "partNameList": [
+              "Engine Oil Filter Kit"
+            ],
+            "isMultiSelect": false
+          }
+        },
+        {
+          "serviceName": "Oksi Part service - Subcategory",
+          "partName": {
+            "partNameList": [
+              "ABS Control Module Stud"
+            ],
+            "isMultiSelect": false
+          }
+        }
+      ],
+      "matrixService": {
+        "matrixServiceName": "zayatsPriceMatrixService",
+        "hailMatrixName": "zayatsPriceMatrix",
+        "vehiclePartData": {
+          "vehiclePartName": "Roof",
+          "vehiclePartSize": "DIME",
+          "vehiclePartSeverity": "LIGHT",
+          "vehiclePartAdditionalService": {
+            "serviceName": "Body Shop 1"
+          }
+        }
+      }
     }
   ]
 }

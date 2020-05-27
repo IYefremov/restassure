@@ -93,6 +93,16 @@ public class InspectionSteps {
         return inspectionNumber;
     }
 
+    public static String saveInspectionAsFinal() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        WaitUtils.elementShouldBeVisible(baseWizardScreen.getInspectionnumber(), true);
+        WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
+        String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
+        baseWizardScreen.clickWizardMenuSaveButton();
+        baseWizardScreen.clcikSaveViaMenuAsFinal();
+        return inspectionNumber;
+    }
+
     public static void trySaveInspection() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
