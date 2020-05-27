@@ -11,6 +11,7 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.enums.partservice.PartInfoScreenField;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
+import com.cyberiansoft.test.vnext.interactions.services.MatrixServiceDetailsScreenInteractions;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
@@ -46,8 +47,18 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
-        basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(MatrixServiceSteps::selectPartServiceInsideMatrixService);
-        //ServiceDetailsScreenSteps.saveServiceDetails();
+        basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(
+                partServiceData -> {
+                    MatrixServiceDetailsScreenInteractions.selectService(partServiceData.getServiceName());
+                    if (partServiceData.getCategory() != null) {
+                        PartServiceSteps.selectPartServiceDetails(partServiceData);
+                    } else {
+                        ServiceDetailsScreenSteps.openPartServiceDetails();
+                        PartServiceSteps.changePartPosition(partServiceData.getPartPosition());
+                    }
+                    PartServiceSteps.confirmPartInfo();
+                    PartServiceSteps.acceptDetailsScreen();
+                });
         MatrixServiceSteps.switchToSelectedServices();
         basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(serviceData -> MatrixServiceDetailsValidations.validateServiceSelected(serviceData.getServiceName()));
         MatrixServiceDetailsValidations.validateMatrixServiceDetails(basicPartsServiceMatrixService);
@@ -59,7 +70,7 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanAddPartServiceWithPreselectedCategorySubCategoryPartNameAndCantEditPreselectedPartsFromPriceMatrix(String rowID,
-                                                              String description, JSONObject testData) {
+                                                                                                                          String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
@@ -73,8 +84,13 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
-        basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(MatrixServiceSteps::selectPartServiceInsideMatrixService);
-        //ServiceDetailsScreenSteps.saveServiceDetails();
+        basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().forEach(partServiceData -> {
+            MatrixServiceDetailsScreenInteractions.selectService(partServiceData.getServiceName());
+            ServiceDetailsScreenSteps.openPartServiceDetails();
+            PartServiceSteps.changePartPosition(partServiceData.getPartPosition());
+            PartServiceSteps.confirmPartInfo();
+            PartServiceSteps.acceptDetailsScreen();
+        });
         MatrixServiceSteps.switchToSelectedServices();
         MatrixServiceSteps.openPartServiceDetails(basicPartsServiceMatrixService.getVehiclePartData().getPartServicesList().get(0));
         ServiceDetailsScreenSteps.openPartServiceDetails();
@@ -97,7 +113,7 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanAddPartServiceWithPreselectedCategoryPlusSubCategoryAndCantEditPreselectedPartsFromPriceMatrix(String rowID,
-                                                                                                                          String description, JSONObject testData) {
+                                                                                                                      String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
@@ -133,7 +149,7 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanAddPartServiceWithPreselectedCategoryAndCantEditPreselectedPartsFromPriceMatrix(String rowID,
-                                                                                                                      String description, JSONObject testData) {
+                                                                                                       String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
@@ -190,7 +206,7 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanEditPartsInMatrixService(String rowID,
-                                                                                                       String description, JSONObject testData) {
+                                                String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
 
         List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
@@ -286,7 +302,9 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         SearchSteps.textSearch(basicPartsServiceMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(basicPartsServiceMatrixService);
-        MatrixServiceSteps.openPartServiceDetailsInsideMatrixService(partServiceInsideMatrix);
+        MatrixServiceDetailsScreenInteractions.selectService(partServiceInsideMatrix.getServiceName());
+        ServiceDetailsScreenSteps.openPartServiceDetails();
+        PartServiceSteps.changePartPosition(partServiceInsideMatrix.getPartPosition());
         PartServiceSteps.confirmPartInfo();
         PartServiceSteps.addLaborService();
         partServiceInsideMatrix.getLaborServiceDataList().stream().map(LaborServiceData::getServiceName).forEach(LaborServiceSteps::selectService);
@@ -318,7 +336,10 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
         MatrixServiceSteps.openServiceDetailsInsideMatrixService(laborServiceInsideMatrix.getServiceName());
         LaborServiceSteps.addPartService();
         partsServicesInsideLaborService.forEach((service -> {
-            PartServiceSteps.selectPartService(service);
+            MatrixServiceDetailsScreenInteractions.selectService(service.getServiceName());
+            ServiceDetailsScreenSteps.openPartServiceDetails();
+            PartServiceSteps.changePartPosition(service.getPartPosition());
+            PartServiceSteps.confirmPartInfo();
             PartServiceSteps.acceptDetailsScreen();
         }));
         ScreenNavigationSteps.pressBackButton();
@@ -334,7 +355,7 @@ public class VNextTeamPartServiceMatrixCases extends BaseTestClass {
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void userCanAddPartsServicesAndSelectCategorySubcategoryPartNamePartPositionAndEdit(String rowID,
-                                                String description, JSONObject testData) {
+                                                                                               String description, JSONObject testData) {
         WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
         List<MatrixServiceData> matrixServiceData = workOrderData.getMatrixServiceDataList();
         MatrixServiceData basicPartsServiceMatrixService = matrixServiceData.get(0);
