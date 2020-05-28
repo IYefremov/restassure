@@ -99,7 +99,7 @@ public class InspectionSteps {
         WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
         String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.clickWizardMenuSaveButton();
-        baseWizardScreen.clcikSaveViaMenuAsFinal();
+        baseWizardScreen.clickSaveViaMenuAsFinal();
         return inspectionNumber;
     }
 
