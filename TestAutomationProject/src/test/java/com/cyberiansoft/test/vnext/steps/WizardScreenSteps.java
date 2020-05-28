@@ -53,7 +53,7 @@ public class WizardScreenSteps {
 
     public static void clcikSaveViaMenuAsFinal() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        baseWizardScreen.clcikSaveViaMenuAsFinal();
+        baseWizardScreen.clickSaveViaMenuAsFinal();
     }
 
     public static void clickNotesMenuButton() {
