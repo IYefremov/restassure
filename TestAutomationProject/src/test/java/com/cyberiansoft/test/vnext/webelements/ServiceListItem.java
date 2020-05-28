@@ -39,8 +39,8 @@ public class ServiceListItem implements IWebElement {
         return WaitUtils.getGeneralFluentWait().until((driver) -> rootElement.findElement(By.xpath(servicePartInfoLocator)).getText().trim());
     }
 
-    public int getNumberOfAddedServices() {
-        return WaitUtils.getGeneralFluentWait().until((driver) -> Integer.parseInt(rootElement.findElement(By.xpath(addServiceLocator)).getAttribute("data-counter")));
+    public String getNumberOfAddedServices() {
+        return WaitUtils.getGeneralFluentWait().until((driver) -> rootElement.findElement(By.xpath(addServiceLocator)).getAttribute("data-counter"));
     }
 
     public void clickAddService() {
