@@ -2,8 +2,10 @@ package com.cyberiansoft.test.vnext.webelements;
 
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.decoration.IWebElement;
+import lombok.Getter;
 import org.openqa.selenium.WebElement;
 
+@Getter
 public class Button implements IWebElement {
     public WebElement rootElement;
 

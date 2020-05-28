@@ -48,6 +48,7 @@ public class ListServicesValidations {
         Assert.assertEquals(servicesScreen.getNotificationPopup().getText(), messageText);
     }
 
+    //todo: rewrite!
     public static void validateAvailableServiceCount(String serviceName, Integer expectedCount) {
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.switchToAvailableServices();

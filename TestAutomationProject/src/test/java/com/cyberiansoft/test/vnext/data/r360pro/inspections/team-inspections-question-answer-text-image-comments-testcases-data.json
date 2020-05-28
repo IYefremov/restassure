@@ -236,10 +236,55 @@
       "vihicleInfo": {
         "vinNumber": "7777777777777"
       },
-      "service": {
-        "serviceName": "Expenses_money (AM)"
+      "moneyService": {
+        "serviceName": "Anastasia money",
+        "questionData": {
+          "questionSetionName": "Alexei's section 2",
+          "textQuestionData": {
+            "questionName": "Do you know? Do you love? Do you really would like to use this note'?",
+            "questionAnswerText": "I would like to use this note"
+          },
+          "logicalQuestionData": {
+            "questionName": "Logical (Required)",
+            "logicalAnswer": "No"
+          },
+          "selectListOptionQuestions": [
+            {
+              "questionName": "Traffic Light (Required)",
+              "questionAnswer": "Checked And OK'd",
+              "isMultiselect": false
+            },
+            {
+              "questionName": "Single Select (Required)",
+              "questionAnswer": "Value 1"
+            },
+            {
+              "questionName": "Multi Select (Required)",
+              "questionAnswers": [
+                "Value 6",
+                "Value 5",
+                "Value 4"
+              ],
+              "isMultiselect": true
+            }
+          ]
+        }
       },
       "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Do you know? Do you love? Do you really would like to use this note'?"
+          },
+          {
+            "questionName": "Logical (Required)"
+          },
+          {
+            "questionName": "Traffic Light (Required)"
+          },
+          {
+            "questionName": "Single Select (Required)"
+          }
+        ],
         "questionData": {
           "imageQuestions": [
             {

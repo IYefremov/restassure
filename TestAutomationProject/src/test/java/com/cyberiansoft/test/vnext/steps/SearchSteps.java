@@ -24,7 +24,7 @@ public class SearchSteps {
 
     public static void selectStatus(RepairOrderStatus status) {
         CommonFilterScreen commonFilterScreen = new CommonFilterScreen();
-        commonFilterScreen.getRepairStatus().selectListElement(status.getStatusString());
+        commonFilterScreen.getRepairStatus().selectOption(status.getStatusString());
     }
 
     public static void clickStatusFilter() {
