@@ -4,7 +4,10 @@ import com.cyberiansoft.test.dataclasses.*;
 import com.cyberiansoft.test.vnext.interactions.ListSelectPageInteractions;
 import com.cyberiansoft.test.vnext.interactions.services.QuestionScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.questions.QuestionScreen;
+import com.cyberiansoft.test.vnext.steps.GeneralSteps;
+import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
+import com.cyberiansoft.test.vnext.webelements.GeneralQuestion;
 
 public class QuestionFormSteps {
 
@@ -98,5 +101,11 @@ public class QuestionFormSteps {
         QuestionScreen questionScreen = new QuestionScreen();
         WaitUtils.waitUntilElementIsClickable(questionScreen.getAnsweredQuestionByText(questionName).getRootElement());
         questionScreen.getAnsweredQuestionByText(questionName).getQuestionNotesIcon().click();
+    }
+
+    public static void removeAddedImageFromImageQuestion(String questionName) {
+        GeneralQuestion imageQuestion = new QuestionScreen().getGeneralQuestionByText(questionName);
+        WaitUtils.click(imageQuestion.getAddedImages().get(0));
+        ImageScreenSteps.removeImage();
     }
 }

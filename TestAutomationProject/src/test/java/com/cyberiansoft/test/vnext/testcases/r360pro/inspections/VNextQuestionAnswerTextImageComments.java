@@ -15,7 +15,7 @@ import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.NotesValidations;
-import com.cyberiansoft.test.vnext.validations.QuestionFormValidations;
+import com.cyberiansoft.test.vnext.validations.questionforms.QuestionFormValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

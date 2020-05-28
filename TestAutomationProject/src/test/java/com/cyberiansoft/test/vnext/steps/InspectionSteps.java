@@ -152,4 +152,13 @@ public class InspectionSteps {
         inspectionsScreen.getMultiSelectInspApproveBtn().click();
         WaitUtils.waitLoadDialogDisappears();
     }
+
+    public static void trySaveInspectionsFinalViaMenu() {
+
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickMenuButton();
+        MenuSteps.selectMenuItem(MenuItems.SAVE_INPSECTION);
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        informationDialog.clickFinalButton();
+    }
 }

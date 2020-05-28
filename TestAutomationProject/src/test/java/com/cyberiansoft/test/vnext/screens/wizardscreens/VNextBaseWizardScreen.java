@@ -78,7 +78,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         tap(cancelinspectionmenu);
     }
 
-    public void clcikSaveViaMenuAsFinal() {
+    public void clickSaveViaMenuAsFinal() {
         VNextInformationDialog informationDialog = new VNextInformationDialog(appiumdriver);
         informationDialog.clickFinalButton();
     }
@@ -93,7 +93,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         clickWizardMenuSaveButton();
         if (inspectionType != null)
             if (new InspectionTypeData(inspectionType).isCanBeFinalDraft())
-                clcikSaveViaMenuAsFinal();
+                clickSaveViaMenuAsFinal();
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         WaitUtils.elementShouldBeVisible(inspectionsScreen.getInspectionsScreen(), true);
     }
@@ -102,7 +102,7 @@ public class VNextBaseWizardScreen extends VNextBaseScreen {
         clickWizardMenuSaveButton();
         if (workOrderType != null)
             if (new WorkOrderTypeData(workOrderType).isCanBeDraft())
-                clcikSaveViaMenuAsFinal();
+                clickSaveViaMenuAsFinal();
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
         workOrdersScreen.clearSearchField();

@@ -135,7 +135,7 @@ public class VNextTeamDraftInspectionsTestCases extends BaseTestClass {
         //HelpingScreenInteractions.dismissHelpingScreenIfPresent();
         InspectionSteps.trySaveInspection();
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
-        baseWizardScreen.clcikSaveViaMenuAsFinal();
+        baseWizardScreen.clickSaveViaMenuAsFinal();
         VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         Assert.assertEquals(informationDialog.clickInformationDialogOKButtonAndGetMessage(),
                 VNextAlertMessages.VIN_REQUIRED_MSG);
