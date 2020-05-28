@@ -1,0 +1,118 @@
+{
+
+  "testWorkOrderVerifyUserCanAddCommentToAllQuestionsType": [
+    {
+      "rowID": "testWorkOrderVerifyUserCanAddCommentToAllQuestionsType.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "126438",
+          "testCaseTitle": "Verify user can add comment to all questions type"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionData": {
+          "textQuestionData": {
+            "questionName": "Free text",
+            "questionAnswerText": "some text"
+          },
+          "imageQuestion": {
+            "questionName": "Image",
+            "numberOFImages": 1
+          },
+          "datePickerQuestion": {
+            "questionName": "Date"
+          },
+          "timePickerQuestion": {
+            "questionName": "Time"
+          },
+          "signatureQuestion": {
+            "questionName": "Signature"
+          }
+        },
+        "questionsData": [
+          {
+            "questionName": "Traffic-light"
+          },
+          {
+            "questionName": "Logical Y/N"
+          },
+          {
+            "questionName": "Single-select"
+          },
+          {
+            "questionName": "Free text"
+          },
+          {
+            "questionName": "Multi-select"
+          },
+          {
+            "questionName": "Image"
+          },
+          {
+            "questionName": "Date"
+          },
+          {
+            "questionName": "Time"
+          },
+          {
+            "questionName": "Signature"
+          }
+        ]
+      }
+    }
+  ],
+  "testWorkOrderVerifyUserCanRemoveCommentForQuestion": [
+    {
+      "rowID": "testWorkOrderVerifyUserCanRemoveCommentForQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "126441",
+          "testCaseTitle": "Verify user can remove comment for question"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Traffic-light"
+          },
+          {
+            "questionName": "Logical Y/N"
+          }
+        ]
+      }
+    }
+  ],
+  "testWorkOrderVerifyUserCanChangeCommentForQuestion": [
+    {
+      "rowID": "testWorkOrderVerifyUserCanChangeCommentForQuestion.01",
+      "description": "",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "126443",
+          "testCaseTitle": "Verify user can change comment for question"
+        }
+      ],
+      "vihicleInfo": {
+        "vinNumber": "7777777777777"
+      },
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Traffic-light"
+          },
+          {
+            "questionName": "Logical Y/N"
+          }
+        ]
+      }
+    }
+  ]
+}

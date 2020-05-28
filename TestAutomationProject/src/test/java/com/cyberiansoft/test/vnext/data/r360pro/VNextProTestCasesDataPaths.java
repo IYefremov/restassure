@@ -231,8 +231,12 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("monitoring.focusmode.button");
     }
 
-    public String getQuestionAnswerTextImageCommentsTestCasesDataPath() {
-        return props.getProperty("question.testimage.comments");
+    public String getInspectionQuestionAnswerTextImageCommentsTestCasesDataPath() {
+        return props.getProperty("inspection.question.textimage.comments");
+    }
+
+    public String getWorkOrderQuestionAnswerTextImageCommentsTestCasesDataPath() {
+        return props.getProperty("workorder.question.textimage.comments");
     }
 
     public String getServiceRequestsTestCasesDataPath() {

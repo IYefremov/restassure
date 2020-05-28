@@ -35,7 +35,7 @@ public class VNextQuestionAnswerTextImageComments extends BaseTestClass {
 
     @BeforeClass(description = "Question Answer Text-Image Comments")
     public void settingUp() {
-        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getQuestionAnswerTextImageCommentsTestCasesDataPath();
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInspectionQuestionAnswerTextImageCommentsTestCasesDataPath();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
