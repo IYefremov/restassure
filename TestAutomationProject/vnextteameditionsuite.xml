@@ -23,6 +23,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoiceEditingTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersList"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTechniciansTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextQuestionAnswerTextImageComments"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextLaborServiceTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextVehicleOwnerSupportTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextInspectionsViewInspectionTestCases"/>
