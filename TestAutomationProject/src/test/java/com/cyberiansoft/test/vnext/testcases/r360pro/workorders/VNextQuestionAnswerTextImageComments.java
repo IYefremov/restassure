@@ -13,7 +13,7 @@ import com.cyberiansoft.test.vnext.steps.commonobjects.TopScreenPanelSteps;
 import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.NotesValidations;
-import com.cyberiansoft.test.vnext.validations.QuestionFormValidations;
+import com.cyberiansoft.test.vnext.validations.questionforms.QuestionFormValidations;
 import org.json.simple.JSONObject;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;

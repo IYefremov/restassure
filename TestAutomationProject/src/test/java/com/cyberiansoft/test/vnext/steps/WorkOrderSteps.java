@@ -65,7 +65,7 @@ public class WorkOrderSteps {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         String workOrderNumber = baseWizardScreen.getNewInspectionNumber();
         baseWizardScreen.clickWizardMenuSaveButton();
-        baseWizardScreen.clcikSaveViaMenuAsFinal();
+        baseWizardScreen.clickSaveViaMenuAsFinal();
         VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
         WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
         workOrdersScreen.clearSearchField();
