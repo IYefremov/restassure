@@ -37,8 +37,8 @@ public class BaseTestClass {
 
     public BaseTestClass() {
         testcustomer = new RetailCustomer();
-        testcustomer.setFirstName("000Automation");
-        testcustomer.setLastName("Retail");
+        testcustomer.setFirstName("111");
+        testcustomer.setLastName("111");
         //testcustomer.setFirstName("Olegg");
         //testcustomer.setLastName("Rom");
 
