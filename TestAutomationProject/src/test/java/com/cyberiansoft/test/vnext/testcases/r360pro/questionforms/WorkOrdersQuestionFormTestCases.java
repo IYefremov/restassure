@@ -6,11 +6,8 @@ import com.cyberiansoft.test.dataprovider.JSONDataProvider;
 import com.cyberiansoft.test.dataprovider.JSonDataParser;
 import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
-import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.steps.HomeScreenSteps;
-import com.cyberiansoft.test.vnext.steps.InspectionSteps;
-import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
-import com.cyberiansoft.test.vnext.steps.WizardScreenSteps;
+import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
+import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.questionform.QuestionFormSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.InformationDialogValidations;
@@ -23,25 +20,25 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-public class InspectionsQuestionFormTestCases extends BaseTestClass {
+public class WorkOrdersQuestionFormTestCases extends BaseTestClass {
 
-    @BeforeClass(description = "Inspections Question Forms Test Cases")
+    @BeforeClass(description = "Work Orders Question Forms Test Cases")
     public void beforeClass() {
-        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getQuestionFormInspectionsCasesDataPath();
+        JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getQuestionFormWorkOrdersCasesDataPath();
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testVerifyInspectionsQuestionFormsImageQuestion(String rowID, String description, JSONObject testData) {
+    public void testVerifyWorkOrdersQuestionFormsImageQuestion(String rowID, String description, JSONObject testData) {
 
-        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-        QuestionsData imageQuestion = inspectionData.getQuestionScreenData().getQuestionsData().get(0);
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        QuestionsData imageQuestion = workOrderData.getQuestionScreenData().getQuestionsData().get(0);
 
-        HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.AT_QF_INSPECTIONS);
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AT_ENCH_QF_WO, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
         QuestionFormValidations.verifyQuestionsScreenIsDisplayed();
         QuestionFormValidations.verifyQuestionIsDisplayed(imageQuestion.getQuestionName());
-        InspectionSteps.trySaveInspectionsFinalViaMenu();
+        WorkOrderSteps.trySaveWorkOrder();
         InformationDialogValidations.clickOKAndVerifyMessage("Please answer all necessary questions");
         QuestionFormValidations.verifyQuestionBackGroundIsRed(imageQuestion.getQuestionName());
         QuestionFormSteps.answerImageQuestion(imageQuestion);
@@ -62,19 +59,19 @@ public class InspectionsQuestionFormTestCases extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testVerifyInspectionsQuestionFormsHandwritingQuestion(String rowID, String description, JSONObject testData) {
+    public void testVerifyWorkOrdersQuestionFormsHandwritingQuestion(String rowID, String description, JSONObject testData) {
 
-        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-        SignatureQuestion signatureQuestion = inspectionData.getQuestionScreenData().getQuestionData().getSignatureQuestion();
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        SignatureQuestion signatureQuestion = workOrderData.getQuestionScreenData().getQuestionData().getSignatureQuestion();
         QuestionsData questionsData = new QuestionsData();
         questionsData.setQuestionName(signatureQuestion.getQuestionName());
 
-        HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.AT_QF_INSPECTIONS);
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AT_ENCH_QF_WO, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
         QuestionFormValidations.verifyQuestionsScreenIsDisplayed();
         QuestionFormValidations.verifyQuestionIsDisplayed(signatureQuestion.getQuestionName());
-        InspectionSteps.trySaveInspectionsFinalViaMenu();
+        WorkOrderSteps.trySaveWorkOrder();
         InformationDialogValidations.clickOKAndVerifyMessage("Please answer all necessary questions");
         QuestionFormValidations.verifyQuestionBackGroundIsRed(signatureQuestion.getQuestionName());
         QuestionFormSteps.answerSignatureQuestion(signatureQuestion);
@@ -88,20 +85,20 @@ public class InspectionsQuestionFormTestCases extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testVerifyInspectionsQuestionFormsDateQuestion(String rowID, String description, JSONObject testData) {
+    public void testVerifyWorkOrdersQuestionFormsDateQuestion(String rowID, String description, JSONObject testData) {
 
-        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-        DatePickerQuestion datePickerQuestion = inspectionData.getQuestionScreenData().getQuestionData().getDatePickerQuestion();
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        DatePickerQuestion datePickerQuestion = workOrderData.getQuestionScreenData().getQuestionData().getDatePickerQuestion();
         QuestionsData questionsData = new QuestionsData();
         questionsData.setQuestionName(datePickerQuestion.getQuestionName());
         LocalDate currentDate = LocalDate.now();
 
-        HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.AT_QF_INSPECTIONS);
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AT_ENCH_QF_WO, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
         QuestionFormValidations.verifyQuestionsScreenIsDisplayed();
         QuestionFormValidations.verifyQuestionIsDisplayed(datePickerQuestion.getQuestionName());
-        InspectionSteps.trySaveInspectionsFinalViaMenu();
+        WorkOrderSteps.trySaveWorkOrder();
         InformationDialogValidations.clickOKAndVerifyMessage("Please answer all necessary questions");
         QuestionFormValidations.verifyQuestionBackGroundIsRed(datePickerQuestion.getQuestionName());
         QuestionFormSteps.answerDateQuestion(datePickerQuestion, currentDate.getMonthValue(), currentDate.getDayOfMonth(), currentDate.getYear());
@@ -116,20 +113,20 @@ public class InspectionsQuestionFormTestCases extends BaseTestClass {
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
-    public void testVerifyInspectionsQuestionFormsTimeQuestion(String rowID, String description, JSONObject testData) {
+    public void testVerifyWorkOrdersQuestionFormsTimeQuestion(String rowID, String description, JSONObject testData) {
 
-        InspectionData inspectionData = JSonDataParser.getTestDataFromJson(testData, InspectionData.class);
-        TimePickerQuestion timePickerQuestion = inspectionData.getQuestionScreenData().getQuestionData().getTimePickerQuestion();
+        WorkOrderData workOrderData = JSonDataParser.getTestDataFromJson(testData, WorkOrderData.class);
+        TimePickerQuestion timePickerQuestion = workOrderData.getQuestionScreenData().getQuestionData().getTimePickerQuestion();
         QuestionsData questionsData = new QuestionsData();
         questionsData.setQuestionName(timePickerQuestion.getQuestionName());
         LocalTime currentTime = LocalTime.now();
 
-        HomeScreenSteps.openCreateMyInspection();
-        InspectionSteps.createInspection(testcustomer, InspectionTypes.AT_QF_INSPECTIONS);
+        HomeScreenSteps.openCreateMyWorkOrder();
+        WorkOrderSteps.createWorkOrder(testcustomer, WorkOrderTypes.AT_ENCH_QF_WO, workOrderData);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.QUESTIONS);
         QuestionFormValidations.verifyQuestionsScreenIsDisplayed();
         QuestionFormValidations.verifyQuestionIsDisplayed(timePickerQuestion.getQuestionName());
-        InspectionSteps.trySaveInspectionsFinalViaMenu();
+        WorkOrderSteps.trySaveWorkOrder();
         InformationDialogValidations.clickOKAndVerifyMessage("Please answer all necessary questions");
         QuestionFormValidations.verifyQuestionBackGroundIsRed(timePickerQuestion.getQuestionName());
         QuestionFormSteps.answerTimeQuestion(timePickerQuestion, currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond());

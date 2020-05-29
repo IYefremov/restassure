@@ -58,11 +58,11 @@ public class VNextInvoiceViewScreenValidations {
                 "Year hasn't been correct");
     }
 
-    public static void verifyCustomerInfoIsDisplayed(String customerAddress) {
+    public static void verifyCustomerInfoIsDisplayed(String customerName, String customerAddress) {
 
         VNextInvoiceViewScreen invoiceViewScreen = new VNextInvoiceViewScreen();
         Assert.assertTrue(invoiceViewScreen.getCustomerName().isDisplayed(), "Customer name hasn't been displayed");
-        Assert.assertEquals(invoiceViewScreen.getCustomerName().getText(), customerAddress,
+        Assert.assertEquals(invoiceViewScreen.getCustomerName().getText(), customerName,
                 "Customer name hasn't been correct");
         Assert.assertTrue(invoiceViewScreen.getCustomerAddress().isDisplayed(), "Customer address hasn't been displayed");
         Assert.assertEquals(invoiceViewScreen.getCustomerAddress().getText(), customerAddress,
