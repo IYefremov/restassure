@@ -33,6 +33,10 @@ public class VNextTeamInvoicePrintViewTestCases extends BaseTestClass {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInvoicePrintViewTestCasesDataPath();
         testCaseData = JSonDataParser.getTestDataFromJson(JSONDataProvider.extractData_JSON(PRECONDITIONS_FILE), TestCaseData.class);
 
+        HomeScreenSteps.openCustomers();
+        CustomerServiceSteps.createCustomerIfNotExist(testcustomer);
+        ScreenNavigationSteps.pressBackButton();
+
         HomeScreenSteps.startInvoiceCreation();
         invoiceNumber = createWorkOrderWithInvoice(testCaseData.getWorkOrderData());
         TopScreenPanelSteps.searchData(invoiceNumber);
@@ -68,7 +72,7 @@ public class VNextTeamInvoicePrintViewTestCases extends BaseTestClass {
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserSeeCorrectCustomerInfo(String rowID, String description, JSONObject testData) {
 
-        VNextInvoiceViewScreenValidations.verifyCustomerInfoIsDisplayed("US");
+        VNextInvoiceViewScreenValidations.verifyCustomerInfoIsDisplayed(testcustomer.getFullName(), "US");
     }
 
     @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
