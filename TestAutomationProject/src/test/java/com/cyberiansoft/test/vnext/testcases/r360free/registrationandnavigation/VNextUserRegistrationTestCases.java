@@ -17,10 +17,10 @@ import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.interactions.VehicleInfoScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.*;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.VNextBaseTestCase;
 import com.cyberiansoft.test.vnext.utils.AppContexts;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
@@ -729,9 +729,9 @@ public class VNextUserRegistrationTestCases extends VNextBaseTestCase {
             vehiclePartInfoPage.selectVehiclePartSeverity(vehiclepartseverities[i]);
             vehiclePartInfoPage.clickSaveVehiclePartInfo();
             vehiclePartsScreen.clickVehiclePartsSaveButton();
-            VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+            SelectedServicesScreenSteps.switchToSelectedService();
             SelectedServicesScreenValidations.validateMatrixServiceIsSelectedForService(matrixservice, availablepricematrixes[i]);
-            selectedServicesScreen.switchToAvalableServicesView();
+            AvailableServicesScreenSteps.switchToAvailableServices();
         }
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();

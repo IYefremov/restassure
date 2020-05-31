@@ -29,7 +29,7 @@ public class VNextVehiclePartInfoScreen extends VNextBaseScreen {
 	@FindBy(xpath = "//div[@input='price']")
 	private WebElement vehiclepartpricefld;
 
-	@FindBy(xpath = "//*[@data-view-mode='available']/div")
+	@FindBy(xpath = "//*[@data-autotests-id='available-services-list']/div")
 	private List<ServiceListItem> servicesList;
 
 	@FindBy(xpath = "//*[@action='notes']")

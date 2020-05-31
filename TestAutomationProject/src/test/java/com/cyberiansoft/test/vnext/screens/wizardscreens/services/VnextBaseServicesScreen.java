@@ -39,12 +39,9 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
         }
     }
 
-    public VNextSelectedServicesScreen switchToSelectedServicesView() {
+    public void switchToSelectedServicesView() {
         WaitUtils.click(selectedButton);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
-        wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-view-mode='selected']")));
-        return new VNextSelectedServicesScreen();
     }
 }

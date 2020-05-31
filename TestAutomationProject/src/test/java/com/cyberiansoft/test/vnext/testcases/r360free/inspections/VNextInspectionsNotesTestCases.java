@@ -139,7 +139,6 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(0));
         AvailableServicesScreenSteps.selectService(inspectionData.getServiceNameByIndex(1));
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         SelectedServicesScreenSteps.openServiceDetails(inspectionData.getServiceNameByIndex(1));
         ServiceDetailsScreenSteps.openServiceNotes();
         NotesSteps.setNoteText(notetext);
@@ -492,7 +491,6 @@ public class VNextInspectionsNotesTestCases extends BaseTestCaseWithDeviceRegist
         VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
         for (ServiceData serviceAdd : inspectionData.getServicesList())
             AvailableServicesScreenSteps.selectService(serviceAdd);
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
         for (ServiceData serviceAdd : inspectionData.getServicesList()) {
             SelectedServicesScreenSteps.openServiceDetails(serviceAdd.getServiceName());
             ServiceDetailsScreenSteps.openServiceNotes();
