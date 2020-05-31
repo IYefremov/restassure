@@ -342,7 +342,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
             ServiceDetailsScreenSteps.saveServiceDetails();
         });
 
-        VisualScreenSteps.clickDamageCancelEditingButton();
+        //VisualScreenSteps.clickDamageCancelEditingButton();
         WizardScreenValidations.validateTotalPriceValue(inspectionData.getInspectionPrice());
         final String inspectionNumber = InspectionSteps.saveInspection();
         InspectionsValidations.verifyInspectionTotalPrice(inspectionNumber, inspectionData.getInspectionPrice());
@@ -395,7 +395,7 @@ public class VNextTeamCalculationsTestCases extends BaseTestClass {
         ServiceDetailsValidations.verifyServicePrice(inspectionData.getDamageData().getMoneyService().getServicePrice());
         ServiceDetailsScreenSteps.saveServiceDetails();
 
-        VisualScreenSteps.clickDamageCancelEditingButton();
+        //VisualScreenSteps.clickDamageCancelEditingButton();
         InspectionSteps.cancelInspection();
         ScreenNavigationSteps.pressBackButton();
     }
