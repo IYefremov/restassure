@@ -95,6 +95,10 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("invoice.editing.td");
     }
 
+    public String getInvoicePrintViewTestCasesDataPath() {
+        return props.getProperty("invoice.print.view.td");
+    }
+
     public String getInvoicePaymentTestCasesDataPath() {
         return props.getProperty("invoice.payment.td");
     }
@@ -167,6 +171,14 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("question.form.basic");
     }
 
+    public String getQuestionFormInspectionsCasesDataPath() {
+        return props.getProperty("question.form.inspections");
+    }
+
+    public String getQuestionFormWorkOrdersCasesDataPath() {
+        return props.getProperty("question.form.work.orders");
+    }
+
     public String getVehiclePartsCasesDataPath() {
         return props.getProperty("vehicle.parts.basic");
     }
@@ -223,8 +235,12 @@ public class VNextProTestCasesDataPaths {
         return props.getProperty("monitoring.focusmode.button");
     }
 
-    public String getQuestionAnswerTextImageCommentsTestCasesDataPath() {
-        return props.getProperty("question.testimage.comments");
+    public String getInspectionQuestionAnswerTextImageCommentsTestCasesDataPath() {
+        return props.getProperty("inspection.question.textimage.comments");
+    }
+
+    public String getWorkOrderQuestionAnswerTextImageCommentsTestCasesDataPath() {
+        return props.getProperty("workorder.question.textimage.comments");
     }
 
     public String getServiceRequestsTestCasesDataPath() {

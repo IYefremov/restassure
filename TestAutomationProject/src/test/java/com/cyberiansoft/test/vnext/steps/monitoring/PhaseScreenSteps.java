@@ -5,6 +5,7 @@ import com.cyberiansoft.test.dataclasses.ServiceTechnician;
 import com.cyberiansoft.test.enums.MenuItems;
 import com.cyberiansoft.test.vnext.interactions.PhaseScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.monitoring.PhasesScreen;
+import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
 import com.cyberiansoft.test.vnext.steps.GeneralListSteps;
 import com.cyberiansoft.test.vnext.steps.GeneralSteps;
 import com.cyberiansoft.test.vnext.steps.MenuSteps;
@@ -63,5 +64,13 @@ public class PhaseScreenSteps {
         clickAddButton();
         PhasesScreen phasesScreen = new PhasesScreen();
         phasesScreen.getTaskButton().click();
+    }
+
+    public static void addServices() {
+        clickAddButton();
+        PhasesScreen phasesScreen = new PhasesScreen();
+        phasesScreen.getAllServicesButton().click();
+        VNextAvailableServicesScreen availableServicesScreen = new VNextAvailableServicesScreen();
+        WaitUtils.waitUntilElementIsClickable(availableServicesScreen.getAllServicesList().getRootElement());
     }
 }

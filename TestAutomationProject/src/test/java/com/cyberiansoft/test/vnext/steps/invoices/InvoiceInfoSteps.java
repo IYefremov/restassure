@@ -1,9 +1,9 @@
-package com.cyberiansoft.test.vnext.steps;
+package com.cyberiansoft.test.vnext.steps.invoices;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
-import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextSelectWorkOrdersScreen;
+import com.cyberiansoft.test.vnext.screens.invoices.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

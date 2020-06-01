@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.validations;
+package com.cyberiansoft.test.vnext.validations.invoices;
 
 import com.cyberiansoft.test.vnext.interactions.VNextInvoiceInfoScreenInteractions;
 import org.testng.Assert;

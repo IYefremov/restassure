@@ -9,7 +9,7 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.InspectionStatus;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
@@ -318,7 +318,8 @@ public class VNextTeamInspectionsLineApprovalTestCases extends BaseTestClass {
         List<VehiclePartData> vehiclePartsData = matrixServiceData.getVehiclePartsData();
         VNextVehiclePartsScreen vehiclePartsScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         for (VehiclePartData vehiclePartData : vehiclePartsData) {
-            VNextVehiclePartInfoPage vehiclePartInfoScreen = vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            vehiclePartsScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+            VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
             vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
             vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
             if (vehiclePartData.getVehiclePartAdditionalServices() != null) {

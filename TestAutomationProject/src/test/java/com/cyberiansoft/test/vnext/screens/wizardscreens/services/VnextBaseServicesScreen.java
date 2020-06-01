@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
 
     @FindBy(xpath = "//div[contains(@data-page,'list')]")
-    private WebElement servicesscreen;
+    private WebElement servicesScreen;
 
     @FindBy(xpath = "//div[@class='notifier']")
     private WebElement notificationPopup;
@@ -28,23 +28,20 @@ public class VnextBaseServicesScreen extends VNextBaseWizardScreen {
     }
 
     public void switchToAvalableServicesView() {
-        WaitUtils.waitUntilElementIsClickable(servicesscreen.findElement(By.xpath("//*[contains(@class,'services-list') and @data-view-mode]")));
-        WaitUtils.getGeneralFluentWait().until(driver -> {
-            tap(servicesscreen.findElement(By.xpath(".//*[@action='available']")));
-            return true;
-        });
-        WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
-        //wait = new WebDriverWait(appiumdriver, 5);
-        //wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[contains(@class,'services-list') and @data-view-mode='available']")));
+        WebElement activeTab = WaitUtils.waitUntilElementIsClickable(servicesScreen.findElement(By.xpath(".//*[@action='available']")));
+        if (!activeTab.getAttribute("class").contains("active")) {
+            WaitUtils.getGeneralFluentWait().until(driver -> {
+                servicesScreen.findElement(By.xpath(".//*[@action='available']")).click();
+                return true;
+            });
+            WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='available' and @class='button active']")));
+        }
     }
 
-    public VNextSelectedServicesScreen switchToSelectedServicesView() {
+    public void switchToSelectedServicesView() {
         WaitUtils.click(selectedButton);
         WebDriverWait wait = new WebDriverWait(appiumdriver, 5);
         wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@action='selected' and @class='button active']")));
-        wait = new WebDriverWait(appiumdriver, 5);
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@data-view-mode='selected']")));
-        return new VNextSelectedServicesScreen();
     }
 }

@@ -23,6 +23,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoiceEditingTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersList"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersTechniciansTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextQuestionAnswerTextImageComments"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextLaborServiceTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextVehicleOwnerSupportTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextInspectionsViewInspectionTestCases"/>
@@ -33,6 +34,7 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.inspections.VNextQuestionAnswerTextImageComments"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.workorders.VNextTeamWorkOrdersCreateMultipleWOFromInspectionTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicesEditWOInInvoiceTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.invoices.VNextTeamInvoicePrintViewTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringBaseCase"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextTeamMonitoringCommonFilters"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.VNextMonitoringSearchFiltersTestCases"/>
@@ -52,6 +54,8 @@
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceLaborCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.partservice.VNextTeamPartServiceBundleCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.questionforms.BasicQuestionFormTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.questionforms.InspectionsQuestionFormTestCases"/>
+            <class name="com.cyberiansoft.test.vnext.testcases.r360pro.questionforms.WorkOrdersQuestionFormTestCases"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.services.option.multiple.SingleSelectionServiceTests"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.vehicleparts.BasicVehiclePartsTests"/>
             <class name="com.cyberiansoft.test.vnext.testcases.r360pro.monitoring.MonitoringRoActionMenuPhase"/>

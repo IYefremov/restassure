@@ -35,6 +35,8 @@ public class QuestionsData {
     private boolean listQuestion;
     @JsonProperty("imageQuestion")
     private ImageQuestion imageQuestion;
+    @JsonProperty("imageQuestions")
+    private List<ImageQuestion> imageQuestions;
     @JsonProperty("datePickerQuestion")
     private DatePickerQuestion datePickerQuestion;
     @JsonProperty("timePickerQuestion")
@@ -45,4 +47,8 @@ public class QuestionsData {
     private TextQuestionData textQuestionData;
     @JsonProperty("logicalQuestionData")
     private LogicalQuestionData logicalQuestionData;
+    @JsonProperty("selectListOptionQuestion")
+    private SelectListOptionQuestion selectListOptionQuestion;
+    @JsonProperty("selectListOptionQuestions")
+    private List<SelectListOptionQuestion> selectListOptionQuestions;
 }

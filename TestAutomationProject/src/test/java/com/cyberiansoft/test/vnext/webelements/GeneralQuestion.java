@@ -23,6 +23,8 @@ public class GeneralQuestion implements IWebElement {
     private String selectTimeLocator = ".//*[@name='Question.QuestionTime']";
     private String signatureLocator = ".//*[@class='handwriting-answer-placeholder']";
     private String questionNotesIcon = ".//*[contains(@class,'selected-answer-notes ')]";
+    private String addedImageLocator = ".//div[@class='image-item']";
+    private String hiddenImagesCounterLocator = ".//div[@class='image-item counter-item']";
 
     public GeneralQuestion(WebElement rootElement) {
         this.rootElement = rootElement;
@@ -87,5 +89,17 @@ public class GeneralQuestion implements IWebElement {
 
     public WebElement getQuestionNotesIcon() {
         return this.rootElement.findElement(By.xpath(questionNotesIcon));
+    }
+
+    public WebElement getClearIcon() {
+        return this.rootElement.findElement(By.xpath(clearButtonLocator));
+    }
+
+    public List<WebElement> getAddedImages() {
+        return this.rootElement.findElements(By.xpath(addedImageLocator));
+    }
+
+    public WebElement getHiddenImagesCount() {
+        return this.rootElement.findElement(By.xpath(hiddenImagesCounterLocator));
     }
 }

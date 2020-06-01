@@ -12,6 +12,7 @@ import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.LaborServiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.ServiceDetailsScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
 import org.json.simple.JSONObject;
@@ -40,8 +41,10 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
         HomeScreenSteps.openCreateMyInspection();
         InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-        SearchSteps.textSearch(basicPartService.getServiceName());
-        PartServiceSteps.selectPartService(basicPartService);
+        AvailableServicesScreenSteps.openServiceDetails(basicPartService.getServiceName());
+        ServiceDetailsScreenSteps.openPartServiceDetails();
+        PartServiceSteps.changePartPosition(basicPartService.getPartPosition());
+        PartServiceSteps.confirmPartInfo();
         PartServiceSteps.addLaborService();
         laborServiceData.stream()
                 .map(LaborServiceData::getServiceName)
@@ -73,9 +76,15 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
         LaborServiceSteps.addPartService();
         partServiceData
                 .forEach(service -> {
-                    SearchSteps.textSearch(service.getServiceName());
-                    PartServiceSteps.selectPartService(service);
-                    PartServiceSteps.acceptDetailsScreen();
+                    AvailableServicesScreenSteps.openServiceDetails(service.getServiceName());
+                    if (service.getCategory() != null) {
+                        PartServiceSteps.selectPartServiceDetails(service);
+                    } else {
+                        ServiceDetailsScreenSteps.openPartServiceDetails();
+                        PartServiceSteps.changePartPosition(service.getPartPosition());
+                    }
+                    PartServiceSteps.confirmPartInfo();
+                    ServiceDetailsScreenSteps.closeServiceDetailsScreen();
                 });
         ScreenNavigationSteps.pressBackButton();
         PartServiceSteps.confirmPartInfo();
@@ -107,9 +116,15 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
             LaborServiceSteps.addPartService();
             laborServiceData.getPartServiceDataList()
                     .forEach(service -> {
-                        SearchSteps.textSearch(service.getServiceName());
-                        PartServiceSteps.selectPartService(service);
-                        PartServiceSteps.acceptDetailsScreen();
+                        AvailableServicesScreenSteps.openServiceDetails(service.getServiceName());
+                        if (service.getCategory() != null) {
+                            PartServiceSteps.selectPartServiceDetails(service);
+                        } else {
+                            ServiceDetailsScreenSteps.openPartServiceDetails();
+                            PartServiceSteps.changePartPosition(service.getPartPosition());
+                        }
+                        PartServiceSteps.confirmPartInfo();
+                        ServiceDetailsScreenSteps.closeServiceDetailsScreen();
                     });
             ScreenNavigationSteps.pressBackButton();
             PartServiceSteps.confirmPartInfo();
@@ -144,8 +159,14 @@ public class VNextTeamPartServiceLaborCases extends BaseTestClass {
         InspectionSteps.createInspection(testcustomer, InspectionTypes.AUTOMATION_MONITORING);
         WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
         partServiceDataList.forEach(partServiceData -> {
-            SearchSteps.textSearch(partServiceData.getServiceName());
-            PartServiceSteps.selectPartService(partServiceData);
+            AvailableServicesScreenSteps.openServiceDetails(partServiceData.getServiceName());
+            if (partServiceData.getCategory() != null) {
+                PartServiceSteps.selectPartServiceDetails(partServiceData);
+            } else {
+                ServiceDetailsScreenSteps.openPartServiceDetails();
+                PartServiceSteps.changePartPosition(partServiceData.getPartPosition());
+            }
+            PartServiceSteps.confirmPartInfo();
             PartServiceSteps.addLaborService();
             partServiceData.getLaborServiceDataList()
                     .forEach(service -> LaborServiceSteps.selectService(service.getServiceName()));

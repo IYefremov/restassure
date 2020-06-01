@@ -17,7 +17,6 @@ import com.cyberiansoft.test.vnext.screens.VNextViewScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
@@ -66,7 +65,7 @@ public class VNextNavigationTestCases extends BaseTestCaseWithDeviceRegistration
             AvailableServicesScreenSteps.selectService(service);
         ScreenNavigationSteps.pressBackButton();
         ScreenNavigationSteps.pressBackButton();
-        VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+        SelectedServicesScreenSteps.switchToSelectedService();
         for (ServiceData service : inspectionData.getServicesList())
             ListServicesValidations.verifyServiceSelected(service.getServiceName(), true);
 

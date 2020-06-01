@@ -55,6 +55,9 @@ public class PhasesScreen extends MonitorScreen {
     @FindBy(xpath = "//*[@class='speed-dial-icon task-button']")
     private WebElement taskButton;
 
+    @FindBy(xpath = "//*[@class='speed-dial-icon all-services-button']")
+    private WebElement allServicesButton;
+
     public PhasesScreen() {
         PageFactory.initElements(new FiledDecorator(webDriver), this);
     }

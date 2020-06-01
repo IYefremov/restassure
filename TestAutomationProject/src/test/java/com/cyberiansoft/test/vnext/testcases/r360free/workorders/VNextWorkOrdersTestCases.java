@@ -10,10 +10,10 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.interactions.HelpingScreenInteractions;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextVehicleInfoScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextAvailableServicesScreen;
-import com.cyberiansoft.test.vnext.screens.wizardscreens.services.VNextSelectedServicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
 import com.cyberiansoft.test.vnext.steps.customers.CustomersScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
+import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360free.BaseTestCaseWithDeviceRegistrationAndUserLogin;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
@@ -47,7 +47,7 @@ public class VNextWorkOrdersTestCases extends BaseTestCaseWithDeviceRegistration
 		MenuSteps.selectMenuItem(MenuItems.EDIT);
 		WaitUtils.elementShouldBeVisible(vehicleInfoScreen.getRootElement(), true);
 		WizardScreenSteps.navigateToWizardScreen(ScreenType.SERVICES);
-		VNextSelectedServicesScreen selectedServicesScreen = availableServicesScreen.switchToSelectedServicesView();
+		SelectedServicesScreenSteps.switchToSelectedService();
 		for (ServiceData serviceData : workOrderData.getServicesList())
 			ListServicesValidations.verifyServiceSelected(serviceData.getServiceName(), true);
 		WorkOrderSteps.saveWorkOrder();

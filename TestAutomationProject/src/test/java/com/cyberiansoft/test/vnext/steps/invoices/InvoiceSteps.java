@@ -1,4 +1,4 @@
-package com.cyberiansoft.test.vnext.steps;
+package com.cyberiansoft.test.vnext.steps.invoices;
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.dataclasses.InvoiceData;
@@ -9,8 +9,15 @@ import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.screens.typeselectionlists.VNextInvoiceTypesList;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.screens.wizardscreens.VNextBaseWizardScreen;
+import com.cyberiansoft.test.vnext.steps.ApproveSteps;
+import com.cyberiansoft.test.vnext.steps.MenuSteps;
+import com.cyberiansoft.test.vnext.steps.NotesSteps;
+import com.cyberiansoft.test.vnext.steps.ScreenNavigationSteps;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import com.cyberiansoft.test.vnext.webelements.InvoiceListElement;
+import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class InvoiceSteps {
 
@@ -113,4 +120,25 @@ public class InvoiceSteps {
         invoicesScreen.clickAddInvoiceButton();
     }
 
+    public static void approveInvoice(String invoiceId) {
+
+        openMenu(invoiceId);
+        MenuSteps.selectMenuItem(MenuItems.APPROVE);
+        ApproveSteps.drawSignature();
+        ApproveSteps.saveApprove();
+    }
+
+    public static void viewInvoice(String invoiceId) {
+
+        openMenu(invoiceId);
+        MenuSteps.selectMenuItem(MenuItems.VIEW);
+        WaitUtils.waitLoadDialogDisappears();
+        try {
+            WaitUtils.getGeneralFluentWait().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class='notifier-contaier']")));
+            WaitUtils.getGeneralFluentWait().until(ExpectedConditions.invisibilityOf(
+                    ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElement(By.xpath("//div[@class='notifier-contaier']"))
+            ));
+        } catch (TimeoutException ex) {
+        }
+    }
 }

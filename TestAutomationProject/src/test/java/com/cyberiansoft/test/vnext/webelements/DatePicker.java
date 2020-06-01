@@ -23,7 +23,7 @@ public class DatePicker implements IWebElement {
     public void selectDateOption(int month, int date, int year) {
         WaitUtils.click(rootElement);
         WaitUtils.getGeneralFluentWait().until((webdriver) -> webdriver.findElements(pickerDateColumns).size() > 0);
-        BaseUtils.waitABit(500);
+        BaseUtils.waitABit(1000);
         if (!ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(pickerDateColumns).get(0)
         .findElement(By.xpath(".//*[@class='picker-item picker-selected']")).getAttribute("data-picker-value").equals(String.valueOf(month-1))) {
             WebElement monthElement = ChromeDriverProvider.INSTANCE.getMobileChromeDriver().findElements(pickerDateColumns).get(0)

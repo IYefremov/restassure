@@ -21,7 +21,7 @@ public class VNextAvailableServicesScreen extends VnextBaseServicesScreen {
     @FindBy(xpath = "//*[@data-autotests-id='all-services']")
     private Button allServicesList;
 
-    @FindBy(xpath = "//*[@data-view-mode='available']/div")
+    @FindBy(xpath = "//*[@data-autotests-id='available-services-list']/div")
     private List<ServiceListItem> servicesList;
 
     public VNextAvailableServicesScreen() {

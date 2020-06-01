@@ -61,6 +61,17 @@ public class WorkOrderSteps {
         return workOrderNumber;
     }
 
+    public static String saveWorkOrderAsFinal() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        String workOrderNumber = baseWizardScreen.getNewInspectionNumber();
+        baseWizardScreen.clickWizardMenuSaveButton();
+        baseWizardScreen.clickSaveViaMenuAsFinal();
+        VNextWorkOrdersScreen workOrdersScreen = new VNextWorkOrdersScreen();
+        WaitUtils.elementShouldBeVisible(workOrdersScreen.getRootElement(), true);
+        workOrdersScreen.clearSearchField();
+        return workOrderNumber;
+    }
+
     public static void trySaveWorkOrder() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));

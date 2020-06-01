@@ -1,9 +1,10 @@
 package com.cyberiansoft.test.vnext.steps.services;
 
+import com.cyberiansoft.test.dataclasses.ServiceData;
 import com.cyberiansoft.test.dataclasses.VehiclePartData;
 import com.cyberiansoft.test.driverutils.ChromeDriverProvider;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
@@ -17,7 +18,7 @@ public class VehiclePartsScreenSteps {
 
     public static void selectVehiclePartData(VehiclePartData vehiclePartData) {
         selectVehiclePart(vehiclePartData.getVehiclePartName());
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = new VNextVehiclePartInfoPage();
+        VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
         selectVehiclePartSizeAndSeverity(vehiclePartData.getVehiclePartSize(),
                 vehiclePartData.getVehiclePartSeverity());
         if (vehiclePartData.getVehiclePartAdditionalService() != null)
@@ -35,14 +36,19 @@ public class VehiclePartsScreenSteps {
         vehiclePartInfoScreen.clickScreenBackButton();
     }
 
+    public static void selectVehiclePartAdditionalService(ServiceData serviceData) {
+        VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
+        vehiclePartInfoScreen.selectVehiclePartAdditionalService(serviceData.getServiceName());
+    }
+
     public static void selectVehiclePartSizeAndSeverity(String vehiclePartSize, String vehiclePartSeverity) {
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = new VNextVehiclePartInfoPage();
+        VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
         vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartSize);
         vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartSeverity);
     }
 
     public static void openAdditionalServiceDetails(String serviceName) {
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = new VNextVehiclePartInfoPage();
+        VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
         vehiclePartInfoScreen.openServiceDetailsScreen(serviceName);
     }
 

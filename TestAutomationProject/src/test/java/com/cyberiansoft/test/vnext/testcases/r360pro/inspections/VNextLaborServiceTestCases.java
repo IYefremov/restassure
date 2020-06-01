@@ -9,7 +9,7 @@ import com.cyberiansoft.test.vnext.data.r360pro.VNextProTestCasesDataPaths;
 import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.inspectiontypes.InspectionTypes;
 import com.cyberiansoft.test.vnext.screens.VNextServiceDetailsScreen;
-import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoPage;
+import com.cyberiansoft.test.vnext.screens.VNextVehiclePartInfoScreen;
 import com.cyberiansoft.test.vnext.screens.VNextVehiclePartsScreen;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePanelsList;
 import com.cyberiansoft.test.vnext.screens.panelandparts.VNextLaborServicePartsList;
@@ -99,7 +99,8 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         AvailableServicesScreenSteps.selectMatrixService(inspectionData.getMatrixServiceData());
         VehiclePartData vehiclePartData = inspectionData.getMatrixServiceData().getVehiclePartData();
         VNextVehiclePartsScreen priceMatrixesScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+        priceMatrixesScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+        VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
         vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
         vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 
@@ -130,7 +131,8 @@ public class VNextLaborServiceTestCases extends BaseTestClass {
         AvailableServicesScreenSteps.selectMatrixService(inspectionData.getMatrixServiceData());
         VNextVehiclePartsScreen priceMatrixesScreen = new VNextVehiclePartsScreen(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
         VehiclePartData vehiclePartData = inspectionData.getMatrixServiceData().getVehiclePartData();
-        VNextVehiclePartInfoPage vehiclePartInfoScreen = priceMatrixesScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+        priceMatrixesScreen.selectVehiclePart(vehiclePartData.getVehiclePartName());
+        VNextVehiclePartInfoScreen vehiclePartInfoScreen = new VNextVehiclePartInfoScreen();
         vehiclePartInfoScreen.selectVehiclePartSize(vehiclePartData.getVehiclePartSize());
         vehiclePartInfoScreen.selectVehiclePartSeverity(vehiclePartData.getVehiclePartSeverity());
 

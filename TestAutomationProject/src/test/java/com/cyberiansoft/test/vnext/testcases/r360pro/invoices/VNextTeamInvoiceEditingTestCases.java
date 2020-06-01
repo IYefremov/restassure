@@ -13,16 +13,18 @@ import com.cyberiansoft.test.vnext.enums.ScreenType;
 import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
-import com.cyberiansoft.test.vnext.screens.VNextInvoiceInfoScreen;
+import com.cyberiansoft.test.vnext.screens.invoices.VNextInvoiceInfoScreen;
 import com.cyberiansoft.test.vnext.screens.typesscreens.VNextInvoicesScreen;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.invoices.InvoiceInfoSteps;
+import com.cyberiansoft.test.vnext.steps.invoices.InvoiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
-import com.cyberiansoft.test.vnext.validations.InvoiceInfoScreenValidations;
-import com.cyberiansoft.test.vnext.validations.InvoicesScreenValidations;
 import com.cyberiansoft.test.vnext.validations.MenuValidations;
 import com.cyberiansoft.test.vnext.validations.WorkOrdersScreenValidations;
+import com.cyberiansoft.test.vnext.validations.invoices.InvoiceInfoScreenValidations;
+import com.cyberiansoft.test.vnext.validations.invoices.InvoicesScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -306,7 +308,7 @@ public class VNextTeamInvoiceEditingTestCases extends BaseTestClass {
         Assert.assertEquals(informationDialog.clickInformationDialogYesButtonAndGetMessage(),
                 VNextAlertMessages.CANCEL_ETING_INVOICE);
         workOrders.forEach(workOrderId ->
-                        InvoicesScreenValidations.validateInvoiceHasWorkOrder(invoiceNumber, workOrderId, true));
+                InvoicesScreenValidations.validateInvoiceHasWorkOrder(invoiceNumber, workOrderId, true));
         ScreenNavigationSteps.pressBackButton();
     }
 

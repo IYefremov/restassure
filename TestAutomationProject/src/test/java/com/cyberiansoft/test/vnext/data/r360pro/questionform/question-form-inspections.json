@@ -1,0 +1,78 @@
+{
+  "testVerifyInspectionsQuestionFormsImageQuestion": [
+    {
+      "rowID": " testVerifyInspectionsQuestionFormsImageQuestion.01",
+      "description": "Test Case 97385: ReconPro - Inspections - Question Forms - Image type",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97385",
+          "testCaseTitle": "ReconPro - Inspections - Question Forms - Image type"
+        }
+      ],
+      "questionScreenData": {
+        "questionsData": [
+          {
+            "questionName": "Picture of your app?"
+          }
+        ]
+      }
+    }
+  ],
+  "testVerifyInspectionsQuestionFormsHandwritingQuestion": [
+    {
+      "rowID": " testVerifyInspectionsQuestionFormsHandwritingQuestion.01",
+      "description": "Test Case 97386: ReconPro - Inspections - Question Forms - Handwriting",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97386",
+          "testCaseTitle": "ReconPro - Inspections - Question Forms - Handwriting"
+        }
+      ],
+      "questionScreenData": {
+        "questionData": {
+          "signatureQuestion": {
+            "questionName": "Sign?"
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyInspectionsQuestionFormsDateQuestion": [
+    {
+      "rowID": " testVerifyInspectionsQuestionFormsDateQuestion.01",
+      "description": "Test Case 97387: ReconPro - Inspections - Question Forms - Date type",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97387",
+          "testCaseTitle": "ReconPro - Inspections - Question Forms - Date type"
+        }
+      ],
+      "questionScreenData": {
+        "questionData": {
+          "datePickerQuestion": {
+            "questionName": "Start Date?"
+          }
+        }
+      }
+    }
+  ],
+  "testVerifyInspectionsQuestionFormsTimeQuestion": [
+    {
+      "rowID": " testVerifyInspectionsQuestionFormsTimeQuestion.01",
+      "description": "Test Case 97388: ReconPro - Inspections - Question Forms - Time type",
+      "targetProcessTestCaseData": [
+        {
+          "testCaseID": "97388",
+          "testCaseTitle": "ReconPro - Inspections - Question Forms - Time type"
+        }
+      ],
+      "questionScreenData": {
+        "questionData": {
+          "timePickerQuestion": {
+            "questionName": "Start Time?"
+          }
+        }
+      }
+    }
+  ]
+}

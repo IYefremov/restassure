@@ -11,13 +11,15 @@ import com.cyberiansoft.test.vnext.factories.invoicestypes.InvoiceTypes;
 import com.cyberiansoft.test.vnext.factories.workordertypes.WorkOrderTypes;
 import com.cyberiansoft.test.vnext.screens.VNextInformationDialog;
 import com.cyberiansoft.test.vnext.steps.*;
+import com.cyberiansoft.test.vnext.steps.invoices.InvoiceInfoSteps;
+import com.cyberiansoft.test.vnext.steps.invoices.InvoiceSteps;
 import com.cyberiansoft.test.vnext.steps.services.AvailableServicesScreenSteps;
 import com.cyberiansoft.test.vnext.steps.services.SelectedServicesScreenSteps;
 import com.cyberiansoft.test.vnext.testcases.r360pro.BaseTestClass;
 import com.cyberiansoft.test.vnext.utils.VNextAlertMessages;
 import com.cyberiansoft.test.vnext.validations.InformationDialogValidations;
-import com.cyberiansoft.test.vnext.validations.InvoiceInfoScreenValidations;
 import com.cyberiansoft.test.vnext.validations.ListServicesValidations;
+import com.cyberiansoft.test.vnext.validations.invoices.InvoiceInfoScreenValidations;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -33,9 +35,9 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
         JSONDataProvider.dataFile = VNextProTestCasesDataPaths.getInstance().getInvoicesEditWOInvoiceTestCasesDataPath();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanEditWOInDraftInvoice(String rowID,
-                                                          String description, JSONObject testData) {
+                                                      String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -60,9 +62,9 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
 
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyWOTotalAmountChangedIfUserAddServiceToWOInDraftInvoice(String rowID,
-                                                      String description, JSONObject testData) {
+                                                                                 String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
 
@@ -94,15 +96,15 @@ public class VNextTeamInvoicesEditWOInInvoiceTestCases extends BaseTestClass {
         ScreenNavigationSteps.pressBackButton();
     }
 
-    @Test(dataProvider="fetchData_JSON", dataProviderClass=JSONDataProvider.class)
+    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testVerifyUserCanAddWOToDraftInvoiceAndEditThisWO(String rowID,
-                                                      String description, JSONObject testData) {
+                                                                  String description, JSONObject testData) {
 
         TestCaseData testCaseData = JSonDataParser.getTestDataFromJson(testData, TestCaseData.class);
         List<String> workOrders = new ArrayList<>();
         final int workOrdersToCreate = 2;
 
-        for (int i = 0; i < workOrdersToCreate; i++ ) {
+        for (int i = 0; i < workOrdersToCreate; i++) {
             workOrders.add(WorkOrderSteps.createSimpleWorkOrder(testcustomer, WorkOrderTypes.O_KRAMAR_CREATE_INVOICE, testCaseData.getWorkOrderData()));
             ScreenNavigationSteps.pressBackButton();
         }

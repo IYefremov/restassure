@@ -55,12 +55,17 @@ public class BaseTestClass {
         employee.setEmployeeLastName("Employee");
         employee.setEmployeePassword("12345");
 
-        Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
-        if (testEnv.isPresent())
-            environmentType = EnvironmentType.getEnvironmentType(testEnv.get());
-        else
-            environmentType = EnvironmentType.QC;
-        deviceOfficeUrl = VNextClientEnvironmentUtils.getBackOfficeURL(environmentType);
+        Optional<String> boURLParam = Optional.ofNullable(System.getProperty("testNewBOURL"));
+        if (boURLParam.isPresent())
+            deviceOfficeUrl = boURLParam.get();
+        else {
+            Optional<String> testEnv = Optional.ofNullable(System.getProperty("testEnv"));
+            if (testEnv.isPresent())
+                environmentType = EnvironmentType.getEnvironmentType(testEnv.get());
+            else
+                environmentType = EnvironmentType.QC;
+            deviceOfficeUrl = VNextClientEnvironmentUtils.getBackOfficeURL(environmentType);
+        }
     }
 
     @BeforeSuite
@@ -96,7 +101,7 @@ public class BaseTestClass {
             VNextInformationDialog informationDialog = new VNextInformationDialog(chromeWebDriver);
 
             //GeneralSteps.skipGuide();
-            editionsScreen.selectEdition("ReconPro Starter");
+            editionsScreen.selectEdition("ReconPro");
             environmentSelectionScreen.selectEnvironment(environmentType);
             verificationScreen.setDeviceRegistrationCode(regCode);
             verificationScreen.clickVerifyButton();

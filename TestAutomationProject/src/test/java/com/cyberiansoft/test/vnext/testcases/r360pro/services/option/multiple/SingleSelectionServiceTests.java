@@ -370,7 +370,6 @@ public class SingleSelectionServiceTests extends BaseTestClass {
         PartServiceSteps.selectPartService(multiplePartService);
         PartServiceSteps.confirmPartInfo();
 
-        SearchSteps.textSearch(singleMatrixService.getMatrixServiceName());
         MatrixServiceSteps.selectMatrixService(singleMatrixService);
         ScreenNavigationSteps.pressBackButton();
         MatrixServiceSteps.acceptDetailsScreen();

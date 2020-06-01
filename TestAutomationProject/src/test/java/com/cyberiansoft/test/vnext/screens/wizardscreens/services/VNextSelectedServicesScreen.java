@@ -18,7 +18,7 @@ public class VNextSelectedServicesScreen extends VnextBaseServicesScreen {
     @FindBy(xpath = "//div[@data-page='services-list']")
     private WebElement servicesScreen;
 
-    @FindBy(xpath = "//*[contains(@class, 'services-list') and @data-view-mode='selected']/div")
+    @FindBy(xpath = "//*[@data-autotests-id='added-services-list']/div")
     private List<ServiceListItem> servicesList;
 
     public VNextSelectedServicesScreen() {

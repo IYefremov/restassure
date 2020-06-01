@@ -93,6 +93,16 @@ public class InspectionSteps {
         return inspectionNumber;
     }
 
+    public static String saveInspectionAsFinal() {
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        WaitUtils.elementShouldBeVisible(baseWizardScreen.getInspectionnumber(), true);
+        WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
+        String inspectionNumber = baseWizardScreen.getNewInspectionNumber();
+        baseWizardScreen.clickWizardMenuSaveButton();
+        baseWizardScreen.clickSaveViaMenuAsFinal();
+        return inspectionNumber;
+    }
+
     public static void trySaveInspection() {
         VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
         WaitUtils.getGeneralFluentWait().until(driver -> (baseWizardScreen.getNewInspectionNumber() != "" && baseWizardScreen.getNewInspectionNumber() != null));
@@ -151,5 +161,14 @@ public class InspectionSteps {
         VNextInspectionsScreen inspectionsScreen = new VNextInspectionsScreen();
         inspectionsScreen.getMultiSelectInspApproveBtn().click();
         WaitUtils.waitLoadDialogDisappears();
+    }
+
+    public static void trySaveInspectionsFinalViaMenu() {
+
+        VNextBaseWizardScreen baseWizardScreen = new VNextBaseWizardScreen();
+        baseWizardScreen.clickMenuButton();
+        MenuSteps.selectMenuItem(MenuItems.SAVE_INPSECTION);
+        VNextInformationDialog informationDialog = new VNextInformationDialog(ChromeDriverProvider.INSTANCE.getMobileChromeDriver());
+        informationDialog.clickFinalButton();
     }
 }
