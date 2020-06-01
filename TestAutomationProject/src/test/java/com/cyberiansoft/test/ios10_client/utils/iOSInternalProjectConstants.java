@@ -1,8 +1,7 @@
 package com.cyberiansoft.test.ios10_client.utils;
 
 public class iOSInternalProjectConstants {
-	
-	public static final String USER_LOGIN = "Lyashenko";
+
 	public static final String USERSIMPLE_LOGIN = "Simple 20%";
 	public static final String USER_PASSWORD = "12345";
 	public static final String MAN_INSP_EMPLOYEE = "Man-Insp";

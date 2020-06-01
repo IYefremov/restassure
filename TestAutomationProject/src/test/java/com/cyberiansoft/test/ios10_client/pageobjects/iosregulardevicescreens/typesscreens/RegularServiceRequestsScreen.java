@@ -105,7 +105,7 @@ public class RegularServiceRequestsScreen extends RegularBaseTypeScreen {
 
 	public WebElement waitForServiceRequestScreenLoad() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
-		return wait.until(ExpectedConditions.elementToBeClickable(By.name("ServiceRequestsTable")));
+		return wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("ServiceRequestsTable")));
 	}
 
 	public void clickRefreshButton()  {

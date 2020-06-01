@@ -55,9 +55,7 @@ public class IOSInvoicePrintTestCases extends IOSHDBaseTestCase {
         VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
         NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
-        ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
-        ServicesScreen servicesScreen = new ServicesScreen();
-        Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getMatrixServiceData().getMatrixServiceName()));
+        ServicesScreenSteps.selectService(workOrderData.getMoneyServiceData().getServiceName());
         NavigationSteps.navigateToOrderSummaryScreen();
         OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
         orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
@@ -103,9 +101,7 @@ public class IOSInvoicePrintTestCases extends IOSHDBaseTestCase {
         VehicleInfoScreenSteps.setVIN(workOrderData.getVehicleInfoData().getVINNumber());
         String workOrderNumber = VehicleInfoScreenSteps.getInspectionNumber();
         NavigationSteps.navigateToScreen(ScreenNamesConstants.ZAYATS_TEST_PACK);
-        ServicesScreenSteps.selectMatrixServiceDataAndSave(workOrderData.getMatrixServiceData());
-        ServicesScreen servicesScreen = new ServicesScreen();
-        Assert.assertTrue(servicesScreen.checkServiceIsSelected(workOrderData.getMatrixServiceData().getMatrixServiceName()));
+        ServicesScreenSteps.selectService(workOrderData.getMoneyServiceData().getServiceName());
         NavigationSteps.navigateToOrderSummaryScreen();
         OrderSummaryScreen orderSummaryScreen = new OrderSummaryScreen();
         orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());

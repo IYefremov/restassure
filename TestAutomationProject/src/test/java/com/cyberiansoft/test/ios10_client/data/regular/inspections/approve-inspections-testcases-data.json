@@ -33,7 +33,20 @@
           "vinNumber": "TESTVINNO",
           "vehicleMake": "Acura",
           "vehicleModel": "1.6 EL",
-          "vehicleColor": "Black"
+          "vehicleColor": "Black",
+          "vehicleType": "Used",
+          "poNumber": "Stock1"
+        },
+        "insuranceCompany": {
+          "insuranceCompanyName": "USG"
+        },
+        "questionScreenData": {
+          "screenName": "Zayats Section1",
+          "questionData": {
+            "questionName": "Question 2",
+            "questionAnswer": "A1",
+            "screenIndex": 1
+          }
         },
         "services": [
           {

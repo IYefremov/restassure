@@ -5,6 +5,7 @@ import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.utils.WebConstants;
 import com.cyberiansoft.test.bo.webelements.*;
+import com.cyberiansoft.test.driverutils.DriverBuilder;
 import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
@@ -312,6 +313,7 @@ public class InvoicesWebPage extends WebPageWithFilter {
 	}
 
 	public void selectSearchStatus(WebConstants.InvoiceStatuses status) {
+
 		selectComboboxValue(searchstatuscmb, searchstatusdd, status.getName());
 	}
 

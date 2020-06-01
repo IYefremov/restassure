@@ -2,6 +2,7 @@ package com.cyberiansoft.test.ios10_client.pageobjects.iosregulardevicescreens.t
 
 import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.ios10_client.appcontexts.TypeScreenContext;
+import com.cyberiansoft.test.ios10_client.utils.AppiumWait;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.ios.IOSElement;
@@ -52,7 +53,8 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 
 	public void waitTeamWorkOrdersScreenLoaded() {
 		FluentWait<WebDriver> wait = new WebDriverWait(appiumdriver, 60);
-		wait.until(ExpectedConditions.elementToBeClickable(By.name("TeamOrdersTable")));
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId("TeamOrdersTable")));
+
 	}
 
 	public void clickCreateInvoiceForWO(String workOrderID) {
@@ -205,7 +207,11 @@ public class RegularTeamWorkOrdersScreen extends RegularBaseTypeScreenWithTabs {
 	
 	public void selectWorkOrder(String workOrderID) {
 		waitTeamWorkOrdersScreenLoaded();
-		teamOrdersTable.findElementByAccessibilityId(workOrderID).click();
+		AppiumWait.getGeneralFluentWait(60, 500).until(driver -> {
+			teamOrdersTable.findElementByAccessibilityId(workOrderID).click();
+			return true;
+		});
+		//teamOrdersTable.findElementByAccessibilityId(workOrderID).click();
 
 	}
 

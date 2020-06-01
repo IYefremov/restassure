@@ -74,6 +74,7 @@ public class IOSDraftModeInspectionsTestCases extends IOSRegularBaseTestCase {
         RegularServiceRequestDetalsScreenSteps.clickServiceRequestSummaryInspectionsButton();
         RegularTeamInspectionsScreen teamInspectionsScreen = new RegularTeamInspectionsScreen();
         teamInspectionsScreen.selectInspectionForEdit(inspectionNumber);
+        RegularServicesScreenSteps.waitServicesScreenLoad();
         RegularInspectionsSteps.saveInspectionAsFinal();
         Assert.assertTrue(teamInspectionsScreen.isInspectionIsApproveButtonExists(inspectionNumber));
         RegularNavigationSteps.navigateBackScreen();

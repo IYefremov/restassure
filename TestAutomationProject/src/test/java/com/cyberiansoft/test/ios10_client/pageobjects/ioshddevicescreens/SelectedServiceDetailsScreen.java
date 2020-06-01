@@ -216,13 +216,13 @@ public class SelectedServiceDetailsScreen extends iOSHDBaseScreen {
 		WebDriverWait wait = new WebDriverWait(appiumdriver,10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("XCUIElementTypePopover")));
 		MobileElement saveButton = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypePopover").
-				findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND name == 'Save'"));
+				findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND label == 'Save'"));
 		saveButton.click();
 	}
 
 	public void clickCancelSelectedServiceDetails() {
 		MobileElement cancelButton = (MobileElement) appiumdriver.findElementByClassName("XCUIElementTypePopover").
-				findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND name == 'Cancel'"));
+				findElement(MobileBy.iOSNsPredicateString("type == 'XCUIElementTypeButton' AND label == 'Cancel'"));
 		cancelButton.click();
 	}
 	

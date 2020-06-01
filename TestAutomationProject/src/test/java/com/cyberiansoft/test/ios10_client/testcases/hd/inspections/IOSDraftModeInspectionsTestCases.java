@@ -181,7 +181,7 @@ public class IOSDraftModeInspectionsTestCases extends IOSHDBaseTestCase {
         Assert.assertFalse(myInspectionsScreen.isCreateServiceRequestInspectionMenuActionExists());
         Assert.assertFalse(myInspectionsScreen.isCopyInspectionMenuActionExists());
         myInspectionsScreen.clickActionButton();
-        myInspectionsScreen.clickDoneButton();
+        myInspectionsScreen.clickCloseFilterDialogButton();
 
         myInspectionsScreen.clickHomeButton();
         TeamInspectionsScreen teamInspectionsScreen = homeScreen.clickTeamInspectionsButton();

@@ -1,7 +1,9 @@
 package com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens;
 
 import com.cyberiansoft.test.dataclasses.ServiceData;
+import com.cyberiansoft.test.ios10_client.utils.AppiumWait;
 import com.cyberiansoft.test.ios10_client.utils.Helpers;
+import com.cyberiansoft.test.vnext.utils.WaitUtils;
 import io.appium.java_client.MobileBy;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.ios.IOSElement;
@@ -54,7 +56,10 @@ public class ApproveInspectionsScreen extends iOSHDBaseScreen {
 	
 	public void clickApproveAfterSelection() {
 		Helpers.waitForAlert();
-		appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.AccessibilityId("Approve")).click();
+		AppiumWait.getGeneralFluentWait(5, 300).until(driver -> {
+			appiumdriver.findElementByClassName("XCUIElementTypeAlert").findElement(MobileBy.AccessibilityId("Approve")).click();
+			return true;
+		});
 	}
 	
 

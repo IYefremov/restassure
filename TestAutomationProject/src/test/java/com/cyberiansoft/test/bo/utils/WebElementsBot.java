@@ -7,6 +7,7 @@ import com.cyberiansoft.test.bo.webelements.DropDown;
 import com.cyberiansoft.test.bo.webelements.TextField;
 import com.cyberiansoft.test.driverutils.DriverBuilder;
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -173,13 +174,9 @@ public class WebElementsBot {
     }
 
     private static WebDriverWait clickCombobox(ComboBox combobox, DropDown droplist) {
-        WebDriver driver = DriverBuilder.getInstance().getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 20);
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(combobox.getWrappedElement())).click();
-        } catch (WebDriverException e) {
-            ((JavascriptExecutor)driver).executeScript("arguments[0].click();", combobox.getWrappedElement());
-        }
+        Actions act = new Actions(DriverBuilder.getInstance().getDriver());
+        act.click(combobox.getWrappedElement()).perform();
+        WebDriverWait wait = new WebDriverWait(DriverBuilder.getInstance().getDriver() , 5);
         try {
             wait.until(ExpectedConditions.visibilityOf(droplist.getWrappedElement()));
         } catch (Exception e) {

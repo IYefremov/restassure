@@ -36,6 +36,9 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	@iOSXCUITFindBy(accessibility = "Save")
     private IOSElement searccsavebtn;*/
 
+	@iOSXCUITFindBy(accessibility = "TeamOrdersPageTableLeft")
+	private IOSElement teamOrdersPageTable;
+
 	@iOSXCUITFindBy(accessibility = "Add")
 	private IOSElement addorderbtn;
 
@@ -166,7 +169,9 @@ public class TeamWorkOrdersScreen extends BaseTypeScreenWithTabs {
 	}
 
 	public boolean isWorkOrderHasActionIcon(String wonumber) {
-		return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_38')]")).size() > 0;
+		waitTeamWorkOrdersScreenLoaded();
+		return teamOrdersPageTable.findElement(MobileBy.AccessibilityId(wonumber)).findElements(MobileBy.iOSNsPredicateString("name contains 'ButtonImageId_38'")).size() > 0;
+		//return appiumdriver.findElements(MobileBy.xpath("//XCUIElementTypeTable/XCUIElementTypeCell[@name='" + wonumber + "']/XCUIElementTypeOther[contains(@name, 'ButtonImageId_38')]")).size() > 0;
 	}
 
 	public String getPriceValueForWO(String wonumber) {

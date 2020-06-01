@@ -73,6 +73,7 @@ public class IOSAutoSaveWorkOrdersTestCases extends IOSHDBaseTestCase {
         orderSummaryScreen.setTotalSale(workOrderData.getWorkOrderTotalSale());
         orderSummaryScreen.clickSave();
         orderSummaryScreen.waitForCustomWarningMessage("Duplicate services", "Cancel");
+        orderSummaryScreen.cancelWorkOrder();
         myWorkOrdersScreen.clickHomeButton();
     }
 
@@ -190,6 +191,7 @@ public class IOSAutoSaveWorkOrdersTestCases extends IOSHDBaseTestCase {
         String workOrderNumber = orderSummaryScreen.getWorkOrderNumber();
         orderSummaryScreen.clickSave();
         orderSummaryScreen.waitForCustomWarningMessage("Duplicate services", "Cancel");
+        orderSummaryScreen.cancelWorkOrder();
         myWorkOrdersScreen.waitWorkOrdersScreenLoaded();
         Assert.assertFalse(myWorkOrdersScreen.isWorkOrderPresent(workOrderNumber));
         NavigationSteps.navigateBackScreen();
