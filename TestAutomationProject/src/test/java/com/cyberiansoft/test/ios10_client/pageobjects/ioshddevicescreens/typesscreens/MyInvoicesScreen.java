@@ -90,7 +90,8 @@ public class  MyInvoicesScreen extends BaseTypeScreenWithTabs {
 	
 	public void selectInvoice(String invoiceNumber) {
 		waitMyInvoicesScreenLoaded();
-		invoicestable.findElementByAccessibilityId(invoiceNumber ).click();
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.elementToBeClickable(invoicestable.findElementByAccessibilityId(invoiceNumber))).click();
 	}
 
 	public String getPriceForInvoice(String invoiceNumber) {

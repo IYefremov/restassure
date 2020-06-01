@@ -14,12 +14,14 @@ import io.appium.java_client.pagefactory.iOSXCUITFindBy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+
 public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	
 	final String firstinspxpath = "//XCUIElementTypeTable[1]/XCUIElementTypeCell[1]";
@@ -51,9 +53,6 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	
 	@iOSXCUITFindBy(accessibility  = "Change Customer")
     private IOSElement changecustomerpopupmenu;
-	
-	@iOSXCUITFindBy(accessibility  = "Service Request")
-    private IOSElement backservicerequestsbtn;
 	
 	@iOSXCUITFindBy(accessibility  = "Show Work Orders")
     private IOSElement showwospopupmenu;
@@ -87,6 +86,9 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	@iOSXCUITFindBy(accessibility = "InspectionsPageTableLeft")
 	private IOSElement inspectionsTable;
+
+	@iOSXCUITFindBy(accessibility  = "Service Request")
+	private IOSElement backservicerequestsbtn;
 	
 	public MyInspectionsScreen() {
 		super();
@@ -379,14 +381,20 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 
 	public void selectInspectionForAction(String inspectionNumber) {
 		waitInspectionsScreenLoaded();
-		inspectionsTable.findElementByAccessibilityId(inspectionNumber).findElement(MobileBy.className("XCUIElementTypeOther")).click();
+		WebElement inspectionCell = getInspectionCell(inspectionNumber);
+		inspectionCell.findElement(MobileBy.iOSNsPredicateString("name contains 'EntityInfoButtonUnchecked'")).click();
+	}
+
+	private WebElement getInspectionCell(String inspectionNumber) {
+		return inspectionsTable.findElementsByClassName("XCUIElementTypeCell").stream().filter(cell -> cell.findElement(MobileBy.AccessibilityId("labelInspectionNumber")).
+				getAttribute("label").equals(inspectionNumber)).findFirst() .orElseThrow(() -> new RuntimeException("Inspection not found " + inspectionNumber));
 	}
 
 	public boolean isInspectionApproved(String inspectionNumber) {
 		waitInspectionsScreenLoaded();
 		WebDriverWait wait = new WebDriverWait(appiumdriver, 20);
 		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(inspectionNumber)));
-		return appiumdriver.findElementByAccessibilityId(inspectionNumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0;
+		return getInspectionCell(inspectionNumber).findElements(MobileBy.AccessibilityId("EntityInfoButtonUnchecked")).size() > 0;
  	}
 	
 	public boolean isNotesIconPresentForInspection(String inspectionNumber) {
@@ -399,7 +407,8 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 	
 	public boolean isDraftIconPresentForInspection(String inspectionNumber) {
 		waitInspectionsScreenLoaded();
-		return appiumdriver.findElementByAccessibilityId(inspectionNumber).findElements(MobileBy.AccessibilityId("ESTIMATION_DRAFT"))
+		WebElement inspectionCell = getInspectionCell(inspectionNumber);
+		return inspectionCell.findElements(MobileBy.AccessibilityId("ESTIMATION_DRAFT"))
 				.size() > 0;
 	}
 	
@@ -422,9 +431,10 @@ public class MyInspectionsScreen extends BaseTypeScreenWithTabs {
 		return new NotesScreen();
 	}
 	
-	public String getInspectionPriceValue(String inspectionnumber) {
+	public String getInspectionPriceValue(String inspectionNumber) {
 		waitInspectionsScreenLoaded();
-		return inspectionsTable.findElementByAccessibilityId(inspectionnumber).findElementByAccessibilityId( "labelInspectionAmount").getAttribute("label");
+		WebElement inspectionCell = getInspectionCell(inspectionNumber);
+		return inspectionCell.findElement( MobileBy.AccessibilityId("labelInspectionAmount")).getAttribute("label");
 	}
 
     public void clickBackButton() {

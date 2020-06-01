@@ -112,9 +112,6 @@ public class ServicesScreen extends BaseWizardScreen {
 		List<MobileElement> serviceCells = selectedservices.findElementByClassName("XCUIElementTypeTable").
 				findElementsByAccessibilityId(serviceName);
 		for (MobileElement serviceCell : serviceCells) {
-			System.out.println("++" + serviceCell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", ""));
-			System.out.println("++" + servicepriceandquantity.replaceAll(" ", ""));
-
 			if (serviceCell.findElementByXPath("//XCUIElementTypeStaticText[3]").getText().replaceAll("[^a-zA-Z0-9$.%]", "").equals(
 			servicepriceandquantity.replaceAll(" ", ""))) {
 				selected = true;
@@ -167,7 +164,13 @@ public class ServicesScreen extends BaseWizardScreen {
 	public void selectService(String serviceName) {
 		waitServicesScreenLoaded();
 		MobileElement searchFld =  null;
-		IOSElement tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId("AvailableServiceList");
+		String tablelistName = "";
+		if (appiumdriver.findElementByClassName("XCUIElementTypeNavigationBar").getAttribute("name").equals("ServiceRequestServicesForm"))
+			tablelistName = "AvailableServicesView";
+		else
+			tablelistName = "AvailableServiceList";
+		IOSElement tablelist = (IOSElement) appiumdriver.findElementByAccessibilityId(tablelistName);
+
 		if (tablelist.getAttribute("type").equals("XCUIElementTypeOther"))
 			searchFld = ((MobileElement) tablelist.findElementByClassName("XCUIElementTypeSearchField"));
 		else
@@ -176,7 +179,7 @@ public class ServicesScreen extends BaseWizardScreen {
 		searchFld.clear();
 		searchFld.setValue(serviceName);
 		appiumdriver.hideKeyboard();
-		appiumdriver.findElementByAccessibilityId("AvailableServiceList").findElement(MobileBy.className("XCUIElementTypeTable")).findElement(MobileBy.AccessibilityId(serviceName)).click();
+		appiumdriver.findElementByAccessibilityId(tablelistName).findElement(MobileBy.className("XCUIElementTypeTable")).findElement(MobileBy.AccessibilityId(serviceName)).click();
 	}
 
 	public SelectedServiceBundleScreen openSelectBundleServiceDetails(String serviceName) {

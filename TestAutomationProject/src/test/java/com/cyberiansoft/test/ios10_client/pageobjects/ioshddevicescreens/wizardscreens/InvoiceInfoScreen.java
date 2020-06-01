@@ -71,6 +71,8 @@ public class InvoiceInfoScreen extends BaseWizardScreen implements ITypeScreen {
 	}
 	
 	public String getInvoicePOValue() {
+		WebDriverWait wait = new WebDriverWait(appiumdriver, 30);
+		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.className("txtPO")));
 		return setpofld.getAttribute("value");
 	}
 

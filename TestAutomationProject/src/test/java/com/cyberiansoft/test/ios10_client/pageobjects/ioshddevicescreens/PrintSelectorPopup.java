@@ -27,7 +27,8 @@ public class PrintSelectorPopup extends iOSHDBaseScreen {
 		appiumdriver.findElement(MobileBy.AccessibilityId("Remote")).click();
 		wait = new WebDriverWait(appiumdriver, 10);
 		wait.until(ExpectedConditions.presenceOfElementLocated(MobileBy.AccessibilityId(printserver)));
-		appiumdriver.findElement(MobileBy.AccessibilityId(printserver)).click();
+		wait = new WebDriverWait(appiumdriver, 10);
+		wait.until(ExpectedConditions.elementToBeClickable(MobileBy.AccessibilityId(printserver))).click();
 		IOSElement par = (IOSElement) appiumdriver.findElement(MobileBy.
 				xpath("//XCUIElementTypeTable/XCUIElementTypeCell/XCUIElementTypeStaticText[@value='" + printserver + "']/.."));
 		IOSElement remoteserverchkbox = (IOSElement) par.findElement(MobileBy.xpath("//XCUIElementTypeButton[1]"));

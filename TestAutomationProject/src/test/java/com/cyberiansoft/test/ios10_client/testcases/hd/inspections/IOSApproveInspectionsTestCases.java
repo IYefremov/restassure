@@ -19,6 +19,7 @@ import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescr
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.basescreens.SettingsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.MyInspectionsScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.typesscreens.TeamInspectionsScreen;
+import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ClaimScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.PriceMatrixScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.ServicesScreen;
 import com.cyberiansoft.test.ios10_client.pageobjects.ioshddevicescreens.wizardscreens.VehicleScreen;
@@ -48,7 +49,7 @@ public class IOSApproveInspectionsTestCases extends IOSHDBaseTestCase {
         _002_Test_Customer.setCompanyName("002 - Test Company");
     }
 
-    @Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
+    //@Test(dataProvider = "fetchData_JSON", dataProviderClass = JSONDataProvider.class)
     public void testApproveInspectionOnBackOfficeFullInspectionApproval(String rowID,
                                                                         String description, JSONObject testData) {
 
@@ -126,7 +127,14 @@ public class IOSApproveInspectionsTestCases extends IOSHDBaseTestCase {
         vehicleScreen.setMakeAndModel(inspectionData.getVehicleInfo().getVehicleMake(), inspectionData.getVehicleInfo().getVehicleModel());
         vehicleScreen.setColor(inspectionData.getVehicleInfo().getVehicleColor());
         vehicleScreen.setTech(iOSInternalProjectConstants.EMPLOYEE_TECHNICIAN);
-
+        vehicleScreen.setType(inspectionData.getVehicleInfo().getVehicleType());
+        vehicleScreen.setPO(inspectionData.getVehicleInfo().getPoNumber());
+        NavigationSteps.navigateToClaimScreen();
+        ClaimScreen claimScreen = new ClaimScreen();
+        claimScreen.selectInsuranceCompany(inspectionData.getInsuranceCompanyData().getInsuranceCompanyName());
+        claimScreen.setClaim("123");
+        claimScreen.setAccidentDate();
+        QuestionsScreenSteps.goToQuestionsScreenAndAnswerQuestions(inspectionData.getQuestionScreenData());
         vehicleScreen.saveWizard();
         myInspectionsScreen.clickHomeButton();
         MainScreen mainScreeneen = homeScreen.clickLogoutButton();
@@ -271,7 +279,7 @@ public class IOSApproveInspectionsTestCases extends IOSHDBaseTestCase {
         Assert.assertFalse(teamInspectionsScreen.isApproveInspectionMenuActionExists());
         Assert.assertTrue(teamInspectionsScreen.isSendEmailInspectionMenuActionExists());
         teamInspectionsScreen.clickActionButton();
-        teamInspectionsScreen.clickDoneButton();
+        myInspectionsScreen.clickCloseFilterDialogButton();
         teamInspectionsScreen.clickHomeButton();
     }
 
@@ -365,7 +373,7 @@ public class IOSApproveInspectionsTestCases extends IOSHDBaseTestCase {
         myInspectionsScreen.clickActionButton();
         Assert.assertFalse(myInspectionsScreen.isApproveInspectionMenuActionExists());
         myInspectionsScreen.clickActionButton();
-        myInspectionsScreen.clickDoneButton();
+        myInspectionsScreen.clickCloseFilterDialogButton();
         myInspectionsScreen.clickHomeButton();
 
         TeamInspectionsScreen teamInspectionsScreen = homeScreen.clickTeamInspectionsButton();
@@ -376,7 +384,7 @@ public class IOSApproveInspectionsTestCases extends IOSHDBaseTestCase {
         teamInspectionsScreen.clickActionButton();
         Assert.assertFalse(teamInspectionsScreen.isApproveInspectionMenuActionExists());
         teamInspectionsScreen.clickActionButton();
-        teamInspectionsScreen.clickDoneButton();
+        myInspectionsScreen.clickCloseFilterDialogButton();
         teamInspectionsScreen.clickHomeButton();
     }
 
@@ -420,7 +428,7 @@ public class IOSApproveInspectionsTestCases extends IOSHDBaseTestCase {
         myInspectionsScreen.clickActionButton();
         Assert.assertTrue(myInspectionsScreen.isApproveInspectionMenuActionExists());
         myInspectionsScreen.clickActionButton();
-        myInspectionsScreen.clickDoneButton();
+        myInspectionsScreen.clickCloseFilterDialogButton();
         myInspectionsScreen.clickHomeButton();
 
         TeamInspectionsScreen teamInspectionsScreen = homeScreen.clickTeamInspectionsButton();
@@ -431,7 +439,7 @@ public class IOSApproveInspectionsTestCases extends IOSHDBaseTestCase {
         teamInspectionsScreen.clickActionButton();
         Assert.assertTrue(teamInspectionsScreen.isApproveInspectionMenuActionExists());
         teamInspectionsScreen.clickActionButton();
-        teamInspectionsScreen.clickDoneButton();
+        myInspectionsScreen.clickCloseFilterDialogButton();
         teamInspectionsScreen.clickHomeButton();
     }
 
@@ -444,6 +452,9 @@ public class IOSApproveInspectionsTestCases extends IOSHDBaseTestCase {
         final String declineReason = "Decline 2";
 
         HomeScreen homeScreen = new HomeScreen();
+        CustomersScreen customersScreen = homeScreen.clickCustomersButton();
+        customersScreen.swtchToWholesaleMode();
+        customersScreen.clickHomeButton();
         MyInspectionsScreen myInspectionsScreen = homeScreen.clickMyInspectionsButton();
         MyInspectionsSteps.startCreatingInspection(_002_Test_Customer, InspectionsTypes.INSPECTION_ALL_SERVICES);
         VehicleInfoScreenSteps.setVehicleInfoData(inspectionData.getVehicleInfo());

@@ -1,5 +1,6 @@
 package com.cyberiansoft.test.bo.pageobjects.webpages;
 
+import com.cyberiansoft.test.baseutils.BaseUtils;
 import com.cyberiansoft.test.baseutils.Utils;
 import com.cyberiansoft.test.baseutils.WaitUtilsWebDriver;
 import com.cyberiansoft.test.bo.webelements.ExtendedFieldDecorator;
@@ -45,6 +46,7 @@ public class OperationsWebPage extends BaseWebPage {
 
 	public void clickInvoicesLink() {
 		wait.until(ExpectedConditions.elementToBeClickable(invoiceslink)).click();
+		BaseUtils.waitABit(500);
 	}
 
 	public void clickWorkOrdersLink() {
