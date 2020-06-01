@@ -17,14 +17,23 @@ public class VNextBOSRTable extends VNextBOSRPage {
     @FindBy(xpath = "//div[contains(@class, 'Table-emptyRow')]")
     private WebElement emptyTable;
 
-    @FindBy(xpath = "//div[contains(@class, 'Table-cell') and not(@style)]//div[@class='ServiceTableTextBlock-text'][1]")
+    @FindBy(xpath = "//div[@name='StatusBadge_name']")
+    private List<WebElement> statusesList;
+
+    @FindBy(xpath = "//div[@name='Id_Customer']")
     private List<WebElement> customersList;
 
-    @FindBy(xpath = "//div[contains(@class, 'Table-cell') and not(@style)]//div[@class='ServiceTableTextBlock-text'][3]")
+    @FindBy(xpath = "//div[@name='Desc_Customer']")
     private List<WebElement> stockNumbersList;
 
-    @FindBy(xpath = "//div[contains(@class, 'ServiceRequests-cell') and @style]//div[@class='ServiceTableTextBlock-text'][1]")
+    @FindBy(xpath = "//div[@name='Id_serviceRequestNameInfo']")
     private List<WebElement> srNumbersList;
+
+    @FindBy(xpath = "//div[@name='Desc_serviceRequestNameInfo']")
+    private List<WebElement> assignedList;
+
+    @FindBy(xpath = "//div[@name='Type_serviceRequestNameInfo']")
+    private List<WebElement> srTypesList;
 
     public VNextBOSRTable() {
         super();

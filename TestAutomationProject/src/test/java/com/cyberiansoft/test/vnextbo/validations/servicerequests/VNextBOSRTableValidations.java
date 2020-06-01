@@ -1,11 +1,13 @@
 package com.cyberiansoft.test.vnextbo.validations.servicerequests;
 
-import com.cyberiansoft.test.vnextbo.screens.servicerequests.VNextBOSRTable;
+import com.cyberiansoft.test.enums.ServiceRequestStatus;
 import com.cyberiansoft.test.vnextbo.steps.servicerequests.VNextBOSRTableSteps;
 import com.cyberiansoft.test.vnextbo.utils.VNextBOAlertMessages;
 import org.testng.Assert;
 
 public class VNextBOSRTableValidations {
+
+    private final static String ALL_ACTIVE = "All Active (all not closed)";
 
     public static boolean isNotFoundNotificationDisplayed() {
         return VNextBOSRTableSteps.getEmptyTableNotification().equals(VNextBOAlertMessages.NO_RECORDS_FOUND);
@@ -17,14 +19,32 @@ public class VNextBOSRTableValidations {
     }
 
     public static void verifyEitherNotificationOrSRsListIsDisplayed() {
-        if (new VNextBOSRTable().getSrNumbersList().size() == 0) {
+        if (VNextBOSRTableSteps.getSRListSize() == 0) {
             verifyNotFoundNotificationIsDisplayed();
         } else {
-            Assert.assertTrue(new VNextBOSRTable().getSrNumbersList().size() > 0, "The SRs haven't been displayed");
+            Assert.assertTrue(VNextBOSRTableSteps.getSRListSize() > 0, "The SRs haven't been displayed");
         }
     }
 
     public static void verifySRContainingValueIsDisplayed(String actual, String expected) {
         Assert.assertTrue(actual.contains(expected), "The SR hasn't been found");
+    }
+
+    public static void verifySRStatusIsNotClosed(String actual) {
+        Assert.assertNotEquals(actual, ServiceRequestStatus.CLOSED,
+                "The SR status has been '" + ServiceRequestStatus.CLOSED + "'");
+    }
+
+    public static void verifySRStatusIsDisplayed(String actual, String expected) {
+        if (expected.equals(ALL_ACTIVE)) {
+            verifySRStatusIsNotClosed(actual);
+        } else {
+            Assert.assertEquals(actual, expected, "The SR status hasn't been found");
+        }
+    }
+
+    public static void verifyMoreServiceRequestsHaveBeenLoaded(int previousSRListSize) {
+        Assert.assertTrue(VNextBOSRTableSteps.getSRListSize() > previousSRListSize,
+                "The SR list size han't been increased after clicking the 'Load 20 more items' button");
     }
 }

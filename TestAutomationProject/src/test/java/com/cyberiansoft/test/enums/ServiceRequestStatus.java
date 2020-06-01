@@ -7,7 +7,8 @@ public enum ServiceRequestStatus {
 
     ON_HOLD("On Hold"),
     SCHEDULED("Scheduled"),
-    PROPOSED("Proposed");
+    PROPOSED("Proposed"),
+    CLOSED("Closed");
 
     private String value;
 
